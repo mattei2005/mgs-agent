@@ -1,0 +1,57 @@
+{
+  "id": "VPS-DEEP-STORAGE-REVIEW-1569034405069070377",
+  "authority_message_id": "1569034405069070377",
+  "status": "read_only_classification_completed_no_deletion",
+  "observed_at": "2026-11-08T17:09:34.413044+00:00",
+  "disk": {
+    "total_bytes": 206900281344,
+    "used_bytes": 169401737216,
+    "free_bytes": 37481766912
+  },
+  "finance_private_metadata_total_bytes": 53675577344,
+  "complete_isolated_pg_clusters": 77,
+  "isolated_cluster_bytes": 16509587456,
+  "dump_and_sql_bytes": 18233122816,
+  "combined_cluster_and_dump_bytes": 34742710272,
+  "byte_identical_physical_duplicate_groups": 129,
+  "potential_duplicate_bytes": 9271173120,
+  "duplicate_potential_by_extension": {
+    ".json": 4982996992,
+    ".dump": 4288176128
+  },
+  "overlap_warning": "Exact duplicate potential is a subset of finance private classes; never add these figures together. Bytes are candidate review potential, not an approved deletion lot.",
+  "process_check": "No process reference detected to any of the77cluster roots; the current finance Meta lookup worker references the parent private root and remains protected. Family/latest selectors and evidence lineage still need exact-lot validation.",
+  "production_boundary_source": "apps/finance-system/deploy/PG-AUTH-RUNBOOK.md and live worker target: MatteiInc01, not this VPS local test state; no production database query/write in this review.",
+  "housekeeping": "Live --dry-run rc0:235smallbackupcandidates allpreserved;0eligibleHermesprofiletarballs. Name-pattern/legacyarchive policy does not cover bulk PG clusters/dumps/JSON/evidence. No retention change was made.",
+  "copy_prevention": "prepare_release.py uses source_stage.py;6testsPASS; recursive private copy prevention already installed, but does not retire historical test state or daily pre-import dumps.",
+  "prior_review_source": "docs/finance-retention-review-1556470980120150179-result.md:18earlierdirs preserved due unproven historical-state reconstruction, not proof every byte is needed for production.",
+  "classification_queues": {
+    "current_policy_eligible_confirmed": {
+      "bytes": 0,
+      "reason": "No new exact disposal lot passed all evidence and consumer gates in this question-only review"
+    },
+    "conditional_review": {
+      "duplicate_potential_bytes": 9271173120,
+      "isolated_clusters": 77,
+      "dump_files": 141,
+      "gate": "Preserve required family sources/evidence and recovery; freeze exact targets; explicit Critical confirmation before deletion. Retirement of unique old test state is distinct from deduplication."
+    },
+    "protected": [
+      "live financial data and current source/import/idempotency ledgers",
+      "active profiles/browser sessions/runtimes and required rollback",
+      "current validated recovery sets",
+      "unique or checksum-coupled historical evidence until explicit scoped retirement"
+    ]
+  },
+  "recommendation": "Prioritize byte-identical physical duplicates; then exact retirement of old isolated test state and historical pre-import dumps with current production and recovery preserved. Do not substitute a VPS upgrade or indiscriminate cache deletion for retention closure.",
+  "deletions": 0,
+  "production_writes": 0,
+  "retention_changed": false,
+  "new_deletion_cron": false,
+  "report_infra": {
+    "message_id": "1569036172402098251",
+    "http_get": 200,
+    "mentions": 0,
+    "content_empty": true
+  }
+}

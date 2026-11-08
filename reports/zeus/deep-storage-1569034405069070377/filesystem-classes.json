@@ -1,0 +1,2555 @@
+{
+  "observed_at": "2026-11-08T17:04:47.913986+00:00",
+  "root": "/root/mgs-agent/apps/finance-system/private",
+  "complete_pg_cluster_count": 77,
+  "cluster_roots": [
+    "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/catalog-test-636d2e84-335a-464d-a6a7-26b64bfc48d5",
+    "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/catalog-test-10600f97-69d8-4d79-884e-cb188babeb23",
+    "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/catalog-test-befbe335-fbe5-4320-a59c-1de6bb32c447",
+    "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/catalog-test-359a2b35-6335-48a2-88f9-ca8a2ce9ffda",
+    "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/catalog-test-2c37acda-7559-463a-bf80-773b1ec54898",
+    "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/ui-test-4445c139-68a4-409f-bfe4-53f59576f9bd",
+    "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/test-pg-34cccb39-ccfa-4098-8ee0-ace1b2ed8858",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-ed85179e-445c-4a20-a131-fb6dd309e142",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-8473a509-2abc-4c02-8f93-1a95d903ea42",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-9e4572e0-7578-4adb-b1b9-2c2a1c6ed960",
+    "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/test-pg-d7c002bd-4c9c-46ab-b54c-a272321d7a00",
+    "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/ui-test-31b4a9bf-bba6-4caf-9433-fda94b98fdc6",
+    "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/ui-test-b976f7f1-cd38-49e4-995e-ed85dda0c027",
+    "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/test-pg-704fa232-f2e3-4a8d-befe-d55b96b30ddf",
+    "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/test-pg-815e9975-1b4f-48f8-9c7d-eb428793ab2b",
+    "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/ui-test-9f2c65e3-f800-43f8-a406-bdfbe23fa69f",
+    "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/catalog-test-6a5b1d41-dbb1-4f05-8d41-96cd23801219",
+    "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/ui-test-96b15bc3-5cbc-4e73-9930-81a4ada50acc",
+    "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/test-pg-2804a1dc-a044-410e-8e22-41c7f98dd911",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-7a731402-c22e-4660-973a-2fb7b084d0c3",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-8c88783e-3211-4bde-977a-b7a1a2e8c71b",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-647f0a3f-5559-4947-acc7-f2975529a586",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-57097a64-177a-4857-a95e-4bcf25555dc8",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-74349550-8a02-4f7d-afb1-e80827608b1e",
+    "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-07864412-5458-420d-a38f-283a466d811e",
+    "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/test-pg-19130566-aed1-45f0-b846-ee640d983912",
+    "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/ui-test-f50a9575-c02a-4751-8736-cbd2ed817126",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-80098e4c-f944-47ef-aa98-e0e20266ca80",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-6bba588b-8a25-4d9f-a543-282e03666990",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-73826e91-176e-4a5f-b3e5-dc475309910f",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-afb2b758-6974-4277-b6e7-7be47f296167",
+    "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-9f613bd7-f503-4c20-b9f3-a46485fb2f83",
+    "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+    "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-4e6eb728-ff92-45c3-9d70-55b376528e49",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-f720caab-e00a-4f1e-b425-268d81d8aa56",
+    "/root/mgs-agent/apps/finance-system/private/catalog-test-ca4cedf8-7653-43f0-9a71-e54567dfc1df",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+    "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-bd15fc30-8a67-41f8-bd9a-f66cc635dce4",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-94a9715a-7de4-44e8-b126-66ae30a2f858",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-bad9632d-d1e1-45f2-88b8-ad1d855dab54",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-59dbae10-17a2-4c7d-bb0b-31bc267c8b96",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-163e8765-ceb3-4d21-b0a4-232ad7536139",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-3fe2a131-b11a-41f2-a193-095c1d6bc3b9",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-515f37ce-123a-413e-b71b-663ef66d01e7",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-3a76fac5-ebed-4474-87e4-565bd9ea5c34",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-13f346e7-a4ff-4e9c-8724-fc9953f3e2be",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-ca20e7a5-96f4-43d8-952f-67c1b1a5cac1",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-b6be8a92-03a6-4d2a-88b5-b91cfc1c6191",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-3a277b17-07eb-4665-bbd8-6c188cee6c98",
+    "/root/mgs-agent/apps/finance-system/private/ui-test-314b79fa-0bb2-4db5-8823-13b8bab0b5d9",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-37a8721e-5981-4150-95ed-b97a68ce125e",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-119b5f9f-cb0c-47c1-a986-63c7c491e724",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-66345f60-bd4e-4d0e-8b14-023ce66a55b3",
+    "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+    "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/pgdata"
+  ],
+  "classes": [
+    {
+      "path_or_class": "database_dumps_or_sql",
+      "file_count": 302,
+      "allocated_bytes": 18233122816,
+      "logical_bytes": 18231982058,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T13:11:56.000592+00:00"
+    },
+    {
+      "path_or_class": "other_code_inputs_evidence_and_state",
+      "file_count": 61589,
+      "allocated_bytes": 18111451136,
+      "logical_bytes": 18057194531,
+      "external_linked_bytes": 249741312,
+      "newest_mtime_utc": "2026-11-08T17:03:52.388057+00:00"
+    },
+    {
+      "path_or_class": "isolated_postgresql_clusters",
+      "file_count": 78496,
+      "allocated_bytes": 16509587456,
+      "logical_bytes": 16495685001,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:19:28.666303+00:00"
+    },
+    {
+      "path_or_class": "gam_report_sources_and_receipts",
+      "file_count": 2055,
+      "allocated_bytes": 462028800,
+      "logical_bytes": 443264456,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T14:41:18.692216+00:00"
+    },
+    {
+      "path_or_class": "recovery_and_other_archives",
+      "file_count": 217,
+      "allocated_bytes": 225054720,
+      "logical_bytes": 224605532,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T16:59:05.048764+00:00"
+    },
+    {
+      "path_or_class": "code_dependencies_and_generated_caches",
+      "file_count": 4899,
+      "allocated_bytes": 134332416,
+      "logical_bytes": 118931039,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:32:45.169692+00:00"
+    }
+  ],
+  "sets": [
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-email-runs",
+      "file_count": 2109,
+      "allocated_bytes": 9065418752,
+      "logical_bytes": 9046328122,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T14:41:18.692216+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829",
+      "file_count": 347,
+      "allocated_bytes": 1765748736,
+      "logical_bytes": 1764917986,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T14:10:59.547670+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/september-visual-1555301641287114806",
+      "file_count": 173,
+      "allocated_bytes": 1471516672,
+      "logical_bytes": 1471001588,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-01T21:05:45.737535+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990",
+      "file_count": 2290,
+      "allocated_bytes": 991543296,
+      "logical_bytes": 984126144,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:37:57.280937+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451",
+      "file_count": 37311,
+      "allocated_bytes": 825659392,
+      "logical_bytes": 708555407,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-14T04:57:27.717551+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526",
+      "file_count": 115,
+      "allocated_bytes": 733163520,
+      "logical_bytes": 732883063,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:55.692950+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243",
+      "file_count": 529,
+      "allocated_bytes": 549818368,
+      "logical_bytes": 548558605,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-28T13:53:57.072026+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506",
+      "file_count": 52,
+      "allocated_bytes": 531824640,
+      "logical_bytes": 531667657,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T19:35:54.240032+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425",
+      "file_count": 547,
+      "allocated_bytes": 493318144,
+      "logical_bytes": 492003131,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:36.834555+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409",
+      "file_count": 602,
+      "allocated_bytes": 485892096,
+      "logical_bytes": 484370275,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:38.767556+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/history-import-1546884731436671056",
+      "file_count": 144,
+      "allocated_bytes": 437067776,
+      "logical_bytes": 436733828,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T14:37:22.124661+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931",
+      "file_count": 566,
+      "allocated_bytes": 434233344,
+      "logical_bytes": 432829584,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:39.750557+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131",
+      "file_count": 2128,
+      "allocated_bytes": 425267200,
+      "logical_bytes": 418344757,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:40.439558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811",
+      "file_count": 538,
+      "allocated_bytes": 412504064,
+      "logical_bytes": 411205532,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:41.514559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743",
+      "file_count": 592,
+      "allocated_bytes": 389754880,
+      "logical_bytes": 388280045,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:37.395555+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969",
+      "file_count": 614,
+      "allocated_bytes": 388853760,
+      "logical_bytes": 387355480,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:39.425557+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275",
+      "file_count": 586,
+      "allocated_bytes": 385589248,
+      "logical_bytes": 384198873,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:37.712555+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539",
+      "file_count": 539,
+      "allocated_bytes": 385327104,
+      "logical_bytes": 384025203,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:37.257555+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176",
+      "file_count": 524,
+      "allocated_bytes": 383864832,
+      "logical_bytes": 382598692,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:39.903558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656",
+      "file_count": 525,
+      "allocated_bytes": 381149184,
+      "logical_bytes": 379889999,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-31T22:01:27.018558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192",
+      "file_count": 527,
+      "allocated_bytes": 373678080,
+      "logical_bytes": 372425179,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-18T14:15:59.859229+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598",
+      "file_count": 503,
+      "allocated_bytes": 367300608,
+      "logical_bytes": 366076764,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:38.080556+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/history-feasibility-1546757745078968381",
+      "file_count": 98,
+      "allocated_bytes": 341385216,
+      "logical_bytes": 341156338,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T06:00:11.534611+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212",
+      "file_count": 505,
+      "allocated_bytes": 335478784,
+      "logical_bytes": 334284733,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T22:44:35.514856+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602",
+      "file_count": 576,
+      "allocated_bytes": 335384576,
+      "logical_bytes": 333844170,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:34:23.920767+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121",
+      "file_count": 489,
+      "allocated_bytes": 334696448,
+      "logical_bytes": 333522601,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T01:30:26.083372+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774",
+      "file_count": 543,
+      "allocated_bytes": 330600448,
+      "logical_bytes": 329263786,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:42.177560+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652",
+      "file_count": 65,
+      "allocated_bytes": 305053696,
+      "logical_bytes": 304877875,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:58.562953+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541",
+      "file_count": 550,
+      "allocated_bytes": 302977024,
+      "logical_bytes": 301649487,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:40.342558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789",
+      "file_count": 543,
+      "allocated_bytes": 302813184,
+      "logical_bytes": 301468272,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:38.889557+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248",
+      "file_count": 584,
+      "allocated_bytes": 295526400,
+      "logical_bytes": 294110822,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:41.984559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732",
+      "file_count": 521,
+      "allocated_bytes": 293732352,
+      "logical_bytes": 292446324,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:41.872559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/september-export-1555274844109803522",
+      "file_count": 123,
+      "allocated_bytes": 292237312,
+      "logical_bytes": 416792055,
+      "external_linked_bytes": 249741312,
+      "newest_mtime_utc": "2026-10-01T19:38:05.524013+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+      "file_count": 1011,
+      "allocated_bytes": 290676736,
+      "logical_bytes": 290504744,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T05:25:30.924742+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717",
+      "file_count": 526,
+      "allocated_bytes": 277303296,
+      "logical_bytes": 275995351,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:42.085559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/september-video-layout-1555338586327613623",
+      "file_count": 70,
+      "allocated_bytes": 275013632,
+      "logical_bytes": 274798208,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T00:21:31.086709+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+      "file_count": 1008,
+      "allocated_bytes": 273248256,
+      "logical_bytes": 273072168,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T19:03:30.790235+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-3fe2a131-b11a-41f2-a193-095c1d6bc3b9",
+      "file_count": 1027,
+      "allocated_bytes": 263557120,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:45:23.173189+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/ui-test-b976f7f1-cd38-49e4-995e-ed85dda0c027",
+      "file_count": 1027,
+      "allocated_bytes": 263557120,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:19:28.666303+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-7a731402-c22e-4660-973a-2fb7b084d0c3",
+      "file_count": 1027,
+      "allocated_bytes": 263557120,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:35:35.357833+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-163e8765-ceb3-4d21-b0a4-232ad7536139",
+      "file_count": 1027,
+      "allocated_bytes": 263553024,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T05:00:21.929185+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-3a76fac5-ebed-4474-87e4-565bd9ea5c34",
+      "file_count": 1027,
+      "allocated_bytes": 263553024,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T03:50:26.622406+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/ui-test-96b15bc3-5cbc-4e73-9930-81a4ada50acc",
+      "file_count": 1027,
+      "allocated_bytes": 263553024,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-31T21:46:01.168435+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-bad9632d-d1e1-45f2-88b8-ad1d855dab54",
+      "file_count": 1027,
+      "allocated_bytes": 263524352,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:31:19.805717+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/ui-test-f50a9575-c02a-4751-8736-cbd2ed817126",
+      "file_count": 1027,
+      "allocated_bytes": 263520256,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-28T13:36:21.960874+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/ui-test-31b4a9bf-bba6-4caf-9433-fda94b98fdc6",
+      "file_count": 1027,
+      "allocated_bytes": 263520256,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-18T13:56:21.036993+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/ui-test-9f2c65e3-f800-43f8-a406-bdfbe23fa69f",
+      "file_count": 1027,
+      "allocated_bytes": 263516160,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T22:13:50.592138+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-94a9715a-7de4-44e8-b126-66ae30a2f858",
+      "file_count": 1027,
+      "allocated_bytes": 263512064,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T18:52:32.690393+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-13f346e7-a4ff-4e9c-8724-fc9953f3e2be",
+      "file_count": 1027,
+      "allocated_bytes": 263512064,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-05T02:19:38.354284+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/ui-test-4445c139-68a4-409f-bfe4-53f59576f9bd",
+      "file_count": 1027,
+      "allocated_bytes": 263512064,
+      "logical_bytes": 263348264,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T01:07:54.304797+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530",
+      "file_count": 234,
+      "allocated_bytes": 263294976,
+      "logical_bytes": 262741618,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:52.276945+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151",
+      "file_count": 728,
+      "allocated_bytes": 245592064,
+      "logical_bytes": 243688987,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:40.007558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/yolo-close-1562816076503449702",
+      "file_count": 40,
+      "allocated_bytes": 239230976,
+      "logical_bytes": 239127140,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T14:05:47.237041+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064",
+      "file_count": 99,
+      "allocated_bytes": 238645248,
+      "logical_bytes": 238397150,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:43.400934+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501",
+      "file_count": 34,
+      "allocated_bytes": 233824256,
+      "logical_bytes": 233727328,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:50.705943+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+      "file_count": 1008,
+      "allocated_bytes": 231112704,
+      "logical_bytes": 230948904,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T16:50:59.161850+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+      "file_count": 1025,
+      "allocated_bytes": 230027264,
+      "logical_bytes": 229826600,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T14:20:21.991179+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+      "file_count": 1024,
+      "allocated_bytes": 227995648,
+      "logical_bytes": 227794984,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:25:47.175392+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+      "file_count": 1024,
+      "allocated_bytes": 227995648,
+      "logical_bytes": 227794984,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:29:36.275602+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953",
+      "file_count": 28,
+      "allocated_bytes": 227237888,
+      "logical_bytes": 227152091,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:56.334950+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-314b79fa-0bb2-4db5-8823-13b8bab0b5d9",
+      "file_count": 1019,
+      "allocated_bytes": 223535104,
+      "logical_bytes": 223371304,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:35:35.969815+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+      "file_count": 1024,
+      "allocated_bytes": 222482432,
+      "logical_bytes": 222281768,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:21:21.604120+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+      "file_count": 1024,
+      "allocated_bytes": 222482432,
+      "logical_bytes": 222281768,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:12:31.706437+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-usage-prepaid-1555464947394285580",
+      "file_count": 14,
+      "allocated_bytes": 220631040,
+      "logical_bytes": 220588885,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T13:09:05.557865+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+      "file_count": 1019,
+      "allocated_bytes": 220463104,
+      "logical_bytes": 220299304,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T15:54:28.963178+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-ca4cedf8-7653-43f0-9a71-e54567dfc1df",
+      "file_count": 1020,
+      "allocated_bytes": 220225536,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:56:31.071917+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-ed85179e-445c-4a20-a131-fb6dd309e142",
+      "file_count": 1020,
+      "allocated_bytes": 220225536,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:30:49.286467+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-80098e4c-f944-47ef-aa98-e0e20266ca80",
+      "file_count": 1020,
+      "allocated_bytes": 220221440,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T03:46:42.193163+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/catalog-test-befbe335-fbe5-4320-a59c-1de6bb32c447",
+      "file_count": 1020,
+      "allocated_bytes": 220221440,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:14:38.215370+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/catalog-test-2c37acda-7559-463a-bf80-773b1ec54898",
+      "file_count": 1020,
+      "allocated_bytes": 220209152,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-31T21:41:56.959128+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+      "file_count": 1019,
+      "allocated_bytes": 220200960,
+      "logical_bytes": 220037160,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T21:52:56.629742+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/catalog-test-10600f97-69d8-4d79-884e-cb188babeb23",
+      "file_count": 1020,
+      "allocated_bytes": 220192768,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-18T13:52:19.061658+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-6bba588b-8a25-4d9f-a543-282e03666990",
+      "file_count": 1020,
+      "allocated_bytes": 220188672,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-05T02:15:40.678924+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-afb2b758-6974-4277-b6e7-7be47f296167",
+      "file_count": 1020,
+      "allocated_bytes": 220188672,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T18:48:17.782080+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-9f613bd7-f503-4c20-b9f3-a46485fb2f83",
+      "file_count": 1020,
+      "allocated_bytes": 220188672,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:33:56.649694+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-4e6eb728-ff92-45c3-9d70-55b376528e49",
+      "file_count": 1020,
+      "allocated_bytes": 220188672,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:26:53.922460+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/catalog-test-359a2b35-6335-48a2-88f9-ca8a2ce9ffda",
+      "file_count": 1020,
+      "allocated_bytes": 220188672,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T22:09:42.148884+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/catalog-test-6a5b1d41-dbb1-4f05-8d41-96cd23801219",
+      "file_count": 1020,
+      "allocated_bytes": 220184576,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-28T13:32:10.750600+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/catalog-test-636d2e84-335a-464d-a6a7-26b64bfc48d5",
+      "file_count": 1020,
+      "allocated_bytes": 220184576,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T01:03:40.682513+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-8473a509-2abc-4c02-8f93-1a95d903ea42",
+      "file_count": 1020,
+      "allocated_bytes": 220184576,
+      "logical_bytes": 220020776,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:21:11.041715+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-direct-1555422806940983327",
+      "file_count": 24,
+      "allocated_bytes": 217894912,
+      "logical_bytes": 217820589,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T05:09:47.728970+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170",
+      "file_count": 49,
+      "allocated_bytes": 216281088,
+      "logical_bytes": 216147383,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:47.554940+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-1546642267291394199",
+      "file_count": 35,
+      "allocated_bytes": 206864384,
+      "logical_bytes": 206781534,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T00:33:21.819925+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/rede2-gross-1554177164872519692",
+      "file_count": 47,
+      "allocated_bytes": 202166272,
+      "logical_bytes": 202043129,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:53.618947+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-73826e91-176e-4a5f-b3e5-dc475309910f",
+      "file_count": 1019,
+      "allocated_bytes": 200835072,
+      "logical_bytes": 200630367,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:25:57.247739+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+      "file_count": 1018,
+      "allocated_bytes": 200654848,
+      "logical_bytes": 200491048,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T23:08:06.063365+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+      "file_count": 1023,
+      "allocated_bytes": 199135232,
+      "logical_bytes": 198967336,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T22:38:05.213385+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+      "file_count": 1018,
+      "allocated_bytes": 198471680,
+      "logical_bytes": 198303784,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T23:12:46.821738+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+      "file_count": 1018,
+      "allocated_bytes": 198467584,
+      "logical_bytes": 198303784,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T23:33:10.798486+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+      "file_count": 1018,
+      "allocated_bytes": 198467584,
+      "logical_bytes": 198303784,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T23:19:11.548756+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+      "file_count": 1018,
+      "allocated_bytes": 198467584,
+      "logical_bytes": 198303784,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T00:52:36.400595+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/catalog-test-f720caab-e00a-4f1e-b425-268d81d8aa56",
+      "file_count": 1019,
+      "allocated_bytes": 198262784,
+      "logical_bytes": 198058079,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:18:34.424180+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-8c88783e-3211-4bde-977a-b7a1a2e8c71b",
+      "file_count": 1024,
+      "allocated_bytes": 195760128,
+      "logical_bytes": 195584095,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:21:10.240714+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-9e4572e0-7578-4adb-b1b9-2c2a1c6ed960",
+      "file_count": 1019,
+      "allocated_bytes": 195694592,
+      "logical_bytes": 195493983,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:25:47.268077+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-59dbae10-17a2-4c7d-bb0b-31bc267c8b96",
+      "file_count": 1024,
+      "allocated_bytes": 194019328,
+      "logical_bytes": 193814623,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:26:33.400783+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+      "file_count": 1022,
+      "allocated_bytes": 193568768,
+      "logical_bytes": 193388584,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:07:37.628204+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+      "file_count": 1018,
+      "allocated_bytes": 193544192,
+      "logical_bytes": 193355816,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T00:06:14.325133+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-410029c0-0626-4f0c-b0b7-df5d832488f2.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:25:42.582380+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-39b81209-2108-4910-958e-4f3e8f4a28a7.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:32:45.491606+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-1390bb10-13cb-4cbe-ba4e-efebfb7f839f.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:15:36.041952+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-aa5bbfe8-ed6b-4282-9625-ece83e6dabbe.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:23:25.741552+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-93ca181f-4bab-4ee4-beec-9a63a3725c96.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-05T02:14:33.064819+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-b8927c0f-8e13-41a6-bbdf-76b92e884e68.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:55:34.950855+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-5acfc219-1ee6-4045-88a2-6fa4e1c4c402.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T18:47:14.824999+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-e528a5af-9137-4649-8c25-3327f574df35.tar",
+      "file_count": 1,
+      "allocated_bytes": 193290240,
+      "logical_bytes": 193284608,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T03:45:45.963102+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/august-adjust-1551644766125428847",
+      "file_count": 84,
+      "allocated_bytes": 193187840,
+      "logical_bytes": 192976258,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T17:42:03.402436+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/pgdata",
+      "file_count": 1004,
+      "allocated_bytes": 193163264,
+      "logical_bytes": 192987176,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-10T19:10:56.468078+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-6355f597-20f0-45c5-a4e5-227ad81c4b83.tar",
+      "file_count": 1,
+      "allocated_bytes": 193142784,
+      "logical_bytes": 193138688,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:37:58.241585+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-bd15fc30-8a67-41f8-bd9a-f66cc635dce4",
+      "file_count": 1018,
+      "allocated_bytes": 192942080,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:15:58.671978+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-ca20e7a5-96f4-43d8-952f-67c1b1a5cac1",
+      "file_count": 1018,
+      "allocated_bytes": 192942080,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:55:36.403857+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-37a8721e-5981-4150-95ed-b97a68ce125e",
+      "file_count": 1018,
+      "allocated_bytes": 192942080,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T03:45:47.382103+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-07864412-5458-420d-a38f-283a466d811e",
+      "file_count": 1018,
+      "allocated_bytes": 192942080,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:29:32.793369+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-66345f60-bd4e-4d0e-8b14-023ce66a55b3",
+      "file_count": 1018,
+      "allocated_bytes": 192937984,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:23:41.250571+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/test-pg-704fa232-f2e3-4a8d-befe-d55b96b30ddf",
+      "file_count": 1018,
+      "allocated_bytes": 192937984,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:13:26.441420+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-57097a64-177a-4857-a95e-4bcf25555dc8",
+      "file_count": 1018,
+      "allocated_bytes": 192937984,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:25:29.464054+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/test-pg-2804a1dc-a044-410e-8e22-41c7f98dd911",
+      "file_count": 1018,
+      "allocated_bytes": 192917504,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-31T21:40:52.330047+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-515f37ce-123a-413e-b71b-663ef66d01e7",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:25:44.726382+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-119b5f9f-cb0c-47c1-a986-63c7c491e724",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T18:47:16.592001+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/test-pg-34cccb39-ccfa-4098-8ee0-ace1b2ed8858",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T01:02:40.799467+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-647f0a3f-5559-4947-acc7-f2975529a586",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:19:49.261607+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/test-pg-d7c002bd-4c9c-46ab-b54c-a272321d7a00",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-18T13:51:20.787569+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/test-pg-815e9975-1b4f-48f8-9c7d-eb428793ab2b",
+      "file_count": 1018,
+      "allocated_bytes": 192909312,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T22:08:40.295821+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-3a277b17-07eb-4665-bbd8-6c188cee6c98",
+      "file_count": 1018,
+      "allocated_bytes": 192905216,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:32:47.469609+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/test-pg-19130566-aed1-45f0-b846-ee640d983912",
+      "file_count": 1018,
+      "allocated_bytes": 192905216,
+      "logical_bytes": 192741416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-28T13:31:04.525526+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+      "file_count": 1005,
+      "allocated_bytes": 192765952,
+      "logical_bytes": 192602152,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:37:59.421587+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+      "file_count": 1018,
+      "allocated_bytes": 192397312,
+      "logical_bytes": 192233512,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T23:06:57.072698+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-test-b6be8a92-03a6-4d2a-88b5-b91cfc1c6191",
+      "file_count": 1024,
+      "allocated_bytes": 192245760,
+      "logical_bytes": 192045151,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T07:18:28.418172+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+      "file_count": 1018,
+      "allocated_bytes": 190783488,
+      "logical_bytes": 190603304,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T23:57:17.965557+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/spyflix-credit-1553049180434604103",
+      "file_count": 13,
+      "allocated_bytes": 189976576,
+      "logical_bytes": 189929367,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:58.240953+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+      "file_count": 1018,
+      "allocated_bytes": 189878272,
+      "logical_bytes": 189710376,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T22:58:48.036172+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+      "file_count": 1018,
+      "allocated_bytes": 189874176,
+      "logical_bytes": 189710376,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T23:00:14.047359+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/history-refresh-requests",
+      "file_count": 78,
+      "allocated_bytes": 189837312,
+      "logical_bytes": 189583622,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:22:25.691764+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+      "file_count": 1005,
+      "allocated_bytes": 188645376,
+      "logical_bytes": 188481576,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T17:21:06.567667+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+      "file_count": 1005,
+      "allocated_bytes": 188477440,
+      "logical_bytes": 188309544,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T14:07:48.845883+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465",
+      "file_count": 25,
+      "allocated_bytes": 180002816,
+      "logical_bytes": 179924278,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:49.993942+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/wavesbee-1546607083468623912",
+      "file_count": 36,
+      "allocated_bytes": 179634176,
+      "logical_bytes": 179533316,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T20:25:35.593141+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897",
+      "file_count": 38,
+      "allocated_bytes": 178941952,
+      "logical_bytes": 178825595,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:53.089946+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484",
+      "file_count": 521,
+      "allocated_bytes": 178933760,
+      "logical_bytes": 177653290,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:42.453560+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/pushalert-1553059046360350835",
+      "file_count": 20,
+      "allocated_bytes": 177774592,
+      "logical_bytes": 177710802,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-25T15:19:58.986729+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/media-spend-runs",
+      "file_count": 3829,
+      "allocated_bytes": 177115136,
+      "logical_bytes": 167363627,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T15:53:24.595422+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192",
+      "file_count": 24,
+      "allocated_bytes": 165330944,
+      "logical_bytes": 165267598,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:48.196940+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077",
+      "file_count": 36,
+      "allocated_bytes": 164950016,
+      "logical_bytes": 164853129,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:44.648936+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510",
+      "file_count": 30,
+      "allocated_bytes": 161103872,
+      "logical_bytes": 161014630,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:45.857938+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493",
+      "file_count": 34,
+      "allocated_bytes": 160448512,
+      "logical_bytes": 160338098,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:52.606946+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749",
+      "file_count": 32,
+      "allocated_bytes": 159916032,
+      "logical_bytes": 159814834,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:55.358949+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/simple-review-1551798771661275147",
+      "file_count": 41,
+      "allocated_bytes": 157671424,
+      "logical_bytes": 157549573,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T11:46:27.130774+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465",
+      "file_count": 505,
+      "allocated_bytes": 154894336,
+      "logical_bytes": 153690326,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:38.624556+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/receipt-review-1554155424285069372",
+      "file_count": 30,
+      "allocated_bytes": 154034176,
+      "logical_bytes": 153950098,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:53.415947+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482",
+      "file_count": 505,
+      "allocated_bytes": 151326720,
+      "logical_bytes": 150090642,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:36.434554+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578",
+      "file_count": 157,
+      "allocated_bytes": 147275776,
+      "logical_bytes": 146854588,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T22:31:52.789637+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/openzed-icaro-1551714950781866035",
+      "file_count": 22,
+      "allocated_bytes": 145498112,
+      "logical_bytes": 145445736,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T22:12:46.663155+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351",
+      "file_count": 506,
+      "allocated_bytes": 141070336,
+      "logical_bytes": 139829374,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:41.747559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850",
+      "file_count": 478,
+      "allocated_bytes": 140718080,
+      "logical_bytes": 139564273,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-15T23:37:41.419559+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sept-invalid-1562911529102475286",
+      "file_count": 34,
+      "allocated_bytes": 138964992,
+      "logical_bytes": 138864534,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T19:43:05.457659+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/invalid-close-1554187234725462097",
+      "file_count": 36,
+      "allocated_bytes": 138604544,
+      "logical_bytes": 138511010,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-28T17:59:58.971557+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/november-open-1565748653027754065",
+      "file_count": 38,
+      "allocated_bytes": 132653056,
+      "logical_bytes": 132544305,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-01T02:09:15.026640+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/cutoff-1551913189355028501",
+      "file_count": 26,
+      "allocated_bytes": 131911680,
+      "logical_bytes": 131831132,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T11:47:03.141810+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/session-rateio-dicas-1551947602562392085",
+      "file_count": 48,
+      "allocated_bytes": 124182528,
+      "logical_bytes": 124025634,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:58:33.903383+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003",
+      "file_count": 51,
+      "allocated_bytes": 123166720,
+      "logical_bytes": 122998310,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T01:56:51.631496+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/vigency-release-1551783001678024736",
+      "file_count": 52,
+      "allocated_bytes": 122556416,
+      "logical_bytes": 122390985,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T03:17:13.843948+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/finc-review-1551931759061631058",
+      "file_count": 29,
+      "allocated_bytes": 121155584,
+      "logical_bytes": 121063811,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T12:35:36.546746+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/review-deductions-1553399478248017973",
+      "file_count": 23,
+      "allocated_bytes": 120991744,
+      "logical_bytes": 120923487,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:54.696948+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/login-redirect-1551937825073790986",
+      "file_count": 25,
+      "allocated_bytes": 120524800,
+      "logical_bytes": 120443399,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T13:09:28.654981+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/conference-access-1551924862854107256",
+      "file_count": 26,
+      "allocated_bytes": 119414784,
+      "logical_bytes": 119329764,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T12:10:58.951305+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-edit-1551700964975714437",
+      "file_count": 29,
+      "allocated_bytes": 117923840,
+      "logical_bytes": 117823489,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T21:50:14.454809+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584",
+      "file_count": 10,
+      "allocated_bytes": 110153728,
+      "logical_bytes": 110117073,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-07T14:43:32.289535+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-close-1551587001629937686",
+      "file_count": 17,
+      "allocated_bytes": 102035456,
+      "logical_bytes": 101981388,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T13:54:38.020182+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/adops-1551275920671776839",
+      "file_count": 1,
+      "allocated_bytes": 95584256,
+      "logical_bytes": 95579575,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T17:16:43.095306+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/reaudit-1551300167230029965",
+      "file_count": 140,
+      "allocated_bytes": 76173312,
+      "logical_bytes": 75857118,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T18:46:24.803016+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/m2-settlement-1552327479627087913",
+      "file_count": 26,
+      "allocated_bytes": 74993664,
+      "logical_bytes": 74894850,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-23T14:42:53.071406+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/full-review-1551317339968901264",
+      "file_count": 85,
+      "allocated_bytes": 73703424,
+      "logical_bytes": 73516660,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T20:03:36.146336+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-access-1546858367635685396",
+      "file_count": 40,
+      "allocated_bytes": 64688128,
+      "logical_bytes": 64567371,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T17:18:34.566686+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/usability-1546729477319696405",
+      "file_count": 135,
+      "allocated_bytes": 63700992,
+      "logical_bytes": 63373486,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T04:55:40.608084+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gamezone-geizian-1548133712795795506",
+      "file_count": 14,
+      "allocated_bytes": 53542912,
+      "logical_bytes": 53506783,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T01:13:45.489928+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-sequential-1548113083774541935",
+      "file_count": 34,
+      "allocated_bytes": 52830208,
+      "logical_bytes": 52682388,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T01:26:54.962594+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/full-reaudit-1551718259718365296",
+      "file_count": 103,
+      "allocated_bytes": 49446912,
+      "logical_bytes": 49185800,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T22:45:36.697012+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/account-managers-1547052028663169105",
+      "file_count": 22,
+      "allocated_bytes": 47673344,
+      "logical_bytes": 47619694,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T01:37:40.379083+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339",
+      "file_count": 40,
+      "allocated_bytes": 45858816,
+      "logical_bytes": 45743408,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-05T02:44:34.948035+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/spend-placement-1547012165150711858",
+      "file_count": 70,
+      "allocated_bytes": 42131456,
+      "logical_bytes": 41922189,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T00:25:29.898696+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/personnel-review-1554276069299716107",
+      "file_count": 8,
+      "allocated_bytes": 40497152,
+      "logical_bytes": 40472366,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-28T23:43:45.115991+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-74349550-8a02-4f7d-afb1-e80827608b1e",
+      "file_count": 999,
+      "allocated_bytes": 40280064,
+      "logical_bytes": 40108127,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:25:31.764057+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-recheck-1551620693446234142",
+      "file_count": 36,
+      "allocated_bytes": 39890944,
+      "logical_bytes": 39812969,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T15:55:30.824797+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/september-export-preflight-1555267485928788099",
+      "file_count": 17,
+      "allocated_bytes": 35561472,
+      "logical_bytes": 35506763,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-01T17:30:18.199542+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sb-tech-cad-1547697182948458611",
+      "file_count": 16,
+      "allocated_bytes": 35217408,
+      "logical_bytes": 35170624,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-10T20:29:44.516231+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/deployment-1545928620462313645",
+      "file_count": 20,
+      "allocated_bytes": 32972800,
+      "logical_bytes": 32896866,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T23:02:44.819066+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-layout-1546719646919434370",
+      "file_count": 42,
+      "allocated_bytes": 32759808,
+      "logical_bytes": 32662550,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T03:36:09.582433+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/navigation-1546682010066489394",
+      "file_count": 31,
+      "allocated_bytes": 31801344,
+      "logical_bytes": 31719005,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T01:44:31.156354+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/company-expenses-1547240897752604704",
+      "file_count": 22,
+      "allocated_bytes": 31707136,
+      "logical_bytes": 31639007,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T14:23:53.968802+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/recalculated.json",
+      "file_count": 1,
+      "allocated_bytes": 30490624,
+      "logical_bytes": 30490216,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:09:38.318316+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-centavos-1551624141885415455",
+      "file_count": 27,
+      "allocated_bytes": 29626368,
+      "logical_bytes": 29552975,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T16:04:45.168219+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manual-quotes-1546975305216827412",
+      "file_count": 131,
+      "allocated_bytes": 28332032,
+      "logical_bytes": 27901261,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T21:06:38.479932+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/attribution-preview-1551308976061419554",
+      "file_count": 64,
+      "allocated_bytes": 28086272,
+      "logical_bytes": 27951127,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T19:24:32.728514+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1564091181686591549",
+      "file_count": 3,
+      "allocated_bytes": 27017216,
+      "logical_bytes": 27005831,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-26T01:42:17.898738+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/account-links-1546752274989191230",
+      "file_count": 12,
+      "allocated_bytes": 26357760,
+      "logical_bytes": 26319128,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T05:33:07.523637+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-compare-1551599521887289517",
+      "file_count": 20,
+      "allocated_bytes": 26087424,
+      "logical_bytes": 26035304,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T14:32:26.255971+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/history-ui-1546894693135028234",
+      "file_count": 21,
+      "allocated_bytes": 25866240,
+      "logical_bytes": 25799007,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T15:46:41.553898+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/source.json",
+      "file_count": 1,
+      "allocated_bytes": 25006080,
+      "logical_bytes": 25004832,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:05:35.870835+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/prevention-audit-1551747394356518933",
+      "file_count": 33,
+      "allocated_bytes": 24764416,
+      "logical_bytes": 24686447,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T00:33:23.992823+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/fb-oct-fix-1569031159805911112",
+      "file_count": 25,
+      "allocated_bytes": 24719360,
+      "logical_bytes": 24656256,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T17:02:41.192977+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-roi-no-media-1548779265607073944",
+      "file_count": 13,
+      "allocated_bytes": 23105536,
+      "logical_bytes": 23061692,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-13T19:46:49.698987+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/google-square-1546702931384991834",
+      "file_count": 27,
+      "allocated_bytes": 21979136,
+      "logical_bytes": 21901846,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T02:54:23.067599+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/origin-1546618148571058266",
+      "file_count": 22,
+      "allocated_bytes": 21762048,
+      "logical_bytes": 21695514,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T21:32:56.444626+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/google-accounts-1546702931384991834",
+      "file_count": 19,
+      "allocated_bytes": 21643264,
+      "logical_bytes": 21587716,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T03:00:12.165984+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/fb-oct-audit-1569026622227615826",
+      "file_count": 20,
+      "allocated_bytes": 21307392,
+      "logical_bytes": 21253390,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T16:44:30.167021+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payroll-1546380179654451281",
+      "file_count": 21,
+      "allocated_bytes": 20647936,
+      "logical_bytes": 20580003,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T05:33:24.269482+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/apply-1551305457015062610",
+      "file_count": 32,
+      "allocated_bytes": 20348928,
+      "logical_bytes": 20276407,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T18:58:56.158252+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-tabs-audit-1548145007612137554",
+      "file_count": 26,
+      "allocated_bytes": 18931712,
+      "logical_bytes": 18868354,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T03:53:28.248746+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-align-1554194062125310075",
+      "file_count": 26,
+      "allocated_bytes": 18812928,
+      "logical_bytes": 18740949,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-28T18:21:13.355059+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-audit-1551627541519794186",
+      "file_count": 44,
+      "allocated_bytes": 18186240,
+      "logical_bytes": 18080090,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T16:30:07.511409+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/review-1551652370998624328",
+      "file_count": 37,
+      "allocated_bytes": 18120704,
+      "logical_bytes": 18030434,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T17:54:53.591185+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-followup-1555083506529468438",
+      "file_count": 28,
+      "allocated_bytes": 16859136,
+      "logical_bytes": 16785376,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:51.083944+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-close-1552302899483254856",
+      "file_count": 38,
+      "allocated_bytes": 16297984,
+      "logical_bytes": 16186942,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:46.280938+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/dual-gross-1551344574859845795",
+      "file_count": 69,
+      "allocated_bytes": 15876096,
+      "logical_bytes": 15710963,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:44.004935+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/fb-fix-1569014246493130852",
+      "file_count": 20,
+      "allocated_bytes": 15339520,
+      "logical_bytes": 15291969,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T15:57:57.661960+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sheet-cent-1554210060094283867",
+      "file_count": 16,
+      "allocated_bytes": 15024128,
+      "logical_bytes": 14977163,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-28T19:23:51.108506+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/fb-audit-1569009565838610493",
+      "file_count": 9,
+      "allocated_bytes": 14839808,
+      "logical_bytes": 14817648,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T15:37:00.439607+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/release-fixtures",
+      "file_count": 2,
+      "allocated_bytes": 14442496,
+      "logical_bytes": 14433020,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T01:05:57.041486+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/personnel-review-1564381094776938537",
+      "file_count": 3,
+      "allocated_bytes": 12996608,
+      "logical_bytes": 12986226,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-26T20:55:18.347731+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/expense-conflict-1554689121836859475",
+      "file_count": 23,
+      "allocated_bytes": 12578816,
+      "logical_bytes": 12515967,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:44.872936+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/live-readback",
+      "file_count": 7,
+      "allocated_bytes": 12283904,
+      "logical_bytes": 12264465,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:33:27.489336+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/card-spend-audit-1547068599796240395",
+      "file_count": 4,
+      "allocated_bytes": 11837440,
+      "logical_bytes": 11821172,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T02:20:01.622903+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-remuneration-card-1548770990954119179",
+      "file_count": 11,
+      "allocated_bytes": 11702272,
+      "logical_bytes": 11671628,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-13T19:21:30.177032+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/august-close-audit-1554278152740540477",
+      "file_count": 8,
+      "allocated_bytes": 10686464,
+      "logical_bytes": 10665455,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-28T23:53:16.451498+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/releases",
+      "file_count": 501,
+      "allocated_bytes": 10665984,
+      "logical_bytes": 9453878,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:33:42.061734+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/geizian-1551658668393631755",
+      "file_count": 17,
+      "allocated_bytes": 10485760,
+      "logical_bytes": 10440482,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T18:21:50.908879+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-periods-1546184035921829938",
+      "file_count": 54,
+      "allocated_bytes": 9842688,
+      "logical_bytes": 9696239,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T17:34:21.272119+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-catalog-1546169687346249728",
+      "file_count": 35,
+      "allocated_bytes": 9592832,
+      "logical_bytes": 9482560,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:26:53.706460+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-review-1546147880559968286",
+      "file_count": 32,
+      "allocated_bytes": 9293824,
+      "logical_bytes": 9202976,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T13:47:17.505527+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/migration-overlap-1551340994195099762",
+      "file_count": 36,
+      "allocated_bytes": 8736768,
+      "logical_bytes": 8656142,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T21:21:56.150418+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/baseline-before-native-expenses-3cb44764-dcb7-45d1-8dfc-28cf0f2d4dda.json",
+      "file_count": 1,
+      "allocated_bytes": 7561216,
+      "logical_bytes": 7558648,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:36:52.489521+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/baseline-before-native-expenses.json",
+      "file_count": 1,
+      "allocated_bytes": 7548928,
+      "logical_bytes": 7548311,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:27:09.822120+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/domain.json",
+      "file_count": 1,
+      "allocated_bytes": 6746112,
+      "logical_bytes": 6742421,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:20:48.683988+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/pg-auth-1545934831664242748",
+      "file_count": 9,
+      "allocated_bytes": 5615616,
+      "logical_bytes": 5587314,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T23:49:05.431542+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-layout-1546158286506561578",
+      "file_count": 32,
+      "allocated_bytes": 3694592,
+      "logical_bytes": 3598997,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T14:30:24.592170+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944",
+      "file_count": 33,
+      "allocated_bytes": 3674112,
+      "logical_bytes": 3580460,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:31:19.590717+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-model.json",
+      "file_count": 1,
+      "allocated_bytes": 3149824,
+      "logical_bytes": 3146963,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T04:31:56.089323+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/month-prune-1556806857664897025",
+      "file_count": 15,
+      "allocated_bytes": 2961408,
+      "logical_bytes": 2908194,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-06T06:54:35.429416+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/approved-attribution-1551312942182441111",
+      "file_count": 8,
+      "allocated_bytes": 2424832,
+      "logical_bytes": 2402763,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-20T19:33:37.611079+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/mavroa-permanent-1549069898674606352-20260914T145426Z",
+      "file_count": 14,
+      "allocated_bytes": 1773568,
+      "logical_bytes": 1706480,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-14T15:17:09.089518+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-month-1555055743785373760",
+      "file_count": 21,
+      "allocated_bytes": 1675264,
+      "logical_bytes": 1621523,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:51.555944+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755",
+      "file_count": 6,
+      "allocated_bytes": 1650688,
+      "logical_bytes": 1628473,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T15:13:44.490030+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/daily-recovery-1563920408531435650",
+      "file_count": 80,
+      "allocated_bytes": 1200128,
+      "logical_bytes": 1001903,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:49:45.755885+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/ui-country-blocks-1546030544213516358",
+      "file_count": 13,
+      "allocated_bytes": 958464,
+      "logical_bytes": 911536,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T05:57:56.931451+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/attribution-1562684657601089557",
+      "file_count": 12,
+      "allocated_bytes": 905216,
+      "logical_bytes": 870232,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T04:52:17.392067+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/month-rollover-runs",
+      "file_count": 96,
+      "allocated_bytes": 782336,
+      "logical_bytes": 96897,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T15:49:38.733032+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/boostingecon-policy-1548317688051277918",
+      "file_count": 39,
+      "allocated_bytes": 704512,
+      "logical_bytes": 550496,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T14:22:15.763373+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/current-policy-1547732274936553532",
+      "file_count": 4,
+      "allocated_bytes": 659456,
+      "logical_bytes": 646517,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T17:15:53.692409+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/skill-audit-1551957170755608587",
+      "file_count": 48,
+      "allocated_bytes": 565248,
+      "logical_bytes": 462416,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T14:15:16.448327+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/network-order-1552310660208009237",
+      "file_count": 23,
+      "allocated_bytes": 520192,
+      "logical_bytes": 460412,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:50.218943+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/m2-closing-1562663899969617922",
+      "file_count": 8,
+      "allocated_bytes": 471040,
+      "logical_bytes": 449008,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T03:23:07.587688+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114",
+      "file_count": 4,
+      "allocated_bytes": 438272,
+      "logical_bytes": 425074,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-10T21:32:36.371205+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/partial-confirmed-data-policy-1549047147465281658-20260914T133011Z",
+      "file_count": 34,
+      "allocated_bytes": 372736,
+      "logical_bytes": 237691,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-14T14:37:12.192315+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/release-guard-1551985522380111956",
+      "file_count": 38,
+      "allocated_bytes": 344064,
+      "logical_bytes": 227759,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:54.263948+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/facebook-closing-1562609136909295721",
+      "file_count": 6,
+      "allocated_bytes": 262144,
+      "logical_bytes": 245626,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T23:47:54.771350+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/google-closing-1562623875055886377",
+      "file_count": 6,
+      "allocated_bytes": 262144,
+      "logical_bytes": 245517,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-22T00:39:55.021668+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/rede2-closing-1562603291936821379",
+      "file_count": 6,
+      "allocated_bytes": 262144,
+      "logical_bytes": 245157,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-21T23:16:47.584113+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/nine-am-1547235522055770142",
+      "file_count": 19,
+      "allocated_bytes": 204800,
+      "logical_bytes": 150654,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T13:35:44.563558+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/small-money-display-1548729278156378185",
+      "file_count": 12,
+      "allocated_bytes": 172032,
+      "logical_bytes": 125163,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-13T16:40:10.818803+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-mapping-1548716825418928213",
+      "file_count": 10,
+      "allocated_bytes": 151552,
+      "logical_bytes": 126623,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-13T15:29:19.064693+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/daily-status-1553778586807304213",
+      "file_count": 13,
+      "allocated_bytes": 118784,
+      "logical_bytes": 81792,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:43.982935+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/remove-adjusted-label-1547250519414935592",
+      "file_count": 5,
+      "allocated_bytes": 102400,
+      "logical_bytes": 81816,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T14:24:47.438665+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-sender-recovery-1548309819658731612",
+      "file_count": 7,
+      "allocated_bytes": 98304,
+      "logical_bytes": 53964,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T12:54:19.581935+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/login-title-1546717157868703805",
+      "file_count": 7,
+      "allocated_bytes": 94208,
+      "logical_bytes": 68353,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T03:07:03.795432+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-card-formula-1548174919920128083",
+      "file_count": 7,
+      "allocated_bytes": 81920,
+      "logical_bytes": 58846,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T03:55:30.818847+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/wavesbee-inspection.log",
+      "file_count": 1,
+      "allocated_bytes": 73728,
+      "logical_bytes": 70484,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T19:51:40.436611+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/pre-pg-auth-1545934831664242748.tar.gz",
+      "file_count": 1,
+      "allocated_bytes": 61440,
+      "logical_bytes": 61330,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T23:17:53.521543+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-september-recheck-1563928121902633064",
+      "file_count": 6,
+      "allocated_bytes": 57344,
+      "logical_bytes": 37395,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:55:50.998283+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/daily-notice-1547230494289174719",
+      "file_count": 9,
+      "allocated_bytes": 57344,
+      "logical_bytes": 29173,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T13:07:39.044610+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-manager-commission-note-1555455453410885714",
+      "file_count": 5,
+      "allocated_bytes": 57344,
+      "logical_bytes": 37100,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T05:52:54.857426+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/growpower-g004-1563528749830377524",
+      "file_count": 11,
+      "allocated_bytes": 53248,
+      "logical_bytes": 15909,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-24T12:47:43.181875+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/fb-reconciliation-1547232956014264392",
+      "file_count": 5,
+      "allocated_bytes": 53248,
+      "logical_bytes": 36366,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-09T13:19:37.455036+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-notice-1552296415269617685",
+      "file_count": 8,
+      "allocated_bytes": 45056,
+      "logical_bytes": 19617,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:46.886939+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-manager-note-1555449010519679079",
+      "file_count": 5,
+      "allocated_bytes": 45056,
+      "logical_bytes": 26376,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T05:30:43.161478+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/remove-finance-label-1548141861066121257",
+      "file_count": 6,
+      "allocated_bytes": 45056,
+      "logical_bytes": 13756,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T01:31:49.338334+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/login-current-month-1550142625485561919",
+      "file_count": 5,
+      "allocated_bytes": 36864,
+      "logical_bytes": 22109,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-17T14:16:28.557409+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/manager-estimate-cards-1548167344650461236",
+      "file_count": 6,
+      "allocated_bytes": 32768,
+      "logical_bytes": 9078,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-12T03:27:24.888415+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/mfa-trust-1554979106112806984",
+      "file_count": 4,
+      "allocated_bytes": 28672,
+      "logical_bytes": 15129,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:03:48.992941+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/same-day-alert-fix-1549777343164325998",
+      "file_count": 3,
+      "allocated_bytes": 16384,
+      "logical_bytes": 1271,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-16T13:54:22.218619+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-ui-review-1551662555783635014",
+      "file_count": 3,
+      "allocated_bytes": 16384,
+      "logical_bytes": 1915,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-21T18:36:32.354793+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/payments-preflight.log",
+      "file_count": 1,
+      "allocated_bytes": 16384,
+      "logical_bytes": 15779,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T22:06:31.070755+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/alert-recovery-1566802832751988855",
+      "file_count": 1,
+      "allocated_bytes": 8192,
+      "logical_bytes": 770,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T13:22:03.701785+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/final-evidence.json",
+      "file_count": 1,
+      "allocated_bytes": 8192,
+      "logical_bytes": 4877,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:38:58.781643+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/report-readback.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 147,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:44:49.146961+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/live-quotes.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 420,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T04:14:51.712793+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quote-sync-state.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 184,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T16:57:19.227681+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quote-sync-alert-state.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 30,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T16:57:19.250682+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/integration-evidence.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 655,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-25T14:25:44.724382+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/source-sha256.txt",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 65,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:05:35.927835+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/release-current.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 1280,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-02T14:33:42.054734+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-lookup-worker-state.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 178,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-11-08T17:03:52.388057+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/sms-plan.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 1782,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T04:26:47.648046+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/browser-evidence.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 1094,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T23:25:39.006837+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/code-hashes.json",
+      "file_count": 1,
+      "allocated_bytes": 4096,
+      "logical_bytes": 2129,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-05T21:42:16.567826+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/month-rollover.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-10-02T14:33:03.290169+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/release-admission.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-22T16:34:42.077579+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/history-refresh.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T01:22:30.251970+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/gam-revenue-sync.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-11T15:11:33.603140+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/quote-sync.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-06T04:14:50.270793+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/media-spend-sync.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-08T21:49:11.380837+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/finance-ui-deploy.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-14T14:31:52.870998+00:00"
+    },
+    {
+      "path_or_class": "/root/mgs-agent/apps/finance-system/private/meta-lookup-worker.lock",
+      "file_count": 1,
+      "allocated_bytes": 0,
+      "logical_bytes": 0,
+      "external_linked_bytes": 0,
+      "newest_mtime_utc": "2026-09-07T21:11:27.263666+00:00"
+    }
+  ],
+  "process_references": [
+    {
+      "pid": "2488306",
+      "matched_scopes": [
+        "finance_private_or_parent_tooling"
+      ]
+    }
+  ],
+  "errors": [],
+  "cross_class_hardlink_bytes": 0,
+  "mode": "filesystem_metadata_only; no database connection; no deletion"
+}
