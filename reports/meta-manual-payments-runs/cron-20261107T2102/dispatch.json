@@ -1,0 +1,70 @@
+{
+  "id": "2ee720363d7d",
+  "name": "Digital Trust · planilha de pagamentos 3x/dia",
+  "prompt": "Atualização financeira recorrente autorizada por Rodolfo344196393512075265,thread1563926766286803004. Mesmos47IDs,BM155263197283282,spreadsheet1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU,sheet271321738. Cadência08:02/14:02/21:02America/New_York permanece,não criarwriter/job paralelo. Ler skill meta-manual-payments-planning,refs accounts-list-search.md,september-invoices.md,funding-regroup-priority.md e contrato data/meta-manual-payments/digital-trust-workbook-contract.json. As regras novas1564382301155098717 e1564382678168502295 supersedem o antigo loop de modais e retenção de números Paid. Primeiro reagrupar fundinglive comregroup_funding.py --apply preservando47IDs,sem MetaWrite. Executar refresh_september_invoices.py --apply: E somente invoices pendentes reais;Paid/due0 fica vazio,históricoemledger/backup/notas;competência segue latest_closed_generated,sem gerar invoice futura. J agora novembro2026 por Rodolfo1566811141747777680:month_since2026-11-01,month_until2026-11-30,limitar coleta ao dia atual no fuso de cada conta e indicar dia parcial;título/notas acompanham contrato. Esta decisão supersede Joutubro2026;E/F seguem invoices outubro efetivamente geradas. Depois refresh_workbook.py --apply --allow-history-pending paraC/G/I/J47contas,Insightsdiário/agregado reconciliados. D histórico independente só com prova do instrumento;não classificar evento genérico como cartão nem bloquear métricas verificadas por pendênciaD. H agora usa Current balance da linhaAccounts autorizada1564382301155098717,não Amount you can pay now: publish_pay_now.py --prepare obtémrun_dir e targets atuais;resolver Python pelo launcherHermes e rodar scripts/read_pc1_accounts_list.py --run-dir <dir> --account-ids <lote> emlotes6foreground,mesma abaAccounts porlote,leasePC1global e Chromeaprovado fresco. NUNCA abrir detalhes/modais para essa simples consulta de saldo. Inspecionar realmente cada screenshot via vision_analyze:nome/IDda linha,Currentbalance e BM,prefixobusca pode retornar várias contas,asset_idURLéfixo e não IDresultado. Captura nativa3200do worker evita OCRambíguo;não normalizar IDs divergentes. Só após leitura de todos,salvar visual-verification.json com verified_account_ids e accounts_list_checks[ID]={valid_billing_list:true,business_id:'155263197283282',row_account_id:ID,name:NOME_EXATO,balance_usd:VALOR_LITERAL};então publish_pay_now.py --run-dir <dir> --apply. Não marcar provas sem ver pixels. Se bloqueio provider/auth/paridade interromper,parar sem bypass/reloadsperfisalternativos;preservarfaltantes e horasantigas;--verified-only --apply é permitido para publicar sóleiturasrealmente verificadas,qualificando parcial. No retry reconciliarwrites/receipts antes de repetir;nunca insertcolunas ou zerarfaltante. Atualizarcontrato/checkpoint/audit/infraquandocabível. Validarfullreadback47IDs,grupos,links,notas,moedas e fórmulas/totaisF/G/H/I/J comvalidate_workbook_readonly.py;PASSestrutural não prova frescorHpreservado. Fechar somente aba própria e liberarlease. Proibidoqualquerpagamento,billing/default,budget,credencial,permissaõoumudançadeescopo. ResultadofinalPTBRcurto nesta mesma thread,sem traces/anexos/mentions,não chamarparcialdeintegral e informarqualquerlacunaDhistórica. Fonte decontinuidade:checkpoint meta-manual-payments-digital-trust. Nunca agendar novosjobs nesta execução.",
+  "skills": [
+    "meta-manual-payments-planning",
+    "google-drive-agent-automation",
+    "secure-remote-windows-automation"
+  ],
+  "skill": "meta-manual-payments-planning",
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": null,
+  "no_agent": false,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "2 8,14,21 * * *",
+    "display": "2 8,14,21 * * *"
+  },
+  "schedule_display": "2 8,14,21 * * *",
+  "repeat": {
+    "times": null,
+    "completed": 39
+  },
+  "enabled": true,
+  "state": "scheduled",
+  "paused_at": null,
+  "paused_reason": null,
+  "created_at": "2026-10-25T13:42:18.304561-04:00",
+  "next_run_at": "2026-11-08T08:02:00-05:00",
+  "last_run_at": "2026-11-07T14:39:26.489639-05:00",
+  "last_status": "ok",
+  "last_error": null,
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": null,
+  "failure_streak": 0,
+  "deliver": "discord:1496267442899521627:1563926766286803004",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1563926766286803004",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Nessa Planilha Que Crie Uma - Rodolfo",
+    "thread_id": "1563926766286803004",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "discord:1496267442899521627:1563926766286803004",
+  "last_dispatch": {
+    "scheduled_at": "2026-11-07T21:02:00-05:00",
+    "dispatched_at": "2026-11-07T21:02:46.439891-05:00",
+    "lateness_seconds": 46.4,
+    "kind": "on_time"
+  },
+  "fire_claim": {
+    "at": "2026-11-07T21:03:47.732478-05:00",
+    "by": "srv1767265:2241212:68bba48519dc423ea4a33cadb82e85a0"
+  },
+  "canonical_completions": [
+    "5e3b82ae43da4f22b7e47dd6353d5680"
+  ],
+  "timezone": "America/New_York"
+}
