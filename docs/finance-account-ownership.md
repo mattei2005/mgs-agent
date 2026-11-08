@@ -71,6 +71,14 @@ Essa decisão supersede somente a ausência da ponte de custos nesses três site
 
 Execução: workspace287→288corrigiu a atribuição; fonteMeta01–07/11atualizada via importador canônico288→289, gastoFBUSD140830.86. A diferençaUSD5.54de fonte é separada dosUSD25888.51já salvos sem atribuição aos gestores. Resultado/comissão recalculados pela regra vigente,sem duplicar custo no total dos sites. Fonte e readback: `reports/finance-fb-fix-1569014246493130852.md`, checkpoint `ZEUS-FINANCE-FB-FIX-1569014246493130852`;novos valores posteriores dependem do runtime.
 
+## Mavroa, Vizioid e Escalatepower — extensão outubro1569031159805911112
+
+Após a auditoria integral01–31/10 (`reports/finance-oct-fb-audit-1569026622227615826.md`), Rodolfo1569031159805911112autorizou explicitamente aplicar também a correção em **outubro/2026**. Essa autorização supersede a barreira de não escreveroutubro da tarefa de novembro somente para estes achados:habilitar `native_account_managers` nos mesmos três cadastros existentes,atribuir cada `account_spend` aoG/manager_key já confirmado,atualizar32valores reais de31/10comdeltaUSD17.49e recalcular resultados/remuneração pela regra do mês.
+
+Produção validada1507→1508atribuição→1509fonte;gastoFacebookUSD869020.28;remuneração calculada dos cinco gestoresBRL143738.99na revisão1509. A despesaUSD19579.52já estava no total dos sites e não foi duplicada. Preservados receitas,países/redes/titularidade,status/rateio,Google,ledgerdepagamentos,novembro e demais períodos. O estado do preenchimento diário continua até07/11;uma correção histórica não retrocede o estado global do cron.
+
+Escopo não inclui setembro/agosto nem pagamentos/estornos. Estado e readback:`reports/finance-oct-fb-fix-1569031159805911112.md`,checkpoint`ZEUS-FINANCE-OCT-FIX-1569031159805911112`. A decisão de novembro permanece ativa no seu próprio mês.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.
