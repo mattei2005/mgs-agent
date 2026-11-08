@@ -2865,6 +2865,19 @@
     },
     {
       "agent": "zeus",
+      "id": "HERMES-OLD-BACKUP-REVIEW-1569021652111462443",
+      "manifest": "/root/mgs-agent/reports/zeus/hermes-old-backups-1569021652111462443-manifest.json",
+      "manifest_sha256": "3856e24a0c3e6d211fefbb750d3036095e767e7eae91ddd82e2a567948b99778",
+      "next_step": "Obtain Rodolfo confirmation for manifest 3856e24a0c3e6d211fefbb750d3036095e767e7eae91ddd82e2a567948b99778 then rerun frozen verifier before removing only the4exacttargets; preserve historical profile snapshots and parent receipts",
+      "objective": "Review only older local Hermes update backup sets; validate retained recovery and identify an exact safe disposal lot",
+      "report": "/root/mgs-agent/reports/zeus/hermes-old-backups-1569021652111462443-review.json",
+      "source": "discord:1569021652111462443",
+      "state": "review_completed_awaiting_exact_critical_confirmation: 4 nested obsolete code copies, 4.19GB; newest archives and18DB valid; 333modified/untracked files reconstructed and hash matched; historical state protected; zero deletions",
+      "thread_id": "1527004682382479380",
+      "updated_at": "2026-11-08T16:22:59.759476+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
       "next_step": "Enviar à Isa/Smart Bidding/JBF a evidência exata e solicitar correção/whitelist do detector IVT para tráfego residencial legítimo. Após ajuste, repetir teste desktop/mobile e exigir slots e gampad sob /21922122164/ antes de marcar impressão/fill como provados.",
       "objective": "Concluir a migração real de Cliquet e finanzas.cliquet do GAM ActiveView para o GAM Smart Bidding/JBF, preservando slots, targeting, receita e rollback independente por site.",
@@ -5500,12 +5513,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SHEIN-REPORT-RECOVERY-1569013882259902467",
-      "next_step": "Testar resolucao/mocks;executar diario atual pelo scheduler exato;validar intraday sem POST e readbacks;inventario e report",
+      "next_step": "Consumir validacao intraday;atualizarinventario/audit;REPORT-INFRA e GET;encerrar sem catchuphistorico",
       "objective": "Recuperar envio D-1 e intraday nas mesmas24threads SHEIN sem alterar agendas/campanhas",
-      "source": "work/shein-report-recovery-1569013882259902467/backups.json",
-      "state": "causa confirmada:wrappers interpretavam launcher shell como python;2wrappers corrigidos via resolver canonico,backup preservado;validacao e retry pendentes",
+      "source": "work/shein-report-recovery-1569013882259902467/daily-delivery-readback.json",
+      "state": "d1 referente07/11 entregue24threads114partes377campanhas11:22et;get independente114/114verificado;188+8testespass. intraday validate-only live em andamento;0post extra.",
       "thread_id": "1569013882259902467",
-      "updated_at": "2026-11-08T15:43:03+00:00"
+      "updated_at": "2026-11-08T16:29:48+00:00"
     },
     {
       "agent": "zeus",
@@ -8548,6 +8561,16 @@
       "updated_at": "2026-11-07T19:26:56+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1569025252971774224",
+      "next_step": "Recuperar aceite especifico na origem; preservar request manifests IDs e12hET; nao sondar targeting nem repetir criacao; manter mesmos objetosPAUSED ate revisao",
+      "objective": "Pausar 006 e 004; duplicar 001 e 005 duas vezes cada a USD45 para 8 novembro 2026 12h ET na Vizioid06 G006",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569025252971774224/aggregate-receipt.json",
+      "state": "pausa006/004 confirmada; fonte001 gerou008/009 usd45 cada paused,4ads; postprocess_pending por user_age_unknown false->true e omissao material device1; qa nao concluido. fonte005 nao iniciada. precisa decisao humana especifica de publico.",
+      "thread_id": "1558134653242703935",
+      "updated_at": "2026-11-08T16:30:17+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -9256,18 +9279,8 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
-    },
-    {
-      "id": "HERMES-OLD-BACKUP-REVIEW-1569021652111462443",
-      "agent": "zeus",
-      "objective": "Review only older local Hermes update backup sets; validate retained recovery and identify an exact safe disposal lot",
-      "state": "read_only_inventory_and_retained_recovery_validation",
-      "next_step": "Validate latest recovery set, historical uniqueness, dependencies and candidate manifest; request Critical confirmation before any deletion",
-      "source": "discord:1569021652111462443",
-      "thread_id": "1527004682382479380",
-      "updated_at": "2026-11-08T16:13:10.021112+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T15:58:22+00:00"
+  "updated_at": "2026-11-08T16:30:17+00:00"
 }

@@ -1,0 +1,90 @@
+{
+  "id": "HERMES-OLD-BACKUP-LOT-1569021652111462443",
+  "authority_to_review": "1569021652111462443",
+  "state": "awaiting_critical_confirmation_no_deletion",
+  "root": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
+  "targets": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/baseline-code",
+      "action": "delete_tree",
+      "counts": {
+        "directory": 1502,
+        "file": 19620
+      },
+      "logical_bytes": 904629438,
+      "naive_allocated_bytes": 956907520
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/clean-target",
+      "action": "delete_tree",
+      "counts": {
+        "directory": 1423,
+        "file": 21066
+      },
+      "logical_bytes": 895450285,
+      "naive_allocated_bytes": 951189504
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/fresh-reproduction-47b23fa0",
+      "action": "delete_tree",
+      "counts": {
+        "directory": 1800,
+        "file": 31112
+      },
+      "logical_bytes": 1063067669,
+      "naive_allocated_bytes": 1141604352
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/fresh-reproduction-4d043038",
+      "action": "delete_tree",
+      "counts": {
+        "directory": 1802,
+        "file": 31121
+      },
+      "logical_bytes": 1063115288,
+      "naive_allocated_bytes": 1141706752
+    }
+  ],
+  "target_count": 4,
+  "file_count": 102919,
+  "inode_aware_reclaim_bytes": 4191408128,
+  "naive_allocated_bytes": 4191408128,
+  "logical_bytes": 3926262680,
+  "ledger": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/cleanup-recovery-1569021652111462443/frozen-target-metadata.json.gz",
+  "ledger_sha256": "daf688096ffab17f9724d270fe230ccc3b1d2cf5430cd7c5289d878b6da2ea6b",
+  "recovery_proof": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/cleanup-recovery-1569021652111462443/replay-proof.json",
+  "recovery_proof_sha256": "5c914d29e350e5094765a9641abd002635c0b0aa9f2e419d6b290c7b930b3866",
+  "process_references": [],
+  "executable_references": [],
+  "inbound_alternate_references": [],
+  "retained": [
+    "Latest November 3 control-plane+supplemental archives; 18 SQLite databases revalidated",
+    "All historical profile snapshots and their immutable checksum evidence",
+    "Parent preparation reports, tests, patch/replay proofs and source-local-files archive",
+    "All top-level active/rollback runtimes and Git alternate ancestors",
+    "All active profiles, browser sessions, offsite backup retention"
+  ],
+  "scope_note": "Only four nested obsolete code-reproduction copies within the October 21 update backup; not profile DBs, current recovery or top-level source runtimes",
+  "irreversible_effect": "Remove four reproducible local code/test working copies and generated caches; preserve source commits, local patches, untracked code and compact evidence; no conversation data removal",
+  "disk": {
+    "free_bytes": 33374003200,
+    "projected_free_bytes": 37565411328
+  },
+  "created_at": "2026-11-08T16:20:44.928591+00:00",
+  "deletions": 0,
+  "verifier": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/cleanup-recovery-1569021652111462443/verify-and-clean.py",
+  "verifier_sha256": "4fb671df753285a9b34e6af58657e5b72d8585cffeb0b838eb9ec9a16dbcaede",
+  "active_launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "retained_archive_hashes": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "bytes": 1506066150,
+      "sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-nested-cron-sqlite.tar.gz",
+      "bytes": 457457,
+      "sha256": "4f06428caf2b56d9e5705d74d81dd6812fe364dc68d6c5aa7b310613697926ad"
+    }
+  ]
+}

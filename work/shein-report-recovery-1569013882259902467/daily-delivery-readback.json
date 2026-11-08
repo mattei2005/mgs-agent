@@ -1,0 +1,599 @@
+{
+  "status": "ALL24_D1_DELIVERED_PARENT_GET_VERIFIED",
+  "date": "2026-11-07",
+  "accounts": 24,
+  "parts": 114,
+  "campaigns": 377,
+  "by_manager": {
+    "g001": 4,
+    "g002": 4,
+    "g003": 4,
+    "g004": 4,
+    "g005": 4,
+    "g006": 4
+  },
+  "completed_at": "2026-11-08T11:22:32.099119-05:00",
+  "parent_verified_at": "2026-11-08T11:26:07.676354-05:00",
+  "cron_entries_preserved": [
+    "47 7 * * * /usr/bin/flock -n /var/lock/ares-shein-daily-scheduler.lock /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-daily-cron.py >> /root/mgs-agent/logs/ares-shein-daily-report.log 2>&1",
+    "32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+    "11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+    "2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+    "2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+    "31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
+  ],
+  "readback": [
+    {
+      "thread_id": "1558146396320698428",
+      "message_id": "1569024032953737230",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146396320698428",
+      "message_id": "1569024034740379886",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146440268742746",
+      "message_id": "1569024037659742409",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146440268742746",
+      "message_id": "1569024039366828177",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146440268742746",
+      "message_id": "1569024042407829638",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146440268742746",
+      "message_id": "1569024045947551805",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146463656058963",
+      "message_id": "1569024048254685426",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146463656058963",
+      "message_id": "1569024050213163200",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146488599842827",
+      "message_id": "1569024052218167539",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146488599842827",
+      "message_id": "1569024054411665543",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146488599842827",
+      "message_id": "1569024056513011954",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146650734592131",
+      "message_id": "1569024058983448828",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146650734592131",
+      "message_id": "1569024062074917015",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024064503292071",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024068319969362",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024070706663455",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024072359346317",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024074523480188",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146691389988897",
+      "message_id": "1569024077572866149",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146712843853897",
+      "message_id": "1569024082895437925",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146712843853897",
+      "message_id": "1569024084916830392",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024086967853191",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024089488629843",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024090881130550",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024092416512052",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024094794547261",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024097017536527",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024099303424134",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024101270691983",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146725376557126",
+      "message_id": "1569024105905258701",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146762147897436",
+      "message_id": "1569024108216328345",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146762147897436",
+      "message_id": "1569024110170742936",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146762147897436",
+      "message_id": "1569024111987130510",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024113874309162",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024115644567575",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024118043447448",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024120040071240",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024123852562444",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146810202034276",
+      "message_id": "1569024126180401163",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146831475540158",
+      "message_id": "1569024129749876839",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146831475540158",
+      "message_id": "1569024131884646583",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146831475540158",
+      "message_id": "1569024134040522793",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024136502837388",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024138671292560",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024140852072600",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024143687553235",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024144903905364",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024147969802373",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558146852854169650",
+      "message_id": "1569024149731541125",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147101924270111",
+      "message_id": "1569024151463788585",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147101924270111",
+      "message_id": "1569024153435246667",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147101924270111",
+      "message_id": "1569024155377213544",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024157918961705",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024160087408721",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024162129776856",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024165522968739",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024167829835858",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147152528674957",
+      "message_id": "1569024170640277505",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147173663776768",
+      "message_id": "1569024173219512496",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147173663776768",
+      "message_id": "1569024175639625801",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147173663776768",
+      "message_id": "1569024177481195611",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024179989258384",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024182195331275",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024190571483238",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024192651726912",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024194606268459",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147211026501643",
+      "message_id": "1569024196606955531",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147255457026128",
+      "message_id": "1569024198775542013",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147255457026128",
+      "message_id": "1569024201015169150",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024204236660858",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024206404984843",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024212478333032",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024214982328334",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024217813352479",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147299727773847",
+      "message_id": "1569024219482824711",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147324255928380",
+      "message_id": "1569024222188146711",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147324255928380",
+      "message_id": "1569024225203724350",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024228618018949",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024230434148466",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024232631967825",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024235148419185",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024237044502550",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024238994723026",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024241179820144",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024243327312015",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024248675049627",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024251510525963",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024257298665604",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024259131445309",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024264588361779",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147344711557211",
+      "message_id": "1569024269487181837",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147388730908714",
+      "message_id": "1569024271777403112",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147388730908714",
+      "message_id": "1569024273618829313",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147388730908714",
+      "message_id": "1569024275355009227",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024278374907916",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024280153423893",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024281562710048",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024284184285216",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024286121795766",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024288609275906",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024290752438375",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024292132356219",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024295118700546",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024301112361132",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147440350076928",
+      "message_id": "1569024306384736371",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147459698655425",
+      "message_id": "1569024309077352503",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147459698655425",
+      "message_id": "1569024311447003238",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147459698655425",
+      "message_id": "1569024313854791722",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024315674857596",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024318376251493",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024320015962296",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024322348261489",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024324931690658",
+      "exact_content_verified": true
+    },
+    {
+      "thread_id": "1558147479432601670",
+      "message_id": "1569024330426486975",
+      "exact_content_verified": true
+    }
+  ],
+  "meta_writes": 0,
+  "deletions": 0
+}

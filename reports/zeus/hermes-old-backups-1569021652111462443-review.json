@@ -1,0 +1,71 @@
+{
+  "id": "hermes-old-backups-1569021652111462443",
+  "status": "review_completed_exact_four_copy_lot_awaiting_critical_confirmation",
+  "authority_message_id": "1569021652111462443",
+  "reviewed_old_sets": 7,
+  "retained_recovery_validation": "Two latest control-plane/supplemental archives SHA256, gzip/tar PASS; 18 SQLite integrity checks PASS",
+  "candidate_manifest": "/root/mgs-agent/reports/zeus/hermes-old-backups-1569021652111462443-manifest.json",
+  "manifest_sha256": "3856e24a0c3e6d211fefbb750d3036095e767e7eae91ddd82e2a567948b99778",
+  "target_count": 4,
+  "files": 102919,
+  "inode_aware_reclaim_bytes": 4191408128,
+  "preserved_old_state": "All historical profile DB snapshots and checksum-coupled evidence preserved; logical subsumption by retained sources was not proven",
+  "review_result_by_old_set": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled",
+      "allocated_file_bytes": 167931904,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation",
+      "allocated_file_bytes": 774144,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime",
+      "allocated_file_bytes": 897024,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport",
+      "allocated_file_bytes": 514138112,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
+      "allocated_file_bytes": 6207082496,
+      "classification": "four_nested_code_copies_only_proposed; historical_profile_snapshots_and_parent_evidence_preserved"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation",
+      "allocated_file_bytes": 2027782144,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery",
+      "allocated_file_bytes": 2031230976,
+      "classification": "preserved_historical_recovery_or_compact_evidence; no proven_disposal_lot"
+    }
+  ],
+  "scope_exclusions": [
+    "caches",
+    "finance",
+    "live profiles",
+    "browser state",
+    "offsite retention",
+    "top-level runtime trees"
+  ],
+  "created_artifacts": {
+    "code_replay_evidence": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/cleanup-recovery-1569021652111462443/replay-proof.json",
+    "replay_scratch": "/root/.hermes/profiles/zeus/cache/scratch/hermes-backup-replay-1569021652111462443",
+    "purpose": "Small code reconstruction proofs, created by this review, not pre-existing cleanup savings"
+  },
+  "deletions": 0,
+  "updated_at": "2026-11-08T16:22:59.759476+00:00",
+  "report_infra": {
+    "message_id": "1569024450601423082",
+    "get_http": 200,
+    "empty_content": true,
+    "mentions": 0
+  }
+}

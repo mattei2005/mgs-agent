@@ -203,6 +203,18 @@ For update evidence directories that contain nested `verify-checkout*` trees, ta
 4. retain the parent verification text, patch checksum, logs and final result;
 5. compute inode-aware reclaim for the exact nested trees, not the apparent size of the parent.
 
+### Reconstruct modified code copies before retiring them
+
+Use this branch for obsolete nested code reproductions inside an update-evidence root, not for live runtimes or historical profile databases. A dirty checkout need not be discarded blindly or preserved in full when its exact code can be recovered compactly.
+
+1. Inventory each copy with `git rev-parse HEAD`, `git diff --name-only HEAD -z`, `git ls-files --others --exclude-standard -z` and `git ls-files --others --ignored --exclude-standard -z`. Count modified, untracked and ignored files separately; porcelain status-line count is not the modified-file count. Inspect ignored paths by class because ignored test measurements or fingerprints can carry evidence even when bytecode/cache files are reproducible.
+2. Preserve `git diff --binary HEAD` outside every deletion target. Archive every non-ignored untracked file with relative paths and no symlink traversal; preserve meaningful ignored evidence separately. Record the base commit and externally computed SHA-256 values for the patch, archive and preserved evidence. Keep parent reports and activation/checksum evidence outside the lot.
+3. Prove Git recovery from repositories that will remain. Enumerate `git for-each-ref --format=%(objectname)` plus detached HEAD, verify required commits in retained repositories, and exercise `git -C RETAINED archive --format=tar BASE_COMMIT` with output discarded and exit status checked. `git cat-file -e COMMIT^{commit}` alone proves only the commit object, not readable trees and file blobs.
+4. Reconstruct the changed paths in a capacity-gated scratch tree from the base commit. Run `git apply --check`, apply the saved binary patch, restore the untracked archive and compare every reconstructed file with the candidate using external SHA-256. Record checked counts and mismatches without printing source contents. Do not label code replay as database-state recovery.
+5. Complete process, service, scheduler, executable-consumer, inbound-alternate and worktree checks before freezing the lot. Preserve any ambiguous dependency. Run all Git probes before the final metadata freeze because status/worktree inspection can refresh Git metadata.
+6. Freeze the exact nested trees in two sorted, relative-path-keyed metadata passes. Compute reclaim across the complete lot with inode-aware hardlink closure, seal the replay proofs and the same non-mutating verifier used for execution, and request the existing Critical confirmation for that exact lot. Stop before deletion if reconstruction, dependency or fingerprint checks fail.
+7. Store full ref maps, file hashes, schemas and per-path comparisons in evidence artifacts. Return only per-copy counts, preservation booleans, unmatched counts, bytes and the next gate; hundreds of ref-to-repository mappings or repeated full SQLite schemas obscure the disposal decision.
+
 For Git staging paths:
 
 ```bash
