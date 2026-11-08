@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-11-08T16:34:10.117930+00:00",
+  "retained_archives": [
+    {
+      "archive": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "sha256_match": true,
+      "gzip_rc": 0,
+      "tar_rc": 0,
+      "members": 5297
+    },
+    {
+      "archive": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-nested-cron-sqlite.tar.gz",
+      "sha256_match": true,
+      "gzip_rc": 0,
+      "tar_rc": 0,
+      "members": 17
+    }
+  ],
+  "all_four_targets_absent": true,
+  "historical_profile_snapshots_preserved": true,
+  "parent_source_archive_and_evidence_preserved": true,
+  "reconstruction_proof_hash_valid": true,
+  "active_launcher_unchanged": true,
+  "failed_units": 0,
+  "dr_sla_healthy": true,
+  "disk_free_bytes": 37548847104
+}

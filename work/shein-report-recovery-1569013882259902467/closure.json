@@ -1,0 +1,52 @@
+{
+  "operation_id": "shein-report-recovery-1569013882259902467",
+  "status": "D1_DELIVERED_AND_INTRADAY_LIVE_VALIDATED",
+  "daily": {
+    "status": "ALL24_D1_DELIVERED_PARENT_GET_VERIFIED",
+    "date": "2026-11-07",
+    "accounts": 24,
+    "parts": 114,
+    "campaigns": 377,
+    "by_manager": {
+      "g001": 4,
+      "g002": 4,
+      "g003": 4,
+      "g004": 4,
+      "g005": 4,
+      "g006": 4
+    },
+    "completed_at": "2026-11-08T11:22:32.099119-05:00",
+    "parent_verified_at": "2026-11-08T11:26:07.676354-05:00",
+    "meta_writes": 0,
+    "deletions": 0
+  },
+  "intraday_validation": {
+    "status": "ALL_24_LIVE_INTRADAY_VALIDATED_NO_POST",
+    "date": "2026-11-08",
+    "slot": "09:32",
+    "accounts": 24,
+    "campaigns": 402,
+    "root": "/root/mgs-agent/data/ares/meta-ads/state/shein-intraday-report/validation/20261108T112240328959",
+    "published_parts": 0,
+    "meta_writes": 0,
+    "completed_at": "2026-11-08T11:30:23.816192-05:00"
+  },
+  "cron_changes": 0,
+  "meta_writes": 0,
+  "history_replayed": false,
+  "future_scheduled_delivery_observed": false,
+  "tests": {
+    "report": 188,
+    "recovery": 8,
+    "total": 196
+  },
+  "skill_readback": {
+    "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+    "runtime_resolver": true,
+    "archived_recovery": true,
+    "paced_message_audit": true
+  },
+  "recovered_transient_audit_issue": "Parallel GET audit exhausted Discord429 retries;sequential1.1s pacing completed114exactreadbacks;noextraPOST",
+  "foreground_timeout_recovery": "Transport killed first420s attempt;reconciled zero delivery intents then resumed silently tracked process",
+  "completed_at": "2026-11-08T16:31:19.195569+00:00"
+}

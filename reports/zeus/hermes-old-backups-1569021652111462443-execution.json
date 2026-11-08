@@ -1,0 +1,47 @@
+{
+  "status": "completed_validated",
+  "approval_message_id": "1569026747473731765",
+  "manifest_sha256": "3856e24a0c3e6d211fefbb750d3036095e767e7eae91ddd82e2a567948b99778",
+  "deleted": [
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/baseline-code",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/clean-target",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/fresh-reproduction-47b23fa0",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/fresh-reproduction-4d043038"
+  ],
+  "observed_free_delta_bytes": 4191444992,
+  "free_bytes": 37541380096,
+  "gateways_unchanged": true,
+  "completed_at": "2026-11-08T16:32:39.238166+00:00",
+  "postvalidation": "/root/mgs-agent/reports/zeus/hermes-old-backups-1569021652111462443-postvalidation.json",
+  "profile_smokes": [
+    {
+      "profile": "zeus",
+      "config_rc": 0,
+      "inference_rc": 0,
+      "marker_present": true
+    },
+    {
+      "profile": "atena",
+      "config_rc": 0,
+      "inference_rc": 0,
+      "marker_present": true
+    },
+    {
+      "profile": "ares",
+      "config_rc": 0,
+      "inference_rc": 0,
+      "marker_present": true
+    }
+  ],
+  "latest_free_bytes": 37548847104,
+  "retained_recovery_archives_valid": true,
+  "no_additional_targets_deleted": true,
+  "future_retention_policy_changed": false,
+  "report_infra": {
+    "message_id": "1569027405559898294",
+    "get_http": 200,
+    "empty_content": true,
+    "mentions": 0
+  },
+  "finalized_at": "2026-11-08T16:35:04.000613+00:00"
+}

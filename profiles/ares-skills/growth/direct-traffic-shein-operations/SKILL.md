@@ -15,7 +15,7 @@ metadata:
 
 SHEIN-US-DIRECT não herda ativos, contas, parâmetros, políticas, relatórios ou automações de CAR/CPV.
 
-Pausa + reativação: pause e confira primeiro; depois prepare a retomada. Responda com quantidade e horário/fuso verificados.
+Pedido misto: pause e confira primeiro. Separe pausas, cópias PAUSED e fontes pendentes; horário em PAUSED não comprova ativação agendada.
 
 ## Duplicação e recuperação — precedência obrigatória
 
