@@ -63,6 +63,14 @@ Rodolfo confirmou `US SHEIN EN` e `G004` para a conta Meta `1419148446852410`, n
 
 Estado de execução: checkpoint `ZEUS-FINANCE-GROWPOWER-G004-1563528749830377524`; decisão não substitui o readback produtivo. Causa verificada: havia vínculo automático US, mas o cadastro nativo materializava apenas dias DE; sem receita US em23/10, faltava o destino diário do gasto. A correção de cadastro deve preceder a retomada da cadeia gastos → receita.
 
+## Mavroa, Vizioid e Escalatepower — correção novembro1569014246493130852
+
+Rodolfo aprovou corrigir todos os achados da auditoria01–07/11 na mensagem1569014246493130852, incluindo os cinco gestores e todos os sites, após o relato de Nicolas/Mavroa. Em **novembro/2026**, habilitar `native_account_managers` nos cadastros existentes `newsite-mgs-mavroa`, `site-vizioid-principal` e `newsite-mgs-escalatepower`. Atribuir cada custo `account_spend` ao gestor já confirmado peloG/manager_key da própria conta, sem nova divisão de receita. G002continuaMGS, sem comissão.
+
+Essa decisão supersede somente a ausência da ponte de custos nesses três sites em novembro. Preservar titularidadeMGS,países,redes,receitas,rateio e pagamentos; VizioidcontinuaATIVO, Mavroa/EscalatepowerINATIVO/Não participa. Não regravar outubro ou meses anteriores. Continuidade para o próximo mês segue o rollover já aprovado, sem criação antecipada de competências nem cópia de realizado.
+
+Execução: workspace287→288corrigiu a atribuição; fonteMeta01–07/11atualizada via importador canônico288→289, gastoFBUSD140830.86. A diferençaUSD5.54de fonte é separada dosUSD25888.51já salvos sem atribuição aos gestores. Resultado/comissão recalculados pela regra vigente,sem duplicar custo no total dos sites. Fonte e readback: `reports/finance-fb-fix-1569014246493130852.md`, checkpoint `ZEUS-FINANCE-FB-FIX-1569014246493130852`;novos valores posteriores dependem do runtime.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.

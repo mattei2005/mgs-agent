@@ -35,6 +35,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Auditoria de alertas Discord por janela: embeds completos, agrupamento por incidente, reconciliação com resoluções/live state e anti-spam de guardrail** → `references/discord-alert-history-audit-and-incident-reconciliation.md`
 - **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
+- **DR SLA: origem correta, dedupe, recuperação e readback sem repost** → `references/stateful-dr-sla-alerts.md`
 - **RunCloud: coleta, orçamento de API, cooldown, cadência e avaliação SSH/API híbrida** → `references/runcloud-initial-monitoring.md`
 - **SHEIN D-1 e cinco rodadas intraday: estado/nonce por slot, lock compartilhado, UI Today e validação sem publicação antecipada** → `references/shein-daily-and-intraday-reports.md`
 

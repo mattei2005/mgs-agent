@@ -15,7 +15,8 @@
 - Não apontar uma nova entrada cron diretamente para o runner D-1: ele fixa D-1, cacheia por data e encerra após completion. Usar runner intraday com estado `YYYY-MM-DD/HHMM` e nonce incluindo data+slot+conta+parte+hash.
 - Compartilhar `shein-daily-report/run.lock` com D-1 para impedir coletores/publishers paralelos. O scheduler intraday possui `ares-shein-intraday-scheduler.lock` próprio, timeout2400s e até3 tentativas internas limitadas, retomando fontes/partes sem POST cego.
 - Usar contexto Chromium efêmero, sessão Ares intraday protegida e preset UI Today; default UI Yesterday do diário permanece intacto. RPS é DOM visível, nunca fórmula/API substituta.
-- Resolver o interpretador pelo shebang atual de `/root/.local/bin/hermes` em cada fire pelo wrapper stdlib, sem LLM e sem fixar um diretório descartável de versão.
+- Resolver o interpretador em cada fire pelo helper stdlib canônico `/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py` (`resolve(...)["python"]`), sem LLM nem diretório de versão fixo. Nunca tratar o shebang do launcher como Python: launchers PM nativos usam `/bin/sh`; isso executa o relatório como shell e falha antes da coleta. O helper distingue launcher legado de PM e consulta a fronteira nativa `--print-runtime-command` e o ambiente selecionado. Testar os dois wrappers, forwarding de argumentos e journal, depois exercitar o scheduler real e conferir os recibos Discord. Preservar horários, locks e escopo; intraday fora da janela só `--validate-only`, nunca catch-up implícito.
+- Se um retry exceder a janela real do transporte de terminal, reconciliar processo, fontes e intents antes de retomar; um timeout pode encerrar o processo sem gravar o journal final. Usar execução acompanhada silenciosa quando a duração observada superar a janela, consumir o resultado antes de encerrar e não reenviar partes sem readback.
 
 ## Validação e colisões
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-08T05:00:02-05:00",
+    "updated_at": "2026-11-08T15:54:58.866430+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -892,6 +892,39 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "finance-fb-manager-fix-1569014246493130852",
+      "agent": "zeus",
+      "type": "authorized_financial_attribution_correction",
+      "status": "production_verified",
+      "authority_message_id": "1569014246493130852",
+      "origin_thread_id": "1545426987756298340",
+      "period": "2026-11",
+      "window": ["2026-11-01", "2026-11-07"],
+      "sites": ["Mavroa", "Vizioid", "Escalatepower"],
+      "workspace_revision": 289,
+      "spend_revision": 7,
+      "evidence": "reports/finance-fb-fix-1569014246493130852.md",
+      "private_artifacts": "apps/finance-system/private/fb-fix-1569014246493130852/",
+      "canonical_source": "docs/finance-account-ownership.md",
+      "verification": {
+        "manager_site_day_controls": 455,
+        "manager_blocks": 65,
+        "authenticated_desktop_mobile_views": 10,
+        "rendered_daily_media_cells": 1694,
+        "replay_changed_fields": 0,
+        "facebook_spend_usd": "140830.86",
+        "payment_ledger_preserved": true,
+        "other_periods_preserved": true,
+        "general_allocation_preserved": true,
+        "nominal_revenue_preserved": true,
+        "production_code_changes": 0,
+        "restarts": 0
+      },
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1569018093617938465",
+      "report_infra_readback": true
+    },
     {
       "id": "zeus-shein-ui116-1568755642695426089",
       "agent": "zeus",
@@ -14387,7 +14420,7 @@
       },
       "id": "mgs-disaster-recovery-offsite-20260716",
       "restore_recovery_1568943185458110531": {
-        "status": "restore_validated_cleanup_confirmation_required",
+        "status": "completed_validated",
         "source_alert_id": "1568943185458110531",
         "cron_job_id": "940e9827b1ac",
         "diagnosis": "Legacy Zeus import peak lower bound 36.29 GB exceeded 33.73 GB observed free; original rc=1 discarded importer detail. Same immutable six components passed all canonical validators after staging reduction.",
@@ -14400,9 +14433,15 @@
         "cleanup_file_count": 139265,
         "cleanup_manifest": "reports/zeus/dr-restore-1568943185458110531-cleanup-ledger.json.gz",
         "cleanup_target_metadata_sha256": "6a3d3c3e060eb9f762c9ecb6349949b60ccaf484547b8dd549621261a8108323",
-        "cleanup_requires_critical_confirmation": true,
-        "recurrence_headroom": "Blocked by preserved workspace created when foreground transport interrupted the native retry at 420 seconds; no remaining restore writer. Exact-target disposal needs Rodolfo confirmation.",
-        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/dr-recovery-1568943185458110531"
+        "cleanup_requires_critical_confirmation": false,
+        "recurrence_headroom": "PASS after exact approved workspace disposal; canonical stage reserve preserved",
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/dr-recovery-1568943185458110531",
+        "cleanup_approval_message_id": "1569014414605295618",
+        "cleanup_result": "reports/zeus/dr-cleanup-1569014414605295618.json",
+        "cleanup_target_absent": true,
+        "observed_free_delta_bytes": 18784849920,
+        "cleanup_result_sha256": "7b2ac9fa1e776b68a032a74193453a585002c5c4453b796d6b2f5b405305fdb7",
+        "report_infra_message_id": "1569017400165142640"
       },
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "lock_contention_recovery": {
@@ -14483,7 +14522,7 @@
       },
       "status": "deployed_validated_active_finance_full_dr_materialized_PASS",
       "type": "encrypted_offsite_backup_restore",
-      "updated_at": "2026-10-03T08:40:34+00:00",
+      "updated_at": "2026-11-08T15:54:58.866053+00:00",
       "validation": {
         "ares_derived_fts": "rebuilt only in isolated restore; post-rebuild quick_check PASS",
         "drive_readback": "size + MD5 + SHA-256 PASS",
@@ -14497,6 +14536,34 @@
         "replacement_full_backup": "PASS",
         "replacement_quick_backup": "PASS",
         "replacement_restore_test": "PASS"
+      },
+      "sla_notification_repair": {
+        "approval_message_id": "1569014414605295618",
+        "script": "scripts/mgs-dr-sla-alert.py",
+        "state": "data/mgs-dr-sla-alert-state.json",
+        "channel_id": "1498132022634483894",
+        "recovery_message_id": "1569016464902586370",
+        "mock_tests": 6,
+        "real_wrapper_two_runs": "recovery posted and GET verified; next run silent",
+        "cron_deliver": "local; direct embed transport",
+        "failure_deliver": "discord:1498132022634483894",
+        "schedule_unchanged": {
+          "kind": "cron",
+          "expr": "*/30 * * * *",
+          "display": "*/30 * * * *"
+        },
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/dr-notification-rollback-1569014414605295618",
+        "report_infra_message_id": "1569017400165142640"
+      },
+      "cleanup_review": {
+        "report": "reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "status": "read_only_review_completed_no_additional_deletion",
+        "coverage": [
+          "/",
+          "/boot",
+          "/boot/efi"
+        ],
+        "scan_errors": 0
       }
     },
     {
@@ -66510,6 +66577,22 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-dr-sla-alert.py",
+      "size_bytes": 5983,
+      "modified_at": "2026-11-08T15:54:58.866239+00:00",
+      "owner": "zeus",
+      "purpose": "DR SLA direct embeds, dedupe and verified recovery",
+      "approval_message_id": "1569014414605295618"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-monitor.sh",
+      "size_bytes": 104,
+      "modified_at": "2026-11-08T15:54:58.866315+00:00",
+      "owner": "zeus",
+      "purpose": "DR SLA direct embeds, dedupe and verified recovery",
+      "approval_message_id": "1569014414605295618"
     }
   ],
   "skills_mgs": [
@@ -70807,6 +70890,14 @@
       "size_bytes": 14725,
       "md5": "a52e03d364e655348f09cdc9901e7bac",
       "modified_at": "2026-11-04T12:41:27-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/mgs-dr-sla-alert-state.json",
+      "size_bytes": 396,
+      "modified_at": "2026-11-08T15:54:58.866357+00:00",
+      "owner": "zeus",
+      "purpose": "DR SLA direct embeds, dedupe and verified recovery",
+      "approval_message_id": "1569014414605295618"
     }
   ],
   "mu_plugin_canonical": {

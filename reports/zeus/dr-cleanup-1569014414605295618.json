@@ -5,7 +5,7 @@
   "target_metadata_sha256": "6a3d3c3e060eb9f762c9ecb6349949b60ccaf484547b8dd549621261a8108323",
   "verified_entries": 151229,
   "verified_process_references": 0,
-  "status": "deleted_validated",
+  "status": "completed_validated",
   "before_free_bytes": 14660898816,
   "services_before": {
     "zeus": "MainPID=2241212\nActiveState=active",
@@ -24,5 +24,56 @@
   "closed_at": "2026-11-08T15:46:52.991540+00:00",
   "observed_free_delta_bytes": 18784849920,
   "next_dr_required_bytes": 29419976507,
-  "next_dr_headroom_pass": true
+  "next_dr_headroom_pass": true,
+  "communications": {
+    "adapter": "scripts/mgs-dr-sla-alert.py",
+    "wrapper": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-monitor.sh",
+    "state": "data/mgs-dr-sla-alert-state.json",
+    "channel_id": "1498132022634483894",
+    "resolution_message_id": "1569016464902586370",
+    "resolution_readback": {
+      "http": 200,
+      "content_empty": true,
+      "mentions": 0
+    },
+    "real_repeat_silent": true,
+    "mock_regression_tests_passed": 6,
+    "restore_regression_tests_passed": 18,
+    "job_id": "453bfdd275b0",
+    "schedule_preserved": true,
+    "all_profile_schedules_preserved": true,
+    "no_new_job": true,
+    "corrected_api_attempt": "absolute script rejected before mutation; relative wrapper accepted"
+  },
+  "profile_smokes": [
+    {
+      "profile": "zeus",
+      "rc": 0,
+      "marker_present": true,
+      "seconds": 8.8
+    },
+    {
+      "profile": "atena",
+      "rc": 0,
+      "marker_present": true,
+      "seconds": 11.1
+    },
+    {
+      "profile": "ares",
+      "rc": 0,
+      "marker_present": true,
+      "seconds": 9.7
+    }
+  ],
+  "scope": "Exact approved temporary DR workspace removed; no additional VPS candidates deleted; no restart/credential/retention change",
+  "preexisting_config_advisories": "Config checks rc=0; legacy messaging toolset labels remain advisory in Zeus/Ares and were not changed",
+  "updated_at": "2026-11-08T15:54:58.809150+00:00",
+  "report_infra": {
+    "message_id": "1569017400165142640",
+    "channel_id": "1498132022634483894",
+    "get_http": 200,
+    "content_empty": true,
+    "mentions": 0
+  },
+  "finalized_at": "2026-11-08T15:55:28.824860+00:00"
 }
