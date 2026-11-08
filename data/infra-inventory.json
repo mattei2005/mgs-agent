@@ -61978,6 +61978,30 @@
       },
       "report_infra_message_id": "1568711423515820033",
       "report_infra_readback": true
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261107-2102",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_updated_validated_pc1_reauthentication_required",
+      "updated_at": "2026-11-07T21:22:46.935496-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261107T2102/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 18,
+        "preserved_h": 18,
+        "pending_d": 3,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1568813290409295923",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
