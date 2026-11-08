@@ -26,6 +26,19 @@ Include, when present:
 
 Avoid double counting nested sets: either total a root or its children, not both in the grand total.
 
+### Deep classification and bounded duplicate proof
+
+Use this branch when substantial usage remains after a narrow cleanup or when directory totals mix test databases, dumps, inputs and evidence.
+
+1. Refresh `df` block/inode usage and mount-bounded `du` for the largest roots. Descend into the dominant producer before recommending cache deletion or more storage; a completed cleanup receipt describes its exact lot, not the necessity of everything left.
+2. Classify files without opening application data. Identify a complete PostgreSQL cluster only by `PG_VERSION` together with sibling `base/` and `global/`; prune nested database directories from cluster discovery so one cluster is not counted repeatedly. Separate cluster trees, database dumps/SQL, compressed and uncompressed archives, JSON/source material, dependencies and compact receipts. Resolve the production host independently before labeling local copies as tests; do not start old databases merely to classify disk usage.
+3. Sum mutually exclusive classes with an inode-aware walk and retain per-set counts, allocated bytes, newest descendant time and errors. Keep a parent workflow's total as context only: its dumps and clusters are components, not extra savings to add to the parent.
+4. Find exact duplicates cheaply: select large regular files, group by logical size, and run external `sha256sum` only for size groups with multiple candidates. Group matching digests by distinct `(st_dev, st_ino)` so existing hardlinks are not mistaken for separate physical copies. Save detailed mappings in evidence and return only file/group counts and bytes.
+5. Retain at least one eligible copy per digest group when estimating duplicate potential. Exclude blocks still held by external hardlinks; a conservative early estimate may credit only single-link candidate files. Split the potential by file class and state that it is already contained in the corresponding root/class totals. Recheck metadata stability and hashes when freezing the actual lot because an observation-time digest is not deletion-time validation.
+6. Check process `cmdline`, `cwd`, `exe` and open descriptors against exact candidate roots. Distinguish a worker using an operational parent directory from a process consuming an isolated child database. Preserve parent state and live workers; absence of child references does not settle family/latest selectors, source inputs, immutable evidence coupling or recovery dependencies.
+7. Treat byte identity as evidence of content duplication, not permission to remove a pathname. Choose retained copies by recovery and consumer requirements, not newest mtime alone; verify every proposed removal's references and evidence contract before an exact destructive manifest. For unique old test state, separate an explicit retirement decision from a claim of proven deduplication and disclose what historical recovery is lost.
+8. Inspect the actual producers and cleanup policy alongside the dry-run. Verify whether name patterns and roots cover the dominant dumps, JSON, test clusters and archives. Distinguish installed prevention of recursive source copying from retirement of existing test state and recurring pre-import backups: one does not establish the other. Close with separate outcomes for classification, approved disposal and future accumulation prevention.
+
 ## 2. Prove the policy scope
 
 Read the housekeeping and safety scripts before interpreting their output. Record:
