@@ -4397,12 +4397,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-FB-FIX-1569014246493130852",
-      "next_step": "Concluir entrega/readback REPORT-INFRA; nenhuma correcao financeira pendente; rotina normal com configuracao mensal corrigida",
+      "next_step": "Nenhuma pendencia deste escopo. Operacao diaria normal; manter atribuicao confirmada no cadastro mensal e rollover; sem pagamentos ou ajustes de meses anteriores.",
       "objective": "Corrigir atribuicao FB tres sites em novembro e refresh01-07;cinco gestores/todos sites",
-      "source": "reports/finance-fb-fix-1569014246493130852.md;discord:1569014246493130852",
-      "state": "producao concluida/verificada287->289;fbusd140830.86;455controles zero divergencia;10vistas autenticadas;replay0;pagamentos/receitas/rateio/outrosmeses preservados",
+      "source": "reports/finance-fb-fix-1569014246493130852.md;apps/finance-system/private/fb-fix-1569014246493130852/report-infra-receipt.json",
+      "state": "completed_verified:287->289;fbusd140830.86;455controles;10vistas;1694celulas;replay0;health20/20;preservacoespass;report-infra1569018093617938465relido;registry/inventario/skills validados",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-08T15:57:33+00:00"
+      "updated_at": "2026-11-08T15:58:22+00:00"
     },
     {
       "agent": "zeus",
@@ -9259,5 +9259,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T15:57:33+00:00"
+  "updated_at": "2026-11-08T15:58:22+00:00"
 }
