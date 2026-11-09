@@ -16,9 +16,13 @@ Inspecione o tipo de `state.target_manifest` antes de tratá-lo como caminho: o 
 
 Projete na saída somente conta, número/IDs, fase, budget, lance, horário e resultados das comparações. Preserve a definição completa no registro canônico existente e use-a em memória durante a verificação.
 
+Em conferência read-only após ação manual, registre os resultados por critério, sem encerrar a coleta no primeiro drift: uma diferença de orçamento não impede conferir status, rejeições, copy, tracking, lance, horário e identidade dos demais objetos. Execute `verify_readback` por campanha com sua definição original e retenha a falha sem afrouxar o comparador; mantenha separados `semantic_verified_against_original`, cobertura de IDs renderizados e verificações específicas aprovadas. Não altere o budget esperado em uma cópia do manifest para fabricar um PASS. Derive o total atual das leituras e apresente-o separado do total originalmente solicitado; não atribua a autoria da mudança sem evidência.
+
 ## 3. Relê-las ao final de recuperação demorada
 
 Releia também os grupos concluídos primeiro, sem reexecutar o writer nem reativar grupos terminais pausados posteriormente. Use `graph_batch_get(token, requests)` com até 50 itens `{name, path, params: {fields, limit}}`; desempacote `(http, rows, headers)`, exija HTTP200 externo e `row.code == 200` para cada resposta antes de decodificar `row.body`. Peça os campos materiais dos creatives. Confira paginação de todos os edges: um `limit` alto não prova completude.
+
+Antes das asserções semânticas, conserve a projeção sanitizada das leituras bem-sucedidas e a cobertura por `name`; identifique cada falha por etapa, objeto, campo e esperado/observado seguros. Em falha de transporte ou child, projete somente HTTP, código/subcode e identidade da consulta, sem body Graph bruto, headers sensíveis, cursores ou URLs assinadas. Uma `AssertionError` sem contexto não permite distinguir leitura incompleta, diferença de tipo e drift material, e força recolher dados já disponíveis. Reutilize as respostas válidas para diagnosticar o verificador; faça novo GET somente quando faltar cobertura ou frescor, nunca novo write para testar uma comparação.
 
 Quando a resposta expandir campanha, anúncios e conjuntos no mesmo objeto, monte a árvore esperada pelo helper:
 

@@ -13,7 +13,7 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN não herda CAR/CPV. Correções preservam request/relógio/IDs/selos; headline não muda CTA.
+SHEIN não herda CAR/CPV; preserve request/relógio/IDs/selos; headline≠CTA. Conferência manual: só leitura, sem retomar writer.
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
