@@ -218,10 +218,13 @@ class CampaignEngine:
         return self._readback_retry_seconds(bundle)
 
     def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
+        from . import reviewed_ad_schedule
+        operations = reviewed_ad_schedule.prepare(bundle, operations, stage)
         journal = progress.begin(operations, stage)
         try:
             results = transport.execute(operations, stage)
             progress.finish(journal, results)
+            reviewed_ad_schedule.verify_results(bundle, results)
             return results
         except BatchTransportError as exc:
             progress.finish(journal, [], exc.detail)
@@ -247,7 +250,7 @@ class CampaignEngine:
             operations.extend([
                 BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
                 BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_constraints,bid_strategy,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50", kind="readback"),
-                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}}&limit=50", kind="readback"),
+                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,ad_schedule_start_time,ad_schedule_end_time,issues_info,failed_delivery_checks,creative{{id,name,status,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}}&limit=50", kind="readback"),
             ])
         return operations
 
@@ -1532,6 +1535,11 @@ class CampaignEngine:
         return resolved_campaign_ids
 
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str, manifest_digest: str | None = None) -> dict[str, Any]:
+        from .reviewed_ad_schedule import lane_context
+        with lane_context(request_id, account, manifest_digest):
+            return self._run_lane_inner(account, bundles, request_id, manifest_digest)
+
+    def _run_lane_inner(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str, manifest_digest: str | None = None) -> dict[str, Any]:
         account_config = (self.config.get("accounts") or {}).get(account) or {}
         if bundles:
             self.quota.seed_access_tier(

@@ -1,0 +1,50 @@
+{
+  "operation_key": "6a8f887c7ddb0077beeeb05b",
+  "mode": "probe_only",
+  "result": "AUTH_READY",
+  "operation_completed": false,
+  "observed_date": "2026-11-09",
+  "observed_timezone": "America/New_York",
+  "probe_window": "09:29-09:32",
+  "job_id": "2ee720363d7d",
+  "thread_id": "1563926766286803004",
+  "business_id": "155263197283282",
+  "authentication_target": "Digital Trust Billing & payments > Accounts > Ad accounts, approved Rodolfo Chrome PC1",
+  "surface": {"pid": 19372, "window_id": 328816, "profile_label_ax": "Rodolfo", "approved_surface_live_revalidated": true},
+  "evidence": {
+    "screenshot": "/root/mgs-agent/reports/automation-auth-probes/6a8f887c7ddb0077beeeb05b/20261109T0932/billing-accounts-access.png",
+    "screenshot_sha256": "445bbe35735b18ef04809f0cd718c0d25b3b5fb9d0cf5af7f2c5ad686f554103",
+    "accessibility": "/root/mgs-agent/reports/automation-auth-probes/6a8f887c7ddb0077beeeb05b/20261109T0932/billing-access-ax.json",
+    "visual_verification": "vision_analyze confirmed Digital Trust Accounts loaded, Search by name available, account IDs, Active status and Current balance visible; no login, 2FA, Windows Security or provider block visible.",
+    "scope_limit": "This proves Accounts access only, not billing-details access, full 47-account collection or fresh H balances."
+  },
+  "reconciliation": {
+    "authority_originals_found": ["1564382301155098717", "1569193434189668453"],
+    "authority_user_id": "344196393512075265",
+    "authority_source": "Read-only query of original user messages and session origin in Zeus state.db, plus current authorized-users registry.",
+    "native_job_contract_hash": "c65030328baacc9d414c5d3346f1a31a98a24fede8e56d2a4523d5561366f682",
+    "native_job_contract_hash_matches_queue": true,
+    "authorized_account_ids_count": 47,
+    "pending_h_count": 36,
+    "pending_h_ids_match_contract": true,
+    "pending_d_event_count": 2,
+    "pending_d_event_account_ids": ["1150399088163771", "1062446663435585"],
+    "financial_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+    "financial_receipt_sha256": "b0873c3fcfd95aa7685dd6f4b68662f2b4dd46a8f3595be50198c0b16e2fcb19",
+    "completed_layers_preserved": ["funding", "invoices", "metrics", "source_to_sheet_readback"],
+    "supervisor_owner": "supervisor:1347188",
+    "supervisor_process_alive": true,
+    "native_job_enabled": true,
+    "native_next_run_at": "2026-11-09T14:02:00-05:00",
+    "separate_financial_worker_observed": false
+  },
+  "cleanup": {
+    "own_probe_tab_closed": true,
+    "original_ads_editor_restored": true,
+    "restored_surface_screenshot": "/root/mgs-agent/reports/automation-auth-probes/6a8f887c7ddb0077beeeb05b/20261109T0932/original-tab-restored.png",
+    "own_lease_released": true,
+    "lease_file_absent_after_release": true
+  },
+  "business_mutations": {"sheets_writes": 0, "meta_writes": 0, "payments": 0, "billing_changes": 0, "cron_changes": 0, "campaign_changes": 0},
+  "next_gate": "Supervisor may reconcile and dispatch only the next authorized retry of the same operation. No business runner or financial report was executed in this probe."
+}
