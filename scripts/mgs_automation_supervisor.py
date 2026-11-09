@@ -305,6 +305,7 @@ def run_worker(row,mode,base=BASE,timeout=900):
     if profile not in ('zeus','atena','ares'):raise ValueError('invalid executor')
     env=dict(os.environ,HERMES_BACKGROUND_NOTIFICATIONS='off',HERMES_DISABLE_TOOL_PROGRESS='1',MGS_CONTINUITY_OPERATION_KEY=row['key'])
     prompt=build_prompt(row,mode,base)
+    prompt+=f'\nLimite técnico desta rodada: {timeout} segundos de parede (não é budget financeiro). Trabalhe em lotes pequenos e reserve tempo para checkpoint durável, recibos e resposta antes do limite; não tente esgotar um backlog que não caiba nesta rodada. Preserve TODO o conjunto autorizado e registre os IDs/etapas faltantes para o próximo retry, sem refazer o que já foi validado. Em UI, salve o progresso de cada lote, sem esperar terminar toda a coleta para persistir.'
     root=Path(os.environ.get('MGS_CONTINUITY_RUN_ROOT','/root/.hermes/shared/automation-continuity/runs'))/row['key'];root.mkdir(parents=True,exist_ok=True,mode=0o700)
     prefix=str(time.time_ns())
     with (root/(prefix+'.stderr')).open('w') as err:

@@ -25,6 +25,15 @@ class WorkerLifecycleTests(unittest.TestCase):
         receipt['start_ticks']='wrong-pid-generation';(directory/'worker.json').write_text(json.dumps(receipt))
         self.assertFalse(self.m.worker_active('fixture-key',self.root))
 
+    def test_worker_receives_actual_wall_budget_and_checkpoint_guard(self):
+        actual=subprocess.Popen;prompts=[]
+        def spawn(args,**kwargs):
+            prompts.append(args[-1]);return actual([sys.executable,'-c','print("Pendente: isolated bounded fixture.")'],**kwargs)
+        row={'key':'budget-fixture','source_key':'native:zeus:fixture','source':json.dumps({'kind':'native','profile':'zeus'}),'observation':None}
+        with patch.dict(os.environ,{'MGS_CONTINUITY_RUN_ROOT':str(self.root)}),patch.object(self.m,'build_prompt',return_value='isolated fixture'),patch.object(self.m.subprocess,'Popen',side_effect=spawn):
+            self.m.run_worker(row,'diagnose_only',timeout=17)
+        self.assertIn('17 segundos',prompts[0]);self.assertIn('checkpoint',prompts[0]);self.assertIn('lotes',prompts[0])
+
     def test_timeout_stops_only_its_owned_worker_process_group(self):
         actual=subprocess.Popen;children=[]
         def spawn(*args,**kwargs):

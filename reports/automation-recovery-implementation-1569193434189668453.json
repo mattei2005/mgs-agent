@@ -7,7 +7,7 @@
   "status": "runtime_active_waiting_shein_historical_delivery_authorization",
   "canonical_policy": "context/automation-recovery-policy.md",
   "tests": {
-    "tests_run": 95,
+    "tests_run": 96,
     "failures": 0,
     "errors": 0,
     "fixture_only_failures_before_fixes": {
@@ -25,7 +25,8 @@
       "scope-red.txt": "F\n======================================================================\nFAIL: test_native_contract_change_never_overwrites_approved_scope (tests.test_automation_recovery_queue.QueueTests.test_native_contract_change_never_overwrites_approved_scope)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 104, in test_native_contract_change_never_overwrites_approved_scope\n    self.assertEqual(json.loads(current['source'])['contract_hash'],'fixture-original')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'fixture-changed' != 'fixture-original'\n- fixture-changed\n+ fixture-original\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.034s\n\nFAILED (failures=1)\n",
       "pc1-red.txt": "F\n======================================================================\nFAIL: test_busy_is_durable_without_stealing_desktop (tests.test_pc1_continuity_ingress.PC1IngressTests.test_busy_is_durable_without_stealing_desktop)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_pc1_continuity_ingress.py\", line 25, in test_busy_is_durable_without_stealing_desktop\n    self.assertTrue(result.get('continuity_queued'), 'Busy currently drops the scheduled request instead of queueing it')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None is not true : Busy currently drops the scheduled request instead of queueing it\n\n----------------------------------------------------------------------\nRan 1 test in 0.135s\n\nFAILED (failures=1)\n",
       "worker-fencing-red.txt": "F\n======================================================================\nFAIL: test_child_fingerprint_survives_parent_loss_without_pid_reuse (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_child_fingerprint_survives_parent_loss_without_pid_reuse)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 20, in test_child_fingerprint_survives_parent_loss_without_pid_reuse\n    self.assertTrue(hasattr(self.m,'worker_active'),'child ownership receipt absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : child ownership receipt absent\n\n----------------------------------------------------------------------\nRan 1 test in 0.019s\n\nFAILED (failures=1)\n",
-      "notice-red.txt": "notice_is_edited_not_reposted (tests.test_continuity_notice_delivery.NoticeTests.test_legacy_verified_notice_is_edited_not_reposted)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 48, in test_legacy_verified_notice_is_edited_not_reposted\n    self.assertEqual(len(edits),1);self.assertEqual(edits[0][1]['message_id'],'200')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_long_notice_preserves_exact_question_and_explicit_push (tests.test_continuity_notice_delivery.NoticeTests.test_long_notice_preserves_exact_question_and_explicit_push)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 28, in test_long_notice_preserves_exact_question_and_explicit_push\n    self.assertIn(question,json.dumps(sent[0],ensure_ascii=False))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Autoriza a entrega histórica tardia da rodada original nas mesmas threads?' not found in '{\"content\": \"Bloqueado: evidência de fixture.\\\\nDetalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixtur\", \"embeds\": [], \"allowed_mentions\": {\"parse\": [], \"users\": [], \"roles\": [], \"replied_user\": false}, \"nonce\": \"70f50985921910eblocked_d\", \"enforce_nonce\": true, \"message_reference\": {\"message_id\": \"100\", \"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false}}'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.122s\n\nFAILED (failures=3)\n"
+      "notice-red.txt": "notice_is_edited_not_reposted (tests.test_continuity_notice_delivery.NoticeTests.test_legacy_verified_notice_is_edited_not_reposted)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 48, in test_legacy_verified_notice_is_edited_not_reposted\n    self.assertEqual(len(edits),1);self.assertEqual(edits[0][1]['message_id'],'200')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_long_notice_preserves_exact_question_and_explicit_push (tests.test_continuity_notice_delivery.NoticeTests.test_long_notice_preserves_exact_question_and_explicit_push)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 28, in test_long_notice_preserves_exact_question_and_explicit_push\n    self.assertIn(question,json.dumps(sent[0],ensure_ascii=False))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Autoriza a entrega histórica tardia da rodada original nas mesmas threads?' not found in '{\"content\": \"Bloqueado: evidência de fixture.\\\\nDetalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixtur\", \"embeds\": [], \"allowed_mentions\": {\"parse\": [], \"users\": [], \"roles\": [], \"replied_user\": false}, \"nonce\": \"70f50985921910eblocked_d\", \"enforce_nonce\": true, \"message_reference\": {\"message_id\": \"100\", \"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false}}'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.122s\n\nFAILED (failures=3)\n",
+      "time-budget-red.txt": "F\n======================================================================\nFAIL: test_worker_receives_actual_wall_budget_and_checkpoint_guard (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_worker_receives_actual_wall_budget_and_checkpoint_guard)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 35, in test_worker_receives_actual_wall_budget_and_checkpoint_guard\n    self.assertIn('17 segundos',prompts[0]);self.assertIn('checkpoint',prompts[0]);self.assertIn('lotes',prompts[0])\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '17 segundos' not found in 'isolated fixture'\n\n----------------------------------------------------------------------\nRan 1 test in 0.045s\n\nFAILED (failures=1)\n"
     },
     "environment": "installed sb-venv, isolated CRON_STALE_STATE, scripts/tests PYTHONPATH"
   },
@@ -37,8 +38,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "sha256": "2e24a78326dc69a154e2a507a311ffdb2e5d078e3e0c6da363648e71e6f5eebf",
-      "bytes": 30859
+      "sha256": "a2c4f9af4985195ebc04c50f4ffb3a554444bcf7e19ef3464834da6637f957cf",
+      "bytes": 31348
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
@@ -97,8 +98,8 @@
     },
     {
       "path": "/root/mgs-agent/tests/test_continuity_worker_lifecycle.py",
-      "sha256": "c77e764ebe5ee89f53cec8e536b0471ebced0a3009df819bc558bb5ae1aa678d",
-      "bytes": 2227
+      "sha256": "da0fb5ea1d89e833582f0b5c7c03f1307d5fb13f7b8dd8bcc6f32c8a2b635874",
+      "bytes": 3047
     },
     {
       "path": "/root/mgs-agent/tests/test_continuity_integration.py",
@@ -122,13 +123,13 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "7f825634eff50b01438e9c84bbb7b0c4fdb9f6ac288e50ee34d62b89abc6cf6f",
-      "bytes": 8872
+      "sha256": "1eb240e7419cbc657d6e178104e5b61a0d3b23deaa2cf4bf6335a3189033f2b6",
+      "bytes": 9184
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "7f825634eff50b01438e9c84bbb7b0c4fdb9f6ac288e50ee34d62b89abc6cf6f",
-      "bytes": 8872
+      "sha256": "1eb240e7419cbc657d6e178104e5b61a0d3b23deaa2cf4bf6335a3189033f2b6",
+      "bytes": 9184
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
@@ -1559,7 +1560,7 @@
   "report_infra_status": "sent_verified",
   "report_infra_message_id": "1569216490891386951",
   "report_infra_readback": true,
-  "final_metadata_readback_at_utc": "2026-11-09T05:33:12.813977+00:00",
+  "final_metadata_readback_at_utc": "2026-11-09T05:41:55.219520+00:00",
   "queue_at_final_metadata_readback": [
     {
       "source_key": "producer:dtr-sb-daily-match-audit.sh",
@@ -1571,9 +1572,9 @@
     },
     {
       "source_key": "native:zeus:2ee720363d7d",
-      "state": "retry_scheduled",
+      "state": "running",
       "cause": "TimeoutExpired",
-      "attempts": 3,
+      "attempts": 4,
       "failures": 1,
       "due": 1794202473.4763787
     },
@@ -1599,7 +1600,7 @@
       "cause": "historical_scope_review",
       "attempts": 0,
       "failures": 0,
-      "due": 1794286027.4888608
+      "due": 1794289026.6770444
     },
     {
       "source_key": "producer:ares/shein-intraday-cron.py",
@@ -1619,10 +1620,9 @@
     }
   ],
   "consumer_heartbeat_at_final_metadata_readback": {
-    "at": 1794202326.938376,
-    "open": 6,
-    "phase": "idle",
-    "pid": 859592
+    "at": 1794202626.6890876,
+    "phase": "dispatching",
+    "pid": 860584
   },
   "dtr_independent_delivery_get": {
     "parts": 3,
@@ -1648,5 +1648,13 @@
     "notification_id": "1569218550697033789",
     "notification_same_ID_edit_GET_verified": true,
     "reason": "Civil date crossed before original sources were complete; no implicit historical catch-up."
+  },
+  "native_timeout_handling": {
+    "business_complete": false,
+    "reconciliation_before_retry_required": true,
+    "owned_worker_timeout_was_observed": true,
+    "progress_preserved_in_canonical_run": true,
+    "worker_wall_time_and_batch_checkpoint_guard_tested": true,
+    "not_a_claim_of_full_native_recovery": true
   }
 }
