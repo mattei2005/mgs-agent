@@ -84,6 +84,49 @@ def validate(receipt, state, checkpoint, *, get_message, verify_authority):
     return {'verified': True, 'receipt': copy.deepcopy(receipt), 'state': state, 'checkpoint': checkpoint}
 
 
+def immediate_plan(state, policy, *, now=None):
+    """Plan target-only start normalization; never rewrite a source or schedule."""
+    from datetime import datetime, timezone
+    request = state.get('resolved_request') or state['request']
+    if (request.get('start_now') is not True or state['request'].get('mode', 'pure_clone') != 'pure_clone'
+            or state['manifest'].get('operation') != 'SHEIN-US-DIRECT'):
+        return None
+    if (policy.get('enabled') is not True or policy.get('approved_by') != '344196393512075265'
+            or policy.get('scope') != 'new_pure_clone_immediate_requests'
+            or policy.get('target_individual_start') != 'INHERIT_NEW_ADSET_START'
+            or policy.get('source_mutation') != 'FORBIDDEN'):
+        return None
+    if state['source'].get('ad_schedule_fields_verified') is not True:
+        raise ValueError('immediate start requires source ad-level schedule preflight before writes')
+    for spec in state['manifest']['campaigns']:
+        if spec.get('start_intent') != 'IMMEDIATE' or spec.get('status') != 'PAUSED' or spec.get('mode') != 'pure_clone':
+            raise ValueError('immediate start cannot use midnight/scheduled/active creation manifest')
+    selected = []; ends = {}
+    instant = now or datetime.now(timezone.utc)
+    if instant.tzinfo is None:
+        raise ValueError('immediate schedule comparison requires timezone')
+    for ad in state['source']['ads']:
+        value = ad.get('ad_schedule_start_time')
+        if not value:
+            continue
+        start = datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+        if start.tzinfo is None:
+            raise ValueError('source individual start requires timezone')
+        selected.append(str(ad['id']))
+        end = ad.get('ad_schedule_end_time')
+        if end:
+            parsed_end = datetime.fromisoformat(str(end).replace('Z', '+00:00'))
+            if parsed_end.tzinfo is None or parsed_end <= instant:
+                raise ValueError('expired source ad end requires explicit decision before writes')
+            ends[str(ad['id'])] = str(end)
+    if not selected:
+        return None
+    return {'schema_version': 1, 'authority_message_id': policy['source_message_id'],
+            'policy_digest': content_digest(policy), 'binding': binding(state, {}),
+            'source_ad_ids': sorted(selected), 'source_end_times': ends,
+            'target_individual_start': 'INHERIT_NEW_ADSET_START', 'source_mutation': 'FORBIDDEN'}
+
+
 @contextmanager
 def lane_context(request_id, account_id, manifest_digest):
     if not re.fullmatch(r'[A-Za-z0-9_.-]{1,160}', request_id):
@@ -91,7 +134,42 @@ def lane_context(request_id, account_id, manifest_digest):
     directory = BASE / 'state/shein-campaigns/single-clone' / request_id
     path = directory / 'reviewed-ad-schedule-recreation.json'
     if not path.exists():
-        yield
+        state_path = directory / 'state.json'
+        if not state_path.exists():
+            yield
+            return
+        state = json.loads(state_path.read_text())
+        operation = json.loads((BASE / 'operations/SHEIN-US-DIRECT.json').read_text())
+        policy = operation.get('request_defaults', {}).get('immediate_start_policy') or {}
+        plan = immediate_plan(state, policy)
+        if plan is None:
+            yield
+            return
+        from .schema import Manifest
+        if (str(state['account']['id']).removeprefix('act_') != account_id
+                or Manifest.from_dict(state['manifest']).digest != manifest_digest):
+            raise ValueError('immediate start lane identity changed')
+        from .prevalidation import verify_prevalidation
+        if not all(verify_prevalidation(state[k]) for k in ('manifest', 'target_manifest')):
+            raise ValueError('immediate start requires sealed manifests')
+        from .shein_channel_authority import verify
+        profile = json.loads((BASE / 'operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles'][account_id]
+        if verify(state['request'], profile, force=True).get('verified') is not True:
+            raise ValueError('immediate start live channel authority unavailable')
+        # Machine receipt of standing policy, never a fabricated human approval.
+        plan['binding']['account_id'] = account_id
+        plan_path = directory / 'immediate-ad-schedule-plan.json'
+        if plan_path.exists():
+            if json.loads(plan_path.read_text()) != plan:
+                raise ValueError('immutable immediate start plan changed')
+        else:
+            from .shein_single_clone import atomic_json
+            atomic_json(plan_path, plan)
+        marker = CURRENT.set({'verified': True, 'receipt': plan, 'state': state, 'preventive': True})
+        try:
+            yield
+        finally:
+            CURRENT.reset(marker)
         return
     receipt = json.loads(path.read_text())
     state = json.loads((directory / 'state.json').read_text())
@@ -157,9 +235,13 @@ def prepare(bundle, operations, stage):
             result.append(creative_op)
             creative_id = '{result=' + creative_op.name + ':$.id}'
             depends_on = creative_op.name
+        direct_body = {'name': ad.name, 'adset_id': op.body['adset_id'], 'source_ad_id': ad.source_ad_id,
+                       'creative': {'creative_id': creative_id}, 'status': 'PAUSED'}
+        end = proof['receipt'].get('source_end_times', {}).get(ad.source_ad_id)
+        if end:
+            direct_body['ad_schedule_end_time'] = end
         result.append(BatchOperation(op.name, 'POST', 'act_' + bundle.account_id + '/ads',
-            body={'name': ad.name, 'adset_id': op.body['adset_id'], 'source_ad_id': ad.source_ad_id,
-                  'creative': {'creative_id': creative_id}, 'status': 'PAUSED'},
+            body=direct_body,
             depends_on=depends_on, kind='ad_create'))
     return result
 
@@ -176,5 +258,13 @@ def verify_results(bundle, rows):
             raise ValueError('ad schedule final edge incomplete')
         for ad in edge['data']:
             if ad.get('source_ad_id') in proof['receipt']['source_ad_ids']:
-                if ad.get('ad_schedule_start_time') or ad.get('ad_schedule_end_time'):
-                    raise ValueError('recreated ad retained individual schedule')
+                if ad.get('ad_schedule_start_time'):
+                    raise ValueError('recreated ad retained individual start')
+                expected_end = proof['receipt'].get('source_end_times', {}).get(ad['source_ad_id'])
+                actual_end = ad.get('ad_schedule_end_time')
+                if bool(expected_end) != bool(actual_end):
+                    raise ValueError('recreated ad end schedule changed')
+                if expected_end:
+                    from datetime import datetime
+                    if datetime.fromisoformat(expected_end) != datetime.fromisoformat(actual_end):
+                        raise ValueError('recreated ad end schedule changed')

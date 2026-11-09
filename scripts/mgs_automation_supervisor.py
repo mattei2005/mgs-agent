@@ -305,14 +305,14 @@ Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:180
 
 
 def run_worker(row,mode,base=BASE,timeout=900):
-    if row['key']=='9f77ed97faf39eb7de4ba1b3' and mode in ('resume_safe','reconcile_first','verify_only'):
-        from mgs_finance_continuity import resume, RUN
-        if (base/RUN/'recovery-financial-validation.json').exists():
+    if row['key'] in ('9f77ed97faf39eb7de4ba1b3','6a8f887c7ddb0077beeeb05b') and mode in ('resume_safe','reconcile_first','verify_only'):
+        from mgs_finance_continuity import resume, RECOVERIES
+        if (base/RECOVERIES[row['key']][0]/'recovery-financial-validation.json').exists():
             source=json.loads(row['source'])
             jobs=json.loads((PROFILES/'zeus/cron/jobs.json').read_text())['jobs']
             matches=[j for j in jobs if j['id']==source.get('job_id')]
             if len(matches)!=1:raise ScopeBlocked('Original financial job unavailable')
-            result=resume(matches[0],base=base,verify_only=mode=='verify_only')
+            result=resume(matches[0],base=base,verify_only=mode=='verify_only',key=row['key'])
             return 'Resolvido: resultado financeiro e entrega na origem validados por GET; recibo '+result['receipt']
     if row['source_key']=='producer:dtr-sb-daily-match-audit.sh' and mode in ('resume_safe','reconcile_first'):
         from mgs_dtr_continuity import latest_snapshot,resume_delivery

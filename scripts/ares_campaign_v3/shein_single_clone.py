@@ -540,7 +540,7 @@ def resolve_intent(request, source, *, now=None, profile=None):
         if not re.fullmatch(r'[1-9][0-9]*', raw):
             raise RouteBlocked('source has no exact positive CBO daily budget to inherit')
         resolved['budget_usd'] = str(Decimal(raw) / Decimal(100))
-    if request.get('start_next_midnight') is True:
+    if request.get('start_next_midnight') is True and resolved.get('start_now') is not True:
         account_profile = profile or CURRENT_PROFILE.get() or {}
         if not account_profile.get('timezone'): raise RouteBlocked('default midnight requires verified account timezone')
         instant = now or datetime.now(timezone.utc)
@@ -551,6 +551,7 @@ def resolve_intent(request, source, *, now=None, profile=None):
         next_date = local.date() + timedelta(days=1)
         resolved['start_time'] = datetime.combine(next_date, datetime.min.time(), tzinfo=ZoneInfo(account_profile['timezone'])).isoformat()
     if resolved.get('start_now') is True:
+        resolved.pop('start_next_midnight', None)
         instant = now or datetime.now(timezone.utc)
         if instant.tzinfo is None: raise RouteBlocked('NOW resolution requires timezone')
         resolved['start_time'] = (instant.astimezone(timezone.utc) + timedelta(seconds=30)).replace(microsecond=0).isoformat()
@@ -598,7 +599,7 @@ def _prepare(request, config, common, token, *, reference_only=False):
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,bid_amount,bid_constraints,bid_strategy,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
-        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,ad_schedule_start_time,ad_schedule_end_time,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     if len(sets) != 1 or not 1 <= len(ads) <= 5:
@@ -619,7 +620,7 @@ def _prepare(request, config, common, token, *, reference_only=False):
                 ad['creative']['asset_feed_spec'] = parent['asset_feed_spec']
                 ad['creative']['object_story_spec'] = parent['object_story_spec']
                 ad['creative']['instagram_user_id'] = parent.get('instagram_user_id')
-    source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads}
+    source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads, 'ad_schedule_fields_verified': True}
     if raw['campaign'].get('status') in {'DELETED', 'ARCHIVED'}:
         raise RouteBlocked('reference campaign is terminal')
     source_video_ids = sorted({vid for ad in ads for vid in video_slots({**ad['creative'], 'object_story_spec': _story(ad)}).values()})
@@ -899,7 +900,9 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 # PREPARED is pre-write; expire only an unexecuted scheduled snapshot.
                 # Existing ENGINE/RECOVERY states keep their original manifests/IDs.
                 already_immediate = all(c.get('start_intent') == 'IMMEDIATE' for c in state['manifest']['campaigns'])
-                if already_immediate or not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
+                schedule_preflight_ready = (state['source'].get('ad_schedule_fields_verified') is True
+                                            or not (state.get('resolved_request') or request).get('start_now'))
+                if schedule_preflight_ready and (already_immediate or not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at)):
                     resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
             if request.get('start_now') is not True and request.get('start_next_midnight') is not True and aware_time(request['start_time']) <= started_at:

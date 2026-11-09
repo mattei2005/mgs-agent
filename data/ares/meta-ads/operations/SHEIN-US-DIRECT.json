@@ -707,6 +707,26 @@
       "already_created_objects": "readback-first continuation of same request and IDs, never a new copy or silent manifest rewrite",
       "implementation": "ares_campaign_v3.shein_schedule + shein_single_clone.resolve_intent",
       "verification": "offline-tested; Meta and media QA gates unchanged"
+    },
+    "immediate_start_policy": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1569374863821512896",
+      "source_thread_id": "1557917403822956698",
+      "scope": "new_pure_clone_immediate_requests",
+      "interpretation": "IMMEDIATE_AFTER_QA",
+      "explicit_now_overrides_default_midnight": true,
+      "target_individual_start": "INHERIT_NEW_ADSET_START",
+      "source_mutation": "FORBIDDEN",
+      "source_ad_schedule_preflight_required": true,
+      "preserve_unexpired_individual_end": true,
+      "expired_individual_end": "BLOCK_BEFORE_WRITE_FOR_EXPLICIT_DECISION",
+      "no_second_start_normalization_approval": true,
+      "preserve_explicit_future_schedule": true,
+      "preserve_explicit_paused": true,
+      "preserve_semantic_media_QA_and_material_change_gates": true,
+      "historical_campaigns": "UNCHANGED",
+      "implementation": "ares_campaign_v3.reviewed_ad_schedule.immediate_plan + lane_context; shein_single_clone schedule preflight"
     }
   },
   "campaign_naming_policy": {

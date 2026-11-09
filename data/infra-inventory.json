@@ -62798,16 +62798,15 @@
       "id": "meta-manual-payments-refresh-20261109-0802",
       "agent": "zeus",
       "type": "authorized_recurring_financial_snapshot",
-      "status": "partial_updated_validated_pc1_reauthentication_required",
-      "updated_at": "2026-11-09T08:10:49.879766-05:00",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+      "status": "completed_validated",
+      "updated_at": "2026-11-09T10:48:44.721824-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/recovery-financial-validation.json",
       "report_infra_status": "sent_verified",
       "verification": {
         "accounts": 47,
         "fresh_metrics": 47,
-        "fresh_h": 0,
-        "preserved_h": 36,
-        "pending_d": 2,
+        "fresh_h": 36,
+        "pending_d": 0,
         "historical_blank_d": 35,
         "other_sheet_data_unchanged": true,
         "lease_free": true,
@@ -62815,7 +62814,13 @@
         "payments_executed": 0,
         "cron_changes": 0
       },
-      "continuity_key": "6a8f887c7ddb0077beeeb05b"
+      "continuity_key": "6a8f887c7ddb0077beeeb05b",
+      "financial_delivery_message_id": "1569377549006409801",
+      "recovery_scripts": [
+        "scripts/mgs_finance_continuity.py",
+        "scripts/mgs_automation_supervisor.py"
+      ],
+      "tests": "8 finance delivery tests PASS"
     }
   ],
   "profile_skill_references": [

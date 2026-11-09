@@ -21,6 +21,12 @@ SOURCE = 'native:zeus:' + JOB
 THREAD = '1563926766286803004'
 HASH = 'c65030328baacc9d414c5d3346f1a31a98a24fede8e56d2a4523d5561366f682'
 RUN = Path('reports/meta-manual-payments-runs/cron-20261108T2102')
+RECOVERIES = {
+    KEY: (RUN, 'recovery-final-workbook-0114.json'),
+    '6a8f887c7ddb0077beeeb05b': (
+        Path('reports/meta-manual-payments-runs/cron-20261109T0802'),
+        'recovery-final-workbook-1042.json'),
+}
 
 
 def load(path):
@@ -77,11 +83,43 @@ def read_workbook(contract):
     return book
 
 
-def validate(base=BASE, reader=read_workbook):
-    root = base / RUN
+def sorted_view(sheet):
+    """Compare complete account rows by ID only inside unchanged filter range.
+
+    Preserve formulas, notes, formatting, group boundaries and all non-account
+    rows. A concurrent user sort is not permission to overwrite their layout.
+    """
+    import copy
+    result = copy.deepcopy(sheet)
+    filt = result.get('basicFilter', {})
+    specs = filt.pop('sortSpecs', [])
+    bounds = filt.get('range', {})
+    for spec in specs:
+        if (set(spec) != {'dimensionIndex', 'sortOrder'}
+                or spec['sortOrder'] not in ('ASCENDING', 'DESCENDING')
+                or not bounds.get('startColumnIndex', 0) <= spec['dimensionIndex'] < bounds.get('endColumnIndex', 0)):
+            raise ValueError('Unsupported concurrent filter change')
+    start, end = bounds.get('startRowIndex', 0), bounds.get('endRowIndex', 0)
+    for grid in result.get('data', []):
+        rows = grid.get('rowData', [])
+        indices = []
+        for i, row in enumerate(rows):
+            cells = row.get('values', [])
+            match = re.search(r'^ID da conta: (\d+)\b', cells[0].get('note', '')) if cells else None
+            if match and start <= i + grid.get('startRow', 0) < end:
+                indices.append((i, match[1], row))
+        ordered = sorted(indices, key=lambda x: x[1])
+        for (index, _, _), (_, _, row) in zip(indices, ordered):
+            rows[index] = row
+    return result
+
+
+def validate(base=BASE, reader=read_workbook, *, key=KEY):
+    run, snapshot = RECOVERIES[key]
+    root = base / run
     receipt = load(root / 'recovery-financial-validation.json')
     contract = load(base / 'data/meta-manual-payments/digital-trust-workbook-contract.json')
-    if (receipt['continuity_key'] != KEY or receipt['accounts'] != 47
+    if (receipt['continuity_key'] != key or receipt['accounts'] != 47
             or receipt['fresh_metrics_count'] != 47 or receipt['fresh_h_count'] != 36
             or receipt['pending_ui'] or contract['thread_id'] != THREAD
             or contract['business_id'] != '155263197283282'
@@ -95,11 +133,14 @@ def validate(base=BASE, reader=read_workbook):
             raise ValueError('Financial validation gate missing: ' + name)
     if any(receipt.get(k) != 0 for k in ('payments_executed', 'billing_changes', 'meta_writes', 'cron_changes')):
         raise ValueError('Recovery safety gate mismatch')
-    frozen = load(root / 'recovery-final-workbook-0114.json')
+    frozen = load(root / snapshot)
     live = reader(contract)
     before = {s['properties']['sheetId']: s for s in frozen['sheets']}
     after = {s['properties']['sheetId']: s for s in live['sheets']}
-    if set(before) != set(after) or any(authored(before[k]) != authored(after[k]) for k in before):
+    if set(before) != set(after) or any(
+            authored(before[k]) != authored(after[k])
+            and (k != contract['sheet_id'] or sorted_view(authored(before[k])) != sorted_view(authored(after[k])))
+            for k in before):
         raise ValueError('Live workbook changed from validated financial snapshot; no replay')
     ids = []
     for grid in after[contract['sheet_id']].get('data', []):
@@ -111,7 +152,7 @@ def validate(base=BASE, reader=read_workbook):
             # Effective calculated monetary values must also match, not just formulas.
     if len(ids) != 47 or len(set(ids)) != 47 or set(ids) != set(contract['account_ids']):
         raise ValueError('Live authorized account set mismatch')
-    for old_grid, new_grid in zip(before[contract['sheet_id']]['data'], after[contract['sheet_id']]['data']):
+    for old_grid, new_grid in zip(sorted_view(before[contract['sheet_id']])['data'], sorted_view(after[contract['sheet_id']])['data']):
         for old_row, new_row in zip(old_grid.get('rowData', []), new_grid.get('rowData', [])):
             for old_cell, new_cell in zip(old_row.get('values', []), new_row.get('values', [])):
                 if old_cell.get('effectiveValue') != new_cell.get('effectiveValue'):
@@ -121,8 +162,10 @@ def validate(base=BASE, reader=read_workbook):
 
 def render(receipt, contract):
     times = sorted(datetime.fromisoformat(t) for t in receipt['h_read_times'].values())
-    return ("Atualização de 08/11 às 21h02 recuperada e validada.\n\n"
-            "47/47 contas: 11 no cartão e 36 na linha. Métricas renovadas em 09/11 às 01h14 Eastern.\n"
+    slot = datetime.fromisoformat(receipt.get('scheduled_at', '2026-11-08T21:02:00-05:00'))
+    metrics = datetime.fromisoformat(receipt.get('validated_metrics_at', '2026-11-09T01:14:29-05:00'))
+    return (f"Atualização de {slot:%d/%m às %Hh%M} recuperada e validada.\n\n"
+            f"47/47 contas: 11 no cartão e 36 na linha. Métricas renovadas em {metrics:%d/%m às %Hh%M} Eastern.\n"
             f"H: 36/36 saldos da lista Accounts, lidos entre {times[0]:%d/%m %Hh%M} e {times[-1]:%d/%m %Hh%M} Eastern; horários preservados, sem republicação. Não são valores de modal.\n"
             "Média diária: 06–08/11 completos. Gasto de novembro: 01–09/11, incluindo o dia local parcial.\n"
             "Invoices de outubro: 29 pendentes, US$ 417.702,93. Outra invoice de US$ 161,18 permanece fora das 47 contas e dos totais.\n\n"
@@ -132,28 +175,29 @@ def render(receipt, contract):
             + '/edit#gid=' + str(contract['sheet_id']))
 
 
-def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=False):
+def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=False, key=KEY):
     if not scope(job):
         raise ValueError('Original job changed, paused, active or unavailable; no delivery')
-    root = base / RUN
+    run, snapshot = RECOVERIES[key]
+    root = base / run
     with (root / 'financial-delivery.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        receipt, contract = validate(base, reader)
+        receipt, contract = validate(base, reader, key=key)
         path = root / 'financial-delivery.json'
         if path.exists():
             state = load(path)
-            if state['snapshot_sha256'] != sha(root / 'recovery-final-workbook-0114.json'):
+            if state['snapshot_sha256'] != sha(root / snapshot):
                 raise ValueError('Frozen delivery snapshot drift')
         else:
             if verify_only:
                 raise ValueError('Source-thread business delivery not yet registered')
-            state = {'continuity_key': KEY, 'status': 'PENDING', 'channel_id': THREAD,
-                     'snapshot_sha256': sha(root / 'recovery-final-workbook-0114.json'),
+            state = {'continuity_key': key, 'status': 'PENDING', 'channel_id': THREAD,
+                     'snapshot_sha256': sha(root / snapshot),
                      'payload': {'content': render(receipt, contract), 'embeds': [],
                                  'allowed_mentions': {'parse': [], 'users': [], 'roles': [], 'replied_user': False},
-                                 'nonce': KEY, 'enforce_nonce': True}, 'message_id': None}
+                                 'nonce': key, 'enforce_nonce': True}, 'message_id': None}
             atomic(path, state)
-        if state['channel_id'] != THREAD or state['continuity_key'] != KEY:
+        if state['channel_id'] != THREAD or state['continuity_key'] != key:
             raise ValueError('Delivery target mismatch')
         if verify_only and not state.get('message_id'):
             raise ValueError('No accepted business report to GET-verify')
@@ -161,7 +205,7 @@ def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=
             # A lost POST response is ambiguous: never send a second report.
             from mgs_alert_transport import request, collection_url
             messages = request('GET', collection_url(THREAD) + '?limit=100')
-            matches = [m for m in messages if str(m.get('nonce')) == KEY and m.get('content') == state['payload']['content']]
+            matches = [m for m in messages if str(m.get('nonce')) == key and m.get('content') == state['payload']['content']]
             if len(matches) != 1:
                 raise ValueError('Ambiguous prior POST; preserve pending delivery without repost')
             state['message_id'] = str(matches[0]['id'])
@@ -186,13 +230,17 @@ def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=
 
 def observation(job, *, base=BASE):
     try:
-        if not scope(job) or not (base / RUN / 'financial-delivery.json').exists():
+        if not scope(job):
             return None
-        receipt = load(base / RUN / 'recovery-financial-validation.json')
-        # Never certify a different, later scheduled slot using this recovery.
-        last = datetime.fromisoformat(job['last_run_at']).timestamp()
-        if last > datetime.fromisoformat(receipt['validated_metrics_at']).timestamp():
-            return None
-        return resume(job, base=base, verify_only=True)
+        for key, (run, _) in reversed(list(RECOVERIES.items())):
+            if not (base / run / 'financial-delivery.json').exists():
+                continue
+            receipt = load(base / run / 'recovery-financial-validation.json')
+            # Never certify a different, later scheduled slot using this recovery.
+            last = datetime.fromisoformat(job['last_run_at']).timestamp()
+            if last > datetime.fromisoformat(receipt['validated_metrics_at']).timestamp():
+                continue
+            return resume(job, base=base, verify_only=True, key=key)
+        return None
     except (OSError, ValueError, RuntimeError, KeyError, TypeError):
         return None

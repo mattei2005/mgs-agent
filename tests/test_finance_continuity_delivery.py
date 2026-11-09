@@ -60,6 +60,25 @@ class FinanceDeliveryTests(unittest.TestCase):
         self.assertEqual(self.sent, [])
         self.assertFalse((self.root / 'financial-delivery.json').exists())
 
+    def test_current_occurrence_has_distinct_snapshot_and_nonce(self):
+        key = '6a8f887c7ddb0077beeeb05b'
+        run, snapshot = m.RECOVERIES[key]
+        root = self.base / run
+        root.mkdir(parents=True)
+        (root / snapshot).write_text(json.dumps(self.snapshot))
+        self.receipt.update(scheduled_at='2026-11-09T08:02:00-05:00',
+                            validated_metrics_at='2026-11-09T10:42:48-05:00')
+        m.resume(self.job, base=self.base, transport=self.transport, key=key)
+        state = m.load(root / 'financial-delivery.json')
+        self.assertEqual(state['continuity_key'], key)
+        self.assertEqual(state['payload']['nonce'], key)
+        self.assertIn('09/11 às 08h02', state['payload']['content'])
+        self.assertIn('09/11 às 10h42', state['payload']['content'])
+        self.assertFalse((self.root / 'financial-delivery.json').exists())
+        m.resume(self.job, base=self.base, transport=self.transport,
+                 key=key, verify_only=True)
+        self.assertEqual(self.sent, [None, '123'])
+
     def test_paused_active_and_changed_contract_do_not_deliver(self):
         for edits in ({'enabled': False}, {'state': 'paused'}, {'fire_claim': 'active'}):
             with self.assertRaises(ValueError):
@@ -89,6 +108,21 @@ class FinanceDeliveryTests(unittest.TestCase):
             {'validated_metrics_at': '2026-11-09T01:14:29-05:00'}))
         job = self.job | {'last_run_at': '2026-11-09T08:02:00-05:00'}
         self.assertIsNone(m.observation(job, base=self.base))
+
+    def test_concurrent_sort_preserves_complete_rows_and_rejects_data_change(self):
+        a = {'basicFilter': {'range': {'startRowIndex': 0, 'endRowIndex': 2,
+                                      'endColumnIndex': 10},
+                             'sortSpecs': [{'dimensionIndex': 7, 'sortOrder': 'ASCENDING'}]},
+             'data': [{'rowData': [{'values': [{'note': 'ID da conta: 2',
+                                               'userEnteredValue': {'numberValue': 20}}]},
+                                  {'values': [{'note': 'ID da conta: 1',
+                                               'userEnteredValue': {'numberValue': 10}}]}]}]}
+        b = copy.deepcopy(a)
+        b['data'][0]['rowData'].reverse()
+        b['basicFilter']['sortSpecs'][0]['dimensionIndex'] = 8
+        self.assertEqual(m.sorted_view(a), m.sorted_view(b))
+        b['data'][0]['rowData'][0]['values'][0]['note'] += ' modified'
+        self.assertNotEqual(m.sorted_view(a), m.sorted_view(b))
 
 
 if __name__ == '__main__':

@@ -4946,6 +4946,23 @@
       "updated_at": "2026-10-09T15:20:24+00:00"
     },
     {
+      "canonical_key": "ares.shein.immediate-start-inherited-ad-schedule",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-09T15:46:42+00:00",
+      "id": "ARES-SHEIN-IMMEDIATE-INHERITED-AD-START-1569374863821512896",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN imediato prevalece sobre início individual herdado",
+      "updated_at": "2026-11-09T15:46:42+00:00"
+    },
+    {
       "canonical_key": "ares.shein.independent-page-catalog",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT-pages.json",
       "consumers": [
@@ -16490,5 +16507,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T04:54:07+00:00"
+  "updated_at": "2026-11-09T15:46:42+00:00"
 }
