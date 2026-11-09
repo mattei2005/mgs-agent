@@ -47,7 +47,7 @@ def validate(receipt,state,checkpoint,*,get_message):
     index=json.loads(POLICY_INDEX.read_text()).get('requests',{})
     grant=index.get(state['request']['request_id']) or {}
     if (grant.get('receipt_digest')!=content_digest(receipt) or grant.get('approval_id')!=receipt.get('approval_id')
-            or grant.get('account_id')!=checkpoint.get('account_id') or grant.get('approved_by')!='344196393512075265'):
+            or grant.get('account_id')!=checkpoint.get('account_id') or grant.get('approved_by')!=receipt.get('approved_by')):
         raise ValueError('review receipt not registered for this exact request/account/approval')
     if set(receipt)!={'schema_version','binding','accepted_omissions','prompt_id','approval_id','prompt_digest','approval_digest','approved_by','origin_id'} or receipt['schema_version']!=1:
         raise ValueError('review receipt fields invalid')
@@ -60,7 +60,19 @@ def validate(receipt,state,checkpoint,*,get_message):
             f=ad['creative_payload'].get('degrees_of_freedom_spec',{}).get('creative_features_spec',{})
             if any(f.get(k)!={'enroll_status':'OPT_IN'} for k in keys):raise ValueError('review source enrollment scope changed')
     origin=state['request']['source_thread_id']
-    if receipt['origin_id']!=origin or receipt['approved_by']!='344196393512075265':raise ValueError('review exact CEO/origin required')
+    if receipt['origin_id']!=origin:raise ValueError('review exact origin required')
+    if receipt['approved_by']!='344196393512075265':
+        # SHEIN's existing channel delegation permits the original requester to
+        # review this request only. No global user/permission policy is changed.
+        if (grant.get('review_authority')!='SHEIN_CHANNEL_POLICY'
+                or state['manifest'].get('operation')!='SHEIN-US-DIRECT'
+                or receipt['approved_by']!=state['request'].get('authorized_by')):
+            raise ValueError('review delegated actor/request/operation invalid')
+        from .shein_channel_authority import verify
+        profiles=json.loads((BASE/'operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
+        profile=profiles[checkpoint['account_id']]
+        if str(profile.get('account_id'))!=str(checkpoint['account_id']):raise ValueError('review profile identity invalid')
+        if verify(state['request'],profile,force=True).get('verified') is not True:raise ValueError('review live channel authority unavailable')
     prompt=get_message('/channels/'+origin+'/messages/'+receipt['prompt_id'])
     approval=get_message('/channels/'+origin+'/messages/'+receipt['approval_id'])
     if (prompt.get('channel_id')!=origin or approval.get('channel_id')!=origin
@@ -112,4 +124,4 @@ def expected_degrees(actual,expected):
 
 
 def warning():
-    return ('CEO accepted unconfirmed API preservation only for the exact reviewed absent feature fields on these existing creative IDs; not literal feature fidelity and no extra opt-out applied' if CURRENT.get() else None)
+    return ('Authorized reviewer accepted unconfirmed API preservation only for the exact reviewed absent feature fields on these existing creative IDs; not literal feature fidelity and no extra opt-out applied' if CURRENT.get() else None)
