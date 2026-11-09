@@ -88,6 +88,12 @@ Para confirmar ausência de drift depois da ativação, compare cada creative vi
 
 ## 4. Persistir e comunicar a conclusão
 
+### Conferências pós-ativação e do acervo
+
+- Releia o estado dos anúncios após a ativação: o snapshot histórico ACTIVE não exclui rejeição posterior. `issues_info` com `2490468` comprova análise rejeitada, não a razão editorial específica. Preserve IDs, mídia/copy e parâmetros; não force ativação nem recrie conteúdo como sondagem. Registre a cobertura atual e peça somente a decisão nova de revisão ou conteúdo corrigido. Se o aviso final já foi entregue, corrija a mesma mensagem com journal e GET, sem segundo POST, e mantenha o pedido aberto até satisfazer o aceite integral.
+- Para validar Usados, resolva o destino pelo binding vivo `ares_manager_storage_standard.destination`. `new_media_assets.testing_parent_id` pode guardar Exclusivos no snapshot do intake, não o parent final de `confirm-use`. Confira pelo mesmo stock ID o parent vigente, nome, hash, reserva e assignments, além da preservação de RAW/clean; não mova arquivos para satisfazer uma expectativa antiga do verificador.
+
+
 Grave um recibo agregado sanitizado com os resultados verificáveis e os campos necessários, sem copiar respostas Graph completas, `object_story_spec`, `media_sourcing_spec` ou thumbnails. Exija cobertura integral da soma das quantidades pedidas, ausência de IDs sobrepostos, budget somado por campanha única e quantidade real de anúncios. Derive dele o checkpoint final e a resposta, evitando totais ou resumos paralelos.
 
 Se informar orçamento ativo total da conta, persista o valor realmente devolvido pelo readback, sua fonte e horário no recibo, separado do budget dos IDs novos. Não introduza esse total como literal manual no verificador ou apresente uma leitura anterior como parte do batch final. Para campanhas com budget diário no nível da campanha, inclua no batch final um GET account-scoped de `act_<account_id>/campaigns`, com `fields=id,status,daily_budget` e `filtering=[{"field":"status","operator":"IN","value":["ACTIVE"]}]`. Percorra todas as páginas, confirme IDs únicos e status configurado ACTIVE e some `int(daily_budget)` em unidades menores antes de formatar a moeda. Um `limit` elevado não dispensa a verificação de `paging.next`. Esse valor é orçamento diário configurado das campanhas ativas, não gasto nem garantia de entrega; estruturas ABO/lifetime exigem a metodologia própria, não tratar `daily_budget` ausente como orçamento zero. Mantenha o delta do pedido calculado exclusivamente pelos IDs novos.
