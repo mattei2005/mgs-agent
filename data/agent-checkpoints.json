@@ -8834,6 +8834,16 @@
       "updated_at": "2026-10-05T03:51:06+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-immediate-start-prevention",
+      "next_step": "Implementar e testar prevenção na rota central; preservar fonte, horário futuro expresso, manifests/IDs históricos, fim vigente e gates QA. Publicar por CAS, registrar política e REPORT-INFRA.",
+      "objective": "Prevenir horário individual herdado em duplicação SHEIN com início imediato, por correção explícita de Rodolfo1569374863821512896",
+      "source": "scripts/ares_campaign_v3/reviewed_ad_schedule.py",
+      "state": "manutenção separada, sem writes meta. audit confirma shell08:30 e ad1 herdado00:00. preparando leitura completa dos horários, precedência now e normalização somente nos novos alvos antes do primeiro write.",
+      "thread_id": "1557917403822956698",
+      "updated_at": "2026-11-09T15:38:26+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-messenger-flow-research-20260810",
       "next_step": "Workbook completo entregue: /root/.hermes/profiles/zeus/artifacts/SHEIN_Messenger_Fluxos_Completos_2026-08-10.xlsx; 54 mensagens por página, M01-M30 completos, 8 criativos, 60 URLs HTTP 200",
@@ -9505,5 +9515,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T15:21:53+00:00"
+  "updated_at": "2026-11-09T15:38:26+00:00"
 }
