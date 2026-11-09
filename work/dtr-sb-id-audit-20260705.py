@@ -42,6 +42,19 @@ def parse_page_card_text(txt):
     return {'page_name':name,'page_email':email,'fb_page_id':m.group('fb'),'page_id':m.group('pg'),'raw':txt}
 
 async def dtr_collect_user(username, item_id, limit_accounts=0):
+    # Each timeout retry has a fresh, isolated browser session. Never replay
+    # authentication failures or credential errors; these require diagnosis.
+    for attempt in range(2):
+        result = await _dtr_collect_user_once(username, item_id, limit_accounts)
+        errors = list(result.get('errors') or [])
+        errors.extend(error for account in result.get('accounts') or []
+                      for error in account.get('errors') or [])
+        if not errors or attempt or not all(error.startswith('TimeoutError:') for error in errors):
+            return result
+        await asyncio.sleep(5)
+    raise RuntimeError('DTR collector attempts exhausted')
+
+async def _dtr_collect_user_once(username, item_id, limit_accounts=0):
     out={'username':username,'login_ok':False,'accounts':[],'pages':[],'errors':[]}
     try:
         password=sync.op_password(item_id)
@@ -57,10 +70,16 @@ async def dtr_collect_user(username, item_id, limit_accounts=0):
             await page.goto(DTR_BASE+'/home/login', wait_until='domcontentloaded', timeout=60000)
             inputs=page.locator('input:visible')
             await inputs.nth(0).fill(username); await inputs.nth(1).fill(password)
-            await page.locator('button:visible, input[type=submit]:visible').last.click()
+            # A submitted login may succeed while Playwright waits for slow
+            # ancillary navigation. Validate the actual protected page instead.
+            await page.locator('button:visible, input[type=submit]:visible').last.click(no_wait_after=True)
             await page.wait_for_timeout(2500)
             await page.goto(DTR_BASE+'/social_accounts/index', wait_until='domcontentloaded', timeout=60000)
             await page.wait_for_timeout(800)
+            if urllib.parse.urlparse(page.url).path.rstrip('/') != '/social_accounts/index':
+                raise RuntimeError('DTR protected account page unavailable after login')
+            if await page.locator('input[type=password]:visible').count():
+                raise RuntimeError('DTR login form remained visible on protected account page')
             out['login_ok']=True
             csrf=''
             try: csrf=await page.locator('#csrf_token').input_value(timeout=5000)

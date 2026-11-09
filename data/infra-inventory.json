@@ -893,6 +893,42 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "dtr-daily-recovery-1569188551139004499",
+      "owner": "zeus",
+      "type": "monitor-recovery",
+      "status": "full_readonly_validation_running",
+      "checkpoint_id": "ZEUS-DTR-DAILY-RECOVERY-1569188551139004499",
+      "source_message_id": "1569188551139004499",
+      "process_session_id": "proc_5b412026f4a4",
+      "pid": 727422,
+      "lock": "/var/lock/dtr_sb_daily_match_audit.lock",
+      "command": "scripts/dtr-sb-daily-match-audit.sh --no-post",
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/dtr-daily-recovery-1569188551139004499",
+      "validation": "8 unit tests pass; exact formerly timed-out user live login OK, 3 accounts, 42 pages, no top-level or nested errors; full 73-user run started under existing exclusive lock; no Discord publication or published-state advancement",
+      "files": [
+        {
+          "path": "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",
+          "sha256": "412744d3aafd6028b4be98c0c61b17ef379acfdda0d5e8be04d13cf9a7e819ef",
+          "size_bytes": 17602
+        },
+        {
+          "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
+          "sha256": "f7a81856108d7b728c3c8d267e5c1def5f0c1f7066a23b74040ece3e8cb389e2",
+          "size_bytes": 18240
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_dtr_sb_daily_match_audit.py",
+          "sha256": "ffa8ef21a13ef61f4d7413a84f3772f92934b45d1d7a1cad06ba03034348e9be",
+          "size_bytes": 6569
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/dtr-sb-daily-match-audit-cron-2026-07-09.md",
+          "sha256": "80b1b18369609da2a7e590748180871a8689338bd2b383873f4b9257e22cedc9",
+          "size_bytes": 5379
+        }
+      ]
+    },
+    {
       "id": "finance-october-notice-1569165518093426809",
       "agent": "zeus",
       "type": "account_bound_manager_communication",

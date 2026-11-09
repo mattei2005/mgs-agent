@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import importlib.util
 import unittest
+from unittest.mock import AsyncMock, patch
 from pathlib import Path
 
 
@@ -19,6 +20,46 @@ def load_module(name, path):
 
 daily = load_module('dtr_sb_daily_match_audit_test', DAILY_SCRIPT)
 sync = load_module('dtr_sb_page_health_sync_for_daily_test', SYNC_SCRIPT)
+collector = daily.load_audit_mod()
+
+
+class DailyAuditCollectionTest(unittest.IsolatedAsyncioTestCase):
+    async def test_timeout_retries_once_with_fresh_collection(self):
+        failed = {'errors': ['TimeoutError: navigation'], 'accounts': []}
+        recovered = {'errors': [], 'accounts': [], 'login_ok': True}
+        with patch.object(collector, '_dtr_collect_user_once', AsyncMock(side_effect=[failed, recovered])) as run, \
+                patch.object(collector.asyncio, 'sleep', AsyncMock()) as sleep:
+            result = await collector.dtr_collect_user('user', 'item', 0)
+        self.assertEqual(result, recovered)
+        self.assertEqual(run.await_count, 2)
+        sleep.assert_awaited_once_with(5)
+
+    async def test_repeated_timeout_stops_after_two_attempts(self):
+        failed = {'errors': ['TimeoutError: navigation'], 'accounts': []}
+        with patch.object(collector, '_dtr_collect_user_once', AsyncMock(return_value=failed)) as run, \
+                patch.object(collector.asyncio, 'sleep', AsyncMock()):
+            self.assertEqual(await collector.dtr_collect_user('user', 'item'), failed)
+        self.assertEqual(run.await_count, 2)
+
+    async def test_authentication_failure_is_not_retried(self):
+        failed = {'errors': ['RuntimeError: login rejected'], 'accounts': []}
+        with patch.object(collector, '_dtr_collect_user_once', AsyncMock(return_value=failed)) as run:
+            self.assertEqual(await collector.dtr_collect_user('user', 'item'), failed)
+        run.assert_awaited_once()
+
+    async def test_account_timeout_retries_but_remains_fail_closed(self):
+        failed = {'errors': [], 'accounts': [{'errors': ['TimeoutError: account']}], 'login_ok': True}
+        with patch.object(collector, '_dtr_collect_user_once', AsyncMock(return_value=failed)) as run, \
+                patch.object(collector.asyncio, 'sleep', AsyncMock()):
+            result = await collector.dtr_collect_user('user', 'item')
+        self.assertEqual(run.await_count, 2)
+        self.assertEqual(daily.collection_errors(result), ['TimeoutError: account'])
+
+    async def test_success_is_not_retried(self):
+        success = {'errors': [], 'accounts': [{'errors': []}], 'login_ok': True}
+        with patch.object(collector, '_dtr_collect_user_once', AsyncMock(return_value=success)) as run:
+            self.assertEqual(await collector.dtr_collect_user('user', 'item'), success)
+        run.assert_awaited_once()
 
 
 class DailyAuditRestrictionMetricTest(unittest.TestCase):

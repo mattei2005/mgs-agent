@@ -95,6 +95,8 @@ Validation performed:
 
 ## Pitfalls
 
+- A DTR login click can complete while Playwright times out waiting for ancillary navigation. Submit with `no_wait_after=True`, then verify the actual protected `/social_accounts/index` URL and absence of a visible password input before accepting login. Retry only a timeout, once after five seconds, in a fresh isolated browser; never retry credential/authentication failures blindly. Include nested per-account errors in the daily completeness gate. A successful single-user check does not recover the full daily audit: rerun all active users and SB under the existing daily lock. With Discord delivery prohibited, use `--no-post`, preserve the last published state and explicitly distinguish a local full-run result from report delivery.
+
 - Never gate full SB child scope on a fixed publisher count (for example, `publishers >= 56`). Publishers can be legitimately added/removed. Validate the live `/company` response structurally: both `digital-trust` and `digital-trust-2` must be present with non-empty publisher lists, consume every returned child publisher, and retain the Messenger-row floor as the volume sanity check. Ensure Playwright/browser cleanup runs in `finally` so a scope exception does not emit a secondary `Event loop is closed` traceback.
 - Do not put this report in `#alerts-infra`. It is operational DTR/SB state, not infrastructure failure.
 - Do not compare Sheet row counts as if they were live pending work; live SB/DTR + global ignore gate wins.

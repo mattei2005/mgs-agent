@@ -202,13 +202,33 @@ def test_blocker_is_escalated_not_marked_recovered(monkeypatch):
     assert posts[0]['embeds'][0]['color'] != MODULE.RESOLVED_COLOR
 
 
-def test_unresolved_observations_are_bounded_not_silently_closed(monkeypatch):
+def test_pending_observations_remain_silent_beyond_three_until_resolved(monkeypatch):
     state, posts, _ = configure_main(monkeypatch)
     calls = []
     monkeypatch.setattr(MODULE, 'run_hermes_resolution', lambda *a: calls.append(1) or 'Pendente: checkpoint ainda em validação.')
-    for _ in range(3):
+    for _ in range(5):
         if '100' in state['processed']:
             state['processed']['100']['retry_at'] = 0
         assert MODULE.main() == 0
-    assert len(calls) == 3 and len(posts) == 1 and state['processed']['100']['status'] == 'escalated'
-    assert MODULE.main() == 0 and len(calls) == 3
+    assert len(calls) == 5 and not posts and state['processed']['100']['status'] == 'retry_pending'
+    assert MODULE.main() == 0 and len(calls) == 5  # cooldown still applies
+    monkeypatch.setattr(MODULE, 'run_hermes_resolution', lambda *a: 'Resolvido: ciclo completo validado.')
+    state['processed']['100']['retry_at'] = 0
+    assert MODULE.main() == 0
+    assert state['processed']['100']['status'] == 'done' and len(posts) == 1
+
+
+def test_pending_followups_do_not_consume_consecutive_failure_budget(monkeypatch):
+    state, posts, _ = configure_main(monkeypatch)
+    monkeypatch.setattr(MODULE, 'run_hermes_resolution', lambda *a: 'Pendente: writer ativo.')
+    assert MODULE.main() == 0
+    def fail(*args):
+        raise RuntimeError('offline fixture failure')
+    monkeypatch.setattr(MODULE, 'run_hermes_resolution', fail)
+    for count in range(1, 4):
+        state['processed']['100']['retry_at'] = 0
+        assert MODULE.main() == 0
+        assert state['processed']['100']['failure_streak'] == count
+        assert not posts
+    assert state['processed']['100']['status'] == 'pending_delivery'
+    assert state['processed']['100']['resolution_text'].startswith('Bloqueado:')

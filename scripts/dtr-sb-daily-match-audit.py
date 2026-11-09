@@ -69,6 +69,13 @@ def ignored_page(row, fb_keys, bot_pg_keys, bot_field='bot_user', pg_field='page
     return (fb and fb in fb_keys) or (bot and pg and (bot, pg) in bot_pg_keys)
 
 
+def collection_errors(scan):
+    errors = list(scan.get('errors') or [])
+    for account in scan.get('accounts') or []:
+        errors.extend(account.get('errors') or [])
+    return errors
+
+
 def sb_public_from_raw(r):
     return {
         'sb_id': norm(r.get('ID') or r.get('sb_id')),
@@ -264,8 +271,9 @@ def main():
             continue
         dtr_scans.append(scan)
         all_dtr_pages.extend(scan.get('pages') or [])
-        if scan.get('errors'):
-            errors.append({'user': u, 'errors': scan.get('errors')})
+        scan_errors = collection_errors(scan)
+        if scan_errors:
+            errors.append({'user': u, 'errors': scan_errors})
 
     login_ok = sum(1 for s in dtr_scans if s.get('login_ok'))
     collection_complete = not missing and not op_errors and not errors and login_ok == len(users)

@@ -393,7 +393,7 @@ def main() -> int:
     # Retry only recent known records; ancient closed incidents are reconciled
     # by evidence, not re-executed to clean the ledger.
     for mid, rec in (state.get('processed') or {}).items():
-        if rec.get('status') in ('error', 'retry_pending', 'pending_delivery', 'processing') and (int(rec.get('attempts', 1)) < 3 or rec.get('resolution_text')):
+        if rec.get('status') in ('error', 'retry_pending', 'pending_delivery', 'processing') and (int(rec.get('attempts', 1)) < 3 or rec.get('resolution_text') or rec.get('outcome') == 'pending'):
             retry_at = rec.get('retry_at', 0)
             if float(retry_at or 0) > time.time():
                 continue
@@ -433,7 +433,7 @@ def main() -> int:
 
         previous = processed.get(mid) or {}
         attempts = int(previous.get('attempts', 0)) + 1
-        if attempts > 3 and not previous.get('resolution_text'):
+        if attempts > 3 and not previous.get('resolution_text') and previous.get('outcome') != 'pending':
             continue
         # If a real reply already exists, reconcile it instead of repeating work.
         existing = next((m for m in messages if str((m.get('message_reference') or {}).get('message_id')) == mid and str((m.get('author') or {}).get('id')) == ZEUS_BOT_ID and is_resolver_feedback(m)), None)
@@ -450,18 +450,16 @@ def main() -> int:
         try:
             result = record.get('resolution_text') or run_hermes_resolution(raw, url)
             outcome = resolution_outcome(result)
-            if outcome == 'pending' and attempts < 3:
+            record['failure_streak'] = 0
+            record.pop('error', None)
+            if outcome == 'pending':
                 record.pop('resolution_text', None)
                 record.update({'status': 'retry_pending', 'outcome': outcome, 'last_observation': result, 'retry_at': time.time() + 300})
                 save_state(state)
                 if attempted >= MAX_CANDIDATES_PER_RUN:
                     break
                 continue
-            if outcome == 'pending':
-                result = ('Bloqueado: três verificações não comprovaram recuperação integral. '
-                          'O incidente permanece aberto, sem novos writers ou retries cegos. '
-                          'Último diagnóstico: ' + result + '\nRecomendação: reconciliar a sessão dona e o checkpoint antes de qualquer nova escrita.')
-                outcome = 'blocked'
+
             record.update({'status': 'pending_delivery', 'resolution_text': result, 'outcome': outcome})
             save_state(state)
             from mgs_alert_transport import post_verified
@@ -474,8 +472,9 @@ def main() -> int:
             handled += 1
         except Exception as exc:
             error_text = safe_error(exc)
+            record['failure_streak'] = int(record.get('failure_streak', 0)) + 1
             record.update({'status': 'pending_delivery' if record.get('resolution_text') else 'retry_pending', 'processed_at': iso_z(), 'error': error_text, 'retry_at': time.time() + 60 * min(attempts, 5)})
-            if attempts >= 3 and not record.get('resolution_text'):
+            if record['failure_streak'] >= 3 and not record.get('resolution_text'):
                 record['resolution_text'] = ('Bloqueado: o resolvedor falhou três vezes para este alerta. Diagnóstico confirmado: ' + error_text + '. Não houve recuperação validada; comandos não serão repetidos automaticamente. Recomendação: investigar o consumidor e seu ambiente antes de reexecutar. Qual decisão autoriza para este bloqueio?')
                 record['status'] = 'pending_delivery'
             log(f'ERROR message_id={mid}: {error_text}')

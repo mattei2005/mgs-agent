@@ -4112,6 +4112,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-DTR-DAILY-RECOVERY-1569188551139004499",
+      "next_step": "Nao iniciar outro writer. Acompanhar PID727422 e lock /var/lock/dtr_sb_daily_match_audit.lock; ler ultima execucao log e JSON reports. Somente ENDrc0 e73logins+SBcompleto validam coleta integral; --no-post preserva estado publicado e nao entrega relatorio Discord. Se em curso, Pendente; nao escalar como decisao humana so por duracao.",
+      "objective": "Recuperar auditoria diaria DTR-SB preservando escopo73usuarios e estado publicado; sem Discord direto",
+      "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1569188551139004499",
+      "state": "validacao_integral_em_curso; causa_timeout_navegacao_login; coletor_corrigido_retry_unico_timeout5s_e_gate_contas;8testespass;alvo_loginok3contas42paginas0erros;fullrun_no_post_pid727422_sessionproc_5b412026f4a4_lockexclusivo_inicio2026-11-08t22:20:18-05:00",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-09T03:21:11+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-DTR-SB-CLIQUET-US-CC-EN-20261002",
       "next_step": "Nenhum passo pendente neste request; preservar os artefatos de backup/rollback e não reinstalar fluxos ausentes sem pedido separado",
       "objective": "Migrar todas as páginas DTR dos sites yolokfx, vizioid, mavroa, bosstingecon/boostingecon, escalatepower e growpowerhub para cq-us-cc-en-drip e normalizar links de Broadcast Template SB para cq-us-cc-en-mct",
@@ -9176,12 +9186,12 @@
     {
       "agent": "zeus",
       "id": "zeus-shein-ui116-1568755642695426089",
-      "next_step": "Supersede bloqueio AdsPower: nao pedir login em perfil592. Chrome humano PC1 acessa editor e modal Advantage+ do ad120253713844160209 apesar do aviso de Page. Controle de background nao visivel no modal inspecionado: estado ainda nao confirmado, nao OPT_OUT. Preservar116 campaigns/239 ads do scope.json e inspecionar controle exato por ad;0 campanhas background confirmadas,116 pendentes. Nenhuma campanha alterada;modal cancelado sem salvar;lease liberada.",
-      "objective": "Confirmar visualmente 116 estados de background omitidos na API pelo Chrome ja autenticado no PC1, sem alterar campanhas",
-      "source": "reports/shein-ui116-route-correction-1569172048230482064.json",
-      "state": "route_corrected_authenticated_chrome_inspection_verified_full_audit_pending",
+      "next_step": "Ler receipts em reports/shein-ui116-1569174451705085953. Retomar primeiros ad_ids sem modal_verified; worker foreground scratch/shein_pc1_batch.py usa scope imutavel. Todos os resumos previos sao candidatos: ausencia no resumo nao confirma toggle; painel completo All optimizations e prova separada. Nenhum Save/Publish/toggle autorizado. Final exige reconciliar239 ads/116campaigns/23accounts e reportar recursos nao oferecidos separadamente de OPT_OUT; nao inferir impacto causal no ROI.",
+      "objective": "Conferir as116 campanhas/239 anuncios pelo Chrome autenticado PC1 e entregar lista por gestor para comparacao de ROI",
+      "source": "reports/shein-ui116-1569174451705085953/progress.jsonl",
+      "state": "in_progress_pc1_full_advantage_panels_read_only",
       "thread_id": "1568669160798683260",
-      "updated_at": "2026-11-09T02:15:55+00:00"
+      "updated_at": "2026-11-09T03:24:57+00:00"
     },
     {
       "agent": "zeus",
@@ -9385,5 +9395,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T03:15:53+00:00"
+  "updated_at": "2026-11-09T03:24:57+00:00"
 }
