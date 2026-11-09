@@ -2283,12 +2283,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G006-INTRADAY-1569486403283194011",
-      "next_step": "Coletar Meta/SB e RPS DOM, renderizar e validar, publicar integral e resumos com GET exato e reconciliar os seis pares conta/thread",
+      "next_step": "Nenhuma execução pendente. Recibo final: /root/.hermes/profiles/ares/cache/scratch/shein-1569486403283194011/final-reconciliation.json",
       "objective": "Intraday atual nas seis threads SHEIN G006, todas com resumo financeiro ao final",
       "source": "discord:1567162580273729629:1569486403283194011",
-      "state": "request_and_destinations_verified; live_meta_identities_confirmed; sources_pending",
+      "state": "complete_get_verified_and_reconciled; 6 pares conta/thread; 136 campanhas únicas; 34 partes integrais e 6 resumos; corte 09/11/2026 17:59–18:00 est; usd; zero writes meta",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-09T22:59:35+00:00"
+      "updated_at": "2026-11-09T23:03:58+00:00"
     },
     {
       "agent": "ares",
@@ -3801,12 +3801,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1569451285260935239",
-      "next_step": "Executar one-shot279/280;278 permanece PAUSED;gestor precisa decidir correcao dos anuncios,sem alterar midia neste pedido",
-      "objective": "Pausar 3 campanhas Yolokfx04 G004 e reativar 10/11/2026 00h America/New_York,status-only",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-yolo04-1569451285260935239/request.json",
-      "state": "scheduled:3/3 paused;279,280 agendadas10nov00hest;278 pendente erro processamento video2643046 nos2ads;26testespass",
+      "next_step": "Reexportar mesmos2videos>=500px sem corte/copy delta;sanitizar,QA,prestage,reattach nosmesmosads,readback e incluir278 no mesmoone-shot",
+      "objective": "Pausar278/279/280 e reativar10nov00hEST;reparo278 aprovado por Rodolfo1569487629093707817",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-yolo04-1569451285260935239/repair-approval-1569487629093707817.json",
+      "state": "repair_authenticated:278 paused;2videos480x854 nativos e erro2643046 confirmados;279/280 agenda original preservada",
       "thread_id": "1558131278589460584",
-      "updated_at": "2026-11-09T20:47:26+00:00"
+      "updated_at": "2026-11-09T23:06:30+00:00"
     },
     {
       "agent": "zeus",
@@ -9605,5 +9605,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T22:59:35+00:00"
+  "updated_at": "2026-11-09T23:06:30+00:00"
 }
