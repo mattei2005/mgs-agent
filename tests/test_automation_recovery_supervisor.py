@@ -69,6 +69,14 @@ class SupervisorTests(unittest.TestCase):
         self.assertEqual(self.m.source_key_for_alert({'id':'100','embeds':[{'fields':[{'name':'Script','value':'`hermes:zeus:abc`'}]}]}),'native:zeus:abc')
         self.assertEqual(self.m.source_key_for_alert({'id':'101','embeds':[{'fields':[{'name':'Script','value':'`dtr-sb-daily-match-audit.sh`'}]}]}),'producer:dtr-sb-daily-match-audit.sh')
 
+    def test_five_consecutive_dispatch_failures_stop_across_sources(self):
+        for n in range(6):self.q.enqueue(f'fixture:job{n}',{'kind':'fixture'},'timeout',now=100+n)
+        calls=[]
+        def fail(*a):calls.append(a);raise TimeoutError('isolated fixture timeout')
+        self.m.drive(self.q,{},fail,lambda:False,lambda s:False,lambda *a:None,now=200,max_jobs=6)
+        self.assertEqual(len(calls),5)
+        self.assertTrue(self.q.open())
+
     def test_busy_pc1_never_demotes_confirmation_gate(self):
         j=self.add();self.q.defer(j['key'],'blocked_decision','Critical Subset',now=150,delay=1)
         self.run_drive({},busy=True)
@@ -76,7 +84,8 @@ class SupervisorTests(unittest.TestCase):
         self.assertFalse(self.calls)
 
     def test_busy_pc1_keeps_auth_probe_only(self):
-        j=self.add();self.q.defer(j['key'],'waiting_human','2FA',now=150,delay=1)
+        j=self.add();self.q.enqueue(j['source_key'],{**json.loads(j['source']),'resource':'pc1'},'pc1_busy',now=150)
+        self.q.defer(j['key'],'waiting_human','2FA',now=150,delay=1)
         self.run_drive({},busy=True)
         self.assertEqual(self.q.get(j['key'])['state'],'waiting_human')
         self.assertFalse(self.calls)

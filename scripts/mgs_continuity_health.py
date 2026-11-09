@@ -25,5 +25,7 @@ def rows(now,path=DB):
     grace=35*60 if phase in ('dispatching','collecting') and alive else 10*60
     if now-stamp>grace:return [('service:automation-continuity','ERROR','common recovery consumer heartbeat overdue; durable requests preserved')]
     result=[('service:automation-continuity','OK',f'consumer phase={phase}; open={pending[0]}; durable queue readable')]
+    if int(json.loads(meta.get('worker_failure_streak','0')))>=5:
+        result.append(('service:automation-continuity-diagnosis','ERROR','five consecutive worker failures; blind dispatch stopped; requests preserved for Zeus technical diagnosis'))
     if failures:result.append(('service:automation-continuity-diagnosis','ERROR',f'{failures} recovery requests require technical diagnosis; not completed or discarded'))
     return result

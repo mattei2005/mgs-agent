@@ -490,4 +490,8 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    # The existing five-minute root-cron/flock remains the only dispatcher.
+    # Keep legacy helpers/import API for transport, classification and rollback.
+    import sys
+    from mgs_automation_supervisor import main as continuity_main
+    raise SystemExit(continuity_main(sys.modules[__name__]))

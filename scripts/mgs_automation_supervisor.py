@@ -36,11 +36,12 @@ def monitor_observations(text,now=None):
         label,status,detail=(x.strip() for x in parts)
         if status not in ('OK','ERROR','STALE','UNKNOWN','WARMUP','SKIP'):continue
         if status in ('SKIP','WARMUP'):continue
-        key='native:'+label[7:] if label.startswith('hermes:') else 'producer:'+label
+        key='native:'+label[7:] if label.startswith('hermes:') else ('service:'+label.split(':',1)[1] if label.startswith(('systemd:','service:')) else 'producer:'+label)
         rows[key]={'status':status,'verified':status=='OK','target':key,'receipt':'monitor-predicate:'+detail[:700],'at':now,'source':{'kind':'producer','script':label}}
         if key.startswith('native:'):
             _,profile,jid=key.split(':',2)
             rows[key]['source']={'kind':'native','profile':profile,'job_id':jid}
+        elif key.startswith('service:'):rows[key]['source']={'kind':'service','service':label.split(':',1)[1],'system_protected':True}
     if not rows:rows['service:monitor-observation']={'status':'UNKNOWN','verified':False,'target':'monitor-observation','receipt':'collector unavailable','at':now,'source':{'kind':'service','service':'cron-health-collector'}}
     return rows
 
@@ -51,6 +52,7 @@ def source_key_for_alert(message):
             if str(f.get('name','')).casefold()=='script':
                 script=str(f.get('value','')).strip(' `\n')
                 if script.startswith('hermes:'):return 'native:'+script[7:]
+                if script.startswith(('service:','systemd:')) and re.fullmatch(r'[a-zA-Z0-9_:.@/-]{1,180}',script):return 'service:'+script.split(':',1)[1]
                 if re.fullmatch(r'[a-zA-Z0-9_./-]{1,180}',script):return 'producer:'+script
     text=str(message.get('content',''))
     match=re.search(r'(?:job_id|cronjob_id)\s*[:=]\s*([a-f0-9]{12})',text)
@@ -142,6 +144,7 @@ def collect(base=BASE,profiles=PROFILES):
         r=subprocess.run(['systemctl','show',service,'-p','Result'],capture_output=True,text=True,timeout=10)
         bad=r.returncode or (r.stdout.strip() not in ('Result=success','Result='))
         key='service:'+unit
+        if observations.get(key,{}).get('status')=='ERROR':bad=True
         observations[key]={'status':'ERROR' if bad else 'OK','verified':not bad,'target':service,'receipt':r.stdout.strip()[:200] or 'systemd result unavailable','at':now,'source':{'kind':'service','service':service,'system_protected':True}}
     return observations,inventory
 
@@ -225,6 +228,8 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
                 state='waiting_human' if row['state']=='waiting_human' else 'waiting_resource'
                 q.defer(row['key'],state,'pc1_busy',now=now,delay=60);continue
     while executed<max_jobs:
+        streak=q.db.execute("SELECT value FROM service WHERE key='worker_failure_streak'").fetchone()
+        if streak and int(json.loads(streak[0]))>=5:break
         row=q.claim('supervisor:'+str(os.getpid()),now=clock(),ttl=1200)
         if not row:break
         previous=row['previous_state'];source=json.loads(row['source'])
@@ -239,8 +244,11 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
             delay=3600 if state=='blocked_decision' else (900 if state=='verifying' else 300)
             q.defer(row['key'],state,state,now=clock(),delay=delay,observation=text[:8000])
         except Exception as exc:
-            q.failed(row['key'],type(exc).__name__,now=clock())
+            cause='worker_no_final_response' if str(exc).startswith('worker_no_final_response') else type(exc).__name__
+            q.failed(row['key'],cause,now=clock())
+            q.service('worker_failure_streak',(int(json.loads(streak[0])) if streak else 0)+1)
         else:
+            q.service('worker_failure_streak',0)
             if state in ('waiting_human','blocked_decision'):
                 try:notify(q.get(row['key']),text)
                 except Exception:q.service('delivery_pending:'+row['key'],True)
@@ -287,7 +295,12 @@ def run_worker(row,mode,base=BASE,timeout=900):
         p=subprocess.Popen(['/root/.local/bin/hermes','-p',profile,'-z',prompt],cwd=str(base),env=env,stdout=subprocess.PIPE,stderr=err,text=True,start_new_session=True)
         from mgs_dtr_continuity import atomic
         receipt={'pid':p.pid,'start_ticks':process_ticks(p.pid),'state':'running','started':time.time()}
-        atomic(root/'worker.json',receipt)
+        try:atomic(root/'worker.json',receipt)
+        except Exception:
+            try:os.killpg(p.pid,signal.SIGTERM)
+            except ProcessLookupError:pass
+            p.communicate(timeout=15)
+            raise
         try:stdout,_=p.communicate(timeout=timeout)
         except subprocess.TimeoutExpired:
             # Only this isolated worker group; never a gateway or foreign owner.
@@ -363,7 +376,7 @@ def main(resolver):
             source=dict(observations.get(key,{}).get('source') or {'kind':'alert','profile':'zeus'})
             source.update(alert_id=mid,alert_channel=resolver.CHANNEL_ID,alert_url=resolver.message_url(message))
             obs=observations.get(key)
-            if not prior.get('continuity_key') and verified_observation(obs) and float(obs.get('at',0))>=epoch(prior.get('started_at')) and not original_active(source):
+            if obs and not prior.get('continuity_key') and verified_observation(obs) and float(obs.get('at',0))>=epoch(prior.get('started_at')) and not original_active(source):
                 legacy.setdefault('processed',{})[mid]={**prior,'status':'done','outcome':'resolved','evidence':obs,'reconciled_at':time.time()}
                 continue
             row=q.enqueue(key,source,'alert_unresolved')
