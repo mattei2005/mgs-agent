@@ -1,0 +1,101 @@
+{
+  "operation_key": "6a8f887c7ddb0077beeeb05b",
+  "job_id": "2ee720363d7d",
+  "mode": "resume_safe",
+  "status": "partial_h_published_validated_pending_remaining",
+  "updated_at": "2026-11-09T09:57:10.816394-05:00",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261109T080433813808",
+  "verified_published_h_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1877104513669062",
+    "2031917360813819"
+  ],
+  "verified_published_h_count": 16,
+  "pending_h_ids": [
+    "1419148446852410",
+    "1851640026221079",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "pending_h_count": 20,
+  "pending_d_ids": [
+    "1150399088163771",
+    "1062446663435585"
+  ],
+  "captured_not_published_ids": [
+    "1419148446852410",
+    "1851640026221079"
+  ],
+  "source_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+  "prior_completed_layers_preserved": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "publication_receipts": [
+    "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261109T080433813808/publication-receipt-20261109T095610135028.json"
+  ],
+  "canonical_publisher_full_grid_readback": true,
+  "independent_structural_readback": "snapshot_readback_pass;47IDs;11card36line;links;USD;F/G/H/I/J totals",
+  "native_job_unchanged": true,
+  "contract_hash": "c65030328baacc9d414c5d3346f1a31a98a24fede8e56d2a4523d5561366f682",
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "billing_changes": 0,
+  "cron_changes": 0,
+  "next_action": "Continue same run missing H only; first inspect captured unpublished screenshots via correct native crop, then collect remaining receipt-free IDs. Do not replay 16 published IDs. Resolve 2 new D generic events independently. Supervisor owns retry and delivery. Two existing receipts are not published: Growpowerhub04 ID confirmed by native crop; CPV06 name suffix needs unambiguous check. No need to navigate again unless pixels remain unresolved.",
+  "reason_partial": "900-second bounded round; remaining accounts preserved with original timestamps; no current authentication blocker observed",
+  "delivery_verified": false,
+  "operation_completed": false,
+  "cleanup": {
+    "owned_tabs_closed": true,
+    "original_AD2_editor_restored_visually": true,
+    "browser_tabs_final": 6,
+    "lease_free": true,
+    "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261109T080433813808/recovery-initial.png",
+    "note": "capture helper reused filename for final screenshot; initial image no longer retained; exact before/after pixel parity not claimed"
+  },
+  "unpublished_crop_checks": {
+    "1419148446852410": {
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "balance_usd": "85.79",
+      "row_id_confirmed_native_crop": "1419148446852410",
+      "verified_visual": true,
+      "published": false
+    },
+    "1851640026221079": {
+      "reason": "name suffix O/0 ambiguous in OCR; do not normalize; compare native pixels and AX before publication",
+      "published": false
+    }
+  }
+}
