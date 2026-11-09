@@ -32,6 +32,8 @@ Native cron correlation requires a unique exact profile/original-thread match. G
 
 Use `mgs_alert_transport.post_verified`. Persist accepted message IDs before GET; a failed verification retries GET of that ID, not the business operation or a second POST. Bound nonces to Discord's accepted length and explicitly disable unintended mentions.
 
+A financial recovery whose business writes are already verified but whose source-thread report is missing needs a delivery-only domain adapter, not another agent recollection. `scripts/mgs_finance_continuity.py` handles the frozen Digital Trust incident only: exact original job/hash and slot gates, corporate-SA live parity with the validated workbook, frozen outbox, accepted ID persisted before GET, and a read-only supervisor observation. A later native slot cannot be certified by this older receipt. An accepted-but-unverified POST resumes GET of its ID; an ambiguous POST without an ID remains pending unless the exact nonce/content can be reconciled. Never turn repeated `delivery_pending` handoffs into another business writer or close from worker wording alone.
+
 For a human/decision gate, preserve the exact final question and required CEO push in a bounded embed; do not cut the tail of a long diagnostic into a content-only message. Freeze the entire notice payload before POST so a changed probe response cannot break GET reconciliation. Upgrade an already-accepted legacy notice by PATCH of its exact ID plus GET, never by a replacement POST.
 
 DTR daily audit uses `scripts/mgs_dtr_continuity.py`:
