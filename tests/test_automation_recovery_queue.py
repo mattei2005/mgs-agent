@@ -97,6 +97,17 @@ class QueueTests(unittest.TestCase):
         self.assertEqual(self.m.disposition('Bloqueado: Critical Subset pagamento exige autorização.'),'blocked_decision')
         self.assertEqual(self.m.disposition('Resolvido: conferido.'),'verifying')
 
+    def test_pc1_queue_order_prevents_newcomer_jump(self):
+        self.assertTrue(hasattr(self.m,'pc1_admission'),'PC1 FIFO admission missing')
+        j=self.q.enqueue('pc1:zeus:first',{'kind':'pc1','profile':'zeus','session_id':'first','thread_id':'123','resource':'pc1'},'pc1_busy',now=100)
+        self.assertEqual(self.m.pc1_admission('ares','new','456',db=self.path),j['key'])
+        self.assertIsNone(self.m.pc1_admission('zeus','first','123',db=self.path))
+        self.assertIsNone(self.m.pc1_admission('zeus','worker','123',operation_key=j['key'],db=self.path))
+
+    def test_timeout_requires_effect_reconciliation(self):
+        a=self.job();self.q.failed(a['key'],'TimeoutExpired',now=200)
+        self.assertTrue(self.q.get(a['key'])['needs_reconciliation'])
+
     def test_multiprocess_enqueue_same_request_is_unique(self):
         ps=[multiprocessing.Process(target=enqueue_child,args=(str(self.path),)) for _ in range(4)]
         for p in ps:p.start()

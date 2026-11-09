@@ -183,7 +183,9 @@ def original_active(source):
 
 
 def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
+    fixed_clock=now is not None
     now=time.time() if now is None else now
+    def clock():return now if fixed_clock else time.time()
     executed=0
     for row in q.open():
         source=json.loads(row['source']);obs=observations.get(row['source_key'])
@@ -203,7 +205,7 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
             if occupied:
                 q.defer(row['key'],'waiting_resource','pc1_busy',now=now,delay=60);continue
     while executed<max_jobs:
-        row=q.claim('supervisor:'+str(os.getpid()),now=now,ttl=1200)
+        row=q.claim('supervisor:'+str(os.getpid()),now=clock(),ttl=1200)
         if not row:break
         previous=row['previous_state'];source=json.loads(row['source'])
         mode='resume_safe'
@@ -214,10 +216,13 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
         try:
             text=runner(row,mode);state=disposition(text)
             delay=3600 if state in ('waiting_human','blocked_decision') else (900 if state=='verifying' else 300)
-            q.defer(row['key'],state,state,now=now,delay=delay,observation=text[:8000])
-            if state in ('waiting_human','blocked_decision'):notify(q.get(row['key']),text)
+            q.defer(row['key'],state,state,now=clock(),delay=delay,observation=text[:8000])
         except Exception as exc:
-            q.failed(row['key'],type(exc).__name__,now=now)
+            q.failed(row['key'],type(exc).__name__,now=clock())
+        else:
+            if state in ('waiting_human','blocked_decision'):
+                try:notify(q.get(row['key']),text)
+                except Exception:q.service('delivery_pending:'+row['key'],True)
         executed+=1
     return executed
 
@@ -246,7 +251,7 @@ Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:180
 
 
 def run_worker(row,mode,base=BASE,timeout=900):
-    if row['source_key']=='producer:dtr-sb-daily-match-audit.sh' and mode=='resume_safe':
+    if row['source_key']=='producer:dtr-sb-daily-match-audit.sh' and mode in ('resume_safe','reconcile_first'):
         from mgs_dtr_continuity import latest_snapshot,resume_delivery
         snapshot,_=latest_snapshot(base)
         if snapshot is not None:return resume_delivery(base)
@@ -276,9 +281,9 @@ def notify_result(q,row,text,transport):
     if not channel:return
     key='notice:'+row['key']+':'+row['state']
     r=q.db.execute('SELECT value FROM service WHERE key=?',(key,)).fetchone()
-    intent=json.loads(r[0]) if r else {'nonce':row['key']+row['state'],'state':row['state']}
+    intent=json.loads(r[0]) if r else {'nonce':row['key'][:15]+row['state'][:9],'state':row['state']}
     if intent.get('verified'):return
-    body={'content':text[:1850],'embeds':[],'allowed_mentions':{'parse':[],'users':[],'roles':[],'replied_user':False},'nonce':intent['nonce'],'enforce_nonce':True}
+    body={'content':text.strip()[:1850].rstrip(),'embeds':[],'allowed_mentions':{'parse':[],'users':[],'roles':[],'replied_user':False},'nonce':intent['nonce'],'enforce_nonce':True}
     if source.get('alert_id'):body['message_reference']={'message_id':source['alert_id'],'channel_id':str(channel),'fail_if_not_exists':False}
     q.service(key,intent)
     def created(mid):intent['message_id']=mid;q.service(key,intent)
