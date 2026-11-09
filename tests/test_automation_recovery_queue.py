@@ -97,6 +97,13 @@ class QueueTests(unittest.TestCase):
         self.assertEqual(self.m.disposition('Bloqueado: Critical Subset pagamento exige autorização.'),'blocked_decision')
         self.assertEqual(self.m.disposition('Resolvido: conferido.'),'verifying')
 
+    def test_native_contract_change_never_overwrites_approved_scope(self):
+        a=self.q.enqueue('native:zeus:frozen',{'kind':'native','profile':'zeus','job_id':'frozen','contract_hash':'fixture-original'},'timeout',now=100)
+        self.q.enqueue('native:zeus:frozen',{'kind':'native','profile':'zeus','job_id':'frozen','contract_hash':'fixture-changed'},'timeout',now=200)
+        current=self.q.get(a['key'])
+        self.assertEqual(json.loads(current['source'])['contract_hash'],'fixture-original')
+        self.assertEqual(current['state'],'blocked_decision')
+
     def test_pc1_queue_order_prevents_newcomer_jump(self):
         self.assertTrue(hasattr(self.m,'pc1_admission'),'PC1 FIFO admission missing')
         j=self.q.enqueue('pc1:zeus:first',{'kind':'pc1','profile':'zeus','session_id':'first','thread_id':'123','resource':'pc1'},'pc1_busy',now=100)

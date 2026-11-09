@@ -28,6 +28,12 @@ def verified_observation(value):
     return bool(value and value.get('status') == 'OK' and value.get('verified') is True and value.get('target') and value.get('receipt'))
 
 
+def native_contract_hash(job):
+    contract={k:job.get(k) for k in ('id','prompt','script','origin','schedule','model','provider','deliver','deliver_to')}
+    contract['repeat_times']=(job.get('repeat') or {}).get('times')
+    return hashlib.sha256(json.dumps(contract,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+
+
 class Queue:
     def __init__(self, path=None):
         self.path = Path(path or os.environ.get('MGS_CONTINUITY_DB',str(DEFAULT_DB)))
@@ -83,8 +89,12 @@ class Queue:
                 # Never reset the retry budget, position, lease, blocker or due.
                 key=old['key']
                 merged=json.loads(old['source'])
-                merged.update(source)
+                changed=bool(merged.get('contract_hash') and source.get('contract_hash') and merged['contract_hash']!=source['contract_hash'])
+                if not changed:merged.update(source)
                 self.db.execute('UPDATE requests SET updated=?,source=? WHERE key=?',(now,json.dumps(merged,sort_keys=True),key))
+                if changed:
+                    self.db.execute("UPDATE requests SET state='blocked_decision',cause='source_scope_changed',owner=NULL,lease_until=NULL WHERE key=?",(key,))
+                    self._event(key,'source_scope_changed_no_replay',{},now)
             else:
                 key=hashlib.sha256((source_key+':'+str(now)).encode()).hexdigest()[:24]
                 state='waiting_resource' if cause=='pc1_busy' else 'queued'
@@ -135,6 +145,7 @@ class Queue:
             failures=row['failures']+1
             state='needs_diagnosis' if failures>=5 else 'retry_scheduled'
             delay=min(3600,300*2**min(failures-1,4))
+            delay=min(3600,delay+int(hashlib.sha256(f'{key}:{failures}'.encode()).hexdigest()[:4],16)%31)
             ambiguous='timeout' in cause.casefold() or 'no_final_response' in cause.casefold()
             self.db.execute('UPDATE requests SET failures=?,state=?,cause=?,due=?,updated=?,owner=NULL,lease_until=NULL,needs_reconciliation=MAX(needs_reconciliation,?) WHERE key=?',(failures,state,cause,now+delay,now,int(ambiguous),key))
             self._event(key,'failed',{'state':state,'cause':cause,'failures':failures},now)
@@ -167,7 +178,7 @@ def enqueue_pc1_busy(agent,session_id,thread_id,db=None):
         jobs=json.loads(p.read_text()).get('jobs',[])
         matches=[j for j in jobs if j.get('enabled') and str((j.get('origin') or {}).get('thread_id'))==str(thread_id)]
         if len(matches)==1:
-            source.update(kind='native',job_id=matches[0]['id'])
+            source.update(kind='native',job_id=matches[0]['id'],contract_hash=native_contract_hash(matches[0]))
             return Queue(db).enqueue(f'native:{agent}:{matches[0]["id"]}',source,'pc1_busy')
     return Queue(db).enqueue(f'pc1:{agent}:{session_id}',source,'pc1_busy')
 
@@ -181,7 +192,7 @@ def pc1_admission(agent,session_id,thread_id,operation_key=None,db=None):
     connection=sqlite3.connect(f'file:{path}?mode=ro',uri=True,timeout=15)
     connection.row_factory=sqlite3.Row
     try:
-        rows=connection.execute("SELECT * FROM requests WHERE state IN ('queued','waiting_resource','retry_scheduled','running','reconciling','verifying') AND (due<=? OR state='running') ORDER BY created,key",(time.time(),))
+        rows=connection.execute("SELECT * FROM requests WHERE state IN ('queued','waiting_resource','retry_scheduled','running','reconciling','verifying') AND (due<=? OR state='running' OR cause='pc1_busy') ORDER BY created,key",(time.time(),))
         for row in rows:
             source=json.loads(row['source'])
             if source.get('resource')!='pc1':continue
