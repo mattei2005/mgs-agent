@@ -1,0 +1,31 @@
+{
+  "decision": {
+    "at": "2026-11-09T14:00:30.206663+00:00",
+    "status": "delivery_cancelled_by_owner",
+    "authorized_by": "344196393512075265",
+    "source": "discord:1569185140502954077/1569350123916361880",
+    "scope": "SHEIN 2026-11-08 23:31 only",
+    "action": "Nao enviar entrega historica; nao solicitar novamente autorizacao para essa rodada",
+    "recurring_jobs_changed": false,
+    "runtime_gate": "blocked_decision preserved to prevent historical re-ingestion while supervisor is active on an unrelated request"
+  },
+  "before_queue": {
+    "key": "6354e984ad07c7c7f1f15529",
+    "source_key": "producer:ares/shein-intraday-cron.py",
+    "source": "{\"alert_channel\": \"1498132022634483894\", \"alert_id\": \"1569214975300337887\", \"alert_url\": \"https://discord.com/channels/1185714635991679006/1498132022634483894/1569214975300337887\", \"kind\": \"producer\", \"script\": \"ares/shein-intraday-cron.py\"}",
+    "state": "blocked_decision",
+    "cause": "blocked_decision",
+    "created": 1794200523.6002817,
+    "updated": 1794232628.779736,
+    "due": 1794204857.0005658,
+    "attempts": 1,
+    "failures": 0,
+    "owner": null,
+    "lease_until": null,
+    "needs_reconciliation": 0,
+    "evidence": null,
+    "observation": "Bloqueado: a prevenção foi corrigida e validada, mas a entrega da rodada SHEIN de 08/11 às 23h31 exige autorização de execução tardia; o dia civil já virou e não fiz catch-up implícito.\n\n1. Problema e causa confirmada\n   A SB mostrava 08/11 no filtro, mas a consulta inicial usava timestamp UTC de 09/11. O coletor confiava no filtro visível e ignorava a aplicação do preset, resultando em captura sem linhas das contas autorizadas e erro RPS_UI_COVERAGE_MISSING_1018267074603840.\n\n2. Correção aplicada\n   O helper canônico agora reaplica Today/Yesterday e Update obrigatoriamente e verifica a data de todas as linhas antes de filtrar conta/domínio. Validei a correção com leitura real da SB e relógio JS isolado na fronteira de horário. Passaram 6 testes novos e 188 regressões; a suíte inicialmente incompatível com Python 3.11 passou no runtime correto, Python 3.14.\n\n3. Pedido preservado\n   Journal original: 24 contas, 403 campanhas coletadas, nenhuma publicação iniciada. Não alterei agenda, campanhas, orçamento ou credenciais. Uma rodada posterior saudável não comprova a entrega desta rodada.\n\nInventário, auditoria e procedimento registrados. REPORT-INFRA 1569218280185663551 confirmado por GET.\nEvidência: /root/mgs-agent/reports/automation-recovery-6354e984ad07c7c7f1f15529.json\n\nRecomendo entrega histórica tardia pelo runner canônico, preservando as fontes originais e identificando honestamente qualquer leitura posterior de RPS. Sem essa autorização, a rodada permanece pendente.\n\nAutoriza a entrega histórica tardia da rodada de 08/11 às 23h31 nas mesmas 24 threads, indicando os horários reais das fontes?",
+    "delivery_id": null,
+    "notified_state": null
+  }
+}

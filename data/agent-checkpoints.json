@@ -2694,12 +2694,12 @@
     {
       "agent": "zeus",
       "id": "AUTOMATION-RECOVERY-IMPLEMENT-1569193434189668453",
-      "next_step": "Camada comum ativa e 97 testes aprovados; DTR 73/73 entregue com GET. Aguardar autorização explícita de Rodolfo para entrega histórica SHEIN 2026-11-08 23:31 nas mesmas 24 threads com horários reais, sem catch-up implícito; queue producer:ares/shein-intraday-cron.py blocked_decision. Digital Trust native:zeus:2ee720363d7d continua no consumidor durável: progresso preservado, timeout com reconciliação/backoff, limite de parede comunicado aos próximos workers; não declarar recuperação integral. Ler estado vivo no SQLite /root/.hermes/shared/automation-continuity/queue.sqlite3 antes da retomada. Evidência e REPORT-INFRA verificados.",
-      "objective": "Implementar continuidade duravel e prevencao de abandono em crons ativos Zeus/Ares/Atena, PC1 busy e timeouts; preservar escopo, estrategia, horarios, writers e gates criticos",
-      "source": "discord:1569185140502954077/1569193434189668453;context/automation-recovery-policy.md;reports/automation-recovery-implementation-1569193434189668453.json;discord:1498132022634483894/1569216490891386951",
-      "state": "runtime_active_waiting_late_shein_scope_authorization",
+      "next_step": "NAO enviar nem pedir novamente autorizacao para rodada historica SHEIN 08/11 23:31: Rodolfo dispensou em 1569350123916361880. Cancelamento registrado na fila como owner_cancelled_historical_delivery; gate blocked_decision preservado para impedir reingestao da mesma rodada. Nao liberar/reexecutar essa entrega. Manter crons recorrentes e rodadas atuais inalterados. Demais recuperacoes independentes: reconciliar SQLite por incidente; nao declarar recuperacao integral por este cancelamento.",
+      "objective": "Continuidade duravel dos crons autorizados, preservando escopo e executor unico",
+      "source": "discord:1569185140502954077/1569350123916361880;/root/mgs-agent/reports/shein-historical-cancel-1569350123916361880.json",
+      "state": "historical_shein_delivery_cancelled_by_owner_replay_gate_preserved",
       "thread_id": "1569185140502954077",
-      "updated_at": "2026-11-09T05:56:37+00:00"
+      "updated_at": "2026-11-09T14:00:30+00:00"
     },
     {
       "agent": "zeus",
@@ -9485,5 +9485,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T13:33:54+00:00"
+  "updated_at": "2026-11-09T14:00:30+00:00"
 }

@@ -2,7 +2,13 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-11-09T08:18:38-05:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "last_operational_change": {
+      "at": "2026-11-09T14:00:30.206663+00:00",
+      "source": "discord:1569185140502954077/1569350123916361880",
+      "summary": "Entrega historica SHEIN 08/11 23:31 dispensada; gate anti-replay preservado, recorrencia inalterada",
+      "evidence": "/root/mgs-agent/reports/shein-historical-cancel-1569350123916361880.json"
+    }
   },
   "system_packages": [
     {
@@ -70333,9 +70339,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 836753,
-      "md5": "e78d00ad227e31c2a20251214a7527b9",
-      "modified_at": "2026-11-09T08:15:20-05:00"
+      "size_bytes": 837433,
+      "md5": "e6b9d5e11b943dc33842fe1183990a71",
+      "modified_at": "2026-11-09T14:00:30.315315+00:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -71620,6 +71626,12 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/shein-historical-cancel-1569350123916361880.json",
+      "size_bytes": 2994,
+      "md5": "a4fb9bcf085dd36e078ff390919e5bd5",
+      "modified_at": "2026-11-09T14:00:30.206315+00:00"
     }
   ],
   "mu_plugin_canonical": {
