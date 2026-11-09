@@ -1,0 +1,56 @@
+{
+  "id": "1569457202320646275",
+  "channel_id": "1498132022634483894",
+  "content_empty": true,
+  "mentions_empty": true,
+  "embeds": [
+    {
+      "type": "rich",
+      "title": "REPORT-INFRA — criada",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Ação",
+          "value": "criada",
+          "inline": true
+        },
+        {
+          "name": "Tipo",
+          "value": "auditoria/checkpoint/skill",
+          "inline": true
+        },
+        {
+          "name": "Host",
+          "value": "srv1767265",
+          "inline": true
+        },
+        {
+          "name": "Path",
+          "value": "data/ares/creative-ops/30tb-archive/consumer-recovery-t_1b4f5263/;work/t_1b4f5263/verify_consumers.py;creative-operations-mgs/references/drive-meta-asset-identity-and-manager-reservation.md;data/agent-checkpoints.json",
+          "inline": false
+        },
+        {
+          "name": "Motivo",
+          "value": "Diagnóstico separado de dois vínculos históricos: divergência exata de parent/path, sem conciliação aplicável. Requer aceite delimitado de Rodolfo, sem contornar guard.",
+          "inline": false
+        },
+        {
+          "name": "Evidência",
+          "value": "SA canônica:32/34 consumidores;2 pares com ACK nativo e SHA256/MD5/tamanho completos íntegros.10 testes offline PASS.Providers já deslocados antes da consolidação;ator/autorização do move não comprovados.Produção/frozen/IDs/reservas preservados;nenhum write de mídia/Meta.Proposta NÃO aprovada digest823e77d9d25190350216611c4160d4c7dbff7cc9fe14060d73008caa38b19cc7.",
+          "inline": false
+        },
+        {
+          "name": "Pendências Hermes",
+          "value": "indisponível",
+          "inline": false
+        },
+        {
+          "name": "Horário",
+          "value": "2026-11-09 16:02:35 EST",
+          "inline": true
+        }
+      ],
+      "content_scan_version": 0
+    }
+  ]
+}

@@ -2062,6 +2062,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1569456380065222707",
+      "next_step": "Preflight read-only, prepare-media, dry-run, execute central mesmo request; QA integral e readback de todos os IDs antes do fechamento",
+      "objective": "Criar 9 clones da 010 Mavroa G006 com 18 videos Nicolas, USD35/dia cada, COST_CAP USD0.90, 10nov2026 00h15 EST",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/request.json",
+      "state": "intake congelado; fonte010 confirmada por nicolas na mensagem1569456812162420747; preparando admissao e preflight central, nenhum write meta efetuado nesta sessao",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-09T21:02:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -6715,6 +6725,16 @@
     },
     {
       "agent": "atena",
+      "id": "atena-seo-balance-1569457575572017154",
+      "next_step": "Recuperar baseline e documentos; inventariar posts públicos elegíveis excluindoREC; conferir saldo e entregarinline.",
+      "objective": "Recuperar levantamento original352 e reconciliar saldo por portal,nicho,categoria apósSEO100",
+      "source": "discord:1569457575572017154/1569457575572017154",
+      "state": "levantamento somente leitura; produção/publicação de novos artigos expressamente suspensas por raquel.",
+      "thread_id": "1569457575572017154",
+      "updated_at": "2026-11-09T21:05:05+00:00"
+    },
+    {
+      "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
       "next_step": "Encerradoeste lote58. Não repetirpublishes/imagens/cache23/locale11/MU. Próximoslotesemthreads/fontespróprias. Nova mudança do fornecedor invalida revisão e exige readback, sem promessa genérica de imutabilidade futura.",
       "objective": "Lote58concluídoevalidadonosesmosIDs/URLs",
@@ -8816,12 +8836,12 @@
     {
       "agent": "ares",
       "id": "shein-1569454008337301577",
-      "next_step": "Ares manutenção reconcilia consumidor sem mover outro gestor ou alterar frozenACKs;cardfilhat_4284ff20retomaomesmoprepare-media,dry-run,campaigncentralatéQA+readback17campanhas34ads;preservarschedule,IDs,SLA",
+      "next_step": "Rodolfo confirmar conciliação read-only dos2pares e parent físico atual exatos sem mover ICARO/providers nem alterar frozenACKs;após aceite Ares manutenção t_1b4f5263 implementa/testa34;filhat_4284ff20únicowriterprepare-media/campaigncentral",
       "objective": "Concluir17clonesC384Yolokfx02G006;34videos;USD35cada;COCAP0.90;10nov2026 00:10America/New_York",
-      "source": "discord:1558134300325716050/1569454008337301577;complementos1569454025198534859,1569454861852876931",
-      "state": "media_prep_blocked_historical_provider_path:32de34readbacksok;2jeansnv004e005providersdeslocados;native_sourceshashesintegrosnapastanicolasvid;manutencaoseparadat_1b4f5263;deliveryownerexclusivot_4284ff20;semrequest-ready/statecampanha",
+      "source": "discord:1558134300325716050/1569454008337301577;complementos1569454025198534859,1569454861852876931;kanban:t_1b4f5263",
+      "state": "maintenance_needs_exact_readonly_reconciliation_authority:canonical32of34pass;2jeans004005historical_archive_path_changed;nativeacksandbothsourceproviderfullhashespass;providersmovedbeforelegacyconsolidation;noapplicablecohortbinding;nomediaormetawrites",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-09T20:56:45+00:00"
+      "updated_at": "2026-11-09T21:01:32+00:00"
     },
     {
       "agent": "ares",
@@ -9565,5 +9585,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T20:56:45+00:00"
+  "updated_at": "2026-11-09T21:05:05+00:00"
 }
