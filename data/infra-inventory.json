@@ -894,6 +894,10 @@
   "runtime_artifacts": [
     {
       "id": "autopush-recovery-faf8f4d1a6797f175ff4fe92",
+      "report_infra_message_id": "1569391416340250779",
+      "report_infra_get_verified": true,
+      "recovery_message_id": "1569391312036167691",
+      "recovery_message_get_verified": true,
       "type": "autocommit_guardrail_recovery",
       "agent": "zeus",
       "owner": "Zeus/Automation continuity",
@@ -908,7 +912,7 @@
       "reviewed_exact_path": "tests/test_sb_token_monitor_auth_readiness.py",
       "cause": "Filename false positive: reviewed offline browser/API regression contains fixture-only authorization, not production tokens.",
       "correction": "Anchored exact-path exception; sibling credential, copy and backup paths remain blocked. Controlled restart of already-active mgs-autocommit only; unchanged batching and cron.",
-      "validation": "36 auto-commit tests plus 1 offline readiness test PASS. Active watcher PID 1578368; fresh readiness marker and authorized same-bytes MODIFY verified. Remote convergence and monitor recovery pending canonical producer flush.",
+      "validation": "37 tests PASS. Canonical watcher auto-committed and pushed f441e268f74db7deb351714c4f50e71bc4ecbf73; remote main equals HEAD and five exact artifact hashes match. Monitor dry-run total_failures=0; canonical apply reset consecutive_failures to 0 and published recovery at 11:40:46 ET. Existing concurrent working-tree changes remain owned by their original writers.",
       "evidence": "/root/.hermes/shared/automation-continuity/runs/faf8f4d1a6797f175ff4fe92/recovery-evidence.json",
       "rollback": "/root/.hermes/shared/automation-continuity/runs/faf8f4d1a6797f175ff4fe92/auto-commit-watcher.sh.before",
       "risk": "low"
