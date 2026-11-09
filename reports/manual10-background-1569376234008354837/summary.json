@@ -1,0 +1,174 @@
+{
+  "completed_at": "2026-11-09T17:07:23.925763+00:00",
+  "campaigns_requested": 10,
+  "campaigns_inspected": 10,
+  "ads_inspected": 20,
+  "all_full_panels_validated": true,
+  "api_initial_OPT_IN": 20,
+  "api_final_OPT_IN": 20,
+  "explicit_background_controls_found": 0,
+  "other_background_label_matches": [],
+  "published_changes": [
+    {
+      "ad_id": "120250528241240331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250528241250331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250528282000331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250528281990331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250546992190331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250546992210331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250562106420331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    },
+    {
+      "ad_id": "120250562106410331",
+      "diffs": {
+        "effective_status": {
+          "before": "ACTIVE",
+          "after": "CAMPAIGN_PAUSED"
+        }
+      }
+    }
+  ],
+  "published_integrity_unchanged": false,
+  "route_counts": {
+    "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel": 8,
+    "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll": 8,
+    "Edit ad; enhancements section not exposed -> Advanced preview -> Advantage+ creative tab -> full panel": 4
+  },
+  "campaigns": [
+    {
+      "account": "Mavroa-US-SHEIN-ES-02-G002",
+      "manager": "Geizian",
+      "number": 10,
+      "campaign_id": "120252350213540326",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Mavroa-US-SHEIN-ES-02-G002",
+      "manager": "Geizian",
+      "number": 11,
+      "campaign_id": "120252350508260326",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Mavroa-US-SHEIN-ES-02-G002",
+      "manager": "Geizian",
+      "number": 13,
+      "campaign_id": "120252369595900326",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Mavroa-US-SHEIN-ES-04-G004",
+      "manager": "Joe",
+      "number": 31,
+      "campaign_id": "120249954763530372",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Growpowerhub-US-SHEIN-EN-05-G005",
+      "manager": "Kelly",
+      "number": 2,
+      "campaign_id": "120254413316870359",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Mavroa-US-SHEIN-ES-05-G005",
+      "manager": "Kelly",
+      "number": 20,
+      "campaign_id": "120253762937410652",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Yolokfx-US-SHEIN-EN-03-G005",
+      "manager": "Kelly",
+      "number": 221,
+      "campaign_id": "120250528241230331",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Yolokfx-US-SHEIN-EN-03-G005",
+      "manager": "Kelly",
+      "number": 222,
+      "campaign_id": "120250528281980331",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Yolokfx-US-SHEIN-EN-03-G005",
+      "manager": "Kelly",
+      "number": 224,
+      "campaign_id": "120250546992200331",
+      "ads": 2,
+      "named_control_found": false
+    },
+    {
+      "account": "Yolokfx-US-SHEIN-EN-03-G005",
+      "manager": "Kelly",
+      "number": 225,
+      "campaign_id": "120250562106400331",
+      "ads": 2,
+      "named_control_found": false
+    }
+  ],
+  "limitation": "No visible Generate backgrounds control or proven renamed equivalent in20 manually inspected ad editors. Does not mean OPT_OUT; no activation/publication. Allselected ads were images according to actual creative structure, even where ad names contain VIDEO."
+}
