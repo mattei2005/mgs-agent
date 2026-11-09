@@ -893,6 +893,16 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-october-notice-1569165518093426809",
+      "agent": "zeus",
+      "type": "approved_ui_notice_pending_content_alignment",
+      "status": "not_deployed",
+      "authority_message_ids": ["1569165518093426809"],
+      "paths": ["docs/finance-october-manager-notice.md"],
+      "checkpoint": "ZEUS-FINANCE-NOTICE-1569165518093426809",
+      "evidence": "Read-only production October revision1524; five manager controls pass. Prior comparison superseded by provisional FX and authorized Zuout attribution for Nicolas; awaiting content alignment. No application or financial writes."
+    },
+    {
       "id": "finance-zuout-g006-1569051595935850601",
       "agent": "zeus",
       "type": "authorized_financial_code_and_attribution_correction",
