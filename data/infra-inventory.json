@@ -62748,6 +62748,22 @@
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1569192702241800254",
       "report_infra_readback": true
+    },
+    {
+      "id": "meta-manual-payments-recovery-9f77ed97faf39eb7de4ba1b3",
+      "agent": "zeus",
+      "status": "financial_result_validated_delivery_pending",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T2102/recovery-financial-validation.json",
+      "progress": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T2102/recovery-9f77ed97-progress.json",
+      "verified_at": "2026-11-09T01:15:59.985712-05:00",
+      "accounts": 47,
+      "h_verified_published": 36,
+      "historical_d_blanks": 35,
+      "meta_writes": 0,
+      "payments": 0,
+      "cron_changes": 0,
+      "report_infra_status": "GET_verified",
+      "report_infra_message_id": "1569234445062512652"
     }
   ],
   "profile_skill_references": [
