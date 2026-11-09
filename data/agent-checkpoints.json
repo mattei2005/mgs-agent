@@ -2063,12 +2063,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569456380065222707",
-      "next_step": "Preflight read-only, prepare-media, dry-run, execute central mesmo request; QA integral e readback de todos os IDs antes do fechamento",
-      "objective": "Criar 9 clones da 010 Mavroa G006 com 18 videos Nicolas, USD35/dia cada, COST_CAP USD0.90, 10nov2026 00h15 EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/request.json",
-      "state": "intake congelado; fonte010 confirmada por nicolas na mensagem1569456812162420747; preparando admissao e preflight central, nenhum write meta efetuado nesta sessao",
+      "next_step": "Bloqueio externo Meta sem reparo central suportado:resolver issue1487083 nos anuncios120251118532380629 e120251118590680629 via revisao/suporte da plataforma;apos liberacao retomar mesmo campaign request-ready somente ativacao faltante,sem criar/upload/reaplicar parametros;GETfinal9/9 antes concluir",
+      "objective": "Concluir9clones010 MavroaG006,18videos/headline HAZ CLIC AQUI,USD35cada,COST_CAP0.90,inicio10nov2026 00h15EST",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/partial-verified-receipt.json",
+      "state": "parcial verificado:102-110/9conjuntos/18ads existentes,qa renderizado9/9 e posprocessamento completos,copy/headline/budget3500/cap90/inicio exatos,ids iguaischeckpoint.102/103 active;104-110 paused.1487083 invalid usage of forcerunstatus confirmado nos ads02 das104 e108.usd315/dia configurado lote,usd70/dia habilitado.original request e correcoes humanas preservados;nao concluido.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-09T21:02:22+00:00"
+      "updated_at": "2026-11-09T21:20:38+00:00"
     },
     {
       "agent": "ares",
@@ -6726,12 +6726,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-balance-1569457575572017154",
-      "next_step": "Integrar levantamento histórico exato, separar expansão de redução do déficit e divergências de menu, calcular e entregar saldo porcategoria. Não produzir/publicar sem aprovação.",
-      "objective": "Recuperar levantamento original352 e reconciliar saldo por portal,nicho,categoria apósSEO100",
-      "source": "/root/.hermes/profiles/atena/work/seo-balance-1569457575572017154/public100-summary.json",
-      "state": "35portais inventariados em rest pública paginada;100/100artigos do relatório atual encontrados e get público200+idbody confirmado. menus localizados coletados. baseline352 em recuperação histórica independente. sem produção/publicação/writesremotos. skillreadonly aprimorada e readback confirmado.",
+      "next_step": "Entregar saldo porportal/nicho/categoria e exceções. Aguardar aprovação de Raquel antes de produzir/publicar ou corrigir menus/taxonomias. Não converter245 emtotalgeral dolevantamento352.",
+      "objective": "Levantamento somente leitura de pendênciasSEO apósSEO100",
+      "source": "/root/.hermes/profiles/atena/work/seo-balance-1569457575572017154/final-result.json",
+      "state": "baseline humano recuperado. escopomgs:43recortes/26portais,259lacunas nos arquivosoriginais;14posições cobertas por posts emcategoriasparalelas,245conteúdosadicionais apósreconciliação;5frentestaxonomicas nãoexecutadas.100posts do lote http200+idbody. totalhistórico352 nãofechado globalmente. nenhumwritewordpress nemprodução/publicação.",
       "thread_id": "1569457575572017154",
-      "updated_at": "2026-11-09T21:11:55+00:00"
+      "updated_at": "2026-11-09T21:21:49+00:00"
     },
     {
       "agent": "atena",
@@ -8836,12 +8836,12 @@
     {
       "agent": "ares",
       "id": "shein-1569454008337301577",
-      "next_step": "Implementar reconciliacao readonly delimitada;provar34consumidoresSA e frozenreservasinalterados;completarparent para liberarfilhaexistente t_4284ff20",
+      "next_step": "Filhaexistente t_4284ff20 UNICOwriter:revalidarestadoreal e prepararmidia--sameinput;request-ready;dryrun;campaigncentral17grupos;QA/postprocess/ACTIVE;concluirnaorigem.Nao repetir authorize_readonly.py:binding/provas aprovados sao digest-bound imutaveis",
       "objective": "Concluir17clonesC384Yolokfx02G006;34videos;USD35cada;COCAP0.90;10nov2026 00:10America/New_York",
-      "source": "discord:1558134300325716050/1569458720050516030;kanban:t_1b4f5263",
-      "state": "maintenance_authorized: rodolfo1569458720050516030 e1569459090634047609;correcao readonly2pares exatos emimplementacao;semwritermeta",
+      "source": "data/ares/creative-ops/30tb-archive/consumer-recovery-t_1b4f5263/canonical-consumers-accepted.json;kanban:t_1b4f5263;t_4284ff20",
+      "state": "maintenance_complete_native34of34:rodolfodecisao1569458720050516030+confirmacao1569459090634047609;193regressoespass;2guardsnegativosnativospass;readonly2paresdigestbound;frozenack34rowsreservaspreservados;semmeta/midiawrite",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-09T21:12:56+00:00"
+      "updated_at": "2026-11-09T21:21:41+00:00"
     },
     {
       "agent": "ares",
@@ -9585,5 +9585,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T21:12:56+00:00"
+  "updated_at": "2026-11-09T21:21:49+00:00"
 }

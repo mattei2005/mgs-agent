@@ -86,6 +86,8 @@ def resolve_media(source_id,token=None):
     if entry.get('mapping_kind')=='historical_verified':
         d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or entry.get('approvedStockId') or source_id)
         require_historical_ack(d,entry)
+        import ares_archive_readonly_reconciliation as readonly
+        entry=readonly.project(d,entry,physical,stock)
         if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=namespace.effective_path(entry):raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
         locations.stock_parent(d,stock['parents'][0])
         return historical_media_record(entry,physical,stock)
