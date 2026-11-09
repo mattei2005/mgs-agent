@@ -132,6 +132,11 @@ def collect(base=BASE,profiles=PROFILES):
             if j.get('last_delivery_unverified'):
                 row.update(status='ERROR',verified=False,receipt='native delivery unverified')
             if j.get('fire_claim'):source['running_claim']=True
+            # Delivery-only recovery receipts never certify a later native slot.
+            if profile=='zeus' and j['id']=='2ee720363d7d':
+                from mgs_finance_continuity import observation as finance_observation
+                recovered=finance_observation(j,base=base)
+                if recovered is not None:observations[key]=recovered
     # Inventory every system cron entry, not just MGS filenames.
     for p in [Path('/etc/crontab'),*Path('/etc/cron.d').glob('*')]:
         if not p.is_file():continue
@@ -300,6 +305,15 @@ Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:180
 
 
 def run_worker(row,mode,base=BASE,timeout=900):
+    if row['key']=='9f77ed97faf39eb7de4ba1b3' and mode in ('resume_safe','reconcile_first','verify_only'):
+        from mgs_finance_continuity import resume, RUN
+        if (base/RUN/'recovery-financial-validation.json').exists():
+            source=json.loads(row['source'])
+            jobs=json.loads((PROFILES/'zeus/cron/jobs.json').read_text())['jobs']
+            matches=[j for j in jobs if j['id']==source.get('job_id')]
+            if len(matches)!=1:raise ScopeBlocked('Original financial job unavailable')
+            result=resume(matches[0],base=base,verify_only=mode=='verify_only')
+            return 'Resolvido: resultado financeiro e entrega na origem validados por GET; recibo '+result['receipt']
     if row['source_key']=='producer:dtr-sb-daily-match-audit.sh' and mode in ('resume_safe','reconcile_first'):
         from mgs_dtr_continuity import latest_snapshot,resume_delivery
         snapshot,_=latest_snapshot(base)
