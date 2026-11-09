@@ -3769,6 +3769,16 @@
       "updated_at": "2026-11-09T05:06:53+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1569451285260935239",
+      "next_step": "Reconciliar GET dos mesmos IDs e retomar somente camada pendente",
+      "objective": "Pausar 3 campanhas Yolokfx04 G004 e reativar 10/11/2026 00h America/New_York,status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-yolo04-1569451285260935239/request.json",
+      "state": "recovery_required: no_active_ad_path_278",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-09T20:41:55+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
       "next_step": "Nenhum:2987 ativa;2955 retida para rollback; Livepatch saudável; PIDs dos agentes iguais; sem reboot; Snap sem candidatos. Observadores d476a2649595 e f17da87f7d57 concluídos/desabilitados sem próximo disparo; histórico automático supersedido pela execução manual.",
@@ -9535,5 +9545,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T19:38:53+00:00"
+  "updated_at": "2026-11-09T20:41:55+00:00"
 }
