@@ -74,6 +74,12 @@ Completion criterion: only the procedure and evidence required for the current a
 - Antes de confirmar o horário, validar o instante efetivamente persistido e auditar esse minuto novamente; o tempo gasto no preflight pode deslocar uma agenda relativa. Se for preciso mudar de slot, atualizar o mesmo job e comunicar o horário ajustado, sem criar uma segunda tentativa.
 - Separar agendamento validado de recuperação concluída: confirmar brevemente a hora e a entrega na origem; só declarar a operação recuperada depois da execução e do readback do alvo. Ver receita em `references/route-pack-03.md`, seção **Native Hermes one-shot readback**.
 
+## Recuperação de cron após falha transitória
+
+- Antes de refazer login ou editar um script, reexecute uma leitura segura pelo consumidor exato, com o interpreter, wrapper e locks do cron; a sessão pode ter se recuperado e um probe genérico não comprova o fluxo afetado. Respeite gates de autenticação/2FA e não transforme essa leitura em tentativas repetidas de login.
+- Separe três aceites: leitura recuperada, operação autorizada concluída com readback e alerta reconciliado pelo watchdog. Um dry-run bem-sucedido não certifica a escrita/entrega nem encerra sozinho o incidente.
+- Na resposta, use **Problema / Causa / Recuperação**, distinguindo a falha observada do mecanismo não comprovado. Não apresente retry bem-sucedido como prevenção permanente de recorrência. Receita e exemplo SB em `references/route-pack-03.md`, seção **Recuperação pelo consumidor exato**.
+
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.

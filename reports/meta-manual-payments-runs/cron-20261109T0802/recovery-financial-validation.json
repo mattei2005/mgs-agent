@@ -390,5 +390,13 @@
     "evidence": "Both canonical billing-history collectors returned success and closed only their own tabs/released lease in finally; lease status readback unlocked. No exact new browser-tab-count parity claimed."
   },
   "report_infra_message_id": "1569378220157968515",
-  "report_infra_readback": true
+  "report_infra_readback": true,
+  "validation_recovery": {
+    "initial_gate": "live_workbook_changed_from_frozen_snapshot",
+    "diagnosis": "Concurrent Accounts-row permutation inside unchanged filter range plus added I-column sort; complete rows/notes/formulas/formatting and effective values identical by exact account ID. No business-value discrepancy; no data replay or layout restoration.",
+    "attribution": "concurrent view change not attributed; not classified as anomaly",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/recovery-divergent-readback-1048.json",
+    "tests_run": 9,
+    "tests_passed": 9
+  }
 }

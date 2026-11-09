@@ -49,7 +49,24 @@ bash -n /root/mgs-agent/scripts/monitor-NOME.sh
 tail -20 /root/mgs-agent/logs/monitor-NOME.log
 ```
 
-Padrão de resposta para o CEO: tabela curta com `Item | Status agora | Decisão`. Separar claramente pendências deliberadas (ex: update Hermes em outro tópico) de problemas resolvidos. Se um erro apareceu em log mas `bash -n` e execução real passam depois, reportar como "não reproduzido no estado atual" e citar a validação feita, sem inventar causa.
+Padrão de resposta para o CEO: para um incidente, abrir com o estado comprovado e usar bullets curtos **Problema / Causa / Recuperação**; para vários itens comparáveis, usar um único bloco monoespaçado simples. Separar claramente pendências deliberadas de problemas resolvidos. Se o erro anterior não reaparecer na execução real, reportar como "não reproduzido no estado atual" e citar a validação feita, sem inventar causa ou atribuir prevenção permanente ao retry.
+
+### Recuperação pelo consumidor exato
+
+1. Extraia da imagem ou embed o nome do job e confirme o bloco de execução mais recente no log canônico. Leia a entrada exata do crontab e confira processo, lock e eventual dono na fila de continuidade antes de iniciar outro executor. Reduza a descoberta ao script e suas dependências diretas; não procure primeiro em toda a árvore de backups/work.
+2. Reproduza com `--dry-run`, quando disponível, usando o mesmo interpreter, Xvfb e `flock` do cron. Para o monitor SB de transições, use o padrão abaixo após conferir a entrada viva; o coletor mantém sua própria lease da sessão compartilhada:
+
+   ```bash
+   flock -n /var/lock/sb_restricted_transition_monitor.lock \
+     xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python \
+     /root/mgs-agent/scripts/sb-restricted-transition-monitor.py --dry-run
+   ```
+
+   Se essa leitura completa passar com a sessão existente, prossiga sem novo login. Se continuar bloqueada, siga o fluxo canônico de autenticação e seus gates; não rotacione credenciais nem altere o coletor apenas para contornar a falha.
+3. Leia os deltas do dry-run e reconcilie efeitos anteriores antes de executar `--apply` sob o mesmo lock. Preserve escopo, horários e semântica de publicação aprovados; uma recuperação técnica não autoriza suprimir transições legítimas. Capture a saída real em scratch e registre no log canônico apenas o resultado efetivamente produzido, nunca um marcador de sucesso sintético.
+4. Verifique o efeito independentemente do retorno do writer. No monitor SB, carregue o módulo implantado com `PYTHONPATH=/root/mgs-agent/scripts`, obtenha `sync` por `load_module(..., DAILY_PATH).load_audit_mod().sync` e releia `Paginas Totais` com `snapshot_from_report_sheet(sync)`. Exija igualdade do conjunto de chaves com `load_state()['active']`, unicidade e igualdade por página de `fb_page_id`, `status` e `restricted_until`; contagem igual sozinha não comprova paridade. Preserve o helper Google corporativo usado pelo próprio consumidor.
+5. Execute `monitor-cron-stale-logs.sh --dry-run`. Se o job recuperado estiver `OK`, execute o watchdog real sob `/var/lock/monitor_cron_stale_logs.lock` e confira state, pendências de entrega e mensagem de recuperação. Não apague manualmente o alerta para obter verde: o watchdog deve reconciliar a resolução com sua entrega verificada. Diferencie esse green técnico da conclusão funcional demonstrada no passo anterior.
+6. Atualize somente os registros exatos dos dados alterados no inventário e registre os aceites na auditoria. Publique o REPORT-INFRA canônico uma única vez e confira seu ID/fields por GET. A resposta final deve dizer se houve apenas recuperação com a sessão existente ou intervenção de login, e deixar explícito quando o mecanismo da falha e a prevenção de recorrência continuam sem prova.
 
 Para alertas Discord com muitos itens comparáveis, o próprio script deve renderizar blocos monoespaçados alinhados. Em volume alto, agregar por entidade sem esconder o estado operacional: uma linha por template, contagens separadas por cor/status e todos os IDs afetados com idade individual (`ID(dias)`). Não despejar uma linha completa por mensagem quando isso gerar dezenas de milhares de caracteres; preservar o detalhe bruto no state/live source e identificar claramente que a tabela é agregada. Dividir em blocos independentes abaixo do limite do Discord, repetindo cabeçalho e delimitadores. Validar o renderer contra o state real: totais por cor, quantidade de registros agregados, presença das três classes, tamanho dos blocos e fechamento dos delimitadores.
 

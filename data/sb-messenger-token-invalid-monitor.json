@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 2,
+  "consecutive_failures": 3,
   "daily": {
     "date": "2026-11-09",
     "last_result": {
@@ -705,7 +705,7 @@
     740394,
     740493
   ],
-  "failure_alert_sent_for": 0,
+  "failure_alert_sent_for": 3,
   "incidents": {
     "digital-trust-2|amazing|8|1778": {
       "alert": {
@@ -4917,7 +4917,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-09T10:42:10-05:00",
+  "last_check": "2026-11-09T10:57:10-05:00",
   "last_delivery": {
     "at": "2026-11-09T07:12:15-05:00",
     "cursor_ids": [
@@ -4931,7 +4931,7 @@
     ]
   },
   "last_error": {
-    "at": "2026-11-09T10:42:10-05:00",
+    "at": "2026-11-09T10:57:10-05:00",
     "message": "Smart Bidding authorization header not captured",
     "type": "RuntimeError"
   },
