@@ -1,0 +1,1679 @@
+{
+  "checked_at": "2026-11-09T19:53:31.884996+00:00",
+  "cases": 2,
+  "ad_pairs": 4,
+  "live_ads": 8,
+  "feature_fields_observed": 84,
+  "documented_semantic_fields": 24,
+  "unmapped_fields": [
+    "ads_with_benefits",
+    "advantage_plus_creative",
+    "app_highlights",
+    "audio",
+    "auto_promotion_tag",
+    "biz_ai",
+    "carousel_to_video",
+    "catalog_feed_tag",
+    "customize_product_recommendation",
+    "cv_transformation",
+    "dha_optimization",
+    "dynamic_cta_text",
+    "dynamic_partner_content",
+    "enable_ncs_testimonials",
+    "fb_feed_tag",
+    "fb_reels_tag",
+    "fb_story_tag",
+    "feed_caption_optimization",
+    "generate_cta",
+    "hide_price",
+    "hyperlink_formatting",
+    "ig_feed_tag",
+    "ig_glados_feed",
+    "ig_reels_tag",
+    "ig_stream_tag",
+    "ig_video_native_subtitle",
+    "image_auto_crop",
+    "image_banner",
+    "image_end_card",
+    "image_enhancement",
+    "local_store_extension",
+    "media_liquidity_animated_image",
+    "media_order",
+    "multi_creative_post_carousel",
+    "multi_photo_to_video",
+    "music_generation",
+    "pac_genai_recomposition",
+    "pac_recomposition",
+    "product_browsing",
+    "product_metadata_automation",
+    "product_tags",
+    "profile_card",
+    "profile_extension",
+    "replace_media_text",
+    "show_destination_blurbs",
+    "show_summary",
+    "site_extensions",
+    "standard_enhancements_catalog",
+    "text_extraction_for_headline",
+    "text_extraction_for_tap_target",
+    "text_formatting_optimization",
+    "text_generation",
+    "text_overlay_translation",
+    "video_highlight",
+    "video_highlights",
+    "video_to_image",
+    "video_uncrop_9x16_to_9x18",
+    "video_voiceover",
+    "wa_mm_image_filtering",
+    "wa_mm_text_truncation_length"
+  ],
+  "pairs": [
+    {
+      "case": "Mavroa05 C031 -> C033",
+      "slot": 1,
+      "source_ad_id": "120253815627260652",
+      "copy_ad_id": "120253826251860652",
+      "feature_differences": [
+        {
+          "field": "adapt_to_placement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "add_text_overlay",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "app_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "audio",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "auto_promotion_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "biz_ai",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "catalog_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "customize_product_recommendation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "description_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dha_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_cta_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_partner_content",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "enable_ncs_testimonials",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_story_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "feed_caption_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "generate_cta",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hide_price",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hyperlink_formatting",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_glados_feed",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_stream_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_video_native_subtitle",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_animation",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_auto_crop",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        },
+        {
+          "field": "image_banner",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_brightness_and_contrast",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_end_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_enhancement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_templates",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_text_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_touchups",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "local_store_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_liquidity_animated_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_order",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_type_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "multi_creative_post_carousel",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "music_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_genai_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_extensions",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_tags",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "replace_media_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "show_summary",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "standard_enhancements_catalog",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_headline",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_tap_target",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_formatting_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_overlay_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "translate_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlight",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_to_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "video_uncrop_9x16_to_9x18",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_image_filtering",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_text_truncation_length",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        }
+      ],
+      "media_identifiers_equal": false,
+      "page_id_equal": true,
+      "cta_type_equal": true
+    },
+    {
+      "case": "Mavroa05 C031 -> C033",
+      "slot": 2,
+      "source_ad_id": "120253815627270652",
+      "copy_ad_id": "120253826251910652",
+      "feature_differences": [
+        {
+          "field": "adapt_to_placement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "add_text_overlay",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "app_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "audio",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "auto_promotion_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "biz_ai",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "catalog_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "customize_product_recommendation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "description_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dha_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_cta_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_partner_content",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "enable_ncs_testimonials",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_story_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "feed_caption_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "generate_cta",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hide_price",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hyperlink_formatting",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_glados_feed",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_stream_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_video_native_subtitle",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_animation",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_auto_crop",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        },
+        {
+          "field": "image_banner",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_brightness_and_contrast",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_end_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_enhancement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_templates",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_text_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_touchups",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "local_store_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_liquidity_animated_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_order",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_type_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "multi_creative_post_carousel",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "music_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_genai_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_extensions",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_tags",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "replace_media_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "show_summary",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "standard_enhancements_catalog",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_headline",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_tap_target",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_formatting_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_overlay_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "translate_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlight",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_to_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "video_uncrop_9x16_to_9x18",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_image_filtering",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_text_truncation_length",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        }
+      ],
+      "media_identifiers_equal": false,
+      "page_id_equal": true,
+      "cta_type_equal": true
+    },
+    {
+      "case": "Yolokfx03 C242 -> C243",
+      "slot": 1,
+      "source_ad_id": "120250623633650331",
+      "copy_ad_id": "120250633689080331",
+      "feature_differences": [
+        {
+          "field": "adapt_to_placement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "add_text_overlay",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "app_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "audio",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "auto_promotion_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "biz_ai",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "catalog_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "customize_product_recommendation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "description_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dha_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_cta_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_partner_content",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "enable_ncs_testimonials",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_story_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "feed_caption_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "generate_cta",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hide_price",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hyperlink_formatting",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_glados_feed",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_stream_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_video_native_subtitle",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_animation",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_auto_crop",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        },
+        {
+          "field": "image_banner",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_brightness_and_contrast",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_end_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_enhancement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_templates",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_text_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_touchups",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "local_store_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_liquidity_animated_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_order",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_type_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "multi_creative_post_carousel",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "music_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_genai_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_extensions",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_tags",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "replace_media_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "reveal_details_over_time",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "show_summary",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "standard_enhancements_catalog",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_headline",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_tap_target",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_formatting_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_overlay_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlight",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_to_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "video_uncrop_9x16_to_9x18",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_image_filtering",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_text_truncation_length",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        }
+      ],
+      "media_identifiers_equal": false,
+      "page_id_equal": true,
+      "cta_type_equal": true
+    },
+    {
+      "case": "Yolokfx03 C242 -> C243",
+      "slot": 2,
+      "source_ad_id": "120250623633660331",
+      "copy_ad_id": "120250633688990331",
+      "feature_differences": [
+        {
+          "field": "adapt_to_placement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "add_text_overlay",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "app_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "audio",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "auto_promotion_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "biz_ai",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "catalog_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "customize_product_recommendation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "description_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dha_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_cta_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "dynamic_partner_content",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "enable_ncs_testimonials",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "fb_story_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "feed_caption_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "generate_cta",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hide_price",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "hyperlink_formatting",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_feed_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_glados_feed",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_reels_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_stream_tag",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "ig_video_native_subtitle",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_animation",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_auto_crop",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        },
+        {
+          "field": "image_banner",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_brightness_and_contrast",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "image_end_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_enhancement",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_templates",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_text_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_touchups",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "image_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "local_store_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_liquidity_animated_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_order",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "media_type_automation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "multi_creative_post_carousel",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "music_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_genai_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "pac_recomposition",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_extensions",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "product_tags",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_card",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "profile_extension",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "replace_media_text",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "reveal_details_over_time",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "show_summary",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "standard_enhancements_catalog",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_headline",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_extraction_for_tap_target",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_formatting_optimization",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_generation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "text_overlay_translation",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlight",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_highlights",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_to_image",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_uncrop",
+          "source": "OPT_IN",
+          "copy": "NOT_RETURNED",
+          "change": "omitted_not_proven_opt_out"
+        },
+        {
+          "field": "video_uncrop_9x16_to_9x18",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "video_voiceover",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_image_filtering",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        },
+        {
+          "field": "wa_mm_text_truncation_length",
+          "source": "NOT_RETURNED",
+          "copy": "OPT_OUT",
+          "change": "added"
+        }
+      ],
+      "media_identifiers_equal": false,
+      "page_id_equal": true,
+      "cta_type_equal": true
+    }
+  ],
+  "writes": 0,
+  "masking": "Stable explicit aliases for identifiers, hashes, URLs and text; values kept in memory for comparisons. No token/paging links persisted.",
+  "limitation": "Existing copies contain accepted omitted feature fields as well as explicit background opt-out; not a one-variable UI experiment. A missing returned field is not OPT_OUT."
+}
