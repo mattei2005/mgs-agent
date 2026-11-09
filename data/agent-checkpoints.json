@@ -7666,12 +7666,12 @@
     {
       "agent": "ares",
       "id": "intake-1569302682425106547",
-      "next_step": "Executar mesmo request com monitor/claim/complete blocos de4; depois manutencao sameID e auditoria final independente de48fontes",
-      "objective": "Tratar e organizar 48 videos SHEIN US EN Kelly common; preservar RAW/IDs/reservas",
-      "source": "data/ares/creative-ops/executions/intake-1569302682425106547/plan.json",
-      "state": "request e174f46715b038b1ebfca2f3a0a29d0b registrado e relido com48fontes;48/48 clean local e qa raw+clean6frames;1080x1920;frames e audio iguais;48novos/0duplicatas;plano inteiro congelado antes de upload",
+      "next_step": "Acompanhar somente canonical-resume-checkpoint.json,claims e writer.lock. Nao iniciar monitor/complete paralelo. Se dono sair, reconciliar fase e retomar apenas saldo; auditoria final e mapa48 exigidos.",
+      "objective": "Tratar e organizar48videos SHEIN_US_EN Kelly common; preservar RAW/IDs/reservas",
+      "source": "data/ares/creative-ops/executions/intake-1569302682425106547/canonical-resume-checkpoint.json",
+      "state": "8complete; scheduler canonico assumiu batch61e9f0ee25bc09da88b3e952a62a71d9 e coordenador resume-canonical.py detem writer.lock. usa mesmo execute.py, plano imutavel48 e checksums existentes; continua mesmo request e faz auditoria. coordenadores proprios encerrados; nenhumsegundo writer autorizado.",
       "thread_id": "1569302682425106547",
-      "updated_at": "2026-11-09T10:59:33+00:00"
+      "updated_at": "2026-11-09T11:23:57+00:00"
     },
     {
       "agent": "zeus",
@@ -9475,5 +9475,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T10:59:33+00:00"
+  "updated_at": "2026-11-09T11:23:57+00:00"
 }
