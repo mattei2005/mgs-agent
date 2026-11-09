@@ -1,0 +1,64 @@
+{
+  "operation_id": "540008b88f209527ec1e7933",
+  "mode": "resume_safe",
+  "verified_at": "2026-11-09T19:19:50.275559+00:00",
+  "source_alert_id": "1569430147172532377",
+  "authority": {
+    "author_id": "344196393512075265",
+    "implementation_message_id": "1569193434189668453",
+    "scope_confirmation_message_id": "1527421659953365276",
+    "current_registry_checked": true
+  },
+  "problem": "SB canonical login required; existing session reached authentication wall",
+  "diagnosis": "Transient authentication-wall observed; exact canonical consumer recovered without credential change or login; underlying expiry/rotation mechanism not proven",
+  "canonical_dry_run_exit": 0,
+  "canonical_apply_exit": 0,
+  "state_last_check": "2026-11-09T14:19:10-05:00",
+  "counts": {
+    "active_restricted_all_statuses": 1043,
+    "active_status_broadcast": 524,
+    "active_status_on-hold": 519,
+    "excluded_status_on-hold": 519,
+    "globally_ignored": 20,
+    "monitored_active": 524,
+    "rows_scoped": 2895
+  },
+  "sheet_readback": {
+    "sheet_id": "1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI",
+    "rows": 524,
+    "unique_keys": 524,
+    "expected": 524,
+    "missing": 0,
+    "extra": 0,
+    "field_mismatches": 0,
+    "compared_fields": [
+      "fb page id",
+      "page id",
+      "bot user",
+      "status sb",
+      "data saida",
+      "sites"
+    ],
+    "tab_indices": {
+      "Resumo": 0,
+      "Paginas Totais": 1,
+      "Histórico Restrições": 2
+    }
+  },
+  "delivery": {
+    "new_blocks": 0,
+    "reason": "No transitions/exits; no new business message required",
+    "prior_outbox_all_get_verified": true,
+    "message_ids": [
+      "1569409161073139885"
+    ]
+  },
+  "watchdog_readonly": {
+    "command": "bash /root/mgs-agent/scripts/monitor-cron-stale-logs.sh --dry-run",
+    "exit_code": 0,
+    "target_result": "sb-restricted-transition-monitor.py | OK     | age=1min threshold=2160min",
+    "production_watchdog_state_edited": false
+  },
+  "structural_changes": false,
+  "pending": "independent supervisor/watchdog reconciliation"
+}
