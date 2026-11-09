@@ -131,11 +131,11 @@ Correção de redação durante a preparação é uma emenda do mesmo acompanham
 
 ## Crons e Discord
 
-- Antes de criar ou alterar qualquer cron, aplicar `context/cron-scheduling-policy.md`: inventariar root/systemd/Hermes de todos os profiles e schedulers próprios, normalizar timezones, exigir zero colisão com outro job operacional fora das baselines e, quando baselines contínuas/densas ocuparem todos os 60 minutos, escolher o minuto de menor contenção com exceção auditada; repetir a auditoria depois do readback e verificar lock, duração, conta/API e recurso compartilhado.
+- Antes de criar ou alterar qualquer cron, aplicar `context/cron-scheduling-policy.md`: inventariar root/systemd/Hermes de todos os profiles e schedulers próprios, normalizar timezones, exigir zero colisão com outro job operacional fora das baselines e, quando baselines contínuas/densas ocuparem todos os 60 minutos, escolher o minuto de menor contenção com exceção auditada; repetir a auditoria depois do readback e verificar lock, duração, conta/API e recurso compartilhado. Em relatório periódico com primeira entrega imediata, valide também o intervalo dessa leitura até o primeiro slot: uma margem de preparação não pode empurrar a próxima atualização para além da cadência solicitada. Escolha a menor contenção somente entre candidatos compatíveis com essa janela; se nenhum existir, explicite o conflito antes de ampliar o intervalo.
 - Crons operacionais determinísticos usam `script` + `no_agent=true`.
 - Confira o envelopamento efetivo antes de escolher a entrega: `no_agent=true` não comprova ausência de cabeçalho/rodapé. Se o scheduler envolver a resposta, use `deliver=local` e `failure_deliver=local`, com stdout vazio e aviso nativo do próprio agente por intent/nonce/GET; isso evita tanto o envelope técnico quanto mensagens duplicadas.
 - Não usar cron com agente e `deliver=origin/all` para conclusão diferida pós-restart.
-- O wrapper deve ficar abaixo do timeout do scheduler e transformar timeout/rate-limit em mensagem sanitizada + audit local.
+- O wrapper deve ficar abaixo do timeout do scheduler e transformar timeout/rate-limit em mensagem sanitizada + audit local. Valide os modos de preparação, primeira entrega e execução agendada pela mesma entrada pública; encaminhe explicitamente os argumentos CLI ao runner, pois testar o módulo Python diretamente não comprova que o wrapper preserva `--dry-run` ou `--initial`.
 - Threads fixas são registradas no contrato da operação. Nunca criar thread nova quando houver rota fixa aplicável.
 - Intraday, Diário, criação e incidentes permanecem separados quando o contrato assim definir.
 - Sem ação/erro, o cron fica silencioso, exceto relatório periódico explicitamente configurado.

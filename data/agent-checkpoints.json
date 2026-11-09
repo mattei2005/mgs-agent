@@ -203,12 +203,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-1569424407607386256",
-      "next_step": "Descoberta live, QA, primeira entrega GET e agenda auditada",
+      "next_step": "Executor finito envia coorte fixa toda meia hora nesta thread; expira10nov00:00EST; retomar somente camada/slot incompleto",
       "objective": "CPR campanhas Mavroa04 criadas09nov ate13:52 EST, relatorios30min ate fim dia",
       "source": "data/ares/meta-ads/state/cpr-updates/1569424407607386256/manifest.json",
-      "state": "intake autenticado; conta live usd america/new_york; preparando coorte fixa e agenda finita read-only",
+      "state": "ativo:046,047,048,049 congeladas created_time live; primeira entrega13:56est get verificada,gasto0 sem resultados; agenda20slots14:13-23:43est readback;41 testespass,auditoriaspre/pospass;zerometa/sbwrites",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-09T18:53:37+00:00"
+      "updated_at": "2026-11-09T18:57:34+00:00"
     },
     {
       "agent": "ares",
@@ -2203,12 +2203,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G004-CPR-1569424366570184796",
-      "next_step": "Congelar coorte por created_time; dry-run; primeira entrega; auditoria agenda finita e readback",
-      "objective": "Relatorios CPR campanhas criadas09/11 ate pedido13:52EST cada30min ate fim do dia",
-      "source": "data/ares/meta-ads/state/cpr-updates/1569424366570184796/authorization.json",
-      "state": "preparing",
+      "next_step": "20slots14:16-23:46EST; expira10/11 00hEST antes de API; coorte fixa278-280;25testespass;primeira entrega13:57EST GET;zero writesMeta;nao reabrir monitores vencidos",
+      "objective": "Relatorios CPR campanhas278-280 criadas09/11 ate13:52EST cada30min somente hoje",
+      "source": "data/ares/meta-ads/state/cpr-updates/1569424366570184796/manifest.json",
+      "state": "scheduled_validated_initial_get_verified",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-09T18:53:55+00:00"
+      "updated_at": "2026-11-09T18:58:35+00:00"
     },
     {
       "agent": "ares",
@@ -9535,5 +9535,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T18:53:55+00:00"
+  "updated_at": "2026-11-09T18:58:35+00:00"
 }
