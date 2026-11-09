@@ -60,6 +60,8 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Retentativas adiadas de operações
 
+- Aplicar `context/automation-recovery-policy.md`, decisão Rodolfo `1569191908020981801`: qualquer função autorizada de cron que encontre PC1 ocupado entra em espera/fila persistente com dedupe, executor, checkpoint e retomada verificável. Timeout exige intervalo/backoff e repetição segura da etapa faltante, sem depender de nova lembrança humana. Não fechar o pedido por ocupação, timeout, alerta ou limite de tentativas; preservar pendência e escalar o bloqueio exato. Anti-loop, autenticação, efeito ambíguo e Critical Subset continuam protegidos. Registro sem consumidor/agendamento não comprova fila executável nem retry automático universal.
+
 - Quando Rodolfo pedir para esperar um intervalo e tentar de novo, agendar **uma execução real e única da operação**, não apenas um lembrete; preservar a recorrência existente, o escopo aprovado e o checkpoint. Retomar somente as etapas faltantes após reconciliar efeitos já publicados.
 - Classificar colisões por finalidade e recurso, não apenas por frequência: um intake de criativos ou outro trabalho de negócio continua operacional mesmo executando a cada poucos minutos. A exceção de baseline densa vale somente para infraestrutura identificada; frequência alta, sozinha, não libera o minuto.
 - Antes de confirmar o horário, validar o instante efetivamente persistido e auditar esse minuto novamente; o tempo gasto no preflight pode deslocar uma agenda relativa. Se for preciso mudar de slot, atualizar o mesmo job e comunicar o horário ajustado, sem criar uma segunda tentativa.

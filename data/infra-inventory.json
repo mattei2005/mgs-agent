@@ -894,6 +894,24 @@
   "runtime_artifacts": [
     {
       "id": "dtr-daily-recovery-1569188551139004499",
+      "followup_fix": "Pending observations remain silent beyond three cycles, with 300s cooldown and 24h recent-record window; three consecutive actual resolver failures still escalate. Verified with 16 resolver assertion tests plus 8 DTR unit tests.",
+      "followup_files": [
+        {
+          "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+          "sha256": "b01ce3d02ca013e6ef7ec6749316081d2d5763f3bcdb8ff87481d9715d654c61",
+          "size_bytes": 24166
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_alerts_infra_failed_alert_resolver.py",
+          "sha256": "f236d8e0537cef41e933ab9a661acaba63537d6f4afc0b5516b8e0d6734995a6",
+          "size_bytes": 10365
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+          "sha256": "72dc9661c275ece1f91d06b8717571478c9ae00c03bfa791a6169236b3b2165b",
+          "size_bytes": 26779
+        }
+      ],
       "owner": "zeus",
       "type": "monitor-recovery",
       "status": "full_readonly_validation_running",
@@ -62500,6 +62518,56 @@
       "scope_preserved": "no new cron, no schedule/campaign/billing/credential/restart/deletion change",
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1569188573238927391",
+      "report_infra_readback": true
+    },
+    {
+      "id": "automation-recovery-policy-1569191908020981801",
+      "agent": "zeus",
+      "type": "canonical-policy-soul-skill-persistence",
+      "status": "policy_persisted_validated_universal_runtime_not_implemented",
+      "updated_at": "2026-11-09T03:31:33.589774+00:00",
+      "authority_message_id": "1569191908020981801",
+      "evidence": "/root/mgs-agent/reports/automation-recovery-policy-1569191908020981801.json",
+      "canonical_source": "/root/mgs-agent/context/automation-recovery-policy.md",
+      "artifacts": [
+        {
+          "path": "/root/mgs-agent/context/automation-recovery-policy.md",
+          "sha256": "345ab5af095b8e7b0102641fb20511b3bcc23570d81a8822deb47de77d2eb424",
+          "bytes": 6453
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/SOUL.md",
+          "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+          "bytes": 15362
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-soul.md",
+          "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+          "bytes": 15362
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
+          "sha256": "51e4f2bef2c647b80a80a50d68e76365e9e8f03677255af4d3fbcebb46992a96",
+          "bytes": 23814
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md",
+          "sha256": "51e4f2bef2c647b80a80a50d68e76365e9e8f03677255af4d3fbcebb46992a96",
+          "bytes": 23814
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+          "sha256": "c2616170626c4d392e70738c2ef19801a2be0ee7039d827acdaedb9cb0859e1b",
+          "bytes": 12550
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+          "sha256": "c2616170626c4d392e70738c2ef19801a2be0ee7039d827acdaedb9cb0859e1b",
+          "bytes": 12550
+        }
+      ],
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1569192702241800254",
       "report_infra_readback": true
     }
   ],

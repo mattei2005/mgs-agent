@@ -1,0 +1,69 @@
+{
+  "id": "automation-recovery-policy-1569191908020981801",
+  "at": "2026-11-09T03:31:33.589774+00:00",
+  "authority_message_id": "1569191908020981801",
+  "thread_id": "1569185140502954077",
+  "status": "policy_persisted_validated_universal_runtime_not_implemented",
+  "canonical_source": "/root/mgs-agent/context/automation-recovery-policy.md",
+  "validation": {
+    "authority_exact": true,
+    "pc1_queued": true,
+    "retry_with_wait": true,
+    "no_silent_abandonment": true,
+    "no_blind_writes": true,
+    "anti_loop_preserved": true,
+    "critical_auth_preserved": true,
+    "runtime_gap_explicit": true,
+    "same_owner_no_duplicate": true,
+    "no_expired_campaign_reinterpretation": true,
+    "all_mirrors_equal": true,
+    "soul_contains_rule": true
+  },
+  "artifacts": [
+    {
+      "path": "/root/mgs-agent/context/automation-recovery-policy.md",
+      "sha256": "345ab5af095b8e7b0102641fb20511b3bcc23570d81a8822deb47de77d2eb424",
+      "bytes": 6453
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/SOUL.md",
+      "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+      "bytes": 15362
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-soul.md",
+      "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+      "bytes": 15362
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
+      "sha256": "51e4f2bef2c647b80a80a50d68e76365e9e8f03677255af4d3fbcebb46992a96",
+      "bytes": 23814
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md",
+      "sha256": "51e4f2bef2c647b80a80a50d68e76365e9e8f03677255af4d3fbcebb46992a96",
+      "bytes": 23814
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "c2616170626c4d392e70738c2ef19801a2be0ee7039d827acdaedb9cb0859e1b",
+      "bytes": 12550
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "c2616170626c4d392e70738c2ef19801a2be0ee7039d827acdaedb9cb0859e1b",
+      "bytes": 12550
+    }
+  ],
+  "implementation_boundary": "Documentation/SOUL/Zeus-owned skills only; no universal queue/dispatcher created or claimed, no other-agent skills modified; current user instruction effective in this conversation, existing other sessions not proven updated.",
+  "critical_changes": false,
+  "cron_changes": false,
+  "gateways_restarted": false,
+  "report_infra_status": "sent_verified",
+  "report_infra": {
+    "message_id": "1569192702241800254",
+    "verified": true,
+    "at": "2026-11-09T03:31:57.218824+00:00"
+  }
+}

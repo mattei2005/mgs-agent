@@ -2683,6 +2683,16 @@
     },
     {
       "agent": "zeus",
+      "id": "AUTOMATION-RECOVERY-CONTINUITY-1569191908020981801",
+      "next_step": "Aplicar regra aos pedidos autorizados; para implantacao universal, reconciliar consumidores reais e implementar/testar busy->queue->resume e timeout->retry com executor unico e gates preservados; nao tratar documento como automacao pronta",
+      "objective": "Persistir regra explicita:PC1ocupado->fila duravel;timeout->espera/retry seguro sem abandono",
+      "source": "/root/mgs-agent/reports/automation-recovery-policy-1569191908020981801.json",
+      "state": "politica_ativa_persistida:context automation-recovery-policy;soulzeus+2skillszeus+espelhos validados;implementacao universal de fila/consumidores nao comprovada nem declarada",
+      "thread_id": "1569185140502954077",
+      "updated_at": "2026-11-09T03:31:33+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "B001-INVEST-CALENDAR-1567032162757382155",
       "next_step": "No forced app alerts or credential changes. Existing published card unchanged; future native alerts use corrected loader. Separate Debora admin token 190/463 requires owner renewal, not automatic credential rotation.",
       "objective": "Diagnosticar e recuperar colunas de investimento n/d do B001 sem alterar credenciais ou reenviar alertas",
@@ -4113,12 +4123,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-DTR-DAILY-RECOVERY-1569188551139004499",
-      "next_step": "Nao iniciar outro writer. Acompanhar PID727422 e lock /var/lock/dtr_sb_daily_match_audit.lock; ler ultima execucao log e JSON reports. Somente ENDrc0 e73logins+SBcompleto validam coleta integral; --no-post preserva estado publicado e nao entrega relatorio Discord. Se em curso, Pendente; nao escalar como decisao humana so por duracao.",
+      "next_step": "Nao iniciar outro writer. Acompanhar PID727422/sessionproc_5b412026f4a4 e lock dtr_sb_daily_match_audit.lock. Ler ultima execucao canonica e JSON local: exigir ENDrc0,73loginssemerronested,SBdigitaltrust+2completo. Se ainda rodando responder Pendente silencioso; resolvedor observa300s/24h sem consumir budgetfalha. --no-post nao entrega reportDiscord e nao avanca estado publicado. Ao fim reconciliar inventario/checkpoint e diferenciar coleta recuperada de publicacao.",
       "objective": "Recuperar auditoria diaria DTR-SB preservando escopo73usuarios e estado publicado; sem Discord direto",
       "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1569188551139004499",
-      "state": "validacao_integral_em_curso; causa_timeout_navegacao_login; coletor_corrigido_retry_unico_timeout5s_e_gate_contas;8testespass;alvo_loginok3contas42paginas0erros;fullrun_no_post_pid727422_sessionproc_5b412026f4a4_lockexclusivo_inicio2026-11-08t22:20:18-05:00",
+      "state": "validacao_integral_em_curso;fullrun_no_post_pid727422_sessionproc_5b412026f4a4_lockexclusivo_inicio2026-11-08t22:20:18-05:00;alvo_loginok3contas42paginas0erros;24testespass;coletor_timeoutretry_e_gate_contas_corrigidos;resolvedor_pending_corrigido_naoconverter3observacoesembloqueio;reports1569190320468533300e1569191854367445055get200;estado_publicado_preservado2026-11-07t06:53:13-05:00",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-11-09T03:21:11+00:00"
+      "updated_at": "2026-11-09T03:28:39+00:00"
     },
     {
       "agent": "zeus",
@@ -9395,5 +9405,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T03:24:57+00:00"
+  "updated_at": "2026-11-09T03:31:33+00:00"
 }
