@@ -212,6 +212,9 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
     def clock():return now if fixed_clock else time.time()
     executed=0
     for row in q.open():
+        # An explicit scope/decision gate needs an authorized transition. A
+        # later healthy slot is not approval or delivery of the missing slot.
+        if row['state']=='blocked_decision':continue
         source=json.loads(row['source']);source['continuity_key']=row['key'];obs=observations.get(row['source_key'])
         if row['state']=='waiting_resource' and source.get('resource')!='pc1' and re.search(r'\bPC1\b',row.get('observation') or '',re.I):
             source['resource']='pc1'

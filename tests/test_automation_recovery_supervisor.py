@@ -71,6 +71,13 @@ class SupervisorTests(unittest.TestCase):
         self.assertEqual(self.q.get(j['key'])['state'],'waiting_resource')
         self.assertFalse(self.calls)
 
+    def test_later_green_cannot_clear_explicit_decision_gate(self):
+        j=self.add();self.q.defer(j['key'],'blocked_decision','late_report_authorization',now=150,delay=1)
+        obs={'native:zeus:abc':{'status':'OK','verified':True,'target':'abc','receipt':'later-slot-fixture-only','at':180}}
+        self.run_drive(obs)
+        self.assertEqual(self.q.get(j['key'])['state'],'blocked_decision')
+        self.assertFalse(self.calls)
+
     def test_old_success_cannot_close_new_incident(self):
         j=self.add();obs={'native:zeus:abc':{'status':'OK','verified':True,'target':'abc','receipt':'old','at':90}}
         self.run_drive(obs);self.assertNotEqual(self.q.get(j['key'])['state'],'completed_validated')
