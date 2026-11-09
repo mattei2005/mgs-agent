@@ -170,5 +170,26 @@
       "named_control_found": false
     }
   ],
-  "limitation": "No visible Generate backgrounds control or proven renamed equivalent in20 manually inspected ad editors. Does not mean OPT_OUT; no activation/publication. Allselected ads were images according to actual creative structure, even where ad names contain VIDEO."
+  "limitation": "No visible Generate backgrounds control or proven renamed equivalent in20 manually inspected ad editors. Does not mean OPT_OUT; no activation/publication. Allselected ads were images according to actual creative structure, even where ad names contain VIDEO.",
+  "creative_integrity_unchanged": true,
+  "ad_configured_status_unchanged": true,
+  "concurrent_campaign_status_changes": {
+    "campaign_ids": [
+      "120250528281980331",
+      "120250546992200331",
+      "120250562106400331",
+      "120250528241230331"
+    ],
+    "meta_actor_name": "Arruda Arruda",
+    "meta_application_name": "Power Editor",
+    "meta_times": [
+      "2026-11-09T16:19:56+0000",
+      "2026-11-09T16:17:08+0000",
+      "2026-11-09T16:06:34+0000",
+      "2026-11-09T16:03:56+0000"
+    ],
+    "origin_evidence": "/root/mgs-agent/reports/manual10-background-1569376234008354837/concurrent-campaign-activities.json",
+    "classification": "concurrent change recorded by Meta, no implicit reactivation; human identity/authorization behind display actor not inferred"
+  },
+  "conclusion": "10 campaigns/20 ads manually inspected and validated; no named Generate backgrounds control, no proven renamed equivalent; API OPT_IN remained20/20. No Save/Publish/toggle actions; creative IDs/update times and ad configured statuses unchanged.4parent campaign pauses recorded separately by Meta actor Arruda Arruda via Power Editor."
 }
