@@ -8745,6 +8745,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1569343054090084383",
+      "next_step": "Aguardar autorização explícita na origem para delta no agendamento individual do AD1 da C150; validar opção suportada, pre-read/journal/readback e retomar mesmo request central sem recriar shells; concluir QA e ativação das três cópias.",
+      "objective": "Duplicar C150 três vezes na Yolokfx 01 G002, USD75/dia por cópia, COST_CAP USD0.70, início imediato 09/11/2026",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569343054090084383/schedule-blocker-receipt.json",
+      "state": "parcial: c152 e c153 paused com um dos dois anúncios cada; usd75 e cap70 confirmados por get. terceira cópia não iniciada. meta100/3858130 recusa ad1 pois fonte contém ad_schedule_start_time 09/11/2026 00:00 et passado. nenhuma ativação. ids preservados em receipt e checkpoint engine.",
+      "thread_id": "1557917403822956698",
+      "updated_at": "2026-11-09T13:33:54+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -9475,5 +9485,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T13:15:20+00:00"
+  "updated_at": "2026-11-09T13:33:54+00:00"
 }
