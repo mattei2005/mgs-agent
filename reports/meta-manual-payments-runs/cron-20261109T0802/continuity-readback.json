@@ -1,0 +1,19 @@
+{
+  "key": "6a8f887c7ddb0077beeeb05b",
+  "source_key": "native:zeus:2ee720363d7d",
+  "source": "{\"authentication_target\": \"Digital Trust Billing & payments on approved Rodolfo Chrome PC1\", \"completed_layers\": [\"funding\", \"invoices\", \"metrics\", \"source_to_sheet_readback\"], \"contract_hash\": \"c65030328baacc9d414c5d3346f1a31a98a24fede8e56d2a4523d5561366f682\", \"financial_receipt\": \"/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json\", \"job_id\": \"2ee720363d7d\", \"kind\": \"native\", \"pending_layers\": [\"36_accounts_balances_H\", \"2_new_generic_events_instrument_D\"], \"profile\": \"zeus\", \"resource\": \"pc1\", \"running_claim\": true, \"same_47_account_contract\": true, \"scheduled_at\": \"2026-11-09T08:02:00-05:00\", \"thread_id\": \"1563926766286803004\", \"time_sensitive\": false}",
+  "state": "waiting_human",
+  "cause": "facebook_twofactor_reauth",
+  "created": 1794229623.9304094,
+  "updated": 1794229850.105686,
+  "due": 1794231650.105686,
+  "attempts": 0,
+  "failures": 0,
+  "owner": null,
+  "lease_until": null,
+  "needs_reconciliation": 0,
+  "evidence": null,
+  "observation": "2FA exigida por Meta na rota Billing do Chrome Rodolfo PC1. Pixels blocked.png: Confirm it’s you with your authentication app. API47 e E/F validadas;H0/36 novas,36 antigas preservadas;D2 eventos genericos novos sem prova. Nao repetir writes concluidos ou contornar login. Retomar somente apos leitura positiva do mesmo alvo;47IDs/job originais. Recibo: /root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+  "delivery_id": null,
+  "notified_state": null
+}

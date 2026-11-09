@@ -8026,12 +8026,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Supervisor deve consumir observation financeira somente leitura e fechar a MESMA fila apos saida deste worker. Relatorio original ja entregue por adapter canonico e GET1569238054475006052. Nao repetir coleta,H,D,API,funding,invoices nem POST. Preservar outbox financial-delivery.json;outro slot futuro nao e certificado por este recibo.",
-      "objective": "Recuperar MESMO job 2ee720363d7d de 08nov21:02,47IDs Digital Trust,J novembro,invoices outubro,sem pagamento/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T2102/recovery-financial-validation.json",
-      "state": "Resultado financeiro47/47,H36/36,pending_ui vazio e35lacunasDqualificadas preservados sem replay. Nova leitura SA confirma paridade exata do workbook validado,47IDs,links e totais F/G/H/I/J. Entrega na origem1569238054475006052 GET-validada e nova observation em processo separado PASS. Causa do loop corrigida: faltava adapter financeiro de entrega e observacao independente no supervisor.58testes passaram. Nenhuma mutacao Meta/Sheets,pagamento,billing,cron ou gateway nesta rodada. Fechamento da fila reservado ao supervisor apos retorno do worker.",
+      "next_step": "Dependencia humana:concluir 2FAFacebook na rotaBilling do ChromeRodolfoPC1. Supervisor existente deve verificar positivamente MESMO alvo antes de retry;preservar mesma fila e47IDs. Reconciliar recibos/escritas deste tick;sem writer/job paralelo. Proximo tick original09nov14:02Eastern. Nao reabrir detalhes/modais paraH;nao repetir coleta enquanto gate persistir.",
+      "objective": "Atualizar mesmos47IDs Digital Trust; J novembro e invoices outubro; sem pagamentos ou billing",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+      "state": "tick09nov08:02eastern parcial:47api(11cartao36linha)verificadas08:04;saldousd546930.21;jnovusd164047.87,01-09nov,dia09parcial;media06-08novusd19113.57.e/f29invoicesoutubrousd417702.93;externagrowpowerhub02usd161.18separada.h0/36novas,36preservadascomhoras08nov23h50-09nov00h28;gatemeta2faautenticadorrodolfomattei na rotabilling antes da primeira linha;semretry/bypass.d2eventosgenericospendentescpv14/escalatepower03;35lacunasdhistoricas(34semprova+growpowerhub04semcobrancalocalizada).readback47idsfontes/notas/linksusd/totaisfghijpass;outraabaintacta;7tabsantes/depois;leasefree.0pagamento/metawrite/billing/cronchange.filaexistentewaiting_human.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-09T06:32:46+00:00"
+      "updated_at": "2026-11-09T13:10:50+00:00"
     },
     {
       "agent": "zeus",
@@ -9475,5 +9475,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T13:00:32+00:00"
+  "updated_at": "2026-11-09T13:10:50+00:00"
 }

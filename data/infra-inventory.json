@@ -62793,6 +62793,29 @@
       "cron_changes": 0,
       "report_infra_status": "GET_verified",
       "report_infra_message_id": "1569234445062512652"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261109-0802",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_updated_validated_pc1_reauthentication_required",
+      "updated_at": "2026-11-09T08:10:49.879766-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 2,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "continuity_key": "6a8f887c7ddb0077beeeb05b"
     }
   ],
   "profile_skill_references": [
