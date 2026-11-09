@@ -1,0 +1,534 @@
+[
+  {
+    "case": "Mavroa05 C031 -> C033",
+    "ad_slot": 1,
+    "historical_request_method": "POST",
+    "historical_request_path": "act_<MASKED_ACCOUNT_ID>/adcreatives",
+    "historical_confirmed_body_digest_match": true,
+    "request_not_replayed": true,
+    "masked_body": {
+      "name": "SHEIN G005 C33 ad 01 COPY C31",
+      "object_story_spec": {
+        "instagram_user_id": "<MASKED_ID_001>",
+        "page_id": "<MASKED_ID_002>",
+        "video_data": {
+          "call_to_action": {
+            "type": "GET_OFFER_VIEW",
+            "value": {
+              "link": "<MASKED_URL_001>"
+            }
+          },
+          "image_hash": "<MASKED_ID_003>",
+          "link_description": "⭐️⭐️⭐️⭐️⭐️",
+          "message": "<MASKED_TEXT_001>",
+          "title": "<MASKED_TEXT_002>",
+          "video_id": "<MASKED_ID_004>"
+        }
+      },
+      "url_tags": "",
+      "degrees_of_freedom_spec": {
+        "creative_features_spec": {
+          "ads_with_benefits": {
+            "enroll_status": "OPT_IN"
+          },
+          "advantage_plus_creative": {
+            "enroll_status": "OPT_OUT"
+          },
+          "carousel_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "creative_stickers": {
+            "enroll_status": "OPT_OUT"
+          },
+          "cv_transformation": {
+            "enroll_status": "OPT_IN"
+          },
+          "enhance_cta": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_animation": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_background_gen": {
+            "enroll_status": "OPT_OUT"
+          },
+          "image_brightness_and_contrast": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_templates": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_touchups": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_uncrop": {
+            "enroll_status": "OPT_IN"
+          },
+          "inline_comment": {
+            "enroll_status": "OPT_IN"
+          },
+          "multi_photo_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "pac_relaxation": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_browsing": {
+            "enroll_status": "OPT_OUT"
+          },
+          "product_metadata_automation": {
+            "enroll_status": "OPT_IN"
+          },
+          "reveal_details_over_time": {
+            "enroll_status": "OPT_IN"
+          },
+          "show_destination_blurbs": {
+            "enroll_status": "OPT_IN"
+          },
+          "site_extensions": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_optimizations": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_translation": {
+            "enroll_status": "OPT_OUT"
+          },
+          "video_auto_crop": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_filtering": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_uncrop": {
+            "enroll_status": "OPT_IN"
+          }
+        }
+      },
+      "media_sourcing_spec": {
+        "bodies": [
+          {
+            "text": "<MASKED_TEXT_001>"
+          }
+        ],
+        "descriptions": [
+          {
+            "text": "<MASKED_TEXT_003>"
+          }
+        ],
+        "titles": [
+          {
+            "text": "<MASKED_TEXT_002>"
+          }
+        ],
+        "videos": [
+          {
+            "opt_in_status": "opt_in",
+            "original_video_id": "<MASKED_ID_004>",
+            "source": "multi_media",
+            "thumbnail_id": "<MASKED_ID_005>",
+            "thumbnail_source": "generated_default",
+            "thumbnail_url": "<MASKED_URL_002>",
+            "video_id": "<MASKED_ID_004>"
+          }
+        ]
+      },
+      "contextual_multi_ads": {
+        "enroll_status": "OPT_OUT"
+      }
+    }
+  },
+  {
+    "case": "Mavroa05 C031 -> C033",
+    "ad_slot": 2,
+    "historical_request_method": "POST",
+    "historical_request_path": "act_<MASKED_ACCOUNT_ID>/adcreatives",
+    "historical_confirmed_body_digest_match": true,
+    "request_not_replayed": true,
+    "masked_body": {
+      "name": "SHEIN G005 C33 ad 02 COPY C31",
+      "object_story_spec": {
+        "instagram_user_id": "<MASKED_ID_001>",
+        "page_id": "<MASKED_ID_002>",
+        "video_data": {
+          "call_to_action": {
+            "type": "GET_OFFER_VIEW",
+            "value": {
+              "link": "<MASKED_URL_001>"
+            }
+          },
+          "image_hash": "<MASKED_ID_006>",
+          "link_description": "⭐️⭐️⭐️⭐️⭐️",
+          "message": "<MASKED_TEXT_001>",
+          "title": "<MASKED_TEXT_002>",
+          "video_id": "<MASKED_ID_007>"
+        }
+      },
+      "url_tags": "",
+      "degrees_of_freedom_spec": {
+        "creative_features_spec": {
+          "ads_with_benefits": {
+            "enroll_status": "OPT_IN"
+          },
+          "advantage_plus_creative": {
+            "enroll_status": "OPT_OUT"
+          },
+          "carousel_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "creative_stickers": {
+            "enroll_status": "OPT_OUT"
+          },
+          "cv_transformation": {
+            "enroll_status": "OPT_IN"
+          },
+          "enhance_cta": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_animation": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_background_gen": {
+            "enroll_status": "OPT_OUT"
+          },
+          "image_brightness_and_contrast": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_templates": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_touchups": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_uncrop": {
+            "enroll_status": "OPT_IN"
+          },
+          "inline_comment": {
+            "enroll_status": "OPT_IN"
+          },
+          "multi_photo_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "pac_relaxation": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_browsing": {
+            "enroll_status": "OPT_OUT"
+          },
+          "product_metadata_automation": {
+            "enroll_status": "OPT_IN"
+          },
+          "reveal_details_over_time": {
+            "enroll_status": "OPT_IN"
+          },
+          "show_destination_blurbs": {
+            "enroll_status": "OPT_IN"
+          },
+          "site_extensions": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_optimizations": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_translation": {
+            "enroll_status": "OPT_OUT"
+          },
+          "video_auto_crop": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_filtering": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_uncrop": {
+            "enroll_status": "OPT_IN"
+          }
+        }
+      },
+      "media_sourcing_spec": {
+        "bodies": [
+          {
+            "text": "<MASKED_TEXT_001>"
+          }
+        ],
+        "descriptions": [
+          {
+            "text": "<MASKED_TEXT_003>"
+          }
+        ],
+        "titles": [
+          {
+            "text": "<MASKED_TEXT_002>"
+          }
+        ],
+        "videos": [
+          {
+            "opt_in_status": "opt_in",
+            "original_video_id": "<MASKED_ID_007>",
+            "source": "multi_media",
+            "thumbnail_id": "<MASKED_ID_008>",
+            "thumbnail_source": "generated_default",
+            "thumbnail_url": "<MASKED_URL_003>",
+            "video_id": "<MASKED_ID_007>"
+          }
+        ]
+      },
+      "contextual_multi_ads": {
+        "enroll_status": "OPT_OUT"
+      }
+    }
+  },
+  {
+    "case": "Yolokfx03 C242 -> C243",
+    "ad_slot": 1,
+    "historical_request_method": "POST",
+    "historical_request_path": "act_<MASKED_ACCOUNT_ID>/adcreatives",
+    "historical_confirmed_body_digest_match": true,
+    "request_not_replayed": true,
+    "masked_body": {
+      "name": "SHEIN G005 C243 VIDEO - 01 COPY C242",
+      "object_story_spec": {
+        "instagram_user_id": "<MASKED_ID_009>",
+        "page_id": "<MASKED_ID_010>",
+        "video_data": {
+          "call_to_action": {
+            "type": "GET_OFFER_VIEW",
+            "value": {
+              "link": "<MASKED_URL_004>"
+            }
+          },
+          "image_hash": "<MASKED_ID_011>",
+          "message": "<MASKED_TEXT_004>",
+          "title": "<MASKED_TEXT_005>",
+          "video_id": "<MASKED_ID_012>"
+        }
+      },
+      "url_tags": "",
+      "degrees_of_freedom_spec": {
+        "creative_features_spec": {
+          "ads_with_benefits": {
+            "enroll_status": "OPT_IN"
+          },
+          "advantage_plus_creative": {
+            "enroll_status": "OPT_OUT"
+          },
+          "carousel_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "creative_stickers": {
+            "enroll_status": "OPT_OUT"
+          },
+          "cv_transformation": {
+            "enroll_status": "OPT_IN"
+          },
+          "enhance_cta": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_animation": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_background_gen": {
+            "enroll_status": "OPT_OUT"
+          },
+          "image_brightness_and_contrast": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_uncrop": {
+            "enroll_status": "OPT_IN"
+          },
+          "inline_comment": {
+            "enroll_status": "OPT_IN"
+          },
+          "multi_photo_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "pac_relaxation": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_browsing": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_metadata_automation": {
+            "enroll_status": "OPT_IN"
+          },
+          "show_destination_blurbs": {
+            "enroll_status": "OPT_IN"
+          },
+          "site_extensions": {
+            "enroll_status": "OPT_OUT"
+          },
+          "text_optimizations": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_translation": {
+            "enroll_status": "OPT_IN"
+          },
+          "translate_voiceover": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_auto_crop": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_filtering": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_uncrop": {
+            "enroll_status": "OPT_IN"
+          }
+        }
+      },
+      "media_sourcing_spec": {
+        "bodies": [
+          {
+            "text": "<MASKED_TEXT_004>"
+          }
+        ],
+        "titles": [
+          {
+            "text": "<MASKED_TEXT_005>"
+          }
+        ],
+        "videos": [
+          {
+            "opt_in_status": "opt_in",
+            "original_video_id": "<MASKED_ID_012>",
+            "source": "multi_media",
+            "thumbnail_id": "<MASKED_ID_013>",
+            "thumbnail_source": "generated_default",
+            "thumbnail_url": "<MASKED_URL_005>",
+            "video_id": "<MASKED_ID_012>"
+          }
+        ]
+      },
+      "contextual_multi_ads": {
+        "enroll_status": "OPT_OUT"
+      }
+    }
+  },
+  {
+    "case": "Yolokfx03 C242 -> C243",
+    "ad_slot": 2,
+    "historical_request_method": "POST",
+    "historical_request_path": "act_<MASKED_ACCOUNT_ID>/adcreatives",
+    "historical_confirmed_body_digest_match": true,
+    "request_not_replayed": true,
+    "masked_body": {
+      "name": "SHEIN G005 C243 VIDEO - 02 COPY C242",
+      "object_story_spec": {
+        "instagram_user_id": "<MASKED_ID_009>",
+        "page_id": "<MASKED_ID_010>",
+        "video_data": {
+          "call_to_action": {
+            "type": "GET_OFFER_VIEW",
+            "value": {
+              "link": "<MASKED_URL_004>"
+            }
+          },
+          "image_hash": "<MASKED_ID_014>",
+          "message": "<MASKED_TEXT_004>",
+          "title": "<MASKED_TEXT_005>",
+          "video_id": "<MASKED_ID_015>"
+        }
+      },
+      "url_tags": "",
+      "degrees_of_freedom_spec": {
+        "creative_features_spec": {
+          "ads_with_benefits": {
+            "enroll_status": "OPT_IN"
+          },
+          "advantage_plus_creative": {
+            "enroll_status": "OPT_OUT"
+          },
+          "carousel_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "creative_stickers": {
+            "enroll_status": "OPT_OUT"
+          },
+          "cv_transformation": {
+            "enroll_status": "OPT_IN"
+          },
+          "enhance_cta": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_animation": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_background_gen": {
+            "enroll_status": "OPT_OUT"
+          },
+          "image_brightness_and_contrast": {
+            "enroll_status": "OPT_IN"
+          },
+          "image_uncrop": {
+            "enroll_status": "OPT_IN"
+          },
+          "inline_comment": {
+            "enroll_status": "OPT_IN"
+          },
+          "multi_photo_to_video": {
+            "enroll_status": "OPT_IN"
+          },
+          "pac_relaxation": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_browsing": {
+            "enroll_status": "OPT_IN"
+          },
+          "product_metadata_automation": {
+            "enroll_status": "OPT_IN"
+          },
+          "show_destination_blurbs": {
+            "enroll_status": "OPT_IN"
+          },
+          "site_extensions": {
+            "enroll_status": "OPT_OUT"
+          },
+          "text_optimizations": {
+            "enroll_status": "OPT_IN"
+          },
+          "text_translation": {
+            "enroll_status": "OPT_IN"
+          },
+          "translate_voiceover": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_auto_crop": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_filtering": {
+            "enroll_status": "OPT_IN"
+          },
+          "video_uncrop": {
+            "enroll_status": "OPT_IN"
+          }
+        }
+      },
+      "media_sourcing_spec": {
+        "bodies": [
+          {
+            "text": "<MASKED_TEXT_004>"
+          }
+        ],
+        "titles": [
+          {
+            "text": "<MASKED_TEXT_005>"
+          }
+        ],
+        "videos": [
+          {
+            "opt_in_status": "opt_in",
+            "original_video_id": "<MASKED_ID_015>",
+            "source": "multi_media",
+            "thumbnail_id": "<MASKED_ID_016>",
+            "thumbnail_source": "generated_default",
+            "thumbnail_url": "<MASKED_URL_006>",
+            "video_id": "<MASKED_ID_015>"
+          }
+        ]
+      },
+      "contextual_multi_ads": {
+        "enroll_status": "OPT_OUT"
+      }
+    }
+  }
+]
