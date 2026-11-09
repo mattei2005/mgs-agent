@@ -7,6 +7,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 SPEC = importlib.util.spec_from_file_location(
     'shein_rps_ui_date', Path('/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py'))
+assert SPEC is not None and SPEC.loader is not None
 ui = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(ui)
 HEADERS = ['DATE', 'DOMAIN', 'ACCOUNT_ID', 'CAMPAIGN_ID', 'CAMPAIGN NAME', 'RPS']

@@ -1,0 +1,84 @@
+{
+  "operation_id": "6354e984ad07c7c7f1f15529",
+  "mode": "resume_safe",
+  "at": "2026-11-09T05:13:12.333640+00:00",
+  "state": "blocked_decision",
+  "authority_get_verified": {
+    "author_id": "344196393512075265",
+    "implementation": "1569193434189668453",
+    "original_request": "1565155813922701353",
+    "original_confirmation": "1565157065234710681"
+  },
+  "owner_reconciled": {
+    "queue_state": "running",
+    "owner": "supervisor:822642",
+    "attempts": 1,
+    "failures": 0,
+    "worker_pid": 822690,
+    "runner_processes_at_preflight": 0,
+    "scheduler_lock": "free",
+    "report_lock": "free"
+  },
+  "original_round": {
+    "date": "2026-11-08",
+    "slot": "23:31",
+    "root": "/root/mgs-agent/data/ares/meta-ads/state/shein-intraday-report/2026-11-08/2331",
+    "collected_accounts": 24,
+    "selected_campaigns": 403,
+    "models": 0,
+    "delivery_intents": 0,
+    "completion_exists": false
+  },
+  "exact_error": "RPS_UI_COVERAGE_MISSING_1018267074603840",
+  "confirmed_cause": "SB initial local date label 08/11 diverges from initial UTC query 2026-11-09T04:34Z and DOM date 09/11; helper skipped preset because label matched. Reproduced with isolated browser JS clock at 2026-11-08T23:34:05-05:00, real SB read.",
+  "deployed_correction": "Always apply approved Today/Yesterday preset and Update; validate every DOM row date before account/domain filtering.",
+  "live_boundary_probe": "/root/mgs-agent/work/automation-recovery-6354e984ad07c7c7f1f15529/live-boundary-probe.jsonl",
+  "canonical_capture_validation": {
+    "date": "2026-11-08",
+    "pages": 10,
+    "scoped_rows": 402,
+    "accounts_with_rows": 23,
+    "every_row_date_verified": true,
+    "mode": "read_only_diagnostic_scratch_no_report_POST"
+  },
+  "tests": {
+    "date_regression": {
+      "passed": 6,
+      "interpreter": "SB python3.11"
+    },
+    "existing_shein_report_suite": {
+      "passed": 188,
+      "interpreter": "current python3.14"
+    },
+    "initial_test_invocation_failure": "Existing suite needs Python>=3.12; Python3.11 invocation failed at existing renderer f-string. Re-run current runtime passed, no renderer changes."
+  },
+  "artifacts": [
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py",
+      "sha256": "f48b8fb1b88c9e2ce46c3c71f994cdf7ac81162c52ea20cf8e2c136be4588284",
+      "bytes": 9272
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_rps_date_filter.py",
+      "sha256": "d368cc4d4becc85af11a3e3c31480a912c1d4325d420d065263901782ebae4cd",
+      "bytes": 3179
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+      "sha256": "9c45b0aa7e606f1ca1f821679a25c7d2680090822d4d74a96c616542938b7349",
+      "bytes": 6775
+    }
+  ],
+  "backup": "/root/mgs-agent/work/automation-recovery-6354e984ad07c7c7f1f15529/shein-daily-rps-ui.py.before",
+  "business_report_posts": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "gateway_restarts": 0,
+  "decision_gate": "Original intraday date/slot expired across civil midnight. No catch-up authorized. Do not accept next slot success as delivery of this slot.",
+  "recommendation": "Authorize late historical delivery only for original 2026-11-08/23:31 round, preserving original Meta/SB snapshots and labeling any later RPS observation honestly; canonical runner only, exact24 threads, idempotence and GET.",
+  "question": "Autoriza a entrega histórica tardia da rodada de 08/11 às 23h31 nas mesmas 24 threads, indicando os horários reais das fontes?",
+  "report_infra_status": "EXACT_GET_VERIFIED",
+  "report_infra_message_id": "1569218280185663551",
+  "report_infra_channel_id": "1498132022634483894",
+  "report_infra_readback": "/root/mgs-agent/work/automation-recovery-6354e984ad07c7c7f1f15529/report-infra-get.json"
+}

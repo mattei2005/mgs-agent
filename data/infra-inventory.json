@@ -893,11 +893,29 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "shein-rps-date-recovery-6354e984ad07c7c7f1f15529",
+      "agent": "zeus",
+      "type": "read-only-report-source-date-fix",
+      "status": "prevention_live_validated_historical_slot_blocked_decision",
+      "authority_message_id": "1569193434189668453",
+      "original_authority_message_id": "1565157065234710681",
+      "source_alert_id": "1569214975300337887",
+      "preserved_round": "2026-11-08/23:31",
+      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py",
+      "evidence": "/root/mgs-agent/reports/automation-recovery-6354e984ad07c7c7f1f15529.json",
+      "backup": "/root/mgs-agent/work/automation-recovery-6354e984ad07c7c7f1f15529/shein-daily-rps-ui.py.before",
+      "tests": "/root/mgs-agent/tests/test_shein_rps_date_filter.py",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+      "business_report_posts": 0,
+      "cron_changes": 0,
+      "meta_writes": 0
+    },
+    {
       "id": "automation-recovery-implementation-1569193434189668453",
       "agent": "zeus",
       "type": "common-durable-automation-continuity",
       "status": "runtime_active_business_recovery_still_tracked",
-      "updated_at": "2026-11-09T05:00:00.454911+00:00",
+      "updated_at": "2026-11-09T05:10:52.218379+00:00",
       "authority_message_id": "1569193434189668453",
       "canonical_source": "/root/mgs-agent/context/automation-recovery-policy.md",
       "evidence": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
@@ -995,13 +1013,13 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-          "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
-          "bytes": 8006
+          "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
+          "bytes": 8486
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-          "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
-          "bytes": 8006
+          "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
+          "bytes": 8486
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
@@ -1014,7 +1032,9 @@
           "bytes": 24049
         }
       ],
-      "report_infra_status": "pending"
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1569216490891386951",
+      "report_infra_readback": true
     },
     {
       "id": "dtr-daily-recovery-1569188551139004499",
@@ -70222,6 +70242,18 @@
     }
   ],
   "data_files": [
+    {
+      "path": "/root/mgs-agent/reports/automation-recovery-tests-1569193434189668453.txt",
+      "size_bytes": 547,
+      "sha256": "27ceb5343890770de03c6c417def59d0f6c9d1684cfe485239184ac49dec102b",
+      "modified_at": "2026-11-09T05:10:52.218379+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
+      "size_bytes": 76832,
+      "sha256": "4843064e7d4ec062a847331a9faa8cab9a834794910ba07e22d2a184472495b5",
+      "modified_at": "2026-11-09T05:10:52.218379+00:00"
+    },
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 832587,

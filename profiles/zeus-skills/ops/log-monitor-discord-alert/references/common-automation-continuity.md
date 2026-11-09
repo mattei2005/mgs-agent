@@ -50,6 +50,7 @@ SHEIN continues to use its canonical per-date/per-slot receipts and nonce rules 
 4. Observe subsequent **natural scheduled ticks** with different dispatcher PIDs, the exact durable request, state transitions and target receipt. Do not create a throwaway production request to prove queue mutation; recover an explicitly authorized real incident or use isolated fixtures.
 5. Compare the root crontab and native immutable schedules before/after; inventory coverage and business success are separate claims. Do not execute sensitive jobs simply to test the generic layer.
 6. Record exact deployment/test/receipt evidence in infra inventory, audit and the initiative checkpoint; send one canonical REPORT-INFRA and GET-verify that embed. Keep remaining resource/human/critical work open with owner and next executable step.
+7. Parse the actual top-level inventory arrays before editing them: nested artifact snapshots may also contain a `scripts` label, so the first textual occurrence is not the root collection. Filter record types, select the exact path/ID, require one match, and use uniquely anchored item edits rather than rewriting an old whole-file snapshot. After a wrapper failure, inspect landed files/records and resume only the missing write; do not recreate the report or resend its embed.
 
 ## Recovery/rollback cautions
 

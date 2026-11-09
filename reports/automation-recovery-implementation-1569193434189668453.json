@@ -121,13 +121,13 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
-      "bytes": 8006
+      "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
+      "bytes": 8486
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
-      "bytes": 8006
+      "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
+      "bytes": 8486
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
@@ -1540,5 +1540,11 @@
     "Historical scope holds are not authorized for blind replay.",
     "No reboot, gateway restart, credential/billing/budget/strategy or schedule changes performed by this implementation."
   ],
-  "report_infra_status": "pending"
+  "report_infra_status": "sent_verified",
+  "report_infra_message_id": "1569216490891386951",
+  "report_infra_readback": true,
+  "final_metadata_readback_at_utc": "2026-11-09T05:10:52.218379+00:00",
+  "queue_at_final_metadata_readback": [{"source_key": "producer:dtr-sb-daily-match-audit.sh", "state": "completed_validated", "cause": "verifying", "attempts": 1, "failures": 0, "due": 1794199629.2466722}, {"source_key": "native:zeus:2ee720363d7d", "state": "retry_scheduled", "cause": "retry_scheduled", "attempts": 2, "failures": 0, "due": 1794200623.9669266}, {"source_key": "alert:1553036838615130164", "state": "blocked_decision", "cause": "historical_scope_review", "attempts": 0, "failures": 0, "due": 1794285127.391169}, {"source_key": "alert:1554316890418053172", "state": "blocked_decision", "cause": "historical_scope_review", "attempts": 0, "failures": 0, "due": 1794285727.1795864}, {"source_key": "alert:1554533493147570180", "state": "blocked_decision", "cause": "historical_scope_review", "attempts": 0, "failures": 0, "due": 1794286027.4888608}, {"source_key": "producer:ares/shein-intraday-cron.py", "state": "running", "cause": "unhealthy_observation", "attempts": 1, "failures": 0, "due": 1794200523.6002817}, {"source_key": "alert:1567473780501254175", "state": "blocked_decision", "cause": "historical_scope_review", "attempts": 0, "failures": 0, "due": 1794286927.2639093}],
+  "consumer_heartbeat_at_final_metadata_readback": {"at": 1794200527.283589, "phase": "dispatching", "pid": 822642},
+  "dtr_independent_delivery_get": {"parts": 3, "users": 73, "logins": 73, "status": "verified"}
 }
