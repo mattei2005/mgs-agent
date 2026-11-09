@@ -185,14 +185,14 @@ def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=
 
 
 def observation(job, *, base=BASE):
-    if not scope(job) or not (base / RUN / 'financial-delivery.json').exists():
-        return None
-    receipt = load(base / RUN / 'recovery-financial-validation.json')
-    # Never certify a different, later scheduled slot using this recovery.
-    last = datetime.fromisoformat(job['last_run_at']).timestamp()
-    if last > datetime.fromisoformat(receipt['validated_metrics_at']).timestamp():
-        return None
     try:
+        if not scope(job) or not (base / RUN / 'financial-delivery.json').exists():
+            return None
+        receipt = load(base / RUN / 'recovery-financial-validation.json')
+        # Never certify a different, later scheduled slot using this recovery.
+        last = datetime.fromisoformat(job['last_run_at']).timestamp()
+        if last > datetime.fromisoformat(receipt['validated_metrics_at']).timestamp():
+            return None
         return resume(job, base=base, verify_only=True)
-    except (OSError, ValueError, RuntimeError):
+    except (OSError, ValueError, RuntimeError, KeyError, TypeError):
         return None

@@ -893,6 +893,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-delivery-recovery-9f77ed97faf39eb7de4ba1b3",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "status": "business_result_and_source_delivery_get_verified_queue_closure_owned_by_supervisor",
+      "verified_at": "2026-11-09T06:32:46+00:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T2102/financial-delivery.json",
+      "business_message_id": "1569238054475006052",
+      "business_thread_id": "1563926766286803004",
+      "cause": "Supervisor had no financial delivery-only adapter or independent financial observation; repeated worker handoffs could not deliver or close the original slot.",
+      "tests_passed": 58,
+      "google_write_calls": 0,
+      "meta_calls": 0,
+      "cron_changes": 0,
+      "artifacts": [
+        {"path": "/root/mgs-agent/tests/test_finance_continuity_delivery.py", "sha256": "54a15dbbd8391298a89ec72d3a1e2534eba9995e705945d2f23d20b9c1f2c198"},
+        {"path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md", "sha256": "d46a9e6b94d7a18b57d4f7d190b4ffd28cb7e7a6b053b07d6d022432e25f5eff"}
+      ],
+      "rollback": "Revert only this delivery adapter and its two supervisor callsites; preserve outbox, accepted message ID and all financial receipts. No business replay."
+    },
+    {
       "id": "shein-rps-date-recovery-6354e984ad07c7c7f1f15529",
       "agent": "zeus",
       "type": "read-only-report-source-date-fix",
@@ -66652,9 +66672,15 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 31555,
-      "modified_at": "2026-11-09T05:54:17.846578+00:00",
-      "sha256": "ae04d425bf8bff4bf9caee138e39cb6e68dc31af63e2036e5c59a3becf12b386"
+      "size_bytes": 32625,
+      "modified_at": "2026-11-09T06:30:11.682064+00:00",
+      "sha256": "30fa761f39524e40c7929d03ce9164ba4bc393e5607b4ab3d4a4a7dc0251467f"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_finance_continuity.py",
+      "size_bytes": 10640,
+      "modified_at": "2026-11-09T06:32:34.912212+00:00",
+      "sha256": "11d9b406d48044f85deb070c2ad5061cfdaf28cadcfc20c0cfbbfa18faa2ec3a"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",

@@ -8016,12 +8016,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "SOMENTE verificar recibo recovery-financial-validation.json e entregar pelo runner/supervisor canonico com idempotencia e GET na thread original;nao repetir H,D,funding,invoices ou API ja validadas. Nao fechar fila sem entrega validada. Nenhum novo input PC1 necessario.",
+      "next_step": "Supervisor deve consumir observation financeira somente leitura e fechar a MESMA fila apos saida deste worker. Relatorio original ja entregue por adapter canonico e GET1569238054475006052. Nao repetir coleta,H,D,API,funding,invoices nem POST. Preservar outbox financial-delivery.json;outro slot futuro nao e certificado por este recibo.",
       "objective": "Recuperar MESMO job 2ee720363d7d de 08nov21:02,47IDs Digital Trust,J novembro,invoices outubro,sem pagamento/billing",
       "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T2102/recovery-financial-validation.json",
-      "state": "resultado financeiro validado em09nov01:16eastern. h36/36 ja publicado sem replay,horas23:50-00:28 preservadas. duas provas d faltantes verificadas em pixels e registradas:1046241194533786 e novo evento1481815942722118. api final47/47 updated_validated01:14:29,pending_ui vazio. fonte-live c/g/i/j,d,h,e/f e totais pass;outras abas intactas;35d historicos vazios qualificados(34semprova,1semcobrancalocalizada). lease livre. entrega original e verificador independente do supervisor ainda pendentes.",
+      "state": "Resultado financeiro47/47,H36/36,pending_ui vazio e35lacunasDqualificadas preservados sem replay. Nova leitura SA confirma paridade exata do workbook validado,47IDs,links e totais F/G/H/I/J. Entrega na origem1569238054475006052 GET-validada e nova observation em processo separado PASS. Causa do loop corrigida: faltava adapter financeiro de entrega e observacao independente no supervisor.58testes passaram. Nenhuma mutacao Meta/Sheets,pagamento,billing,cron ou gateway nesta rodada. Fechamento da fila reservado ao supervisor apos retorno do worker.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-09T06:16:22+00:00"
+      "updated_at": "2026-11-09T06:32:46+00:00"
     },
     {
       "agent": "zeus",
