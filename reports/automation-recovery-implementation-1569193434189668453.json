@@ -7,7 +7,7 @@
   "status": "runtime_active_waiting_shein_historical_delivery_authorization",
   "canonical_policy": "context/automation-recovery-policy.md",
   "tests": {
-    "tests_run": 96,
+    "tests_run": 97,
     "failures": 0,
     "errors": 0,
     "fixture_only_failures_before_fixes": {
@@ -26,7 +26,8 @@
       "pc1-red.txt": "F\n======================================================================\nFAIL: test_busy_is_durable_without_stealing_desktop (tests.test_pc1_continuity_ingress.PC1IngressTests.test_busy_is_durable_without_stealing_desktop)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_pc1_continuity_ingress.py\", line 25, in test_busy_is_durable_without_stealing_desktop\n    self.assertTrue(result.get('continuity_queued'), 'Busy currently drops the scheduled request instead of queueing it')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None is not true : Busy currently drops the scheduled request instead of queueing it\n\n----------------------------------------------------------------------\nRan 1 test in 0.135s\n\nFAILED (failures=1)\n",
       "worker-fencing-red.txt": "F\n======================================================================\nFAIL: test_child_fingerprint_survives_parent_loss_without_pid_reuse (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_child_fingerprint_survives_parent_loss_without_pid_reuse)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 20, in test_child_fingerprint_survives_parent_loss_without_pid_reuse\n    self.assertTrue(hasattr(self.m,'worker_active'),'child ownership receipt absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : child ownership receipt absent\n\n----------------------------------------------------------------------\nRan 1 test in 0.019s\n\nFAILED (failures=1)\n",
       "notice-red.txt": "notice_is_edited_not_reposted (tests.test_continuity_notice_delivery.NoticeTests.test_legacy_verified_notice_is_edited_not_reposted)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 48, in test_legacy_verified_notice_is_edited_not_reposted\n    self.assertEqual(len(edits),1);self.assertEqual(edits[0][1]['message_id'],'200')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_long_notice_preserves_exact_question_and_explicit_push (tests.test_continuity_notice_delivery.NoticeTests.test_long_notice_preserves_exact_question_and_explicit_push)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_notice_delivery.py\", line 28, in test_long_notice_preserves_exact_question_and_explicit_push\n    self.assertIn(question,json.dumps(sent[0],ensure_ascii=False))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'Autoriza a entrega histórica tardia da rodada original nas mesmas threads?' not found in '{\"content\": \"Bloqueado: evidência de fixture.\\\\nDetalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixture. Detalhe de fixtur\", \"embeds\": [], \"allowed_mentions\": {\"parse\": [], \"users\": [], \"roles\": [], \"replied_user\": false}, \"nonce\": \"70f50985921910eblocked_d\", \"enforce_nonce\": true, \"message_reference\": {\"message_id\": \"100\", \"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false}}'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.122s\n\nFAILED (failures=3)\n",
-      "time-budget-red.txt": "F\n======================================================================\nFAIL: test_worker_receives_actual_wall_budget_and_checkpoint_guard (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_worker_receives_actual_wall_budget_and_checkpoint_guard)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 35, in test_worker_receives_actual_wall_budget_and_checkpoint_guard\n    self.assertIn('17 segundos',prompts[0]);self.assertIn('checkpoint',prompts[0]);self.assertIn('lotes',prompts[0])\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '17 segundos' not found in 'isolated fixture'\n\n----------------------------------------------------------------------\nRan 1 test in 0.045s\n\nFAILED (failures=1)\n"
+      "time-budget-red.txt": "F\n======================================================================\nFAIL: test_worker_receives_actual_wall_budget_and_checkpoint_guard (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_worker_receives_actual_wall_budget_and_checkpoint_guard)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 35, in test_worker_receives_actual_wall_budget_and_checkpoint_guard\n    self.assertIn('17 segundos',prompts[0]);self.assertIn('checkpoint',prompts[0]);self.assertIn('lotes',prompts[0])\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '17 segundos' not found in 'isolated fixture'\n\n----------------------------------------------------------------------\nRan 1 test in 0.045s\n\nFAILED (failures=1)\n",
+      "late-gate-red.txt": "F\n======================================================================\nFAIL: test_later_green_cannot_clear_explicit_decision_gate (tests.test_automation_recovery_supervisor.SupervisorTests.test_later_green_cannot_clear_explicit_decision_gate)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 78, in test_later_green_cannot_clear_explicit_decision_gate\n    self.assertEqual(self.q.get(j['key'])['state'],'blocked_decision')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'completed_validated' != 'blocked_decision'\n- completed_validated\n+ blocked_decision\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.082s\n\nFAILED (failures=1)\n"
     },
     "environment": "installed sb-venv, isolated CRON_STALE_STATE, scripts/tests PYTHONPATH"
   },
@@ -38,8 +39,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "sha256": "a2c4f9af4985195ebc04c50f4ffb3a554444bcf7e19ef3464834da6637f957cf",
-      "bytes": 31348
+      "sha256": "ae04d425bf8bff4bf9caee138e39cb6e68dc31af63e2036e5c59a3becf12b386",
+      "bytes": 31555
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
@@ -78,8 +79,8 @@
     },
     {
       "path": "/root/mgs-agent/tests/test_automation_recovery_supervisor.py",
-      "sha256": "c4a8a7b4d3649e0ce7b0848f9ac1696933be663e2509c845263817548cb3b77c",
-      "bytes": 7308
+      "sha256": "eb9a2921e825403d724f15b9d637e112f3c20772cf0e818d1e5cc8113238ae21",
+      "bytes": 7748
     },
     {
       "path": "/root/mgs-agent/tests/test_pc1_continuity_ingress.py",
@@ -123,13 +124,13 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "1eb240e7419cbc657d6e178104e5b61a0d3b23deaa2cf4bf6335a3189033f2b6",
-      "bytes": 9184
+      "sha256": "69e8a343921f82839d3d8e0adf8086c29175f89f681c117136727df21206cec2",
+      "bytes": 9343
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-      "sha256": "1eb240e7419cbc657d6e178104e5b61a0d3b23deaa2cf4bf6335a3189033f2b6",
-      "bytes": 9184
+      "sha256": "69e8a343921f82839d3d8e0adf8086c29175f89f681c117136727df21206cec2",
+      "bytes": 9343
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
@@ -1560,7 +1561,7 @@
   "report_infra_status": "sent_verified",
   "report_infra_message_id": "1569216490891386951",
   "report_infra_readback": true,
-  "final_metadata_readback_at_utc": "2026-11-09T05:41:55.219520+00:00",
+  "final_metadata_readback_at_utc": "2026-11-09T05:54:17.846578+00:00",
   "queue_at_final_metadata_readback": [
     {
       "source_key": "producer:dtr-sb-daily-match-audit.sh",
@@ -1572,11 +1573,11 @@
     },
     {
       "source_key": "native:zeus:2ee720363d7d",
-      "state": "running",
+      "state": "retry_scheduled",
       "cause": "TimeoutExpired",
       "attempts": 4,
-      "failures": 1,
-      "due": 1794202473.4763787
+      "failures": 2,
+      "due": 1794204139.8089614
     },
     {
       "source_key": "alert:1553036838615130164",
@@ -1620,8 +1621,9 @@
     }
   ],
   "consumer_heartbeat_at_final_metadata_readback": {
-    "at": 1794202626.6890876,
-    "phase": "dispatching",
+    "at": 1794203526.821191,
+    "open": 6,
+    "phase": "idle",
     "pid": 860584
   },
   "dtr_independent_delivery_get": {
@@ -1656,5 +1658,6 @@
     "progress_preserved_in_canonical_run": true,
     "worker_wall_time_and_batch_checkpoint_guard_tested": true,
     "not_a_claim_of_full_native_recovery": true
-  }
+  },
+  "blocked_gate_not_closed_by_later_healthy_slot_tested": true
 }
