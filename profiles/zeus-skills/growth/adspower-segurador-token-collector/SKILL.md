@@ -34,7 +34,7 @@ For routine remote AdsPower operation—locating a profile, opening it, verifyin
 references/pc1-remote-adspower-operations.md
 ```
 
-The same private PC1 transport is used by Zeus and Ares. Deterministic profile and browser-page operations use the official AdsPower Local API/MCP route first; Computer Use remains the fallback for native GUI, CAPTCHA, 2FA, checkpoints, or visual recovery. Both routes share the same cross-agent lease, because they can conflict on the same AdsPower profile and interactive browser state. Zeus owns technical governance; Ares owns routine Growth/Media Buying execution within the requesting user's current authority.
+The same private PC1 transport is used by Zeus and Ares. Select this route only when the task requires an AdsPower-managed identity, profile or proxy; a Meta campaign audit on PC1 does not by itself require AdsPower. If Rodolfo identifies an already-authenticated ordinary Chrome session, inspect that session through `secure-remote-windows-automation` first rather than creating another login dependency. Within the AdsPower route, deterministic profile and browser-page operations use the official Local API/MCP first; Computer Use remains the fallback for native GUI, CAPTCHA, 2FA, checkpoints, or visual recovery. Both routes share the same cross-agent lease, because they can conflict on the same AdsPower profile and interactive browser state. Zeus owns technical governance; Ares owns routine Growth/Media Buying execution within the requesting user's current authority.
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
 

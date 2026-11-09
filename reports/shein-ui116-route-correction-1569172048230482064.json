@@ -1,0 +1,30 @@
+{
+  "authority_message_id": "1569172048230482064",
+  "thread_id": "1568669160798683260",
+  "scope_file": "/root/mgs-agent/data/ares/meta-ads/audit/shein/ui116-1568755642695426089/scope.json",
+  "previous_authentication_blocker_superseded_for_route": true,
+  "route": "Existing ordinary Chrome on PC1, authenticated Rodolfo browser; no AdsPower operation in this turn",
+  "browser_pid": 19372,
+  "window_id": 328816,
+  "representative": {
+    "account_id": "1018267074603840",
+    "campaign_id": "120253713844140209",
+    "ad_id": "120253713844160209",
+    "ad_name": "AD - 01",
+    "editor_access_confirmed": true,
+    "page_access_warning_did_not_prevent_inspection": true,
+    "advantage_creative_modal_opened": true,
+    "visible_features": ["Create sticker CTA", "Video touch-ups", "Text improvements", "Add details to ad layout", "Relevant comments", "Enhance CTA", "Add video effects"],
+    "image_background_generation_visible": false,
+    "background_state": "unconfirmed: not visible in inspected modal; absence is not OPT_OUT",
+    "evidence_screenshot": "/root/.hermes/profiles/zeus/cache/images/computer_use_070e411f66434b7aa114c379f16ce894.png",
+    "modal_cancelled_without_saving": true,
+    "cancel_readback_screenshot": "/root/.hermes/profiles/zeus/cache/images/computer_use_f438094a54a84de89b88d7a406251676.png"
+  },
+  "campaigns_background_confirmed": 0,
+  "campaigns_background_pending": 116,
+  "meta_changes_made": false,
+  "permission_or_credential_changes": false,
+  "desktop_lease_released": true,
+  "next_step": "Preserve same 116 campaign IDs / 239 ad IDs. Continue only through authenticated PC1 Chrome; inspect exact background control per ad, keeping absent controls unconfirmed and not mistaking video effects for image background generation. No AdsPower login request is a prerequisite."
+}
