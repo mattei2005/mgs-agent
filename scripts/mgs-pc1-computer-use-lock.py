@@ -151,7 +151,12 @@ def main() -> None:
 
         if args.action == "acquire":
             if state and not same_owner:
-                emit({"ok": False, "reason": "lock_held", **public_state(state, now)}, 2)
+                try:
+                    from mgs_automation_continuity import enqueue_pc1_busy
+                    queued = enqueue_pc1_busy(args.agent, args.session_id, args.thread_id)
+                except Exception as exc:
+                    emit({"ok": False, "reason": "continuity_queue_persistence_failed", "error_type": type(exc).__name__, **public_state(state, now)}, 3)
+                emit({"ok": False, "reason": "lock_held", "continuity_queued": True, "continuity_key": queued['key'], **public_state(state, now)}, 2)
             acquired_at = state.get("acquired_at") if state else iso(now)
             next_state = {
                 "version": 1,

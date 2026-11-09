@@ -82,9 +82,11 @@ def collect(base=BASE,profiles=PROFILES):
             key=f'native:{profile}:{j["id"]}'
             inventory.append({'kind':'native','profile':profile,'id':j['id'],'schedule':j.get('schedule')})
             source={'kind':'native','profile':profile,'job_id':j['id'],'thread_id':str((j.get('origin') or {}).get('thread_id') or ''),'time_sensitive':(j.get('schedule') or {}).get('kind')=='once'}
+            if re.search(r'\bPC1\b',str(j.get('prompt') or ''),re.I):source['resource']='pc1'
             row=observations.setdefault(key,{'status':'UNKNOWN','verified':False,'target':key,'receipt':'native observation missing','at':now})
             row['source']=source
             row['at']=epoch(j.get('last_run_at')) or now
+            if not j.get('last_run_at') or j.get('last_status')!='ok':row['verified']=False
             # A successful scheduler turn may explicitly report an unfinished PC1 stage.
             files=sorted((profiles/profile/'cron/output'/j['id']).glob('*.md'),key=lambda f:f.stat().st_mtime)
             if files:
@@ -128,6 +130,14 @@ def pc1_busy():
 
 
 def original_active(source):
+    if source.get('kind')=='producer':
+        name=Path(str(source.get('script',''))).name
+        names={name,name[:-3]+'.py' if name.endswith('.sh') else name}
+        for p in Path('/proc').iterdir():
+            if not p.name.isdigit() or int(p.name)==os.getpid():continue
+            try:args=(p/'cmdline').read_bytes().split(b'\0')
+            except (OSError,ProcessLookupError):continue
+            if any(Path(a.decode(errors='replace')).name in names for a in args if a):return True
     profile=source.get('profile')
     if profile not in ('zeus','atena','ares'):return False
     if source.get('job_id'):
@@ -151,15 +161,15 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
     executed=0
     for row in q.open():
         source=json.loads(row['source']);obs=observations.get(row['source_key'])
+        if row['state']=='running':continue  # claim() reconciles an expired owner.
+        if active(source):
+            q.defer(row['key'],'waiting_resource','original_writer_active',now=now,delay=300);continue
         if verified_observation(obs) and float(obs.get('at',0))>=row['created']:
             # Confirmed producer readback, never just the worker's final wording.
             q.complete(row['key'],obs,now=now)
             try:notify(q.get(row['key']),'Resolvido: produtor e resultado verificados por nova leitura.')
             except Exception:q.service('delivery_pending:'+row['key'],True)
             continue
-        if row['state']=='running':continue  # claim() reconciles an expired owner.
-        if active(source):
-            q.defer(row['key'],'waiting_resource','original_writer_active',now=now,delay=300);continue
         if source.get('resource')=='pc1' or row['cause']=='pc1_busy':
             try:occupied=busy()
             except Exception:
@@ -171,7 +181,7 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
         if not row:break
         previous=row['previous_state'];source=json.loads(row['source'])
         mode='resume_safe'
-        if source.get('time_sensitive') or previous=='needs_diagnosis':mode='diagnose_only'
+        if source.get('time_sensitive') or source.get('system_protected') or previous=='needs_diagnosis':mode='diagnose_only'
         elif previous=='waiting_human':mode='probe_only'
         elif previous=='reconciling' or row['needs_reconciliation']:mode='reconcile_first'
         elif previous=='verifying':mode='verify_only'
@@ -280,12 +290,18 @@ def main(resolver):
             source=dict(observations.get(key,{}).get('source') or {'kind':'alert','profile':'zeus'})
             source.update(alert_id=mid,alert_channel=resolver.CHANNEL_ID,alert_url=resolver.message_url(message))
             row=q.enqueue(key,source,'alert_unresolved')
+            assert row is not None
+            age=time.time()-epoch(prior.get('started_at') or prior.get('processed_at'))
+            if prior and age>2*86400 and key not in observations:
+                # Old unresolved one-offs stay visible but are never replayed as
+                # a newly authorized campaign/payment/expired-time operation.
+                q.defer(row['key'],'blocked_decision','historical_scope_review',delay=86400,observation='Histórico preservado; operação fora do inventário ativo, sem replay autorizado.')
             if prior.get('status')=='escalated' and prior.get('resolution_text'):
                 state=disposition(prior['resolution_text'])
                 if state in ('waiting_human','blocked_decision','waiting_resource') and row['attempts']==0:
                     q.defer(row['key'],state,state,delay=60 if state=='waiting_resource' else 3600,observation=prior['resolution_text'])
             legacy.setdefault('processed',{})[mid]={**prior,'status':'continuity_owned','continuity_key':row['key'],'url':source['alert_url']}
-        if messages:legacy['last_seen_id']=str(max(int(m['id']) for m in messages))
+        if messages:legacy['last_seen_id']=str(max(int(legacy.get('last_seen_id') or 0),max(int(m['id']) for m in messages)))
         resolver.save_state(legacy)
         from mgs_alert_transport import post_verified
         q.service('heartbeat',{'pid':os.getpid(),'at':time.time(),'phase':'dispatching'})

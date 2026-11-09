@@ -47,6 +47,12 @@ class SupervisorTests(unittest.TestCase):
         self.run_drive(obs)
         self.assertEqual(self.q.get(j['key'])['state'],'completed_validated');self.assertFalse(self.calls)
 
+    def test_active_owner_prevents_green_from_fresh_progress_log(self):
+        j=self.add();obs={'native:zeus:abc':{'status':'OK','verified':True,'target':'abc','receipt':'fresh-progress','at':180}}
+        self.run_drive(obs,active=True)
+        self.assertEqual(self.q.get(j['key'])['state'],'waiting_resource')
+        self.assertFalse(self.calls)
+
     def test_old_success_cannot_close_new_incident(self):
         j=self.add();obs={'native:zeus:abc':{'status':'OK','verified':True,'target':'abc','receipt':'old','at':90}}
         self.run_drive(obs);self.assertNotEqual(self.q.get(j['key'])['state'],'completed_validated')
