@@ -10,7 +10,7 @@
   "ad_name": "VIDEO - 01",
   "api_scope_enrollment": "OPT_IN",
   "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
-  "inspection_complete": true,
+  "inspection_complete": false,
   "named_control_found": false,
   "background_matches": [],
   "panel_controls": [
@@ -302,5 +302,6 @@
     "lower": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241250331-panel-lower.png"
   },
   "no_toggle_save_publish": true,
-  "closed_with_cancel": true
+  "closed_with_cancel": true,
+  "invalid_reason": "Wrong modal; no Advantage+ creative tab or populated feature controls. Excluded from completed count."
 }
