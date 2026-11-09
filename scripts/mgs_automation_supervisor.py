@@ -231,7 +231,7 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
         if source.get('resource')=='pc1' or row['cause']=='pc1_busy':
             try:occupied=busy()
             except Exception:
-                state='waiting_human' if row['state']=='waiting_human' else 'reconciling'
+                state=row['state'] if row['state'] in ('waiting_human','verifying','retry_scheduled') else 'reconciling'
                 q.defer(row['key'],state,'pc1_state_unknown',now=now,delay=max(300,row['due']-now));continue
             if occupied:
                 state=row['state'] if row['state'] in ('waiting_human','verifying','reconciling','retry_scheduled') else 'waiting_resource'
