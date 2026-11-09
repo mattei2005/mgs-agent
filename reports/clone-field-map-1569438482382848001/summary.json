@@ -1675,5 +1675,101 @@
   ],
   "writes": 0,
   "masking": "Stable explicit aliases for identifiers, hashes, URLs and text; values kept in memory for comparisons. No token/paging links persisted.",
-  "limitation": "Existing copies contain accepted omitted feature fields as well as explicit background opt-out; not a one-variable UI experiment. A missing returned field is not OPT_OUT."
+  "limitation": "Existing copies contain accepted omitted feature fields as well as explicit background opt-out; not a one-variable UI experiment. A missing returned field is not OPT_OUT.",
+  "ui_labels_explicitly_documented": 20,
+  "compact_pairs": [
+    {
+      "case": "Mavroa05 C031 -> C033",
+      "slot": 1,
+      "source_media_type": "VIDEO",
+      "copy_media_type": "VIDEO",
+      "backing_story_video_id_equal": true,
+      "enrollment_changes": [
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        }
+      ],
+      "omitted_fields": [
+        "image_animation",
+        "image_brightness_and_contrast",
+        "image_templates",
+        "image_touchups",
+        "image_uncrop",
+        "video_uncrop"
+      ],
+      "new_opt_out_defaults": 58
+    },
+    {
+      "case": "Mavroa05 C031 -> C033",
+      "slot": 2,
+      "source_media_type": "VIDEO",
+      "copy_media_type": "VIDEO",
+      "backing_story_video_id_equal": true,
+      "enrollment_changes": [
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        }
+      ],
+      "omitted_fields": [
+        "image_animation",
+        "image_brightness_and_contrast",
+        "image_templates",
+        "image_touchups",
+        "image_uncrop",
+        "video_uncrop"
+      ],
+      "new_opt_out_defaults": 58
+    },
+    {
+      "case": "Yolokfx03 C242 -> C243",
+      "slot": 1,
+      "source_media_type": "VIDEO",
+      "copy_media_type": "VIDEO",
+      "backing_story_video_id_equal": true,
+      "enrollment_changes": [
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        }
+      ],
+      "omitted_fields": [
+        "image_animation",
+        "image_brightness_and_contrast",
+        "image_uncrop",
+        "video_uncrop"
+      ],
+      "new_opt_out_defaults": 60
+    },
+    {
+      "case": "Yolokfx03 C242 -> C243",
+      "slot": 2,
+      "source_media_type": "VIDEO",
+      "copy_media_type": "VIDEO",
+      "backing_story_video_id_equal": true,
+      "enrollment_changes": [
+        {
+          "field": "image_background_gen",
+          "source": "OPT_IN",
+          "copy": "OPT_OUT",
+          "change": "explicit_change"
+        }
+      ],
+      "omitted_fields": [
+        "image_animation",
+        "image_brightness_and_contrast",
+        "image_uncrop",
+        "video_uncrop"
+      ],
+      "new_opt_out_defaults": 60
+    }
+  ],
+  "field_map_status": "Partial: semantics/correspondence proven per field, no guessed mappings for remaining internal flags; existing pairs are not a single-variable manual-UI experiment."
 }

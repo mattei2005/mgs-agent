@@ -1333,5 +1333,12 @@
     "page_id",
     "instagram_user_id",
     "video_data"
-  ]
+  ],
+  "media_path_checks": {
+    "source_object_type": "VIDEO",
+    "copy_object_type": "VIDEO",
+    "object_story_spec_video_id_equal": true,
+    "root_video_id_equal": false,
+    "caveat": "Different top-level media IDs alone do not prove different rendered bytes. No new media writes were made."
+  }
 }

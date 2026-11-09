@@ -3,7 +3,7 @@
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.adapt_to_placement",
     "ui_label_documented": "Image touch-ups",
     "meaning": "Ajuste de imagem ao posicionamento",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -29,13 +29,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.add_text_overlay",
     "ui_label_documented": "Add dynamic overlays",
     "meaning": "Sobreposicoes com dados de catalogo",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -61,7 +63,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ads_with_benefits",
@@ -93,7 +97,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.advantage_plus_creative",
@@ -125,7 +131,9 @@
         "source": "OPT_OUT",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.app_highlights",
@@ -157,7 +165,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.audio",
@@ -189,7 +199,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.auto_promotion_tag",
@@ -221,7 +233,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.biz_ai",
@@ -253,7 +267,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.carousel_to_video",
@@ -285,7 +301,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.catalog_feed_tag",
@@ -317,13 +335,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.creative_stickers",
     "ui_label_documented": "Create sticker CTA",
     "meaning": "Stickers gerados para CTA",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -349,7 +369,9 @@
         "source": "OPT_OUT",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.customize_product_recommendation",
@@ -381,7 +403,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.cv_transformation",
@@ -413,13 +437,15 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.description_automation",
     "ui_label_documented": "Dynamic description",
     "meaning": "Descricao dinamica de produto/carrossel",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -445,7 +471,27 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "description_automation",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.dha_optimization",
@@ -477,7 +523,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.dynamic_cta_text",
@@ -509,7 +557,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.dynamic_partner_content",
@@ -541,7 +591,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.enable_ncs_testimonials",
@@ -573,13 +625,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.enhance_cta",
     "ui_label_documented": "Enhance CTA",
     "meaning": "Frases associadas ao botao de chamada",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -605,7 +659,35 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "enhance_cta",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [
+            "eligible"
+          ],
+          "copy_statuses": [
+            "eligible"
+          ]
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [
+            "eligible"
+          ],
+          "copy_statuses": [
+            "eligible"
+          ]
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.fb_feed_tag",
@@ -637,7 +719,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.fb_reels_tag",
@@ -669,7 +753,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.fb_story_tag",
@@ -701,7 +787,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.feed_caption_optimization",
@@ -733,7 +821,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.generate_cta",
@@ -765,7 +855,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.hide_price",
@@ -797,7 +889,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.hyperlink_formatting",
@@ -829,7 +923,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ig_feed_tag",
@@ -861,7 +957,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ig_glados_feed",
@@ -893,7 +991,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ig_reels_tag",
@@ -925,7 +1025,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ig_stream_tag",
@@ -957,7 +1059,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.ig_video_native_subtitle",
@@ -989,13 +1093,14 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_animation",
-    "ui_label_documented": "Add animation",
     "meaning": "Transformacao de imagem em animacao",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_only",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1021,7 +1126,29 @@
         "source": "OPT_IN",
         "copy": "NOT_RETURNED"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "semantic_candidate_not_pairwise_UI_proven",
+    "ui_label_candidate": "Add animation",
+    "ui_label_documented": null,
+    "live_preview_probe": {
+      "field": "image_animation",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_auto_crop",
@@ -1053,13 +1180,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_background_gen",
     "ui_label_documented": "Generate backgrounds",
     "meaning": "Geracao de fundos para imagens de produtos elegiveis",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1085,7 +1214,37 @@
         "source": "OPT_IN",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "image_background_gen",
+      "provider_descriptions": [
+        "Generate background variations"
+      ],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [
+            "ineligible"
+          ],
+          "copy_statuses": [
+            "ineligible"
+          ]
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [
+            "ineligible"
+          ],
+          "copy_statuses": [
+            "ineligible"
+          ]
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_banner",
@@ -1117,13 +1276,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_brightness_and_contrast",
     "ui_label_documented": "Adjust brightness and contrast",
     "meaning": "Ajuste de brilho/contraste",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1149,7 +1310,9 @@
         "source": "OPT_IN",
         "copy": "NOT_RETURNED"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_end_card",
@@ -1181,7 +1344,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_enhancement",
@@ -1213,13 +1378,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_templates",
     "ui_label_documented": "Add overlays",
     "meaning": "Sobreposicoes com texto do anuncio",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1245,13 +1412,33 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "image_templates",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_text_translation",
     "ui_label_documented": "Translate image text",
     "meaning": "Traducao de texto na imagem",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1277,13 +1464,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_touchups",
     "ui_label_documented": "Visual touch-ups",
     "meaning": "Recorte/expansao da midia de imagem",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1309,13 +1498,33 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "image_touchups",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.image_uncrop",
     "ui_label_documented": "Expand image",
     "meaning": "Expansao de imagem",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1341,13 +1550,43 @@
         "source": "OPT_IN",
         "copy": "NOT_RETURNED"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "image_uncrop",
+      "provider_descriptions": [
+        "Expand image aspect ratio"
+      ],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [
+            "ineligible"
+          ],
+          "copy_statuses": [
+            "ineligible"
+          ]
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [
+            "ineligible"
+          ],
+          "copy_statuses": [
+            "ineligible"
+          ]
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.inline_comment",
     "ui_label_documented": "Relevant comments",
     "meaning": "Comentario relevante abaixo do anuncio",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1373,7 +1612,27 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "inline_comment",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.local_store_extension",
@@ -1405,7 +1664,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.media_liquidity_animated_image",
@@ -1437,7 +1698,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.media_order",
@@ -1469,13 +1732,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.media_type_automation",
     "ui_label_documented": "Allow product video",
     "meaning": "Videos de produto de catalogo",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1501,7 +1766,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.multi_creative_post_carousel",
@@ -1533,7 +1800,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.multi_photo_to_video",
@@ -1565,7 +1834,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.music_generation",
@@ -1597,7 +1868,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.pac_genai_recomposition",
@@ -1629,7 +1902,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.pac_recomposition",
@@ -1661,13 +1936,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.pac_relaxation",
     "ui_label_documented": "Flex media / Flexible media",
     "meaning": "Flexibilizacao da midia entre proporcoes",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1693,7 +1970,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.product_browsing",
@@ -1725,13 +2004,15 @@
         "source": "NOT_RETURNED",
         "copy": "NOT_RETURNED"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.product_extensions",
     "ui_label_documented": "Show products",
     "meaning": "Itens de catalogo junto da midia",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1757,7 +2038,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.product_metadata_automation",
@@ -1789,7 +2072,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.product_tags",
@@ -1821,7 +2106,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.profile_card",
@@ -1853,7 +2140,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.profile_extension",
@@ -1885,7 +2174,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.replace_media_text",
@@ -1917,13 +2208,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.reveal_details_over_time",
     "ui_label_documented": "Reveal details over time",
     "meaning": "Revela informacoes do site/app ao longo do tempo",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -1949,7 +2242,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.show_destination_blurbs",
@@ -1981,7 +2276,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.show_summary",
@@ -2013,7 +2310,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.site_extensions",
@@ -2045,13 +2344,15 @@
         "source": "OPT_OUT",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.standard_enhancements",
     "ui_label_documented": null,
     "meaning": "Pacote legado/depreciado; nao interpretar como chave-mestra atual",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_only",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2077,7 +2378,9 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.standard_enhancements_catalog",
@@ -2109,7 +2412,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_extraction_for_headline",
@@ -2141,7 +2446,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_extraction_for_tap_target",
@@ -2173,7 +2480,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_formatting_optimization",
@@ -2205,7 +2514,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_generation",
@@ -2237,13 +2548,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_optimizations",
     "ui_label_documented": "Text improvements",
     "meaning": "Recombinacao/realce de opcoes de texto",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2269,7 +2582,27 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "text_optimizations",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_overlay_translation",
@@ -2301,13 +2634,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.text_translation",
     "ui_label_documented": "Translate Text",
     "meaning": "Traducao do texto do anuncio",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2333,13 +2668,15 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.translate_voiceover",
     "ui_label_documented": "Translate voiceover",
     "meaning": "Traducao da locucao do video",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2365,13 +2702,15 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_auto_crop",
     "ui_label_documented": "Visual touch-ups",
     "meaning": "Recorte/ajuste da midia de video",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_and_label",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2397,13 +2736,33 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "official_explicit_label",
+    "live_preview_probe": {
+      "field": "video_auto_crop",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_filtering",
     "ui_label_documented": null,
     "meaning": "Melhorias visuais/cor do video; rotulo UI exato nao comprovado",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_only",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2429,7 +2788,37 @@
         "source": "OPT_IN",
         "copy": "OPT_IN"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": {
+      "field": "video_filtering",
+      "provider_descriptions": [
+        "Video Filter"
+      ],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [
+            "eligible"
+          ],
+          "copy_statuses": [
+            "eligible"
+          ]
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [
+            "eligible"
+          ],
+          "copy_statuses": [
+            "eligible"
+          ]
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_highlight",
@@ -2461,7 +2850,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_highlights",
@@ -2493,7 +2884,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_to_image",
@@ -2525,13 +2918,15 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_uncrop",
     "ui_label_documented": null,
     "meaning": "Expansao de video; rotulo UI exato nao comprovado",
-    "mapping_confidence": "official_documentation",
+    "mapping_confidence": "official_semantics_only",
     "observed": [
       {
         "case": "Mavroa05 C031 -> C033",
@@ -2557,7 +2952,27 @@
         "source": "OPT_IN",
         "copy": "NOT_RETURNED"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": {
+      "field": "video_uncrop",
+      "provider_descriptions": [],
+      "http_counts": {
+        "200": 8
+      },
+      "by_case": [
+        {
+          "case": "Mavroa05 C031 -> C033",
+          "source_statuses": [],
+          "copy_statuses": []
+        },
+        {
+          "case": "Yolokfx03 C242 -> C243",
+          "source_statuses": [],
+          "copy_statuses": []
+        }
+      ]
+    }
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_uncrop_9x16_to_9x18",
@@ -2589,7 +3004,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.video_voiceover",
@@ -2621,7 +3038,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.wa_mm_image_filtering",
@@ -2653,7 +3072,9 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   },
   {
     "api_field": "creative.degrees_of_freedom_spec.creative_features_spec.wa_mm_text_truncation_length",
@@ -2685,6 +3106,8 @@
         "source": "NOT_RETURNED",
         "copy": "OPT_OUT"
       }
-    ]
+    ],
+    "ui_mapping_evidence": "not_confirmed",
+    "live_preview_probe": null
   }
 ]

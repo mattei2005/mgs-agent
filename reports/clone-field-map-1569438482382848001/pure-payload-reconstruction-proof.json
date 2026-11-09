@@ -1,0 +1,98 @@
+[
+  {
+    "request_id": "shein-1568649228383686737",
+    "slot": 1,
+    "effective_payload_digest_matches_saved_receipt": true,
+    "canonical_body_digest_matches_journal": true,
+    "matching_operations": [
+      {
+        "stage": "existing_post_recovery_materialize",
+        "state": "CONFIRMED",
+        "operation": "existing_post_recovery_creative_1_1"
+      }
+    ],
+    "feature_delta_in_effective_payload": [
+      "image_background_gen"
+    ],
+    "background_before": {
+      "enroll_status": "OPT_IN"
+    },
+    "background_after": {
+      "enroll_status": "OPT_OUT"
+    },
+    "all_other_planned_features_unchanged": true,
+    "no_execution": true
+  },
+  {
+    "request_id": "shein-1568649228383686737",
+    "slot": 2,
+    "effective_payload_digest_matches_saved_receipt": true,
+    "canonical_body_digest_matches_journal": true,
+    "matching_operations": [
+      {
+        "stage": "existing_post_recovery_materialize",
+        "state": "CONFIRMED",
+        "operation": "existing_post_recovery_creative_1_2"
+      }
+    ],
+    "feature_delta_in_effective_payload": [
+      "image_background_gen"
+    ],
+    "background_before": {
+      "enroll_status": "OPT_IN"
+    },
+    "background_after": {
+      "enroll_status": "OPT_OUT"
+    },
+    "all_other_planned_features_unchanged": true,
+    "no_execution": true
+  },
+  {
+    "request_id": "shein-1568649923107225623",
+    "slot": 1,
+    "effective_payload_digest_matches_saved_receipt": true,
+    "canonical_body_digest_matches_journal": true,
+    "matching_operations": [
+      {
+        "stage": "existing_post_recovery_materialize",
+        "state": "CONFIRMED",
+        "operation": "existing_post_recovery_creative_1_1"
+      }
+    ],
+    "feature_delta_in_effective_payload": [
+      "image_background_gen"
+    ],
+    "background_before": {
+      "enroll_status": "OPT_IN"
+    },
+    "background_after": {
+      "enroll_status": "OPT_OUT"
+    },
+    "all_other_planned_features_unchanged": true,
+    "no_execution": true
+  },
+  {
+    "request_id": "shein-1568649923107225623",
+    "slot": 2,
+    "effective_payload_digest_matches_saved_receipt": true,
+    "canonical_body_digest_matches_journal": true,
+    "matching_operations": [
+      {
+        "stage": "existing_post_recovery_materialize",
+        "state": "CONFIRMED",
+        "operation": "existing_post_recovery_creative_1_2"
+      }
+    ],
+    "feature_delta_in_effective_payload": [
+      "image_background_gen"
+    ],
+    "background_before": {
+      "enroll_status": "OPT_IN"
+    },
+    "background_after": {
+      "enroll_status": "OPT_OUT"
+    },
+    "all_other_planned_features_unchanged": true,
+    "no_execution": true
+  }
+]
