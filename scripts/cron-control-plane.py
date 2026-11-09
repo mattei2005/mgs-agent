@@ -23,6 +23,7 @@ LOGS = BASE / 'logs'
 SCRIPTS = BASE / 'scripts'
 
 DESCRIPTIONS = {
+    'campaign-creation-sheet-cron.py': 'Prepara 00h13:25 e atualiza a planilha Yolo/Mavroa a partir de00h15 Eastern com D-1 fechado, detalhes e resumo mensal; preserva o envio Discord18h08.',
     'cron-control-plane.py': 'Regenera docs/CRONS.md com inventário/status dos crons MGS.',
     'monitor-cron-stale-logs.sh': 'Watchdog que alerta quando logs de crons MGS deixam de atualizar dentro da tolerância esperada.',
     'cron-smoke-test.sh': 'Smoke test manual dos crons MGS seguros; usa dry-run em scripts de risco.',
@@ -61,6 +62,7 @@ DESCRIPTIONS = {
 }
 
 RISK = {
+    'campaign-creation-sheet-cron.py': 'baixo/médio: Meta GET em12contas autorizadas e escrita somente no Sheet existente via SA canônica; lock único, baseline histórico, ledger e GET integral; sem Meta/ACL write',
     'cron-control-plane.py': 'baixo: re-renderiza docs/CRONS.md',
     'monitor-cron-stale-logs.sh': 'baixo: read-only + alerta Discord',
     'cron-smoke-test.sh': 'baixo/médio: execução manual controlada',
@@ -99,6 +101,7 @@ RISK = {
 }
 
 OWNER = {
+    'campaign-creation-sheet-cron.py': 'Ares/Campaign Ops',
     'cron-control-plane.py': 'Zeus/Ops',
     'monitor-cron-stale-logs.sh': 'Zeus/Infra',
     'cron-smoke-test.sh': 'Zeus/Ops',

@@ -793,12 +793,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATION-SHEET-1569491241303801868",
-      "next_step": "Ler workbook e destino reais; coletar12contas; atualizar e readback; instalar agenda e testar",
-      "objective": "Atualizar outubro e novembro e resumos no Sheet existente; fechar D-1 00h15 Eastern sem alterar envio18h08",
-      "source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
-      "state": "in_progress: fontes, identidade sa, binding destino e coleta live em validacao",
+      "next_step": "Instalar agenda unica com preparacao00h13:25 e gate00h15; testarhook,readbackglobal,registrarpolitica e REPORT-INFRA",
+      "objective": "Outubro e novembro detalhados + resumos; fechamento D-1 00h15 Eastern mantendo Discord18h08",
+      "source": "data/ares/meta-ads/policies/campaign-creation-sheet.json",
+      "state": "sheet6abas getverificado1495celulas; out990 nov386parcial09/11; baselinehistorico preservado;25testespass; wrapper --scheduled realpass; preflightglobal8datas00h13semcolisao; gatepublicacao00h15",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-11-09T23:19:19+00:00"
+      "updated_at": "2026-11-09T23:31:22+00:00"
     },
     {
       "agent": "ares",
@@ -2073,12 +2073,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569456380065222707",
-      "next_step": "Bloqueio externo Meta sem reparo central suportado:resolver issue1487083 nos anuncios120251118532380629 e120251118590680629 via revisao/suporte da plataforma;apos liberacao retomar mesmo campaign request-ready somente ativacao faltante,sem criar/upload/reaplicar parametros;GETfinal9/9 antes concluir",
-      "objective": "Concluir9clones010 MavroaG006,18videos/headline HAZ CLIC AQUI,USD35cada,COST_CAP0.90,inicio10nov2026 00h15EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/partial-verified-receipt.json",
-      "state": "parcial verificado:102-110/9conjuntos/18ads existentes,qa renderizado9/9 e posprocessamento completos,copy/headline/budget3500/cap90/inicio exatos,ids iguaischeckpoint.102/103 active;104-110 paused.1487083 invalid usage of forcerunstatus confirmado nos ads02 das104 e108.usd315/dia configurado lote,usd70/dia habilitado.original request e correcoes humanas preservados;nao concluido.",
+      "next_step": "Nao retomar writer nem reativar/pausar/recriar por snapshot antigo;reportar duas rejeicoes e oito divergencias de budget.Qualquer correcao precisa novo pedido especifico;preservar runner/manifests e autoria manual;encerramento de coordenacao somente fluxo canonico suportado,sem terminalfalso.",
+      "objective": "Conferir9clones010 MavroaG006 apos ativacao manual informada porNicolas;somente leitura",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/manual-activation-verification-1569494300255985776.json",
+      "state": "verificacao09nov2026 18h32est:9campanhas102-110 e9conjuntos active,16/18ads active;ad02da104 ead02da108 paused/with_issues codigo2490468 rejeitados em avaliacao.metaagora explicita rejeicao,sem motivo de politica retornado.mesmosids,copy/headline/tracking/features eprovasqa preservados;cap90,inicio10nov00h15est.102/104-110 usd43.75cada;103 usd35,totalusd385/dia versusoriginalusd315;origemautoria alteracaobudgetnao verificada.insights09nov0imp/usd0.ativacao manual relatada pelonicolas;ares0writesmeta.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-09T21:20:38+00:00"
+      "updated_at": "2026-11-09T23:33:36+00:00"
     },
     {
       "agent": "ares",
@@ -9625,5 +9625,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T23:23:36+00:00"
+  "updated_at": "2026-11-09T23:33:36+00:00"
 }
