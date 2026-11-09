@@ -914,7 +914,7 @@
       ],
       "owner": "zeus",
       "type": "monitor-recovery",
-      "status": "full_readonly_validation_running",
+      "status": "full_readonly_validation_completed_no_post",
       "checkpoint_id": "ZEUS-DTR-DAILY-RECOVERY-1569188551139004499",
       "source_message_id": "1569188551139004499",
       "process_session_id": "proc_5b412026f4a4",
@@ -922,7 +922,7 @@
       "lock": "/var/lock/dtr_sb_daily_match_audit.lock",
       "command": "scripts/dtr-sb-daily-match-audit.sh --no-post",
       "backup": "/root/.hermes/profiles/zeus/cache/scratch/dtr-daily-recovery-1569188551139004499",
-      "validation": "8 unit tests pass; exact formerly timed-out user live login OK, 3 accounts, 42 pages, no top-level or nested errors; full 73-user run started under existing exclusive lock; no Discord publication or published-state advancement",
+      "validation": "Full no-post run completed 2026-11-08T22:53:27-05:00 with END rc=0; report reports/dtr-sb-daily-match-audit-20261108-222018.json verified: 73/73 logins, 199 accounts, 2595 raw DTR pages, 54 SB publishers, 2875 SB rows after ignore, zero collection/nested/1Password errors; 8 unit tests rerun PASS with PYTHONPATH=scripts; Python AST and bash syntax PASS; original PID exited and daily lock free. Operational Discord delivery intentionally not performed; last published state preserved at 2026-11-07T06:53:13-05:00; no additional writer or business changes.",
       "files": [
         {
           "path": "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",

@@ -14,6 +14,7 @@ import signal
 import sqlite3
 import subprocess
 import time
+from zoneinfo import ZoneInfo
 from mgs_automation_continuity import Queue, disposition, verified_observation
 
 BASE=Path('/root/mgs-agent')
@@ -64,10 +65,33 @@ def blocking_output(text):
     return None
 
 
+def dtr_observation(base=BASE,root=Path('/root/.hermes/shared/automation-continuity/dtr-delivery'),now=None):
+    now=time.time() if now is None else now
+    key='producer:dtr-sb-daily-match-audit.sh'
+    result={'status':'ERROR','verified':False,'target':key,'receipt':'DTR daily report delivery not independently verified','at':now,'source':{'kind':'producer','script':'dtr-sb-daily-match-audit.sh'}}
+    try:
+        published=json.loads((base/'data/dtr-sb-daily-match-audit-state.json').read_text())
+        summary=published['last_summary'];stamp=epoch(summary['started_at_et'])
+        current=datetime.fromtimestamp(now,ZoneInfo('America/New_York'))
+        due=current.replace(hour=6,minute=20,second=0,microsecond=0).timestamp()
+        if now<due:due-=86400
+        if stamp<due or stamp>now+300:return result
+        path=root/str(summary['started_at_et'])[:10]/'manifest.json';receipt=json.loads(path.read_text())
+        if receipt.get('status')!='GET_VERIFIED' or not receipt.get('parts') or not all(p.get('verified') and p.get('message_id') for p in receipt['parts']):return result
+        snapshot=Path(receipt['snapshot']);raw=snapshot.read_bytes()
+        if hashlib.sha256(raw).hexdigest()!=receipt['sha256']:return result
+        from mgs_dtr_continuity import validate_snapshot
+        validate_snapshot(json.loads(raw))
+        result.update(status='OK',verified=True,receipt=str(path),at=float(receipt['verified_at']))
+    except (OSError,ValueError,KeyError,TypeError):pass
+    return result
+
+
 def collect(base=BASE,profiles=PROFILES):
     now=time.time()
     result=subprocess.run([str(base/'scripts/monitor-cron-stale-logs.sh'),'--dry-run'],capture_output=True,text=True,timeout=90)
     observations=monitor_observations(result.stdout if result.returncode==0 else '',now)
+    observations['producer:dtr-sb-daily-match-audit.sh']=dtr_observation(base=base,now=now)
     inventory=[]
     cron=subprocess.run(['crontab','-l'],capture_output=True,text=True,timeout=15)
     if cron.returncode:raise RuntimeError('root cron inventory unavailable')
@@ -99,6 +123,8 @@ def collect(base=BASE,profiles=PROFILES):
                     source.update(resource='pc1',pending_cause=blocked)
             if j.get('last_status') in ('error','failed'):
                 row.update(status='ERROR',verified=False)
+            if j.get('last_delivery_unverified'):
+                row.update(status='ERROR',verified=False,receipt='native delivery unverified')
             if j.get('fire_claim'):source['running_claim']=True
     # Inventory every system cron entry, not just MGS filenames.
     for p in [Path('/etc/crontab'),*Path('/etc/cron.d').glob('*')]:
@@ -220,6 +246,10 @@ Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:180
 
 
 def run_worker(row,mode,base=BASE,timeout=900):
+    if row['source_key']=='producer:dtr-sb-daily-match-audit.sh' and mode=='resume_safe':
+        from mgs_dtr_continuity import latest_snapshot,resume_delivery
+        snapshot,_=latest_snapshot(base)
+        if snapshot is not None:return resume_delivery(base)
     source=json.loads(row['source']);profile=source.get('profile','zeus')
     if profile not in ('zeus','atena','ares'):raise ValueError('invalid executor')
     env=dict(os.environ,HERMES_BACKGROUND_NOTIFICATIONS='off',HERMES_DISABLE_TOOL_PROGRESS='1',MGS_CONTINUITY_OPERATION_KEY=row['key'])

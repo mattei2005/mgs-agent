@@ -259,13 +259,22 @@ def main():
     if args.limit_users:
         users = users[:args.limit_users]
 
+    from mgs_dtr_continuity import Progress, ROOT
+    progress = None if args.dry_run else Progress(
+        ROOT / 'dtr-collection' / datetime.now(NY).strftime('%Y-%m-%d') / str(args.limit_accounts), users)
     dtr_scans = []
     all_dtr_pages = []
     errors = []
     for i, u in enumerate(users, 1):
         print(f'PROGRESS DTR {i}/{len(users)} {u}', flush=True)
         try:
-            scan = asyncio.run(mod.dtr_collect_user(u, matched[u], args.limit_accounts))
+            scan = progress.read(u) if progress is not None else None
+            if scan is None:
+                scan = asyncio.run(mod.dtr_collect_user(u, matched[u], args.limit_accounts))
+                if progress is not None:
+                    progress.save(u, scan)
+            else:
+                print(f'PROGRESS CACHE DTR {i}/{len(users)}', flush=True)
         except Exception as exc:
             errors.append({'user': u, 'errors': [f'{type(exc).__name__}: {exc}']})
             continue
@@ -432,9 +441,14 @@ def main():
     if args.dry_run or args.no_post:
         print(report)
     else:
-        for chunk in chunk_discord(report):
-            discord_post('```\n' + chunk + '\n```')
-        save_state(issue_keys, summary)
+        from mgs_dtr_continuity import deliver
+        from mgs_alert_transport import post_verified
+        delivery = deliver(raw_path, ROOT / 'dtr-delivery' / str(summary['started_at_et'])[:10], sys.modules[__name__], post_verified)
+        summary = dict(delivery['summary'])
+        summary['delivery_verified'] = True
+        summary['delivery_message_ids'] = [p['message_id'] for p in delivery['parts']]
+    if progress is not None:
+        progress.complete()
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 

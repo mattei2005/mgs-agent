@@ -69,6 +69,19 @@ class SupervisorTests(unittest.TestCase):
         self.assertEqual(self.m.source_key_for_alert({'id':'100','embeds':[{'fields':[{'name':'Script','value':'`hermes:zeus:abc`'}]}]}),'native:zeus:abc')
         self.assertEqual(self.m.source_key_for_alert({'id':'101','embeds':[{'fields':[{'name':'Script','value':'`dtr-sb-daily-match-audit.sh`'}]}]}),'producer:dtr-sb-daily-match-audit.sh')
 
+    def test_failed_blocker_notice_cannot_resume_business_work(self):
+        j=self.add()
+        def notify(*a):raise RuntimeError('fixture delivery unavailable')
+        self.m.drive(self.q,{},lambda *a:'Bloqueado: 2FA necessária.',lambda:False,lambda s:False,notify,now=200,max_jobs=1)
+        self.assertEqual(self.q.get(j['key'])['state'],'waiting_human')
+        self.assertEqual(self.q.get(j['key'])['failures'],0)
+
+    def test_dtr_no_post_validation_cannot_count_as_delivered_report(self):
+        self.assertTrue(hasattr(self.m,'dtr_observation'),'Missing independent DTR delivery validator')
+        obs=self.m.dtr_observation(base=Path(self.tmp.name),root=Path(self.tmp.name)/'delivery',now=200)
+        self.assertEqual(obs['status'],'ERROR')
+        self.assertFalse(obs['verified'])
+
     def test_collector_unavailable_is_explicit_not_empty_healthy(self):
         rows=self.m.monitor_observations('invalid monitor output',now=200)
         self.assertEqual(rows['service:monitor-observation']['status'],'UNKNOWN')
