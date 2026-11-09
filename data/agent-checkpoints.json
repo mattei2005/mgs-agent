@@ -1362,6 +1362,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1569353719407976469",
+      "next_step": "Concluído; preservar recibos. Receita consolidada Escalatepower n/d por ausência de linha SB em 002; Boostingecon sem entrega, receita/ROI n/d; atraso destacado por publisher.",
+      "objective": "Intraday atual nas seis threads SHEIN G006, cada uma com resumo financeiro final",
+      "source": "discord:1185714635991679006/1567162580273729629/1569353719407976469",
+      "state": "complete_get_verified: seis relatórios integrais, 123 campanhas, 32 partes e seis resumos finais; get exato de todas as 38 mensagens; corte 09/11/2026 09:13–09:14 est; zero write meta",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-09T14:18:02+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -7674,6 +7684,16 @@
       "updated_at": "2026-11-09T13:15:20+00:00"
     },
     {
+      "agent": "ares",
+      "id": "intake-1569353567305728011",
+      "next_step": "Registrar mesmos IDs, consumir batches canônicos de até quatro, QA completo e complete, auditoria permanente integral",
+      "objective": "Tratar e organizar 36 fontes SHEIN_US_ES Kelly common, preservando RAW IDs e reservas",
+      "source": "data/ares/creative-ops/executions/intake-1569353567305728011",
+      "state": "36 ids novos estáveis; amostras raw espanhol confirmadas apesar nomes en; register plan verified e1da3517234622eac7546d169a6fd26e; nenhum write remoto",
+      "thread_id": "1569353567305728011",
+      "updated_at": "2026-11-09T14:14:36+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "jbf-preloader-rollout-20260817",
       "next_step": "Aguardar decisão do Rodolfo sobre migrar financeadx.com (jbf-server-child sem módulo integrado) para LoftLoader; não há pendência nos 35 sites compatíveis com JBF integrado.",
@@ -9485,5 +9505,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T14:06:40+00:00"
+  "updated_at": "2026-11-09T14:18:02+00:00"
 }
