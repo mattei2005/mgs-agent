@@ -29,6 +29,7 @@ BASE = Path('/root/mgs-agent')
 sys.path.insert(0, os.environ['MGS_MONITOR_SCRIPT_DIR'])
 from mgs_alert_transport import post_verified, update_verified
 from mgs_scheduler_health import native_rows, timer_rows, producer_health
+from mgs_report_scheduler_health import report_health
 STATE = Path(sys.argv[1])
 DRY_RUN = sys.argv[2] == '1'
 NOW = int(time.time())
@@ -55,7 +56,7 @@ CUSTOM_LOG = {
 # Erros semânticos: log fresco não significa cron saudável.
 # Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".
 SEMANTIC_ERROR_RE = re.compile(
-    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\b)(error|erro):|error token|command not found|permission denied|no such file or directory)',
+    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\b)(error|erro):|error token|command not found|permission denied|no such file or directory|\bEND\b[^\n]*\brc=(?:-[1-9]\d*|[1-9]\d*)\b|"execution_complete"\s*:\s*false)',
     re.I,
 )
 
@@ -128,7 +129,7 @@ def parse_crons():
     jobs = []
     for line in out.splitlines():
         s = line.strip()
-        if not s or s.startswith('#') or str(BASE) + '/' not in s:
+        if not s or s.startswith('#'):
             continue
         parts = s.split()
         if len(parts) < 6:
@@ -136,9 +137,13 @@ def parse_crons():
         schedule = ' '.join(parts[:5])
         command = ' '.join(parts[5:])
         m = re.search(re.escape(str(BASE)) + r'/((?:scripts/|apps/)[^\s;\"\']+\.(?:py|sh))(?=$|[\s\"\'])', command)
-        if not m:
-            continue
-        script = m.group(1).removeprefix('scripts/')
+        if m:
+            script = m.group(1).removeprefix('scripts/')
+        else:
+            profile_match = re.search(r'/root/\.hermes/profiles/(zeus|atena|ares)/scripts/([^\s;\"\']+\.(?:py|sh))(?=$|[\s\"\'])', command)
+            if not profile_match:
+                continue
+            script = profile_match.group(1) + '/' + profile_match.group(2)
         log_m = re.search(r'>>\s*([^\s]+)', command)
         log_path = log_m.group(1) if log_m else CUSTOM_LOG.get(script, '')
         jobs.append({'schedule': schedule, 'script': script, 'command': command, 'log_path': log_path})
@@ -279,6 +284,9 @@ for job in parse_crons():
         heartbeat = producer_health(CANONICAL_PRODUCER_STATE[script], NOW, threshold, p.stat().st_mtime if p.exists() else 0)
         if heartbeat is not None:
             status, detail = heartbeat
+    receipt = report_health(script, NOW, p.stat().st_mtime if p.exists() else 0)
+    if receipt is not None:
+        status, detail = receipt
     rows.append((script, status, detail))
 
 # Um mesmo script pode ter várias agendas no root crontab apontando para o

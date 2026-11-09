@@ -1,0 +1,239 @@
+{
+  "id": "ZEUS-AUTOMATION-AUDIT-1569185815869915167",
+  "at": "2026-11-09T03:15:09.490027+00:00",
+  "authority_message_id": "1569185815869915167",
+  "thread_id": "1569185140502954077",
+  "coverage": {
+    "hermes_jobs": 71,
+    "enabled": 18,
+    "paused": 24,
+    "completed": 29,
+    "root_cron_entries": 60,
+    "system_timers": 18
+  },
+  "baseline_comparison": [
+    {
+      "profile": "zeus",
+      "before": 30,
+      "now": 25,
+      "missing": [
+        {
+          "id": "a3e5fb6a5b7b",
+          "name": "Digital Trust · retomar cartões pendentes PC1",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        },
+        {
+          "id": "0123d4ca4a8f",
+          "name": "Ares cleanup visual · finalização externa única",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        },
+        {
+          "id": "c88b29889557",
+          "name": "Dash financeira · abrir novembro",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        },
+        {
+          "id": "d476a2649595",
+          "name": "Hostinger core22 · validar atualização automática",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        },
+        {
+          "id": "f17da87f7d57",
+          "name": "Hostinger core22 · revalidar ciclo nativo",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        }
+      ],
+      "newly_disabled": [
+        {
+          "id": "be0c6fd23c82",
+          "name": "F011 descarte condicional dois backups",
+          "current_state": "completed",
+          "current_paused_at": null
+        }
+      ]
+    },
+    {
+      "profile": "atena",
+      "before": 1,
+      "now": 1,
+      "missing": [],
+      "newly_disabled": []
+    },
+    {
+      "profile": "ares",
+      "before": 26,
+      "now": 45,
+      "missing": [
+        {
+          "id": "4343ea68574c",
+          "name": "Yolokfx02 G006 · reativar dez · 01-11 00h15",
+          "enabled_before": false,
+          "state_before": "completed",
+          "repeat": {
+            "times": 1,
+            "completed": 1
+          }
+        }
+      ],
+      "newly_disabled": [
+        {
+          "id": "96f0eb16279d",
+          "name": "SHEIN G004 Yolokfx04 CPR 03-11",
+          "current_state": "completed",
+          "current_paused_at": null
+        },
+        {
+          "id": "e8ffbbfce6a5",
+          "name": "SHEIN G004 Mavroa04 CPR 03-11",
+          "current_state": "completed",
+          "current_paused_at": null
+        }
+      ]
+    }
+  ],
+  "baseline_conclusion": "No previously enabled recurring Hermes job missing or unexpectedly paused since pre-cutover backup; retired rows were already completed; observed completed transitions were bounded jobs. Current store changed by native lifecycle during audit.",
+  "shein": {
+    "creation_get_verified": "1569185827056255019",
+    "creation_accounts": 36,
+    "intraday_slots": [
+      {
+        "slot": "1411",
+        "accounts": 24,
+        "complete": 24,
+        "parts": 116,
+        "verified_parts": 116
+      },
+      {
+        "slot": "1602",
+        "accounts": 24,
+        "complete": 24,
+        "parts": 116,
+        "verified_parts": 116
+      },
+      {
+        "slot": "2002",
+        "accounts": 24,
+        "complete": 24,
+        "parts": 119,
+        "verified_parts": 119
+      }
+    ],
+    "independent_exact_get_accounts": 24,
+    "wrapper_root_cause": "Old wrappers interpreted shell launcher shebang as Python; prior recoveries reconciled, not rerun here."
+  },
+  "open_findings": [
+    {
+      "id": "digital-trust-refresh",
+      "job_id": "2ee720363d7d",
+      "status": "partial_blocked",
+      "cause_confirmed": "Codex HTTP400 after partial writes; provider gave no specific root cause",
+      "reconciled_effects": "47 accounts metrics published21:04 per existing resolver; H36 not fresh; PC1 occupied by active owner session; prior billing2FA gate documented",
+      "authority_boundary": "No duplicate writer, payment, billing, credential or PC1 takeover. Existing recurring schedule preserved.",
+      "resolver_state": "escalated after3bounded checks; no claim of autonomous follow-up beyond existing scheduled job",
+      "source": "data/alerts-infra-failed-alert-resolver-state.json#/processed/1569173452038864958"
+    },
+    {
+      "id": "dtr-match-audit",
+      "status": "target_recovered_full_report_not_reexecuted",
+      "last_scheduled_result": "72/73login complete; ENDrc2, report withheld",
+      "target_live_retry": {
+        "at": "2026-11-09T03:12:08.859894+00:00",
+        "username": "disparosescalatepower@gmail.com",
+        "login_ok": true,
+        "accounts": 3,
+        "pages": 42,
+        "errors": [],
+        "scope": "single previously timed-out user only; no full-audit recovery inferred",
+        "remote_business_writes": 0
+      },
+      "scope_limit": "Single failed user reread does not prove full daily report regeneration; no operational report posted."
+    }
+  ],
+  "monitor_recovery": {
+    "state": "deployed_tested_next_scheduled_cycle",
+    "fixed": [
+      "root-cron coverage for all3profile script paths",
+      "nonzeroENDrc and execution_completefalse",
+      "SHEIN exactcoverage/verifiedreceipt/freshness without replay or hiding newer errors"
+    ],
+    "tests": "19tests pass isolated; bash-n pass; live dry-run2real findings",
+    "cron_schedule_changed": false,
+    "no_new_job": true,
+    "intraday_receipt_max_age_hours": 12,
+    "overnight_gap_preserved": "23:31->09:32 plus DST variation; fixture11h healthy/13h stale"
+  },
+  "services": {
+    "zeus_pid": 2241212,
+    "atena_pid": 2237072,
+    "ares_pid": 2233587,
+    "all_active": true,
+    "autocommit_active": true,
+    "failed_units": 0
+  },
+  "customizations": {
+    "native_patch_guard": "733tests36files0fail at22:02Eastern",
+    "limitation": "Regression suite and scheduler/receipt audit are not exhaustive live acceptance of every on-demand business customization."
+  },
+  "artifacts": [
+    {
+      "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+      "sha256": "d7e44f32430c469962fe7674c8e6a180b05ff4b99a11a4fa1c6c61ce81fc348f",
+      "bytes": 18327
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_report_scheduler_health.py",
+      "sha256": "a10d5091872dbcb9fa82fc46c1c9834faef73411b784c6b26dd5ed1189ce5b40",
+      "bytes": 3127
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_automation_continuity_health.py",
+      "sha256": "e8f6711e72dadd1dfb307e2ce01d5df25639e85662191726bf37d099c3479c35",
+      "bytes": 5752
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "sha256": "1f1e36af228e1ce12050242524141a03ca44178d400eaefc63460ac8d974d140",
+      "bytes": 26479
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "sha256": "1f1e36af228e1ce12050242524141a03ca44178d400eaefc63460ac8d974d140",
+      "bytes": 26479
+    }
+  ],
+  "evidence_dir": "/root/.hermes/profiles/zeus/cache/scratch/automation-audit-1569185815869915167",
+  "report_infra_status": "sent_verified",
+  "report_infra": {
+    "message_id": "1569188573238927391",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified_at": "2026-11-09T03:15:53.744643+00:00"
+  }
+}
