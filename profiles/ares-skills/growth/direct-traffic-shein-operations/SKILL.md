@@ -13,9 +13,9 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN-US-DIRECT não herda ativos, contas, parâmetros, políticas, relatórios ou automações de CAR/CPV.
+SHEIN não herda CAR/CPV. Correções preservam request/relógio/IDs/selos; headline não muda CTA.
 
-Pausa: use o bootstrap de `references/status-only-readiness-and-signatures.md` antes de hierarquias/agenda. PAUSED não comprova ativação agendada.
+Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
 ## Duplicação e recuperação — precedência obrigatória
 
