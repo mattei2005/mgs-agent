@@ -32,6 +32,8 @@ Native cron correlation requires a unique exact profile/original-thread match. G
 
 Use `mgs_alert_transport.post_verified`. Persist accepted message IDs before GET; a failed verification retries GET of that ID, not the business operation or a second POST. Bound nonces to Discord's accepted length and explicitly disable unintended mentions.
 
+For a human/decision gate, preserve the exact final question and required CEO push in a bounded embed; do not cut the tail of a long diagnostic into a content-only message. Freeze the entire notice payload before POST so a changed probe response cannot break GET reconciliation. Upgrade an already-accepted legacy notice by PATCH of its exact ID plus GET, never by a replacement POST.
+
 DTR daily audit uses `scripts/mgs_dtr_continuity.py`:
 
 - Cache only complete per-user collections, scoped by target list/date/account limit. Do not reuse partial login/account results or expired checkpoints.

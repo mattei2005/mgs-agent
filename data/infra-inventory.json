@@ -914,12 +914,12 @@
       "id": "automation-recovery-implementation-1569193434189668453",
       "agent": "zeus",
       "type": "common-durable-automation-continuity",
-      "status": "runtime_active_business_recovery_still_tracked",
-      "updated_at": "2026-11-09T05:10:52.218379+00:00",
+      "status": "runtime_active_waiting_shein_historical_delivery_authorization",
+      "updated_at": "2026-11-09T05:33:12.813977+00:00",
       "authority_message_id": "1569193434189668453",
       "canonical_source": "/root/mgs-agent/context/automation-recovery-policy.md",
       "evidence": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
-      "tests_passed": 92,
+      "tests_passed": 95,
       "artifacts": [
         {
           "path": "/root/mgs-agent/scripts/mgs_automation_continuity.py",
@@ -928,8 +928,8 @@
         },
         {
           "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-          "sha256": "890d541313b2f714eef8dbbe4432b1002b5a7f2d9c48cdcd197776200bf8e4cd",
-          "bytes": 29712
+          "sha256": "2e24a78326dc69a154e2a507a311ffdb2e5d078e3e0c6da363648e71e6f5eebf",
+          "bytes": 30859
         },
         {
           "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
@@ -1013,13 +1013,13 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-          "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
-          "bytes": 8486
+          "sha256": "7f825634eff50b01438e9c84bbb7b0c4fdb9f6ac288e50ee34d62b89abc6cf6f",
+          "bytes": 8872
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
-          "sha256": "4ae8b30420e614bec24a5a7a2e5be85a44b6166054a95bd3fb689d0370e82b00",
-          "bytes": 8486
+          "sha256": "7f825634eff50b01438e9c84bbb7b0c4fdb9f6ac288e50ee34d62b89abc6cf6f",
+          "bytes": 8872
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
@@ -1030,11 +1030,27 @@
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md",
           "sha256": "2655617ccd17d2d10b5c13e2b017a29d4f8353ae200d7287d8a4860eb88c1172",
           "bytes": 24049
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_continuity_notice_delivery.py",
+          "sha256": "b556f88c1ff8455982dca1e56c071726813df60896fee85f42973379a20623a1",
+          "bytes": 3172
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+          "sha256": "9c45b0aa7e606f1ca1f821679a25c7d2680090822d4d74a96c616542938b7349",
+          "bytes": 6775
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+          "sha256": "9c45b0aa7e606f1ca1f821679a25c7d2680090822d4d74a96c616542938b7349",
+          "bytes": 6775
         }
       ],
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1569216490891386951",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "business_gate_evidence": "/root/mgs-agent/reports/automation-recovery-6354e984ad07c7c7f1f15529.json"
     },
     {
       "id": "dtr-daily-recovery-1569188551139004499",
@@ -65132,7 +65148,8 @@
     {
       "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
       "size_bytes": 24436,
-      "modified_at": "2026-11-08T23:29:58-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "eb9a89cdbab011a43291bba20064d98ab5af69cfb510b5677fbfb090b5cf8040"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
@@ -66072,7 +66089,8 @@
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
       "size_bytes": 19059,
-      "modified_at": "2026-11-08T22:59:18-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "68a8121fcd9d44a194ce7cff24969f9f0dd7132f7209cf9dc2e3863816d0005d"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
@@ -66402,7 +66420,8 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-pc1-computer-use-lock.py",
       "size_bytes": 8176,
-      "modified_at": "2026-11-08T23:16:27-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "4d7e56eaf37bcc2b4b1a5a35d2ff4d05192ee539c62d66b87036ae625c18e55a"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh",
@@ -66612,12 +66631,14 @@
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_continuity.py",
       "size_bytes": 12702,
-      "modified_at": "2026-11-08T23:45:12-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "e73a3871c167857a5520598e8cd723d16eef27a84f88981bb9bf90a58db703a8"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 29712,
-      "modified_at": "2026-11-08T23:51:00-05:00"
+      "size_bytes": 30859,
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "2e24a78326dc69a154e2a507a311ffdb2e5d078e3e0c6da363648e71e6f5eebf"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",
@@ -66637,7 +66658,8 @@
     {
       "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
       "size_bytes": 1968,
-      "modified_at": "2026-11-08T23:28:38-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "f0260c12d202ac6ab703e97aa86696d9ede40da56882bcdd2ca4e5f644e1d6cc"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_corporate_archive.py",
@@ -66647,7 +66669,8 @@
     {
       "path": "/root/mgs-agent/scripts/mgs_dtr_continuity.py",
       "size_bytes": 7149,
-      "modified_at": "2026-11-08T23:16:27-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "fadb4d725e1a4f8afa12d0e3d89a392a394154b7d650c29d37eaedeeb82bdcc4"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_flat_consolidation.py",
@@ -66787,7 +66810,8 @@
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
       "size_bytes": 18423,
-      "modified_at": "2026-11-08T23:18:53-05:00"
+      "modified_at": "2026-11-09T05:33:12.813977+00:00",
+      "sha256": "0bebe8a87786b09c799a2550db78eebc84b5ef02314f2e1a0c0c0202cf8e38b2"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -70244,15 +70268,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/reports/automation-recovery-tests-1569193434189668453.txt",
-      "size_bytes": 547,
-      "sha256": "27ceb5343890770de03c6c417def59d0f6c9d1684cfe485239184ac49dec102b",
-      "modified_at": "2026-11-09T05:10:52.218379+00:00"
+      "size_bytes": 550,
+      "sha256": "fefb240a0d10a98dda7fe09692b852475769b25183ff91f0599448fb29307d04",
+      "modified_at": "2026-11-09T05:33:12.813977+00:00"
     },
     {
       "path": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
-      "size_bytes": 76832,
-      "sha256": "4843064e7d4ec062a847331a9faa8cab9a834794910ba07e22d2a184472495b5",
-      "modified_at": "2026-11-09T05:10:52.218379+00:00"
+      "size_bytes": 82463,
+      "sha256": "0bd15624a37e7c6314ae4c0c0b73ec1f452462fe29449787f3b7b0753616035a",
+      "modified_at": "2026-11-09T05:33:12.813977+00:00"
     },
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
