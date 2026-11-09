@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 2,
+  "consecutive_failures": 0,
   "daily": {
     "date": "2026-11-09",
     "last_result": {
@@ -4925,7 +4925,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-09T12:27:35-05:00",
+  "last_check": "2026-11-09T12:42:10-05:00",
   "last_delivery": {
     "at": "2026-11-09T11:10:26-05:00",
     "cursor_ids": [
@@ -4937,11 +4937,7 @@
     "message_ids": [],
     "notification_ids": []
   },
-  "last_error": {
-    "at": "2026-11-09T12:27:35-05:00",
-    "message": "Smart Bidding canonical login required; authentication wall; no credential changed",
-    "type": "RuntimeError"
-  },
+  "last_error": null,
   "last_seen_id": 740593,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
