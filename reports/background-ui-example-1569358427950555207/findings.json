@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-09T14:42:50.356415+00:00",
+  "source_message": "1569358427950555207",
+  "request": "Screenshot of specific Generate backgrounds control visibly enabled",
+  "positive_mgs_ui_example_obtained": false,
+  "api_specific_preview": {
+    "ads": 60,
+    "campaigns": 30,
+    "http_counts": {
+      "200": 60
+    },
+    "transformation_statuses": {
+      "ineligible": 60
+    },
+    "all_ads_explicitly_ineligible": true,
+    "source": "GET ad/previews?ad_format=MOBILE_FEED_STANDARD&creative_feature=image_background_gen"
+  },
+  "inspected_ui": {
+    "account": "Mavroa 02 G002",
+    "campaign": "013",
+    "ad_id": "120252369595910326",
+    "named_control_present": false,
+    "modal_closed_without_save": true,
+    "published_integrity_verified": true
+  },
+  "external_illustration": {
+    "path": "/root/mgs-agent/reports/background-ui-example-1569358427950555207/generate-backgrounds-exemplo-externo-vend.jpg",
+    "source": "https://vend.digital/digital-marketing/facebook-ads/what-is-generate-backgrounds-ai-in-meta-ads/",
+    "not_an_mgs_campaign": true,
+    "control_label": "Generate backgrounds",
+    "blue_toggle_visible": true
+  },
+  "official_definition": "https://www.facebook.com/business/help/981940746195135",
+  "recommendation": "Do not interpret30 OPT_IN campaigns as using background generation;60/60 exact previews ineligible. No new creation, activation or catalog changes to manufacture screenshot."
+}
