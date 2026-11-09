@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""Read-only rendered RPS capture. Isolated Ares session; no dashboard writes."""
+import argparse,ast,asyncio,json,os,re,shlex,subprocess,sys
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from playwright.async_api import async_playwright
+HOME=Path('/root/.hermes/profiles/ares')
+URL='https://app.smartbiddingdigital.com/reports/adgroup'
+UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36'
+def credentials():
+    tree=ast.parse(Path('/root/mgs-agent/scripts/ares-smartbidding-common.py').read_text())
+    nodes=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in {'_shell_quote','_fetch_credentials'}]
+    assert len(nodes)==2
+    ns={'os':os,'subprocess':subprocess,'shlex':shlex,'json':json}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),'corporate-resolver','exec'),ns)
+    return ns['_fetch_credentials']('Ares - Smartbidding Dashboard')
+def save(path,value):
+    path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    path.write_text(json.dumps(value,ensure_ascii=False,indent=2));path.chmod(0o600)
+async def run(args):
+    root=Path(args.root);request=json.loads((root/'request.json').read_text())
+    bindings=request['bindings'];aids={b['account_id'] for b in bindings}
+    domains={b['account_name'].split('-')[0].lower() for b in bindings}
+    target=request['date'];state=Path(args.session) if args.session else HOME/'cache/scratch/shein-daily-rps-session.json'
+    source=state if state.exists() else Path('/root/.local/share/mgs/smartbidding_state_ares.json')
+    if source.exists():
+        data=json.loads(source.read_text())
+        for o in data.get('origins',[]):o['localStorage']=[v for v in o.get('localStorage',[]) if not v['name'].startswith('sb:cache:')]
+        save(state,data)
+    async with async_playwright() as p:
+        browser=await p.chromium.launch(headless=False,args=['--disable-blink-features=AutomationControlled'])
+        context=await browser.new_context(storage_state=str(state) if state.exists() else None,viewport={'width':1600,'height':1000},user_agent=UA)
+        try:
+            page=await context.new_page();await page.goto(URL,wait_until='networkidle',timeout=90000)
+            if '/u/login' in page.url:
+                username,password=credentials()
+                await page.locator('input[name="username"]:visible, input[type="email"]:visible').first.fill(username)
+                await page.locator('input[type="password"]:visible').first.fill(password)
+                del username,password
+                await page.get_by_role('button',name=re.compile('Continue|Log in|Login',re.I)).first.click()
+                await page.wait_for_url('https://app.smartbiddingdigital.com/**',timeout=90000)
+                await page.wait_for_load_state('networkidle',timeout=90000)
+            assert await page.get_by_text('Ares',exact=True).count()>0,'Ares UI identity missing'
+            data=await context.storage_state()
+            for o in data.get('origins',[]):o['localStorage']=[v for v in o.get('localStorage',[]) if not v['name'].startswith('sb:cache:')]
+            save(state,data)
+            if args.probe:
+                await page.locator('input').first.click()
+                await page.get_by_role('button',name=args.preset,exact=(args.preset=='Today')).click()
+                await page.wait_for_timeout(2500)
+                print(json.dumps({'url':page.url.split('?')[0],'date':await page.locator('input').first.input_value(),'calendar_panels':await page.locator('.p-datepicker:visible, [role="dialog"]:visible').all_text_contents(),'buttons':await page.get_by_role('button').all_text_contents()},ensure_ascii=False));return
+            control=page.get_by_placeholder('Select a dimension').first.locator('xpath=../..')
+            wanted={'DATE','DOMAIN','CUSTOMER_ID','CAMPAIGN_ID','CAMPAIGN_NAME'}
+            for _ in range(30):
+                if not await page.locator('.p-multiselect-panel:visible').count():await control.click()
+                opts=await page.locator('.p-multiselect-panel:visible [role="option"]').evaluate_all('(es)=>es.map(e=>({label:e.getAttribute("aria-label"),selected:e.getAttribute("aria-selected")==="true"}))')
+                diff=next((o for o in opts if o['selected']!=(o['label'] in wanted)),None)
+                if not diff:break
+                await page.locator('.p-multiselect-panel:visible [role="option"][aria-label="'+diff['label']+'"]').evaluate('(e)=>e.click()')
+                await page.wait_for_timeout(700)
+            assert {o['label'] for o in opts if o['selected']}==wanted
+            await page.keyboard.press('Escape');await page.wait_for_timeout(1500)
+            desired=datetime.strptime(target,'%Y-%m-%d').strftime('%d/%m/%Y');date_range=desired+' - '+desired
+            inp=page.locator('input').first
+            if await inp.input_value()!=date_range:
+                await inp.click()
+                await page.get_by_role('button',name=args.preset,exact=(args.preset=='Today')).click()
+                await page.wait_for_timeout(500)
+                await page.locator('button').filter(has_text=re.compile(r'\bUpdate\b')).first.click()
+                await page.wait_for_load_state('networkidle',timeout=90000);await page.wait_for_timeout(1500)
+            assert await inp.input_value()==date_range,'UI date range did not converge'
+            assert 'USD' in await page.locator('.p-dropdown-label').all_text_contents()
+            headers=[s.strip() for s in await page.locator('thead th').all_text_contents()]
+            keep=['DATE','DOMAIN','ACCOUNT_ID','CAMPAIGN_ID','CAMPAIGN NAME','RPS'];assert all(v in headers for v in keep)
+            capture={'headers':keep,'rows':[],'pages':[],'url':URL,'currency':'USD','currency_evidence':{'visible_dropdown_label':'USD','same_browser_context_as_capture':True},'data_date':target,'filters':{'dimensions':sorted(wanted),'date_control':date_range,'scope':'exact authorized daily report accounts only'},'identity_Ares_visible':True}
+            seen=set();last_end=0
+            for n in range(1,150):
+                raw=await page.locator('tbody tr').evaluate_all('(es)=>es.map(e=>Array.from(e.querySelectorAll("td")).map(c=>c.innerText.trim()))');matched=[]
+                for cells in raw:
+                    if len(cells)!=len(headers):continue
+                    row=dict(zip(headers,cells));aid=row.get('ACCOUNT_ID','').removeprefix('act_')
+                    if aid not in aids or row.get('DOMAIN') not in domains:continue
+                    dt=datetime.strptime(row['DATE'],'%d/%m/%Y').date().isoformat()
+                    assert dt==target,'UI returned another report date'
+                    key=(aid,row['CAMPAIGN_ID'],dt);assert key not in seen;seen.add(key)
+                    matched.append({k:row[k] for k in keep})
+                capture['rows'].extend(matched)
+                footer=await page.locator('.p-paginator-current').inner_text();m=re.search(r'Showing\s+(\d+)\s+to\s+(\d+)\s+of\s+(\d+)',footer);assert m
+                start,end,total=map(int,m.groups());assert end>last_end or total==0;last_end=end
+                pg={'number':n,'start':start,'end':end,'total':total,'matching_rows':len(matched)};capture['pages'].append(pg)
+                save(root/f'rps-page-{n}.json',{'headers':keep,'rows':matched,'pagination':pg})
+                nxt=page.get_by_role('button',name='Next Page',exact=True)
+                if end>=total:assert await nxt.is_disabled();break
+                assert not await nxt.is_disabled();await nxt.click();await page.wait_for_timeout(600)
+            else:raise RuntimeError('UI pagination bound')
+            assert 'USD' in await page.locator('.p-dropdown-label').all_text_contents()
+            capture.update(observed_at=datetime.now(ZoneInfo('America/New_York')).isoformat(),complete=True)
+            save(root/'sb-visible-rps-capture.json',capture)
+            print(json.dumps({'status':'RPS_UI_CAPTURED','pages':len(capture['pages']),'rows':len(capture['rows']),'date':target}))
+        finally:await browser.close()
+if __name__=='__main__':
+    ap=argparse.ArgumentParser();ap.add_argument('--root',required=True);ap.add_argument('--probe',action='store_true');ap.add_argument('--preset',choices=['Yesterday','Today'],default='Yesterday');ap.add_argument('--session');args=ap.parse_args()
+    try:asyncio.run(run(args))
+    except Exception as exc:
+        import traceback
+        print('RPS_UI_FAILED '+type(exc).__name__,file=sys.stderr)
+        print(json.dumps({'frames':[(Path(f.filename).name,f.lineno) for f in traceback.extract_tb(exc.__traceback__)],'diagnostic':str(exc)[:1200] if not any(x in str(exc).lower() for x in ['password','username']) else 'auth UI timeout'}),file=sys.stderr)
+        sys.exit(1)

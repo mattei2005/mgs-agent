@@ -3731,12 +3731,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1569148392355926029",
-      "next_step": "Reativacao deterministica dos26 IDs aptos;376 permanece pausada, revisar reprovacao antes de nova ativacao",
+      "next_step": "Reconciliar somente activation_blocked.",
       "objective": "Pausar 27 campanhas Yolokfx02 G006 e reativar 09/11/2026 00:05 America/New_York,status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1569148392355926029/request.json",
-      "state": "scheduled:27/27 pausadas;26 aptas agendadas09/11/2026 00:05est;376 bloqueada por2 anuncios disapproved",
+      "state": "complete_activated:26/27 active por get final; budgets/lances/filhos/programacao preservados",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-09T00:44:26+00:00"
+      "updated_at": "2026-11-09T05:06:53+00:00"
     },
     {
       "agent": "zeus",
@@ -9425,5 +9425,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T05:03:49+00:00"
+  "updated_at": "2026-11-09T05:06:53+00:00"
 }
