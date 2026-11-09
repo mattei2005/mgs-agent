@@ -1,0 +1,542 @@
+{
+  "operation_id": "174788b26497fe84da75b01c",
+  "mode": "diagnose_only",
+  "captured_at": "2026-11-09T16:47:06.071317+00:00",
+  "disposition": "pending_original_executor_and_evidence_validation",
+  "previous_evidence_preserved": "/root/mgs-agent/reports/automation-recovery-diagnosis-174788b26497fe84da75b01c-round2.json",
+  "authority": {
+    "messages": [
+      {
+        "message_id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "author_id": "344196393512075265",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "GET_verified": true
+      },
+      {
+        "message_id": "1569376234008354837",
+        "channel_id": "1568669160798683260",
+        "author_id": "344196393512075265",
+        "content": "compliacdo muito confuso isso e eu nao consigo achar isso habilitado em campanha nenhuma\n\nhttps://www.facebook.com/business/help/981940746195135\n\naqui explica exatamente como ativa e desativa\n\ntente editar as camapnhas pelo pc1 e veja se voce acha esse recurso dentro da campanha manualmente, se achar em alguma me mande os screenshots....\n\ntente editar umas 10 camapnhas que tem isso habilitado segundo a api quando voce consulta........",
+        "GET_verified": true
+      }
+    ],
+    "current_registry_verified": true,
+    "effective_mode": "read_only_diagnosis_no_UI_or_business_write"
+  },
+  "alert": {
+    "id": "1569381079306207313",
+    "channel": "1498132022634483894",
+    "author_id": "1496296175014252634",
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron com erro no log",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`service:automation-continuity-diagnosis`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "GET_verified": true
+  },
+  "origin_delivery": {
+    "latest_twelve_message_ids": [
+      "1569378758928896151",
+      "1569378257923608628",
+      "1569377679726092342",
+      "1569376274345103363",
+      "1569376272478642247",
+      "1569376234008354837",
+      "1569373359983042600",
+      "1569373129766215851",
+      "1569369751552004190",
+      "1569369630399660054",
+      "1569369131726147685",
+      "1569369128832073742"
+    ],
+    "latest_timestamp": "2026-11-09T15:50:53.776000+00:00",
+    "final_delivery_observed_in_window": false,
+    "limit": "Read latest twelve exact-origin messages; no final delivery after the source command. Progress/tool messages are not final completion."
+  },
+  "queue": [
+    {
+      "key": "174788b26497fe84da75b01c",
+      "state": "running",
+      "cause": "pc1_busy",
+      "due": 1794242123.231421,
+      "attempts": 3,
+      "failures": 0,
+      "owner": "supervisor:1571525",
+      "lease_until": 1794243754.194651,
+      "needs_reconciliation": 0,
+      "source": {
+        "alert_channel": "1498132022634483894",
+        "alert_id": "1569381079306207313",
+        "alert_url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1569381079306207313",
+        "continuity_key": "174788b26497fe84da75b01c",
+        "kind": "service",
+        "resource": "pc1",
+        "service": "automation-continuity-diagnosis",
+        "system_protected": true
+      },
+      "original_active_readonly": true,
+      "isolated_worker_active": true
+    },
+    {
+      "key": "a6c411eff3c0bd511cf4dc25",
+      "state": "needs_diagnosis",
+      "cause": "original_writer_active",
+      "due": 1794243201.9397657,
+      "attempts": 1,
+      "failures": 1,
+      "owner": null,
+      "lease_until": null,
+      "needs_reconciliation": 1,
+      "source": {
+        "authorized_by": "344196393512075265",
+        "checkpoint": "/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json",
+        "kind": "pc1",
+        "next_step": "Fresh API enrollment/status baseline, wait FIFO/lease, manual editor Ad creative Advantage+ creative Edit, inspect full control panel and preserve screenshots; Cancel; post-read published integrity.",
+        "objective": "Inspect manual edit controls on10 API OPT_IN image campaigns via existing PC1 Chrome, following exact Meta help; seek Generate backgrounds or documented equivalent; never toggle/save/publish/change catalog. Inspect both ads per selected campaign.",
+        "profile": "zeus",
+        "read_only": true,
+        "resource": "pc1",
+        "session_id": "20261109_091051_28bf62c8",
+        "source_message_id": "1569376234008354837",
+        "thread_id": "1568669160798683260"
+      },
+      "original_active_readonly": true,
+      "isolated_worker_active": false
+    }
+  ],
+  "worker_failure_streak": 0,
+  "recent_events": [
+    {
+      "at": 1794242554.194651,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1571525\", \"previous_state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794241930.1395547,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"pc1_busy\", \"due\": 1794242123.231421, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794241930.1395547,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794243201.9397657, \"state\": \"needs_diagnosis\"}"
+    },
+    {
+      "at": 1794241823.231421,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"waiting_resource\", \"due\": 1794242123.231421, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794241563.607627,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1561860\", \"previous_state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794241330.1221101,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"pc1_busy\", \"due\": 1794241400.086158, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794241330.1221101,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794243201.9397657, \"state\": \"needs_diagnosis\"}"
+    },
+    {
+      "at": 1794241100.086158,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"waiting_resource\", \"due\": 1794241400.086158, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "at": 1794240915.7372599,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1509313\", \"previous_state\": \"queued\"}"
+    },
+    {
+      "at": 1794240132.2617953,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794243201.9397657, \"state\": \"needs_diagnosis\"}"
+    }
+  ],
+  "health_readonly": [
+    [
+      "service:automation-continuity",
+      "OK",
+      "consumer phase=dispatching; open=14; durable queue readable"
+    ],
+    [
+      "service:automation-continuity-diagnosis",
+      "ERROR",
+      "1 recovery requests require technical diagnosis; not completed or discarded"
+    ]
+  ],
+  "pc1_lease": {
+    "version": 1,
+    "resource": "pc1-interactive-desktop",
+    "agent": "zeus",
+    "session_id": "20261109_091051_28bf62c8",
+    "thread_id": "1568669160798683260",
+    "acquired_at": "2026-11-09T15:52:18.567125Z",
+    "updated_at": "2026-11-09T16:46:29.648741Z",
+    "expires_at": "2026-11-09T17:16:29.648741Z"
+  },
+  "original_session": {
+    "id": "20261109_091051_28bf62c8",
+    "ended_at": null,
+    "last_activity_at": 1794242798.3505201,
+    "activity_age_seconds": 28.72874665260315
+  },
+  "processes": [
+    {
+      "pid": 1571522,
+      "start_ticks": "165171896",
+      "argv": [
+        "flock",
+        "-n",
+        "/var/lock/alerts_infra_failed_alert_resolver.lock",
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py"
+      ]
+    },
+    {
+      "pid": 1571525,
+      "start_ticks": "165171896",
+      "argv": [
+        "python3",
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py"
+      ]
+    }
+  ],
+  "worker_receipts": {
+    "174788b26497fe84da75b01c": {
+      "pid": 1594405,
+      "start_ticks": "165235213",
+      "started": 1794242554.2010567,
+      "state": "running",
+      "live_fingerprint_match": true
+    },
+    "a6c411eff3c0bd511cf4dc25": {
+      "finished": 1794239598.4409072,
+      "pid": 1474120,
+      "returncode": -15,
+      "start_ticks": "164920451",
+      "started": 1794239406.57716,
+      "state": "finished",
+      "live_fingerprint_match": false
+    }
+  },
+  "checkpoint": {
+    "scope_path": "/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json",
+    "campaigns": 10,
+    "unique_ads": 20,
+    "local_receipt_count": 14,
+    "receipts": [
+      {
+        "ad_id": "120249954763540372",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763540372-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763540372-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120249954763550372",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763550372-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763550372-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120250528241240331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241240331-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241240331-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": true
+      },
+      {
+        "ad_id": "120250528241250331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241250331-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241250331-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": true
+      },
+      {
+        "ad_id": "120252350213550326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213550326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213550326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120252350213560326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213560326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213560326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120252350508270326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508270326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508270326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120252350508280326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508280326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508280326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120252369595910326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595910326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595910326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120252369595920326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595920326-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595920326-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120253762937420652",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937420652-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937420652-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120253762937440652",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937440652-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937440652-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120254413316880359",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316880359-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316880359-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      },
+      {
+        "ad_id": "120254413316890359",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316890359-inspection.json",
+        "panel": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316890359-full-panel.png",
+        "inspection_complete_flag": true,
+        "named_control_found_flag": false,
+        "no_toggle_save_publish_flag": true,
+        "closed_with_cancel_flag": true,
+        "wrong_translation_modal_confirmed_in_cached_AX": false
+      }
+    ],
+    "missing_receipt_ad_ids": [
+      "120250528281990331",
+      "120250528282000331",
+      "120250546992190331",
+      "120250546992210331",
+      "120250562106410331",
+      "120250562106420331"
+    ],
+    "wrong_panel_requires_validation_ad_ids": [
+      "120250528241240331",
+      "120250528241250331"
+    ],
+    "pending_evidence_ad_ids": [
+      "120250528241240331",
+      "120250528241250331",
+      "120250528281990331",
+      "120250528282000331",
+      "120250546992190331",
+      "120250546992210331",
+      "120250562106410331",
+      "120250562106420331"
+    ],
+    "progress_json_readback": {
+      "completed_ads": 14,
+      "completed_campaigns": 7,
+      "total_campaigns": 10,
+      "pending_ads": [
+        "120250528282000331",
+        "120250528281990331",
+        "120250546992190331",
+        "120250546992210331",
+        "120250562106420331",
+        "120250562106410331"
+      ],
+      "found": []
+    },
+    "referenced_png_count": 56,
+    "invalid_pngs": [],
+    "final_named_artifacts": [],
+    "limits": "Live non-atomic snapshot while owner runs. Receipt flags are not independent completion. Two wrong-panel images visually verified; one other screenshot sampled. Remaining images were signature checked, not all visually reviewed. No live Meta integrity readback."
+  },
+  "new_confirmed_finding": {
+    "problem": "Two inspection_complete receipts show the translation modal, not creative enhancements; neither proves absence of Generate backgrounds.",
+    "visual_verification": {
+      "ad_ids": [
+        "120250528241240331",
+        "120250528241250331"
+      ],
+      "observed_modal_title": "Advantage+ creative translation",
+      "observed_controls": [
+        "Languages",
+        "Translate all ad creatives and text"
+      ],
+      "section_screenshot_visually_checked": "120250528241240331-section-edit.png"
+    },
+    "root_cause": "Runner selects Edit where heading_top <= button_top < heading_top+230. Correct enhancements button is 9 pixels above heading_top; translation Edit below it is uniquely selected. Generic Cancel is accepted as proof of the target modal. The 25-second expected-controls loop has no final readiness assertion and still writes inspection_complete=True.",
+    "runner_path": "/root/.hermes/profiles/zeus/cache/scratch/manual10-background-ui.py",
+    "runner_sha256": "d041fd4b671f7bddfaf68a27396fed2bb64f5e27030a3f1e0b6e44749145629f",
+    "source_lines": [
+      "50-59",
+      "85-87",
+      "101-120"
+    ],
+    "cached_AX_executable_reproduction": [
+      {
+        "ad_id": "120250528241240331",
+        "heading_bounds": [
+          1035,
+          840,
+          235,
+          19
+        ],
+        "chosen_index": 182,
+        "chosen_bounds": [
+          1372,
+          1044,
+          60,
+          37
+        ],
+        "actual_same_line_index": 159,
+        "actual_same_line_bounds": [
+          1372,
+          831,
+          60,
+          37
+        ],
+        "wrong_selection_reproduced_without_IO": true
+      },
+      {
+        "ad_id": "120250528241250331",
+        "heading_bounds": [
+          1035,
+          818,
+          235,
+          19
+        ],
+        "chosen_index": 182,
+        "chosen_bounds": [
+          1372,
+          1022,
+          60,
+          37
+        ],
+        "actual_same_line_index": 159,
+        "actual_same_line_bounds": [
+          1372,
+          809,
+          60,
+          37
+        ],
+        "wrong_selection_reproduced_without_IO": true
+      }
+    ],
+    "recommendation_not_applied": "Original executor must reconcile these two receipts without deleting evidence or blindly repeating other completed inspections. In a mutation-capable authorized round, associate Edit with its actual section/container, then require target-modal title and expected controls before marking complete. Timeout/wrong panel must remain incomplete. Do not modify or restart a running owner script concurrently."
+  },
+  "admission_gap": {
+    "still_present_in_deployed_source": true,
+    "locations": [
+      "scripts/mgs_automation_supervisor.py:219-246",
+      "scripts/mgs_automation_supervisor.py:247-259",
+      "scripts/mgs_automation_continuity.py:107-124"
+    ],
+    "finding": "Active-owner/resource checks occur in initial q.open snapshot, not again immediately before per-job runner invocation. Previous isolated reproduction preserved in round2. No supervisor mutation made.",
+    "recommendation_not_applied": "Revalidate owner PID/start ticks, session, lease, scope, state and cooldown immediately before every dispatch, including late arrivals. Keep original diagnosis/decision gates; preserve due times. Separate authorized implementation and validation from this read-only diagnosis."
+  },
+  "next_step_for_supervisor": "Preserve original executor, current needs_diagnosis gate and lease. No parallel UI writer. Do not certify two translation-panel receipts; reconcile six missing IDs and two invalid-evidence IDs with original owner after current batch. Require exact twenty-ad scope coverage, published-integrity readback and final source-thread delivery before closure. This report does not authorize reopening any gate or changing campaign controls.",
+  "actions_this_round": {
+    "pc1_interactions": 0,
+    "business_mutations": 0,
+    "queue_writes": 0,
+    "messages_sent": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0,
+    "cron_changes": 0,
+    "local_diagnostic_evidence_only": true,
+    "loader_limit": "hermes-agent skill disabled; canonical SKILL.md read directly; no enable/config change.",
+    "recovered_diagnostic_error": "Initial session query used nonexistent created_at; PRAGMA inspected, then correct started_at read succeeded; no DB mutation."
+  }
+}
