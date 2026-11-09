@@ -34,6 +34,7 @@ For an authorized account task that needs the user's real Windows Chrome session
 
 ## Always-on rules
 
+- Procedimento da fila/consumidor comum, FIFO, timeout, gates humanos e aceite real: consultar a referência **Common automation continuity** na skill `log-monitor-discord-alert`. Aplicar sem alterar a autoridade do fluxo de negócio.
 - Apply the owner-approved continuity policy `context/automation-recovery-policy.md` (Rodolfo `1569191908020981801`) to every authorized scheduled PC1 function, irrespective of business subject: busy means persist the same request in a deduplicated executable queue with owner/checkpoint/next retry, not abandon it. Release and reacquire the shared lease; never hijack another session. Verify the queue consumer and resume path before promising automatic continuation. A timeout requires cooldown/backoff plus safe reconciliation/retry of only the missing step; anti-loop escalation preserves an open owned request rather than closing it. Policy persistence is not proof that all consumers implement this contract.
 
 - Use a private overlay network. Never publish OpenSSH, the cua-driver named pipe, an application's local API, CDP/WebSocket endpoint, or MCP listener to the public internet.

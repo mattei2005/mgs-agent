@@ -93,7 +93,7 @@ class Queue:
                 if not changed:merged.update(source)
                 self.db.execute('UPDATE requests SET updated=?,source=? WHERE key=?',(now,json.dumps(merged,sort_keys=True),key))
                 if changed:
-                    self.db.execute("UPDATE requests SET state='blocked_decision',cause='source_scope_changed',owner=NULL,lease_until=NULL WHERE key=?",(key,))
+                    self.db.execute("UPDATE requests SET state='blocked_decision',cause='source_scope_changed',owner=NULL,lease_until=NULL,observation=? WHERE key=?",('Bloqueado: contrato original alterado; nenhuma nova versão executada. Preservar o pedido e reconciliar decisão, escopo e autoridade antes de retomar.',key))
                     self._event(key,'source_scope_changed_no_replay',{},now)
             else:
                 key=hashlib.sha256((source_key+':'+str(now)).encode()).hexdigest()[:24]
@@ -131,7 +131,7 @@ class Queue:
         try:
             row=self.get(key)
             if not row or row['state'] in ('completed_validated','cancelled_owner'):raise ValueError('not open')
-            self.db.execute('UPDATE requests SET state=?,cause=?,due=?,updated=?,owner=NULL,lease_until=NULL,observation=? WHERE key=?',(state,cause,now+max(1,delay),now,observation,key))
+            self.db.execute('UPDATE requests SET state=?,cause=?,due=?,updated=?,owner=NULL,lease_until=NULL,observation=COALESCE(?,observation) WHERE key=?',(state,cause,now+max(1,delay),now,observation,key))
             self._event(key,'deferred',{'state':state,'cause':cause,'due':now+max(1,delay)},now)
             self.db.execute('COMMIT')
         except BaseException:self.db.execute('ROLLBACK');raise

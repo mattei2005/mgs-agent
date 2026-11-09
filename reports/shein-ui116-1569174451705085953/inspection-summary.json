@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-08T23:41:38.868290-05:00",
+  "requested_campaigns": 116,
+  "requested_accounts": 23,
+  "requested_ads": 239,
+  "ad_editors_read": 239,
+  "populated_full_panels": 237,
+  "blank_full_panels": 2,
+  "campaign_classification": {
+    "control_not_exposed_in_populated_full_ui": 115,
+    "optimization_panel_blank": 1
+  },
+  "all_background_on_off_still_unconfirmed_for_original_unknowns": true,
+  "complete_original_universe_counts": {
+    "control_not_exposed_in_populated_full_ui": 115,
+    "api_opt_in": 30,
+    "api_opt_out": 245,
+    "optimization_panel_blank": 1
+  },
+  "published_integrity": {
+    "scope_ads": 239,
+    "readback_ads": 239,
+    "ads_updated_after_desktop_audit_start": [],
+    "creative_id_changes_since_scope": [],
+    "all_updated_times_pre_audit": true,
+    "query_method": "GET-only Graph batch reads through unchanged canonical BISU token reference"
+  },
+  "limitation": "The UI inspection does not resolve the original 116 into explicit enabled/disabled enrollment. Populated UI without this named control is not OPT_OUT; one campaign has a persistently blank full optimization panel. Original API classifications for the other275 are historical source snapshot, not a fresh recrawl."
+}

@@ -20,6 +20,7 @@ Completion criterion: only the procedure and evidence required for the current a
 ## Operational route packs
 
 - **Hostinger provider metrics versus local health/DR/cron signals, performance and native read-only trust gate** → skill `hostinger-vps-operations`, then its **Process routing and performance** route. Keep the local 5-minute health monitor and deterministic business/DR jobs; provider `running`/historical metrics are supplementary predicates, not replacements. Do not add repeated standalone MCP/1Password bootstraps, new jobs or altered cadence merely to adopt MCP; migrations require equivalent-predicate/failure/credential validation within an authorized scope.
+- **Fila comum PC1/timeout, consumidor durável, gates e recibos de retomada** → `references/common-automation-continuity.md`
 - **Quando usar** → `references/route-pack-01.md`
 - **Convenção de canal Discord por tipo de alerta → Template do script monitor** → `references/route-pack-02.md`
 - **Cron entry → Atualizar infra-inventory.json** → `references/route-pack-03.md`

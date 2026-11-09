@@ -213,10 +213,13 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
     executed=0
     for row in q.open():
         source=json.loads(row['source']);source['continuity_key']=row['key'];obs=observations.get(row['source_key'])
+        if row['state']=='waiting_resource' and source.get('resource')!='pc1' and re.search(r'\bPC1\b',row.get('observation') or '',re.I):
+            source['resource']='pc1'
+            q.enqueue(row['source_key'],source,row['cause'],now=clock())
         if row['state']=='running':continue  # claim() reconciles an expired owner.
         if active(source):
-            state=row['state'] if row['state'] in ('waiting_human','blocked_decision','needs_diagnosis') else 'waiting_resource'
-            q.defer(row['key'],state,'original_writer_active',now=now,delay=300);continue
+            state=row['state'] if row['state'] in ('waiting_human','blocked_decision','needs_diagnosis','verifying','reconciling','retry_scheduled') else 'waiting_resource'
+            q.defer(row['key'],state,'original_writer_active',now=now,delay=max(300,row['due']-now));continue
         matching_scope=not source.get('contract_hash') or bool(obs and (obs.get('source') or {}).get('contract_hash')==source['contract_hash'])
         if matching_scope and verified_observation(obs) and float(obs.get('at',0))>=row['created']:
             # Confirmed producer readback, never just the worker's final wording.
@@ -228,10 +231,11 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
         if source.get('resource')=='pc1' or row['cause']=='pc1_busy':
             try:occupied=busy()
             except Exception:
-                q.defer(row['key'],'reconciling','pc1_state_unknown',now=now,delay=300);continue
+                state='waiting_human' if row['state']=='waiting_human' else 'reconciling'
+                q.defer(row['key'],state,'pc1_state_unknown',now=now,delay=max(300,row['due']-now));continue
             if occupied:
-                state='waiting_human' if row['state']=='waiting_human' else 'waiting_resource'
-                q.defer(row['key'],state,'pc1_busy',now=now,delay=60);continue
+                state=row['state'] if row['state'] in ('waiting_human','verifying','reconciling','retry_scheduled') else 'waiting_resource'
+                q.defer(row['key'],state,'pc1_busy',now=now,delay=max(60,row['due']-now));continue
     while executed<max_jobs:
         streak=q.db.execute("SELECT value FROM service WHERE key='worker_failure_streak'").fetchone()
         if streak and int(json.loads(streak[0]))>=5:break

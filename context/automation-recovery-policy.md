@@ -51,3 +51,18 @@ Esta política complementa a recuperação resiliente do `AGENT.md`. Supersede a
 O helper `scripts/mgs-pc1-computer-use-lock.py` fornece lease e retorna `lock_held`; isso não comprova uma fila persistente com consumidor universal. Não declarar esse mecanismo universal implantado por editar documentação ou SOUL.
 
 A implementação deve demonstrar: busy→fila; dedupe e executor único; liberação→retomada; timeout→espera→retry; reinício→pedido preservado; efeitos ambíguos→readback; bloqueio humano→pendência visível; conclusão→efeito e entrega validados. Cada consumidor precisa de prova própria de adoção. Até então, distinguir **regra persistida** de **automação universal implantada**.
+
+## 7. Camada comum implantada — 2026-11-08
+
+Autorização de implementação: Rodolfo `1569193434189668453`, mesma thread. Esta seção atualiza a situação de implementação, sem alterar os limites da política nem afirmar certificação funcional universal.
+
+- Fila durável: `/root/.hermes/shared/automation-continuity/queue.sqlite3`; implementação `scripts/mgs_automation_continuity.py`.
+- Consumidor: `scripts/mgs_automation_supervisor.py`, chamado pelo entrypoint do resolvedor `scripts/alerts-infra-failed-alert-resolver.py`, reutilizando seu cron/flock existente de cinco minutos. Nenhuma nova agenda de negócio foi criada.
+- Ingresso/FIFO PC1: `scripts/mgs-pc1-computer-use-lock.py`; busy só retorna fila confirmada quando a persistência realmente funcionou. Contrato nativo alterado, pausa e gates humanos/criticos não viram autorização de retry.
+- Watchdog independente do worker: `scripts/mgs_continuity_health.py`, integrado ao stale monitor existente. Observa heartbeat, fila e diagnóstico; cinco falhas não descartam o pedido.
+- DTR: `scripts/mgs_dtr_continuity.py` adiciona progresso válido por usuário e outbox congelada com IDs aceitos/GET. A retomada produtiva confirmou 73/73 usuários e entregou as três partes do relatório sem repetir a coleta completa.
+- Evidência produtiva: ticks naturais do resolvedor em processos distintos, incluindo entrega DTR às 23:32 ET e posterior estado `completed_validated`. A fila e o consumidor são execução real, não somente esta documentação.
+- Inventário observado: 106 alvos (root cron, cron de sistema, Hermes Zeus/Atena/Ares e timers); o manifesto/recibos ficam no banco e no relatório de implementação. Inventariar um alvo ou provar sua saúde técnica não certifica todos os seus efeitos de negócio. Recibos por workflow/período continuam obrigatórios.
+
+Procedimento reutilizável: skill `log-monitor-discord-alert`, referência **Common automation continuity**. Evidência detalhada: `reports/automation-recovery-implementation-1569193434189668453.json`. Pendências de recurso, autenticação e histórico fora do inventário ativo permanecem explicitamente abertas; não entram no total de recuperação concluída por inferência.
+

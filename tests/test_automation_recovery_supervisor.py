@@ -30,6 +30,24 @@ class SupervisorTests(unittest.TestCase):
         j=self.add(resource='pc1');self.run_drive(busy=True)
         row=self.q.get(j['key']);self.assertEqual(row['state'],'waiting_resource');self.assertEqual(row['attempts'],0);self.assertFalse(self.calls)
 
+    def test_resource_wait_preserves_verification_phase(self):
+        j=self.add(resource='pc1');self.q.defer(j['key'],'verifying','await_readback',now=150,delay=1)
+        self.run_drive(busy=True)
+        self.assertEqual(self.q.get(j['key'])['state'],'verifying')
+        self.assertFalse(self.calls)
+
+    def test_resource_wait_never_shortens_existing_backoff(self):
+        j=self.add(resource='pc1');self.q.defer(j['key'],'retry_scheduled','cooldown',now=150,delay=3600)
+        due=self.q.get(j['key'])['due'];self.run_drive(busy=True)
+        self.assertGreaterEqual(self.q.get(j['key'])['due'],due)
+        self.assertFalse(self.calls)
+
+    def test_newly_discovered_pc1_dependency_persists_without_reprobe_loop(self):
+        j=self.add();self.run_drive(result='Pendente: PC1 ocupado por outra sessão.')
+        self.run_drive(busy=True)
+        self.assertEqual(len(self.calls),1)
+        self.assertEqual(json.loads(self.q.get(j['key'])['source'])['resource'],'pc1')
+
     def test_release_causes_one_resume(self):
         j=self.add(resource='pc1');self.run_drive(busy=False)
         self.assertEqual(len(self.calls),1);self.assertEqual(self.q.get(j['key'])['state'],'retry_scheduled')
