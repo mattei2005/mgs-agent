@@ -8846,12 +8846,12 @@
     {
       "agent": "ares",
       "id": "shein-1569454008337301577",
-      "next_step": "prepare-media mesmo input;request-ready;campaign dryrun;execute;QA/postprocess/ACTIVE;avisoGETorigem",
+      "next_step": "AguardarquotaMetavideo;retomarAPENASmesmocampaign--inputrequest-ready--confirm-execute;preservar8provas;nenhumreupload/copy;QA17/postprocess/ACTIVE/finalreadback/avisoorigem",
       "objective": "Concluir17clonesC384Yolokfx02G006;34videos;USD35cada;COCAP0.90;10nov2026 00:10America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569454008337301577/request.json;kanban:t_4284ff20",
-      "state": "t_4284ff20 ownerunico;manutencao34/34digestverificado;inputoriginal17grupos34arquivoslido;semstate/checkpoint/ready;conta/dominioallowed;retomadacentral",
+      "source": "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1569454008337301577/state.json;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569454008337301577/video-qa-diagnosis.json;kanban:t_4284ff20",
+      "state": "postprocess_pending;enginecomplete_paused;17campaigns17adsets34adscheckpoint;qasemantico17/17;render8/17;meta403code4applicationrequestlimitreachedsomentevideoqa;originais/selos/ids/provaspreservados;ownerunicot_4284ff20",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-09T21:24:32+00:00"
+      "updated_at": "2026-11-09T21:49:48+00:00"
     },
     {
       "agent": "ares",
@@ -9595,5 +9595,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T21:36:50+00:00"
+  "updated_at": "2026-11-09T21:49:48+00:00"
 }
