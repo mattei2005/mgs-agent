@@ -699,7 +699,7 @@
     {
       "index": 58,
       "role": "Group",
-      "label": "u_1_1_Wi",
+      "label": "u_1_1_rt",
       "bounds": [
         0,
         0,
@@ -1635,7 +1635,7 @@
     {
       "index": 136,
       "role": "CheckBox",
-      "label": "Free baby tees with no extra costs",
+      "label": "Free baby tees at no extra cost",
       "bounds": [
         1059,
         315,
@@ -1647,11 +1647,11 @@
     {
       "index": 137,
       "role": "Text",
-      "label": "Free baby tees with no extra costs",
+      "label": "Free baby tees at no extra cost",
       "bounds": [
         1091,
         318,
-        223,
+        200,
         19
       ],
       "app": ""
@@ -3111,35 +3111,35 @@
     {
       "index": 259,
       "role": "Text",
-      "label": "Reach more people in more languages with AI-generated translation. ",
+      "label": "You can review how your ad will show up on different placements as well as how it might be adapted with Advantage+ creative. We will show variations of your ad based on what we predict will help improve performance the most.",
       "bounds": [
-        689,
-        307,
-        441,
+        24,
+        198,
+        1450,
         18
       ],
       "app": ""
     },
     {
       "index": 260,
-      "role": "Hyperlink",
-      "label": "View terms",
+      "role": "TabItem",
+      "label": "Placements",
       "bounds": [
-        1129,
-        307,
-        74,
-        18
+        24,
+        233,
+        126,
+        36
       ],
       "app": ""
     },
     {
       "index": 261,
-      "role": "Button",
-      "label": "Close ​",
+      "role": "TabItem",
+      "label": "Advantage+ creative",
       "bounds": [
-        1839,
-        278,
-        40,
+        157,
+        233,
+        184,
         36
       ],
       "app": ""
@@ -3147,293 +3147,1829 @@
     {
       "index": 262,
       "role": "Button",
-      "label": "Languages All languages selected Your ad will be translated into the languages you select, where available.",
+      "label": "All optimizations",
       "bounds": [
-        705,
-        374,
-        614,
-        48
+        2335,
+        233,
+        161,
+        36
       ],
       "app": ""
     },
     {
       "index": 263,
-      "role": "StatusBar",
-      "label": "",
+      "role": "Text",
+      "label": "All optimizations",
       "bounds": [
-        793,
-        374,
-        2,
-        1
+        2351,
+        242,
+        109,
+        18
       ],
       "app": ""
     },
     {
       "index": 264,
-      "role": "Group",
-      "label": "",
+      "role": "Button",
+      "label": "Close ​",
       "bounds": [
-        725,
-        490,
-        574,
-        24
+        2504,
+        169,
+        40,
+        36
       ],
       "app": ""
     },
     {
       "index": 265,
-      "role": "CheckBox",
-      "label": "Spanish",
+      "role": "Button",
+      "label": "All optimizations",
       "bounds": [
-        725,
-        490,
         24,
-        24
+        294,
+        38,
+        22
       ],
       "app": ""
     },
     {
       "index": 266,
       "role": "Text",
-      "label": "Spanish",
+      "label": "All optimizations",
       "bounds": [
-        757,
-        493,
-        52,
+        70,
+        296,
+        108,
         18
       ],
       "app": ""
     },
     {
       "index": 267,
-      "role": "Button",
-      "label": "See other languages (17)",
+      "role": "Text",
+      "label": "You’ve been enrolled in testing new creative and AI enhancements, which you can edit in ",
       "bounds": [
-        705,
-        546,
-        157,
-        20
+        24,
+        345,
+        564,
+        18
       ],
       "app": ""
     },
     {
       "index": 268,
-      "role": "Button",
-      "label": "Manage translations Ad text, media texts, and other creatives will be translated into your audience's preferred languages.",
+      "role": "Hyperlink",
+      "label": "Advertising settings",
       "bounds": [
-        705,
-        614,
-        614,
-        48
+        587,
+        345,
+        130,
+        18
       ],
       "app": ""
     },
     {
       "index": 269,
-      "role": "DataGrid",
-      "label": "",
+      "role": "Text",
+      "label": ". By using AI creative enhancements, you agree to the ",
       "bounds": [
-        705,
-        678,
-        614,
-        162
+        716,
+        345,
+        345,
+        18
       ],
       "app": ""
     },
     {
       "index": 270,
-      "role": "DataItem",
-      "label": "Translate all ad creatives and text Recommended Status Ad text, media texts, and other creatives will be translated into your audience's preferred languages.",
+      "role": "Hyperlink",
+      "label": "Ad Creative Generative AI Terms",
       "bounds": [
-        705,
-        678,
-        614,
-        72
+        1060,
+        345,
+        208,
+        18
       ],
       "app": ""
     },
     {
       "index": 271,
-      "role": "RadioButton",
-      "label": "Translate all ad creatives and text Recommended Status Ad text, media texts, and other creatives will be translated into your audience's preferred languages.",
+      "role": "Text",
+      "label": ".",
       "bounds": [
-        705,
-        702,
-        24,
-        24
+        1267,
+        345,
+        5,
+        18
       ],
       "app": ""
     },
     {
       "index": 272,
-      "role": "StatusBar",
-      "label": "",
+      "role": "Button",
+      "label": "Add overlays",
       "bounds": [
-        956,
-        694,
-        2,
-        1
+        40,
+        396,
+        38,
+        22
       ],
       "app": ""
     },
     {
       "index": 273,
-      "role": "DataItem",
-      "label": "Translate selected ad creatives Choose which parts of your ad to translate. People will see all other elements of your ad in the original language.",
+      "role": "Text",
+      "label": "Meta AI",
       "bounds": [
-        705,
-        752,
-        614,
-        88
+        63,
+        427,
+        44,
+        15
       ],
       "app": ""
     },
     {
       "index": 274,
-      "role": "RadioButton",
-      "label": "Translate selected ad creatives Choose which parts of your ad to translate. People will see all other elements of your ad in the original language.",
+      "role": "StatusBar",
+      "label": "",
       "bounds": [
-        705,
-        784,
-        24,
-        24
+        39,
+        425,
+        1,
+        1
       ],
       "app": ""
     },
     {
       "index": 275,
-      "role": "Button",
-      "label": "Spanish, all creatives translated",
+      "role": "Text",
+      "label": "Meta AI",
       "bounds": [
-        1599,
-        374,
-        256,
-        36
+        39,
+        425,
+        42,
+        14
       ],
       "app": ""
     },
     {
       "index": 276,
       "role": "Text",
-      "label": "Spanish, all creatives translated",
+      "label": "Using branding",
       "bounds": [
-        1615,
-        383,
-        204,
-        18
+        124,
+        427,
+        85,
+        15
       ],
       "app": ""
     },
     {
       "index": 277,
-      "role": "Text",
-      "label": "Before",
+      "role": "StatusBar",
+      "label": "",
       "bounds": [
-        1375,
-        427,
-        45,
-        18
+        116,
+        425,
+        2,
+        1
       ],
       "app": ""
     },
     {
       "index": 278,
       "role": "Text",
-      "label": "The ad creative you chose isn't compatible with this optimization",
+      "label": "Using branding",
       "bounds": [
-        1389,
-        550,
-        188,
-        34
+        116,
+        425,
+        81,
+        14
       ],
       "app": ""
     },
     {
       "index": 279,
-      "role": "Text",
-      "label": "After",
+      "role": "Button",
+      "label": "Visual touch-ups",
       "bounds": [
-        1623,
-        427,
-        35,
-        18
+        320,
+        396,
+        38,
+        22
       ],
       "app": ""
     },
     {
       "index": 280,
       "role": "Text",
-      "label": "The ad creative you chose isn't compatible with this optimization",
+      "label": "Meta AI",
       "bounds": [
-        1637,
-        550,
-        188,
-        34
+        343,
+        427,
+        44,
+        15
       ],
       "app": ""
     },
     {
       "index": 281,
-      "role": "Button",
+      "role": "StatusBar",
       "label": "",
       "bounds": [
-        1375,
-        887,
-        16,
-        16
+        319,
+        425,
+        1,
+        1
       ],
       "app": ""
     },
     {
       "index": 282,
       "role": "Text",
-      "label": "1 of 2 placements",
+      "label": "Meta AI",
       "bounds": [
-        1559,
-        886,
-        112,
-        18
+        319,
+        425,
+        42,
+        14
       ],
       "app": ""
     },
     {
       "index": 283,
-      "role": "Button",
-      "label": "",
+      "role": "ProgressBar",
+      "label": "Loading...",
       "bounds": [
-        1839,
-        887,
-        16,
-        16
+        321,
+        452,
+        230,
+        408
       ],
       "app": ""
     },
     {
       "index": 284,
-      "role": "Button",
-      "label": "Cancel",
+      "role": "ProgressBar",
+      "label": "Loading...",
       "bounds": [
-        1720,
-        1077,
-        77,
-        36
+        321,
+        869,
+        230,
+        16
       ],
       "app": ""
     },
     {
       "index": 285,
       "role": "Button",
-      "label": "Done",
+      "label": "Add music",
       "bounds": [
-        1804,
-        1077,
-        67,
-        36
+        600,
+        396,
+        38,
+        22
       ],
       "app": ""
     },
     {
       "index": 286,
+      "role": "Text",
+      "label": "Meta AI",
+      "bounds": [
+        623,
+        427,
+        44,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 287,
+      "role": "StatusBar",
+      "label": "",
+      "bounds": [
+        599,
+        425,
+        1,
+        1
+      ],
+      "app": ""
+    },
+    {
+      "index": 288,
+      "role": "Text",
+      "label": "Meta AI",
+      "bounds": [
+        599,
+        425,
+        42,
+        14
+      ],
+      "app": ""
+    },
+    {
+      "index": 289,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        613,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 290,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        721,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 291,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        748,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 292,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        757,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 293,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        786,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 294,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        607,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 295,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        682,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 296,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        885,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 297,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        993,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 298,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        1020,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 299,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        1029,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 300,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        1058,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 301,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        879,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 302,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        954,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 303,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        1157,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 304,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        1265,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 305,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        1292,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 306,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        1301,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 307,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        1330,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 308,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        1151,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 309,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        1226,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 310,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        1429,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 311,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        1537,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 312,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        1564,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 313,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        1573,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 314,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        1602,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 315,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        1423,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 316,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        1498,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 317,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        1701,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 318,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        1809,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 319,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        1836,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 320,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        1845,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 321,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        1874,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 322,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        1695,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 323,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        1770,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 324,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        1973,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 325,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        2081,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 326,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        2108,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 327,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        2117,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 328,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        2146,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 329,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        1967,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 330,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        2042,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 331,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        2245,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 332,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        2353,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 333,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        2380,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 334,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        2389,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 335,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        2418,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 336,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        2239,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 337,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        2314,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 338,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        2517,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 339,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        2625,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 340,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        2652,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 341,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        2661,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 342,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        2690,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 343,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        2511,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 344,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        2586,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 345,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        2789,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 346,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        2897,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 347,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        2924,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 348,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        2933,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 349,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        2962,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 350,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        2783,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 351,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        2858,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 352,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        3061,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 353,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        3169,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 354,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        3196,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 355,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        3205,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 356,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        3234,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 357,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        3055,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 358,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        3130,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 359,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        3333,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 360,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        3441,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 361,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        3468,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 362,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        3477,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 363,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        3506,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 364,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        3327,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 365,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        3402,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 366,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        3605,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 367,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        3713,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 368,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        3740,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 369,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        3749,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 370,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        3778,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 371,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        3599,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 372,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        3674,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 373,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        3877,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 374,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        3985,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 375,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        4012,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 376,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        4021,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 377,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        4050,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 378,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        3871,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 379,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        3946,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 380,
+      "role": "Button",
+      "label": "Play",
+      "bounds": [
+        4149,
+        821,
+        32,
+        26
+      ],
+      "app": ""
+    },
+    {
+      "index": 381,
+      "role": "Text",
+      "label": "0:00",
+      "bounds": [
+        4257,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 382,
+      "role": "Text",
+      "label": "/",
+      "bounds": [
+        4284,
+        826,
+        6,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 383,
+      "role": "Text",
+      "label": "0:15",
+      "bounds": [
+        4293,
+        826,
+        24,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 384,
+      "role": "Button",
+      "label": "Mute",
+      "bounds": [
+        4322,
+        823,
+        32,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 385,
+      "role": "Text",
+      "label": "Adding music",
+      "bounds": [
+        4143,
+        871,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 386,
+      "role": "Text",
+      "label": " generated with AI to your ad.",
+      "bounds": [
+        4218,
+        871,
+        143,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 387,
+      "role": "Text",
+      "label": "Example 1 of 14",
+      "bounds": [
+        673,
+        917,
+        86,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 388,
+      "role": "Button",
+      "label": "Next ​",
+      "bounds": [
+        792,
+        907,
+        40,
+        36
+      ],
+      "app": ""
+    },
+    {
+      "index": 389,
+      "role": "Button",
+      "label": "Customize",
+      "bounds": [
+        600,
+        952,
+        232,
+        36
+      ],
+      "app": ""
+    },
+    {
+      "index": 390,
+      "role": "Button",
+      "label": "Add details to ad layout",
+      "bounds": [
+        880,
+        396,
+        38,
+        22
+      ],
+      "app": ""
+    },
+    {
+      "index": 391,
+      "role": "Text",
+      "label": "We'll show images of your product alongside your creative in your ad's layout.",
+      "bounds": [
+        880,
+        871,
+        232,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 392,
+      "role": "Hyperlink",
+      "label": "Hide essential enhancements",
+      "bounds": [
+        24,
+        1020,
+        188,
+        20
+      ],
+      "app": ""
+    },
+    {
+      "index": 393,
+      "role": "Text",
+      "label": "These enhancements work well for most ads and are enabled by default. We recommend keeping them on for best results.",
+      "bounds": [
+        41,
+        1114,
+        775,
+        18
+      ],
+      "app": ""
+    },
+    {
+      "index": 394,
+      "role": "CheckBox",
+      "label": "Relevant comments",
+      "bounds": [
+        41,
+        1173,
+        24,
+        24
+      ],
+      "app": ""
+    },
+    {
+      "index": 395,
+      "role": "Text",
+      "label": "Relevant comments",
+      "bounds": [
+        73,
+        1176,
+        129,
+        18
+      ],
+      "app": ""
+    },
+    {
+      "index": 396,
+      "role": "Text",
+      "label": "On by default",
+      "bounds": [
+        48,
+        1206,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 397,
+      "role": "StatusBar",
+      "label": "",
+      "bounds": [
+        40,
+        1204,
+        1,
+        1
+      ],
+      "app": ""
+    },
+    {
+      "index": 398,
+      "role": "Text",
+      "label": "On by default",
+      "bounds": [
+        40,
+        1204,
+        71,
+        14
+      ],
+      "app": ""
+    },
+    {
+      "index": 399,
+      "role": "Text",
+      "label": "We will display the most relevant comment below your ad on Facebook and Instagram.",
+      "bounds": [
+        43,
+        1650,
+        228,
+        47
+      ],
+      "app": ""
+    },
+    {
+      "index": 400,
+      "role": "CheckBox",
+      "label": "Enhance CTA",
+      "bounds": [
+        321,
+        1173,
+        24,
+        24
+      ],
+      "app": ""
+    },
+    {
+      "index": 401,
+      "role": "Text",
+      "label": "Enhance CTA",
+      "bounds": [
+        353,
+        1176,
+        86,
+        18
+      ],
+      "app": ""
+    },
+    {
+      "index": 402,
+      "role": "Text",
+      "label": "Meta AI",
+      "bounds": [
+        344,
+        1206,
+        44,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 403,
+      "role": "StatusBar",
+      "label": "",
+      "bounds": [
+        320,
+        1204,
+        1,
+        1
+      ],
+      "app": ""
+    },
+    {
+      "index": 404,
+      "role": "Text",
+      "label": "Meta AI",
+      "bounds": [
+        320,
+        1204,
+        42,
+        14
+      ],
+      "app": ""
+    },
+    {
+      "index": 405,
+      "role": "Button",
+      "label": "Customize",
+      "bounds": [
+        321,
+        1729,
+        232,
+        36
+      ],
+      "app": ""
+    },
+    {
+      "index": 406,
+      "role": "CheckBox",
+      "label": "Adjust brightness and contrast",
+      "bounds": [
+        601,
+        1173,
+        24,
+        24
+      ],
+      "app": ""
+    },
+    {
+      "index": 407,
+      "role": "Text",
+      "label": "Adjust brightness and contrast",
+      "bounds": [
+        633,
+        1176,
+        180,
+        18
+      ],
+      "app": ""
+    },
+    {
+      "index": 408,
+      "role": "Text",
+      "label": "On by default",
+      "bounds": [
+        608,
+        1206,
+        76,
+        15
+      ],
+      "app": ""
+    },
+    {
+      "index": 409,
+      "role": "StatusBar",
+      "label": "",
+      "bounds": [
+        600,
+        1204,
+        1,
+        1
+      ],
+      "app": ""
+    },
+    {
+      "index": 410,
+      "role": "Text",
+      "label": "On by default",
+      "bounds": [
+        600,
+        1204,
+        71,
+        14
+      ],
+      "app": ""
+    },
+    {
+      "index": 411,
+      "role": "Text",
+      "label": "We'll apply subtle color tweaks when likely to improve performance.",
+      "bounds": [
+        601,
+        1650,
+        232,
+        31
+      ],
+      "app": ""
+    },
+    {
+      "index": 412,
+      "role": "Button",
+      "label": "Cancel",
+      "bounds": [
+        2389,
+        1340,
+        76,
+        36
+      ],
+      "app": ""
+    },
+    {
+      "index": 413,
+      "role": "Button",
+      "label": "Save",
+      "bounds": [
+        2472,
+        1340,
+        64,
+        36
+      ],
+      "app": ""
+    },
+    {
+      "index": 414,
       "role": "Button",
       "label": "Tab search",
       "bounds": [
@@ -3445,7 +4981,7 @@
       "app": ""
     },
     {
-      "index": 287,
+      "index": 415,
       "role": "TabItem",
       "label": "Tailscale",
       "bounds": [
@@ -3457,7 +4993,7 @@
       "app": ""
     },
     {
-      "index": 288,
+      "index": 416,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3469,7 +5005,7 @@
       "app": ""
     },
     {
-      "index": 289,
+      "index": 417,
       "role": "TabItem",
       "label": "Proxy List",
       "bounds": [
@@ -3481,7 +5017,7 @@
       "app": ""
     },
     {
-      "index": 290,
+      "index": 418,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3493,7 +5029,7 @@
       "app": ""
     },
     {
-      "index": 291,
+      "index": 419,
       "role": "TabItem",
       "label": "Dashboard | Decodo",
       "bounds": [
@@ -3505,7 +5041,7 @@
       "app": ""
     },
     {
-      "index": 292,
+      "index": 420,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3517,7 +5053,7 @@
       "app": ""
     },
     {
-      "index": 293,
+      "index": 421,
       "role": "TabItem",
       "label": "Tailscale",
       "bounds": [
@@ -3529,7 +5065,7 @@
       "app": ""
     },
     {
-      "index": 294,
+      "index": 422,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3541,7 +5077,7 @@
       "app": ""
     },
     {
-      "index": 295,
+      "index": 423,
       "role": "TabItem",
       "label": "Domain",
       "bounds": [
@@ -3553,7 +5089,7 @@
       "app": ""
     },
     {
-      "index": 296,
+      "index": 424,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3565,7 +5101,7 @@
       "app": ""
     },
     {
-      "index": 297,
+      "index": 425,
       "role": "TabItem",
       "label": "(99) Ads Manager - Manage ads - Ads - Edit - High memory usage - 1.7 GB",
       "bounds": [
@@ -3577,7 +5113,7 @@
       "app": ""
     },
     {
-      "index": 298,
+      "index": 426,
       "role": "Button",
       "label": "Close",
       "bounds": [
@@ -3589,7 +5125,7 @@
       "app": ""
     },
     {
-      "index": 299,
+      "index": 427,
       "role": "Button",
       "label": "New Tab",
       "bounds": [
@@ -3601,7 +5137,7 @@
       "app": ""
     },
     {
-      "index": 300,
+      "index": 428,
       "role": "Button",
       "label": "Open Gemini in Chrome",
       "bounds": [
