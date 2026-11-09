@@ -8,6 +8,12 @@ Use quando uma conta permitida falhar no guard técnico, um objeto criado não t
 
 Pedido explícito “para hoje”/“para a data de hoje”, sem hora futura indicada, significa início imediato: materializar `start_now=true`, sem nova pergunta de horário. Resolver pela fonte canônica `SHEIN-US-DIRECT.json#/request_defaults/explicit_today_start_policy`. Distinguir retenção técnica para QA de agendamento futuro na comunicação. Se o gestor informar ativação manual, fazer readback dos mesmos campaign/adset/ad IDs e dos creative IDs atuais; não retomar automaticamente o writer pelo snapshot PAUSED antigo, nem pausar/recriar/reativar por inferência. Status ACTIVE não prova preservação dos recursos ou entrega. O horário já autorizado não dispensa QA nem aprova deltas materiais de criativo.
 
+### ForceRunStatus e ativação manual parcial
+
+Diante de `1487083 / Invalid usage of ForceRunStatus`, registre o erro como opaco: ele não comprova sozinho falha exclusivamente técnica nem uma política específica de conteúdo. Após uma ativação manual informada, releia campanhas, conjuntos e TODOS os anúncios do mesmo lote, com `status`, `effective_status`, `issues_info` e `ad_review_feedback`, além dos parâmetros materiais. O erro pode evoluir para `2490468` com rejeição na avaliação, enquanto a campanha e o conjunto ficam ACTIVE e um anúncio continua PAUSED/WITH_ISSUES. Informe separadamente as contagens em cada nível e a rejeição atual; não atribua um motivo de política quando o feedback não o expuser. Não tente superar rejeição por status write, recriação idêntica ou alteração não autorizada do conteúdo.
+
+Compare também orçamento, lance, horário, copy/tracking e os mesmos IDs após a ação manual. Registre divergências sem atribuir seu autor por inferência, sem restaurar valores automaticamente e sem retomar o writer antigo. Status ACTIVE futuro não prova entrega: consulte Insights no período quando necessário e mantenha a autoria da ativação como relato do operador, distinta da leitura do Ares.
+
 ### Número-fonte ausente ou ambíguo
 
 1. Quando o dry-run retornar `source campaign missing or ambiguous`, leia pelo transporte comum o edge `act_<conta_autorizada>/campaigns` com `fields=id,account_id,name,status,daily_budget`, complete a paginação e filtre o número inicial com `^([0-9]+)\s*-`, comparando-o numericamente com `source_number`. Não procure o número em qualquer posição: marcadores COPY e tracking também o contêm.

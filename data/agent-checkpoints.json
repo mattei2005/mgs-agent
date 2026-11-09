@@ -793,12 +793,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATION-SHEET-1569491241303801868",
-      "next_step": "Instalar agenda unica com preparacao00h13:25 e gate00h15; testarhook,readbackglobal,registrarpolitica e REPORT-INFRA",
-      "objective": "Outubro e novembro detalhados + resumos; fechamento D-1 00h15 Eastern mantendo Discord18h08",
-      "source": "data/ares/meta-ads/policies/campaign-creation-sheet.json",
-      "state": "sheet6abas getverificado1495celulas; out990 nov386parcial09/11; baselinehistorico preservado;25testespass; wrapper --scheduled realpass; preflightglobal8datas00h13semcolisao; gatepublicacao00h15",
+      "next_step": "Nenhuma acao humana necessaria. Primeiro fechamento automatico10/11/2026 a partir00h15Eastern de09/11; tickfuturo ainda nao observado. Proximas verificacoes atualizam detalhe+resumo via hook;manter mesmoID/state/agenda.",
+      "objective": "Planilha Yolo/Mavroa outubro e novembro + resumos; fechar D-1 00h15Eastern mantendo envio18h08",
+      "source": "data/ares/meta-ads/reports/creation-sheet-1569491241303801868/inventory.json",
+      "state": "complete_verified: mesmosheet6abas e1495celulas get;outubro990 nov386parcial09/11 18h22est;historico839baseline preservado por corte exato + ledgerids.12contaslive;27testespass;wrapper scheduled e hookliveget;agenda unica00h13:25 preparacao/gate00h15,rootcronativo,casreadback,8datasprepossemcolisao;18h08bytepreservado;acl emeta intactos;skill salva/relida;report-infra1569495573252284457 getembedunico silencioso.",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-11-09T23:31:22+00:00"
+      "updated_at": "2026-11-09T23:35:26+00:00"
     },
     {
       "agent": "ares",
@@ -2079,6 +2079,16 @@
       "state": "verificacao09nov2026 18h32est:9campanhas102-110 e9conjuntos active,16/18ads active;ad02da104 ead02da108 paused/with_issues codigo2490468 rejeitados em avaliacao.metaagora explicita rejeicao,sem motivo de politica retornado.mesmosids,copy/headline/tracking/features eprovasqa preservados;cap90,inicio10nov00h15est.102/104-110 usd43.75cada;103 usd35,totalusd385/dia versusoriginalusd315;origemautoria alteracaobudgetnao verificada.insights09nov0imp/usd0.ativacao manual relatada pelonicolas;ares0writesmeta.",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-09T23:33:36+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1569495587005530205",
+      "next_step": "Diagnosticar coordenacao do predecessor manual sem reativar/recriar fontes antigas;liberacao somente por transicao canonica;seguir6linhas sequenciais cadaDRY_RUN->execute->QAintegral->readback;agregar todosIDs",
+      "objective": "28copias MavroaG006:049x4,010x4,025x4,098x6,056x6,100x4;USD45cada;10nov2026 00h03EST;lances herdados fonteslive",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569495587005530205/aggregate-progress.json",
+      "state": "intake6linhas congelado,28camps/usd1260dia;admissao retida por leaseactivation_pending do pedido anterior assumido manualmente pornicolas;nenhum write meta no pedido novo",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-09T23:37:00+00:00"
     },
     {
       "agent": "ares",
@@ -9625,5 +9635,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T23:33:36+00:00"
+  "updated_at": "2026-11-09T23:37:00+00:00"
 }

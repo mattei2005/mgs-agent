@@ -2,7 +2,7 @@ import copy,importlib.util,json,unittest
 from pathlib import Path
 from datetime import datetime,timedelta
 from unittest.mock import patch
-P=Path('/root/.hermes/profiles/ares/scripts/campaign-creation-sheet.py');s=importlib.util.spec_from_file_location('tested_creation_sheet',P);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+P=Path('/root/.hermes/profiles/ares/scripts/campaign-creation-sheet.py');s=importlib.util.spec_from_file_location('tested_creation_sheet',P);assert s and s.loader;m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 class CreationSheetTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
