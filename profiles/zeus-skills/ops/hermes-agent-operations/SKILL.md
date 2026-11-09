@@ -117,6 +117,8 @@ Primary reference: `references/portuguese-stt-language.md`. Use for Zeus local S
 
 Primary reference: `references/session-context-discord-output.md`.
 
+For auditing and editing an existing Discord slash-command catalog, use `references/slash-command-catalog-audit.md` instead: compare the deployed registry/handlers with official docs, validate exact canonical/alias coverage, preserve original message IDs, and read back every edit without executing destructive commands.
+
 Important distinction: visible Discord message count is not context size. Internal tool calls, results, schemas, reasoning replay, system prompt, and attachments all contribute. Diagnose with session/runtime evidence before changing thresholds.
 
 ### Memory/USER compaction, automatic learning writes, approval gates, or curator
