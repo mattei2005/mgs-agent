@@ -2282,6 +2282,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G006-INTRADAY-1569486403283194011",
+      "next_step": "Coletar Meta/SB e RPS DOM, renderizar e validar, publicar integral e resumos com GET exato e reconciliar os seis pares conta/thread",
+      "objective": "Intraday atual nas seis threads SHEIN G006, todas com resumo financeiro ao final",
+      "source": "discord:1567162580273729629:1569486403283194011",
+      "state": "request_and_destinations_verified; live_meta_identities_confirmed; sources_pending",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-09T22:59:35+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-G006-SHEET-1564653162420248638",
       "next_step": "Aguardar avaliacao visual de Rodolfo; nao promover a previa a recorrencia ou alterar relatorios do Discord automaticamente.",
       "objective": "Rodolfo pediu a planilha do relatorio existente com duas abas, Intraday e Historico7dias, filtros e leitura mais visivel.",
@@ -9595,5 +9605,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T22:33:45+00:00"
+  "updated_at": "2026-11-09T22:59:35+00:00"
 }
