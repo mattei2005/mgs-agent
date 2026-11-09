@@ -1,0 +1,85 @@
+{
+  "operation_key": "6a8f887c7ddb0077beeeb05b",
+  "mode": "probe_only",
+  "started_at": "2026-11-09T09:08:37.858146-05:00",
+  "authority": [
+    {
+      "message_id": "1563960345826037821",
+      "channel_id": "1563926766286803004",
+      "author_id": "344196393512075265",
+      "content": "Eu quero que a planilha seja atualizada 3x por dia\n1x por volta das 8am, \n2x por volta das 2pm\n3x por volta das 9pm",
+      "get_verified": true
+    },
+    {
+      "message_id": "1569193434189668453",
+      "channel_id": "1569185140502954077",
+      "author_id": "344196393512075265",
+      "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+      "get_verified": true
+    }
+  ],
+  "contract_hash": "c65030328baacc9d414c5d3346f1a31a98a24fede8e56d2a4523d5561366f682",
+  "owner": "supervisor:1310641",
+  "queue_state": "running",
+  "queue_failures": 0,
+  "worker": {
+    "pid": 1311195,
+    "start_ticks": "164302440",
+    "started": 1794233226.464843,
+    "state": "running"
+  },
+  "job_fire_claim": null,
+  "account_count": 47,
+  "pending_h_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1419148446852410",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1851640026221079",
+    "1877104513669062",
+    "2031917360813819",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "pending_d_ids": [
+    "1150399088163771",
+    "1062446663435585"
+  ],
+  "completed_layers_not_replayed": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "financial_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json",
+  "financial_receipt_sha256_before": "b0873c3fcfd95aa7685dd6f4b68662f2b4dd46a8f3595be50198c0b16e2fcb19",
+  "workbook_contract_sha256_before": "14958922d7c9aba631ef8f16478a7aad8a700a87ed3af8b98f53a38ccb8fb794",
+  "business_writes": 0
+}
