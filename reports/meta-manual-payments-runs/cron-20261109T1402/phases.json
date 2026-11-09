@@ -39,6 +39,21 @@
     "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261109T140456924987"
   },
   "refresh_workbook": {
+    "status": "updated_validated",
+    "accounts": 47,
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261109T143612402877",
+    "meta_writes": 0,
+    "payments_executed": 0,
+    "snapshot_at": "2026-11-09T14:36:04.711894-05:00",
+    "pending_ui": []
+  },
+  "publish_pay_now": {
+    "status": "prepared",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261109T140530354363",
+    "credit_line_accounts": 36,
+    "sheet_writes": 0
+  },
+  "refresh_workbook_initial": {
     "status": "updated_metrics_pending_card_history",
     "accounts": 47,
     "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261109T140528360299",
@@ -57,11 +72,5 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ]
-  },
-  "publish_pay_now": {
-    "status": "prepared",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261109T140530354363",
-    "credit_line_accounts": 36,
-    "sheet_writes": 0
   }
 }
