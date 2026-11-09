@@ -893,6 +893,21 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "automation-recovery-45b6842545f7e2b71d86df1c",
+      "report_infra_message_id": "1569436078040154283",
+      "report_infra_get_verified": true,
+      "authorization_message_id": "1569193434189668453",
+      "source_key": "producer:sb-restricted-transition-monitor.py",
+      "status": "target_validated_supervisor_verification_pending",
+      "receipt": "/root/.hermes/shared/automation-continuity/runs/45b6842545f7e2b71d86df1c/recovery-evidence.json",
+      "artifacts": [
+        "/root/mgs-agent/data/sb-restricted-transition-state.json"
+      ],
+      "validation": "Canonical locked dry-run/apply/post-apply dry-run exit=0; 54 publishers, 73 active users; independent Sheet/state parity 524/524 on identity, FB ID, status and restriction date; zero transitions/exits/new business posts; prior message 1569409161073139885 GET verified; 16 tests pass; watchdog target OK.",
+      "recurrence_risk": "Initial bounded consumer read failed at authentication wall; subsequent same-state read and exact consumer recovered without login or credential change. Specific Auth0 mechanism and permanent prevention unproven; existing lease, bounded retries and durable supervisor remain active.",
+      "pending_stage": "Supervisor independently verifies producer and delivers this diagnosis; no business-stage replay. REPORT-INFRA receipt retained in recovery-evidence.json."
+    },
+    {
       "id": "automation-recovery-c1410a01474a061abbd2d308",
       "report_infra_message_id": "1569420537644449805",
       "report_infra_get_verified": true,
@@ -62904,6 +62919,29 @@
         "tests_run": 9,
         "tests_passed": 9
       }
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-20261109-1402",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T1402/closure-current.json",
+      "status": "completed_validated_with_historical_d_gaps",
+      "type": "authorized_recurring_financial_snapshot",
+      "updated_at": "2026-11-09T14:38:06.489747-05:00",
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "pending_d": 0,
+        "historical_blank_d": 35,
+        "card_proofs_updated": 2,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
@@ -71543,8 +71581,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 1489466,
-      "md5": "2fddc1a2dc7d5b83337385cdd4f49a53",
-      "modified_at": "2026-11-09T13:59:31-05:00"
+      "md5": "e186b8f5608ee13cca91a8a1d3e51d17",
+      "modified_at": "2026-11-09T14:36:31-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
