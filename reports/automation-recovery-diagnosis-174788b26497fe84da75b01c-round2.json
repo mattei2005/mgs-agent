@@ -1,0 +1,130 @@
+{
+  "operation_id": "174788b26497fe84da75b01c",
+  "mode": "diagnose_only",
+  "captured_at": "2026-11-09T16:29:08.504466+00:00",
+  "disposition": "pending_original_executor",
+  "previous_evidence_preserved": "/root/mgs-agent/reports/automation-recovery-diagnosis-174788b26497fe84da75b01c.json",
+  "authority": {
+    "implementation_message_id": "1569193434189668453",
+    "implementation_channel_id": "1569185140502954077",
+    "implementation_author_id": "344196393512075265",
+    "implementation_command": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "original_message_id": "1569376234008354837",
+    "original_thread_id": "1568669160798683260",
+    "original_author_id": "344196393512075265",
+    "exact_messages_GET_revalidated": true,
+    "current_authorization_registry_checked": true,
+    "scope": "Existing manual PC1 inspection of ten API OPT_IN campaigns, two ads each, seeking Generate backgrounds or a documented equivalent. No toggle, save, publish or catalog changes. This round is diagnosis only."
+  },
+  "alert": {
+    "id": "1569381079306207313",
+    "channel_id": "1498132022634483894",
+    "GET_revalidated": true,
+    "confirmed_trigger": "One needs_diagnosis request, not five consecutive dispatcher failures.",
+    "worker_failure_streak": 0,
+    "consumer_health_readonly": "OK; phase=dispatching; durable queue readable",
+    "supervisor_pid": 1561860,
+    "supervisor_process_verified": true
+  },
+  "affected_request": {
+    "key": "a6c411eff3c0bd511cf4dc25",
+    "state": "needs_diagnosis",
+    "cause": "original_writer_active",
+    "attempts": 1,
+    "failures": 1,
+    "needs_reconciliation": true,
+    "due_epoch": 1794243201.9397657,
+    "queue_owner": null,
+    "original_session_id": "20261109_091051_28bf62c8",
+    "session_ended_at": null,
+    "session_activity_age_seconds": 43.0,
+    "pc1_lease_session_id": "20261109_091051_28bf62c8",
+    "pc1_lease_thread_id": "1568669160798683260",
+    "pc1_lease_updated_at": "2026-11-09T16:28:52.121970Z",
+    "pc1_lease_expires_at": "2026-11-09T16:58:52.121970Z"
+  },
+  "duplicate_admission_diagnosis": {
+    "new_confirmed_finding": "The supervisor checks active owners and resource availability only in its initial q.open() snapshot. Its later per-job claim loop does not repeat these checks before runner dispatch. A request arriving while the first runner is executing can therefore be claimed as the second job without an active-owner/resource recheck.",
+    "source_locations": [
+      "scripts/mgs_automation_supervisor.py:219-246",
+      "scripts/mgs_automation_supervisor.py:247-259",
+      "scripts/mgs_automation_supervisor.py:448",
+      "scripts/mgs_automation_continuity.py:107-124"
+    ],
+    "real_timeline_epoch": [
+      {"event": "first worker claimed by supervisor:1456247", "request_key": "6a8f887c7ddb0077beeeb05b", "at": 1794238626.8571472},
+      {"event": "original manual-inspection request enqueued while first worker running", "request_key": "a6c411eff3c0bd511cf4dc25", "at": 1794238861.5343568},
+      {"event": "first worker returned and was deferred verifying", "at": 1794239406.5568864},
+      {"event": "same supervisor claimed late-arriving manual-inspection request", "at": 1794239406.563971},
+      {"event": "duplicate isolated worker finished returncode -15", "at": 1794239598.4409072},
+      {"event": "foreground takeover recorded with needs_diagnosis", "at": 1794239601.9397657}
+    ],
+    "original_session_messages_during_first_worker_verified": true,
+    "isolated_diagnostic": {
+      "method": "Executed deployed drive() with an in-memory diagnostic queue; first fake runner inserts a second fake request whose owner is active. No production DB, PC1 or network writes.",
+      "checked_owners": ["fixture-first"],
+      "dispatched_fixture_ids": ["fixture-first", "fixture-arriving-request"],
+      "late_active_owner_rechecked": false,
+      "dispatch_gap_reproduced": true
+    },
+    "duplicate_worker_receipt": {
+      "pid": 1474120,
+      "start_ticks": "164920451",
+      "state": "finished",
+      "returncode": -15,
+      "live_fingerprint_match": false
+    },
+    "recommendation_not_applied": "In a separately authorized mutation-capable round, revalidate current owner, worker PID/start ticks, resource lease, pending state, scope and cooldown immediately before each runner invocation, including rows that arrived during a preceding runner. If blocked, defer the same request while preserving gates and later due times. Cover late-ingress and owner/lease changes in isolated regression tests; inventory/audit/REPORT-INFRA and validate natural scheduled operation. Do not clear the current needs_diagnosis gate merely from this report.",
+    "limits": "The deployed admission gap and the matching real event sequence are confirmed. No claim is made that the old PC1 GUI was manipulated by both executors simultaneously; no historical lease snapshot at the exact claim instant was available. No prevention was deployed in this read-only round."
+  },
+  "checkpoint": {
+    "path": "/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json",
+    "progress_path": "/root/mgs-agent/reports/manual10-background-1569376234008354837/progress.json",
+    "authorized_campaign_count": 10,
+    "authorized_unique_ad_count": 20,
+    "completed_local_inspection_receipt_count": 8,
+    "completed_campaign_count": 4,
+    "completed_ad_ids": [
+      "120249954763540372", "120249954763550372",
+      "120252350213550326", "120252350213560326",
+      "120252350508270326", "120252350508280326",
+      "120252369595910326", "120252369595920326"
+    ],
+    "pending_ad_ids": [
+      "120250528241240331", "120250528241250331",
+      "120250528281990331", "120250528282000331",
+      "120250546992190331", "120250546992210331",
+      "120250562106410331", "120250562106420331",
+      "120253762937420652", "120253762937440652",
+      "120254413316880359", "120254413316890359"
+    ],
+    "all_eight_receipts_report": {
+      "inspection_complete": true,
+      "named_control_found": false,
+      "no_toggle_save_publish": true,
+      "closed_with_cancel": true
+    },
+    "screenshot_file_validation": {
+      "nonempty_PNG_signature_valid_count": 32,
+      "missing_or_invalid": [],
+      "visual_contents_independently_reviewed": false
+    },
+    "last_error": {"stage": "manual10", "error_type": "AssertionError", "detail": "exact_editor_or_section_not_ready", "index": 8},
+    "final_after_closure_delivery_summary_named_artifacts_observed": [],
+    "latest_origin_GET": "No final delivery for this original message among latest twelve messages. Progress/tool messages are not completion.",
+    "limits": "Receipt flags and file existence/signatures are local evidence, not independent current Meta integrity readback or visual verification. Eight local receipts are partial progress, not twenty-ad completion."
+  },
+  "next_step_for_supervisor": "Preserve the active original executor and live PC1 lease. No new PC1 writer. Reconcile final original checkpoint, published-integrity readback and exact source-thread delivery before any closure. Pending IDs remain with the original executor. Treat prevention deployment as separate from business inspection completion; this diagnostic evidence does not authorize reopening the gate or replaying inspected ads.",
+  "actions_this_round": {
+    "business_mutations": 0,
+    "pc1_interactions": 0,
+    "production_queue_writes": 0,
+    "messages_sent": 0,
+    "cron_or_cadence_changes": 0,
+    "credential_permission_billing_budget_changes": 0,
+    "gateway_restarts": 0,
+    "infrastructure_changes": 0,
+    "local_diagnostic_evidence_only": true,
+    "skill_loader_limitation": "hermes-agent skill_view returned disabled; canonical SKILL.md read directly. No enable/install/config change."
+  }
+}

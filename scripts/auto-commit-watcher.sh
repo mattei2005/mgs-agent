@@ -91,6 +91,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^reports/vagaaqui-cloudf
 # Synthetic tokens only; this exact test path does not exempt runtime secrets.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_ares_credential_metadata\.py$"
 
+# Reviewed offline monitor-readiness regression: mocked browser/API and
+# fixture-only authorization. Exact source path; runtime tokens stay blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_sb_token_monitor_auth_readiness\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

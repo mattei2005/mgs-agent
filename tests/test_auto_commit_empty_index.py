@@ -271,6 +271,23 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def test_reviewed_sb_monitor_readiness_test_commits(self):
+        name = "tests/test_sb_token_monitor_auth_readiness.py"
+        path = self.repo / name
+        path.parent.mkdir()
+        path.write_text("# Synthetic offline browser/API readiness test.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_sb_monitor_readiness_exception_blocks_sibling_credentials(self):
+        base = self.repo / "tests"
+        base.mkdir()
+        (base / "test_sb_token_monitor_auth_readiness.py").write_text("# Synthetic fixture.\n")
+        (base / "sb_token_monitor_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_cloudflare_metadata_exception_blocks_sibling_credentials(self):
         base = self.repo / "reports/vagaaqui-cloudflare-1567024655431245884"
         base.mkdir(parents=True)

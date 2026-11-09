@@ -28,6 +28,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from playwright.async_api import async_playwright
+from mgs_sb_session import auth_wall, session_lease
 
 BASE = Path('/root/mgs-agent')
 STATE_PATH = BASE / 'data/sb-messenger-token-invalid-monitor.json'
@@ -318,6 +319,11 @@ def build_payloads(
 
 
 async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    async with session_lease(SB_STATE):
+        return await _fetch_live_under_lease()
+
+
+async def _fetch_live_under_lease() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if not SB_STATE.exists():
         raise RuntimeError(f'SB storage state missing: {SB_STATE}')
     async with async_playwright() as playwright:
@@ -326,17 +332,24 @@ async def fetch_live() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list
             context = await browser.new_context(storage_state=str(SB_STATE), viewport={'width': 1600, 'height': 1000}, user_agent=UA)
             page = await context.new_page()
             captured: dict[str, str] = {}
+            ready = asyncio.Event()
 
             def on_request(request):
-                if 'api.jbfdigital.com.br' in request.url:
+                if request.url.startswith(API_BASE + '/') and request.headers.get('authorization'):
                     # Event callbacks are not awaited by Playwright. Reading the
                     # already available headers synchronously avoids a pending
                     # all_headers() task racing browser shutdown.
                     captured.update(request.headers)
+                    ready.set()
 
             page.on('request', on_request)
             await page.goto(APP_URL, wait_until='domcontentloaded', timeout=60000)
-            await page.wait_for_timeout(5000)
+            try:
+                await asyncio.wait_for(ready.wait(), timeout=30)
+            except asyncio.TimeoutError:
+                if auth_wall(page):
+                    raise RuntimeError('Smart Bidding canonical login required; authentication wall; no credential changed') from None
+                raise RuntimeError('Smart Bidding authenticated-header timeout after 30s; no business write attempted') from None
             body = await page.locator('body').inner_text()
             if 'BotGuardError' in body:
                 raise RuntimeError('Smart Bidding BotGuardError')

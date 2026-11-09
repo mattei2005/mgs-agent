@@ -1,0 +1,107 @@
+{
+  "operation_id": "174788b26497fe84da75b01c",
+  "mode": "diagnose_only",
+  "captured_at": "2026-11-09T16:17:33.083355+00:00",
+  "disposition": "pending_original_executor",
+  "authority": {
+    "implementation_message_id": "1569193434189668453",
+    "implementation_channel_id": "1569185140502954077",
+    "implementation_author_id": "344196393512075265",
+    "implementation_command": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "original_business_message_id": "1569376234008354837",
+    "original_business_thread_id": "1568669160798683260",
+    "original_business_author_id": "344196393512075265",
+    "exact_messages_GET_verified": true,
+    "current_zeus_authorization_registry_checked": true,
+    "business_scope": "Manual inspection of approximately ten API OPT_IN campaigns through PC1, seeking background generation controls and screenshots. Existing frozen checkpoint specifies ten campaigns and twenty ads; no save, publish, toggle or catalog change."
+  },
+  "alert": {
+    "id": "1569381079306207313",
+    "channel_id": "1498132022634483894",
+    "service": "automation-continuity-diagnosis",
+    "GET_verified": true,
+    "confirmed_trigger": "One request in needs_diagnosis, not five consecutive worker failures.",
+    "worker_failure_streak": 0,
+    "consumer_health": "OK",
+    "consumer_phase": "dispatching",
+    "supervisor_pid": 1509313,
+    "supervisor_process_verified": true
+  },
+  "affected_request": {
+    "key": "a6c411eff3c0bd511cf4dc25",
+    "source_key": "pc1:zeus:20261109_091051_28bf62c8",
+    "state": "needs_diagnosis",
+    "cause": "original_writer_active",
+    "attempts": 1,
+    "failures": 1,
+    "needs_reconciliation": true,
+    "due_epoch": 1794243201.9397657,
+    "original_session_id": "20261109_091051_28bf62c8",
+    "session_ended_at": null,
+    "session_activity_age_seconds": 26.7,
+    "pc1_lease_session_id": "20261109_091051_28bf62c8",
+    "pc1_lease_thread_id": "1568669160798683260",
+    "pc1_lease_expires_at": "2026-11-09T16:47:14.527769Z",
+    "confirmed_event_sequence": [
+      "enqueued pc1_busy",
+      "claimed by supervisor:1456247",
+      "worker_no_final_response; failures=1",
+      "original_foreground_reconciled_takeover; needs_diagnosis",
+      "subsequent original_writer_active deferrals preserve needs_diagnosis"
+    ],
+    "existing_observation": "Original foreground executor reports duplicate worker stopped with PID/start-tick verification before foreground GUI input. This round did not repeat a stop or perform GUI input.",
+    "implementation_observation": "The health reader emits the diagnosis error whenever any needs_diagnosis row exists. The supervisor preserves that gate while the original writer is active. Its session ownership predicate uses ended_at and activity newer than 600 seconds; the exact reason the earlier duplicate was admitted is not independently proven by this snapshot."
+  },
+  "checkpoint": {
+    "path": "/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json",
+    "authorized_campaign_count": 10,
+    "authorized_ad_count": 20,
+    "completed_local_inspection_receipt_count": 5,
+    "completed_local_inspection_ad_ids": [
+      "120252350213550326",
+      "120252350508280326",
+      "120252369595910326",
+      "120252350213560326",
+      "120252350508270326"
+    ],
+    "all_five_receipts_report": {
+      "inspection_complete": true,
+      "named_control_found": false,
+      "no_toggle_save_publish": true,
+      "closed_with_cancel": true
+    },
+    "missing_complete_inspection_ad_ids": [
+      "120252369595920326",
+      "120249954763540372",
+      "120249954763550372",
+      "120254413316890359",
+      "120254413316880359",
+      "120253762937440652",
+      "120253762937420652",
+      "120250528241240331",
+      "120250528241250331",
+      "120250528282000331",
+      "120250528281990331",
+      "120250546992190331",
+      "120250546992210331",
+      "120250562106420331",
+      "120250562106410331"
+    ],
+    "scope_counts_and_missing_ids_computed_programmatically": true,
+    "local_last_error": {"stage": "manual10", "error_type": "AssertionError", "detail": "lease_lost", "index": 0},
+    "final_after_closure_delivery_named_receipts_observed": [],
+    "limitations": "Local receipt flags were read; screenshots and published Meta integrity were not independently revalidated in this read-only service diagnosis. Partial progress is not full recovery or final delivery."
+  },
+  "next_step_for_supervisor": "Preserve original executor and its live PC1 lease. Do not dispatch another PC1 writer. Reconcile that executor's final checkpoint, published-integrity readback and exact source delivery when available, then use the canonical verifier for the affected request and the diagnosis alert. If original ownership becomes genuinely stale, reconcile processes and partial effects before any separately permitted recovery. Do not infer authorization to clear needs_diagnosis or retry from this report.",
+  "actions_this_round": {
+    "business_mutations": 0,
+    "pc1_interactions": 0,
+    "queue_state_writes": 0,
+    "messages_sent": 0,
+    "cron_or_cadence_changes": 0,
+    "credential_or_permission_changes": 0,
+    "gateway_restarts": 0,
+    "infrastructure_changes": 0,
+    "local_diagnostic_evidence_only": true
+  }
+}

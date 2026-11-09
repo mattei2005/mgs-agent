@@ -160,6 +160,13 @@ fi
             "tests/test_ares_credential_metadata.json": 1,
             "tests/ares_credentials.json": 1,
             "tests/ares_token.json": 1,
+            "tests/test_sb_token_monitor_auth_readiness.py": 0,
+            "work/tests/test_sb_token_monitor_auth_readiness.py": 1,
+            "tests/test_sb_token_monitor_auth_readiness.py.bak": 1,
+            "tests/test_sb_token_monitor_auth_readiness_other.py": 1,
+            "tests/test_sb_token_monitor_auth_readiness.json": 1,
+            "tests/sb_token_monitor_credentials.json": 1,
+            "tests/sb_token_monitor_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

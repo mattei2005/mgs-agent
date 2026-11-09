@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 3,
+  "consecutive_failures": 0,
   "daily": {
     "date": "2026-11-09",
     "last_result": {
@@ -703,9 +703,13 @@
     740356,
     740379,
     740394,
-    740493
+    740493,
+    740547,
+    740551,
+    740575,
+    740593
   ],
-  "failure_alert_sent_for": 3,
+  "failure_alert_sent_for": 0,
   "incidents": {
     "digital-trust-2|amazing|8|1778": {
       "alert": {
@@ -2371,9 +2375,9 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-08T12:05:50.000Z",
+        "created_at": "2026-11-09T16:05:40.000Z",
         "domain": "infinitynexx",
-        "notification_id": 739467,
+        "notification_id": 740575,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -2413,7 +2417,8 @@
         735516,
         737163,
         738421,
-        739467
+        739467,
+        740575
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2574,9 +2579,9 @@
     "digital-trust|infinitynexx|88|1535": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-08T12:05:28.000Z",
+        "created_at": "2026-11-09T16:05:16.000Z",
         "domain": "infinitynexx",
-        "notification_id": 739406,
+        "notification_id": 740547,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -2602,7 +2607,8 @@
         726466,
         736820,
         738364,
-        739406
+        739406,
+        740547
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -3996,9 +4002,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-08T12:05:43.000Z",
+        "created_at": "2026-11-09T16:05:36.000Z",
         "domain": "topfeed",
-        "notification_id": 739447,
+        "notification_id": 740551,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 16,
@@ -4040,7 +4046,8 @@
         732956,
         736848,
         738401,
-        739447
+        739447,
+        740551
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -4291,9 +4298,9 @@
     "digital-trust|xyvlov|43|197": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-08T12:06:49.000Z",
+        "created_at": "2026-11-09T16:06:48.000Z",
         "domain": "xyvlov",
-        "notification_id": 739487,
+        "notification_id": 740593,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 6,
@@ -4317,7 +4324,8 @@
         735531,
         737189,
         738443,
-        739487
+        739487,
+        740593
       ],
       "opened_at": "2026-11-03T11:12:13-05:00",
       "repeat_count": 0,
@@ -4917,25 +4925,20 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-09T10:57:10-05:00",
+  "last_check": "2026-11-09T11:27:10-05:00",
   "last_delivery": {
-    "at": "2026-11-09T07:12:15-05:00",
+    "at": "2026-11-09T11:10:26-05:00",
     "cursor_ids": [
-      740493
+      740547,
+      740551,
+      740575,
+      740593
     ],
-    "message_ids": [
-      "1569323735486435429"
-    ],
-    "notification_ids": [
-      740493
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
-  "last_error": {
-    "at": "2026-11-09T10:57:10-05:00",
-    "message": "Smart Bidding authorization header not captured",
-    "type": "RuntimeError"
-  },
-  "last_seen_id": 740493,
+  "last_error": null,
+  "last_seen_id": 740593,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
