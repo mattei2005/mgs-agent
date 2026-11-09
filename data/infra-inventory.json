@@ -893,6 +893,21 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "automation-recovery-c1410a01474a061abbd2d308",
+      "report_infra_message_id": "1569420537644449805",
+      "report_infra_get_verified": true,
+      "authorization_message_id": "1569193434189668453",
+      "source_alert_id": "1569418819372589056",
+      "status": "pending_technical_validation",
+      "receipt": "/root/.hermes/shared/automation-continuity/runs/c1410a01474a061abbd2d308/recovery-evidence.json",
+      "artifacts": [
+        "/root/mgs-agent/data/sb-restricted-transition-state.json",
+        "/root/mgs-agent/data/sb-restricted-transition-state.delivery.json"
+      ],
+      "validation": "Canonical apply exit=0 at 2026-11-09T13:34:21-05:00; 54 publishers, 73 users, 524 Sheet/state rows with independent identity/FB/status/date parity. Zero transitions/exits/posts. Prior outbox message 1569409161073139885 GET verified. 16 unittest tests passed. Later read-only consumer failed at authentication wall: technical recovery NOT complete.",
+      "pending_stage": "Existing supervisor owns backoff and read-only exact-consumer validation; do not repeat completed business stages. Specific Auth0 cause unproven; no credential, script, skill or cadence change."
+    },
+    {
       "id": "automation-recovery-c1e8980ca04dd6ff1a1db7d7",
       "report_infra_message_id": "1569410048411701401",
       "report_infra_get_verified": true,
