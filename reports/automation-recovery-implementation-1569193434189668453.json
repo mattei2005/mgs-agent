@@ -1,0 +1,1544 @@
+{
+  "schema_version": 1,
+  "id": "automation-recovery-implementation-1569193434189668453",
+  "observed_at_utc": "2026-11-09T05:00:00.454911+00:00",
+  "authority_message_id": "1569193434189668453",
+  "thread_id": "1569185140502954077",
+  "status": "runtime_active_business_recovery_still_tracked",
+  "canonical_policy": "context/automation-recovery-policy.md",
+  "tests": {
+    "tests_run": 92,
+    "failures": 0,
+    "errors": 0,
+    "fixture_only_failures_before_fixes": {
+      "blocker-notice-red.txt": "F\n======================================================================\nFAIL: test_failed_blocker_notice_cannot_resume_business_work (tests.test_automation_recovery_supervisor.SupervisorTests.test_failed_blocker_notice_cannot_resume_business_work)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 76, in test_failed_blocker_notice_cannot_resume_business_work\n    self.assertEqual(self.q.get(j['key'])['state'],'waiting_human')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'retry_scheduled' != 'waiting_human'\n- retry_scheduled\n+ waiting_human\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.046s\n\nFAILED (failures=1)\n",
+      "gates-red.txt": ".F\n======================================================================\nFAIL: test_busy_pc1_keeps_auth_probe_only (tests.test_automation_recovery_supervisor.SupervisorTests.test_busy_pc1_keeps_auth_probe_only)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 81, in test_busy_pc1_keeps_auth_probe_only\n    self.assertEqual(self.q.get(j['key'])['state'],'waiting_human')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'retry_scheduled' != 'waiting_human'\n- retry_scheduled\n+ waiting_human\n\n\n----------------------------------------------------------------------\nRan 2 tests in 0.051s\n\nFAILED (failures=1)\n",
+      "queue-red.txt": "continuity queue is not implemented\n\n======================================================================\nFAIL: test_multiprocess_enqueue_same_request_is_unique (tests.test_automation_recovery_queue.QueueTests.test_multiprocess_enqueue_same_request_is_unique)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 30, in setUp\n    self.assertTrue(MODULE.exists(), 'Durable common continuity queue is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Durable common continuity queue is not implemented\n\n======================================================================\nFAIL: test_restart_dedup_preserves_first_position_and_attempts (tests.test_automation_recovery_queue.QueueTests.test_restart_dedup_preserves_first_position_and_attempts)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 30, in setUp\n    self.assertTrue(MODULE.exists(), 'Durable common continuity queue is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Durable common continuity queue is not implemented\n\n======================================================================\nFAIL: test_unknown_must_not_become_healthy (tests.test_automation_recovery_queue.QueueTests.test_unknown_must_not_become_healthy)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 30, in setUp\n    self.assertTrue(MODULE.exists(), 'Durable common continuity queue is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Durable common continuity queue is not implemented\n\n----------------------------------------------------------------------\nRan 10 tests in 0.002s\n\nFAILED (failures=10)\n",
+      "phase-backoff-red.txt": "FF\n======================================================================\nFAIL: test_resource_wait_preserves_verification_phase (tests.test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_preserves_verification_phase)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 36, in test_resource_wait_preserves_verification_phase\n    self.assertEqual(self.q.get(j['key'])['state'],'verifying')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'waiting_resource' != 'verifying'\n- waiting_resource\n+ verifying\n\n\n======================================================================\nFAIL: test_resource_wait_never_shortens_existing_backoff (tests.test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_never_shortens_existing_backoff)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 42, in test_resource_wait_never_shortens_existing_backoff\n    self.assertGreaterEqual(self.q.get(j['key'])['due'],due)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 260.0 not greater than or equal to 3750.0\n\n----------------------------------------------------------------------\nRan 2 tests in 0.054s\n\nFAILED (failures=2)\n",
+      "false-green-red.txt": "F\n======================================================================\nFAIL: test_active_owner_prevents_green_from_fresh_progress_log (tests.test_automation_recovery_supervisor.SupervisorTests.test_active_owner_prevents_green_from_fresh_progress_log)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 53, in test_active_owner_prevents_green_from_fresh_progress_log\n    self.assertEqual(self.q.get(j['key'])['state'],'waiting_resource')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'completed_validated' != 'waiting_resource'\n- completed_validated\n+ waiting_resource\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.031s\n\nFAILED (failures=1)\n",
+      "admission-red.txt": "FF\n======================================================================\nFAIL: test_pc1_queue_order_prevents_newcomer_jump (tests.test_automation_recovery_queue.QueueTests.test_pc1_queue_order_prevents_newcomer_jump)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 101, in test_pc1_queue_order_prevents_newcomer_jump\n    self.assertTrue(hasattr(self.m,'pc1_admission'),'PC1 FIFO admission missing')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : PC1 FIFO admission missing\n\n======================================================================\nFAIL: test_timeout_requires_effect_reconciliation (tests.test_automation_recovery_queue.QueueTests.test_timeout_requires_effect_reconciliation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 109, in test_timeout_requires_effect_reconciliation\n    self.assertTrue(self.q.get(a['key'])['needs_reconciliation'])\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 is not true\n\n----------------------------------------------------------------------\nRan 2 tests in 0.070s\n\nFAILED (failures=2)\n",
+      "dtr-red.txt": "=======================\nFAIL: test_incomplete_and_expired_reads_not_reused (tests.test_dtr_continuity_resume.DTRContinuityTests.test_incomplete_and_expired_reads_not_reused)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_dtr_continuity_resume.py\", line 18, in setUp\n    self.assertTrue(TARGET.exists(),'DTR durable per-user progress and delivery continuation absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : DTR durable per-user progress and delivery continuation absent\n\n======================================================================\nFAIL: test_partial_snapshot_never_publishes (tests.test_dtr_continuity_resume.DTRContinuityTests.test_partial_snapshot_never_publishes)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_dtr_continuity_resume.py\", line 18, in setUp\n    self.assertTrue(TARGET.exists(),'DTR durable per-user progress and delivery continuation absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : DTR durable per-user progress and delivery continuation absent\n\n======================================================================\nFAIL: test_resume_preserves_completed_users_after_restart (tests.test_dtr_continuity_resume.DTRContinuityTests.test_resume_preserves_completed_users_after_restart)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_dtr_continuity_resume.py\", line 18, in setUp\n    self.assertTrue(TARGET.exists(),'DTR durable per-user progress and delivery continuation absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : DTR durable per-user progress and delivery continuation absent\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (failures=4)\n",
+      "dtr-proof-red.txt": "F\n======================================================================\nFAIL: test_dtr_no_post_validation_cannot_count_as_delivered_report (tests.test_automation_recovery_supervisor.SupervisorTests.test_dtr_no_post_validation_cannot_count_as_delivered_report)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 73, in test_dtr_no_post_validation_cannot_count_as_delivered_report\n    self.assertTrue(hasattr(self.m,'dtr_observation'),'Missing independent DTR delivery validator')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Missing independent DTR delivery validator\n\n----------------------------------------------------------------------\nRan 1 test in 0.030s\n\nFAILED (failures=1)\n",
+      "supervisor-red.txt": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Common recovery consumer is not implemented\n\n======================================================================\nFAIL: test_release_causes_one_resume (tests.test_automation_recovery_supervisor.SupervisorTests.test_release_causes_one_resume)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 15, in setUp\n    self.assertTrue(SUP.exists(),'Common recovery consumer is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Common recovery consumer is not implemented\n\n======================================================================\nFAIL: test_terminal_prefix_is_not_used_to_green_unknown (tests.test_automation_recovery_supervisor.SupervisorTests.test_terminal_prefix_is_not_used_to_green_unknown)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 15, in setUp\n    self.assertTrue(SUP.exists(),'Common recovery consumer is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Common recovery consumer is not implemented\n\n======================================================================\nFAIL: test_unknown_and_expired_job_only_diagnose (tests.test_automation_recovery_supervisor.SupervisorTests.test_unknown_and_expired_job_only_diagnose)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 15, in setUp\n    self.assertTrue(SUP.exists(),'Common recovery consumer is not implemented')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : Common recovery consumer is not implemented\n\n----------------------------------------------------------------------\nRan 10 tests in 0.002s\n\nFAILED (failures=10)\n",
+      "five-global-red.txt": "F\n======================================================================\nFAIL: test_five_consecutive_dispatch_failures_stop_across_sources (tests.test_automation_recovery_supervisor.SupervisorTests.test_five_consecutive_dispatch_failures_stop_across_sources)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 77, in test_five_consecutive_dispatch_failures_stop_across_sources\n    self.assertEqual(len(calls),5)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 6 != 5\n\n----------------------------------------------------------------------\nRan 1 test in 0.099s\n\nFAILED (failures=1)\n",
+      "resource-discovery-red.txt": "E\n======================================================================\nERROR: test_newly_discovered_pc1_dependency_persists_without_reprobe_loop (tests.test_automation_recovery_supervisor.SupervisorTests.test_newly_discovered_pc1_dependency_persists_without_reprobe_loop)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_supervisor.py\", line 37, in test_newly_discovered_pc1_dependency_persists_without_reprobe_loop\n    self.assertEqual(json.loads(self.q.get(j['key'])['source'])['resource'],'pc1')\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\nKeyError: 'resource'\n\n----------------------------------------------------------------------\nRan 1 test in 0.042s\n\nFAILED (errors=1)\n",
+      "scope-red.txt": "F\n======================================================================\nFAIL: test_native_contract_change_never_overwrites_approved_scope (tests.test_automation_recovery_queue.QueueTests.test_native_contract_change_never_overwrites_approved_scope)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_automation_recovery_queue.py\", line 104, in test_native_contract_change_never_overwrites_approved_scope\n    self.assertEqual(json.loads(current['source'])['contract_hash'],'fixture-original')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'fixture-changed' != 'fixture-original'\n- fixture-changed\n+ fixture-original\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.034s\n\nFAILED (failures=1)\n",
+      "pc1-red.txt": "F\n======================================================================\nFAIL: test_busy_is_durable_without_stealing_desktop (tests.test_pc1_continuity_ingress.PC1IngressTests.test_busy_is_durable_without_stealing_desktop)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_pc1_continuity_ingress.py\", line 25, in test_busy_is_durable_without_stealing_desktop\n    self.assertTrue(result.get('continuity_queued'), 'Busy currently drops the scheduled request instead of queueing it')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None is not true : Busy currently drops the scheduled request instead of queueing it\n\n----------------------------------------------------------------------\nRan 1 test in 0.135s\n\nFAILED (failures=1)\n",
+      "worker-fencing-red.txt": "F\n======================================================================\nFAIL: test_child_fingerprint_survives_parent_loss_without_pid_reuse (tests.test_continuity_worker_lifecycle.WorkerLifecycleTests.test_child_fingerprint_survives_parent_loss_without_pid_reuse)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/root/mgs-agent/tests/test_continuity_worker_lifecycle.py\", line 20, in test_child_fingerprint_survives_parent_loss_without_pid_reuse\n    self.assertTrue(hasattr(self.m,'worker_active'),'child ownership receipt absent')\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : child ownership receipt absent\n\n----------------------------------------------------------------------\nRan 1 test in 0.019s\n\nFAILED (failures=1)\n"
+    },
+    "environment": "installed sb-venv, isolated CRON_STALE_STATE, scripts/tests PYTHONPATH"
+  },
+  "artifacts": [
+    {
+      "path": "/root/mgs-agent/scripts/mgs_automation_continuity.py",
+      "sha256": "e73a3871c167857a5520598e8cd723d16eef27a84f88981bb9bf90a58db703a8",
+      "bytes": 12702
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+      "sha256": "890d541313b2f714eef8dbbe4432b1002b5a7f2d9c48cdcd197776200bf8e4cd",
+      "bytes": 29712
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
+      "sha256": "f0260c12d202ac6ab703e97aa86696d9ede40da56882bcdd2ca4e5f644e1d6cc",
+      "bytes": 1968
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_dtr_continuity.py",
+      "sha256": "fadb4d725e1a4f8afa12d0e3d89a392a394154b7d650c29d37eaedeeb82bdcc4",
+      "bytes": 7149
+    },
+    {
+      "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+      "sha256": "eb9a89cdbab011a43291bba20064d98ab5af69cfb510b5677fbfb090b5cf8040",
+      "bytes": 24436
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-pc1-computer-use-lock.py",
+      "sha256": "4d7e56eaf37bcc2b4b1a5a35d2ff4d05192ee539c62d66b87036ae625c18e55a",
+      "bytes": 8176
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+      "sha256": "0bebe8a87786b09c799a2550db78eebc84b5ef02314f2e1a0c0c0202cf8e38b2",
+      "bytes": 18423
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
+      "sha256": "68a8121fcd9d44a194ce7cff24969f9f0dd7132f7209cf9dc2e3863816d0005d",
+      "bytes": 19059
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_automation_recovery_queue.py",
+      "sha256": "d10b0c2439a1fc997afe1c7038cf890b936072f5b5c72d5aa4d9afd448ba44bf",
+      "bytes": 6015
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_automation_recovery_supervisor.py",
+      "sha256": "c4a8a7b4d3649e0ce7b0848f9ac1696933be663e2509c845263817548cb3b77c",
+      "bytes": 7308
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_pc1_continuity_ingress.py",
+      "sha256": "0b94cdcd369f4657eb0c8c4d52ebb69389da99147fe692b3dafae8193c1aec03",
+      "bytes": 1476
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_dtr_continuity_resume.py",
+      "sha256": "1d613ac8616d49750161a38cf08f8611ad994634352faf4609f285fd01e56a9f",
+      "bytes": 3205
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_automation_continuity_health.py",
+      "sha256": "e8f6711e72dadd1dfb307e2ce01d5df25639e85662191726bf37d099c3479c35",
+      "bytes": 5752
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_continuity_worker_lifecycle.py",
+      "sha256": "c77e764ebe5ee89f53cec8e536b0471ebced0a3009df819bc558bb5ae1aa678d",
+      "bytes": 2227
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_continuity_integration.py",
+      "sha256": "55660251d14b648ae320d35a20183d33004278158551cd393caacc4fdcfae99c",
+      "bytes": 4303
+    },
+    {
+      "path": "/root/mgs-agent/context/automation-recovery-policy.md",
+      "sha256": "cbfbe49e6b06559a6a9b23b83f4fdfb0e005ba8a90d5408d93900174d478027a",
+      "bytes": 8687
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "116deedf275eb3d91bf89ccde4d5693cd1635ab261f36585b0fe78a282eef71b",
+      "bytes": 12678
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "116deedf275eb3d91bf89ccde4d5693cd1635ab261f36585b0fe78a282eef71b",
+      "bytes": 12678
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+      "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
+      "bytes": 8006
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+      "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
+      "bytes": 8006
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
+      "sha256": "2655617ccd17d2d10b5c13e2b017a29d4f8353ae200d7287d8a4860eb88c1172",
+      "bytes": 24049
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md",
+      "sha256": "2655617ccd17d2d10b5c13e2b017a29d4f8353ae200d7287d8a4860eb88c1172",
+      "bytes": 24049
+    }
+  ],
+  "inventory_counts": {
+    "root": 60,
+    "native": 18,
+    "system-cron": 10,
+    "timer": 18
+  },
+  "inventory_targets": [
+    {
+      "command_hash": "d1774d1f364d51bf3e4ede99cf376278c10dd53dd035c90d6f4269b5359d42c4",
+      "id": "d1774d1f364d51bf3e4e",
+      "kind": "root",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "command_hash": "44887e8bfc4416882ca383fb81a8f2267889a7521a2e3eee9f2a77ee18084fab",
+      "id": "44887e8bfc4416882ca3",
+      "kind": "root",
+      "schedule": "11,26,41,56 * * * *"
+    },
+    {
+      "command_hash": "800b40ba66c4f838349aec6f85597ec4497f95337f021378b92a84fa3b4c715d",
+      "id": "800b40ba66c4f838349a",
+      "kind": "root",
+      "schedule": "23 10 * * *"
+    },
+    {
+      "command_hash": "5f61b07cb5991267274efafaef39b85f6454f07158b40565356b05fc5a04cdf2",
+      "id": "5f61b07cb5991267274e",
+      "kind": "root",
+      "schedule": "7,22,37,52 * * * *"
+    },
+    {
+      "command_hash": "b427e5cee0f73bae3dbda9b6a094a4dce2d1e61b80b63c3d73c6fdd1cea94c2a",
+      "id": "b427e5cee0f73bae3dbd",
+      "kind": "root",
+      "schedule": "1-56/5 * * * *"
+    },
+    {
+      "command_hash": "8ad91aeb574098f74d9dea8ffbad9e7fe942a99879b100a12ffe97fac6b779e5",
+      "id": "8ad91aeb574098f74d9d",
+      "kind": "root",
+      "schedule": "54 11 * * *"
+    },
+    {
+      "command_hash": "4545893a3c443ca944a2d9102e10241ff62906de14573ea2bea28310eb3a2cca",
+      "id": "4545893a3c443ca944a2",
+      "kind": "root",
+      "schedule": "3-58/5 * * * *"
+    },
+    {
+      "command_hash": "3fb441a0314260827814ae6f746847c9fe447cde434968fff01988b99e04748d",
+      "id": "3fb441a0314260827814",
+      "kind": "root",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "command_hash": "63cda16aca1142dff4ca7bf681ababbf34c655f43fb4cfd54a368761dbaa7e73",
+      "id": "63cda16aca1142dff4ca",
+      "kind": "root",
+      "schedule": "37 8,14,20 * * *"
+    },
+    {
+      "command_hash": "2f872ad2c37755b8110948f9bbe0fdbb9ae85f9797e75f81cb30f49e7292ccfc",
+      "id": "2f872ad2c37755b81109",
+      "kind": "root",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "command_hash": "bc0c5f86353f4093131b39ba6b0f726358f9e8dba19ec42f293bd38d60388de3",
+      "id": "bc0c5f86353f4093131b",
+      "kind": "root",
+      "schedule": "0 * * * *"
+    },
+    {
+      "command_hash": "52fec8410adeeb9b5e35644739e2f9bf30be001de2effe53597f0f4b6fd5390a",
+      "id": "52fec8410adeeb9b5e35",
+      "kind": "root",
+      "schedule": "44 20 * * 2,5"
+    },
+    {
+      "command_hash": "81415d695a3e2f672a28626d17fe1c60d4a3ee912b2a60c916ec4b2d5bfe3bdd",
+      "id": "81415d695a3e2f672a28",
+      "kind": "root",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "command_hash": "f8f78b881a14dfd2c8ede4b99211628cd1028bac9b4f79d165245b18515b5a75",
+      "id": "f8f78b881a14dfd2c8ed",
+      "kind": "root",
+      "schedule": "0 * * * *"
+    },
+    {
+      "command_hash": "0991d4309826d901f2a1a1a18bfa3f4213465bb336afff114183463039737088",
+      "id": "0991d4309826d901f2a1",
+      "kind": "root",
+      "schedule": "32 8 * * *"
+    },
+    {
+      "command_hash": "48b3156161a82288e98f74bd7beae30f0f9778d950f91293e71b2283bdcd258a",
+      "id": "48b3156161a82288e98f",
+      "kind": "root",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "command_hash": "d0c86fb74a62bea0f66a9e836ea845da15677baa9919b8e36d462f74ee7a348a",
+      "id": "d0c86fb74a62bea0f66a",
+      "kind": "root",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "command_hash": "0759f66ad58a84d6928f4d067767ad87ba266abb092fb897abe1fd163c89cce3",
+      "id": "0759f66ad58a84d6928f",
+      "kind": "root",
+      "schedule": "7 8,14,20 * * *"
+    },
+    {
+      "command_hash": "bd0d4d2be56c8969fc30450109cfc253d0a5af13b9cc2d7d3065c53e423710e3",
+      "id": "bd0d4d2be56c8969fc30",
+      "kind": "root",
+      "schedule": "41 3 * * *"
+    },
+    {
+      "command_hash": "58753805dff19887978a05bff5da738082180d9570664f7543a497dee6f7a1d9",
+      "id": "58753805dff19887978a",
+      "kind": "root",
+      "schedule": "* * * * *"
+    },
+    {
+      "command_hash": "8fc41deb48edeaf0ef9e7088d4072154f02d9bc05eab4991b48610fc141e852f",
+      "id": "8fc41deb48edeaf0ef9e",
+      "kind": "root",
+      "schedule": "54 2,8,14,20 * * *"
+    },
+    {
+      "command_hash": "0a1a7b14329e28f389ec9e4754bcb0ea1f8a2642c38dd32ba8afe446548faf68",
+      "id": "0a1a7b14329e28f389ec",
+      "kind": "root",
+      "schedule": "16 9 * * *"
+    },
+    {
+      "command_hash": "4d815c5d41e8b7fbf2558a5a74c068378fade92018ba208050dd963f79b971f2",
+      "id": "4d815c5d41e8b7fbf255",
+      "kind": "root",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "command_hash": "d00bc2fdad0ee2bea6b8411a536560f80056ae6095a6d58148c882a062be395f",
+      "id": "d00bc2fdad0ee2bea6b8",
+      "kind": "root",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "command_hash": "fa1335cd46e019baaa83dda235c9dabfa303cbd3b2fba4684c1aed5dfb1a393d",
+      "id": "fa1335cd46e019baaa83",
+      "kind": "root",
+      "schedule": "30 7,15 * * *"
+    },
+    {
+      "command_hash": "d5a110536b41194479372434cdd88a65ab2bf22a427315a35d76bd199a3276d5",
+      "id": "d5a110536b4119447937",
+      "kind": "root",
+      "schedule": "2-57/5 * * * *"
+    },
+    {
+      "command_hash": "369c34fecf2d7622ce4c62d27e0673b29695ccee2d02eedc2a4878200f662b13",
+      "id": "369c34fecf2d7622ce4c",
+      "kind": "root",
+      "schedule": "20 6 * * *"
+    },
+    {
+      "command_hash": "84bcd1c1718efa6d8c4d17f31fa3bea4caf15288a2acc76b173ad509253e9ac5",
+      "id": "84bcd1c1718efa6d8c4d",
+      "kind": "root",
+      "schedule": "39 * * * *"
+    },
+    {
+      "command_hash": "80a5ebe95ae3314229f682172b68bd0c60f46bac001568e750b31bb98c06e3ed",
+      "id": "80a5ebe95ae3314229f6",
+      "kind": "root",
+      "schedule": "19,49 * * * *"
+    },
+    {
+      "command_hash": "da3f2f65b0f02414776f4548dc4237911d8096348b496f0c3ffbf670c1e16f44",
+      "id": "da3f2f65b0f02414776f",
+      "kind": "root",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "command_hash": "b9a8cf942bb0bf360714ff55eb4679965ba808afa69b05b6099c0aa2831a0646",
+      "id": "b9a8cf942bb0bf360714",
+      "kind": "root",
+      "schedule": "8 9 * * *"
+    },
+    {
+      "command_hash": "314bc16a05e408ea789a6ce5840cf671c9b1ac3c51fcead4c905525c49b52665",
+      "id": "314bc16a05e408ea789a",
+      "kind": "root",
+      "schedule": "* * * * *"
+    },
+    {
+      "command_hash": "18b0e685aecd761641fee7d3c9d0fdf2599a74bda5bf25bfafad91bcf0e028d8",
+      "id": "18b0e685aecd761641fe",
+      "kind": "root",
+      "schedule": "* * * * *"
+    },
+    {
+      "command_hash": "1821f977b288187b1edeb9d61ea74e03e807e032b9eb32d66098273d4a90bdc8",
+      "id": "1821f977b288187b1ede",
+      "kind": "root",
+      "schedule": "5 8 * * *"
+    },
+    {
+      "command_hash": "ef2aae25849033f964ff397f1e0f3d62cb2af10903127c1ac2cea0250c165ffb",
+      "id": "ef2aae25849033f964ff",
+      "kind": "root",
+      "schedule": "14,29,44,59 * * * *"
+    },
+    {
+      "command_hash": "dab46577101ebc5123bfa90065fdeb8c0ebb6686f489c81a079a8991242da351",
+      "id": "dab46577101ebc5123bf",
+      "kind": "root",
+      "schedule": "0 8,14,20 * * *"
+    },
+    {
+      "command_hash": "3914420ceed74484b9d6a7da5bc53e9fe2dd5da3219e5eb75aee7c65de06b235",
+      "id": "3914420ceed74484b9d6",
+      "kind": "root",
+      "schedule": "24 0,1,7-23 * * *"
+    },
+    {
+      "command_hash": "ea748613ba86da8c8dd0cca9ee57f0f3912d94f057d22df7d77a6977db3c104b",
+      "id": "ea748613ba86da8c8dd0",
+      "kind": "root",
+      "schedule": "3-58/5 13,14 * * 5"
+    },
+    {
+      "command_hash": "9863de0249caf742a89f2bdb5a3514202f6fa60efac108d6f3fcd49480654675",
+      "id": "9863de0249caf742a89f",
+      "kind": "root",
+      "schedule": "4,14,24,34,44,54 * * * *"
+    },
+    {
+      "command_hash": "c4e8b93ba6fa7007f246329dc7faa094a45c70ecc4078f03b69ae5ac4bf23fea",
+      "id": "c4e8b93ba6fa7007f246",
+      "kind": "root",
+      "schedule": "* * * * *"
+    },
+    {
+      "command_hash": "6e40aed02d966acc096505cf8e19b5ba6ac7fb8e4d86ccf3c81e0b0ddd63f502",
+      "id": "6e40aed02d966acc0965",
+      "kind": "root",
+      "schedule": "47 4 * * *"
+    },
+    {
+      "command_hash": "fc636cc939181558d0a8089c97dfa5b4b93927e8c8b230bdcda12d633c95ffba",
+      "id": "fc636cc939181558d0a8",
+      "kind": "root",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "command_hash": "83be2c4026a1d7b7b3b9dee0b08bbd787a2f90dbc9b45aa6d5e7238eb89e0075",
+      "id": "83be2c4026a1d7b7b3b9",
+      "kind": "root",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "command_hash": "c0de4f65ee5b16f942ab1bf775601b5a31b230ba67b1c288eedce45cd24ea70f",
+      "id": "c0de4f65ee5b16f942ab",
+      "kind": "root",
+      "schedule": "21 * * * *"
+    },
+    {
+      "command_hash": "853bdba437c593ca7262ba3cac2d0f1e534a140a2664934013e413dec5f83984",
+      "id": "853bdba437c593ca7262",
+      "kind": "root",
+      "schedule": "17 8 * * *"
+    },
+    {
+      "command_hash": "02deef5660418261fa769cdeb6a6b964e1acc173ac1826d2026b712db4cb1118",
+      "id": "02deef5660418261fa76",
+      "kind": "root",
+      "schedule": "12,27,42,57 * * * *"
+    },
+    {
+      "command_hash": "441ef37743b3135870ad572c3069bc4eac7e3081135c7c0c4757fb774957de69",
+      "id": "441ef37743b3135870ad",
+      "kind": "root",
+      "schedule": "5 0 * * *"
+    },
+    {
+      "command_hash": "398c5736488c78527708a503bede036d219bb1d40ff59e38cecc7cb82d7bfacb",
+      "id": "398c5736488c78527708",
+      "kind": "root",
+      "schedule": "3 9 * * *"
+    },
+    {
+      "command_hash": "221f64b46bd499a351d484b95cdbd280fde785dadb6c5bd5b01b1813d7317f99",
+      "id": "221f64b46bd499a351d4",
+      "kind": "root",
+      "schedule": "3,8,18,28 8 * * *"
+    },
+    {
+      "command_hash": "b7e965ef4023eda58db36baee40cf0fb158e3dc7b6c6397804c4cb4e55ba3327",
+      "id": "b7e965ef4023eda58db3",
+      "kind": "root",
+      "schedule": "22,31,41 9 * * *"
+    },
+    {
+      "command_hash": "d5d3ec6dd4bb8b77e284ea2d4e6e4281cc9fe6b7c71bef034c6cddeb58677e92",
+      "id": "d5d3ec6dd4bb8b77e284",
+      "kind": "root",
+      "schedule": "4 23 * * *"
+    },
+    {
+      "command_hash": "ac1911387ecd2ac8ebe03b2eba6db411ef1414e82d706ea45569abee41f377c5",
+      "id": "ac1911387ecd2ac8ebe0",
+      "kind": "root",
+      "schedule": "34 * * * *"
+    },
+    {
+      "command_hash": "7bf65e1c2ab589e75df86a9be9c8f6437d8aaa5e490525f97f6fba60e94d09c2",
+      "id": "7bf65e1c2ab589e75df8",
+      "kind": "root",
+      "schedule": "4 0-23/2 * * *"
+    },
+    {
+      "command_hash": "576eb8b0698f76dffd1c0a0cc7816062b2fda1be517b7272f92e28ced5a65632",
+      "id": "576eb8b0698f76dffd1c",
+      "kind": "root",
+      "schedule": "47 7 * * *"
+    },
+    {
+      "command_hash": "a383076534c916e84fccf8ae74d8396b3333b247d017c1dae2445cf3df51a20a",
+      "id": "a383076534c916e84fcc",
+      "kind": "root",
+      "schedule": "32 9 * * *"
+    },
+    {
+      "command_hash": "f00e7b5b91a488eedf801a6870b87f3cdc599b47cdaec00ee9118b72266e68d0",
+      "id": "f00e7b5b91a488eedf80",
+      "kind": "root",
+      "schedule": "11 14 * * *"
+    },
+    {
+      "command_hash": "361a988f45db4115479d2304d53e4fc3f055aae338a168f20625ececc73f3d2f",
+      "id": "361a988f45db4115479d",
+      "kind": "root",
+      "schedule": "2 16 * * *"
+    },
+    {
+      "command_hash": "d16416fee26b3f40be1010f2fe3f0ad05a52a640021384ca66baabf1f5f4306e",
+      "id": "d16416fee26b3f40be10",
+      "kind": "root",
+      "schedule": "2 20 * * *"
+    },
+    {
+      "command_hash": "76d566d0d26d9cccfc3ac1e5240f2e3168b0798082775ac71be839a4aeb0640c",
+      "id": "76d566d0d26d9cccfc3a",
+      "kind": "root",
+      "schedule": "31 23 * * *"
+    },
+    {
+      "command_hash": "abf11e4a6c28a2143b7dd53b66bf06e3c128f5ff8d5b43dda37832c460de78cc",
+      "id": "abf11e4a6c28a2143b7d",
+      "kind": "root",
+      "schedule": "8 18 * * *"
+    },
+    {
+      "id": "44671121f3cc",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "every 360m",
+        "kind": "interval",
+        "minutes": 360
+      }
+    },
+    {
+      "id": "0cc7ed1e587e",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "*/3 0,8-23 * * *",
+        "expr": "*/3 0,8-23 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "498fb0d95e10",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "2-59/9 0,8-23 * * *",
+        "expr": "2-59/9 0,8-23 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "3ff8bd8ca40d",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "23 * * * *",
+        "expr": "23 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "f0222c3bfcf0",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "15 4 * * *",
+        "expr": "15 4 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "940e9827b1ac",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "45 5 * * 0",
+        "expr": "45 5 * * 0",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "453bfdd275b0",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "*/30 * * * *",
+        "expr": "*/30 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "62dfebef142b",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "30 6 * * *",
+        "expr": "30 6 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "685397627b29",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "26,56 * * * *",
+        "expr": "26,56 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "fb40054022fa",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "*/10 1-7 * * *",
+        "expr": "*/10 1-7 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "f42618f5ced7",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "2-59/10 1-7 * * *",
+        "expr": "2-59/10 1-7 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "83b148017b4d",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "10,25,40,55 * * * *",
+        "expr": "10,25,40,55 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "2ee720363d7d",
+      "kind": "native",
+      "profile": "zeus",
+      "schedule": {
+        "display": "2 8,14,21 * * *",
+        "expr": "2 8,14,21 * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "41712f74f949",
+      "kind": "native",
+      "profile": "ares",
+      "schedule": {
+        "display": "1 * * * *",
+        "expr": "1 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "69dfca2b9719",
+      "kind": "native",
+      "profile": "ares",
+      "schedule": {
+        "display": "6 * * * *",
+        "expr": "6 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "528c5710269d",
+      "kind": "native",
+      "profile": "ares",
+      "schedule": {
+        "display": "12,27,42,57 * * * *",
+        "expr": "12,27,42,57 * * * *",
+        "kind": "cron"
+      }
+    },
+    {
+      "id": "6d27047a0822",
+      "kind": "native",
+      "profile": "ares",
+      "schedule": {
+        "display": "once at 2026-11-08 23:58",
+        "kind": "once",
+        "run_at": "2026-11-08T23:58:40-05:00"
+      }
+    },
+    {
+      "id": "fe1e3ab66a68",
+      "kind": "native",
+      "profile": "ares",
+      "schedule": {
+        "display": "once at 2026-11-09 00:13",
+        "kind": "once",
+        "run_at": "2026-11-09T00:13:15-05:00"
+      }
+    },
+    {
+      "id": "/etc/crontab:d863c50e45f88e75",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/crontab:828489e43a6eebbc",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/crontab:f777d792de7fd8f2",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/crontab:828f504817cef615",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/php:e0de51a5403098a9",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/e2scrub_all:a5b743e90bcc79bc",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/e2scrub_all:c7958183746b4c8f",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/monarx-update:b819fc3b8e49f597",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/sysstat:fa1df2e7f5c95b97",
+      "kind": "system-cron"
+    },
+    {
+      "id": "/etc/cron.d/sysstat:9bc29b7d8f08fda9",
+      "kind": "system-cron"
+    },
+    {
+      "id": "sysstat-collect.timer",
+      "kind": "timer",
+      "service": "sysstat-collect.service"
+    },
+    {
+      "id": "ua-timer.timer",
+      "kind": "timer",
+      "service": "ua-timer.service"
+    },
+    {
+      "id": "sysstat-summary.timer",
+      "kind": "timer",
+      "service": "sysstat-summary.service"
+    },
+    {
+      "id": "phpsessionclean.timer",
+      "kind": "timer",
+      "service": "phpsessionclean.service"
+    },
+    {
+      "id": "fwupd-refresh.timer",
+      "kind": "timer",
+      "service": "fwupd-refresh.service"
+    },
+    {
+      "id": "fstrim.timer",
+      "kind": "timer",
+      "service": "fstrim.service"
+    },
+    {
+      "id": "dpkg-db-backup.timer",
+      "kind": "timer",
+      "service": "dpkg-db-backup.service"
+    },
+    {
+      "id": "logrotate.timer",
+      "kind": "timer",
+      "service": "logrotate.service"
+    },
+    {
+      "id": "apt-daily.timer",
+      "kind": "timer",
+      "service": "apt-daily.service"
+    },
+    {
+      "id": "man-db.timer",
+      "kind": "timer",
+      "service": "man-db.service"
+    },
+    {
+      "id": "apt-daily-upgrade.timer",
+      "kind": "timer",
+      "service": "apt-daily-upgrade.service"
+    },
+    {
+      "id": "motd-news.timer",
+      "kind": "timer",
+      "service": "motd-news.service"
+    },
+    {
+      "id": "update-notifier-download.timer",
+      "kind": "timer",
+      "service": "update-notifier-download.service"
+    },
+    {
+      "id": "systemd-tmpfiles-clean.timer",
+      "kind": "timer",
+      "service": "systemd-tmpfiles-clean.service"
+    },
+    {
+      "id": "e2scrub_all.timer",
+      "kind": "timer",
+      "service": "e2scrub_all.service"
+    },
+    {
+      "id": "update-notifier-motd.timer",
+      "kind": "timer",
+      "service": "update-notifier-motd.service"
+    },
+    {
+      "id": "apport-autoreport.timer",
+      "kind": "timer",
+      "service": "apport-autoreport.service"
+    },
+    {
+      "id": "snapd.snap-repair.timer",
+      "kind": "timer",
+      "service": "snapd.snap-repair.service"
+    }
+  ],
+  "coverage_predicates": [
+    {
+      "source_key": "producer:sync-souls.sh",
+      "at": 1794199623.2709074,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:sync-souls.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-auto-push.sh",
+      "at": 1794199623.2729697,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=5min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-auto-push.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-yoast-health-eggbev.sh",
+      "at": 1794199623.275183,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=803min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-yoast-health-eggbev.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:check-pending-reports.sh",
+      "at": 1794199623.2797143,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=9min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:check-pending-reports.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-service-restarts.sh",
+      "at": 1794199623.2841508,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=0min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:monitor-service-restarts.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-gpt55-oauth-cost.sh",
+      "at": 1794199623.286818,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=712min threshold=2880min\", \"status\": \"OK\", \"target\": \"producer:monitor-gpt55-oauth-cost.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-tool-loops.sh",
+      "at": 1794199623.2889504,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=4min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:monitor-tool-loops.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:infra-discovery.sh",
+      "at": 1794199623.2918785,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1126min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:infra-discovery.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-hermes-updates.sh",
+      "at": 1794199623.2936277,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=189min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-hermes-updates.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:track-article-cost.sh",
+      "at": 1794199623.2955525,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1min threshold=60min\", \"status\": \"OK\", \"target\": \"producer:track-article-cost.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:cleanup-zombie-sessions.sh",
+      "at": 1794199623.2978346,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=46min threshold=150min\", \"status\": \"OK\", \"target\": \"producer:cleanup-zombie-sessions.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:housekeeping-bak-cleanup.sh",
+      "at": 1794199623.2997124,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=3062min threshold=11520min\", \"status\": \"OK\", \"target\": \"producer:housekeeping-bak-cleanup.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:pendencia-render-md.sh",
+      "at": 1794199623.3023405,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=946min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:pendencia-render-md.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:chat-log.sh",
+      "at": 1794199623.305353,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=46min threshold=150min\", \"status\": \"OK\", \"target\": \"producer:chat-log.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:cron-control-plane.py",
+      "at": 1794199623.309011,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=915min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:cron-control-plane.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:hermes-news-explainer.py",
+      "at": 1794199623.3130574,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=2min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:hermes-news-explainer.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-webshare-status.sh",
+      "at": 1794199623.3174345,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=219min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-webshare-status.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:mgs-safety-backup.sh",
+      "at": 1794199623.3204813,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1206min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:mgs-safety-backup.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor_honcho_billing_watch.py",
+      "at": 1794199623.323401,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=0min threshold=5min\", \"status\": \"OK\", \"target\": \"producer:monitor_honcho_billing_watch.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-honcho-health.sh",
+      "at": 1794199623.3267472,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=173min threshold=540min\", \"status\": \"OK\", \"target\": \"producer:monitor-honcho-health.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-discord-thread-archive-warnings.py",
+      "at": 1794199623.3292184,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=870min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-discord-thread-archive-warnings.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:discord-archive-stale-agent-threads.py",
+      "at": 1794199623.3317811,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1min threshold=60min\", \"status\": \"OK\", \"target\": \"producer:discord-archive-stale-agent-threads.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-vps-health.py",
+      "at": 1794199623.334859,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:monitor-vps-health.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:dtr-sb-page-health-sync.sh",
+      "at": 1794199623.3382316,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=483min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:dtr-sb-page-health-sync.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:alerts-infra-failed-alert-resolver.py",
+      "at": 1794199623.3413188,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=4min threshold=20min\", \"status\": \"OK\", \"target\": \"producer:alerts-infra-failed-alert-resolver.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:dtr-sb-daily-match-audit.sh",
+      "at": 1794199623.3446894,
+      "status": "OK",
+      "receipt": "{\"at\": 1794198729.2428167, \"receipt\": \"/root/.hermes/shared/automation-continuity/dtr-delivery/2026-11-08/manifest.json\", \"status\": \"OK\", \"target\": \"producer:dtr-sb-daily-match-audit.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-op-rate-limit.py",
+      "at": 1794199623.3489206,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=7min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-op-rate-limit.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-drive-auth-unified.py",
+      "at": 1794199623.3510194,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=27min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-drive-auth-unified.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:sync-sb-sms-revenue-daily.sh",
+      "at": 1794199623.3547382,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=946min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:sync-sb-sms-revenue-daily.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:sync-smsfunnel-cost-daily.sh",
+      "at": 1794199623.3579388,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=877min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:sync-smsfunnel-cost-daily.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor_hermes_pending_writes.py",
+      "at": 1794199623.3626592,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=-1min threshold=5min\", \"status\": \"OK\", \"target\": \"producer:monitor_hermes_pending_writes.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:finalize-hermes-structural-write.py",
+      "at": 1794199623.3683674,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=0min threshold=5min\", \"status\": \"OK\", \"target\": \"producer:finalize-hermes-structural-write.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:dtr-sb-restricted-summary.py",
+      "at": 1794199623.3731027,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=941min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:dtr-sb-restricted-summary.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:sb-restricted-transition-monitor.py",
+      "at": 1794199623.375448,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=2min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:sb-restricted-transition-monitor.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:refresh-sb-restricted-history-sheet.py",
+      "at": 1794199623.3777235,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=226min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:refresh-sb-restricted-history-sheet.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-sms-funnel-balance.py",
+      "at": 1794199623.386599,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=22min threshold=11520min\", \"status\": \"OK\", \"target\": \"producer:monitor-sms-funnel-balance.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-hermes-memory-capacity.py",
+      "at": 1794199623.3937964,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=3min threshold=40min\", \"status\": \"OK\", \"target\": \"producer:monitor-hermes-memory-capacity.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:hermes-news-explainer-watchdog.py",
+      "at": 1794199623.401838,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=-1min threshold=5min\", \"status\": \"OK\", \"target\": \"producer:hermes-news-explainer-watchdog.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:hermes-context-cost-audit.py",
+      "at": 1794199623.4041808,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1139min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:hermes-context-cost-audit.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:sb-broadcast-template-repair.sh",
+      "at": 1794199623.4069366,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:sb-broadcast-template-repair.sh\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:sync-sb-messenger-revenue-sheet.py",
+      "at": 1794199623.4102502,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=929min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:sync-sb-messenger-revenue-sheet.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-sb-messenger-token-invalid.py",
+      "at": 1794199623.4125786,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=1421min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:monitor-sb-messenger-token-invalid.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:apps/finance-system/finance_media_spend_sync.py",
+      "at": 1794199623.4170177,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:canonical producer state=ok newer than log; age=590min\", \"status\": \"OK\", \"target\": \"producer:apps/finance-system/finance_media_spend_sync.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:apps/finance-system/finance_gam_revenue_sync.py",
+      "at": 1794199623.4213939,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=934min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:apps/finance-system/finance_gam_revenue_sync.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:finance-month-rollover.py",
+      "at": 1794199623.4292877,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=42min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:finance-month-rollover.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:finance-readonly-health.py",
+      "at": 1794199623.4328222,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=12min threshold=2160min\", \"status\": \"OK\", \"target\": \"producer:finance-readonly-health.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:monitor-runcloud.py",
+      "at": 1794199623.434997,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:age=102min threshold=180min\", \"status\": \"OK\", \"target\": \"producer:monitor-runcloud.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:ares/shein-daily-cron.py",
+      "at": 1794199623.4381602,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:verified report receipt accounts=24; age=744min; cadence unchanged\", \"status\": \"OK\", \"target\": \"producer:ares/shein-daily-cron.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:ares/shein-intraday-cron.py",
+      "at": 1794199623.4407206,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:verified report receipt accounts=24; age=215min; cadence unchanged\", \"status\": \"OK\", \"target\": \"producer:ares/shein-intraday-cron.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "producer:ares/shein-campaign-creation-cron.py",
+      "at": 1794199623.4439578,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:verified report receipt accounts=36; age=102min; cadence unchanged\", \"status\": \"OK\", \"target\": \"producer:ares/shein-campaign-creation-cron.py\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:44671121f3cc",
+      "at": 1794199623.4460266,
+      "status": "OK",
+      "receipt": "{\"at\": 1794193349.019833, \"receipt\": \"monitor-predicate:Hermes MGS patch watchdog; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:44671121f3cc\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:0cc7ed1e587e",
+      "at": 1794199623.4487066,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199462.189338, \"receipt\": \"monitor-predicate:meta-app-roles-watch; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:0cc7ed1e587e\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:498fb0d95e10",
+      "at": 1794199623.4519389,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199340.458786, \"receipt\": \"monitor-predicate:b013-dtr-link-watch; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:498fb0d95e10\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:3ff8bd8ca40d",
+      "at": 1794199623.4552476,
+      "status": "OK",
+      "receipt": "{\"at\": 1794198505.692931, \"receipt\": \"monitor-predicate:MGS DR backup hor\\u00e1rio; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:3ff8bd8ca40d\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:f0222c3bfcf0",
+      "at": 1794199623.4582233,
+      "status": "OK",
+      "receipt": "{\"at\": 1794130693.583779, \"receipt\": \"monitor-predicate:MGS DR backup completo; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:f0222c3bfcf0\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:940e9827b1ac",
+      "at": 1794199623.4601355,
+      "status": "OK",
+      "receipt": "{\"at\": 1794137523.303181, \"receipt\": \"monitor-predicate:MGS DR restore semanal; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:940e9827b1ac\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:453bfdd275b0",
+      "at": 1794199623.462254,
+      "status": "OK",
+      "receipt": "{\"at\": 1794198648.054855, \"receipt\": \"monitor-predicate:MGS DR monitor SLA; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:453bfdd275b0\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:62dfebef142b",
+      "at": 1794199623.4643598,
+      "status": "OK",
+      "receipt": "{\"at\": 1794137517.652416, \"receipt\": \"monitor-predicate:SB Utility Candidate Reservoir; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:62dfebef142b\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:685397627b29",
+      "at": 1794199623.4664934,
+      "status": "OK",
+      "receipt": "{\"at\": 1794198458.602875, \"receipt\": \"monitor-predicate:Financeiro \\u00b7 c\\u00e2mbio autom\\u00e1tico; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:685397627b29\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:fb40054022fa",
+      "at": 1794199623.4682212,
+      "status": "OK",
+      "receipt": "{\"at\": 1794142345.245605, \"receipt\": \"monitor-predicate:meta-app-roles-watch overnight; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:fb40054022fa\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:f42618f5ced7",
+      "at": 1794199623.471029,
+      "status": "OK",
+      "receipt": "{\"at\": 1794142557.85498, \"receipt\": \"monitor-predicate:b013-dtr-link-watch overnight; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:f42618f5ced7\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:83b148017b4d",
+      "at": 1794199623.4749436,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199309.271618, \"receipt\": \"monitor-predicate:Ares arquivo 30TB \\u00b7 reconcilia\\u00e7\\u00e3o cloud; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:zeus:83b148017b4d\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:zeus:2ee720363d7d",
+      "at": 1794199623.4784083,
+      "status": "ERROR",
+      "receipt": "{\"at\": 1794189941.539488, \"receipt\": \"monitor-predicate:Digital Trust \\u00b7 planilha de pagamentos 3x/dia; last execution failed (details retained in scheduler)\", \"status\": \"ERROR\", \"target\": \"native:zeus:2ee720363d7d\", \"verified\": false}"
+    },
+    {
+      "source_key": "native:ares:41712f74f949",
+      "at": 1794199623.4845958,
+      "status": "OK",
+      "receipt": "{\"at\": 1794196884.569895, \"receipt\": \"monitor-predicate:Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:ares:41712f74f949\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:ares:69dfca2b9719",
+      "at": 1794199623.487642,
+      "status": "OK",
+      "receipt": "{\"at\": 1794197196.07193, \"receipt\": \"monitor-predicate:Creditoparaveiculo 13 G006 Intraday 2h cont\\u00ednuo; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:ares:69dfca2b9719\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:ares:528c5710269d",
+      "at": 1794199623.489535,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199383.763278, \"receipt\": \"monitor-predicate:Ares criativos \\u00b7 intake contextual aut\\u00f4nomo; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:ares:528c5710269d\", \"verified\": true}"
+    },
+    {
+      "source_key": "native:ares:6d27047a0822",
+      "at": 1794199623.4920516,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:Yolokfx02 G006 reativar26 09nov0005; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:ares:6d27047a0822\", \"verified\": false}"
+    },
+    {
+      "source_key": "native:ares:fe1e3ab66a68",
+      "at": 1794199623.4947567,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:Mavroa06 G006 reativar19 09nov0015; scheduler completion and delivery checked\", \"status\": \"OK\", \"target\": \"native:ares:fe1e3ab66a68\", \"verified\": false}"
+    },
+    {
+      "source_key": "service:phpsessionclean.timer",
+      "at": 1794199623.5041163,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"phpsessionclean.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:sysstat-collect.timer",
+      "at": 1794199623.498326,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"sysstat-collect.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:fwupd-refresh.timer",
+      "at": 1794199623.5064871,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"fwupd-refresh.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:ua-timer.timer",
+      "at": 1794199623.5001342,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"ua-timer.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:sysstat-summary.timer",
+      "at": 1794199623.5021214,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"sysstat-summary.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:fstrim.timer",
+      "at": 1794199623.5084789,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"fstrim.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:dpkg-db-backup.timer",
+      "at": 1794199623.5109391,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"dpkg-db-backup.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:logrotate.timer",
+      "at": 1794199623.5135765,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"logrotate.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:apt-daily.timer",
+      "at": 1794199623.5161293,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"apt-daily.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:man-db.timer",
+      "at": 1794199623.5190375,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"man-db.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:apt-daily-upgrade.timer",
+      "at": 1794199623.5222712,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"apt-daily-upgrade.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:motd-news.timer",
+      "at": 1794199623.5244808,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"motd-news.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:update-notifier-download.timer",
+      "at": 1794199623.5269608,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"update-notifier-download.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:systemd-tmpfiles-clean.timer",
+      "at": 1794199623.5295117,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"systemd-tmpfiles-clean.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:e2scrub_all.timer",
+      "at": 1794199623.5330021,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"e2scrub_all.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:update-notifier-motd.timer",
+      "at": 1794199623.5361295,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"update-notifier-motd.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:apport-autoreport.timer",
+      "at": 1794199623.5391304,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"apport-autoreport.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:snapd.snap-repair.timer",
+      "at": 1794199623.5421517,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"Result=success\", \"status\": \"OK\", \"target\": \"snapd.snap-repair.service\", \"verified\": true}"
+    },
+    {
+      "source_key": "service:automation-continuity",
+      "at": 1794199623.4966478,
+      "status": "OK",
+      "receipt": "{\"at\": 1794199621.6663196, \"receipt\": \"monitor-predicate:consumer phase=idle; open=3; durable queue readable\", \"status\": \"OK\", \"target\": \"service:automation-continuity\", \"verified\": true}"
+    }
+  ],
+  "consumer": {
+    "heartbeat": {
+      "at": 1794200323.9746568,
+      "open": 4,
+      "phase": "idle",
+      "pid": 809651
+    },
+    "enabled": true,
+    "worker_failure_streak": 0,
+    "existing_dispatcher": "root cron every 5 minutes, existing resolver outer flock + queue dispatcher flock"
+  },
+  "database_integrity": "ok",
+  "root_crontab_unchanged": true,
+  "native_schedule_checks": [
+    {
+      "profile": "zeus",
+      "id": "44671121f3cc",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "0cc7ed1e587e",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "498fb0d95e10",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "3ff8bd8ca40d",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "f0222c3bfcf0",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "940e9827b1ac",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "453bfdd275b0",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "62dfebef142b",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "685397627b29",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "fb40054022fa",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "f42618f5ced7",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "83b148017b4d",
+      "unchanged": true
+    },
+    {
+      "profile": "zeus",
+      "id": "2ee720363d7d",
+      "unchanged": true
+    },
+    {
+      "profile": "ares",
+      "id": "41712f74f949",
+      "unchanged": true
+    },
+    {
+      "profile": "ares",
+      "id": "69dfca2b9719",
+      "unchanged": true
+    },
+    {
+      "profile": "ares",
+      "id": "528c5710269d",
+      "unchanged": true
+    },
+    {
+      "profile": "ares",
+      "id": "6d27047a0822",
+      "unchanged": true
+    },
+    {
+      "profile": "ares",
+      "id": "fe1e3ab66a68",
+      "unchanged": true
+    }
+  ],
+  "dtr_recovery": {
+    "users_scanned": 73,
+    "logins_ok": 73,
+    "errors": [],
+    "delivery_status": "GET_VERIFIED",
+    "parts": [
+      {
+        "message_id": "1569207941100339272",
+        "part": 0,
+        "verified": true
+      },
+      {
+        "message_id": "1569207944866693264",
+        "part": 1,
+        "verified": true
+      },
+      {
+        "message_id": "1569207946473246742",
+        "part": 2,
+        "verified": true
+      }
+    ],
+    "snapshot": "/root/mgs-agent/reports/dtr-sb-daily-match-audit-20261108-222018.json",
+    "snapshot_sha256": "4d2bdc8a8027d3450a6a300e8ad9a8dad9317810d8e6130867d17e1d5c89d38c"
+  },
+  "queue_at_observation": [
+    {
+      "key": "9566d5c1ab8a44866e0a2bce",
+      "source_key": "producer:dtr-sb-daily-match-audit.sh",
+      "state": "completed_validated",
+      "cause": "verifying",
+      "created": 1794198608.1829867,
+      "updated": 1794199028.5107465,
+      "due": 1794199629.2466722,
+      "attempts": 1,
+      "failures": 0,
+      "evidence": "{\"at\": 1794198729.2428167, \"receipt\": \"/root/.hermes/shared/automation-continuity/dtr-delivery/2026-11-08/manifest.json\", \"source\": {\"kind\": \"producer\", \"script\": \"dtr-sb-daily-match-audit.sh\"}, \"status\": \"OK\", \"target\": \"producer:dtr-sb-daily-match-audit.sh\", \"verified\": true}"
+    },
+    {
+      "key": "9f77ed97faf39eb7de4ba1b3",
+      "source_key": "native:zeus:2ee720363d7d",
+      "state": "retry_scheduled",
+      "cause": "retry_scheduled",
+      "created": 1794198608.299797,
+      "updated": 1794200323.9669266,
+      "due": 1794200623.9669266,
+      "attempts": 2,
+      "failures": 0,
+      "evidence": null
+    },
+    {
+      "key": "a58b1f8770bd92af4893a72e",
+      "source_key": "alert:1553036838615130164",
+      "state": "blocked_decision",
+      "cause": "historical_scope_review",
+      "created": 1794198727.3887966,
+      "updated": 1794198727.391169,
+      "due": 1794285127.391169,
+      "attempts": 0,
+      "failures": 0,
+      "evidence": null
+    },
+    {
+      "key": "96d5dc647e7b1b8f15e290a0",
+      "source_key": "alert:1554316890418053172",
+      "state": "blocked_decision",
+      "cause": "historical_scope_review",
+      "created": 1794199028.4941807,
+      "updated": 1794199327.1795864,
+      "due": 1794285727.1795864,
+      "attempts": 0,
+      "failures": 0,
+      "evidence": null
+    },
+    {
+      "key": "2715f70f35889b349dde53e0",
+      "source_key": "alert:1554533493147570180",
+      "state": "blocked_decision",
+      "cause": "historical_scope_review",
+      "created": 1794199627.4865336,
+      "updated": 1794199627.4888608,
+      "due": 1794286027.4888608,
+      "attempts": 0,
+      "failures": 0,
+      "evidence": null
+    }
+  ],
+  "limitations": [
+    "Inventory/technical health is not universal business certification.",
+    "Digital Trust remains owned by the executable consumer until its missing stages and original delivery are verified.",
+    "Historical scope holds are not authorized for blind replay.",
+    "No reboot, gateway restart, credential/billing/budget/strategy or schedule changes performed by this implementation."
+  ],
+  "report_infra_status": "pending"
+}

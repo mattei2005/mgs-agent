@@ -893,6 +893,130 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "automation-recovery-implementation-1569193434189668453",
+      "agent": "zeus",
+      "type": "common-durable-automation-continuity",
+      "status": "runtime_active_business_recovery_still_tracked",
+      "updated_at": "2026-11-09T05:00:00.454911+00:00",
+      "authority_message_id": "1569193434189668453",
+      "canonical_source": "/root/mgs-agent/context/automation-recovery-policy.md",
+      "evidence": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
+      "tests_passed": 92,
+      "artifacts": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs_automation_continuity.py",
+          "sha256": "e73a3871c167857a5520598e8cd723d16eef27a84f88981bb9bf90a58db703a8",
+          "bytes": 12702
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+          "sha256": "890d541313b2f714eef8dbbe4432b1002b5a7f2d9c48cdcd197776200bf8e4cd",
+          "bytes": 29712
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
+          "sha256": "f0260c12d202ac6ab703e97aa86696d9ede40da56882bcdd2ca4e5f644e1d6cc",
+          "bytes": 1968
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs_dtr_continuity.py",
+          "sha256": "fadb4d725e1a4f8afa12d0e3d89a392a394154b7d650c29d37eaedeeb82bdcc4",
+          "bytes": 7149
+        },
+        {
+          "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+          "sha256": "eb9a89cdbab011a43291bba20064d98ab5af69cfb510b5677fbfb090b5cf8040",
+          "bytes": 24436
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-pc1-computer-use-lock.py",
+          "sha256": "4d7e56eaf37bcc2b4b1a5a35d2ff4d05192ee539c62d66b87036ae625c18e55a",
+          "bytes": 8176
+        },
+        {
+          "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+          "sha256": "0bebe8a87786b09c799a2550db78eebc84b5ef02314f2e1a0c0c0202cf8e38b2",
+          "bytes": 18423
+        },
+        {
+          "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
+          "sha256": "68a8121fcd9d44a194ce7cff24969f9f0dd7132f7209cf9dc2e3863816d0005d",
+          "bytes": 19059
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_automation_recovery_queue.py",
+          "sha256": "d10b0c2439a1fc997afe1c7038cf890b936072f5b5c72d5aa4d9afd448ba44bf",
+          "bytes": 6015
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_automation_recovery_supervisor.py",
+          "sha256": "c4a8a7b4d3649e0ce7b0848f9ac1696933be663e2509c845263817548cb3b77c",
+          "bytes": 7308
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_pc1_continuity_ingress.py",
+          "sha256": "0b94cdcd369f4657eb0c8c4d52ebb69389da99147fe692b3dafae8193c1aec03",
+          "bytes": 1476
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_dtr_continuity_resume.py",
+          "sha256": "1d613ac8616d49750161a38cf08f8611ad994634352faf4609f285fd01e56a9f",
+          "bytes": 3205
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_automation_continuity_health.py",
+          "sha256": "e8f6711e72dadd1dfb307e2ce01d5df25639e85662191726bf37d099c3479c35",
+          "bytes": 5752
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_continuity_worker_lifecycle.py",
+          "sha256": "c77e764ebe5ee89f53cec8e536b0471ebced0a3009df819bc558bb5ae1aa678d",
+          "bytes": 2227
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_continuity_integration.py",
+          "sha256": "55660251d14b648ae320d35a20183d33004278158551cd393caacc4fdcfae99c",
+          "bytes": 4303
+        },
+        {
+          "path": "/root/mgs-agent/context/automation-recovery-policy.md",
+          "sha256": "cbfbe49e6b06559a6a9b23b83f4fdfb0e005ba8a90d5408d93900174d478027a",
+          "bytes": 8687
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+          "sha256": "116deedf275eb3d91bf89ccde4d5693cd1635ab261f36585b0fe78a282eef71b",
+          "bytes": 12678
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+          "sha256": "116deedf275eb3d91bf89ccde4d5693cd1635ab261f36585b0fe78a282eef71b",
+          "bytes": 12678
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+          "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
+          "bytes": 8006
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+          "sha256": "1abd18d4b5301201d4b440a7f843ba9ea3bc4378a71804bbe91131a138defb8c",
+          "bytes": 8006
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/SKILL.md",
+          "sha256": "2655617ccd17d2d10b5c13e2b017a29d4f8353ae200d7287d8a4860eb88c1172",
+          "bytes": 24049
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md",
+          "sha256": "2655617ccd17d2d10b5c13e2b017a29d4f8353ae200d7287d8a4860eb88c1172",
+          "bytes": 24049
+        }
+      ],
+      "report_infra_status": "pending"
+    },
+    {
       "id": "dtr-daily-recovery-1569188551139004499",
       "followup_fix": "Pending observations remain silent beyond three cycles, with 300s cooldown and 24h recent-record window; three consecutive actual resolver failures still escalate. Verified with 16 resolver assertion tests plus 8 DTR unit tests.",
       "followup_files": [
@@ -64097,6 +64221,34 @@
   ],
   "scripts": [
     {
+      "path": "/root/mgs-agent/scripts/mgs_dtr_continuity.py",
+      "size_bytes": 7149,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "fadb4d725e1a4f8afa12d0e3d89a392a394154b7d650c29d37eaedeeb82bdcc4",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_continuity_health.py",
+      "size_bytes": 1968,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "f0260c12d202ac6ab703e97aa86696d9ede40da56882bcdd2ca4e5f644e1d6cc",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+      "size_bytes": 29712,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "890d541313b2f714eef8dbbe4432b1002b5a7f2d9c48cdcd197776200bf8e4cd",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_automation_continuity.py",
+      "size_bytes": 12702,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "e73a3871c167857a5520598e8cd723d16eef27a84f88981bb9bf90a58db703a8",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
+    },
+    {
       "path": "/root/mgs-agent/scripts/.ares_campaign_v3.image-identity-final-t_8364ae25/__init__.py",
       "size_bytes": 132,
       "modified_at": "2026-08-20T23:43:43-04:00"
@@ -64983,8 +65135,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
-      "size_bytes": 24358,
-      "modified_at": "2026-10-22T20:35:55-04:00"
+      "size_bytes": 24436,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "eb9a89cdbab011a43291bba20064d98ab5af69cfb510b5677fbfb090b5cf8040",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
     },
     {
       "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
@@ -65923,8 +66077,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
-      "size_bytes": 18017,
-      "modified_at": "2026-08-02T17:07:27-04:00"
+      "size_bytes": 19059,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "68a8121fcd9d44a194ce7cff24969f9f0dd7132f7209cf9dc2e3863816d0005d",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
@@ -66253,8 +66409,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-pc1-computer-use-lock.py",
-      "size_bytes": 6937,
-      "modified_at": "2026-09-27T18:47:45-04:00"
+      "size_bytes": 8176,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "4d7e56eaf37bcc2b4b1a5a35d2ff4d05192ee539c62d66b87036ae625c18e55a",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh",
@@ -66613,8 +66771,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 18327,
-      "modified_at": "2026-11-09T03:15:09.490027+00:00"
+      "size_bytes": 18423,
+      "modified_at": "2026-11-09T05:00:00.454911+00:00",
+      "sha256": "0bebe8a87786b09c799a2550db78eebc84b5ef02314f2e1a0c0c0202cf8e38b2",
+      "description": "Automation continuity implementation 1569193434189668453; see canonical policy and implementation evidence."
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -70074,6 +70234,21 @@
     }
   ],
   "data_files": [
+    {
+      "path": "/root/.hermes/shared/automation-continuity/queue.sqlite3",
+      "description": "Private durable runtime queue, coverage, leases and delivery receipts; not copied into Git.",
+      "modified_at": "2026-11-09T05:00:00.454911+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/automation-recovery-tests-1569193434189668453.txt",
+      "description": "Acceptance receipt; fixtures are not production observations.",
+      "modified_at": "2026-11-09T05:00:00.454911+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/reports/automation-recovery-implementation-1569193434189668453.json",
+      "description": "Validated deployment evidence, scoped tests, natural consumer ticks and remaining business state.",
+      "modified_at": "2026-11-09T05:00:00.454911+00:00"
+    },
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 827503,
