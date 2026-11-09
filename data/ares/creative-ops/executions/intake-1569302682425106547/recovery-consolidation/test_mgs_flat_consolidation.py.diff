@@ -1,0 +1,17 @@
+--- tests/test_mgs_flat_consolidation.py.before
++++ tests/test_mgs_flat_consolidation.py
+@@ -118,10 +118,13 @@
+     def test_move_landed_replay_no_mutation(self):
+         self.d.meta.side_effect = None
+         self.d.meta.return_value = copy.deepcopy(self.meta)
+-        journal = Mock(data={'intents': {'consolidate:source': {'destination_parent': 'ready'}}})
++        binding = {'source_parent': 'old', 'destination_parent': 'ready',
++                   'metadata_before': self.meta, 'authority': c.AUTHORITY}
++        journal = Mock(data={'intents': {'consolidate:source': {'binding': binding, 'id': 'source'}}})
+         with patch.object(c.f, 'rpc_once') as rpc:
+             c.move_once(Mock(), self.d, journal, 'source', 'old', 'ready', self.meta)
+             rpc.assert_not_called()
++            journal.landed.assert_not_called()
+ 
+     def test_unjournalled_landed_move_rejected(self):
+         self.d.meta.side_effect = None

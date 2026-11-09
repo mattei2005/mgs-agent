@@ -1,0 +1,90 @@
+--- scripts/mgs_flat_consolidation.py.before
++++ scripts/mgs_flat_consolidation.py
+@@ -164,10 +164,15 @@
+     owned(current)
+     key = 'consolidate:' + fid
+     prior = journal.data['intents'].get(key)
++    prior_binding = prior.get('binding', {}) if prior else None
++    binding = {'source_parent': old_parent, 'destination_parent': new_parent,
++               'metadata_before': expected, 'authority': AUTHORITY}
+     if current.get('parents') == [new_parent]:
+-        require(prior is not None and prior.get('destination_parent') == new_parent,
++        require(prior is not None and prior_binding == binding,
+                 'UNJOURNALLED_MOVE')
+         metadata_equal(expected, current, new_parent)
++        if prior and prior.get('id') != fid:
++            journal.landed(key, fid)
+         return
+     require(not prior and current.get('parents') == [old_parent] and
+             current.get('version') == expected.get('version'), 'CAS_OR_AMBIGUOUS')
+@@ -313,6 +318,58 @@
+     return expected
+ 
+ 
++def expected_for_move(sa, journal, target_home, generation, fid, record):
++    """Supplement a frozen plan only after exact bytes/ACL and stable native CAS.
++
++    Original plans/snapshots are immutable. Each observed native version gets its
++    own scoped proof; move_once still compares the exact observed version.
++    """
++    expected = record['metadata_before']
++    old_parent = expected['parents'][0]
++    new_parent = record['destination_parent']
++    prior = journal.data['intents'].get('consolidate:' + fid)
++    if prior:
++        binding = prior.get('binding', {})
++        frozen = binding.get('metadata_before')
++        if frozen == expected:
++            return expected
++        require(isinstance(frozen, dict), 'REFRESH_INTENT_METADATA')
++        proof = b.read_json(target_home / ('cas-' + fid + '-' +
++                            str(frozen.get('version', '')) + '.json'), {})
++        require(proof.get('authority') == AUTHORITY and
++                proof.get('generation') == generation and
++                proof.get('record_sha256') == sha(record) and
++                proof.get('metadata_before') == frozen and
++                proof.get('full_streams_verified') is True,
++                'REFRESH_INTENT_PROOF')
++        return frozen
++    current = sa.meta(fid)
++    if current.get('version') == expected.get('version') or current.get('parents') == [new_parent]:
++        return expected
++    metadata_equal(expected, current, old_parent)
++    require(str(current.get('version', '')).isdigit() and
++            str(expected.get('version', '')).isdigit() and
++            int(current['version']) > int(expected['version']), 'REFRESH_VERSION')
++    require(f.same_access(record['permissions_before'], f.permissions(sa, fid)),
++            'REFRESH_ACCESS')
++    hashes = {'size': expected['size'], 'md5': expected['md5Checksum'],
++              'sha256': expected['sha256Checksum']}
++    require(sa.hashes(fid) == hashes, 'REFRESH_STREAM')
++    after = sa.meta(fid)
++    require(after == current, 'REFRESH_NOT_STABLE')
++    proof = {'schema': 'mgs.flat.consolidation.cas.v1', 'authority': AUTHORITY,
++             'generation': generation, 'source_id': fid,
++             'record_sha256': sha(record), 'metadata_before': current,
++             'hashes': hashes, 'full_streams_verified': True,
++             'access_preserved': True}
++    path = target_home / ('cas-' + fid + '-' + str(current['version']) + '.json')
++    saved = b.read_json(path)
++    require(saved is None or saved == proof, 'REFRESH_PROOF_CHANGED')
++    if saved is None:
++        b.atomic_json(path, proof)
++    return current
++
++
+ def consolidate(sa, owner, generation):
+     authority()
+     require(enabled(), 'NOT_ENABLED')
+@@ -348,9 +405,10 @@
+     require({i for i, m in live.items() if m['mimeType'] != b.FOLDER} ==
+             expected_remaining, 'NEW_SOURCE_OBJECT')
+     for fid, rec in records.items():
++        expected = expected_for_move(sa, journal, target_home, generation, fid, rec)
+         move_once(owner, sa, journal, fid,
+                   rec['metadata_before']['parents'][0], rec['destination_parent'],
+-                  rec['metadata_before'])
++                  expected)
+     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+         checked_hashes = dict(zip(records, pool.map(
+             lambda pair: streams(sa, *pair), records.items())))

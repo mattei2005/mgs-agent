@@ -7666,12 +7666,12 @@
     {
       "agent": "ares",
       "id": "intake-1569302682425106547",
-      "next_step": "Acompanhar somente canonical-resume-checkpoint.json,claims e writer.lock. Nao iniciar monitor/complete paralelo. Se dono sair, reconciliar fase e retomar apenas saldo; auditoria final e mapa48 exigidos.",
+      "next_step": "Acompanhar somente handle e claims; nao iniciar monitor/complete paralelo. Validarconsolidacaolive e consumir saldo mesmos48IDs/names. Quando complete, auditoriaindependente48 e mapaexato.",
       "objective": "Tratar e organizar48videos SHEIN_US_EN Kelly common; preservar RAW/IDs/reservas",
-      "source": "data/ares/creative-ops/executions/intake-1569302682425106547/canonical-resume-checkpoint.json",
-      "state": "8complete; scheduler canonico assumiu batch61e9f0ee25bc09da88b3e952a62a71d9 e coordenador resume-canonical.py detem writer.lock. usa mesmo execute.py, plano imutavel48 e checksums existentes; continua mesmo request e faz auditoria. coordenadores proprios encerrados; nenhumsegundo writer autorizado.",
+      "source": "data/ares/creative-ops/executions/intake-1569302682425106547/recovery-consolidation/change-inventory.json",
+      "state": "20complete/28pendentes. recoveryconsolidation84testspass;scriptreparado dentroescopo,backupsdiffsinventarioereport1569319555396804639 relido. planos/snapshotsimutaveis,journalbindingrealrecuperado,provacasporfonte/versao combytes/acl/duasmetasiguais. coordenador unico execute.py execute ativo handleproc_03f73cdea9f5.",
       "thread_id": "1569302682425106547",
-      "updated_at": "2026-11-09T11:23:57+00:00"
+      "updated_at": "2026-11-09T11:56:01+00:00"
     },
     {
       "agent": "zeus",
@@ -9475,5 +9475,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T11:23:57+00:00"
+  "updated_at": "2026-11-09T11:56:01+00:00"
 }
