@@ -70,5 +70,11 @@
   "unchanged": ["cron/cadence", "credentials", "permissions", "billing/payments", "budget", "strategy", "campaign start", "SB page configuration", "gateways", "supervisor queue ownership"],
   "remaining_business_ids": [],
   "next_step": "Supervisor independently verifies canonical producer evidence and diagnostic delivery, then performs its own queue transition. Do not replay the completed transition.",
-  "report_infra": {"status": "pending"}
+  "report_infra": {
+    "status": "sent_get_verified",
+    "message_id": "1569410048411701401",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "mentions_empty": true
+  }
 }

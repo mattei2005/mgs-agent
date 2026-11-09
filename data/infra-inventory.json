@@ -893,6 +893,22 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "automation-recovery-c1e8980ca04dd6ff1a1db7d7",
+      "report_infra_message_id": "1569410048411701401",
+      "report_infra_get_verified": true,
+      "authorization_message_id": "1569193434189668453",
+      "source_alert_id": "1569407492038070403",
+      "receipt": "/root/mgs-agent/reports/automation-recovery-c1e8980ca04dd6ff1a1db7d7/receipt.json",
+      "artifacts": [
+        "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+        "/root/mgs-agent/tests/test_sb_restricted_transition_monitor.py",
+        "/root/mgs-agent/data/sb-restricted-transition-state.delivery.json",
+        "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-11.md"
+      ],
+      "validation": "16 tests; canonical apply exit=0; exact independent Sheet/state parity 524/524; Discord 1569409161073139885 GET ID/content exact; post-apply dry-run zero delta; watchdog OK.",
+      "rollback": "Pre-recovery source from verified commit 6d022aff2 retained beside receipt; preserve outbox/accepted IDs and state during any rollback."
+    },
+    {
       "id": "autopush-recovery-faf8f4d1a6797f175ff4fe92",
       "report_infra_message_id": "1569391416340250779",
       "report_infra_get_verified": true,
@@ -67212,8 +67228,11 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "size_bytes": 26441,
-      "modified_at": "2026-10-26T17:05:27-04:00"
+      "size_bytes": 30283,
+      "modified_at": "2026-11-09T12:51:08-05:00",
+      "sha256": "4710bb40258a2f760bb3a4a04c8c10311de2110f8ca7a5026d44a7cd23964949",
+      "recovery_receipt": "/root/mgs-agent/reports/automation-recovery-c1e8980ca04dd6ff1a1db7d7/receipt.json",
+      "delivery_contract": "Frozen event outbox; persist accepted ID before GET; fail closed on ambiguous POST/scope drift; approved layout and role mentions preserved."
     },
     {
       "path": "/root/mgs-agent/scripts/sb-set-restricted-until.py",
@@ -71505,9 +71524,16 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 1489466,
-      "md5": "627d59736d596033b8153507d9826afe",
-      "modified_at": "2026-11-09T11:24:36-05:00"
+      "size_bytes": 1490784,
+      "md5": "180e50c1c6f8790790b178eb6d8d27b8",
+      "modified_at": "2026-11-09T12:51:42-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/sb-restricted-transition-state.delivery.json",
+      "size_bytes": 1464,
+      "md5": "8a7fbc7724b7976ff3c916c1efdf8946",
+      "modified_at": "2026-11-09T12:51:42-05:00",
+      "purpose": "Canonical transition-report frozen outbox and accepted/GET-verified message receipts."
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
