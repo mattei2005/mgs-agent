@@ -1,0 +1,39 @@
+{
+  "request_message_id": "1569402330539884696",
+  "authority": "Rodolfo Mattei 344196393512075265; read-only investigation",
+  "confirmed": [
+    "Meta defines enroll_status as the opt-in status for an individual creative feature, with OPT_IN and OPT_OUT values. This is not the campaign/ad ACTIVE status and is not a rendering/eligibility receipt.",
+    "The official Advantage+ guide explicitly maps image_background_gen to Generate backgrounds, image_touchups to Visual-touch ups, and video_auto_crop to Visual-touch ups for video. No documented mapping makes Visual touch-ups another name for image_background_gen.",
+    "The documented background-generation setup uses eligible product/catalog images and MOBILE_FEED_STANDARD previews.",
+    "Fresh reads of representative image and video ads returned image_background_gen OPT_IN while the specific background preview returned ineligible.",
+    "An image-only creative also returned video_auto_crop OPT_IN; a video creative also returned image_touchups OPT_IN. Therefore per-feature enrollment flags alone do not establish that the feature is applicable or being rendered.",
+    "The representative image creative returned the same flags in direct reads with response headers confirming Graph v26.0 and v27.0. This observation is not explained simply by using the older requested version.",
+    "The prior exact manual sample inspected10 campaigns and20 ads, validating the Advantage+ creative tab and populated feature panels, without finding Generate backgrounds. The same20 enrollments remained OPT_IN.",
+    "The historical copy diagnosis recorded Meta code100/subcode3858293 when image_background_gen OPT_IN was resubmitted without product_set_id, despite source previews being ineligible. Existing CEO policy resolves authorized copies by OPT_OUT only on the copied feature, not by adding a catalog or changing sources."
+  ],
+  "not_confirmed": [
+    "Whether these enrollment values originate from a stored manual choice, inherited legacy bundle, creation-time defaults or read-time expansion. A GET and an opt-in enum cannot identify that provenance.",
+    "The internal Meta reason why the existing flags remain returned while the UI omits the control. Do not label a Meta bug or a renamed control as proven.",
+    "Historical per-impression background rendering or causal ROI impact."
+  ],
+  "operational_resolution": [
+    "Treat OPT_IN as declared enrollment, not an effectively active background transformation.",
+    "Keep the approved copy-only OPT_OUT policy and preserve originals/other features; no new campaign writes were performed in this research.",
+    "Do not use the old enabled/disabled enrollment split as a usage-based ROI experiment.",
+    "If an authoritative explanation of the internal inconsistency is needed, submit the prepared minimal case to Meta only after owner authorization; never change production to manufacture a visible control."
+  ],
+  "primary_sources": [
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-creative-feature-details/",
+    "https://developers.facebook.com/documentation/ads-commerce/marketing-api/creative/advantage-creative/get-started",
+    "https://developers.facebook.com/documentation/ads-commerce/marketing-api/creative/generative-ai-features",
+    "https://www.facebook.com/business/help/981940746195135"
+  ],
+  "evidence": [
+    "readback-v26.0.json",
+    "readback-v27.0.json",
+    "direct-creative-version-proof.json",
+    "/root/mgs-agent/reports/manual10-background-1569376234008354837/verification.json",
+    "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568261072639758487/background-api-diagnosis.json",
+    "/root/mgs-agent/context/meta-creative-copy-policy.md"
+  ]
+}
