@@ -5,6 +5,36 @@ import {openDatabase} from '../storage.mjs';
 import {createApp} from '../server.mjs';
 import {request} from 'node:http';
 import proxyaddr from 'proxy-addr';
+test('October notice is user-scoped, durable, idempotent and never financial',{timeout:90000},async()=>{
+ const db=await openDatabase('memory://'),password=randomUUID()+'-TEST-ONLY',salt=randomUUID(),config={username:'rodolfo',salt,hash:scryptSync(password,salt,64).toString('hex'),origin:'https://dash.mgsdigitalcorp.com'};
+ const app=await createApp(db,{auth:config});let server=app.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));
+ const call=(url,body,headers={},method=body?'POST':'GET')=>new Promise((resolve,reject)=>{const r=request({hostname:'127.0.0.1',port:server.address().port,path:url,method,agent:false,headers:{Host:'dash.mgsdigitalcorp.com',Origin:config.origin,'Content-Type':'application/json',...headers}},res=>{let text='';res.on('data',x=>text+=x);res.on('end',()=>{let data;try{data=JSON.parse(text)}catch{}resolve({status:res.statusCode,headers:res.headers,data});});});r.on('error',reject);r.end(body?JSON.stringify(body):undefined);});
+ const login=async username=>{const r=await call('/api/auth/login',{username,password});assert.equal(r.status,200);const h={Cookie:r.headers['set-cookie'][0].split(';')[0]};const me=(await call('/api/auth/me',null,h)).data;return {...h,'X-CSRF-Token':me.csrf};};
+ const id='october-result-1569167402279764110',url='/api/auth/notices',ack=url+'/'+id+'/ack';
+ try{
+ for(const name of ['geizian','icaro','isliago','joe','kelly','nicolas','other'])await db.query('INSERT INTO finance_users(username,display_name,role,manager_key,enabled,salt,password_hash) VALUES($1,$1,$2,$3,true,$4,$5)',[name,name==='geizian'?'partner':'manager',name==='geizian'?null:name==='other'?'joe':name,salt,config.hash]);
+ assert.equal((await call(url)).status,401);assert.equal((await call(ack,{})).status,401);
+ const owner=await login('rodolfo');assert.deepEqual((await call(url,null,owner)).data.notices,[]);assert.equal((await call(ack,{},owner)).status,403);
+ const ph={...owner,'X-MGS-Preview-User':'icaro'};assert.equal((await call(url,null,ph)).data.notices.length,1);assert.equal((await call(ack,{},ph)).status,403);
+ const other=await login('other');assert.deepEqual((await call(url,null,other)).data.notices,[]);assert.equal((await call(ack,{},other)).status,403);
+ const partner=await login('geizian');assert.deepEqual((await call(url,null,partner)).data.notices,[]);
+ const headers={};for(const name of ['icaro','isliago','joe','kelly','nicolas']){
+  const h=headers[name]=await login(name),r=await call(url,null,h);assert.equal(r.status,200);assert.equal(r.headers['cache-control'],'no-store');assert.equal(r.data.notices.length,1);const n=r.data.notices[0];assert.equal(n.id,id);assert.equal(n.button,'Entendido');assert.equal(n.name,name==='icaro'?'Ícaro':name[0].toUpperCase()+name.slice(1));assert.equal(n.title,'Atualização do resultado de outubro');assert.ok(n.paragraphs.some(x=>x.includes('Mavroa, Vizioid e Escalatepower')));assert.ok(n.paragraphs.every(x=>!/%|R\$|US\$|10%|7%/.test(x)));
+ }
+ const h=headers.icaro;assert.equal((await call(ack,{}, {Cookie:h.Cookie})).status,403);assert.equal((await call(ack,{}, {...h,Origin:'https://evil.test'})).status,403);assert.equal((await call(ack,{username:'joe'},h)).status,400);assert.equal((await call('/api/auth/notices/wrong/ack',{},h)).status,404);
+ const stamp=(await call('/api/auth/update-state',null,h)).data.data;
+ const results=await Promise.all([call(ack,{},h),call(ack,{},h)]);assert.ok(results.every(r=>r.status===200&&r.data.acknowledged));assert.equal((await call('/api/auth/update-state',null,h)).data.data,stamp);
+ assert.deepEqual((await call(url,null,h)).data.notices,[]);for(const name of ['isliago','joe','kelly','nicolas'])assert.equal((await call(url,null,headers[name])).data.notices.length,1);
+ assert.equal((await db.query("SELECT count(*)::int n FROM audit_events WHERE action='NOTICE_ACKNOWLEDGED' AND actor='icaro'")).rows[0].n,1);
+ await call('/api/auth/logout',{},h);assert.equal((await call(url,null,h)).status,401);
+ // Rebuild the app and open a second session: durable server receipt, not browser state.
+ await new Promise(r=>server.close(r));const app2=await createApp(db,{auth:config});server=app2.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));
+ await db.query('DELETE FROM auth_limits');const second=await login('icaro');assert.deepEqual((await call(url,null,second)).data.notices,[]);
+ await db.query("UPDATE finance_users SET enabled=false WHERE username='joe'");assert.equal((await call(ack,{},headers.joe)).status,401);
+ for(const name of ['isliago','kelly','nicolas']){assert.equal((await call(ack,{},headers[name])).status,200);assert.deepEqual((await call(url,null,headers[name])).data.notices,[]);}
+ assert.equal((await db.query('SELECT count(*)::int n FROM finance_ledger')).rows[0].n,0);assert.equal((await db.query('SELECT count(*)::int n FROM scenarios')).rows[0].n,0);
+ }finally{await new Promise(r=>server.close(r));await db.close();}
+});
 import qs from 'qs';import {createRequire} from 'node:module';import {spawnSync} from 'node:child_process';
 test('qs comma format handles hostile objects and preserves valid values',()=>{
  for(const input of [JSON.parse('{"a":[{"toString":"x"}]}'),qs.parse('a[0][toString]=x',{allowPrototypes:true}),qs.parse('a[][b]=c',{plainObjects:true})])for(const encodeValuesOnly of [false,true])assert.doesNotThrow(()=>qs.stringify(input,{arrayFormat:'comma',encodeValuesOnly}));

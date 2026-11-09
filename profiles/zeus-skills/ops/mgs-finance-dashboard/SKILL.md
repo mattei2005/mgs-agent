@@ -56,6 +56,14 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 
 Do not substitute the general finance workbook for the live Dash as the comparison target. A supplied closing Sheet is a read-only reference unless Rodolfo separately authorizes editing it.
 
+## Account-bound manager communications
+
+For the approved October login/access notice, read `/root/mgs-agent/docs/finance-october-manager-notice.md`. Rodolfo1569167402279764110 supersedes numeric BRL/USD/percentage comparisons and the special Ícaro paragraph: use the exact shared text, personalized name, and **Entendido** for only the five named managers. Publication state belongs to checkpoint `ZEUS-FINANCE-NOTICE-1569165518093426809` and its release evidence, not this authorization.
+
+Persist acknowledgement by authenticated account plus immutable notice ID in server-side append-only storage; browser storage is never the source of truth. Preserve Origin/CSRF/role/active-user gates, deny owner-preview writes, serialize duplicate clicks, and return success only after commit/readback. Keep the dialog pending after a failed or ambiguous request; retries must be idempotent. Exclude read receipts from financial freshness markers. Test all recipients, other roles, cross-user spoofing, concurrent acknowledgement, failed/held requests, reload, new device/session, app/database reopen, and desktop/mobile. Production QA must not mark the managers' notices as read; use owner read-only previews and actual isolated identities for the acknowledgement tests. Do not add financial/schema/permission changes merely to implement a notice.
+
+When explaining a historical correction, reconcile later authorized adjustments and provisional FX before presenting old amounts as current. A USD or percentage label does not itself isolate the original correction. Preserve historical comparisons explicitly, or use the owner's approved nonnumeric wording; never silently rewrite the requested message.
+
 ## Spend-audit coverage and period boundaries
 
 - Treat a reported site or screenshot as the starting example, not the audit boundary when Rodolfo asks to check everything. Verify every spending account, site and manager in the requested period, including individual daily results—not only the company total or import status.

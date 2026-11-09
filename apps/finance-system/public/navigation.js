@@ -2,6 +2,7 @@
 window.MGSExistingPeriod=(periods,requested,current)=>{const ids=periods.map(p=>p.id).sort();if(!ids.length)throw Error('Nenhuma competência disponível');if(ids.includes(requested))return requested;if(!current){const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));current=p.year+'-'+p.month;}return ids.includes(current)?current:ids.filter(x=>x<=current).at(-1)||ids[0];};
 window.MGSNavigation={period(){const explicit=new URLSearchParams(location.search).get('period')||sessionStorage.getItem('financePeriod');if(explicit)return explicit;const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value])),current=parts.year+'-'+parts.month;return current<'2026-08'?'2026-08':current>'2027-12'?'2027-12':current;},setPeriod(period){sessionStorage.setItem('financePeriod',period);const u=new URL(location.href);u.searchParams.set('period',period);history.replaceState(null,'',u);document.querySelectorAll('.sidebar a[href]').forEach(a=>{const x=new URL(a.href,location.origin);if(x.origin===location.origin){x.searchParams.set('period',period);a.href=x;}});},mount(role,selected,operations=false,user={}){
  window.MGSPreview.mount(user);
+ window.MGSNotices?.mount(user);
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const main=[['overview','Dashboard'],['movement','Relatório Diário'],['annual','Caixa Sintético']],admin=[['sites','Cadastro de Domínios'],['accounts','Contas de Anúncio'],['company','Despesas Gerais'],['personnel','Despesas Funcionários'],['rates','Câmbio e Inválidos'],['payments','Pagamentos',true],['activity','Histórico de Atividades',true],['approvals','Aprovações',true],['users','Usuários',true]],partnerViews=['company','personnel','rates','payments'];
  if(role==='owner'&&user.username==='rodolfo')main.push(['review','Conferência mensal']);
@@ -21,6 +22,28 @@ window.MGSNavigation={period(){const explicit=new URLSearchParams(location.searc
  },select(view){document.querySelectorAll('.nav-item').forEach(a=>a.classList.toggle('selected',new URL(a.href,location.origin).searchParams.get('view')===view));}};
 
 /* Automatic freshness: never refresh an open editor or an in-flight operation. */
+/* Rodolfo1569167402279764110: a read receipt belongs to the account, not the browser. */
+window.MGSNotices=(()=>{
+ let user=null,started=false,loading=false,done=false,attempts=0,dialog=null;
+ const get=async()=>{const r=await fetch('/api/auth/notices',{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Não foi possível consultar o comunicado');return r.json();};
+ function render(n,readOnly){
+  if(dialog?.isConnected)return;dialog=document.createElement('dialog');dialog.id='managerNotice';dialog.setAttribute('aria-labelledby','managerNoticeTitle');dialog.setAttribute('aria-describedby','managerNoticeBody');
+  const title=document.createElement('h2');title.id='managerNoticeTitle';title.textContent=n.title;
+  const body=document.createElement('div');body.id='managerNoticeBody';for(const text of n.paragraphs){const p=document.createElement('p');p.textContent=text;body.appendChild(p);}
+  const error=document.createElement('p');error.id='managerNoticeError';error.setAttribute('role','alert');
+  const button=document.createElement('button');button.id='managerNoticeAck';button.type='button';button.textContent=n.button;button.disabled=readOnly;
+  if(readOnly){error.textContent='Visualização somente leitura. A ciência só pode ser registrada pelo gestor. Pressione Esc para fechar esta prévia.';dialog.addEventListener('cancel',()=>{done=true;});}
+  else dialog.addEventListener('cancel',e=>e.preventDefault());
+  button.onclick=async()=>{button.disabled=true;dialog.setAttribute('aria-busy','true');error.textContent='';try{
+   const r=await fetch('/api/auth/notices/'+encodeURIComponent(n.id)+'/ack',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':user.csrf},body:'{}',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Sua confirmação não foi salva. Clique em Entendido para tentar novamente.');const saved=await r.json();if(saved.id!==n.id||saved.acknowledged!==true)throw Error('Confirmação não validada. Tente novamente.');
+   const check=await get();if(check.notices.some(x=>x.id===n.id))throw Error('Confirmação ainda pendente. Tente novamente.');done=true;dialog.close();dialog.remove();
+  }catch(e){error.textContent=e.name==='TimeoutError'?'Não foi possível confirmar o recebimento. Clique em Entendido para verificar novamente.':e.message;button.disabled=false;}finally{dialog.removeAttribute('aria-busy');}};
+  dialog.append(title,body,error,button);document.body.appendChild(dialog);dialog.showModal();if(!readOnly)button.focus();
+ }
+ async function check(){if(!user||loading||done||dialog?.open)return;loading=true;attempts++;try{const data=await get();if(!Array.isArray(data.notices))throw Error('Resposta inválida');if(data.notices.length)render(data.notices[0],!!data.read_only);else done=true;}catch{if(attempts<3)setTimeout(check,5000);}finally{loading=false;}}
+ function mount(me){if(started||me.role!=='manager')return;started=true;user=me;check();window.addEventListener('focus',()=>{if(!done&&attempts<6)check();});}
+ return {mount};
+})();
 /* Owner-only preview: carry the effective identity across this tab, never cookies. */
 window.MGSPreview=(()=>{
  const username=new URLSearchParams(location.search).get('__preview'),nativeFetch=window.fetch.bind(window);let me=null;

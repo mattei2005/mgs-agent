@@ -34,11 +34,35 @@ export async function createApp(db,options={}) {
  // Hash actual deployed source, not a manually maintained release label. No private/config files.
  const codeFiles=[];for(const dir of ['', 'public'])for(const entry of await fs.readdir(path.join(root,dir),{withFileTypes:true}))if(entry.isFile()&&/\.(mjs|py|sql|js|css|html)$/.test(entry.name))codeFiles.push(path.join(dir,entry.name));
  const versionHash=createHash('sha256');for(const name of codeFiles.sort()){versionHash.update(name+'\0');versionHash.update(await fs.readFile(path.join(root,name)));}const releaseVersion=versionHash.digest('hex');
- const updateState=async req=>{const row=(await db.query("SELECT id FROM audit_events WHERE action NOT LIKE 'LOGIN_%' AND action NOT LIKE 'MFA_%' AND action<>'LOGOUT' AND action NOT LIKE 'PREVIEW_%' ORDER BY id DESC LIMIT 1")).rows[0];const periods=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' ORDER BY id")).rows.map(x=>x.id);return {version:releaseVersion,data:createHash('sha256').update(JSON.stringify([req.auth?.username||'local',String(row?.id||0),periods])).digest('hex')};};
+ const updateState=async req=>{const row=(await db.query("SELECT id FROM audit_events WHERE action NOT LIKE 'LOGIN_%' AND action NOT LIKE 'MFA_%' AND action<>'LOGOUT' AND action NOT LIKE 'PREVIEW_%' AND action<>'NOTICE_ACKNOWLEDGED' ORDER BY id DESC LIMIT 1")).rows[0];const periods=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' ORDER BY id")).rows.map(x=>x.id);return {version:releaseVersion,data:createHash('sha256').update(JSON.stringify([req.auth?.username||'local',String(row?.id||0),periods])).digest('hex')};};
  // Authenticated opaque freshness markers only: no balances, IDs, other users or audit contents.
  app.get('/api/auth/update-state',async(req,res)=>res.json(await updateState(req)));
  const navigationSource=await fs.readFile(path.join(root,'public/navigation.js'),'utf8');
  app.get('/navigation.js',async(req,res)=>res.type('application/javascript').set('Cache-Control','no-store').send('window.MGSUpdateBoot='+JSON.stringify(await updateState(req))+';\n'+navigationSource));
+ // October notice: immutable approved content; only authenticated recipients can acknowledge.
+ // Existing append-only audit storage makes the receipt durable without touching financial data.
+ const noticeId='october-result-1569167402279764110',noticeNames=Object.freeze({icaro:'Ícaro',isliago:'Isliago',joe:'Joe',kelly:'Kelly',nicolas:'Nicolas'});
+ const noticeRecipient=req=>req.auth?.role==='manager'&&Object.hasOwn(noticeNames,req.auth.username)&&req.auth.manager_key===req.auth.username;
+ const noticeReceipt=async(tx,username)=>(await tx.query("SELECT id,created_at FROM audit_events WHERE action='NOTICE_ACKNOWLEDGED' AND actor=$1 AND after_data->>'notice_id'=$2 ORDER BY id LIMIT 1",[username,noticeId])).rows[0]||null;
+ const noticeContent=username=>({id:noticeId,name:noticeNames[username],title:'Atualização do resultado de outubro',paragraphs:[`Olá, ${noticeNames[username]}.`,'Identificamos que os gastos com anúncios de Mavroa, Vizioid e Escalatepower estavam registrados nos sites, mas não estavam sendo descontados do seu resultado individual de outubro.','Essa falha foi corrigida. Os gastos passaram a ser considerados no cálculo, e seu resultado e sua remuneração foram atualizados conforme as regras já existentes.','Você pode consultar os dados atualizados na Dash.','Qualquer dúvida, pode me chamar.','Att.,\nRodolfo'],button:'Entendido'});
+ app.get('/api/auth/notices',async(req,res)=>{
+  if(!noticeRecipient(req))return res.json({notices:[]});
+  const receipt=await noticeReceipt(db,req.auth.username);return res.json({notices:receipt?[]:[noticeContent(req.auth.username)],read_only:!!req.auth.preview});
+ });
+ app.post('/api/auth/notices/:id/ack',async(req,res)=>{
+  if(!noticeRecipient(req)||req.auth.preview)return res.status(403).json({error:'Ciência permitida somente ao próprio destinatário'});
+  if(req.params.id!==noticeId)return res.status(404).json({error:'Comunicado indisponível'});
+  if(!req.body||Array.isArray(req.body)||Object.keys(req.body).length)return res.status(400).json({error:'A confirmação não recebe valores ou outro usuário'});
+  const receipt=await db.transaction(async tx=>{
+   const user=(await tx.query('SELECT username,role,manager_key,enabled FROM finance_users WHERE username=$1 FOR UPDATE',[req.auth.username])).rows[0];
+   if(!user?.enabled||user.role!=='manager'||user.manager_key!==req.auth.manager_key)throw Object.assign(Error('Acesso desativado'),{status:403});
+   const previous=await noticeReceipt(tx,user.username);if(previous)return previous;
+   return (await tx.query("INSERT INTO audit_events(actor,action,after_data) VALUES($1,'NOTICE_ACKNOWLEDGED',$2::jsonb) RETURNING id,created_at",[user.username,JSON.stringify({notice_id:noticeId,authority:'1569167402279764110',meaning:'read_receipt_only',content_sha256:createHash('sha256').update(JSON.stringify(noticeContent(user.username))).digest('hex')})])).rows[0];
+  });
+  // Read back the committed record before telling the client it may dismiss the dialog.
+  const saved=await noticeReceipt(db,req.auth.username);if(!saved||String(saved.id)!==String(receipt.id))throw Error('Notice receipt readback failed');
+  res.json({id:noticeId,acknowledged:true,acknowledged_at:saved.created_at});
+ });
  await installFinanceOps(app,db);
  installHistory(app,db);installMediaSpend(app,db);
  app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:db.production?'production':'local-homologation',production:!!db.production});});
