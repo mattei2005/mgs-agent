@@ -8746,12 +8746,12 @@
     {
       "agent": "ares",
       "id": "shein-1569343054090084383",
-      "next_step": "Aguardar autorização explícita na origem para delta no agendamento individual do AD1 da C150; validar opção suportada, pre-read/journal/readback e retomar mesmo request central sem recriar shells; concluir QA e ativação das três cópias.",
+      "next_step": "Não pedir novamente autorização de editar horário. Solicitar decisão apenas sobre alternativa de recriar AD1 nos alvos sem horário herdado; validar suporte central antes de criar, preservando demais parâmetros e IDs existentes. Sem fonte/lineage trocadas silenciosamente ou writer paralelo.",
       "objective": "Duplicar C150 três vezes na Yolokfx 01 G002, USD75/dia por cópia, COST_CAP USD0.70, início imediato 09/11/2026",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569343054090084383/schedule-blocker-receipt.json",
-      "state": "parcial: c152 e c153 paused com um dos dois anúncios cada; usd75 e cap70 confirmados por get. terceira cópia não iniciada. meta100/3858130 recusa ad1 pois fonte contém ad_schedule_start_time 09/11/2026 00:00 et passado. nenhuma ativação. ids preservados em receipt e checkpoint engine.",
+      "state": "autorização1569351305716174912 validada por get e permissão live. ajuste somente do horário ad1 tentado: vazio http200 sem efeito; timestamp explícito recusado meta100/3858129 porque anúncio já iniciou veiculação. get confirma fonte inalterada. c152/c153 seguem paused incompletas, um anúncio cada; terceira não iniciada, zero ativação.",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-11-09T13:33:54+00:00"
+      "updated_at": "2026-11-09T14:06:40+00:00"
     },
     {
       "agent": "ares",
@@ -9485,5 +9485,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T14:00:30+00:00"
+  "updated_at": "2026-11-09T14:06:40+00:00"
 }
