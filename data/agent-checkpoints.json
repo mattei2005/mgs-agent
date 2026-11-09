@@ -792,6 +792,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CREATION-SHEET-1569491241303801868",
+      "next_step": "Ler workbook e destino reais; coletar12contas; atualizar e readback; instalar agenda e testar",
+      "objective": "Atualizar outubro e novembro e resumos no Sheet existente; fechar D-1 00h15 Eastern sem alterar envio18h08",
+      "source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
+      "state": "in_progress: fontes, identidade sa, binding destino e coleta live em validacao",
+      "thread_id": "1565084013763371009",
+      "updated_at": "2026-11-09T23:19:19+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CREATIVE-1547920816119881783",
       "next_step": "Aguardar revisão/liberação expressa da gestora antes de elegibilidade Ares ou uso em campanha",
       "objective": "Tratar 32 vídeos CAR_BR_BR enviados por Kelly no UPLOAD MANUAL",
@@ -9615,5 +9625,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T23:10:09+00:00"
+  "updated_at": "2026-11-09T23:19:19+00:00"
 }
