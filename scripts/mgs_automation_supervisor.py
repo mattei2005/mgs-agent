@@ -155,7 +155,24 @@ def pc1_busy():
     return expiry>time.time()
 
 
+def process_ticks(pid):
+    try:
+        tail=Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()
+        return tail[19] if tail[0]!='Z' else None
+    except (OSError,IndexError):return None
+
+
+def worker_active(key,root=None):
+    if not re.fullmatch(r'[a-zA-Z0-9_-]{1,80}',str(key)):return False
+    root=Path(root or os.environ.get('MGS_CONTINUITY_RUN_ROOT','/root/.hermes/shared/automation-continuity/runs'))
+    path=root/str(key)/'worker.json'
+    if not path.exists():return False
+    receipt=json.loads(path.read_text())
+    return bool(receipt.get('state')=='running' and receipt.get('start_ticks') and process_ticks(receipt['pid'])==receipt['start_ticks'])
+
+
 def original_active(source):
+    if source.get('continuity_key') and worker_active(source['continuity_key']):return True
     if source.get('kind')=='producer':
         name=Path(str(source.get('script',''))).name
         names={name,name[:-3]+'.py' if name.endswith('.sh') else name}
@@ -188,22 +205,25 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
     def clock():return now if fixed_clock else time.time()
     executed=0
     for row in q.open():
-        source=json.loads(row['source']);obs=observations.get(row['source_key'])
+        source=json.loads(row['source']);source['continuity_key']=row['key'];obs=observations.get(row['source_key'])
         if row['state']=='running':continue  # claim() reconciles an expired owner.
         if active(source):
-            q.defer(row['key'],'waiting_resource','original_writer_active',now=now,delay=300);continue
+            state=row['state'] if row['state'] in ('waiting_human','blocked_decision','needs_diagnosis') else 'waiting_resource'
+            q.defer(row['key'],state,'original_writer_active',now=now,delay=300);continue
         if verified_observation(obs) and float(obs.get('at',0))>=row['created']:
             # Confirmed producer readback, never just the worker's final wording.
             q.complete(row['key'],obs,now=now)
             try:notify(q.get(row['key']),'Resolvido: produtor e resultado verificados por nova leitura.')
             except Exception:q.service('delivery_pending:'+row['key'],True)
             continue
+        if row['state'] in ('blocked_decision','needs_diagnosis'):continue
         if source.get('resource')=='pc1' or row['cause']=='pc1_busy':
             try:occupied=busy()
             except Exception:
                 q.defer(row['key'],'reconciling','pc1_state_unknown',now=now,delay=300);continue
             if occupied:
-                q.defer(row['key'],'waiting_resource','pc1_busy',now=now,delay=60);continue
+                state='waiting_human' if row['state']=='waiting_human' else 'waiting_resource'
+                q.defer(row['key'],state,'pc1_busy',now=now,delay=60);continue
     while executed<max_jobs:
         row=q.claim('supervisor:'+str(os.getpid()),now=clock(),ttl=1200)
         if not row:break
@@ -215,7 +235,8 @@ def drive(q,observations,runner,busy,active,notify,now=None,max_jobs=1):
         elif previous=='verifying':mode='verify_only'
         try:
             text=runner(row,mode);state=disposition(text)
-            delay=3600 if state in ('waiting_human','blocked_decision') else (900 if state=='verifying' else 300)
+            if previous=='waiting_human' and not text.startswith('AUTH_READY:') and state in ('retry_scheduled','waiting_resource','verifying'):state='waiting_human'
+            delay=3600 if state=='blocked_decision' else (900 if state=='verifying' else 300)
             q.defer(row['key'],state,state,now=clock(),delay=delay,observation=text[:8000])
         except Exception as exc:
             q.failed(row['key'],type(exc).__name__,now=clock())
@@ -244,6 +265,7 @@ No modo diagnose_only, probe_only ou verify_only: SOMENTE LEITURAS/diagnóstico 
 No modo resume_safe, concluir APENAS a etapa faltante segura do mesmo escopo. Relatório de negócio deve ser produzido pelo runner canônico com idempotência e GET, nunca por uma cópia do agente. Se for DTR audit, repetir wrapper canônico até cobertura completa; retomar o cache de progresso da mesma data/escopo sem inventar páginas.
 Aplique e valide correção segura dentro da autoridade, salvo modos somente leitura. Sem restart de gateways. Se modificar infraestrutura, faça inventário/audit/REPORT-INFRA e readback. Não use delegate_task, cronjob run/create ou send_message para simular continuação; este supervisor é dono da retomada e da entrega do diagnóstico. Sua resposta final será consumida pelo supervisor.
 Comece Resolvido: SOMENTE se resultado real e entrega foram validados; Pendente: para recurso/cooldown/validação; Bloqueado: para autenticação/decisão humana real. Uma frase Resolvido não fecha a fila sem o verificador independente.
+Exceção de formato APENAS no modo probe_only: se uma leitura real do MESMO alvo provar que a autenticação foi liberada e não há desafio, responda AUTH_READY: seguido da evidência objetiva de acesso. Isso libera só o próximo retry autorizado e não declara a operação concluída. Sem prova positiva, preserve o bloqueio humano.
 Fonte sanitizada: {json.dumps(source,ensure_ascii=False)}
 Estado anterior: {row['observation'] or '(primeira investigação)'}
 Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:18000]}
@@ -259,23 +281,29 @@ def run_worker(row,mode,base=BASE,timeout=900):
     if profile not in ('zeus','atena','ares'):raise ValueError('invalid executor')
     env=dict(os.environ,HERMES_BACKGROUND_NOTIFICATIONS='off',HERMES_DISABLE_TOOL_PROGRESS='1',MGS_CONTINUITY_OPERATION_KEY=row['key'])
     prompt=build_prompt(row,mode,base)
-    root=Path('/root/.hermes/shared/automation-continuity/runs')/row['key'];root.mkdir(parents=True,exist_ok=True,mode=0o700)
+    root=Path(os.environ.get('MGS_CONTINUITY_RUN_ROOT','/root/.hermes/shared/automation-continuity/runs'))/row['key'];root.mkdir(parents=True,exist_ok=True,mode=0o700)
     prefix=str(time.time_ns())
     with (root/(prefix+'.stderr')).open('w') as err:
         p=subprocess.Popen(['/root/.local/bin/hermes','-p',profile,'-z',prompt],cwd=str(base),env=env,stdout=subprocess.PIPE,stderr=err,text=True,start_new_session=True)
+        from mgs_dtr_continuity import atomic
+        receipt={'pid':p.pid,'start_ticks':process_ticks(p.pid),'state':'running','started':time.time()}
+        atomic(root/'worker.json',receipt)
         try:stdout,_=p.communicate(timeout=timeout)
         except subprocess.TimeoutExpired:
             # Only this isolated worker group; never a gateway or foreign owner.
             os.killpg(p.pid,signal.SIGTERM)
             try:p.communicate(timeout=15)
             except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);p.communicate()
+            receipt.update(state='timed_out',finished=time.time());atomic(root/'worker.json',receipt)
             raise
+        receipt.update(state='finished',finished=time.time(),returncode=p.returncode);atomic(root/'worker.json',receipt)
     (root/(prefix+'.result.txt')).write_text(stdout or '')
     if not (stdout or '').strip():raise RuntimeError('worker_no_final_response')
     return stdout.strip()
 
 
 def notify_result(q,row,text,transport):
+    if row.get('cause')=='historical_scope_review':return
     if row['state'] not in ('waiting_human','blocked_decision','completed_validated'):return
     source=json.loads(row['source']);channel=source.get('alert_channel') or source.get('thread_id')
     if not channel:return
@@ -301,13 +329,23 @@ def main(resolver):
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return 0
         q.service('heartbeat',{'pid':os.getpid(),'at':time.time(),'phase':'collecting','authority':AUTHORITY})
+        q.service('enabled',True)
         for key,obs in observations.items():
             q.observe(key,obs['status'],{k:v for k,v in obs.items() if k!='source'})
+            if key.startswith('service:automation-continuity'):continue  # no recursive self-repair jobs
             if obs['status'] in ('ERROR','STALE','UNKNOWN'):
                 source=obs['source'];cause=source.get('pending_cause','unhealthy_observation')
                 q.enqueue(key,source,cause)
         q.service('inventory',{'at':time.time(),'targets':inventory})
+        if args.init:
+            q.service('heartbeat',{'pid':os.getpid(),'at':time.time(),'phase':'idle','open':len(q.open())})
+            print(json.dumps({'status':'continuity_registered','observed':len(observations),'inventory_targets':len(inventory),'open':len(q.open())}))
+            q.close();return 0
         token=resolver.load_token();legacy=resolver.load_state()
+        for record in legacy.get('processed',{}).values():
+            if record.get('continuity_key'):
+                saved=q.get(record['continuity_key'])
+                if saved and saved['state']=='completed_validated':record.update(status='done',outcome='resolved',evidence=json.loads(saved['evidence']))
         messages=resolver.fetch_messages(token,args.limit,after=legacy.get('last_seen_id'))
         indexed={str(m['id']):m for m in messages}
         # Escalation/age are not terminal. Migrate only unresolved historical records.
@@ -324,6 +362,10 @@ def main(resolver):
             key=source_key_for_alert(message)
             source=dict(observations.get(key,{}).get('source') or {'kind':'alert','profile':'zeus'})
             source.update(alert_id=mid,alert_channel=resolver.CHANNEL_ID,alert_url=resolver.message_url(message))
+            obs=observations.get(key)
+            if not prior.get('continuity_key') and verified_observation(obs) and float(obs.get('at',0))>=epoch(prior.get('started_at')) and not original_active(source):
+                legacy.setdefault('processed',{})[mid]={**prior,'status':'done','outcome':'resolved','evidence':obs,'reconciled_at':time.time()}
+                continue
             row=q.enqueue(key,source,'alert_unresolved')
             assert row is not None
             age=time.time()-epoch(prior.get('started_at') or prior.get('processed_at'))
@@ -331,16 +373,21 @@ def main(resolver):
                 # Old unresolved one-offs stay visible but are never replayed as
                 # a newly authorized campaign/payment/expired-time operation.
                 q.defer(row['key'],'blocked_decision','historical_scope_review',delay=86400,observation='Histórico preservado; operação fora do inventário ativo, sem replay autorizado.')
-            if prior.get('status')=='escalated' and prior.get('resolution_text'):
+            elif not prior.get('continuity_key') and prior.get('status')=='escalated' and prior.get('resolution_text'):
                 state=disposition(prior['resolution_text'])
                 if state in ('waiting_human','blocked_decision','waiting_resource') and row['attempts']==0:
-                    q.defer(row['key'],state,state,delay=60 if state=='waiting_resource' else 3600,observation=prior['resolution_text'])
+                    q.defer(row['key'],state,state,delay=3600 if state=='blocked_decision' else 60,observation=prior['resolution_text'])
             legacy.setdefault('processed',{})[mid]={**prior,'status':'continuity_owned','continuity_key':row['key'],'url':source['alert_url']}
         if messages:legacy['last_seen_id']=str(max(int(legacy.get('last_seen_id') or 0),max(int(m['id']) for m in messages)))
         resolver.save_state(legacy)
         from mgs_alert_transport import post_verified
         q.service('heartbeat',{'pid':os.getpid(),'at':time.time(),'phase':'dispatching'})
         drive(q,observations,run_worker,pc1_busy,original_active,lambda r,t:notify_result(q,r,t,post_verified),max_jobs=2)
+        for record in legacy.get('processed',{}).values():
+            if record.get('continuity_key'):
+                saved=q.get(record['continuity_key'])
+                if saved and saved['state']=='completed_validated':record.update(status='done',outcome='resolved',evidence=json.loads(saved['evidence']))
+        resolver.save_state(legacy)
         # Retry accepted-but-unverified delivery without re-executing business work.
         for row in q.db.execute("SELECT * FROM requests WHERE state IN ('completed_validated','waiting_human','blocked_decision')"):
             row=dict(row)

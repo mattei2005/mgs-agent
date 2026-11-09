@@ -121,7 +121,7 @@ def resume_delivery(base=Path('/root/mgs-agent')):
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return 'Pendente: outra sessão executa a auditoria DTR; nenhuma duplicação.'
         path,data=latest_snapshot(base)
-        if path is None:raise ValueError('fresh complete DTR snapshot unavailable; collector must resume first')
+        if path is None or data is None:raise ValueError('fresh complete DTR snapshot unavailable; collector must resume first')
         spec=importlib.util.spec_from_file_location('dtr_daily_renderer',base/'scripts/dtr-sb-daily-match-audit.py');assert spec and spec.loader
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         day=str(data['summary']['started_at_et'])[:10]

@@ -157,6 +157,16 @@ def main() -> None:
                 except Exception as exc:
                     emit({"ok": False, "reason": "continuity_queue_persistence_failed", "error_type": type(exc).__name__, **public_state(state, now)}, 3)
                 emit({"ok": False, "reason": "lock_held", "continuity_queued": True, "continuity_key": queued['key'], **public_state(state, now)}, 2)
+            if not state:
+                try:
+                    from mgs_automation_continuity import pc1_admission, enqueue_pc1_busy
+                    earlier = pc1_admission(args.agent, args.session_id, args.thread_id, os.environ.get('MGS_CONTINUITY_OPERATION_KEY'))
+                    if earlier:
+                        queued = enqueue_pc1_busy(args.agent, args.session_id, args.thread_id)
+                        assert queued is not None
+                        emit({'ok': False, 'reason': 'waiting_fifo_turn', 'continuity_queued': True, 'continuity_key': queued['key'], 'earlier_key': earlier, 'locked': False}, 2)
+                except Exception as exc:
+                    emit({'ok': False, 'reason': 'continuity_queue_persistence_failed', 'error_type': type(exc).__name__}, 3)
             acquired_at = state.get("acquired_at") if state else iso(now)
             next_state = {
                 "version": 1,

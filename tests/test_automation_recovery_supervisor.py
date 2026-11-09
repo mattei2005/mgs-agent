@@ -69,6 +69,18 @@ class SupervisorTests(unittest.TestCase):
         self.assertEqual(self.m.source_key_for_alert({'id':'100','embeds':[{'fields':[{'name':'Script','value':'`hermes:zeus:abc`'}]}]}),'native:zeus:abc')
         self.assertEqual(self.m.source_key_for_alert({'id':'101','embeds':[{'fields':[{'name':'Script','value':'`dtr-sb-daily-match-audit.sh`'}]}]}),'producer:dtr-sb-daily-match-audit.sh')
 
+    def test_busy_pc1_never_demotes_confirmation_gate(self):
+        j=self.add();self.q.defer(j['key'],'blocked_decision','Critical Subset',now=150,delay=1)
+        self.run_drive({},busy=True)
+        self.assertEqual(self.q.get(j['key'])['state'],'blocked_decision')
+        self.assertFalse(self.calls)
+
+    def test_busy_pc1_keeps_auth_probe_only(self):
+        j=self.add();self.q.defer(j['key'],'waiting_human','2FA',now=150,delay=1)
+        self.run_drive({},busy=True)
+        self.assertEqual(self.q.get(j['key'])['state'],'waiting_human')
+        self.assertFalse(self.calls)
+
     def test_failed_blocker_notice_cannot_resume_business_work(self):
         j=self.add()
         def notify(*a):raise RuntimeError('fixture delivery unavailable')

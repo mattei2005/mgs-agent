@@ -104,7 +104,7 @@ class Queue:
                     self.db.execute("UPDATE requests SET state='reconciling',needs_reconciliation=1,owner=NULL,due=?,updated=? WHERE key=?",(now+300,now,live['key']))
                     self._event(live['key'],'owner_lost_requires_readback',{},now)
                 self.db.execute('COMMIT');return None
-            row=self.db.execute("SELECT * FROM requests WHERE state IN ('queued','waiting_resource','retry_scheduled','reconciling','needs_diagnosis','verifying','waiting_human') AND due<=? ORDER BY created,key LIMIT 1",(now,)).fetchone()
+            row=self.db.execute("SELECT * FROM requests WHERE state IN ('queued','waiting_resource','retry_scheduled','reconciling','verifying','waiting_human') AND due<=? ORDER BY CASE WHEN state='waiting_human' THEN 1 ELSE 0 END,due,created,key LIMIT 1",(now,)).fetchone()
             if not row:self.db.execute('COMMIT');return None
             self.db.execute("UPDATE requests SET state='running',owner=?,lease_until=?,attempts=attempts+1,updated=? WHERE key=?",(owner,now+ttl,now,row['key']))
             self._event(row['key'],'claimed',{'owner':owner,'previous_state':row['state']},now)
@@ -135,7 +135,8 @@ class Queue:
             failures=row['failures']+1
             state='needs_diagnosis' if failures>=5 else 'retry_scheduled'
             delay=min(3600,300*2**min(failures-1,4))
-            self.db.execute('UPDATE requests SET failures=?,state=?,cause=?,due=?,updated=?,owner=NULL,lease_until=NULL WHERE key=?',(failures,state,cause,now+delay,now,key))
+            ambiguous='timeout' in cause.casefold() or 'no_final_response' in cause.casefold()
+            self.db.execute('UPDATE requests SET failures=?,state=?,cause=?,due=?,updated=?,owner=NULL,lease_until=NULL,needs_reconciliation=MAX(needs_reconciliation,?) WHERE key=?',(failures,state,cause,now+delay,now,int(ambiguous),key))
             self._event(key,'failed',{'state':state,'cause':cause,'failures':failures},now)
             self.db.execute('COMMIT')
         except BaseException:self.db.execute('ROLLBACK');raise
@@ -169,3 +170,25 @@ def enqueue_pc1_busy(agent,session_id,thread_id,db=None):
             source.update(kind='native',job_id=matches[0]['id'])
             return Queue(db).enqueue(f'native:{agent}:{matches[0]["id"]}',source,'pc1_busy')
     return Queue(db).enqueue(f'pc1:{agent}:{session_id}',source,'pc1_busy')
+
+
+def pc1_admission(agent,session_id,thread_id,operation_key=None,db=None):
+    """Return the earlier request key, or None when this caller has the turn.
+    Read-only admission; never release another session or create a database.
+    """
+    path=Path(db or os.environ.get('MGS_CONTINUITY_DB',str(DEFAULT_DB)))
+    if not path.exists():return None
+    connection=sqlite3.connect(f'file:{path}?mode=ro',uri=True,timeout=15)
+    connection.row_factory=sqlite3.Row
+    try:
+        rows=connection.execute("SELECT * FROM requests WHERE state IN ('queued','waiting_resource','retry_scheduled','running','reconciling','verifying') AND (due<=? OR state='running') ORDER BY created,key",(time.time(),))
+        for row in rows:
+            source=json.loads(row['source'])
+            if source.get('resource')!='pc1':continue
+            if operation_key==row['key']:return None
+            if source.get('profile')==agent:
+                if source.get('session_id')==session_id:return None
+                if source.get('kind')=='native' and thread_id and str(source.get('thread_id'))==str(thread_id):return None
+            return row['key']
+        return None
+    finally:connection.close()

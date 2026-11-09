@@ -30,6 +30,7 @@ sys.path.insert(0, os.environ['MGS_MONITOR_SCRIPT_DIR'])
 from mgs_alert_transport import post_verified, update_verified
 from mgs_scheduler_health import native_rows, timer_rows, producer_health
 from mgs_report_scheduler_health import report_health
+from mgs_continuity_health import rows as continuity_rows
 STATE = Path(sys.argv[1])
 DRY_RUN = sys.argv[2] == '1'
 NOW = int(time.time())
@@ -298,6 +299,7 @@ for job in parse_crons():
 if 'CRON_STALE_STATE' not in os.environ or os.environ.get('MGS_MONITOR_NATIVE') == '1':
     rows.extend(native_rows(NOW))
     rows.extend(timer_rows())
+    rows.extend(continuity_rows(NOW))
 priority = {'OK': 0, 'WARMUP': 0, 'STALE': 1, 'ERROR': 2}
 evaluations = {}
 for script, status, detail in rows:
