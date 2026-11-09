@@ -2693,6 +2693,16 @@
     },
     {
       "agent": "zeus",
+      "id": "AUTOMATION-RECOVERY-IMPLEMENT-1569193434189668453",
+      "next_step": "Inventariar schedulers e consumidores, reutilizar fila/lease/alert-resolver, construir camada comum com testes isolados e canarios; separar gates criticos exatos se necessarios",
+      "objective": "Implementar continuidade duravel e prevencao de abandono em crons ativos Zeus/Ares/Atena, PC1 busy e timeouts; preservar escopo, estrategia, horarios, writers e gates criticos",
+      "source": "discord:1569185140502954077/1569193434189668453;context/automation-recovery-policy.md",
+      "state": "authorized_discovery_in_progress",
+      "thread_id": "1569185140502954077",
+      "updated_at": "2026-11-09T03:34:46+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "B001-INVEST-CALENDAR-1567032162757382155",
       "next_step": "No forced app alerts or credential changes. Existing published card unchanged; future native alerts use corrected loader. Separate Debora admin token 190/463 requires owner renewal, not automatic credential rotation.",
       "objective": "Diagnosticar e recuperar colunas de investimento n/d do B001 sem alterar credenciais ou reenviar alertas",
@@ -9405,5 +9415,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T03:31:33+00:00"
+  "updated_at": "2026-11-09T03:34:46+00:00"
 }
