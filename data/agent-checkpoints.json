@@ -202,6 +202,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1569424407607386256",
+      "next_step": "Descoberta live, QA, primeira entrega GET e agenda auditada",
+      "objective": "CPR campanhas Mavroa04 criadas09nov ate13:52 EST, relatorios30min ate fim dia",
+      "source": "data/ares/meta-ads/state/cpr-updates/1569424407607386256/manifest.json",
+      "state": "intake autenticado; conta live usd america/new_york; preparando coorte fixa e agenda finita read-only",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-09T18:53:37+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -2189,6 +2199,16 @@
       "state": "monitor habilitado e readback confirmado; 14testes pass; dry-run+inicial13:18est cinco sem resultados;21slots13:43-23:43est;expiracao05/11 00hest;zero meta writes",
       "thread_id": "1558147211026501643",
       "updated_at": "2026-11-04T18:19:09+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-G004-CPR-1569424366570184796",
+      "next_step": "Congelar coorte por created_time; dry-run; primeira entrega; auditoria agenda finita e readback",
+      "objective": "Relatorios CPR campanhas criadas09/11 ate pedido13:52EST cada30min ate fim do dia",
+      "source": "data/ares/meta-ads/state/cpr-updates/1569424366570184796/authorization.json",
+      "state": "preparing",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-09T18:53:55+00:00"
     },
     {
       "agent": "ares",
@@ -9515,5 +9535,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T16:13:38+00:00"
+  "updated_at": "2026-11-09T18:53:55+00:00"
 }
