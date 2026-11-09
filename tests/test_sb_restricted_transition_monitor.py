@@ -7,6 +7,8 @@ import unittest
 from decimal import Decimal
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
+from types import SimpleNamespace
 
 SCRIPT = Path('/root/mgs-agent/scripts/sb-restricted-transition-monitor.py')
 spec = importlib.util.spec_from_file_location('sb_restricted_transition_monitor', SCRIPT)
@@ -330,6 +332,81 @@ class TransitionComparisonTest(unittest.TestCase):
         self.assertEqual(history['totals']['entries_detected'], 1)
         self.assertEqual(history['totals']['exits_confirmed'], 2)
         self.assertEqual(history['totals']['currently_restricted'], 1)
+
+
+class VerifiedDeliveryTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path_patch = patch.object(monitor, 'STATE_PATH', Path(self.tmp.name) / 'state.json')
+        self.path_patch.start()
+        self.sync = SimpleNamespace(TEAM_MENTIONS='<@&123>', TEAM_ROLE_IDS=['123'])
+        self.saved = {}
+        self.calls = []
+        self.fail_get = False
+
+    def tearDown(self):
+        self.path_patch.stop()
+        self.tmp.cleanup()
+
+    def request(self, method, url, payload=None):
+        self.calls.append(method)
+        if method == 'POST':
+            assert isinstance(payload, dict)
+            self.saved = dict(payload, id='987')
+            return self.saved
+        if self.fail_get:
+            raise RuntimeError('GET unavailable')
+        if '?limit=' in url:
+            return [self.saved] if self.saved else []
+        return self.saved
+
+    def deliver(self, block='frozen block', date='2026-12-07'):
+        transition = {'key': 'bot-page:bot@example.com|1', 'after': row(1, date)}
+        return monitor.verified_delivery({'last_check': 'baseline'}, [transition], [], [block], [], self.sync)
+
+    def test_accepted_post_failed_get_resumes_only_get_and_frozen_payload(self):
+        with patch('mgs_alert_transport.request', self.request):
+            self.fail_get = True
+            with self.assertRaisesRegex(RuntimeError, 'GET unavailable'):
+                self.deliver()
+            manifest = json.loads(monitor.STATE_PATH.with_suffix('.delivery.json').read_text())
+            self.assertEqual(manifest['parts'][0]['message_id'], '987')
+            self.fail_get = False
+            result = self.deliver('changed renderer must not replace frozen payload')
+            self.assertTrue(result[0]['result']['readback_ok'])
+            self.assertEqual(self.calls, ['POST', 'GET', 'GET'])
+            self.assertEqual(self.saved['content'], '<@&123>\nfrozen block')
+            self.assertLessEqual(len(self.saved['nonce']), 25)
+            self.assertTrue(self.saved['enforce_nonce'])
+            self.assertEqual(self.saved['allowed_mentions'], {'parse': [], 'roles': ['123']})
+
+    def test_ambiguous_post_does_not_replay_without_positive_receipt(self):
+        with patch('mgs_alert_transport.request', side_effect=RuntimeError('POST unknown')):
+            with self.assertRaisesRegex(RuntimeError, 'POST unknown'):
+                self.deliver()
+        with patch('mgs_alert_transport.request', self.request):
+            with self.assertRaisesRegex(RuntimeError, 'POST ambiguous'):
+                self.deliver()
+        self.assertEqual(self.calls, ['GET'])
+
+    def test_ambiguous_post_reconciles_exact_nonce_without_reposting(self):
+        def lost_response(method, url, payload=None):
+            self.request(method, url, payload)
+            raise RuntimeError('POST response lost')
+        with patch('mgs_alert_transport.request', lost_response):
+            with self.assertRaisesRegex(RuntimeError, 'response lost'):
+                self.deliver()
+        with patch('mgs_alert_transport.request', self.request):
+            result = self.deliver()
+        self.assertEqual(self.calls, ['POST', 'GET', 'GET'])
+        self.assertEqual(result[0]['result']['message_id'], '987')
+
+    def test_scope_drift_stops_before_another_post(self):
+        with patch('mgs_alert_transport.request', self.request):
+            self.deliver()
+            with self.assertRaisesRegex(RuntimeError, 'scope drift'):
+                self.deliver(date='2026-12-08')
+        self.assertEqual(self.calls, ['POST', 'GET'])
 
 
 if __name__ == '__main__':

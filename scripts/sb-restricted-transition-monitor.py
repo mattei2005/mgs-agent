@@ -10,6 +10,7 @@ and exact time; this monitor never attributes the writer without direct evidence
 import argparse
 import asyncio
 import copy
+import hashlib
 import importlib.util
 import json
 import os
@@ -508,6 +509,79 @@ def discord_status(result):
     return None
 
 
+def verified_delivery(state, transitions, exits, transition_blocks, exit_blocks, sync):
+    """Frozen outbox: accepted IDs survive failed GET; ambiguous POST never replays."""
+    from mgs_alert_transport import collection_url, post_verified, request
+
+    path = STATE_PATH.with_suffix('.delivery.json')
+    baseline = (state or {}).get('last_check', 'sheet-reconciliation')
+    identity = {
+        'baseline': baseline,
+        'transitions': [
+            [item['key'], item['after'].get('restricted_until'), item['after'].get('status')]
+            for item in transitions
+        ],
+        'exits': [[row.get('bot user'), row.get('page id')] for row in exits],
+    }
+    event = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+    old = json.loads(path.read_text()) if path.exists() else None
+
+    def persist(manifest):
+        fd, tmp = tempfile.mkstemp(prefix=path.name + '.', dir=str(path.parent))
+        with os.fdopen(fd, 'w', encoding='utf-8') as handle:
+            json.dump(manifest, handle, ensure_ascii=False, indent=2)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+
+    if old and old['event'] != event:
+        if old['baseline'] == baseline or not all(p.get('verified') for p in old['parts']):
+            raise RuntimeError('Transition delivery scope drift; reconcile existing outbox before new POST')
+    manifest = old if old and old['event'] == event else None
+    if manifest is None:
+        parts = []
+        for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:
+            for block in blocks:
+                mention = not parts
+                content = f'{sync.TEAM_MENTIONS}\n{block}' if mention else block
+                if len(content) > 2000:
+                    raise RuntimeError('Transition outbox content exceeds Discord limit')
+                nonce = hashlib.sha256(f'{event}:{len(parts)}'.encode()).hexdigest()[:24]
+                parts.append({'kind': kind, 'payload': {
+                    'content': content,
+                    'allowed_mentions': {'parse': [], 'roles': sync.TEAM_ROLE_IDS} if mention else {'parse': []},
+                    'nonce': nonce, 'enforce_nonce': True,
+                }})
+        manifest = {'event': event, 'baseline': baseline, 'parts': parts, 'created_at': now_iso()}
+        persist(manifest)
+    results = []
+    for part in manifest['parts']:
+        payload = part['payload']
+        if part.get('posting') and not part.get('message_id'):
+            messages = request('GET', collection_url(TARGET_CHANNEL_ID) + '?limit=100')
+            matches = [m for m in messages if str(m.get('nonce')) == payload['nonce'] and m.get('content') == payload['content']]
+            if len(matches) != 1:
+                raise RuntimeError('Transition POST ambiguous; no exact nonce/content receipt; no replay allowed')
+            part['message_id'] = str(matches[0]['id'])
+            persist(manifest)
+
+        def accepted(message_id):
+            part['message_id'] = message_id
+            persist(manifest)
+
+        if not part.get('message_id'):
+            part['posting'] = True
+            persist(manifest)
+        message_id = post_verified(payload, channel=TARGET_CHANNEL_ID,
+                                   prior_id=part.get('message_id'), on_created=accepted)
+        part.update(message_id=message_id, verified=True, verified_at=now_iso())
+        persist(manifest)
+        results.append({'kind': part['kind'], 'result': {
+            'status': 200, 'message_id': message_id, 'readback_ok': True,
+        }})
+    return results
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', action='store_true', help='Rebuild the report Sheet, post confirmed transitions/exits, and save state after readback.')
@@ -586,16 +660,18 @@ def main():
         for block in [*transition_blocks, *exit_blocks]:
             print(block)
     else:
+        delivery_path = STATE_PATH.with_suffix('.delivery.json')
+        if not transition_blocks and not exit_blocks and delivery_path.exists():
+            pending = json.loads(delivery_path.read_text())
+            if not all(part.get('verified') for part in pending['parts']):
+                raise RuntimeError('Pending transition outbox no longer matches live scope; reconcile before advancing baseline')
         sheet_rows, sheet_stats = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
         sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats)
         if not sheet_update.get('readback_ok'):
             raise RuntimeError('Google Sheet update returned no successful readback')
-        for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:
-            for block in blocks:
-                result = sync.post_discord(block, mention_roles=not post_results)
-                post_results.append({'kind': kind, 'result': result})
-                if discord_status(result) not in (200, 201):
-                    raise RuntimeError(f'Discord {kind} delivery failed: {result!r}')
+        if transition_blocks or exit_blocks:
+            post_results = verified_delivery(state, transitions, confirmed_exits,
+                                             transition_blocks, exit_blocks, sync)
         save_state(current, counts, transitions, confirmed_exits, source, history)
 
     all_blocks = [*transition_blocks, *exit_blocks]
