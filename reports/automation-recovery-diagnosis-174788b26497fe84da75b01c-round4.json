@@ -1,0 +1,995 @@
+{
+  "operation_id": "174788b26497fe84da75b01c",
+  "mode": "diagnose_only",
+  "captured_at": "2026-11-09T17:16:25.888620+00:00",
+  "disposition": "pending_infrastructure_prevention_business_request_reconciled",
+  "authority": {
+    "messages": [
+      {
+        "id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "timestamp": "2026-11-09T03:34:28.915000+00:00",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "embeds": [],
+        "author_id": "344196393512075265",
+        "GET_verified": true
+      },
+      {
+        "id": "1569376234008354837",
+        "channel_id": "1568669160798683260",
+        "timestamp": "2026-11-09T15:40:51.788000+00:00",
+        "content": "compliacdo muito confuso isso e eu nao consigo achar isso habilitado em campanha nenhuma\n\nhttps://www.facebook.com/business/help/981940746195135\n\naqui explica exatamente como ativa e desativa\n\ntente editar as camapnhas pelo pc1 e veja se voce acha esse recurso dentro da campanha manualmente, se achar em alguma me mande os screenshots....\n\ntente editar umas 10 camapnhas que tem isso habilitado segundo a api quando voce consulta........",
+        "embeds": [],
+        "author_id": "344196393512075265",
+        "GET_verified": true
+      }
+    ],
+    "current_registry_verified": true
+  },
+  "origin_delivery": {
+    "id": "1569399322204967063",
+    "channel_id": "1568669160798683260",
+    "timestamp": "2026-11-09T17:12:36.443000+00:00",
+    "content": "**Terminei a conferência manual das 10 campanhas, com dois anúncios de cada uma — 20 anúncios no total. Não encontrei o controle “Generate backgrounds” em nenhuma delas.**\n\nConferi estas campanhas:\n- **Mavroa 02 — Geizian:** 010, 011 e 013.\n- **Mavroa 04 — Joe:** 031.\n- **Growpowerhub 05 — Kelly:** 002.\n- **Mavroa 05 — Kelly:** 020.\n- **Yolokfx 03 — Kelly:** 221, 222, 224 e 225.\n\nAbri cada anúncio no editor do PC1 e conferi o painel completo de melhorias Advantage+, incluindo a parte inferior. Quando o bloco de edição não apareceu, entrei pela **Prévia avançada → Advantage+ creative**.\n\n**Resultado:**\n- A API continuou retornando `OPT_IN` nos 20 anúncios.\n- Nenhum painel mostrou **“Generate backgrounds”**.\n- Também **não encontrei evidência de que outro botão seja esse mesmo recurso com nome diferente**.\n\nNão tenho, portanto, um screenshot positivo para enviar. Não vou substituir isso novamente por imagem externa ou apontar outra melhoria como se fosse a mesma opção.\n\n**Não acionei nenhum toggle, Salvar ou Publicar; os criativos permaneceram iguais.** Durante a consulta, as quatro campanhas da Yolokfx 03 ficaram pausadas; o histórico da Meta registra essas ações pelo perfil **“Arruda Arruda”**, via Power Editor. Preservei esse estado, sem reativá-las.\n\n*Método de conferência atualizado e validado na skill Meta Ads.*",
+    "embeds": [],
+    "author_id": "1496296175014252634",
+    "GET_verified": true
+  },
+  "business_request": {
+    "key": "a6c411eff3c0bd511cf4dc25",
+    "campaigns": 10,
+    "ads": 20,
+    "receipts": [
+      {
+        "ad_id": "120252350213560326",
+        "campaign_id": "120252350213540326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213560326-inspection.json",
+        "receipt_sha256": "9c7b2f60fcc3184a1b66b82803f657b530ff32e5006ddb3043a88ef28d259b85",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120252350213550326",
+        "campaign_id": "120252350213540326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350213550326-inspection.json",
+        "receipt_sha256": "4bf78b6a063e51968d7ff9b90d0f07908d79f3c5c06a6bbb8f99e24d280bffcf",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120252350508280326",
+        "campaign_id": "120252350508260326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508280326-inspection.json",
+        "receipt_sha256": "71244f1bd78b3c25279291ba17154bb3be67f729ec89958e63a01209b6a72d13",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120252350508270326",
+        "campaign_id": "120252350508260326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252350508270326-inspection.json",
+        "receipt_sha256": "e856bb4793cff2990c6d22caf5719601ab3bd51c6182850422b41a19b0829afc",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120252369595910326",
+        "campaign_id": "120252369595900326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595910326-inspection.json",
+        "receipt_sha256": "04355871cfc031f6c1280262cf0345f9f6a0ee6aa9569223f1adad87b677c497",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120252369595920326",
+        "campaign_id": "120252369595900326",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120252369595920326-inspection.json",
+        "receipt_sha256": "87d4eda7bfcc179b65bb6f6068ea38917276076849cf84edc9fd9ec77ac46351",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120249954763540372",
+        "campaign_id": "120249954763530372",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763540372-inspection.json",
+        "receipt_sha256": "9b14cbd838f4f6a787cee7e2a978b4bd4d16432dc5d09ab6b2351a1d79e892a5",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120249954763550372",
+        "campaign_id": "120249954763530372",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120249954763550372-inspection.json",
+        "receipt_sha256": "c5a7bf6a996880a530c774bfe4f57ae017d40603e803eea731df1c6e249f6e49",
+        "manual_route": "Edit ad -> scroll Ad creative -> Advantage+ creative enhancements Edit -> complete panel and lower scroll",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120254413316890359",
+        "campaign_id": "120254413316870359",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316890359-inspection.json",
+        "receipt_sha256": "e475fd489103d6d94d3dfaae14359b0c08481d2c267f11ec4914c16f09d4fa46",
+        "manual_route": "Edit ad; enhancements section not exposed -> Advanced preview -> Advantage+ creative tab -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120254413316880359",
+        "campaign_id": "120254413316870359",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120254413316880359-inspection.json",
+        "receipt_sha256": "982b481a56c49f01cce3ba7136df4646e34423f4553bf585213a50223b043ccb",
+        "manual_route": "Edit ad; enhancements section not exposed -> Advanced preview -> Advantage+ creative tab -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120253762937440652",
+        "campaign_id": "120253762937410652",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937440652-inspection.json",
+        "receipt_sha256": "3618d62771150c8a38f96d4cda0ee26aa75321a1620b5feeca774eeb24a2414a",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120253762937420652",
+        "campaign_id": "120253762937410652",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120253762937420652-inspection.json",
+        "receipt_sha256": "91d700ae309b21b4db90cd78b7b007eede135546259de317ba41d69f644e1ec0",
+        "manual_route": "Edit ad; enhancements section not exposed -> Advanced preview -> Advantage+ creative tab -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add animation",
+              "Add music",
+              "Add overlays",
+              "Text improvements",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250528241240331",
+        "campaign_id": "120250528241230331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241240331-inspection.json",
+        "receipt_sha256": "f51596bef51e076293045848021b910accbe9717777dc836fc6e86a4a47212ce",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250528241250331",
+        "campaign_id": "120250528241230331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528241250331-inspection.json",
+        "receipt_sha256": "a295eaca17cc2fc64a2922f942dc06ce70ca3c6d662267fc929fe6b858ae17e6",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250528282000331",
+        "campaign_id": "120250528281980331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528282000331-inspection.json",
+        "receipt_sha256": "d2b4148ff863de20551cdd1b79ef04ba8b4022ed35b8ca3a0498b815243b3784",
+        "manual_route": "Edit ad; enhancements section not exposed -> Advanced preview -> Advantage+ creative tab -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250528281990331",
+        "campaign_id": "120250528281980331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250528281990331-inspection.json",
+        "receipt_sha256": "9974b8af72f7d99818616294b69aaa36edf40957d4f08fad8508abce861dc89f",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250546992190331",
+        "campaign_id": "120250546992200331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250546992190331-inspection.json",
+        "receipt_sha256": "b249b9f9f90f806321e6d7a20954653fe68889efb7f2eb4294a4fe3879786745",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250546992210331",
+        "campaign_id": "120250546992200331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250546992210331-inspection.json",
+        "receipt_sha256": "177dc47864d032510e838aa2e75dde86e3884c6e714a5eef71c4fc1e41b2f3a6",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250562106420331",
+        "campaign_id": "120250562106400331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250562106420331-inspection.json",
+        "receipt_sha256": "0a9a5426bd9ac9dc0075cb5345e2a0f116b0caede6ce0b57390f10e797e5265a",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      },
+      {
+        "ad_id": "120250562106410331",
+        "campaign_id": "120250562106400331",
+        "receipt": "/root/mgs-agent/reports/manual10-background-1569376234008354837/120250562106410331-inspection.json",
+        "receipt_sha256": "d0f5d13489676e6b33ac48e6eaec8d01497cb18c171d9aa73cd88e898a237401",
+        "manual_route": "Edit ad -> Ad creative -> Advantage+ creative enhancements Edit -> full panel",
+        "named_control_found": false,
+        "axes": {
+          "panel": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          },
+          "lower": {
+            "expected_feature_controls": [
+              "Add music",
+              "Add overlays",
+              "Visual touch-ups"
+            ],
+            "target_tab_present": true,
+            "translation_section_label_present": true
+          }
+        },
+        "errors": []
+      }
+    ],
+    "missing_receipt_ad_ids": [],
+    "invalid_target_panel_ad_ids": [],
+    "previous_wrong_panel_ad_ids_now_reconciled": [
+      "120250528241240331",
+      "120250528241250331"
+    ],
+    "visual_review_this_round": [
+      "120250528241240331-full-panel.png",
+      "120250528241250331-full-panel.png",
+      "control-labels-contact-1.jpg",
+      "control-labels-contact-2.jpg"
+    ],
+    "visual_limit": "Two corrected full panels and ten-ad contact-sheet samples reviewed; not a fresh visual review of all eighty images. Cached AX checked for all twenty panels; a translation section label in underlying editor AX is not proof that translation modal is open.",
+    "referenced_png_count": 80,
+    "all_referenced_png_signatures_valid": true,
+    "post_ui_readback": "/root/mgs-agent/reports/manual10-background-1569376234008354837/post-ui-readback.json",
+    "post_ui_readback_sha256": "f88a00e9cd63b8ead303cc8dddf1d45a24a4b2495580f8f0af9a9f1cb8ce9954",
+    "cached_readback_ads": 20,
+    "cached_OPT_IN_ads": 20,
+    "creative_id_updated_time_configured_status_differences": [],
+    "effective_status_changes": [
+      {
+        "ad_id": "120250528241240331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250528241250331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250528282000331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250528281990331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250546992190331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250546992210331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250562106420331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      },
+      {
+        "ad_id": "120250562106410331",
+        "diffs": {
+          "effective_status": {
+            "before": "ACTIVE",
+            "after": "CAMPAIGN_PAUSED"
+          }
+        }
+      }
+    ],
+    "concurrent_changes": {
+      "pages": 1,
+      "matched": [
+        {
+          "event_type": "update_campaign_run_status",
+          "event_time": "2026-11-09T16:19:56+0000",
+          "actor_id": "4479926448819320",
+          "actor_name": "Arruda Arruda",
+          "application_id": "119211728144504",
+          "application_name": "Power Editor",
+          "object_id": "120250528281980331",
+          "object_name": "222 - IMAGEM - plus-size, oversized hoodies - US-EN (b01fb03c222) - (US_APP) - event_add_to_wishlist",
+          "extra_data": "{\"run_status\":{\"old_value\":1,\"new_value\":15},\"old_value\":\"Ativa\",\"new_value\":\"Inativa\",\"type\":\"run_status\"}"
+        },
+        {
+          "event_type": "update_campaign_run_status",
+          "event_time": "2026-11-09T16:17:08+0000",
+          "actor_id": "4479926448819320",
+          "actor_name": "Arruda Arruda",
+          "application_id": "119211728144504",
+          "application_name": "Power Editor",
+          "object_id": "120250546992200331",
+          "object_name": "224 - IMAGEM - CHRISTMAS PAJAMA - US-EN (b01fb03c224) - (US_APP) - event_add_to_wishlist",
+          "extra_data": "{\"run_status\":{\"old_value\":1,\"new_value\":15},\"old_value\":\"Ativa\",\"new_value\":\"Inativa\",\"type\":\"run_status\"}"
+        },
+        {
+          "event_type": "update_campaign_run_status",
+          "event_time": "2026-11-09T16:06:34+0000",
+          "actor_id": "4479926448819320",
+          "actor_name": "Arruda Arruda",
+          "application_id": "119211728144504",
+          "application_name": "Power Editor",
+          "object_id": "120250562106400331",
+          "object_name": "225 - IMAGEM - Winter Boots - US-EN (b01fb03c225) - (US_APP) - event_add_to_wishlist",
+          "extra_data": "{\"run_status\":{\"old_value\":1,\"new_value\":15},\"old_value\":\"Ativa\",\"new_value\":\"Inativa\",\"type\":\"run_status\"}"
+        },
+        {
+          "event_type": "update_campaign_run_status",
+          "event_time": "2026-11-09T16:03:56+0000",
+          "actor_id": "4479926448819320",
+          "actor_name": "Arruda Arruda",
+          "application_id": "119211728144504",
+          "application_name": "Power Editor",
+          "object_id": "120250528241230331",
+          "object_name": "221 - IMAGEM - Baby Tees - US-EN (b01fb03c221) - (US_APP) - event_add_to_wishlist",
+          "extra_data": "{\"run_status\":{\"old_value\":1,\"new_value\":15},\"old_value\":\"Ativa\",\"new_value\":\"Inativa\",\"type\":\"run_status\"}"
+        }
+      ]
+    },
+    "concurrent_change_limit": "Meta actor/application attribution recorded; current human identity/authorization not inferred. No campaigns reactivated.",
+    "business_outcome": "No named Generate backgrounds control found in captured panels; no proven renamed equivalent; OPT_IN is not proof of actual use.",
+    "fresh_Meta_GET_this_round": false,
+    "integrity_limit": "Independent comparison of original scope against producer post-UI GET receipt, not a new live Meta query.",
+    "stale_progress_json": {
+      "completed_ads": 14,
+      "completed_campaigns": 7,
+      "total_campaigns": 10,
+      "pending_ads": [
+        "120250528282000331",
+        "120250528281990331",
+        "120250546992190331",
+        "120250546992210331",
+        "120250562106420331",
+        "120250562106410331"
+      ],
+      "found": []
+    }
+  },
+  "queue": [
+    {
+      "key": "174788b26497fe84da75b01c",
+      "source_key": "service:automation-continuity-diagnosis",
+      "source": "{\"alert_channel\": \"1498132022634483894\", \"alert_id\": \"1569381079306207313\", \"alert_url\": \"https://discord.com/channels/1185714635991679006/1498132022634483894/1569381079306207313\", \"continuity_key\": \"174788b26497fe84da75b01c\", \"kind\": \"service\", \"resource\": \"pc1\", \"service\": \"automation-continuity-diagnosis\", \"system_protected\": true}",
+      "state": "running",
+      "cause": "pc1_busy",
+      "created": 1794240132.2510595,
+      "updated": 1794244332.4029565,
+      "due": 1794244089.9211543,
+      "attempts": 4,
+      "failures": 0,
+      "owner": "supervisor:1617368",
+      "lease_until": 1794245532.4029565,
+      "needs_reconciliation": 0,
+      "evidence": null,
+      "observation": "Pendente: PC1 ocupado pelo executor original; nenhum retry paralelo iniciado. Há uma nova falha comprovada na validação dos recibos.\n\n1. Problema e reconciliação\n   Revalidei por GET a autorização de implementação e o comando original, ambos de Rodolfo, além do cadastro vigente. O pedido a6c411eff3c0bd511cf4dc25 continua em needs_diagnosis, com uma falha; o contador global permanece zerado.\n\n   A sessão 20261109_091051_28bf62c8 continua ativa, com lease renovada até 17:16:29 UTC. O worker duplicado anterior está encerrado, sem fingerprint ativo.\n\n2. Nova causa comprovada\n   Os recibos dos anúncios 120250528241240331 e 120250528241250331 declaram inspeção completa, mas os screenshots mostram “Advantage+ creative translation”, não o painel de melhorias.\n\n   Confirmei visualmente as duas imagens e reproduzi a seleção usando somente os dados de acessibilidade salvos. O seletor exclui o Edit correto, situado nove pixels acima do título, e escolhe o Edit da tradução. Depois, aceita um Cancel genérico e grava conclusão mesmo sem confirmar os controles esperados.\n\n   Esses dois recibos não comprovam ausência de “Generate backgrounds”.\n\n3. Cobertura real nesta captura\n   Escopo preservado: 10 campanhas/20 anúncios.\n   Existem 14 recibos locais; dois têm evidência do painel errado e seis anúncios ainda não possuem recibo. O progress.json permanece desatualizado em oito concluídos.\n\n   Os 56 PNGs referenciados passaram na verificação de assinatura. Isso não equivale à revisão visual integral. Não observei readback final de integridade nem entrega final na origem.\n\n4. Encaminhamento ao supervisor\n   Preservar executor, lease e gate atual. Reconciliar os dois recibos inválidos com o executor original, sem replay dos demais. A lacuna anterior de admissão do supervisor também permanece: falta revalidar ownership/recurso imediatamente antes de cada dispatch.\n\n   Nenhuma correção foi aplicada por esta rodada ser diagnose_only. Não houve interação no PC1, escrita na fila produtiva, mensagem enviada ou alteração de infraestrutura.\n\nEvidência local validada, incluindo os oito IDs com evidência pendente:\n /root/mgs-agent/reports/automation-recovery-diagnosis-174788b26497fe84da75b01c-round3.json",
+      "delivery_id": null,
+      "notified_state": null
+    },
+    {
+      "key": "a6c411eff3c0bd511cf4dc25",
+      "source_key": "pc1:zeus:20261109_091051_28bf62c8",
+      "source": "{\"authorized_by\": \"344196393512075265\", \"checkpoint\": \"/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json\", \"kind\": \"pc1\", \"next_step\": \"Fresh API enrollment/status baseline, wait FIFO/lease, manual editor Ad creative Advantage+ creative Edit, inspect full control panel and preserve screenshots; Cancel; post-read published integrity.\", \"objective\": \"Inspect manual edit controls on10 API OPT_IN image campaigns via existing PC1 Chrome, following exact Meta help; seek Generate backgrounds or documented equivalent; never toggle/save/publish/change catalog. Inspect both ads per selected campaign.\", \"profile\": \"zeus\", \"read_only\": true, \"resource\": \"pc1\", \"session_id\": \"20261109_091051_28bf62c8\", \"source_message_id\": \"1569376234008354837\", \"thread_id\": \"1568669160798683260\"}",
+      "state": "completed_validated",
+      "cause": "original_writer_active",
+      "created": 1794238861.5343568,
+      "updated": 1794244324.579977,
+      "due": 1794244329.9211543,
+      "attempts": 1,
+      "failures": 1,
+      "owner": null,
+      "lease_until": null,
+      "needs_reconciliation": 1,
+      "evidence": "{\"concurrent_status_changes_recorded\": 4, \"receipt\": \"/root/mgs-agent/reports/manual10-background-1569376234008354837/summary.json\", \"scope\": \"/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json\", \"screenshots_condition\": \"Send positive screenshot only if the named resource found;0 found. Executive response remains native final reply.\", \"target\": \"PC1 Chrome manual edit of exact10 SHEIN campaigns/20 ads authorized by1569376234008354837\", \"verified\": true}",
+      "observation": "Foreground Zeus remains executor of original request1569376234008354837. Auto-dispatched duplicate worker stopped by verified PID/start ticks/process group before foreground GUI input; same20ad scope preserved. Do not start another UI writer. Checkpoint /root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json; prepared read-only runner /root/.hermes/profiles/zeus/cache/scratch/manual10-background-ui.py. Parent will validate result and reconcile this row.",
+      "delivery_id": null,
+      "notified_state": null
+    }
+  ],
+  "service": [
+    {
+      "key": "heartbeat",
+      "value": "{\"at\": 1794244332.3973386, \"phase\": \"dispatching\", \"pid\": 1617368}"
+    },
+    {
+      "key": "worker_failure_streak",
+      "value": "0"
+    }
+  ],
+  "recent_events": [
+    {
+      "id": 245,
+      "at": 1794244332.4029565,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1617368\", \"previous_state\": \"waiting_resource\"}"
+    },
+    {
+      "id": 242,
+      "at": 1794244324.579977,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "completed_validated",
+      "detail": "{\"concurrent_status_changes_recorded\": 4, \"receipt\": \"/root/mgs-agent/reports/manual10-background-1569376234008354837/summary.json\", \"scope\": \"/root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json\", \"screenshots_condition\": \"Send positive screenshot only if the named resource found;0 found. Executive response remains native final reply.\", \"target\": \"PC1 Chrome manual edit of exact10 SHEIN campaigns/20 ads authorized by1569376234008354837\", \"verified\": true}"
+    },
+    {
+      "id": 241,
+      "at": 1794244029.9211543,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"pc1_busy\", \"due\": 1794244089.9211543, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "id": 240,
+      "at": 1794244029.9211543,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794244329.9211543, \"state\": \"needs_diagnosis\"}"
+    },
+    {
+      "id": 236,
+      "at": 1794243730.6984012,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"pc1_busy\", \"due\": 1794243790.6984012, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "id": 235,
+      "at": 1794243730.6984012,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794244030.6984012, \"state\": \"needs_diagnosis\"}"
+    },
+    {
+      "id": 232,
+      "at": 1794243430.7835925,
+      "request_key": "174788b26497fe84da75b01c",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"pc1_busy\", \"due\": 1794243490.7835925, \"state\": \"waiting_resource\"}"
+    },
+    {
+      "id": 231,
+      "at": 1794243430.7835925,
+      "request_key": "a6c411eff3c0bd511cf4dc25",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"original_writer_active\", \"due\": 1794243730.7835925, \"state\": \"needs_diagnosis\"}"
+    }
+  ],
+  "original_session": {
+    "id": "20261109_091051_28bf62c8",
+    "ended_at": null,
+    "last_activity_at": 1794244351.2866397
+  },
+  "pc1_lease": null,
+  "workers": {
+    "174788b26497fe84da75b01c": {
+      "pid": 1617692,
+      "start_ticks": "165413034",
+      "started": 1794244332.406189,
+      "state": "running",
+      "live_fingerprint_match": true
+    },
+    "a6c411eff3c0bd511cf4dc25": {
+      "finished": 1794239598.4409072,
+      "pid": 1474120,
+      "returncode": -15,
+      "start_ticks": "164920451",
+      "started": 1794239406.57716,
+      "state": "finished",
+      "live_fingerprint_match": false
+    }
+  },
+  "prevention_still_pending": {
+    "source": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+    "source_sha256": "2566991b010a38ce6f6b3d732b2ce929cd5226a9a6155b265a977ae37e0aecca",
+    "locations": [
+      "219-246 initial snapshot guards",
+      "247-259 claim and runner without last-moment guard"
+    ],
+    "isolated_late_arrival_reproduction": {
+      "storage": "in_memory_fixture_only",
+      "calls": [
+        "runner_invoked"
+      ],
+      "busy_returns_if_called": true,
+      "active_owner_returns_if_called": true,
+      "production_queue_writes": 0
+    },
+    "recommendation": "In a separately mutation-capable authorized round, revalidate owner PID/start ticks, original session, PC1 lease, gate, scope and cooldown immediately before dispatch. Validate late arrivals and no duplicate writers. No business replay."
+  },
+  "actions_this_round": {
+    "business_mutations": 0,
+    "pc1_interactions": 0,
+    "queue_writes": 0,
+    "messages_sent": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0,
+    "cron_changes": 0,
+    "local_diagnostic_evidence_only": true
+  },
+  "next_step_for_supervisor": "Preserve completed original business request and source delivery ID. No UI replay. Reconcile stale progress as bookkeeping only through its owner. Keep infrastructure prevention pending until authorized implementation plus isolated and deployed validation. Do not manufacture human decision or authentication gates."
+}
