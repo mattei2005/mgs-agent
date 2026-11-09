@@ -76,4 +76,54 @@ class CountsTests(unittest.TestCase):
             m.save(p/'outbox.json',{'sha256':sha,'content':content,'status':'IN_FLIGHT'})
             with self.assertRaisesRegex(AssertionError,'AMBIGUOUS_POST'):m.deliver(Discord(),p,policy,content,'key')
 
+class CronWrapperTests(unittest.TestCase):
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location('creation_wrapper', '/root/.hermes/profiles/ares/scripts/shein-campaign-creation-cron.py')
+        assert spec is not None and spec.loader is not None
+        self.wrapper = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.wrapper)
+
+    def test_uses_canonical_resolver_preserves_args_and_profile(self):
+        from types import SimpleNamespace
+        import sys
+        resolver = SimpleNamespace(resolve=lambda launcher: {'python': sys.executable})
+        with patch.object(self.wrapper.importlib.util, 'module_from_spec', return_value=resolver), \
+             patch.object(self.wrapper.importlib.util, 'spec_from_file_location') as spec, \
+             patch.object(self.wrapper.os, 'execv') as execute, \
+             patch.object(self.wrapper.sys, 'argv', ['cron.py', '--scheduled']), \
+             patch.dict(self.wrapper.os.environ, {}, clear=False):
+            self.wrapper.main()
+            spec.assert_called_once_with('shein_creation_runtime', self.wrapper.RESOLVER)
+            self.assertEqual(execute.call_args.args, (sys.executable, [sys.executable, '/root/.hermes/profiles/ares/scripts/shein-campaign-creation-daily.py', '--scheduled']))
+            self.assertEqual(self.wrapper.os.environ['HERMES_PROFILE'], 'ares')
+            self.assertEqual(self.wrapper.os.environ['HERMES_HOME'], '/root/.hermes/profiles/ares')
+
+    def test_shell_candidate_never_executes(self):
+        from types import SimpleNamespace
+        resolver = SimpleNamespace(resolve=lambda launcher: {'python': '/bin/sh'})
+        with patch.object(self.wrapper.importlib.util, 'module_from_spec', return_value=resolver), \
+             patch.object(self.wrapper.importlib.util, 'spec_from_file_location'), \
+             patch.object(self.wrapper.os, 'execv') as execute:
+            with self.assertRaises(AssertionError): self.wrapper.main()
+            execute.assert_not_called()
+
+    def test_resolution_failure_never_falls_back(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        resolver = SimpleNamespace(resolve=Mock(side_effect=ValueError('unavailable')))
+        with patch.object(self.wrapper.importlib.util, 'module_from_spec', return_value=resolver), \
+             patch.object(self.wrapper.importlib.util, 'spec_from_file_location'), \
+             patch.object(self.wrapper.os, 'execv') as execute:
+            with self.assertRaises(ValueError): self.wrapper.main()
+            execute.assert_not_called()
+
+    def test_actual_entrypoint_under_cron_environment(self):
+        import subprocess
+        result = subprocess.run(['/usr/bin/python3', '/root/.hermes/profiles/ares/scripts/shein-campaign-creation-cron.py', '--help'], env={'HOME': '/root', 'PATH': '/usr/bin:/bin'}, capture_output=True, text=True, timeout=60)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('--scheduled', result.stdout)
+        self.assertIn('--validate-live', result.stdout)
+        self.assertNotIn('from: not found', result.stderr)
+
+
 if __name__=='__main__':unittest.main(verbosity=2)

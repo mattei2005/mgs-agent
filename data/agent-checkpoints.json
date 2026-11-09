@@ -2103,12 +2103,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-DAILY-CREATION-1565429557547503729",
-      "next_step": "Primeira execucao regular hoje18:08 Eastern; coleta diaria desde00:00 ate18:08 e publica na mesma thread. Evidencias e retomada no contrato e audit de instalacao.",
-      "objective": "Relatorio diario de campanhas novas dos seis sites SHEIN por gestor, nesta thread, por volta das18h Eastern.",
+      "next_step": "Proximo disparo09/11/2026 18h08America/New_York, futuro nao executado;somente objetos historicos ainda expostos naAPI;preservar relatos04/05 e nao repetir POSTs;finalizar REPORT-INFRA.",
+      "objective": "Relatorio diario de campanhas novas SHEIN por gestor/site18h08Eastern;recuperar06/07 autorizados1569186030475681874.",
       "source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
-      "state": "ativo: root cron18:08 eastern +25s, sem llm. coleta live36/36 contas, nove testes e entrega de teste por get validados. agenda unica, daemon ativo, auditoria global8dias sem colisao operacional. sem writes meta.",
+      "state": "recuperado:resolver canonico pm;13testespass;08/11 47camp36/36get1569185827056255019;backfills06/11 36campget1569186496546607115 e07/11 20campget1569186690667651083,36/36cada;periodo00h-18h08,consulta historica realizada08/11;meta writes0;agenda unica byte-identica.",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-10-29T18:28:09+00:00"
+      "updated_at": "2026-11-09T03:07:59+00:00"
     },
     {
       "agent": "ares",
@@ -3979,6 +3979,16 @@
       "state": "aplicado/validado rev442 audit1677:38fatosyolomgs;smsp121formula;cpv31formulas corrigidas;7creditosgeizian positivos preservados;backup restaurado;107+5testespass. pendentepropostatc21usd762.62 e redistribuicaoopenzedusd1.76sheet;nenhuma escrita nesses dois pontos.",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-21T17:45:29+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-AUTOMATION-AUDIT-1569185815869915167",
+      "next_step": "Reconciliar execucao e entregas, pausas autorizadas, integridade dos wrappers e falha400 planilhaDigitalTrust; preservar writers concorrentes e gates criticos",
+      "objective": "Auditar continuidade de automacoes Hermes/Linux/systemd Zeus Atena Ares apos atualizacao e dois relatos de falha; sem mudar estrategia ou duplicar envios",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/automation-audit-1569185815869915167",
+      "state": "inventory_collected:72hermesjobs18enabled;60rootcronentries;18timers;investigation_in_progress",
+      "thread_id": "1569185140502954077",
+      "updated_at": "2026-11-09T03:06:19+00:00"
     },
     {
       "agent": "zeus",
@@ -9375,5 +9385,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:16:28+00:00"
+  "updated_at": "2026-11-09T03:07:59+00:00"
 }
