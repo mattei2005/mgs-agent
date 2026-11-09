@@ -339,12 +339,28 @@ def notify_result(q,row,text,transport):
     key='notice:'+row['key']+':'+row['state']
     r=q.db.execute('SELECT value FROM service WHERE key=?',(key,)).fetchone()
     intent=json.loads(r[0]) if r else {'nonce':row['key'][:15]+row['state'][:9],'state':row['state']}
-    if intent.get('verified'):return
-    body={'content':text.strip()[:1850].rstrip(),'embeds':[],'allowed_mentions':{'parse':[],'users':[],'roles':[],'replied_user':False},'nonce':intent['nonce'],'enforce_nonce':True}
-    if source.get('alert_id'):body['message_reference']={'message_id':source['alert_id'],'channel_id':str(channel),'fail_if_not_exists':False}
-    q.service(key,intent)
+    if intent.get('verified') and intent.get('render_version')==2:return
+    if intent.get('render_version')!=2:
+        description=text.strip()
+        if len(description)>3800:
+            description=description[:1300].rstrip()+'\n\n[Detalhes completos preservados no registro da operação.]\n\n'+description[-2200:].lstrip()
+        blocked=row['state'] in ('waiting_human','blocked_decision')
+        push=blocked or bool(source.get('source_pushed_rodolfo'))
+        body={'content':'<@344196393512075265>' if push else '',
+              'embeds':[{'title':'🔎 ALERTA INVESTIGADO' if blocked else '✅ ALERTA CORRIGIDO','description':description,'color':15844367 if blocked else 3066993,'footer':{'text':'Zeus · continuidade automática'}}],
+              'allowed_mentions':{'parse':[],'users':['344196393512075265'] if push else [],'roles':[],'replied_user':False},
+              'nonce':intent['nonce'],'enforce_nonce':True}
+        if source.get('alert_id'):body['message_reference']={'message_id':source['alert_id'],'channel_id':str(channel),'fail_if_not_exists':False}
+        intent.update(render_version=2,payload=body,verified=False,needs_patch=bool(intent.get('message_id')))
+        q.service(key,intent)
+    body=intent['payload']  # Frozen before POST, including across a later probe.
     def created(mid):intent['message_id']=mid;q.service(key,intent)
-    mid=transport(body,channel=str(channel),prior_id=intent.get('message_id'),on_created=created)
+    if intent.get('needs_patch'):
+        from mgs_alert_transport import update_verified
+        mid=update_verified(body,channel=str(channel),message_id=intent['message_id'])
+        intent['needs_patch']=False
+    else:
+        mid=transport(body,channel=str(channel),prior_id=intent.get('message_id'),on_created=created)
     intent.update(message_id=mid,verified=True);q.service(key,intent)
 
 
