@@ -1,0 +1,34 @@
+{
+  "status": "completed_read_only_with_business_enforcement_gap",
+  "verified_at": "2026-11-10T15:21:23.125369+00:00",
+  "business": {
+    "id": "1473532917114441",
+    "name": "Nouakchott Hotel Api",
+    "verification_status": "verified",
+    "restriction_verdict": "not_exposed_by_verified_field"
+  },
+  "app": "B013-7",
+  "messaging_permission": "live",
+  "sample_profile": "Lan Bui",
+  "sample_page_count": 9,
+  "sample_page_integrity_ok": 9,
+  "sample_restrictions": 0,
+  "dtr_sample_campaign": {
+    "page": "Christine Smith",
+    "campaign_marker": "2144 - 18",
+    "sent": 13,
+    "delivered": 13,
+    "displayed_schedule": "Nov 10, 26 11:53",
+    "display_timezone_not_verified": true,
+    "current_app_execution_not_certified": true
+  },
+  "full_drip_delivery_audit_performed": false,
+  "messages_sent": 0,
+  "production_configuration_writes": 0,
+  "remaining_gap": "Business Support Home enforcement verdict and exact present send rejection are not proven by this read-only sample.",
+  "probe_recovery": [
+    "DOM account selector representations deduplicated by exact account ID/name",
+    "Optional CSRF handling aligned to existing native inspector"
+  ],
+  "process_exited": true
+}
