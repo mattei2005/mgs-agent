@@ -69,6 +69,16 @@ O readback desta expansão substitui a descrição antiga limitada a V1/V2 G002 
 
 Mavroa e BoostingEcon operam `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e treze rotas físicas validadas em cada site. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
 
+### Domínio de entrada exclusivo — lp-yolo.com
+
+Por instrução de Rodolfo `discord:1569723577178001430#1569743502701494457`, `lp-yolo.com` hospeda somente as quizzes SHEIN em inglês, no **MatteiInc01 (`162.55.28.178`)**, separado da instalação original de `yolokfx.com` no MatteiInc03JBF. A seleção do MatteiInc01 supersede o destino inicialmente proposto `46.4.95.117` para este domínio novo; não migra nem altera o Yolokfx original.
+
+- V1/V2/V3 ativas para G001–G006: `/quiz/us/sh1-gNNN/`, `/quiz/us/sh2-gNNN/`, `/quiz/us/sh3-gNNN/`; dezoito rotas estáticas geradas pelo painel próprio.
+- Todos os CTAs apontam para `https://yolokfx.com/rec-us-app-shein-circle-of-style/`, preservando parâmetros de entrada exatamente uma vez; o domínio de entrada não é um novo REC nem substitui os seis sites editoriais acima.
+- RunCloud: servidor `290075`, webapp `3114713`, webroot `/home/runcloud/webapps/lp-yolo`, owner `runcloud`, PHP8.3, Native NGINX; WordPress como plano de controle e `mgs-direct-quiz` v1.2.1.
+- Cloudflare: conta indicada `mattei20052@gmail.com`, proxy ativo e SSL Full (strict). Credenciais exclusivas no 1Password, item `WordPress - lp-yolo.com`; nunca reutilizar credenciais da origem. Renovação corretiva autorizada em `1569745827201683529`, mantendo as identidades já criadas.
+- Evidência: `work/lp-yolo-1569743502701494457/verification.json`; 18/18 rotas HTTP200 e mobile, três cliques reais com REC200/UTMs, painel autenticado e configuração original preservada. V1 G004 foi ativada somente no domínio novo, conforme pedido de todos os modelos/gestores; permanece inativa na origem.
+
 ### Vizioid — escopo editorial sem finanças
 
 Decisão ativa de Rodolfo em 2026-10-22 (`discord:1562971403525816392#1562986239601156216`): `vizioid.com` não deve manter conteúdo financeiro publicado. Conteúdos financeiros identificados devem ficar em **rascunho**, preservando texto, mídia, IDs e possibilidade de rollback; não excluir nem republicar automaticamente. Preservar SHEIN, moda, tendências, tecnologia/lifestyle e compras não financeiras. A decisão é específica do Vizioid, não autoriza alterações nos demais domínios. Evidência da aplicação e dos controles: `reports/vizioid-finance-draft-menu-1562986239601156216.md`. Esta decisão substitui qualquer inferência anterior de que a alocação SHEIN coexistiria com publicação financeira no Vizioid; o histórico técnico anterior permanece como baseline, não verdade ativa.
