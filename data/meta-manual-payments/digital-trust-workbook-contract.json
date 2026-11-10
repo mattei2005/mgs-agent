@@ -84,19 +84,20 @@
   ],
   "latest_refresh_qualification": {
     "status": "completed_validated_with_historical_d_gaps",
-    "source_message_id": "1569709472924827800",
-    "requested_at": "2026-11-10T08:45:02-05:00",
-    "verified_at": "2026-11-10T09:23:27.288388-05:00",
+    "job_id": "2ee720363d7d",
+    "execution_id": "efcc40ff743f454fa1784238111925c2",
+    "scheduled_at": "2026-11-10T14:02:00-05:00",
+    "verified_at": "2026-11-10T14:33:03.726977-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
     "fresh_metrics_count": 47,
-    "validated_metrics_at": "2026-11-10T09:22:29.060281-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261110T092236897925",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T084814237723",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261110T084736216965",
+    "validated_metrics_at": "2026-11-10T14:31:27.400973-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261110T143129873006",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T140537683569",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261110T140505244067",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -143,57 +144,50 @@
     "pending_h_account_ids": [],
     "h_preserved_count": 0,
     "h_original_collection_times_preserved": true,
-    "h_read_at_min": "2026-11-10T08:49:13.557575-05:00",
-    "h_read_at_max": "2026-11-10T09:08:32.334772-05:00",
-    "h_sum_usd": "560356.63",
+    "h_read_at_min": "2026-11-10T14:06:42.680876-05:00",
+    "h_read_at_max": "2026-11-10T14:29:33.222165-05:00",
+    "h_sum_usd": "563761.30",
     "h_read_times": {
-      "1829406761389732": "2026-11-10T09:01:36.898565-05:00",
-      "1245683183659911": "2026-11-10T09:03:58.724276-05:00",
-      "908704754163659": "2026-11-10T09:00:27.333637-05:00",
-      "1018267074603840": "2026-11-10T08:57:31.118262-05:00",
-      "787796726891306": "2026-11-10T09:07:21.695517-05:00",
-      "1107653168698121": "2026-11-10T09:06:32.795160-05:00",
-      "26632890069640784": "2026-11-10T08:50:39.841981-05:00",
-      "1001115192056600": "2026-11-10T09:00:03.208667-05:00",
-      "1753257812779707": "2026-11-10T09:00:49.616287-05:00",
-      "311204101516831": "2026-11-10T08:50:20.805961-05:00",
-      "937846586033361": "2026-11-10T09:04:46.323440-05:00",
-      "1583000095650153": "2026-11-10T09:07:46.636401-05:00",
-      "1736068407518263": "2026-11-10T08:56:18.773266-05:00",
-      "536294549227786": "2026-11-10T08:57:07.609771-05:00",
-      "3188620887977617": "2026-11-10T08:51:02.477001-05:00",
-      "336562339356179": "2026-11-10T08:49:13.557575-05:00",
-      "3752157451670648": "2026-11-10T08:49:39.632604-05:00",
-      "4511685129081248": "2026-11-10T09:01:12.651540-05:00",
-      "1744611463000838": "2026-11-10T09:03:35.703247-05:00",
-      "1600310064116258": "2026-11-10T09:08:32.334772-05:00",
-      "1085117577390237": "2026-11-10T08:59:39.459969-05:00",
-      "1062887799996139": "2026-11-10T08:53:45.293387-05:00",
-      "1498990138663094": "2026-11-10T08:53:22.936078-05:00",
-      "1419148446852410": "2026-11-10T08:52:36.232039-05:00",
-      "2031917360813819": "2026-11-10T08:56:42.113341-05:00",
-      "2429758060563333": "2026-11-10T09:08:10.197657-05:00",
-      "869857549542755": "2026-11-10T08:57:53.540444-05:00",
-      "897046653487466": "2026-11-10T08:54:07.194524-05:00",
-      "2633813727134360": "2026-11-10T09:04:22.725978-05:00",
-      "2039876850230678": "2026-11-10T08:49:58.290917-05:00",
-      "1877104513669062": "2026-11-10T08:54:29.177955-05:00",
-      "1851640026221079": "2026-11-10T09:03:15.225543-05:00",
-      "7840111366055613": "2026-11-10T09:06:57.784732-05:00",
-      "814915838330687": "2026-11-10T08:55:57.583191-05:00",
-      "781612907182683": "2026-11-10T09:05:07.390484-05:00",
-      "1526280818302320": "2026-11-10T08:52:58.590760-05:00"
+      "781612907182683": "2026-11-10T14:25:51.982182-05:00",
+      "2429758060563333": "2026-11-10T14:29:06.498997-05:00",
+      "536294549227786": "2026-11-10T14:17:45.244316-05:00",
+      "1583000095650153": "2026-11-10T14:28:38.738938-05:00",
+      "1877104513669062": "2026-11-10T14:14:38.411315-05:00",
+      "7840111366055613": "2026-11-10T14:27:47.804369-05:00",
+      "26632890069640784": "2026-11-10T14:08:57.172750-05:00",
+      "2039876850230678": "2026-11-10T14:07:49.929327-05:00",
+      "1062887799996139": "2026-11-10T14:13:36.648986-05:00",
+      "2633813727134360": "2026-11-10T14:25:06.549282-05:00",
+      "1419148446852410": "2026-11-10T14:11:59.680731-05:00",
+      "937846586033361": "2026-11-10T14:25:31.059870-05:00",
+      "897046653487466": "2026-11-10T14:14:07.784014-05:00",
+      "3752157451670648": "2026-11-10T14:07:16.193970-05:00",
+      "787796726891306": "2026-11-10T14:28:13.956754-05:00",
+      "1829406761389732": "2026-11-10T14:22:25.406096-05:00",
+      "4511685129081248": "2026-11-10T14:22:01.326788-05:00",
+      "1600310064116258": "2026-11-10T14:29:33.222165-05:00",
+      "869857549542755": "2026-11-10T14:18:50.884656-05:00",
+      "3188620887977617": "2026-11-10T14:09:33.055615-05:00",
+      "814915838330687": "2026-11-10T14:16:07.997934-05:00",
+      "1001115192056600": "2026-11-10T14:20:49.657497-05:00",
+      "1753257812779707": "2026-11-10T14:21:37.366542-05:00",
+      "1018267074603840": "2026-11-10T14:18:16.055450-05:00",
+      "1085117577390237": "2026-11-10T14:20:25.383866-05:00",
+      "1736068407518263": "2026-11-10T14:16:38.539409-05:00",
+      "1498990138663094": "2026-11-10T14:13:06.073819-05:00",
+      "311204101516831": "2026-11-10T14:08:21.226786-05:00",
+      "908704754163659": "2026-11-10T14:21:13.968546-05:00",
+      "2031917360813819": "2026-11-10T14:17:11.616771-05:00",
+      "1744611463000838": "2026-11-10T14:24:20.978707-05:00",
+      "1107653168698121": "2026-11-10T14:27:24.311376-05:00",
+      "1245683183659911": "2026-11-10T14:24:42.907310-05:00",
+      "1851640026221079": "2026-11-10T14:23:55.985300-05:00",
+      "336562339356179": "2026-11-10T14:06:42.680876-05:00",
+      "1526280818302320": "2026-11-10T14:12:32.023598-05:00"
     },
     "pending_ui": [],
-    "card_proofs_updated": 6,
-    "renewed_card_proof_ids": [
-      "1062446663435585",
-      "1290644206529750",
-      "1414197490675732",
-      "1481815942722118",
-      "1543098427832443",
-      "2852476828464907"
-    ],
+    "card_proofs_updated": 0,
+    "renewed_card_proof_ids": [],
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
@@ -387,9 +381,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "20117.17",
-      "balance": "564760.45",
-      "month_spend": "185757.67"
+      "average_daily": "20125.86",
+      "balance": "567624.10",
+      "month_spend": "190242.32"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -411,19 +405,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4773.05"
+        "value": "4775.22"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "4320.56"
+        "value": "3877.88"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "42907.60"
+        "value": "44098.94"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -435,25 +429,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15344.12"
+        "value": "15350.64"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "560356.63"
+        "value": "563761.30"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "560439.89"
+        "value": "563746.22"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "142850.07"
+        "value": "146143.38"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -465,25 +459,25 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "20117.17"
+        "value": "20125.86"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "560356.63"
+        "value": "563761.30"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "564760.45"
+        "value": "567624.10"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "185757.67"
+        "value": "190242.32"
       }
     ],
     "lease_free": true,
@@ -498,19 +492,19 @@
       "final_browser_tabs_visually_counted": 6,
       "owned_tabs_closed": true,
       "lease_free": true,
-      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/surface-initial.png",
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/surface-final.png"
+      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T1402/surface-initial.png",
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T1402/surface-final.png"
     },
-    "next_existing_run_at": "2026-11-10T14:02:00-05:00",
+    "next_existing_run_at": "2026-11-10T21:02:00-05:00",
     "report_infra_status": "sent_verified",
-    "report_infra_message_id": "1569719324141289509"
+    "report_infra_message_id": "1569797270562541609"
   },
   "pending_card_history": {
     "status": "no_new_events_pending_historical_gaps_qualified",
     "account_ids": [],
     "pending_ui": [],
     "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -538,7 +532,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-10T14:02:00-05:00",
+  "next_run_at": "2026-11-10T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
@@ -581,7 +575,7 @@
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261107T210443132474",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T140537683569",
   "pay_now_updated_each_tick": true,
   "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
   "schema": {

@@ -63345,6 +63345,30 @@
       "scope": "B013-7 owning BM and frozen 103-profile/1180-user-page delivery report cohort",
       "changes": "No configuration, credential or customer-send writes; temporary exclusive canonical DTR lock for source reads",
       "report_infra_status": "pending_final_verified_receipt"
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-tick-20261110T1402",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T1402/closure-current.json",
+      "status": "completed_validated_with_historical_d_gaps",
+      "type": "authorized_scheduled_financial_refresh",
+      "updated_at": "2026-11-10T14:33:03.726977-05:00",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "pending_d": 0,
+        "historical_blank_d": 35,
+        "card_proofs_updated": 0,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1569797270562541609"
     }
   ],
   "profile_skill_references": [
