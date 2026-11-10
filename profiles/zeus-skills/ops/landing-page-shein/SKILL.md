@@ -76,6 +76,8 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 4. Confrontar a matriz solicitada de modelos × gestores com as configurações da origem. Uma variante inativa na origem não cancela o pedido de publicá-la no domínio novo; registrar a diferença e preservar o status original. Não tratar simples cópia dos HTMLs existentes como entrega completa quando o pedido inclui painel de edição e todas as variantes.
 5. Antes das escritas sujeitas a confirmação, apresentar numa única mensagem o diff DNS/SSL obtido do estado real e as operações sensíveis concretas ainda necessárias. Reutilizar as confirmações já dadas sobre domínio, modelos, gestores e REC; não reabrir essas decisões. Distinguir preflight concluído de hospedagem criada e páginas publicadas, pois leitura SSH e zona ativa não comprovam provisionamento.
 
+Para provisionar hospedagem, painel e mídia próprios em um novo domínio de entrada, seguir `references/dedicated-quiz-domain-provisioning.md` depois deste preflight; não improvisar um clone completo do site editorial.
+
 ## Implantação segura
 
 1. Confirmar domínio, webroot, rota livre e artigo de destino HTTP 200.
@@ -110,6 +112,8 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 3. Fazer GET de cada destino, seguindo redirects, e conferir URL efetiva e conteúdo SHEIN. Entregar bullets curtos com nome do site e URL limpa, sem acrescentar UTMs de campanha. Se houver destinos diferentes entre configurações, explicitar a diferença em vez de escolher um silenciosamente.
 4. Delimitar a evidência: HTTP 200 comprova disponibilidade, não equivalência visual/editorial nem funcionamento de CTAs. Pedidos para conferir o “padrão do Yolo” exigem a comparação de REC abaixo, não repetir o teste de status.
 5. Quando o pedido mencionar explicitamente **quizzes**, entregar as entradas `/quiz/.../`, agrupadas por site e modelo, não os RECs. Se usar um gestor como referência, identificá-lo no início e limitar a validação às URLs realmente conferidas; links G002 não comprovam publicação para G001–G006. Não sugerir trocar apenas o sufixo como garantia de rota ativa sem ler a configuração correspondente.
+6. Quando Rodolfo pedir **todas de todos os gestores**, enumerar cada URL completa, agrupada por código/nome do gestor e ordenada V1/V2/V3; exemplos de um gestor ou instrução para trocar sufixos não satisfazem o pedido. Resolver nomes na fonte canônica e montar a lista a partir das configurações ativas. Persistir cada lote de verificações antes das assertions, contar/deduplicar por URL em código e conferir a matriz solicitada antes de declarar o total.
+7. Separar inventário e disponibilidade: se a leitura WP falhar, um snapshot já validado pode fornecer os endereços, identificado como tal, enquanto GETs públicos verificam o estado atual. Não chamar o snapshot de configuração live nem esconder falhas numéricas atrás de uma assertion vazia. Em falha transitória, diagnosticar e repetir com backoff limitado; só declarar recuperação após revalidar todas as URLs afetadas.
 
 ## Inventário operacional e mudança de nicho
 

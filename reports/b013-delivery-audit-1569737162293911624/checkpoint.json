@@ -4,7 +4,7 @@
   "app": "B013-7",
   "business_id": "1473532917114441",
   "started_at": "2026-11-10T15:36:17.775911+00:00",
-  "status": "delivery_audit_running_bm_waiting_for_human_authentication",
+  "status": "bm_restriction_confirmed_broadcast_scan_complete_drip_evidence_pending",
   "objectives": [
     "Audit Drip and Broadcast send/delivery/error evidence for current B013 seguradores/pages",
     "Read owning BM enforcement verdict through authorized admin session; API verified is not unrestricted"
@@ -13,13 +13,21 @@
   "no_configuration_changes": true,
   "latest_monitor_targets": 103,
   "next_step": "Discover exact DTR delivery report transports and inspect BM owner profile availability",
-  "bm_blocker": {
-    "profile_no": "1190",
-    "profile_id": "k1f7o4im",
-    "profile_name": "Giselle Santos",
-    "reason": "remembered profile login/continue surface; Business Support target not authenticated",
-    "next_action": "Rodolfo authenticates same profile on PC1; preserve profile and resume exact Business ID read"
-  },
+  "bm_blocker": null,
   "delivery_process": "proc_f172b1886479",
-  "updated_at": "2026-11-10T15:52:30.195433+00:00"
+  "updated_at": "2026-11-10T16:33:18.108831+00:00",
+  "bm_enforcement": "Restricted on Meta Account Overview, dated Oct 21 2026; read after authentication 1569742613656117371",
+  "broadcast_scope": {
+    "profiles": 103,
+    "unique_user_page_keys": 1180,
+    "latest_completed_report_statuses": {
+      "no_completed_campaign": 946,
+      "accepted_by_meta_delivery_not_certified": 22,
+      "send_errors": 169,
+      "globally_ignored_not_scanned": 4,
+      "accepted_with_errors": 9,
+      "completed_without_recipient_outcome": 30
+    }
+  },
+  "delivery_gap": "Meta accepted IDs are not end-device delivery receipts; raw recipient column mapping being validated; do not publish 0 delivered from unknown schema. Drip proof remains pending."
 }

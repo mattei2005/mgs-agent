@@ -30,6 +30,15 @@ Use this skill when Rodolfo asks to:
 
 Do not use this skill for WordPress application cache, RunCloud cache, plugin cache, browser cache, or CDN providers other than Cloudflare unless Rodolfo explicitly says Cloudflare is involved.
 
+## Explicar e escolher Full versus Full (strict)
+
+- Quando Rodolfo perguntar a diferença, explique primeiro os dois trechos `visitante → Cloudflare → origem`. Para acessos HTTPS, ambos os modos criptografam os dois trechos; a diferença é a validação do certificado **da origem**, não o certificado público apresentado ao navegador.
+- Explique que **Full** aceita o certificado da origem sem validar confiança, validade ou correspondência do hostname; **Full (strict)** exige certificado não vencido, correspondente ao domínio e emitido por CA pública confiável ou Cloudflare Origin CA. O cadeado público pode continuar normal em Full mesmo quando o certificado da origem está incorreto.
+- Traduza o efeito operacional: strict não é WAF, CAPTCHA nem restrição de visitantes/bots. Com certificado válido, não altera por si só CTAs ou UTMs. Se a validação do certificado falhar, pode ocorrer526; não prometa disponibilidade apenas porque a opção está selecionada.
+- Trate a informação de que Rodolfo costuma usar Full como contexto, não como ordem para trocar o site atual ou migrar o portfólio. Em perguntas explicativas, responda sem executar mudanças e sem abrir uma auditoria de todos os sites. Para implantação nova, proponha o modo e seu requisito de certificado no diff autorizado; para sites existentes, preserve a configuração até haver instrução específica.
+- Para recomendar strict num alvo concreto, confira separadamente certificado de origem, cadeia/hostname/validade e HTTPS público. Consulte as referências oficiais: `https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full/` e `https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full-strict/`.
+- Diante de521/522 junto com timeout SSH, investigue conectividade e eventual reinício antes de culpar strict ou reduzir a validação TLS. Após recuperação, repita o conjunto exato de URLs afetadas; boot recente comprova reinício, não seu autor ou causa.
+
 ## Block/challenge investigation: establish the traffic path first
 
 1. Before credential discovery, resolve the exact hostname's A, AAAA and CNAME records and the apex NS. Use DNS-over-HTTPS, for example `GET https://dns.google/resolve?name=<hostname>&type=A`, and confirm an unexpected answer through `https://cloudflare-dns.com/dns-query` with `Accept: application/dns-json`. Preserve the distinction between authoritative DNS and HTTP proxying: external nameservers alone do not exclude a Cloudflare partial/CNAME setup.

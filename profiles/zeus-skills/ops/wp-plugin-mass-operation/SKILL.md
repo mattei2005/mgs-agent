@@ -51,6 +51,8 @@ Ao explicar “como você acessa por SSH?”, responder primeiro qual servidor, 
 
 ## Mutation and preservation gates
 
+- Capture both stdout and stderr in memory for every credential-bearing WP-CLI command, including successful `--prompt` calls: WP-CLI can echo the reconstructed command with the secret. Print only sanitized stage/status evidence. Follow `references/route-pack-02.md`, seção `WP-CLI e prompts com segredo`, for provisioning and confirmed same-identity recovery.
+
 - Before escalating selective editorial-cache invalidation merely because the cache copy is a file, resolve the current confirmation authority in `data/atena/editorial-manager-authority.json#/cache_request_authority`. Apply Raquel's delegated approval for proven regenerable selective ContentOps cache without another CEO approval for each equivalent request; this is not general file-deletion authority. Preserve the exact approved target set, regeneration proof, private backup, no-symlink/path/hash/owner checks, canary and bare-canonical readback. Never add newly discovered homes/URLs to a previous manifest by inference or take over an active executor through a governance handoff.
 
 - When an immutable native-route pin refers to a positional inventory index that drifted, relocate only by a unique exact original record hash **and** the same record ID/domain/webroot/server. Preserve the original hash and history, revalidate the native installation in read-only mode, and bind the next stage to a separate fresh relocation artifact. Never repin to whichever record now occupies the old index, weaken the source guard, or rewrite another agent's historical adapter to force passage.
