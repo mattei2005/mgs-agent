@@ -1,0 +1,124 @@
+{
+  "path": "/messenger_bot/bot_list",
+  "text": " Bot manager\nPages\nAlejandra Castillo\n#22019 - 1019926647878264\nVanessa Zamora\n#22018 - 1093160177214656\nDelilah Prescott\n#19334 - 1030940283437025\nCarolina Cruz\n#19333 - 1025593570646416\nFallon Prescott\n#13932 - 961913790339634\nMargot Ellington\n#13862 - 984775948044959\nDaphne Sinclair\n#13857 - 923089147560846\nChristine Smith\n#5469 - 839712962548312\nNatalia Pacheco\n#5438 - 756174520916549",
+  "links": [
+    {
+      "text": "Logout",
+      "title": "",
+      "href": "/home/logout",
+      "id": "",
+      "cls": "dropdown-item has-icon text-danger"
+    },
+    {
+      "text": "Review Replies",
+      "title": "",
+      "href": "/gmb/review_report",
+      "id": "",
+      "cls": "nav-link"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    },
+    {
+      "text": "Api log",
+      "title": "",
+      "href": "",
+      "id": "",
+      "cls": "text-danger float-right error_log_report2"
+    }
+  ],
+  "frames": [
+    "/messenger_bot/bot_list",
+    "/messenger_bot/bot_list"
+  ],
+  "tables": [
+    {
+      "id": "mytable2",
+      "headers": [
+        "#",
+        "Settings type",
+        "Status",
+        "Email/phone",
+        "Auto responde type",
+        "API name",
+        "Inserted at",
+        "Actions"
+      ],
+      "rows": []
+    },
+    {
+      "id": "mytable1",
+      "headers": [
+        "#",
+        "Bot name",
+        "Error message",
+        "Error time",
+        "Actions"
+      ],
+      "rows": []
+    }
+  ],
+  "requests": [
+    {
+      "path": "/messenger_bot/get_page_details",
+      "form": {
+        "page_table_id": [
+          "22019"
+        ],
+        "media_type": [
+          "fb"
+        ]
+      }
+    },
+    {
+      "path": "/messenger_bot/get_page_details",
+      "form": {
+        "page_table_id": [
+          "5469"
+        ],
+        "media_type": [
+          "fb"
+        ]
+      }
+    }
+  ]
+}

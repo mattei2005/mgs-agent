@@ -51,7 +51,33 @@
     "credential_rotation_verified": true,
     "temporary_credential_relays_remaining": 0,
     "ssl_mode": "strict",
-    "final_private_backups_verified": true
+    "final_private_backups_verified": true,
+    "static_runtime_fixture": {
+      "first_marker": true,
+      "first_raw_destination": true,
+      "first_assets_versioned": true,
+      "first_assets_https": true,
+      "edit_replaced": true,
+      "edit_path_same": true,
+      "route_guard_code": "mgs_dq_static_route_change",
+      "inactive_removed_public_path": true,
+      "inactive_archived": true,
+      "inactive_copy_unpublished": true,
+      "reactivated": true,
+      "readback_sha_match": true,
+      "v3_cta_count": 7,
+      "v3_category_count": 6,
+      "v3_countdown": true,
+      "v3_disclaimer": true,
+      "v3_own_assets": true,
+      "es_v3_lang": true,
+      "es_v3_fixed_labels": true,
+      "es_v3_default_copy": true,
+      "es_v3_no_english_labels": true,
+      "es_v2_badge_and_legal": true
+    }
   },
-  "state": "complete_validated_pending_governance_reporting"
+  "state": "complete_validated",
+  "knowledge_registry_id": "LP-YOLO-SHEIN-ENTRY-20261110",
+  "credential_incident_status": "resolved_by_confirmed_same_identity_rotation"
 }
