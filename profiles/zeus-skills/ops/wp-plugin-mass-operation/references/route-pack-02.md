@@ -259,6 +259,11 @@ Nunca registrar ou repetir senha de login/application password nesta skill. Reso
 
 ---
 
+## WP-CLI e prompts com segredo
+
+- Trate `wp config create --prompt=dbpass` e `wp core install --prompt=admin_password` como operações com stdout sensível: o WP-CLI pode ecoar a linha reconstruída com o valor digitado. Passe os segredos somente por stdin, capture stdout/stderr em memória e nunca imprima o retorno bruto, nem em sucesso nem em exceções. Emita apenas status booleano/exit code e faça readback por campos sem segredo. `--prompt` evita o segredo no argv, mas não garante redaction do output.
+- Se uma operação já reexibiu credenciais, interrompa a etapa afetada, registre a exposição sem os valores e obtenha a confirmação crítica para renová-las; não rotacione credenciais automaticamente sob a autorização genérica de recovery. Preserve IDs e a instalação já criada.
+
 ## ⚠️ Pitfalls
 
 1. **`sudo -u runcloud` falha em sites do runcloud2** — wantabrand (Inc01), creditoparaveiculo e gamezonead (Inc02) estão em `/home/runcloud2/` e pertencem ao usuário `runcloud2`. Usar `sudo -u runcloud2`. Verificar com `ls -la /home/runcloud2/webapps/`.

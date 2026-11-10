@@ -3191,12 +3191,12 @@
     {
       "agent": "zeus",
       "id": "LP-YOLO-SHEIN-1569741897080115311",
-      "next_step": "Validar SSH destino e painel RunCloud; criar apenas app lp-yolo; DNS A162.55.28.178 proxy; SSL strict; novos acessos proprios 1Password; publicar matriz completa e QA. Origem46.4.95.117 somente leitura. API RunCloud cooldown96289s respeitado; usar painel como alternativa.",
+      "next_step": "Solicitar confirmacao para renovar senha DB mgs_lp_yolo localhost e admin WP zeus unicamente de lp-yolo.com: WPCLI --prompt ecoou os valores no stdout tecnico. Nao imprimir retorno de comandos sensiveis. App3114713 e DNS A162.55.28.178 proxy criados/readback; WP instalado;18configs/plugin origem preservados em work/lp-yolo-1569743502701494457; nao publicados. Apos OK renovar mesmas identidades/1Password h5ablwrkofkjiiemdndctk2tua, validar autenticacao, concluir plugin/configs/SSL strict e QA. Nao recriar app/db/login. API RunCloud cooldown respeitado; painel Servidores114579 autenticado validado como alternativa.",
       "objective": "Publicar V1/V2/V3 G001-G006 em lp-yolo.com no MatteiInc01 162.55.28.178 com painel dedicado; preservar Yolokfx e CTAs REC",
       "source": "discord:1569723577178001430#1569743502701494457",
-      "state": "executing_authorized_server_change_to_matteiinc01",
+      "state": "partial_provisioning_credential_rotation_critical_confirmation_required",
       "thread_id": "1569723577178001430",
-      "updated_at": "2026-11-10T16:01:06+00:00"
+      "updated_at": "2026-11-10T16:09:10+00:00"
     },
     {
       "agent": "zeus",
@@ -9719,5 +9719,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T16:01:06+00:00"
+  "updated_at": "2026-11-10T16:09:10+00:00"
 }
