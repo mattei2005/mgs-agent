@@ -17,11 +17,11 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 46,
+  "consecutive_failures": 0,
   "daily": {
-    "date": "2026-11-09",
+    "date": "2026-11-10",
     "last_result": {
-      "at": "2026-11-09T00:12:13-05:00",
+      "at": "2026-11-10T06:42:15-05:00",
       "discarded_cached_pending": 0,
       "resolved": 0,
       "sent": 0,
@@ -710,9 +710,19 @@
     740593,
     740775,
     740784,
-    740804
+    740804,
+    740995,
+    741015,
+    741034,
+    741055,
+    741076,
+    741099,
+    741121,
+    741142,
+    741165,
+    741182
   ],
-  "failure_alert_sent_for": 3,
+  "failure_alert_sent_for": 0,
   "incidents": {
     "digital-trust-2|amazing|8|1778": {
       "alert": {
@@ -947,9 +957,9 @@
     "digital-trust|boostingecon|30|1761": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:04:47.000Z",
+        "created_at": "2026-11-10T00:05:13.000Z",
         "domain": "boostingecon",
-        "notification_id": 740251,
+        "notification_id": 741034,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -980,7 +990,8 @@
         736590,
         737960,
         739100,
-        740251
+        740251,
+        741034
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -1281,9 +1292,9 @@
     "digital-trust|eggbev|12|275": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:24.000Z",
+        "created_at": "2026-11-10T00:05:57.000Z",
         "domain": "eggbev",
-        "notification_id": 740356,
+        "notification_id": 741142,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 13,
@@ -1308,7 +1319,8 @@
         736360,
         738088,
         739207,
-        740356
+        740356,
+        741142
       ],
       "opened_at": "2026-11-05T07:12:14-05:00",
       "repeat_count": 0,
@@ -1388,9 +1400,9 @@
     "digital-trust|escalatepower|29|1539": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:39.000Z",
+        "created_at": "2026-11-10T00:06:13.000Z",
         "domain": "escalatepower",
-        "notification_id": 740394,
+        "notification_id": 741182,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 12,
@@ -1414,7 +1426,8 @@
         736402,
         738111,
         739247,
-        740394
+        740394,
+        741182
       ],
       "opened_at": "2026-11-03T19:12:19-05:00",
       "repeat_count": 0,
@@ -1459,9 +1472,9 @@
     "digital-trust|financeadx|24|1577": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:04:48.000Z",
+        "created_at": "2026-11-10T00:05:15.000Z",
         "domain": "financeadx",
-        "notification_id": 740270,
+        "notification_id": 741055,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1487,7 +1500,8 @@
         735225,
         737981,
         739122,
-        740270
+        740270,
+        741055
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2661,9 +2675,9 @@
     "digital-trust|lyzmofinanzas|77|1768": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:02.000Z",
+        "created_at": "2026-11-10T00:05:30.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 740320,
+        "notification_id": 741076,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -2691,7 +2705,8 @@
         736630,
         738024,
         739164,
-        740320
+        740320,
+        741076
       ],
       "opened_at": "2026-10-28T12:12:15-04:00",
       "repeat_count": 0,
@@ -2767,9 +2782,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:04:30.000Z",
+        "created_at": "2026-11-10T00:04:44.000Z",
         "domain": "lyzmo",
-        "notification_id": 740210,
+        "notification_id": 740995,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2799,7 +2814,8 @@
         736553,
         737919,
         739057,
-        740210
+        740210,
+        740995
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -2903,9 +2919,9 @@
     "digital-trust|mavroa|27|1718": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:33.000Z",
+        "created_at": "2026-11-10T00:06:05.000Z",
         "domain": "mavroa",
-        "notification_id": 740379,
+        "notification_id": 741165,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -2931,7 +2947,8 @@
         736918,
         738209,
         739226,
-        740379
+        740379,
+        741165
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
       "repeat_count": 0,
@@ -3122,9 +3139,9 @@
     "digital-trust|newsoun|14|264": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:18.000Z",
+        "created_at": "2026-11-10T00:05:46.000Z",
         "domain": "newsoun",
-        "notification_id": 740340,
+        "notification_id": 741121,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 64,
@@ -3153,7 +3170,8 @@
         736716,
         738066,
         739183,
-        740340
+        740340,
+        741121
       ],
       "opened_at": "2026-09-24T16:12:13-04:00",
       "repeat_count": 0,
@@ -3726,9 +3744,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:05:01.000Z",
+        "created_at": "2026-11-10T00:05:31.000Z",
         "domain": "spe",
-        "notification_id": 740296,
+        "notification_id": 741099,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -3805,7 +3823,8 @@
         736611,
         738003,
         739144,
-        740296
+        740296,
+        741099
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -3845,9 +3864,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-09T00:04:43.000Z",
+        "created_at": "2026-11-10T00:05:09.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 740227,
+        "notification_id": 741015,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -3900,7 +3919,8 @@
         736340,
         737942,
         739079,
-        740227
+        740227,
+        741015
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -4931,23 +4951,26 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-10T06:27:36-05:00",
+  "last_check": "2026-11-10T06:43:56-05:00",
   "last_delivery": {
-    "at": "2026-11-09T15:12:10-05:00",
+    "at": "2026-11-10T06:43:56-05:00",
     "cursor_ids": [
-      740775,
-      740784,
-      740804
+      740995,
+      741015,
+      741034,
+      741055,
+      741076,
+      741099,
+      741121,
+      741142,
+      741165,
+      741182
     ],
     "message_ids": [],
     "notification_ids": []
   },
-  "last_error": {
-    "at": "2026-11-10T06:27:36-05:00",
-    "message": "Smart Bidding canonical login required; authentication wall; no credential changed",
-    "type": "RuntimeError"
-  },
-  "last_seen_id": 740804,
+  "last_error": null,
+  "last_seen_id": 741182,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
