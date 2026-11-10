@@ -154,6 +154,8 @@ def load_ready_assets(request, profile, base, common, token):
 
 
 def finalize_ready_assets(state, live, base, common, token):
+    from .shein_manual_takeover import deny_replay
+    deny_replay(base,state['request']['request_id'])
     assets = state.get('new_media_assets') or []
     if not assets:
         raise ValueError('new-media postprocess has no inventory lineage')

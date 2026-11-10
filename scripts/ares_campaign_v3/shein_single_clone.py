@@ -775,6 +775,10 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False, refer
 
 
 def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
+    from .shein_manual_takeover import deny_replay
+    from .shein_prewrite_amendment import require_request
+    deny_replay(BASE, request['request_id'])
+    require_request(BASE, request)
     request = copy.deepcopy(request)
     if request.get('start_now') is True and 'start_time' in request:
         raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
@@ -813,6 +817,10 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
 
 
 def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
+    from .shein_manual_takeover import deny_replay
+    from .shein_prewrite_amendment import require_request
+    deny_replay(BASE, request['request_id'])
+    require_request(BASE, request)
     import subprocess
     validate_request(request)
     catalog_account = lookup_account(request['account'])
@@ -892,7 +900,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
         state = old
         page_token = None
         resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED', 'GLOBAL_QA_COMPLETE'}
-        if state and state.get('phase') == 'PREPARED':
+        if state and state.get('phase') == 'PREPARED' and not state.get('prewrite_amendment_pending'):
             prepared_at = state.get('prepared_at') or state['manifest'].get('created_at')
             age = (started_at - aware_time(prepared_at)).total_seconds() if prepared_at else float('inf')
             if 0 <= age <= int((config.get('shein_media_qa') or {}).get('source_snapshot_ttl_seconds', 120)):

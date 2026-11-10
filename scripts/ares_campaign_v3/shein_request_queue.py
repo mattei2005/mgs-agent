@@ -78,7 +78,9 @@ def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
     source_proof = None
     from .shein_decision_wait import pending
     pinned_owners = set()
-    for path in (root(base) / 'queue/decision-waits').glob('*.json'):
+    pinned_paths = list((root(base) / 'queue/decision-waits').glob('*.json'))
+    pinned_paths += list((root(base) / 'queue/manual-takeovers').glob('*.json'))
+    for path in pinned_paths:
         record = json.loads(path.read_text())
         owner = path.stem
         if str(record.get('account_id')) == str(account_id) and owner != rid:
@@ -219,6 +221,10 @@ def authorize_queue_request(request, base=BASE):
 
 
 def gate(request, command, base=BASE, *, launch=True):
+    from .shein_manual_takeover import deny_replay
+    deny_replay(base, request['request_id'])
+    from .shein_prewrite_amendment import require_request
+    require_request(base, request)
     operation = json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
     if not operation.get('request_queue_policy', {}).get('enabled'):
         return None
@@ -242,6 +248,10 @@ def gate(request, command, base=BASE, *, launch=True):
 
 def take_foreground(request, base=BASE):
     """Explicit Ares ownership of the same central route; never campaign execution."""
+    from .shein_manual_takeover import deny_replay
+    from .shein_prewrite_amendment import require_request
+    deny_replay(base, request['request_id'])
+    require_request(base, request)
     if os.environ.get('HERMES_PROFILE') != 'ares':
         raise ValueError('queue foreground handoff requires owning Ares profile')
     account = authorize_queue_request(request, base)
@@ -362,6 +372,8 @@ def find_notice(job, channel, nonce, content, actor, get):
 
 def notify(job, s):
     """Deferred final only, as Ares; reconcile nonce and GET exact sent target."""
+    from .shein_manual_takeover import deny_replay
+    deny_replay(BASE, job['request_id'])
     from .shein_channel_authority import _get
     import urllib.request
     verify_final(s)

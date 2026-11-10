@@ -107,8 +107,12 @@ class SourceMediaProof:
         for rid, record in historical.items():
             state_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid / 'state.json'
             cp = _engine_root(base) / 'checkpoints' / (rid + '-' + self.account_id + '.json')
+            from . import shein_manual_takeover as manual
+            pinned_record = manual.path(base,rid) if record.get('classification') == manual.STATUS else record_path(base,rid)
+            if record.get('classification') == manual.STATUS:
+                manual.validate(base,rid)
             if (record['state_sha256'] != digest(state_path)
-                    or record['record_sha256'] != digest(record_path(base, rid))
+                    or record['record_sha256'] != digest(pinned_record)
                     or record['checkpoint_sha256'] != digest(cp)):
                 raise ValueError('pure-clone historical evidence changed')
         return self
@@ -148,7 +152,8 @@ def resolve(request, account_id, base, *, held_accounts=frozenset()):
             handle = stack.enter_context(path.open('rb'))
             fcntl.flock(handle, mode | fcntl.LOCK_NB)
         lease = json.loads((engine / 'writer-leases' / (account_id + '.json')).read_text())
-        idle = lease.get('status') == 'COMPLETE' and lease.get('blocks_readers') is False and bool(lease.get('released_at_utc'))
+        from .shein_manual_takeover import lease_idle
+        idle = lease_idle(engine, lease)
         resume = q.state(base, request['request_id'])
         own = (lease.get('request_id') == request['request_id'] and lease.get('blocks_readers') is True
                and lease.get('status') in {'IN_PROGRESS', 'DEFERRED_QUOTA', 'READBACK_DEFERRED', 'RECOVERY_PENDING', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'}
@@ -202,7 +207,10 @@ def resolve(request, account_id, base, *, held_accounts=frozenset()):
                 raise ValueError('source media inventory lineage missing or ambiguous')
         identities, linked = expand(identities, rows)
         historical = {}
-        for path in (q.root(base) / 'queue/decision-waits').glob('*.json'):
+        from . import shein_manual_takeover as manual
+        historical_records = list((q.root(base) / 'queue/decision-waits').glob('*.json'))
+        historical_records += list((q.root(base) / 'queue/manual-takeovers').glob('*.json'))
+        for path in historical_records:
             pinned = json.loads(path.read_text())
             if pinned.get('account_id') != account_id or path.stem == request['request_id']:
                 continue
@@ -210,6 +218,9 @@ def resolve(request, account_id, base, *, held_accounts=frozenset()):
             evidence(base, previous, resume_request=request)
             if previous['request'].get('source_channel_id') != request['source_channel_id']:
                 raise ValueError('source media historical partition mismatch')
+            if manual.present(base, path.stem):
+                historical[path.stem] = manual.verify_live(base,path.stem,common,token)
+                continue
             cp_path = engine / 'checkpoints' / (path.stem + '-' + account_id + '.json')
             cp = json.loads(cp_path.read_text())
             expected_ads = {x for b in cp.get('bundles', []) for x in b.get('ad_ids', [])}

@@ -27,6 +27,8 @@ def digest(value):
 
 
 def ensure_staging_paused(engine, manifest, campaign_id):
+    from .shein_manual_takeover import deny_engine_replay
+    deny_engine_replay(engine.config['state_root'],manifest.request_id)
     """Reconcile existing direct-create children; no creation or manifest edit."""
     matches = [c for c in manifest.campaigns if c.mode == 'from_zero_prestaged' and c.status == 'PAUSED']
     if manifest.operation != 'SHEIN-US-DIRECT' or len(matches) != 1:
@@ -162,6 +164,10 @@ def read_tree(engine,bundle,transport,cid,stage):
 
 
 def activate(engine,target,creation,proof):
+    from .shein_manual_takeover import deny_engine_replay
+    from .shein_prewrite_amendment import require_manifest
+    deny_engine_replay(engine.config['state_root'], target.request_id)
+    require_manifest(engine.config['state_root'], target)
     if engine.config.get('enabled') is not True or engine.config.get('write_enabled') is not True:
         raise ValueError('activation write gate disabled')
     if target.operation!='SHEIN-US-DIRECT' or len(target.campaigns)<1 or any(c.status!='ACTIVE' for c in target.campaigns):

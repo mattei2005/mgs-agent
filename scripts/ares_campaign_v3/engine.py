@@ -1706,6 +1706,10 @@ class CampaignEngine:
 
     @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
+        from .shein_manual_takeover import deny_engine_replay
+        from .shein_prewrite_amendment import require_manifest
+        deny_engine_replay(self.config['state_root'], manifest.request_id)
+        require_manifest(self.config['state_root'], manifest)
         validate_account_policy(manifest, self.config)
         if self.config.get("enabled") is not True or self.config.get("write_enabled") is not True:
             raise EngineDisabled("v3 execute is disabled; use dry_run until the canary gate is approved")

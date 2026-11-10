@@ -73,6 +73,11 @@ def _unlocked(path):
 def evidence(base, value, *, resume_request=None):
     """Validate only local pinned facts. No provider call or resource mutation."""
     request = value['request']; rid = request['request_id']; account = str(request['account'])
+    from . import shein_manual_takeover as manual
+    if manual.present(base, rid):
+        rec = manual.validate(base, rid)
+        manual.assert_available(base, account, resume_request)
+        return rec
     rec = _read(record_path(base, rid))
     state_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid / 'state.json'
     engine_root = _engine_root(base)
@@ -110,8 +115,8 @@ def evidence(base, value, *, resume_request=None):
             or any(x.get('account_id') != account or x.get('status') != 'PAUSED' for x in snapshots)):
         raise ValueError('decision-wait evidence mismatch; dependency retained')
     lease = _read(engine_root / 'writer-leases' / (account + '.json'))
-    idle = (lease.get('status') == 'COMPLETE' and lease.get('blocks_readers') is False
-            and bool(lease.get('released_at_utc')))
+    from .shein_manual_takeover import lease_idle
+    idle = lease_idle(engine_root, lease)
     # A persisted lease owned by this SAME resumable request is not a foreign
     # writer. Blocking it here would deadlock its legitimate missing-only recovery.
     # A concurrent process is still rejected by the real account lock below.
@@ -181,6 +186,9 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(),
 
 def pending(base, rid):
     """A pinned review must not be automatically retried as campaign execution."""
+    from .shein_manual_takeover import present
+    if present(base, rid):
+        return True
     path = record_path(base, rid)
     if not path.exists():
         return False

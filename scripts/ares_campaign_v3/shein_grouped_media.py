@@ -93,6 +93,8 @@ def manager_folder(request, profile, base, ops, drive_token):
 
 
 def prepare(request, *, base=Path('/root/mgs-agent'), work_dir=None):
+    from .shein_manual_takeover import deny_replay
+    deny_replay(base,request['request_id'])
     from .shein_single_clone import lookup_account
     account = lookup_account(request['account'])
     locks = base/'data/ares/meta-ads/state/shein-campaigns/single-clone'
@@ -112,6 +114,8 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     never declares historical/unknown-use assets new. Repeated invocation keeps
     the same reservation and uses the canonical registry/title reconciliation.
     """
+    from .shein_manual_takeover import deny_replay
+    deny_replay(base,request['request_id'])
     from . import shein_single_clone as driver
     from .shein_general import authorize
     from .shein_media_handoff import _ops

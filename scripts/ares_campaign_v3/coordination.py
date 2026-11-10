@@ -69,8 +69,14 @@ class AccountWriterLeaseStore:
 
     def claim(self, account_id: str, request_id: str, *, status: str = "IN_PROGRESS") -> dict[str, Any]:
         request_id = str(request_id)
+        from .shein_manual_takeover import deny_engine_replay
+        deny_engine_replay(self.root.parent, request_id)
 
         def mutate(current: dict[str, Any]) -> dict[str, Any]:
+            from .shein_manual_takeover import STATUS, lease_idle
+            deny_engine_replay(self.root.parent, request_id)
+            if current.get('status') == STATUS and not lease_idle(self.root.parent,current):
+                raise WriterLeaseConflict('invalid manual takeover lease; cannot admit writer')
             if current.get("blocks_readers") and current.get("request_id") not in {None, "", request_id}:
                 raise WriterLeaseConflict(
                     f"account {account_id} already has active writer request {current.get('request_id')}"
@@ -92,6 +98,8 @@ class AccountWriterLeaseStore:
 
     def release(self, account_id: str, request_id: str) -> dict[str, Any]:
         request_id = str(request_id)
+        from .shein_manual_takeover import deny_engine_replay
+        deny_engine_replay(self.root.parent, request_id)
 
         def mutate(current: dict[str, Any]) -> dict[str, Any]:
             if current.get("request_id") not in {None, "", request_id}:
@@ -111,6 +119,33 @@ class AccountWriterLeaseStore:
         return self._locked_update(account_id, mutate)
 
 
+    def retire_manual(self, account_id: str, request_id: str, *, expected_sha256: str) -> dict[str, Any]:
+        """Receipt-bound coordination retirement; never QA COMPLETE or reservation release."""
+        from . import shein_manual_takeover as manual
+        base = manual.engine_base(self.root.parent)
+        if base is None:
+            raise ValueError('manual takeover requires canonical engine layout')
+        record = manual.validate(base, request_id)
+        if record['account_id'] != str(account_id):
+            raise ValueError('manual takeover account mismatch')
+        receipt_sha = manual.sha(manual.path(base, request_id))
+        def mutate(current):
+            if (current.get('request_id') == request_id and current.get('status') == manual.STATUS
+                    and current.get('manual_takeover_receipt_sha256') == receipt_sha
+                    and manual.lease_idle(self.root.parent, current)):
+                return current
+            if (manual.sha(self.path(account_id)) != expected_sha256
+                    or current.get('account_id') != str(account_id)
+                    or current.get('request_id') != request_id
+                    or current.get('status') != 'ACTIVATION_PENDING'
+                    or current.get('blocks_readers') is not True):
+                raise WriterLeaseConflict('manual takeover lease CAS/owner mismatch')
+            return {**current, 'status':manual.STATUS, 'blocks_readers':False,
+                    'released_at_utc':_utc(), 'updated_at_utc':_utc(),
+                    'manual_takeover_receipt_sha256':receipt_sha, 'qa_certified':False}
+        return self._locked_update(account_id, mutate)
+
+
 def reader_block_reason(
     account_id: str,
     state_root: Path | str,
@@ -118,6 +153,9 @@ def reader_block_reason(
     operation_state: Path | str | None = None,
 ) -> dict[str, Any] | None:
     lease = _load(AccountWriterLeaseStore(state_root).path(account_id))
+    from .shein_manual_takeover import STATUS, lease_idle
+    if lease.get('status') == STATUS and not lease_idle(state_root, lease):
+        return {'source':'manual_takeover_invalid', 'request_id':lease.get('request_id'), 'status':STATUS}
     if lease.get("blocks_readers") is True and str(lease.get("status") or "") != "COMPLETE":
         return {
             "source": "writer_lease",
@@ -126,6 +164,17 @@ def reader_block_reason(
         }
     if operation_state:
         state = _load(Path(operation_state))
+        from .shein_manual_takeover import engine_base, present, validate
+        base = engine_base(state_root)
+        rid = state.get('request_id') or (state.get('request') or {}).get('request_id')
+        if base is not None and rid and present(base,rid):
+            try:
+                validate(base,rid)
+                if lease_idle(state_root,lease):
+                    return None
+            except (OSError, ValueError, KeyError, TypeError):
+                pass
+            return {'source':'manual_takeover_invalid','request_id':rid,'status':STATUS}
         status = str(state.get("status") or "")
         if status in ACTIVE_OPERATION_STATES:
             return {"source": "operation_state", "request_id": state.get("request_id"), "status": status}
