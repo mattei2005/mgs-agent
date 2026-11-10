@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "request_source": "discord:1185714635991679006/1569764300665524224/1569764300665524224",
+  "authorized_by": "Rodolfo Mattei",
+  "thread_id": "1569763893138694167",
+  "parent_id": "1548149300826079333",
+  "manual_title_readback": "🎯Yolokfx Conta 07 Criar Camp",
+  "account_id": "1492168699397108",
+  "account_name_declared": "Yolokfx-US-SHEIN-EN-07-G002",
+  "manager_code": "G002",
+  "scope": "campaign_management",
+  "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
+  "registry_id": "ares-shein-g002-yolokfx07-scope-1569764300665524224",
+  "verification": {
+    "discord_thread_get": true,
+    "discord_messages_get": true,
+    "account_scope_allowed": true,
+    "business_id": "155263197283282",
+    "knowledge_validate": "ok",
+    "meta_live_identity_queried": false,
+    "onboarding_verified": false
+  },
+  "change_inventory": {
+    "modified": ["/root/mgs-agent/context/ares-operational-map.md", "/root/mgs-agent/data/knowledge-registry.json"],
+    "created": ["/root/mgs-agent/data/ares/discord/thread-scope-1569763893138694167.json"],
+    "unchanged": ["Discord thread title", "campaigns", "budgets", "credentials", "permissions", "crons", "gateway config", "account operational readiness"]
+  }
+}

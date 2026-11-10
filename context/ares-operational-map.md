@@ -114,6 +114,14 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo e não solicita nova campanha, replay de pedidos antigos ou mudança de campanhas existentes. Preflight/readback Meta continua obrigatório antes de execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Yolokfx Conta 07 G002 Campanhas
+
+- Decisão explícita de Rodolfo Mattei na mensagem `1569764300665524224`, origem Diretoria `1569764300665524224`: a thread `1569763893138694167`, pai `1548149300826079333` (rota G002), fica dedicada à gestão de campanhas da conta `Yolokfx-US-SHEIN-EN-07-G002`, ID literal `1492168699397108`, gestor G002. Nome da conta informado por Rodolfo; não tratar como nome live confirmado pela Meta.
+- Discord consultado por ID: título manual atual `🎯Yolokfx Conta 07 Criar Camp`, pai confirmado `1548149300826079333`; preservar esse título e o histórico, sem renomear em follow-ups. O vínculo é pelo ID da thread, não pelo título; não confundir com a conta 01 G002 nem transportar seus parâmetros, fontes ou estado.
+- Escopo de conta aceito pelo checker corporativo (`allowed=true`, BM Digital Trust `155263197283282`). Isso não comprova onboarding, acesso live, Page, pixel, tracking, moeda, timezone ou readiness do executor; resolver e validar essas dependências na operação correspondente, sem herdar configurações da conta 01.
+- Esta declaração registra conta, gestor e destino: não solicita campanha imediata, ativação, budget, cron, permissão, credencial ou migração de rotinas. Cada execução futura exige pedido e gates próprios. O alcance de gestão de campanhas vale somente para esta thread; não altera outras rotas.
+- Evidência Discord: GET da thread e leitura das mensagens `1569763937120026715` (título informado por Rodolfo) e `1569764042715955253` (confirmação anterior do Ares). A nova decisão acima explicita o ID da conta e prevalece sobre a confirmação anterior sem ID.
+
 ### Escopo exclusivo — Boostingecon Conta 02 G002 Criação
 
 - Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558125944496066673`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-02-G002` (`2407807766227252` no catálogo SHEIN), gestor Geizian/G002.
