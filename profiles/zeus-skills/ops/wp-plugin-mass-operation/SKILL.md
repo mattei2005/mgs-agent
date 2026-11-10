@@ -32,6 +32,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Menu mobile JBF abre vazio apesar de menu principal existir** → `references/jbf-empty-mobile-drawer-native-widget.md`
 - **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
 - **Auditar SEO/indexação de todos os artigos e corrigir sitemap XML obsoleto em WP Fastest Cache** → `references/article-seo-indexing-sitemap-audit.md`
+- **Auditar sites com plugins/temas desatualizados, sem atualizar** → `references/wordpress-update-readonly-portfolio-audit.md`
 - **Investigar árvores de plugins com versões misturadas** → `references/wordpress-plugin-mixed-version-forensics.md`
 - **Recuperar fatal de `wp-content/db.php`/drop-in no admin** → `references/wordpress-db-dropin-fatal-recovery.md`
 - **Instalar/enforçar WP 2FA em todo o portfólio** → `references/wp2fa-mass-enforcement-rollout.md`
