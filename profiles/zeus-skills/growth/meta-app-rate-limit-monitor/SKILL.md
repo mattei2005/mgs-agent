@@ -52,6 +52,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
+- **Owning BM / Business lookup by API** → `references/app-business-ownership-api.md`
 - **Overview → Headers and Thresholds** → `references/route-pack-01.md`
 - **Detectable Failure Modes → Segurador Sheet Reconciliation** → `references/route-pack-02.md`
 - **Advanced-Access App Without Seguradores as App Admins → Segurador Page Token Monitoring** → `references/route-pack-03.md`

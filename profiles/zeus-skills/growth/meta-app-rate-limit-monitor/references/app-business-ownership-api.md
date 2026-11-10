@@ -1,0 +1,8 @@
+# Read-only app-to-Business ownership verification
+
+1. Resolve the exact active app and immutable 1Password item from the registry. Keep credentials only in process memory; verify app identity with `GET /{app_id}?fields=id,name` and the app access token.
+2. Do not assume SDK-listed Application fields are exposed by the deployed Graph version or token context. If `business` or `owner_business` returns code 100/nonexisting field, stop retrying those field variants and switch to the Business ownership edge. An unsupported field does not establish that the app has no BM.
+3. Read the existing app-admin user token from the same approved item; inspect `debug_token` for validity, app binding and `business_management`. Never rotate credentials or substitute an unrelated account to answer the lookup. A scope/visibility denial is an inconclusive ownership lookup, not proof of no owning Business.
+4. Fully paginate `GET /me/businesses?fields=id,name` with that user token. For each returned Business, fully paginate `GET /{business_id}/owned_apps?fields=id,name` and retain only exact requested app-ID matches. Consume pagination internally; never print `paging.next` or raw token-bearing URLs.
+5. A matching `owned_apps` result is positive evidence of ownership. `client_apps` proves shared/accessed apps, not ownership. If no match is found, qualify the result by the token's visible Business scope rather than declaring global absence.
+6. Return the exact app ID/name and confirmed owning Business ID/name, with the read-only scope. Project every response to these fields before printing or saving it; do not expose unrelated Business assets or credentials.
