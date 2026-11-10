@@ -35,6 +35,32 @@ class MetaAppInvest3DTests(unittest.TestCase):
         cls.generic = load_embedded(GENERIC, 'import importlib.util\n', '\nstate = load_state()')
         cls.b013 = load_embedded(B013, 'import asyncio\n')
 
+    def test_investment_timeout_budget_covers_native_report_and_cleanup(self):
+        import ast
+        self.assertGreater(self.helper.INVEST_REPORT_TOTAL_TIMEOUT_SECONDS, 120)
+        tree = ast.parse(HELPER.read_text())
+        self.assertTrue(any(isinstance(node, ast.Call)
+                            and isinstance(node.func, ast.Attribute)
+                            and node.func.attr == 'wait_for'
+                            and any(keyword.arg == 'timeout'
+                                    and isinstance(keyword.value, ast.Name)
+                                    and keyword.value.id == 'INVEST_REPORT_TOTAL_TIMEOUT_SECONDS'
+                                    for keyword in node.keywords)
+                            for node in ast.walk(tree)))
+        for path, marker, stop in ((GENERIC, 'import importlib.util\n', '\nstate = load_state()'),
+                                   (B013, 'import asyncio\n', None)):
+            text = path.read_text()
+            end = text.index(stop) if stop else text.rindex('\nPY\n')
+            tree = ast.parse(text[text.index(marker):end])
+            loader = next(node for node in tree.body
+                          if isinstance(node, ast.FunctionDef) and node.name == 'load_invest_3d')
+            timeouts = [keyword.value.value for node in ast.walk(loader)
+                        if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+                        and node.func.attr == 'run' for keyword in node.keywords
+                        if keyword.arg == 'timeout' and isinstance(keyword.value, ast.Constant)]
+            self.assertEqual(len(timeouts), 1)
+            self.assertGreaterEqual(timeouts[0], self.helper.INVEST_REPORT_TOTAL_TIMEOUT_SECONDS + 30)
+
     def fixture(self):
         final = date(2026, 9, 4)
         rows = []

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-10T07:30:37-05:00",
+    "updated_at": "2026-11-10T13:26:32.368940+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -63149,6 +63149,41 @@
         "billing_changes": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "meta-app-invest-20261110",
+      "agent": "zeus",
+      "type": "monitor-investment-timeout-recovery",
+      "status": "validated",
+      "updated_at": "2026-11-10T13:26:10.367152+00:00",
+      "source_thread_id": "1569703248317915156",
+      "evidence": "/root/mgs-agent/reports/meta-app-invest-20261110/summary.json",
+      "paths": [
+        "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+        "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+        "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/investment-deadline-validation.md"
+      ],
+      "backup": "/root/mgs-agent/backups/meta-app-invest-20261110",
+      "verification": {
+        "status": "generator_recovered_and_resilience_validated",
+        "source_message_id": "1569703248317915156",
+        "checked_at": "2026-11-10T13:26:10.367152+00:00",
+        "apps_validated": 13,
+        "assignment_rows_validated": 195,
+        "numeric_both_metrics": 153,
+        "source_unmatched_both": 42,
+        "tests_passed": 22,
+        "historical_failure": "two helper timeout failures recorded at 2026-11-10T00:48:48-05:00; current source recovered before patch; historical upstream slowness not reproduced",
+        "change": "helper 45s -> 150s total; both consumers 60s -> 180s",
+        "credentials_changed": false,
+        "app_alerts_forced": false,
+        "pauses_modified": false,
+        "backup": "/root/mgs-agent/backups/meta-app-invest-20261110"
+      },
+      "report_infra_status": "verified",
+      "report_infra_message_id": "1569704727443153090"
     }
   ],
   "profile_skill_references": [

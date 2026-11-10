@@ -9667,13 +9667,15 @@
       "id": "META-APP-INVEST-20261110",
       "agent": "zeus",
       "objective": "Corrigir INVEST HOJE/INVEST 3D n/d nas rotas de apps atuais sem mudar credenciais/pausas",
-      "state": "Investigação: último enriquecimento genérico falhou por timeout em duas tentativas; B013 último recibo válido em 06/11. Helper fonte inspecionado.",
-      "next_step": "Reproduzir leitura real, reparar causa comum, testar ambos consumidores e validar valores/entrega.",
+      "state": "Concluído: deadline corrigido, 22 testes e ambos loaders nativos reais OK; 13 apps e 195 linhas conferidos; 153 com valores, 42 sem correspondência real. Pausas/credenciais intactas. Histórico Discord não reescrito e nenhum alerta forçado.",
+      "next_step": "Novos alertas nativos usarão a coleta corrigida; mensagens antigas permanecem como histórico. Sem escrita ou reenvio pendente autorizado.",
       "thread_id": "1569703248317915156",
       "source_message_id": "1569703248317915156",
-      "updated_at": "2026-11-10T13:21:42.467175+00:00"
+      "updated_at": "2026-11-10T13:26:32.368940+00:00",
+      "source": "reports/meta-app-invest-20261110/summary.json",
+      "status": "completed"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T13:21:42.467175+00:00"
+  "updated_at": "2026-11-10T13:26:32.368940+00:00"
 }

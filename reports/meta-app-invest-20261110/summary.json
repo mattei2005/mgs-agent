@@ -1,0 +1,16 @@
+{
+  "status": "generator_recovered_and_resilience_validated",
+  "source_message_id": "1569703248317915156",
+  "checked_at": "2026-11-10T13:26:10.367152+00:00",
+  "apps_validated": 13,
+  "assignment_rows_validated": 195,
+  "numeric_both_metrics": 153,
+  "source_unmatched_both": 42,
+  "tests_passed": 22,
+  "historical_failure": "two helper timeout failures recorded at 2026-11-10T00:48:48-05:00; current source recovered before patch; historical upstream slowness not reproduced",
+  "change": "helper 45s -> 150s total; both consumers 60s -> 180s",
+  "credentials_changed": false,
+  "app_alerts_forced": false,
+  "pauses_modified": false,
+  "backup": "/root/mgs-agent/backups/meta-app-invest-20261110"
+}

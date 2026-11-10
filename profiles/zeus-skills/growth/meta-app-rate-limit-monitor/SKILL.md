@@ -58,6 +58,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **B013 coverage audit and misleading addition alerts** → `references/b013-confirmed-link-transitions.md`
 - **Fleet recheck → real-alert delivery → complete split-table readback** → `references/route-pack-05.md`, section `Fleet recheck and real-alert delivery`
 - **Live delivery sizing, contended locks and per-destination recovery** → `references/live-alert-execution.md`
+- **Investment timeout budgets and native-loader validation** → `references/investment-deadline-validation.md`
 - **Production Cron Implementation** → `references/route-pack-05.md`
 - **References → Verification Checklist** → `references/route-pack-06.md`
 
