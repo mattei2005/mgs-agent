@@ -1,0 +1,308 @@
+#!/usr/bin/env python3
+"""Yolo/Mavroa creation workbook: Meta GET-only; exact existing Sheet only."""
+from __future__ import annotations
+import argparse, calendar, copy, fcntl, importlib.util, json, os, subprocess, sys, time
+from collections import Counter
+from datetime import datetime, date, timedelta
+from pathlib import Path
+from urllib import request, parse, error
+from zoneinfo import ZoneInfo
+BASE=Path('/root/mgs-agent'); HOME=Path('/root/.hermes/profiles/ares')
+POLICY=BASE/'data/ares/meta-ads/policies/campaign-creation-sheet.json'
+STATE=BASE/'data/ares/meta-ads/state/campaign-creation-sheet'
+NY=ZoneInfo('America/New_York')
+
+def module(name,path):
+ s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s);sys.modules[name]=m;s.loader.exec_module(m);return m
+
+def load(p):return json.loads(Path(p).read_text())
+def save(p,v):
+ p=Path(p);p.parent.mkdir(parents=True,exist_ok=True,mode=0o700);tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps(v,ensure_ascii=False,indent=2));tmp.chmod(0o600);os.replace(tmp,p)
+def now():return datetime.now(NY)
+def config():
+ p=load(POLICY)
+ assert p['enabled'] and p['authorization_message_id']=='1569491241303801868'
+ assert p['spreadsheet_id']=='1U6t0uBCRnGyu7sS0D0pH2T-LjIqaNGuj4vR03AsfHfs'
+ assert p['brands']==['Yolokfx','Mavroa'] and p['meta_writes'] is False and p['permissions_writes'] is False
+ return p
+
+def selection(p):
+ accounts=[a for a in load(BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json')['accounts'] if a['name'].split('-')[0] in p['brands']]
+ assert len(accounts)==len({a['account_id'] for a in accounts})==12
+ assert Counter((a['manager_code'],a['name'].split('-')[0]) for a in accounts)==Counter({(m,b):1 for m in p['manager_codes'] for b in p['brands']})
+ for b in p['brands']:
+  r=subprocess.run([sys.executable,str(BASE/'scripts/mgs-domain-scope.py'),'check','--agent','ares',b.lower()+'.com'],capture_output=True,text=True,timeout=20);assert r.returncode==0,'DOMAIN_SCOPE'
+ for a in accounts:
+  r=subprocess.run([sys.executable,str(BASE/'scripts/mgs-ares-asset-scope.py'),'check-account',a['account_id'],'--json'],capture_output=True,text=True,timeout=20);assert r.returncode==0 and json.loads(r.stdout)['allowed'],'ACCOUNT_SCOPE'
+ return sorted(accounts,key=lambda a:(a['manager_code'],a['name']))
+
+class Google:
+ def __init__(self,p):
+  self.p=p;self.fid=p['spreadsheet_id'];d=module('creation_sheet_drive',BASE/'scripts/ares-drive-upload-manual-inventory.py');d.load_env();sa=d.extract_service_account(d.get_op_item_json())
+  assert (sa['type'],sa['client_email'],sa['project_id'])==('service_account','mgsagent@mgs-core-prod.iam.gserviceaccount.com','mgs-core-prod'),'SA_IDENTITY'
+  d.SCOPES='https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets';self.token=d.get_access_token(sa)
+ def rpc(self,method,path,payload=None,params=None,drive=False):
+  url=('https://www.googleapis.com/drive/v3/' if drive else 'https://sheets.googleapis.com/v4/spreadsheets/'+self.fid)+path
+  if params:url+='?'+parse.urlencode(params,doseq=True)
+  data=json.dumps(payload,ensure_ascii=False).encode() if payload is not None else None
+  # No blind mutation retry. Next run reconciles exact same IDs and values.
+  req=request.Request(url,data=data,headers={'Authorization':'Bearer '+self.token,'Content-Type':'application/json'},method=method)
+  try:
+   with request.urlopen(req,timeout=90) as r:return json.load(r)
+  except error.HTTPError as e:
+   raw=e.read()
+   try:message=json.loads(raw)['error']['message'][:350]
+   except Exception:message='provider_error'
+   raise RuntimeError('GOOGLE_HTTP_'+str(e.code)+':'+message) from None
+ def binding(self):
+  m=self.rpc('GET','files/'+self.fid,params={'supportsAllDrives':'true','fields':'id,name,driveId,parents,owners(emailAddress),capabilities,trashed'},drive=True)
+  b=self.p['storage_binding'];assert m['id']==self.fid and not m['trashed'] and m['capabilities']['canEdit'] and m['capabilities']['canModifyContent'],'SHEET_CAPABILITIES'
+  # This exact report was authoritatively moved by same ID to corporate 30TB.
+  receipt=load(BASE/b['canonical_source'])['objects'][self.fid]
+  assert receipt['metadata_after']['id']==self.fid and receipt['metadata_after']['parents']==[b['parent_id']],'BINDING_RECEIPT'
+  assert m.get('driveId') is None and m['parents']==[b['parent_id']] and any(o['emailAddress']==b['owner_email'] for o in m['owners']),'LIVE_STORAGE_BINDING'
+  parent=self.rpc('GET','files/'+b['parent_id'],params={'fields':'id,name,trashed,owners(emailAddress),capabilities','supportsAllDrives':'true'},drive=True)
+  assert parent['id']==b['parent_id'] and parent['name']=='MGS-CORPORATIVO' and not parent['trashed'],'CORPORATE_PARENT'
+  perms=self.rpc('GET','files/'+self.fid+'/permissions',params={'supportsAllDrives':'true','fields':'permissions(id,type,role,emailAddress),nextPageToken','pageSize':100},drive=True)
+  assert not perms.get('nextPageToken') and all(x['type']=='user' for x in perms['permissions']),'UNEXPECTED_PUBLIC_ACCESS'
+  assert any(x.get('emailAddress')=='mattei2005@gmail.com' and x['role'] in ['writer','owner','organizer'] for x in perms['permissions'])
+  assert any(x.get('emailAddress')=='geizianpereira@gmail.com' and x['role'] in ['writer','owner','organizer'] for x in perms['permissions'])
+  return {'metadata':m,'parent':parent,'permissions':perms}
+ def book(self):return self.rpc('GET','')
+ def batch(self,requests):return self.rpc('POST',':batchUpdate',{'requests':requests})
+ def values(self,ranges):return self.rpc('GET','/values:batchGet',params={'ranges':ranges,'valueRenderOption':'UNFORMATTED_VALUE','dateTimeRenderOption':'SERIAL_NUMBER'})
+
+
+def snapshot_to_days(snapshot,p,accounts):
+ selected={a['account_id']:a for a in accounts};rows=[a for a in snapshot['accounts'] if a['account_id'] in selected]
+ assert len(rows)==12 and all(a['complete'] and a['identity_verified'] for a in rows),'INCOMPLETE_NO_SHEET_WRITE'
+ start=datetime.fromisoformat(snapshot['start']).astimezone(NY);cutoff=datetime.fromisoformat(snapshot['cutoff']).astimezone(NY)
+ endday=cutoff.date();result={};seen=set()
+ for a in rows:
+  src=selected[a['account_id']];assert a['manager_code']==src['manager_code'] and a['name']==src['name'],'SNAPSHOT_IDENTITY'
+  counts=Counter()
+  for c in a['campaigns']:
+   assert c['id'] not in seen and c['account_id']==a['account_id'],'DUPLICATE_CAMPAIGN';seen.add(c['id'])
+   t=datetime.fromisoformat(c['created_time']).astimezone(NY)
+   assert start<=t<=cutoff;counts[t.date().isoformat()]+=1
+  d=start.date()
+  while d<=endday:
+   key=d.isoformat();r=result.setdefault(key,{'date':key,'closed':d<now().date(),'cutoff':cutoff.isoformat(),'observed_at':snapshot.get('completed_at',now().isoformat()),'cells':{}})
+   r['cells'][src['name'].split('-')[0]+'|'+src['manager_code']]=counts[key];d+=timedelta(days=1)
+ assert all(len(v['cells'])==12 for v in result.values())
+ return result
+
+def merge_days(prior,new):
+ result=copy.deepcopy(prior)
+ for day,row in new.items():
+  old=result.get(day)
+  if old and (old['closed'] and not row['closed'] or old['cutoff']>row['cutoff']):continue
+  result[day]=row
+ return result
+
+def month_list(first,last):
+ d=date.fromisoformat(first+'-01');end=date(last.year,last.month,1);out=[]
+ while d<=end:
+  out.append(d.strftime('%Y-%m'));d=date(d.year+int(d.month==12),d.month%12+1,1)
+ return out
+
+def models(days,p,accounts):
+ last=max(date.fromisoformat(k) for k in days);names={a['manager_code']:a['manager_name'] for a in accounts};out=[]
+ for month in month_list(p['first_month'],last):
+  year,mo=map(int,month.split('-'));ndays=calendar.monthrange(year,mo)[1];dates=[date(year,mo,d).isoformat() for d in range(1,ndays+1)]
+  available=[d for d in dates if d in days];assert available and available==dates[:len(available)],'MISSING_DAY_NO_WRITE'
+  latest=days[available[-1]];closed=all(days[d]['closed'] for d in available) and len(available)==ndays
+  monthlabel={10:'OUTUBRO',11:'NOVEMBRO'}.get(mo,calendar.month_name[mo].upper())
+  status=('MÊS FECHADO' if closed else 'MÊS EM ANDAMENTO')+' | '+('último dia fechado '+available[-1] if latest['closed'] else 'dia '+available[-1]+' PARCIAL')
+  observed=max(days[d]['observed_at'] for d in available)
+  note=('Meta created_time / Eastern. Histórico já verificado preservado até 28/10 16h25; complemento posterior por IDs únicos. ' if month=='2026-10' else 'Meta created_time / Eastern. Contagem por IDs únicos preservados após cada verificação. ')+ 'Inclui clones. Gestor = responsável pela conta. API não garante objetos removidos antes da coleta.'
+  titles={b:('Yolo' if b=='Yolokfx' else b)+' — '+('OUT' if mo==10 else 'NOV' if mo==11 else f'{mo:02}')+' '+str(year) for b in p['brands']}
+  detail={}
+  for b in p['brands']:
+   rows=[[b.upper(),'CAMPANHAS CRIADAS | '+monthlabel+' '+str(year)],['Período',dates[0]+' a '+available[-1]],['Estado',status],['Verificado',observed+' | corte '+latest['cutoff']],['Critério',note],['Gestor']+[date.fromisoformat(d).strftime('%d/%m') for d in dates]+['TOTAL']]
+   for code in p['manager_codes']:
+    vals=[days[d]['cells'][b+'|'+code] if d in days else '' for d in dates];rows.append([names[code]]+vals+[sum(v for v in vals if isinstance(v,int))])
+   total=['TOTAL']+[sum(days[d]['cells'][b+'|'+c] for c in p['manager_codes']) if d in days else '' for d in dates];total+=[sum(r[-1] for r in rows[6:12])];rows.append(total)
+   detail[b]=rows;out.append({'title':titles[b],'kind':'detail','brand':b,'month':month,'rows':rows,'width':ndays+2,'color': {'red':0.15,'green':0.39,'blue':0.78} if b=='Yolokfx' else {'red':0.04,'green':0.4,'blue':0.38}})
+  rows=[['RESUMO',monthlabel+' '+str(year)+' | YOLO + MAVROA'],['Período',dates[0]+' a '+available[-1]],['Estado',status],['Verificado',observed+' | corte '+latest['cutoff']],['Critério',note],['Gestor','Yolo','Mavroa','TOTAL','Participação']]
+  total=sum(detail[b][-1][-1] for b in p['brands'])
+  for i,code in enumerate(p['manager_codes']):
+   y,m=(detail[b][i+6][-1] for b in p['brands']);rows.append([names[code],y,m,y+m,(y+m)/total if total else 0])
+  rows.append(['TOTAL',detail['Yolokfx'][-1][-1],detail['Mavroa'][-1][-1],total,1 if total else 0]);rows.extend([[],['Data','Yolo','Mavroa','TOTAL','Fechamento']])
+  for d in dates:
+   if d not in days:rows.append([d,'','','','FUTURO — não consolidado']);continue
+   y,m=(sum(days[d]['cells'][b+'|'+c] for c in p['manager_codes']) for b in p['brands']);rows.append([d,y,m,y+m,'FECHADO' if days[d]['closed'] else 'PARCIAL'])
+  out.append({'title':'Resumo '+('OUT' if mo==10 else 'NOV' if mo==11 else str(mo))+' '+str(year),'kind':'summary','month':month,'rows':rows,'width':5,'color':{'red':0.35,'green':0.24,'blue':0.65}})
+ return out
+
+
+def grid(sid,r0,r1,c0,c1):return {'sheetId':sid,'startRowIndex':r0,'endRowIndex':r1,'startColumnIndex':c0,'endColumnIndex':c1}
+def chart_spec(sid,title,col,color,position):
+ return {'spec':{'title':title,'basicChart':{'chartType':'BAR','legendPosition':'NO_LEGEND','headerCount':0,'domains':[{'domain':{'sourceRange':{'sources':[grid(sid,6,12,0,1)]}}}],'series':[{'series':{'sourceRange':{'sources':[grid(sid,6,12,col,col+1)]}},'targetAxis':'BOTTOM_AXIS','color':color}]}},'position':{'overlayPosition':{'anchorCell':{'sheetId':sid,'rowIndex':position,'columnIndex':0},'widthPixels':690,'heightPixels':330}}}
+
+def sync(g,model,root):
+ before=g.book();save(root/'book-before.json',before);byid={s['properties']['sheetId']:s for s in before['sheets']};bytitle={s['properties']['title']:s for s in before['sheets']};requests=[];mapping={}
+ # Keep original October sheet IDs and their audit lineage.
+ for idx,m in enumerate(model):
+  existing=bytitle.get(m['title'])
+  if not existing and m['month']=='2026-10' and m['kind']=='detail':existing=byid.get(0 if m['brand']=='Yolokfx' else 101)
+  sid=existing['properties']['sheetId'] if existing else 20261000+idx
+  assert sid not in mapping.values(),'SHEET_ID_COLLISION';mapping[m['title']]=sid
+  props={'sheetId':sid,'title':m['title'],'index':idx,'gridProperties':{'rowCount':max(70,len(m['rows'])+25),'columnCount':max(m['width'],12),'frozenRowCount':6,'frozenColumnCount':1,'hideGridlines':True},'tabColorStyle':{'rgbColor':m['color']}}
+  if existing:
+   requests.append({'updateSheetProperties':{'properties':props,'fields':'title,index,gridProperties,tabColorStyle'}})
+   for merge in existing.get('merges',[]):requests.append({'unmergeCells':{'range':dict(merge,sheetId=sid)}})
+   for i in reversed(range(len(existing.get('conditionalFormats',[])))):requests.append({'deleteConditionalFormatRule':{'sheetId':sid,'index':i}})
+   for band in existing.get('bandedRanges',[]):requests.append({'deleteBanding':{'bandedRangeId':band['bandedRangeId']}})
+  else:
+   assert sid not in byid,'FIXED_ID_ALREADY_USED';requests.append({'addSheet':{'properties':props}})
+  w=m['width'];height=len(m['rows']);white={'red':1,'green':1,'blue':1};navy={'red':0.08,'green':0.13,'blue':0.24}
+  # Clear only the managed numeric/text grid; charts and prior IDs are retained.
+  requests.append({'updateCells':{'range':grid(sid,0,70,0,max(w,12)),'fields':'userEnteredValue'}})
+  data=[]
+  for row in m['rows']:
+   cells=[]
+   for v in row:
+    cells.append({'userEnteredValue':{'numberValue':v} if isinstance(v,(int,float)) else {'stringValue':v}})
+   data.append({'values':cells})
+  requests.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':0},'rows':data,'fields':'userEnteredValue'}})
+  requests.append({'repeatCell':{'range':grid(sid,0,70,0,max(w,12)),'cell':{'userEnteredFormat':{'textFormat':{'fontFamily':'Arial','fontSize':10},'verticalAlignment':'MIDDLE','numberFormat':{'type':'NUMBER','pattern':'0'}}},'fields':'userEnteredFormat'}})
+  for r in range(5):requests.append({'mergeCells':{'range':grid(sid,r,r+1,1,w),'mergeType':'MERGE_ALL'}})
+  for r in [0,5,12]:
+   requests.append({'repeatCell':{'range':grid(sid,r,r+1,0,w),'cell':{'userEnteredFormat':{'backgroundColor':navy if r!=12 else m['color'],'textFormat':{'bold':True,'foregroundColor':white,'fontSize':11},'wrapStrategy':'WRAP'}},'fields':'userEnteredFormat.backgroundColor,userEnteredFormat.textFormat,userEnteredFormat.wrapStrategy'}})
+  requests.append({'repeatCell':{'range':grid(sid,1,5,0,w),'cell':{'userEnteredFormat':{'backgroundColor':{'red':0.94,'green':0.96,'blue':0.99},'wrapStrategy':'WRAP'}},'fields':'userEnteredFormat.backgroundColor,userEnteredFormat.wrapStrategy'}})
+  requests.append({'repeatCell':{'range':grid(sid,5,13,1,w),'cell':{'userEnteredFormat':{'horizontalAlignment':'CENTER'}},'fields':'userEnteredFormat.horizontalAlignment'}})
+  requests.append({'addBanding':{'bandedRange':{'range':grid(sid,6,12,0,w),'rowProperties':{'firstBandColor':white,'secondBandColor':{'red':0.95,'green':0.97,'blue':0.99}}}}})
+  requests.append({'setBasicFilter':{'filter':{'range':grid(sid,5,12,0,w)}}})
+  requests.append({'updateBorders':{'range':grid(sid,5,13,0,w),'innerHorizontal':{'style':'SOLID','color':{'red':0.8,'green':0.85,'blue':0.9}},'innerVertical':{'style':'SOLID','color':{'red':0.8,'green':0.85,'blue':0.9}}}})
+  requests.extend([{'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':0,'endIndex':1},'properties':{'pixelSize':140},'fields':'pixelSize'}},{'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':1,'endIndex':w},'properties':{'pixelSize':78 if m['kind']=='detail' else 155},'fields':'pixelSize'}},{'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'ROWS','startIndex':0,'endIndex':height},'properties':{'pixelSize':30},'fields':'pixelSize'}}])
+  requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'ROWS','startIndex':3,'endIndex':5},'properties':{'pixelSize':60},'fields':'pixelSize'}})
+  if m['kind']=='detail':requests.append({'addConditionalFormatRule':{'index':0,'rule':{'ranges':[grid(sid,6,12,1,w-1)],'gradientRule':{'minpoint':{'color':white,'type':'NUMBER','value':'0'},'maxpoint':{'color':{'red':0.36,'green':0.69,'blue':0.94},'type':'MAX'}}}}})
+  else:
+   requests.append({'repeatCell':{'range':grid(sid,6,13,4,5),'cell':{'userEnteredFormat':{'numberFormat':{'type':'PERCENT','pattern':'0.0%'}}},'fields':'userEnteredFormat.numberFormat'}})
+   requests.append({'repeatCell':{'range':grid(sid,14,15,0,5),'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white}}},'fields':'userEnteredFormat.backgroundColor,userEnteredFormat.textFormat'}})
+  spec=chart_spec(sid,'Campanhas criadas por gestor',w-1 if m['kind']=='detail' else 3,m['color'],17 if m['kind']=='detail' else height+2)
+  charts=existing.get('charts',[]) if existing else []
+  if charts:
+   requests.append({'updateChartSpec':{'chartId':charts[0]['chartId'],'spec':spec['spec']}})
+   requests.append({'updateEmbeddedObjectPosition':{'objectId':charts[0]['chartId'],'newPosition':spec['position'],'fields':'anchorCell,widthPixels,heightPixels'}})
+  else:requests.append({'addChart':{'chart':spec}})
+ requests.insert(0,{'updateSpreadsheetProperties':{'properties':{'title':'SHEIN | Campanhas criadas — Yolo e Mavroa | Consolidado mensal','timeZone':'America/New_York'},'fields':'title,timeZone'}})
+ save(root/'write-intent.json',{'spreadsheet_id':g.fid,'mapping':mapping,'models':model,'request_count':len(requests),'authority':g.p['authorization_message_id']})
+ g.batch(requests)
+ book=g.book();ranges=["'"+m['title']+"'!A1:"+colname(m['width'])+str(len(m['rows'])) for m in model];values=g.values(ranges)
+ assert len(values['valueRanges'])==len(model)
+ cell_count=0
+ for m,remote in zip(model,values['valueRanges']):
+  actual=remote.get('values',[])
+  for ri,row in enumerate(m['rows']):
+   for ci,v in enumerate(row):
+    got=actual[ri][ci] if ri<len(actual) and ci<len(actual[ri]) else ''
+    assert got==v or isinstance(v,float) and isinstance(got,(float,int)) and abs(got-v)<1e-10,('CELL_READBACK',m['title'],ri,ci,v,got)
+    cell_count+=1
+  sheet=next(s for s in book['sheets'] if s['properties']['sheetId']==mapping[m['title']]);gp=sheet['properties']['gridProperties']
+  assert gp['frozenRowCount']==6 and gp['frozenColumnCount']==1 and sheet['basicFilter']['range']['endColumnIndex']==m['width']
+  assert sheet.get('charts') and len(sheet.get('bandedRanges',[]))==1
+  assert all(x.get('startColumnIndex',0)>=1 for x in sheet['merges'])
+ save(root/'readback.json',{'book':book,'values':values,'cell_count':cell_count,'verified_at':now().isoformat(),'status':'GET_VERIFIED'})
+ return {'tabs':len(model),'verified_cells':cell_count,'monthly_totals':{m['month']:m['rows'][12][3] for m in model if m['kind']=='summary'},'url':book['spreadsheetUrl']}
+
+def colname(n):
+ s=''
+ while n:n,r=divmod(n-1,26);s=chr(65+r)+s
+ return s
+
+def preserve_history(snapshot,days,accounts,ledger):
+ # The original verified counts have an exact timestamp but not campaign IDs.
+ # Partition by that timestamp: baseline <= timestamp, unique-ID ledger > timestamp.
+ # Never sum two overlapping count snapshots or infer IDs for deleted objects.
+ baseline=load(BASE/'data/ares/meta-ads/audit/sheets-campaign-counts-1565101536021971057/source-summary.json')
+ boundary=datetime.fromisoformat(baseline['cutoff']).astimezone(NY)
+ selected={a['account_id']:a for a in accounts};current=copy.deepcopy(ledger)
+ for a in snapshot['accounts']:
+  if a['account_id'] not in selected:continue
+  for c in a['campaigns']:
+   old=current.get(c['id'])
+   assert old is None or (old['account_id'],old['created_time'])==(c['account_id'],c['created_time']),'LEDGER_ID_DRIFT'
+   current[c['id']]={k:c[k] for k in ['id','account_id','created_time']}
+ counts=Counter()
+ for c in current.values():
+  a=selected[c['account_id']];at=datetime.fromisoformat(c['created_time']).astimezone(NY)
+  counts[(at.date().isoformat(),a['name'].split('-')[0],a['manager_code'])]+=1
+ post=Counter()
+ for c in current.values():
+  at=datetime.fromisoformat(c['created_time']).astimezone(NY)
+  if at<=boundary:continue
+  a=selected[c['account_id']];post[(at.date().isoformat(),a['name'].split('-')[0],a['manager_code'])]+=1
+ for day,row in days.items():
+  for a in accounts:
+   brand=a['name'].split('-')[0];code=a['manager_code'];key=brand+'|'+code
+   original=baseline['sites'][brand]['daily'].get(day)
+   if original is not None:
+    row['cells'][key]=original[code]+(post[(day,brand,code)] if day==boundary.date().isoformat() else 0)
+    row['historical_baseline']=baseline['cutoff']
+   else:row['cells'][key]=counts[(day,brand,code)]
+ return days,current
+
+def write_from_snapshot(snapshot,root,accounts,p):
+ dayspath=STATE/'days.json';prior=load(dayspath) if dayspath.exists() else {};days=merge_days(prior,snapshot_to_days(snapshot,p,accounts))
+ ledgerpath=STATE/'campaign-ledger.json';ledger=load(ledgerpath) if ledgerpath.exists() else {}
+ days,ledger=preserve_history(snapshot,days,accounts,ledger)
+ model=models(days,p,accounts);g=Google(p);binding=g.binding();save(root/'binding.json',binding);result=sync(g,model,root)
+ save(ledgerpath,ledger)
+ assert g.binding()['permissions']==binding['permissions'],'ACL_CHANGED'
+ save(dayspath,days);save(STATE/'last-success.json',dict(result,at=now().isoformat(),run=str(root),cutoff=snapshot['cutoff'],source_start=snapshot['start']))
+ save(root/'result.json',result)
+ failure=STATE/'failure.json'
+ if failure.exists():
+  old=load(failure)
+  if not old.get('resolved_at'):save(failure,dict(old,resolved_at=now().isoformat(),resolved_by_run=str(root)))
+ return result
+
+def refresh_verification(snapshot):
+ p=config();STATE.mkdir(parents=True,exist_ok=True)
+ with (STATE/'writer.lock').open('a+') as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX);accounts=selection(p)
+  # Only publish a partial-day update after the initial historical reconstruction.
+  assert (STATE/'days.json').exists(),'HISTORICAL_INITIALIZATION_REQUIRED'
+  root=STATE/'runs'/('verification-'+now().strftime('%Y%m%dT%H%M%S'));return write_from_snapshot(snapshot,root,accounts,p)
+
+def close_window(at):
+ at=at.astimezone(NY)
+ assert at.hour>0 or at.minute>=13,'BEFORE_PREPARATION_SLOT'
+ gate=at.replace(hour=0,minute=15,second=0,microsecond=0)
+ cutoff=at.replace(hour=0,minute=0,second=0,microsecond=0)-timedelta(microseconds=1)
+ return cutoff,gate
+
+def main(args):
+ p=config();STATE.mkdir(parents=True,exist_ok=True)
+ with (STATE/'writer.lock').open('a+') as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);accounts=selection(p)
+  at=now();cutoff=at
+  if args.scheduled:
+   cutoff,gate=close_window(at)
+  if args.closed_through:
+   d=date.fromisoformat(args.closed_through);assert d<at.date();cutoff=datetime.combine(d+timedelta(days=1),datetime.min.time(),NY)-timedelta(microseconds=1)
+  start=datetime.fromisoformat(p['first_month']+'-01T00:00:00').replace(tzinfo=NY)
+  root=STATE/'runs'/('closed-'+cutoff.date().isoformat() if args.scheduled else 'manual-'+at.strftime('%Y%m%dT%H%M%S'))
+  root.mkdir(parents=True,exist_ok=True)
+  daily=module('creation_sheet_collector',HOME/'scripts/shein-campaign-creation-daily.py');cp=load(daily.POLICY)
+  if args.snapshot:
+   path=Path(args.snapshot).resolve();assert path.is_relative_to(STATE/'runs') and path.name=='snapshot.json','SNAPSHOT_PATH_SCOPE'
+   snapshot=load(path);root=path.parent
+  else:snapshot=daily.Collector(cp,root,accounts,start,cutoff).collect()
+  assert all(a['complete'] for a in snapshot['accounts']),'COLLECTION_INCOMPLETE'
+  if args.collect_only:print(json.dumps({'accounts':len(snapshot['accounts']),'campaigns':sum(len(a['campaigns']) for a in snapshot['accounts']),'snapshot':str(root/'snapshot.json')}));return 0
+  if args.scheduled:
+   wait=(gate-now()).total_seconds()
+   if wait>0:
+    assert wait<=120,'UNEXPECTED_PREPUBLICATION_WAIT'
+    time.sleep(wait)
+   assert now()>=gate,'PUBLICATION_BEFORE_0015'
+  result=write_from_snapshot(snapshot,root,accounts,p);print(json.dumps(result,ensure_ascii=False));return 0
+
+if __name__=='__main__':
+ parser=argparse.ArgumentParser();parser.add_argument('--scheduled',action='store_true');parser.add_argument('--closed-through');parser.add_argument('--snapshot');parser.add_argument('--collect-only',action='store_true');args=parser.parse_args()
+ try:raise SystemExit(main(args))
+ except Exception as e:
+  save(STATE/'failure.json',{'at':now().isoformat(),'error_type':type(e).__name__,'safe_reason':str(e)[:500] if isinstance(e,(AssertionError,RuntimeError)) else 'TECHNICAL_FAILURE','resumable':True});print('CREATION_SHEET_FAILED_RESUMABLE',file=sys.stderr);raise SystemExit(1)

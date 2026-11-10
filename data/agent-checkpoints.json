@@ -793,12 +793,22 @@
     {
       "agent": "ares",
       "id": "ARES-CREATION-SHEET-1569491241303801868",
-      "next_step": "Nenhuma acao humana necessaria. Primeiro fechamento automatico10/11/2026 a partir00h15Eastern de09/11; tickfuturo ainda nao observado. Proximas verificacoes atualizam detalhe+resumo via hook;manter mesmoID/state/agenda.",
-      "objective": "Planilha Yolo/Mavroa outubro e novembro + resumos; fechar D-1 00h15Eastern mantendo envio18h08",
-      "source": "data/ares/meta-ads/reports/creation-sheet-1569491241303801868/inventory.json",
-      "state": "complete_verified: mesmosheet6abas e1495celulas get;outubro990 nov386parcial09/11 18h22est;historico839baseline preservado por corte exato + ledgerids.12contaslive;27testespass;wrapper scheduled e hookliveget;agenda unica00h13:25 preparacao/gate00h15,rootcronativo,casreadback,8datasprepossemcolisao;18h08bytepreservado;acl emeta intactos;skill salva/relida;report-infra1569495573252284457 getembedunico silencioso.",
+      "next_step": "Usar checkpoint sucessor e politica canonica atual;nao restaurar escopo2sites/12contas.",
+      "objective": "Historico: planilha mensal inicial Yolo/Mavroa com resumos e fechamento D-1",
+      "source": "data/ares/meta-ads/reports/creation-sheet-1569716229999173673/inventory.json",
+      "state": "concluido historico e escopo supersedido por ares-creation-sheet-1569716229999173673:mesmo spreadsheet agora6sites/36contas/14abas. primeiro fechamento00h15 de10/11 foi observado get;antiga restricao12contas inativa.",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-11-09T23:35:26+00:00"
+      "updated_at": "2026-11-10T14:18:51+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CREATION-SHEET-1569716229999173673",
+      "next_step": "Fechamento D-1 a partir00h15Eastern e verificacao diaria atualizam os6sites pelo mesmo writer;envio Discord18h08 mantido. Sem pendencia humana.",
+      "objective": "Planilha existente ampliada aos seis sites SHEIN, outubro/novembro e resumos atualizados",
+      "source": "data/ares/meta-ads/reports/creation-sheet-1569716229999173673/inventory.json",
+      "state": "complete_get_verified:36/36contas;14abas,3971celulas,14graficos;outubro1063,novembro428parcial10/11 09h14est;29testespass;hook real reexecutado sem duplicar abas/ids;baseline+ledger historico preservados;acl/cron intactos;skill salva/relida;report-infra1569717924187607041 enviado.",
+      "thread_id": "1565084013763371009",
+      "updated_at": "2026-11-10T14:18:51+00:00"
     },
     {
       "agent": "ares",
@@ -3377,6 +3387,30 @@
       "state": "completed: quatro cutovers ativos; app metadata,/roles,/me,debug_token http 200 e app-bound; sheet 10/15/14/44 e zero predecessores; canários/baselines pass; ciclo genérico agendado 12/12 sem erro; b013 agendado saudável; pausas vazias; crons diurno/noturno enabled+scheduled; knowledge/inventory/report validados.",
       "thread_id": "1552752306058174555",
       "updated_at": "2026-09-24T19:48:28+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-INVEST-20261110",
+      "next_step": "Novos alertas nativos usarão a coleta corrigida; mensagens antigas permanecem como histórico. Sem escrita ou reenvio pendente autorizado.",
+      "objective": "Corrigir INVEST HOJE/INVEST 3D n/d nas rotas de apps atuais sem mudar credenciais/pausas",
+      "source": "reports/meta-app-invest-20261110/summary.json",
+      "source_message_id": "1569703248317915156",
+      "state": "Concluído: deadline corrigido, 22 testes e ambos loaders nativos reais OK; 13 apps e 195 linhas conferidos; 153 com valores, 42 sem correspondência real. Pausas/credenciais intactas. Histórico Discord não reescrito e nenhum alerta forçado.",
+      "status": "completed",
+      "thread_id": "1569703248317915156",
+      "updated_at": "2026-11-10T13:26:32.368940+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-LIVE-1569708982673870910",
+      "next_step": "Nenhum reenvio pendente. Restrição B011 permanece contida, sem reativação.",
+      "objective": "Enviar um alerta nativo real e novo nos 13 canais de apps; B011 restrito requer aviso diagnóstico, sem reativar sua rota",
+      "source": "/root/mgs-agent/reports/meta-app-live-1569708982673870910/closure.json",
+      "source_message_id": "1569708982673870910",
+      "state": "Concluído e lido de volta: 13/13 canais. Doze alertas live com investimento válido; B011 aviso nativo após restrição Meta confirmada novamente. B013 incluiu todas as continuações e contagem conferida. Pausa canônica preservada.",
+      "status": "completed",
+      "thread_id": "1569703248317915156",
+      "updated_at": "2026-11-10T14:01:03.556363+00:00"
     },
     {
       "agent": "zeus",
@@ -9662,32 +9696,8 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
-    },
-    {
-      "id": "META-APP-INVEST-20261110",
-      "agent": "zeus",
-      "objective": "Corrigir INVEST HOJE/INVEST 3D n/d nas rotas de apps atuais sem mudar credenciais/pausas",
-      "state": "Concluído: deadline corrigido, 22 testes e ambos loaders nativos reais OK; 13 apps e 195 linhas conferidos; 153 com valores, 42 sem correspondência real. Pausas/credenciais intactas. Histórico Discord não reescrito e nenhum alerta forçado.",
-      "next_step": "Novos alertas nativos usarão a coleta corrigida; mensagens antigas permanecem como histórico. Sem escrita ou reenvio pendente autorizado.",
-      "thread_id": "1569703248317915156",
-      "source_message_id": "1569703248317915156",
-      "updated_at": "2026-11-10T13:26:32.368940+00:00",
-      "source": "reports/meta-app-invest-20261110/summary.json",
-      "status": "completed"
-    },
-    {
-      "id": "META-APP-LIVE-1569708982673870910",
-      "agent": "zeus",
-      "objective": "Enviar um alerta nativo real e novo nos 13 canais de apps; B011 restrito requer aviso diagnóstico, sem reativar sua rota",
-      "state": "Concluído e lido de volta: 13/13 canais. Doze alertas live com investimento válido; B011 aviso nativo após restrição Meta confirmada novamente. B013 incluiu todas as continuações e contagem conferida. Pausa canônica preservada.",
-      "next_step": "Nenhum reenvio pendente. Restrição B011 permanece contida, sem reativação.",
-      "source_message_id": "1569708982673870910",
-      "thread_id": "1569703248317915156",
-      "source": "/root/mgs-agent/reports/meta-app-live-1569708982673870910/closure.json",
-      "updated_at": "2026-11-10T14:01:03.556363+00:00",
-      "status": "completed"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T14:01:03.556363+00:00"
+  "updated_at": "2026-11-10T14:18:51+00:00"
 }

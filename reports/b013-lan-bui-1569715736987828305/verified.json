@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-11-10T09:17:40-05:00",
+  "expected_app": "B013-7",
+  "target": {
+    "row": 94,
+    "sheet_x": "X",
+    "user": "disparosfinanceadxmx@gmail.com",
+    "segurador": "Lan Bui",
+    "profile_id": "100054992677299",
+    "pages": "9",
+    "invest_profile_names": [
+      "Lan Bui"
+    ]
+  },
+  "result": {
+    "segurador": "Lan Bui",
+    "user": "disparosfinanceadxmx@gmail.com",
+    "profile_id": "100054992677299",
+    "row": 94,
+    "checked_at": "2026-11-10T09:17:38-05:00",
+    "switch_status": 200,
+    "active_label": "Lan Bui",
+    "verdict": "unlinked_confirmed",
+    "link_status": "not_linked_or_invalid",
+    "pages_visible": 9,
+    "debug_status": 200,
+    "debug_app_id": null,
+    "debug_application": null,
+    "debug_is_valid": false,
+    "accounts_status": null,
+    "graph_pages": null,
+    "connected_pages": null
+  },
+  "debug": [
+    {
+      "status": 200,
+      "is_valid": false,
+      "app_id": null,
+      "application": null,
+      "expires_at": null,
+      "data_access_expires_at": null,
+      "error_code": null,
+      "error_subcode": null,
+      "error_class": null,
+      "token_me": {
+        "status": 400,
+        "name": null,
+        "error_code": 190,
+        "error_subcode": null,
+        "error_class": "other"
+      }
+    }
+  ],
+  "sync": {
+    "updated": false,
+    "reason": "no_positive_B013_link_evidence"
+  },
+  "sheet_after": "X",
+  "canonical_state_modified": false,
+  "alerts_forced": false
+}
