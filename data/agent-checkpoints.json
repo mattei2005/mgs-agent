@@ -9716,8 +9716,26 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
+    },
+    {
+      "id": "B013-DELIVERY-AUDIT-1569737162293911624",
+      "agent": "zeus",
+      "objective": "Verificar entrega/erros de Drip e Broadcast nos seguradores/páginas B013-7 e identificar restrição da BM dona sem enviar testes ou alterar produção",
+      "state": "BM Restricted confirmada após autenticação do titular; Advanced Access pages_messaging concedido. Broadcast: 103 perfis, 1180 chaves user/page conferidas. Drip: fonte nativa de relatório 24h validada; coleta assíncrona por coorte em andamento, reaproveitando usuário concluído.",
+      "next_step": "Consumir proc_e89498fea2cb, validar 103 perfis/1180 páginas na mesma coorte e qualificar contadores de aceite/entrega; concluir com readback e limitações exatas.",
+      "thread_id": "1569703248317915156",
+      "source_message_id": "1569737162293911624",
+      "auth_resume_message_id": "1569742613656117371",
+      "source": "/root/mgs-agent/reports/b013-delivery-audit-1569737162293911624/checkpoint.json",
+      "process_owner": {
+        "session_id": "proc_e89498fea2cb",
+        "pid": 3222613,
+        "lock": "/var/lock/b013-dtr-link-watch.lock"
+      },
+      "status": "running",
+      "updated_at": "2026-11-10T17:02:37.261039+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T16:43:37+00:00"
+  "updated_at": "2026-11-10T17:02:37.261039+00:00"
 }

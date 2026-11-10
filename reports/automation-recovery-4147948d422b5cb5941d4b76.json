@@ -1,0 +1,49 @@
+{
+  "operation": "4147948d422b5cb5941d4b76",
+  "mode": "resume_safe",
+  "state": "recovery_and_delivery_validated_awaiting_independent_supervisor",
+  "owner": "supervisor:3216512",
+  "worker_pid": 3216705,
+  "source_alert_id": "1569757570787311648",
+  "authority": {"message_id": "1569193434189668453", "author_id": "344196393512075265", "get_http": 200},
+  "origin_receipt": {
+    "human_message_id": "1569737162293911624",
+    "thread_id": "1569703248317915156",
+    "author_id": "344196393512075265",
+    "get_http": 200,
+    "session_id": "20261110_082019_725a5785",
+    "scope": "Read-only B013 message-delivery and BM-restriction audit; remains owned by original session, not replayed here"
+  },
+  "problem": "Auto-commit sensitive-path guard correctly rejected local app-webhook-readback.json and blocked the entire batch before commit/push",
+  "correction": "Exact anchored .gitignore exclusion for one local receipt; no sensitive allowlist or watcher changes",
+  "paths": [".gitignore", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py"],
+  "receipt_path": "reports/b013-delivery-audit-1569737162293911624/app-webhook-readback.json",
+  "receipt_sha256": "1a210805580fcd386db0affcbb3da4bb8b55e040cb6d4a72649311f2ca37b48d",
+  "validation": {
+    "tests_passed": 39,
+    "fixture_real_watcher_preserves_receipt_and_commits_normal_file": true,
+    "fixture_sibling_credentials_still_blocked": true,
+    "native_commit": "93fc6dd4651e238e904e052208b6939e1d27c124",
+    "native_push_remote_main_equals_head": true,
+    "monitor_dry_run_total_failures": 0,
+    "watcher_main_pid": 1578368,
+    "watcher_nrestarts": 0,
+    "manual_commit_or_push": false,
+    "credentials_changed": false,
+    "cron_changed": false
+  },
+  "delivery": {
+    "canonical_monitor_message_id": "1569759113477623892",
+    "canonical_monitor_get_http": 200,
+    "report_infra_message_id": "1569759281660829809",
+    "report_infra_get_http": 200,
+    "content_empty": true,
+    "mentions": 0
+  },
+  "monitor_consecutive_failures": 0,
+  "receipt_hash_preserved": true,
+  "audit_recorded": true,
+  "inventory_record_id": "autopush-b013-local-receipt-1569757570787311648",
+  "next_step": "Independent supervisor must re-read canonical monitor, HEAD/GitHub and GET-verified deliveries before closing existing queue row; no business stage replay",
+  "rollback": "Remove only the exact new .gitignore line and its three isolated regression tests; receipt bytes never moved or removed"
+}

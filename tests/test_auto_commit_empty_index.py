@@ -145,6 +145,32 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def b013_subscription_receipt(self):
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        base = self.repo / "reports/b013-delivery-audit-1569737162293911624"
+        base.mkdir(parents=True)
+        receipt = base / "app-webhook-readback.json"
+        receipt.write_text('{"synthetic_fixture":true}\n')
+        return receipt
+
+    def test_b013_receipt_preserved_while_normal_file_commits(self):
+        receipt = self.b013_subscription_receipt()
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        before = receipt.read_bytes()
+        (self.repo / "normal.txt").write_text("valid")
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()),
+                         {".gitignore", "normal.txt"})
+        self.assertEqual(receipt.read_bytes(), before)
+        self.assertEqual(self.git("ls-files", "--", str(receipt)), "")
+
+    def test_b013_receipt_exclusion_keeps_sibling_credentials_blocked(self):
+        receipt = self.b013_subscription_receipt()
+        (receipt.parent / "credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def fleet_audit_receipts(self):
         (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
         base = self.repo / "reports/fleet-token-1568297168245362822"

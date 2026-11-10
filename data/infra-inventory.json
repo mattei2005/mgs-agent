@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-10T11:37:17-05:00",
+    "updated_at": "2026-11-10T17:02:37.261039+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -892,6 +892,41 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "autopush-b013-local-receipt-1569757570787311648",
+      "actor": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "operation": "4147948d422b5cb5941d4b76",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1569757570787311648",
+      "origin_thread_id": "1569703248317915156",
+      "origin_human_message_id": "1569737162293911624",
+      "origin_session_id": "20261110_082019_725a5785",
+      "cause": "Local subscription readback filename matched sensitive webhook guard; full batch aborted before commit/push",
+      "correction": "One exact anchored .gitignore rule; preserve local receipt bytes, sibling guards and original audit executor",
+      "paths": [
+        ".gitignore",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py"
+      ],
+      "checkpoint": "reports/automation-recovery-4147948d422b5cb5941d4b76.json",
+      "state": "recovery_and_delivery_validated_awaiting_independent_supervisor",
+      "recovery_delivery_id": "1569759113477623892",
+      "recovery_delivery_get_http": 200,
+      "report_infra_message_id": "1569759281660829809",
+      "report_infra_get_http": 200,
+      "tests_passed": 39,
+      "native_commit": "93fc6dd4651e238e904e052208b6939e1d27c124",
+      "remote_main_equals_head": true,
+      "monitor_dry_run_failures": 0,
+      "monitor_consecutive_failures": 0,
+      "watcher_main_pid": 1578368,
+      "watcher_nrestarts": 0,
+      "manual_commit_or_push": false,
+      "cron_changed": false,
+      "credentials_changed": false,
+      "rollback": "Remove only the exact local receipt ignore rule and its isolated regression tests; no receipt deletion or move"
+    },
     {
       "agent": "zeus",
       "id": "LP-YOLO-SHEIN-1569741897080115311",
@@ -63292,6 +63327,24 @@
         "billing_changes": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "b013-delivery-audit-1569737162293911624",
+      "agent": "zeus",
+      "type": "read_only_incident_diagnosis",
+      "status": "running_under_canonical_monitor_lock",
+      "source_thread_id": "1569703248317915156",
+      "source_message_id": "1569737162293911624",
+      "updated_at": "2026-11-10T17:02:37.261039+00:00",
+      "evidence": "/root/mgs-agent/reports/b013-delivery-audit-1569737162293911624/checkpoint.json",
+      "process_owner": {
+        "session_id": "proc_e89498fea2cb",
+        "pid": 3222613,
+        "lock": "/var/lock/b013-dtr-link-watch.lock"
+      },
+      "scope": "B013-7 owning BM and frozen 103-profile/1180-user-page delivery report cohort",
+      "changes": "No configuration, credential or customer-send writes; temporary exclusive canonical DTR lock for source reads",
+      "report_infra_status": "pending_final_verified_receipt"
     }
   ],
   "profile_skill_references": [
