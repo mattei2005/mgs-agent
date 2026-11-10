@@ -3191,12 +3191,12 @@
     {
       "agent": "zeus",
       "id": "LP-YOLO-SHEIN-1569741897080115311",
-      "next_step": "Confirmar A apex para 46.4.95.117 com proxy Cloudflare e SSL Full strict; confirmar credenciais exclusivas novas guardadas no 1Password. RunCloud API HTTP429 Retry-After96289: respeitar cooldown; avaliar painel existente como alternativa, sem alterar limite ou credenciais. SSH origem validado, sem escrita remota.",
-      "objective": "Publicar V1/V2/V3 G001-G006 em lp-yolo.com com painel dedicado e CTAs para REC Yolokfx; preservar site original",
-      "source": "discord:1569723577178001430#1569741897080115311",
-      "state": "preflight_validated_awaiting_exact_dns_and_new_credentials_confirmation",
+      "next_step": "Validar SSH destino e painel RunCloud; criar apenas app lp-yolo; DNS A162.55.28.178 proxy; SSL strict; novos acessos proprios 1Password; publicar matriz completa e QA. Origem46.4.95.117 somente leitura. API RunCloud cooldown96289s respeitado; usar painel como alternativa.",
+      "objective": "Publicar V1/V2/V3 G001-G006 em lp-yolo.com no MatteiInc01 162.55.28.178 com painel dedicado; preservar Yolokfx e CTAs REC",
+      "source": "discord:1569723577178001430#1569743502701494457",
+      "state": "executing_authorized_server_change_to_matteiinc01",
       "thread_id": "1569723577178001430",
-      "updated_at": "2026-11-10T15:56:11+00:00"
+      "updated_at": "2026-11-10T16:01:06+00:00"
     },
     {
       "agent": "zeus",
@@ -9719,5 +9719,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T15:56:11+00:00"
+  "updated_at": "2026-11-10T16:01:06+00:00"
 }
