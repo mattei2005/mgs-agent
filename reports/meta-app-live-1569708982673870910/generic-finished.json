@@ -1,0 +1,111 @@
+{
+  "label": "generic",
+  "finished_at": "2026-11-10T13:47:04.388692+00:00",
+  "exit_code": 0,
+  "state_updated_at": "2026-11-10T08:47:04-05:00",
+  "summary": {
+    "items": [
+      "BOT B001-5 Token - Debora Monteiro Lima",
+      "BOT B002-5 Token - Afonso Araujo",
+      "BOT B003-3 Token - Dhidin Distro",
+      "BOT B004-11 Token - Milla Fernandes",
+      "BOT B005-4 Token - Taina Rocha Silveira",
+      "BOT B006-10 Token - Anre Kameza",
+      "BOT B007-4 Token - Siti Uwiyah",
+      "BOT B008-3 Token - Refi Aldiyansyah",
+      "BOT B009-7 Token - Davi Andrade",
+      "BOT B010-3 Token - Huy Phạm",
+      "BOT B011-10 Token - Eliana Moura Burgos",
+      "BOT B012-2 Token - Bình Hòa Trần"
+    ],
+    "processed_items": [
+      "BOT B001-5 Token - Debora Monteiro Lima",
+      "BOT B002-5 Token - Afonso Araujo",
+      "BOT B003-3 Token - Dhidin Distro",
+      "BOT B004-11 Token - Milla Fernandes",
+      "BOT B005-4 Token - Taina Rocha Silveira",
+      "BOT B006-10 Token - Anre Kameza",
+      "BOT B007-4 Token - Siti Uwiyah",
+      "BOT B008-3 Token - Refi Aldiyansyah",
+      "BOT B009-7 Token - Davi Andrade",
+      "BOT B010-3 Token - Huy Phạm",
+      "BOT B012-2 Token - Bình Hòa Trần"
+    ],
+    "alerts_sent": 11,
+    "errors_count": 0,
+    "dry_run": false,
+    "force_snapshot_requested": false,
+    "force_snapshot_effective": false,
+    "snapshot_blocked": false,
+    "force_live_alert": true,
+    "force_recovery_notice": false,
+    "active_alert_pause": {
+      "apps": [
+        "B011-10"
+      ],
+      "monitor_apps": [
+        "B011-10"
+      ],
+      "mode": "manual",
+      "manual": true,
+      "until": null,
+      "expired": false,
+      "invalid": false,
+      "reason": "Rotas pausadas automaticamente após restrição confirmada pelo monitor Meta."
+    },
+    "restriction_auto_pause": {
+      "candidates": [],
+      "changed": false,
+      "apps": [
+        "B011-10"
+      ],
+      "monitor_apps": [
+        "B011-10"
+      ]
+    },
+    "suppressed_alert_deliveries": 0,
+    "sheet_removed_sync": {
+      "enabled": true,
+      "rows": 220,
+      "checked_intent_rows": 88,
+      "present": 42,
+      "marked": 60,
+      "marked_missing_current_meta": 9,
+      "marked_cumulative_removed": 37,
+      "unknown_app_rows": 4,
+      "identity_blocked_rows": 0,
+      "blank_intent_rows": 19,
+      "ignored_verification_rows": 6,
+      "unmatched_removed": 1,
+      "checked_at": "2026-11-10T08:46:46-05:00",
+      "updated": true,
+      "updated_range": "'Migracao 22/06'!A2:A221"
+    },
+    "invest_3d": {
+      "status": "INVEST_3D_OK",
+      "current_date": "2026-11-10",
+      "current_day_partial": true,
+      "period_start": "2026-11-07",
+      "period_end": "2026-11-09",
+      "days": 3,
+      "error": null
+    }
+  },
+  "last_invest_3d": {
+    "status": "INVEST_3D_OK",
+    "current_date": "2026-11-10",
+    "current_day_partial": true,
+    "period_start": "2026-11-07",
+    "period_end": "2026-11-09",
+    "days": 3,
+    "error": null,
+    "checked_at": "2026-11-10T08:47:04-05:00",
+    "attempts": [
+      {
+        "attempt": 1,
+        "checked_at": "2026-11-10T08:46:52-05:00",
+        "status": "ok"
+      }
+    ]
+  }
+}

@@ -9674,8 +9674,20 @@
       "updated_at": "2026-11-10T13:26:32.368940+00:00",
       "source": "reports/meta-app-invest-20261110/summary.json",
       "status": "completed"
+    },
+    {
+      "id": "META-APP-LIVE-1569708982673870910",
+      "agent": "zeus",
+      "objective": "Enviar um alerta nativo real e novo nos 13 canais de apps; B011 restrito requer aviso diagnóstico, sem reativar sua rota",
+      "state": "Coorte e baselines congelados; execução única com locks canônicos e leitores reais.",
+      "next_step": "Concluir rotas genéricas e B013 e conferir cada família entregue.",
+      "source_message_id": "1569708982673870910",
+      "thread_id": "1569703248317915156",
+      "source": "/root/mgs-agent/reports/meta-app-live-1569708982673870910/request.json",
+      "updated_at": "2026-11-10T13:45:19.081171+00:00",
+      "status": "running"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T13:26:32.368940+00:00"
+  "updated_at": "2026-11-10T13:45:19.081190+00:00"
 }
