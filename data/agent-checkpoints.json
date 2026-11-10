@@ -8949,6 +8949,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1569727042789052517",
+      "next_step": "Nenhum write adicional; entregar confirmacao nativa e bloco Iris com tracking validado.",
+      "objective": "Duplicar C049 duas vezes na Mavroa-US-SHEIN-ES-04-G004; USD100/dia por copia; COST_CAP USD0.80; inicio imediato.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569727042789052517/completion-receipt.json",
+      "state": "complete; c050 e c051 active; 2 campanhas, 2 conjuntos e 4 anuncios; usd100/dia cada, usd200/dia lote; cost_cap usd0.80; qa e readback integrais; ids preservados na retomada sem replay; posts novos.",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-10T14:58:58+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -9699,5 +9709,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T14:24:43+00:00"
+  "updated_at": "2026-11-10T14:58:58+00:00"
 }
