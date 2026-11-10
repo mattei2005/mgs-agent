@@ -1503,12 +1503,12 @@
     {
       "agent": "ares",
       "id": "ARES-IRIS-UTMS-1569553893958885459",
-      "next_step": "Coletar contas/campanhas, ler tracking final, validar domínios e consolidar mensagem copiável",
+      "next_step": "Entregar os três blocos copiáveis nesta thread e ressalva de cobertura. Cobertura das demais contas depende de grant corporativo autorizado; não trocar token nem alterar permissões automaticamente.",
       "objective": "Listar UTMs reais das campanhas criadas 09/11/2026 ET ou agendadas 10/11/2026 ET, por domínio, para Iris",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/iris-1569553893958885459/collect.py",
-      "state": "consulta read-only iniciada pelo catálogo positivo digital trust; sem writes meta/gam",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/iris-key-values-1569553893958885459/consolidated.json",
+      "state": "coleta encerrada com cobertura parcial: 53 contas consultadas integralmente de 351; outras 298 http403/código200 pela credencial corporativa atual. confirmadas 78 campanhas criadas hoje, 54 também agendadas amanhã; 159 anúncios/creatives lidos. 78 utm_campaign + 78 utm_adgroup únicos em três domínios validados. sem writes meta/gam.",
       "thread_id": "1569552761673089126",
-      "updated_at": "2026-11-10T03:28:47+00:00"
+      "updated_at": "2026-11-10T03:36:40+00:00"
     },
     {
       "agent": "ares",
@@ -9665,5 +9665,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T03:28:47+00:00"
+  "updated_at": "2026-11-10T03:36:40+00:00"
 }
