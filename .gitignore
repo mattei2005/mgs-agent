@@ -154,3 +154,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 /reports/fleet-token-1568297168245362822/results.jsonl
 /reports/fleet-token-1568297168245362822/summary.json
 
+# Local B013 delivery-audit subscription readback: preserve the exact receipt
+# without publishing it or weakening the sensitive-path guard. Siblings stay tracked.
+/reports/b013-delivery-audit-1569737162293911624/app-webhook-readback.json
+

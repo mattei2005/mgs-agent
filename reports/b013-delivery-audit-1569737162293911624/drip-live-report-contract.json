@@ -1,0 +1,85 @@
+{
+  "path": "/messenger_bot_enhancers/sequence_message_campaign/5469/1/fb",
+  "tables": [
+    {
+      "id": "mytable",
+      "headers": [
+        "Sl",
+        "Name",
+        "Last sent",
+        "Drip type",
+        "Engagement campaign",
+        "Actions"
+      ],
+      "row_count": 1
+    },
+    {
+      "id": "",
+      "headers": [
+        "TAG",
+        "DESCRIPTION",
+        "ALLOWED",
+        "DISALLOWED (NON-EXHAUSTIVE)"
+      ],
+      "row_count": 5
+    },
+    {
+      "id": "",
+      "headers": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "row_count": 5
+    },
+    {
+      "id": "",
+      "headers": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "row_count": 5
+    }
+  ],
+  "dt": [
+    {
+      "id": "mytable",
+      "info": {
+        "page": 0,
+        "pages": 1,
+        "start": 0,
+        "end": 1,
+        "length": 10,
+        "recordsTotal": 1,
+        "recordsDisplay": 1,
+        "serverSide": false
+      },
+      "ajax": null
+    }
+  ],
+  "requests": [
+    {
+      "path": "/messenger_bot_enhancers/get_campaign_report",
+      "form": {
+        "campaign_id": [
+          "7139"
+        ],
+        "is_day": [
+          "0"
+        ],
+        "media_type": [
+          "fb"
+        ]
+      }
+    }
+  ]
+}

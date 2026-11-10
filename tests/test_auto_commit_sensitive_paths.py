@@ -314,6 +314,30 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_local_b013_subscription_receipt_exclusion(self):
+        base = "reports/b013-delivery-audit-1569737162293911624/"
+        ignored = [base + "app-webhook-readback.json"]
+        included = [
+            base + "drip-progress.json",
+            base + "other-webhook.json",
+            base + "credentials.json",
+            base + "app-webhook-readback.json.other",
+            "reports/b013-delivery-audit-other/app-webhook-readback.json",
+            "work/" + base + "app-webhook-readback.json",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.
