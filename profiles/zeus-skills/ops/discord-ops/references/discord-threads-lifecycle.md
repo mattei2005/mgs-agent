@@ -11,6 +11,19 @@ Referência validada em conversa com Rodolfo — 2026-05-14.
 | **Arquivada** | Após X horas de inatividade, some da lista mas permanece no histórico |
 | **Deletada** | NÃO ocorre automaticamente — permanece indefinidamente a menos que deletada via API/manualmente |
 
+## Encerramento explícito com histórico preservado
+
+Use quando um participante autorizado pedir para finalizar a thread atual; não rode o arquivador em lote de threads antigas para atender a um único alvo.
+
+1. Leia `GET /channels/{thread_id}` e `GET /channels/{thread_id}/messages/{request_message_id}`. Confira autor real, `parent_id`, guild e escopo vigente; o nome de exibição não substitui identidade.
+2. Use o transporte canônico do perfil responsável. Se a ferramenta disponível não expuser arquivamento, reutilize o carregador de credencial e os headers do helper `/root/mgs-agent/scripts/discord-bot-post.py` para chamadas REST em memória; não imprima token nem amplie permissões.
+3. Envie `POST /channels/{thread_id}/messages` com confirmação breve, `allowed_mentions: {"parse": []}` e referência à mensagem do pedido. Leia `GET /channels/{thread_id}/messages/{sent_message_id}` e confira o conteúdo exato. Evite afirmar que já está arquivada antes do PATCH.
+4. Faça `PATCH /channels/{thread_id}` com apenas `{"archived": true}`. Preserve título, `locked`, membros e duração de autoarchive.
+5. Faça `GET /channels/{thread_id}` e exija `thread_metadata.archived == true`. Se houver erro ou timeout, releia o alvo antes de repetir a escrita; não reenvie automaticamente a confirmação já entregue.
+6. Termine sem outra mensagem pública: uma resposta automática posterior pode reabrir a thread. Se o transporte exigir uma resposta final, resolva essa entrega antes do arquivamento; não declare o estado final com base em um GET anterior a uma nova publicação.
+
+Arquivar preserva o histórico. Não use DELETE nem bloqueio de thread como substitutos de encerramento.
+
 ## Auto-archive time configurável
 
 - 1 hora, 24 horas (padrão MGS), 3 dias, 1 semana

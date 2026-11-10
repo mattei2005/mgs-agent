@@ -16,6 +16,15 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
+## Finalizar uma thread a pedido
+
+1. Validar remetente, thread e canal pai contra a autoridade vigente; tratar o pedido de finalizar a conversa como arquivamento, não exclusão, bloqueio ou mudança nos servidores.
+2. Publicar uma única confirmação curta de encerramento, sem mentions, e conferir a mensagem pelo ID exato antes de arquivar.
+3. Arquivar somente a thread solicitada e consultar novamente seu `thread_metadata.archived`; sucesso no envio da mensagem não comprova arquivamento.
+4. Não publicar uma segunda resposta após o readback: uma nova mensagem pode reabrir a thread e invalidar o estado acabado de verificar. Planejar a entrega final antes do PATCH, sem adicionar `locked=true` para contornar esse problema.
+
+Receita de REST e verificação: `references/discord-threads-lifecycle.md`, seção **Encerramento explícito com histórico preservado**.
+
 ## Exclusão de canais obsoletos
 
 Resolva o ID e confirme a finalidade pelo histórico e pelos consumidores atuais antes de recomendar exclusão. Obtenha a confirmação crítica do alvo e da perda de histórico; se Rodolfo dispensar explicitamente o backup nessa confirmação, respeite a dispensa somente para esse alvo, registre-a e execute sem exportação nem nova rodada de aprovação. Não transforme a dispensa pontual em política geral sem backup. Preserve o canal sucessor e não altere permissões, rotas ou reinicie gateways sem dependência comprovada. Receita de inventário, DELETE e readback: `references/route-pack-09.md`, seção **Exclusão de canal redundante**.
