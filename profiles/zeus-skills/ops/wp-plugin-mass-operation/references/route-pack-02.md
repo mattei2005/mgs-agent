@@ -4,6 +4,8 @@
 
 - Use o User-Agent canônico `mgs-agent-runcloud-inventory/1.0` em coletores API. Diante de HTTP403 no transporte genérico, compare a mesma chamadaGET com esse transporte antes de atribuir a falha ao token ou solicitar nova permissão; um200 com a mesma credencial prova que não é necessário rotacioná-la. Reduza erros aos status/códigos, sem expor objeto webapp, pull keys ou headers de autenticação.
 - Leia `meta.pagination.total_pages`/`meta.lastPage` e o total declarado, quando presente. Não encerre a enumeração só porque `len(data)` é menor que o `perPage` pedido: o provedor pode aplicar outra paginação. Ausência de hostname só é conclusão após todas as páginas e os domínios dos apps candidatos serem reconciliados.
+- Capture HTTP status e `Retry-After` já na primeira resposta 429, sem imprimir headers de autenticação. Suspenda novas consultas API durante o cooldown indicado, inclusive em outros servidores, pois a limitação pode ser compartilhada pela conta; um loop por servidor pode consumir o mesmo limite. Preserve resultados parciais por alvo em vez de deixar uma exceção de `executor.map` descartar as leituras concluídas.
+- Para continuar o diagnóstico durante o cooldown, use o inventário apenas como localizador e valide o alvo pelo SSH existente com `wp option get home` e leituras WP-CLI específicas. Esse caminho comprova a instalação e suas configurações, não a criação de webapp, DNS ou SSL pelo painel; qualquer rota de provisionamento alternativa precisa de validação própria antes de ser prometida.
 
 
 > **Guard de frescor:** o dicionário histórico abaixo não representa o portfólio RunCloud completo atual. Antes de concluir que um domínio não está hospedado ou antes de operar um site ausente da lista, descubra os webapps no servidor em modo read-only e confirme cada alvo com `wp option get home`. Não edite o inventário histórico apenas por suposição.
@@ -263,7 +265,7 @@ Nunca registrar ou repetir senha de login/application password nesta skill. Reso
 
 2. **Plugin instalado mas inativo** — WP-CLI retorna `'X' is not a registered wp command` se plugin está instalado mas inativo. Sempre rodar `plugin install SLUG --activate` (o `--activate` é ignorado se já estiver ativo, mas ativa se estiver inativo).
 
-3. **Subprocess Python não acessa 1Password** — `subprocess.run(['op', 'item', 'get', ...])` retorna vazio/erro porque o subprocess não herda o token de serviço do ambiente. Usar sempre `terminal('op item get ...')` do hermes_tools.
+3. **Ambiente do 1Password em subprocessos** — prefira o wrapper canônico `mgs-op-with-service-account.sh`; nos fluxos legados que carregam `.env`, use `set -a; source /root/mgs-agent/.env; set +a` antes de iniciar Python para exportar o ambiente aos subprocessos `op`. Resolva o segredo em memória e imprima somente status/projeções não sensíveis. Uma falha de herança de ambiente não demonstra que Python não pode executar `op` nem exige outra credencial.
 
 4. **Warning "Permission denied" em mu-plugins** — alguns sites (lyzmo.com) mostram warning de permissão ao rodar WP-CLI. Não bloqueia a operação — ignorar.
 

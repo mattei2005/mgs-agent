@@ -68,6 +68,14 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Em deploy de upgrade, chamar `MGS_Direct_Quiz::sync_static_pages()` e validar no HTML público o marker `MGS Direct Quiz static`, versão, dois CTAs, zero formulário/input, zero `wp-includes`/tema e assets HTTPS.
 - O browser deve provar largura mobile, execução do JavaScript e clique real; HTML estático sem CSS/JS pode parecer aprovado em checks de texto, mas falha no produto.
 
+## Preflight de domínio exclusivo para quizzes
+
+1. Separar **domínio de entrada** e **REC de destino**. Um domínio exclusivo para quizzes pode encaminhar os CTAs ao REC do site original; não copiar artigos, mudar `home` do WordPress original ou retirar suas rotas por inferência.
+2. Conferir separadamente a zona exata na conta Cloudflare indicada, seu status, os registros A/AAAA/CNAME existentes e a delegação NS pública. Zona `active` e nameservers corretos não significam que exista um registro apontando para a hospedagem. Depois que Rodolfo informar que cadastrou o domínio, refazer a consulta exata em vez de reutilizar uma ausência anterior.
+3. Resolver servidor e webroot pelo inventário e validar a instalação por `sudo -u <owner> wp --path=<webroot> option get home`; ler a versão do plugin e a option `mgs_direct_quiz_landings` em modo somente leitura. Usar a projeção de IDs, slugs, modelos, gestores e `active`, não um dump de banco ou credenciais.
+4. Confrontar a matriz solicitada de modelos × gestores com as configurações da origem. Uma variante inativa na origem não cancela o pedido de publicá-la no domínio novo; registrar a diferença e preservar o status original. Não tratar simples cópia dos HTMLs existentes como entrega completa quando o pedido inclui painel de edição e todas as variantes.
+5. Antes das escritas sujeitas a confirmação, apresentar numa única mensagem o diff DNS/SSL obtido do estado real e as operações sensíveis concretas ainda necessárias. Reutilizar as confirmações já dadas sobre domínio, modelos, gestores e REC; não reabrir essas decisões. Distinguir preflight concluído de hospedagem criada e páginas publicadas, pois leitura SSH e zona ativa não comprovam provisionamento.
+
 ## Implantação segura
 
 1. Confirmar domínio, webroot, rota livre e artigo de destino HTTP 200.
@@ -101,6 +109,7 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 2. Resolver os domínios em `context/acquisition.md` e confirmar o destino no `href` dos CTAs da landing pública; não montar o slug apenas por analogia com outro site. Deduplicar destinos por domínio antes de contar.
 3. Fazer GET de cada destino, seguindo redirects, e conferir URL efetiva e conteúdo SHEIN. Entregar bullets curtos com nome do site e URL limpa, sem acrescentar UTMs de campanha. Se houver destinos diferentes entre configurações, explicitar a diferença em vez de escolher um silenciosamente.
 4. Delimitar a evidência: HTTP 200 comprova disponibilidade, não equivalência visual/editorial nem funcionamento de CTAs. Pedidos para conferir o “padrão do Yolo” exigem a comparação de REC abaixo, não repetir o teste de status.
+5. Quando o pedido mencionar explicitamente **quizzes**, entregar as entradas `/quiz/.../`, agrupadas por site e modelo, não os RECs. Se usar um gestor como referência, identificá-lo no início e limitar a validação às URLs realmente conferidas; links G002 não comprovam publicação para G001–G006. Não sugerir trocar apenas o sufixo como garantia de rota ativa sem ler a configuração correspondente.
 
 ## Inventário operacional e mudança de nicho
 
@@ -113,6 +122,7 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 ## Preflight e validadores sem falso negativo
 
 - Antes de confirmar quantas versões existem para todos os gestores, ler as configurações live com `slug`, modelo e `active`; configuração existente não significa rota publicada. A skill/checkpoint pode preceder expansões posteriores, portanto não afirmar ausência a partir desses registros.
+- Em inventário somente leitura, a ausência do comentário `MGS Direct Quiz static` não prova indisponibilidade. Conferir status, URL efetiva, título, assets `mgs-direct-quiz` e REC dos CTAs para distinguir uma landing legada funcional de uma home/404 devolvida com HTTP 200. Em implantação nova, continuar exigindo o contrato estático e o marker da versão aprovada; não alterar produção só para satisfazer um detector de inventário.
 - Para `country=us`, o campo de configuração `language=en` renderiza `<html lang="en-US">` e `es` renderiza `es-US`; fora de US, o template usa os códigos curtos `en/es`. Validar o atributo real e o conteúdo visível, sem exigir que o HTML seja igual ao código curto da option.
 - Se o transporte padrão de urllib devolver 403, comparar uma única vez com curl e User-Agent normal ou com Chromium real antes de atribuir WAF/IP/credencial. Um 200 nessa comparação é falha do transporte inicial; não alterar regras Cloudflare ou produção para fazer o validador passar.
 - Para a marca, o `custom_logo` pode ser apenas um recorte minúsculo. Ler o attachment, `post_parent` e metadados, e procurar o original em alta resolução na Biblioteca antes de ampliar/recolorir a miniatura. Preservar original e criar derivado separado quando a versão branca não for legível no card.

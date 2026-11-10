@@ -3190,6 +3190,16 @@
     },
     {
       "agent": "zeus",
+      "id": "LP-YOLO-SHEIN-1569741897080115311",
+      "next_step": "Confirmar A apex para 46.4.95.117 com proxy Cloudflare e SSL Full strict; confirmar credenciais exclusivas novas guardadas no 1Password. RunCloud API HTTP429 Retry-After96289: respeitar cooldown; avaliar painel existente como alternativa, sem alterar limite ou credenciais. SSH origem validado, sem escrita remota.",
+      "objective": "Publicar V1/V2/V3 G001-G006 em lp-yolo.com com painel dedicado e CTAs para REC Yolokfx; preservar site original",
+      "source": "discord:1569723577178001430#1569741897080115311",
+      "state": "preflight_validated_awaiting_exact_dns_and_new_credentials_confirmation",
+      "thread_id": "1569723577178001430",
+      "updated_at": "2026-11-10T15:56:11+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B001-4 por B001-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
@@ -9709,5 +9719,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T14:58:58+00:00"
+  "updated_at": "2026-11-10T15:56:11+00:00"
 }
