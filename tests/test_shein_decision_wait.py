@@ -72,6 +72,16 @@ class DecisionWaitTests(unittest.TestCase):
         self.assertEqual(before, [p.read_bytes() for p in [self.spath, self.inv, self.lease, self.cp]])
         self.assertFalse(q.terminal(self.state))
 
+    def test_unmaterialized_source_media_does_not_block_explicit_selection(self):
+        self.state['source'] = {'ads':[{'creative':{'object_story_spec':{'link_data':{'image_hash':'new-hash'}}}}]}
+        self.seal()
+        self.assertEqual(self.deps(), [])
+
+    def test_real_campaign_inventory_binding_is_not_ignored(self):
+        self.state['source'] = {'image_hash':'new-hash'}; self.seal()
+        self.rows[0]['meta_campaign_id']='C1'; self.write_rows()
+        self.assertEqual(self.deps(), [self.owner])
+
     def test_shared_asset_identity_blocks_even_without_reservation(self):
         self.rows[0]['asset_id'] = 'OLD'; self.write_rows()
         self.assertEqual(self.deps(), [self.owner])

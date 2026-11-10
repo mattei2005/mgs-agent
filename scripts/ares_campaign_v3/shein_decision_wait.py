@@ -59,6 +59,28 @@ def _media(value):
     return found
 
 
+def materialized_media(value):
+    """Project final manifest ads, not the unmaterialized source/reference tree.
+
+    Inventory reservations/campaign bindings and fresh live evidence are added
+    independently by inert_for. Never infer disjointness from missing final ads.
+    """
+    campaigns = value.get('manifest', {}).get('campaigns') or []
+    if not campaigns:
+        raise ValueError('historical final manifest media missing')
+    found = set()
+    for campaign in campaigns:
+        ads = campaign.get('ads') or []
+        if not ads:
+            raise ValueError('historical final ad coverage missing')
+        for ad in ads:
+            identities = _media(ad)
+            if not any(kind == 'identity' for kind, _ in identities):
+                raise ValueError('historical final ad media missing')
+            found.update(identities)
+    return found
+
+
 def _unlocked(path):
     # Read-only probe; do not create missing files or unlink another owner's lock.
     with path.open('rb') as handle:
@@ -159,7 +181,7 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(),
         # Engine's persistent lease is checked above; its update lock must be idle too.
         if not _unlocked(_engine_root(base) / 'writer-leases' / (account + '.lock')):
             return False
-        historical = _media(value)
+        historical = materialized_media(value)
         inventory = base / 'data/ares/creative-ops/inventory/assets.jsonl'
         campaign_ids = set(value['engine_result']['campaign_ids'])
         rows = [json.loads(line) for line in inventory.read_text().splitlines() if line.strip()]

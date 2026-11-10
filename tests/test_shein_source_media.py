@@ -179,6 +179,61 @@ class SourceMediaTests(unittest.TestCase):
         self.fixture.state['source']={'ads':[{'source_ad_id':'SHARED-TEMPLATE-NOT-MEDIA'}]};self.fixture.seal()
         self.assertEqual(self.deps(),[])
 
+    def test_real_source010_equals_historical_source_not_final_targets(self):
+        data = json.loads((Path(__file__).parent/'fixtures/shein-historical-source010-media.json').read_text())
+        selected = {tuple(i) for i in data['selected_identities']}
+        previous = data['state']; rows = data['inventory_rows']
+        all_snapshot, _ = sm.expand(dw._media(previous), rows)
+        final, _ = sm.expand(dw.materialized_media(previous), rows)
+        self.assertTrue(all_snapshot & selected)  # reproduces original defect
+        self.assertFalse(final & selected)
+        self.assertIn(('identity','14d415782045ed7591f13abb07472182'), all_snapshot & selected)
+        self.assertEqual(len(previous['manifest']['campaigns']), 9)
+        self.assertEqual(sum(len(c['ads']) for c in previous['manifest']['campaigns']), 18)
+
+    def test_source_snapshot_actual_media_is_not_final_media(self):
+        # Regression: the new pure clone is the old clone_prestaged SOURCE,
+        # not any of its final replacement media. No snapshot is rewritten.
+        self.fixture.state['source'] = copy.deepcopy(self.children)
+        self.fixture.state['target_manifest'] = {'reference_only': {'image_hash':'new-hash'}}
+        self.fixture.seal()
+        before = self.fixture.spath.read_bytes()
+        self.assertEqual(self.deps(), [])
+        self.assertEqual(before, self.fixture.spath.read_bytes())
+
+    def test_source_snapshot_still_blocks_real_reservation(self):
+        self.fixture.state['source'] = copy.deepcopy(self.children); self.fixture.seal()
+        self.fixture.rows[0]['reservation_request_id'] = self.fixture.owner
+        self.fixture.write_rows()
+        self.assertEqual(self.deps(), [self.fixture.owner])
+
+    def test_live_drift_to_unmaterialized_source_media_is_not_pinned(self):
+        self.fixture.state['source'] = copy.deepcopy(self.children); self.fixture.seal()
+        self.old_live['C1']['ads']['data'][0]['creative'] = copy.deepcopy(self.children['ads']['data'][0]['creative'])
+        self.assertEqual(self.deps(), [self.fixture.owner])
+
+    def test_final_media_transitive_alias_still_blocks(self):
+        self.fixture.state['source'] = copy.deepcopy(self.children); self.fixture.seal()
+        self.fixture.rows += [{'asset_id':'BRIDGE','video_id':'old-video','checksum':'bridge'},
+                              {'asset_id':'LAST','clean_checksum':'bridge','image_hash':'new-hash'}]
+        self.fixture.write_rows()
+        # Avoid ambiguous primary inventory mapping; link by checksum instead.
+        self.fixture.rows[-1].pop('image_hash'); self.fixture.rows[0]['clean_checksum']='bridge'
+        self.fixture.write_rows()
+        self.assertEqual(self.deps(), [self.fixture.owner])
+
+    def test_source_only_cannot_replace_missing_final_media(self):
+        self.fixture.state['source'] = copy.deepcopy(self.children)
+        self.fixture.state['manifest']['campaigns'][0]['ads'] = []
+        self.fixture.seal()
+        self.assertEqual(self.deps(), [self.fixture.owner])
+
+    def test_final_manifest_ad_still_conflicts_with_source_snapshot(self):
+        self.fixture.state['source'] = copy.deepcopy(self.children)
+        self.fixture.state['manifest']['campaigns'][0]['ads'][0]['image_hash']='new-hash'
+        self.fixture.seal()
+        self.assertEqual(self.deps(), [self.fixture.owner])
+
     def test_stale_historical_evidence_still_blocks(self):
         self.fixture.spath.write_text('{}');self.assertEqual(self.deps(),[self.fixture.owner])
 

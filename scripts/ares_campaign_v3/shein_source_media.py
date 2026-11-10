@@ -130,7 +130,7 @@ class SourceMediaProof:
 def resolve(request, account_id, base, *, held_accounts=frozenset()):
     """No cached proof is trusted. Missing locks, source or media fail closed."""
     from . import shein_request_queue as q, shein_single_clone as driver
-    from .shein_decision_wait import _media, _engine_root, digest, evidence
+    from .shein_decision_wait import _media, _engine_root, digest, evidence, materialized_media
     account_id = str(account_id)
     if (request.get('mode', 'pure_clone') != 'pure_clone' or request.get('asset_refs')
             or request.get('campaign_groups') or str(request.get('account')) != account_id
@@ -226,7 +226,7 @@ def resolve(request, account_id, base, *, held_accounts=frozenset()):
             expected_ads = {x for b in cp.get('bundles', []) for x in b.get('ad_ids', [])}
             expected_sets = {x for b in cp.get('bundles', []) for x in b.get('adset_ids', [])}
             observed_ads, observed_sets, observed_media = set(), set(), set()
-            pinned_media, _ = expand(_media(previous), rows)
+            pinned_media, _ = expand(materialized_media(previous), rows)
             for historical_id in previous['engine_result']['campaign_ids']:
                 live = driver._readback(common, token, historical_id)
                 if (live['campaign'].get('id') != historical_id

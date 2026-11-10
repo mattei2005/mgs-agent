@@ -893,6 +893,35 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ares-shein-historical-media-projection-t_78f35e03",
+      "agent": "zeus",
+      "task_id": "t_78f35e03",
+      "delivery_task_id": "t_4ac36ea1",
+      "type": "central-final-media-identity-projection",
+      "status": "validated-awaiting-report-readback",
+      "authority": "Ares scoped technical handoff; original Nicolas1569495587005530205, amendment1569505674847854603 and Rodolfo1569530861022355457 freshly GET verified",
+      "account_id": "937846586033361",
+      "request_id": "shein-1569495587005530205",
+      "installed_files": 5,
+      "installed_hashes_manifest": "data/ares/meta-ads/audit/maintenance/t_78f35e03/installation.json",
+      "evidence": "data/ares/meta-ads/audit/maintenance/t_78f35e03/final-readback.json",
+      "handoff": "data/ares/meta-ads/audit/maintenance/t_78f35e03/HANDOFF.md",
+      "backup": "data/ares/meta-ads/audit/maintenance/t_78f35e03/before",
+      "tests_passed": 125,
+      "new_regression_tests": 9,
+      "effective_inputs_readonly_dependencies_empty": 6,
+      "protected_files_hash_equal": 21,
+      "job010_maintenance_hold_preserved": true,
+      "manual_takeover_qa_certified": false,
+      "c3_review_preserved": true,
+      "meta_writes": 0,
+      "drive_writes": 0,
+      "campaign_execute_calls": 0,
+      "operational_thread_posts": 0,
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-request-queue-decision-waits.md",
+      "ares_skill_not_modified": true
+    },
+    {
       "artifacts": [
         "/root/mgs-agent/data/sb-restricted-transition-state.json"
       ],
