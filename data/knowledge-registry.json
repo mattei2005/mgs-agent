@@ -6639,6 +6639,23 @@
       "updated_at": "2026-10-27T16:04:34+00:00"
     },
     {
+      "canonical_key": "content.operations.seo100.1564353146120310928.report",
+      "canonical_source": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/continue-1569768545649434697/final-result.json",
+      "consumers": [
+        "atena"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-11-10T18:00:50+00:00",
+      "id": "ATENA-SEO100-CONTINUATION-REPORT-1569768545649434697",
+      "kind": "source",
+      "owner": "Content Operations / Raquel / Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SEO100:100Yoastcomprovados;91OK,6schema e3sitemap pendentes",
+      "updated_at": "2026-11-10T18:00:50+00:00"
+    },
+    {
       "canonical_key": "content.seo100.continue.1569768545649434697",
       "canonical_source": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/continue-1569768545649434697/authority.json",
       "consumers": [
@@ -6822,10 +6839,10 @@
       "kind": "source",
       "owner": "Content Operations / Raquel / Atena",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO100-CONTINUATION-REPORT-1569768545649434697",
       "title": "SEO100 residual: rotulos49-51 e rodape1 corrigidos,12Yoastpersistidos,3empausa",
-      "updated_at": "2026-11-06T15:10:43+00:00"
+      "updated_at": "2026-11-10T18:00:50+00:00"
     },
     {
       "canonical_key": "content.seo100.1564353146120310928.localized-execution-approval",
@@ -16735,5 +16752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T17:51:49+00:00"
+  "updated_at": "2026-11-10T18:00:50+00:00"
 }
