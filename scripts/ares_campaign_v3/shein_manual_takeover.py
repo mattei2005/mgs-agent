@@ -183,7 +183,7 @@ def capture_live(base, rec, common, token):
                     'status':x['status'],'effective_status':x.get('effective_status'),
                     'issue_codes':sorted({i['error_code'] for i in x.get('issues_info') or [] if i.get('error_code')}),
                     'ad_review_feedback':x.get('ad_review_feedback'),
-                    'primary_media':sorted(primary_media(x['creative']))} for x in sorted(ads,key=lambda x:x['id'])]})
+                    'primary_media':[list(identity) for identity in sorted(primary_media(x['creative']))]} for x in sorted(ads,key=lambda x:x['id'])]})
     return sorted(result, key=lambda c:c['id'])
 
 

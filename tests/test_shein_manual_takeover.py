@@ -95,6 +95,22 @@ class ManualTakeoverTests(unittest.TestCase):
         self.close();before=(m.path(self.base,self.rid).read_bytes(),self.lease.read_bytes())
         self.close();self.assertEqual(before,(m.path(self.base,self.rid).read_bytes(),self.lease.read_bytes()))
 
+    def test_real_capture_json_round_trip_is_idempotent(self):
+        self.capture.stop()
+        raw={}
+        for c in self.campaigns:
+            raw[c['id']+'_campaign']={**c,'account_id':self.account}
+            raw[c['id']+'_adsets']={'data':[{**s,'account_id':self.account,'campaign_id':c['id']} for s in c['adsets']]}
+            raw[c['id']+'_ads']={'data':[{**a,'account_id':self.account,'campaign_id':c['id'],
+                'issues_info':[{'error_code':code} for code in a['issue_codes']],
+                'creative':{'id':a['creative_id'],'object_story_spec':{'video_data':{'video_id':a['primary_media'][0][1]}}}} for a in c['ads']]}
+        with patch.object(driver,'_batch',return_value=raw):
+            captured=m.capture_live(self.base,{'campaign_ids':self.cids},None,None)
+            self.assertEqual(captured,json.loads(json.dumps(captured)))
+            self.close();before=m.path(self.base,self.rid).read_bytes()
+            self.close();self.assertEqual(before,m.path(self.base,self.rid).read_bytes())
+            m.verify_live(self.base,self.rid,None,None)
+
     def test_missing_approval_rejected_before_lease_change(self):
         before=self.lease.read_bytes()
         with self.assertRaises(ValueError):m.reconcile(self.base,self.messages[:1],expected_pins=self.pins,expected_lease_sha256=self.lease_sha)
