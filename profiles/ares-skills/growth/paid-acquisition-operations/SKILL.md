@@ -31,7 +31,7 @@ Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é
 - No resultado técnico, reporte separadamente lineage (`source_ad_id`), identidade do pacote (`creative_id`) e post/prova social (`effective_object_story_id`). Se a conta exigir lineage para serving, explique isso uma vez sem mudar silenciosamente a intenção comercial nem autorizar reutilização de mídia no modo de criativos novos.
 - Trate modelos em revisão como rascunhos: não persista, versione nem chame de final antes da confirmação explícita do operador, porque uma versão intermediária pode ser substituída na mensagem seguinte.
 - Quando o operador pedir alteração somente de uma parte, preserve o restante do texto, sua ordem e compactação; devolva o modelo em cerca `text` sem expandi-lo em um formulário novo.
-- Se vários modelos precisarem ser copiados separadamente no Discord, entregue exatamente um por resposta e avance apenas quando o operador disser `próximo`; durante a coleta, confirme `1/N`, `2/N` etc. e faça a revisão cruzada somente depois do último bloco.
+- Na revisão interativa de modelos que precisam ser copiados separadamente no Discord, entregue exatamente um por resposta e avance apenas quando o operador disser `próximo`; durante a coleta, confirme `1/N`, `2/N` etc. e faça a revisão cruzada somente depois do último bloco. Isso não se aplica à entrega de um inventário ou relatório consolidado já solicitado: nesse caso, entregar todos os blocos por domínio/estratégia, sem criar uma espera por `próximo`.
 
 ## Fechamento de campanhas — mensagem para Iris/AdOps
 
@@ -61,7 +61,9 @@ Formato BOT:
 <um valor real por linha>
 ```
 
-Autoridade: Rodolfo Mattei, confirmação `1569553206055280715`, thread `1569552761673089126`; proposta `1569552761673089126`. Chave canônica: `ares.campaigns.completion.iris-adops-key-values`. Esta regra acrescenta somente o bloco copiável à conclusão nativa já existente; preserva execução, QA, recuperação, gates e demais informações obrigatórias.
+Para pedidos retrospectivos de UTMs por data de criação ou agendamento, usar `meta-ads-account-visualization` → `references/scoped-generic-reporting.md`, seção `Inventário por criação/agendamento e extração de tracking`. A coleta deve separar as janelas e sua sobreposição e declarar cobertura. Diferentemente do fechamento de um pedido ainda em execução, o inventário retrospectivo pode incluir tracking instalado em campanhas pausadas ou anúncios com pendência, quando fizerem parte do recorte pedido; informar o estado sem tratar cadastro como aprovação ou veiculação.
+
+Chave canônica: `ares.campaigns.completion.iris-adops-key-values`. Esta regra acrescenta somente o bloco copiável à conclusão nativa já existente; preserva execução, QA, recuperação, gates e demais informações obrigatórias.
 
 ## Relatórios de campanhas ativas e Estimate Health
 

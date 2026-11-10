@@ -57,6 +57,17 @@ id,name,status,object_type,effective_object_story_id
 5. Derivar `subs` pela ordem definida por Rodolfo e `CPS = spend / subs`.
 6. Responder com resumo executivo em tabela alinhada, sem despejar JSON bruto.
 
+## Inventário de criação, agendamento e UTMs para cadastro
+
+- Para “criadas hoje e agendadas amanhã”, resolver as datas pelo relógio real no fuso do pedido e formar a união dos conjuntos por campaign ID. Informar separadamente criadas, agendadas e sobreposição; uma campanha que pertence aos dois conjuntos não vira duas campanhas.
+- Fazer seleção e cobertura pelo catálogo positivo, resolver a credencial vinculada a cada conta e agrupar leituras por esse vínculo antes de consultar campanhas. Não usar uma credencial de uma família como default silencioso para contas sem binding; catálogo autorizado e grant remoto são provas diferentes.
+- Ler primeiro identidade e campanhas leves em Graph Batch paginado; buscar anúncios e tracking somente das campanhas selecionadas. Reconciliar contas previstas, consultadas integralmente e indisponíveis, além das quantidades de campanhas/anúncios, antes de declarar completude.
+- Extrair os valores do tracking efetivamente instalado, incluindo `url_tags`, links de `object_story_spec` e `asset_feed_spec.link_urls` quando presente; não gerar UTMs pelo nome. Preservar literalmente zeros e sufixos e deduplicar por domínio/chave/estratégia.
+- Em inventário retrospectivo solicitado, não filtrar automaticamente campanhas pausadas ou anúncios rejeitados: valores já instalados podem precisar de cadastro, mas o relatório deve separar existência do tracking de aprovação/veiculação. Isso não autoriza anunciar como concluído um pedido de criação ainda pendente.
+- Entregar todos os blocos de cadastro pedidos, um por domínio/estratégia, sem exigir `próximo`. A regra de um modelo por turno aplica-se à revisão interativa de modelos, não à entrega de um inventário consolidado. Formato canônico: `paid-acquisition-operations/SKILL.md`, seção de mensagem para Iris/AdOps.
+
+Receita de coleta, campos e aceite: `references/scoped-generic-reporting.md`, seção `Inventário por criação/agendamento e extração de tracking`.
+
 ## Métricas canônicas atuais
 
 ### Operações Europa/GDPR
