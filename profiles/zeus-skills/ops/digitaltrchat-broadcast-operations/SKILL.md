@@ -33,6 +33,16 @@ Before any URL-host migration or multi-campaign write, load `references/subscrib
 
 For B011 broadcasts, also load `meta-app-rate-limit-monitor` and its Operational Symptom Monitor route pack before interpreting a DTR/ChatPion send state as delivery evidence. A DTR action can be accepted while a restricted app-owning Business Manager leaves advanced Messenger permissions inactive and Meta rejects OAuth/no delivery. Require the B011 capability monitor to show Graph pages above zero and confirm a delivered canary with Ciro before resuming normal volume after such an incident.
 
+## Delivery and failure audits
+
+For send failures or delivery verification, load `segurador-page-health-monitor` and its **DigitalTRChat Bot Error Audit** route pack first. Reuse the read-only campaign/report transport definitions in `/root/mgs-agent/scripts/dtr-sb-page-health-sync.py`; do not run its `--apply` path for a diagnostic request. Freeze exact current app assignments and composed login × segurador identities, preserve the canonical DTR lock and include marked rows when the requested scope is every assigned profile rather than only operational scheduling.
+
+- Enumerate every Page and classify its latest Completed report; keep no campaign, empty recipient outcome, explicit rejection, Meta-accepted message ID and end-recipient delivery confirmation separate. `Sent : m_...` proves Meta accepted a message, not that the recipient received it. A green connection monitor, app permission status, `Completed`, or a high-level `Delivered` counter is not an end-to-end delivery verdict.
+- Validate the current native XHR parameters and DataTables `aoColumns` mapping against a real UI report before interpreting recipient timestamps. Hidden checkbox columns can shift the raw JSON indexes relative to visible DOM headers. Never report zero delivered from an unknown/unvalidated schema; paginate every recipient batch and reconcile its declared total.
+- Clear the Page filter to its observed generic `Page` option. The report action may use `data-original-title="Campaign report"` after Bootstrap consumes `title`, and responsive DataTables can hide the action cell. Bind the exact campaign's `.sent_report[cam-id]` and invoke only that observed read-only report handler; never select neighboring edit/delete/retry controls.
+- Do not confuse SMS/email `external_sequence_lists` or a GET `create_sequence_campaign` form with Messenger Drip delivery evidence. Resolve the Page's actual Messenger sequence campaign/report surface through Bot manager and its live frame URLs; wait for the selected Page ID, not a stale default Page's iframe. Inspect frame-local UI elements rather than serializing hidden frame bodies, which can include scripts and credential-bearing source.
+- Match report dates to the authentication/app binding being tested. An older accepted send does not prove that a later token cutover or current Drip path works. Preserve recipient privacy: retain counts, error classifications and timestamps, not names/PSIDs or raw credential-bearing HTML.
+
 ## Canonical route
 
 1. Log into `https://digitaltrchat.com/` with the exact 1Password item.
