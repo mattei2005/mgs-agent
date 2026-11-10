@@ -720,7 +720,15 @@
     741121,
     741142,
     741165,
-    741182
+    741182,
+    741483,
+    741500,
+    741524,
+    741544,
+    741565,
+    741585,
+    741607,
+    741626
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1034,6 +1042,37 @@
         727383
       ],
       "opened_at": "2026-10-20T16:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|cliquetfinanzas|75|1300": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-10T12:05:17.000Z",
+        "domain": "cliquetfinanzas",
+        "notification_id": 741544,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 3,
+          "Ready": 1
+        },
+        "pages": 4,
+        "segurador_id": "1300",
+        "segurador_name": "Manoel Maximiano",
+        "source": "page_token",
+        "user_email": "disparoscliquetes@gmail.com",
+        "user_id": "75",
+        "user_name": "Disparos Cliquet US-CC-ES"
+      },
+      "last_sent_at": "2026-11-10T07:12:15-05:00",
+      "message_ids": [
+        "1569686107271069787"
+      ],
+      "notification_ids": [
+        741544
+      ],
+      "opened_at": "2026-11-10T07:12:11-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -1778,6 +1817,39 @@
       "resolved_at": "2026-08-29T01:58:12-04:00",
       "status": "resolved"
     },
+    "digital-trust|financeadx|53|289": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-10T12:05:00.000Z",
+        "domain": "financeadx",
+        "notification_id": 741524,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 11,
+          "Campaign": 1,
+          "On-hold": 4,
+          "Ready": 1
+        },
+        "pages": 17,
+        "segurador_id": "289",
+        "segurador_name": "Ed Michael Sena",
+        "source": "page_token",
+        "user_email": "disparosfinanceadxca@gmail.com",
+        "user_id": "53",
+        "user_name": "Disparos Financeadx CA-CC-EN"
+      },
+      "last_sent_at": "2026-11-10T07:12:15-05:00",
+      "message_ids": [
+        "1569686112392314901"
+      ],
+      "notification_ids": [
+        741524
+      ],
+      "opened_at": "2026-11-10T07:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|financeadx|57|325": {
       "alert": {
         "company": "digital-trust",
@@ -1882,9 +1954,9 @@
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-05T16:08:00.000Z",
+        "created_at": "2026-11-10T12:05:25.000Z",
         "domain": "financeadx",
-        "notification_id": 736652,
+        "notification_id": 741565,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 9
@@ -1905,7 +1977,8 @@
         691974,
         706488,
         735288,
-        736652
+        736652,
+        741565
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2361,9 +2434,9 @@
     "digital-trust|helixenit|89|1716": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-05T20:05:33.000Z",
+        "created_at": "2026-11-10T12:04:35.000Z",
         "domain": "helixenit",
-        "notification_id": 736831,
+        "notification_id": 741483,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 15
@@ -2383,7 +2456,8 @@
       "notification_ids": [
         706471,
         725478,
-        736831
+        736831,
+        741483
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -3213,9 +3287,9 @@
     "digital-trust|newsoun|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-06T12:07:12.000Z",
+        "created_at": "2026-11-10T12:05:44.000Z",
         "domain": "newsoun",
-        "notification_id": 737504,
+        "notification_id": 741607,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -3235,7 +3309,8 @@
         706697,
         734357,
         735828,
-        737504
+        737504,
+        741607
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -3307,9 +3382,9 @@
     "digital-trust|openzedfinanzas|96|1306": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-12T16:05:59.000Z",
+        "created_at": "2026-11-10T12:04:42.000Z",
         "domain": "openzedfinanzas",
-        "notification_id": 712142,
+        "notification_id": 741500,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 17
@@ -3329,7 +3404,8 @@
       "notification_ids": [
         692051,
         708601,
-        712142
+        712142,
+        741500
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -4489,6 +4565,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|zuout|11|326": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-10T12:05:53.000Z",
+        "domain": "zuout",
+        "notification_id": 741626,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 27,
+          "Broadcast": 45,
+          "On-hold": 72,
+          "Ready": 1
+        },
+        "pages": 145,
+        "segurador_id": "326",
+        "segurador_name": "Đoàn Diệu Hồng",
+        "source": "page_token",
+        "user_email": "disparoszuout@gmail.com",
+        "user_id": "11",
+        "user_name": "Disparos Zuout US-CC-EN"
+      },
+      "last_sent_at": "2026-11-10T07:12:15-05:00",
+      "message_ids": [
+        "1569686117752770571"
+      ],
+      "notification_ids": [
+        741626
+      ],
+      "opened_at": "2026-11-10T07:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zuout|11|915": {
       "alert": {
         "company": "digital-trust",
@@ -4750,6 +4859,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|zytiva|17|269": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-10T12:05:40.000Z",
+        "domain": "zytiva",
+        "notification_id": 741585,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "269",
+        "segurador_name": "Rori Ginbresil Ginting",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-11-10T07:12:15-05:00",
+      "message_ids": [
+        "1569686122890797089"
+      ],
+      "notification_ids": [
+        741585
+      ],
+      "opened_at": "2026-11-10T07:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zytiva|17|270": {
       "alert": {
         "company": "digital-trust",
@@ -4951,26 +5093,34 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-10T06:57:09-05:00",
+  "last_check": "2026-11-10T07:12:15-05:00",
   "last_delivery": {
-    "at": "2026-11-10T06:43:56-05:00",
+    "at": "2026-11-10T07:12:15-05:00",
     "cursor_ids": [
-      740995,
-      741015,
-      741034,
-      741055,
-      741076,
-      741099,
-      741121,
-      741142,
-      741165,
-      741182
+      741483,
+      741500,
+      741524,
+      741544,
+      741565,
+      741585,
+      741607,
+      741626
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1569686107271069787",
+      "1569686112392314901",
+      "1569686117752770571",
+      "1569686122890797089"
+    ],
+    "notification_ids": [
+      741524,
+      741544,
+      741585,
+      741626
+    ]
   },
   "last_error": null,
-  "last_seen_id": 741182,
+  "last_seen_id": 741626,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
