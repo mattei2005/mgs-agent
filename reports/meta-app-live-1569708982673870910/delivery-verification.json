@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-10T13:53:06.170120+00:00",
+  "checked_at": "2026-11-10T14:00:30.881961+00:00",
   "requested": 13,
-  "delivered": 12,
+  "delivered": 13,
   "results": [
     {
       "app": "B001-5",
@@ -203,7 +203,25 @@
     },
     {
       "app": "B013-7",
-      "status": "waiting_for_native_completion"
+      "status": "delivered_live_complete",
+      "channel_id": "1522830283240505385",
+      "card_id": "1569713237719654562",
+      "message_ids": [
+        "1569713237719654562",
+        "1569713302324518983",
+        "1569713304312488018",
+        "1569713305902387213",
+        "1569713313384763402",
+        "1569713315591094283",
+        "1569713317646438421",
+        "1569713319051395115"
+      ],
+      "timestamp": "2026-11-10T13:59:59.734000+00:00",
+      "current_rows": 97,
+      "money_rows": 103,
+      "numeric_today": 75,
+      "numeric_3d": 75,
+      "money_cells_validated": true
     }
   ]
 }

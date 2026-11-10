@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-10T13:26:32.368940+00:00",
+    "updated_at": "2026-11-10T14:01:03.556363+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -63184,6 +63184,33 @@
       },
       "report_infra_status": "verified",
       "report_infra_message_id": "1569704727443153090"
+    },
+    {
+      "id": "meta-app-live-1569708982673870910",
+      "agent": "zeus",
+      "type": "requested-native-app-alert-delivery",
+      "status": "completed_verified",
+      "updated_at": "2026-11-10T14:01:03.556363+00:00",
+      "source_thread_id": "1569703248317915156",
+      "source_message_id": "1569708982673870910",
+      "evidence": "/root/mgs-agent/reports/meta-app-live-1569708982673870910/closure.json",
+      "verification": {
+        "status": "completed",
+        "verified_at": "2026-11-10T14:01:03.556363+00:00",
+        "requested_channels": 13,
+        "delivered_channels": 13,
+        "live_metric_alerts": 12,
+        "restriction_notices": 1,
+        "canonical_pause_unchanged": true,
+        "credential_changes": false,
+        "generic_source": "INVEST_3D_OK",
+        "b013_source": "INVEST_3D_OK",
+        "b011": "fresh restriction confirmed; native notice delivered without resuming route",
+        "readback": "/root/mgs-agent/reports/meta-app-live-1569708982673870910/delivery-verification.json",
+        "process_exit_verified": true
+      },
+      "report_infra_status": "verified",
+      "report_infra_message_id": "1569713507807662113"
     }
   ],
   "profile_skill_references": [

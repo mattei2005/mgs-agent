@@ -1,0 +1,77 @@
+{
+  "label": "b013",
+  "finished_at": "2026-11-10T14:00:19.641695+00:00",
+  "exit_code": 0,
+  "state_updated_at": "2026-11-10T08:59:59-05:00",
+  "summary": {
+    "targets": 103,
+    "linked": 97,
+    "unlinked_confirmed": 6,
+    "unknown": 0,
+    "not_linked_or_error": 6,
+    "total_dtr_pages_visible": 1143,
+    "total_graph_pages": 1006,
+    "total_connected_pages": 969,
+    "linked_debug_valid": 97,
+    "linked_accounts_status_200": 97,
+    "linked_dtr_pages_zero_graph": 0,
+    "planned_scope_removals": 0,
+    "app_capability": {
+      "status": "healthy",
+      "linked_accounts": 97,
+      "debug_valid": 97,
+      "accounts_status_200": 97,
+      "dtr_pages_visible": 1143,
+      "graph_pages_visible": 1006,
+      "dtr_pages_zero_graph_accounts": 0,
+      "checked_at": "2026-11-10T08:59:58-05:00"
+    },
+    "sheet_sync": {
+      "enabled": true,
+      "checked_rows": 103,
+      "marked": 6,
+      "unknown_preserved": 0,
+      "updates_needed": 5,
+      "updated": true,
+      "checked_at": "2026-11-10T08:59:58-05:00",
+      "updated_cells": 5,
+      "updated_ranges": 5
+    },
+    "alert_profiles": {
+      "profile": "Giselle Santos",
+      "backup_profile": "Emgai Datquang"
+    },
+    "possible_restriction_gate": {
+      "status": "no_candidate",
+      "persistent_debug_failures": 0,
+      "capability_status": "healthy"
+    },
+    "invest_3d": {
+      "status": "INVEST_3D_OK",
+      "current_date": "2026-11-10",
+      "current_day_partial": true,
+      "period_start": "2026-11-07",
+      "period_end": "2026-11-09",
+      "days": 3,
+      "error": null
+    },
+    "alerts_sent": 1
+  },
+  "last_invest_3d": {
+    "status": "INVEST_3D_OK",
+    "current_date": "2026-11-10",
+    "current_day_partial": true,
+    "period_start": "2026-11-07",
+    "period_end": "2026-11-09",
+    "days": 3,
+    "error": null,
+    "checked_at": "2026-11-10T09:00:19-05:00",
+    "attempts": [
+      {
+        "attempt": 1,
+        "checked_at": "2026-11-10T09:00:14-05:00",
+        "status": "ok"
+      }
+    ]
+  }
+}
