@@ -17,6 +17,132 @@
       "cls": "nav-link"
     },
     {
+      "text": "Change settings",
+      "title": "",
+      "href": "/visual_flow_builder/flowbuilder_manager/22019/1",
+      "id": "bot_flow_settings",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/bot_settings/22019/1",
+      "id": "reply_settings",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/template_manager/22019/1",
+      "id": "postback_manager",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "get_started_settings",
+      "cls": "card-cta enable_start_button"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "general_settings",
+      "cls": "card-cta enable_general_settings"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "action_button_settings",
+      "cls": "card-cta action_button_settings"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/persistent_menu_list/22019/1",
+      "id": "",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/otn_template_manager/22019/1",
+      "id": "otn_postback_settings",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot_connectivity/webview_builder_manager/22019/1",
+      "id": "webform_builder_list",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/saved_templates",
+      "id": "",
+      "cls": "card-cta"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "sequence_message_settings",
+      "cls": "card-cta sequence_message_settings"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "messenger_engagement_settings",
+      "cls": "card-cta messenger_engagement_settings"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "",
+      "id": "user_input_flow_settings",
+      "cls": "card-cta user_input_flow_settings"
+    },
+    {
+      "text": "Change settings",
+      "title": "",
+      "href": "/messenger_bot/domain_whitelist/22019/1",
+      "id": "whitelisted_domains",
+      "cls": "card-cta iframed"
+    },
+    {
+      "text": "Errors 99",
+      "title": "",
+      "href": "",
+      "id": "error_log",
+      "cls": "btn btn-sm btn-outline-danger float-right error_log_report"
+    },
+    {
+      "text": "Classic",
+      "title": "Create using classic editor",
+      "href": "/messenger_bot_enhancers/create_sequence_campaign/22019/1/fb",
+      "id": "#ID1#",
+      "cls": "#CLASS1# iframed btn btn-sm btn-outline-primary block-button"
+    },
+    {
+      "text": "Lists",
+      "title": "Campaign lists",
+      "href": "/messenger_bot_enhancers/sequence_message_campaign/22019/1/fb",
+      "id": "#ID3#",
+      "cls": "#CLASS3# iframed btn btn-sm btn-outline-primary block-button"
+    },
+    {
+      "text": "Lists",
+      "title": "Campaign lists",
+      "href": "/sms_email_sequence/sms_email_sequence_message_campaign/22019/1",
+      "id": "#ID3#",
+      "cls": "#CLASS3# iframed btn btn-sm btn-outline-primary block-button"
+    },
+    {
       "text": "Api log",
       "title": "",
       "href": "",
@@ -67,7 +193,7 @@
     }
   ],
   "frames": [
-    "/messenger_bot/bot_list",
+    "/visual_flow_builder/flowbuilder_manager/22019/1",
     "/messenger_bot/bot_list"
   ],
   "tables": [
@@ -106,6 +232,140 @@
         ],
         "media_type": [
           "fb"
+        ]
+      }
+    },
+    {
+      "path": "/visual_flow_builder/visual_flow_builder_data/22019",
+      "form": {
+        "draw": [
+          "1"
+        ],
+        "columns[0][data]": [
+          "0"
+        ],
+        "columns[0][name]": [
+          ""
+        ],
+        "columns[0][searchable]": [
+          "true"
+        ],
+        "columns[0][orderable]": [
+          "false"
+        ],
+        "columns[0][search][value]": [
+          ""
+        ],
+        "columns[0][search][regex]": [
+          "false"
+        ],
+        "columns[1][data]": [
+          "1"
+        ],
+        "columns[1][name]": [
+          ""
+        ],
+        "columns[1][searchable]": [
+          "true"
+        ],
+        "columns[1][orderable]": [
+          "true"
+        ],
+        "columns[1][search][value]": [
+          ""
+        ],
+        "columns[1][search][regex]": [
+          "false"
+        ],
+        "columns[2][data]": [
+          "2"
+        ],
+        "columns[2][name]": [
+          ""
+        ],
+        "columns[2][searchable]": [
+          "true"
+        ],
+        "columns[2][orderable]": [
+          "true"
+        ],
+        "columns[2][search][value]": [
+          ""
+        ],
+        "columns[2][search][regex]": [
+          "false"
+        ],
+        "columns[3][data]": [
+          "3"
+        ],
+        "columns[3][name]": [
+          ""
+        ],
+        "columns[3][searchable]": [
+          "true"
+        ],
+        "columns[3][orderable]": [
+          "true"
+        ],
+        "columns[3][search][value]": [
+          ""
+        ],
+        "columns[3][search][regex]": [
+          "false"
+        ],
+        "columns[4][data]": [
+          "4"
+        ],
+        "columns[4][name]": [
+          ""
+        ],
+        "columns[4][searchable]": [
+          "true"
+        ],
+        "columns[4][orderable]": [
+          "true"
+        ],
+        "columns[4][search][value]": [
+          ""
+        ],
+        "columns[4][search][regex]": [
+          "false"
+        ],
+        "columns[5][data]": [
+          "5"
+        ],
+        "columns[5][name]": [
+          ""
+        ],
+        "columns[5][searchable]": [
+          "true"
+        ],
+        "columns[5][orderable]": [
+          "false"
+        ],
+        "columns[5][search][value]": [
+          ""
+        ],
+        "columns[5][search][regex]": [
+          "false"
+        ],
+        "order[0][column]": [
+          "1"
+        ],
+        "order[0][dir]": [
+          "desc"
+        ],
+        "start": [
+          "0"
+        ],
+        "length": [
+          "10"
+        ],
+        "search[value]": [
+          ""
+        ],
+        "search[regex]": [
+          "false"
         ]
       }
     },
