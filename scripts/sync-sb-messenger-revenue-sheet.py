@@ -54,6 +54,9 @@ SEGURADOR_ALIASES = {
 }
 MIN_MATCHED_SHEET_ROWS = 100
 MIN_SOURCE_MATCH_RATIO = Decimal("0.95")
+# Includes browser admission, navigation and the native report response.
+# Consumers allow an additional 30 seconds for process startup and cleanup.
+INVEST_REPORT_TOTAL_TIMEOUT_SECONDS = 150
 
 
 def now_et() -> str:
@@ -677,7 +680,7 @@ def main() -> int:
     try:
         if args.invest_3d_json:
             report_rows, request_payload = asyncio.run(
-                asyncio.wait_for(fetch_live_report(), timeout=45)
+                asyncio.wait_for(fetch_live_report(), timeout=INVEST_REPORT_TOTAL_TIMEOUT_SECONDS)
             )
             print(json.dumps(aggregate_invest_3d(report_rows, request_payload), ensure_ascii=False, separators=(",", ":")))
             return 0
