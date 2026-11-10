@@ -2812,6 +2812,24 @@
       "updated_at": "2026-11-02T23:31:29-05:00"
     },
     {
+      "agent": "zeus",
+      "auth_resume_message_id": "1569742613656117371",
+      "id": "B013-DELIVERY-AUDIT-1569737162293911624",
+      "next_step": "Consumir proc_e89498fea2cb, validar 103 perfis/1180 páginas na mesma coorte e qualificar contadores de aceite/entrega; concluir com readback e limitações exatas.",
+      "objective": "Verificar entrega/erros de Drip e Broadcast nos seguradores/páginas B013-7 e identificar restrição da BM dona sem enviar testes ou alterar produção",
+      "process_owner": {
+        "lock": "/var/lock/b013-dtr-link-watch.lock",
+        "pid": 3222613,
+        "session_id": "proc_e89498fea2cb"
+      },
+      "source": "/root/mgs-agent/reports/b013-delivery-audit-1569737162293911624/checkpoint.json",
+      "source_message_id": "1569737162293911624",
+      "state": "BM Restricted confirmada após autenticação do titular; Advanced Access pages_messaging concedido. Broadcast: 103 perfis, 1180 chaves user/page conferidas. Drip: fonte nativa de relatório 24h validada; coleta assíncrona por coorte em andamento, reaproveitando usuário concluído.",
+      "status": "running",
+      "thread_id": "1569703248317915156",
+      "updated_at": "2026-11-10T17:02:37.261039+00:00"
+    },
+    {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
       "next_step": "Nenhuma pendencia de landing deste pedido; limpezaIntraday e215mensagens de outros autores permanecem somente no checkpoint conjunto/admin, nao duplicar navegacoes",
@@ -9088,6 +9106,16 @@
       "updated_at": "2026-11-09T23:10:09+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-status-1569766229315420292",
+      "next_step": "Para362e373: revisão da reprovação no Gerenciador ou pedido específico de substituição criativa; não forçar ativação ou recriar. Retomar os mesmos IDs após liberação comprovada.",
+      "objective": "Ativar somente as 18 campanhas listadas por Nicolas na Yolokfx02 G006, sem alterar filhos ou orçamento",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/status-only/shein-status-1569766229315420292/journal.json",
+      "state": "partial_activated:16de18activeporgetfinal;16writes;362e373pausedcomtodosanunciosdisapproved;budgets,lances,programacao,tracking,creativeids,filhospreservados;leaseliberada",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-10T17:34:42+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-yolokfx-pages-lazyblocks-migration",
       "next_step": "Nenhum; operação encerrada. Backups preservados para rollback nos paths registrados no audit.",
@@ -9716,26 +9744,8 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
-    },
-    {
-      "id": "B013-DELIVERY-AUDIT-1569737162293911624",
-      "agent": "zeus",
-      "objective": "Verificar entrega/erros de Drip e Broadcast nos seguradores/páginas B013-7 e identificar restrição da BM dona sem enviar testes ou alterar produção",
-      "state": "BM Restricted confirmada após autenticação do titular; Advanced Access pages_messaging concedido. Broadcast: 103 perfis, 1180 chaves user/page conferidas. Drip: fonte nativa de relatório 24h validada; coleta assíncrona por coorte em andamento, reaproveitando usuário concluído.",
-      "next_step": "Consumir proc_e89498fea2cb, validar 103 perfis/1180 páginas na mesma coorte e qualificar contadores de aceite/entrega; concluir com readback e limitações exatas.",
-      "thread_id": "1569703248317915156",
-      "source_message_id": "1569737162293911624",
-      "auth_resume_message_id": "1569742613656117371",
-      "source": "/root/mgs-agent/reports/b013-delivery-audit-1569737162293911624/checkpoint.json",
-      "process_owner": {
-        "session_id": "proc_e89498fea2cb",
-        "pid": 3222613,
-        "lock": "/var/lock/b013-dtr-link-watch.lock"
-      },
-      "status": "running",
-      "updated_at": "2026-11-10T17:02:37.261039+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T17:02:37.261039+00:00"
+  "updated_at": "2026-11-10T17:34:42+00:00"
 }
