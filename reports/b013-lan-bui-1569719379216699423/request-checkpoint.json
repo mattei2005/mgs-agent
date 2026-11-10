@@ -5,9 +5,9 @@
   "app": "B013-7",
   "account": "disparosfinanceadxmx@gmail.com",
   "objective": "Reverificar a conexão após autenticação informada por Rodolfo e reconciliar somente o X da linha exata se houver vínculo válido confirmado.",
-  "status": "waiting_for_existing_canonical_B013_writer",
+  "status": "completed_verified",
   "single_consumer_process": "proc_c2f5c733061c",
-  "next_step": "O mesmo processo aguardará o lock canônico, consultará fontes reais e salvará verified.json; consumir o resultado antes do encerramento.",
+  "next_step": "Concluído: vínculo B013-7 válido, nove páginas conectadas e X removido de A94 com leitura de confirmação. Processo encerrado com exit 0; nenhum alerta forçado.",
   "credentials_may_be_changed": false,
   "force_alerts": false
 }
