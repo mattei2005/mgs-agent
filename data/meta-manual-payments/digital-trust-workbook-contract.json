@@ -83,26 +83,26 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_validated_metrics_invoices_ui_blocked",
-    "scheduled_at": "2026-11-10T08:02:00-05:00",
-    "verified_at": "2026-11-10T08:08:09.061808-05:00",
+    "status": "completed_validated_with_historical_d_gaps",
+    "source_message_id": "1569709472924827800",
+    "requested_at": "2026-11-10T08:45:02-05:00",
+    "verified_at": "2026-11-10T09:23:27.288388-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
     "fresh_metrics_count": 47,
-    "validated_metrics_at": "2026-11-10T08:05:43.270066-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261110T080552854758",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T080554831960",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261110T080516336412",
+    "validated_metrics_at": "2026-11-10T09:22:29.060281-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261110T092236897925",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T084814237723",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261110T084736216965",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
     "d_ledger_to_live_sheet_exact": true,
-    "fresh_h_count": 0,
-    "fresh_h_account_ids": [],
-    "pending_h_account_ids": [
+    "fresh_h_count": 36,
+    "fresh_h_account_ids": [
       "1001115192056600",
       "1018267074603840",
       "1062887799996139",
@@ -140,73 +140,60 @@
       "908704754163659",
       "937846586033361"
     ],
-    "h_preserved_count": 36,
+    "pending_h_account_ids": [],
+    "h_preserved_count": 0,
     "h_original_collection_times_preserved": true,
-    "h_read_at_min": "2026-11-09T14:06:51.463591-05:00",
-    "h_read_at_max": "2026-11-09T14:30:27.687462-05:00",
-    "h_sum_usd": "549065.63",
+    "h_read_at_min": "2026-11-10T08:49:13.557575-05:00",
+    "h_read_at_max": "2026-11-10T09:08:32.334772-05:00",
+    "h_sum_usd": "560356.63",
     "h_read_times": {
-      "2031917360813819": "2026-11-09T14:14:23.438923-05:00",
-      "787796726891306": "2026-11-09T14:28:45.577237-05:00",
-      "1419148446852410": "2026-11-09T14:10:09.742239-05:00",
-      "1600310064116258": "2026-11-09T14:30:27.687462-05:00",
-      "1001115192056600": "2026-11-09T14:20:02.786395-05:00",
-      "1245683183659911": "2026-11-09T14:24:16.529081-05:00",
-      "1877104513669062": "2026-11-09T14:12:04.102379-05:00",
-      "1018267074603840": "2026-11-09T14:15:12.988097-05:00",
-      "7840111366055613": "2026-11-09T14:28:12.790149-05:00",
-      "3188620887977617": "2026-11-09T14:08:49.547069-05:00",
-      "26632890069640784": "2026-11-09T14:08:19.645075-05:00",
-      "2039876850230678": "2026-11-09T14:07:33.493565-05:00",
-      "908704754163659": "2026-11-09T14:20:23.295561-05:00",
-      "937846586033361": "2026-11-09T14:25:28.544250-05:00",
-      "781612907182683": "2026-11-09T14:25:59.636665-05:00",
-      "1583000095650153": "2026-11-09T14:29:19.730955-05:00",
-      "1085117577390237": "2026-11-09T14:19:39.077617-05:00",
-      "311204101516831": "2026-11-09T14:07:56.051801-05:00",
-      "536294549227786": "2026-11-09T14:14:47.841867-05:00",
-      "1526280818302320": "2026-11-09T14:10:36.187262-05:00",
-      "814915838330687": "2026-11-09T14:13:32.705976-05:00",
-      "4511685129081248": "2026-11-09T14:21:11.040828-05:00",
-      "2633813727134360": "2026-11-09T14:24:51.243961-05:00",
-      "897046653487466": "2026-11-09T14:11:43.512962-05:00",
-      "3752157451670648": "2026-11-09T14:07:11.515088-05:00",
-      "1498990138663094": "2026-11-09T14:10:59.474309-05:00",
-      "1851640026221079": "2026-11-09T14:23:07.078530-05:00",
-      "1107653168698121": "2026-11-09T14:27:38.269360-05:00",
-      "1744611463000838": "2026-11-09T14:23:40.732220-05:00",
-      "1753257812779707": "2026-11-09T14:20:45.454061-05:00",
-      "1062887799996139": "2026-11-09T14:11:23.583156-05:00",
-      "1829406761389732": "2026-11-09T14:21:36.593781-05:00",
-      "2429758060563333": "2026-11-09T14:29:50.684772-05:00",
-      "869857549542755": "2026-11-09T14:15:36.417460-05:00",
-      "336562339356179": "2026-11-09T14:06:51.463591-05:00",
-      "1736068407518263": "2026-11-09T14:13:59.228986-05:00"
+      "1829406761389732": "2026-11-10T09:01:36.898565-05:00",
+      "1245683183659911": "2026-11-10T09:03:58.724276-05:00",
+      "908704754163659": "2026-11-10T09:00:27.333637-05:00",
+      "1018267074603840": "2026-11-10T08:57:31.118262-05:00",
+      "787796726891306": "2026-11-10T09:07:21.695517-05:00",
+      "1107653168698121": "2026-11-10T09:06:32.795160-05:00",
+      "26632890069640784": "2026-11-10T08:50:39.841981-05:00",
+      "1001115192056600": "2026-11-10T09:00:03.208667-05:00",
+      "1753257812779707": "2026-11-10T09:00:49.616287-05:00",
+      "311204101516831": "2026-11-10T08:50:20.805961-05:00",
+      "937846586033361": "2026-11-10T09:04:46.323440-05:00",
+      "1583000095650153": "2026-11-10T09:07:46.636401-05:00",
+      "1736068407518263": "2026-11-10T08:56:18.773266-05:00",
+      "536294549227786": "2026-11-10T08:57:07.609771-05:00",
+      "3188620887977617": "2026-11-10T08:51:02.477001-05:00",
+      "336562339356179": "2026-11-10T08:49:13.557575-05:00",
+      "3752157451670648": "2026-11-10T08:49:39.632604-05:00",
+      "4511685129081248": "2026-11-10T09:01:12.651540-05:00",
+      "1744611463000838": "2026-11-10T09:03:35.703247-05:00",
+      "1600310064116258": "2026-11-10T09:08:32.334772-05:00",
+      "1085117577390237": "2026-11-10T08:59:39.459969-05:00",
+      "1062887799996139": "2026-11-10T08:53:45.293387-05:00",
+      "1498990138663094": "2026-11-10T08:53:22.936078-05:00",
+      "1419148446852410": "2026-11-10T08:52:36.232039-05:00",
+      "2031917360813819": "2026-11-10T08:56:42.113341-05:00",
+      "2429758060563333": "2026-11-10T09:08:10.197657-05:00",
+      "869857549542755": "2026-11-10T08:57:53.540444-05:00",
+      "897046653487466": "2026-11-10T08:54:07.194524-05:00",
+      "2633813727134360": "2026-11-10T09:04:22.725978-05:00",
+      "2039876850230678": "2026-11-10T08:49:58.290917-05:00",
+      "1877104513669062": "2026-11-10T08:54:29.177955-05:00",
+      "1851640026221079": "2026-11-10T09:03:15.225543-05:00",
+      "7840111366055613": "2026-11-10T09:06:57.784732-05:00",
+      "814915838330687": "2026-11-10T08:55:57.583191-05:00",
+      "781612907182683": "2026-11-10T09:05:07.390484-05:00",
+      "1526280818302320": "2026-11-10T08:52:58.590760-05:00"
     },
-    "pending_ui": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
+    "pending_ui": [],
+    "card_proofs_updated": 6,
+    "renewed_card_proof_ids": [
+      "1062446663435585",
+      "1290644206529750",
+      "1414197490675732",
+      "1481815942722118",
+      "1543098427832443",
+      "2852476828464907"
     ],
-    "card_proofs_updated": 0,
-    "renewed_card_proof_ids": [],
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
@@ -400,9 +387,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "20113.19",
-      "balance": "564054.00",
-      "month_spend": "184701.25"
+      "average_daily": "20117.17",
+      "balance": "564760.45",
+      "month_spend": "185757.67"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -424,19 +411,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4772.13"
+        "value": "4773.05"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "4379.97"
+        "value": "4320.56"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "42629.26"
+        "value": "42907.60"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -448,25 +435,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15341.06"
+        "value": "15344.12"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "549065.63"
+        "value": "560356.63"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "559674.03"
+        "value": "560439.89"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "142071.99"
+        "value": "142850.07"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -478,25 +465,25 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "20113.19"
+        "value": "20117.17"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "549065.63"
+        "value": "560356.63"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "564054.00"
+        "value": "564760.45"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "184701.25"
+        "value": "185757.67"
       }
     ],
     "lease_free": true,
@@ -506,60 +493,24 @@
     "cron_changes": 0,
     "other_sheet_data_unchanged": true,
     "other_sheet_properties_unchanged": true,
-    "ui_blocker": {
-      "status": "blocked_native_auth_surface_conflict_no_input",
-      "native_windows_security_ax": true,
-      "approved_profile_rodolfo_ax": true,
-      "pid": 19372,
-      "window_id": 328816,
-      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261110T0802/surface-initial.png",
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261110T0802/surface-final.png",
-      "keyboard_mouse_input": 0,
-      "owned_tabs_created": 0,
-      "h_fresh_count": 0,
-      "human_action": "Concluir ou fechar pessoalmente o diálogo Windows Security no PC1 e deixar a janela Meta disponível; não há prova de logout global Meta."
-    },
     "ui_cleanup": {
       "initial_browser_tabs_visually_counted": 6,
       "final_browser_tabs_visually_counted": 6,
-      "owned_tabs_created": 0,
-      "lease_free": true
+      "owned_tabs_closed": true,
+      "lease_free": true,
+      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/surface-initial.png",
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/surface-final.png"
     },
-    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
-    "next_existing_run_at": "2026-11-10T14:02:00-05:00"
+    "next_existing_run_at": "2026-11-10T14:02:00-05:00",
+    "report_infra_status": "sent_verified",
+    "report_infra_message_id": "1569719324141289509"
   },
   "pending_card_history": {
-    "status": "pending_new_events_native_auth_surface_conflict",
-    "account_ids": [
-      "1062446663435585",
-      "1414197490675732",
-      "1543098427832443",
-      "2852476828464907"
-    ],
-    "pending_ui": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
+    "status": "no_new_events_pending_historical_gaps_qualified",
+    "account_ids": [],
+    "pending_ui": [],
     "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261110T0802/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1569709472924827800/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
