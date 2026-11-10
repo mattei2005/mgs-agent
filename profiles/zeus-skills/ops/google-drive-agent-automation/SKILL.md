@@ -191,6 +191,14 @@ For Search Console API enablement, Service Usage IAM, property access and read-o
 
 ## Sheets verification
 
+### Verify whether an automated column is updating
+
+1. Resolve the exact spreadsheet ID and numeric `gid` from the supplied link, then confirm the live tab title and column header through the canonical Service Account. Explain the header's actual metric and period; a revenue column is not the same metric as investment in an adjacent monitoring workflow.
+2. Identify the writer and inspect its live scheduler entry, latest completed state receipt and matching execution-log record. Separate configured cadence, successful scheduled execution and the time of this verification; an enabled cron or a file modification timestamp alone does not prove a Sheet update.
+3. Read the full bounded column with `UNFORMATTED_VALUE`. Compare numeric-cell, positive-value and explicit-zero counts and a Decimal cents total against the same completed write receipt; keep blank/unmatched cells distinct from numeric zero. Use row-level receipt values for exact cell parity when available. Matching counts and totals establish aggregate parity, not that every row's value is correct.
+4. Do not rerun `--apply`, write a sentinel or change a healthy schedule merely to answer a status question. If the existing receipt and live column agree, return a verified no-op; if they disagree, reconcile later edits or writes before classifying a failure or replaying the sync.
+5. Answer briefly with the verdict, last successful update in the operational timezone, configured cadence, covered dates and material mismatch or caveat. Include a total only when useful, and state whether this check performed any writes.
+
 ### Source-to-Sheet financial reconciliation
 
 - For two-decimal monetary subtotals and grand totals, publish `ROUND(SUM(...),2)` and validate computed Sheets values against independently calculated Decimal totals. Raw `SUM` can return binary floating artifacts even when the displayed cents look correct. If values already landed before this gate fails, read back the exact formula cells and correct only those formulas; preserve the original snapshot, account rows, notes, links and formatting instead of replaying the dataset.
