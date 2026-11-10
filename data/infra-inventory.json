@@ -62969,33 +62969,106 @@
       "id": "ares-shein-manual-coordination-t_27706e88",
       "agent": "ares",
       "task_id": "t_27706e88",
-      "type": "coordination-maintenance-safe-hold",
-      "status": "blocked_structural_transition_approval",
-      "authority": "kanban:t_27706e88 (limited maintenance only; no new lifecycle policy promoted)",
+      "type": "request-scoped-manual-takeover-coordination",
+      "status": "ready_handoff_to_delivery",
+      "authority": "Rodolfo1569530861022355457 GET verified; bounded to separated requests",
       "account_id": "937846586033361",
       "predecessor_request": "shein-1569456380065222707",
       "new_request": "shein-1569495587005530205-c049",
       "delivery_task": "t_4ac36ea1",
       "job_path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1569495587005530205-c049.json",
       "backup": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/job-before.json",
-      "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/manual-readback-receipt.json",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/attempt2/acceptance-readback.json",
       "handoff": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/HANDOFF.md",
-      "gap": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/consumer-and-authority-gap.json",
       "preservation": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/preservation-receipt.json",
       "tests": {
-        "baseline_unique_passed": 87,
-        "implementation_acceptance": false
+        "installed_tests_passed": 209,
+        "installed_subtests_passed": 135,
+        "new_contract_tests_passed": 29,
+        "failures": 0,
+        "junit_testcase_rows_including_subtests": 209,
+        "junit_sha256": "2347d30316f7d9b5d1cc78f175c9034ac6936a6ee7fef75f68e6f9f317279353",
+        "engine_baseline_comparison": {
+          "engine_existing_failures": [
+            [
+              "test_ares_campaign_engine_v3",
+              "test_engine_dry_run_never_calls_transport",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_engine_executes_accounts_in_independent_lanes",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_engine_writes_stage_timestamps_to_audit",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_forty_campaigns_three_accounts_produce_seven_global_waves",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ],
+            [
+              "test_ares_campaign_engine_v3",
+              "test_planner_bundles_two_campaigns_per_account_without_cross_account_mix",
+              "ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation"
+            ]
+          ],
+          "new_failures": [],
+          "engine_baseline_tests": 74,
+          "engine_stage_tests": 74,
+          "baseline_identical": true,
+          "reason": "Legacy empty-creative fixtures rejected by permanent copy feature policy; unchanged by this maintenance"
+        },
+        "omissions_legacy_baseline_failure": "test_all_six_live_definitions_pass_with_exact_review_without_mutating_payloads",
+        "omissions_baseline_not_acceptance": true
       },
-      "runtime_changed": false,
+      "runtime_changed": true,
       "dispatch_owner": "foreground",
       "maintenance_hold": true,
       "meta_writes": 0,
       "drive_writes": 0,
       "campaign_execution": false,
-      "updated_at": "2026-11-09T23:45:45.740823+00:00",
+      "updated_at": "2026-11-10T02:24:35.333288+00:00",
       "report_infra_message_id": "1569498361185444010",
       "report_infra_readback": true,
-      "report_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/report-infra-readback.json"
+      "report_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/report-infra-readback.json",
+      "installed_hashes": {
+        "scripts/ares_campaign_v3/shein_manual_takeover.py": "71e5781e795820aa2f0c67ada9c2d327f1ef6d09021ea93f4cea5044613dafcb",
+        "scripts/ares_campaign_v3/shein_prewrite_amendment.py": "71e50e5103b115347b1b37d756bf547cddb9c2ba4c200681db6090b03b4d260f",
+        "scripts/ares_campaign_v3/coordination.py": "2f5d3bbc97704967f81c35de961274cde6e4080ba2bf7c6d3f8d183072e18c91",
+        "scripts/ares_campaign_v3/shein_request_queue.py": "e6b02865b3b666682542e5060f96a1474c19bd9a7447c7b2d2f6821ed1453a9c",
+        "scripts/ares_campaign_v3/shein_single_clone.py": "e06ec9dd3f63c8a8e74e4434ba992f9a8a17a5f3e414a73a93d3418ce4dcc17a",
+        "scripts/ares_campaign_v3/activation.py": "e05dbb57c498b8dc199f2dfc3e0a36883fad081ced80cc2919c3d4fa18cc1450",
+        "scripts/ares_campaign_v3/engine.py": "7085e6134b795374e46ab948bd82f9decf4ad451d68294bf1bb1b40a551062ff",
+        "scripts/ares_campaign_v3/shein_source_media.py": "6c735c4ba73fa1331e08b900b1ef6a71209068126967925f643e5720c88a7e65",
+        "scripts/ares_campaign_v3/shein_decision_wait.py": "bf82003f4a47d58a077321352716858ad3eaefb2270870d8d017dd69a8da88ed",
+        "scripts/ares_campaign_v3/shein_grouped_media.py": "a24361828ca34003e4ebcf1be91e7df6a4acabd8d017be498796ce6f6eed9965",
+        "scripts/ares_campaign_v3/shein_media_handoff.py": "52120103eb678c8b143eec353248f3ffa86281f2c180c88121f51b331813ac07",
+        "tests/test_shein_manual_takeover.py": "1277f4e4646eb722de4f847bab219d0cddf400f7b675a8e2f6a06d44a2c32d2c",
+        "tests/fixtures/shein-manual-takeover-messages.json": "e0c0a2ae1ac7c54abc049664344890ea5087ed2e8e3dcf7909289ced5ee23440"
+      },
+      "manual_qa_certified": false,
+      "reservation_release": false,
+      "skill_reference": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/campaign-runtime-recovery.md",
+      "prior_attempt_gap": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/consumer-and-authority-gap.json"
     },
     {
       "agent": "zeus",

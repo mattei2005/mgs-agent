@@ -5034,6 +5034,26 @@
       "updated_at": "2026-10-29T00:29:00+00:00"
     },
     {
+      "canonical_key": "ares.shein.manual_takeover.shein-1569456380065222707",
+      "canonical_source": "data/ares/meta-ads/state/shein-campaigns/queue/manual-takeovers/shein-1569456380065222707.json",
+      "consumers": [
+        "scripts/ares_campaign_v3/coordination.py",
+        "scripts/ares_campaign_v3/shein_manual_takeover.py",
+        "scripts/ares_campaign_v3/shein_request_queue.py",
+        "scripts/ares_campaign_v3/shein_source_media.py"
+      ],
+      "domain": "ares.campaign_ops.shein.coordination",
+      "effective_at": "2026-11-10T01:55:17.741000+00:00",
+      "id": "ARES-SHEIN-MANUAL-TAKEOVER-1569456380065222707",
+      "kind": "capability",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Encerramento de coordenação por takeover manual; exclusivo do request1569456380065222707",
+      "updated_at": "2026-11-10T02:24:35+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reference-inheritance-defaults",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
       "consumers": [
@@ -16575,5 +16595,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-09T23:34:24+00:00"
+  "updated_at": "2026-11-10T02:24:35+00:00"
 }

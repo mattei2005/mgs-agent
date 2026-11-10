@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="25" time="0.290" timestamp="2026-11-09T21:11:27.128149-05:00" hostname="srv1767265"><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_additional_feature_or_explicit_toggle_or_background_opt_in_is_rejected" time="0.083" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_all_six_live_definitions_pass_with_exact_review_without_mutating_payloads" time="0.013"><failure message="ValueError: reference individual creative feature drift">self = &lt;test_shein_reviewed_feature_omissions.ReviewedOmissionTests testMethod=test_all_six_live_definitions_pass_with_exact_review_without_mutating_payloads&gt;
+
+    def test_all_six_live_definitions_pass_with_exact_review_without_mutating_payloads(self):
+        before=copy.deepcopy(self.state);marker=APPROVED_RESUME.set(self.context())
+&gt;       try:self.check_all()
+            ^^^^^^^^^^^^^^^^
+
+/root/mgs-agent/tests/test_shein_reviewed_feature_omissions.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/root/mgs-agent/tests/test_shein_reviewed_feature_omissions.py:60: in check_all
+    verify_readback({**self.state['manifest'],'campaigns':[desired]},self.state['source'],tree)
+/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py:325: in verify_readback
+    verify_copy_creative(ad.get('creative') or {}, expected_by_name[ad['name']]['creative_payload'])
+/root/mgs-agent/scripts/ares_campaign_v3/creative_copy_policy.py:55: in verify_creative
+    verify_degrees(actual.get('degrees_of_freedom_spec'),expected_degrees(actual,wanted))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {}, expected = {}
+
+    def verify_degrees(actual, expected):
+        """Preserve original individual features; new API defaults may only OPT_OUT."""
+        actual = copy.deepcopy(actual or {}); expected = copy.deepcopy(expected or {})
+        observed = actual.pop('creative_features_spec', {})
+        wanted = expected.pop('creative_features_spec', {})
+        # Deprecated aggregate is rejected on input yet rematerialized by Graph.
+        # Preserve every individual feature; the aggregate is not a new toggle.
+        observed.pop('standard_enhancements', None)
+        wanted.pop('standard_enhancements', None)
+        if any(actual.get(k) != v for k, v in expected.items()):
+            raise ValueError('reference creative degrees state drift')
+        if (any(observed.get(k) != v for k, v in wanted.items())
+                or any(v != {'enroll_status': 'OPT_OUT'} for k, v in observed.items() if k not in wanted)):
+&gt;           raise ValueError('reference individual creative feature drift')
+E           ValueError: reference individual creative feature drift
+
+/root/mgs-agent/scripts/ares_campaign_v3/shein_reference.py:149: ValueError</failure></testcase><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_bindings_reject_other_ids_source_manifest_and_schedule" time="0.009" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_dialogue_uses_two_gets_not_one_request_per_message" time="0.010" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_missing_or_forged_verified_review_is_rejected" time="0.007" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_real_review_descriptor_validates_without_clock_or_scope_change" time="0.011" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_reject_changed_review_identity_or_text" time="0.008" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_unexpected_intervening_human_message_blocks" time="0.005" /><testcase classname="mgs-agent.tests.test_shein_reviewed_feature_omissions.ReviewedOmissionTests" name="test_without_extra_review_original_gate_is_preserved" time="0.005" /></testsuite></testsuites>

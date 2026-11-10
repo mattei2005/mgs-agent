@@ -1683,12 +1683,12 @@
     {
       "agent": "ares",
       "id": "ARES-MAINT-t_27706e88",
-      "next_step": "Instalar sob writer único; reconciliar recibo/lease sem COMPLETE; invalidar PREPARED45 sem editar selos; verificar --inspect+typedproof; entregar ao t_4ac36ea1",
-      "objective": "Reconciliar apenas coordenação do takeover manual e emenda pré-write USD30, sem executar campanhas",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569495587005530205/rodolfo-separation-1569530861022355457.json",
-      "state": "decisão rodolfo1569530861022355457 validada por get; staging208pass/135subtests; hold+foreground mantidos; instalação cas e readback pendentes",
+      "next_step": "Completar pré-requisito após REPORT-INFRA; t_4ac36ea1 único dono gera inspect/prova fresca e take-foreground do049revisionado30, entrega28 via runner central e QA/readback, sem retomar antigos",
+      "objective": "Reconciliar somente coordenação manual e preparo pré-write USD30, sem executar campanhas",
+      "source": "data/ares/meta-ads/audit/maintenance/t_27706e88/HANDOFF.md",
+      "state": "manutenção implementada e validada:13arquivos cas,209testes+135subtests;receipt manual qafalse;lease coordenação encerrada;prepared/job30 e dry-run30 válidos;inspect depsvazias e prova typed real;holdforeground/attempts0 mantidos;0meta/drivewrites",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-10T02:14:31+00:00"
+      "updated_at": "2026-11-10T02:25:22+00:00"
     },
     {
       "agent": "zeus",
@@ -2083,22 +2083,22 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569456380065222707",
-      "next_step": "Nao retomar writer nem reativar/pausar/recriar por snapshot antigo;reportar duas rejeicoes e oito divergencias de budget.Qualquer correcao precisa novo pedido especifico;preservar runner/manifests e autoria manual;encerramento de coordenacao somente fluxo canonico suportado,sem terminalfalso.",
-      "objective": "Conferir9clones010 MavroaG006 apos ativacao manual informada porNicolas;somente leitura",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569456380065222707/manual-activation-verification-1569494300255985776.json",
-      "state": "verificacao09nov2026 18h32est:9campanhas102-110 e9conjuntos active,16/18ads active;ad02da104 ead02da108 paused/with_issues codigo2490468 rejeitados em avaliacao.metaagora explicita rejeicao,sem motivo de politica retornado.mesmosids,copy/headline/tracking/features eprovasqa preservados;cap90,inicio10nov00h15est.102/104-110 usd43.75cada;103 usd35,totalusd385/dia versusoriginalusd315;origemautoria alteracaobudgetnao verificada.insights09nov0imp/usd0.ativacao manual relatada pelonicolas;ares0writesmeta.",
+      "next_step": "Não retomar writer, QA ou status antigos. Qualquer correção material exige pedido específico; novo pedido28 é separado e usa USD30 exclusivamente nas novas.",
+      "objective": "Preservar lote102-110 assumido manualmente por Nicolas; apenas coordenação automática encerrada",
+      "source": "data/ares/meta-ads/state/shein-campaigns/queue/manual-takeovers/shein-1569456380065222707.json",
+      "state": "get manteve9campanhas/9adsetsactive e16/18adsactive;104/108ad02 rejeitados2490468.103budget3500,outros8budget4375,autoria budget não provada.receipt manual_takeover_coordination_closed,qafalse;lease vinculada;state/core/activation/manifests e reservas preservados porhash;0writesmetadrive.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-09T23:33:36+00:00"
+      "updated_at": "2026-11-10T02:25:22+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569495587005530205",
-      "next_step": "ManutencaominimalreconciliasomentecoordenacaoantigaebindingpréwriteUSD30sobdecisaoatual;naopedirmesmaaprovaçaonovamente.SemQAterminalfalso/guardbypass/globalgrant.Apósaceitaçãotécnicaentrega28peloenginecentral,horaagendada00h03EST+readbackintegral,mensagemunicaconclusao.",
-      "objective": "ConcluirpedidoSEPARADO28clones049x4,010x4,025x4,098x6,056x6,100x4;USD30cada/USD840lote;10nov202600h03EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569495587005530205/rodolfo-separation-1569530861022355457.json",
-      "state": "rodolfo1569530861022355457getvalidado:1loteantigoativadomanualpornicolasnaoreexecutar;2pedido28agendadopodeconcluir;3usd30somente28. mesmografo:prerequisitot_27706e88desbloqueadoerelançadorealmente;entregat_4ac36ea1continuatododependentedaaceitacaotecnica.6inputs30revisionadospreservados;0campanhasnovasnaúltimaleitura,nãoconcluido.",
+      "next_step": "t_4ac36ea1 único executor apósparentdone:revalidar gates/GET;inspectfrescoTTL120;take-foreground do049revisionado30;runnersequencial6fontes;QA/render+readback28;conclusãoúnica naorigem.Semtakeover/execute pela manutenção.",
+      "objective": "Entregar28clones separados049x4,010x4,025x4,098x6,056x6,100x4;USD30cada/USD840;10nov00h03EST",
+      "source": "data/ares/meta-ads/audit/maintenance/t_27706e88/HANDOFF.md",
+      "state": "manutenção t_27706e88 tecnicamente aceita;mesmosids/clock;049prepared30/dry-runok;inspectdepsvazias/prova typed ao manual+c3 semalterá-los;jobhold+foreground/attempts0/notificationnull.0campanhasnovas;6inputs30efetivos,45somentehistórico.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-10T01:57:58+00:00"
+      "updated_at": "2026-11-10T02:25:22+00:00"
     },
     {
       "agent": "ares",
@@ -9645,5 +9645,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T02:14:31+00:00"
+  "updated_at": "2026-11-10T02:25:22+00:00"
 }
