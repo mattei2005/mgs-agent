@@ -4,7 +4,7 @@
   "app": "B013-7",
   "business_id": "1473532917114441",
   "started_at": "2026-11-10T15:36:17.775911+00:00",
-  "status": "read_only_discovery",
+  "status": "delivery_audit_running_bm_waiting_for_human_authentication",
   "objectives": [
     "Audit Drip and Broadcast send/delivery/error evidence for current B013 seguradores/pages",
     "Read owning BM enforcement verdict through authorized admin session; API verified is not unrestricted"
@@ -12,5 +12,14 @@
   "no_test_sends": true,
   "no_configuration_changes": true,
   "latest_monitor_targets": 103,
-  "next_step": "Discover exact DTR delivery report transports and inspect BM owner profile availability"
+  "next_step": "Discover exact DTR delivery report transports and inspect BM owner profile availability",
+  "bm_blocker": {
+    "profile_no": "1190",
+    "profile_id": "k1f7o4im",
+    "profile_name": "Giselle Santos",
+    "reason": "remembered profile login/continue surface; Business Support target not authenticated",
+    "next_action": "Rodolfo authenticates same profile on PC1; preserve profile and resume exact Business ID read"
+  },
+  "delivery_process": "proc_f172b1886479",
+  "updated_at": "2026-11-10T15:52:30.195433+00:00"
 }
