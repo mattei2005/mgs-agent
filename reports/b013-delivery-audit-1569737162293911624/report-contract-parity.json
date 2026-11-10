@@ -1,0 +1,161 @@
+{
+  "at": "2026-11-10T11:44:05-05:00",
+  "csrf_field_present": true,
+  "campaign_id": "5493226",
+  "helper_report_rows": 13,
+  "shape": [
+    {
+      "index": 0,
+      "kind": "identity_or_action_not_logged",
+      "date": null
+    },
+    {
+      "index": 1,
+      "kind": "checkbox_html",
+      "date": null
+    },
+    {
+      "index": 2,
+      "kind": "identity_or_action_not_logged",
+      "date": null
+    },
+    {
+      "index": 3,
+      "kind": "identity_or_action_not_logged",
+      "date": null
+    },
+    {
+      "index": 4,
+      "kind": "identity_or_action_not_logged",
+      "date": null
+    },
+    {
+      "index": 5,
+      "kind": "date",
+      "date": "Nov 10, 26 13:33"
+    },
+    {
+      "index": 6,
+      "kind": "blank",
+      "date": null
+    },
+    {
+      "index": 7,
+      "kind": "date",
+      "date": "Nov 10, 26 13:33"
+    },
+    {
+      "index": 8,
+      "kind": "accepted_id",
+      "date": null
+    },
+    {
+      "index": 9,
+      "kind": "blank",
+      "date": null
+    }
+  ],
+  "datatable": {
+    "info": {
+      "page": 0,
+      "pages": 2,
+      "start": 0,
+      "end": 10,
+      "length": 10,
+      "recordsTotal": 13,
+      "recordsDisplay": 13,
+      "serverSide": true
+    },
+    "columns": [
+      {
+        "data": 0,
+        "title": "#",
+        "visible": true
+      },
+      {
+        "data": 1,
+        "title": "\n\t\t\t\t\t\t\t\t\t<input class=\"regular-checkbox\" id=\"datatableSelectAllRows\" type=\"checkbox\"><label for=\"datatableSelectAllRows\"></label>\n\t\t\t\t\t\t\t\t",
+        "visible": false
+      },
+      {
+        "data": 2,
+        "title": "First Name",
+        "visible": true
+      },
+      {
+        "data": 3,
+        "title": "Last Name",
+        "visible": true
+      },
+      {
+        "data": 4,
+        "title": "Subscriber id",
+        "visible": true
+      },
+      {
+        "data": 5,
+        "title": "Sent at",
+        "visible": true
+      },
+      {
+        "data": 6,
+        "title": "Delivered at",
+        "visible": true
+      },
+      {
+        "data": 7,
+        "title": "Opened at",
+        "visible": false
+      },
+      {
+        "data": 8,
+        "title": "Sent response",
+        "visible": true
+      },
+      {
+        "data": 9,
+        "title": "Action",
+        "visible": true
+      }
+    ]
+  },
+  "native_requests": [
+    {
+      "path": "/messenger_bot_enhancers/campaign_sent_status",
+      "form": {
+        "id": [
+          "5493226"
+        ]
+      }
+    },
+    {
+      "path": "/messenger_bot_enhancers/campaign_sent_status_data",
+      "form": {
+        "draw": [
+          "1"
+        ],
+        "order[0][column]": [
+          "3"
+        ],
+        "order[0][dir]": [
+          "desc"
+        ],
+        "start": [
+          "0"
+        ],
+        "length": [
+          "10"
+        ],
+        "search[value]": [
+          ""
+        ],
+        "search[regex]": [
+          "false"
+        ],
+        "campaign_id": [
+          "5493226"
+        ]
+      }
+    }
+  ]
+}

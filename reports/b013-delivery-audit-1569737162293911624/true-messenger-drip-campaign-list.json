@@ -1,0 +1,390 @@
+{
+  "path": "/messenger_bot_enhancers/sequence_message_campaign/5469/1/fb",
+  "text": "Sl\tName\tLast sent\tDrip type\tEngagement campaign\tActions\n1\tAuto Principal Drip\t10 Nov 26 11:44\tDefault\t-\t\n10\n25\n50\n100\n200\n500\n1,000\n1-1/1\nPrevious\n1\nNext",
+  "tables": [
+    {
+      "id": "mytable",
+      "headers": [
+        "Sl",
+        "Name",
+        "Last sent",
+        "Drip type",
+        "Engagement campaign",
+        "Actions"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "1",
+            "Auto Principal Drip",
+            "10 Nov 26 11:44",
+            "Default",
+            "-",
+            ""
+          ],
+          "actions": [
+            {
+              "title": "",
+              "text": "",
+              "href": "#",
+              "cls": "btn btn-outline-primary btn-circle dropdown-toggle bot_actions no_caret",
+              "attrs": []
+            },
+            {
+              "title": "",
+              "text": "24h promo report",
+              "href": "",
+              "cls": "dropdown-item has-icon message_content",
+              "attrs": [
+                {
+                  "name": "data-id",
+                  "value": "7139"
+                }
+              ]
+            },
+            {
+              "title": "",
+              "text": "Edit sequence",
+              "href": "/messenger_bot_enhancers/edit_sequence_message_campaign/7139/5469/1/fb",
+              "cls": "dropdown-item has-icon",
+              "attrs": []
+            },
+            {
+              "title": "",
+              "text": "Delete sequence",
+              "href": "",
+              "cls": "dropdown-item has-icon delete_bot red",
+              "attrs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "",
+      "headers": [
+        "TAG",
+        "DESCRIPTION",
+        "ALLOWED",
+        "DISALLOWED (NON-EXHAUSTIVE)"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "CONFIRMED_EVENT_UPDATE",
+            "Send the user reminders or updates for an event they have registered for (e.g., RSVP'ed, purchased tickets). This tag may be used for upcoming events and events in progress.",
+            "Reminder of upcoming classes, appointments, or events that the user has scheduled\n\t      \t                    Confirmation of user's reservation or attendance to an accepted event or appointment\n\t      \t                    Notification of user's transportation or trip scheduled, such as arrival, cancellation, baggage delay, or other status changes",
+            "Promotional content, including but not limited to deals, offers, coupons, and discounts\n\t      \t                    Content related to an event the user has not signed up for (e.g., reminders to purchase event tickets, cross-sell of other events, tour schedules, etc) \n\t      \t                    Messages related to past events\n\t      \t                    Prompts to any survey, poll, or reviews"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "POST_PURCHASE_UPDATE",
+            "Notify the user of an update on a recent purchase.",
+            "Confirmation of transaction, such as invoices or receipts\n\t      \t                    Notifications of shipment status, such as product in-transit, shipped, delivered, or delayed\n\t      \t                    Changes related to an order that the user placed, such credit card has declined, backorder items, or other order updates that require user action",
+            "Promotional content, including but not limited to deals, promotions, coupons, and discounts\n\t      \t                    Messages that cross-sell or upsell products or services\n\t      \t                    Prompts to any survey, poll, or reviews"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "ACCOUNT_UPDATE",
+            "Notify the user of a non-recurring change to their application or account.",
+            "A change in application status (e.g., credit card, job)\n\t      \t                    Notification of suspicious activity, such as fraud alerts",
+            "Promotional content, including but not limited to deals, promotions, coupons, and discounts\n\t      \t                    Recurring content (e.g., statement is ready, bill is due, new job listings)\n\t      \t                    Prompts to any survey, poll, or reviews"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "HUMAN_AGENT\n\n\t      \t                (Closed BETA)",
+            "Allows human agents to respond to user inquiries. Messages can be sent within 7 days after a user message.",
+            "Human agent support for issues that cannot be resolved within the standard messaging window (e.g., business is closed for the weekend, issue requires >24 hours to resolve)",
+            "Automated messages \n\t      \t                    Content unrelated to user inquiry"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "NON_PROMOTIONAL_SUBSCRIPTION",
+            "News messages allow news publishers to send regular news updates to their subscribers in Messenger. This feature is only available for registered news Pages under the  Facebook News Page Index (NPI)  Read Policy Details here",
+            "Registered news Pages under the  Facebook News Page Index (NPI)",
+            "Read Policy Details here"
+          ],
+          "actions": [
+            {
+              "title": "",
+              "text": "Facebook News Page Index (NPI)",
+              "href": "/help/publisher/316333835842972",
+              "cls": "",
+              "attrs": []
+            },
+            {
+              "title": "",
+              "text": "Read Policy Details here",
+              "href": "/docs/messenger-platform/policy/policy-overview/",
+              "cls": "",
+              "attrs": []
+            },
+            {
+              "title": "",
+              "text": "Facebook News Page Index (NPI)",
+              "href": "/help/publisher/316333835842972",
+              "cls": "",
+              "attrs": []
+            },
+            {
+              "title": "",
+              "text": "Read Policy Details here",
+              "href": "/docs/messenger-platform/policy/policy-overview/",
+              "cls": "",
+              "attrs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "",
+      "headers": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "29",
+            "30",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "actions": []
+        }
+      ]
+    },
+    {
+      "id": "",
+      "headers": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28"
+          ],
+          "actions": []
+        },
+        {
+          "cells": [
+            "29",
+            "30",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "actions": []
+        }
+      ]
+    }
+  ],
+  "dt": [
+    {
+      "id": "mytable",
+      "info": {
+        "page": 0,
+        "pages": 1,
+        "start": 0,
+        "end": 1,
+        "length": 10,
+        "recordsTotal": 1,
+        "recordsDisplay": 1,
+        "serverSide": false
+      },
+      "ajax": null
+    }
+  ],
+  "requests": [
+    {
+      "path": "/messenger_bot_enhancers/subscriber_broadcast_campaign_data",
+      "form": {
+        "draw": [
+          "1"
+        ],
+        "order[0][column]": [
+          "12"
+        ],
+        "order[0][dir]": [
+          "desc"
+        ],
+        "start": [
+          "0"
+        ],
+        "length": [
+          "10"
+        ],
+        "search[value]": [
+          ""
+        ],
+        "search[regex]": [
+          "false"
+        ],
+        "search_page_id": [
+          ""
+        ],
+        "search_value": [
+          ""
+        ],
+        "search_status": [
+          ""
+        ],
+        "campaign_date_range": [
+          ""
+        ]
+      }
+    },
+    {
+      "path": "/messenger_bot_enhancers/campaign_sent_status",
+      "form": {
+        "id": [
+          "5493226"
+        ]
+      }
+    },
+    {
+      "path": "/messenger_bot_enhancers/campaign_sent_status_data",
+      "form": {
+        "draw": [
+          "1"
+        ],
+        "order[0][column]": [
+          "3"
+        ],
+        "order[0][dir]": [
+          "desc"
+        ],
+        "start": [
+          "0"
+        ],
+        "length": [
+          "10"
+        ],
+        "search[value]": [
+          ""
+        ],
+        "search[regex]": [
+          "false"
+        ],
+        "campaign_id": [
+          "5493226"
+        ]
+      }
+    }
+  ]
+}
