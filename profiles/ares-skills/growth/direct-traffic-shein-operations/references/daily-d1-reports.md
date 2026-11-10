@@ -4,6 +4,12 @@
 
 Resolver sempre `data/ares/meta-ads/policies/shein-daily-report.json` e `SHEIN-US-DIRECT.json#/reporting/daily_report_policy`; a aprovação de Rodolfo está na thread1561752465978818722. A política fixa24contas/threads,4por gestor, excluindo Boostingecon/Growpowerhub em todos os gestores. Os36bindings continuam existentes e disponíveis on-demand; a exclusão é de envios recorrentes, não remoção de conta/rota. Não criar novas threads nem mudar permissões/campanhas/dashboards.
 
+## Inclusão de conta e thread novas
+
+- Separe o vínculo declarado pelo operador da prontidão real: valide a thread pelo ID e a conta com o token corporativo vigente. `/me` válido e conta local permitida não comprovam acesso ao novo ativo; HTTP403/código200 sobre a conta exige diagnosticar a delegação, sem trocar token ou usar administrador como identidade de relatório.
+- Enquanto faltar acesso e confirmação crítica de permissões, registre o contrato resumível e o destino em `shein-intraday-report-bindings.json#/pending_bindings`, fora de `bindings` e das listas ativas das políticas. O lote recorrente é atômico: inserir uma conta inacessível ou uma contagem incompatível pode impedir os relatórios dos demais. Comprove que os resolvedores D-1/Intraday continuam selecionando exatamente os consumidores ativos e que seus testes passam.
+- Após concessão mínima autorizada e GET com a identidade original, promova somente o vínculo exato, valide identidade/moeda/fuso e revise as contagens e seletores tanto dos runners quanto das políticas D-1/Intraday e dos testes. Não limite a inclusão a acrescentar um ID: versões históricas têm assertions fixas de cobertura e igualdade entre as duas rotinas. Preserve horários, locks, journals e relatórios já publicados; não criar cron duplicado para contornar a inclusão.
+
 ## Agenda e execução
 
 - Root cron determinístico, sem LLM: `47 7 * * *` America/New_York. O wrapper `scripts/shein-daily-cron.py` do profile Ares prepara e retoma; `scripts/shein-daily-report.py` bloqueia qualquer publicação antes08:00. A preparação antecipada preserva o horário pedido sem colidir com as outras rotinas das08h.
