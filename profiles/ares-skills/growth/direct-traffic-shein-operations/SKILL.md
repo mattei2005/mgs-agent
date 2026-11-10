@@ -13,13 +13,13 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; preserve IDs/request/relógio/selos. Headline≠CTA. Conferir≠escrever. Budget: pedido≠Meta.
+SHEIN≠CAR/CPV; IDs/request/relógio/selos intactos. Headline≠CTA; conferir≠escrever; pedido≠Meta. Separe ação manual, novo lote e emenda; intenção resolvida não exige reconfirmação.
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
 ## Duplicação e recuperação — precedência obrigatória
 
-Antes de escolher um adapter, releia `context/meta-creative-copy-policy.md` e confira a capacidade central instalada. Nas duplicações autorizadas, transforme somente `image_background_gen=OPT_IN` em `OPT_OUT` na cópia, sem nova pergunta; mantenha ausência/OPT_OUT, fonte, mídia, copy, CTA, demais recursos e novas UTMs no destino aprovado. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
+Valide capacidade e `context/meta-creative-copy-policy.md`. Na cópia autorizada, só `image_background_gen` OPT_IN→OPT_OUT; preserve ausência/OPT_OUT, fonte, mídia/copy/CTA, demais recursos e novas UTMs no destino aprovado. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
 
 Quando várias sessões dependerem da mesma correção, defina um único integrador dos arquivos compartilhados antes de editar. Mantenha writers Meta separados por conta/request, informe patches já aplicados e retome pelo runner normal após validar a integração; locks de contas diferentes não dão exclusividade sobre código compartilhado.
 
