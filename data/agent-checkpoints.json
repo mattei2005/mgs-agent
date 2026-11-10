@@ -1502,6 +1502,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-IRIS-UTMS-1569553893958885459",
+      "next_step": "Coletar contas/campanhas, ler tracking final, validar domínios e consolidar mensagem copiável",
+      "objective": "Listar UTMs reais das campanhas criadas 09/11/2026 ET ou agendadas 10/11/2026 ET, por domínio, para Iris",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/iris-1569553893958885459/collect.py",
+      "state": "consulta read-only iniciada pelo catálogo positivo digital trust; sem writes meta/gam",
+      "thread_id": "1569552761673089126",
+      "updated_at": "2026-11-10T03:28:47+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260903-1545129145665593426",
       "next_step": "Aguardar revisão/liberação expressa da Kelly ou conciliação Meta × Drive antes de qualquer elegibilidade ou uso em campanha.",
       "objective": "Tratar e organizar o lote de criativos BR/CAR/PT-BR enviado por Kelly em UPLOAD MANUAL",
@@ -2093,12 +2103,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569495587005530205",
-      "next_step": "Publicar uma conclusão consolidada na origem com journal/nonce/GET, sem novos writesMeta ou replay.",
-      "objective": "Concluir28duplicacoesMavroaG006USD30cada10nov2026 00h03EST semreplayhistorico",
+      "next_step": "Nenhum write pendente; conclusão única entregue por Ares na origem,GET confirmado:1569553392026517505. ACTIVE futuro não comprova serving. Preservar102–110/c3/fontes/IDs.",
+      "objective": "Entregar e validar 28 duplicações MavroaG006(111–138),28conjuntos/60ads,USD840/dia,10nov2026 00h03EST",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569495587005530205/delivery-t_4ac36ea1/verified-final-receipt.json",
-      "state": "complete: 28campanhas111–138/28conjuntos/60ads active configurados; usd840/dia;10nov2026 00h03est;qaexato,checkpointigual,getfinalpass;entreganativapendente.",
+      "state": "completed",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-10T03:22:52+00:00"
+      "updated_at": "2026-11-10T03:25:46+00:00"
     },
     {
       "agent": "ares",
@@ -9655,5 +9665,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T03:22:52+00:00"
+  "updated_at": "2026-11-10T03:28:47+00:00"
 }

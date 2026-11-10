@@ -33,6 +33,36 @@ Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é
 - Quando o operador pedir alteração somente de uma parte, preserve o restante do texto, sua ordem e compactação; devolva o modelo em cerca `text` sem expandi-lo em um formulário novo.
 - Se vários modelos precisarem ser copiados separadamente no Discord, entregue exatamente um por resposta e avance apenas quando o operador disser `próximo`; durante a coleta, confirme `1/N`, `2/N` etc. e faça a revisão cruzada somente depois do último bloco.
 
+## Fechamento de campanhas — mensagem para Iris/AdOps
+
+Ao concluir qualquer pedido autorizado de criação, duplicação ou clonagem de campanhas, incluir na própria resposta final um bloco `text` pronto para o gestor copiar e colar para `@Iris` no canal de adops, solicitando o pré-cadastro dos key values no GAM. Esta entrega é obrigatória para tráfego direto e BOT, em todas as operações do escopo Ares; não altera o executor nem acrescenta callback, cron, write GAM ou envio automático para Iris.
+
+- Resolver o domínio real da operação e validar o escopo pelo checker canônico antes de mencioná-lo. Em pedido com vários domínios, separar um bloco por domínio e estratégia.
+- Extrair os valores literais do tracking final efetivamente conferido no readback dos objetos novos do mesmo pedido, respeitando a localização contratada (Website URL, `url_tags` ou tracking BOT comprovado). Não deduzir UTMs somente pelo nome da campanha, não inventar valores e não alterar tracking para produzir a mensagem.
+- No tráfego direto, listar `utm_adgroup` e `utm_campaign`; no BOT, listar somente `utm_campaign`, preservando o padrão real da operação (por exemplo, `pg_512`). Não impor o padrão de uma operação às demais.
+- Consolidar e deduplicar valores por chave/domínio/estratégia, mantendo a ordem da primeira ocorrência. Excluir objetos não concluídos e valores exclusivos das fontes; valor compartilhado preservado por contrato BOT não é excluído se estiver comprovadamente instalado no alvo novo.
+- Se o resultado for parcial, identificar a parcialidade e incluir apenas a parte efetivamente concluída e verificada; retomar o saldo no mesmo request. Valor ausente, dinâmico não resolvido ou divergente permanece pendência explícita, nunca confirmação de pré-cadastro.
+- Ares apenas prepara a mensagem: o gestor copia e envia; Iris executa o pré-cadastro. Não afirmar envio, cadastro ou sucesso no GAM sem evidência própria e autorização correspondente.
+
+Formato de tráfego direto (substituir os marcadores por dados reais validados):
+
+```text
+@Iris preciso pré-cadastrar os key values utm_adgroup no <domínio validado>:
+<um valor real por linha>
+
+E os utm_campaign:
+<um valor real por linha>
+```
+
+Formato BOT:
+
+```text
+@Iris pré-cadastra no <domínio validado> os utm_campaign:
+<um valor real por linha>
+```
+
+Autoridade: Rodolfo Mattei, confirmação `1569553206055280715`, thread `1569552761673089126`; proposta `1569552761673089126`. Chave canônica: `ares.campaigns.completion.iris-adops-key-values`. Esta regra acrescenta somente o bloco copiável à conclusão nativa já existente; preserva execução, QA, recuperação, gates e demais informações obrigatórias.
+
 ## Relatórios de campanhas ativas e Estimate Health
 
 - Resolver todas as contas do recorte pelo catálogo positivo, aplicar os gates e enumerar suas campanhas na Meta com paginação completa. Reconciliar contas previstas versus consultadas antes de filtrar por Health; consultar somente contas que apareceram na SB não demonstra cobertura de todas as contas.

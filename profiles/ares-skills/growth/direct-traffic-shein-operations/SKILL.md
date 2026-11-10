@@ -13,7 +13,7 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; IDs/request/relógio/selos intactos. Headline≠CTA; conferir≠escrever; pedido≠Meta. Separe ação manual, novo lote e emenda; intenção resolvida não exige reconfirmação.
+SHEIN≠CAR/CPV; preserve IDs/relógio/selos. Headline≠CTA; conferir≠escrever. Separe manual, lote novo e emenda. Reconheça a correção uma vez; execute e avise na origem, sem reafirmações repetidas.
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
