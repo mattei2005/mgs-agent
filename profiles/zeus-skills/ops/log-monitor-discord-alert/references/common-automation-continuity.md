@@ -54,6 +54,8 @@ DTR daily audit uses `scripts/mgs_dtr_continuity.py`:
 
 SHEIN continues to use its canonical per-date/per-slot receipts and nonce rules in `references/shein-daily-and-intraday-reports.md`; this common layer does not change cutoffs, strategy, UI/API policy or report slots.
 
+For a failed SHEIN D-1 wrapper followed by canonical delivery recovery, reconcile the observer instead of replaying the report or rewriting `last-cron-result.json`. `mgs_report_scheduler_health.daily_recovery_receipt` resolves the failed wrapper's New York delivery date to its exact D-1 directory and requires a later completion, matching request/account/thread coverage, per-account delivery journals, unique accepted IDs, GET_VERIFIED intents and frozen content hashes. Other periods, newer failures/logs, partial or mismatched journals remain non-green. Validate the deployed monitor and the supervisor's observation parser, preserve the original failure evidence, and leave the actual queue transition to its active supervisor. A green local predicate and live Discord GET proof are separate checks; neither authorizes touching a concurrent intraday writer or its shared lock.
+
 ## Acceptance and operation
 
 1. Run the affected queue/supervisor/PC1 ingress, worker lifecycle, integration, monitor, resolver and DTR tests in isolated temporary state. Use the installed SB venv for tests importing Playwright, with `PYTHONPATH` including scripts and tests. Set a fixture `CRON_STALE_STATE` to avoid contaminating root-log fixtures with live native job failures; never weaken production probes to make tests pass.

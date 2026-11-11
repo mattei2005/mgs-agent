@@ -893,6 +893,28 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "shein-d1-observer-reconciliation-d9c7bcd5959aa91de38c7c6d",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "operation": "d9c7bcd5959aa91de38c7c6d",
+      "type": "read-only-report-observer-recovery",
+      "path": "/root/mgs-agent/scripts/mgs_report_scheduler_health.py",
+      "sha256": "5d324f6eea5119c1a70b2c33a9abe37e98b1d1fa340072554bb67457bc8c7e4f",
+      "status": "business_get_and_observer_validated_awaiting_supervisor_transition",
+      "reason": "Reconcile failed D-1 wrapper against later exact-date completion, request bindings, delivery journals, GET_VERIFIED intents and frozen hashes; retain original failed wrapper receipt.",
+      "tests": "/root/mgs-agent/tests/test_report_recovery_receipt.py",
+      "tests_passed": 40,
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/d9c7bcd5959aa91de38c7c6d/observer-reconciliation-live-proof.json",
+      "backup": "/root/.hermes/shared/automation-continuity/runs/d9c7bcd5959aa91de38c7c6d/mgs_report_scheduler_health.py.before-observer-reconciliation",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+      "validation": "Live monitor and supervisor observation parser OK; fresh independent Discord GETs verified24 accounts/118 parts/407 campaigns. Business files, original failure receipt and crontab hashes unchanged. Concurrent intraday writer/lock untouched.",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1570086703056814142",
+      "report_infra_readback": true,
+      "business_mutations": 0,
+      "cron_changes": 0
+    },
+    {
       "id": "shein-quiz-host-recovery-d9c7bcd5959aa91de38c7c6d",
       "agent": "zeus",
       "authority_message_id": "1569193434189668453",
@@ -67825,8 +67847,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_report_scheduler_health.py",
-      "size_bytes": 3127,
-      "modified_at": "2026-11-08T22:16:38-05:00"
+      "size_bytes": 6957,
+      "modified_at": "2026-11-11T14:40:03.349951+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_restart_attribution.py",
