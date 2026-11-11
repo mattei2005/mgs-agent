@@ -32,6 +32,9 @@ RODOLFO_ID = '344196393512075265'
 AGENTS = ('zeus', 'atena', 'ares')
 AUTO_ARCHIVE_1_WEEK_MINUTES = 10080
 WARN_WINDOW_SECONDS = 24 * 3600
+# Daily local-time cron can shift by 1h at DST and by seconds between runs.
+# Renew slightly early instead of leaving a scheduling-sized coverage gap.
+SCHEDULE_SAFETY_SECONDS = 2 * 3600
 USER_AGENT = 'MGS-thread-archive-warning-monitor/1.0'
 DISCORD_EPOCH_MS = 1420070400000
 KEEPALIVE_MESSAGE = 'Mantendo a thread ativa para não arquivar automaticamente.'
@@ -159,7 +162,8 @@ def collect_threads(now: dt.datetime) -> tuple[dict[str, dict[str, Any]], list[s
                 continue
             archive_at = activity_ts + dt.timedelta(minutes=auto_archive_minutes)
             remaining = (archive_at - now).total_seconds()
-            if remaining <= 0 or remaining > WARN_WINDOW_SECONDS:
+            # An overdue thread still returned as active needs recovery too.
+            if remaining > WARN_WINDOW_SECONDS + SCHEDULE_SAFETY_SECONDS:
                 continue
             item = by_id.setdefault(thread_id, {
                 'id': thread_id,

@@ -65,15 +65,26 @@ def _account_for_node(node,data):
 def _dependency_for_node(node,data):
  row=_objects(data).get(node,{})
  accounts=row.get('account_ids',[])
- return row if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts) else None
+ if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts):return row
+ # Approved architecture: a freshly reconciled exact corporate SB Page is a
+ # transient read-only dependency, never a writable account object or grant.
+ try:
+  from ares_campaign_v3.eggbev_page_identity import dependency
+  live=dependency(node)
+ except ImportError:live=None
+ if live and all(allowed_account(a,data) for a in live.get('account_ids',[])):return live
+ return None
 
 def _enforce_dependency(clean,params,method,row,data):
  parts=clean.split('/')
+ if (method.upper()=='POST' and len(parts)==2 and parts[1]=='page_backed_instagram_accounts' and row.get('kind')=='page' and row.get('source')=='live_sb_page_dependency' and row.get('pbia_initialization_authorized') is True and not params):return
  if method.upper()!='GET' or len(parts)>2:raise ScopeError(DENY)
  kind=row.get('kind');edge=parts[1] if len(parts)==2 else ''
  fields=set(str(params.get('fields','')).split(','))
  allowed={'page':{'id','name','access_token','instagram_business_account'},'video':{'id','title','length','status','picture','source'},'pixel':{'id','name'},'instagram':{'id','name','username'}}.get(kind,set())
- if edge=='assigned_users' and kind=='page':
+ if edge=='page_backed_instagram_accounts' and kind=='page' and row.get('source')=='live_sb_page_dependency':
+  if fields!={'id','username'} or not set(params)<={'fields','limit'} or int(params.get('limit',10))!=10:raise ScopeError(DENY)
+ elif edge=='assigned_users' and kind=='page':
   if str(params.get('business',''))!=data.get('operational_business_id') or not fields or not fields<={'id','name','tasks'} or not set(params)<={'business','fields','limit','after','before'}:raise ScopeError(DENY)
  elif edge=='thumbnails' and kind=='video':
   if not set(params)<={'fields','limit','after','before'} or (fields!={''} and not fields<={'id','uri','is_preferred','width','height','scale'}):raise ScopeError(DENY)

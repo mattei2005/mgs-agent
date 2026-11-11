@@ -49,8 +49,62 @@ class PageDependencyTests(unittest.TestCase):
         self.assertEqual(result['instagram_user_id'],'82002');self.assertNotIn('access_token',result)
         self.assertIsNone(p.dependency('82001'))
         with self.assertRaises(guard.ScopeError):guard.enforce_meta_path('82001',{'fields':'id,name'},'GET')
+    def test_pbia_initialization_is_exact_and_read_back(self):
+        import importlib.util,json,tempfile
+        from ares_campaign_v3 import eggbev_page_identity as p
+        spec=importlib.util.spec_from_file_location('init_dependency_guard','/root/mgs-agent/scripts/mgs-ares-asset-scope.py');guard=importlib.util.module_from_spec(spec);spec.loader.exec_module(guard)
+        class SB:
+            def api_request(self,*args,**kwargs):return 200,[{'UTM_CAMPAIGN':'pg_23186','FB_PAGE_ID':'82001','PAGE_NAME':'Target Page'}],{}
+        class Meta:
+            made=False;writes=0
+            def graph_get(self,path,token,params):
+                guard.enforce_meta_path(path,params,'GET')
+                if '/' in path:return 200,{'data':[{'id':'82002'}] if self.made else []},{}
+                return 200,{'id':'82001','name':'Target Page','access_token':'synthetic-only'},{}
+            def graph_post_once(self,path,token,body):
+                guard.enforce_meta_path(path,body,'POST');self.made=True;self.writes+=1
+                with selftest.assertRaises(guard.ScopeError):guard.enforce_meta_path('82001',{'name':'wrong'},'POST')
+                return 200,{'id':'82002'},{}
+        selftest=self
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as tmp:
+            request=Path(tmp)/'request.json';request.write_text(json.dumps({'request_id':'offline-only','account_id':'1034081997659047','target_page_token':'pg_23186','commercial_ok_message_id':'1569925441127579672'}))
+            meta=Meta();out=p.resolve(meta,SB(),'synthetic-only','1034081997659047','pg_23186',ensure_pbia=True,request_path=request)
+            self.assertTrue(out['pbia_initialized']);self.assertEqual(meta.writes,1)
+            self.assertEqual(json.loads((Path(tmp)/'pbia-initialization.json').read_text())['state'],'VERIFIED')
+            p.resolve(meta,SB(),'synthetic-only','1034081997659047','pg_23186',ensure_pbia=True,request_path=request);self.assertEqual(meta.writes,1)
     def test_other_account_rejected_before_sb(self):
         from ares_campaign_v3.eggbev_page_identity import resolve
         with self.assertRaises(ValueError):resolve(None,None,'synthetic-only','999999999','pg_23186')
+
+class TargetEngineTests(unittest.TestCase):
+    def engine(self,fake,root):
+        from ares_campaign_v3.engine import CampaignEngine
+        config={'enabled':True,'write_enabled':True,'state_root':str(root/'state'),'audit_root':str(root/'audit'),'require_account_registration':True,'accounts':{'1034081997659047':{'app_key':'test-app','operation':'Eggbev-US-CC-EN-BOT','supported_modes':['clone_target_prestaged'],'ad_serving_route':'direct_and_lineage_verified','target_page_replacement':{'enabled':True,'authorized_by':'344196393512075265','authority_message_id':'1569927267633602693','account_id':'1034081997659047'}}}}
+        return CampaignEngine(config,transport_factory=lambda account:fake)
+    def manifest(self):
+        from ares_campaign_v3.schema import Manifest
+        from ares_campaign_v3.eggbev_create import messenger_welcome_message
+        d=specimen();d['ads'][0]['creative_payload']['asset_feed_spec']['additional_data']={'page_welcome_message':messenger_welcome_message()}
+        return Manifest.from_dict({'schema_version':3,'request_id':'offline-target-clone','operation':'Eggbev-US-CC-EN-BOT','graph_version':'v26.0','created_at':datetime.now(timezone.utc).isoformat(),'campaigns':[d]})
+    def test_real_engine_and_replay(self):
+        import tempfile
+        from eggbev_target_fake import TargetFakeMeta
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as temp:
+            fake=TargetFakeMeta();engine=self.engine(fake,Path(temp));m=self.manifest();result=engine.execute(m)
+            self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE')
+            self.assertEqual(len([x for x in fake.objects.values() if x.get('_kind')=='campaign']),1)
+            self.assertEqual(len([x for x in fake.objects.values() if x.get('_kind')=='adset']),1)
+            ads=[x for x in fake.objects.values() if x.get('_kind')=='ad'];self.assertEqual(len(ads),2)
+            self.assertEqual(len([x for x in ads if x['status']=='PAUSED']),1)
+            before=len(fake.calls);self.assertTrue(engine.execute(m)['idempotent_replay']);self.assertEqual(before,len(fake.calls))
+    def test_crash_after_unknown_seed_never_duplicates(self):
+        import tempfile
+        from eggbev_target_fake import TargetFakeMeta
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as temp:
+            fake=TargetFakeMeta(crash_seed=True);engine=self.engine(fake,Path(temp));m=self.manifest()
+            with self.assertRaises(KeyboardInterrupt):engine.execute(m)
+            result=engine.execute(m);self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE')
+            self.assertEqual(len([x for x in fake.objects.values() if x.get('_kind')=='ad']),2)
+            self.assertEqual(len([x for x in fake.calls if x[1].startswith('target_seed_create')]),1)
 
 if __name__=='__main__':unittest.main()

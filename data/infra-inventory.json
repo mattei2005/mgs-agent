@@ -63558,6 +63558,169 @@
       ],
       "validation_note": "initial interactive Python 3.14 lacked PyYAML; reran successfully with cron /usr/bin/python3, no dependency installation",
       "updated_at": "2026-11-11T04:17:12.902632+00:00"
+    },
+    {
+      "id": "discord-week-global-1569929576786690209",
+      "origin_thread_id": "1569928012101845054",
+      "authority_message_id": "1569929576786690209",
+      "actor": "zeus",
+      "coverage": "72 accessible parent channels; active across zeus/atena/ares and all public/private archived pages, complete; THREAD_UPDATE audit paginated to retention boundary",
+      "scanned_threads_unique": 1348,
+      "week_total": 157,
+      "initial_active_week": 108,
+      "final_active_week": 110,
+      "restored": [
+        "1521035900086255659",
+        "1525220563642089535"
+      ],
+      "manual_archives_preserved": [
+        "1528844141906100254",
+        "1529147682411778068",
+        "1559670596252733561",
+        "1517183244297179251",
+        "1555381168894115912",
+        "1541578606076231750",
+        "1541578596253175858",
+        "1543312825890381865"
+      ],
+      "historical_archive_authority_unresolved": [
+        "1506458013081407580",
+        "1507572808648229026",
+        "1507569784869617836",
+        "1507567368136687729",
+        "1507564957133438987",
+        "1507554479627567115",
+        "1506533382891507793",
+        "1527441676975738981",
+        "1541975432574931005",
+        "1534202131236655245",
+        "1533672578735013889",
+        "1527428793600315533",
+        "1524986086156144811",
+        "1515170623964450947",
+        "1524807803129036912",
+        "1522619776072155347",
+        "1521556870526009354",
+        "1521188046169702461",
+        "1521028675707994293",
+        "1519732093398159581",
+        "1520998070693924925",
+        "1521360665305157672",
+        "1519701756722806825",
+        "1522132346453758064",
+        "1512547605823881328",
+        "1513004275926700114",
+        "1519875766463238256",
+        "1509270717022077059",
+        "1512539907468558477",
+        "1509199259663339650",
+        "1508906079642456084",
+        "1547337897085108245",
+        "1518648967360024757",
+        "1517682975234326729",
+        "1543280854024060999",
+        "1539427734294499420",
+        "1540426218405363873",
+        "1543659546093027519",
+        "1542597966400065536"
+      ],
+      "historical_archive_policy": "preserved; no implicit bulk reopen",
+      "keepalive_readback": [
+        {
+          "thread_id": "1539826050765299872",
+          "message_id": "1569930142023819305",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1541578622106865815",
+          "message_id": "1569930149456125983",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1542892943352799242",
+          "message_id": "1569930138324439071",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1542892955315081246",
+          "message_id": "1569930134524534916",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1542892971186454719",
+          "message_id": "1569930129814192179",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1543333373945053184",
+          "message_id": "1569930145559609405",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1551768281688580096",
+          "message_id": "1569930777813188619",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1552033992474234982",
+          "message_id": "1569930154090962975",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        },
+        {
+          "thread_id": "1558127274073788488",
+          "message_id": "1569930126081392733",
+          "absence_http": 404,
+          "active": true,
+          "activity_retained": true
+        }
+      ],
+      "tests_passed": 14,
+      "schedule_recovery": "2h daily/DST safety margin; overdue-but-active candidates no longer discarded; only 7-day threads eligible",
+      "checkpoint_state": "audit_complete_recovery_validated_historical_reopen_requires_decision",
+      "completed_at": "2026-11-11T04:25:27Z",
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/thread-week-global-1569929576786690209/monitor-discord-thread-archive-warnings.py",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+          "sha256": "ac3f50502e370c3e4a0b7c652c6d38b26b49e7f24ed76913b07fb236c2949ba2",
+          "size_bytes": 18343,
+          "modified_at": "2026-11-11T04:22:58.982160+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_discord_keepalive_window.py",
+          "sha256": "cafd584ab24f8c6165f88e23d8bf70f3845da2e335ca9515a5c8927d7c66ec6b",
+          "size_bytes": 1924,
+          "modified_at": "2026-11-11T04:23:19.776201+00:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-thread-auto-archive-warning-cron.md",
+          "sha256": "62403505a3364d1dc0a026491f3d94b3cbd28e4425815aad31086c0376e9cc9b",
+          "size_bytes": 5899,
+          "modified_at": "2026-11-11T04:23:39.054239+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-thread-auto-archive-warning-cron.md",
+          "sha256": "62403505a3364d1dc0a026491f3d94b3cbd28e4425815aad31086c0376e9cc9b",
+          "size_bytes": 5899,
+          "modified_at": "2026-11-11T04:23:39.054239+00:00"
+        }
+      ]
     }
   ],
   "profile_skill_references": [
@@ -67655,8 +67818,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
-      "size_bytes": 18072,
-      "modified_at": "2026-10-06T10:18:52-04:00"
+      "size_bytes": 18343,
+      "modified_at": "2026-11-11T04:22:58.982160+00:00",
+      "sha256": "ac3f50502e370c3e4a0b7c652c6d38b26b49e7f24ed76913b07fb236c2949ba2"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",

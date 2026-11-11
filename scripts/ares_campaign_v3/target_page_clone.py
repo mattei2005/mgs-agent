@@ -180,7 +180,17 @@ def run(engine,bundle,transport,record):
     record['created_children']=len(record['ad_ids']);record['stage']='children_created_readback_pending';_save()
     results=engine._batch(bundle,transport,engine._readback_ops(campaign_ids),'consolidated_readback')
     record['readback_results']=[{'name':x.name,'code':x.code,'body':x.body} for x in results]
-    verify(bundle,record);_save();return campaign_ids
+    try:
+        verify(bundle,record)
+    except Exception:
+        # A semantic failure must not leave an unsafe future ACTIVE parent.
+        engine._batch(bundle,transport,[BatchOperation(f'target_qa_hold_{i}','POST',cid,{'status':'PAUSED'},kind='campaign_finalize') for i,cid in enumerate(campaign_ids,1)],'target_semantic_failure_hold')
+        for ci in range(1,len(campaign_ids)+1):
+            if f'campaign_finalize_{ci}' in completed:completed.remove(f'campaign_finalize_{ci}')
+        held=engine._batch(bundle,transport,[BatchOperation(f'target_hold_readback_{i}','GET',cid+'?fields=id,status',kind='readback') for i,cid in enumerate(campaign_ids,1)],'target_semantic_failure_hold_readback')
+        if any(row.body.get('status')!='PAUSED' for row in held):raise ValueError('target semantic failure: PAUSED containment unconfirmed')
+        record['semantic_hold']='PAUSED_confirmed';_save();raise
+    _save();return campaign_ids
 
 
 def verify(bundle,record):
