@@ -5,6 +5,7 @@ import unittest
 
 HOME = Path('/root/.hermes/profiles/ares')
 spec = importlib.util.spec_from_file_location('quiz_host_daily', HOME / 'scripts/shein-daily-report.py')
+assert spec is not None and spec.loader is not None
 daily = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(daily)
 

@@ -29,6 +29,12 @@
 
 - Se Insights selecionar uma campanha que gastou no período, mas o edge da conta omitir seus conjuntos/anúncios por estarem arquivados, consultar somente os IDs selecionados na campanha exata com `effective_status=["ARCHIVED"]`. Validar campaign_id e account_id, ausência de IDs duplicados e preservar a observação e a origem da recuperação. Não excluir a linha financeira, inferir lance/quiz, mudar status ou usar um vazio como configuração válida. O coletor compartilhado `recover_archived_configuration` deve valer tanto para D-1 quanto intraday e continuar fail-closed se o conjunto permanecer indisponível.
 
+## Quiz de entrada versus domínio de receita
+
+- Resolver o quiz pelo CTA real dos anúncios da conta/campanha exata. O domínio de entrada aprovado `lp-yolo.com` pertence às quizzes do Yolokfx (`context/acquisition.md`); aceitá-lo somente nessa família, sem substituir `yolokfx.com` como publisher ou origem financeira da SB. O coletor D-1 é compartilhado pelo intraday: manter a correção em `reporting_quiz`, não em cópias por rodada.
+- Quando a coluna Nº estourar a largura fixa, diagnosticar os componentes antes de ampliar ou truncar. Um `n/d` causado por host de entrada não reconhecido pode ocupar mais espaço que o quiz confirmado. Corrigir a evidência, preservando IDs, COPY, largura aprovada e valores financeiros; host desconhecido ou evidência ambígua continua `n/d`/`misto`, nunca inferido do nome da campanha.
+- Validar a correção com materialização offline das mesmas24 fontes e comparação dos campos financeiros; só depois retomar o runner canônico, no mesmo journal/data, sem tocar em intents já congeladas. Semântica de host não autoriza catch-up expirado nem mudança de layout.
+
 ## Validação e colisões
 
 - Aplicar `context/cron-scheduling-policy.md`: oito datas civis, todos os profiles, root/system cron, timers e contratos de aplicação; considerar DST e o timezone real observado do daemon.

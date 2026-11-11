@@ -893,6 +893,25 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "shein-quiz-host-recovery-d9c7bcd5959aa91de38c7c6d",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "original_authority_message_ids": ["1562060116717736078", "1562060468074455082"],
+      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-report.py",
+      "sha256": "002bd1fa7f26a99b16145c07ddabd84a56839a4b1258401ed39236e2dbf1882b",
+      "type": "shared-daily-intraday-report-quiz-host-fix",
+      "status": "offline_validated_canonical_resume_refresh_timeout_pending",
+      "reason": "Recognize approved lp-yolo.com quiz CTAs only for Yolokfx without changing financial publisher, column widths or campaign data.",
+      "tests": "/root/mgs-agent/tests/test_shein_reporting_quiz_hosts.py",
+      "validation": "6 new tests and188 regressions passed; same24 sources rendered407 campaigns offline; existing financial model fields unchanged.",
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/d9c7bcd5959aa91de38c7c6d/recovery-evidence.json",
+      "backup": "/root/.hermes/shared/automation-continuity/runs/d9c7bcd5959aa91de38c7c6d/shein-daily-report.py.before",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+      "pending": "Same2026-11-10 canonical refresh, materialize, delivery and GET. No delivery intents or posts occurred before the300s timeout.",
+      "cron_changes": 0,
+      "meta_writes": 0
+    },
+    {
       "id": "autopush-b013-local-receipt-1569757570787311648",
       "actor": "zeus",
       "type": "autocommit_guardrail_recovery",
