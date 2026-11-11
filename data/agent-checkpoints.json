@@ -7687,6 +7687,16 @@
     },
     {
       "agent": "ares",
+      "id": "eggbev-pg23185-1570142923516022827",
+      "next_step": "Confirmar acesso da Page ao anunciante da conta; qualquer mudanca de credencial/permissao exige gate proprio. Manutencao isolada/testada do runner para seeds antes de retomar o mesmo request, preparar manifest e pedir OK final. Se horario expirar, solicitar novo horario.",
+      "objective": "Duplicar 1x Cornell C01 com Page pg_23185, 3 videos 163-165, USD35/dia e inicio 2026-11-11 13:45 ET.",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23185-1570142923516022827/request.json",
+      "state": "preflight_blocked_no_write: fonte exata encontrada; 3 finais active e 3 seeds paused. page sb beatrix moorcroft elegivel, mas get meta http400 codigo10. tres videos confirmados no estoque; sem reserva/upload/publicacao. runner rejeita seis objetos-fonte para tres midias.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-11T18:30:57+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "eggbev-skill-route-cron-governance-20260831",
       "next_step": "Use current cron inventory and route map; no unresolved schedule decision remains in this checkpoint.",
       "objective": "Separar rotas Eggbev em skills funcionais e institucionalizar política global de anti-colisão de cron",
@@ -9857,5 +9867,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T18:17:42+00:00"
+  "updated_at": "2026-11-11T18:30:57+00:00"
 }
