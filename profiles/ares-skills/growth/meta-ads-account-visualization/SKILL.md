@@ -59,6 +59,7 @@ id,name,status,object_type,effective_object_story_id
 
 ## Campanha mais recente e configuração por nível
 
+- Em consulta de configuração ou nomenclatura, mostrar o `name` completo e literal da campanha retornado pela Meta em bloco copiável; uma abreviação pode complementar, mas nunca substituir o nome cadastrado, pois omite tokens operacionais.
 - Para “última campanha rodando”, paginar as campanhas ativas e ordenar por `created_time` em código; mencionar empates de criação/lote em vez de inventar precedência temporal. `ACTIVE` comprova status, não entrega: confirmar impressões/gasto em Insights do período antes de afirmar veiculação.
 - Para configuração, seguir a sequência `campanha → conjuntos/anúncios paginados → detalhes dos creatives únicos`. Conferir contagens e vínculos entre níveis antes de declarar cobertura completa. Receita e campos: `references/campaign-configuration.md`.
 - Interpretar objetivo, evento de conversão e estratégia por campos reais, nunca pelos sufixos do nome; objetivo Vendas não implica otimização para compra, e uma marcação de app no nome não comprova destino app.
