@@ -242,6 +242,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1570181603597226005",
+      "next_step": "Executar slots finitos na origem com intent/nonce/GET, sem ampliar coorte;reconciliar mesmo request em falhas;encerrar na expiracao.",
+      "objective": "Relatorios de CPR a cada 30min da campanha nova009 Vizioid04 somente11/11/2026",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570181603597226005/manifest.json",
+      "state": "agenda finita ativa:15slots16:33-23:33est;expira12/11 00h. coorte fixa009;primeira entrega16:04est get verificado,gastousd0,resultados0,cprn/d.21testes pass;wrapper dry-run/replay/no-op;agenda global pre/pos sem colisao operacional;sem write meta/sb.",
+      "thread_id": "1558147173663776768",
+      "updated_at": "2026-11-11T21:05:31+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -6287,6 +6297,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-1570181680755376220",
+      "next_step": "Executar somente IDs congelados nos slots30min; expirar12nov00hEST sem API; sem alteracoes Meta",
+      "objective": "CPR30min campanhas005,006 Growpowerhub04 ate fim11nov",
+      "source": "data/ares/meta-ads/state/cpr-updates/1570181680755376220/manifest.json",
+      "state": "primeira entrega16:06est get verificada:005/006 ativas, gastousd0, sem resultados;40checks pass; agenda finita habilitada16:33-23:33est; meta live america/new_york prevalece historico",
+      "thread_id": "1558147134040178828",
+      "updated_at": "2026-11-11T21:07:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -9927,5 +9947,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T20:34:24+00:00"
+  "updated_at": "2026-11-11T21:07:36+00:00"
 }
