@@ -116,6 +116,26 @@ def snowflake_time(sf: str | None) -> dt.datetime | None:
     return dt.datetime.fromtimestamp(ms / 1000, tz=dt.timezone.utc)
 
 
+def thread_activity_time(thread: dict[str, Any]) -> dt.datetime | None:
+    """Honor newer Discord lifecycle activity, not only the last message.
+
+    Human unarchive/duration changes can renew archive_timestamp without a new
+    message. Deleted keepalives can instead leave a newer last_message_id.
+    Use the newest valid signal so the enforcer agrees with the keepalive.
+    """
+    signals = [snowflake_time(str(thread.get("last_message_id") or ""))]
+    raw = (thread.get("thread_metadata") or {}).get("archive_timestamp")
+    if isinstance(raw, str):
+        try:
+            stamp = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            if stamp.tzinfo is not None:
+                signals.append(stamp.astimezone(dt.timezone.utc))
+        except ValueError:
+            pass
+    valid = [stamp for stamp in signals if stamp is not None]
+    return max(valid) if valid else snowflake_time(str(thread.get("id") or ""))
+
+
 def iso(ts: dt.datetime | None) -> str:
     if ts is None:
         return "unknown"
@@ -165,7 +185,7 @@ def main() -> int:
             if meta.get("archived"):
                 continue
             duration = int(meta.get("auto_archive_duration") or 1440)
-            last_at = snowflake_time(str(thread.get("last_message_id") or thread.get("id")))
+            last_at = thread_activity_time(thread)
             cutoff = (last_at or now) + dt.timedelta(minutes=duration + args.grace_minutes)
             name = str(thread.get("name") or "")[:80]
             if cutoff > now:

@@ -240,7 +240,7 @@ class CampaignSpec:
                 raise ManifestError('exact numeric reference identities required')
             if 'target_page_id' in reference and re.fullmatch(r'[1-9][0-9]+', str(reference['target_page_id'])) is None:
                 raise ManifestError('exact numeric target Page identity required')
-        if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
+        if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged", "clone_target_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
@@ -262,8 +262,8 @@ class CampaignSpec:
         ads = tuple(
             AdSpec.from_dict(
                 item,
-                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch"} or tracking_aware_pure_clone),
-                require_media=(mode in {"clone_prestaged", "from_zero_prestaged"}),
+                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch", "clone_target_prestaged"} or tracking_aware_pure_clone),
+                require_media=(mode in {"clone_prestaged", "from_zero_prestaged", "clone_target_prestaged"}),
             )
             for item in (value.get("ads") or [])
         )
@@ -274,7 +274,10 @@ class CampaignSpec:
         adset_create = value.get("adset_create") or {}
         if not isinstance(campaign_create, dict) or not isinstance(adset_create, dict):
             raise ManifestError("campaign_create and adset_create must be objects")
-        if mode == "clone_prestaged":
+        if mode == "clone_target_prestaged":
+            if not source_campaign_id or not source_adset_id:
+                raise ManifestError("clone_target_prestaged requires exact source campaign/adset references")
+        elif mode == "clone_prestaged":
             if not source_campaign_id or not source_adset_id:
                 raise ManifestError("clone_prestaged requires source_campaign_id and source_adset_id")
             if len(ads) < 1 or len(ads) > 5:
@@ -430,6 +433,9 @@ class CampaignSpec:
             reference=reference,
         )
         from .shein_native_inheritance import require_shape
+        if mode == "clone_target_prestaged":
+            from .target_page_clone import validate_shape
+            validate_shape(result)
         try:
             require_shape(result)
             from .shein_reference_destination import require_shape as require_reference_shape

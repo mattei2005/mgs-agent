@@ -291,7 +291,13 @@ class Planner:
                 legacy_pure_clone = mode == "pure_clone" and all(not campaign.ads for campaign in chunk)
                 if mode == "pure_clone" and not (tracking_aware_pure_clone or legacy_pure_clone):
                     raise ValueError("a pure_clone bundle cannot mix legacy deep-copy and tracking-aware routes")
-                if legacy_pure_clone:
+                if mode == "clone_target_prestaged":
+                    from .target_page_clone import stages as target_stages
+                    stages = (*target_stages(chunk), self._readback_placeholders(chunk))
+                    outer_write_calls = 7
+                    if sum(len(c.ads) for c in chunk) > self.max_ads_per_batch:
+                        raise ValueError("target clone ad batch exceeds max_ads_per_batch")
+                elif legacy_pure_clone:
                     stages = (self._pure_stage(chunk), self._pure_update_stage(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 2
                 elif mode in {"clone_prestaged", "clone_page_switch"} or tracking_aware_pure_clone:

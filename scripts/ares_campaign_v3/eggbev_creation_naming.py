@@ -99,7 +99,8 @@ def verify_live_reservation(request_id,snapshots,policy=None):
 
 def validate_manifest(manifest,policy=None):
  p=policy or load_policy()
- relevant=[c for c in manifest.campaigns if c.mode==p['mode'] and applies(manifest.created_at,c.account_id,p)]
+ extension=p.get('duplication_with_replacements_extension') or {}
+ relevant=[c for c in manifest.campaigns if applies(manifest.created_at,c.account_id,p) and (c.mode==p['mode'] or (c.mode=='clone_target_prestaged' and extension.get('status')=='active' and c.account_id in extension.get('account_ids',[])))]
  if not relevant:return
  row=allocation(manifest.request_id,p)
  if not row or len(relevant)!=row['count']:raise NamingError('real request atomic naming reservation required')

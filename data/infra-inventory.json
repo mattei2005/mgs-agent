@@ -63453,6 +63453,111 @@
         "billing_changes": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "discord-thread-renewal-1569928012101845054",
+      "actor": "zeus",
+      "type": "safe_monitor_recovery",
+      "origin_thread_id": "1569928012101845054",
+      "authority_message_id": "1569928012101845054",
+      "standing_authority": "recover safe monitor failures; preserve seven-day keepalive policy",
+      "cause": "stale enforcer ignored renewed archive_timestamp; Discord audit proves Ares archived the 4 human-renewed threads at 2026-11-05T16:00Z",
+      "correction": "max(valid timezone-aware archive_timestamp,last_message_id), creation fallback only if neither exists",
+      "state": "recovery_validated",
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/thread-hide-1569928012101845054/discord-archive-stale-agent-threads.py",
+      "tests_passed": 8,
+      "live_apply": {
+        "checked": 115,
+        "stale": 0,
+        "archived": 0,
+        "errors": 0
+      },
+      "readback": [
+        {
+          "id": "1567930204477849701",
+          "name": "Relatorio Intraday",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1565032888347664495",
+          "name": "Conta 03 Aquecimento",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1565032879040499744",
+          "name": "Conta 02 Aquecimento",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1565032671669919827",
+          "name": "Conta 03 Criar Campanhas",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1565032661557313747",
+          "name": "Conta 02 Criar Campanhas",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1543333373945053184",
+          "name": "Conta 01 Aquecimento",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1541578622106865815",
+          "name": "-Regras",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        },
+        {
+          "id": "1541578556037927053",
+          "name": "Conta 01 Criar Campanhas",
+          "http": 200,
+          "archived": false,
+          "duration": 10080
+        }
+      ],
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
+          "sha256": "35452fc5d6fd0f72ea510bb683a39e73d6c5a23ecd6a09f796c64aa10edb07d4",
+          "size_bytes": 8642,
+          "modified_at": "2026-11-11T04:15:47.786312+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_discord_archive_activity.py",
+          "sha256": "1080cc6c5cf37088138f97129b5026cba50dedf9c85edcf367c27a9516509c56",
+          "size_bytes": 3647,
+          "modified_at": "2026-11-11T04:16:35.779407+00:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-stale-thread-archive-enforcement-2026-06-30.md",
+          "sha256": "36b0282f57eb3324e8a33c10b23a0e04772f0c0fbd603f178a32a29d8146761e",
+          "size_bytes": 3588,
+          "modified_at": "2026-11-11T04:16:24.562385+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-stale-thread-archive-enforcement-2026-06-30.md",
+          "sha256": "36b0282f57eb3324e8a33c10b23a0e04772f0c0fbd603f178a32a29d8146761e",
+          "size_bytes": 3588,
+          "modified_at": "2026-11-11T04:16:24.562385+00:00"
+        }
+      ],
+      "validation_note": "initial interactive Python 3.14 lacked PyYAML; reran successfully with cron /usr/bin/python3, no dependency installation",
+      "updated_at": "2026-11-11T04:17:12.902632+00:00"
     }
   ],
   "profile_skill_references": [
@@ -66779,8 +66884,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
-      "size_bytes": 7743,
-      "modified_at": "2026-07-12T13:45:21-04:00"
+      "size_bytes": 8642,
+      "modified_at": "2026-11-11T04:15:47.786312+00:00",
+      "sha256": "35452fc5d6fd0f72ea510bb683a39e73d6c5a23ecd6a09f796c64aa10edb07d4"
     },
     {
       "path": "/root/mgs-agent/scripts/discord-bot-post.py",

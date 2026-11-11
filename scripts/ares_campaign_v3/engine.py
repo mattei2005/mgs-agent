@@ -1617,7 +1617,10 @@ class CampaignEngine:
                 from .shein_reviewed_background import resolve_bundle
                 bundle = resolve_bundle(self, bundle, transport, record)
                 mode = bundle.campaigns[0].mode
-                if previous_failed is not None:
+                if mode == "clone_target_prestaged":
+                    from .target_page_clone import run as run_target_clone
+                    ids = run_target_clone(self, bundle, transport, record)
+                elif previous_failed is not None:
                     if mode in {"clone_prestaged", "clone_page_switch"}:
                         ids = self._recover_prestaged_bundle(bundle, transport, record)
                     elif mode == "from_zero_prestaged":
