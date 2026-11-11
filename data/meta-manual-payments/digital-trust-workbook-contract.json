@@ -731,21 +731,9 @@
   ],
   "pending_sheet_reclassification": null,
   "invoice_refresh_each_tick": true,
-  "general_refresh_blocker": {
-    "status": "waiting_human",
-    "kind": "target_billing_2fa",
-    "read_at": "2026-11-10T21:09:48.683254-05:00",
-    "pending_stages": [
-      "accounts_list_H_36",
-      "new_card_history_events_10",
-      "final_API_reconciliation"
-    ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T2102/closure-current.json",
-    "owner": "zeus",
-    "no_bypass": true
-  },
+  "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261110T210507760321",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261111T080509141255",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",
