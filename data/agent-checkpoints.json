@@ -3004,12 +3004,12 @@
     {
       "agent": "ares",
       "id": "EGGBEV-301-PG23186-1569925441127579672",
-      "next_step": "Comprovar bijecao de midia IDs derivados;manutencao autorizada separada se necessaria;retomar somente QA/ativacao/finalize dos IDs existentes",
-      "objective": "Publicar301 Cornell Loan USD35/dia sob OK inicio imediato",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-301-pg23186-1569925441127579672/execution-now-1570023114514104391/manifest.json",
-      "state": "recovery_pending;campaign120251157092950629 criado_paused_containment_confirmed;1adset3final_ads3seeds_exist;meta_rematerialized6videoids;no_replay;original_assets_manifests_preserved",
+      "next_step": "Nenhum replay/criacao/ativacao pendente. Aguardar revisao Meta normal; qualquer manutencao futura do wrapper deve ser separada da campanha publicada;erro inicial e selos preservados.",
+      "objective": "Publicar301 Cornell Loan USD35/dia3videos160-162 inicio imediato",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-301-pg23186-1569925441127579672/execution-now-1570023114514104391/final.json",
+      "state": "complete_verified_recovery;campaign120251157092950629_active;1adsetactive3finaladsactive_pending_review3seedpaused;six_variants_byte_identical_and_unchanged_comparatorpass;source300_unchanged;3stockusadosreceipts_verified;inventory02_testing_em_uso;ledgercommitted;lease_released;no_serving_observed_yet",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-11T10:36:37+00:00"
+      "updated_at": "2026-11-11T10:45:19+00:00"
     },
     {
       "agent": "ares",
@@ -9847,5 +9847,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T10:36:37+00:00"
+  "updated_at": "2026-11-11T10:45:19+00:00"
 }
