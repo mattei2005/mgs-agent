@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "zone_id": "0a38ce4f11fedd8f03e02fcc07601d74",
+  "hosts": [
+    "vagaaqui.com",
+    "www.vagaaqui.com"
+  ],
+  "thread_id": "1569851196234014781",
+  "credential_item": "Cloudflare MGS Admin Token - mattei2005",
+  "start": "2026-11-11T01:38:29Z",
+  "end": "2026-12-11T01:38:29Z",
+  "request_source": "eyeball",
+  "dataset": "httpRequestsAdaptiveGroups",
+  "period_timezone": "UTC",
+  "settling_hours": 3,
+  "scheduler": "46 * * * *",
+  "stagger_seconds": 7,
+  "authority_message_id": "1569887564804915231",
+  "requested_by_discord_id": "963808102891798649",
+  "newsfolha_in_scope": false,
+  "shutdown": "After all clipped daily slices and final readback, status completed; later ticks have zero external requests.",
+  "failure_policy": "Bounded transport retry; hourly missing-stage recovery, stop provider attempts after 5 consecutive failed cycles or credential/authz blocker."
+}
