@@ -115,4 +115,15 @@ class TargetEngineTests(unittest.TestCase):
             campaigns=[x for x in fake.objects.values() if x.get('_kind')=='campaign']
             self.assertEqual(len(campaigns),1);self.assertEqual(campaigns[0]['status'],'PAUSED')
 
+class TargetUploaderTests(unittest.TestCase):
+    def test_association_proves_ids_before_ready_and_is_not_repeated(self):
+        import importlib.util
+        from unittest.mock import patch
+        from ares_campaign_v3.prestage import AdAccountVideoUploader
+        spec=importlib.util.spec_from_file_location('target_uploader_test','/root/mgs-agent/scripts/ares-eggbev-target-clone.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        uploader=m.TargetAccountUploader(common=object(),user_token='synthetic-only',account_id='1034081997659047');events=[];proof={'91001':{'associated':True}}
+        with patch.object(AdAccountVideoUploader,'verify_association',side_effect=lambda ids:(events.append('association') or proof)) as check,patch.object(AdAccountVideoUploader,'wait_ready',side_effect=lambda ids:(events.append('ready') or {'91001':{'ready':True}})):
+            uploader.wait_ready(['91001']);self.assertEqual(uploader.verify_association(['91001']),proof)
+            self.assertEqual(events,['association','ready']);self.assertEqual(check.call_count,1)
+
 if __name__=='__main__':unittest.main()

@@ -69,6 +69,15 @@ def selected(request, base):
 
 
 def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
+    # Resolve a supported exact catalogue name for proof scheduling only; never
+    # mutate the immutable intake/job or infer an account from a display label.
+    if (str(request.get('account')) != str(account_id)
+            and not str(request.get('account')).isdigit()):
+        from . import shein_single_clone as driver
+        resolved = driver.lookup_account(request['account'])
+        if str(resolved['account_id']) != str(account_id):
+            raise ValueError('queue account resolution mismatch')
+        request = {**request, 'account': str(account_id)}
     rid = request['request_id']
     if terminal(state(base, rid)):
         return []

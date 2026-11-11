@@ -187,10 +187,28 @@ def capture_live(base, rec, common, token):
     return sorted(result, key=lambda c:c['id'])
 
 
+def scheduling_identity(campaigns):
+    """Historical replay fence is not a freeze of external delivery/review state.
+
+    Compare all pinned configuration, IDs and actual media. Preserve both live
+    and baseline status/review facts separately; this is never a QA certificate.
+    Deleted/archived objects or changed identity/configuration still fail closed.
+    """
+    result = copy.deepcopy(campaigns)
+    for campaign in result:
+        objects = [campaign] + campaign['adsets'] + campaign['ads']
+        for obj in objects:
+            if obj.get('status') not in {'ACTIVE', 'PAUSED'}:
+                raise ValueError('manual takeover historical object no longer live')
+            for key in ('status', 'effective_status', 'issue_codes', 'ad_review_feedback'):
+                obj.pop(key, None)
+    return result
+
+
 def verify_live(base, rid, common, token):
     rec = validate(base, rid)
     current = capture_live(base, {'campaign_ids':[c['id'] for c in rec['campaigns']]}, common, token)
-    if current != rec['campaigns']:
+    if scheduling_identity(current) != scheduling_identity(rec['campaigns']):
         raise ValueError('manual takeover historical live facts changed; dependency retained')
     return {'classification':STATUS, 'state_sha256':rec['pins'][str(pinned_paths(base,rid,engine_root(base))[0].relative_to(base))],
             'record_sha256':sha(path(base,rid)),

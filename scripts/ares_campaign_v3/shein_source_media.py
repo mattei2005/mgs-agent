@@ -27,6 +27,20 @@ def inventory_path(base):
 def same_resume_request(base, persisted, original):
     if persisted == original:
         return True
+    if (isinstance(persisted, dict) and isinstance(original, dict)
+            and persisted.get('account') != original.get('account')):
+        from . import shein_single_clone as driver
+        try:
+            left = driver.lookup_account(persisted['account'])['account_id']
+            right = driver.lookup_account(original['account'])['account_id']
+        except (KeyError, ValueError):
+            return False
+        if left != right:
+            return False
+        persisted = {**persisted, 'account': left}
+        original = {**original, 'account': right}
+        if persisted == original:
+            return True
     if original.get('mode', 'pure_clone') != 'pure_clone':
         return False
     # Compare only the runner's canonical defaults, not arbitrary field subsets.

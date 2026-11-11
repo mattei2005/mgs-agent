@@ -24,6 +24,19 @@ R=Path('/root/mgs-agent');CONFIG=R/'data/ares/meta-ads/engine-v3/config.json';IN
 ACCOUNT='1034081997659047';MODE='clone_target_prestaged'
 
 
+class TargetAccountUploader(AdAccountVideoUploader):
+    """Prove fresh account provenance before direct ready GETs, once per batch."""
+    def wait_ready(self,video_ids):
+        proof=super().verify_association(video_ids)
+        if any(not row.get('associated') for row in proof.values()) or set(proof)!=set(video_ids):
+            raise ValueError('uploaded target media association unconfirmed; no ready GET or upload replay')
+        self._target_association=proof
+        return super().wait_ready(video_ids)
+    def verify_association(self,video_ids):
+        cached=getattr(self,'_target_association',{})
+        return cached if set(cached)==set(video_ids) else super().verify_association(video_ids)
+
+
 def load(path):return json.loads(Path(path).read_text())
 def save(path,value):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_suffix(path.suffix+'.new');tmp.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');os.replace(tmp,path)
@@ -37,7 +50,7 @@ def request_load(path):
     if q.get('account_id')!=ACCOUNT or q.get('operation')!='Eggbev-US-CC-EN-BOT' or q.get('duplicate_count')!=1:
         raise ValueError('this intake requires one exact Eggbev01 replacement request; use independent requests for batches')
     if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',q.get('request_id','')) is None:raise ValueError('safe exact request_id required')
-    if not q.get('commercial_ok_message_id') or not q.get('media_filenames') or len(q['media_filenames']) not in {1,2,3,4,5}:raise ValueError('approved exact request/media missing')
+    if not q.get('commercial_ok_message_id') or not q.get('media_filenames') or len(q['media_filenames']) not in {1,2,3,4,5} or len(set(q['media_filenames']))!=len(q['media_filenames']):raise ValueError('approved exact unique request/media missing')
     if datetime.fromisoformat(q['start_time'])<=datetime.now(timezone.utc):raise ValueError('requested start expired; ask operator, never shift it')
     for value in [ACCOUNT,*naming.load_policy()['account_ids']]:
         out=subprocess.run(['python3',str(R/'scripts/mgs-ares-asset-scope.py'),'check-account',value,'--json'],capture_output=True,text=True,check=True)
@@ -87,6 +100,10 @@ def build(q,source,page,selected,registry,allocation):
 def prepare(path,confirm=False):
     if not confirm:raise ValueError('prepare requires --confirm-prepare')
     q=request_load(path);home=Path(path).parent;cfg=load(CONFIG)
+    if (home/'summary.json').exists() and (home/'manifest.json').exists():
+        existing=load(home/'manifest.json');summary=load(home/'summary.json')
+        if verify_prevalidation(existing) and summary.get('digest')==existing['prevalidation']['content_digest']:
+            return summary
     if MODE not in cfg['accounts'][ACCOUNT]['supported_modes']:raise ValueError('validated target clone mode not released in exact account')
     conflict=reader_block_reason(ACCOUNT,cfg['state_root'])
     if conflict and conflict.get('request_id')!=q['request_id']:raise ValueError('another request owns account; no media writes')
@@ -102,6 +119,7 @@ def prepare(path,confirm=False):
         matches=[x for x in inventory if x.get('canonical_filename')==filename and x.get('manager_media_folder_id')==folder]
         if len(matches)!=1:raise ValueError('exact requested inventory filename missing or ambiguous')
         row=matches[0];live=ops.drive_file_readback(drive_token,row['asset_drive_id']);storage.require_lineage_available(row)
+        if (row.get('operation'),row.get('vertical'),row.get('country'),row.get('language'),row.get('format'))!=('CC_US_EN','CC','US','EN','VID'):raise ValueError('manager media operation/language/format mismatch')
         if row.get('metadata_clean') is not True or live.get('parents')!=[folder] or live.get('name')!=filename or live.get('trashed') or live.get('md5Checksum')!=row.get('clean_md5'):raise ValueError('exact manager media identity/bytes drift')
         def reference_only(x):
             if isinstance(x,dict):return any((k=='reference_only' and str(v).lower()=='true') or reference_only(v) for k,v in x.items())
@@ -122,7 +140,7 @@ def prepare(path,confirm=False):
     creation=module('target_creation_helpers',R/'scripts/ares-eggbev-creation.py');creation.reserve_inventory(selected,q['request_id'],q['requested_by'],home/'reservation.json')
     save(home/'selected-assets.json',selected);save(home/'media-live-readback.json',list(livefiles.values()))
     work=Path('/root/.hermes/profiles/ares/cache/scratch')/q['request_id'];work.mkdir(exist_ok=True)
-    registry=MediaRegistry(R/'data/ares/meta-ads/engine-v3/media-registry.json');service=PrestageService(registry,AdAccountVideoUploader(common=meta,user_token=token,account_id=ACCOUNT))
+    registry=MediaRegistry(R/'data/ares/meta-ads/engine-v3/media-registry.json');service=PrestageService(registry,TargetAccountUploader(common=meta,user_token=token,account_id=ACCOUNT))
     def prepare_asset(row):
         vertical=work/(row['asset_id']+'-vertical.mp4');square=work/(row['asset_id']+'-square.mp4')
         if not vertical.exists():creation.download_drive(drive_token,livefiles[row['asset_id']],vertical)
@@ -135,7 +153,7 @@ def prepare(path,confirm=False):
     result=OnDemandMediaPipeline(service,max_workers=3).run(account_id=ACCOUNT,assets=selected,prepare_asset=prepare_asset)
     save(home/'prestage.json',result);draft=build(q,source,page,selected,registry,allocation);sealed=prevalidate_payload(draft,registry);manifest=Manifest.from_dict(sealed);validate_account_policy(manifest,cfg)
     save(home/'manifest.json',sealed);plan=CampaignEngine(cfg,transport_factory=lambda account:None).dry_run(manifest);save(home/'plan.json',plan)
-    summary={'phase':'AWAITING_FINAL_APPROVAL','request_id':q['request_id'],'name':proposed,'budget_usd':q['daily_budget_usd'],'start_time':q['start_time'],'page_name':page['name'],'page_token':page['page_token'],'structure':'1 campaign / 1 target adset / 3 final ads; one PAUSED technical seed per final ad, preserved without deletion','media':q['media_filenames'],'copy':q['copy'],'source_unchanged':True,'digest':sealed['prevalidation']['content_digest'],'campaign_writes':0}
+    summary={'phase':'AWAITING_FINAL_APPROVAL','request_id':q['request_id'],'name':proposed,'budget_usd':q['daily_budget_usd'],'start_time':q['start_time'],'page_name':page['name'],'page_token':page['page_token'],'structure':f'1 campaign / 1 target adset / {len(selected)} final ads; {len(selected)} PAUSED technical seeds preserved without deletion','media':q['media_filenames'],'copy':q['copy'],'source_unchanged':True,'digest':sealed['prevalidation']['content_digest'],'campaign_writes':0}
     save(home/'summary.json',summary);return summary
 
 
@@ -173,6 +191,7 @@ def finalize(path):
     records=[x for x in checkpoint['bundles'] if x.get('status')=='COMPLETE']
     if len(records)!=1:raise ValueError('one exact completed bundle required')
     record=records[0];ids=record['target_clone_ids'];selected=load(home/'selected-assets.json');manifest=load(home/'manifest.json')['campaigns'][0]
+    if not selected or len(selected)!=len(manifest['ads']) or len(selected)!=len(q['media_filenames']):raise ValueError('nonempty exact asset/manifest cardinality required')
     _,meta,_,token=runtime();assignments=[]
     for ai,(asset,expected) in enumerate(zip(selected,manifest['ads']),1):
         ad_id=ids[f'copied_ad_id_1_{ai}'];code,ad,_=meta.graph_get(ad_id,token,{'fields':'id,account_id,name,campaign_id,adset_id,status,source_ad_id,creative{id,object_story_spec,asset_feed_spec,url_tags,effective_object_story_id}'})

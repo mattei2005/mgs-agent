@@ -199,10 +199,13 @@ def verify(bundle,record):
     ids=record['target_clone_ids']
     for ci,c in enumerate(bundle.campaigns,1):
         live=rows[f'readback_campaign_{ci}'];sets=rows[f'readback_adsets_{ci}'];ads=rows[f'readback_ads_{ci}']
-        if str(live.get('account_id'))!=c.account_id or live.get('name')!=c.name or str(live.get('daily_budget'))!=str(c.campaign_create['daily_budget']) or live.get('status')!=c.status:raise ValueError('target campaign readback mismatch')
+        if str(live.get('account_id'))!=c.account_id or live.get('name')!=c.name or str(live.get('daily_budget'))!=str(c.campaign_create['daily_budget']) or live.get('status')!=c.status or live.get('bid_strategy')!=c.campaign_create['bid_strategy']:raise ValueError('target campaign readback mismatch')
         if sets.get('paging',{}).get('next') or len(sets.get('data',[]))!=1:raise ValueError('target adset cardinality mismatch')
         adset=sets['data'][0]
-        if str(adset.get('id'))!=ids[f'adset_id_{ci}'] or adset.get('promoted_object',{}).get('page_id')!=c.adset_create['promoted_object']['page_id'] or adset.get('name')!=c.adset_name:raise ValueError('target adset Page/name mismatch')
+        if str(adset.get('id'))!=ids[f'adset_id_{ci}'] or adset.get('promoted_object',{}).get('page_id')!=c.adset_create['promoted_object']['page_id'] or adset.get('name')!=c.adset_name or adset.get('status')!='ACTIVE':raise ValueError('target adset Page/name/status mismatch')
+        from .prevalidation import _require_subset
+        for key in ['promoted_object','targeting','attribution_spec','billing_event','optimization_goal','is_dynamic_creative']:
+            _require_subset(adset.get(key),c.adset_create.get(key),key)
         from datetime import datetime
         if datetime.fromisoformat(adset['start_time'])!=datetime.fromisoformat(c.start_time):raise ValueError('target schedule mismatch')
         if ads.get('paging',{}).get('next') or len(ads.get('data',[]))!=2*len(c.ads):raise ValueError('target final/seed cardinality mismatch')
@@ -215,6 +218,9 @@ def verify(bundle,record):
             actual=creative.get('asset_feed_spec') or {};expected=wanted.get('asset_feed_spec') or {}
             for key in ['bodies','titles','descriptions']:
                 if [x.get('text') for x in actual.get(key,[])] != [x.get('text') for x in expected.get(key,[])]:raise ValueError('target literal copy readback mismatch')
+            if actual.get('call_to_action_types')!=expected.get('call_to_action_types'):raise ValueError('target CTA mismatch')
+            from .shein_reference import verify_degrees
+            verify_degrees(creative.get('degrees_of_freedom_spec'),wanted.get('degrees_of_freedom_spec'))
             # Same-Page copies may rematerialize IDs; direct media bijection is a
             # separate postprocess gate, never silently passed as equality.
             if [x.get('video_id') for x in actual.get('videos',[])] != [x.get('video_id') for x in expected.get('videos',[])]:
