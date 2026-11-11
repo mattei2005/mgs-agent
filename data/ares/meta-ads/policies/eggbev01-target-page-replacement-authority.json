@@ -1,5 +1,9 @@
 {
-  "status": "approved_pending_implementation_validation",
+  "status": "active",
+  "mode": "clone_target_prestaged",
+  "runner": "scripts/ares-eggbev-target-clone.py",
+  "readiness": "Implemented and isolated central Engine/recovery/scope tests passed. Provider campaign acceptance and serving remain unverified until a real approved request completes.",
+  "page_dependency": "Read only the exact fresh corporate SB Messenger Page via its advertiser identity. If PBIA GET is empty, an explicitly prepared persisted request may initialize that Page-backed shadow identity only, then must GET/read back it; no credential, ACL, external Instagram account or Business import.",
   "authority_message_id": "1569927267633602693",
   "authorized_by_discord_id": "344196393512075265",
   "source_thread_id": "1541578556037927053",

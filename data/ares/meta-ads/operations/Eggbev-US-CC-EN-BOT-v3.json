@@ -52,8 +52,20 @@
   "supported_modes": [
     "pure_clone",
     "clone_prestaged",
-    "from_zero_prestaged"
+    "from_zero_prestaged",
+    "clone_target_prestaged"
   ],
+  "target_page_replacement": {
+    "mode": "clone_target_prestaged",
+    "authority_message_id": "1569927267633602693",
+    "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
+    "runner": "scripts/ares-eggbev-target-clone.py",
+    "architecture": "Explicit source-derived new campaign shell and fresh target adset, target-Page PAUSED seed ads and same-Page final copies; original campaign unchanged. Technical seeds remain PAUSED, no DELETE.",
+    "scope": "Eggbev01 only, this request and future equivalent independently approved requests; legacy clone_page_switch stays disabled",
+    "naming": "shared global number, target Page name/pg, next target CXX, no DUPnn",
+    "readiness": "isolated Engine/recovery/scope tests passed; provider campaign acceptance remains unverified until the first approved real execution",
+    "final_approval": "Present sealed manifest digest, exact budget/start and technical seed preservation; require subsequent explicit request OK before Engine execute"
+  },
   "mode_contract": {
     "pure_clone": {
       "label": "duplicação exata",

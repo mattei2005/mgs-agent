@@ -84,6 +84,14 @@
     "status": "approved_by_nicolas"
   },
   "campaign_cloning_policy": {
+    "target_page_replacement": {
+      "mode": "clone_target_prestaged",
+      "authority_message_id": "1569927267633602693",
+      "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
+      "runner": "scripts/ares-eggbev-target-clone.py",
+      "supersedes": "Architecture approval is no longer pending for Eggbev01 target Page/media/copy replacement. It does not enable the legacy copied-adset clone_page_switch.",
+      "gates": "Exact source/target readbacks, canonical media/reservation, final sealed summary and explicit per-request OK, Engine v3 and consolidated readback; no source mutation or seed deletion."
+    },
     "naming_override_policy": {
       "source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json#/duplication_with_replacements_extension",
       "authority_message_id": "1569923369284149249",

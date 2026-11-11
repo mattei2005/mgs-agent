@@ -106,5 +106,13 @@ class TargetEngineTests(unittest.TestCase):
             result=engine.execute(m);self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE')
             self.assertEqual(len([x for x in fake.objects.values() if x.get('_kind')=='ad']),2)
             self.assertEqual(len([x for x in fake.calls if x[1].startswith('target_seed_create')]),1)
+    def test_bad_page_readback_contains_parent_paused(self):
+        import tempfile
+        from eggbev_target_fake import TargetFakeMeta
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as temp:
+            fake=TargetFakeMeta(wrong_final=True);engine=self.engine(fake,Path(temp))
+            with self.assertRaises(ValueError):engine.execute(self.manifest())
+            campaigns=[x for x in fake.objects.values() if x.get('_kind')=='campaign']
+            self.assertEqual(len(campaigns),1);self.assertEqual(campaigns[0]['status'],'PAUSED')
 
 if __name__=='__main__':unittest.main()

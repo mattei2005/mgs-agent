@@ -54,7 +54,7 @@ def source_read(q,common,meta,token):
     sid=q['source_campaign_id_candidate'];code,campaign,_=meta.graph_get(sid,token,{'fields':'id,account_id,name,status,objective,buying_type,bid_strategy,special_ad_categories,special_ad_category_country'})
     if code!=200 or campaign.get('account_id')!=ACCOUNT or campaign.get('name')!=q['source_campaign_name']:raise ValueError('source identity mismatch')
     sets=common.fetch_all_meta(meta,token,sid+'/adsets',{'fields':'id,name,status,billing_event,optimization_goal,destination_type,targeting,promoted_object,attribution_spec,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities,bid_amount,bid_constraints,optimization_sub_event','limit':100})
-    ads=common.fetch_all_meta(meta,token,sid+'/ads',{'fields':'id,name,status,adset_id,creative{id,object_story_spec,asset_feed_spec,url_tags,degrees_of_freedom_spec}','limit':100})
+    ads=common.fetch_all_meta(meta,token,sid+'/ads',{'fields':'id,name,status,adset_id,creative{id,object_story_spec,asset_feed_spec,url_tags,degrees_of_freedom_spec,contextual_multi_ads}','limit':100})
     if len(sets)!=1 or len(ads)!=len(q['media_filenames']) or any(x.get('adset_id')!=sets[0]['id'] for x in ads):raise ValueError('source hierarchy does not match requested structure')
     return {'campaign':campaign,'adset':sets[0],'ads':ads}
 
@@ -68,9 +68,19 @@ def build(q,source,page,selected,registry,allocation):
     ads=[]
     for i,(asset,original) in enumerate(zip(selected,source['ads']),1):
         media=registry.require_ready(ACCOUNT,asset['asset_id'],asset['clean_checksum'])
-        cta=(original.get('creative',{}).get('asset_feed_spec',{}).get('call_to_action_types') or ['APPLY_NOW'])[0]
+        observed_ctas=original.get('creative',{}).get('asset_feed_spec',{}).get('call_to_action_types')
+        if not isinstance(observed_ctas,list) or len(observed_ctas)!=1:raise ValueError('source CTA must be read exactly before rematerialization')
+        cta=observed_ctas[0]
         prefix=hashlib.sha256((q['request_id']+str(i)).encode()).hexdigest()[:14]
         payload=_creative_payload(media=media,page_id=page['id'],instagram_user_id=page['instagram_user_id'],page_token=page['page_token'],label_prefix='target_'+prefix,primary_text=q['copy']['primary_text'],headlines=[q['copy']['headline']],description=q['copy']['description'],cta=cta)
+        from ares_campaign_v3.creative_copy_policy import effective
+        source_creative=effective(original['creative'])
+        for key in ['degrees_of_freedom_spec','contextual_multi_ads']:
+            if key in source_creative:payload[key]=copy.deepcopy(source_creative[key])
+            else:payload.pop(key,None)
+        source_tags=source_creative.get('url_tags') or ''
+        if len(re.findall(r'(?:^|&)utm_campaign=pg_[0-9]+(?:&|$)',source_tags))!=1:raise ValueError('source Page tracking missing or ambiguous')
+        payload['url_tags']=re.sub(r'(^|&)utm_campaign=pg_[0-9]+(?=&|$)',lambda match:match.group(1)+'utm_campaign='+page['page_token'],source_tags,count=1)
         ads.append({'name':f'AD {i:02d} - {Path(asset["canonical_filename"]).stem}','source_ad_id':original['id'],'media':{k:media[k] for k in ['asset_id','checksum','vertical_video_id','square_video_id','ready','upload_edge','association_verified']},'creative_payload':payload})
     return {'schema_version':3,'request_id':q['request_id'],'operation':q['operation'],'graph_version':'v26.0','created_at':datetime.now(timezone.utc).isoformat(),'campaigns':[{'idempotency_key':q['request_id']+'-1','app_key':'mgs-meta-app-1299247318762949','account_id':ACCOUNT,'mode':MODE,'source_campaign_id':source['campaign']['id'],'source_adset_id':source_set['id'],'campaign_create':campaign,'adset_create':adset,'adset_name':'ADGROUP 01','name':allocation['names'][0],'start_time':q['start_time'],'status':'ACTIVE','ads':ads}]}
 
@@ -132,6 +142,8 @@ def prepare(path,confirm=False):
 def execute(path,confirm=False,approved_digest=None,approval_message_id=None):
     if not confirm or not approval_message_id:raise ValueError('execute requires explicit final OK, digest and --confirm-execute')
     q=request_load(path);home=Path(path).parent;payload=load(home/'manifest.json')
+    gate_config=load(CONFIG);conflict=reader_block_reason(ACCOUNT,gate_config['state_root'])
+    if conflict and conflict.get('request_id')!=q['request_id']:raise ValueError('another request owns account; approved request remains resumable')
     if approved_digest!=payload.get('prevalidation',{}).get('content_digest') or not verify_prevalidation(payload):raise ValueError('approved manifest digest mismatch')
     # A pre-intake commercial OK is not a later manifest/technical-seed approval.
     if approval_message_id==q.get('commercial_ok_message_id'):raise ValueError('final summary requires a subsequent explicit OK message')
@@ -192,6 +204,11 @@ def main():
     q=load(a.input);lock=Path(a.input).parent/'target-clone.lock'
     with lock.open('a+') as stream:
         fcntl.flock(stream,fcntl.LOCK_EX|fcntl.LOCK_NB)
-        value=prepare(a.input,a.confirm_prepare) if a.command=='prepare' else (finalize(a.input) if a.command=='finalize' else execute(a.input,a.confirm_execute,a.approved_digest,a.approval_message_id))
+        if a.command=='prepare':
+            request_load(a.input)
+            leases=AccountWriterLeaseStore(load(CONFIG)['state_root']);leases.claim(ACCOUNT,q['request_id'],status='PREFLIGHT_ACTIVE')
+            try:value=prepare(a.input,a.confirm_prepare)
+            finally:leases.release(ACCOUNT,q['request_id'])
+        else:value=finalize(a.input) if a.command=='finalize' else execute(a.input,a.confirm_execute,a.approved_digest,a.approval_message_id)
     print(json.dumps(value,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

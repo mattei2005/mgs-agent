@@ -73,7 +73,8 @@
     "pure_clone": 30,
     "clone_prestaged": 30,
     "clone_page_switch": 30,
-    "from_zero_prestaged": 30
+    "from_zero_prestaged": 30,
+    "clone_target_prestaged": 60
   },
   "quota_scope": "app_key_plus_ad_account_id",
   "quota_tier_policy": "unknown uses configured 100/120 ceiling; live development_access caps the lane at 60; live standard_access uses 9000 and skips the fixed development readback cooldown",
@@ -333,8 +334,19 @@
       "supported_modes": [
         "pure_clone",
         "clone_prestaged",
-        "from_zero_prestaged"
+        "from_zero_prestaged",
+        "clone_target_prestaged"
       ],
+      "target_page_replacement": {
+        "enabled": true,
+        "authorized_by": "344196393512075265",
+        "authority_message_id": "1569927267633602693",
+        "account_id": "1034081997659047",
+        "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
+        "runner": "scripts/ares-eggbev-target-clone.py",
+        "legacy_copied_adset_page_switch_enabled": false,
+        "live_campaign_acceptance_verified": false
+      },
       "campaign_policy": {
         "name_regex": ".+ DUP[0-9]{2,}$",
         "budget_update_required": true,
@@ -356,6 +368,14 @@
           "daily_budget"
         ],
         "by_mode": {
+          "clone_target_prestaged": {
+            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) - C[0-9]{2,}",
+            "budget_source": "campaign_create",
+            "start_local_time": null,
+            "allowed_ad_counts": [1, 2, 3, 4, 5],
+            "required_media_variants": ["vertical", "square"],
+            "creative_materialization_route": "inline_copy"
+          },
           "from_zero_prestaged": {
             "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\)(?: C[0-9]{3}| - C[0-9]{2,})",
             "budget_source": "campaign_create",
