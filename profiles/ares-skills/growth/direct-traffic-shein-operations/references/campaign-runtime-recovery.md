@@ -66,6 +66,25 @@ Se o preparador falhar no guard após possíveis uploads, reconcilie primeiro o 
 
 Para `video QA read incomplete`, projete HTTP/código dos children e somente headers de uso permitidos. `403/code=4` com `Application request limit reached` e `X-App-Usage` alto comprova quota do aplicativo, não permissão ausente; uso baixo de conta/BUC não invalida esse limite. Preserve IDs/provas e use a continuação durável do mesmo request na fila canônica, sem novo cron ou segundo writer. Confira separadamente retomada real, QA integral e a situação posterior à ativação; recuperação da quota não comprova aprovação dos anúncios.
 
+### Identificar o nome da Página pela prévia do anúncio
+
+Use para responder qual Página um anúncio usa, sem confundir identificação visual com acesso administrativo.
+
+1. Resolva a conta autorizada e um anúncio da campanha-fonte exata. Leia o `page_id` de `creative.object_story_spec`; em setup de post existente, reconcilie a identidade da Página pelo post. Preserve o vínculo conta → campanha → anúncio → Página antes de buscar o nome.
+2. Faça `page-lookup --page <PAGE_ID>` e, se faltar nome confirmado, `GET /<PAGE_ID>?fields=id,name` pelo transporte autorizado. Catálogo incompleto ou leitura negada não tornam o nome irrecuperável; não repita a mesma consulta nem abra um inventário global para responder só essa pergunta.
+3. Obtenha a prévia do anúncio já vinculado, sem criar objetos:
+
+   ```python
+   http, payload, headers = common.graph_get(
+       source_ad_id + '/previews', token,
+       {'ad_format': 'MOBILE_FEED_STANDARD'},
+   )
+   ```
+
+   Exija HTTP200 e `data[].body` não vazio. Extraia o `src` do iframe e aplique `html.unescape`; mantenha HTML e URL assinada somente em memória ou scratch protegido, fora do chat e do recibo compartilhado.
+4. Abra somente o iframe de prévia Meta pelo navegador real com `new_tab`, aguarde `wait_for_load()` e leia `js('document.body.innerText')`. Identifique o nome do anunciante no cabeçalho; não confunda o nome com headline/produto, não clique no anúncio e não visite a landing. Use screenshot se o texto não permitir identificação inequívoca. HTTP200 da API sozinho não confirma o nome exibido.
+5. Grave apenas Page ID, nome observado, conta/campanha/ad IDs e tipo de evidência. Responda primeiro **nome + ID**, com uma frase curta sobre a prévia como fonte. Não promova essa observação a prova de ownership, grant, acesso à Página ou prontidão do executor: a prévia pode funcionar enquanto a API administrativa continua sem acesso.
+
 ### Sequência geral de diagnóstico de preflight
 
 1. Recupere o request original e os IDs de runner/checkpoint; faça o checker positivo da conta e o dry-run pela rota central. Se `account-lookup --account <nome informado> --channel-id <pai real>` retornar nome ausente/ambíguo, filtre somente o catálogo canônico SHEIN pela conta e partição solicitadas. Havendo correspondência única comprovada, use o `account_id` literal cadastrado no checker e repita `account-lookup` pelo ID; preserve o nome humano original na evidência. Não invente alias, altere o catálogo ou enumere portfólios para contornar uma diferença de apresentação do nome. Cadastro permitido não prova acesso live, e rejeição local anterior ao HTTP não é negativa da Meta.
@@ -229,7 +248,7 @@ Em manutenção, preservar jobs sob `.dispatch.lock` + `.lock` e `maintenance_ho
 
 ## 2. Guard e proveniência de dependências técnicas
 
-1. Trate `/me?fields=id,name,client_business_id` como GET técnico restrito, com readback do Business operacional e identidade exigida pelo runner. Não conceda por consequência `/me/adaccounts`, descoberta de portfólios ou writes de identidade.
+1. Trate `/me?fields=id,name,client_business_id` como GET técnico restrito da identidade corporativa BISU, com readback do Business operacional e identidade exigida pelo runner. Não reutilize `client_business_id` para validar um User Access Token administrativo: esse campo é exclusivo de BISU e pode produzir código190 por incompatibilidade de campo, não por token inválido. Classifique a mensagem sanitizada antes de concluir expiração, revogação ou necessidade de novo token; use somente a leitura de identidade compatível autorizada para aquele contexto, sem contornar o guard. Não conceda por consequência `/me/adaccounts`, descoberta de portfólios ou writes de identidade.
 2. Diferencie objetos Marketing API de Pages/vídeos/pixels referidos em respostas já account-scoped. Registre essas dependências com tipo e contas comprovadas, somente para leituras necessárias. Exija Business exato na leitura de tarefas; não promova Page ou usuários retornados por `assigned_users` a objetos mutáveis. Uma Page compartilhada não concede acesso às outras contas que a usam.
    Para reparo de delegação, separe aprovação humana, capacidade do executor e efeito Meta. Uma aprovação válida para o pedido e futuros equivalentes deve ser vinculada à pergunta exata e persistida somente no recorte Page/conta/Business/identidade/tarefas do contrato, com `repeat_approval_required=false`, registro institucional e validação; não a transforme em isenção global nem volte a pedir a mesma autorização. Depois de aprovação específica válida, mantenha o Ares como responsável também pelo reparo administrativo; etapa de provisionamento separada não significa mencionar ou transferir automaticamente ao Zeus. Execute pelo próprio runtime administrativo autorizado e compatível, preservando o token de Campaign Ops. Se o guard mantiver a dependência como GET-only, não tente outros tokens como bypass, HTTP fora do transporte ou alterações no guard para executar o POST. Verifique a capacidade administrativa efetiva e, se faltar acesso ou uma rota instalada compatível, registre a lacuna técnica exata na origem sem repetir a aprovação já resolvida e sem handoff automático. A autorização humana, a capacidade local e o acesso Meta são provas distintas; o Ares continua sendo o único writer das campanhas. Ao receber o recibo administrativo, leia-o em memória e projete somente status, request, Page, conta, Business, System User, autoridade e tarefas finais; o arquivo pode conter outros usuários e inventários administrativos que não pertencem à saída da operação. Confira esses identificadores contra o pedido e a autorização canônica antes de retomar.
 
