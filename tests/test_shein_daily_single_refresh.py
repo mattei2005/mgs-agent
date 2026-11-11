@@ -9,6 +9,7 @@ from unittest.mock import Mock, patch
 from zoneinfo import ZoneInfo
 
 spec = importlib.util.spec_from_file_location('daily_single_refresh', Path('/root/.hermes/profiles/ares/scripts/shein-daily-report.py'))
+assert spec is not None and spec.loader is not None
 daily = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(daily)
 
@@ -32,9 +33,10 @@ class SingleRefresh(unittest.TestCase):
             before = datetime(2026, 11, 11, hour, tzinfo=ZoneInfo('America/New_York'))
             after = before.replace(hour=max(8, hour))
             clock = Mock()
-            clock.now.side_effect = [before, before, before, before, after]
+            instants = iter([before, before, before, before, after] if hour < 8 else [before] * 4)
+            clock.now.side_effect = lambda *a: next(instants, after)
             delivery = lambda r, b, d: {'account_id': b['account_id'], 'thread_id': b['thread_id'], 'manager': b['manager_code'], 'parts': [{'id': b['account_id']}], 'campaigns': 1}
-            with patch.object(daily, 'STATE', state), patch.object(daily, 'load', wraps=daily.load) as load, patch.object(daily, 'resolve', return_value=bindings), patch.object(daily, 'Runner', return_value=runner), patch.object(daily, 'Discord', return_value=discord), patch.object(daily, 'datetime', clock), patch.object(daily.time, 'sleep') as sleep, patch.object(daily, 'deliver_account', side_effect=delivery) as send:
+            with patch.object(daily, 'STATE', state), patch.object(daily, 'load', wraps=daily.load) as load, patch.object(daily, 'resolve', return_value=bindings), patch.object(daily, 'Runner', return_value=runner), patch.object(daily, 'Discord', return_value=discord), patch.object(daily, 'datetime', clock), patch.object(daily, 'now', return_value=before.isoformat()), patch.object(daily.time, 'sleep') as sleep, patch.object(daily, 'deliver_account', side_effect=delivery) as send:
                 load.side_effect = lambda p: policy if p == daily.POLICY else __import__('json').loads(Path(p).read_text())
                 result = daily.main(SimpleNamespace(run_date='2026-11-10', prepare_only=prepare, verify_only=False))
             return runner, send, sleep, result
