@@ -2983,6 +2983,16 @@
     },
     {
       "agent": "ares",
+      "id": "EGGBEV-301-PG23186-1569925441127579672",
+      "next_step": "Solicitar aprovacao estrutural de Rodolfo na origem para arquitetura deterministica Page+midia/copy novas e integracao naming;validar manutencao separadamente;retomar mesmo request sem alterar fonte e sem trocar modo por inferencia. PageMeta/PBIA ainda pendentes. Nao deslocar horario se vencer.",
+      "objective": "Criar uma duplicacao da campanha300 com Page pg_23186,3videos160-162,copy literal,USD35/dia,inicio2026-11-11 00:10ET,nome301CornellLoanC01",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-301-pg23186-1569925441127579672/request.json",
+      "state": "blocked_engine_architecture_approval; ok comercial nicolas1569925441127579672 preservado; account/source get200,1adset3ads; page sem historico na denylist;engine3.6.8 enabled/write true mas clone_page_switch ausente supported_modes/writefalse;clone regex aindadup. nenhuma campanha/reserva/upload/writemeta.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-11T04:05:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "EGGBEV-GLOBAL-NAMING-1567964887353663610",
       "next_step": "Novas criacoes consultam3historicos e ledger,proxima base301,reconfirmar antes de reservar. Nao reutilizar300 nem renomear outras campanhas por inferencia. Gates/readiness e clonecontracts mantidos.",
       "objective": "Padrao global Eggbev US EN01/02/03 e rename explicito da campanha atual para300",
@@ -9807,5 +9817,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T04:00:20+00:00"
+  "updated_at": "2026-11-11T04:05:36+00:00"
 }
