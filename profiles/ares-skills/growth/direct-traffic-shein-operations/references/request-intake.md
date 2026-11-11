@@ -9,6 +9,13 @@ Use ao converter pedidos naturais em input do runner comum. Para mídia, autorid
 3. Reúna todas as partes de uma correção dividida em mensagens antes de executar. Antes de selar o manifest, incorpore somente os campos corrigidos ao input e registre a supersessão. Depois de selado ou de qualquer write, preserve documentos e IDs imutáveis e use a recuperação central aplicável; não sobrescreva manifests históricos.
 4. Aplique a correção ao campo explicitamente indicado. Texto fornecido em `headline` continua sendo headline, mesmo que o operador o chame informalmente de botão. Preserve-o literalmente e mantenha a CTA nativa e os demais textos quando não houver outra alteração expressa.
 
+### Cancelamento durante o intake e pedido posterior
+
+1. Ao receber cancelamento explícito durante a preparação, interrompa o avanço antes do próximo passo mutável. Use o estágio efetivamente executado para delimitar o efeito: se houve somente leitura, ajuda de CLI ou dry-run sem entrada no writer, confirme brevemente que a duplicação não foi executada. Não rode execute apenas para encerrar o pedido.
+2. Se houver writer em voo, job enfileirado ou IDs retornados, reconcilie essas camadas pela coordenação canônica antes de afirmar cancelamento completo. Preserve efeitos e auditoria; cancelar o saldo não autoriza excluir, pausar ou desfazer objetos já existentes. Não invente um status terminal para liberar a lane.
+3. Trate uma nova ordem completa após o cancelamento como novo pedido: recolha novamente a metadata da mensagem atual e derive dela o request ID. Preserve o pedido cancelado como histórico e não reutilize seu input, relógio, budget ou defaults. Uma instrução explícita para retomar o pedido antigo, por outro lado, exige recuperar sua identidade e seus efeitos antes de continuar.
+4. Confira os três casos antes do writer: cancelamento após somente leitura não executa cópias; cancelamento após efeito parcial não declara zero alterações; nova ordem após cancelamento usa a nova mensagem e somente seus parâmetros. Essa distinção impede tanto replay do pedido revogado quanto bloqueio indevido de uma autorização nova.
+
 ### Emenda de orçamento entre lotes existentes e pendentes
 
 1. Resolva o referente antes do write. Quando a conversa contiver campanhas já criadas e duplicações ainda pendentes, uma redução para “todas elas” não identifica uma coorte única. Pergunte somente se o valor vale para as existentes, para as novas ou para ambas; cumpra separadamente uma conferência read-only já inequívoca. Não altere campanhas-fonte nem amplie para toda a conta.

@@ -213,12 +213,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-1570151841751375913",
-      "next_step": "Autenticar mensagem e conta, preparar runner isolado, testar e publicar leitura inicial antes de habilitar agenda finita",
-      "objective": "Relatorios CPR Mavroa04 campanhas criadas hoje atuais e futuras, cada30min ate fim dia",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570151841751375913",
-      "state": "preparacao: autenticacao, identidade live, reuso do runner dinamico e auditoria global de agenda; nenhuma campanha alterada",
+      "next_step": "Executar slots finitos e incluir novas campanhas de11nov na mesma conta; expirar12nov00:00EST antes de API; retomar somente slot/camada incompleta",
+      "objective": "Relatorios CPR Mavroa04 criadas11nov atuais/futuras, cada30min ate fim dia",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570151841751375913/manifest.json",
+      "state": "ativo: descoberta created_time mesma conta/data;052-054 inicialmente,gasto0 sem resultados;primeira entrega14:06est get;20slots14:28-23:58est job91558e3f4696 enabled no_agent local/failurelocal;22 testespass;auditorias globais pre/pospass;report-infra get;zero campaign/sb writes",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-11T19:04:13+00:00"
+      "updated_at": "2026-11-11T19:09:23+00:00"
     },
     {
       "agent": "ares",
@@ -2169,6 +2169,16 @@
       "state": "parcial verificado get:130->139-145 e137->146-152 active,35ads,usd630/dia;126->153-159 paused14ads,4/7qa;157/158 inicio00:03:30 e15900:04:05 divergem00:03;1357copias nao iniciadas. mesmos ids/manifests;maintenance131testespass.",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-11T05:08:11+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1570154441934504089",
+      "next_step": "Administrador disponibilizar acesso a Page e tarefas ADVERTISE/ANALYZE ao System User corporativo existente. Revalidar acesso pela identidade original e retomar o mesmo request via dry-run e execute central; preservar relogio original.",
+      "objective": "Duplicar C007 Vizioid 04 G004 duas vezes; USD70/dia por campanha; COCAP USD0.90; agora",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/preflight-blocker.json",
+      "state": "waiting_page_access; zero writes de campanha; conta e fonte confirmadas; page 680516861808576 retorna code10; tarefas nao verificadas; sem autorizacao de permission write no recorte",
+      "thread_id": "1558131493048688711",
+      "updated_at": "2026-11-11T19:16:33+00:00"
     },
     {
       "agent": "ares",
@@ -8368,12 +8378,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Zeus mantem pedido aberto. Restaurar conectividade privada do PC1 e validar mesma janelaChrome/BM155263197283282;2FA anterior exige prova positiva do alvo antes de liberar. Sem credenciais/codigos em chat ou bypass. Mesmo job existente proximo tick 2026-11-11T14:02:00-05:00;nao criar outrojob/writer. Reconciliar dispatch/writes/recibos;retomar36H e10eventosD pendentes,reconciliarAPI final e validar sem repetir fases publicadas. Conectividade, autenticacao e recuperacao de H/D ainda nao comprovadas.",
+      "next_step": "Zeus mantem H/D abertos na continuidade existente f3d0b1d8da3c0353e1361184;consumidor ativo observado nesta execucao e gate original_writer_active respeitado. Restabelecer conectividade privadaPC1;validar mesma Chrome/BM155263197283282 e2FA antes de H/D,sem bypass/credenciais. Mesmo job proximo tick 2026-11-11T21:02:00-05:00;nenhum job novo. Reconciliar dispatch/owners/receipts,retomar 36H e 10eventosD;API final/validacao sem repetir fases publicadas. PC1 desligado versus falha local de rede nao determinado.",
       "objective": "Atualizar mesmos47IDs Digital Trust; J novembro e invoices outubro; sem pagamentos ou billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261111T0802/closure-current.json",
-      "state": "tick 2026-11-11 08:02 eastern parcial validado:47ids(11cartao36linha),funding/invoices/c/g/i/j publicados;metricas 2026-11-11t08:05:36.169488-05:00;saldo usd576462.32;j novembro usd203230.24,1-11nov dia parcial;g usd20225.49,8-10nov completos por fuso. pc1 online=false no tailscale e ssh timeout repetido apos backoff;ultimo lastseen2026-11-11t07:00:00.1z. nenhuma captura/input/aba aberta nesta rodada;autenticacao meta atual nao inspecionada e gate2fa anterior nao declarado resolvido. h0/36frescos,36preservados com horas originais 2026-11-10t14:06:42.680876-05:00 a 2026-11-10t14:29:33.222165-05:00.10eventos genericos aguardam instrumento;12d anteriores preservados,35d vazios historicos(34sem prova+growpowerhub-us-shein-en-04-g004 sem cobranca localizada).29invoices outubro usd417702.93;externausd161.18excluida. ids/links/notas/moedas/formulas/totais/outrasabaspass;lease livre;zero pagamento/metawrite/billing/cronchange. report-infra pendente por entrega exclusiva do cron.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261111T1402/closure-current.json",
+      "state": "tick 2026-11-11t14:02:00-05:00 parcial validado: 47ids, grupos {'cartão de crédito': 11, 'linha de crédito': 36};funding/invoices/c/g/i/j publicados. metricas 2026-11-11t14:08:57.917294-05:00;saldo usd580087.36;j novembro usd208883.21,periodos [{'since': '2026-11-01', 'until': '2026-11-11'}],dia parcial;g usd20240.21,periodos completos [{'since': '2026-11-08', 'until': '2026-11-10'}]. falha meta http500/code2 recuperada apos reconciliacao sem replay de writes anteriores. pc1 online=false e ssh timeout confirmado apos backoff;ultimo lastseen 2026-11-11t07:00:00.1z. nenhuma captura/input/aba aberta;autenticacao meta nao inspecionada;2fa anterior nao declarado resolvido. h0/36frescos,preservados com horas originais 2026-11-10t14:06:42.680876-05:00 a 2026-11-10t14:29:33.222165-05:00. 10eventos genericos aguardam instrumento;12d anteriores preservados;35d vazios historicos, incluindo growpowerhub-us-shein-en-04-g004 sem cobranca localizada. 29invoices outubro usd417702.93;externas [{'account_id': '1754588462350629', 'name': 'growpowerhub-us-shein-en-02-g002', 'invoice': '26911668', 'due': '161.18', 'original': '161.18', 'status': 'unpaid', 'due_date': '2026-12-01t08:00:00+0000', 'billing_period': '2026-10-01'}]excluidas. ids/links/notas/moedas/formulas/totais/outraabapass;lease livre;zero pagamento/metawrite/billing/cronchange. report-infra pendente por entrega exclusiva do cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-11T13:08:34+00:00"
+      "updated_at": "2026-11-11T19:11:26+00:00"
     },
     {
       "agent": "zeus",
@@ -9897,5 +9907,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T19:07:58+00:00"
+  "updated_at": "2026-11-11T19:16:33+00:00"
 }

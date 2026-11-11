@@ -85,6 +85,10 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Campanha nova deve nascer PAUSED, salvo autorização operacional explícita em contrato validado.
 - IDs técnicos ficam em audit; relatório humano mostra alias e nomes operacionais.
 
+## Consulta pontual da última campanha
+
+Para “qual a última campanha da conta?”, resolva o binding atual e consulte a Meta read-only; não abra coleta financeira, Smart Bidding, histórico de performance ou agenda. Selecione por `created_time`, não por `updated_time`, número no nome ou primeira linha do edge. Confirme o objeto selecionado por GET e responda com número/produto, criação no fuso live, status e orçamento quando disponíveis. Siga a receita **Consulta pontual da última campanha** em `references/current-operational-pitfalls.md`; timestamps empatados não comprovam ordem estrita de criação.
+
 ## Histórico de alterações solicitado pelo operador
 
 Para “quais campanhas alterei hoje”, faça auditoria read-only de Activities, não um novo relatório de performance nem uma comparação isolada de snapshots. Resolva o período no fuso live da conta, agrupe alterações por campaign ID real e separe campanhas existentes editadas de campanhas novas. Apresente bullets por campanha com horário local, campo e valor anterior → novo; preserve alterações intermediárias. Atribua a ação ao perfil/app comprovado, sem tratar o nome do perfil Meta como prova da pessoa física. Não conte processamento/revisão como pausa ou reativação manual. Siga a receita de coleta, hierarquia e reconciliação em `references/current-operational-pitfalls.md`, seção **Auditoria pontual de alterações via Activities**.
