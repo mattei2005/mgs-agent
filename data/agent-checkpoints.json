@@ -2202,6 +2202,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1570186404401647677",
+      "next_step": "Aguardar decisao delimitada sobre suspender recuperacao de 8/11 mantendo 008/009 pausadas. Depois da transicao canonica autorizada e readback, retomar C5 e C1 nos mesmos requests com QA integral e agendamento original.",
+      "objective": "Duplicar 3x a 005 e 3x a 01 na Vizioid 06 G006; USD45/dia por copia; 12 novembro 2026 00:03 EST",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570186404401647677/aggregate-receipt.json",
+      "state": "nenhuma das seis novas copias criada. c5 dry-run aprovado e enfileirado; c1 preservado para depois de c5 terminal. predecessor de 8/11 postprocess_pending aguarda aceite de divergencias de publico; get atual confirmou 008/009 e quatro anuncios paused. servico da fila ativo; nao suspender ou ativar o pedido antigo sem decisao.",
+      "thread_id": "1558134653242703935",
+      "updated_at": "2026-11-11T21:24:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -3899,6 +3909,16 @@
       "state": "complete_activated: 38/38 active por get final; budgets/lances/filhos/programacao preservados",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-11T05:08:30+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-MAVROA06-1570185868096835655",
+      "next_step": "Validar testes e agenda one-shot no mesmo request",
+      "objective": "Pausar 56 campanhas Mavroa06 G006 e reativar12novembro2026 00h05 America/New_York status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-mavroa06-1570185868096835655/request.json",
+      "state": "56 paused; 56 aptas; 0 excecoes",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-11T21:26:29+00:00"
     },
     {
       "agent": "ares",
@@ -9947,5 +9967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T21:09:39+00:00"
+  "updated_at": "2026-11-11T21:26:29+00:00"
 }
