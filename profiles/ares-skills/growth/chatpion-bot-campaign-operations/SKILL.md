@@ -105,6 +105,8 @@ Quando uma mudança específica revelar um procedimento reutilizável, promover 
 
 ## Alterações de nome e continuidade do pedido
 
+- Em perguntas como “qual nome você colocaria?”, consultar o mapping exato da Page, os históricos permitidos e o ledger em modo read-only; responder primeiro com o nome literal proposto, sem devolver placeholders quando os dados forem recuperáveis. Informar sucintamente a origem da identidade e se a numeração ainda não foi reservada, pois uma prévia não equivale a um manifest aprovado.
+- Tratar testes de entendimento e prévias como leitura: não reservar sequência ou assets, fazer upload ou publicar sem pedido real. Preservar uma aprovação posterior no mesmo request, sem fazê-la valer como confirmação de mudança estrutural ou como prova de readiness.
 - Separar uma regra prospectiva de naming de um pedido explícito para renomear o objeto atual. Não renomear campanhas existentes apenas porque o padrão futuro mudou; quando o operador autorizar o rename atual, executar essa alteração delimitada sem cobrar novamente budget, mídia ou OK comercial já concedidos.
 - Resolver o alvo pelo ID persistido do pedido e confirmar sua hierarquia por GET. Não escolher apenas pelo nome ou pelo status ACTIVE: a campanha-modelo e a cópia publicada podem ter nomes semelhantes e ambas estar ativas.
 - Tratar rename como alteração de metadata, não como nova criação ou recuperação do Engine. Enviar somente o campo `name`, preservar IDs e comparar antes/depois budget, status, conjunto, anúncios e tracking. Não reeditar manifests aprovados para fazê-los parecer criados com o nome novo; guardar separadamente o nome original e o nome atual confirmado.
@@ -126,6 +128,8 @@ Fluxo: preflight vivo → Page/UTM → criativos reconciliados → pre-stage →
 ### Clonar campanhas
 
 O contrato da operação declara os modos suportados. Fonte, colisão de naming, Page, mídia, copy, JSON, budget e start são lidos ao vivo. Reconcilie a hierarquia com paginação completa e conte conjuntos/anúncios e seus estados em código; um sufixo no nome da campanha não comprova quantidade nem autoriza reativar filhos pausados. Schema/plan não prova readiness live; recovery reutiliza request e IDs.
+
+Antes de reservar mídia ou anunciar execução, decompor todos os deltas solicitados: estrutura, Page, mídia, copy, tracking, nome e início. Conferir se um único modo suportado pela conta representa a combinação completa e aceita o nome aprovado; troca de Page combinada com criativos/copy novos não deve ser reduzida automaticamente a um modo que só suporte um desses deltas. Confrontar contrato operacional, contrato v3 e `config.accounts[account_id]`, incluindo `supported_modes`, flags de write e a policy de naming do modo. Uma regra salva e projetada não atualiza, por si, o validador do executor. Se houver divergência, distinguir regra registrada de integração executável pendente e apresentar o impedimento antes de pedir OK de publicação. Não editar o motor dentro da transação nem converter clone em criação do zero para contornar um gate; preservar o OK comercial, o horário literal e o request ao solicitar somente a decisão estrutural realmente faltante.
 
 Para localizar uma fonte informada por nome:
 
