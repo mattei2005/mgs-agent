@@ -70559,7 +70559,15 @@
       {
         "name": "hermes-agent-operations",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md",
+        "provider_recovery_reference": {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/providers-codex-oauth.md",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/providers-codex-oauth.md",
+          "sha256": "011e32a6f06c7639e07fa0ffdf8090a34e2d9f73ff778f4584fb39ffc7d152e8",
+          "verified_at": "2026-11-11T04:27:58.511169+00:00",
+          "source_thread_id": "1569929719145824417",
+          "summary": "HTTP400 generico: retomar somente efeito faltante sem reset; validar gateway e entrega separadamente; GET Discord serializado e retomavel."
+        }
       },
       {
         "name": "hermes-configuration-integrity",

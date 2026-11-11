@@ -126,10 +126,11 @@ def verify_used_delivery(d,row,entry,delivery):
 def verify_meta_assignment(row,request_id,common,token):
  """Generic campaign reader: validates existing ad, never creates Meta objects."""
  require(row.get('reservation_request_id')==request_id and row.get('meta_ad_id') and row.get('ad_account_id'),'STANDARD_USE_EXACT_REQUEST')
- code,ad,_=common.graph_get(row['meta_ad_id'],token,{'fields':'id,account_id,campaign_id,adset_id,creative{id,object_story_spec}'})
+ code,ad,_=common.graph_get(row['meta_ad_id'],token,{'fields':'id,account_id,campaign_id,adset_id,creative{id,object_story_spec,asset_feed_spec}'})
  require(code==200 and ad.get('id')==row['meta_ad_id'] and ad.get('account_id')==row['ad_account_id'] and ad.get('campaign_id')==row.get('used_by') and ad.get('creative',{}).get('id')==row.get('meta_creative_id'),'STANDARD_LIVE_META_IDENTITY')
  spec=ad['creative'].get('object_story_spec',{});video=spec.get('video_data',{}).get('video_id');image=spec.get('link_data',{}).get('image_hash')
- require((row.get('meta_video_id') and video==row['meta_video_id']) or (row.get('meta_image_hash') and image==row['meta_image_hash']),'STANDARD_LIVE_META_MEDIA')
+ afs_videos={str(x.get('video_id')) for x in ad['creative'].get('asset_feed_spec',{}).get('videos',[]) if x.get('video_id')}
+ require((row.get('meta_video_id') and (video==row['meta_video_id'] or str(row['meta_video_id']) in afs_videos)) or (row.get('meta_image_hash') and image==row['meta_image_hash']),'STANDARD_LIVE_META_MEDIA')
  result={'campaign_id':ad['campaign_id'],'adset_id':ad['adset_id'],'ad_id':ad['id'],'creative_id':ad['creative']['id']}
  validate_assignment(result);return result
 

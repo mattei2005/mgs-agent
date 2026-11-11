@@ -41,6 +41,12 @@ Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção p
 - After a wrapper fails following publication, reconcile the existing child and original transcript before retry. The canonical conversation reader may strip a trailing newline even though stored rows are exact; validate that contract without publishing a second child.
 - Keep finance MFA and provider safety separate. An exposed DB dump calls for credential/session remediation; removing user MFA does not repair a model request and weakens account protection.
 
+### HTTP 400 genérico com trabalho parcialmente executado
+
+- `HTTP 400: {"detail":"Bad Request"}` não identifica sozinho a causa interna nem prova credencial inválida, contexto excessivo ou sessão irrecuperável. Preserve o request dump protegido e confira os pares call/output e JSON de argumentos sem expor headers, prompts ou reasoning cifrado. Validade local não garante aceitação do provedor.
+- Quando a coleta/render já estiver validada, reconcilie efeitos e retome somente o transporte faltante com o request, corte, IDs e nonces originais. Mantenha o agente de origem como executor único; em handoff autorizado, forneça o checkpoint, adaptador exato e critérios de aceite em vez de mandar repetir a descoberta. Não resetar histórico, trocar modelo/credencial ou reiniciar gateway por padrão. Uma continuação bem-sucedida comprova recuperação daquele fluxo, não correção estrutural do erro 400.
+- Confirme separadamente resposta nova do gateway, conclusão do pedido e readback externo de todas as partes/complementos. Para GETs de muitas mensagens no mesmo canal Discord, serialize com espaçamento, respeite Retry-After e persista cada confirmação para não reiniciar a verificação inteira após rate limit.
+
 ### Fatos essenciais
 
 - Endpoint Codex: `https://chatgpt.com/backend-api/codex` (não `api.openai.com`).
