@@ -595,7 +595,7 @@ if __name__ == '__main__':
             print(json.dumps(take_foreground(request)))
         else:
             print(json.dumps({'request_id': request['request_id'],
-                'dependencies': dependencies(request, request['account']),
+                'dependencies': dependencies(request, authorize_queue_request(request)['account_id']),
                 'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}))
     else:
         raise SystemExit('Use --work, --inspect INPUT or --take-foreground INPUT')

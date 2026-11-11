@@ -2133,12 +2133,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1569933761293062208",
-      "next_step": "Dry-run e execucao sequencial das quatro fontes pelo runner central;QA e readback integrais",
+      "next_step": "Review exato na origem para horarios nativos157/158/159 e ativacao das7aposQA;usar continuation tipada mesmos IDs;depois fonte135x7 mantendo request/relogio,budget e politica de horario vigente",
       "objective": "28 duplicacoes Mavroa06 G006:130/137/126/135 x7 USD45/dia cada,11novembro2026 00h03EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569933761293062208/aggregate-progress.json",
-      "state": "intake registrado;sem writes meta;validando primeira linha",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569933761293062208/partial-verified-receipt.json",
+      "state": "parcial verificado get:130->139-145 e137->146-152 active,35ads,usd630/dia;126->153-159 paused14ads,4/7qa;157/158 inicio00:03:30 e15900:04:05 divergem00:03;1357copias nao iniciadas. mesmos ids/manifests;maintenance131testespass.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-11T04:37:31+00:00"
+      "updated_at": "2026-11-11T05:08:11+00:00"
     },
     {
       "agent": "ares",
@@ -3833,12 +3833,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-MAVROA06-1569866790589436018",
-      "next_step": "One-shot validado, aguardar horario e GET final dos mesmos38IDs",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 38 campanhas Mavroa06 G006 e reativar 11novembro2026 00h05 America/New_York status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-mavroa06-1569866790589436018/request.json",
-      "state": "scheduled:38/38 paused confirmadas; reativacao38 em11novembro2026 00h05est; budgets/lances/filhos preservados",
+      "state": "complete_activated: 38/38 active por get final; budgets/lances/filhos/programacao preservados",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-11T00:19:50+00:00"
+      "updated_at": "2026-11-11T05:08:30+00:00"
     },
     {
       "agent": "ares",
@@ -9837,5 +9837,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T04:47:46+00:00"
+  "updated_at": "2026-11-11T05:08:30+00:00"
 }
