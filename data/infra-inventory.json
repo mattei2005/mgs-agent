@@ -63429,6 +63429,30 @@
       "type": "monitor_support",
       "owner": "Zeus/Tech",
       "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-tick-20261110T2102",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261110T2102/closure-current.json",
+      "status": "partial_validated_waiting_human_2fa",
+      "type": "authorized_scheduled_financial_refresh",
+      "updated_at": "2026-11-10T21:09:48.683254-05:00",
+      "report_infra_status": "pending_not_sent_cron_delivery_only",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 10,
+        "historical_blank_d": 35,
+        "card_proofs_updated": 0,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
