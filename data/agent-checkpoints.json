@@ -6298,12 +6298,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-1570181680755376220",
-      "next_step": "Executar somente IDs congelados nos slots30min; expirar12nov00hEST sem API; sem alteracoes Meta",
+      "next_step": "Executar slots30min IDs congelados; expirar12nov00hEST sem API; sem alteracoes Meta",
       "objective": "CPR30min campanhas005,006 Growpowerhub04 ate fim11nov",
       "source": "data/ares/meta-ads/state/cpr-updates/1570181680755376220/manifest.json",
-      "state": "primeira entrega16:06est get verificada:005/006 ativas, gastousd0, sem resultados;40checks pass; agenda finita habilitada16:33-23:33est; meta live america/new_york prevalece historico",
+      "state": "primeira16:06est get verificada gastousd0 sem resultados.40checks pass. agenda finita revisada no mesmo job por concorrencia:16:14-23:44est; inicial e coorte preservadas",
       "thread_id": "1558147134040178828",
-      "updated_at": "2026-11-11T21:07:36+00:00"
+      "updated_at": "2026-11-11T21:09:39+00:00"
     },
     {
       "agent": "ares",
@@ -9947,5 +9947,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T21:07:36+00:00"
+  "updated_at": "2026-11-11T21:09:39+00:00"
 }
