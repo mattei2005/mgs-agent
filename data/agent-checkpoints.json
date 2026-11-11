@@ -2994,12 +2994,12 @@
     {
       "agent": "ares",
       "id": "EGGBEV-NAMING-CLONE-1569923369284149249",
-      "next_step": "Atualizar politica e contrato scoped, sincronizar rota e Regras, validar e mostrar preview com identidade real",
-      "objective": "Estender naming global prospectivo a duplicacoes Eggbev01 como pedido de Nicolas: Page/criativos/copy novos; consultar preview sem Meta write",
-      "source": "discord:1541578556037927053/1569923369284149249",
-      "state": "in_progress; pedido explicito1569923369284149249; nenhuma campanha ou reserva autorizada por esta atualizacao",
+      "next_step": "Naming vigente para pedidos futuros equivalentes. Nao executar este teste nem desbloquear modos Meta. Execucao real exige readiness Page/engine,preflight,manifest e OK final proprios.",
+      "objective": "Estender naming global a duplicacoes Eggbev01 com Page/criativos/copy novos e mostrar preview",
+      "source": "data/ares/meta-ads/audit/eggbev/naming-clone-1569923369284149249/verification.json",
+      "state": "naming_complete; politica/contrato/projecoes/prompts alinhados;25testespass; preview301-cornell loan-pg_23186-c01; sb nome confirmado,meta page sem provenance validada; nenhuma reserva ou campanha criada",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-11T03:55:46+00:00"
+      "updated_at": "2026-11-11T04:00:20+00:00"
     },
     {
       "agent": "ares",
@@ -9807,5 +9807,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T03:55:46+00:00"
+  "updated_at": "2026-11-11T04:00:20+00:00"
 }

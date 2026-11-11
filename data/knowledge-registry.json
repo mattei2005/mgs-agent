@@ -8306,6 +8306,24 @@
       "updated_at": "2026-11-05T19:25:17+00:00"
     },
     {
+      "canonical_key": "ares.eggbev-us-en.duplication-with-replacements-naming",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-11T03:59:17+00:00",
+      "id": "EGGBEV-REPLACEMENT-DUPLICATION-NAMING-1569923369284149249",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev01: duplicacoes com Page/criativos/copy substituidos usam numero global e CXX alvo sem DUP",
+      "updated_at": "2026-11-11T03:59:17+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev-us-en.creation-naming",
       "canonical_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
       "consumers": [
@@ -16752,5 +16770,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-10T18:00:50+00:00"
+  "updated_at": "2026-11-11T03:59:17+00:00"
 }

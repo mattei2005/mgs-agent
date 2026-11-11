@@ -9,6 +9,12 @@
 
 ## Eggbev — threads no canal de relatórios
 
+### Naming prospectivo de duplicacoes com substituicoes — conta01
+
+- Autoridade Nicolas `1569923369284149249`, origem `1541578556037927053`: estendido o padrao global existente somente para futuras duplicacoes da conta01 com troca expressa de Page, criativos e copy. Proximo numero global compartilhado, nome/pg alvo, proximo CXX alvo e nenhum DUPnn; outros clones e contas preservados.
+- Fonte unica: `data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json#/duplication_with_replacements_extension`; ponteiro no contrato Eggbev. Projecoes somente Criacao/Clone conta01 e Regras, via sincronizador canonico; inventario/audit `data/ares/meta-ads/audit/eggbev/naming-clone-1569923369284149249/`.
+- Nenhuma alteracao de codigo/executor, modos bloqueados, credenciais, permissoes, budget, campanhas historicas ou cron. Preview sem reserva; prontidao Meta permanece separada da aprovacao de naming.
+
 - Autoridade: Rodolfo `1565029050001391727`, origem `1565027664660664452`; canal alvo `1565027294920319126`.
 - Ares: removida somente a exceção `discord.no_thread_channels` do alvo; mantidos `auto_thread=true`, admission sem menção e demais canais. Atualizados o prompt específico e os membros automáticos Zeus/Rodolfo/Nicolas. Backup protegido e comparação estrutural confirmaram apenas três campos alterados no profile próprio.
 - Fonte canônica: `context/routes.md`; registro `EGGBEV-ACCOUNT-REPORTS-AUTOTHREAD-1565029050001391727` supersede explicitamente a orientação inline anterior. Nenhum write Meta, cron, budget, credencial ou permissão Discord.

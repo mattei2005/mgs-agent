@@ -30,6 +30,11 @@ Prompts com bullets podem ser interpretados como listas/mappings em folhas dinâ
 
 Quando o contrato separar a sequência global de campanhas do identificador da Page, consultar somente o conjunto exato de contas permitido e paginar suas histórias por completo. Reservar números sob lock compartilhado, com idempotência por request/conta e sem consumi-los em exemplos ou testes. A mudança de conta não reinicia um contador global; o contador local da Page segue a regra da operação. Resolver o pg inteiro na SB, exigir uma única combinação de FB_PAGE_ID/nome e conferir a identidade Meta antes de selar. Nome de campanha, Page do creative/adset e utm_campaign devem concordar. Divergência ou colisão exige bloqueio/reconciliação, não credencial alternativa, renomeação da Page ou alteração silenciosa do tracking. Preservar manifests anteriores à regra e revalidar colisões antes do execute.
 
+## Extender naming a uma modalidade de duplicacao
+
+- Quando o gestor autorizar aplicar o padrao de criacao a duplicacoes de um tipo especifico, registrar a excecao prospectiva no contrato e na politica da operacao, com autoridade, contas/intencao exatas e supersessao parcial explicita. Preservar as demais modalidades, a fonte original e as contas nao abrangidas. Nao promover a regra para a familia nem confundir aprovacao de nome com suporte de um modo no executor.
+- Para mostrar o nome, fazer preview pela sequencia compartilhada e o contador da Page alvo sem reservar numeros. Distinguir nome confirmado no cadastro SB de identidade Meta diretamente validada; falta de provenance scoped nao autoriza bypass de guard, token alternativo ou cadastro artificial. A publicacao continua sujeita aos readbacks reais e gates independentes.
+
 ## Renomear uma campanha existente com sequência compartilhada
 
 1. Recuperar o ID da campanha entregue pelo request/checkpoint e aplicar a admissão da conta antes da alteração. Se houver modelo e cópia com nomes parecidos, usar o vínculo da entrega, não o primeiro resultado pelo nome. Um writer de outro pedido não deve ser liberado por inferência.

@@ -84,6 +84,12 @@
     "status": "approved_by_nicolas"
   },
   "campaign_cloning_policy": {
+    "naming_override_policy": {
+      "source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json#/duplication_with_replacements_extension",
+      "authority_message_id": "1569923369284149249",
+      "precedence": "For prospective Eggbev01 duplications with explicitly replaced target Page, assets and copy, apply the shared global naming pattern, next target-Page CXX and no DUP suffix instead of the legacy clone naming below. Other clone naming remains unchanged.",
+      "readiness": "Naming-only change; no new executable mode, no unblocking of clone_page_switch, no retroactive campaign rename and no Meta write authorization."
+    },
     "allowed_modes": {
       "clone_page_switch": {
         "campaign_naming": {
