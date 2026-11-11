@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-11-10T20:35:39.101524-05:00",
+  "days": 8,
+  "window_start": "2026-11-10T00:00:00-05:00",
+  "window_end": "2026-11-18T00:00:00-05:00",
+  "sources": [
+    "/etc/cron.d/e2scrub_all",
+    "/etc/cron.d/monarx-update",
+    "/etc/cron.d/php",
+    "/etc/cron.d/sysstat",
+    "/etc/crontab",
+    "/root/.hermes/profiles/ares/cron/jobs.json:41712f74f949",
+    "/root/.hermes/profiles/ares/cron/jobs.json:528c5710269d",
+    "/root/.hermes/profiles/ares/cron/jobs.json:69dfca2b9719",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:0cc7ed1e587e",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:2ee720363d7d",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:3ff8bd8ca40d",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:453bfdd275b0",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:498fb0d95e10",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:62dfebef142b",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:685397627b29",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:83b148017b4d",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:940e9827b1ac",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:f0222c3bfcf0",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:f42618f5ced7",
+    "/root/.hermes/profiles/zeus/cron/jobs.json:fb40054022fa",
+    "root"
+  ],
+  "cron_definitions": 86,
+  "registered_live_crons": 71,
+  "systemd_timers": "NEXT                                 LEFT LAST                               PASSED UNIT                           ACTIVATES\nTue 2026-11-10 20:39:00 EST      3min 18s Tue 2026-11-10 20:09:18 EST     26min ago phpsessionclean.timer          phpsessionclean.service\nTue 2026-11-10 20:40:00 EST      4min 18s Tue 2026-11-10 20:30:04 EST      5min ago sysstat-collect.timer          sysstat-collect.service\nTue 2026-11-10 21:22:18 EST         46min Tue 2026-11-10 15:15:18 EST  5h 20min ago ua-timer.timer                 ua-timer.service\nTue 2026-11-10 21:35:15 EST         59min Tue 2026-11-10 20:25:05 EST     10min ago fwupd-refresh.timer            fwupd-refresh.service\nWed 2026-11-11 00:07:00 EST      3h 31min Tue 2026-11-10 00:07:03 EST       20h ago sysstat-summary.timer          sysstat-summary.service\nWed 2026-11-11 01:41:33 EST       5h 5min Tue 2026-11-10 02:52:36 EST       17h ago dpkg-db-backup.timer           dpkg-db-backup.service\nWed 2026-11-11 02:00:26 EST      5h 24min Tue 2026-11-10 00:41:33 EST       19h ago logrotate.timer                logrotate.service\nWed 2026-11-11 03:29:24 EST            6h Tue 2026-11-10 02:43:19 EST       17h ago man-db.timer                   man-db.service\nWed 2026-11-11 04:14:57 EST            7h Tue 2026-11-10 14:06:59 EST        6h ago apt-daily.timer                apt-daily.service\nWed 2026-11-11 04:17:12 EST            7h Tue 2026-11-10 12:04:21 EST        8h ago motd-news.timer                motd-news.service\nWed 2026-11-11 06:44:37 EST           10h Tue 2026-11-10 06:02:59 EST       14h ago apt-daily-upgrade.timer        apt-daily-upgrade.service\nWed 2026-11-11 08:51:18 EST           12h Tue 2026-11-10 08:51:18 EST       11h ago update-notifier-download.timer update-notifier-download.service\nWed 2026-11-11 09:00:47 EST           12h Tue 2026-11-10 09:00:47 EST       11h ago systemd-tmpfiles-clean.timer   systemd-tmpfiles-clean.service\nSun 2026-11-15 03:10:29 EST        4 days Sun 2026-11-08 03:10:59 EST    2 days ago e2scrub_all.timer              e2scrub_all.service\nMon 2026-11-16 00:28:31 EST        5 days Mon 2026-11-09 01:28:18 EST 1 day 19h ago fstrim.timer                   fstrim.service\nSat 2026-11-21 21:35:09 EST 1 week 4 days Sun 2026-11-08 21:36:22 EST 1 day 22h ago update-notifier-motd.timer     update-notifier-motd.service\n-                                       - -                                       - apport-autoreport.timer        apport-autoreport.service\n-                                       - -                                       - snapd.snap-repair.timer        snapd.snap-repair.service\n\n18 timers listed.\n",
+  "hourly_candidates": [
+    {
+      "minute": 46,
+      "baseline_occurrences": 960
+    },
+    {
+      "minute": 9,
+      "baseline_occurrences": 1096
+    },
+    {
+      "minute": 36,
+      "baseline_occurrences": 1096
+    },
+    {
+      "minute": 51,
+      "baseline_occurrences": 1096
+    },
+    {
+      "minute": 52,
+      "baseline_occurrences": 1208
+    },
+    {
+      "minute": 50,
+      "baseline_occurrences": 1400
+    }
+  ],
+  "selected_minute": 46,
+  "baseline_commands": [
+    "flock -n /var/lock/finalize-hermes-structural-write.lock /root/mgs-agent/scripts/finalize-hermes-structural-write.py >> /root/mgs-agent/logs/hermes-structural-write-finalizer.log 2>&1",
+    "flock -n /var/lock/hermes_news_explainer_watchdog.lock /root/mgs-agent/scripts/hermes-news-explainer-watchdog.py >> /root/mgs-agent/logs/hermes-news-explainer-watchdog.log 2>&1",
+    "flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2>&1",
+    "flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1",
+    "sleep 17 && flock -n /var/lock/monitor_honcho_billing_watch.lock /root/mgs-agent/scripts/monitor_honcho_billing_watch.py >> /root/mgs-agent/logs/monitor-honcho-billing-watch.log 2>&1"
+  ],
+  "operational_collisions": 0,
+  "shared_resources": "New dedicated lock/state; no browser; CF read-only one credential lookup only when a daily bucket is due; Discord same thread. Dense baselines are local predicates, not a second writer. +7s deterministic stagger."
+}
