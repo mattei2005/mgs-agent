@@ -3913,12 +3913,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-MAVROA06-1570185868096835655",
-      "next_step": "Validar testes e agenda one-shot no mesmo request",
+      "next_step": "One-shot existente revalida autoridade e invariantes; statusACTIVE apenas nos56IDs; GET final e aviso nativo na origem. Sem recorrencia.",
       "objective": "Pausar 56 campanhas Mavroa06 G006 e reativar12novembro2026 00h05 America/New_York status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-mavroa06-1570185868096835655/request.json",
-      "state": "56 paused; 56 aptas; 0 excecoes",
+      "state": "scheduled:56/56 paused por get integral;56 aptas; reativacao12novembro2026 00h05est;520 testes e agenda/readback/auditoria pos-write validos",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-11T21:26:29+00:00"
+      "updated_at": "2026-11-11T21:33:49+00:00"
     },
     {
       "agent": "ares",
@@ -9967,5 +9967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T21:26:29+00:00"
+  "updated_at": "2026-11-11T21:33:49+00:00"
 }
