@@ -212,6 +212,26 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1570151841751375913",
+      "next_step": "Autenticar mensagem e conta, preparar runner isolado, testar e publicar leitura inicial antes de habilitar agenda finita",
+      "objective": "Relatorios CPR Mavroa04 campanhas criadas hoje atuais e futuras, cada30min ate fim dia",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570151841751375913",
+      "state": "preparacao: autenticacao, identidade live, reuso do runner dinamico e auditoria global de agenda; nenhuma campanha alterada",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-11T19:04:13+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPR-1570151871652565074",
+      "next_step": "Inicial14:07EST três283-285 sem gasto/resultados;20slots14:13–23:43EST;descobrir futuras criadas11/11 mesma conta;expirar12/11 00hEST;27testespass;readback agenda e auditoria pós zero colisões;zero writesMeta",
+      "objective": "Relatórios CPR cada30min campanhas subidas11/11 incluindo futuras Yolokfx04 G004",
+      "source": "data/ares/meta-ads/state/cpr-updates/1570151871652565074/manifest.json",
+      "state": "scheduled_initial_get_verified",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-11T19:07:58+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -9877,5 +9897,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T18:49:38+00:00"
+  "updated_at": "2026-11-11T19:07:58+00:00"
 }
