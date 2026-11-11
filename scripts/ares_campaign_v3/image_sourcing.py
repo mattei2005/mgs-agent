@@ -32,6 +32,9 @@ def valid_observed(actual, expected):
     from .shein_reviewed_background_batch import preserved_sourcing
     preserved=preserved_sourcing(actual,expected)
     if preserved is not None:return preserved
+    from .reviewed_copy_omissions import preserved_sourcing as reviewed_source
+    reviewed = reviewed_source(actual, expected)
+    if reviewed is not None:return reviewed
     spec = actual.get('media_sourcing_spec')
     if spec is None:
         return expected.get('media_sourcing_spec') is None

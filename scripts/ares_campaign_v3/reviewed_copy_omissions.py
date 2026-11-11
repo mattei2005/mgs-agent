@@ -123,5 +123,57 @@ def expected_degrees(actual,expected):
     return desired
 
 
+def preserved_sourcing(actual, expected):
+    """Recognize an unchanged static source package in an exact reviewed slot.
+
+    Feature acceptance never approves media changes: require the bound payload,
+    primary image, all inherited variants/flags, text feed and story verbatim.
+    No new-media recipe or unreviewed request is changed by this comparison.
+    """
+    proof = CURRENT.get()
+    if proof is None:
+        return None
+    receipt = proof.get('receipt') or {}
+    if (proof.get('verified') is not True
+            or proof.get('digest') != content_digest(receipt)):
+        return False
+    slots = [slot for slot in receipt.get('binding', {}).get('slots', [])
+             if slot.get('creative_id') == actual.get('id')
+             and slot.get('effective_payload_digest') == content_digest(expected)]
+    if len(slots) != 1:
+        return False
+    spec = expected.get('media_sourcing_spec')
+    feed = expected.get('asset_feed_spec')
+    story = expected.get('object_story_spec') or {}
+    primary = (story.get('link_data') or {}).get('image_hash')
+    if (not primary or story.get('video_data') or expected.get('object_story_id')
+            or actual.get('object_story_id') or not isinstance(spec, dict)
+            or set(spec) - {'images', 'titles', 'bodies', 'descriptions'}
+            or not isinstance(feed, dict)
+            or set(feed) - {'titles', 'bodies', 'descriptions', 'optimization_type'}
+            or feed.get('optimization_type') != 'DEGREES_OF_FREEDOM'):
+        return None
+    images = spec.get('images')
+    if not isinstance(images, list) or not images:
+        return False
+    if any(not isinstance(row, dict)
+           or set(row) - {'hash', 'source', 'opt_in_status', 'variant_types', 'url'}
+           or not row.get('hash')
+           or row.get('source') not in {'padding', 'uncrop', 'recomposition', 'multi_media'}
+           or row.get('opt_in_status') not in {'opt_in', 'opt_out'} for row in images):
+        return False
+    enabled = [row for row in images if row['opt_in_status'] == 'opt_in']
+    if (len(enabled) != 1 or enabled[0].get('hash') != primary
+            or enabled[0].get('source') != 'multi_media'):
+        return False
+    from .creative_media import stable
+    observed_story = copy.deepcopy(actual.get('object_story_spec') or {})
+    if story.get('instagram_user_id') and not observed_story.get('instagram_user_id'):
+        observed_story['instagram_user_id'] = actual.get('instagram_user_id')
+    return (actual.get('media_sourcing_spec') == spec
+            and stable(actual.get('asset_feed_spec')) == stable(feed)
+            and stable(observed_story) == stable(story))
+
+
 def warning():
     return ('Authorized reviewer accepted unconfirmed API preservation only for the exact reviewed absent feature fields on these existing creative IDs; not literal feature fidelity and no extra opt-out applied' if CURRENT.get() else None)
