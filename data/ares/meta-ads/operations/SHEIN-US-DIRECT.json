@@ -1,5 +1,35 @@
 {
   "page_delegation_repair_authorizations": {
+    "680516861808576": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1570158283484827789",
+      "source_thread_id": "1558131493048688711",
+      "source_channel_id": "1548149654926135486",
+      "approval_prompt_message_id": "1570155319328378952",
+      "account_id": "1736068407518263",
+      "account_name": "Vizioid-US-SHEIN-EN-04-G004",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Durable authorization for current and future authorized requests on this account using exact Page 680516861808576. Preserve existing tasks and add only ADVERTISE and ANALYZE when absent. No other Page/account/identity authority.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, operational business and existing tasks with authorized administrative identity",
+        "sanitized journal before minimal assignment write; reconcile uncertain effects before retry",
+        "administrative assignment readback and original corporate Page access readback",
+        "separate administrative provisioning executor when Ares Page write guard is GET-only; never bypass guard or change campaign identity",
+        "resume original request and IDs through central Engine v3 with original E2E, QA and activation gates"
+      ],
+      "exclusions": [
+        "ownership transfer",
+        "credential issuance or rotation",
+        "app permission changes",
+        "billing",
+        "other Pages or accounts",
+        "unapproved recurrence"
+      ],
+      "initial_request_id": "shein-1570154441934504089"
+    },
     "717431928129946": {
       "enabled": true,
       "approved_by": "344196393512075265",
