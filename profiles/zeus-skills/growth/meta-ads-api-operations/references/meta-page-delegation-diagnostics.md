@@ -65,13 +65,14 @@ When the owner explicitly authorizes all current accounts matching a name filter
 
 ### When the administrative Page pre-read fails
 
-If `assigned_users` returns code 10 despite granted Page scopes:
+If the direct Page GET or `assigned_users` returns code 10:
 
-1. Validate the administrative token via `/me` and `/debug_token`.
-2. Resolve the actor's BusinessUser through paginated `GET /{BUSINESS_ID}/business_users?fields=id,name,role&limit=100`; require unambiguous identity correspondence, not a similar name.
-3. Paginate `GET /{BUSINESS_USER_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,name,tasks&limit=100` and compare the target IDs with the administrator's `/me/accounts`.
-4. Distinguish BM ADMIN from personal Page task assignment: the former can expose the Business inventory while the latter is absent for a new Page.
-5. If an additional human Page assignment is needed, stop before granting the batch and obtain its separate authorization or have the owner make that assignment. Do not silently enlarge a person's access, regenerate a token, or reduce the batch to only accessible Pages.
+1. Preserve the sanitized HTTP status, endpoint, error code and message, then continue the independent read-only preflight; a failed direct Page GET must block writes, not prevent collection of Business inventory and assignment evidence. Use an explicit diagnostic rather than a bare assertion whose message can be empty.
+2. Validate the administrative token via `/me` and `/debug_token`, and paginate `/me/permissions` to confirm the actual granted Page scopes. A permission name in Meta's code-10 message does not by itself prove that the token lacks that OAuth scope.
+3. Complete the administrative Business `owned_pages` and `client_pages` inventories. Persist each edge's success/error, `pagination_complete`, enumerated count and exact-target membership before discarding unrelated rows. Never turn a failed edge into an empty inventory; doing so makes access denial indistinguishable from proven absence.
+4. Resolve the actor's BusinessUser through paginated `GET /{BUSINESS_ID}/business_users?fields=id,name,role&limit=100`; require unambiguous identity correspondence, not a similar name. Paginate `GET /{BUSINESS_USER_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,name,tasks&limit=100` and compare the target IDs with the administrator's `/me/accounts`.
+5. Distinguish the confirmed boundaries: valid token, granted OAuth scopes, BM ADMIN role, Business-visible Page membership and personal Page task assignment are separate facts. Absence from all successfully completed administrative inventories supports a Page-visibility prerequisite, not a claim that the Page was deleted, belongs to another Business, or requires token replacement. Report ownership as unresolved unless an authorized read proves it.
+6. Require a successful exact-target assignment pre-read before any grant, even when the narrow BISU grant is already authorized. If exposing the Page requires an additional human assignment or Business-sharing change, identify that separate dependency and obtain its authority or have the owner perform it; do not silently enlarge access, transfer ownership, regenerate a token, or reduce the approved batch. Keep a blocked administrative receipt and the original campaign request open; do not present diagnostic completion as permission recovery.
 
 ## 4. Reconcile owner-side changes and scope revisions
 
