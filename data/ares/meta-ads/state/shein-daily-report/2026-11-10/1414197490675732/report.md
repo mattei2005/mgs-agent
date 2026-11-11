@@ -3,9 +3,9 @@
 **⏱️ ATRASO GAM/SB ATUAL: 47min**
 Diário D-1: 10/11/2026 00:00–23:59 no fuso America/New_York; coleta em 11/11 07:47 EST.
 Financeiro: 11/11 07:47 EST. Bid: Meta 11/11 07:47 EST.
-B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 11/11 08:05 EST.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 11/11 08:12 EST.
 RPS: coluna da dash SB, consultada em 11/11 07:50 EST.
-Status dos blocos: Meta 11/11 08:05 EST.
+Status dos blocos: Meta 11/11 08:12 EST.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **981,21** · Rev **1350,99** · Saldo **+369,78** · ROI **37,69%** · ROI E. **37,72%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -18,15 +18,15 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 28/10  |  008 CC CP3 v2  | ROPA GRATIS  | 851,58  | 0,80 | 10,30  |  2,23%  |  29,13   | +18,83  | 96,15%  | 182,82%  | 182,82%  | 2,83x
 🟢🟢 | 02/10  |    002 MV v2    | ROPA GRATIS  | 926,59  |  —   | 31,01  | 53,75%  |  75,89   | +44,88  | 96,34%  | 144,73%  | 144,73%  | 2,50x
 🟢🟢 | 31/10  |    010 MV v2    | BOLSAS 1     | 811,23  |  —   | 26,74  | 89,13%  |  53,30   | +26,56  | 95,29%  |  99,33%  |  99,33%  | 2,03x
-🟢🟢 | 07/11  |  019 MV CP2 v2  | ROPA GRATIS  | 835,76  |  —   | 28,89  | 96,30%  |  49,65   | +20,76  | 95,68%  |  71,86%  |  71,82%  | 1,82x
-🟢🟢 | 31/10  |    011 MV v2    | CONJ TALLA G | 769,81  |  —   | 43,50  | 108,75% |  72,05   | +28,55  | 98,44%  |  65,63%  |  65,63%  | 1,78x
+🟢🟢 | 07/11  |  019 MV CP2 v2  | ROPA GRATIS  | 835,76  |  —   | 28,89  | 50,08%  |  49,65   | +20,76  | 95,68%  |  71,86%  |  71,82%  | 1,82x
+🟢🟢 | 31/10  |    011 MV v2    | CONJ TALLA G | 769,81  |  —   | 43,50  | 50,49%  |  72,05   | +28,55  | 98,44%  |  65,63%  |  65,63%  | 1,78x
 ```
 
 **SHEIN — principal · Campanhas ativas (20) · 2/3**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🟢🟢 | 09/11  |  020 MV CP2 v2  | BATERIA SOLA | 816,79  |  —   | 24,92  | 83,07%  |  38,96   | +14,04  | 99,05%  |  56,34%  |  56,34%  | 1,47x
-🟢🟢 | 07/11  |  018 MV CP2 v2  | ROPA GRATIS  | 1062,09 |  —   | 29,26  | 97,53%  |  41,10   | +11,84  | 96,00%  |  40,46%  |  40,46%  | 1,39x
+🟢🟢 | 07/11  |  018 MV CP2 v2  | ROPA GRATIS  | 1062,09 |  —   | 29,26  | 50,72%  |  41,10   | +11,84  | 96,00%  |  40,46%  |  40,46%  | 1,39x
 🟢🟡 | 28/10  |  005 CC CP3 v2  | ROPA GRATIS  | 815,96  | 0,80 | 353,48 | 125,03% |  476,61  | +123,13 | 96,60%  |  34,83%  |  34,83%  | 1,52x
 🟢🟡 | 25/09  |    001 MV v2    | EBIKE        | 649,55  |  —   | 50,34  | 58,43%  |  64,89   | +14,55  | 90,98%  |  28,90%  |  28,90%  | 1,38x
 🟢🟡 | 27/10  |  004 CC CP1 v2  | EBIKE - SHEI | 738,75  | 0,80 | 88,19  | 117,59% |  111,70  | +23,51  | 94,42%  |  26,66%  |  27,06%  | 1,42x
@@ -34,8 +34,8 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 01/11  | 012 CC CP11 v2  | CONJ TALLA G | 691,11  | 0,90 |  4,72  |  2,36%  |   5,60   |  +0,88  | 92,00%  |  18,64%  |  18,64%  | 1,96x
 🟢🟡 | 28/10  |  009 CC CP3 v2  | ROPA GRATIS  | 707,14  | 0,70 | 30,48  | 40,64%  |  35,64   |  +5,16  | 97,90%  |  16,93%  |  16,93%  | 1,72x
 🟢🔴 | 09/11  |    021 CC v2    | BATERIA SOLA | 696,10  | 0,90 | 101,96 | 101,96% |  110,89  |  +8,93  | 98,06%  |  8,76%   |  8,76%   | 1,18x
-🟢🔴 | 03/11  | 016 CC CP10 v2  | BOLSAS 1 - S | 621,10  | 0,90 | 38,02  | 50,69%  |  40,81   |  +2,79  | 96,20%  |  7,34%   |  7,31%   | 1,68x
-🟢🔴 | 03/11  | 014 CC CP10 v2  | BOLSAS 1 - S | 772,86  | 0,90 | 23,20  | 30,93%  |  24,35   |  +1,15  | 98,70%  |  4,96%   |  4,96%   | 1,62x
+🟢🔴 | 03/11  | 016 CC CP10 v2  | BOLSAS 1 - S | 621,10  | 0,90 | 38,02  | 25,35%  |  40,81   |  +2,79  | 96,20%  |  7,34%   |  7,31%   | 1,68x
+🟢🔴 | 03/11  | 014 CC CP10 v2  | BOLSAS 1 - S | 772,86  | 0,90 | 23,20  | 15,47%  |  24,35   |  +1,15  | 98,70%  |  4,96%   |  4,96%   | 1,62x
 🔴🔴 | 28/10  |  007 CC CP3 v2  | ROPA GRATIS  | 686,67  | 0,80 |  6,26  |  1,91%  |   5,56   |  -0,70  | 100,00% | -11,18%  | -11,18%  | 1,01x
 ```
 
@@ -43,7 +43,7 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🔴🔴 | 02/11  |    013 MV v2    | BOLSAS 2     | 533,20  |  —   | 27,23  | 90,77%  |  24,00   |  -3,23  | 97,87%  | -11,86%  | -11,86%  | 1,17x
-🔴🔴 | 03/11  | 015 CC CP10 v2  | BOLSAS 1 - S | 543,48  | 0,90 | 28,46  | 37,95%  |  22,50   |  -5,96  | 97,37%  | -20,94%  | -20,94%  | 1,47x
+🔴🔴 | 03/11  | 015 CC CP10 v2  | BOLSAS 1 - S | 543,48  | 0,90 | 28,46  | 18,97%  |  22,50   |  -5,96  | 97,37%  | -20,94%  | -20,94%  | 1,47x
 ```
 
 **SHEIN — principal · Campanhas pausadas (0) · 1/1**

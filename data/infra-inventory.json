@@ -63721,6 +63721,30 @@
           "modified_at": "2026-11-11T04:23:39.054239+00:00"
         }
       ]
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-tick-20261111T0802",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261111T0802/closure-current.json",
+      "status": "partial_validated_pc1_offline",
+      "type": "authorized_scheduled_financial_refresh",
+      "updated_at": "2026-11-11T08:07:30.469740-05:00",
+      "report_infra_status": "pending_not_sent_cron_delivery_only",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 10,
+        "historical_blank_d": 35,
+        "card_proofs_updated": 0,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
