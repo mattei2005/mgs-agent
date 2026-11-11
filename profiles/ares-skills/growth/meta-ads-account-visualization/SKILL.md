@@ -11,7 +11,7 @@ metadata:
 
 # Meta Ads Account Visualization — Ares/MGS
 
-Use esta skill quando Rodolfo pedir para Ares acessar/visualizar uma conta Meta Ads, confirmar permissões read-only, listar campanhas/adsets/ads, puxar insights ou gerar relatório de auditoria da conta.
+Use esta skill quando um operador autorizado pedir para Ares acessar/visualizar uma conta Meta Ads, identificar a campanha mais recente em operação, consultar configuração de campanha/conjunto/anúncio, confirmar permissões read-only, listar objetos, puxar insights ou gerar relatório de auditoria da conta.
 
 ## Princípios
 
@@ -39,7 +39,7 @@ Arquivo / script                                                Uso
 
 ## Fluxo read-only recomendado
 
-1. Rodar auth check:
+1. Resolver conta e credencial pelo catálogo positivo da operação e pelo binding vigente da conta no runtime; não presumir que o arquivo individual de `accounts/` seja a única fonte. Aplicar o checker de conta e validar identidade/BM/moeda/fuso no GET real antes de consultar os objetos. Rodar auth check com o item explicitamente vinculado:
 
 ```bash
 /root/mgs-agent/scripts/ares-meta-auth-check.py --account-id <ACCOUNT_ID> --item '<item corporativo vinculado à conta>' --out /root/mgs-agent/data/ares/meta-ads/audit/auth-check-<ACCOUNT_ID>-$(date -u +%Y%m%dT%H%M%SZ).json
@@ -53,9 +53,17 @@ Arquivo / script                                                Uso
 id,name,status,object_type,effective_object_story_id
 ```
 
-4. Só buscar `object_story_spec` por ID ou em lotes pequenos quando houver necessidade real de revisar criativo/anúncio.
-5. Derivar `subs` pela ordem definida por Rodolfo e `CPS = spend / subs`.
-6. Responder com resumo executivo em tabela alinhada, sem despejar JSON bruto.
+5. Só buscar `object_story_spec` por ID ou em lotes pequenos quando houver necessidade real de revisar criativo/anúncio.
+6. Derivar `subs` pela ordem definida por Rodolfo e `CPS = spend / subs` quando o pedido envolver performance.
+7. Responder em PT-BR com resumo executivo e bullets/blocos por nível no Discord, sem tabela Markdown crua nem JSON bruto. Em configuração, agrupar campos comuns aos anúncios uma única vez e separar apenas suas diferenças; informar horário da consulta no fuso da conta e que nenhuma alteração foi feita.
+
+## Campanha mais recente e configuração por nível
+
+- Para “última campanha rodando”, paginar as campanhas ativas e ordenar por `created_time` em código; mencionar empates de criação/lote em vez de inventar precedência temporal. `ACTIVE` comprova status, não entrega: confirmar impressões/gasto em Insights do período antes de afirmar veiculação.
+- Para configuração, seguir a sequência `campanha → conjuntos/anúncios paginados → detalhes dos creatives únicos`. Conferir contagens e vínculos entre níveis antes de declarar cobertura completa. Receita e campos: `references/campaign-configuration.md`.
+- Interpretar objetivo, evento de conversão e estratégia por campos reais, nunca pelos sufixos do nome; objetivo Vendas não implica otimização para compra, e uma marcação de app no nome não comprova destino app.
+- Não converter campo ausente em “desativado”, “ilimitado” ou “automático confirmado”. Informar o que a API efetivamente retornou; traduzir códigos de idioma somente com mapping validado. HTTP 200 não valida a semântica de uma busca: resultados de interesses não são rótulos de locale.
+- Inspecionar `degrees_of_freedom_spec.creative_features_spec` por recurso: `advantage_plus_creative=OPT_OUT` não significa todos os aprimoramentos desligados, pois recursos individuais podem permanecer `OPT_IN`.
 
 ## Inventário de criação, agendamento e UTMs para cadastro
 
