@@ -1,0 +1,9 @@
+{
+  "entry": "46 * * * * /usr/bin/flock -n /var/lock/monitor-vagaaqui-country.lock /bin/sh -c '/bin/sleep 7; /usr/bin/timeout 300s /usr/bin/python3 /root/mgs-agent/scripts/monitor-vagaaqui-country.py' >> /root/mgs-agent/logs/monitor-vagaaqui-country.log 2>&1",
+  "readback_exact": true,
+  "installed_at": "2026-11-11T01:42:20.537960+00:00",
+  "backup": "/root/mgs-agent/backups/vagaaqui-country-monitor-20261111/root-crontab.before",
+  "before_sha256": "216e422342aae2c4df9dc9c03493b87176705b5e644c1dcb7f406b2a1cd9eb69",
+  "after_sha256": "0f6c11a13166e8cb538eecf522d5122099ea0b4a5b851deb457e1601d7c35d36",
+  "collision_preflight": 0
+}

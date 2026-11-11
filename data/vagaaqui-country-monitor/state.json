@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "active",
+  "days": {},
+  "outbox": {
+    "initial": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Vagaaqui — monitor por país ativado",
+            "color": 3447003,
+            "fields": [
+              {
+                "name": "Período / cobertura",
+                "value": "Referência: 2026-11-10T01:42:23Z a 2026-11-11T01:42:23Z (24h anteriores; fora do acumulado mensal).\nMonitor: 2026-11-11T01:38:29Z a 2026-12-11T01:38:29Z, em UTC. Resumo diário nesta thread; encerramento automático e fechamento final. Apenas vagaaqui.com e www.vagaaqui.com.",
+                "inline": false
+              },
+              {
+                "name": "Requisições estimadas",
+                "value": "270.828",
+                "inline": true
+              },
+              {
+                "name": "Países / categorias",
+                "value": "65",
+                "inline": true
+              },
+              {
+                "name": "Distribuição por país",
+                "value": "```\nPaís                   Requisições      %\nÁfrica do Sul (ZA)         249.421  92.10\nEstados Unidos (US)         11.166   4.12\nFrança (FR)                  3.177   1.17\nAlemanha (DE)                2.051   0.76\nBrasil (BR)                  1.783   0.66\nPaíses Baixos (NL)             718   0.27\nSingapura (SG)                 577   0.21\nBélgica (BE)                   395   0.15\nJapão (JP)                     271   0.10\nTH                             172   0.06\nOutros (55)                  1.097   0.41\n```",
+                "inline": false
+              },
+              {
+                "name": "Leitura correta",
+                "value": "País estimado pelo IP, não localização física garantida. Requisições incluem recursos, bots e acessos que podem ser bloqueados; não são pessoas ou visitas. Analytics com amostragem adaptativa. Maior intervalo de amostragem: 1.272.",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-VAGAAQUI:initial"
+            }
+          }
+        ],
+        "nonce": "743469119461944834",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-11T01:42:24Z",
+      "message_id": "1569890007345270897",
+      "verified": true,
+      "verified_at": "2026-11-11T01:42:25Z"
+    }
+  },
+  "failure_streak": 0,
+  "last_check": "2026-11-11T01:43:24Z"
+}

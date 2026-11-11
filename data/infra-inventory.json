@@ -63369,6 +63369,66 @@
         "cron_changes": 0
       },
       "report_infra_message_id": "1569797270562541609"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_vagaaqui_country_monitor.py",
+      "size_bytes": 9627,
+      "modified_at": "2026-11-11T01:40:57.343546+00:00",
+      "sha256": "dd854af895874a78d46f890eea7b2c396d22b7052b25876ea7f641c07bba8eaf",
+      "id": "vagaaqui-country-cd138bf5e970",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "path": "/root/mgs-agent/tests/vagaaqui_country_schedule_audit.py",
+      "size_bytes": 4798,
+      "modified_at": "2026-11-11T01:43:24.822408+00:00",
+      "sha256": "5fe8e6c9f414a474d02050d057c98a30ddba9146ec9454207f89d8d68e28d0ee",
+      "id": "vagaaqui-country-478e81e0ab1a",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "path": "/root/mgs-agent/docs/vagaaqui-country-monitor.md",
+      "size_bytes": 4602,
+      "modified_at": "2026-11-11T01:41:59.196927+00:00",
+      "sha256": "f74848544b206c7466db45d27846e60f487761851a010e15e4ad12ca77fe0fbd",
+      "id": "vagaaqui-country-2856eeed7dfc",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
+      "size_bytes": 24299,
+      "modified_at": "2026-11-11T01:42:50.588222+00:00",
+      "sha256": "95f6aea891585657785ffc2a9fbc0cefc64b319d70a0487a5cc960368834af0d",
+      "id": "vagaaqui-country-13c10727bc2d",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "path": "/root/mgs-agent/backups/vagaaqui-country-monitor-20261111/root-crontab.before",
+      "size_bytes": 17446,
+      "modified_at": "2026-11-11T01:42:20.522052+00:00",
+      "sha256": "216e422342aae2c4df9dc9c03493b87176705b5e644c1dcb7f406b2a1cd9eb69",
+      "id": "vagaaqui-country-925c3d615f5d",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
+    },
+    {
+      "path": "/root/mgs-agent/backups/vagaaqui-country-monitor-20261111/root-crontab.candidate",
+      "size_bytes": 17880,
+      "modified_at": "2026-11-11T01:42:20.522052+00:00",
+      "sha256": "0f6c11a13166e8cb538eecf522d5122099ea0b4a5b851deb457e1601d7c35d36",
+      "id": "vagaaqui-country-f9165cd6c347",
+      "type": "monitor_support",
+      "owner": "Zeus/Tech",
+      "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup."
     }
   ],
   "profile_skill_references": [
@@ -64884,6 +64944,12 @@
     },
     {
       "entry": "13 0 * * * /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/campaign-creation-sheet-cron.py --scheduled' >> /root/mgs-agent/logs/ares-campaign-creation-sheet.log 2>&1"
+    },
+    {
+      "entry": "46 * * * * /usr/bin/flock -n /var/lock/monitor-vagaaqui-country.lock /bin/sh -c '/bin/sleep 7; /usr/bin/timeout 300s /usr/bin/python3 /root/mgs-agent/scripts/monitor-vagaaqui-country.py' >> /root/mgs-agent/logs/monitor-vagaaqui-country.log 2>&1",
+      "description": "Finite Vagaaqui country monitor through2026-12-11T01:38:29Z; hourly consumer publishes once per closed UTC slice; same origin thread; zero external requests after completion.",
+      "owner": "Zeus/Tech",
+      "authorization_message_id": "1569887564804915231"
     }
   ],
   "scripts": [
@@ -67896,6 +67962,13 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-vagaaqui-country.py",
+      "size_bytes": 17189,
+      "modified_at": "2026-11-11T01:39:26.512926+00:00",
+      "sha256": "9adfef26d535c3a3f18697cb998103049bbdc24eae11d3f96fe6e92f8d23e2a9",
+      "description": "Finite Cloudflare country monitor: exact apex/www, adaptive estimates, daily UTC clipped slices, durable readback outbox and final coverage gate."
     }
   ],
   "skills_mgs": [
@@ -70912,9 +70985,11 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 861034,
+      "size_bytes": 861762,
       "md5": "ec690804155b44ff4e5ecb5222330724",
-      "modified_at": "2026-11-10T19:19:50-05:00"
+      "modified_at": "2026-11-11T01:44:03.712610+00:00",
+      "sha256": "1e5f852b1a980264e89d6360f32844f7052e03479b528258c3d88535af91688e",
+      "description": "Vagaaqui country monitoring scope/state/receipts; checkpoint record"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -72205,6 +72280,48 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/state.json",
+      "size_bytes": 2533,
+      "modified_at": "2026-11-11T01:43:24.761407+00:00",
+      "sha256": "111fb866ba1190f74024a78262644b5214ef552d86db44bc77afa91d8249efdf",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/schedule-preflight.json",
+      "size_bytes": 5667,
+      "modified_at": "2026-11-11T01:42:22.916066+00:00",
+      "sha256": "1656b15a1ac76ffe77b936e92e41463badc30bd4f7bf96b45105af4bdadf0221",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/schedule-receipt.json",
+      "size_bytes": 636,
+      "modified_at": "2026-11-11T01:42:20.538052+00:00",
+      "sha256": "ce6e03c4a2711e2da3d9296689a1d0430ad6e0d38a6f22658c242c184b0f8288",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/validation.json",
+      "size_bytes": 573,
+      "modified_at": "2026-11-11T01:43:24.823408+00:00",
+      "sha256": "aaab3d0fb5d2aed026945950263f2a5406fa63be64f4123fa4fb8e162574987e",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/initial-reference.json",
+      "size_bytes": 1161,
+      "modified_at": "2026-11-11T01:42:24.288074+00:00",
+      "sha256": "bc2c9d76f2830669df50c066769f1e26833b66f6e147b2d96f0e3ee9098c3c87",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
+    },
+    {
+      "path": "/root/mgs-agent/data/vagaaqui-country-monitor/config.json",
+      "size_bytes": 899,
+      "modified_at": "2026-11-11T01:38:29.223492+00:00",
+      "sha256": "d2832b2b19a3d1d63b9aa94dde95d1e29237205c784c1842f0e9a58db521e49b",
+      "description": "Vagaaqui country monitoring scope/state/receipt; no credentials or personal identifiers."
     }
   ],
   "mu_plugin_canonical": {

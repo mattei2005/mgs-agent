@@ -2852,12 +2852,12 @@
     {
       "agent": "zeus",
       "id": "CF-VAGAAQUI-COUNTRY-20261111",
-      "next_step": "Validar dataset, implantar coletor determinístico com dedupe/readback e cron auditado, testar entrega e término automático.",
+      "next_step": "Consumidor horário no minuto46 retoma somente slices/outbox faltantes; boletim diário normal22:46ET; coleta encerra2026-12-11T01:38:29Z e fechamento exige cobertura integral+GET. Cinco ciclos falhos ou auth bloqueiam com pendência humana na origem.",
       "objective": "Monitorar por um mês o tráfego por país de vagaaqui.com, com resumos diários e fechamento nesta thread; Cloudflare somente leitura, newsfolha fora do escopo.",
-      "source": "discord:1569851196234014781/1569887564804915231",
-      "state": "implementing",
+      "source": "data/vagaaqui-country-monitor/validation.json",
+      "state": "active_validated",
       "thread_id": "1569851196234014781",
-      "updated_at": "2026-11-11T01:34:48+00:00"
+      "updated_at": "2026-11-11T01:44:03+00:00"
     },
     {
       "agent": "ares",
@@ -9797,5 +9797,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T01:34:48+00:00"
+  "updated_at": "2026-11-11T01:44:03+00:00"
 }
