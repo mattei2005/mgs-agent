@@ -83,28 +83,26 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_validated_pc1_offline",
-    "job_id": "2ee720363d7d",
-    "execution_id": "32681e68c7ab4a37841b51ce3a733410",
-    "scheduled_at": "2026-11-11T21:02:00-05:00",
-    "verified_at": "2026-11-11T21:11:51.872284-05:00",
+    "status": "partial_validated_one_history_ui_blocked",
+    "source_message_id": "1570280845757915227",
+    "requested_at": "2026-11-11T22:35:28.036-05:00",
+    "verified_at": "2026-11-11T23:27:08.191899-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
     "fresh_metrics_count": 47,
-    "validated_metrics_at": "2026-11-11T21:05:09.193630-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261111T210515529352",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261111T210517576074",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261111T210446823583",
+    "validated_metrics_at": "2026-11-11T23:26:08.872017-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261111T232613884745",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261111T223946951154",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261111T223858463665",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
     "d_ledger_to_live_sheet_exact": true,
-    "fresh_h_count": 0,
-    "fresh_h_account_ids": [],
-    "pending_h_account_ids": [
+    "fresh_h_count": 36,
+    "fresh_h_account_ids": [
       "1001115192056600",
       "1018267074603840",
       "1062887799996139",
@@ -142,103 +140,69 @@
       "908704754163659",
       "937846586033361"
     ],
-    "h_preserved_count": 36,
+    "pending_h_account_ids": [],
+    "h_preserved_count": 0,
     "h_original_collection_times_preserved": true,
-    "h_read_at_min": "2026-11-10T14:06:42.680876-05:00",
-    "h_read_at_max": "2026-11-10T14:29:33.222165-05:00",
-    "h_sum_usd": "563761.30",
+    "h_read_at_min": "2026-11-11T22:40:39.471603-05:00",
+    "h_read_at_max": "2026-11-11T23:00:38.740025-05:00",
+    "h_sum_usd": "583172.22",
     "h_read_times": {
-      "1107653168698121": "2026-11-10T14:27:24.311376-05:00",
-      "2039876850230678": "2026-11-10T14:07:49.929327-05:00",
-      "4511685129081248": "2026-11-10T14:22:01.326788-05:00",
-      "1753257812779707": "2026-11-10T14:21:37.366542-05:00",
-      "1736068407518263": "2026-11-10T14:16:38.539409-05:00",
-      "1851640026221079": "2026-11-10T14:23:55.985300-05:00",
-      "1085117577390237": "2026-11-10T14:20:25.383866-05:00",
-      "814915838330687": "2026-11-10T14:16:07.997934-05:00",
-      "869857549542755": "2026-11-10T14:18:50.884656-05:00",
-      "1583000095650153": "2026-11-10T14:28:38.738938-05:00",
-      "1498990138663094": "2026-11-10T14:13:06.073819-05:00",
-      "897046653487466": "2026-11-10T14:14:07.784014-05:00",
-      "1877104513669062": "2026-11-10T14:14:38.411315-05:00",
-      "336562339356179": "2026-11-10T14:06:42.680876-05:00",
-      "26632890069640784": "2026-11-10T14:08:57.172750-05:00",
-      "2429758060563333": "2026-11-10T14:29:06.498997-05:00",
-      "787796726891306": "2026-11-10T14:28:13.956754-05:00",
-      "1062887799996139": "2026-11-10T14:13:36.648986-05:00",
-      "1526280818302320": "2026-11-10T14:12:32.023598-05:00",
-      "536294549227786": "2026-11-10T14:17:45.244316-05:00",
-      "1001115192056600": "2026-11-10T14:20:49.657497-05:00",
-      "1829406761389732": "2026-11-10T14:22:25.406096-05:00",
-      "937846586033361": "2026-11-10T14:25:31.059870-05:00",
-      "7840111366055613": "2026-11-10T14:27:47.804369-05:00",
-      "1419148446852410": "2026-11-10T14:11:59.680731-05:00",
-      "1744611463000838": "2026-11-10T14:24:20.978707-05:00",
-      "2031917360813819": "2026-11-10T14:17:11.616771-05:00",
-      "781612907182683": "2026-11-10T14:25:51.982182-05:00",
-      "2633813727134360": "2026-11-10T14:25:06.549282-05:00",
-      "1018267074603840": "2026-11-10T14:18:16.055450-05:00",
-      "1245683183659911": "2026-11-10T14:24:42.907310-05:00",
-      "3752157451670648": "2026-11-10T14:07:16.193970-05:00",
-      "3188620887977617": "2026-11-10T14:09:33.055615-05:00",
-      "1600310064116258": "2026-11-10T14:29:33.222165-05:00",
-      "908704754163659": "2026-11-10T14:21:13.968546-05:00",
-      "311204101516831": "2026-11-10T14:08:21.226786-05:00"
+      "7840111366055613": "2026-11-11T22:59:05.977888-05:00",
+      "2039876850230678": "2026-11-11T22:42:27.521467-05:00",
+      "937846586033361": "2026-11-11T22:56:36.327084-05:00",
+      "1829406761389732": "2026-11-11T22:53:43.573939-05:00",
+      "336562339356179": "2026-11-11T22:40:39.471603-05:00",
+      "1526280818302320": "2026-11-11T22:45:23.607174-05:00",
+      "536294549227786": "2026-11-11T22:49:31.865714-05:00",
+      "869857549542755": "2026-11-11T22:50:24.018632-05:00",
+      "1085117577390237": "2026-11-11T22:50:46.041834-05:00",
+      "1062887799996139": "2026-11-11T22:46:07.419409-05:00",
+      "26632890069640784": "2026-11-11T22:43:10.078038-05:00",
+      "1498990138663094": "2026-11-11T22:45:47.053276-05:00",
+      "1744611463000838": "2026-11-11T22:55:32.610620-05:00",
+      "1877104513669062": "2026-11-11T22:46:54.139895-05:00",
+      "1018267074603840": "2026-11-11T22:49:56.253041-05:00",
+      "1583000095650153": "2026-11-11T22:59:51.079241-05:00",
+      "311204101516831": "2026-11-11T22:42:50.663070-05:00",
+      "1107653168698121": "2026-11-11T22:57:23.483298-05:00",
+      "1001115192056600": "2026-11-11T22:52:11.473348-05:00",
+      "897046653487466": "2026-11-11T22:46:29.445681-05:00",
+      "1600310064116258": "2026-11-11T23:00:38.740025-05:00",
+      "1245683183659911": "2026-11-11T22:55:54.681399-05:00",
+      "1851640026221079": "2026-11-11T22:54:07.507329-05:00",
+      "1753257812779707": "2026-11-11T22:52:55.755324-05:00",
+      "787796726891306": "2026-11-11T22:59:31.931329-05:00",
+      "2429758060563333": "2026-11-11T23:00:15.714733-05:00",
+      "2031917360813819": "2026-11-11T22:49:10.076536-05:00",
+      "781612907182683": "2026-11-11T22:57:00.364721-05:00",
+      "1736068407518263": "2026-11-11T22:48:47.693132-05:00",
+      "2633813727134360": "2026-11-11T22:56:16.139425-05:00",
+      "3752157451670648": "2026-11-11T22:42:05.044323-05:00",
+      "4511685129081248": "2026-11-11T22:53:21.645709-05:00",
+      "814915838330687": "2026-11-11T22:47:16.213742-05:00",
+      "3188620887977617": "2026-11-11T22:43:34.034140-05:00",
+      "908704754163659": "2026-11-11T22:52:33.329960-05:00",
+      "1419148446852410": "2026-11-11T22:43:56.313715-05:00"
     },
     "pending_ui": [
-      {
-        "account_id": "1046241194533786",
-        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1481815942722118",
-        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1762774024309795",
-        "name": "Financeadx-CA-CC-EN-01",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "648687381127947",
-        "name": "Financeadx-MX-CC-ES-01",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
       {
         "account_id": "1290644206529750",
         "name": "OpenzedFinanzas-ES-CC-ES-02",
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "card_proofs_updated": 0,
-    "renewed_card_proof_ids": [],
+    "card_proofs_updated": 9,
+    "renewed_card_proof_ids": [
+      "1046241194533786",
+      "1062446663435585",
+      "1150399088163771",
+      "1414197490675732",
+      "1481815942722118",
+      "1543098427832443",
+      "1762774024309795",
+      "2852476828464907",
+      "648687381127947"
+    ],
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
@@ -420,12 +384,12 @@
     "historical_d_verified_values": 12,
     "average_period": [
       {
-        "since": "2026-11-08",
-        "until": "2026-11-10"
-      },
-      {
         "since": "2026-11-09",
         "until": "2026-11-11"
+      },
+      {
+        "since": "2026-11-08",
+        "until": "2026-11-10"
       }
     ],
     "month_periods": [
@@ -440,9 +404,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "20208.41",
-      "balance": "586204.61",
-      "month_spend": "215950.38"
+      "average_daily": "20156.55",
+      "balance": "587342.32",
+      "month_spend": "218509.09"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -464,19 +428,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4943.44"
+        "value": "4937.30"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "4513.90"
+        "value": "3919.72"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "51850.64"
+        "value": "52729.41"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -488,25 +452,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15264.97"
+        "value": "15219.25"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "563761.30"
+        "value": "583172.22"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "581690.71"
+        "value": "583422.60"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "164099.74"
+        "value": "165779.68"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -518,25 +482,25 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "20208.41"
+        "value": "20156.55"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "563761.30"
+        "value": "583172.22"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "586204.61"
+        "value": "587342.32"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "215950.38"
+        "value": "218509.09"
       }
     ],
     "lease_free": true,
@@ -546,102 +510,49 @@
     "cron_changes": 0,
     "other_sheet_data_unchanged": true,
     "other_sheet_properties_unchanged": true,
-    "other_tabs_count": 1,
     "ui_cleanup": {
-      "no_gui_input": true,
-      "owned_tabs_opened": 0,
-      "browser_tab_parity_not_observed": "PC1 offline before list_windows",
-      "lease_acquired": false,
-      "lease_free": true
+      "initial_browser_tabs_visually_counted": 6,
+      "final_browser_tabs_visually_counted": 6,
+      "owned_tabs_closed": true,
+      "lease_free": true,
+      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/surface-initial.png",
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/surface-final.png"
     },
     "next_existing_run_at": "2026-11-12T08:02:00-05:00",
+    "report_infra_status": "sent_verified",
     "blocker": {
-      "kind": "pc1_private_network_offline",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261111T2102/transport-diagnostic.json",
-      "pc1_online": false,
-      "ssh_timeout_after_backoff": true,
-      "last_seen_utc": "2026-11-11T07:00:00.1Z",
-      "current_meta_authentication_not_inspected": true,
-      "previous_2fa_gate_not_cleared": true,
+      "status": "waiting_human",
+      "kind": "meta_billing_surface_redirect_and_search_input_unconfirmed",
       "owner": "zeus",
-      "next_step": "Restore PC1 private connectivity; positively read same approved Chrome/BM before H/D. Preserve prior human2FA gate until target access proven."
+      "account_id": "1290644206529750",
+      "name": "OpenzedFinanzas-ES-CC-ES-02",
+      "read_at": "2026-11-11T23:28:35.940362-05:00",
+      "cause_confirmed": "Legacy details and Accounts routes redirected to new Business Suite list. Exact authorized business_id retained; different context asset_id. Search stayed blank despite fresh-bounds background and foreground attempts. Authentication gate not observed.",
+      "cause_unproven": "Internal provider routing/focus mechanism and access to this individual account not established.",
+      "ui_attempts_stopped_after": 5,
+      "new_authentication_required_not_proven": true,
+      "next_step": "Owner opens Billing/payment activity for exact OpenzedFinanzas-ES-CC-ES-02 ID1290644206529750 in existing Rodolfo Chrome. Zeus validates that surface, resumes only D and final API reconciliation; no new payment, billing or scope.",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/closure-current.json",
+      "resume_via_existing_job": "2ee720363d7d",
+      "next_existing_run_at": "2026-11-12T08:02:00-05:00"
     },
-    "continuity": {
-      "key": "f3d0b1d8da3c0353e1361184",
-      "state": "completed_validated",
-      "cause": "original_writer_active",
-      "owner": null,
-      "due": 1794424329.632033,
-      "updated": 1794424329.8876882
+    "operational_learning": {
+      "skill": "meta-manual-payments-planning",
+      "references": [
+        "references/accounts-list-search.md",
+        "references/recurring-refresh.md"
+      ],
+      "summary": "New Billing Suite redirect is not logout; blank search is unconfirmed input; optional inline AX capture persisted without elements_file."
     },
-    "continuity_qualification": {
-      "prior_queue_record_terminal": true,
-      "business_h_d_unresolved": true,
-      "immediate_queue_recovery_not_proven": true,
-      "remaining_resume_path": "same existing native job; human PC1 connectivity gate; next tick verified only, not recovery success"
-    },
-    "report_infra_status": "pending_not_sent_cron_delivery_only"
+    "report_infra_message_id": "1570294228049727494",
+    "report_infra_readback": true
   },
   "pending_card_history": {
-    "status": "waiting_pc1_connectivity_previous_2fa_not_revalidated",
+    "status": "one_new_event_pending_ui_surface_handoff",
     "account_ids": [
-      "1046241194533786",
-      "1150399088163771",
-      "1481815942722118",
-      "1062446663435585",
-      "1762774024309795",
-      "648687381127947",
-      "1414197490675732",
-      "1543098427832443",
-      "2852476828464907",
       "1290644206529750"
     ],
     "pending_ui": [
-      {
-        "account_id": "1046241194533786",
-        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1481815942722118",
-        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1762774024309795",
-        "name": "Financeadx-CA-CC-EN-01",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "648687381127947",
-        "name": "Financeadx-MX-CC-ES-01",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
       {
         "account_id": "1290644206529750",
         "name": "OpenzedFinanzas-ES-CC-ES-02",
@@ -649,7 +560,7 @@
       }
     ],
     "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261111T2102/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -748,7 +659,22 @@
   ],
   "pending_sheet_reclassification": null,
   "invoice_refresh_each_tick": true,
-  "general_refresh_blocker": null,
+  "general_refresh_blocker": {
+    "status": "waiting_human",
+    "kind": "meta_billing_surface_redirect_and_search_input_unconfirmed",
+    "owner": "zeus",
+    "account_id": "1290644206529750",
+    "name": "OpenzedFinanzas-ES-CC-ES-02",
+    "read_at": "2026-11-11T23:28:35.940362-05:00",
+    "cause_confirmed": "Legacy details and Accounts routes redirected to new Business Suite list. Exact authorized business_id retained; different context asset_id. Search stayed blank despite fresh-bounds background and foreground attempts. Authentication gate not observed.",
+    "cause_unproven": "Internal provider routing/focus mechanism and access to this individual account not established.",
+    "ui_attempts_stopped_after": 5,
+    "new_authentication_required_not_proven": true,
+    "next_step": "Owner opens Billing/payment activity for exact OpenzedFinanzas-ES-CC-ES-02 ID1290644206529750 in existing Rodolfo Chrome. Zeus validates that surface, resumes only D and final API reconciliation; no new payment, billing or scope.",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/closure-current.json",
+    "resume_via_existing_job": "2ee720363d7d",
+    "next_existing_run_at": "2026-11-12T08:02:00-05:00"
+  },
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
   "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261111T223855074522",
   "pay_now_rule_authority_message": "1564382301155098717",

@@ -1,0 +1,7 @@
+{"status": "blocked", "reason": "searched_row_not_ready_1290644206529750", "completed": 0, "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/investigate-new-ui/blocked.png", "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/investigate-new-ui"}
+computer_use: approval bypass (--yolo / -z) escalated the cua-driver permission mode from the configured 'standard' to 'unrestricted' for this session. Runtime approval prompts are disabled and the driver's residual ceilings no longer apply. Drop the bypass flag to keep 'standard', or declare a version-3 computer_use.capability_manifest to keep a ceiling on bypassed runs.
+
+✨ cua-driver v0.47.13 is available (you have v0.21.0).
+   Update with: cua-driver update
+   Release notes: https://github.com/trycua/cua/releases/tag/cua-driver-rs-v0.47.13
+

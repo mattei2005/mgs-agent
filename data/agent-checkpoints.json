@@ -2193,12 +2193,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570154441934504089",
-      "next_step": "Nao repetir criacao, grant, QA mutante ou ativacao. Pedido entregue; revisao pendente da Meta nao e falha de criacao.",
-      "objective": "Concluir 2 copias C007 Vizioid04 USD70/dia COCAP USD0.90 NOW; mesmo pedido original",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/zeus-delivery-recovery-1570283838653865987.json",
-      "state": "concluido/reconciliado por zeus: ares concluiu runner e qa antes de http400; live api confirma c010 120257118054990273 e c011 120257118054950273 active, dois conjuntos cap90 e quatro anuncios statusactive, um effective pending_review. entrega final zeus verificada 1570285167908757655.",
+      "next_step": "Entregar resposta nativa com status e bloco Iris/AdOps das UTMs conferidas. Nao reenviar campanhas, permissao ou ativacao. Revisao Meta permanece externa.",
+      "objective": "Conferir duas copias C007 Vizioid04 e entregar UTMs literais para cadastro",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/recheck-1570292821880209459.json",
+      "state": "recheck read-only verificado: c010 e c011 active, usd70/dia cada, cost_cap usd0.90, 2 conjuntos active e 4 anuncios configurados active; 3 effective active e 1 pending_review na c010. qa semantico/renderizado e ids preservados. utms novas conferidas nos 4 anuncios. zero writes meta. insights de hoje sem linhas; entrega nao comprovada.",
       "thread_id": "1558131493048688711",
-      "updated_at": "2026-11-12T03:53:16+00:00"
+      "updated_at": "2026-11-12T04:24:26+00:00"
     },
     {
       "agent": "ares",
@@ -8448,12 +8448,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Concluir36checks/publicarH;coletarDpendente atual,API final/readback/cleanup;mesmojob08:02semnovoagendamento",
-      "objective": "Refresh autorizado1570280845757915227 mesmos47IDs;Jnovembro,invoicesoutubro,sem billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/phases.json",
-      "state": "em execução manual;pc1 acessível,chromerodolfo novo22596/131572;digitaltrust155263197283282 confirmado emcanárioaccounts;api47publicada,36hcapturadas,35visualchecks,1idaguarda crop;d1renovada+2capturadas;writerúnico,jobsemfireclaim",
+      "next_step": "Owner opens Billing/payment activity for exact OpenzedFinanzas-ES-CC-ES-02 ID1290644206529750 in existing Rodolfo Chrome. Zeus validates that surface, resumes only D and final API reconciliation; no new payment, billing or scope. Same existing next tick 2026-11-12T08:02:00-05:00; no new job. Do not claim old offline/2FA blocker remains. Pending D never authorizes extra billing actions.",
+      "objective": "Atualizar mesmos47IDs Digital Trust; J novembro e invoices outubro; sem pagamentos ou billing",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/closure-current.json",
+      "state": "manual1570280845757915227 parcial validado:47ids11cartao36linha;metricas2026-11-11t23:26:08.872017-05:00;saldousd587342.32;novembrousd218509.09dia parcial;mediausd20156.5508–10nov37contas/09–11nov10contas(fusos).h36/36accounts22:40–23:00easternusd583172.22;9drenovadas,1eventod1290644206529750pendente.pc1online,autenticacaometa confirmada;bloqueioagorauilegacyredirecionanovasuiteesearchpermanecevazio,semgateauth;5tentativasfalhas,inputsinterrompidos.35lacunasdhistoricasqualificadas.29invoicesoutubrousd417702.93,externausd161.18excluida.ids/links/notas/moedas/totais/outraabapass;6abasoriginaispreservadas,lease livre;zero pagamento/billing/metawrite/cronchange.report-infra enviado e lido1570294228049727494.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-12T04:09:31+00:00"
+      "updated_at": "2026-11-12T04:29:31+00:00"
     },
     {
       "agent": "zeus",
@@ -9987,5 +9987,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T04:16:59+00:00"
+  "updated_at": "2026-11-12T04:29:31+00:00"
 }
