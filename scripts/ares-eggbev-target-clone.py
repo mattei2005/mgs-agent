@@ -51,7 +51,9 @@ def request_load(path):
         raise ValueError('this intake requires one exact Eggbev01 replacement request; use independent requests for batches')
     if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',q.get('request_id','')) is None:raise ValueError('safe exact request_id required')
     if not q.get('commercial_ok_message_id') or not q.get('media_filenames') or len(q['media_filenames']) not in {1,2,3,4,5} or len(set(q['media_filenames']))!=len(q['media_filenames']):raise ValueError('approved exact unique request/media missing')
-    if datetime.fromisoformat(q['start_time'])<=datetime.now(timezone.utc):raise ValueError('requested start expired; ask operator, never shift it')
+    if datetime.fromisoformat(q['start_time'])<=datetime.now(timezone.utc):
+        from ares_campaign_v3.target_continuation import validate_local
+        validate_local(path,load(Path(path).parent/'manifest.json'),load(CONFIG))
     for value in [ACCOUNT,*naming.load_policy()['account_ids']]:
         out=subprocess.run(['python3',str(R/'scripts/mgs-ares-asset-scope.py'),'check-account',value,'--json'],capture_output=True,text=True,check=True)
         if not json.loads(out.stdout)['allowed']:raise ValueError('account scope rejected')
@@ -226,7 +228,7 @@ def prepare(path,confirm=False):
     save(home/'summary.json',summary);return summary
 
 
-def execute(path,confirm=False,approved_digest=None,approval_message_id=None):
+def execute(path,confirm=False,approved_digest=None,approval_message_id=None,check_only=False):
     if not confirm or not approval_message_id:raise ValueError('execute requires explicit final OK, digest and --confirm-execute')
     q=request_load(path);home=Path(path).parent;payload=load(home/'manifest.json')
     gate_config=load(CONFIG);conflict=reader_block_reason(ACCOUNT,gate_config['state_root'])
@@ -235,7 +237,10 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None):
     # A pre-intake commercial OK is not a later manifest/technical-seed approval.
     if approval_message_id==q.get('commercial_ok_message_id'):raise ValueError('final summary requires a subsequent explicit OK message')
     common,meta,sb,token=runtime();current=source_read(q,common,meta,token);original=load(home/'source-live.json')
-    save(home/'source-current-before-execute.json',current)
+    if not check_only:
+        target=home/'source-current-before-execute.json'
+        if target.exists():target=home/('source-current-before-resume-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'.json')
+        save(target,current)
     if source_comparison(current)!=source_comparison(original):raise ValueError('source snapshot changed; reconcile before write')
     page=resolve_page(meta,sb,token,ACCOUNT,q['target_page_token'])
     if page['instagram_user_id']!=load(home/'target-page-live.json')['instagram_user_id']:raise ValueError('target Page/PBIA changed')
@@ -243,9 +248,24 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None):
     inventory={x['asset_id']:x for x in (json.loads(s) for s in INVENTORY.read_text().splitlines() if s.strip())}
     for row in load(home/'selected-assets.json'):
         if inventory[row['asset_id']].get('reservation_request_id')!=q['request_id']:raise ValueError('asset reservation changed')
-    cfg=load(CONFIG);manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
-    save(home/'final-approval.json',{'message_id':approval_message_id,'approved_digest':approved_digest})
-    result=CampaignEngine(cfg,transport_factory=real_transport_factory(cfg,manifest)).execute(manifest);save(home/'engine-result.json',result)
+    from contextlib import nullcontext
+    from ares_campaign_v3.target_continuation import admission,expired
+    cfg=load(CONFIG)
+    scope=admission(path,payload,cfg,meta=meta,token=token) if expired(payload) else nullcontext(None)
+    with scope as continuation:
+        manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
+        if continuation and approval_message_id!=continuation['receipt']['approval_message_id']:raise ValueError('continuation final approval ID mismatch')
+        engine=CampaignEngine(cfg,transport_factory=real_transport_factory(cfg,manifest))
+        if check_only:
+            if not continuation:raise ValueError('check-continuation requires existing elapsed NOW proof')
+            from ares_campaign_v3.target_page_clone import reconcile_existing
+            bundle=engine.planner.build(manifest).lanes[ACCOUNT][0]
+            checked_record=copy.deepcopy(continuation['record'])
+            proof=reconcile_existing(engine,bundle,engine.transport_factory(ACCOUNT),checked_record,require_shells=True)
+            return {'phase':'CONTINUATION_VERIFIED_READ_ONLY','request_id':q['request_id'],'manifest_digest':manifest.digest,'confirmed_ids':proof,'known_media_observations':checked_record.get('target_clone_known_media_observed',{}),'media_qa_bypass':False,'meta_writes':0,'drive_writes':0}
+        if not continuation:save(home/'final-approval.json',{'message_id':approval_message_id,'approved_digest':approved_digest})
+        result=engine.execute(manifest)
+    save(home/'engine-result.json',result)
     # Exact assignment finalization is resumed independently if any readback or
     # manager-stock movement cannot be certified; never replay a completed Engine.
     if result['status'] in {'COMPLETE_FUTURE_ACTIVE','COMPLETE_PAUSED'}:
@@ -288,7 +308,7 @@ def finalize(path):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize','check-continuation']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
     # One foreground/request owner across preparation and engine invocation.
     q=load(a.input);lock=Path(a.input).parent/'target-clone.lock'
     with lock.open('a+') as stream:
@@ -298,6 +318,6 @@ def main():
             leases=AccountWriterLeaseStore(load(CONFIG)['state_root']);leases.claim(ACCOUNT,q['request_id'],status='PREFLIGHT_ACTIVE')
             try:value=prepare(a.input,a.confirm_prepare)
             finally:leases.release(ACCOUNT,q['request_id'])
-        else:value=finalize(a.input) if a.command=='finalize' else execute(a.input,a.confirm_execute,a.approved_digest,a.approval_message_id)
+        else:value=finalize(a.input) if a.command=='finalize' else execute(a.input,a.confirm_execute or a.command=='check-continuation',a.approved_digest,a.approval_message_id,check_only=a.command=='check-continuation')
     print(json.dumps(value,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

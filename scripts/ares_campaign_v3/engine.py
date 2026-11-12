@@ -1709,6 +1709,8 @@ class CampaignEngine:
 
     @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
+        from .target_continuation import require_execution
+        require_execution(manifest)
         from .shein_manual_takeover import deny_engine_replay
         from .shein_prewrite_amendment import require_manifest
         deny_engine_replay(self.config['state_root'], manifest.request_id)

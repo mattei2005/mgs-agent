@@ -5070,6 +5070,24 @@
       "updated_at": "2026-10-29T00:29:00+00:00"
     },
     {
+      "canonical_key": "ares.shein.manual_observation.shein-1570314359530459327.shein-1569456380065222707",
+      "canonical_source": "data/ares/meta-ads/state/shein-campaigns/queue/manual-observations/shein-1570314359530459327/shein-1569456380065222707.json",
+      "consumers": [
+        "scripts/ares_campaign_v3/shein_manual_observation.py",
+        "scripts/ares_campaign_v3/shein_source_media.py"
+      ],
+      "domain": "ares.campaign_ops.shein.coordination",
+      "effective_at": "2026-11-12T06:12:00+00:00",
+      "id": "ARES-SHEIN-MANUAL-OBSERVATION-1570314359530459327",
+      "kind": "capability",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Observação comercial externa exclusiva do sucessor018; takeover original preservado",
+      "updated_at": "2026-11-12T06:12:00+00:00"
+    },
+    {
       "canonical_key": "ares.shein.manual_takeover.shein-1569456380065222707",
       "canonical_source": "data/ares/meta-ads/state/shein-campaigns/queue/manual-takeovers/shein-1569456380065222707.json",
       "consumers": [
@@ -16823,5 +16841,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T04:05:55+00:00"
+  "updated_at": "2026-11-12T06:12:00+00:00"
 }

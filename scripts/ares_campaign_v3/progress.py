@@ -34,6 +34,10 @@ def finish(entry, rows, error=None):
     if entry is not None:
         entry['state']='CONFIRMED' if error is None else 'PARTIAL_OR_UNCERTAIN'
         entry['confirmed']=confirmed
+        if error is not None:
+            # Keep the per-child response on its exact intent, not only the
+            # mutable last bundle error. Transport/outer errors remain unknown.
+            entry['failed_children']=error.get('children') or []
     slots=record.setdefault('confirmed_objects',{})
     for row in confirmed:
         slots[row['name']]=row.get('ids') or {}

@@ -65,14 +65,18 @@ def _account_for_node(node,data):
 def _dependency_for_node(node,data):
  row=_objects(data).get(node,{})
  accounts=row.get('account_ids',[])
- if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts):return row
  # Approved architecture: a freshly reconciled exact corporate SB Page is a
  # transient read-only dependency, never a writable account object or grant.
  try:
   from ares_campaign_v3.eggbev_page_identity import dependency
   live=dependency(node)
  except ImportError:live=None
- if live and all(allowed_account(a,data) for a in live.get('account_ids',[])):return live
+ if live and all(allowed_account(a,data) for a in live.get('account_ids',[])):
+  # Cached Page provenance cannot hide a fresh, narrower same-account PBIA
+  # metadata context. Conflicting provenance remains fail-closed.
+  if row and (row.get('source')!='scoped_graph_dependency' or row.get('kind')!='page' or not set(live['account_ids']).issubset(accounts)):raise ScopeError(DENY)
+  return live
+ if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts):return row
  return None
 
 def _enforce_dependency(clean,params,method,row,data):

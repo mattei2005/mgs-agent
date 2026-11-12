@@ -344,6 +344,12 @@
         "account_id": "1034081997659047",
         "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
         "runner": "scripts/ares-eggbev-target-clone.py",
+        "continuations": {
+          "eggbev-pg23187-1570285402068091011": {
+            "receipt_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-continuations/eggbev-pg23187-1570285402068091011-1034081997659047.json",
+            "sha256": "199cf547bce2826bb8b42085aab01f08fc7061eed5be2108168193cd43322664"
+          }
+        },
         "legacy_copied_adset_page_switch_enabled": false,
         "live_campaign_acceptance_verified": false
       },

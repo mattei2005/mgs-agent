@@ -338,6 +338,34 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_maintenance_staging_exclusion(self):
+        base = "data/ares/meta-ads/audit/maintenance/t_ee2d9949/"
+        ignored = [
+            base + "staging/scripts/mgs_private_backup_upload.py",
+            base + "staging/tests/test_ares_credential_metadata.py",
+            base + "staging/scripts/ares_campaign_v3/engine.py",
+        ]
+        included = [
+            base + "HANDOFF.md",
+            base + "staging-other/scripts/mgs_private_backup_upload.py",
+            "data/ares/meta-ads/audit/maintenance/other/staging/scripts/mgs_private_backup_upload.py",
+            "work/" + base + "staging/scripts/mgs_private_backup_upload.py",
+            "scripts/mgs_private_backup_upload.py",
+            "tests/test_ares_credential_metadata.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

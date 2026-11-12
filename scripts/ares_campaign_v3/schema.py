@@ -256,7 +256,8 @@ class CampaignSpec:
         start = _iso(str(value["start_time"]), "start_time")
         if status == "ACTIVE" and start_intent == "SCHEDULED" and start <= datetime.now(timezone.utc):
             from .shein_continuation import allows_elapsed_campaign
-            if not allows_elapsed_campaign(value):
+            from .target_continuation import allows_elapsed_campaign as allows_target_elapsed
+            if not allows_elapsed_campaign(value) and not allows_target_elapsed(value):
                 raise ManifestError("ACTIVE requires future start_time")
         tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(
@@ -466,6 +467,11 @@ class Manifest:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
+        if any(c.mode == 'clone_target_prestaged' and c.status == 'ACTIVE' and _iso(c.start_time, 'start_time') <= datetime.now(timezone.utc) for c in campaigns):
+            from .target_continuation import CURRENT, digest
+            continuation = CURRENT.get()
+            if not continuation or digest(value) != continuation['receipt']['manifest_digest']:
+                raise ManifestError('elapsed target manifest is not the exact admitted request')
         if operation != 'SHEIN-US-DIRECT' and any(ad.media and ad.media.media_type == 'image' for c in campaigns for ad in c.ads):
             raise ManifestError('image replacement is restricted to SHEIN')
         if operation != 'SHEIN-US-DIRECT' and any(c.reference for c in campaigns):

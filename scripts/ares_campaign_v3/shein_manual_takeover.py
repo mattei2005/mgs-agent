@@ -205,12 +205,17 @@ def scheduling_identity(campaigns):
     return result
 
 
-def verify_live(base, rid, common, token):
+def verify_live(base, rid, common, token, *, resume_request=None):
     rec = validate(base, rid)
     current = capture_live(base, {'campaign_ids':[c['id'] for c in rec['campaigns']]}, common, token)
+    observation_sha256 = None
     if scheduling_identity(current) != scheduling_identity(rec['campaigns']):
-        raise ValueError('manual takeover historical live facts changed; dependency retained')
-    return {'classification':STATUS, 'state_sha256':rec['pins'][str(pinned_paths(base,rid,engine_root(base))[0].relative_to(base))],
+        if resume_request is None:
+            raise ValueError('manual takeover historical live facts changed; dependency retained')
+        from . import shein_manual_observation as observation
+        observation_sha256 = observation.verify(base, resume_request, rid, current)
+    return {'classification':STATUS, 'coordination_observation_sha256':observation_sha256,
+            'state_sha256':rec['pins'][str(pinned_paths(base,rid,engine_root(base))[0].relative_to(base))],
             'record_sha256':sha(path(base,rid)),
             'checkpoint_sha256':rec['pins'][str(pinned_paths(base,rid,engine_root(base))[2].relative_to(base))],
             'campaign_ids':[c['id'] for c in current],

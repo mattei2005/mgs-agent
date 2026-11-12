@@ -209,6 +209,35 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()), {name, receipt})
 
+    def maintenance_staging(self):
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        base = self.repo / "data/ares/meta-ads/audit/maintenance/t_ee2d9949"
+        for name in ("scripts/mgs_private_backup_upload.py",
+                     "tests/test_ares_credential_metadata.py"):
+            path = base / "staging" / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("# Synthetic offline source; no credentials.\n")
+        return base
+
+    def test_maintenance_staging_preserved_while_normal_file_commits(self):
+        base = self.maintenance_staging()
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        before = {str(p): p.read_bytes() for p in base.rglob("*.py")}
+        (base / "HANDOFF.md").write_text("Synthetic handoff evidence.\n")
+        (self.repo / "normal.txt").write_text("valid")
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()),
+                         {".gitignore", "normal.txt", str((base / "HANDOFF.md").relative_to(self.repo))})
+        self.assertEqual({str(p): p.read_bytes() for p in base.rglob("*.py")}, before)
+        self.assertEqual(self.git("ls-files", "--", str(base / "staging")), "")
+
+    def test_maintenance_staging_exclusion_keeps_sibling_guard(self):
+        base = self.maintenance_staging()
+        (base / "private_credentials.txt").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_reviewed_direct_backup_sources_commit(self):
         names = {"scripts/mgs_private_backup_upload.py", "tests/test_private_backup_upload.py"}
         for name in names:

@@ -125,6 +125,11 @@ class SourceMediaProof:
             pinned_record = manual.path(base,rid) if record.get('classification') == manual.STATUS else record_path(base,rid)
             if record.get('classification') == manual.STATUS:
                 manual.validate(base,rid)
+                if record.get('coordination_observation_sha256'):
+                    from . import shein_manual_observation as observation
+                    observation.validate(base, request, rid)
+                    if record['coordination_observation_sha256'] != manual.sha(observation.receipt_path(base, request, rid)):
+                        raise ValueError('pure-clone manual observation changed')
             if (record['state_sha256'] != digest(state_path)
                     or record['record_sha256'] != digest(pinned_record)
                     or record['checkpoint_sha256'] != digest(cp)):
@@ -233,7 +238,7 @@ def resolve(request, account_id, base, *, held_accounts=frozenset()):
             if previous['request'].get('source_channel_id') != request['source_channel_id']:
                 raise ValueError('source media historical partition mismatch')
             if manual.present(base, path.stem):
-                historical[path.stem] = manual.verify_live(base,path.stem,common,token)
+                historical[path.stem] = manual.verify_live(base,path.stem,common,token,resume_request=request)
                 continue
             cp_path = engine / 'checkpoints' / (path.stem + '-' + account_id + '.json')
             cp = json.loads(cp_path.read_text())
