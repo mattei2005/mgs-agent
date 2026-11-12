@@ -19,7 +19,7 @@ Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness
 
 ## Duplicação e recuperação — precedência obrigatória
 
-Valide capacidade e `context/meta-creative-copy-policy.md`. Na cópia autorizada, só `image_background_gen` OPT_IN→OPT_OUT; preserve ausência/OPT_OUT, fonte, mídia/copy/CTA, demais recursos e novas UTMs no destino aprovado. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
+Valide `context/meta-creative-copy-policy.md`, inclusive aceite permanente de omissões: se aplicável, continue sem reconfirmação com receipt próprio. Na cópia, só `image_background_gen` OPT_IN→OPT_OUT; preserve fonte, mídia/copy/CTA, demais recursos e novas UTMs aprovadas. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
 
 Quando várias sessões dependerem da mesma correção, defina um único integrador dos arquivos compartilhados antes de editar. Mantenha writers Meta separados por conta/request, informe patches já aplicados e retome pelo runner normal após validar a integração; locks de contas diferentes não dão exclusividade sobre código compartilhado.
 

@@ -57,7 +57,7 @@ Before declaring success, verify:
 - rollback launcher/runtime still work;
 - retained recovery paths are resolved from the fresh manifest/inventory, confirmed to exist, and then pass integrity listing/readback; never reconstruct a backup path from a historical label, approximate size, or remembered directory name;
 - each smoke's reported claim matches its actual assertion contract—a diagnostic command that merely logs anomalies and exits zero proves execution or reopen only, not UI/layout correctness; use an assertion-bearing test before claiming the broader property;
-- current disk bytes and observed free-space delta are captured;
+- the immediate pre/post-deletion filesystem readings establish observed reclaim, and a fresh reading just before delivery establishes current disk/free space; keep these observations separate when validation or native Git batching allows concurrent writers to change occupancy;
 - inventory, audit, checkpoint, REPORT-INFRA, and Git state are reconciled.
 
 Before running a monolithic closure validator, inspect each retained state file's current top-level keys and status vocabulary with a bounded readback, then freeze those exact assertions. Normalize only known equivalent success values such as `PASS` versus `success`; never guess field names such as `last_success` versus `last_successful_backup`. A schema mismatch is a validator defect, not an operational failure: correct it from live readback before retrying so repeated guessed assertions do not consume the anti-loop budget or obscure the already-validated cleanup.
