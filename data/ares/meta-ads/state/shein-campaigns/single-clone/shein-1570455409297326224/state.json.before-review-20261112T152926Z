@@ -1,0 +1,3806 @@
+{
+  "account": {
+    "account_status": 1,
+    "currency": "USD",
+    "disable_reason": 0,
+    "id": "act_2429758060563333",
+    "name": "Yolokfx-US-SHEIN-EN-03-G005",
+    "timezone_name": "America/New_York",
+    "user_tasks": [
+      "DRAFT",
+      "ANALYZE",
+      "ADVERTISE",
+      "MANAGE"
+    ]
+  },
+  "batch_barrier": true,
+  "engine_result": {
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/shein-1570455409297326224.json",
+    "campaign_ids": [
+      "120250701710910331",
+      "120250701710940331",
+      "120250701716300331",
+      "120250701716310331",
+      "120250701720690331"
+    ],
+    "deferred_accounts": [],
+    "idempotent_replay": false,
+    "metrics": {
+      "campaign_count": 5,
+      "global_wave_count": 3,
+      "intermediate_get_calls": 0,
+      "lane_count": 1,
+      "outer_readback_calls": 3
+    },
+    "request_id": "shein-1570455409297326224",
+    "retry_after_seconds": 0,
+    "status": "COMPLETE_PAUSED"
+  },
+  "execution_started_at": "2026-11-12T15:09:07.227000+00:00",
+  "last_error_type": "ValueError",
+  "manifest": {
+    "campaigns": [
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C263 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c263&utm_adgroup=b01fb03c263g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C263 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c263&utm_adgroup=b01fb03c263g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c263g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c263",
+        "mode": "pure_clone",
+        "name": "263 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c263) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "PAUSED"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C264 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c264&utm_adgroup=b01fb03c264g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C264 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c264&utm_adgroup=b01fb03c264g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c264g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c264",
+        "mode": "pure_clone",
+        "name": "264 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c264) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "PAUSED"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C265 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c265&utm_adgroup=b01fb03c265g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C265 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c265&utm_adgroup=b01fb03c265g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c265g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c265",
+        "mode": "pure_clone",
+        "name": "265 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c265) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "PAUSED"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C266 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c266&utm_adgroup=b01fb03c266g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C266 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c266&utm_adgroup=b01fb03c266g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c266g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c266",
+        "mode": "pure_clone",
+        "name": "266 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c266) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "PAUSED"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C267 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c267&utm_adgroup=b01fb03c267g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C267 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c267&utm_adgroup=b01fb03c267g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c267g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c267",
+        "mode": "pure_clone",
+        "name": "267 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c267) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "PAUSED"
+      }
+    ],
+    "created_at": "2026-11-12T15:10:29.471477+00:00",
+    "execution_mode": "pure_clone",
+    "graph_version": "v26.0",
+    "operation": "SHEIN-US-DIRECT",
+    "prevalidated": true,
+    "prevalidation": {
+      "checks": [
+        "schema_v3",
+        "unique_idempotency",
+        "timezone_start",
+        "safe_creative_payload",
+        "source_ad_lineage"
+      ],
+      "content_digest": "842862bb93a07dcb3cc61e43237e853e6610bf1372b27f3128724a7d4eca09be",
+      "engine_version": 3,
+      "validated_at": "2026-11-12T15:10:29.487037+00:00"
+    },
+    "request_id": "shein-1570455409297326224",
+    "schema_version": 3
+  },
+  "media_qa": {
+    "120250701710910331": {
+      "ad_ids": [
+        "120250701713970331",
+        "120250701714010331"
+      ],
+      "creative_ids": [
+        "1660675962361529",
+        "1448154900101807"
+      ],
+      "rendered_media": [
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        },
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        }
+      ],
+      "signed_urls_persisted": false,
+      "variant_pairs": [
+        [
+          "1424199033027112",
+          "1424199033027112"
+        ],
+        [
+          "1668974951354376",
+          "1668974951354376"
+        ]
+      ],
+      "verified": true
+    },
+    "120250701710940331": {
+      "ad_ids": [
+        "120250701713990331",
+        "120250701714730331"
+      ],
+      "creative_ids": [
+        "2303343363549184",
+        "1454722762679950"
+      ],
+      "rendered_media": [
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        },
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        }
+      ],
+      "signed_urls_persisted": false,
+      "variant_pairs": [
+        [
+          "1424199033027112",
+          "1424199033027112"
+        ],
+        [
+          "1668974951354376",
+          "1668974951354376"
+        ]
+      ],
+      "verified": true
+    },
+    "120250701716300331": {
+      "ad_ids": [
+        "120250701718940331",
+        "120250701718870331"
+      ],
+      "creative_ids": [
+        "1958008955584178",
+        "1425560166445104"
+      ],
+      "rendered_media": [
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        },
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        }
+      ],
+      "signed_urls_persisted": false,
+      "variant_pairs": [
+        [
+          "1424199033027112",
+          "1424199033027112"
+        ],
+        [
+          "1668974951354376",
+          "1668974951354376"
+        ]
+      ],
+      "verified": true
+    },
+    "120250701716310331": {
+      "ad_ids": [
+        "120250701718920331",
+        "120250701719450331"
+      ],
+      "creative_ids": [
+        "1157173883476372",
+        "1735991271582668"
+      ],
+      "rendered_media": [
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        },
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        }
+      ],
+      "signed_urls_persisted": false,
+      "variant_pairs": [
+        [
+          "1424199033027112",
+          "1424199033027112"
+        ],
+        [
+          "1668974951354376",
+          "1668974951354376"
+        ]
+      ],
+      "verified": true
+    },
+    "120250701720690331": {
+      "ad_ids": [
+        "120250701722510331",
+        "120250701722470331"
+      ],
+      "creative_ids": [
+        "1616636199469293",
+        "2315354652592550"
+      ],
+      "rendered_media": [
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        },
+        {
+          "images": [
+            {
+              "height": 1920,
+              "width": 1080
+            }
+          ],
+          "videos": [
+            {
+              "duration": 8.148042,
+              "error": null,
+              "height": 1280,
+              "readyState": 4,
+              "width": 720
+            }
+          ]
+        }
+      ],
+      "signed_urls_persisted": false,
+      "variant_pairs": [
+        [
+          "1424199033027112",
+          "1424199033027112"
+        ],
+        [
+          "1668974951354376",
+          "1668974951354376"
+        ]
+      ],
+      "verified": true
+    }
+  },
+  "new_media_assets": [],
+  "number": 263,
+  "page_id": "410983488769165",
+  "phase": "POSTPROCESS_PENDING",
+  "prepared_at": "2026-11-12T15:10:20.566831+00:00",
+  "prerequisites": {
+    "assignment": {
+      "data": [
+        {
+          "id": "2224495688418118",
+          "name": "Andressa Silva",
+          "tasks": [
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122116729113458075",
+          "name": "Arruda Arruda",
+          "tasks": [
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122114458605478932",
+          "name": "Beatriz Ribeiro",
+          "tasks": [
+            "VIEW_MONETIZATION_INSIGHTS",
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122141618025069441",
+          "name": "Roosevelt Mattei",
+          "tasks": [
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122095869861482193",
+          "name": "minibot System User",
+          "tasks": [
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        }
+      ],
+      "paging": {
+        "cursors": {
+          "after": "QVFIVHdTRF9UQURWS0lCUFpqTjdkS2NVRzZATc1JMMWpxUDBoM1Y3ZAFhwTWlIanU2eU9VR0lmUElCLThiOHVkS3lqTV9iRWc4R2xtcHdMemtCSUNranZAlLWp4SjdzcW9XMHFPUkZAjY25mTktMbk5R",
+          "before": "QVFIVHhRd01PRzZAiQy1sV0NiT0ZADNTlOLU43aUpCTDdLZAFlJQXhMV3pWNlBrR0FYSERBMnp3NWlYM1pQd05MdzhJbF9YRzNLQmhzTUxDb2xtMm5XQ0VwZAm1B"
+        }
+      }
+    },
+    "page": {
+      "id": "410983488769165",
+      "name": "Choice Offers"
+    },
+    "pixels": {
+      "data": [
+        {
+          "id": "1049581090103163",
+          "name": "US-SHEIN-EN"
+        },
+        {
+          "id": "548684051428245",
+          "name": "Vizioid-US-CC-EN e ES"
+        }
+      ],
+      "paging": {
+        "cursors": {
+          "after": "NTQ4Njg0MDUxNDI4MjQ1",
+          "before": "MTA0OTU4MTA5MDEwMzE2MwZDZD"
+        }
+      }
+    }
+  },
+  "request": {
+    "account": "Yolokfx-US-SHEIN-EN-03-G005",
+    "authorized_by": "1291113428982693940",
+    "bid_strategy": "COCAP",
+    "bid_usd": "0.55",
+    "budget_usd": "150",
+    "mode": "pure_clone",
+    "quantity": 5,
+    "request_id": "shein-1570455409297326224",
+    "source_channel_id": "1548150015275438220",
+    "source_message_id": "1570455409297326224",
+    "source_number": 261,
+    "source_thread_id": "1558126286826774711",
+    "start_now": true,
+    "status": "ACTIVE"
+  },
+  "resolved_request": {
+    "account": "Yolokfx-US-SHEIN-EN-03-G005",
+    "authorized_by": "1291113428982693940",
+    "bid_strategy": "COCAP",
+    "bid_usd": "0.55",
+    "budget_usd": "150",
+    "mode": "pure_clone",
+    "quantity": 5,
+    "request_id": "shein-1570455409297326224",
+    "source_channel_id": "1548150015275438220",
+    "source_message_id": "1570455409297326224",
+    "source_number": 261,
+    "source_thread_id": "1558126286826774711",
+    "start_now": true,
+    "start_time": "2026-11-12T15:10:59+00:00",
+    "status": "ACTIVE"
+  },
+  "schema_version": 1,
+  "source": {
+    "ad_schedule_fields_verified": true,
+    "ads": [
+      {
+        "adset_id": "120250677011270331",
+        "creative": {
+          "contextual_multi_ads": {
+            "enroll_status": "OPT_OUT"
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {
+              "ads_with_benefits": {
+                "enroll_status": "OPT_IN"
+              },
+              "advantage_plus_creative": {
+                "enroll_status": "OPT_OUT"
+              },
+              "carousel_to_video": {
+                "enroll_status": "OPT_IN"
+              },
+              "creative_stickers": {
+                "enroll_status": "OPT_OUT"
+              },
+              "cv_transformation": {
+                "enroll_status": "OPT_IN"
+              },
+              "enhance_cta": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_animation": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_background_gen": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_brightness_and_contrast": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_templates": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_text_translation": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_touchups": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_uncrop": {
+                "enroll_status": "OPT_IN"
+              },
+              "inline_comment": {
+                "enroll_status": "OPT_IN"
+              },
+              "multi_photo_to_video": {
+                "enroll_status": "OPT_IN"
+              },
+              "pac_relaxation": {
+                "enroll_status": "OPT_IN"
+              },
+              "product_browsing": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_metadata_automation": {
+                "enroll_status": "OPT_IN"
+              },
+              "show_destination_blurbs": {
+                "enroll_status": "OPT_IN"
+              },
+              "site_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "standard_enhancements": {
+                "enroll_status": "OPT_IN"
+              },
+              "text_optimizations": {
+                "enroll_status": "OPT_IN"
+              },
+              "text_translation": {
+                "enroll_status": "OPT_IN"
+              },
+              "translate_voiceover": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_auto_crop": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_filtering": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_uncrop": {
+                "enroll_status": "OPT_IN"
+              }
+            }
+          },
+          "effective_object_story_id": "410983488769165_122222011526542101",
+          "id": "1444489447771688",
+          "instagram_user_id": "17841469509077092",
+          "media_sourcing_spec": {
+            "bodies": [
+              {
+                "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+              }
+            ],
+            "titles": [
+              {
+                "text": "CLICK HERE ✅"
+              }
+            ],
+            "videos": [
+              {
+                "opt_in_status": "opt_in",
+                "original_video_id": "1424199033027112",
+                "source": "multi_media",
+                "thumbnail_id": "1470001534518233",
+                "thumbnail_source": "generated_default",
+                "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                "video_id": "1424199033027112"
+              }
+            ]
+          },
+          "name": "CLICK HERE ✅ 2026-11-10-8ebb9b263c8823ea7ca029acd9b1f0d5",
+          "object_story_spec": {
+            "instagram_user_id": "17841469509077092",
+            "page_id": "410983488769165",
+            "video_data": {
+              "call_to_action": {
+                "type": "SEE_DETAILS",
+                "value": {
+                  "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c261&utm_adgroup=b01fb03c261g01"
+                }
+              },
+              "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+              "image_url": "https://www.facebook.com/ads/image/?d=AQLh93R8Z2SN-HVGxGJ9JF3-fa_pO9yWapNH2J_rgYH7PVNGnjVusAkNoK5LwjMjCprD-B8K_ttznFWHpHyhmUpAmr4ikvPStuBOVdbMt1KKwM51lKk5YMOEm5xqRWeuxrOh4kIFSV5xYWfwM_4LdJyI",
+              "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+              "title": "CLICK HERE ✅",
+              "video_id": "1424199033027112"
+            }
+          }
+        },
+        "id": "120250677011250331",
+        "name": "VIDEO - 01",
+        "source_ad_id": "120250546934880331",
+        "status": "ACTIVE"
+      },
+      {
+        "adset_id": "120250677011270331",
+        "creative": {
+          "contextual_multi_ads": {
+            "enroll_status": "OPT_OUT"
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {
+              "ads_with_benefits": {
+                "enroll_status": "OPT_IN"
+              },
+              "advantage_plus_creative": {
+                "enroll_status": "OPT_OUT"
+              },
+              "carousel_to_video": {
+                "enroll_status": "OPT_IN"
+              },
+              "creative_stickers": {
+                "enroll_status": "OPT_OUT"
+              },
+              "cv_transformation": {
+                "enroll_status": "OPT_IN"
+              },
+              "enhance_cta": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_animation": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_background_gen": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_brightness_and_contrast": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_templates": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_text_translation": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_touchups": {
+                "enroll_status": "OPT_IN"
+              },
+              "image_uncrop": {
+                "enroll_status": "OPT_IN"
+              },
+              "inline_comment": {
+                "enroll_status": "OPT_IN"
+              },
+              "multi_photo_to_video": {
+                "enroll_status": "OPT_IN"
+              },
+              "pac_relaxation": {
+                "enroll_status": "OPT_IN"
+              },
+              "product_browsing": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_metadata_automation": {
+                "enroll_status": "OPT_IN"
+              },
+              "show_destination_blurbs": {
+                "enroll_status": "OPT_IN"
+              },
+              "site_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "standard_enhancements": {
+                "enroll_status": "OPT_IN"
+              },
+              "text_optimizations": {
+                "enroll_status": "OPT_IN"
+              },
+              "text_translation": {
+                "enroll_status": "OPT_IN"
+              },
+              "translate_voiceover": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_auto_crop": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_filtering": {
+                "enroll_status": "OPT_IN"
+              },
+              "video_uncrop": {
+                "enroll_status": "OPT_IN"
+              }
+            }
+          },
+          "effective_object_story_id": "410983488769165_122222011544542101",
+          "id": "1662153882121078",
+          "instagram_user_id": "17841469509077092",
+          "media_sourcing_spec": {
+            "bodies": [
+              {
+                "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+              }
+            ],
+            "titles": [
+              {
+                "text": "CLICK HERE ✅"
+              }
+            ],
+            "videos": [
+              {
+                "opt_in_status": "opt_in",
+                "original_video_id": "1668974951354376",
+                "source": "multi_media",
+                "thumbnail_id": "1139037305551351",
+                "thumbnail_source": "generated_default",
+                "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                "video_id": "1668974951354376"
+              }
+            ]
+          },
+          "name": "CLICK HERE ✅ 2026-11-10-ebd2e5ae70ca7d2f8721078f036e623b",
+          "object_story_spec": {
+            "instagram_user_id": "17841469509077092",
+            "page_id": "410983488769165",
+            "video_data": {
+              "call_to_action": {
+                "type": "SEE_DETAILS",
+                "value": {
+                  "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c261&utm_adgroup=b01fb03c261g01"
+                }
+              },
+              "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+              "image_url": "https://www.facebook.com/ads/image/?d=AQK1a7BSYjOVwwXte611sBzOeA9PY_8BP48BCGizOtTqWSkra6UgviJBUW_32iCaq2ouz4NABQQR5YXaEiaFAQgzL3QrHzyprQrWG_UfLqOOUqQm17d7bb4GiNG3YIANE-CUpaEaEDq0W7mC9qnywA6U",
+              "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+              "title": "CLICK HERE ✅",
+              "video_id": "1668974951354376"
+            }
+          }
+        },
+        "id": "120250677011260331",
+        "name": "VIDEO - 02",
+        "source_ad_id": "120250546934870331",
+        "status": "ACTIVE"
+      }
+    ],
+    "adset": {
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        },
+        {
+          "event_type": "ENGAGED_VIDEO_VIEW",
+          "window_days": 1
+        }
+      ],
+      "billing_event": "IMPRESSIONS",
+      "id": "120250677011270331",
+      "is_dynamic_creative": false,
+      "name": "01 - ADGROUP - VIDEOS (b01fb03c261g01)",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "promoted_object": {
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "pixel_id": "1049581090103163",
+        "smart_pse_enabled": false
+      },
+      "regional_regulated_categories": [
+        "VOLUNTARY_VERIFICATION"
+      ],
+      "regional_regulation_identities": {
+        "universal_beneficiary": "1773412024030451",
+        "universal_payer": "1773412024030451"
+      },
+      "start_time": "2026-11-11T00:00:00-0500",
+      "status": "ACTIVE",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "targeting_automation": {
+          "advantage_audience": 1,
+          "individual_setting": {
+            "age": 1,
+            "gender": 1
+          }
+        },
+        "user_age_unknown": true
+      }
+    },
+    "campaign": {
+      "account_id": "2429758060563333",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "buying_type": "AUCTION",
+      "daily_budget": "4000",
+      "id": "120250677011240331",
+      "name": "261 - WIRELESS SEAMLESS BRA - US-EN (b01fb03c261) - (US_APP) - event_add_to_wishlist",
+      "objective": "OUTCOME_SALES",
+      "special_ad_categories": [],
+      "status": "ACTIVE"
+    },
+    "video_metadata": {
+      "1424199033027112": {
+        "id": "1424199033027112",
+        "length": 8.042,
+        "status": {
+          "processing_phase": {
+            "status": "complete"
+          },
+          "publishing_phase": {
+            "publish_status": "published",
+            "publish_time": "2026-11-11T01:21:07+0000",
+            "status": "complete"
+          },
+          "uploading_phase": {
+            "status": "complete"
+          },
+          "video_status": "ready"
+        },
+        "title": "10_2306 US_SHEIN_EN_11-11 - Wireless Seamless Bras  - K. (INGLES) .mp4"
+      },
+      "1668974951354376": {
+        "id": "1668974951354376",
+        "length": 8.042,
+        "status": {
+          "processing_phase": {
+            "status": "complete"
+          },
+          "publishing_phase": {
+            "publish_status": "published",
+            "publish_time": "2026-11-11T01:21:07+0000",
+            "status": "complete"
+          },
+          "uploading_phase": {
+            "status": "complete"
+          },
+          "video_status": "ready"
+        },
+        "title": "6_2305 US_SHEIN_EN_11-11 - Wireless Seamless Bras  - K. (INGLES) .mp4"
+      }
+    }
+  },
+  "target_manifest": {
+    "campaigns": [
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C263 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c263&utm_adgroup=b01fb03c263g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C263 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c263&utm_adgroup=b01fb03c263g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c263g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c263",
+        "mode": "pure_clone",
+        "name": "263 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c263) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "ACTIVE"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C264 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c264&utm_adgroup=b01fb03c264g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C264 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c264&utm_adgroup=b01fb03c264g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c264g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c264",
+        "mode": "pure_clone",
+        "name": "264 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c264) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "ACTIVE"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C265 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c265&utm_adgroup=b01fb03c265g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C265 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c265&utm_adgroup=b01fb03c265g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c265g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c265",
+        "mode": "pure_clone",
+        "name": "265 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c265) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "ACTIVE"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C266 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c266&utm_adgroup=b01fb03c266g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C266 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c266&utm_adgroup=b01fb03c266g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c266g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c266",
+        "mode": "pure_clone",
+        "name": "266 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c266) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "ACTIVE"
+      },
+      {
+        "account_id": "2429758060563333",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1424199033027112",
+                    "source": "multi_media",
+                    "thumbnail_id": "1470001534518233",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/894718308_2289357968507247_200650937071986962_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=e3495b&_nc_ohc=mA8IyqU_qIgQ7kNvwEgtIov&_nc_oc=AdpUT20g-HSVyqy12gMRvnNZLMpunjjmwWR8fVr-yHP6XJAB4_kQB7sefsM_2qcKJ3c&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=0rH1jD_gUo6lNAtvWoDyQA&_nc_ss=7e2a8&oh=00_AQSuKDTkPbfTyH-LfZ7os7u8iT4qTQ-qMmQdZuXb2Z2_yA&oe=6AF9A2E5",
+                    "video_id": "1424199033027112"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C267 VIDEO - 01 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c267&utm_adgroup=b01fb03c267g01"
+                    }
+                  },
+                  "image_hash": "e91650e0fa2dd5e1cb493100e540db10",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1424199033027112"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 01",
+            "source_ad_id": "120250677011250331"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_IN"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES."
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "CLICK HERE ✅"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1668974951354376",
+                    "source": "multi_media",
+                    "thumbnail_id": "1139037305551351",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-sjc6-1.xx.fbcdn.net/v/t15.5256-10/897763168_30010689918518729_4103916238280854597_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uk6V-IX71v4Q7kNvwGvgGIO&_nc_oc=AdotJT6Ps4exfOs78PS2cFWXfsB766hH4vClH10QRKIHCP6wnjKQ0NG9RoyLHCetinc&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&_nc_gid=6Cz4XM2r2gacgnc5pyRYfQ&_nc_ss=7e2a8&oh=00_AQQdiDcB1N-l8nKVzPiLPTKyMZSkUsIlPB1R2SwLDERCFQ&oe=6AF99CCD",
+                    "video_id": "1668974951354376"
+                  }
+                ]
+              },
+              "name": "SHEIN G005 C267 VIDEO - 02 COPY C261",
+              "object_story_spec": {
+                "instagram_user_id": "17841469509077092",
+                "page_id": "410983488769165",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "SEE_DETAILS",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c267&utm_adgroup=b01fb03c267g01"
+                    }
+                  },
+                  "image_hash": "cdcb4da062a2d93b4e83bc9e1ba9d56e",
+                  "message": "🎁 FREE WIRELESS SEAMLESS BRA\n✔️ NO EXTRA COSTS OR FEES.",
+                  "title": "CLICK HERE ✅",
+                  "video_id": "1668974951354376"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "VIDEO - 02",
+            "source_ad_id": "120250677011260331"
+          }
+        ],
+        "adset_name": "01 - ADGROUP - VIDEOS (b01fb03c267g01)",
+        "adset_updates": {
+          "bid_amount": "55",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "15000"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1570455409297326224-c267",
+        "mode": "pure_clone",
+        "name": "267 - 12/11 - v2 - WIRELESS SEAMLESS BRA - COCAP - (b01fb03c267) - COPY C261 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250677011270331",
+        "source_campaign_id": "120250677011240331",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-11-12T10:10:59-05:00",
+        "status": "ACTIVE"
+      }
+    ],
+    "created_at": "2026-11-12T15:10:29.471477+00:00",
+    "execution_mode": "pure_clone",
+    "graph_version": "v26.0",
+    "operation": "SHEIN-US-DIRECT",
+    "prevalidated": true,
+    "prevalidation": {
+      "checks": [
+        "schema_v3",
+        "unique_idempotency",
+        "timezone_start",
+        "safe_creative_payload",
+        "source_ad_lineage"
+      ],
+      "content_digest": "bd0dbee30b0ce2343229458a39f665f36f990e963e66cf5344af1bf413a1818a",
+      "engine_version": 3,
+      "validated_at": "2026-11-12T15:10:29.482615+00:00"
+    },
+    "request_id": "shein-1570455409297326224",
+    "schema_version": 3
+  }
+}
