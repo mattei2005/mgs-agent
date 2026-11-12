@@ -5281,20 +5281,25 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-11-11T00:05:02-05:00",
+    "last_check": "2026-11-12T00:05:05-05:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-11-10T00:00:00-05:00",
-      "deleted": 1,
-      "eligible": 1,
+      "cutoff": "2026-11-11T00:00:00-05:00",
+      "deleted": 6,
+      "eligible": 6,
       "message_ids": [
-        "1569323735486435429"
+        "1569867375057043469",
+        "1569867316114620467",
+        "1569686122890797089",
+        "1569686117752770571",
+        "1569686112392314901",
+        "1569686107271069787"
       ],
       "remaining": 0,
       "scanned": 7,
       "would_delete": 0
     },
-    "last_success_date": "2026-11-11"
+    "last_success_date": "2026-11-12"
   }
 }
