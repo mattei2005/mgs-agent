@@ -1771,6 +1771,16 @@
       "updated_at": "2026-11-10T02:25:22+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-MAINT-t_ee2d9949",
+      "next_step": "Obter diff exato, validar fonte018 e conflitos; manter históricos/selos/reviewc3, corrigir somente coordenação central necessária e entregar ao card dependente.",
+      "objective": "Reconciliar apenas coordenação histórica para retomada018; zero writes Meta/Drive",
+      "source": "data/ares/meta-ads/audit/maintenance/t_ee2d9949",
+      "state": "job original protegido sob locks dispatch/job com hold+foreground, attempts0 e notificationnull; investigando diff live vs receipt imutável.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-12T05:59:51+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-META-APP-PROFILE-TOKEN-CUTOVER-20260902",
       "next_step": "Aguardar tick real Eggbev LEADS c3d2499d8c33 às 20:16 ET e validação one-shot d1b94343f4af às 20:21 ET nesta thread; depois confirmar streak0 ou reportar/corrigir bloqueio. Badges históricos Diário/Intraday CPV13 serão substituídos nos ticks 16:01/16:06 ET.",
@@ -6497,6 +6507,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-eggbev-immediate-partial-maintenance",
+      "next_step": "Backup, correção central, testes negativos e aceitação read-only, REPORT-INFRA GET; entregar ao owner original sem execução comercial",
+      "objective": "Manutenção isolada de retomada missing-only Eggbev01; zero writes Meta/Drive",
+      "source": "kanban:t_629315b4",
+      "state": "t_629315b4: diagnóstico confirmado; implementação central com admissão vinculada a recibo, selos, autorização now e hierarquia existente",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-12T05:59:30+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-eggbev-reactivation-created-for-20260831",
       "next_step": "No action pending; never replay this one-shot.",
       "objective": "Reativar em execução única todas as campanhas Eggbev com gasto em 31/08, excluindo Page restrita, e preservar Corte/ROAS.",
@@ -7798,12 +7818,12 @@
     {
       "agent": "ares",
       "id": "eggbev-pg23187-1570285402068091011",
-      "next_step": "Perguntar se aceita3finaisativos+3seedsPAUSEDpreservadas para inicio imediato. Nao publicar/deletar enquanto essa divergencia estiver aberta. Preservar input,midia,reservas e selo anterior; eventual revisao imediata segue runner/allowlist e gates proprios.",
-      "objective": "Publicar clone303 Moorcroft USD35 videos163-165 conforme decisao atual de Nicolas",
-      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/followup-1570313044771475559.json",
-      "state": "manifest preparado e resumo1570291238941491242. nova instrucao1570313044771475559 pede remover pausadas e inicioagora; inicio00:02supersedido. arquitetura aprovada exige3seedspausedpreservadas. getcampanhas exato alvo vazio;zero criacao/delecao. instrucao condicional nao autoriza ignorar remocao solicitada.",
+      "next_step": "Manutencao isolada recovery cronologico/creative-failures com testes e integradorunico; retomada central no mesmo request, somente slots faltantes, sem mudar inicio Meta imutavel nem recriar shells. Autoridade comercial final atual preservada,nao pedir outroOK.",
+      "objective": "Concluir publicacao303 Moorcroft USD35 inicioimediato aprovado1570313437379170436 com3finaisACTIVE3seedsPAUSED",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest.json",
+      "state": "execution_partial_recovery: campanha120251175890330629paused/conjunto120251175890720629active/creative1 2190284505251875in_process/zeroads porget. creative2/3http400100:1487390;sucesso1persistido. start00:52:38etpassou durante reconciliação;meta recusou alterar start100:1487057 e getmantem original. runner/schema naoaceitam start vencido na retomada. nenhuma nova campanha nem delecao;mesmo request/selo/ids preservados. config apenas allowlist request id adicionada+report1570314111512748137.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-12T05:44:28+00:00"
+      "updated_at": "2026-11-12T05:56:13+00:00"
     },
     {
       "agent": "ares",
@@ -9997,5 +10017,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T05:44:28+00:00"
+  "updated_at": "2026-11-12T05:59:51+00:00"
 }

@@ -156,6 +156,13 @@ Para localizar uma fonte informada por nome:
 4. Reconciliar reservas, sequência e uploads existentes antes de reservar novamente. Reutilizar efeitos compatíveis somente pelo mecanismo idempotente registrado; não liberar globalmente assets, reaproveitar número comprometido ou repetir uploads por supor que cancelar o pedido removeu seus efeitos.
 5. Preservar o horário literal e separar intenção comercial de aprovação final. Se o início vencer durante manutenção/preparação, perguntar somente o novo horário; depois de preparar o sucessor, apresentar seu próprio resumo selado e exigir o OK posterior aplicável. Uma notificação tardia de manutenção nunca reabre o pedido cancelado.
 
+#### Alteração após o resumo e confirmação curta
+
+1. Decompor a resposta ao resumo em aprovação e deltas: horário, status, quantidade e eventual exclusão. Uma instrução condicionada à remoção de objetos não aprova silenciosamente um plano que os preserva.
+2. Se o operador pedir remover anúncios técnicos que o modo contratado exige preservar, explicar uma vez a diferença entre os anúncios finais e os técnicos pausados e perguntar somente se aceita essa preservação. Não excluir objetos da fonte nem trocar a arquitetura para satisfazer a condição por inferência.
+3. Vincular uma confirmação curta à pergunta imediatamente anterior. Se ela aceita explicitamente a estrutura preservada e o início imediato, registrar essa aprovação no mesmo request e avançar os gates técnicos restantes; não exigir outro OK comercial só porque houve manutenção ou geração do horário técnico de execução.
+4. Preservar o resumo e o selo anteriores ao materializar uma alteração autorizada. Separar mudança de intenção do operador de suporte real do runner: aprovação de início imediato não prova que a continuação após writes parciais já é executável. A mecânica de horário vencido pertence à skill `meta-campaign-engine-v3`: carregar sua referência **Manifest and commands**, seção **Retomada com início vencido**.
+
 ### Corte e ROAS
 
 A família define isolamento, idempotência, proveniência, lane de corte e lane de reativação. Thresholds, comparadores, fases, horários, níveis de write, métricas e budgets são parâmetros obrigatórios da operação.
