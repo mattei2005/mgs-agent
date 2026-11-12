@@ -1,0 +1,101 @@
+{
+  "task_id": "t_629315b4",
+  "deployment": "canonical runtime in place; fresh-process CLI and isolated engine tested; no service restart",
+  "changed_files": [
+    {
+      "path": "scripts/ares-eggbev-target-clone.py",
+      "sha256": "f533f2d7d7903f8b5a3cf210eff9a96a4d4c3a5287c4502006e46becc4319313",
+      "before_sha256": "4c506037d20f9ff59e6f0ff61167a5041dc76b17348249f7cf2e2ba834456419"
+    },
+    {
+      "path": "scripts/ares_campaign_v3/target_continuation.py",
+      "sha256": "a93d9e3fd146ed377150e6d2365cfcb36da1f085f56e9cd8faf51251a61fa70d",
+      "before_sha256": null
+    },
+    {
+      "path": "scripts/ares_campaign_v3/target_page_clone.py",
+      "sha256": "494980eacc7c069624f0e1a17aeeb1207e4635630ab2422978b1989a556d7537",
+      "before_sha256": "74724a54dfae7b59c00d5afd7ceaae996898947f9782a8b4901c2918d92b9e94"
+    },
+    {
+      "path": "scripts/ares_campaign_v3/progress.py",
+      "sha256": "9ca03d47582a0f87230ad231583e4d3b5e5c3b931341c875b7292ae69250baa7",
+      "before_sha256": "f9276f5924f53e10ab50b615743fc5cb91df5dc8b7c33d9678763dd4bf50533b"
+    },
+    {
+      "path": "scripts/ares_campaign_v3/schema.py",
+      "sha256": "b79f7027e3525168390241cfbcd5d1955cf33a5cb1d4ed00686a0145c48ebaaf",
+      "before_sha256": "a71a8a9a0c247da0b7fd52a785d94500c1232bf0e351a8c6e67b42afa1e572a6"
+    },
+    {
+      "path": "scripts/ares_campaign_v3/engine.py",
+      "sha256": "17565a49cc11e9f0e9bedf23374556aa60c8ba0a15d8b464106ba7308ff8beeb",
+      "before_sha256": "0c1e07d49ac2685912bcacc5b09ec45e8128901feb106dc8fbc1fd0f23b66fdc"
+    },
+    {
+      "path": "scripts/mgs-ares-asset-scope.py",
+      "sha256": "f2d95456b7e8850c9891ab3cfa68a6d936c9170fd2d14f53f159e71d0e9d9ddd",
+      "before_sha256": "3adab8f1a4a16db7c6fac63e317fbeec9a690389d6a5f404015a369eac8f4bf9"
+    },
+    {
+      "path": "tests/test_target_continuation.py",
+      "sha256": "9bd51b3c532f40f1afe6fd3ac421309dfefcf671d03798c143ed973f2bae4731",
+      "before_sha256": null
+    },
+    {
+      "path": "data/ares/meta-ads/engine-v3/config.json",
+      "sha256": "99c1e2e810b7d3b53b6cc6a88fbd9069fa54a00d53ad0db180ceb40f72981ff9",
+      "before_sha256": "f848ebaadb8514bc59ef9d42deebb7e95fcbfc4f6eefd63d9ebc2077798158ac"
+    },
+    {
+      "path": "data/ares/meta-ads/engine-v3/state/target-continuations/eggbev-pg23187-1570285402068091011-1034081997659047.json",
+      "sha256": "199cf547bce2826bb8b42085aab01f08fc7061eed5be2108168193cd43322664",
+      "before_sha256": null
+    },
+    {
+      "path": "profiles/ares-skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md",
+      "sha256": "ae593bb8e729a9f1b2bc86cd03971ac79f0d142e203d17e802f2122bbc2516c3",
+      "before_sha256": null
+    }
+  ],
+  "backup": "/root/mgs-agent/backups/t_629315b4",
+  "tests": {
+    "current": {
+      "tests": 235,
+      "failures": 8,
+      "passed": 227,
+      "failed_ids": [
+        "tests.test_ares_campaign_engine_v3::test_engine_dry_run_never_calls_transport",
+        "tests.test_ares_campaign_engine_v3::test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback",
+        "tests.test_ares_campaign_engine_v3::test_engine_executes_accounts_in_independent_lanes",
+        "tests.test_ares_campaign_engine_v3::test_engine_writes_stage_timestamps_to_audit",
+        "tests.test_ares_campaign_engine_v3::test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed",
+        "tests.test_ares_campaign_engine_v3::test_forty_campaigns_three_accounts_produce_seven_global_waves",
+        "tests.test_ares_campaign_engine_v3::test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns",
+        "tests.test_ares_campaign_engine_v3::test_planner_bundles_two_campaigns_per_account_without_cross_account_mix"
+      ]
+    },
+    "baseline": {
+      "tests": 74,
+      "failures": 8,
+      "passed": 66,
+      "failed_ids": [
+        "tests.test_ares_campaign_engine_v3::test_engine_dry_run_never_calls_transport",
+        "tests.test_ares_campaign_engine_v3::test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback",
+        "tests.test_ares_campaign_engine_v3::test_engine_executes_accounts_in_independent_lanes",
+        "tests.test_ares_campaign_engine_v3::test_engine_writes_stage_timestamps_to_audit",
+        "tests.test_ares_campaign_engine_v3::test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed",
+        "tests.test_ares_campaign_engine_v3::test_forty_campaigns_three_accounts_produce_seven_global_waves",
+        "tests.test_ares_campaign_engine_v3::test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns",
+        "tests.test_ares_campaign_engine_v3::test_planner_bundles_two_campaigns_per_account_without_cross_account_mix"
+      ]
+    },
+    "new_regressions": 0,
+    "baseline_failure_ids_equal": true,
+    "baseline_reason": "Legacy pure_clone fixtures omit explicit source creative slots; existing background policy rejects native deep-copy. Production guard unchanged."
+  },
+  "live_acceptance": "/root/mgs-agent/work/t_629315b4/live-acceptance.json",
+  "commercial_execution_performed": false,
+  "meta_writes": 0,
+  "drive_writes": 0
+}

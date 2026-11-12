@@ -50,6 +50,10 @@ git add -A -- .
 
 Pitfall validado: não misturar `git add -A -- . ':!.env' ...` quando `.env` já está ignorado; o Git pode abortar com “paths are ignored by one of your .gitignore files: .env”. O guardrail via `git status --porcelain` + `.gitignore` é mais estável.
 
+### Offline staging copies inside audit trees
+
+When a sensitive-path guard blocks copied source/tests under an audit directory, reconcile the active task, original authority, inventory and REPORT-INFRA before changing Git policy. JSON-only audit exclusions do not cover Python copies. Keep the guard strict: exclude only the exact anchored offline staging directory in `.gitignore`, not the whole audit tree and not a wildcard maintenance path. Do not allowlist copied private/token source files merely because their deployed originals are reviewed. Preserve all local bytes and active executor ownership; do not delete staging or restart the watcher. Test exact-path exclusion, sibling/other-task negative cases and the real watcher in an isolated repository, then observe the existing production watcher commit/push and validate the exact remote commit. Hash a preservation manifest before/after and retain evidence siblings as versioned artifacts.
+
 ### 4. Validação pós-hardening
 
 Checklist mínimo após tocar monitores/autocommit:

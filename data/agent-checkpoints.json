@@ -2222,6 +2222,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1570314359530459327",
+      "next_step": "Manutenção separada t_32bc2e19 reconcilia política vigente de horário vencido em continuação parcial sem writeMeta/manifest. Ares t_f4bacf0f retoma MESMO input sóQA faltante+activate_verified+readback10/20+Iris; não repetir criação/notify.",
+      "objective": "Concluir dez duplicações fonte018 Mavroa G006 e entrega única com UTMs Iris",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570314359530459327/continuation-live-readback.json",
+      "state": "10 campanhas160-169,10adsets,20ads paused confirmados por get; budget85usdcada,cost_cap95minor;8/10 qa semântico e renderizado. core complete. runner postprocess_pending:168/169 início nativo01:20:27est dentro janela original adset_copy,manifest literal01:00est preservado. sem ativação ou entrega final.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-12T06:26:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -6508,12 +6518,12 @@
     {
       "agent": "ares",
       "id": "ares-eggbev-immediate-partial-maintenance",
-      "next_step": "Backup, correção central, testes negativos e aceitação read-only, REPORT-INFRA GET; entregar ao owner original sem execução comercial",
+      "next_step": "Owner original retoma mesmo request via execute central, somente missing layers; confirmar variantes derivadas em QA sem bypass, finalizar pelo controlador existente. Não repetir shells nem alterar start.",
       "objective": "Manutenção isolada de retomada missing-only Eggbev01; zero writes Meta/Drive",
-      "source": "kanban:t_629315b4",
-      "state": "t_629315b4: diagnóstico confirmado; implementação central com admissão vinculada a recibo, selos, autorização now e hierarquia existente",
+      "source": "/root/mgs-agent/work/t_629315b4/deployment.json",
+      "state": "t_629315b4: manutenção instalada e aceita read-only; mesmo selo, campanha/conjunto/creative1 preservados; 227 testes pass e 8 falhas pré-existentes comprovadas no baseline; report-infra get 1570322204489547821",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-12T05:59:30+00:00"
+      "updated_at": "2026-11-12T06:20:44+00:00"
     },
     {
       "agent": "ares",
@@ -10017,5 +10027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T06:15:07+00:00"
+  "updated_at": "2026-11-12T06:26:21+00:00"
 }

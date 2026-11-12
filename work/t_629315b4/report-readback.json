@@ -1,0 +1,84 @@
+{
+  "type": 0,
+  "content": "",
+  "mentions": [],
+  "mention_roles": [],
+  "attachments": [],
+  "embeds": [
+    {
+      "type": "rich",
+      "title": "REPORT-INFRA — modificada",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Ação",
+          "value": "modificada",
+          "inline": true
+        },
+        {
+          "name": "Tipo",
+          "value": "script/data/skill",
+          "inline": true
+        },
+        {
+          "name": "Host",
+          "value": "srv1767265",
+          "inline": true
+        },
+        {
+          "name": "Path",
+          "value": "scripts/ares_campaign_v3/{target_continuation,target_page_clone,progress,schema,engine}.py; scripts/ares-eggbev-target-clone.py; scripts/mgs-ares-asset-scope.py; config/receipt Eggbev01; skill target-page-replacement-clone",
+          "inline": false
+        },
+        {
+          "name": "Motivo",
+          "value": "t_629315b4: recovery parcial NOW Eggbev01 fail-closed, mesmo request/selo/IDs. Admissão com receipt hash-pinado, identidade/app e autorizações live; hierarquia GET antes de missing writes. HTTP400 definitivo por child separado de POST incerto. Sem novo shell/start update; zero writes Meta/Drive.",
+          "inline": false
+        },
+        {
+          "name": "Evidência",
+          "value": "Aceitação live CONTINUATION_VERIFIED_READ_ONLY, 22 arquivos protegidos intactos. 227 testes passaram; 8 falhas legadas idênticas reproduzidas no baseline isolado, zero regressão nova. Backup e hashes em backups/t_629315b4 e work/t_629315b4/deployment.json. QA de mídia/linhagem continua obrigatório; nenhuma ativação comercial.",
+          "inline": false
+        },
+        {
+          "name": "Pendências Hermes",
+          "value": "indisponível",
+          "inline": false
+        },
+        {
+          "name": "Horário",
+          "value": "2026-11-12 01:19:48 EST",
+          "inline": true
+        }
+      ],
+      "content_scan_version": 0
+    }
+  ],
+  "timestamp": "2026-11-12T06:19:48.726000+00:00",
+  "edited_timestamp": null,
+  "flags": 0,
+  "components": [],
+  "id": "1570322204489547821",
+  "channel_id": "1498132022634483894",
+  "author": {
+    "id": "1496296175014252634",
+    "username": "Zeus",
+    "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+    "discriminator": "2591",
+    "public_flags": 0,
+    "flags": 0,
+    "bot": true,
+    "banner": null,
+    "accent_color": null,
+    "global_name": null,
+    "avatar_decoration_data": null,
+    "collectibles": null,
+    "display_name_styles": null,
+    "banner_color": null,
+    "clan": null,
+    "primary_guild": null
+  },
+  "pinned": false,
+  "mention_everyone": false,
+  "tts": false
+}

@@ -63925,6 +63925,37 @@
       "report_infra_readback": true
     },
     {
+      "id": "autopush-staging-recovery-e655991befdb04aae5386d92",
+      "agent": "zeus",
+      "type": "autocommit-guardrail-recovery",
+      "report_infra_id": "1570322163389571163",
+      "report_infra_get_verified": true,
+      "source_alert_id": "1570320023623303222",
+      "authority_message_id": "1569193434189668453",
+      "status": "recovered_validated",
+      "native_commit": "63e7308ac9d80b1e1e76c36333c9d61ab7cfa600",
+      "github_main_equals_head_verified": true,
+      "native_push_ok_at": "2026-11-12T01:17:51-05:00",
+      "monitor_failures": 0,
+      "monitor_recovery_message_id": "1570321991716839506",
+      "monitor_recovery_get_verified": true,
+      "cause": "Copied offline Python source/tests under the reconciled Ares maintenance staging directory matched the sensitive-path guard; JSON audit exclusions did not cover them.",
+      "paths": [
+        ".gitignore",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py",
+        "profiles/zeus-skills/ops/log-monitor-discord-alert/references/cron-autocommit-guardrails-2026-05-16.md"
+      ],
+      "exact_local_exclusion": "/data/ares/meta-ads/audit/maintenance/t_ee2d9949/staging/",
+      "preserved_files": 3581,
+      "tests_passed": {"watcher": 42, "monitor": 17},
+      "native_watcher_pid": 1578368,
+      "watcher_restart": false,
+      "manual_commit_or_push": false,
+      "campaign_writes": false,
+      "checkpoint": "/root/.hermes/shared/automation-continuity/runs/e655991befdb04aae5386d92/recovery-evidence.json"
+    },
+    {
       "id": "ares-shein-manual-observation-t_ee2d9949",
       "agent": "ares",
       "task_id": "t_ee2d9949",

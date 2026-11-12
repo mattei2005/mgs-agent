@@ -1,0 +1,35 @@
+{
+  "current": {
+    "tests": 235,
+    "failures": 8,
+    "passed": 227,
+    "failed_ids": [
+      "tests.test_ares_campaign_engine_v3::test_engine_dry_run_never_calls_transport",
+      "tests.test_ares_campaign_engine_v3::test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback",
+      "tests.test_ares_campaign_engine_v3::test_engine_executes_accounts_in_independent_lanes",
+      "tests.test_ares_campaign_engine_v3::test_engine_writes_stage_timestamps_to_audit",
+      "tests.test_ares_campaign_engine_v3::test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed",
+      "tests.test_ares_campaign_engine_v3::test_forty_campaigns_three_accounts_produce_seven_global_waves",
+      "tests.test_ares_campaign_engine_v3::test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns",
+      "tests.test_ares_campaign_engine_v3::test_planner_bundles_two_campaigns_per_account_without_cross_account_mix"
+    ]
+  },
+  "baseline": {
+    "tests": 74,
+    "failures": 8,
+    "passed": 66,
+    "failed_ids": [
+      "tests.test_ares_campaign_engine_v3::test_engine_dry_run_never_calls_transport",
+      "tests.test_ares_campaign_engine_v3::test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback",
+      "tests.test_ares_campaign_engine_v3::test_engine_executes_accounts_in_independent_lanes",
+      "tests.test_ares_campaign_engine_v3::test_engine_writes_stage_timestamps_to_audit",
+      "tests.test_ares_campaign_engine_v3::test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed",
+      "tests.test_ares_campaign_engine_v3::test_forty_campaigns_three_accounts_produce_seven_global_waves",
+      "tests.test_ares_campaign_engine_v3::test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns",
+      "tests.test_ares_campaign_engine_v3::test_planner_bundles_two_campaigns_per_account_without_cross_account_mix"
+    ]
+  },
+  "new_regressions": 0,
+  "baseline_failure_ids_equal": true,
+  "baseline_reason": "Legacy pure_clone fixtures omit explicit source creative slots; existing background policy rejects native deep-copy. Production guard unchanged."
+}
