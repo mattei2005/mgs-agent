@@ -2223,12 +2223,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570314359530459327",
-      "next_step": "Manutenção separada t_32bc2e19 reconcilia política vigente de horário vencido em continuação parcial sem writeMeta/manifest. Ares t_f4bacf0f retoma MESMO input sóQA faltante+activate_verified+readback10/20+Iris; não repetir criação/notify.",
+      "next_step": "Concluído e entregue na origem com bloco Iris. Nenhum replay/novo aviso; ACTIVE não comprova serving.",
       "objective": "Concluir dez duplicações fonte018 Mavroa G006 e entrega única com UTMs Iris",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570314359530459327/continuation-live-readback.json",
-      "state": "10 campanhas160-169,10adsets,20ads paused confirmados por get; budget85usdcada,cost_cap95minor;8/10 qa semântico e renderizado. core complete. runner postprocess_pending:168/169 início nativo01:20:27est dentro janela original adset_copy,manifest literal01:00est preservado. sem ativação ou entrega final.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570314359530459327/delivery-final-verification.json",
+      "state": "complete: campanhas160-169,10campanhas/10conjuntos/20ads configuradosactive; qa10/10 e igualdade idscheckpoint/readback,8idsoriginais preservados; budgetsusd85cada,deltausd850/dia,cost_cap0.95. get conta ativausd9496.03/dia. início160-16701:00est,168-16901:20:27est;active confirmado01:54est12nov2026;19ads effectiveactive,1análise164 no snapshot;20postsnovos;fonte018semwrite. entregairis única getmessage1570332611354693663.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-12T06:26:21+00:00"
+      "updated_at": "2026-11-12T07:01:50+00:00"
     },
     {
       "agent": "ares",
@@ -10027,5 +10027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T06:43:14+00:00"
+  "updated_at": "2026-11-12T07:01:50+00:00"
 }
