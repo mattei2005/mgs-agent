@@ -1,0 +1,1019 @@
+{
+  "current_filesystem": {
+    "available_bytes": 34117865472,
+    "used_bytes": 172765638656
+  },
+  "deletion_effect": "Irreversible retirement of the saved state of isolated generated unit-test databases and test-only tar exports. This is NOT proven byte deduplication. Current production databases, financial inputs, receipts, source code and four explicitly retained prior test roots remain. Future tests generate new UUID directories; the exact old test state will not be recoverable from this lot.",
+  "executable_literal_references": 0,
+  "executor_sha256": "af0847952fd3cf37e7026079aa4ea40cf6312946a9959e0291cb215e98278a41",
+  "frozen_at": "2026-11-12T11:32:03-0500",
+  "process_references": 0,
+  "projected_used_percent": 75.23,
+  "protected_launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "protected_prior_roots": [
+    "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d"
+  ],
+  "reclaim_bytes": 17122353152,
+  "request_message_id": "1570473727043436596",
+  "retained_generator_files": [
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/api.test.mjs",
+      "sha256": "ad993ff8e9020648e319e55b75d1d525b6da2f66d001e30475d343a9dccab11f"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/catalog.test.mjs",
+      "sha256": "a120f12b6efcd37cd39382f7de9dd1632b803488b9119b97e82ca312293523a0"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs",
+      "sha256": "ff2bf7d1e6659c588ddaa2f152baec8db501ac6f34a5f0d555b9abf8e84ce400"
+    }
+  ],
+  "retained_input_paths": [
+    "/root/mgs-agent/apps/finance-system/private/source.json",
+    "/root/mgs-agent/apps/finance-system/private/ui-model.json",
+    "/root/mgs-agent/apps/finance-system/private/history-import-1546884731436671056/payloads/principal-2026-07.json"
+  ],
+  "retention_changed": false,
+  "schema": "mgs.generated.test.retirement.v1",
+  "status": "frozen_awaiting_critical_test_state_retirement",
+  "targets": [
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220192768,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "b3f4276b78cee9da11a6d752ca8465eca491dfa10f5820fcd53bcd06c7f7fb99",
+        "inode": 790643
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/catalog-test-10600f97-69d8-4d79-884e-cb188babeb23"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "46002048d2b4ebd94d1d670dbde15cafe688483bb0e22c2b772b15312b3ef2cf",
+        "inode": 790642
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/test-pg-d7c002bd-4c9c-46ab-b54c-a272321d7a00"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263520256,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "097c402884934ef8c5b03cfe26e09f1d17cba56815cb9cc55bc3c43e7fb75c2f",
+        "inode": 790577
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/ui-test-31b4a9bf-bba6-4caf-9433-fda94b98fdc6"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "0156fb53459386325a0ecef94e12514bfa016f87f6bd5a35ce41e0db963eb53e",
+        "inode": 848326
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/private/verified-db-backup-27412801-a947-470b-859b-a91d55c6a72b.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220184576,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "82fd443dcc853bd42362caa42f9f9ff78fdc023080882edff8cb77b33d178ecd",
+        "inode": 869729
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/catalog-test-6a5b1d41-dbb1-4f05-8d41-96cd23801219"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192905216,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "58959f5c104f7e7a79d31b3563a61d696348ff8f3ca3175b06af750badabeb9b",
+        "inode": 869728
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/test-pg-19130566-aed1-45f0-b846-ee640d983912"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263520256,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "175f83b39d3a34bcc06637d27c36270bcc49e498261d1a958666aaff2ab31ff0",
+        "inode": 3227444
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/ui-test-f50a9575-c02a-4751-8736-cbd2ed817126"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "c166050608bd0cc2ff81ba738754382076ed413f0cb0be3e349741bb674a3777",
+        "inode": 869812
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/private/verified-db-backup-bcfcce13-b00f-4ee1-936e-30ead8d2d0bc.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "4c5e30eea85f5a4bbd281c1457b38d8025bb7f2551184a774af0efff1aee40ef",
+        "inode": 2701322
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-4e6eb728-ff92-45c3-9d70-55b376528e49"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "a647ac1444cda6da651e3bc1a334ea2c6caa4274584b0a168f72f865939c2b73",
+        "inode": 2398040
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-6bba588b-8a25-4d9f-a543-282e03666990"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 200835072,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1019,
+        "fingerprint_sha256": "fbba3e1c3bee8d51515dc4783052b5dccef3652e49ac4ad9ea144ab88e6a00d5",
+        "inode": 2699384
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-73826e91-176e-4a5f-b3e5-dc475309910f"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220221440,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "d4f3a482b7831bb8f920de5db92d58bae7854eb965ffde022577a6c0edf96af4",
+        "inode": 1050980
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-80098e4c-f944-47ef-aa98-e0e20266ca80"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "9b9fbd2aaf9e62b81c5af5dae94fa68c50cfaa9ddc372a81cc4f8efe8d541b35",
+        "inode": 3443742
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-9f613bd7-f503-4c20-b9f3-a46485fb2f83"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "44d650c98528544f561c2350081da63e6c7bf5647cc49382bd3dd5b0a4961f65",
+        "inode": 857280
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-afb2b758-6974-4277-b6e7-7be47f296167"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220225536,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "b7359ff9fac09f44b85c7968a9284740df3965b82fefcdb7ac5af3d535474159",
+        "inode": 858403
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-ca4cedf8-7653-43f0-9a71-e54567dfc1df"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 198262784,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1019,
+        "fingerprint_sha256": "1bd1c51bb5ba7cbbe82d7c8e954108e25ef2b14437afb4972cbbb999813aba41",
+        "inode": 3176963
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-f720caab-e00a-4f1e-b425-268d81d8aa56"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220209152,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "3a5295bc1a38d8b2f42c3700455441ab001c2027c7725bb864d8d0cec7057bc5",
+        "inode": 4772706
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/catalog-test-2c37acda-7559-463a-bf80-773b1ec54898"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192917504,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "c3c585bd655fe0b2b1a225cbe739b4d25fcf62f2609bec46e74dc981ebf50625",
+        "inode": 4772705
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/test-pg-2804a1dc-a044-410e-8e22-41c7f98dd911"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263553024,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "d12f9937afa17a743294bdcb691e4da0a8898c049260fde5dbe0cd92705a54f2",
+        "inode": 4774969
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/ui-test-96b15bc3-5cbc-4e73-9930-81a4ada50acc"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "0dc7f04eb43c2316fbbfb8dc996fab42646950fad217a10860f5684c62609e64",
+        "inode": 4773741
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/private/verified-db-backup-42c0b336-00c3-496e-a116-3a01aff99b03.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220221440,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "81fe4eb132e2271d59882d20d0f8fa67733e7bc5084433865a6b3a6a60da9ab9",
+        "inode": 4986952
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/catalog-test-befbe335-fbe5-4320-a59c-1de6bb32c447"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192937984,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "94256bcef8e2dd3a72ade889b69e5c2ec31781ea7d5f23c91392726a4f31a7c7",
+        "inode": 4986951
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/test-pg-704fa232-f2e3-4a8d-befe-d55b96b30ddf"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263557120,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "561a29e740b0d3dc30828a07d2d4559c941d2dee35d8a78aa891718ad79e26b2",
+        "inode": 4989048
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/ui-test-b976f7f1-cd38-49e4-995e-ed85dda0c027"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "05a01b42c2c752accb4b90b7bb9016d0ac073a7b944c84a5852400103d2e59e1",
+        "inode": 3753838
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/private/verified-db-backup-ea90319f-c20c-42f9-81d8-6fbc47e17f9c.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220225536,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "233ea2e3b87531b9d8a0b61b7623dd96dd258c4ee6bd302d119916353d251544",
+        "inode": 1049368
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/private/catalog-test-14ce1823-bd16-4e23-9324-20383f01cb11"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192942080,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "222cca261f6042eda49834ff54728fc53c24faf39b456883206803e60b25752f",
+        "inode": 1052656
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/private/test-pg-c3dc0097-80ed-4701-840c-0a84a80e603a"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263557120,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "23d9d383cfdd9d3749bbeedbb2e8b098ffcd3867a802c514da6f55b101f807aa",
+        "inode": 2962423
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/private/ui-test-7a529fde-ab50-4113-902a-2e6137b7d81a"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "4bd25e0976fba0a13c534020d6e55713b3b360b195ba24f9c60304bb431776c4",
+        "inode": 1129059
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/private/verified-db-backup-f5407195-1d04-4c7c-90ab-f4aeed55171b.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "7a99b7433ef44895f4744135ff5a0faddef46e7440a420d5d79e31737d3c2a08",
+        "inode": 4788363
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/catalog-test-359a2b35-6335-48a2-88f9-ca8a2ce9ffda"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "c763cbfda2b8dc9fa9263689b39fcfd281b0924a35d74a2904c8e2796c61b564",
+        "inode": 4788362
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/test-pg-815e9975-1b4f-48f8-9c7d-eb428793ab2b"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263516160,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "4a121656c9e041afeba1fb9ef20070e163d7975c740f671f4c219d02c7ccfd53",
+        "inode": 5517102
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/ui-test-9f2c65e3-f800-43f8-a406-bdfbe23fa69f"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "6fc23dcc2f5b4f80a08c568eb2b446bf0f782f32daa308d754b9033eeadaa347",
+        "inode": 3968567
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/private/verified-db-backup-d40cf370-046b-4cdd-b48c-7182a621a5f2.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220184576,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "5fcb1ee80f86bd4e82490dd1aeeae42e6b209cfc44f2b5d719f12016ad31754e",
+        "inode": 5518660
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/catalog-test-636d2e84-335a-464d-a6a7-26b64bfc48d5"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "642f99255635ff7bc6db520645b2a77e1ae4fef91a945407e7b37c4fcd31e3ba",
+        "inode": 5518658
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/test-pg-34cccb39-ccfa-4098-8ee0-ace1b2ed8858"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263512064,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "2ddbd2ae5cd1540723edb7632918cb632f2830c17f3ba5233166d5bf293681a6",
+        "inode": 5520756
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/ui-test-4445c139-68a4-409f-bfe4-53f59576f9bd"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "4fb2637920cb893f2ccca024b3514f2204b5f53be129b1fe8a54548b5d2d97e9",
+        "inode": 4486472
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/private/verified-db-backup-240b1886-ee8e-41eb-a73c-2f85c800b926.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220184576,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "ffeb9ce8c515e690863a346bf9a2779e4ae22402328d26ee33764faf1585643f",
+        "inode": 4798596
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-8473a509-2abc-4c02-8f93-1a95d903ea42"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 195694592,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1019,
+        "fingerprint_sha256": "916d3cd1cfd69da21b59d456c8ada1f3e7b9195de02865403fedd8ad74dd1b4a",
+        "inode": 4798560
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-9e4572e0-7578-4adb-b1b9-2c2a1c6ed960"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220225536,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "fa66c30c7c242c1138c5403d602e27222e526b7000abcf2a7153c0f1aabd41cf",
+        "inode": 4983202
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/catalog-test-ed85179e-445c-4a20-a131-fb6dd309e142"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192942080,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "0f3aa20dcf8b11c855f33698b2ea31d1625ebf31c4702689798cf2186e143b4e",
+        "inode": 4983201
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-07864412-5458-420d-a38f-283a466d811e"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192937984,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "d9ebec8412508a3f1caa48c6ce406d7fd599de13d1cf1560ecfcc69941d8384c",
+        "inode": 4798559
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-57097a64-177a-4857-a95e-4bcf25555dc8"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "316c5a1fb207826ad969f355f4465dd0adfe99b0a9f3d8417f8235d81ce63f45",
+        "inode": 4798594
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/test-pg-647f0a3f-5559-4947-acc7-f2975529a586"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 40280064,
+        "device": 2049,
+        "dirs": 27,
+        "files": 999,
+        "fingerprint_sha256": "5b1ebc86614d9d66055cfa57192720df4f9d46b25c2b7b489a66fabf5041eeeb",
+        "inode": 4981081
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-74349550-8a02-4f7d-afb1-e80827608b1e"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263557120,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "eb94b84721175f918259a6c3d88b60196c47c3be1015ca477e3ed4667bd8e266",
+        "inode": 4985294
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-7a731402-c22e-4660-973a-2fb7b084d0c3"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 195760128,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1024,
+        "fingerprint_sha256": "eca810c987e93ff50715c6d00286ec8dd8c9658df9347e8771fee515560b4272",
+        "inode": 4800700
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/ui-test-8c88783e-3211-4bde-977a-b7a1a2e8c71b"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "3b68a8f0772f297aa643a5c7fac099724ecf2b03d992a47cbb42542cc438559a",
+        "inode": 4802502
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/verified-db-backup-4f0aedae-5e89-4f84-905b-e1878ea415ea.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "790d8349ac6a5446d0e8f403f91ca9e25cb188643318c4caf5d07a3af915a70f",
+        "inode": 4802423
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/verified-db-backup-8c11ce08-2adb-4282-849c-25c8b531f53b.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "b2d110550c8c75ab7f9be4dea701509d084241eefdcf7ace6070648ede02a655",
+        "inode": 4799594
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/private/verified-db-backup-ef508f2c-46a7-4f0a-99cb-8495d977bd02.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "3ab982f844d7699e5c3b4171c7ec7f722aa92b24b4c89d4add35e44b2b859754",
+        "inode": 857278
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-119b5f9f-cb0c-47c1-a986-63c7c491e724"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192942080,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "c4d313b799e4bbc20817f4f4a9ad6327af232b95d68a71df7d4e0df4f8c24d79",
+        "inode": 1049407
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-37a8721e-5981-4150-95ed-b97a68ce125e"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192905216,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "51d762442ca826e8bd2c7793fff18a691a8904b04b7a2ade77dd624e9a4af69d",
+        "inode": 3443741
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-3a277b17-07eb-4665-bbd8-6c188cee6c98"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "2c5873c307e5bcc2ff087a7fad1e66242bfa09be53a5be74ebf4f10d79dd7e04",
+        "inode": 2701321
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-515f37ce-123a-413e-b71b-663ef66d01e7"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192937984,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "891df0f0f23a35d1c33ef4c9b794fec875ae95cdc16fc54bb9b71819546f64cc",
+        "inode": 2699383
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-66345f60-bd4e-4d0e-8b14-023ce66a55b3"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192942080,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "cfe52adcc4eba93eb7d9c5d6784b965b9857052086dc8d2ac2bc83a97facee7c",
+        "inode": 3176962
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-bd15fc30-8a67-41f8-bd9a-f66cc635dce4"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192942080,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "5d3f6e1b9f85db646947fd943820fc1549fdfef646c1b539e0a9b3b7768935f5",
+        "inode": 858400
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-ca20e7a5-96f4-43d8-952f-67c1b1a5cac1"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263512064,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "0caa2d6a5c64dbdaa3411ec7147546ad364fbe2134c589ee5b8322d2d22354fd",
+        "inode": 2399070
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-13f346e7-a4ff-4e9c-8724-fc9953f3e2be"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263553024,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "8ac59ad1d0faac9e5f470a45189ac69092cf033df07e428cb128ac4654c5c27c",
+        "inode": 2154103
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-163e8765-ceb3-4d21-b0a4-232ad7536139"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 223535104,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1019,
+        "fingerprint_sha256": "eedca09eaa8f4ab5fba53e1593fc483686a75109218d992f21b38fd0d6b79261",
+        "inode": 787563
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-314b79fa-0bb2-4db5-8823-13b8bab0b5d9"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263553024,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "aebeff19c50c8e58e743379e029c0540d7439048c79327d7dd00485e17a335cc",
+        "inode": 2144689
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-3a76fac5-ebed-4474-87e4-565bd9ea5c34"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263557120,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "613394ec4cd11097b34475634aeef8467512384c79dafbcc12bc7730d5405f79",
+        "inode": 2154265
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-3fe2a131-b11a-41f2-a193-095c1d6bc3b9"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 194019328,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1024,
+        "fingerprint_sha256": "c268c02c96187aacea893d585ac5282116d0065aab5e412fbc414868ca418eaa",
+        "inode": 3193776
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-59dbae10-17a2-4c7d-bb0b-31bc267c8b96"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263512064,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "d2528134a2e31083848248516dc3c6fb5d55217f9cd06c2d00710e32d60886c9",
+        "inode": 3163577
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-94a9715a-7de4-44e8-b126-66ae30a2f858"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192245760,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1024,
+        "fingerprint_sha256": "a59083711bd53398f07e286c881a8e5f6a8d0e9641d40dd717d536f36fcf24e1",
+        "inode": 858497
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-b6be8a92-03a6-4d2a-88b5-b91cfc1c6191"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263524352,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "4f9fde3b818cb64e4f9cea620f9477791e026a2c3bba3ede5fc72cbecab7147d",
+        "inode": 4518826
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-test-bad9632d-d1e1-45f2-88b8-ad1d855dab54"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "c45a5699e4bcf0d1b70ee56cb01076e174c006c7f6a3f8e14ec7b42b911928ac",
+        "inode": 858571
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-1390bb10-13cb-4cbe-ba4e-efebfb7f839f.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "29fcecfaa088fd65d18f121a279ef20d92a5534f89e8b7398ba33a3acd6d33ae",
+        "inode": 860922
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-39b81209-2108-4910-958e-4f3e8f4a28a7.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "5dff1a0768cbd15f89a94338f68fbbc124a5b63bc2f84d89f15f2daae8100937",
+        "inode": 790566
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-410029c0-0626-4f0c-b0b7-df5d832488f2.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "3dee72c90cd1c4e78f58b7e3909a9c7713cafe3595ac9b65f8a7a227f49b71a9",
+        "inode": 858859
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-5acfc219-1ee6-4045-88a2-6fa4e1c4c402.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193142784,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "b0f4d4110a78ee231d673506dcb1556a1b5230d87b40bbf9ccac7457837d7da0",
+        "inode": 794961
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-6355f597-20f0-45c5-a4e5-227ad81c4b83.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "e86ab8b0db8e63198864e82318a031108f50754a55aa08e6a669e1deff6e7b3d",
+        "inode": 867112
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-93ca181f-4bab-4ee4-beec-9a63a3725c96.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "82a96c4e5058e871c85cda02447e7a7b6b9eceb61e8300634f62ae119f4b8622",
+        "inode": 858576
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-aa5bbfe8-ed6b-4282-9625-ece83e6dabbe.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "54f5cabe1eda8474f2da5522bd235be3e7c5b41cbe3c392afb8e9fd2778bc571",
+        "inode": 858481
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-b8927c0f-8e13-41a6-bbdf-76b92e884e68.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "fc5fb0e493786fac8c0b225ade0b8273ac6f6d3b6a3107386cf15a04095a4750",
+        "inode": 858371
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-e528a5af-9137-4649-8c25-3327f574df35.tar"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220188672,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "cfbda7abb605d7d47a533d8874638fa0ba886b8ad73a38e0fedda7aa6f374d99",
+        "inode": 850627
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/catalog-test-03669ba2-4927-4640-ab19-b37bfbacae17"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 220205056,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1020,
+        "fingerprint_sha256": "9d9f673698cff071d55066a5fdeef0fc8f2c841e8fa35b8e6a6f11aa1a196e13",
+        "inode": 853956
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/catalog-test-a9ee9100-baa1-4991-8b9e-73a05c1ed543"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192913408,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "1582420f1ed0120eac79d8d9ef9d052d50655f858cafe4dc9ac4f533080280c4",
+        "inode": 853903
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/test-pg-58b04ccb-b5d2-45f2-a028-f414b9a0da4b"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 192909312,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1018,
+        "fingerprint_sha256": "9b0ee401740565e615b8fbce63ccde8a73e1f8b6676e3c7207c9facddf1741e0",
+        "inode": 850626
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/test-pg-e6d845a3-4478-475a-a59a-1341efea66be"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 263553024,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1027,
+        "fingerprint_sha256": "d2ee7db75b93b4575fb458d47fa52cbbac5da76a95e90b7515eb17b23ada32f3",
+        "inode": 854954
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/ui-test-676c533c-9f0c-4a81-b064-60ea1ed7351f"
+    },
+    {
+      "action": "delete_tree",
+      "metadata": {
+        "allocated_bytes": 260771840,
+        "device": 2049,
+        "dirs": 27,
+        "files": 1028,
+        "fingerprint_sha256": "3f1aec3b4c7eb13267dfa48d99cf54bd7366b8f5d999b1ce485a4546c976d3e3",
+        "inode": 852687
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/ui-test-ddd65645-122a-4c9f-ae1a-052f59f87740"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "f9c8a4013054b40b855b3c651460c12033c50b61fe0a69067538dc6ae55648ec",
+        "inode": 856107
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/verified-db-backup-29384712-f809-43ed-b932-cece9938a48a.tar"
+    },
+    {
+      "action": "delete_file",
+      "metadata": {
+        "allocated_bytes": 193290240,
+        "device": 2049,
+        "dirs": 0,
+        "files": 1,
+        "fingerprint_sha256": "df219a643022f9b91beab236ca6124fee59972e9754da241aaebd0845b523d77",
+        "inode": 853867
+      },
+      "path": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/private/verified-db-backup-3d36f6de-5b29-4f69-b51f-ffe3054d0503.tar"
+    }
+  ],
+  "targets_tracked_in_git": 0,
+  "thread_id": "1569928464033783862"
+}
