@@ -29,3 +29,13 @@ Manifesto: `data/storage-reorganization-1570447435074109502/finance-duplicate-lo
 São 28 arquivos locais de dump redundantes, com 9 representantes locais byte-idênticos preservados e 9 cópias remotas validadas por hash/tamanho e catálogo pg_restore. Este lote não inclui pastas, fontes, JSONs financeiros, banco produtivo, perfis, versões do Hermes nem retenção futura. A leitura do catálogo não é prova de restauração materializada. O executor é read-only por padrão e recusa apply sem uma nova confirmação nativa de Rodolfo vinculada ao hash do manifesto e ao executor.
 
 O restante da investigação permanece com Zeus no checkpoint `ZEUS-STORAGE-REORGANIZATION-1570447435074109502`. Fonte de medição e gates: diretório `data/storage-reorganization-1570447435074109502/`.
+
+## Segundo lote proposto: estado histórico de testes gerados
+
+Revisão solicitada pela manifestação de Rodolfo `1570473727043436596`, após o primeiro lote. **Não houve autorização para novas exclusões.** O candidato delimitado é `data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/manifest.json`: 60 clusters locais gerados por testes (`test-pg`, `catalog-test`, `ui-test`) e 21 exportações `.tar` desses testes, totalizando 81 alvos/61.283 arquivos e 17.122.353.152 bytes alocados (~15,95 GiB). A projeção no congelamento era 75,23% de uso, não economia já realizada.
+
+A origem foi conferida em `tests/api.test.mjs`, `tests/catalog.test.mjs` e `tests/workspace.test.mjs`: os testes abrem diretórios isolados com UUID novo e geram exportações de teste. Foram preservados os quatro diretórios explicitamente retidos na revisão anterior, os demais clusters não incluídos, fontes/fixtures, código, recibos e todos os bancos produtivos. A varredura não detectou processos nem referências literais em executáveis aos alvos. O verificador passou em modo read-only e bloqueou apply sem uma nova confirmação.
+
+**Efeito irreversível a confirmar:** abandonar o estado salvo dessas execuções antigas de teste e suas exportações, não excluir dados do banco produtivo. Isso é aposentadoria de histórico de teste, não deduplicação comprovada nem promessa de reproduzir exatamente o antigo estado a partir dos testes atuais. A confirmação anterior `1570460898970181713` vale somente para os 28 dumps já removidos e não autoriza este segundo lote.
+
+**Correção da classificação inicial:** a localização em `candidate/private` não comprova recópia recursiva. A revisão encontrou ali bancos e arquivos criados pelos próprios testes. Os 13,67 GiB antes agrupados como evidência recopiada devem ser entendidos como ocupação dentro dessas árvores, não como 13,67 GiB de duplicatas comprovadas ou de falha de cópia.

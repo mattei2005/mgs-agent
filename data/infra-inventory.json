@@ -64115,6 +64115,33 @@
       "retained_local_hashes_valid": 9,
       "result_path": "data/storage-reorganization-1570447435074109502/cleanup-result.json",
       "result_sha256": "e270e34246983bbe9d33776af1f931e8940a2e64caf40f06e8695868dc5d9bac"
+    },
+    {
+      "id": "storage-generated-tests-retirement-1570473727043436596",
+      "agent": "zeus",
+      "type": "isolated_generated_test_state_retirement_proposal",
+      "path": "/root/mgs-agent/data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596",
+      "status": "awaiting_critical_confirmation_no_deletion",
+      "request_message_id": "1570473727043436596",
+      "thread_id": "1569928464033783862",
+      "manifest_sha256": "196fc0a3ac475bf76298141d9644f339e526b39b72ffeefff13edf21a2958ad9",
+      "executor_sha256": "af0847952fd3cf37e7026079aa4ea40cf6312946a9959e0291cb215e98278a41",
+      "targets": 81,
+      "test_clusters": 60,
+      "test_tar_exports": 21,
+      "file_count": 61283,
+      "projected_reclaim_bytes": 17122353152,
+      "projected_used_percent": 75.23,
+      "deletions": 0,
+      "prior_lot_approval_not_reused": true,
+      "irreversible_effect": "Loss of exact state of selected old isolated test executions; not deletion of production financial data.",
+      "preserved_prior_test_roots": 4,
+      "retention_changed": false,
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "validation_path": "/root/mgs-agent/data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/safety-tests.json",
+      "updated_at": "2026-11-12T11:34:52-0500",
+      "report_infra_message_id": "1570476992841785536",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

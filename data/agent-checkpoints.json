@@ -6167,6 +6167,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-GENERATED-TESTS-1570473727043436596",
+      "next_step": "Rodolfo decidir sobre 60clusters gerados+21tars de testes/81alvos/61283arquivos/15.95GiB;projecao75.23%;manifesto196fc0a3ac475bf76298141d9644f339e526b39b72ffeefff13edf21a2958ad9. Perde estado exato de execucoes antigas;codigo/fixtures/recibos/4familias retidas/producao preservados. Zero exclusoes nesta etapa;confirmacao28dumpsnaoseaplica.",
+      "objective": "Reduzir ocupacao relevante da VPS aposentando somente estado historico isolado de testes, sem tocar operacao financeira ou repetir o lote anterior.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/manifest.json;discord:1569928464033783862/1570473727043436596",
+      "state": "awaiting_critical_confirmation_exact_test_state_retirement",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-12T16:34:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
       "next_step": "Lote confirmado1570460898970181713concluido:28/28dumps ausentes;3.999GiB observados;9locais+9remotos preservados;3configs/3smokes ePIDs passaram;REPORT1570461702804480164readback. Nenhuma pendencia deste lote. Demais categorias seguem em revisao sem autorizacao de exclusao; retencao futura nao alterada.",
       "objective": "Descarte seguro financeiro/perfis/backups/runtimes e reorganizacao de produtores; manter operacao e recuperacao.",
@@ -10077,5 +10087,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T15:34:38+00:00"
+  "updated_at": "2026-11-12T16:34:52+00:00"
 }
