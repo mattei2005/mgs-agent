@@ -91,6 +91,10 @@ def normalized_schedule_proof(state, checkpoint, *, request_id, account_id, camp
 
 def proven_now_copy_time(expected, observed, *, request_id, account_id, campaign_id, idempotency_key):
     """Load exact same-request provenance; fail closed if seals/evidence missing."""
+    from .shein_elapsed_continuation import proof as elapsed_proof
+    if elapsed_proof(expected, observed, request_id=request_id, account_id=account_id,
+                     campaign_id=campaign_id, idempotency_key=idempotency_key, base=BASE):
+        return True
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,119}', str(request_id)):
         return False
     if not all(re.fullmatch(r'[0-9]+', str(x)) for x in [account_id, campaign_id]):

@@ -92,7 +92,7 @@ def validate_live(live, expected, spec, request_id=None):
     from .shein_copy_schedule import proven_now_copy_time
     def schedule_ok(observed):
         return same_time(observed,spec.start_time) or (
-            request_id is not None and spec.start_intent == 'IMMEDIATE' and proven_now_copy_time(
+            request_id is not None and proven_now_copy_time(
                 spec.start_time, observed, request_id=request_id, account_id=spec.account_id,
                 campaign_id=campaign['id'], idempotency_key=spec.idempotency_key))
     for field in ['id','account_id','name','daily_budget','bid_strategy']:
@@ -149,6 +149,13 @@ def validate_live(live, expected, spec, request_id=None):
     validate_feature_tree(live)
     if any(n.get('configured_status',n.get('status')) not in {'PAUSED','ACTIVE'} for n in statuses(live)):
         raise ValueError('activation target has an unexpected configured status')
+
+
+def elapsed_policy_allows_activation(spec, request_id, live):
+    from .shein_elapsed_continuation import proof
+    return bool(proof(spec.start_time, live['campaign'].get('start_time'),
+        request_id=request_id, account_id=spec.account_id,
+        campaign_id=live['campaign']['id'], idempotency_key=spec.idempotency_key))
 
 
 def read_tree(engine,bundle,transport,cid,stage):
@@ -242,7 +249,7 @@ def activate(engine,target,creation,proof):
                 return {'status':'ACTIVATION_DEFERRED','request_id':rid,'campaign_ids':ids,'retry_after_seconds':state['retry_after_seconds']}
             cid=tree['campaign']['id'];live=read_tree(engine,bundle,transport,cid,'activation_pre_read');validate_live(live,tree,spec,rid)
             missing=[n for n in statuses(live) if n.get('configured_status',n.get('status'))!='ACTIVE']
-            if missing and not continuation and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
+            if missing and not continuation and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc) and not elapsed_policy_allows_activation(spec, rid, live):
                 raise ValueError('approved start time elapsed; no silent immediate activation or reschedule')
             if deadline_exceeded(): return hold()
             children=[n for n in missing if n['id']!=cid]

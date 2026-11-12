@@ -174,9 +174,18 @@ def test_exact_observed_second_no_generic_tolerance(tmp_path,monkeypatch):
 def test_historical_manual_replay_fence(tmp_path,monkeypatch):
     registered(tmp_path,monkeypatch)
     from ares_campaign_v3 import shein_manual_takeover
-    def deny(*a):raise ValueError('manual history')
-    monkeypatch.setattr(shein_manual_takeover,'deny_replay',deny)
+    fence=shein_manual_takeover.path(tmp_path,RID)
+    fence.parent.mkdir(parents=True,exist_ok=True);fence.write_text('{}')
     assert call(tmp_path) is None
+    from ares_campaign_v3.activation import activate
+    from ares_campaign_v3.engine import CampaignEngine
+    engine=SimpleNamespace(config={'state_root':str(tmp_path/'data/ares/meta-ads/engine-v3/state')})
+    manifest=SimpleNamespace(request_id=RID,operation='SHEIN-US-DIRECT')
+    with pytest.raises(ValueError,match='manual takeover'):
+        activate(engine,manifest,None,None)
+    execute=getattr(CampaignEngine.execute,'__wrapped__',CampaignEngine.execute)
+    with pytest.raises(ValueError,match='manual takeover'):
+        execute(engine,manifest)
 
 
 def test_original_clock_cannot_be_shifted_with_reissued_receipt():
@@ -184,6 +193,37 @@ def test_original_clock_cannot_be_shifted_with_reissued_receipt():
     s['execution_started_at']='2026-11-12T05:48:39+00:00'
     r={'kind':m.KIND,'issued_at':NOW,'binding':m.binding(s,c,o,p,pr,now=NOW),'authority':a}
     with pytest.raises(ValueError,match='clock'):m.validate_receipt(r,s,c,o,p,pr,now=NOW,authority=a)
+
+
+@pytest.mark.parametrize('change',['missing_window','ad_id','adset_id','campaign_id','first_second','missing_first_proof'])
+def test_native_evidence_required(tmp_path,monkeypatch,change):
+    s,c,o,p,pr,r,a=registered(tmp_path,monkeypatch)
+    if change=='missing_window':c['bundles'][0]['timings']={}
+    elif change=='ad_id':c['bundles'][0]['ad_ids'][0]='999'
+    elif change=='adset_id':o['campaigns'][1]['adsets'][0]['id']='999'
+    elif change=='campaign_id':o['campaigns'][1]['campaign_id']='999'
+    elif change=='first_second':o['campaigns'][1]['start_time']='2026-11-12T01:20:28-0500'
+    else:o={}
+    _,cp,lp,_=m.paths(tmp_path,RID,AID)
+    cp.write_text(json.dumps(c));lp.write_text(json.dumps(o))
+    assert call(tmp_path) is None
+
+
+def test_schema_scope_never_leaks_and_needs_whole_exact_target(tmp_path,monkeypatch):
+    s,c,o,p,pr,r,a=registered(tmp_path,monkeypatch)
+    monkeypatch.setattr(m,'BASE',tmp_path)
+    real=m.proof
+    monkeypatch.setattr(m,'proof',lambda *args,**kw:real(*args,**kw,now=NOW))
+    from ares_campaign_v3.shein_elapsed_schema import admission,allows_campaign
+    value=s['target_manifest'];spec=value['campaigns'][1]
+    assert not allows_campaign(spec)
+    with admission(value):assert allows_campaign(spec)
+    assert not allows_campaign(spec)
+    for k,v in [('operation','Other'),('request_id','other')]:
+        bad=copy.deepcopy(value);bad[k]=v
+        with admission(bad):assert not allows_campaign(spec)
+    bad=copy.deepcopy(value);bad['campaigns'][1]['campaign_updates']['daily_budget']='9000';seal(bad)
+    with admission(bad):assert not allows_campaign(bad['campaigns'][1])
 
 
 def test_activation_elapsed_guard_uses_central_proof(tmp_path,monkeypatch):

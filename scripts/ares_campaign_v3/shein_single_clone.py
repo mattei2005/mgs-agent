@@ -333,7 +333,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     from .shein_copy_schedule import proven_now_copy_time
     def schedule_ok(observed):
         return _same_time(observed, desired['start_time']) or (
-            desired.get('start_intent') == 'IMMEDIATE' and proven_now_copy_time(
+            proven_now_copy_time(
                 desired['start_time'], observed, request_id=payload['request_id'],
                 account_id=desired['account_id'], campaign_id=campaign['id'],
                 idempotency_key=desired['idempotency_key']))
