@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-12T12:13:07-0500",
+  "services_active": [
+    "active",
+    "active"
+  ],
+  "fingerprints": {
+    "scenarios": {
+      "rows": 295,
+      "digest": "24721e56f621edc88c60b135369f9b8e"
+    },
+    "source_cells": {
+      "rows": 85868,
+      "digest": "483741c7fa03938dd92c8913e3f9a28d"
+    },
+    "audit_events": {
+      "rows": 6390,
+      "digest": "4e69217e7864b34857ae8e7c614c7683"
+    },
+    "finance_history": {
+      "rows": 40,
+      "digest": "ff484aea18b34f3996420dbcbff43184"
+    },
+    "finance_ledger": {
+      "rows": 39,
+      "digest": "57b8072ca3507221861f65800b231f42"
+    },
+    "imports": {
+      "rows": 1,
+      "digest": "fbc4159723e0eaf0fd5a92ad3f63859c"
+    }
+  },
+  "transaction": "READ ONLY",
+  "financial_writes": 0
+}

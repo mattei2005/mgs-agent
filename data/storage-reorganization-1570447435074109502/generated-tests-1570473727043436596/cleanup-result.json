@@ -1,0 +1,73 @@
+{
+  "status": "completed_validated",
+  "request_message_id": "1570473727043436596",
+  "confirmation_message_id": "1570486008917655623",
+  "manifest_sha256": "196fc0a3ac475bf76298141d9644f339e526b39b72ffeefff13edf21a2958ad9",
+  "started_at": "2026-11-12T12:13:07-0500",
+  "executor_exit": 0,
+  "executor_stdout": "{\"status\": \"deleted_pending_external_validation\", \"deleted_targets\": 81, \"manifest_sha256\": \"196fc0a3ac475bf76298141d9644f339e526b39b72ffeefff13edf21a2958ad9\"}",
+  "executor_stderr": "",
+  "target_roots_deleted": 81,
+  "file_count": 61283,
+  "remaining_paths": [],
+  "filesystem_before": {
+    "total_bytes": 206900281344,
+    "used_bytes": 172787920896,
+    "available_bytes": 34095583232
+  },
+  "filesystem_after": {
+    "total_bytes": 206900281344,
+    "used_bytes": 155670097920,
+    "available_bytes": 51213406208
+  },
+  "observed_free_space_increase_bytes": 17117822976,
+  "retention_policy_changed": false,
+  "loss_scope": "Saved state of the exact old isolated test executions and their test-only tar exports.",
+  "validation": {
+    "targets_absent": 81,
+    "test_clusters_removed": 60,
+    "test_tar_exports_removed": 21,
+    "prior_test_roots_unchanged": 4,
+    "source_inputs_hashes_unchanged": 3,
+    "profile_control_files_hashes_unchanged": 12,
+    "financial_table_fingerprints_unchanged": 6,
+    "remote_finance_services_active": true,
+    "gateway_pids_unchanged": true,
+    "failed_units": 0,
+    "launcher_unchanged": true,
+    "profile_checks": [
+      {
+        "profile": "zeus",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "seconds": 11.4
+      },
+      {
+        "profile": "atena",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "seconds": 16.1
+      },
+      {
+        "profile": "ares",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "seconds": 11.4
+      }
+    ]
+  },
+  "final_observed_filesystem": {
+    "total_bytes": 206900281344,
+    "used_bytes": 155680301056,
+    "available_bytes": 51203203072,
+    "used_percent": 75.25
+  },
+  "postvalidated_at": "2026-11-12T12:14:29-0500",
+  "report_infra_message_id": "1570487273534005391",
+  "report_infra_readback": true,
+  "governance_errors": [],
+  "closed_at": "2026-11-12T12:16:25-0500"
+}

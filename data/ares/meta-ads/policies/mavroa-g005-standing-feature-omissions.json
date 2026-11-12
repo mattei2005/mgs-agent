@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "policy_id": "mavroa-g005-standing-feature-omissions-1570487140364849216",
+  "status": "ACTIVE",
+  "owner": "Rodolfo",
+  "canonical_key": "acquisition.shein.mavroa-g005.copy.six-api-omissions-standing-acceptance",
+  "authority": {
+    "approved_by": "344196393512075265",
+    "origin_id": "1558133898209394780",
+    "prompt_id": "1570486241638752603",
+    "approval_id": "1570487140364849216",
+    "statement": "sim e para campanhas futuras, pode seguri sempre, nao precisa ficar perguntando mais"
+  },
+  "scope": {
+    "operation": "SHEIN-US-DIRECT",
+    "account_id": "1829406761389732",
+    "source_channel_id": "1548150015275438220",
+    "source_thread_id": "1558133898209394780",
+    "mode": "pure_clone",
+    "requires_independent_authorized_campaign_request": true
+  },
+  "accepted_absent_opt_in_features": [
+    "image_animation",
+    "image_brightness_and_contrast",
+    "image_templates",
+    "image_touchups",
+    "image_uncrop",
+    "video_uncrop"
+  ],
+  "repeat_human_approval_required": false,
+  "mechanism": "ares_campaign_v3.reviewed_copy_omissions",
+  "application": "For each independently authorized matching request, read all live target slots and source features. Bind a new immutable request-specific receipt with actual IDs, manifests, source, original clock and effective payload digests. accepted_omissions must be exactly the live nonempty missing set, limited to this policy list and identical for all affected reviewed slots as required by the installed comparator. Reuse the original unedited CEO prompt/approval as standing authority; register only the current receipt digest in the existing request index and validate it with live Discord reads before central QA/activation. Do not reuse another request's binding or receipt.",
+  "invariants": [
+    "Absence in GET is accepted uncertainty, not proof of OPT_OUT or preservation.",
+    "Do not omit or turn off these features in the write payload.",
+    "image_background_gen remains subject to the permanent OPT_OUT policy, never included in this acceptance.",
+    "Changed values, explicit OPT_OUT replacing OPT_IN, other missing individual features, additional enabled individual features or material media/copy/tracking/identity/targeting drift remain blocked by their existing gates.",
+    "Deprecated standard_enhancements is not an individual feature difference.",
+    "No campaign authorization, new asset scope, budget, schedule, billing, credential, source write or automatic campaign creation is granted by this policy.",
+    "Preserve strict global comparators and all per-request QA, rendered-media coverage, account authority, seals, IDs, original timing and final readback.",
+    "Policy is account-and-origin scoped; do not infer a global waiver from this thread."
+  ],
+  "supersedes": "Repeated human confirmation for these six API omissions only in the matching scope; historical per-request approvals and other scopes remain intact.",
+  "verified_current_request": "shein-1570484823330656422"
+}

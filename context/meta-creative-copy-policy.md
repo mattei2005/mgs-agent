@@ -30,6 +30,16 @@ Rodolfo também determinou concluir os mesmos pedidos Kelly:
 
 As sessões Ares de cada thread de origem já retomaram com autorização direta de Rodolfo. Não abrir outra execução nem transportar ownership de uma conta para a outra. Alterações em código compartilhado exigem um único escritor coordenado; os writes de campanha continuam isolados por conta e pelos locks canônicos.
 
+## Aceite permanente — seis omissões de API em Mavroa G005
+
+Decisão de Rodolfo `1570487140364849216`, em reply à pergunta `1570486241638752603`, origem `1558133898209394780`: **“sim e para campanhas futuras, pode seguri sempre, nao precisa ficar perguntando mais”**. Fonte canônica de decisão: `data/ares/meta-ads/policies/mavroa-g005-standing-feature-omissions.json`.
+
+O aceite cobre o request atual `shein-1570484823330656422` e próximas duplicações autorizadas da conta `1829406761389732`, nessa origem, quando a Meta omitir os mesmos recursos individuais `image_animation`, `image_brightness_and_contrast`, `image_templates`, `image_touchups`, `image_uncrop` e `video_uncrop`. Não solicitar outra confirmação humana para essas ausências. Isso supersede somente a reconfirmação por ocorrência nesse recorte; não é waiver global nem autorização de novas campanhas.
+
+Continuar enviando os recursos conforme a definição aprovada: ausência de retorno não significa desligamento ou preservação comprovada. Gerar para cada pedido o binding/receipt próprio pelo mecanismo instalado `reviewed_copy_omissions`, usando os IDs/selos/payloads/relógio reais e a decisão permanente como autoridade; registrar o digest e validar o receipt com GET do diálogo original antes do QA e da ativação central. Nunca reutilizar binding de outro lote. O receipt atual foi validado e os mesmos cinco objetos C047–C051 ativados com QA integral e readback, sem recriação.
+
+Manter `image_background_gen=OPT_OUT`, o comparador global estrito, QA renderizado, tracking, mídia/copy, identidade, autoridade e orçamento/início por pedido. Valor explicitamente alterado, recurso adicional habilitado, outra omissão ou qualquer outro drift material segue seus gates próprios. Se a representação por slots do novo pedido diferir da capacidade instalada, resolver a capacidade técnica sem reabrir o aceite comercial já concedido.
+
 ## Implementação e evidência
 
 A política aprovada não equivale a implantação: o executor precisa aplicar a resolução nos caminhos centrais de construção, retomada, materialização e QA e exercitar testes negativos/de preservação. Cada pedido só está concluído após readback da quantidade integral, URLs, recursos e estado final aprovado e entrega na origem. O checkpoint Zeus `zeus-shein-background-1568656839132971009` acompanha a conclusão, sem writer Meta paralelo.
