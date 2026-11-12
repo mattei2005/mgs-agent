@@ -7798,12 +7798,12 @@
     {
       "agent": "ares",
       "id": "eggbev-pg23187-1570285402068091011",
-      "next_step": "Aguardar OK final do Nicolas posterior ao resumo1570291238941491242, vinculado ao digest selado. Nao executar pela conclusao do preparo/manutencao. Inicio literal2026-11-12T00:02:00-05:00: se expirar perguntar somente novo horario. Nao retomar pg23185.",
-      "objective": "Preparar1clone Cornell para Moorcroft pg23187 USD35 inicio12nov00:02ET videos163-165 e copy literal; sem publicar",
-      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/summary-delivery-readback.json",
-      "state": "awaiting_final_approval;summary1570291238941491242get200exact;303 moorcroft finances c01;manifest seal1657f8c8ac6279504d81bd861a84744eebcc509da0b3dbf0d05b25f91774b613;3assetsreserved_same_request;6variantsready_accountassociated;pbia verified;source301 unchanged3finalactive3seedpaused;lease released;zero campaign writes",
+      "next_step": "Perguntar se aceita3finaisativos+3seedsPAUSEDpreservadas para inicio imediato. Nao publicar/deletar enquanto essa divergencia estiver aberta. Preservar input,midia,reservas e selo anterior; eventual revisao imediata segue runner/allowlist e gates proprios.",
+      "objective": "Publicar clone303 Moorcroft USD35 videos163-165 conforme decisao atual de Nicolas",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/followup-1570313044771475559.json",
+      "state": "manifest preparado e resumo1570291238941491242. nova instrucao1570313044771475559 pede remover pausadas e inicioagora; inicio00:02supersedido. arquitetura aprovada exige3seedspausedpreservadas. getcampanhas exato alvo vazio;zero criacao/delecao. instrucao condicional nao autoriza ignorar remocao solicitada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-12T04:16:59+00:00"
+      "updated_at": "2026-11-12T05:44:28+00:00"
     },
     {
       "agent": "ares",
@@ -9997,5 +9997,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T05:10:22+00:00"
+  "updated_at": "2026-11-12T05:44:28+00:00"
 }
