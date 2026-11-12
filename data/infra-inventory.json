@@ -893,6 +893,22 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ZEUS-SHEIN-DELIVERY-1570283838653865987",
+      "agent": "zeus",
+      "type": "verified_campaign_delivery_recovery",
+      "status": "verified",
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/zeus-delivery-recovery-1570283838653865987.json",
+      "authority_message_id": "1570283838653865987",
+      "source_thread_id": "1558131493048688711",
+      "delivery_message_id": "1570285167908757655",
+      "campaign_executor": "ares",
+      "meta_writes_by_zeus": 0,
+      "credential_writes": 0,
+      "history_reset": false,
+      "evidence": "Live Meta readback confirms existing C010/C011 ACTIVE at USD70/day each and COST_CAP90; two adsets and four ads statusACTIVE, one effective PENDING_REVIEW. Exact Zeus-authored source delivery GET verified. Same original context/model passed tool-disabled provider test HTTP200 exact marker; not a live gateway turn. Original HTTP400 internal cause remains unproven. Reconciled Page and campaign checkpoints prevent replay.",
+      "procedural_reference": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/providers-codex-oauth.md"
+    },
+    {
       "id": "vizioid-page-1570158283484827789",
       "agent": "ares",
       "type": "meta_page_administrative_provisioning",

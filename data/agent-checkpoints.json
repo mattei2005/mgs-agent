@@ -2193,12 +2193,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570154441934504089",
-      "next_step": "Respeitar 305s do engine e retomar mesmo input; somente readback, QA integral e activate_verified. Nao repetir Page grant ou criacao.",
+      "next_step": "Nao repetir criacao, grant, QA mutante ou ativacao. Pedido entregue; revisao pendente da Meta nao e falha de criacao.",
       "objective": "Concluir 2 copias C007 Vizioid04 USD70/dia COCAP USD0.90 NOW; mesmo pedido original",
-      "source": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/shein-1570154441934504089-1736068407518263.json",
-      "state": "page repair verified; 2 campanhas 120257118054990273 e 120257118054950273, 2 conjuntos e 4 anuncios persistidos. engine readback_deferred children_created_readback_pending; somente readback pendente por quota development_access, replay de criacao bloqueado.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/zeus-delivery-recovery-1570283838653865987.json",
+      "state": "concluido/reconciliado por zeus: ares concluiu runner e qa antes de http400; live api confirma c010 120257118054990273 e c011 120257118054950273 active, dois conjuntos cap90 e quatro anuncios statusactive, um effective pending_review. entrega final zeus verificada 1570285167908757655.",
       "thread_id": "1558131493048688711",
-      "updated_at": "2026-11-12T03:40:53+00:00"
+      "updated_at": "2026-11-12T03:53:16+00:00"
     },
     {
       "agent": "ares",
@@ -5967,6 +5967,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SHEIN-DELIVERY-1570283838653865987",
+      "next_step": "Nenhuma repeticao de campanha. Revisao de 1 anuncio depende da Meta; causa interna do 400 original nao comprovada e novo turno do gateway nao testado.",
+      "objective": "Recuperar entrega do pedido shein-1570154441934504089 sem duplicacao ou reset",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/zeus-delivery-recovery-1570283838653865987.json",
+      "state": "concluido: meta live confirmado e entrega exata verificada na mensagem 1570285167908757655; duas campanhas active usd70/dia cocap usd0.90; 3 anuncios active e 1 pending_review; mesmo contexto/modelo passou http200 sem ferramentas.",
+      "thread_id": "1570283838653865987",
+      "updated_at": "2026-11-12T03:53:15+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558225355930861649",
       "next_step": "Nenhuma pendência deste pedido; não repetir criação/ativação. Autoridade ativa nos seis canais/threads, late_recovery_review verificado, 167 testes PASS, C007 e filhos ACTIVE USD100 COST_CAP80, C006 intacta; Ares PID3443710 readiness confirmado; prompt_pin consumido no canário G002 igual ao YAML normalizado.",
       "objective": "Auditoria independente concluída da autorização SHEIN Geizian, C007 existente e prompt runtime Ares",
@@ -7768,12 +7778,22 @@
     {
       "agent": "ares",
       "id": "eggbev-pg23185-1570142923516022827",
-      "next_step": "Aguardar esclarecer se exclusao significa apagar os tres seeds da original ou somente exclui-los da selecao. Acesso API da Page continua pendente; nao alterar credenciais/permissoes sem gate proprio. Manter mesmo request; horario literal nao pode ser deslocado silenciosamente.",
-      "objective": "Duplicar Cornell C01 para pg_23185 com videos 163-165, USD35/dia e inicio 11/11/2026 13:45 ET.",
+      "next_step": "Somente novo pedido eggbev-pg23187-1570285402068091011 permanece vigente.",
+      "objective": "Preservar pedido anterior cancelado pelo Nicolas",
       "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23185-1570142923516022827/request.json",
-      "state": "nicolas confirmou vinculo da page e pediu excluir pausados/usar ativos. get page permanece http400 codigo10. fonte revalidada 3 active finais + 3 paused seeds. zero exclusao, upload ou publicacao.",
+      "state": "cancelled_superseded_by_operator1570285402068091011; zerometa effects; nao retomar nem cobrar lacunas antigas",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-11T18:34:57+00:00"
+      "updated_at": "2026-11-12T03:56:56+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "eggbev-pg23187-1570285402068091011",
+      "next_step": "Verificar manutenção isolada source handling; preparar mesmo request via runner central; se horario expirou perguntar somente novo inicio. Resumo selado e OK posterior obrigatorios antes de publicar. Nunca retomar pg23185.",
+      "objective": "Preparar1clone Cornell para Moorcroft pg23187 USD35 inicio12nov00:02ET videos163-165 e copy literal",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/request.json",
+      "state": "sourcemetaget200:1adset3activefinals3pausedseeds;targetsbmetaget200moorcroftfinances1272524399287905;denylistpass;pbiaempty;runnerstrictcountblocked;zerometa/media/reservations;maintenance t_c63b434e;prepare-only dependency t_0f57f34c",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-12T03:56:56+00:00"
     },
     {
       "agent": "ares",
@@ -9408,12 +9428,12 @@
     {
       "agent": "zeus",
       "id": "vizioid-page-1570158283484827789",
-      "next_step": "Dependência humana: disponibilizar Página exata à BM Digital Trust e ao administrador aprovado sem transferir ownership. Após confirmação, Zeus refaz pre-read e grant mínimo, valida identidade original e devolve ao Ares o mesmo pedido shein-1570154441934504089; sem novas cópias ou writer paralelo.",
-      "objective": "Provisionar somente ADVERTISE/ANALYZE da Página 680516861808576 para BISU 122095869861482193; Ares permanece writer das campanhas",
-      "source": "data/ares/meta-ads/audit/page-access/vizioid-04-1570158283484827789.json",
-      "state": "blocked_external_page_visibility: identidades válidas, conta acessível; página ausente dos inventários owned/client da bm digital trust e das atribuições do administrador. meta código 10 em page/assigned_users; zero writes.",
+      "next_step": "Nenhum novo grant ou handoff: campanhas originais ja criadas/ativas pelo Ares; entrega final validada por Zeus.",
+      "objective": "Reconciliar provisionamento da Pagina 680516861808576 preservando Ares como writer",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/zeus-delivery-recovery-1570283838653865987.json",
+      "state": "concluido por ares e reconciliado: recibo page-repair-1570280670864081108 verified; grant minimo advertise/analyze, ownership e outros atores preservados; zeus confirmou get da mesma pagina http200. antigo bloqueio de visibilidade supersedido por reparo validado.",
       "thread_id": "1558131493048688711",
-      "updated_at": "2026-11-11T19:37:01+00:00"
+      "updated_at": "2026-11-12T03:53:15+00:00"
     },
     {
       "agent": "zeus",
@@ -9967,5 +9987,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T03:40:53+00:00"
+  "updated_at": "2026-11-12T03:56:56+00:00"
 }
