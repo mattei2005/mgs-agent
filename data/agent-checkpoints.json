@@ -2602,6 +2602,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-PAUSE-1570458266733903976",
+      "next_step": "Concluido; responder na origem. Sem reativacao, cron, nova campanha ou replay de writes.",
+      "objective": "Desativar exclusivamente as 72 campanhas nominais solicitadas por Nicolas na Mavroa Conta 06 G006",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-1570458266733903976/verified-final-receipt.json",
+      "state": "complete_verified:72/72 campanhas paused nos tres estados via batch final integral;72 alteradas,0ja pausadas;budgets,lances,nomes,programacao e identidade preservados;reconciliacao pos-timeout somente get,0postadicional;lease complete.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-12T15:32:13+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-PIPELINE-HARDENING-1557274000680288307",
       "next_step": "REPORT-INFRA/readback; nenhum novo teste pago. Próximo request humano usa start_now e budget_from_reference no mesmo runner; não prometer 144s antes de medição live e não alterar C114.",
       "objective": "Eliminar falhas NOW e atingir alvo E2E 2min24 sem remover QA",
@@ -6158,12 +6168,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Rodolfo confirmar somente 28 dumps redundantes / 3.993675GiB, manifesto c999586429f3227b665da1b17c4141dcb008e03b779f8efb18bb1b0a8c5fb489. Demais frentes continuam separadas: Ares858copias/0.761GiB remotas verificadas ainda sem lote; SEO tem evidencia/trabalho pendente; runtimes dependem de alternates/worktree/scripts e patches; retencao futura nao ativada.",
+      "next_step": "Lote confirmado1570460898970181713concluido:28/28dumps ausentes;3.999GiB observados;9locais+9remotos preservados;3configs/3smokes ePIDs passaram;REPORT1570461702804480164readback. Nenhuma pendencia deste lote. Demais categorias seguem em revisao sem autorizacao de exclusao; retencao futura nao alterada.",
       "objective": "Descarte seguro financeiro/perfis/backups/runtimes e reorganizacao de produtores; manter operacao e recuperacao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-reorganization-1570447435074109502/finance-duplicate-lot.json;discord:1569928464033783862/1570447435074109502",
-      "state": "awaiting_critical_confirmation_first_exact_lot",
+      "source": "data/storage-reorganization-1570447435074109502/cleanup-result.json;context/storage-reorganization-20261112.md;confirmation:1570460898970181713;report:1570461702804480164",
+      "state": "first_exact_lot_completed_validated_other_fronts_not_deleted",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-12T14:54:44+00:00"
+      "updated_at": "2026-11-12T15:34:37+00:00"
     },
     {
       "agent": "zeus",
@@ -9288,12 +9298,12 @@
     {
       "agent": "ares",
       "id": "shein-1570455409297326224",
-      "next_step": "Obter na origem aceite especifico da omissao de image_animation,image_brightness_and_contrast,image_templates,image_text_translation,image_touchups,image_uncrop,video_uncrop nas C263-C267. Ausencia nao comprova OPT_OUT. Se aceito, vincular dialogo live via reviewed_copy_omissions, validar receipt real e retomar mesmo runner/input/IDs, sem recriacao nem alteracao de horario; exigir QA e readback ACTIVE integral.",
-      "objective": "Duplicar C261 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD150/dia por campanha, COCAP USD0.55, inicio imediato em 12/11/2026.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1570455409297326224/feature-drift-readback.json",
-      "state": "postprocess_pending: c263-c267 criadas paused; 5 campanhas, 5 conjuntos e 10 anuncios paused confirmados por get, budget do lote usd750/dia, cap55centavos. qa renderizado presente para todos os ids. get completo confirmou sete enhancements ausentes em9/10 anuncios; fonte permanece opt_in. qa semantico bloqueia ativacao; pedido nao concluido.",
+      "next_step": "Entregar conclusao nativa com bloco Iris/AdOps dos valores literais do recibo. Nao repetir criacao nem ativacao. Entrega real ainda nao comprovada; anuncios seguem revisao Meta.",
+      "objective": "Duplicar C261 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD150/dia por campanha, COCAP USD0.55, inicio imediato em12/11/2026.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1570455409297326224/final-verification.json",
+      "state": "complete: c263-c267,5 campanhas,5 conjuntos,10 anuncios configurados active,10 anuncios pending_review no get final15:32:13utc. mesmo conjunto de ids preservado; budget750usd/dia no lote e150usd por campanha,cap55centavos. qa semantico no contexto aprovado e qa renderizado integral verificados. kelly aceitou omissoes em1570460111766294640; posts novos e flags opcionais age/gender omitidas. tracking final deduplicado no recibo; budget ativo configurado da conta5610usd/dia.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-12T15:15:52+00:00"
+      "updated_at": "2026-11-12T15:32:35+00:00"
     },
     {
       "agent": "ares",
@@ -10067,5 +10077,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T15:15:52+00:00"
+  "updated_at": "2026-11-12T15:34:38+00:00"
 }

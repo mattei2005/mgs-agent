@@ -5,7 +5,7 @@
 - Dono: Rodolfo Mattei, Discord `344196393512075265`.
 - Pedido: `discord:1569928464033783862/1570447435074109502`.
 - Direção autorizada: identificar o que é redundante ou deixou de ter uso, preservar a operação, confirmar os alvos antes da exclusão e reorganizar produtores/retenção para evitar reacúmulo.
-- Estado: investigação e preparação autorizadas; **nenhuma exclusão nem nova retenção automática ativada por este registro**.
+- Estado: **primeiro lote de 28 dumps locais redundantes excluído e validado em 2026-11-12**, por confirmação nativa de Rodolfo `1570460898970181713`, vinculada ao manifesto `c999586429f3227b665da1b17c4141dcb008e03b779f8efb18bb1b0a8c5fb489`. Nove representantes locais e nove cópias remotas foram preservados. Nenhuma nova retenção automática foi ativada; as outras categorias não foram autorizadas para exclusão por essa confirmação.
 - As confirmações críticas do AGENT.md permanecem obrigatórias. Este pedido não é confirmação de um manifesto ainda não apresentado.
 
 ## Separação de armazenamento

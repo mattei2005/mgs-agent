@@ -1,0 +1,65 @@
+{
+  "status": "completed_validated",
+  "confirmation_message_id": "1570460898970181713",
+  "request_message_id": "1570447435074109502",
+  "manifest_sha256": "c999586429f3227b665da1b17c4141dcb008e03b779f8efb18bb1b0a8c5fb489",
+  "started_at": "2026-11-12T10:32:25-0500",
+  "executor_exit": 0,
+  "executor_stdout": "{\"status\": \"deleted_validated\", \"deleted\": 28, \"manifest_sha256\": \"c999586429f3227b665da1b17c4141dcb008e03b779f8efb18bb1b0a8c5fb489\", \"governance_and_external_postchecks_pending\": true}",
+  "executor_stderr": "",
+  "targets_deleted": 28,
+  "remaining_paths": [],
+  "filesystem_before": {
+    "total_bytes": 206900281344,
+    "used_bytes": 177051729920,
+    "available_bytes": 29831774208
+  },
+  "filesystem_after": {
+    "total_bytes": 206900281344,
+    "used_bytes": 172757897216,
+    "available_bytes": 34125606912
+  },
+  "observed_free_space_increase_bytes": 4293832704,
+  "retention_policy_changed": false,
+  "validation": {
+    "targets_absent": 28,
+    "retained_local_hashes_valid": 9,
+    "gateways_active_and_pids_unchanged": true,
+    "failed_units": 0,
+    "launcher_unchanged": true,
+    "profile_postchecks": [
+      {
+        "profile": "zeus",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "elapsed_seconds": 12.3
+      },
+      {
+        "profile": "atena",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "elapsed_seconds": 16.2
+      },
+      {
+        "profile": "ares",
+        "config_exit": 0,
+        "smoke_exit": 0,
+        "marker_seen": true,
+        "elapsed_seconds": 12.4
+      }
+    ]
+  },
+  "final_observed_filesystem": {
+    "total_bytes": 206900281344,
+    "used_bytes": 172763176960,
+    "available_bytes": 34120327168,
+    "used_percent": 83.51
+  },
+  "postvalidation_at": "2026-11-12T10:33:21-0500",
+  "report_infra_message_id": "1570461702804480164",
+  "report_infra_readback": true,
+  "closed_at": "2026-11-12T10:34:37-0500",
+  "governance_errors": []
+}
