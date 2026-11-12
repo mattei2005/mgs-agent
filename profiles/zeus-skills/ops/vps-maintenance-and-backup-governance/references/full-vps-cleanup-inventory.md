@@ -24,6 +24,8 @@ When the owner requests latest-only retention, define the operational class befo
 
 Detect process use from `/proc/<pid>/cmdline` as well as `cwd`, `exe`, and open file descriptors. A virtualenv can resolve `/proc/<pid>/exe` to a shared UV base interpreter while `argv[0]` still points inside the active runtime; checking `exe` alone can falsely classify the source repository as unused.
 
+Exclude the auditor PID and its ancestor shell/tool-wrapper chain from literal command-line matches: an inline Python or shell audit can contain every candidate path as data and otherwise report itself as a consumer. Compare exact paths or directory-boundary prefixes (`root + '/'`), not arbitrary substrings; `hermes-agent` must not match every `hermes-agent-port-*` sibling. Keep the exclusion list and scope in the receipt; do not exclude independent workers or infer semantic non-use from a zero-reference result.
+
 Delete only the exact confirmed set. Record every removed path. On any exception, emit a partial-failure event containing deleted and remaining paths before raising.
 
 ## 2. Estimate disk recovery correctly
