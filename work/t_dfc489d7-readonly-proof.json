@@ -1,0 +1,322 @@
+{
+  "task_id": "t_dfc489d7",
+  "started_at": "2026-11-12T06:32:50.294308+00:00",
+  "request_id": "eggbev-pg23187-1570285402068091011",
+  "account_id": "1034081997659047",
+  "approved_content_digest": "920a08d00c7a5f1a0d93cad744c98bb5c7875c559605d8d126cf6648b9a03499",
+  "meta_mutations": 0,
+  "drive_mutations": 0,
+  "rounds": [
+    {
+      "at": "2026-11-12T06:32:54.776070+00:00",
+      "round": 1,
+      "confirmed_ids": {
+        "adset_id_1": "120251175890720629",
+        "campaign_id_1": "120251175890330629",
+        "creative_id_1_1": "2190284505251875",
+        "creative_id_1_2": "1635180731421878",
+        "creative_id_1_3": "1122858043828146",
+        "seed_ad_id_1_1": "120251176219130629"
+      },
+      "slots": [
+        {
+          "operation": "target_seed_create_1_2",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 02 AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_164",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1635180731421878",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        },
+        {
+          "operation": "target_seed_create_1_3",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 03 AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_165",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1122858043828146",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        }
+      ],
+      "ads": [
+        {
+          "id": "120251176219130629",
+          "name": "__ARES_SEED__ 11efe348b50a 01 AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_163",
+          "account_id": "1034081997659047",
+          "campaign_id": "120251175890330629",
+          "adset_id": "120251175890720629",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "source_ad_id": "0",
+          "creative": {
+            "id": "2190284505251875"
+          }
+        }
+      ],
+      "campaign": {
+        "id": "120251175890330629",
+        "name": "303 - Moorcroft Finances - ENG - US - (pg_23187) - C01",
+        "account_id": "1034081997659047",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "daily_budget": "3500"
+      },
+      "get_operations": 10,
+      "known_media_observations": {
+        "1122858043828146": {
+          "expected_video_ids": [
+            "1885097619146472",
+            "1702260964800544"
+          ],
+          "observed_video_ids": [
+            "1327227676125168",
+            "1679194926889977"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "1635180731421878": {
+          "expected_video_ids": [
+            "1492405269415351",
+            "1428668982810363"
+          ],
+          "observed_video_ids": [
+            "28248612118146351",
+            "1054182801011014"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "2190284505251875": {
+          "expected_video_ids": [
+            "1572034998276467",
+            "2399797254096259"
+          ],
+          "observed_video_ids": [
+            "1168397519066439",
+            "3141467466207004"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        }
+      }
+    },
+    {
+      "at": "2026-11-12T06:33:28.122519+00:00",
+      "round": 2,
+      "confirmed_ids": {
+        "adset_id_1": "120251175890720629",
+        "campaign_id_1": "120251175890330629",
+        "creative_id_1_1": "2190284505251875",
+        "creative_id_1_2": "1635180731421878",
+        "creative_id_1_3": "1122858043828146",
+        "seed_ad_id_1_1": "120251176219130629"
+      },
+      "slots": [
+        {
+          "operation": "target_seed_create_1_2",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 02 AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_164",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1635180731421878",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        },
+        {
+          "operation": "target_seed_create_1_3",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 03 AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_165",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1122858043828146",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        }
+      ],
+      "ads": [
+        {
+          "id": "120251176219130629",
+          "name": "__ARES_SEED__ 11efe348b50a 01 AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_163",
+          "account_id": "1034081997659047",
+          "campaign_id": "120251175890330629",
+          "adset_id": "120251175890720629",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "source_ad_id": "0",
+          "creative": {
+            "id": "2190284505251875"
+          }
+        }
+      ],
+      "campaign": {
+        "id": "120251175890330629",
+        "name": "303 - Moorcroft Finances - ENG - US - (pg_23187) - C01",
+        "account_id": "1034081997659047",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "daily_budget": "3500"
+      },
+      "get_operations": 10,
+      "known_media_observations": {
+        "1122858043828146": {
+          "expected_video_ids": [
+            "1885097619146472",
+            "1702260964800544"
+          ],
+          "observed_video_ids": [
+            "1327227676125168",
+            "1679194926889977"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "1635180731421878": {
+          "expected_video_ids": [
+            "1492405269415351",
+            "1428668982810363"
+          ],
+          "observed_video_ids": [
+            "28248612118146351",
+            "1054182801011014"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "2190284505251875": {
+          "expected_video_ids": [
+            "1572034998276467",
+            "2399797254096259"
+          ],
+          "observed_video_ids": [
+            "1168397519066439",
+            "3141467466207004"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        }
+      }
+    },
+    {
+      "at": "2026-11-12T06:34:33.041571+00:00",
+      "round": 3,
+      "confirmed_ids": {
+        "adset_id_1": "120251175890720629",
+        "campaign_id_1": "120251175890330629",
+        "creative_id_1_1": "2190284505251875",
+        "creative_id_1_2": "1635180731421878",
+        "creative_id_1_3": "1122858043828146",
+        "seed_ad_id_1_1": "120251176219130629"
+      },
+      "slots": [
+        {
+          "operation": "target_seed_create_1_2",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 02 AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_164",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1635180731421878",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        },
+        {
+          "operation": "target_seed_create_1_3",
+          "expected_name": "__ARES_SEED__ 11efe348b50a 03 AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_165",
+          "expected_adset_id": "120251175890720629",
+          "expected_creative_id": "1122858043828146",
+          "uncertain": true,
+          "unique_exact_match_id": null,
+          "verdict": "UNRESOLVED_NO_POST_REPLAY"
+        }
+      ],
+      "ads": [
+        {
+          "id": "120251176219130629",
+          "name": "__ARES_SEED__ 11efe348b50a 01 AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_163",
+          "account_id": "1034081997659047",
+          "campaign_id": "120251175890330629",
+          "adset_id": "120251175890720629",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "source_ad_id": "0",
+          "creative": {
+            "id": "2190284505251875"
+          }
+        }
+      ],
+      "campaign": {
+        "id": "120251175890330629",
+        "name": "303 - Moorcroft Finances - ENG - US - (pg_23187) - C01",
+        "account_id": "1034081997659047",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "daily_budget": "3500"
+      },
+      "get_operations": 10,
+      "known_media_observations": {
+        "1122858043828146": {
+          "expected_video_ids": [
+            "1885097619146472",
+            "1702260964800544"
+          ],
+          "observed_video_ids": [
+            "1327227676125168",
+            "1679194926889977"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "1635180731421878": {
+          "expected_video_ids": [
+            "1492405269415351",
+            "1428668982810363"
+          ],
+          "observed_video_ids": [
+            "28248612118146351",
+            "1054182801011014"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        },
+        "2190284505251875": {
+          "expected_video_ids": [
+            "1572034998276467",
+            "2399797254096259"
+          ],
+          "observed_video_ids": [
+            "1168397519066439",
+            "3141467466207004"
+          ],
+          "lineage_qa_required": true,
+          "media_equivalence_verified": false
+        }
+      }
+    }
+  ],
+  "protected_before": {
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request-first-execution.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest-first-execution.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/checkpoint-before-recovery.json": "578386473e5ac11676f0622692464d14ee94fd3ddfaec1f20a2336a1fa3edbdc",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/audit-before-recovery.json": "838a1f71b1bc84d10d6e37ce4c6cce1e170482625d6598f0bcd82b8db6a54bc2",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/execute-stderr.log": "3709d72e93348047cef4515480ce2cc4fdab918028622e24f4a20dcb07306f67",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/eggbev-pg23187-1570285402068091011-1034081997659047.json": "49cca79b5179743b6052874fc5a248ab8d56ca65d6a99a58d3648a518b07e37b",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/eggbev-pg23187-1570285402068091011.json": "21a2031176d6297ff3ee7a81a244fdff06a83f52f33b29c280ae80b50180a818",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json": "2f982eb623c29532ca3169b742fd2aecb40a78830ba97e28d4aa4a466b860a03"
+  },
+  "source_unchanged": true,
+  "finished_at": "2026-11-12T06:34:33.837977+00:00",
+  "protected_after": {
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request-first-execution.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest-first-execution.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/checkpoint-before-recovery.json": "578386473e5ac11676f0622692464d14ee94fd3ddfaec1f20a2336a1fa3edbdc",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/audit-before-recovery.json": "838a1f71b1bc84d10d6e37ce4c6cce1e170482625d6598f0bcd82b8db6a54bc2",
+    "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/execute-stderr.log": "3709d72e93348047cef4515480ce2cc4fdab918028622e24f4a20dcb07306f67",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/eggbev-pg23187-1570285402068091011-1034081997659047.json": "49cca79b5179743b6052874fc5a248ab8d56ca65d6a99a58d3648a518b07e37b",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/eggbev-pg23187-1570285402068091011.json": "21a2031176d6297ff3ee7a81a244fdff06a83f52f33b29c280ae80b50180a818",
+    "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json": "2f982eb623c29532ca3169b742fd2aecb40a78830ba97e28d4aa4a466b860a03"
+  },
+  "all_protected_unchanged": true,
+  "resolution": "BLOCKED_META_SIDE_EFFECTS_UNRESOLVED",
+  "no_durable_adoption": true
+}

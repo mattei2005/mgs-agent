@@ -257,7 +257,8 @@ class CampaignSpec:
         if status == "ACTIVE" and start_intent == "SCHEDULED" and start <= datetime.now(timezone.utc):
             from .shein_continuation import allows_elapsed_campaign
             from .target_continuation import allows_elapsed_campaign as allows_target_elapsed
-            if not allows_elapsed_campaign(value) and not allows_target_elapsed(value):
+            from .shein_elapsed_schema import allows_campaign as allows_explicit_elapsed
+            if not allows_elapsed_campaign(value) and not allows_target_elapsed(value) and not allows_explicit_elapsed(value):
                 raise ManifestError("ACTIVE requires future start_time")
         tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(
@@ -466,7 +467,9 @@ class Manifest:
         if not request_id or not operation or not graph_version:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
-        campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
+        from .shein_elapsed_schema import admission
+        with admission(value):
+            campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
         if any(c.mode == 'clone_target_prestaged' and c.status == 'ACTIVE' and _iso(c.start_time, 'start_time') <= datetime.now(timezone.utc) for c in campaigns):
             from .target_continuation import CURRENT, digest
             continuation = CURRENT.get()
