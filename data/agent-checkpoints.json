@@ -1462,6 +1462,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1570447595078156369",
+      "next_step": "Coletar Meta/SB e RPS DOM, validar modelos e publicar seis integrais e seis resumos com GET final",
+      "objective": "Intraday atual nas seis threads G006 com resumo financeiro individual ao final",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/shein-1570447595078156369/request.json",
+      "state": "pedido autenticado; seis pares conta/thread validados; identidades meta usd america/new_york confirmadas; coleta em andamento; zero writes meta",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-12T14:40:03+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -2549,6 +2559,16 @@
       "state": "completed",
       "thread_id": "1560303769680355525",
       "updated_at": "2026-10-15T22:36:37+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-LANDING-DISABLE-1570446457419337890",
+      "next_step": "Manter funcao desativada em toda SHEIN; somente nova autorizacao explicita de Rodolfo revoga retirada; nao retomar ou fazer backfill por pedidos de campanha",
+      "objective": "Desativar definitivamente acompanhamento automatico de landings em toda SHEIN sem mudar campanhas",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/shein-landing-disable-1570446457419337890/verification.json;discord:1185714635991679006/1570446315769430037/1570446457419337890",
+      "state": "completed_verified: retirada shein registrada; dois timers disabled/inactive; servicos inativos; tick/intake/activate-intake retornam policy_disabled; zero pendencias e avisos; fila e evidencias preservadas; nenhuma visita ou write meta",
+      "thread_id": "1570446315769430037",
+      "updated_at": "2026-11-12T14:37:19+00:00"
     },
     {
       "agent": "ares",
@@ -6134,6 +6154,16 @@
       "state": "completed_validated",
       "thread_id": "1562078493498540042",
       "updated_at": "2026-11-04T04:10:13+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
+      "next_step": "Medir duplicatas e vinculos cloud; fechar lote exato e proposta de retencao. Nenhuma exclusao sem confirmacao critica do manifesto.",
+      "objective": "Classificar descarte seguro do financeiro/perfis/backups/runtimes e reorganizar retencao; confirmar arquivo 30TB sem tocar credenciais, campanhas ou dados ativos.",
+      "source": "discord:1569928464033783862/1570447435074109502",
+      "state": "in_progress_readonly_classification",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-12T14:39:17+00:00"
     },
     {
       "agent": "zeus",
@@ -10027,5 +10057,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T13:12:54+00:00"
+  "updated_at": "2026-11-12T14:40:03+00:00"
 }

@@ -2,6 +2,27 @@
   "schema_version": 3,
   "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
   "status": "PAUSED_BY_RODOLFO",
+  "operation_retirements": {
+    "SHEIN-US-DIRECT": {
+      "status": "DISABLED_BY_RODOLFO",
+      "canonical_key": "growth.shein.post-creation-landing-observation.retirement",
+      "authority_user_id": "344196393512075265",
+      "authority_message_id": "1570446457419337890",
+      "authority_thread_id": "1570446315769430037",
+      "statement": "quero que desative isso. em todos os sites da shein, todas as contas de anuncio, nao vamos mais usar essa funcao. confere tudo e veja se tem algo ativo ainda e desative.",
+      "scope": "ALL_SHEIN_SITES_MANAGERS_CHANNELS_AND_AD_ACCOUNTS_CURRENT_AND_FUTURE",
+      "automatic_intake": false,
+      "automatic_observation": false,
+      "automatic_retries": false,
+      "automatic_replay": false,
+      "landing_followup_notifications": false,
+      "resume_requires": "EXPLICIT_NEW_AUTHORIZATION_FROM_RODOLFO_RESCINDING_THIS_RETIREMENT",
+      "global_pause_remains_in_force": true,
+      "campaign_creation_and_delivery_unchanged": true,
+      "historical_jobs_and_evidence_preserved": true,
+      "verification": "data/ares/meta-ads/audit/shein-landing-disable-1570446457419337890/verification.json"
+    }
+  },
   "operator_pause": {
     "active": true,
     "authority_user_id": "344196393512075265",
