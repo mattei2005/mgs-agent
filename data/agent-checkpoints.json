@@ -9287,6 +9287,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1570455409297326224",
+      "next_step": "Obter na origem aceite especifico da omissao de image_animation,image_brightness_and_contrast,image_templates,image_text_translation,image_touchups,image_uncrop,video_uncrop nas C263-C267. Ausencia nao comprova OPT_OUT. Se aceito, vincular dialogo live via reviewed_copy_omissions, validar receipt real e retomar mesmo runner/input/IDs, sem recriacao nem alteracao de horario; exigir QA e readback ACTIVE integral.",
+      "objective": "Duplicar C261 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD150/dia por campanha, COCAP USD0.55, inicio imediato em 12/11/2026.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1570455409297326224/feature-drift-readback.json",
+      "state": "postprocess_pending: c263-c267 criadas paused; 5 campanhas, 5 conjuntos e 10 anuncios paused confirmados por get, budget do lote usd750/dia, cap55centavos. qa renderizado presente para todos os ids. get completo confirmou sete enhancements ausentes em9/10 anuncios; fonte permanece opt_in. qa semantico bloqueia ativacao; pedido nao concluido.",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-11-12T15:15:52+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -10057,5 +10067,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T14:54:44+00:00"
+  "updated_at": "2026-11-12T15:15:52+00:00"
 }
