@@ -84,19 +84,19 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_validated_h_preserved_d_pending_provider_ui",
-    "scheduled_at": "2026-11-12T08:02:00-05:00",
-    "execution_id": "e0bf5a37706f4ac8a37ae7010367abfc",
-    "verified_at": "2026-11-12T08:11:49.937431-05:00",
+    "scheduled_at": "2026-11-12T14:02:00-05:00",
+    "execution_id": "92d9d5df4fbc480ba6ba85f879b7059d",
+    "verified_at": "2026-11-12T14:08:02.695035-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
     "fresh_metrics_count": 47,
-    "validated_metrics_at": "2026-11-12T08:09:40.333318-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261112T081000044389",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261112T080551234704",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261112T080507155608",
+    "validated_metrics_at": "2026-11-12T14:06:23.016188-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261112T140627018254",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261112T140628891307",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261112T140559007572",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -153,8 +153,23 @@
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
+        "account_id": "1481815942722118",
+        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
         "account_id": "1414197490675732",
         "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
@@ -358,9 +373,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "19425.95",
-      "balance": "589853.22",
-      "month_spend": "222694.66"
+      "average_daily": "19438.28",
+      "balance": "591826.49",
+      "month_spend": "228507.45"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -382,19 +397,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "5397.64"
+        "value": "5401.20"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3676.16"
+        "value": "2006.22"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "54195.42"
+        "value": "56355.50"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -406,7 +421,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "14028.31"
+        "value": "14037.08"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -418,13 +433,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "586177.06"
+        "value": "589820.27"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "168499.24"
+        "value": "172151.95"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -436,7 +451,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19425.95"
+        "value": "19438.28"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -448,13 +463,13 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "589853.22"
+        "value": "591826.49"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "222694.66"
+        "value": "228507.45"
       }
     ],
     "lease_free": true,
@@ -465,40 +480,52 @@
     "other_sheet_data_unchanged": true,
     "other_sheet_properties_unchanged": true,
     "other_sheet_count": 1,
-    "next_existing_run_at": "2026-11-12T14:02:00-05:00",
+    "next_existing_run_at": "2026-11-12T21:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "blocker": {
       "status": "blocked_provider_surface_contract",
       "kind": "meta_billing_ui_redirect_and_balance_metric_label_changed",
       "owner": "zeus",
-      "read_at": "2026-11-12T08:11:49.937390-05:00",
-      "cause_confirmed": "Approved Rodolfo Chrome remains live with exact authorized business_id. Accounts now redirects to Business Suite list with literal Outstanding balance, not Current balance. One exact D1150399088163771 details probe also redirected to generic Accounts with different context asset_id and no requested account/history table. No authentication gate observed.",
-      "cause_unproven": "Equivalence of new Outstanding balance to approved Current balance and access path to exact historical transactions are not established.",
+      "read_at": "2026-11-12T14:08:02.694053-05:00",
+      "cause_confirmed": "Fresh capture of approved Rodolfo Chrome and authorized business_id155263197283282 shows Accounts with literal Outstanding balance, not Current balance. No authentication/native gate observed. Known legacy collector heading cannot be satisfied by this surface; no input/reload/alternate profile attempted. Historical D exact-account route remains unresolved from prior diagnostic, not reattempted in this run.",
+      "cause_unproven": "Equivalence of Outstanding balance to authorized Current balance and exact-account historical transaction route remain unestablished.",
       "h_action": "Preserve all H values and original collection timestamps; no old collector replay, semantic substitution, alternate profile or reload bypass.",
       "d_account_ids": [
         "1150399088163771",
+        "1481815942722118",
+        "1062446663435585",
         "1414197490675732",
+        "1543098427832443",
         "1290644206529750"
       ],
-      "next_step": "Validate provider UI metric and exact-account read-only history route before resuming missing H/D; retain same scheduled job and authorized47IDs. Do not repeat known-failing legacy collectors or claim authentication is needed.",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T0802/closure-current.json",
+      "next_step": "Validate the provider metric and exact-account read-only history route before resuming missing H/D; same job and47IDs, no blind legacy collector retries and no new job.",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T1402/closure-current.json",
       "resume_via_existing_job": "2ee720363d7d",
-      "next_existing_run_at": "2026-11-12T14:02:00-05:00"
+      "next_existing_run_at": "2026-11-12T21:02:00-05:00"
     },
     "ui_cleanup": {
       "initial_browser_tabs_visually_counted": 6,
-      "final_browser_tabs_visually_counted": 6,
+      "keyboard_mouse_input": 0,
+      "owned_tabs_created": 0,
+      "owned_tabs_closed": 0,
       "lease_free": true,
-      "worker_owned_tab_cleanup_executed_in_finally": true,
-      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T0802/surface-initial.png",
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T0802/surface-final.png"
-    }
+      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T1402/surface-initial.png"
+    },
+    "new_pending_d_account_ids": [
+      "1062446663435585",
+      "1481815942722118",
+      "1543098427832443"
+    ],
+    "prior_pending_d_count": 3
   },
   "pending_card_history": {
-    "status": "three_new_events_pending_ui_route",
+    "status": "six_new_events_pending_ui_route",
     "account_ids": [
       "1150399088163771",
+      "1481815942722118",
+      "1062446663435585",
       "1414197490675732",
+      "1543098427832443",
       "1290644206529750"
     ],
     "pending_ui": [
@@ -508,8 +535,23 @@
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
+        "account_id": "1481815942722118",
+        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
         "account_id": "1414197490675732",
         "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
@@ -519,7 +561,7 @@
       }
     ],
     "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T0802/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -547,7 +589,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-12T14:02:00-05:00",
+  "next_run_at": "2026-11-12T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
@@ -622,22 +664,25 @@
     "status": "blocked_provider_surface_contract",
     "kind": "meta_billing_ui_redirect_and_balance_metric_label_changed",
     "owner": "zeus",
-    "read_at": "2026-11-12T08:11:49.937390-05:00",
-    "cause_confirmed": "Approved Rodolfo Chrome remains live with exact authorized business_id. Accounts now redirects to Business Suite list with literal Outstanding balance, not Current balance. One exact D1150399088163771 details probe also redirected to generic Accounts with different context asset_id and no requested account/history table. No authentication gate observed.",
-    "cause_unproven": "Equivalence of new Outstanding balance to approved Current balance and access path to exact historical transactions are not established.",
+    "read_at": "2026-11-12T14:08:02.694053-05:00",
+    "cause_confirmed": "Fresh capture of approved Rodolfo Chrome and authorized business_id155263197283282 shows Accounts with literal Outstanding balance, not Current balance. No authentication/native gate observed. Known legacy collector heading cannot be satisfied by this surface; no input/reload/alternate profile attempted. Historical D exact-account route remains unresolved from prior diagnostic, not reattempted in this run.",
+    "cause_unproven": "Equivalence of Outstanding balance to authorized Current balance and exact-account historical transaction route remain unestablished.",
     "h_action": "Preserve all H values and original collection timestamps; no old collector replay, semantic substitution, alternate profile or reload bypass.",
     "d_account_ids": [
       "1150399088163771",
+      "1481815942722118",
+      "1062446663435585",
       "1414197490675732",
+      "1543098427832443",
       "1290644206529750"
     ],
-    "next_step": "Validate provider UI metric and exact-account read-only history route before resuming missing H/D; retain same scheduled job and authorized47IDs. Do not repeat known-failing legacy collectors or claim authentication is needed.",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T0802/closure-current.json",
+    "next_step": "Validate the provider metric and exact-account read-only history route before resuming missing H/D; same job and47IDs, no blind legacy collector retries and no new job.",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T1402/closure-current.json",
     "resume_via_existing_job": "2ee720363d7d",
-    "next_existing_run_at": "2026-11-12T14:02:00-05:00"
+    "next_existing_run_at": "2026-11-12T21:02:00-05:00"
   },
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261112T080501144739",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261112T140555450118",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",

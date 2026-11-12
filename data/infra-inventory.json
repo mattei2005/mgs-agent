@@ -64151,6 +64151,30 @@
       "preparation_report_infra_message_id": "1570476992841785536",
       "profile_control_files_unchanged": 12,
       "financial_tables_unchanged": 6
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-cron-20261112T1402",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T1402/closure-current.json",
+      "status": "partial_validated_h_preserved_d_pending_provider_ui",
+      "type": "scheduled_financial_refresh",
+      "updated_at": "2026-11-12T14:08:02.695035-05:00",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 6,
+        "historical_blank_d": 35,
+        "card_proofs_updated": 0,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
