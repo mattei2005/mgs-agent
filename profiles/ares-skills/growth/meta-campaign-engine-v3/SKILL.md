@@ -123,6 +123,12 @@ O runner diário CPV tem gate de início às 17:00 São Paulo e permite retomar 
 
 A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais. O guard inicial é **por lane**: em uma conta, o primeiro bundle daquela conta é guardado/fail-closed; em várias contas, o primeiro bundle de cada `app_key + ad_account_id` pode iniciar em paralelo pelo `ThreadPoolExecutor`. Não existe canário global único antes das outras lanes; os bundles seguintes de cada lane obedecem à própria quota.
 
+## Execução do lote e interrupção do comando
+
+1. Antes do execute, dimensione o timeout da ferramenta para o lote inteiro, não para uma chamada Graph. Em lotes SHEIN foreground, use `terminal(..., timeout=600)` quando essa janela comportar a execução; para trabalho maior, use execução determinística rastreada ou a continuação canônica do mesmo request, sem cron novo nem loop de `sleep`. Um timeout curto pode interromper o writer entre o efeito remoto e a persistência local.
+2. Após timeout, confira liveness do runner **e do Engine filho** pelo request exato antes de retomar; ausência do processo wrapper não comprova ausência de executor. Releia state/checkpoint/audit e os edges reais dos pais confirmados, completando a paginação. Um bundle em `shells_normalized` sem `ad_ids` pode já ter anúncios na Meta; campo ausente no checkpoint não autoriza repetir cópias.
+3. Congele os IDs vivos e deixe o recovery central reconciliar por slot, pai, lineage e creative antes de escrever somente o ausente. Revalide admissão e ownership no mesmo request; se a retomada voltar à fila, diagnostique sua dependência sem apagar holds históricos nem iniciar outro writer. Compare os conjuntos de IDs anteriores com o resultado final e preserve as provas válidas de QA.
+
 ## Inspeção e retomada de pós-processamento SHEIN
 
 1. Resolva diretamente os registros do mesmo pedido: runner em `data/ares/meta-ads/state/shein-campaigns/single-clone/<request_id>/state.json`, checkpoint em `data/ares/meta-ads/engine-v3/state/checkpoints/<request_id>-<account_id>.json` e audit em `data/ares/meta-ads/engine-v3/audit/<request_id>.json`. Não procure o state do runner na árvore de audit nem faça busca recursiva quando request e conta já estiverem resolvidos: cada registro representa uma camada diferente.
