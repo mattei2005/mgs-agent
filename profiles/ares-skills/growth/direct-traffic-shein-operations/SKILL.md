@@ -31,6 +31,8 @@ Corrija reincidências no executor compartilhado, preservando padrões e decisõ
 
 Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.
 
+Relatório com complemento só termina após reconciliar remotamente ambos, inclusive em conta única: conferir partes, intents, resumo e ordem pelos IDs exatos, não apenas o `COMPLETE` do adaptador. Receita em `references/canonical-report-renderer.md`, seção `Resumo complementar persistido por conta`.
+
 Usar ROI real no dia fechado; quantidade isolada recebe só número e unidade. Complementos preservam coorte, snapshot e colunas não alteradas. Dias atípicos exigem comparação histórica, não inferência pelo último dia. Receita em `references/smartbidding-product-analysis.md`.
 
 ## Pedidos concorrentes e comunicação — regra permanente
@@ -62,9 +64,7 @@ Rodolfo aprovou expressamente a extensão de **B.U.% às36contas/threads SHEIN**
 
 Rodolfo promoveu a correção visual para **todos os relatórios das36contas SHEIN**, fonte `on_demand_default_layout.numeric_width_standard`, política `ARES-SHEIN-ALL36-NUMERIC-WIDTHS-20261019`. Manter mínimos **Gasto6, B.U.%7 e Saldo7**; a grade-base160 desta etapa foi posteriormente reduzida a143 pelo compacto global, sem retirar a adaptação dessas três colunas; essas três colunas crescem conforme o maior valor já formatado do relatório, sem cortar números, sinal ou casas decimais e sem nova confirmação. Usar uma única largura por coluna em todos os blocos do mesmo relatório. As outras colunas, caps, seleção, ROI, fontes e histórico não mudam. B.U.% continua gasto Meta diário/daily_budget Meta×100; a mudança visual não corrige nem substitui a fórmula já aprovada globalmente. A regra supersede somente o gate157 nessas três colunas e o escopo exclusivo de Gasto G002 para próximos snapshots. Replays históricos ficam intactos; para retomar snapshot preservado, usar `numeric_width_policy_id` canônico + `source_timestamps.presentation` atual, sem mudar o horário financeiro. Não republicar fora do pedido nem fazer write Meta/cron. Suíte `test_shein_report_global_numeric_widths.py` + regressão completa.
 
-### Histórico supersedido para novos snapshots — Gasto adaptativo na Yolokfx G002
-
-Por autorização de Geizian nesta conta/thread, `account_width_overrides.7840111366055613` permite ampliar somente **Gasto** conforme o maior número formatado do relatório, preservando os valores e demais colunas. A grade global157 continua para as demais contas; nesta conta cresce apenas pelo delta necessário de Gasto. Consultar a seção `Gasto adaptativo autorizado` da referência canônica antes de bloquear um relatório por esse campo. A autorização posterior supersede a negativa anterior, sem alterar finanças/Meta nem promover o ajuste globalmente.
+A exceção histórica de Gasto adaptativo por conta foi supersedida pelo padrão global acima; para replay antigo, consultar `references/canonical-report-renderer.md`, seção `Gasto adaptativo autorizado`.
 
 ## Compacto aprovado globalmente — G001 a G006
 

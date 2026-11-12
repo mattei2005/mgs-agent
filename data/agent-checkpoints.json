@@ -2203,12 +2203,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570186404401647677",
-      "next_step": "Aguardar decisao delimitada sobre suspender recuperacao de 8/11 mantendo 008/009 pausadas. Depois da transicao canonica autorizada e readback, retomar C5 e C1 nos mesmos requests com QA integral e agendamento original.",
-      "objective": "Duplicar 3x a 005 e 3x a 01 na Vizioid 06 G006; USD45/dia por copia; 12 novembro 2026 00:03 EST",
+      "next_step": "Validar descriptor real read-only com GET das mensagens, autoridade live e binding imutavel; instalar CAS+backup e REPORT-INFRA. Retomar008/009 pelos mesmos IDs no core, depois C5 e C1 com QA e horario futuro preservados.",
+      "objective": "Ativar 008/009 com review humano atual e concluir seis novas duplicacoes 3x005+3x01 USD45 para12 novembro00h03EST",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570186404401647677/aggregate-receipt.json",
-      "state": "nenhuma das seis novas copias criada. c5 dry-run aprovado e enfileirado; c1 preservado para depois de c5 terminal. predecessor de 8/11 postprocess_pending aguarda aceite de divergencias de publico; get atual confirmou 008/009 e quatro anuncios paused. servico da fila ativo; nao suspender ou ativar o pedido antigo sem decisao.",
+      "state": "decisao1570236401524547606 recusou suspensao e mandou manter todas ativas. get confirmou008/009 paused e fonte001 active. delta publico comprovado; suporte instalado restrito a outros requests. manutencao delimitada separada: review tipado generico por receipt; testes22 novos, suites existentes130pass+54subtests,8falhas preexistentes reproduzidas baseline. nenhum write meta nesta manutencao.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-11-11T21:24:09+00:00"
+      "updated_at": "2026-11-12T00:45:07+00:00"
     },
     {
       "agent": "ares",
@@ -9967,5 +9967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-11T21:33:49+00:00"
+  "updated_at": "2026-11-12T00:45:07+00:00"
 }
