@@ -54,6 +54,9 @@ def binding(state, checkpoint):
 
 def require_binding(state, checkpoint, expected, *, kind=None):
     if kind is not None:
+        from . import reviewed_copy_targeting as generic
+        if kind == generic.KIND:
+            return generic.require_binding(state, checkpoint, expected)
         from . import shein_reviewed_img as img
         if kind != img.KIND:
             raise ValueError('unknown reviewed targeting kind')
@@ -75,6 +78,9 @@ def validate_review(descriptor, state, checkpoint, *, get_message):
         return None
     kind = descriptor.get('reviewed_targeting_kind')
     if kind is not None:
+        from . import reviewed_copy_targeting as generic
+        if kind == generic.KIND:
+            return generic.validate_review(descriptor, state, checkpoint, get_message=get_message)
         from . import shein_reviewed_img as img
         if kind != img.KIND:
             raise ValueError('unknown reviewed targeting kind')
@@ -112,7 +118,9 @@ def active_context():
     verified = context['verified']
     kind = context['descriptor'].get('reviewed_targeting_kind')
     from . import shein_reviewed_img as img
-    seal = img.BINDING_DIGEST if kind == img.KIND else BINDING_DIGEST
+    from . import reviewed_copy_targeting as generic
+    seal = (content_digest(context['descriptor']['reviewed_targeting']) if kind == generic.KIND
+            else img.BINDING_DIGEST if kind == img.KIND else BINDING_DIGEST)
     if (verified.get('verified') is not True or verified['accepted_targeting']['binding_digest'] != seal
             or content_digest(context['descriptor']) != verified['descriptor_digest']):
         raise ValueError('reviewed targeting continuation proof invalid')
@@ -140,6 +148,9 @@ def validate_tree(context, tree):
                 or node.get('campaign_id', campaign['id']) != campaign['id']):
             raise ValueError('reviewed targeting parent/account mismatch')
     if context['descriptor'].get('reviewed_targeting_kind') is not None:
+        from . import reviewed_copy_targeting as generic
+        if context['descriptor']['reviewed_targeting_kind'] == generic.KIND:
+            return generic.validate_fields(context, tree, slot)
         from . import shein_reviewed_img as img
         if context['descriptor']['reviewed_targeting_kind'] != img.KIND:
             raise ValueError('unknown reviewed targeting kind')
