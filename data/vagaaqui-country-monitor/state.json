@@ -1,7 +1,89 @@
 {
   "schema": 1,
   "status": "active",
-  "days": {},
+  "days": {
+    "daily:2026-11-11T01:38:29Z": {
+      "start": "2026-11-11T01:38:29Z",
+      "end": "2026-11-12T00:00:00Z",
+      "total": 247393,
+      "countries": {
+        "ZA": 232830,
+        "US": 6657,
+        "FR": 3456,
+        "DE": 1867,
+        "MX": 640,
+        "BE": 521,
+        "SG": 403,
+        "NL": 341,
+        "GB": 101,
+        "BR": 81,
+        "ES": 52,
+        "IE": 39,
+        "ID": 39,
+        "UA": 24,
+        "RU": 24,
+        "IN": 22,
+        "GR": 21,
+        "FI": 16,
+        "CN": 14,
+        "DK": 14,
+        "SE": 14,
+        "HK": 14,
+        "PL": 12,
+        "TR": 11,
+        "CA": 10,
+        "IT": 10,
+        "MY": 10,
+        "CL": 9,
+        "VN": 8,
+        "BD": 7,
+        "SA": 7,
+        "TH": 6,
+        "JM": 6,
+        "AE": 6,
+        "AR": 6,
+        "CO": 6,
+        "PH": 5,
+        "TW": 5,
+        "AZ": 5,
+        "MD": 4,
+        "MA": 4,
+        "BO": 4,
+        "AU": 4,
+        "IL": 4,
+        "CH": 4,
+        "CZ": 3,
+        "TN": 3,
+        "KE": 3,
+        "NG": 3,
+        "SY": 3,
+        "KR": 3,
+        "GT": 3,
+        "PK": 3,
+        "SI": 3,
+        "QA": 3,
+        "BG": 2,
+        "OM": 2,
+        "UZ": 2,
+        "DZ": 2,
+        "T1": 2,
+        "CW": 1,
+        "BY": 1,
+        "TT": 1,
+        "LV": 1,
+        "ET": 1,
+        "NP": 1,
+        "SN": 1,
+        "VE": 1,
+        "KH": 1,
+        "RO": 1
+      },
+      "max_sample_interval": 1.3783068783068784,
+      "collected_at": "2026-11-12T03:46:09Z",
+      "dataset": "httpRequestsAdaptiveGroups",
+      "estimated": true
+    }
+  },
   "outbox": {
     "initial": {
       "payload": {
@@ -52,8 +134,58 @@
       "message_id": "1569890007345270897",
       "verified": true,
       "verified_at": "2026-11-11T01:42:25Z"
+    },
+    "daily:2026-11-11T01:38:29Z": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Vagaaqui — tráfego diário por país",
+            "color": 3447003,
+            "fields": [
+              {
+                "name": "Período / cobertura",
+                "value": "2026-11-11T01:38:29Z a 2026-11-12T00:00:00Z (UTC; início/fim do mês podem ser parciais).\nAcumulado dos 1 intervalos coletados: 247.393 requisições estimadas.",
+                "inline": false
+              },
+              {
+                "name": "Requisições estimadas",
+                "value": "247.393",
+                "inline": true
+              },
+              {
+                "name": "Países / categorias",
+                "value": "70",
+                "inline": true
+              },
+              {
+                "name": "Distribuição por país",
+                "value": "```\nPaís                   Requisições      %\nÁfrica do Sul (ZA)         232.830  94.11\nEstados Unidos (US)          6.657   2.69\nFrança (FR)                  3.456   1.40\nAlemanha (DE)                1.867   0.75\nMéxico (MX)                    640   0.26\nBélgica (BE)                   521   0.21\nSingapura (SG)                 403   0.16\nPaíses Baixos (NL)             341   0.14\nReino Unido (GB)               101   0.04\nBrasil (BR)                     81   0.03\nOutros (60)                    496   0.20\n```",
+                "inline": false
+              },
+              {
+                "name": "Leitura correta",
+                "value": "País estimado pelo IP, não localização física garantida. Requisições incluem recursos, bots e acessos que podem ser bloqueados; não são pessoas ou visitas. Analytics com amostragem adaptativa. Maior intervalo de amostragem: 1.378.",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-VAGAAQUI:daily:2026-11-11T01:38:29Z"
+            }
+          }
+        ],
+        "nonce": "938871374940958684",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-12T03:46:09Z",
+      "message_id": "1570283544079507504",
+      "verified": true,
+      "verified_at": "2026-11-12T03:46:11Z"
     }
   },
   "failure_streak": 0,
-  "last_check": "2026-11-12T02:46:09Z"
+  "last_check": "2026-11-12T03:46:08Z"
 }
