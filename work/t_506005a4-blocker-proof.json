@@ -1,0 +1,52 @@
+{
+  "at": "2026-11-12T06:28:43.203618+00:00",
+  "campaign": {
+    "id": "120251175890330629",
+    "name": "303 - Moorcroft Finances - ENG - US - (pg_23187) - C01",
+    "status": "PAUSED",
+    "effective_status": "PAUSED",
+    "daily_budget": "3500"
+  },
+  "ads": [
+    {
+      "id": "120251176219130629",
+      "name": "__ARES_SEED__ 11efe348b50a 01 AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_163",
+      "adset_id": "120251175890720629",
+      "campaign_id": "120251175890330629",
+      "status": "PAUSED",
+      "source_ad_id": "0",
+      "creative": {
+        "id": "2190284505251875",
+        "status": "ACTIVE",
+        "url_tags": "utm_campaign=pg_23187"
+      }
+    }
+  ],
+  "source_unchanged": true,
+  "protected_sha256": {
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request-first-execution.json": "036dc1321a1ffd5f20c7ab36e080ecb1071e4971b1b0447f6d67c4c74e72d929",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest-first-execution.json": "902f226a1561f073a42a57a5e499e1eede5d7c5e3243b0016599465afeac6f4e",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/checkpoint-before-recovery.json": "578386473e5ac11676f0622692464d14ee94fd3ddfaec1f20a2336a1fa3edbdc",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/audit-before-recovery.json": "838a1f71b1bc84d10d6e37ce4c6cce1e170482625d6598f0bcd82b8db6a54bc2",
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/execute-stderr.log": "3709d72e93348047cef4515480ce2cc4fdab918028622e24f4a20dcb07306f67"
+  },
+  "protected_match_parent": {
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/request-first-execution.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/manifest-first-execution.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/checkpoint-before-recovery.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/audit-before-recovery.json": true,
+    "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23187-1570285402068091011/execution-now-1570313437379170436/execute-stderr.log": true
+  },
+  "unknown_posts": [
+    "target_seed_create_1_2",
+    "target_seed_create_1_3"
+  ],
+  "final_ads": 0,
+  "paused_technical_seeds": 1,
+  "safe_next_action": "Resolve uncertain 5xx effects by exact adoption/convergence or explicitly authorized reconciliation policy; no blind POST replay",
+  "lease_retained": true
+}
