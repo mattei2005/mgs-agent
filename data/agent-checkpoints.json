@@ -2203,12 +2203,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570186404401647677",
-      "next_step": "Validar descriptor real read-only com GET das mensagens, autoridade live e binding imutavel; instalar CAS+backup e REPORT-INFRA. Retomar008/009 pelos mesmos IDs no core, depois C5 e C1 com QA e horario futuro preservados.",
-      "objective": "Ativar 008/009 com review humano atual e concluir seis novas duplicacoes 3x005+3x01 USD45 para12 novembro00h03EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570186404401647677/aggregate-receipt.json",
-      "state": "decisao1570236401524547606 recusou suspensao e mandou manter todas ativas. get confirmou008/009 paused e fonte001 active. delta publico comprovado; suporte instalado restrito a outros requests. manutencao delimitada separada: review tipado generico por receipt; testes22 novos, suites existentes130pass+54subtests,8falhas preexistentes reproduzidas baseline. nenhum write meta nesta manutencao.",
+      "next_step": "Entregar conclusao nativa na origem. Nao repetir criacao/ativacao; acompanhamento futuro somente mediante pedido. Preservar saldo antigo separado, sem criar duas copias extras.",
+      "objective": "Ativar008/009 e concluir3x005+3x01 na Vizioid06 G006 USD45/dia para12 novembro2026 00:03EST",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570186404401647677/final-verification.json",
+      "state": "complete verificado:008/009 active4ads nos mesmos ids;005 gerou010/011/012 cocap0.90 com9ads;001 gerou013/014/015 maxvol com6ads. seis novas active com12 novembro2026 00:03est,usd45cada total270/dia. conta ativa405/dia em get fresco.19ads do recorteactive sem issues; qa integral eids preservados. review1570236401524547606 registrado por request; fontes001/005active sem writes de fonte. blocoiris extraido do tracking final.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-11-12T00:45:07+00:00"
+      "updated_at": "2026-11-12T01:05:02+00:00"
     },
     {
       "agent": "ares",
@@ -9108,12 +9108,12 @@
     {
       "agent": "ares",
       "id": "shein-1569025252971774224",
-      "next_step": "Recuperar aceite especifico na origem; preservar request manifests IDs e12hET; nao sondar targeting nem repetir criacao; manter mesmos objetosPAUSED ate revisao",
-      "objective": "Pausar 006 e 004; duplicar 001 e 005 duas vezes cada a USD45 para 8 novembro 2026 12h ET na Vizioid06 G006",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1569025252971774224/aggregate-receipt.json",
-      "state": "pausa006/004 confirmada; fonte001 gerou008/009 usd45 cada paused,4ads; postprocess_pending por user_age_unknown false->true e omissao material device1; qa nao concluido. fonte005 nao iniciada. precisa decisao humana especifica de publico.",
+      "next_step": "Nao criar saldo historico adicional por efeito do pedido novo; manter historico e tratar eventual instrucao explicita sobre saldo como escopo separado.",
+      "objective": "Pedido historico8novembro: pausas006/004 e duplicacoes001/005; recuperacao atual somente008/009 autorizada na origem",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570186404401647677/final-verification.json",
+      "state": "subrequestc1 concluido:008/009active4ads apos review1570236401524547606, mesmos ids usd45cada, qa integral e readback atual. pausas006/004 historicas nao revertidas por inferencia. fonte005x2 do pedidoantigo nao iniciada; seis novas copias do request1570186404401647677 foram concluidas separadamente.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-11-08T16:30:17+00:00"
+      "updated_at": "2026-11-12T01:05:03+00:00"
     },
     {
       "agent": "ares",
@@ -9967,5 +9967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T00:45:07+00:00"
+  "updated_at": "2026-11-12T01:05:03+00:00"
 }
