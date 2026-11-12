@@ -761,7 +761,8 @@
     743390,
     743410,
     743431,
-    743450
+    743450,
+    743640
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3363,9 +3364,9 @@
     "digital-trust|newsoun|14|264": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-10T00:05:46.000Z",
+        "created_at": "2026-11-12T12:06:14.000Z",
         "domain": "newsoun",
-        "notification_id": 741121,
+        "notification_id": 743640,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 64,
@@ -3395,7 +3396,8 @@
         738066,
         739183,
         740340,
-        741121
+        741121,
+        743640
       ],
       "opened_at": "2026-09-24T16:12:13-04:00",
       "repeat_count": 0,
@@ -5255,22 +5257,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-12T06:57:10-05:00",
+  "last_check": "2026-11-12T07:12:10-05:00",
   "last_delivery": {
-    "at": "2026-11-11T19:12:12-05:00",
+    "at": "2026-11-12T07:12:10-05:00",
     "cursor_ids": [
-      743346,
-      743368,
-      743390,
-      743410,
-      743431,
-      743450
+      743640
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 743450,
+  "last_seen_id": 743640,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
