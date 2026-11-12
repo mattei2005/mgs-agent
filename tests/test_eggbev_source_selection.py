@@ -194,6 +194,37 @@ class SourceSelectionTests(unittest.TestCase):
         self.assertIsNone(self.proof_with_mutation(change))
         with self.assertRaises(ValueError):self.classify(proof=False)
 
+    def test_execute_source_drift_stops_before_any_engine_or_page_call(self):
+        import tempfile
+        from contextlib import ExitStack
+        source=self.classify();current=copy.deepcopy(source);current['all_ads'][0]['name']='unauthorized edit'
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as temp,ExitStack() as stack:
+            home=Path(temp);path=home/'request.json';runner.save(home/'source-live.json',source)
+            runner.save(home/'manifest.json',{'prevalidation':{'content_digest':'offline-digest'}})
+            stack.enter_context(patch.object(runner,'request_load',return_value=self.q))
+            stack.enter_context(patch.object(runner,'reader_block_reason',return_value=None))
+            stack.enter_context(patch.object(runner,'verify_prevalidation',return_value=True))
+            stack.enter_context(patch.object(runner,'runtime',return_value=(None,None,None,'offline-only')))
+            stack.enter_context(patch.object(runner,'source_read',return_value=current))
+            engine=stack.enter_context(patch.object(runner,'CampaignEngine',side_effect=AssertionError('engine forbidden on source drift')))
+            page=stack.enter_context(patch.object(runner,'resolve_page',side_effect=AssertionError('page forbidden on source drift')))
+            with self.assertRaisesRegex(ValueError,'source snapshot changed'):
+                runner.execute(path,True,'offline-digest','subsequent-offline-approval')
+            engine.assert_not_called();page.assert_not_called()
+            self.assertEqual(runner.load(home/'source-live.json'),source)
+            self.assertEqual(runner.load(home/'source-current-before-execute.json'),current)
+
+    def test_commercial_ok_cannot_be_reused_as_final_approval(self):
+        import tempfile
+        from contextlib import ExitStack
+        with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch') as temp,ExitStack() as stack:
+            path=Path(temp)/'request.json';runner.save(path.parent/'manifest.json',{'prevalidation':{'content_digest':'offline-digest'}})
+            stack.enter_context(patch.object(runner,'request_load',return_value=self.q));stack.enter_context(patch.object(runner,'reader_block_reason',return_value=None));stack.enter_context(patch.object(runner,'verify_prevalidation',return_value=True))
+            runtime=stack.enter_context(patch.object(runner,'runtime',side_effect=AssertionError('no API before final approval')))
+            with self.assertRaisesRegex(ValueError,'subsequent explicit OK'):
+                runner.execute(path,True,'offline-digest',self.q['commercial_ok_message_id'])
+            runtime.assert_not_called()
+
 
 class SourceComparisonTests(unittest.TestCase):
     def setUp(self):

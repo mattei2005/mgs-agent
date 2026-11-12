@@ -1,0 +1,1 @@
+from PIL import Image; im=Image.open('/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261111T223946951154/2429758060563333.png'); im.crop((340,390,950,550)).resize((2440,640)).save('/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570280845757915227/ambiguous-id-enlarged.png')

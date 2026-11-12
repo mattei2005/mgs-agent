@@ -84,7 +84,7 @@ def source_seed_proof(q):
     expected={'campaign_id_1','adset_id_1'}|{f'{key}_1_{i}' for i in range(1,n+1) for key in ['copied_ad_id','seed_ad_id','creative_id']}
     if set(ids)!=expected or any(not isinstance(v,str) or not v.isdigit() or int(v)==0 for v in ids.values()):raise ValueError('source checkpoint slots missing or extra')
     finals=[a for a,_ in pairs];seeds=[a for _,a in pairs]
-    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
+    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or checkpoint.get('campaign_ids')!=[sid] or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or len(record.get('ad_ids',[]))!=n or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
     evidence={'request_id':request_id,'checkpoint_path':str(checkpoint_path),'checkpoint_sha256':hashlib.sha256(checkpoint_path.read_bytes()).hexdigest(),'adset_id':ids['adset_id_1'],'pairs':pairs}
     # Independent recovery is terminal only with its exact COMPLETE receipt.
     if checkpoint.get('recovery_result'):
@@ -93,7 +93,7 @@ def source_seed_proof(q):
         final=load(final_path);assignments=final.get('assignments',[])
         if final.get('phase')!='COMPLETE' or final.get('request_id')!=request_id or final.get('campaign_ids')!=[sid] or final.get('final_ads')!=n or final.get('technical_paused_seeds')!=n or len(assignments)!=n or {a.get('ad_id') for a in assignments}!=set(finals) or any(a.get('campaign_id')!=sid or a.get('adset_id')!=ids['adset_id_1'] for a in assignments):raise ValueError('source completion receipt mismatch')
         manifest=load(final_path.parent/'manifest.json')
-        if not verify_prevalidation(manifest) or manifest.get('request_id')!=request_id or len(manifest.get('campaigns',[]))!=1 or manifest['campaigns'][0].get('mode')!=MODE or len(manifest['campaigns'][0].get('ads',[]))!=n:raise ValueError('source sealed target mode proof mismatch')
+        if not verify_prevalidation(manifest) or manifest.get('request_id')!=request_id or manifest.get('operation')!='Eggbev-US-CC-EN-BOT' or len(manifest.get('campaigns',[]))!=1 or manifest['campaigns'][0].get('account_id')!=ACCOUNT or manifest['campaigns'][0].get('mode')!=MODE or len(manifest['campaigns'][0].get('ads',[]))!=n:raise ValueError('source sealed target mode proof mismatch')
         evidence.update({'completion_path':str(final_path),'completion_sha256':hashlib.sha256(final_path.read_bytes()).hexdigest()})
     return evidence
 
