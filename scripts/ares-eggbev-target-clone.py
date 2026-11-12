@@ -63,13 +63,82 @@ def runtime():
     meta,sb,token,_=common.load_runtime_modules(account)
     return common,meta,sb,token
 
+def source_seed_proof(q):
+    """Resolve only committed engine IDs, never infer seeds from names/status."""
+    sid=q['source_campaign_id_candidate']
+    ledger_path=R/naming.load_policy()['ledger_path']
+    matches=[v for v in load(ledger_path)['allocations'].values() if sid in v.get('campaign_ids',[])]
+    if not matches:return None
+    if len(matches)!=1:raise ValueError('ambiguous source allocation')
+    allocation=matches[0];request_id=allocation.get('request_id','')
+    if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',request_id) is None:raise ValueError('unsafe source request identity')
+    if allocation.get('status')!='COMMITTED' or allocation.get('account_id')!=ACCOUNT or allocation.get('campaign_ids')!=[sid] or allocation.get('names')!=[q['source_campaign_name']]:raise ValueError('source allocation identity/state mismatch')
+    checkpoint_path=Path(load(CONFIG)['state_root'])/'checkpoints'/f'{request_id}-{ACCOUNT}.json'
+    checkpoint=load(checkpoint_path)
+    records=[b for b in checkpoint['bundles'] if sid in b.get('campaign_ids',[])]
+    if len(records)!=1:raise ValueError('source checkpoint ambiguous or missing')
+    record=records[0];ids=record.get('target_clone_ids')
+    if not ids:return None  # Ordinary sources retain the exact cardinality gate.
+    if checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('status')!='COMPLETE' or record.get('status')!='COMPLETE':raise ValueError('source target clone checkpoint incomplete')
+    n=len(q['media_filenames']);pairs=[[ids.get(f'copied_ad_id_1_{i}'),ids.get(f'seed_ad_id_1_{i}')] for i in range(1,n+1)]
+    expected={'campaign_id_1','adset_id_1'}|{f'{key}_1_{i}' for i in range(1,n+1) for key in ['copied_ad_id','seed_ad_id','creative_id']}
+    if set(ids)!=expected or any(not isinstance(v,str) or not v.isdigit() or int(v)==0 for v in ids.values()):raise ValueError('source checkpoint slots missing or extra')
+    finals=[a for a,_ in pairs];seeds=[a for _,a in pairs]
+    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
+    evidence={'request_id':request_id,'checkpoint_path':str(checkpoint_path),'checkpoint_sha256':hashlib.sha256(checkpoint_path.read_bytes()).hexdigest(),'adset_id':ids['adset_id_1'],'pairs':pairs}
+    # Independent recovery is terminal only with its exact COMPLETE receipt.
+    if checkpoint.get('recovery_result'):
+        final_path=Path(checkpoint['recovery_result']).resolve()
+        if not final_path.is_relative_to((R/'data/ares/meta-ads/audit/eggbev').resolve()) or final_path.name!='final.json':raise ValueError('source completion receipt outside canonical audit')
+        final=load(final_path);assignments=final.get('assignments',[])
+        if final.get('phase')!='COMPLETE' or final.get('request_id')!=request_id or final.get('campaign_ids')!=[sid] or final.get('final_ads')!=n or final.get('technical_paused_seeds')!=n or len(assignments)!=n or {a.get('ad_id') for a in assignments}!=set(finals) or any(a.get('campaign_id')!=sid or a.get('adset_id')!=ids['adset_id_1'] for a in assignments):raise ValueError('source completion receipt mismatch')
+        manifest=load(final_path.parent/'manifest.json')
+        if not verify_prevalidation(manifest) or manifest.get('request_id')!=request_id or len(manifest.get('campaigns',[]))!=1 or manifest['campaigns'][0].get('mode')!=MODE or len(manifest['campaigns'][0].get('ads',[]))!=n:raise ValueError('source sealed target mode proof mismatch')
+        evidence.update({'completion_path':str(final_path),'completion_sha256':hashlib.sha256(final_path.read_bytes()).hexdigest()})
+    return evidence
+
+
+def classify_source(campaign,sets,ads,count,proof=None):
+    """Keep the whole snapshot; expose only proven final slots to build()."""
+    if len(sets)!=1 or not ads or any(x.get('adset_id')!=sets[0]['id'] for x in ads):raise ValueError('source hierarchy does not match requested structure')
+    byid={x.get('id'):x for x in ads}
+    if None in byid or len(byid)!=len(ads):raise ValueError('source ad IDs missing or duplicated')
+    if proof is None:
+        if len(ads)!=count:raise ValueError('source hierarchy does not match requested structure; unproven extra ads')
+        selected=ads;seeds=[]
+    else:
+        pairs=proof['pairs'];final_ids=[a for a,_ in pairs];seed_ids=[a for _,a in pairs]
+        if len(pairs)!=count or len(set(final_ids+seed_ids))!=2*count or set(byid)!=set(final_ids+seed_ids) or proof['adset_id']!=sets[0]['id']:raise ValueError('source final/seed identity or cardinality drift')
+        if any(byid[seed].get('status')!='PAUSED' or byid[final].get('status')!='ACTIVE' or byid[final].get('source_ad_id')!=seed or byid[seed].get('source_ad_id') not in {None,'0'} for final,seed in pairs):raise ValueError('source final/seed status or lineage drift')
+        selected=[byid[a] for a in final_ids];seeds=[byid[a] for a in seed_ids]
+    return copy.deepcopy({'campaign':campaign,'adset':sets[0],'ads':selected,'all_ads':ads,'technical_seed_ads':seeds,'source_selection':{'final_count':len(selected),'seed_count':len(seeds),'total_count':len(ads),'proof':proof}})
+
+
 def source_read(q,common,meta,token):
     sid=q['source_campaign_id_candidate'];code,campaign,_=meta.graph_get(sid,token,{'fields':'id,account_id,name,status,objective,buying_type,bid_strategy,special_ad_categories,special_ad_category_country'})
-    if code!=200 or campaign.get('account_id')!=ACCOUNT or campaign.get('name')!=q['source_campaign_name']:raise ValueError('source identity mismatch')
+    if code!=200 or campaign.get('id')!=sid or campaign.get('account_id')!=ACCOUNT or campaign.get('name')!=q['source_campaign_name']:raise ValueError('source identity mismatch')
     sets=common.fetch_all_meta(meta,token,sid+'/adsets',{'fields':'id,name,status,billing_event,optimization_goal,destination_type,targeting,promoted_object,attribution_spec,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities,bid_amount,bid_constraints,optimization_sub_event','limit':100})
-    ads=common.fetch_all_meta(meta,token,sid+'/ads',{'fields':'id,name,status,adset_id,creative{id,object_story_spec,asset_feed_spec,url_tags,degrees_of_freedom_spec,contextual_multi_ads}','limit':100})
-    if len(sets)!=1 or len(ads)!=len(q['media_filenames']) or any(x.get('adset_id')!=sets[0]['id'] for x in ads):raise ValueError('source hierarchy does not match requested structure')
-    return {'campaign':campaign,'adset':sets[0],'ads':ads}
+    ads=common.fetch_all_meta(meta,token,sid+'/ads',{'fields':'id,name,status,adset_id,source_ad_id,creative{id,object_story_spec,asset_feed_spec,url_tags,degrees_of_freedom_spec,contextual_multi_ads}','limit':100})
+    return classify_source(campaign,sets,ads,len(q['media_filenames']),source_seed_proof(q))
+
+
+def source_comparison(snapshot):
+    """Ignore only signed delivery metadata on the same video thumbnail file."""
+    from urllib.parse import urlsplit,urlunsplit,parse_qsl,urlencode
+    value=copy.deepcopy(snapshot)
+    for edge in ['ads','all_ads','technical_seed_ads']:
+        for ad in value.get(edge,[]):
+            videos=ad.get('creative',{}).get('asset_feed_spec',{}).get('videos',[])
+            for video in videos:
+                url=video.get('thumbnail_url')
+                if not isinstance(url,str):continue
+                parts=urlsplit(url)
+                if parts.scheme!='https' or not re.fullmatch(r'scontent-[a-z0-9-]+\.xx\.fbcdn\.net',parts.netloc):continue
+                query=[(k,v) for k,v in parse_qsl(parts.query,keep_blank_values=True) if not k.startswith('_nc_') and k not in {'oh','oe','ccb'}]
+                video['thumbnail_url']=urlunsplit(('https','scontent.xx.fbcdn.net',parts.path,urlencode(sorted(query)),parts.fragment))
+        # Graph edge order is not a commercial property; slot order in ads is.
+        if edge!='ads' and edge in value:value[edge].sort(key=lambda x:x['id'])
+    return value
 
 def build(q,source,page,selected,registry,allocation):
     campaign={k:copy.deepcopy(source['campaign'][k]) for k in ['objective','buying_type','bid_strategy','special_ad_categories','special_ad_category_country']}
@@ -166,7 +235,8 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None):
     # A pre-intake commercial OK is not a later manifest/technical-seed approval.
     if approval_message_id==q.get('commercial_ok_message_id'):raise ValueError('final summary requires a subsequent explicit OK message')
     common,meta,sb,token=runtime();current=source_read(q,common,meta,token);original=load(home/'source-live.json')
-    if current!=original:raise ValueError('source snapshot changed; reconcile before write')
+    save(home/'source-current-before-execute.json',current)
+    if source_comparison(current)!=source_comparison(original):raise ValueError('source snapshot changed; reconcile before write')
     page=resolve_page(meta,sb,token,ACCOUNT,q['target_page_token'])
     if page['instagram_user_id']!=load(home/'target-page-live.json')['instagram_user_id']:raise ValueError('target Page/PBIA changed')
     naming.verify_live_reservation(q['request_id'],naming.collect_history(meta,token))
