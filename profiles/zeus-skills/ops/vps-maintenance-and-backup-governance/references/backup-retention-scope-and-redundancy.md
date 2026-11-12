@@ -39,6 +39,17 @@ Use this branch when substantial usage remains after a narrow cleanup or when di
 7. Treat byte identity as evidence of content duplication, not permission to remove a pathname. Choose retained copies by recovery and consumer requirements, not newest mtime alone; verify every proposed removal's references and evidence contract before an exact destructive manifest. For unique old test state, separate an explicit retirement decision from a claim of proven deduplication and disclose what historical recovery is lost.
 8. Inspect the actual producers and cleanup policy alongside the dry-run. Verify whether name patterns and roots cover the dominant dumps, JSON, test clusters and archives. Distinguish installed prevention of recursive source copying from retirement of existing test state and recurring pre-import backups: one does not establish the other. Close with separate outcomes for classification, approved disposal and future accumulation prevention.
 
+### Repeated pre-import database dumps
+
+Use this bounded path when scheduled retries leave separate local copies of the same pre-import database backup:
+
+1. Resolve the actual producer, its interpreter and remote backup helper from the live scheduler before importing its code; reuse that execution environment rather than guessing a Python environment or installing packages for the audit. Inspect the helper for side effects and invoke only its read-only transport operation.
+2. Group regular dump files by size, then compare SHA-256 within repeated-size groups. Deduplicate inode identities and select a retained representative per digest according to recovery consumers. Record excess copies as duplicate potential, not approved reclaim.
+3. Read the completed operation receipts to join each proposed local removal to its exact retained local file and remote backup path, size and digest. Through the canonical transport, recheck remote `sha256sum`/size and use the producer's `pg_restore --list` command to prove catalogue readability. Do not describe catalogue listing as a materialized restore.
+4. Preserve source attachments, import/idempotency state and compact immutable receipts. Confirm that future runs create new execution directories and do not reopen a selected historical local dump; check pending recovery jobs, exact executable references, processes and checksum-coupled evidence. A receipt's historical `local_copy` field is not a sufficient recovery route after removal: retain an explicit mapping to the surviving local or remote copy without rewriting the original receipt.
+5. Freeze only the individual excess dump files, never their parent run directories. Apply the exact-manifest/validator/confirmation workflow; revalidate retained hashes and remote recovery before execution, then verify target absence and measure the actual `df` delta.
+6. Keep this one-time duplicate-copy removal separate from changing future import backup behavior or retention. Identical backups already present at the remote producer can still be copied repeatedly by the local consumer; producer reuse alone does not prove that local accumulation is prevented.
+
 ## 2. Prove the policy scope
 
 Read the housekeeping and safety scripts before interpreting their output. Record:
@@ -307,16 +318,11 @@ For disk-life estimates:
 
 ## 8. Reporting format
 
-Use root/set totals for the complete inventory, then list every deletion target exactly. This keeps Discord readable while preserving complete accounting.
+Select the report by the current question, not by the breadth of the investigation:
 
-Report:
+- **What can be deleted now:** name only the validated lot, file class/count, approximate reclaim, retained recovery and exact pending confirmation. If other categories are unproven, say that once without presenting their occupied totals as removable space.
+- **Requested full audit:** show root/set occupancy, independently validated Queue A reclaim, Queue B policy-dependent potential, Queue C preservation reasons and the producer coverage gap. Keep these quantities distinct and non-additive when roots overlap.
+- **Requested plan:** number the actual disposal steps and clearly separate ready lots from further investigation, archiving prerequisites and future retention. Do not bury the immediately actionable answer in a general roadmap.
+- **Completed deletion:** lead with verified files removed and observed `df` savings, then current disk/free space and retained-recovery/service checks. State unchanged or unexecuted scope briefly; a completed lot does not close a broader reorganization.
 
-1. total explicit backup/evidence bytes;
-2. separately protected archives and remote backups;
-3. Queue A exact paths and reclaim total;
-4. projected disk percentage;
-5. Queue B policy proposal and additional potential savings;
-6. Queue C protected reasons;
-7. the automation coverage gap that allowed accumulation.
-
-Never attach a huge filename dump unless Rodolfo explicitly asks for an artifact.
+Keep the complete exact path/action list and hashes in the frozen manifest. Present individual paths inline only when needed to identify the user's decision, not thousands of child names. Preserve the exact approval binding and Critical gates without making technical metadata dominate the executive explanation. Never attach a filename dump unless Rodolfo explicitly requests an artifact.

@@ -163,6 +163,14 @@ For a combined update-and-backup review, use two sections:
 1. **Updates:** closed pendencies, current candidates, service/reboot health, Git release/main distinction, local port risk, recommendation.
 2. **Backups:** total by root/set, exact high-confidence deletion paths and bytes, projected disk result, protected/conditional classes, housekeeping coverage gap.
 
+### Answer what can be deleted first
+
+When Rodolfo asks what can be deleted to free disk, lead with the **already validated deletion lot and its reclaim amount**, not the full storage inventory or a reorganization roadmap. State the file class/count, approximate GiB, what recovery remains and whether confirmation or execution is pending. If only one lot passed the gates, say so plainly; directories under review and files merely matched to cloud metadata must not inflate that total.
+
+If he asks for numbered steps, list the actionable deletion sequence first and label every additional category as still under review. Do not present an eleven-stage investigation as though it were a list of files ready to delete. Keep future retention/prevention separate and secondary unless he explicitly requests that design; do not make an independently safe lot wait for unrelated cleanup research merely to consolidate approvals.
+
+When he says the answer is confusing, immediately narrow to the verified amount and preservation facts instead of repeating the plan. After approval, execute the unchanged exact lot without another approval round. Close with files removed, observed space recovered, current disk/free space and preservation checks; keep hashes, internal paths and governance detail in evidence unless needed for the decision.
+
 ### Explain a high disk percentage
 
 For a focused **“why is the disk full?”** question, do not force the full maintenance template. Follow this read-only sequence:
