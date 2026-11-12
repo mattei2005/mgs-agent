@@ -284,9 +284,11 @@ For the complete reusable submission flow—including Allowed usage text, Reques
 
 Follow the operation-specific architecture gate in **Page-access workflow and Rodolfo's onboarding preference**. For SHEIN direct traffic, begin with `operations/SHEIN-US-DIRECT.json` and its active registry source; resolve other operations independently. Validate the actual actor with `/me`, and validate type/app with `/debug_token` authenticated by an app access token. An authorized direct-traffic BISU does not change the separately approved BOT/Messenger architecture.
 
-### SHEIN queue blocked by a historical human review
+### SHEIN recovery gates
 
-For distinguishing inert material-decision waits from active account writers, fail-closed dependency classification and an explicitly coordinated dry Ares takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer approval of historical targeting differences.
+For inert decision waits versus active writers and coordinated takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer historical targeting approval.
+
+For elapsed explicit starts after partial creation, load `references/shein-explicit-partial-schedule.md`; preserve seals/clock and verify schema, QA, activation and final readback.
 
 ### Recurring SHEIN clone defects — repair acceptance
 
