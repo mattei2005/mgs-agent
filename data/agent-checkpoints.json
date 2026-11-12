@@ -2193,12 +2193,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1570154441934504089",
-      "next_step": "Dry-run e execute central do input original, QA integral PAUSED e activate_verified. Preservar SLA, parametros e request.",
+      "next_step": "Respeitar 305s do engine e retomar mesmo input; somente readback, QA integral e activate_verified. Nao repetir Page grant ou criacao.",
       "objective": "Concluir 2 copias C007 Vizioid04 USD70/dia COCAP USD0.90 NOW; mesmo pedido original",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/page-repair-1570280670864081108.json",
-      "state": "page repair verified: super offers em digital trust; advertise e analyze atribuidos ao bisu por 1 post minimo. readback administrativo e corporativo http200, page token disponivel sem exposicao. outros acessos e ownership preservados. campanhas ainda nao criadas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/shein-1570154441934504089-1736068407518263.json",
+      "state": "page repair verified; 2 campanhas 120257118054990273 e 120257118054950273, 2 conjuntos e 4 anuncios persistidos. engine readback_deferred children_created_readback_pending; somente readback pendente por quota development_access, replay de criacao bloqueado.",
       "thread_id": "1558131493048688711",
-      "updated_at": "2026-11-12T03:38:33+00:00"
+      "updated_at": "2026-11-12T03:40:53+00:00"
     },
     {
       "agent": "ares",
@@ -9967,5 +9967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T03:38:33+00:00"
+  "updated_at": "2026-11-12T03:40:53+00:00"
 }

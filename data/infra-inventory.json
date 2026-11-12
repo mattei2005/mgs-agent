@@ -894,18 +894,19 @@
   "runtime_artifacts": [
     {
       "id": "vizioid-page-1570158283484827789",
-      "agent": "zeus",
+      "agent": "ares",
       "type": "meta_page_administrative_provisioning",
-      "status": "blocked_external_page_visibility",
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/vizioid-04-1570158283484827789.json",
+      "status": "verified_by_ares",
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1570154441934504089/page-repair-1570280670864081108.json",
+      "historical_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/vizioid-04-1570158283484827789.json",
       "authorization_message_id": "1570158283484827789",
       "source_thread_id": "1558131493048688711",
       "page_id": "680516861808576",
       "business_id": "155263197283282",
       "system_user_id": "122095869861482193",
-      "permission_writes": 0,
+      "permission_writes": 1,
       "campaign_writes": 0,
-      "evidence": "Admin and corporate identities valid. Page absent from complete BM owned/client inventories and administrative assigned_pages; Page and assigned_users GETs return code 10. External Page visibility prerequisite; no credential/ownership/app changes."
+      "evidence": "Ares provisioning verified: exact Page and Digital Trust read back by approved administrator; only ADVERTISE and ANALYZE granted to existing corporate System User. Administrative assignment and original corporate Page access HTTP200 with Page token available only in memory. Other assignments and ownership preserved. Campaign request resumes separately through Engine v3; prior blocked receipt retained as history."
     },
     {
       "id": "shein-d1-observer-reconciliation-d9c7bcd5959aa91de38c7c6d",
