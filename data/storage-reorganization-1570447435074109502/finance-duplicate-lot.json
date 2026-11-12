@@ -1,0 +1,918 @@
+{
+  "executor_sha256": "2d82ded7111e416f92a6fa51495bcc9d813ea2b9b9ae76d5a29d5c5d1d9bc651",
+  "frozen_at": "2026-11-12T09:52:18-0500",
+  "notes": [
+    "Only 28 individually named redundant local dump files; parent trees are NOT targets.",
+    "Nine byte-identical local representatives and nine verified remote archive files remain.",
+    "Original source/result receipts remain immutable; the historical local_copy path may become absent; use retained_identical_path or retained_remote_path.",
+    "All profile state, databases in production, business facts, browser sessions and runtimes remain untouched.",
+    "This lot does not finish remaining profile/archive/runtime cleanup or deploy future retention."
+  ],
+  "protected_launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "protected_paths": [
+    "/root/.hermes/profiles",
+    "/root/mgs-agent/apps/finance-system/private",
+    "/root/.hermes/secure-backups"
+  ],
+  "remote_readbacks": [
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-complete-84cc7e1ffeda/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "a1a21f8b315f7dea588040ca184d808f54bb4e82b4eb52d6f0c10089b389364c",
+      "size": 170547523,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-24-da81207dde4c-complete-494e75ce1a63/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "5fc8e2fc3ec19aad2a52c2f73d58090a7b2e524bcbc5c7c1bf1d48f4c5c01b2a",
+      "size": 161739696,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-partial-494e75ce1a63/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-11-01-9697c81173d0-complete-e44c2159f68b/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "79bb79fc56104e146ad1c06488c1764bc73a05e741ceab9ffae01cfa20d32541",
+      "size": 186608942,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-complete-e44c2159f68b/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "5ffa0f004d4208039895b55317650bcbc9ef3acc3444bafda3e3dac0e0c34f72",
+      "size": 181075881,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-complete-494e75ce1a63/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "efa4e79ff98c607bde03ffd1dfe373c13b94e81540edd2180f6cbc70f81bb1c9",
+      "size": 134201317,
+      "verified": true
+    },
+    {
+      "path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-17-43665244e9ef-complete-494e75ce1a63/mgs_finance-before.dump",
+      "pg_restore_list_exit": 0,
+      "sha256": "36e097b2b5e29d5249e4e242ba238872d202cbefcbeae559482e6fad7c3a85a3",
+      "size": 135245291,
+      "verified": true
+    }
+  ],
+  "request_message_id": "1570447435074109502",
+  "retained_local": [
+    {
+      "allocated": 170553344,
+      "inode": [
+        2049,
+        2689963
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/catalog-backup/mgs_finance-before.dump",
+      "sha256": "a1a21f8b315f7dea588040ca184d808f54bb4e82b4eb52d6f0c10089b389364c",
+      "size": 170547523
+    },
+    {
+      "allocated": 179724288,
+      "inode": [
+        2049,
+        5556769
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "allocated": 161746944,
+      "inode": [
+        2049,
+        5508732
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261025T104458-0400/mgs_finance-before.dump",
+      "sha256": "5fc8e2fc3ec19aad2a52c2f73d58090a7b2e524bcbc5c7c1bf1d48f4c5c01b2a",
+      "size": 161739696
+    },
+    {
+      "allocated": 169283584,
+      "inode": [
+        2049,
+        5555131
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338
+    },
+    {
+      "allocated": 131035136,
+      "inode": [
+        2049,
+        4485013
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "allocated": 186613760,
+      "inode": [
+        2049,
+        5556424
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261102T091921-0500/mgs_finance-before.dump",
+      "sha256": "79bb79fc56104e146ad1c06488c1764bc73a05e741ceab9ffae01cfa20d32541",
+      "size": 186608942
+    },
+    {
+      "allocated": 181080064,
+      "inode": [
+        2049,
+        5541159
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T175817-0400/mgs_finance-before.dump",
+      "sha256": "5ffa0f004d4208039895b55317650bcbc9ef3acc3444bafda3e3dac0e0c34f72",
+      "size": 181075881
+    },
+    {
+      "allocated": 134205440,
+      "inode": [
+        2049,
+        1878622
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T100921-0400/mgs_finance-before.dump",
+      "sha256": "efa4e79ff98c607bde03ffd1dfe373c13b94e81540edd2180f6cbc70f81bb1c9",
+      "size": 134201317
+    },
+    {
+      "allocated": 135249920,
+      "inode": [
+        2049,
+        1879658
+      ],
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101219-0400/mgs_finance-before.dump",
+      "sha256": "36e097b2b5e29d5249e4e242ba238872d202cbefcbeae559482e6fad7c3a85a3",
+      "size": 135245291
+    }
+  ],
+  "retention_policy_changed": false,
+  "schema": "mgs.storage.exact_cleanup.v1",
+  "status": "frozen_awaiting_critical_confirmation",
+  "targets": [
+    {
+      "action": "delete_file",
+      "allocated": 170553344,
+      "historical_operation_status": "applied",
+      "inode": [
+        2049,
+        5555472
+      ],
+      "metadata": {
+        "blocks": 333112,
+        "dev": 2049,
+        "ino": 5555472,
+        "mode": 384,
+        "mtime_ns": 1793195462030833808,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095024-0400/mgs_finance-before.dump",
+        "size": 170547523
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095024-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095024-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/catalog-backup/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-complete-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "a1a21f8b315f7dea588040ca184d808f54bb4e82b4eb52d6f0c10089b389364c",
+      "size": 170547523
+    },
+    {
+      "action": "delete_file",
+      "allocated": 170553344,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        5555476
+      ],
+      "metadata": {
+        "blocks": 333112,
+        "dev": 2049,
+        "ino": 5555476,
+        "mode": 384,
+        "mtime_ns": 1793195531830910630,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095142-0400/mgs_finance-before.dump",
+        "size": 170547523
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095142-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T095142-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/catalog-backup/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-complete-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "a1a21f8b315f7dea588040ca184d808f54bb4e82b4eb52d6f0c10089b389364c",
+      "size": 170547523
+    },
+    {
+      "action": "delete_file",
+      "allocated": 179724288,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5556813
+      ],
+      "metadata": {
+        "blocks": 351024,
+        "dev": 2049,
+        "ino": 5556813,
+        "mode": 384,
+        "mtime_ns": 1793449134501582501,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T081818-0400/mgs_finance-before.dump",
+        "size": 179716562
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T081818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T081818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "action": "delete_file",
+      "allocated": 179724288,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5556857
+      ],
+      "metadata": {
+        "blocks": 351024,
+        "dev": 2049,
+        "ino": 5556857,
+        "mode": 384,
+        "mtime_ns": 1793449733948324047,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T082818-0400/mgs_finance-before.dump",
+        "size": 179716562
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T082818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T082818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "action": "delete_file",
+      "allocated": 179724288,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5556861
+      ],
+      "metadata": {
+        "blocks": 351024,
+        "dev": 2049,
+        "ino": 5556861,
+        "mode": 384,
+        "mtime_ns": 1793452974899886420,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T092218-0400/mgs_finance-before.dump",
+        "size": 179716562
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T092218-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T092218-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "action": "delete_file",
+      "allocated": 179724288,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5556955
+      ],
+      "metadata": {
+        "blocks": 351024,
+        "dev": 2049,
+        "ino": 5556955,
+        "mode": 384,
+        "mtime_ns": 1793454113843251246,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T094118-0400/mgs_finance-before.dump",
+        "size": 179716562
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T094118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T094118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "action": "delete_file",
+      "allocated": 179724288,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5556904
+      ],
+      "metadata": {
+        "blocks": 351024,
+        "dev": 2049,
+        "ino": 5556904,
+        "mode": 384,
+        "mtime_ns": 1793453514336538530,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T093118-0400/mgs_finance-before.dump",
+        "size": 179716562
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T093118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T093118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-partial-84cc7e1ffeda/mgs_finance-before.dump",
+      "sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce",
+      "size": 179716562
+    },
+    {
+      "action": "delete_file",
+      "allocated": 161746944,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        5508743
+      ],
+      "metadata": {
+        "blocks": 315912,
+        "dev": 2049,
+        "ino": 5508743,
+        "mode": 384,
+        "mtime_ns": 1792939656306744786,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261025T104708-0400/mgs_finance-before.dump",
+        "size": 161739696
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261025T104708-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261025T104708-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261025T104458-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-24-da81207dde4c-complete-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "5fc8e2fc3ec19aad2a52c2f73d58090a7b2e524bcbc5c7c1bf1d48f4c5c01b2a",
+      "size": 161739696
+    },
+    {
+      "action": "delete_file",
+      "allocated": 169283584,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5555466
+      ],
+      "metadata": {
+        "blocks": 330632,
+        "dev": 2049,
+        "ino": 5555466,
+        "mode": 384,
+        "mtime_ns": 1793194913757232949,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T094118-0400/mgs_finance-before.dump",
+        "size": 169277338
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T094118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T094118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-partial-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338
+    },
+    {
+      "action": "delete_file",
+      "allocated": 169283584,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5555283
+      ],
+      "metadata": {
+        "blocks": 330632,
+        "dev": 2049,
+        "ino": 5555283,
+        "mode": 384,
+        "mtime_ns": 1793190534064658192,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T082819-0400/mgs_finance-before.dump",
+        "size": 169277338
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T082819-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T082819-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-partial-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338
+    },
+    {
+      "action": "delete_file",
+      "allocated": 169283584,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5555423
+      ],
+      "metadata": {
+        "blocks": 330632,
+        "dev": 2049,
+        "ino": 5555423,
+        "mode": 384,
+        "mtime_ns": 1793194314896582028,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T093118-0400/mgs_finance-before.dump",
+        "size": 169277338
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T093118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T093118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-partial-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338
+    },
+    {
+      "action": "delete_file",
+      "allocated": 169283584,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        5555380
+      ],
+      "metadata": {
+        "blocks": 330632,
+        "dev": 2049,
+        "ino": 5555380,
+        "mode": 384,
+        "mtime_ns": 1793193773291977671,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T092218-0400/mgs_finance-before.dump",
+        "size": 169277338
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T092218-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T092218-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-partial-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d",
+      "size": 169277338
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        4485856
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 4485856,
+        "mode": 384,
+        "mtime_ns": 1792243370874365877,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T092218-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T092218-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T092218-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1878093
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1878093,
+        "mode": 384,
+        "mtime_ns": 1792325030851615911,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080318-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080318-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080318-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        4485102
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 4485102,
+        "mode": 384,
+        "mtime_ns": 1792240130974125726,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T082818-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T082818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T082818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        4485908
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 4485908,
+        "mode": 384,
+        "mtime_ns": 1792243911290058939,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T093118-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T093118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T093118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1870761
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1870761,
+        "mode": 384,
+        "mtime_ns": 1792325931076276305,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T081818-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T081818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T081818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1878558
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1878558,
+        "mode": 384,
+        "mtime_ns": 1792325330516830450,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080818-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T080818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        4485058
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 4485058,
+        "mode": 384,
+        "mtime_ns": 1792239531364318646,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T081819-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T081819-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T081819-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1878814
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1878814,
+        "mode": 384,
+        "mtime_ns": 1792330910851808941,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T094118-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T094118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T094118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131031040,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1878697
+      ],
+      "metadata": {
+        "blocks": 255920,
+        "dev": 2049,
+        "ino": 1878697,
+        "mode": 384,
+        "mtime_ns": 1792329770256879078,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T092218-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T092218-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T092218-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        4485976
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 4485976,
+        "mode": 384,
+        "mtime_ns": 1792244511059824817,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T094118-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T094118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T094118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1878686
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1878686,
+        "mode": 384,
+        "mtime_ns": 1792330310134338663,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T093118-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T093118-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T093118-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 131035136,
+      "historical_operation_status": "partial_already_applied",
+      "inode": [
+        2049,
+        1857689
+      ],
+      "metadata": {
+        "blocks": 255928,
+        "dev": 2049,
+        "ino": 1857689,
+        "mode": 384,
+        "mtime_ns": 1792326531254730049,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T082818-0400/mgs_finance-before.dump",
+        "size": 131028380
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T082818-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T082818-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-partial-57c9dd1d8116/mgs_finance-before.dump",
+      "sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1",
+      "size": 131028380
+    },
+    {
+      "action": "delete_file",
+      "allocated": 186613760,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        5556439
+      ],
+      "metadata": {
+        "blocks": 364480,
+        "dev": 2049,
+        "ino": 5556439,
+        "mode": 384,
+        "mtime_ns": 1793629359577343076,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261102T092209-0500/mgs_finance-before.dump",
+        "size": 186608942
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261102T092209-0500/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261102T092209-0500/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261102T091921-0500/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-11-01-9697c81173d0-complete-e44c2159f68b/mgs_finance-before.dump",
+      "sha256": "79bb79fc56104e146ad1c06488c1764bc73a05e741ceab9ffae01cfa20d32541",
+      "size": 186608942
+    },
+    {
+      "action": "delete_file",
+      "allocated": 181080064,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        5541163
+      ],
+      "metadata": {
+        "blocks": 353672,
+        "dev": 2049,
+        "ino": 5541163,
+        "mode": 384,
+        "mtime_ns": 1793484015398470257,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T175945-0400/mgs_finance-before.dump",
+        "size": 181075881
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T175945-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T175945-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T175817-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-30-629f8d5ebdbf-complete-e44c2159f68b/mgs_finance-before.dump",
+      "sha256": "5ffa0f004d4208039895b55317650bcbc9ef3acc3444bafda3e3dac0e0c34f72",
+      "size": 181075881
+    },
+    {
+      "action": "delete_file",
+      "allocated": 134205440,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        1862553
+      ],
+      "metadata": {
+        "blocks": 262120,
+        "dev": 2049,
+        "ino": 1862553,
+        "mode": 384,
+        "mtime_ns": 1792332682237964698,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101056-0400/mgs_finance-before.dump",
+        "size": 134201317
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101056-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101056-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T100921-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-16-6182f1fad1a3-complete-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "efa4e79ff98c607bde03ffd1dfe373c13b94e81540edd2180f6cbc70f81bb1c9",
+      "size": 134201317
+    },
+    {
+      "action": "delete_file",
+      "allocated": 135249920,
+      "historical_operation_status": "already_applied",
+      "inode": [
+        2049,
+        1879828
+      ],
+      "metadata": {
+        "blocks": 264160,
+        "dev": 2049,
+        "ino": 1879828,
+        "mode": 384,
+        "mtime_ns": 1792332873840147847,
+        "nlink": 1,
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101408-0400/mgs_finance-before.dump",
+        "size": 135245291
+      },
+      "nlink": 1,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101408-0400/mgs_finance-before.dump",
+      "result_receipt": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101408-0400/result.json",
+      "retained_identical_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261018T101219-0400/mgs_finance-before.dump",
+      "retained_remote_path": "/home/zeus/mgs-finance-backups/gam-email/2026-10-17-43665244e9ef-complete-494e75ce1a63/mgs_finance-before.dump",
+      "sha256": "36e097b2b5e29d5249e4e242ba238872d202cbefcbeae559482e6fad7c3a85a3",
+      "size": 135245291
+    }
+  ],
+  "thread_id": "1569928464033783862"
+}

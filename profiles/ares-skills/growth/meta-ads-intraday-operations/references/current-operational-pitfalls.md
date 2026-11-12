@@ -104,6 +104,13 @@ Um `croniter` timezone-aware pode não avançar corretamente em uma transição 
 - Não pedir `object_story_spec` em massa.
 - Aplicar throttle e backoff limitado; erro de parâmetro/compliance não recebe retry.
 
+### Retomada de renderização com refresh remoto
+
+1. Inspecione o modo `render` antes de dimensionar a execução: ele pode chamar `refresh()` por batches Meta antes de gerar qualquer arquivo local. Reserve tempo para essas leituras e o backoff do helper; ausência de stdout não comprova travamento nem falha de coleta.
+2. Após timeout, confira no mesmo request os arquivos e timestamps de refresh, modelo, texto, validação e entrega. Confirme que a execução anterior terminou antes de iniciar outra; não crie um segundo writer ou diretório para retomar a mesma etapa.
+3. Se faltou apenas refresh/materialização e não houve publicação, repita somente esse modo com uma janela de execução maior e limitada, preservando financeiro, histórico e captura RPS já persistidos. Não volte a `collect` ou à UI: isso renovaria fontes desnecessariamente e perderia a separação entre cortes financeiros e de configuração.
+4. Depois da retomada, confira os novos horários de status/orçamento e a conservação dos horários financeiros, revalide seleção e partes e revise o texto antes de publicar. Se já existir intent de entrega, reconcilie seu estado e o GET remoto antes de qualquer POST; um timeout local não torna seguro reenviar o relatório.
+
 ## Discord e cron
 
 - Usar thread fixa registrada e não criar substituta por conveniência.
