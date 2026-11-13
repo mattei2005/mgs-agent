@@ -64199,6 +64199,49 @@
         "billing_changes": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "sms-funnel-wallet-monitor-recovery-20261113",
+      "owner": "zeus",
+      "type": "monitor-recovery-evidence",
+      "source_thread": "1570675581476147280",
+      "authorization_message": "1570696098371211275",
+      "description": "Wallet-aware consumer, offline regressions, rollback copies, correct message readback and exact false-alert cleanup evidence",
+      "artifacts": [
+        {
+          "path": "/root/mgs-agent/tests/test_sms_funnel_balance_monitor.py",
+          "size_bytes": 12424,
+          "sha256": "eb5321c69d94d7e003341dbd1009bd83a28bddb7e1332c5bb1771d0039eeb25c"
+        },
+        {
+          "path": "/root/mgs-agent/work/sms-wallet-monitor-20261113/checkpoint.json",
+          "size_bytes": 914,
+          "sha256": "34371832de22481a85f8b6433fd6ec215846e8d5e44d31198e41a7496935ba39"
+        },
+        {
+          "path": "/root/mgs-agent/work/sms-wallet-monitor-20261113/delivery-cleanup-receipt.json",
+          "size_bytes": 795,
+          "sha256": "cfdae30dec2ef581cc9cdbf328647d451da24e9f428e4d2756097d3ed994cfa5"
+        },
+        {
+          "path": "/root/mgs-agent/work/sms-wallet-monitor-20261113/monitor-sms-funnel-balance.py.before",
+          "size_bytes": 24912,
+          "sha256": "80badd1f2c82997365193e7837dd9884a6fd5f520976bcd24a54c8856d7b91e9"
+        },
+        {
+          "path": "/root/mgs-agent/work/sms-wallet-monitor-20261113/sms-funnel-balance-state.json.before",
+          "size_bytes": 17662,
+          "sha256": "0bb97400c7326938fad2c2f5f6d17cbd208c8b863736f7ac3470dcd9afec7aad"
+        },
+        {
+          "path": "/root/mgs-agent/work/sms-wallet-monitor-20261113/wrong-alerts-before.json",
+          "size_bytes": 9278,
+          "sha256": "1825e7e5e998bc812879e218b6d71550039273abb8a6a4130eb36576387585b5"
+        }
+      ],
+      "validated_at": "2026-11-13T02:17:08.764086-05:00",
+      "status": "completed_verified",
+      "report_infra_message_id": "1570699026964160534"
     }
   ],
   "profile_skill_references": [
