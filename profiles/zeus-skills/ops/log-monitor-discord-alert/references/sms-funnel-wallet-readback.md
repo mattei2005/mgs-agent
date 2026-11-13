@@ -28,4 +28,6 @@ Run `python3 -m unittest discover -s /root/mgs-agent/tests -p test_sms_funnel_ba
 
 ## Reporting
 
+Read back the report against its immutable publication snapshot (amount + timestamp + message ID), not the monitor's mutable `last_metrics`: a normal subsequent run can legitimately consume more balance and update that state without altering the earlier report.
+
 Say separately: API balance confirmed, authenticated dashboard balance confirmed, comparison result, and monitor deployment state. Saving this procedure does not patch the credits-based monitor. Do not claim monitoring recovered until the consumer itself is corrected and tested.

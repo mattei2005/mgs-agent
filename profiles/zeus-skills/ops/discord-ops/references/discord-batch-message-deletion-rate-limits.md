@@ -15,8 +15,9 @@ Use when Rodolfo explicitly asks to delete several Discord messages from one cha
    - retry bounded 5xx/transport failures, but fail closed on other 4xx responses.
 5. Resolve the Zeus bot token only from the local protected runtime/1Password route. Never print, persist, or interpolate it into logs or command output.
 6. After repeated 429s from a high-level tool, stop that tool path instead of looping. Switch once to a sequential rate-limit-aware Discord REST caller and report the recovered partial count honestly.
-7. Verify by refetching the channel. For date-range cleanup, the first remaining historical message must predate the requested cutoff; newly requested replacement alerts may appear after the cleanup and must be distinguished from old messages.
-8. Append an audit event with requested/deleted/already-missing/failure counts and exact IDs. Do not claim complete deletion unless readback proves it.
+7. Apply the same bounded 429/retry_after handling to GET preflight and GET verification, not only DELETE. A successful DELETE followed by a rate-limited readback is unverified, not a failed deletion: resume the exact GET and do not repeat DELETE blindly. Persist each per-ID outcome incrementally so a later verification failure cannot erase progress.
+8. Verify by refetching the channel. For date-range cleanup, the first remaining historical message must predate the requested cutoff; newly requested replacement alerts may appear after the cleanup and must be distinguished from old messages.
+9. Append an audit event with requested/deleted/already-missing/failure counts and exact IDs. Do not claim complete deletion unless readback proves it.
 
 ## Exact-message cleanup across active agent threads
 
