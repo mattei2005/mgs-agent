@@ -28,9 +28,16 @@
     "schedule_authorized": true,
     "schedule_authority_message_id": "1570859539019079793",
     "schedule_request": "data/ares/discord/thread-report-1570858183700910221.json",
-    "schedule_changed": false,
-    "meta_identity_readback_performed": false,
-    "account_name_is_user_declared_not_live_verified": true
+    "schedule_changed": true,
+    "meta_identity_readback_performed": true,
+    "account_name_is_user_declared_not_live_verified": false
   },
-  "status": "SCOPE_REGISTERED_AWAITING_REPORT_REQUEST"
+  "status": "SCOPE_REGISTERED_INTRADAY_ACTIVE_VALIDATED",
+  "live_account_readback": {
+    "account_id": "1663268201836138",
+    "name": "Yolokfx-US-SHEIN-EN-08-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "source": "data/ares/meta-ads/audit/yolo08-cron-1570859539019079793/after-resume-account-readback.json"
+  }
 }

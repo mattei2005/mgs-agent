@@ -10,7 +10,7 @@
   "channel_id": "1558147364450074734",
   "thread_name": "📈Yolokfx Conta 08 Intraday",
   "creation_thread_id": "1570857869790945455",
-  "status": "HOLD_BY_RODOLFO_AFTER_READ_ONLY_GRANT",
+  "status": "ACTIVE_INTRADAY_VALIDATED",
   "hold_message_id": "1570863755242512415",
   "read_only_grant_authority_message_id": "1570862320408596491",
   "read_only_grant_evidence": "data/ares/meta-ads/audit/yolo08-cron-1570859539019079793/permission-journal.json",
@@ -20,7 +20,13 @@
   "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
   "existing_schedules": {
     "timezone": "America/New_York",
-    "intraday_slots": ["09:32", "14:11", "16:02", "20:02", "23:31"],
+    "intraday_slots": [
+      "09:32",
+      "14:11",
+      "16:02",
+      "20:02",
+      "23:31"
+    ],
     "daily_d1_change_authorized": false
   },
   "preflight": {
@@ -34,16 +40,30 @@
     "target_account_http": 200,
     "target_account_error_code": null,
     "target_account_error": null,
-    "account_identity_currency_timezone": "Yolokfx-US-SHEIN-EN-08-G006 / USD / America/Los_Angeles; read back with original corporate token",
+    "account_identity_currency_timezone": "Yolokfx-US-SHEIN-EN-08-G006 / USD / America/New_York; fresh readback after operator resumption",
     "credential_changed": false,
     "permission_changed": true,
-    "tasks_added": ["ANALYZE"],
+    "tasks_added": [
+      "ANALYZE"
+    ],
     "other_assignments_preserved": true,
     "original_corporate_token_readback_verified": true
   },
-  "next_action": "AGUARDAR a mudanca que Rodolfo informara. Nao alterar fuso Meta, catalogo, binding ativo, layout, consumidores ou cron. Grant minimo ANALYZE ja concluido e verificado; nao repetir nem revogar sem pedido. Inclusao da conta08 no cron ainda nao executada. Reconciliar a nova instrucao com o readback live America/Los_Angeles antes de retomar este mesmo request.",
-  "cron_membership": "pending; existing24report consumers unchanged; no duplicate cron created",
+  "next_action": "Aguardar os slots existentes. Primeira rodada futura ainda nao observada; preservar journals e reconciliar os IDs exatos se houver falha, sem duplicar cron ou campanha.",
+  "cron_membership": "active in existing Intraday policy; no new cron; D-1 unchanged",
   "meta_campaign_writes": 0,
   "dashboard_writes": 0,
-  "deletes": 0
+  "deletes": 0,
+  "resume_message_id": "1570864612889600177",
+  "hold_released": true,
+  "live_account": {
+    "id": "1663268201836138",
+    "name": "Yolokfx-US-SHEIN-EN-08-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "validation_evidence": "data/ares/meta-ads/audit/yolo08-cron-1570859539019079793/live-smoke/validation.json",
+  "enrollment_readback": "data/ares/meta-ads/audit/yolo08-cron-1570859539019079793/enrollment-readback.json",
+  "schedule_audit": "data/ares/meta-ads/audit/yolo08-cron-1570859539019079793/schedule-post.json"
 }

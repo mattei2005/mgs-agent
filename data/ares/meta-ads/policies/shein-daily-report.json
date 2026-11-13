@@ -40,7 +40,8 @@
     "1498990138663094",
     "937846586033361",
     "869857549542755",
-    "1583000095650153"
+    "1583000095650153",
+    "1492168699397108"
   ],
   "thread_ids": [
     "1558146396320698428",
@@ -66,10 +67,10 @@
     "1558147388730908714",
     "1558147440350076928",
     "1558147459698655425",
-    "1558147479432601670"
+    "1558147479432601670",
+    "1569767319339663361"
   ],
-  "expected_reports": 24,
-  "expected_reports_per_manager": 4,
+  "expected_reports": 25,
   "source_BINDINGS": "data/ares/discord/shein-intraday-report-bindings.json",
   "layout_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout",
   "budget_reference": "current_Meta_daily_budget_with_actual_observed_timestamp",
@@ -84,5 +85,23 @@
   "timeout_seconds": 2400,
   "lock": "data/ares/meta-ads/state/shein-daily-report/run.lock",
   "scheduler": "root_crontab_deterministic_no_LLM",
-  "output": "local_only; runner publishes exact validated report parts"
+  "output": "local_only; runner publishes exact validated report parts",
+  "expected_reports_by_manager": {
+    "g001": 4,
+    "g002": 5,
+    "g003": 4,
+    "g004": 4,
+    "g005": 4,
+    "g006": 4
+  },
+  "membership_extensions": {
+    "1492168699397108": {
+      "thread_id": "1569767319339663361",
+      "manager_code": "g002",
+      "authorized_by_discord_id": "344196393512075265",
+      "source_message_id": "1570858841023713285",
+      "permission_approval_message_id": "1570860329947103396",
+      "evidence": "data/ares/meta-ads/audit/yolo07-cron-1570858841023713285/smoke-result.json"
+    }
+  }
 }
