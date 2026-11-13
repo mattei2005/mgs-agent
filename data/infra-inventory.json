@@ -4,6 +4,23 @@
     "updated_at": "2026-11-13T11:48:02-05:00",
     "generated_by": "infra-discovery.sh"
   },
+  "cloudns_api_access": {
+    "agent": "zeus",
+    "owner": "Rodolfo Mattei",
+    "canonical_source": "context/cloudns.md",
+    "skill": "/root/.hermes/profiles/zeus/skills/ops/cloudns-api-operations/SKILL.md",
+    "credential_source": "1Password / MGS Conteúdo / www.cloudns.net; exact fields auth-id and auth-password",
+    "capability": "API user selected by CEO; full-account capability, operation-specific authorization required",
+    "validated_scope": "read-only login, provider-observed IP, scorexboost.com DNS records and SOA",
+    "approved_ipv4": "2.25.165.171",
+    "client_transport": "IPv4 only; no global network or allowlist change",
+    "authority_message_ids": ["1570833701430894685", "1570860268597158018"],
+    "source_thread": "1570829578987905088",
+    "validated_at": "2026-11-13T18:01:22.743500+00:00",
+    "record_count_at_validation": 13,
+    "dns_writes": 0,
+    "secrets_stored_locally": false
+  },
   "system_packages": [
     {
       "agent": "zeus",

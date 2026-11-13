@@ -5942,6 +5942,23 @@
       "updated_at": "2026-10-16T22:05:08+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.account.1663268201836138.intraday-schedule",
+      "canonical_source": "data/ares/discord/thread-report-1570858183700910221.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.reporting",
+      "effective_at": "2026-11-13T18:02:32+00:00",
+      "id": "ARES-SHEIN-YOLO08-INTRADAY-1570859539019079793",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conta08 G006: incluir Intraday existente; pendente grant minimo Meta",
+      "updated_at": "2026-11-13T18:02:32+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1558138059344576593.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -14742,6 +14759,23 @@
       "updated_at": "2026-10-05T04:55:57+00:00"
     },
     {
+      "canonical_key": "infra.cloudns.api-access",
+      "canonical_source": "context/cloudns.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-11-13T18:01:22.743500+00:00",
+      "id": "cloudns-api-access-20261113",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "ClouDNS API autenticada e exportacao GeoDNS validada",
+      "updated_at": "2026-11-13T18:02:52+00:00"
+    },
+    {
       "canonical_key": "campaign_engine_v3.ad_serving_route.cpv_lineage_required",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -17051,5 +17085,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T17:52:26+00:00"
+  "updated_at": "2026-11-13T18:02:52+00:00"
 }
