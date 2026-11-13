@@ -1,0 +1,71 @@
+{
+  "status": "added8_verified_pending_ui_fields",
+  "source_message_id": "1570799435502588027",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027",
+  "accounts_before": 47,
+  "accounts_after": 55,
+  "added_accounts": 8,
+  "new_ids": [
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "groups": {
+    "Cartão de crédito": 15,
+    "Linha de crédito": 40
+  },
+  "prior47_cells_preserved_exact": true,
+  "other_sheets_authored_unchanged": true,
+  "entire_authored_workbook_expected_exact_by_id_inside_filter": true,
+  "pending_h_new_account_ids": [
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_d_new_account_ids": [
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "new_month_spend_usd": "3630.09",
+  "meta_writes": 0,
+  "payments_executed": 0,
+  "canary_restored": true,
+  "link_repairs": 55,
+  "recovery_diagnosis": "Broad textFormatRuns clearing removed links; repaired only link field for current exact row IDs. setBasicFilter applied existing sort specs to expanded range; complete row parity proved by ID, no factual mismatch. New pending-cell colors canonicalized only for redundant ColorStyle and float32.",
+  "verified_at": "2026-11-13T09:14:49.726359-05:00",
+  "summary_note_repairs": 6,
+  "historical_d_blank_count": 43,
+  "old_and_new_card_history_pending_events": 11,
+  "invoice_due_usd": "417864.11",
+  "invoice_pending_count": 30,
+  "invoice_outside_current_scope": 0,
+  "source_to_new_accounts_api_exact": true,
+  "recurring55_api_dry_run_verified": true,
+  "validator_final": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/validator-final.json",
+  "same_cron_id": "2ee720363d7d",
+  "cron_schedule_unchanged": true,
+  "cron_prompt55_readback_verified": true,
+  "skill_mirror_hashes": {
+    "scripts/validate_workbook_readonly.py": "2da3c943ef4ae4ac86246658345149cde4278d315147fa923316bb99b0153110",
+    "scripts/refresh_september_invoices.py": "4af386b82f90dbf5d3504ab37fa6bc0017a75e7489db75369f74ab3270364796",
+    "references/collection-and-workbook.md": "e8939f5ff7645d41cd9a7bd9462700d53f4118c9e609e25224b435f40bee4481",
+    "references/recurring-refresh.md": "951d19b9c570cc6331ed17111aa1712caef67e1849024bab3ded0cdfaab46f0c",
+    "references/funding-regroup-priority.md": "5262411814c5f490d637cbad754f3624ad1e4c5c4c6f5a313f970e6db34e65fd",
+    "references/september-invoices.md": "19ce48a9a01afcb10450cd498e26d1b0bfd3130a3df48b6186996ba479779699"
+  },
+  "report_infra_status": "sent_verified",
+  "report_infra_message_id": "1570804315063324803",
+  "report_infra_readback": true
+}

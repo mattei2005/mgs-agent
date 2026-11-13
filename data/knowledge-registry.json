@@ -13831,6 +13831,23 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "storage.reorganization.1570447435074109502.retention-direction",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-13T14:18:03+00:00",
+      "id": "STORAGE-REVIEW-LATEST-ONLY-1570799339108958250",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Direcao de revisao latest-only VPS e Hermes; preservar dash e historico",
+      "updated_at": "2026-11-13T14:18:03+00:00"
+    },
+    {
       "canonical_key": "team.icaro.identity",
       "canonical_source": "context/team.md",
       "consumers": [
@@ -15794,6 +15811,24 @@
       "updated_at": "2026-10-03T00:31:43+00:00"
     },
     {
+      "canonical_key": "finance.meta.manual-payments.account-scope",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "cron:2ee720363d7d",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-13T14:12:37+00:00",
+      "id": "finance-meta-account-scope-55-1570799435502588027",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Digital Trust: incluir oito contas com gasto, total55 no mesmo workbook e refresh",
+      "updated_at": "2026-11-13T14:12:37+00:00"
+    },
+    {
       "canonical_key": "finance.meta.manual-payments.pay-now-column",
       "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
       "consumers": [
@@ -16928,5 +16963,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-12T17:21:55+00:00"
+  "updated_at": "2026-11-13T14:18:03+00:00"
 }

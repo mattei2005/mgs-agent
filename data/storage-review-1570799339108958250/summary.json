@@ -1,0 +1,58 @@
+{
+  "request": "1570799339108958250",
+  "thread": "1569928464033783862",
+  "observed_at": "2026-11-13T09:18:03.644814-05:00",
+  "status": "read_only_findings_delivered_no_deletions_or_retention_change",
+  "root_scan": {
+    "dirs": 214797,
+    "other": 24977,
+    "files": 1801492
+  },
+  "root_scan_errors": [],
+  "separate_boot_efi": "separately measured; no disposal targets selected",
+  "backup_inventory_scope": "All nodes in enumerated operational backup roots plus 885 standalone backup-like files outside dependency/Git trees. These are operational sets, not 776 complete VPS snapshots. Off-host listing is independent.",
+  "nonempty_backup_sets": 776,
+  "backup_root_files": 126979,
+  "standalone_backup_like": 885,
+  "backup_sets_sizes_are_exclusive_of_hardlinked_blocks_already_seen_elsewhere": true,
+  "finance_candidate_count": 27,
+  "finance_candidate_bytes": 4639371264,
+  "finance_preserved": "latest local dump 20261113, three partial-import dump files, every remote counterpart, attachments/inputs/state/receipts and production",
+  "finance_verified_remote_copies": 31,
+  "finance_dependency_scan": "31 individual paths; no process or executable literal references detected; producer creates fresh run directories",
+  "finance_remaining_dump_sql_files": 289,
+  "local_finance_duplicate_groups_ge10MiB": 0,
+  "ares_atena": "No newly completed profile-media disposal lot. Prior 858 matched paths/0.761GiB lacks full ancestry and dependency closure; SEO initiatives remain open. Protect conversations/auth/working evidence.",
+  "hermes_backup_keep": "20261103-phase4-1567354570823172209 recovery set; two archives hash/gzip/tar revalidated. Native cutover snapshots and compact evidence remain pending exact coverage review.",
+  "hermes_backup_other_sets": 7,
+  "hermes_runtime_keep": [
+    "29a61cb7 active",
+    "3f2afed3 immediate rollback",
+    "59004a62 alternate object dependency",
+    "46904a3b script consumer until migration",
+    "base hermes-agent/stage7cc3/ad2d dirty customized copies pending code recovery"
+  ],
+  "hostinger_backups": [
+    {
+      "id": 58971908,
+      "created_at": "2026-11-08T10:12:08Z"
+    },
+    {
+      "id": 58045990,
+      "created_at": "2026-11-01T20:13:20Z"
+    }
+  ],
+  "hostinger_backup_scope": "provider readback total2/page1; stored outside VPS; no separate snapshot (404 is documented no snapshot)",
+  "local_safety_keep": "mgs-safety-20261110-034101.tar.gz; gzip/tar validated; excludes secrets and DB files; not a whole-VPS snapshot",
+  "offsite_latest_state": "daily full 20261113 and hourly quick 20261113 PASS; latest isolated restore proof is different generation 20261108; not sufficient to remove all local recovery",
+  "system": "28 cached .deb payloads/230252544 allocated bytes identified; no removal or autoremove. 282 autoremove suggestions include ImageMagick and Node modules and are not certified unused. Preserve swapfile4GiB and system.",
+  "cache_retention": "scratch idle24h; targeted native caches have scoped cleanup; no scheduled UV/npm/pip general retention found in inspected scripts/root cron/timers/three Hermes job stores",
+  "git": "main repository local history includes code/config/evidence/media/venv objects; 19239 commits at observed HEAD, count-objects garbage0; nearly all 8.79GB reachable. Remote main accessible. Local full history is not universally required; shallow/partial working clone requires controlled consumer migration, not deleting .git.",
+  "deletions": 0,
+  "schedule_changes": 0,
+  "diagnostic_recovery": [
+    "first inventory scan exceeded300s before artifact; no writer survived; optimized string-prefix metadata scan completed with zero errors",
+    "two output-filter SyntaxErrors corrected; apt-get simulation returned0",
+    "disabled hermes-agent skill read directly from installed Zeus skill path"
+  ]
+}

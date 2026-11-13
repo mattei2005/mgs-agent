@@ -535,6 +535,10 @@
       "1150399088163771",
       "1481815942722118",
       "1062446663435585",
+      "1635726541410028",
+      "2323706575049143",
+      "1547524853816263",
+      "1867022354284742",
       "1414197490675732",
       "1543098427832443",
       "2852476828464907",
@@ -557,6 +561,26 @@
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
+        "account_id": "1635726541410028",
+        "name": "Growpowerhub-US-SHEIN-EN-01-G001",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "2323706575049143",
+        "name": "Growpowerhub-US-SHEIN-EN-03-G003",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1547524853816263",
+        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1867022354284742",
+        "name": "Growpowerhub-US-SHEIN-EN-06-G006",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
         "account_id": "1414197490675732",
         "name": "Mavroa-US-SHEIN-ES-02-G002",
         "reason": "new_generic_payment_since_pc1_proof"
@@ -577,8 +601,8 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/closure-current.json"
+    "historical_blank_count": 43,
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -804,5 +828,34 @@
     "reason": "New rows admitted under explicit authority; historical-card and UI-only H values remain blank until independently verified, never guessed.",
     "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json"
   },
-  "last_account_scope_expansion": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json"
+  "last_account_scope_expansion": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json",
+  "scope_inclusion_qualification": {
+    "authority_message_id": "1570799435502588027",
+    "accounts": 55,
+    "added": 8,
+    "preserved_previous_accounts": 47,
+    "new_metrics_source": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/plan.json",
+    "whole55_api_dry_run": "/root/mgs-agent/reports/meta-manual-payments-runs/20261113T091237057150",
+    "whole55_published_metrics_refreshed": false,
+    "pending_new_h_account_ids": [
+      "1492168699397108",
+      "1034081997659047",
+      "1542257646409395",
+      "1754588462350629"
+    ],
+    "pending_new_d_account_ids": [
+      "2323706575049143",
+      "1547524853816263",
+      "1867022354284742",
+      "1754588462350629",
+      "1542257646409395",
+      "1034081997659047",
+      "1492168699397108",
+      "1635726541410028"
+    ],
+    "prior_h_read_times_preserved": true,
+    "other_sheet_data_unchanged": true,
+    "summary_notes_reconciled": true,
+    "verified_at": "2026-11-13T09:14:47.985643-05:00"
+  }
 }

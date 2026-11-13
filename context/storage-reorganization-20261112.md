@@ -30,6 +30,12 @@ São 28 arquivos locais de dump redundantes, com 9 representantes locais byte-id
 
 O restante da investigação permanece com Zeus no checkpoint `ZEUS-STORAGE-REORGANIZATION-1570447435074109502`. Fonte de medição e gates: diretório `data/storage-reorganization-1570447435074109502/`.
 
+## Direção da revisão em oito pontos — 2026-11-13
+
+Fonte humana: Rodolfo `1570799339108958250`, nesta mesma thread. Para esta iniciativa, o resultado desejado é preservar apenas o último backup validado da VPS e o último conjunto validado do Hermes, listar o que pode sair nas demais categorias sem comprometer a dashboard, dados, memórias, histórico, autenticação ou operação, e explicar a retenção real de caches e a necessidade do histórico Git local. Esta direção supersede a indefinição anterior sobre a quantidade desejada de backups VPS/Hermes; não constitui confirmação de um manifesto destrutivo, alteração automática de produtores, redução de retenção offsite nem autorização para descartar ativos únicos de outros domínios.
+
+Checkpoint específico: `ZEUS-STORAGE-REVIEW-1570799339108958250`. Evidências: `data/storage-review-1570799339108958250/`. Backups locais de controle, código copiado, snapshots nativos, dump financeiro, backup operacional safety, backup Hostinger e DR criptografado são classes distintas; um arquivo de maior data não substitui as outras classes por nome/mtime. Dependências de código ativo e histórico operacional ficam protegidos até prova de cobertura ou decisão específica. A retenção desejada não está implantada por este registro.
+
 ## Segundo lote: estado histórico de testes gerados — executado
 
 Rodolfo confirmou a aposentadoria deste lote em `1570486008917655623`, depois de esclarecido o efeito sobre os testes e a exclusão de memórias/perfis/produção do escopo. **Execução concluída e validada em 2026-11-12:** 60 clusters locais de teste e 21 exportações `.tar`, totalizando 81 alvos/61.283 arquivos ausentes. O aumento de espaço livre medido foi de 17.117.822.976 bytes (~15,94 GiB); a medição pós-validação registrou 75,25% de uso e 47,69 GiB disponíveis. Resultado: `data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/cleanup-result.json`. Os seis fingerprints financeiros produtivos, quatro raízes de teste retidas, três fontes de entrada e 12 arquivos de controle dos perfis permaneceram iguais; os três agentes passaram em config/smoke e mantiveram PIDs. Nenhuma retenção futura foi alterada.

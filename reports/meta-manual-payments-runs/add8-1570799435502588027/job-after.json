@@ -1,0 +1,70 @@
+{
+  "id": "2ee720363d7d",
+  "name": "Digital Trust · planilha de pagamentos 3x/dia",
+  "prompt": "Atualização financeira recorrente autorizada por Rodolfo344196393512075265 na thread1563926766286803004. ESCOPO VIGENTE:55IDs do campo account_ids em data/meta-manual-payments/digital-trust-workbook-contract.json, BM155263197283282, spreadsheet1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU,sheet271321738. Rodolfo1570799435502588027 autorizou acrescentar oito contas com gasto à mesma aba, supersedindo a fixação anterior47IDs. Não adicionar outras contas por descoberta nem remover zeros automaticamente. Preservar cadência08:02/14:02/21:02America/New_York; mesmo job, writer e lease, sem cópias. Ler skill meta-manual-payments-planning e refs recurring-refresh.md,accounts-list-search.md,september-invoices.md,funding-regroup-priority.md,collection-and-workbook.md e contrato live antes de agir. Primeiro preflight de execução concorrente, snapshots de todas as abas e writer.lock. Reagrupar fundinglive comregroup_funding.py --apply mantendo todos os account_ids atuais. Executar refresh_september_invoices.py --apply: E só invoices pendentes reais;Paid/due0 fica vazio,históricoemledger/backup/notas;F segue latest_closed_generated. J novembro2026 por1566811141747777680:month_since2026-11-01,month_until2026-11-30;limitar ao dia atual no fuso de cada conta e indicar parcial;título/notas pelo contrato. E/F atualmente invoices outubro geradas. Depois refresh_workbook.py --apply --allow-history-pending paraC/G/I/J em todos os IDs;Insightsdiário/agregado reconciliados. D somente com prova do instrumento histórico, inclusive contas na linha; não inferir cartão por default/evento genérico, não bloquear métricas verificadas por pendênciaD. Novas oito contas admitidas com D ainda sem prova; pending_new_account_fields no contrato preserva as lacunas sem transformá-las em zero. H usa Current balance da linhaAccounts pela autoridade1564382301155098717,não Amount you can pay now nem balanceAPI. Quatro novas contas de linha estão com H vazio e nota PENDENTE_H_NOVA_CONTA; campo histórico antigo deve ser preservado com hora original. A superfície recente mostrava Outstanding balance em vez de Current balance: validar equivalência antes de publicar, não trocar significado nem inventar leitura. publish_pay_now.py --prepare obtém targets atuais. Resolver interpreter pelo launcherHermes/PM e janela Chromeaprovada fresca; read_pc1_accounts_list.py --run-dir <dir> --account-ids <lote> em lotes6foreground com leaseglobal; não abrir detalhes/modais para simples saldo. Inspecionar de verdade cada screenshot via vision_analyze; BM,nome,IDeCurrentbalance exatos da linha, não asset_id fixoURL. Só após pixels salvar visual-verification.json com verified_account_ids e accounts_list_checks[ID]={valid_billing_list:true,business_id:'155263197283282',row_account_id:ID,name:NOME_EXATO,balance_usd:VALOR_LITERAL}; publicar pelo mesmo worker. Gate provider/auth/paridade: interromper sem bypass/reloads/perfisalternativos; preservar faltantes/horasantigas; --verified-only --apply só para evidência real; nunca zerar ausente. Quando novo H for comprovado, remover somente pendência resolvida do contrato. No retry reconciliarwrites/receipts antes de repetir; não inserir colunas/duplicar contas. validate_workbook_readonly.py deve confirmar55IDs,grupos,links,notas,moedas e totaisF/G/H/I/J; pending_new_h_rows significa H parcial legítimo, não integral. Verificador aceita vazio somente para ID novo na interseção autorizada do histórico/contrato com marcador e autoridade; ausência sem isso continua bloqueada. Após batch com sortSpecs, comparar linhas completas porIDsomente dentro do filtro e manter demais células estritas; nunca ignorar diferenças financeiras. Preservar/validar hyperlinks, não limpar textFormatRuns em máscara ampla. Atualizarcontrato/checkpoint/audit/infraquando cabível. Fechar só aba própria,liberarlease. Proibido qualquer pagamento,billing/default,budget,credencial/permissão ou ampliação além55IDs. Resumo finalPTBR nesta thread,sem traces/anexos/mentions; qualificar frescorAPI,H e lacunasD. Fonte decontinuidade:checkpoint meta-manual-payments-digital-trust; comprovante de expansão reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json. Não agendar novosjobs.",
+  "skills": [
+    "meta-manual-payments-planning",
+    "google-drive-agent-automation",
+    "secure-remote-windows-automation"
+  ],
+  "skill": "meta-manual-payments-planning",
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": null,
+  "no_agent": false,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "2 8,14,21 * * *",
+    "display": "2 8,14,21 * * *"
+  },
+  "schedule_display": "2 8,14,21 * * *",
+  "repeat": {
+    "times": null,
+    "completed": 56
+  },
+  "enabled": true,
+  "state": "scheduled",
+  "paused_at": null,
+  "paused_reason": null,
+  "created_at": "2026-10-25T13:42:18.304561-04:00",
+  "next_run_at": "2026-11-13T14:02:00-05:00",
+  "last_run_at": "2026-11-13T08:07:17.996816-05:00",
+  "last_status": "ok",
+  "last_error": null,
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": {
+    "at": "2026-11-08T21:05:41.539488-05:00",
+    "detail": "RuntimeError: HTTP 400: {\"detail\":\"Bad Request\"}"
+  },
+  "failure_streak": 0,
+  "deliver": "discord:1496267442899521627:1563926766286803004",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1563926766286803004",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Nessa Planilha Que Crie Uma - Rodolfo",
+    "thread_id": "1563926766286803004",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "discord:1496267442899521627:1563926766286803004",
+  "last_dispatch": {
+    "scheduled_at": "2026-11-13T08:02:00-05:00",
+    "dispatched_at": "2026-11-13T08:02:46.440628-05:00",
+    "lateness_seconds": 46.4,
+    "kind": "on_time"
+  },
+  "fire_claim": null,
+  "canonical_completions": [
+    "754ad1d89d1e47fc8fe3ebe793ed2c6b"
+  ],
+  "timezone": "America/New_York"
+}

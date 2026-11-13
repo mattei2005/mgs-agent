@@ -64272,6 +64272,58 @@
         "billing_changes": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "meta-manual-payments-add8-1570799435502588027",
+      "agent": "zeus",
+      "type": "financial-account-scope-expansion-contract-cron-skill",
+      "authority_message_id": "1570799435502588027",
+      "source_thread_id": "1563926766286803004",
+      "status": "8_added_55_verified_pending_ui_fields",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/closure-current.json",
+      "paths": [
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "cron:zeus:2ee720363d7d",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning"
+      ],
+      "verification": {
+        "accounts": 55,
+        "added": 8,
+        "groups": {
+          "Cartão de crédito": 15,
+          "Linha de crédito": 40
+        },
+        "prior47_cells_preserved_exact": true,
+        "other_sheet_data_unchanged": true,
+        "new_h_pending": 4,
+        "new_d_no_instrument_proof": 8,
+        "history_d_blank_total": 43,
+        "new_month_spend_usd": "3630.09",
+        "invoice_due_usd": "417864.11",
+        "same_cron_schedule_preserved": true,
+        "global_eight_day_schedule_conflicts": 0,
+        "recurring55_api_dry_run_verified": true,
+        "pending_h_gate_tests": 6,
+        "meta_writes": 0,
+        "payments": 0
+      },
+      "learning_readback": {
+        "subsystem": "meta-manual-payments-planning",
+        "files_sha256": {
+          "scripts/validate_workbook_readonly.py": "2da3c943ef4ae4ac86246658345149cde4278d315147fa923316bb99b0153110",
+          "scripts/refresh_september_invoices.py": "4af386b82f90dbf5d3504ab37fa6bc0017a75e7489db75369f74ab3270364796",
+          "references/collection-and-workbook.md": "e8939f5ff7645d41cd9a7bd9462700d53f4118c9e609e25224b435f40bee4481",
+          "references/recurring-refresh.md": "951d19b9c570cc6331ed17111aa1712caef67e1849024bab3ded0cdfaab46f0c",
+          "references/funding-regroup-priority.md": "5262411814c5f490d637cbad754f3624ad1e4c5c4c6f5a313f970e6db34e65fd",
+          "references/september-invoices.md": "19ce48a9a01afcb10450cd498e26d1b0bfd3130a3df48b6186996ba479779699"
+        },
+        "mirrors_equal": true,
+        "summary": "Scope admission55;unknown new UI fields explicit;exact links repair after textFormatRuns;sort-aware ID parity only inside filter."
+      },
+      "report_infra_status": "sent_verified",
+      "updated_at": "2026-11-13T09:15:29.831424-05:00",
+      "report_infra_message_id": "1570804315063324803",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -73169,6 +73221,22 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "id": "storage-review-1570799339108958250",
+      "agent": "zeus",
+      "type": "read_only_storage_classification",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1570799339108958250",
+      "status": "read_only_findings_delivered_no_deletions_or_retention_change",
+      "updated_at": "2026-11-13T09:18:03.644814-05:00",
+      "path": "/root/mgs-agent/data/storage-review-1570799339108958250",
+      "result_path": "/root/mgs-agent/data/storage-review-1570799339108958250/summary.json",
+      "evidence": "/root/mgs-agent/data/storage-review-1570799339108958250/SHA256SUMS",
+      "finance_candidate_count": 27,
+      "finance_candidate_bytes": 4639371264,
+      "deletions": 0,
+      "retention_implemented": false
     }
   ],
   "mu_plugin_canonical": {
