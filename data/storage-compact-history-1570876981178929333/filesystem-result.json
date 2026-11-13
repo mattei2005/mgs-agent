@@ -1,0 +1,35 @@
+{
+  "status": "filesystem_applied_once",
+  "manifest_sha256": "2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592",
+  "confirmation_message_id": "1570888435353526397",
+  "removed_roots": [
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/profile-snapshots/root",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/profile-snapshots/zeus",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/profile-snapshots/atena",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/profile-snapshots/ares",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/profiles/root",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/profiles/zeus",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/profiles/atena",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/profiles/ares",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery/profiles/root",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery/profiles/zeus",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery/profiles/atena",
+    "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery/profiles/ares"
+  ],
+  "regular_files_removed": 9984,
+  "directories_removed": 3318,
+  "symlinks_removed": 0,
+  "before": {
+    "used": 148446281728,
+    "available": 58437222400,
+    "observed_at": "2026-11-13T14:53:35.859289-05:00"
+  },
+  "after": {
+    "used": 142480023552,
+    "available": 64403480576,
+    "observed_at": "2026-11-13T14:53:37.161321-05:00"
+  },
+  "observed_free_delta": 5966258176,
+  "executor_sha256": "0d1434d1fe75f9c874c3509f174b49fc84c12cba89c5613fff190a8e50655dbf",
+  "completed_at": "2026-11-13T14:53:37.161461-05:00"
+}
