@@ -224,6 +224,8 @@ Ao excluir uma campanha futura, a Meta pode devolver `start_time=1969-12-31T18:5
 
 ## Onboarding de nova operação
 
+Para incluir uma conta nova nas rotinas de relatório existentes, sem criar campanhas ou outro cron, siga `direct-traffic-shein-operations/references/report-account-enrollment.md`: separar grant, catálogo, binding, layout e membership por produtor; derivar contagens das allowlists e preservar enrollments concorrentes e replays históricos.
+
 Para acrescentar uma conta a relatórios existentes, trate cadastro/binding, perfil visual e participação de agenda como camadas independentes. Releia identidade/moeda/fuso após qualquer intervenção manual; não reutilize o fuso anterior nem repita um grant já confirmado. Estenda somente a rotina solicitada: uma inclusão Intraday não autoriza ampliar o Diário D-1. Modele diferenças por bindings explicitamente autorizados, derive contagens e distribuição por gestor do conjunto real e teste duplicatas, pares conta/thread trocados e drift de escopo. No renderer SHEIN, confira também a allowlist de `format_profiles`, além dos overrides e padrões compactos/B.U.%; um binding válido sozinho não torna a conta elegível ao perfil. Valide coleta e renderização reais sem publicar teste, confira o encaminhamento dos argumentos pelo wrapper e faça auditoria pré/pós dos horários existentes, preservando alterações concorrentes autorizadas.
 
 1. Validar solicitante e autoridade.

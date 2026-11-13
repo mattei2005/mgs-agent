@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "query_only_write_rejected": true,
+  "union_recovers_one_source_missing_row": true,
+  "same_pk_different_payload_not_misclassified": true,
+  "unique_full_row_detected": true,
+  "zero_wal_stale_shm_model": true,
+  "normalization_only_in_ram": [
+    18,
+    19
+  ],
+  "no_original_sqlite_connection": true
+}

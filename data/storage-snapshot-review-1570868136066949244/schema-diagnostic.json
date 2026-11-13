@@ -1,0 +1,404 @@
+{
+  "cause": "Candidate phases legitimately have different database schema versions; equality gate was too strict, no source drift detected",
+  "snapshots": [
+    {
+      "id": "preparation-atena",
+      "source_hash_unchanged": true,
+      "schema_differences": {}
+    },
+    {
+      "id": "activation-atena",
+      "source_hash_unchanged": true,
+      "schema_differences": {}
+    },
+    {
+      "id": "recovery-atena",
+      "source_hash_unchanged": true,
+      "schema_differences": {
+        "hosted_room_policy_events": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "thread_id",
+            "discussion_event_id",
+            "seq",
+            "event_json"
+          ]
+        },
+        "worker_executions": {
+          "first_columns": null,
+          "this_columns": [
+            "execution_id",
+            "session_id",
+            "kind",
+            "owner_epoch",
+            "generation",
+            "status",
+            "adoption_digest",
+            "last_sequence"
+          ]
+        },
+        "hosted_room_policy_cursors": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "through_seq",
+            "stopped_through_seq",
+            "updated_at"
+          ]
+        },
+        "hosted_room_remote_runs": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "home_install_id",
+            "authority_gateway_id",
+            "authority_epoch",
+            "member_id",
+            "task_id",
+            "execution_generation",
+            "target_install_id",
+            "target_profile",
+            "run_id",
+            "session_id",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "hosted_rooms": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "name",
+            "members_json",
+            "authority_gateway_id",
+            "authority_epoch",
+            "next_seq",
+            "event_bytes",
+            "revision",
+            "created_at",
+            "updated_at",
+            "disbanded_at"
+          ]
+        },
+        "hosted_room_retired_ids": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "retired_at"
+          ]
+        },
+        "hosted_room_policy_transcript": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "thread_id",
+            "seq",
+            "kind",
+            "settled_seq"
+          ]
+        },
+        "sessions": {
+          "first_columns": [
+            "id",
+            "source",
+            "user_id",
+            "model",
+            "model_config",
+            "system_prompt",
+            "parent_session_id",
+            "started_at",
+            "ended_at",
+            "end_reason",
+            "message_count",
+            "tool_call_count",
+            "input_tokens",
+            "output_tokens",
+            "cache_read_tokens",
+            "cache_write_tokens",
+            "reasoning_tokens",
+            "billing_provider",
+            "billing_base_url",
+            "billing_mode",
+            "estimated_cost_usd",
+            "actual_cost_usd",
+            "cost_status",
+            "cost_source",
+            "pricing_version",
+            "title",
+            "api_call_count",
+            "handoff_state",
+            "handoff_platform",
+            "handoff_error",
+            "cwd",
+            "rewind_count",
+            "archived",
+            "git_branch",
+            "git_repo_root",
+            "session_key",
+            "chat_id",
+            "chat_type",
+            "thread_id",
+            "compression_failure_cooldown_until",
+            "compression_failure_error",
+            "display_name",
+            "origin_json",
+            "expiry_finalized",
+            "compression_fallback_streak",
+            "profile_name",
+            "compression_ineffective_count",
+            "pinned",
+            "system_prompt_hash",
+            "title_source",
+            "last_activity_at",
+            "last_activity_description",
+            "last_activity_provenance",
+            "last_read_at",
+            "git_metadata_generation",
+            "hidden",
+            "compression_recovery_deadline",
+            "tool_names",
+            "transport_profile",
+            "created_source",
+            "compression_overload_streak",
+            "auto_archived"
+          ],
+          "this_columns": [
+            "id",
+            "source",
+            "user_id",
+            "model",
+            "model_config",
+            "system_prompt",
+            "parent_session_id",
+            "started_at",
+            "ended_at",
+            "end_reason",
+            "message_count",
+            "tool_call_count",
+            "input_tokens",
+            "output_tokens",
+            "cache_read_tokens",
+            "cache_write_tokens",
+            "reasoning_tokens",
+            "billing_provider",
+            "billing_base_url",
+            "billing_mode",
+            "estimated_cost_usd",
+            "actual_cost_usd",
+            "cost_status",
+            "cost_source",
+            "pricing_version",
+            "title",
+            "api_call_count",
+            "handoff_state",
+            "handoff_platform",
+            "handoff_error",
+            "cwd",
+            "rewind_count",
+            "archived",
+            "git_branch",
+            "git_repo_root",
+            "session_key",
+            "chat_id",
+            "chat_type",
+            "thread_id",
+            "compression_failure_cooldown_until",
+            "compression_failure_error",
+            "display_name",
+            "origin_json",
+            "expiry_finalized",
+            "compression_fallback_streak",
+            "profile_name",
+            "compression_ineffective_count",
+            "pinned",
+            "system_prompt_hash",
+            "title_source",
+            "last_activity_at",
+            "last_activity_description",
+            "last_activity_provenance",
+            "last_read_at",
+            "git_metadata_generation",
+            "hidden",
+            "compression_recovery_deadline",
+            "tool_names",
+            "transport_profile",
+            "created_source",
+            "compression_overload_streak",
+            "auto_archived",
+            "runtime_revision",
+            "runtime_generation",
+            "transcript_revision"
+          ]
+        },
+        "hosted_room_events": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "seq",
+            "event_id",
+            "kind",
+            "actor_json",
+            "authority_epoch",
+            "payload_json",
+            "created_at"
+          ]
+        },
+        "hosted_room_policy_publications": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "task_id",
+            "kind",
+            "execution_generation",
+            "seq"
+          ]
+        },
+        "worker_receipts": {
+          "first_columns": null,
+          "this_columns": [
+            "execution_id",
+            "sequence",
+            "payload_digest",
+            "result_json"
+          ]
+        },
+        "hosted_room_revoked_grants": {
+          "first_columns": null,
+          "this_columns": [
+            "scope_key",
+            "expires_at",
+            "revoked_before"
+          ]
+        },
+        "hosted_room_policy_transcript_state": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "schema_version"
+          ]
+        },
+        "hosted_room_peer_reservations": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "member_id",
+            "target_profile",
+            "authority_gateway_id",
+            "authority_epoch",
+            "expires_at",
+            "revoked_at",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "session_admissions": {
+          "first_columns": null,
+          "this_columns": [
+            "seq",
+            "admission_id",
+            "request_id",
+            "principal_id",
+            "target_session_id",
+            "lineage_json",
+            "payload_json",
+            "payload_digest",
+            "intent",
+            "status",
+            "outcome",
+            "owner_epoch",
+            "generation"
+          ]
+        },
+        "hosted_room_policy_threads": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "thread_id",
+            "discussion_event_id",
+            "latest_user_seq",
+            "completed"
+          ]
+        },
+        "async_delegations": {
+          "first_columns": [
+            "delegation_id",
+            "origin_session",
+            "origin_ui_session_id",
+            "parent_session_id",
+            "state",
+            "dispatched_at",
+            "completed_at",
+            "updated_at",
+            "event_json",
+            "result_json",
+            "delivery_state",
+            "delivery_attempts",
+            "delivered_at",
+            "owner_pid",
+            "owner_started_at",
+            "task_json",
+            "delivery_claim",
+            "delivery_claimed_at",
+            "origin_session_id"
+          ],
+          "this_columns": [
+            "delegation_id",
+            "origin_session",
+            "origin_ui_session_id",
+            "parent_session_id",
+            "state",
+            "dispatched_at",
+            "completed_at",
+            "updated_at",
+            "event_json",
+            "result_json",
+            "delivery_state",
+            "delivery_attempts",
+            "delivered_at",
+            "owner_pid",
+            "owner_started_at",
+            "task_json",
+            "delivery_claim",
+            "delivery_claimed_at",
+            "origin_session_id",
+            "owner_execution_id"
+          ]
+        },
+        "hosted_room_policy_watermarks": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "thread_id",
+            "member_id",
+            "seen_through_seq"
+          ]
+        },
+        "runtime_epoch": {
+          "first_columns": null,
+          "this_columns": [
+            "singleton",
+            "epoch",
+            "instance_id"
+          ]
+        },
+        "hosted_room_links": {
+          "first_columns": null,
+          "this_columns": [
+            "room_id",
+            "member_id",
+            "target_url",
+            "target_profile",
+            "grant",
+            "catalog_json",
+            "cancellation_scope_id",
+            "trace_id",
+            "transport_security",
+            "status",
+            "updated_at"
+          ]
+        }
+      }
+    }
+  ]
+}

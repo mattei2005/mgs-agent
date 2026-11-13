@@ -62,5 +62,5 @@ elif MODE=='policies':
    after['membership_extensions']={**after.get('membership_extensions',{}),AID:{'thread_id':TID,'manager_code':'g002','authorized_by_discord_id':'344196393512075265','source_message_id':'1570858841023713285','permission_approval_message_id':'1570860329947103396','evidence':'data/ares/meta-ads/audit/yolo07-cron-1570858841023713285/smoke-result.json'}}
    assert set(after['account_ids'])-set(before['account_ids'])<={AID};assert set(after['thread_ids'])-set(before['thread_ids'])<={TID}
    assert after['enabled']==before['enabled'];commit(p,before,after)
- print('EXACT_TARGET_ADDED_TO_BOTH_EXISTING_POLICIES;25_REPORTS;NO_NEW_CRON')
+ print('EXACT_TARGET_ADDED_TO_BOTH_EXISTING_POLICIES;COUNTS_DERIVED_FROM_EACH_POLICY;NO_NEW_CRON')
 else:raise ValueError(MODE)
