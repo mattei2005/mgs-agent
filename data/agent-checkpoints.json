@@ -2722,6 +2722,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-TWO-REPORTS-1570812403937976371",
+      "next_step": "Concluir/GET36 ontem;coletar/render/entregar/GET36 Intraday;reconciliar72;então inventariar/restaurar apenas cinco slots, política enabled/readback,sem catchup, REPORT-INFRA.",
+      "objective": "Entregar12/11fechado e13/11Intraday nas36threads;depois reativar cinco slots Intraday conforme emenda Rodolfo1570814262631473396.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/request.json",
+      "state": "collecting_yesterday: fontes/ui em andamento;36preflights confirmados;228testes ok. emenda autenticada permite retomar cron somente após concluir e verificar ambas fases.",
+      "thread_id": "1570801075621986305",
+      "updated_at": "2026-11-13T14:55:35+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
       "next_step": "Do not assume asset access from app presence. Confirm the issuance surface supports config_id with Authorization Code exchange, invoke the system-user OAuth flow from a secure callback, explicitly delegate the intended Digital Trust Pages/ad accounts and optional SHEIN pixel, store token only in 1Password, then read back token identity, scopes, expiry, client_business_id, accessible accounts, currency/timezone/health and rate-limit headers before enabling aliases.",
       "objective": "Onboard SHEIN US direct traffic across six manager channels with campaign-creation focus, isolated accounts and no fixed threads.",
@@ -6238,12 +6248,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-PROFILES-1570811193906700471",
-      "next_step": "Atualizar inventario e provas SA/Drive porID+hash+ancestralidade;verificar refs e estado tarefas;congelar alvos seguros para confirmacao critica. Nenhuma exclusao autorizada.",
-      "objective": "Ponto2:revisar copias locais de materiais Ares/Atena;preservar memoria,historico,logins,coletores e tarefasativas;prepararsomentelotecomprova.",
-      "source": "discord:1569928464033783862/1570811193906700471",
-      "state": "read_only_inventory_in_progress",
+      "next_step": "Inventario63469arquivos;12111midiasAres;858matches493IDs.493/493consumidornativo+ACK+ancestrais+streamsPASS;1HTTP0transportrecuperado. Selecionar754copiasPOUPLIX(0.53GiB),tarefasencerradas;104outrosmatches eAtena preservados. Referencias858somente12JSONhistoricos,nenhumexecutavel/processo;preservaroriginais+indicepathname→arquivo. Congelarmanifesto/executor antesconfirmacao.",
+      "objective": "Ponto2:copias locais de materiais Ares/Atena sem perda dehistorico/autenticacao.",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/profile-review-1570811193906700471/cloud-native-final.json",
+      "state": "native_archive_verified_preparing_exact_lot",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T14:43:36+00:00"
+      "updated_at": "2026-11-13T14:58:21+00:00"
     },
     {
       "agent": "zeus",
@@ -10197,5 +10207,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:43:36+00:00"
+  "updated_at": "2026-11-13T14:58:21+00:00"
 }

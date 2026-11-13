@@ -8,7 +8,8 @@
     "1564373157727576245",
     "1564382301155098717",
     "1564382678168502295",
-    "1570799435502588027"
+    "1570799435502588027",
+    "1570815017794674749"
   ],
   "thread_id": "1563926766286803004",
   "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
@@ -675,11 +676,11 @@
     "1034081997659047",
     "1492168699397108"
   ],
-  "pay_now_column": "Disponível para pagar no cartão (Pay now)",
+  "pay_now_column": "Saldo pendente — Outstanding balance",
   "layout_version": 3,
   "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T140537683569",
   "pay_now_updated_each_tick": true,
-  "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
+  "pay_now_collection_policy": "Rodolfo1570815017794674749 delegated resolving the proposed H source change: use literal Outstanding balance of exact Accounts-list row; source accounts_list_outstanding_balance, original per-account timestamps, matching name/ID/BM/header verified in pixels and AX. Applies to all40 current line-funded IDs under55-account scope. Rename H to actual metric, never Pay now modal or assumed Current balance equivalence. No Meta/billing/payment changes.",
   "schema": {
     "A": "Nome",
     "B": "Forma",
@@ -688,7 +689,7 @@
     "E": "Invoice",
     "F": "Outubro — saldo em aberto",
     "G": "Média diária",
-    "H": "Pay now",
+    "H": "Saldo pendente — Outstanding balance",
     "I": "Saldo a pagar",
     "J": "Novembro2026"
   },
@@ -706,7 +707,7 @@
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
   "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261113T092625844101",
-  "pay_now_rule_authority_message": "1564382301155098717",
+  "pay_now_rule_authority_message": "1570815017794674749",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",
   "invoice_current_header": "Outubro — saldo em aberto",
@@ -836,5 +837,15 @@
     "other_sheet_data_unchanged": true,
     "summary_notes_reconciled": true,
     "verified_at": "2026-11-13T09:14:47.985643-05:00"
-  }
+  },
+  "h_source_history": [
+    {
+      "previous_authority": "1564382301155098717",
+      "previous_column": "Disponível para pagar no cartão (Pay now)",
+      "previous_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
+      "superseded_by": "1570815017794674749",
+      "effective_at": "2026-11-13T10:00:41.361131-05:00"
+    }
+  ],
+  "h_source": "accounts_list_outstanding_balance"
 }
