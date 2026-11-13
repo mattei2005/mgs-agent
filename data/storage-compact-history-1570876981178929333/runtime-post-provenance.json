@@ -1,0 +1,30 @@
+{
+  "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "gateways": [
+    {
+      "profile": "zeus",
+      "pid": 2241212,
+      "python_exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "runtime_path_args": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ]
+    },
+    {
+      "profile": "ares",
+      "pid": 2233587,
+      "python_exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "runtime_path_args": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ]
+    },
+    {
+      "profile": "atena",
+      "pid": 2237072,
+      "python_exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "runtime_path_args": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ]
+    }
+  ],
+  "smoke_cli_flags_verified": true
+}
