@@ -75,5 +75,16 @@ with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as tmp:
  run=root/'delivery';run.mkdir()
  for _ in range(2):delivery.deliver(SimpleNamespace(Discord=DC,BOT_ID='BOT'),manifest,run,['test'])
  check('nonce readback replay one POST',len(posts)==1 and posts[0]['enforce_nonce'])
+ # Decimal/type failures remain isolated to the inconsistent campaign.
+ Runner.ins=[{'campaign_id':'1','date_start':m.DAY,'date_stop':m.DAY,'spend':'invalid'}]
+ result=collect('invalid-decimal');check('invalid decimal isolated',result['rows']['1']['pending'] and not result['rows']['2']['pending'])
+ Runner.ins=[{'campaign_id':'1','date_start':m.DAY,'date_stop':m.DAY,'spend':'5','actions':[{'action_type':m.w.ACTION,'value':None}]}]
+ result=collect('invalid-type');check('invalid action isolated',result['rows']['1']['pending'] and not result['rows']['2']['pending'])
+ # Empty OS run-parts is a verified no-op, never an assumed exemption.
+ import subprocess
+ rp=root/'hourly';rp.mkdir()
+ check('empty run-parts verified',not subprocess.check_output(['run-parts','--test',str(rp)],text=True).strip())
+ task=rp/'workload';task.write_text('#!/bin/sh\nexit 0\n');task.chmod(0o700)
+ check('nonempty run-parts detected',str(task) in subprocess.check_output(['run-parts','--test',str(rp)],text=True))
  m.ROOT,m.scope=orig_root,orig_scope
 result={'status':'PASS','tests':len(checks),'checks':checks,'external_calls':0};m.save(m.ROOT/'tests.json',result);print(json.dumps(result,ensure_ascii=False))

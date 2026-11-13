@@ -253,12 +253,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-1570854779284885505",
-      "next_step": "Congelar quatro288-291; dry-run congelado; inicial GET; auditar agenda global e habilitar somente até meia-noite14/11EST",
-      "objective": "Relatórios CPR cada30min somente13/11 Yolokfx04 G004 campanhas criadas até pedido12:36EST; coorte fixa",
+      "next_step": "Inicial12:39EST GET confirmado: quatro sem gasto/resultados; 23slots12:47–23:47EST; expira14/11 00hEST antes API; manter mesmosIDs sem inclusão futura; 29testes PASS; auditoria pré/pós sem conflitos operacionais; zero writesMeta",
+      "objective": "Relatórios CPR cada30min campanhas288-291 criadas13/11 até12:36EST; coorte fixa Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-updates/1570854779284885505/manifest.json",
-      "state": "preparing_live_cohort_verified",
+      "state": "scheduled_validated_initial_get_verified",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-13T17:39:23+00:00"
+      "updated_at": "2026-11-13T17:44:12+00:00"
     },
     {
       "agent": "ares",
@@ -10247,5 +10247,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T17:39:23+00:00"
+  "updated_at": "2026-11-13T17:44:12+00:00"
 }
