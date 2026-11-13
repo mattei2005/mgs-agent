@@ -1,0 +1,60 @@
+{
+  "status": "completed_validated",
+  "manifest_sha256": "4c4c89490adcc8c6647799632ba459fe58996cd8fcacd4074f31e06c7a87bd25",
+  "confirmation_message_id": "1570858909420232707",
+  "target": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/control-plane",
+  "target_absent": true,
+  "regular_files_removed": 4204,
+  "directories_removed": 1089,
+  "symlinks_removed": 2,
+  "observed_reclaim_bytes": 3468783616,
+  "retained_recovery_files_hashes_unchanged": 63,
+  "protected_files_unchanged": 17,
+  "profile_control_files": 12,
+  "browser_containers": 3,
+  "production_symlink_referents": 2,
+  "retained_archives_readable": 3,
+  "profile_smokes": [
+    {
+      "profile": "zeus",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 11.48
+    },
+    {
+      "profile": "ares",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 13.59
+    },
+    {
+      "profile": "atena",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 13.64
+    }
+  ],
+  "gateway_pids_unchanged": true,
+  "failed_units": 0,
+  "retention_changed": false,
+  "remote_writes": 0,
+  "older_snapshots_removed": false,
+  "delivery_used_percent": 71.49388695025574,
+  "delivery_available_bytes": 58974445568,
+  "diagnostic_recovery": "Initial read-only preflight exceeded120s; no writer/apply survived; exact predicate rerun instrumentedPASS11.57s before mutation; cause of transient timeout unproven",
+  "next": "Continue point3: prove historical coverage/subsumption of older profile snapshots before any exact retirement lot; point4 runtimes not authorized by this deletion",
+  "completed_at": "2026-11-13T13:04:29.726762-05:00",
+  "report_infra": {
+    "message_id": "1570862156134621296",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-13T13:06:06.320230-05:00"
+}
