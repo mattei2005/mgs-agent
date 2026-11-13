@@ -6328,12 +6328,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-COMPACT-1570876981178929333",
-      "next_step": "ConclusaoREPORT1570892341189943489readback;compacto375MiB+7basesprotegidos. Nadaapagarounovaconfirmacaopendentedestelote. Proximopontoerevisaoread-onlybackupsantigosVPSmaintenance;semoutrasexclusoes/retencao. ValidarconvergenciaGItsemreplay.",
-      "objective": "12pastasconfirmadas1570888435353526397excluidasevalidadas,5.56GiBefetivos;historico9984filesrecuperadoposdelete.",
-      "source": "data/storage-compact-history-1570876981178929333/cleanup-result.json",
+      "next_step": "Loteconcluidosempendenciadeconfirmacao/retry. Gitcf590c4ed07bea28c77b5a81cb6aa4189fc2a1fdcontem15artefatos/2registros/resultado344847a7fdf6754952e990482b3fb158c0a09517477afb31e5a75d9d6b23a26c;recibocleanup-git-sync.json. Proximoponto:revisaoread-onlyVPSmaintenance;preservarcompacto375MiB+7bases/latest/safety/offsite;nenhumaoutraexclusaoautorizada.",
+      "objective": "12snapshotsconfirmadosremovidos,5.56GiBrecuperados;9984filesrecuperaveisposdelete;REPORTeGitvalidados.",
+      "source": "data/storage-compact-history-1570876981178929333/cleanup-result.json;data/storage-compact-history-1570876981178929333/cleanup-git-sync.json",
       "state": "expanded_snapshot_lot_completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T20:06:33+00:00"
+      "updated_at": "2026-11-13T20:11:13+00:00"
     },
     {
       "agent": "zeus",
@@ -10337,5 +10337,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T20:06:33+00:00"
+  "updated_at": "2026-11-13T20:11:13+00:00"
 }
