@@ -2,6 +2,14 @@
 
 Use this reference when a maintenance job regenerates a large JSON inventory/report inside a Git repository that is automatically committed or pushed.
 
+## Current execution contract — overrides historical snippets
+
+- Keep every temporary component and final staged output outside the watched repository, on the canonical profile scratch/TMPDIR and the same filesystem needed for atomic replace. Do not use `/tmp` or create watched `OUT.tmp.*` artifacts for Hermes sessions.
+- Track temporary paths explicitly. The shell cleanup traps and `rm` commands below are historical examples, not current deletion authorization; exact disposal follows AGENT.md/Critical Subset. Do not add automatic trap/finally deletion merely to recover an inventory writer.
+- Preserve healthy native batching and wait its remaining configured window. A narrowly authorized producer-startup catch-up is distinct from normal batching; do not manufacture events, replay an old blob or shorten settings just to close an operation faster. The current full-VPS cleanup reference owns synchronization closure.
+- Re-read shared inventory immediately before a record-level upsert and preserve all unrelated collections/fields. Stage outside Git, compare the canonical source version before atomic replacement and re-read the exact ID afterward; atomic rename alone does not prevent stale-document lost updates.
+- If a closure record vanished during concurrent work, first reconcile audit → current inventory → REPORT-INFRA → Git → sessions. Recover only the exact owned record proven by a prior Git revision and surviving sealed result/approval/report; merge its current validated outcome into the latest document, require one matching ID and retain the omission commit in a separate recovery receipt. Do not restore the whole old inventory, attribute an unknown writer, replay deletion or resend the already-delivered report. Verify the repaired record and final result hash in the remote-contained commit before closure.
+
 ## Failure class
 
 Two independent hazards can combine:

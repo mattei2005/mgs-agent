@@ -1,0 +1,48 @@
+--- 
++++ 
+@@ -8,10 +8,10 @@
+   "authorized_by": "344196393512075265",
+   "source_thread_id": "1557274000680288307",
+   "catalog_purpose": "exact account name/id lookup and manager/channel binding; not new campaign, permission, credential or onboarding authority",
+-  "account_count": 36,
++  "account_count": 37,
+   "counts_by_manager": {
+     "G001": 6,
+-    "G002": 6,
++    "G002": 7,
+     "G003": 6,
+     "G004": 6,
+     "G005": 6,
+@@ -833,6 +833,31 @@
+       ],
+       "single_clone_runtime_enabled": true,
+       "account_prerequisite_status": "LIVE_SOURCE_READY"
++    },
++    {
++      "account_id": "1492168699397108",
++      "name": "Yolokfx-US-SHEIN-EN-07-G002",
++      "manager_code": "G002",
++      "manager_name": "Geizian",
++      "manager_discord_id": "321263240782807040",
++      "channel_id": "1548149300826079333",
++      "channel_name": "shein-g002",
++      "currency": "USD",
++      "timezone_name": "America/New_York",
++      "account_status": 1,
++      "relationship": "owned",
++      "engine_registered": false,
++      "registered_modes": [],
++      "single_clone_runtime_enabled": false,
++      "account_prerequisite_status": "REPORT_READ_ONLY_VALIDATED",
++      "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00",
++      "reporting_source_message_id": "1570858841023713285"
+     }
+-  ]
++  ],
++  "last_scoped_reconciliation": {
++    "account_id": "1492168699397108",
++    "source_message_id": "1570858841023713285",
++    "observed_at": "2026-11-13T18:12:13.439139+00:00",
++    "source": "exact allowed account GET;no portfolio discovery"
++  }
+ }

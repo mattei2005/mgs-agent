@@ -1623,6 +1623,26 @@
           "request_text": "Pode aplicar.",
           "approved_scope": "Substituir B.R.% por B.U.% nas36contas, preservando demais colunas, ordenacoes e historico; sem alterar budgets/status/automacoes",
           "supersedes_for_this_account_only": "budget_remaining_over_daily_budget_percent"
+        },
+        "1492168699397108": {
+          "status": "active",
+          "policy_id": "ARES-SHEIN-ALL36-BUDGET-USED-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-07-G002",
+          "source_thread_id": "1569767319339663361",
+          "authorization_source_thread_id": "1558146725376557126",
+          "authorized_by_discord_id": "344196393512075265",
+          "confirmation_request_message_id": "1561845294080204821",
+          "effective_from_report_date": "2026-10-19",
+          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
+          "metric": "daily_spend_over_daily_budget_percent",
+          "display_header": "B.U.%",
+          "formula": "100 * Meta campaign spend on report civil date / Meta campaign daily_budget",
+          "scope": "explicit_Yolokfx07_G002_reporting_extension",
+          "request_text": "Pode aplicar.",
+          "approved_scope": "Substituir B.R.% por B.U.% nas36contas, preservando demais colunas, ordenacoes e historico; sem alterar budgets/status/automacoes",
+          "supersedes_for_this_account_only": "budget_remaining_over_daily_budget_percent",
+          "extension_authority_message_id": "1570858841023713285",
+          "permission_approval_message_id": "1570860329947103396"
         }
       },
       "account_column_overrides": {
@@ -3252,6 +3272,46 @@
             "source_thread_id": "1561752465978818722",
             "request_text": "faca as mudancas para todos nao somente o yolo, assim fica tudo no mesmo padrao."
           }
+        },
+        "1492168699397108": {
+          "status": "active",
+          "policy_id": "ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-07-G002",
+          "thread_id": "1569767319339663361",
+          "manager_code": "g002",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
+          "scope": "explicit_Yolokfx07_G002_reporting_extension",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "include_status": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "status_codes": {
+              "ACTIVE": "A",
+              "PAUSED": "P",
+              "DELETED": "D",
+              "ARCHIVED": "A"
+            },
+            "format_profile_id": "SHEIN_ALL36_UNIFORM_G001_CAPS_V1",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "faca as mudancas para todos nao somente o yolo, assim fica tudo no mesmo padrao."
+          },
+          "previous_policy_id": "ARES-YOLO-REPORT-UNIFORM-CAPS-20261019",
+          "status_column_effective_from_financial_snapshot": "2026-10-19T11:52:05.914548-04:00",
+          "status_column_source_thread_id": "1561752465978818722",
+          "status_code_correction_message_id": "1561768488425627691",
+          "format_profile_effective_from_financial_snapshot": "2026-10-19T12:59:06.363679-04:00",
+          "domain": "yolokfx.com",
+          "source_instruction_message_id": "1561784289786466416",
+          "extension_authority_message_id": "1570858841023713285",
+          "permission_approval_message_id": "1570860329947103396"
         }
       },
       "format_profiles": {
@@ -3376,7 +3436,8 @@
             "1867022354284742",
             "937846586033361",
             "869857549542755",
-            "1583000095650153"
+            "1583000095650153",
+            "1492168699397108"
           ],
           "reference_manager": "g001",
           "display_columns": [
@@ -3490,7 +3551,8 @@
           "787796726891306",
           "869857549542755",
           "897046653487466",
-          "937846586033361"
+          "937846586033361",
+          "1492168699397108"
         ],
         "thread_ids": [
           "1558146381871587390",
@@ -3528,7 +3590,8 @@
           "1558147411900366861",
           "1558147440350076928",
           "1558147459698655425",
-          "1558147479432601670"
+          "1558147479432601670",
+          "1569767319339663361"
         ],
         "effective_from_financial_snapshot": "2026-10-19T16:59:37.406578-04:00",
         "metric": "daily_spend_over_daily_budget_percent",
@@ -3586,7 +3649,8 @@
           "787796726891306",
           "869857549542755",
           "897046653487466",
-          "937846586033361"
+          "937846586033361",
+          "1492168699397108"
         ],
         "account_bindings": {
           "1018267074603840": {
@@ -3768,6 +3832,11 @@
             "account_name": "Mavroa-US-SHEIN-ES-06-G006",
             "thread_id": "1558147440350076928",
             "manager_code": "g006"
+          },
+          "1492168699397108": {
+            "account_name": "Yolokfx-US-SHEIN-EN-07-G002",
+            "thread_id": "1569767319339663361",
+            "manager_code": "g002"
           }
         },
         "approved_preview_policy_id": "ARES-YOLO-G001-NO-STATUS-PREVIEW-20261019",
