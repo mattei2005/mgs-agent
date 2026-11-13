@@ -26,6 +26,10 @@ Include, when present:
 
 Avoid double counting nested sets: either total a root or its children, not both in the grand total.
 
+Define the counting unit before reporting an exhaustive backup inventory: distinguish complete VPS recovery points, operational recovery sets, individual backup files, empty containers and filename-only matches. Group the executive list by purpose while retaining every exact member in the detailed ledger; never present hundreds of small rollback entries as hundreds of complete VPS backups. Separate provider/offsite inventories from local disk usage because removing an off-host recovery point does not reclaim guest filesystem space.
+
+Keep large metadata scans allocation-light: use `os.scandir`, one `os.lstat` per node, plain path strings and directory-boundary prefix checks in the hot loop; construct `Path` objects only for retained rows or selected candidates. Persist the metadata ledger before content hashing or remote probes so an expensive later phase can resume without rescanning the filesystem. After a timeout, check surviving processes and persisted phase artifacts before starting another scanner.
+
 ### Deep classification and bounded duplicate proof
 
 Use this branch when substantial usage remains after a narrow cleanup or when directory totals mix test databases, dumps, inputs and evidence.
@@ -42,12 +46,12 @@ Use this branch when substantial usage remains after a narrow cleanup or when di
 
 ### Repeated pre-import database dumps
 
-Use this bounded path when scheduled retries leave separate local copies of the same pre-import database backup:
+Use this bounded path for repeated local pre-import dumps or local copies individually mirrored at the production backup host:
 
 1. Resolve the actual producer, its interpreter and remote backup helper from the live scheduler before importing its code; reuse that execution environment rather than guessing a Python environment or installing packages for the audit. Inspect the helper for side effects and invoke only its read-only transport operation.
-2. Group regular dump files by size, then compare SHA-256 within repeated-size groups. Deduplicate inode identities and select a retained representative per digest according to recovery consumers. Record excess copies as duplicate potential, not approved reclaim.
-3. Read the completed operation receipts to join each proposed local removal to its exact retained local file and remote backup path, size and digest. Through the canonical transport, recheck remote `sha256sum`/size and use the producer's `pg_restore --list` command to prove catalogue readability. Do not describe catalogue listing as a materialized restore.
-4. Preserve source attachments, import/idempotency state and compact immutable receipts. Confirm that future runs create new execution directories and do not reopen a selected historical local dump; check pending recovery jobs, exact executable references, processes and checksum-coupled evidence. A receipt's historical `local_copy` field is not a sufficient recovery route after removal: retain an explicit mapping to the surviving local or remote copy without rewriting the original receipt.
+2. Test two independent redundancy routes. For duplicate local copies, group by size, compare SHA-256 within repeated-size groups and deduplicate inode identities. For individually mirrored local dumps, join each file to its own remote counterpart even when every local dump has a unique hash; zero local duplicate groups does not rule out remote redundancy. Keep both routes as candidates until consumer and retained-recovery checks pass.
+3. Read the operation receipts to join each proposed local removal to its exact surviving local or remote file, size and digest. Through the canonical transport, recheck remote `sha256sum`/size and use the producer's `pg_restore --list` command to prove catalogue readability. Compare all selected counterparts, not a representative sample, and do not describe catalogue listing as a materialized restore.
+4. Split completed imports from partial, blocked or pending recovery before selecting targets. Preserve ambiguous recovery cases and any required newest local fallback until their own closure is proven; do not infer full completion from a generic success boolean. Preserve source attachments, import/idempotency state and compact immutable receipts. Confirm that future runs create new execution directories and do not reopen a selected historical local dump; check pending recovery jobs, exact executable references, processes and checksum-coupled evidence. A receipt's historical `local_copy` field is not a sufficient recovery route after removal: retain an explicit mapping to the surviving local or remote copy without rewriting the original receipt.
 5. Freeze only the individual excess dump files, never their parent run directories. Apply the exact-manifest/validator/confirmation workflow; revalidate retained hashes and remote recovery before execution, then verify target absence and measure the actual `df` delta.
 6. Keep this one-time duplicate-copy removal separate from changing future import backup behavior or retention. Identical backups already present at the remote producer can still be copied repeatedly by the local consumer; producer reuse alone does not prove that local accumulation is prevented.
 
