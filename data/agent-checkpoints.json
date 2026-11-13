@@ -252,6 +252,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1570854779284885505",
+      "next_step": "Congelar quatro288-291; dry-run congelado; inicial GET; auditar agenda global e habilitar somente até meia-noite14/11EST",
+      "objective": "Relatórios CPR cada30min somente13/11 Yolokfx04 G004 campanhas criadas até pedido12:36EST; coorte fixa",
+      "source": "data/ares/meta-ads/state/cpr-updates/1570854779284885505/manifest.json",
+      "state": "preparing_live_cohort_verified",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-13T17:39:23+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -10237,5 +10247,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T16:54:10+00:00"
+  "updated_at": "2026-11-13T17:39:23+00:00"
 }
