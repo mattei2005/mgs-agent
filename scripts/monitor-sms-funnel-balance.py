@@ -9,6 +9,7 @@ Credentials stay in 1Password; Discord delivery uses the Zeus bot token.
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import os
 import subprocess
@@ -18,6 +19,7 @@ import time
 import urllib.error
 import urllib.request
 from datetime import datetime
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -32,6 +34,9 @@ VAULT = "MGS Conteúdo"
 LOGIN_URL = "https://web2.smsfunnel.com.br/api/login"
 CREDITS_URL = "https://web2.smsfunnel.com.br/api/user-credits-info"
 DAILY_SENTS_URL = "https://web2.smsfunnel.com.br/api/daily-sents"
+WALLET_BALANCE_URL = "https://web2.smsfunnel.com.br/api/wallet/balance"
+WALLET_BILLING_URL = "https://web2.smsfunnel.com.br/api/wallet/billing"
+WALLET_PRICES_URL = "https://web2.smsfunnel.com.br/api/wallet/prices"
 DISCORD_API_BASE = "https://discord.com/api/v10"
 MENTION_USER_ID = "344196393512075265"
 
@@ -82,6 +87,7 @@ def default_state(channel_id: str) -> dict[str, Any]:
             "description": "Estado do monitor de saldo SMS Funnel.",
             "channel_id": channel_id,
             "emergency_credits": THRESHOLDS["emergency"],
+            "balance_contract": "wallet-v2: BRL via /wallet/balance; 7000 SMS-equivalent at live price",
             "schedule": "24 0,1,7-23 * * *",
         },
         "last_check": None,
@@ -177,6 +183,8 @@ def read_credential(env: dict[str, str]) -> tuple[str, str]:
 def validate_metrics(data: Any) -> dict[str, int]:
     if not isinstance(data, dict):
         raise RuntimeError("resposta de créditos não é um objeto")
+    if "credits" not in data:
+        raise RuntimeError("resposta de créditos sem saldo: estado desconhecido")
     keys = ["total_contracted", "total_sent", "total_reserved", "credits", "total_calculated_broadcasts"]
     metrics: dict[str, int] = {}
     for key in keys:
@@ -209,7 +217,50 @@ def completed_three_day_average(data: Any) -> int:
     return int(round(sum(completed) / len(completed))) if len(completed) == 3 else 0
 
 
-def probe_live(env: dict[str, str]) -> dict[str, int]:
+def wallet_metrics(metrics: dict[str, Any], wallet: Any, prices: Any) -> dict[str, Any]:
+    """Wallet amounts are authoritative; legacy credits are not wallet funds."""
+    if not isinstance(wallet, dict) or wallet.get("currency") != "BRL":
+        raise RuntimeError("carteira ausente ou moeda diferente de BRL")
+    result = dict(metrics)
+    for key in ("balance_micros", "available_micros", "held_micros"):
+        value = wallet.get(key)
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise RuntimeError(f"campo monetário inválido/ausente: {key}")
+        result[key] = value
+    if result["balance_micros"] - result["held_micros"] != result["available_micros"]:
+        raise RuntimeError("carteira não conciliada: saldo - reservas != disponível")
+    if not isinstance(prices, dict) or not isinstance(prices.get("products"), list):
+        raise RuntimeError("tarifa SMS indisponível; não inferir limite de alerta")
+    sms = [p for p in prices["products"] if isinstance(p, dict) and p.get("service") == "sms" and p.get("unit") == "message"]
+    if len(sms) != 1 or sms[0].get("blocked") is not False:
+        raise RuntimeError("tarifa SMS ausente, ambígua ou bloqueada")
+    price = sms[0].get("unit_price_micros")
+    if isinstance(price, bool) or not isinstance(price, int) or price <= 0:
+        raise RuntimeError("preço SMS inválido; não usar tarifa fixa")
+    result.update(balance_basis="wallet", currency="BRL", sms_unit_price_micros=price,
+                  sms_equivalent=result["available_micros"] // price)
+    return result
+
+
+def alert_capacity(metrics: dict[str, Any]) -> int:
+    return metrics["sms_equivalent"] if metrics.get("balance_basis") == "wallet" else metrics["credits"]
+
+
+def same_basis(previous: dict[str, Any], current: dict[str, Any]) -> bool:
+    return bool(previous) and previous.get("balance_basis", "package") == current.get("balance_basis", "package")
+
+
+def increased_balance(previous: dict[str, Any], current: dict[str, Any]) -> bool:
+    if not same_basis(previous, current):
+        return False  # migration is not a new recharge
+    if current.get("balance_basis") == "wallet":
+        # A hold release or price change must not be reported as a recharge.
+        return current["balance_micros"] > previous["balance_micros"]
+    return (current["total_contracted"] > previous["total_contracted"] or
+            current["credits"] - previous["credits"] >= 100)
+
+
+def probe_live(env: dict[str, str]) -> dict[str, Any]:
     username, password = read_credential(env)
     status, login = http_json(LOGIN_URL, method="POST", payload={"email": username, "password": password})
     if status != 200 or not isinstance(login, dict):
@@ -217,10 +268,19 @@ def probe_live(env: dict[str, str]) -> dict[str, int]:
     token = str(login.get("access_token") or "")
     if not token:
         raise RuntimeError("login SMS Funnel sem access_token")
-    status, credits = http_json(CREDITS_URL, headers={"Authorization": f"Bearer {token}"})
+    headers = {"Authorization": f"Bearer {token}"}
+    _, billing = http_json(WALLET_BILLING_URL, headers=headers)
+    if not isinstance(billing, dict) or billing.get("sms") not in {"wallet", "package", "credits"}:
+        raise RuntimeError("origem da cobrança SMS desconhecida; não assumir pacote")
+    status, credits = http_json(CREDITS_URL, headers=headers)
     if status != 200:
         raise RuntimeError(f"consulta de créditos falhou com HTTP {status}")
     metrics = validate_metrics(credits)
+    metrics["balance_basis"] = "package"
+    if billing["sms"] == "wallet":
+        _, wallet = http_json(WALLET_BALANCE_URL, headers=headers)
+        _, prices = http_json(WALLET_PRICES_URL, headers=headers)
+        metrics = wallet_metrics(metrics, wallet, prices)
     try:
         daily_status, daily_sents = http_json(DAILY_SENTS_URL, headers={"Authorization": f"Bearer {token}"})
         if daily_status == 200:
@@ -235,6 +295,8 @@ def probe_fixture(path: Path) -> dict[str, int]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(data, dict) and data.get("error"):
         raise RuntimeError(str(data["error"]))
+    if isinstance(data, dict) and "wallet" in data:
+        return wallet_metrics(validate_metrics(data["legacy"]), data["wallet"], data["prices"])
     return validate_metrics(data)
 
 
@@ -246,6 +308,11 @@ def balance_level(credits: int) -> str:
 
 def fmt_int(value: int | float) -> str:
     return f"{int(round(value)):,}".replace(",", ".")
+
+
+def fmt_money(micros: int) -> str:
+    value = f"{Decimal(micros) / Decimal(1_000_000):,.2f}"
+    return "R$ " + value.translate(str.maketrans({",": ".", ".": ","}))
 
 
 def append_sample(state: dict[str, Any], metrics: dict[str, int], now_epoch: int) -> None:
@@ -265,9 +332,12 @@ def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: i
     if daily_average > 0:
         return {
             "daily_sent": daily_average,
-            "hours_left": round(metrics["credits"] / daily_average * 24, 1),
+            "hours_left": round(alert_capacity(metrics) / daily_average * 24, 1),
             "window_hours": 72.0,
         }
+    if metrics.get("balance_basis") == "wallet":
+        # Legacy total_sent can freeze after migration; never derive wallet burn from it.
+        return {"daily_sent": None, "hours_left": None, "window_hours": 0.0}
     samples = [sample for sample in state.get("samples", []) if isinstance(sample, dict)]
     candidates = [sample for sample in samples if now_epoch - int(sample.get("ts", 0)) <= 78 * 3600]
     if len(candidates) < 2:
@@ -300,6 +370,17 @@ def projection_text(projection: dict[str, Any]) -> str:
 
 
 def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[dict[str, Any]]:
+    if metrics.get("balance_basis") == "wallet":
+        projection_value = projection_text(projection)
+        if projection.get("hours_left") is not None:
+            projection_value += " Estimativa somente para SMS à tarifa atual; outros canais também consomem esta carteira."
+        return [
+            {"name": "Saldo disponível na carteira", "value": f"**{fmt_money(metrics['available_micros'])}**", "inline": True},
+            {"name": "Reservado em envios", "value": fmt_money(metrics["held_micros"]), "inline": True},
+            {"name": "Tarifa SMS vigente", "value": fmt_money(metrics["sms_unit_price_micros"]) + " por SMS", "inline": True},
+            {"name": "Capacidade estimada em SMS", "value": f"Aprox. {fmt_int(metrics['sms_equivalent'])} SMS se todo o saldo for usado somente em SMS. Não é um pacote de créditos.", "inline": False},
+            {"name": "Projeção", "value": projection_value, "inline": False},
+        ]
     fields = [
         {"name": "Saldo disponível", "value": f"**{fmt_int(metrics['credits'])} SMS**", "inline": True},
         {"name": "Projeção", "value": projection_text(projection), "inline": False},
@@ -335,7 +416,7 @@ def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any
 
 def friday_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
     fields = metric_fields(metrics, projection)
-    if metrics["credits"] <= THRESHOLDS["emergency"]:
+    if alert_capacity(metrics) <= THRESHOLDS["emergency"]:
         fields.append({
             "name": "Ação necessária",
             "value": "Fazer a recarga via PIX com o fornecedor da SMS Funnel para evitar a interrupção dos envios.",
@@ -346,7 +427,7 @@ def friday_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[
         "allowed_mentions": {"users": [MENTION_USER_ID]},
         "embeds": [{
             "title": "Saldo SMS Funnel — alerta de sexta-feira",
-            "color": LEVEL_COLOR["emergency"] if metrics["credits"] <= THRESHOLDS["emergency"] else LEVEL_COLOR["info"],
+            "color": LEVEL_COLOR["emergency"] if alert_capacity(metrics) <= THRESHOLDS["emergency"] else LEVEL_COLOR["info"],
             "fields": fields,
         }],
     }
@@ -356,7 +437,7 @@ def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> d
     fields = metric_fields(metrics, projection)
     fields.append({
         "name": "Comportamento",
-        "value": "Consulta a cada hora. Não alerta acima de 7.000 SMS; toda sexta-feira às 15h de São Paulo envia uma conferência obrigatória.",
+        "value": "Consulta nos horários aprovados. Para carteira em reais, alerta até o equivalente a 7.000 SMS à tarifa vigente. Toda sexta às 15h de São Paulo envia conferência obrigatória.",
         "inline": False,
     })
     return {
@@ -367,6 +448,10 @@ def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> d
 
 
 def recharge_payload(previous: dict[str, Any], metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
+    if metrics.get("balance_basis") == "wallet":
+        fields = metric_fields(metrics, projection)
+        fields.insert(1, {"name": "Variação do saldo total", "value": f"{fmt_money(previous['balance_micros'])} → {fmt_money(metrics['balance_micros'])}. Aumento detectado; não comprova pagamento novo.", "inline": False})
+        return {"content": "", "allowed_mentions": {"parse": []}, "embeds": [{"title": "Aumento de saldo SMS Funnel detectado", "color": LEVEL_COLOR["normal"], "fields": fields}]}
     before = int(previous.get("credits", 0) or 0)
     delta = metrics["credits"] - before
     fields = metric_fields(metrics, projection)
@@ -376,6 +461,17 @@ def recharge_payload(previous: dict[str, Any], metrics: dict[str, int], projecti
         "allowed_mentions": {"parse": []},
         "embeds": [{"title": "Recarga SMS Funnel detectada", "color": LEVEL_COLOR["normal"], "fields": fields}],
     }
+
+
+def current_payload(metrics: dict[str, Any], projection: dict[str, Any]) -> dict[str, Any]:
+    fields = metric_fields(metrics, projection)
+    fields.extend([
+        {"name": "Correção dos alertas anteriores", "value": "Os alertas de zero SMS confundiram o pacote antigo com a carteira em reais. Não indicavam que o saldo financeiro havia acabado. Esta leitura substitui os alertas incorretos.", "inline": False},
+        {"name": "Fonte e horário", "value": "/api/wallet/balance + /api/wallet/billing + /api/wallet/prices · " + now_local().isoformat(), "inline": False},
+    ])
+    if alert_capacity(metrics) <= THRESHOLDS["emergency"]:
+        fields.append({"name": "Ação necessária", "value": "Saldo atual na faixa de alerta; planejar recarga com o fornecedor.", "inline": False})
+    return {"content": "", "allowed_mentions": {"parse": []}, "embeds": [{"title": "Saldo SMS Funnel — correção e conferência atual", "color": LEVEL_COLOR[balance_level(alert_capacity(metrics))], "fields": fields}]}
 
 
 def recovery_payload(metrics: dict[str, int], projection: dict[str, Any], previous_level: str) -> dict[str, Any]:
@@ -445,6 +541,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", help="consulta sem gravar state nem enviar Discord")
     parser.add_argument("--send-test", action="store_true", help="envia o embed informativo de ativação")
+    parser.add_argument("--current-report", action="store_true", help="publica uma conferência atual e retificação dos alertas de créditos legados")
     parser.add_argument("--friday-report", action="store_true", help="envia o alerta obrigatório de sexta às 15h de São Paulo")
     parser.add_argument("--now-brazil", help=argparse.SUPPRESS)
     parser.add_argument("--fixture", type=Path, help="usa métricas JSON locais em vez da API/1Password")
@@ -452,6 +549,18 @@ def main() -> int:
     parser.add_argument("--channel-id", default=DEFAULT_CHANNEL_ID)
     parser.add_argument("--discord-api-base", default=DISCORD_API_BASE)
     args = parser.parse_args()
+    if sum((args.send_test, args.friday_report, args.current_report)) > 1:
+        parser.error("escolha somente um modo de publicação")
+
+    # Both existing cron locks and manual invocations share this state-level lock.
+    args.state_file.parent.mkdir(parents=True, exist_ok=True)
+    run_lock = args.state_file.with_suffix(".run.lock").open("a")
+    os.chmod(run_lock.name, 0o600)
+    try:
+        fcntl.flock(run_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print("SKIP monitor already_running")
+        return 0
 
     brazil_now = (
         datetime.fromisoformat(args.now_brazil).astimezone(ZoneInfo("America/Sao_Paulo"))
@@ -474,7 +583,7 @@ def main() -> int:
 
     try:
         metrics = probe_fixture(args.fixture) if args.fixture else probe_live(env)
-        level = balance_level(metrics["credits"])
+        level = balance_level(alert_capacity(metrics))
     except Exception as exc:
         error = str(exc)
         if args.dry_run:
@@ -509,16 +618,19 @@ def main() -> int:
     if args.dry_run:
         print(
             "DRY-RUN OK "
-            f"level={level} credits={metrics['credits']} sent={metrics['total_sent']} "
-            f"contracted={metrics['total_contracted']} daily={projection.get('daily_sent')} "
-            f"accounting_gap={metrics.get('accounting_gap')}"
+            f"level={level} basis={metrics.get('balance_basis', 'package')} "
+            f"available_micros={metrics.get('available_micros')} sms_capacity={alert_capacity(metrics)} "
+            f"daily={projection.get('daily_sent')}"
         )
         return 0
 
     sent_kind = "none"
     result: dict[str, Any] | None = None
     try:
-        if args.send_test:
+        if args.current_report:
+            result = discord_post(env, args.channel_id, current_payload(metrics, projection), args.discord_api_base)
+            sent_kind = "current_correction"
+        elif args.send_test:
             result = discord_post(env, args.channel_id, activation_payload(metrics, projection), args.discord_api_base)
             sent_kind = "activation"
         elif args.friday_report:
@@ -528,12 +640,13 @@ def main() -> int:
             result = discord_post(env, args.channel_id, probe_error_payload("", resolved=True), args.discord_api_base)
             sent_kind = "probe_recovery"
 
-        recharge_delta = metrics["credits"] - int(previous_metrics.get("credits", metrics["credits"]) or metrics["credits"])
-        contracted_increased = metrics["total_contracted"] > int(previous_metrics.get("total_contracted", metrics["total_contracted"]) or metrics["total_contracted"])
-        recharge_detected = bool(previous_metrics) and (contracted_increased or recharge_delta >= 100)
+        recharge_detected = increased_balance(previous_metrics, metrics)
 
-        if not args.send_test and not args.friday_report:
-            if recharge_detected:
+        if not args.send_test and not args.friday_report and not args.current_report and result is None:
+            if previous_metrics and not same_basis(previous_metrics, metrics):
+                result = discord_post(env, args.channel_id, current_payload(metrics, projection), args.discord_api_base)
+                sent_kind = "basis_correction"
+            elif recharge_detected:
                 result = discord_post(env, args.channel_id, recharge_payload(previous_metrics, metrics, projection), args.discord_api_base)
                 sent_kind = "recharge"
             elif LEVEL_RANK[level] > LEVEL_RANK.get(previous_level, 0):
@@ -573,7 +686,7 @@ def main() -> int:
             state["last_friday_report_date"] = brazil_date
     save_state(args.state_file, state)
     print(
-        f"OK level={level} credits={metrics['credits']} sent={metrics['total_sent']} "
+        f"OK level={level} basis={metrics.get('balance_basis', 'package')} available_micros={metrics.get('available_micros')} sms_capacity={alert_capacity(metrics)} "
         f"notification={sent_kind} message_id={result.get('id') if result else 'none'}"
     )
     return 0
