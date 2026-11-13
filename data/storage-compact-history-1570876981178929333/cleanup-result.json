@@ -1,5 +1,5 @@
 {
-  "status": "filesystem_runtime_recovery_validated_governance_pending",
+  "status": "completed_validated",
   "manifest_sha256": "2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592",
   "confirmation_message_id": "1570888435353526397",
   "question_message_id": "1570888113536901312",
@@ -71,5 +71,17 @@
   "next_review_root_exists": true,
   "broader_point3_closed": false,
   "filesystem_completed_at": "2026-11-13T14:53:37.161461-05:00",
-  "validated_at": "2026-11-13T15:00:42.191080-05:00"
+  "validated_at": "2026-11-13T15:00:42.191080-05:00",
+  "report_infra": {
+    "message_id": "1570892341189943489",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "governance_errors": [],
+  "native_approval_ids_rendered_and_verified": true,
+  "skill_update": "full-vps-cleanup-inventory.md native-ID rendering/readback; live/mirror equal",
+  "closed_at": "2026-11-13T15:06:33.348877-05:00"
 }
