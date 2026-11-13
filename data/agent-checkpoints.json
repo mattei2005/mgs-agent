@@ -6237,6 +6237,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-REVIEW-1570799339108958250",
+      "next_step": "Inventariar classes e dependencias; listar preservacao/descarte/condicionais e responder 1-8; manter sem exclusao ate manifesto e confirmacao exata.",
+      "objective": "Responder os oito pontos com inventario atual, alvos sem impacto na dash/historico, backups locais latest-only VPS/Hermes e auditoria de cache/Git; nenhuma exclusao autorizada por esta listagem.",
+      "source": "discord:1569928464033783862/1570799339108958250",
+      "state": "read_only_inventory_in_progress",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-13T13:56:45+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-VPS-1555704911805808712",
       "next_step": "Nenhum no escopo de update/reboot; ocorrência histórica do validador corrigida e preservada; sosreport faseado",
       "objective": "Atualizar somente VPS: pacotes APT/npm, backup, reboot validado; Hermes inalterado",
@@ -8608,12 +8618,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Validate the provider metric and exact-account read-only history route before resuming missing H/D; same job and47IDs, no blind legacy collector retries and no new job. Existing next tick 2026-11-13T14:02:00-05:00; no new job. Validate provider metric semantics and exact-account history route before resuming missing H/D; not an authentication failure.",
-      "objective": "Atualizar mesmos47IDs Digital Trust; J novembro e invoices outubro; sem pagamentos ou billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/closure-current.json",
-      "state": "cron13nov08:02 parcial validado:47ids;grupos={'cartão de crédito': 11, 'linha de crédito': 36};metricas=2026-11-13t08:05:42.853422-05:00;totaisusd={'average_daily': '19630.18', 'balance': '603525.42', 'month_spend': '243968.88'};novembro ate13nov dia parcial;media10a12nov.h0/36novas,36preservadasde2026-11-11t22:40:39.471603-05:00a2026-11-11t23:00:38.740025-05:00;7eventosdpendentes,0novos;35lacunasdhistoricasqualificadas.ui atual conferida em pixels:outstanding balance,naocurrent balance.semgateauth/nativo;nenhuminput/reload/perfilalternativo.nao repetir collector legado nem inventar equivalencia.rota historica d bloqueada previamente,nao retestada.29invoicesoutubrousd417702.93;invoice externausd161.18excluida.ids/links/notas/moedas/totais/outraabapass;lease livre;zero pagamento/billing/metawrite/cronchange.report-infrapendente:cronproibeenviomanual.",
+      "next_step": "Coletar dados somente leitura dos8 IDs, preparar55linhas com rollback, executar canário/readback, atualizar mesmo contrato/job e validar",
+      "objective": "Adicionar somente oito contas com gasto ausentes da aba Digital Trust por1570799435502588027; preservar47 contas, colunas e outras abas; incorporar novo conjunto ao mesmo refresh",
+      "source": "https://discord.com/channels/1185714635991679006/1563926766286803004/1570799435502588027",
+      "state": "iniciado preflight: oito ids reconfirmados;4cartão4linha;job existente sem fire_claim;coletar métricas/invoices e backup antes da inclusão",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-13T13:07:03+00:00"
+      "updated_at": "2026-11-13T13:57:41+00:00"
     },
     {
       "agent": "zeus",
@@ -10157,5 +10167,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T13:07:03+00:00"
+  "updated_at": "2026-11-13T13:57:41+00:00"
 }
