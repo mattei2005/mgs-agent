@@ -167,6 +167,13 @@ For a combined update-and-backup review, use two sections:
 
 When Rodolfo asks what can be deleted to free disk, lead with the **already validated deletion lot and its reclaim amount**, not the full storage inventory or a reorganization roadmap. State the file class/count, approximate GiB, what recovery remains and whether confirmation or execution is pending. If only one lot passed the gates, say so plainly; directories under review and files merely matched to cloud metadata must not inflate that total.
 
+For a follow-up asking which previously listed categories can be deleted without compromising operation:
+
+1. Reconcile the latest checkpoint and execution receipt before reusing a classification summary; a preparation-time `ready` status can describe a lot already deleted and must not become a new savings offer.
+2. Answer in the original category order, with a short verdict for each: **validated lot**, **candidate pending proof**, or **preserve**. Name the removable subclass, the retained boundary and the single missing predicate; do not repeat the whole occupancy inventory or present conditional examples as validated targets.
+3. State explicitly when no new lot is validated, without implying that no further reclaim is possible. Separate unchanged current operation from loss of historical recovery, and cache regeneration from zero operational cost; rebuildable does not mean safe to remove while a consumer needs it.
+4. Preserve category identity across replies. Treat a shared-hardlink bucket as an accounting reconciliation, not an additional deletion target; if the user refers only to the substantive categories, explain that distinction briefly rather than silently dropping a numbered item.
+
 If he asks for numbered steps, list the actionable deletion sequence first and label every additional category as still under review. Do not present an eleven-stage investigation as though it were a list of files ready to delete. Keep future retention/prevention separate and secondary unless he explicitly requests that design; do not make an independently safe lot wait for unrelated cleanup research merely to consolidate approvals.
 
 When he says the answer is confusing, immediately narrow to the verified amount and preservation facts instead of repeating the plan. After approval, execute the unchanged exact lot without another approval round. Close with files removed, observed space recovered, current disk/free space and preservation checks; keep hashes, internal paths and governance detail in evidence unless needed for the decision.
