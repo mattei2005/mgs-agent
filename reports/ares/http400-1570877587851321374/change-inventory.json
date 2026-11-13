@@ -1,0 +1,12 @@
+{
+  "action": "session-native-readonly-recovery-and-cleanup",
+  "changed_files": [
+    "/root/mgs-agent/data/agent-checkpoints.json",
+    "/root/.hermes/profiles/ares/skills/ops/hermes-agent-operations/SKILL.md"
+  ],
+  "evidence": "/root/mgs-agent/reports/ares/http400-1570877587851321374/verification.json",
+  "test": "real existing gateway session; 2 API calls; actual skill and Discord delivery; GET404x3; GET200 preserved humans/title",
+  "runtime_code_changes": [],
+  "config_changes": [],
+  "skill_sha256": "89ae5317eb4c2d3c4073f4d0d9a3d9eb6e12dc8250776afad0a3281d7ece5d5a"
+}

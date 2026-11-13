@@ -1,0 +1,57 @@
+{
+  "request_id": "1570877587851321374",
+  "thread_id": "1570857869790945455",
+  "session_id": "20261113_132756_1f566626",
+  "status": "current_recovery_native_roundtrip_and_discord_delivery_verified_human_ingress_pending",
+  "root_cause": "unconfirmed; original request reconstructed with stored reasoning now completed; no speculative patch",
+  "gateway_completed": true,
+  "gateway_failed": false,
+  "api_calls": 2,
+  "final_marker_verified_before_public_edit": true,
+  "tool_names": [
+    "skill_view",
+    "skill_view"
+  ],
+  "prior_failed_skill_calls_in_history": 1,
+  "new_probe_skill_calls": 1,
+  "model": "gpt-6.1-sol",
+  "provider": "openai-codex",
+  "session_reset": false,
+  "gateway_restart": false,
+  "credentials_changed": false,
+  "campaign_writes": 0,
+  "budget_writes": 0,
+  "cleanup": {
+    "deleted": [
+      {
+        "id": "1570867879543312445",
+        "readback_http": 404,
+        "discord_code": 10008,
+        "reconciled_without_repeat_delete": true
+      },
+      {
+        "id": "1570867881581740163",
+        "readback_http": 404,
+        "discord_code": 10008,
+        "reconciled_without_repeat_delete": true
+      },
+      {
+        "id": "1570867883175710852",
+        "readback_http": 404,
+        "discord_code": 10008,
+        "reconciled_without_repeat_delete": true
+      }
+    ],
+    "preserved_human_ids": [
+      "1570867827307581462",
+      "1570858078738583674",
+      "1570857934311661690"
+    ],
+    "conclusion_id": "1570879033556865169",
+    "conclusion_readback_verified": true,
+    "title_preserved": true,
+    "thread_get_verified": true,
+    "permission_writes": 0
+  },
+  "human_ingress_after_recovery_observed": false
+}

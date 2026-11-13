@@ -41,7 +41,7 @@ An IPv4 egress lookup does not prove that the ClouDNS client will use IPv4. If t
 
 ## Institutional continuity
 
-Persist nonsecret access receipts and the canonical credential pointer, not credential values. Register reusable capabilities in the MGS knowledge registry, inventory structural additions and send the canonical REPORT-INFRA embed. Append a secret-free audit event with original authorization IDs, exact zone, read-only endpoints, counts, validation result and artifact checksum. Reconcile writes by readback before retry.
+Persist nonsecret access receipts and the canonical credential pointer, not credential values. Store manually curated capability/provider entries in the inventory's preserved `runtime_artifacts` list, not a new top-level key: `infra-discovery.sh` regenerates the root schema and drops unrecognized keys. Keep provider facts in `context/cloudns.md` with discovery pointers in `context/sites.md` and `context/mgs-os-map.md`. Register reusable capabilities in the MGS knowledge registry, inventory structural additions and send the canonical REPORT-INFRA embed. Append a secret-free audit event with original authorization IDs, exact zone, read-only endpoints, counts, validation result and artifact checksum. Reconcile writes by readback before retry.
 
 ## Official references
 

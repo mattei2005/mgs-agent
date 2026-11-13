@@ -32,6 +32,7 @@ Regra prática:
 - Pessoas/equipe: `context/team.md`
 - Sites conceituais: `context/sites.md`
 - Sites técnicos: `data/sites.json`
+- Provedor DNS ClouDNS de deolhonoworld.com, newsfolha.com e scorexboost.com: `context/cloudns.md`
 - Escopo compartilhável Ares/Atena: `data/mgs-domain-scope.json` + `scripts/mgs-domain-scope.py`
 - Crons documentados: `docs/CRONS.md`
 - Inventário de estrutura: `docs/mgs-structure-inventory.md`

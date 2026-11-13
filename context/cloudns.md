@@ -23,6 +23,18 @@ Status: acesso API autenticado e leitura validada em 2026-11-13. Dono: Rodolfo M
 - O caminho IPv6 tentou `2a02:4780:75:4061::1` e foi recusado pela allowlist. Usar IPv4 somente no cliente dessa integração, sem alterar rede global, allowlist ou credencial.
 - A presença de IPv6 no host não exige ampliar a permissão IP. Revalidar o IP no provedor quando mudar o ambiente executor.
 
+## Provedor DNS dos três domínios — fonte canônica
+
+Confirmado por Rodolfo na mensagem `1570877248305635521`, após consulta autenticada da lista de zonas nesta thread: estes três domínios usam **ClouDNS (`cloudns.net`), e não Cloudflare, como provedor de gestão DNS**.
+
+- `deolhonoworld.com` — zona GeoDNS ClouDNS `14785998`.
+- `newsfolha.com` — zona GeoDNS ClouDNS `14801138`.
+- `scorexboost.com` — zona GeoDNS ClouDNS `14802160`.
+
+Consultas e operações DNS destes domínios devem ser roteadas ao ClouDNS pela credencial existente no 1Password. Seus subdomínios, como `jobs.scorexboost.com`, são registros da respectiva zona, salvo delegação específica comprovada. Não procurar esses três domínios nas contas Cloudflare como rota padrão de DNS.
+
+Este cadastro documenta o provedor DNS; não autoriza migração, alterações nos registros, ampliação de acesso ou mudanças de CDN/WAF. Não representa uma mudança de infraestrutura: registra o estado já existente e confirmado.
+
 ## Zona e exportação
 
 - Zona: `scorexboost.com`; painel informado pelo CEO: `https://www.cloudns.net/records-geodns/domain/14802160/`.

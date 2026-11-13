@@ -262,6 +262,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1570877060862312680",
+      "next_step": "Executar somente slots congelados e expirar14nov00:00EST antes API; retomar camada/slot incompleto no mesmo request",
+      "objective": "Relatorios CPR campanhas Mavroa04 criadas13nov ate14:04EST, cada30min ate fim dia",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570877060862312680/manifest.json",
+      "state": "coorte fixa057,058,059; inicial14:09est entregue e get; gasto0 sem resultados;31testespass; agenda20slots14:20-23:50est habilitada com readback; auditoria globalpos sem colisao operacional; zero writesmetasb",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-13T19:12:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -1542,6 +1552,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-HTTP400-1570877587851321374",
+      "next_step": "Validar proxima mensagem humana na origem1570857869790945455;nao declarar prevencao definitiva;manter evidencias e nao reenviar campanhas.",
+      "objective": "Recuperar resposta da conversa Yolokfx08 sem replay Meta ou troca de identidade",
+      "source": "reports/ares/http400-1570877587851321374/verification.json",
+      "state": "current_recovery_verified: gateway vivo mesma sessao completou2chamadas modelo comskill_view real e resposta discord get200;3residuos removidos get404/10008;humanos/titulo preservados. nenhum reset,restart,patch runtime,token ou write campanha. causa http400 nao comprovada; testes diretos e nativo agora pass.",
+      "thread_id": "1570877587851321374",
+      "updated_at": "2026-11-13T19:15:44+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-1563285734503358485",
       "next_step": "Nenhuma pendencia deste pedido; nao reabrir por notificacao tardia de processos consumidos. Proximos pedidos explicitos equivalentes usam politica permanente e rota dedicada sem novo OK do CEO; demais gates criticos preservados.",
       "objective": "Entregar 25 criativos US-CC-EN na pasta Nicolas e registrar autonomia permanente",
@@ -1623,12 +1643,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1570875079363919935",
-      "next_step": "Preparar e revisar16midias;congelarplano;monitor/claim batches4;complete/monitor mesmo request;auditaroriginais/providers/READY e entregar mapa16pares",
-      "objective": "Tratar e arquivar 16 videos Kelly US SHEIN EN common, preservando RAW, IDs e reservas",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1570875079363919935",
-      "state": "registered_16_sources_stable;request786f2a28e7eec7877a86683cdf8840c8;foreground_preparation",
+      "next_step": "Executor canonico assumindo saldo. Reusar plano inteiro executions/intake-1570875079363919935/plan.json e prepared/reviews por sourceID;adapter scratch intake-1570875079363919935/intake_task.py com hashes validados. Item11 headline coloringkits sobre unhas,REVIEW_REQUIRED. Nao rebaixar provas ou repetir tratamento4completos. Final auditar16 originais/providers/READY e mapa16pares.",
+      "objective": "Tratar e arquivar16videos Kelly US SHEIN EN common preservando RAW IDs reservas",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1570875079363919935/plan.json",
+      "state": "4/16complete;16/16prepared+reviewed;request786f2a28e7eec7877a86683cdf8840c8;canonical_scheduler_fire_claim_active;foreground_readonly",
       "thread_id": "1570875079363919935",
-      "updated_at": "2026-11-13T19:00:25+00:00"
+      "updated_at": "2026-11-13T19:13:58+00:00"
     },
     {
       "agent": "ares",
@@ -6307,6 +6327,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-COMPACT-1570876981178929333",
+      "next_step": "Validarcodecbinariozstdpatch-fromcomfixture;preservarsomentecomponentesnaocobertosporfontesretidas,recuperandotodos9984arquivospelohashoriginal.Semalterarbackupsouretencaooriginais.",
+      "objective": "Preservar compactamente12snapshots21/10evalidarrecuperacaosemnenhumaexclusao;aprovacaoSim1570876981178929333.",
+      "source": "data/storage-snapshot-review-1570868136066949244/review-result.json;context/storage-reorganization-20261112.md",
+      "state": "compact_recovery_method_fixture_in_progress",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-13T19:08:02+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-GENERATED-TESTS-1570473727043436596",
       "next_step": "Nenhuma pendencia no lote confirmado1570486008917655623:81/81alvos/61283arquivos ausentes;15.94GiB efetivos;6tabelasfinanceiras/12arquivoscontroleperfis/3fontes/4raizesretidas iguais;3configs/3smokes/PIDs passaram;REPORT1570487273534005391readback. Retencao futura e outras categorias fora deste lote.",
       "objective": "Aposentar o lote exato de testes isolados confirmado sem tocar operacao financeira, memoria ou perfis.",
@@ -10307,5 +10337,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T19:00:25+00:00"
+  "updated_at": "2026-11-13T19:15:44+00:00"
 }

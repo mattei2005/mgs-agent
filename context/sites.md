@@ -249,7 +249,9 @@ GTM / pixels               Tracking e integração com ads.
 Blocos de anúncio          Monetização via Smart Bidding/ActiveView.
 ```
 
-A stack real pode variar por site. A fonte técnica deve ser validada em `data/sites.json`, WordPress, RunCloud/VPS, Cloudflare ou dashboard externo conforme o caso.
+A stack real pode variar por site. A fonte técnica deve ser validada em `data/sites.json`, WordPress, RunCloud/VPS, Cloudflare, ClouDNS ou dashboard externo conforme o caso.
+
+**Exceção DNS ao uso de Cloudflare:** `deolhonoworld.com`, `newsfolha.com` e `scorexboost.com` usam **ClouDNS (`cloudns.net`)**. O cadastro canônico das zonas e a rota de acesso estão em `context/cloudns.md`, seção “Provedor DNS dos três domínios”. Confirmação de Rodolfo: `1570877248305635521`. Esta referência não amplia o escopo compartilhável de Ares/Atena nem autoriza alterações DNS.
 
 Responsabilidade por camada:
 

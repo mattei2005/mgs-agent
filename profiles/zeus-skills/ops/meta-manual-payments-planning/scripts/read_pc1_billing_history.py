@@ -46,13 +46,14 @@ try:
   assert args.account_id and args.account_id.isdigit()
   contract=json.loads(Path('/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json').read_text())
   assert args.account_id in contract['account_ids'] and contract['business_id']=='155263197283282'
-  assert not re.search(r'Windows Security|temporarily blocked|going too fast|Enter the 6-digit code|Confirm it.s you|Log into Facebook|Log in to Facebook',text,re.I),'native_provider_or_auth_gate_before_input'
+  assert not re.search(r'Windows Security|temporarily blocked|going too fast|Enter the 6-digit code|Confirm it.s you|Log into Facebook|Log in to Facebook|If you don.t have a passkey for Facebook|security/twofactor/reauth',text,re.I),'native_provider_or_auth_gate_before_input'
   action({'action':'key','keys':'ctrl+t'});created=True
   url='https://business.facebook.com/latest/billing_hub/accounts/details/?business_id=155263197283282&asset_id='+args.account_id+'&payment_account_id='+args.account_id
   action({'action':'key','keys':'ctrl+l'});action({'action':'type','text':url});action({'action':'key','keys':'return'})
   end=time.monotonic()+55
   while True:
    es,text=cap()
+   if re.search(r'If you don.t have a passkey for Facebook|security/twofactor/reauth',text,re.I):raise RuntimeError('facebook_passkey_reauthentication_required')
    if any(e.get('role')in ['Heading','Document']and re.search(r'Log into Facebook|Log in to Facebook|Confirm it.s you|2FA Entry|Enter your password',e.get('label',''),re.I)for e in es):raise RuntimeError('facebook_authentication_gate')
    if ('\nDate\nPayment method\nAmount\nStatus\n'in text or 'No payment activity'in text or 'No transactions'in text or 'You have no recent spending.'in text):break
    if time.monotonic()>end:raise RuntimeError('billing_page_not_verified')

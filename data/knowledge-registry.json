@@ -3583,6 +3583,23 @@
       "updated_at": "2026-10-20T17:49:34+00:00"
     },
     {
+      "canonical_key": "ares.hermes.recovery.native-tool-roundtrip",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/ops/hermes-agent-operations/SKILL.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "operations.hermes",
+      "effective_at": "2026-11-13T19:15:53+00:00",
+      "id": "ARES-HERMES-NATIVE-TOOL-ROUNDTRIP",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares valida recuperacao pos-tool no gateway existente com recibo e entrega real",
+      "updated_at": "2026-11-13T19:15:53+00:00"
+    },
+    {
       "canonical_key": "creative_ops.flat_intake.mechanical_continuation",
       "canonical_source": "context/drive-flat-intake-cutover.md",
       "consumers": [
@@ -14811,6 +14828,23 @@
       "updated_at": "2026-11-13T18:02:52+00:00"
     },
     {
+      "canonical_key": "infra.dns-provider.cloudns-three-domains",
+      "canonical_source": "context/cloudns.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-11-13T19:07:11+00:00",
+      "id": "cloudns-three-domain-provider-20261113",
+      "kind": "source",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "DNS de deolhonoworld, newsfolha e scorexboost usa ClouDNS, nao Cloudflare",
+      "updated_at": "2026-11-13T19:07:11+00:00"
+    },
+    {
       "canonical_key": "campaign_engine_v3.ad_serving_route.cpv_lineage_required",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -17120,5 +17154,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:33:43+00:00"
+  "updated_at": "2026-11-13T19:15:53+00:00"
 }

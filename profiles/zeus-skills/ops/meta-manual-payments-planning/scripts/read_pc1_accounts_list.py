@@ -32,6 +32,7 @@ def snap(label):
  tp=B/(label+'.txt');tp.write_text(text);os.chmod(tp,0o600);v=call({'action':'capture','mode':'vision','pid':pid,'window_id':wid});sp=v.get('screenshot_path');assert sp and Path(sp).is_file(),'missing_pixels';pp=B/(label+'.png');shutil.copy2(sp,pp);os.chmod(pp,0o600);return str(pp)
 def gate():
  if re.search(r'^Windows Security$',text,re.M):raise RuntimeError('native_auth_surface_conflict_no_input')
+ if re.search(r'If you don.t have a passkey for Facebook|security/twofactor/reauth',text,re.I):raise RuntimeError('facebook_passkey_reauthentication_required')
  if re.search(r'temporarily blocked|going too fast|Enter the 6-digit code|Confirm it.s you|Log into Facebook|Log in to Facebook',text,re.I):raise RuntimeError('provider_or_auth_gate')
 def search():
  return [e for e in es if e.get('role')in ['Edit','TextField','SearchBox']and re.search(r'Search by name|^Search$',e.get('label',''),re.I)]
