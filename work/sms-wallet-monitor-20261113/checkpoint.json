@@ -1,0 +1,15 @@
+{
+  "objective": "Corrigir monitor SMS Funnel para carteira real, publicar saldo atualizado e excluir somente alertas falsos de zero",
+  "status": "preflight_complete",
+  "next": "patch/test exact deployed consumer; publish/readback; delete/readback exact zero-alert IDs; inventory/report",
+  "source_thread": "1570675581476147280",
+  "authorization_message": "1570696098371211275",
+  "deletion_authorization_message": "1570696171188650045",
+  "wrong_message_ids": [
+    "1570685666621268039",
+    "1570625270157680693",
+    "1570564871785816258",
+    "1570504474638950612"
+  ],
+  "updated_at": "2026-11-13T02:07:34.396613-05:00"
+}

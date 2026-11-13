@@ -1,0 +1,839 @@
+{
+  "_meta": {
+    "description": "Estado do monitor de saldo SMS Funnel.",
+    "channel_id": "1527433742233374893",
+    "emergency_credits": 7000,
+    "schedule": "24 0,1,7-23 * * *"
+  },
+  "last_check": "2026-11-13T01:24:02.249935-05:00",
+  "level": "emergency",
+  "last_metrics": {
+    "total_contracted": 3074000,
+    "total_sent": 2852054,
+    "total_reserved": 0,
+    "credits": 0,
+    "total_calculated_broadcasts": 6708,
+    "accounting_gap": 221946,
+    "daily_average_3d": 14968
+  },
+  "samples": [
+    {
+      "ts": 1793946242,
+      "credits": 315925,
+      "total_sent": 2758075,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793967841,
+      "credits": 313150,
+      "total_sent": 2760850,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793971442,
+      "credits": 312488,
+      "total_sent": 2761512,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793975042,
+      "credits": 311767,
+      "total_sent": 2762233,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793978641,
+      "credits": 311033,
+      "total_sent": 2762967,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793982241,
+      "credits": 310083,
+      "total_sent": 2763917,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793985842,
+      "credits": 309324,
+      "total_sent": 2764676,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793988271,
+      "credits": 308899,
+      "total_sent": 2765101,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793989441,
+      "credits": 308663,
+      "total_sent": 2765337,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793993041,
+      "credits": 308034,
+      "total_sent": 2765966,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1793996641,
+      "credits": 307413,
+      "total_sent": 2766587,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794000241,
+      "credits": 306814,
+      "total_sent": 2767186,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794003842,
+      "credits": 306139,
+      "total_sent": 2767861,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794007442,
+      "credits": 305436,
+      "total_sent": 2768564,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794011041,
+      "credits": 304621,
+      "total_sent": 2769379,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794014642,
+      "credits": 303992,
+      "total_sent": 2770008,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794018241,
+      "credits": 303345,
+      "total_sent": 2770655,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794021841,
+      "credits": 302805,
+      "total_sent": 2771195,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794025441,
+      "credits": 302464,
+      "total_sent": 2771536,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794029041,
+      "credits": 302340,
+      "total_sent": 2771660,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794032641,
+      "credits": 302340,
+      "total_sent": 2771660,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794054241,
+      "credits": 300024,
+      "total_sent": 2773976,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794057842,
+      "credits": 299393,
+      "total_sent": 2774607,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794061442,
+      "credits": 298654,
+      "total_sent": 2775346,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794065041,
+      "credits": 297918,
+      "total_sent": 2776082,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794068642,
+      "credits": 297095,
+      "total_sent": 2776905,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794072242,
+      "credits": 296261,
+      "total_sent": 2777739,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794075842,
+      "credits": 295523,
+      "total_sent": 2778477,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794079441,
+      "credits": 294782,
+      "total_sent": 2779218,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794083041,
+      "credits": 294022,
+      "total_sent": 2779978,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794086641,
+      "credits": 293266,
+      "total_sent": 2780734,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794090241,
+      "credits": 292544,
+      "total_sent": 2781456,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794093841,
+      "credits": 291742,
+      "total_sent": 2782258,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794097441,
+      "credits": 290917,
+      "total_sent": 2783083,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794101042,
+      "credits": 290151,
+      "total_sent": 2783849,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794104641,
+      "credits": 289425,
+      "total_sent": 2784575,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794108242,
+      "credits": 288802,
+      "total_sent": 2785198,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794111841,
+      "credits": 288508,
+      "total_sent": 2785492,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794115441,
+      "credits": 288397,
+      "total_sent": 2785603,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794119041,
+      "credits": 288397,
+      "total_sent": 2785603,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794140641,
+      "credits": 286082,
+      "total_sent": 2787918,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794144242,
+      "credits": 285209,
+      "total_sent": 2788791,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794147841,
+      "credits": 284180,
+      "total_sent": 2789820,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794151442,
+      "credits": 283184,
+      "total_sent": 2790816,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794155041,
+      "credits": 282125,
+      "total_sent": 2791875,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794158641,
+      "credits": 281164,
+      "total_sent": 2792836,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794162241,
+      "credits": 280214,
+      "total_sent": 2793786,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794165842,
+      "credits": 279211,
+      "total_sent": 2794789,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794169441,
+      "credits": 278167,
+      "total_sent": 2795833,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794173041,
+      "credits": 277243,
+      "total_sent": 2796757,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794176641,
+      "credits": 276354,
+      "total_sent": 2797646,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794180241,
+      "credits": 275477,
+      "total_sent": 2798523,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794183841,
+      "credits": 274608,
+      "total_sent": 2799392,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794187441,
+      "credits": 273773,
+      "total_sent": 2800227,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794191041,
+      "credits": 273199,
+      "total_sent": 2800801,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794194641,
+      "credits": 272812,
+      "total_sent": 2801188,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794198242,
+      "credits": 272502,
+      "total_sent": 2801498,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794201842,
+      "credits": 272420,
+      "total_sent": 2801580,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794205441,
+      "credits": 272420,
+      "total_sent": 2801580,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794227041,
+      "credits": 270652,
+      "total_sent": 2803348,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794230642,
+      "credits": 269982,
+      "total_sent": 2804018,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794234241,
+      "credits": 269202,
+      "total_sent": 2804798,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794237841,
+      "credits": 268465,
+      "total_sent": 2805535,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794241441,
+      "credits": 267617,
+      "total_sent": 2806383,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794245041,
+      "credits": 266850,
+      "total_sent": 2807150,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794248642,
+      "credits": 266124,
+      "total_sent": 2807876,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794252242,
+      "credits": 265486,
+      "total_sent": 2808514,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794255842,
+      "credits": 264865,
+      "total_sent": 2809135,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794259442,
+      "credits": 264143,
+      "total_sent": 2809857,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794263042,
+      "credits": 263257,
+      "total_sent": 2810743,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794266641,
+      "credits": 262222,
+      "total_sent": 2811778,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794270241,
+      "credits": 261167,
+      "total_sent": 2812833,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794273842,
+      "credits": 260269,
+      "total_sent": 2813731,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794277442,
+      "credits": 259506,
+      "total_sent": 2814494,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794281041,
+      "credits": 258998,
+      "total_sent": 2815002,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794284641,
+      "credits": 258688,
+      "total_sent": 2815312,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794288241,
+      "credits": 258539,
+      "total_sent": 2815461,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794291841,
+      "credits": 258539,
+      "total_sent": 2815461,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794313442,
+      "credits": 255921,
+      "total_sent": 2818079,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794317041,
+      "credits": 255104,
+      "total_sent": 2818896,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794320642,
+      "credits": 254340,
+      "total_sent": 2819660,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794324242,
+      "credits": 253471,
+      "total_sent": 2820529,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794327842,
+      "credits": 252491,
+      "total_sent": 2821509,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794331442,
+      "credits": 251633,
+      "total_sent": 2822367,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794335042,
+      "credits": 250841,
+      "total_sent": 2823159,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794338641,
+      "credits": 250104,
+      "total_sent": 2823896,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794342241,
+      "credits": 249342,
+      "total_sent": 2824658,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794345843,
+      "credits": 248582,
+      "total_sent": 2825418,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794349441,
+      "credits": 247724,
+      "total_sent": 2826276,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794353041,
+      "credits": 246799,
+      "total_sent": 2827201,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794356641,
+      "credits": 245819,
+      "total_sent": 2828181,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794360242,
+      "credits": 244934,
+      "total_sent": 2829066,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794363841,
+      "credits": 244210,
+      "total_sent": 2829790,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794367442,
+      "credits": 243626,
+      "total_sent": 2830374,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794371041,
+      "credits": 243276,
+      "total_sent": 2830724,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794374642,
+      "credits": 243145,
+      "total_sent": 2830855,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794378242,
+      "credits": 243145,
+      "total_sent": 2830855,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794399842,
+      "credits": 240971,
+      "total_sent": 2833029,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794403441,
+      "credits": 240333,
+      "total_sent": 2833667,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794407042,
+      "credits": 239675,
+      "total_sent": 2834325,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794410642,
+      "credits": 238899,
+      "total_sent": 2835101,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794414241,
+      "credits": 237963,
+      "total_sent": 2836037,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794417842,
+      "credits": 237164,
+      "total_sent": 2836836,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794421442,
+      "credits": 236402,
+      "total_sent": 2837598,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794425041,
+      "credits": 235771,
+      "total_sent": 2838229,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794428641,
+      "credits": 235152,
+      "total_sent": 2838848,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794432242,
+      "credits": 234481,
+      "total_sent": 2839519,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794435841,
+      "credits": 233572,
+      "total_sent": 2840428,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794439443,
+      "credits": 232504,
+      "total_sent": 2841496,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794443041,
+      "credits": 231463,
+      "total_sent": 2842537,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794446642,
+      "credits": 230557,
+      "total_sent": 2843443,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794450241,
+      "credits": 229785,
+      "total_sent": 2844215,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794453842,
+      "credits": 229190,
+      "total_sent": 2844810,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794457442,
+      "credits": 228774,
+      "total_sent": 2845226,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794461042,
+      "credits": 228631,
+      "total_sent": 2845369,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794464641,
+      "credits": 228631,
+      "total_sent": 2845369,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794486241,
+      "credits": 226093,
+      "total_sent": 2847907,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794489841,
+      "credits": 225396,
+      "total_sent": 2848604,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794493441,
+      "credits": 224683,
+      "total_sent": 2849317,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794497042,
+      "credits": 223851,
+      "total_sent": 2850149,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794500642,
+      "credits": 222916,
+      "total_sent": 2851084,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794504242,
+      "credits": 222088,
+      "total_sent": 2851912,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794507842,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794511442,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794515041,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794518641,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794522242,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794525841,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794529441,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794533041,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794536642,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794540242,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794543841,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794547441,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    },
+    {
+      "ts": 1794551042,
+      "credits": 0,
+      "total_sent": 2852054,
+      "total_contracted": 3074000
+    }
+  ],
+  "last_alert_sent": "2026-11-13T01:24:02.249935-05:00",
+  "last_alert_level": "emergency",
+  "last_reminder_sent": "2026-11-13T01:24:02.249935-05:00",
+  "last_discord_message_id": "1570685666621268039",
+  "consecutive_probe_failures": 0,
+  "probe_failure_alerted": false,
+  "last_error": null,
+  "last_friday_report_date": "2026-11-06"
+}
