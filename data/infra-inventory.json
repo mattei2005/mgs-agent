@@ -64437,6 +64437,172 @@
       "updated_at": "2026-11-13T10:35:12.040610-05:00",
       "report_infra_message_id": "1570824435621957633",
       "report_infra_readback": true
+    },
+    {
+      "id": "storage-backup-review-1570830889359777924",
+      "agent": "zeus",
+      "type": "storage-review-operational-history",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1570830889359777924",
+      "status": "expanded_copy_lot_completed_validated_older_snapshots_not_retired",
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924",
+      "result_path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/lot-expanded-copy/cleanup-result.json",
+      "manifest_sha256": "4c4c89490adcc8c6647799632ba459fe58996cd8fcacd4074f31e06c7a87bd25",
+      "candidate_regular_files": 4204,
+      "candidate_directories": 1089,
+      "candidate_symlinks": 2,
+      "reclaim_bytes": 3469041664,
+      "retained_archive_and_native_recovery_validated": true,
+      "backup_db_integrity_checks": 36,
+      "persistent_sqlite_staging_bytes": 0,
+      "deletions": 5295,
+      "older_differing_snapshots_retired": false,
+      "retention_policy_changed": false,
+      "skills_updated": [
+        "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+        "vps-maintenance-and-backup-governance/references/state-snapshot-redundancy-and-bounded-archive-review.md"
+      ],
+      "updated_at": "2026-11-13T13:10:24.582546-05:00",
+      "result_sha256": "1395ae90c788fb5b115b061c8ced74c83b789235314da46de15bbcd4535a5081",
+      "report_message_id": "1570862156134621296",
+      "report_readback": true,
+      "review_result_path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/summary.json",
+      "review_result_sha256": "b594e3e20cf9c7387432fef94515d010abffecfe0f8ddc43b6668fade80d697a",
+      "confirmation_message_id": "1570858909420232707",
+      "target_absent": true,
+      "deleted_regular_files": 4204,
+      "deleted_directories": 1089,
+      "deleted_symlinks": 2,
+      "observed_reclaim_bytes": 3468783616,
+      "retained_recovery_files_hashes_unchanged": 63,
+      "protected_files_unchanged": 17,
+      "inventory_record_reconciled_from_git": true,
+      "inventory_omission_commit": "ffd287d43b2d9ac738df3eaf1422ba436b1f2add",
+      "learning_reference": "vps-maintenance-and-backup-governance/references/inventory-generation-and-autopush-safety.md",
+      "learning_readback": "live/mirror equal; latest-version upsert and exact missing-record recovery",
+      "migrated_from_generated_collection": "data_files",
+      "source_git_revision": "f2ec1726fadedaaeee3c43f6cfbd28eef8b99946",
+      "followup_compact_case": "storage-compact-history-1570876981178929333",
+      "dependent_recovery_artifacts": [
+        "hermes-history-compact-1570876981178929333"
+      ]
+    },
+    {
+      "id": "storage-snapshot-review-1570868136066949244",
+      "path": "/root/mgs-agent/data/storage-snapshot-review-1570868136066949244",
+      "agent": "zeus",
+      "thread_id": "1569928464033783862",
+      "request_message_id": "1570868136066949244",
+      "status": "review_completed_no_deletions_blocked_on_historical_state_decision",
+      "result_path": "/root/mgs-agent/data/storage-snapshot-review-1570868136066949244/review-result.json",
+      "snapshot_count": 12,
+      "regular_files": 9984,
+      "occupied_unique_allocated_bytes": 5959327744,
+      "zero_historical_loss_eligible_reclaim_bytes": 0,
+      "deletions": 0,
+      "production_message_rows_missing": 0,
+      "checksum_coupled_snapshots": 12,
+      "original_sources_unchanged": true,
+      "persistent_db_staging_bytes": 0,
+      "retention_changed": false,
+      "next_step": "Owner choose preservation of historical technical differences versus explicit retirement; then exact-manifest confirmation before any deletion",
+      "learning_reference": "vps-maintenance-and-backup-governance/references/state-snapshot-redundancy-and-bounded-archive-review.md",
+      "learning_readback": "live/mirror identical;schema projections,PK vs payload,and frozen zero-WAL/stale-SHM RAM-only guard",
+      "updated_at": "2026-11-13T13:52:29.672358-05:00",
+      "result_sha256": "2fd480d19c1d0a8ac5decedd92f14f813f170df6c2cc4e0dfc4360ca59b636b1",
+      "report_message_id": "1570873902916173850",
+      "report_readback": true,
+      "type": "storage-review-operational-history",
+      "migrated_from_generated_collection": "data_files",
+      "source_git_revision": "fc11e31688228f953159c7e7d7663f0b3e6bd916",
+      "followup_compact_case": "storage-compact-history-1570876981178929333",
+      "dependent_recovery_artifacts": [
+        "hermes-history-compact-1570876981178929333"
+      ]
+    },
+    {
+      "id": "hermes-history-compact-1570876981178929333",
+      "agent": "zeus",
+      "type": "dependency-aware-lossless-historical-backup",
+      "path": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333",
+      "authority_message_ids": [
+        "1570876981178929333"
+      ],
+      "source_thread_id": "1569928464033783862",
+      "status": "validated_protected_no_original_deletion",
+      "archive_path": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333/historical-snapshots.tar",
+      "archive_sha256": "e457fb3a585154ae756410efcb24bbde80e44d288b2c7d0c8c53e8b64ec6321b",
+      "allocated_bytes": 393609216,
+      "self_contained": false,
+      "required_dependencies": {
+        "retained-file-4": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/.env",
+          "sha256": "f8c5a5ee8c1e5cde2611841d554de31588722c4c6977f13613eabbbf984fe2ed"
+        },
+        "retained-file-18": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/.env",
+          "sha256": "38cc0df898dece05049936b6f79432fb491e3df892a02d0d2ed76c72f26c6c11"
+        },
+        "retained-file-43": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/sessions/sessions.db",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "retained-archive": {
+          "kind": "archive",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+          "sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005"
+        },
+        "native-db-zeus": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/state.db",
+          "sha256": "79bee2a527c78aa875fff806ecffb9ceedd14c16392fe785a32d83065dfea044"
+        },
+        "native-db-atena": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/state.db",
+          "sha256": "6f956b376cfc7710c66f134e76b97d4d58b8656141640d20a55a37bf94dd20f0"
+        },
+        "native-db-ares": {
+          "kind": "file",
+          "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/state.db",
+          "sha256": "0f36fecb51761b4a5706a143ab2dad763b7d82db842f0f27bcd7c031b7b26d77"
+        }
+      },
+      "verification": "9984exactfileimages/12snapshots/9uniqueDBquickFKRAM;no_old_source_read_by_decoder;6codectests+isolatedfixturePASS",
+      "evidence": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/preservation-result.json",
+      "retirement_rule": "Bases protected until verified rebase/standalone successor; future retention unchanged",
+      "changed_skill_files": [
+        "vps-maintenance-and-backup-governance/references/state-snapshot-redundancy-and-bounded-archive-review.md",
+        "vps-maintenance-and-backup-governance/references/inventory-generation-and-autopush-safety.md"
+      ],
+      "report_infra_message_id": "1570886718242955375",
+      "report_infra_readback": true,
+      "result_sha256": "97436b31c691a2f773050cf2ae02e602ab4e41e2d689e6715c6f520a73198cb4",
+      "report_infra_status": "delivered_verified"
+    },
+    {
+      "id": "storage-compact-history-1570876981178929333",
+      "agent": "zeus",
+      "type": "historical-backup-preservation-evidence",
+      "path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333",
+      "source_thread_id": "1569928464033783862",
+      "authority_message_ids": [
+        "1570876981178929333"
+      ],
+      "status": "compact_preservation_completed_validated_deletion_waiting_new_confirmation",
+      "result_path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/preservation-result.json",
+      "deletion_manifest_sha256": "2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592",
+      "reclaim_bytes_pending_confirmation": 5959327744,
+      "deletions": 0,
+      "next_step": "AsknewexactCriticalconfirmationfor12expandedroots/hash2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592;keepcompact+7bases+latest/safety+parentmanifests;revalidatebeforeanydeletion",
+      "updated_at": "2026-11-13T14:41:40.893655-05:00",
+      "report_infra_message_id": "1570886718242955375",
+      "report_infra_readback": true,
+      "result_sha256": "97436b31c691a2f773050cf2ae02e602ab4e41e2d689e6715c6f520a73198cb4",
+      "report_infra_status": "delivered_verified"
     }
   ],
   "profile_skill_references": [

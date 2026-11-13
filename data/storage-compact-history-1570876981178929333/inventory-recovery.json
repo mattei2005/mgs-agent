@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "root_cause": "Custom operational IDs were incorrectly stored in generated data_files. Native infra-discovery.sh rebuilds that collection and preserves runtime_artifacts; no unauthorized deletion inferred.",
+  "generator": "scripts/infra-discovery.sh:94-108,124-145,153-180",
+  "generator_sha256": "4d0e7b6ca97afab5b7d5fc931bea53d71f4db71ba362354edd883bdc45c9de71",
+  "migrated_owned_records": [
+    {
+      "id": "storage-backup-review-1570830889359777924",
+      "source_git_revision": "f2ec1726fadedaaeee3c43f6cfbd28eef8b99946",
+      "result_sha256_verified": "1395ae90c788fb5b115b061c8ced74c83b789235314da46de15bbcd4535a5081",
+      "target_collection": "runtime_artifacts"
+    },
+    {
+      "id": "storage-snapshot-review-1570868136066949244",
+      "source_git_revision": "fc11e31688228f953159c7e7d7663f0b3e6bd916",
+      "result_sha256_verified": "2fd480d19c1d0a8ac5decedd92f14f813f170df6c2cc4e0dfc4360ca59b636b1",
+      "target_collection": "runtime_artifacts"
+    }
+  ],
+  "native_jq_preserved_collection_fixture": "PASS",
+  "exact_ids_readback": true,
+  "producer_modified": false,
+  "old_receipts_unchanged": true
+}

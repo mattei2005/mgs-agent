@@ -92,6 +92,33 @@ def discover(d):
    out.append(descriptor(native,c))
  return out
 
+def verify_version_advance(d,batch,source,registered,native):
+ """Supplement immutable registration only for stable, byte-identical metadata drift.
+
+ The batch still CASes its exact observed version. No request/snapshot rewrite,
+ new source, permission mutation, content change or stale-batch acceptance.
+ """
+ versions=[str(x.get('version','')) for x in (registered,source,native)]
+ require(all(re.fullmatch('[0-9]+',v) for v in versions),'FLAT_VERSION_FORMAT')
+ require(versions[1]==versions[2] and int(versions[2])>int(versions[0]),'FLAT_VERSION_CAS')
+ for key in ['id','name','mimeType','parents','driveId','size','md5Checksum','sha256Checksum','createdTime','trashed']:
+  require(native.get(key)==registered.get(key),'FLAT_VERSION_CONTENT:'+key)
+ for key in ['properties','appProperties']:
+  require(native.get(key,{})==registered.get(key,{}),'FLAT_VERSION_PROPERTIES:'+key)
+ require(re.fullmatch('[a-f0-9]{64}',registered.get('sha256Checksum','')) is not None,'FLAT_VERSION_SHA_REQUIRED')
+ require(not any(p.get('type') in ['anyone','domain'] for p in native.get('permissions',[])),'FLAT_VERSION_PUBLIC')
+ require(all(native.get('capabilities',{}).get(k) is True for k in ['canEdit','canDownload']),'FLAT_VERSION_CAPABILITY')
+ expected={'size':str(registered['size']),'md5':registered['md5Checksum'],'sha256':registered['sha256Checksum']}
+ require(d.hashes(native['id'])==expected,'FLAT_VERSION_FULL_STREAM')
+ after=d.meta(native['id'])
+ require(after==native,'FLAT_VERSION_NOT_STABLE')
+ proof={'schema':'mgs.flat.intake.version-proof.v1','request_id':batch['flat_request_id'],'batch_id':batch['batch_id'],'batch_sha256':digest(batch),'source_id':native['id'],'registered_source_sha256':digest(registered),'registered_version':versions[0],'accepted_version':versions[2],'metadata_observed':native,'hashes':expected,'full_stream_verified':True,'exact_batch_version_verified':True,'remote_writes':0}
+ path=b.DATA/'flat-intake-cas'/batch['flat_request_id']/(batch['batch_id']+'-'+native['id']+'-v'+versions[2]+'.json')
+ saved=b.read_json(path)
+ require(saved is None or saved==proof,'FLAT_VERSION_PROOF_CHANGED')
+ if saved is None:b.atomic_json(path,proof)
+ return True
+
 def validate_new_batch(d,batch):
  validate_batch_identity(batch);c=b.read_json(REQUESTS,{}).get('requests',{}).get(batch.get('flat_request_id'))
  require(c is not None,'FLAT_REQUEST_MISSING');validate_context(c)
@@ -105,7 +132,9 @@ def validate_new_batch(d,batch):
   native=d.meta(source['source_id']);current=descriptor(native,c)
   for k in ['source_id','name','mime_type','size','md5','sha256','source_parent_id','operation','manager_code','manager_name','flat_request_id']:
    require(current.get(k)==source.get(k),'FLAT_SOURCE_CAS:'+k)
-  require(native.get('version')==registered[source['source_id']]['version'],'FLAT_NATIVE_VERSION_CHANGED')
+  require(str(native.get('version'))==str(source.get('version')),'FLAT_BATCH_NATIVE_VERSION_CHANGED')
+  if str(native.get('version'))!=str(registered[source['source_id']]['version']):
+   verify_version_advance(d,batch,source,registered[source['source_id']],native)
  return True
 
 def discord_get(path):
