@@ -1,11 +1,11 @@
 {
-  "event": "e7f1d56a7b67af204582b628ba9ce80371e0cd2a2952d71ff77335a77d5c500c",
-  "baseline": "2026-11-12T13:59:25-05:00",
+  "event": "ed19b331e2e3bf13b94a8e1cd818c4ba9b96d2935c3fe3641e7829a4d0e8c126",
+  "baseline": "2026-11-12T23:59:18-05:00",
   "parts": [
     {
-      "kind": "transition",
+      "kind": "exit",
       "payload": {
-        "content": "<@&1496256346994249912> <@&1496260941787168848>\n```\n🔴 PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB\nAtualizado em: 2026-11-12 14:14 EST\nComparação: última leitura SB concluída → SB live\n\nNovas/renovadas/alteradas: 1\nBroadcast ativas monitoradas: 447\nCampaign ativas monitoradas: 0\nOn-hold ignoradas: 518\n\nPágina             FB Page ID        Page ID  Bot user           Invest 7d     Rev. 7d       Status    Saída\n------------------ ----------------- -------- ------------------ ------------- ------------- --------- ----------\nCecily Redgrave    1222917254248176  22459    disparoseggbev     R$ 0,00       R$ 1,24       Broadcast 2026-12-10\n```\n\n**Planilha completa:** <https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0>",
+        "content": "<@&1496256346994249912> <@&1496260941787168848>\n```\n🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO\nAtualizado em: 2026-11-13 00:14 EST\n\nPágina               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída\n-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------\nAmelia Taylor        774411559095958    10940    disparosopenzed    Bẹp Lan              Broadcast                 2026-11-12\nAngela Payton        612974068574941    4868     disparoslyzmo      Elisa Thompson       Broadcast                 2026-11-12\nAria Clark           918759857978480    13767    disparosfinanceto… Beatriz Thomaz       Broadcast                 2026-11-12\nBeatrice Pascal      675575938972669    4966     disparoscliquet    John Cesar           Broadcast                 2026-11-12\nBlythe Merrill       643533488839697    4611     disparosopenzed                         Broadcast                 2026-11-12\nClaudia Medina       802040252996629    10957    disparosopenzed    Lam Sai              Broadcast                 2026-11-12\nClaudia Pacheco      774433692414885    22272    disparosopenzedes  Paula Oliveira       Broadcast                 2026-11-12\nDesiree Maddox       593076003878723    3813     disparosfinanceadx Oncho Anha           Broadcast                 2026-11-12\nElla Scott           524818184050557    22141    disparosfinanceadx Yu Hana              Broadcast                 2026-11-12\nEmilia Long          891166967408007    13709    disparoslyzmo      Khang Minh           Broadcast                 2026-11-12\nFaye Whitman         616342808225697    5119     disparosopenzed    Tiger                Broadcast                 2026-11-12\nGuadalupe Bustamante 693363430535369    5309     disparosopenzed    Rida'e Muhammad      Broadcast                 2026-11-12\n```",
         "allowed_mentions": {
           "parse": [],
           "roles": [
@@ -13,14 +13,44 @@
             "1496260941787168848"
           ]
         },
-        "nonce": "cbd982f3de2f64004359733e",
+        "nonce": "9ad8796b43325c94d0c1c548",
         "enforce_nonce": true
       },
       "posting": true,
-      "message_id": "1570517151641641132",
+      "message_id": "1570668112171241494",
       "verified": true,
-      "verified_at": "2026-11-12T14:14:28-05:00"
+      "verified_at": "2026-11-13T00:14:19-05:00"
+    },
+    {
+      "kind": "exit",
+      "payload": {
+        "content": "```\n🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO (CONTINUAÇÃO)\nAtualizado em: 2026-11-13 00:14 EST\n\nPágina               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída\n-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------\nHailey Carter        905614472633833    13689    disparoszuout      Đoàn Diệu Hồng       Broadcast                 2026-11-12\nIsabella Davis       799674723230252    13702    disparosopenzed    Tu Tu                Broadcast                 2026-11-12\nJuliana Sánchez      866404293215972    10951    disparosopenzed    Lam Sai              Broadcast                 2026-11-12\nKaren Forsyth        694351820423787    5218     disparoszytiva     Rori Ginbresil Gint… Broadcast                 2026-11-12\nKennedy Stone        837019876153790    5562     disparoseggbev     Luis Hoàng           Broadcast                 2026-11-12\nLily Hall            833598046509208    11062    disparosopenzed    Tu Tu                Broadcast                 2026-11-12\nLucia García         810127882174743    5533     disparoszytiva                          Broadcast                 2026-11-12\nMargot Ellington     984775948044959    13862    disparosfinancead… Lan Bui              Broadcast                 2026-11-12\nMaya Cooper          860018150531717    11055    disparosopenzed    Tu Tu                Broadcast                 2026-11-12\nMila Cruz            489660340900014    22717    disparosopenzed    Max Tin Masela       Broadcast                 2026-11-12\nOpaline Shepherd     670229692829629    4619     disparosopenzed                         Broadcast                 2026-11-12\nPenelope Green       844202168775902    11004    disparosnewsoun    Anh Tran             Broadcast                 2026-11-12\n```",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "nonce": "412267733f7313d793a8c1f1",
+        "enforce_nonce": true
+      },
+      "posting": true,
+      "message_id": "1570668114348085291",
+      "verified": true,
+      "verified_at": "2026-11-13T00:14:20-05:00"
+    },
+    {
+      "kind": "exit",
+      "payload": {
+        "content": "```\n🟢 PÁGINAS QUE SAÍRAM DA RESTRIÇÃO (CONTINUAÇÃO)\nAtualizado em: 2026-11-13 00:14 EST\n\nPágina               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída\n-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------\nRose Lawrence        1016750674845525   13929    disparoszuout      Maribel Tamboon      Broadcast                 2026-11-12\nSamantha Roberts     813649321841379    13731    disparosnewsoun    Anh Tran             Broadcast                 2026-11-12\nSkylar Lane          799679149892020    10944    disparosopenzed    Bẹp Lan              Broadcast                 2026-11-12\nSofía Ramírez        836761859531703    19173    disparoscliquetes  Manoel Maximiano     Broadcast                 2026-11-12\nStella Mitchell      936449889543476    13725    disparosnewsoun    Anh Tran             Broadcast                 2026-11-12\n```",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "nonce": "614125bf3fb76b10a34054b6",
+        "enforce_nonce": true
+      },
+      "posting": true,
+      "message_id": "1570668116910800900",
+      "verified": true,
+      "verified_at": "2026-11-13T00:14:21-05:00"
     }
   ],
-  "created_at": "2026-11-12T14:14:27-05:00"
+  "created_at": "2026-11-13T00:14:19-05:00"
 }
