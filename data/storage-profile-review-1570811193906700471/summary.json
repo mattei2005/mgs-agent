@@ -27,5 +27,22 @@
   "retention_changed": false,
   "current_used_percent": 73.40714271063335,
   "projected_used_percent": 73.13066145399043,
-  "result_path": "/root/mgs-agent/data/storage-profile-review-1570811193906700471/lot-754/manifest.json"
+  "result_path": "/root/mgs-agent/data/storage-profile-review-1570811193906700471/lot-754/manifest.json",
+  "report_infra": {
+    "message_id": "1570816340602781880",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "preflight": "PASS",
+  "negative_tests": [
+    "count",
+    "scope",
+    "metadata",
+    "missing_approval"
+  ],
+  "governance_errors": [],
+  "review_completed_at": "2026-11-13T10:03:54.769286-05:00"
 }

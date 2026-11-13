@@ -227,6 +227,12 @@ For creative/media staging, remote existence is proven by the canonical Shared D
 5. If legacy IDs are missing after a migration, exclude that local root from the destructive manifest. Do not infer a replacement by name alone.
 6. A future upload workflow may remove transient local media immediately after this readback, but must preserve a compact provenance manifest containing source ID, destination ID, filename, size, checksum, and status.
 
+#### Historical inventories are not automatically live media consumers
+
+Classify references by behavior before declaring a duplicate local binary protected. A retained JSON inventory, upload receipt or comparison record mentioning a filename is evidence, not proof that a current executable opens that local path. Preserve those original records unchanged, create a compact exact local-path → logical-ID/provider-ID/stock-ID/hash recovery index outside every target, and exercise the real native archive resolver, ACK/ancestry/access guards and full provider stream. Count every unique remote ID programmatically and retain unmatched files or unfinished owning tasks. Disclose that physical local pathnames disappear while the material and provenance remain remotely recoverable; never equate this with deleting conversations, browser state or the historical records themselves. If a live executable, rendered local report or active task still depends on the physical path, preserve it until that consumer is migrated.
+
+For large read-only archive audits, append bounded batches to a durable ledger, cache only identical GET/metadata/ACK observations in process memory, and keep the native resolver authoritative. Treat helper status `0` as a transport exception family, not an HTTP rejection or absent object. Retry the exact non-mutating native read with bounded backoff, preserve the initial failure separately and aggregate the latest independently validated result per native ID; never silently double-count the retry or bypass credential/trust gates.
+
 ## 6. Housekeeping dry-run pitfalls
 
 `npm cache verify` is **not** a read-only verification command: npm may garbage-collect stale cache objects while validating the cache. During discovery, size npm caches with metadata-only filesystem reads and use non-mutating listings where needed. Run `npm cache verify` only inside an authorized cache-cleanup scope, capture its reported garbage-collected bytes, and verify the post-command cache size and filesystem delta before reporting the effect.

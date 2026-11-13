@@ -7,21 +7,24 @@ from decimal import Decimal
 from urllib.parse import quote
 sys.path.insert(0,'/root/mgs-agent/scripts')
 import mgs_google_workspace_auth as g
-H=Path('/root/mgs-agent/data/meta-manual-payments');REPORTS=Path('/root/mgs-agent/reports');HEADER='Disponível para pagar no cartão (Pay now)'
+H=Path('/root/mgs-agent/data/meta-manual-payments');REPORTS=Path('/root/mgs-agent/reports');HEADER='Saldo pendente — Outstanding balance';LEGACY_HEADER='Disponível para pagar no cartão (Pay now)'
 def save(p,d):
  p.parent.mkdir(parents=True,exist_ok=True);tmp=p.with_suffix(p.suffix+'.next');tmp.write_text(json.dumps(d,ensure_ascii=False,indent=2));os.chmod(tmp,0o600);os.replace(tmp,p)
 def verified_entry(r,t,c,v,receipt_path):
  aid=t['account_id']
  assert r['account_id']==aid and r['business_id']==c['business_id']and r['payments_executed']==0
- if r['status']=='accounts_list_read':
-  assert '1564382301155098717'in c.get('authorization_messages',[]),'accounts_list_publication_not_authorized'
+ if r['status']in ['accounts_list_read','accounts_list_outstanding_balance_read']:
+  outstanding=r['status']=='accounts_list_outstanding_balance_read'
+  if outstanding:assert '1570815017794674749'in c.get('authorization_messages',[])and c.get('h_source')=='accounts_list_outstanding_balance','outstanding_publication_not_authorized'
+  else:assert '1564382301155098717'in c.get('authorization_messages',[]),'accounts_list_publication_not_authorized'
   proof=v.get('accounts_list_checks',{}).get(aid,{})
   assert proof.get('valid_billing_list')is True and proof.get('business_id')==c['business_id']and proof.get('row_account_id')==aid,'accounts_list_visual_identity_missing'
   assert proof.get('name')==t['name']and r['name']==t['name'],'accounts_list_exact_name_mismatch'
   dec=Decimal(r['amount']);assert dec>=0 and Decimal(proof['balance_usd'])==dec,'accounts_list_visual_balance_mismatch'
   assert Path(r['screenshot']).is_file();ls=Path(r['text_path']).read_text().splitlines();prefix=t['name']+' ID: '+aid+' ';matches=[l for l in ls if l.startswith(prefix)and re.search(r'\$[0-9,]+\.\d{2}',l)];assert len(matches)==1,'accounts_list_exact_row_not_unique'
   amount=re.search(r'\$([0-9,]+\.\d{2})',matches[0])[1];assert Decimal(amount.replace(',',''))==dec,'accounts_list_ax_balance_mismatch'
-  source='accounts_list_current_balance';period='Current balance da linha Accounts; leitura autorizada1564382301155098717; não é valor de modal';screenshot=r['screenshot']
+  if outstanding:assert proof.get('balance_label')=='Outstanding balance'and proof.get('authority_message_id')=='1570815017794674749','outstanding_visual_label_or_authority_missing'
+  source='accounts_list_outstanding_balance'if outstanding else'accounts_list_current_balance';period='Outstanding balance da linha Accounts; autorizado1570815017794674749; não é valor de modal Pay now'if outstanding else'Current balance da linha Accounts; leitura autorizada1564382301155098717; não é valor de modal';screenshot=r['screenshot']
  elif r['status']=='current_balance_pay_now_unavailable':
   proof=v.get('disabled_balance_checks',{}).get(aid,{})
   assert proof.get('pay_now_visually_disabled')is True and proof.get('valid_billing_page')is True,'disabled_button_visual_proof_missing'
@@ -66,7 +69,7 @@ def main():
  for t in targets:
   if t['account_id']not in verified:continue
   aid=t['account_id'];rp=B/(aid+'-receipt.json');r=json.loads(rp.read_text());entries[aid]=verified_entry(r,t,c,v,rp)
- total=sum((Decimal(x['amount'])for x in entries.values()),Decimal(0));heads=[x.get('userEnteredValue',{}).get('stringValue','')for x in rows[0]['values']];existing=HEADER in heads;paycol=heads.index(HEADER)if existing else 5;balancecol=heads.index('Saldo a pagar');width=len(heads)
+ total=sum((Decimal(x['amount'])for x in entries.values()),Decimal(0));heads=[x.get('userEnteredValue',{}).get('stringValue','')for x in rows[0]['values']];existing=HEADER in heads or LEGACY_HEADER in heads;paycol=heads.index(HEADER)if HEADER in heads else heads.index(LEGACY_HEADER)if LEGACY_HEADER in heads else 5;balancecol=heads.index('Saldo a pagar');width=len(heads)
  assert existing or heads[5:7]==['Saldo a pagar','Total já gasto em outubro'],'unexpected_schema'
  if not a.apply:print(json.dumps({'status':'pay_now_plan_pass','accounts':len(entries),'sum_usd':str(total),'insert_required':not existing,'sheet_writes':0}));return
  with (H/'writer.lock').open('a')as lock:
@@ -90,19 +93,21 @@ def main():
    while len(cells)<width:cells.append({})
    cell=copy.deepcopy(cells[balancecol]);cell.pop('userEnteredValue',None);cell.pop('note',None)
    if i==0 or(cells[0].get('userEnteredValue',{}).get('stringValue')=='Nome da conta'and cells[1].get('userEnteredValue',{}).get('stringValue')=='Forma de pagamento'):
-    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte H nas '+str(len(targets))+' contas de linha; '+str(len(entries))+' verificadas nesta publicação, '+str(len(targets)-len(entries))+' preservadas com timestamp anterior: Current balance da lista Accounts autorizado1564382301155098717; modal ou balance topo quando explicitamente registrados na nota. Cada nota distingue fonte e hora da leitura real. Não é limite do cartão. Nenhum pagamento executado.'
+    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte H nas '+str(len(targets))+' contas de linha; '+str(len(entries))+' verificadas nesta publicação, '+str(len(targets)-len(entries))+' preservadas com timestamp anterior: Fonte vigente Outstanding balance da lista Accounts autorizado1570815017794674749; valores antigos preservados mantêm a fonte/hora original. Cada nota distingue fonte e hora da leitura real. Não é limite do cartão. Nenhum pagamento executado.'
    else:
     mt=re.search(r'^ID da conta: (\d+)\b',cells[0].get('note',''));label=cells[0].get('userEnteredValue',{}).get('stringValue','')
     if mt and mt[1]in entries:
      e=entries[mt[1]];cell['userEnteredValue']={'numberValue':float(Decimal(e['amount']))}
-     if e['source']=='accounts_list_current_balance':
+     if e['source']=='accounts_list_outstanding_balance':
+      detail='Outstanding balance da linha Accounts: USD '+e['amount']+'. Fonte vigente autorizada por Rodolfo1570815017794674749; nome e ID exatos e cabeçalho conferidos nos pixels. Não é leitura de modal Pay now nem prova de equivalência com o antigo Current balance.'
+     elif e['source']=='accounts_list_current_balance':
       detail='Current balance da linha Accounts: USD '+e['amount']+'. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado.'
      elif e['source']=='current_balance_pay_now_unavailable':
       detail='Current balance do topo: USD '+e['amount']+'. Pay now comprovadamente desabilitado na página válida. Usado como saldo a pagar de outubro ainda aberto conforme Rodolfo1564373157727576245; não é leitura de modal.'
      else:detail='Amount you can pay now: USD '+e['amount']+'. '+e['period_label']+'. Valor literal permitido no modal.'
      cell['note']=detail+' Fonte '+e['source']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: '+e['receipt']
     elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
-     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma H das '+str(len(targets))+' contas de linha; '+str(len(entries))+' atualizadas, '+str(len(targets)-len(entries))+' históricas preservadas: Current balance da Accounts list por1564382301155098717, ou outra fonte explicitada individualmente. Leituras sequenciais com fonte/hora individual; não é limite de cartão nem promessa de liquidação simultânea.'
+     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma H das '+str(len(targets))+' contas de linha; '+str(len(entries))+' atualizadas, '+str(len(targets)-len(entries))+' históricas preservadas: Outstanding balance da Accounts list por1570815017794674749, ou fonte histórica explicitada individualmente. Leituras sequenciais com fonte/hora individual; não é limite de cartão nem promessa de liquidação simultânea.'
     elif mt and mt[1]in targetids:
      # Partial recovery must preserve missing values AND their historical notes.
      continue

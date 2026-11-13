@@ -73206,6 +73206,30 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "id": "storage-profile-review-1570811193906700471",
+      "agent": "zeus",
+      "type": "local_profile_media_disposal_review",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1570811193906700471",
+      "status": "exact754_lot_frozen_awaiting_critical_confirmation",
+      "path": "/root/mgs-agent/data/storage-profile-review-1570811193906700471",
+      "result_path": "/root/mgs-agent/data/storage-profile-review-1570811193906700471/summary.json",
+      "manifest_sha256": "1290b048ad7080c958bc74a2c191c3cbd2537a850571aad06cfc1a310e434011",
+      "target_files": 754,
+      "reclaim_bytes": 571994112,
+      "native_remote_objects_verified": 493,
+      "native_full_streams": 493,
+      "preserved_historical_json_sources": 12,
+      "preserved_atena_work": true,
+      "deletions": 0,
+      "retention_changed": false,
+      "skill_reference": "vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+      "updated_at": "2026-11-13T10:03:54.769286-05:00",
+      "result_sha256": "21945337631ae2ab502eab33332b535e7788c3e0e8e1ae606fe4a1cc5051702c",
+      "report_message_id": "1570816340602781880",
+      "report_readback": true
     }
   ],
   "mu_plugin_canonical": {

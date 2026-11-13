@@ -42,14 +42,17 @@ def search_pixel_point(element,capture):
  scale=capture.get('bounds_scale')or 1
  bounds=element.get('bounds');assert bounds and len(bounds)==4,'search_bounds_missing'
  bx,by,bw,bh=bounds;assert scale>0 and bw>0 and bh>0,'search_bounds_invalid'
- return [round((bx+min(180,bw/2))/scale),round((by+bh/2)/scale)]
+ assert bx>=0 and by>=0 and bx+bw<=capture['width']+4 and by+bh<=capture['height']+4,'search_native_bounds_not_in_screenshot'
+ # Native3200 captures and these fresh UIA bounds share pixel coordinates.
+ # bounds_scale is an estimated offscreen-tree hint, not a reliable transform.
+ return [round(bx+min(180,bw/2)),round(by+bh/2)]
 try:
  w=subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=45);windows=json.loads(w.stdout)['windows'];surface=B/'pc1-surface.json';surface=surface if surface.exists()else H/'pc1-browser-surface.json';known=json.loads(surface.read_text());ws=[x for x in windows if x.get('pid')==known['pid']and x.get('window_id')==known['window_id']and not x.get('minimized')and'chrome'in str(x.get('app_name','')).lower()];assert len(ws)==1,'approved_chrome_not_live';pid=ws[0]['pid'];wid=ws[0]['window_id'];cap();gate();act({'action':'key','keys':'ctrl+t'});created=True
- url='https://adsmanager.facebook.com/adsmanager/billing_hub/accounts?asset_id=2852476828464907&business_id=155263197283282&payment_account_id=2852476828464907&placement=BILLING_HUB&session_id=upl_1793047342_61c89fd3-1293-4191-aab6-314f3793aac2'
+ url='https://business.facebook.com/latest/billing_hub/accounts/?business_id=155263197283282'
  act({'action':'key','keys':'ctrl+l'});act({'action':'type','text':url});act({'action':'key','keys':'return'});deadline=time.monotonic()+70
  while True:
   cap();gate()
-  if len(search())==1 and'Digital Trust'in text:break
+  if len(search())==1 and any(e.get('role')=='DataItem'and ' ID: 'in e.get('label','')for e in es):break
   if time.monotonic()>deadline:raise RuntimeError('accounts_search_not_ready')
   time.sleep(2)
  for aid in a.account_ids:
@@ -60,7 +63,7 @@ try:
    if len(matches)==1:time.sleep(2);cap();break
    if time.monotonic()>deadline:raise RuntimeError('searched_row_not_ready_'+aid)
    time.sleep(1)
-  pic=snap(aid);matches=[l for l in text.splitlines()if l.startswith(prefix)and re.search(r'\$[0-9,]+\.\d{2}',l)];assert len(matches)==1,'exact_row_not_unique';row={'account_id':aid,'name':t['name'],'business_id':c['business_id'],'read_at':datetime.now().astimezone().isoformat(),'screenshot':pic,'text_path':str(B/(aid+'.txt')),'ui_surface':'Billing & payments > Accounts > Ad accounts; exact row ID/name','row_label':matches[0],'amount':re.search(r'\$([0-9,]+\.\d{2})',matches[0])[1].replace(',',''),'source':'accounts_list_current_balance','status':'accounts_list_read','payments_executed':0,'meta_writes':0,'sheets_writes':0};rp=B/(aid+'-receipt.json');rp.write_text(json.dumps(row,ensure_ascii=False,indent=2));os.chmod(rp,0o600);results.append(row);print(json.dumps({k:row[k]for k in ['account_id','name','amount','read_at','screenshot','source']},ensure_ascii=False),flush=True)
+  pic=snap(aid);matches=[l for l in text.splitlines()if l.startswith(prefix)and re.search(r'\$[0-9,]+\.\d{2}',l)];assert len(matches)==1,'exact_row_not_unique';row={'account_id':aid,'name':t['name'],'business_id':c['business_id'],'read_at':datetime.now().astimezone().isoformat(),'screenshot':pic,'text_path':str(B/(aid+'.txt')),'ui_surface':'Billing & payments > Accounts > Ad accounts; exact row ID/name','row_label':matches[0],'amount':re.search(r'\$([0-9,]+\.\d{2})',matches[0])[1].replace(',',''),'source':'accounts_list_outstanding_balance'if c.get('h_source')=='accounts_list_outstanding_balance'else'accounts_list_current_balance','status':'accounts_list_outstanding_balance_read'if c.get('h_source')=='accounts_list_outstanding_balance'else'accounts_list_read','payments_executed':0,'meta_writes':0,'sheets_writes':0};rp=B/(aid+'-receipt.json');rp.write_text(json.dumps(row,ensure_ascii=False,indent=2));os.chmod(rp,0o600);results.append(row);print(json.dumps({k:row[k]for k in ['account_id','name','amount','read_at','screenshot','source']},ensure_ascii=False),flush=True)
  print(json.dumps({'status':'account_search_batch_captured','accounts':len(results),'same_owned_tab':True,'detail_pages_opened':0,'sheet_writes':0,'meta_writes':0,'run_dir':str(B)}),flush=True)
 except Exception as exc:
  try:cap();pic=snap('blocked')

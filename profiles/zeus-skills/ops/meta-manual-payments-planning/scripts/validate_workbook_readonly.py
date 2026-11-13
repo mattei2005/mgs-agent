@@ -28,6 +28,7 @@ def main():
  if pay:expected.insert(5,'Disponível para pagar no cartão')
  if september:
   month_headers=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];assert forms[0][5]in [m+' — saldo em aberto'for m in month_headers],'invoice_period_header_invalid';expected[4:4]=['Invoice',forms[0][5]]
+ if september and forms[0][7]=='Saldo pendente — Outstanding balance':expected[7]='Saldo pendente — Outstanding balance'
  assert len(forms[0])==len(expected)and all(str(v).startswith(pre)for v,pre in zip(forms[0],expected)),'header_schema_mismatch'
  width=len(expected);paycol=7 if september else 5;metrics=(6 if september else 4,width-2,width-1);special=((paycol,)if pay else())+((5,)if september else());financial=tuple(sorted(metrics+special));assert len(forms)==len(vals)
  from pathlib import Path
@@ -46,8 +47,9 @@ def main():
     if row[1]=='Linha de crédito':
      sn=cells[paycol].get('note','');modal='Amount you can pay now'in sn;disabled=all(x in sn for x in ['current_balance_pay_now_unavailable','1564373157727576245','Pay now comprovadamente desabilitado','Leitura PC1 autenticada:'])
      listing=all(x in sn for x in ['accounts_list_current_balance','1564382301155098717','Current balance da linha Accounts:','Leitura PC1 autenticada:'])
+     outstanding=all(x in sn for x in ['accounts_list_outstanding_balance','1570815017794674749','Outstanding balance da linha Accounts:','Leitura PC1 autenticada:'])and contract.get('h_source')=='accounts_list_outstanding_balance'and'1570815017794674749'in contract.get('authorization_messages',[])
      if authorized_new_h_gap(contract,aid,row[paycol],sn):pending_new_h.append({'account_id':aid,'row':i+1,'reason':'new_account_h_pending_independent_ui_evidence'})
-     else:assert numeric(row[paycol])and(modal or disabled or listing),'credit_line_pay_now_missing_or_no_source_note'
+     else:assert numeric(row[paycol])and(modal or disabled or listing or outstanding),'credit_line_pay_now_missing_or_no_source_note'
     else:assert row[paycol]=='','pay_now_scope_includes_unrequested_card_account'
    if september:
     if row[1]=='Linha de crédito':assert numeric(row[5]),'september_due_missing'
