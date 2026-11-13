@@ -92,7 +92,8 @@
           "table": "schema_version",
           "rows": 1,
           "without_primary_key": true,
-          "coverage_proven": false
+          "coverage_proven": true,
+          "exact_database_digest_covers_no_pk_table": true
         },
         {
           "table": "state_meta",
@@ -227,12 +228,13 @@
       "sources": [
         {
           "label": "latest_historical_root_snapshot_recovery",
+          "db_sha256": "18299be5fdf385ef498816ef8df9110cb464967ddfed2d608edb0573bd366313",
           "quick_check": "ok",
           "foreign_key_violations": 0,
           "missing_candidate_tables_or_columns": []
         }
       ],
-      "all_meaningful_rows_covered": false,
+      "all_meaningful_rows_covered": true,
       "original_sqlite_opened": false,
       "persistent_db_staging_bytes": 0
     },
@@ -326,7 +328,8 @@
           "table": "schema_version",
           "rows": 1,
           "without_primary_key": true,
-          "coverage_proven": false
+          "coverage_proven": true,
+          "exact_database_digest_covers_no_pk_table": true
         },
         {
           "table": "state_meta",
@@ -461,12 +464,13 @@
       "sources": [
         {
           "label": "latest_historical_root_snapshot_recovery",
+          "db_sha256": "18299be5fdf385ef498816ef8df9110cb464967ddfed2d608edb0573bd366313",
           "quick_check": "ok",
           "foreign_key_violations": 0,
           "missing_candidate_tables_or_columns": []
         }
       ],
-      "all_meaningful_rows_covered": false,
+      "all_meaningful_rows_covered": true,
       "original_sqlite_opened": false,
       "persistent_db_staging_bytes": 0,
       "reused_identical_db_digest": true
@@ -561,7 +565,8 @@
           "table": "schema_version",
           "rows": 1,
           "without_primary_key": true,
-          "coverage_proven": false
+          "coverage_proven": true,
+          "exact_database_digest_covers_no_pk_table": true
         },
         {
           "table": "state_meta",
@@ -696,23 +701,17 @@
       "sources": [
         {
           "label": "latest_historical_root_snapshot_recovery",
+          "db_sha256": "18299be5fdf385ef498816ef8df9110cb464967ddfed2d608edb0573bd366313",
           "quick_check": "ok",
           "foreign_key_violations": 0,
           "missing_candidate_tables_or_columns": []
         }
       ],
-      "all_meaningful_rows_covered": false,
+      "all_meaningful_rows_covered": true,
       "original_sqlite_opened": false,
       "persistent_db_staging_bytes": 0,
       "reused_identical_db_digest": true
     }
   ],
-  "sources": [
-    {
-      "label": "latest_historical_root_snapshot_recovery",
-      "quick_check": "ok",
-      "foreign_key_violations": 0,
-      "missing_candidate_tables_or_columns": []
-    }
-  ]
+  "schema_variants": 1
 }
