@@ -804,7 +804,9 @@
     744810,
     744831,
     744862,
-    744876
+    744876,
+    745146,
+    745167
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3243,9 +3245,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T00:04:54.000Z",
+        "created_at": "2026-11-13T00:05:00.000Z",
         "domain": "lyzmo",
-        "notification_id": 743346,
+        "notification_id": 745146,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -3277,7 +3279,8 @@
         739057,
         740210,
         740995,
-        743346
+        743346,
+        745146
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -3992,6 +3995,39 @@
         733476
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|1770": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-13T00:05:28.000Z",
+        "domain": "openzed",
+        "notification_id": 745167,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 15,
+          "Broadcast": 288,
+          "On-hold": 85,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "1770",
+        "segurador_name": "Alex Silva Araujo",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-11-12T19:12:13-05:00",
+      "message_ids": [
+        "1570592079980265515"
+      ],
+      "notification_ids": [
+        745167
+      ],
+      "opened_at": "2026-11-12T19:12:11-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -5727,69 +5763,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-12T18:57:09-05:00",
+  "last_check": "2026-11-12T19:12:13-05:00",
   "last_delivery": {
-    "at": "2026-11-12T15:12:38-05:00",
+    "at": "2026-11-12T19:12:13-05:00",
     "cursor_ids": [
-      744278,
-      744299,
-      744320,
-      744342,
-      744368,
-      744391,
-      744405,
-      744436,
-      744456,
-      744470,
-      744491,
-      744509,
-      744532,
-      744551,
-      744574,
-      744607,
-      744627,
-      744639,
-      744657,
-      744678,
-      744701,
-      744719,
-      744745,
-      744762,
-      744783,
-      744810,
-      744831,
-      744862,
-      744876
+      745146,
+      745167
     ],
     "message_ids": [
-      "1570531740118945793",
-      "1570531744803848264",
-      "1570531749862051862",
-      "1570531755411243102",
-      "1570531761614618789",
-      "1570531766425354291",
-      "1570531771194277931",
-      "1570531776198221927",
-      "1570531780182675658",
-      "1570531784188240144",
-      "1570531788806299713"
+      "1570592079980265515"
     ],
     "notification_ids": [
-      744491,
-      744551,
-      744574,
-      744607,
-      744627,
-      744639,
-      744762,
-      744783,
-      744831,
-      744862,
-      744876
+      745167
     ]
   },
   "last_error": null,
-  "last_seen_id": 744876,
+  "last_seen_id": 745167,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
