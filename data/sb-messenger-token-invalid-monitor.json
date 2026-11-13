@@ -811,7 +811,14 @@
     745410,
     745431,
     745453,
-    745472
+    745472,
+    745852,
+    745868,
+    745889,
+    745910,
+    745935,
+    745953,
+    745974
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1199,9 +1206,9 @@
     "digital-trust|cliquetfinanzas|75|1300": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:05:34.000Z",
+        "created_at": "2026-11-13T16:11:15.000Z",
         "domain": "cliquetfinanzas",
-        "notification_id": 743915,
+        "notification_id": 745910,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 3,
@@ -1222,7 +1229,8 @@
       "notification_ids": [
         741544,
         742598,
-        743915
+        743915,
+        745910
       ],
       "opened_at": "2026-11-10T07:12:11-05:00",
       "repeat_count": 0,
@@ -1586,6 +1594,40 @@
         732477
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|eggbev|12|336": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-13T16:10:37.000Z",
+        "domain": "eggbev",
+        "notification_id": 745852,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 13,
+          "Broadcast": 71,
+          "Campaign": 11,
+          "On-hold": 27,
+          "Ready": 2
+        },
+        "pages": 124,
+        "segurador_id": "336",
+        "segurador_name": "Luis Hoàng",
+        "source": "page_token",
+        "user_email": "disparoseggbev@gmail.com",
+        "user_id": "12",
+        "user_name": "Disparos Eggbev US-CC-EN"
+      },
+      "last_sent_at": "2026-11-13T11:12:16-05:00",
+      "message_ids": [
+        "1570833681688563813"
+      ],
+      "notification_ids": [
+        745852
+      ],
+      "opened_at": "2026-11-13T11:12:14-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2626,9 +2668,9 @@
     "digital-trust|helixenit|47|203": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:05:58.000Z",
+        "created_at": "2026-11-13T16:11:56.000Z",
         "domain": "helixenit",
-        "notification_id": 743976,
+        "notification_id": 745974,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 3,
@@ -2650,7 +2692,8 @@
       "notification_ids": [
         706677,
         742661,
-        743976
+        743976,
+        745974
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -3079,9 +3122,9 @@
     "digital-trust|lyzmofinanzas|77|1768": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:05:39.000Z",
+        "created_at": "2026-11-13T16:11:23.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 743936,
+        "notification_id": 745935,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -3089,7 +3132,7 @@
         "pages": 2,
         "segurador_id": "1768",
         "segurador_name": "Riza Gabiola",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoslyzmouscces@gmail.com",
         "user_id": "77",
         "user_name": "Disparos Lyzmo US-CC-ES"
@@ -3112,7 +3155,8 @@
         740320,
         741076,
         742619,
-        743936
+        743936,
+        745935
       ],
       "opened_at": "2026-10-28T12:12:15-04:00",
       "repeat_count": 0,
@@ -4386,9 +4430,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:05:40.000Z",
+        "created_at": "2026-11-13T16:11:28.000Z",
         "domain": "spe",
-        "notification_id": 743956,
+        "notification_id": 745953,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -4468,7 +4512,8 @@
         740296,
         741099,
         742640,
-        743956
+        743956,
+        745953
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -4508,9 +4553,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:05:15.000Z",
+        "created_at": "2026-11-13T16:10:47.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 743901,
+        "notification_id": 745868,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -4566,7 +4611,8 @@
         740227,
         741015,
         742582,
-        743901
+        743901,
+        745868
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -5501,6 +5547,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|zytiva|17|1744": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-13T16:10:50.000Z",
+        "domain": "zytiva",
+        "notification_id": 745889,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "1744",
+        "segurador_name": "Gia Huy",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-11-13T11:12:16-05:00",
+      "message_ids": [
+        "1570833686914531389"
+      ],
+      "notification_ids": [
+        745889
+      ],
+      "opened_at": "2026-11-13T11:12:14-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zytiva|17|1752": {
       "alert": {
         "company": "digital-trust",
@@ -5804,25 +5883,29 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-13T10:57:12-05:00",
+  "last_check": "2026-11-13T11:12:16-05:00",
   "last_delivery": {
-    "at": "2026-11-13T07:12:11-05:00",
+    "at": "2026-11-13T11:12:16-05:00",
     "cursor_ids": [
-      745391,
-      745410,
-      745431,
-      745453,
-      745472
+      745852,
+      745868,
+      745889,
+      745910,
+      745935,
+      745953,
+      745974
     ],
     "message_ids": [
-      "1570773270481997998"
+      "1570833681688563813",
+      "1570833686914531389"
     ],
     "notification_ids": [
-      745431
+      745852,
+      745889
     ]
   },
   "last_error": null,
-  "last_seen_id": 745472,
+  "last_seen_id": 745974,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
