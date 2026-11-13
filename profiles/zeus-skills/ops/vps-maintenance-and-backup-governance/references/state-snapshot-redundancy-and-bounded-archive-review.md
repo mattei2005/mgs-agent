@@ -29,7 +29,8 @@ Deletion safety is directional: the candidate may be fully subsumed even when th
 
 - Run `PRAGMA quick_check` and `PRAGMA foreign_key_check` read-only on every candidate DB.
 - Compare candidate DBs to the latest retained snapshot and the validated full archive.
-- For tables with primary keys, count candidate rows absent from retained sources by PK.
+- For tables with primary keys, count candidate rows absent from retained sources by PK, then independently compare the full candidate-column payload for each row. A surviving session ID can have a different historical system prompt, usage, routing or runtime version; PK coverage alone is not full historical-state coverage. Report missing keys separately from same-key/different-payload versions and distinguish message preservation from old technical-state retirement.
+- Inspect the schema of every candidate phase before building retained-source coverage. Preparation, activation and recovery can legitimately have different tables/columns despite equal file size. Cache union coverage by the candidate's table/column/PK projection, not by date or the first phase's schema; keep missing retained columns fail-closed and rerun all affected variants after an over-strict schema equality gate fails. Fingerprint source files before/after to distinguish legitimate schema versions from drift.
 - Treat `sessions`, `messages`, routing, model usage, delivery obligations, system prompts, and cron executions as meaningful history.
 - Keep FTS shadow/index tables separate: candidate-only FTS internals do not by themselves prove unique user history.
 - For tables without primary keys, report row-count differences and fail closed rather than claiming set containment.
@@ -48,13 +49,17 @@ A SQLite connection intended as read-only can still remove or recreate stale `st
 
 ## Bounded RAM shadow for coherent standalone SQLite backups
 
-Use this optional integrity-check route only for already consistent, standalone backup DBs with no nonempty WAL/SHM sidecars. Do not use it for live databases or to infer WAL recovery or historical-row subsumption.
+Use this optional integrity-check route only for already consistent, standalone backup DBs with no nonempty WAL/SHM sidecars by default; the narrowly validated stale-SHM exception below is the only additional route. Do not use it for live databases or to infer WAL recovery or historical-row subsumption from integrity alone.
 
 1. Test `sqlite3.Connection.deserialize` on a synthetic fixture first, including `quick_check`, FK checks, known row counts and a `query_only` write rejection. A SQLite URI under `/proc/self/fd/<memfd>` may fail to open; do not keep retrying that route or touch the original snapshot to compensate.
 2. Before each DB, require live `MemAvailable >= 3 × DB logical bytes + 1 GiB`; process sequentially and release each connection/buffer before the next. Use a bytearray/readinto clone to avoid unnecessary full-buffer copies, `temp_store=MEMORY` and a bounded SQLite cache. Fall back to the separately capacity-gated file staging workflow when RAM cannot safely hold the clone.
 3. A coherent DB can retain SQLite WAL journal-format header bytes even after checkpointing. If deserialize cannot open that standalone form, normalize only header offsets 18 and 19 from 2 to 1 **in the disposable RAM clone**. First prove that exact two-byte transformation on a fixture; require the source signature and header versions, and never apply it to the original or to a DB requiring a nonempty WAL.
 4. Run `query_only=ON`, `quick_check` and `foreign_key_check` against the RAM clone only. Record checks and exception findings without exposing rows, messages, credentials or config contents. This is an integrity check of a coherent backup, not a production restore or proof that one snapshot subsumes another.
 5. Verify each original inode, size, nanosecond mtime and external SHA-256 before/after inspection. Reuse an integrity result only for an identical complete DB digest. Bind the validation to retained archive/snapshot manifests and record zero persistent staging bytes.
+
+### Checksum-frozen native backups with empty WAL and stale SHM
+
+A sealed native backup may retain a standard 32 KiB SHM index with an absent/zero-byte WAL. This is not a nonempty WAL recovery case. Permit a RAM-only inspection only after validating the standalone deserialize fixture (known rows, integrity/FK, query-only write rejection and copy-only header normalization), proving the backup's recorded hashes and zero source `cwd`/`exe`/FD consumers, and applying the same per-DB RAM gate. Copy the SHM bytes into RAM for preservation bookkeeping but do not use them as an input to SQLite; require its size to be exactly zero or 32768 bytes and reject a nonempty WAL before any clone. Never connect SQLite to the original DB or sidecars. Require quick/FK checks on the RAM image, then revalidate every original node, file hash and sidecar's inode/size/mtime after analysis. Unknown SHM layout, a live/changed source, nonempty WAL or failed integrity returns to the separately gated staging route; do not broaden the exception. Any historical-row claim still requires the independent schema-aware retained-union comparison, not this integrity fixture.
 
 ## Archive-member staging capacity gate
 

@@ -1,0 +1,252 @@
+{
+  "status": "review_completed_no_deletions_blocked_on_historical_state_decision",
+  "request_message_id": "1570868136066949244",
+  "thread_id": "1569928464033783862",
+  "authority_native_verified": true,
+  "review_scope": "12 exact profile snapshot directories across preparation/activation/recovery on21Oct; not a whole-backup-root disposal",
+  "snapshot_count": 12,
+  "regular_files": 9984,
+  "occupied_unique_allocated_bytes": 5959327744,
+  "validated_zero_historical_loss_reclaim_bytes": 0,
+  "observed_reclaim_bytes": 0,
+  "deletions": 0,
+  "messages": [
+    {
+      "profile": "zeus",
+      "snapshots": 3,
+      "all_message_rows_identical_in_retained_union": true,
+      "per_snapshot_message_counts": [
+        89035,
+        89664,
+        90709
+      ],
+      "missing_message_rows": 0,
+      "historical_technical_state_or_versions_absent": true
+    },
+    {
+      "profile": "atena",
+      "snapshots": 3,
+      "all_message_rows_identical_in_retained_union": true,
+      "per_snapshot_message_counts": [
+        7257,
+        7257,
+        7261
+      ],
+      "missing_message_rows": 0,
+      "historical_technical_state_or_versions_absent": true
+    },
+    {
+      "profile": "ares",
+      "snapshots": 3,
+      "all_message_rows_identical_in_retained_union": true,
+      "per_snapshot_message_counts": [
+        44201,
+        44525,
+        44804
+      ],
+      "missing_message_rows": 0,
+      "historical_technical_state_or_versions_absent": true
+    }
+  ],
+  "root_history": "Default/root state excluded from latest production bundle; its latest historical recovery copy covers all42messages/67sessions and is separately protected",
+  "checksum_coupled_snapshot_count": 12,
+  "checksum_coupled_deletions_eligible_without_retirement_override": 0,
+  "sqlite_integrity_checks": "12/12 quick_check and foreign_key_check passed on RAM clones",
+  "source_preservation": [
+    {
+      "id": "preparation-root",
+      "regular_file_hashes_verified": 7,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "preparation-zeus",
+      "regular_file_hashes_verified": 10,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "preparation-atena",
+      "regular_file_hashes_verified": 10,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "preparation-ares",
+      "regular_file_hashes_verified": 10,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "activation-root",
+      "regular_file_hashes_verified": 704,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "activation-zeus",
+      "regular_file_hashes_verified": 1987,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "activation-atena",
+      "regular_file_hashes_verified": 961,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "activation-ares",
+      "regular_file_hashes_verified": 1321,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "recovery-root",
+      "regular_file_hashes_verified": 704,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "recovery-zeus",
+      "regular_file_hashes_verified": 1988,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "recovery-atena",
+      "regular_file_hashes_verified": 961,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    },
+    {
+      "id": "recovery-ares",
+      "regular_file_hashes_verified": 1321,
+      "all_nodes_and_metadata_unchanged": true,
+      "original_sidecars_unchanged": true
+    }
+  ],
+  "retained_native_state_db_hashes_unchanged": 3,
+  "retained_archive_hash_unchanged": true,
+  "original_sqlite_connections": 0,
+  "persistent_db_staging_bytes": 0,
+  "sqlite_sources_compared": "Latest native snapshot plus retained archive union for production agents; latest historical default/root copy for root",
+  "no_pk_tables_not_declared_covered_except_exact_db_identity": true,
+  "fts_or_no_pk_counts_not_used_to_assert_unique_message_loss": true,
+  "non_db_payload_comparison": [
+    {
+      "id": "preparation-root",
+      "non_db_files_byte_preserved_at_checked_paths": 4,
+      "non_db_files_not_preserved_at_checked_paths": {},
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "preparation-zeus",
+      "non_db_files_byte_preserved_at_checked_paths": 0,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "historical_config_auth": 3,
+        "control_memory_cron_or_other": 4
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "preparation-atena",
+      "non_db_files_byte_preserved_at_checked_paths": 3,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 2
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "preparation-ares",
+      "non_db_files_byte_preserved_at_checked_paths": 3,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 2
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "activation-root",
+      "non_db_files_byte_preserved_at_checked_paths": 701,
+      "non_db_files_not_preserved_at_checked_paths": {},
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "activation-zeus",
+      "non_db_files_byte_preserved_at_checked_paths": 1556,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "historical_config_auth": 3,
+        "control_memory_cron_or_other": 4,
+        "skills": 421
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "activation-atena",
+      "non_db_files_byte_preserved_at_checked_paths": 758,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 2,
+        "skills": 196
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "activation-ares",
+      "non_db_files_byte_preserved_at_checked_paths": 875,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 2,
+        "skills": 439
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "recovery-root",
+      "non_db_files_byte_preserved_at_checked_paths": 701,
+      "non_db_files_not_preserved_at_checked_paths": {},
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "recovery-zeus",
+      "non_db_files_byte_preserved_at_checked_paths": 1556,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "historical_config_auth": 3,
+        "control_memory_cron_or_other": 4,
+        "skills": 422
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "recovery-atena",
+      "non_db_files_byte_preserved_at_checked_paths": 759,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 1,
+        "skills": 196
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    },
+    {
+      "id": "recovery-ares",
+      "non_db_files_byte_preserved_at_checked_paths": 875,
+      "non_db_files_not_preserved_at_checked_paths": {
+        "control_memory_cron_or_other": 2,
+        "historical_config_auth": 2,
+        "skills": 439
+      },
+      "hash_mismatch_not_proof_globally_unique": true
+    }
+  ],
+  "scope_not_extended": true,
+  "retention_policy_changed": false,
+  "services_restarted": false,
+  "diagnostic_recovery": "Initial equality-of-schema gate failed on legitimate recovery-phase additive schema changes; original source hashes unchanged; comparator now caches retained coverage by candidate schema projection, rerun12/12 passed",
+  "decision": "Recommend preserving a compact verified historical-difference archive before retiring old snapshot sets; alternatively explicit owner retirement may discard old technical state/config versions, not compared production message rows. Neither action is authorized by this read-only continuation. Broader point3 remains open.",
+  "next_step": "Owner choose preservation of historical technical differences versus explicit retirement; then exact-manifest confirmation before any deletion",
+  "delivery_used_percent": 71.50884477888033,
+  "delivery_free_bytes": 58943500288,
+  "completed_at": "2026-11-13T13:48:18.655041-05:00"
+}
