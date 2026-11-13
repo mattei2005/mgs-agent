@@ -2583,12 +2583,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTRADAY-CLEANUP-1570801075621986305",
-      "next_step": "Aguardar aviso explícito de Rodolfo nesta origem após concluir a solução na thread 1558146784554000467. Não retomar automaticamente. Fórmula e Diário D-1 não alterados.",
-      "objective": "Excluir Intradays SHEIN enviados em 13/11/2026 e suspender novos envios até aviso do Rodolfo; preservar humanos, investigação e Diário D-1.",
-      "source": "/root/mgs-agent/data/ares/discord/cleanup-1570801075621986305/final-reconciliation.json",
-      "state": "cleanup_complete_verified: nove reports, 42 mensagens removidas com get404/10008; 89 canais/threads preservados; 24 diários d-1 preservados. hold: cinco slots comentados no root crontab, política enabled=false, bloqueio runtime testado antes de resolver fontes.",
+      "next_step": "Suspensão encerrada;estado vigente em ARES-SHEIN-TWO-REPORTS-1570812403937976371. Não voltar a pausar nem repetir limpeza.",
+      "objective": "Excluir Intradays SHEIN enviados em13/11;preservar humanos,investigação e DiárioD1;controlar suspensão temporária.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/completion.json",
+      "state": "cleanup_complete_verified:9reports/42mensagens removidas;89canais/threads e24d1 preservados. suspension_superseded:cron retomado após72reports novos getverificados,por autorizaçãorodolfo1570814262631473396 no pedido1570812403937976371;histórico original preservado.",
       "thread_id": "1570801075621986305",
-      "updated_at": "2026-11-13T14:08:33+00:00"
+      "updated_at": "2026-11-13T15:27:10+00:00"
     },
     {
       "agent": "ares",
@@ -2723,12 +2723,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-TWO-REPORTS-1570812403937976371",
-      "next_step": "Finalizar fontes13/11,render/QA/entrega/GET36;reconciliar ordem e72relatórios;após isso restaurar cinco slots com auditoria/readback,sem catchup.",
+      "next_step": "Nenhuma pendência. Próximo despacho cron13/11/2026 14:11America/New_York;sem catchup;Meta/SB somente leitura. Fonte financeira ajustada SB e corteIntraday10:17–10:19EST.",
       "objective": "Entregar12/11fechado e13/11Intraday nas36threads;depois reativar cinco slots Intraday conforme emenda Rodolfo1570814262631473396.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/yesterday/final-reconciliation.json",
-      "state": "yesterday_complete_get_verified:36contas/449campanhas/169partes+1resumo em36threads;reconciliação remota integral salva. intraday_collecting: coleta financeira eui13/11 iniciadas somente após fechar12/11.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/completion.json",
+      "state": "complete_get_verified_cron_resumed:72reports/36threads;320partes+2resumos=322mensagens getverificadas;ontem449campanhas e hoje350;ordem global comprovada. cron/política habilitados após ambasfases;cinco slots originais/24contas;auditorias8dias antes/depois sem conflito operacional;producer resolve_policy passou;d1 intacto.",
       "thread_id": "1570801075621986305",
-      "updated_at": "2026-11-13T15:17:18+00:00"
+      "updated_at": "2026-11-13T15:27:09+00:00"
     },
     {
       "agent": "ares",
@@ -7038,12 +7038,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-financial-source-1570801675239694367",
-      "next_step": "Nenhuma pendência desta correção. Intraday permanece suspenso sob ordem1570801075621986305; retomada depende de autorização na origem própria. D-1 segue ativo. Sem envios extras ou writes Meta/SB/scheduler.",
-      "objective": "Corrigir próximos relatórios financeiros SHEIN agendados e avulsos com investimento SB já ajustado.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein-financial-source-1570801675239694367/completion.json",
-      "state": "complete_implemented_207_tests_live36_350_campaigns_infra_get_verified",
+      "next_step": "Nenhuma pendência desta correção. Suspensão antiga encerrada no seguimento autorizado;consultar completion do pedido1570812403937976371 para cron vigente. Não reenviar relatório nem reaplicar patch.",
+      "objective": "Corrigir próximos relatórios financeiros SHEIN agendados e avulsos com investimentoSB já ajustado.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/completion.json",
+      "state": "complete_implemented_207_tests_live36_350_campaigns_infra_get_verified;seguimento1570812403937976371 entregou72reports e retomou cinco slots/24contas após autorização1570814262631473396. gate pontual all36 posteriormente ampliado/testado228regressões,sem mudar escopo da recorrência.",
       "thread_id": "1558146784554000467",
-      "updated_at": "2026-11-13T14:35:05+00:00"
+      "updated_at": "2026-11-13T15:27:10+00:00"
     },
     {
       "agent": "ares",
@@ -10207,5 +10207,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T15:17:18+00:00"
+  "updated_at": "2026-11-13T15:27:10+00:00"
 }

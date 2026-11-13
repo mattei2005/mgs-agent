@@ -1,9 +1,12 @@
 {
   "schema_version": 1,
   "policy_id": "ARES-SHEIN-INTRADAY-5SLOTS-20261028",
-  "enabled": false,
+  "enabled": true,
   "temporary_suspension": {
-    "active": true,
+    "active": false,
+    "resumed_by_message_id": "1570814262631473396",
+    "resumption_request_id": "1570812403937976371",
+    "resumption_evidence": "data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/reports-final-reconciliation.json",
     "source_message_id": "1570801075621986305",
     "source_thread_id": "1570801075621986305",
     "authorized_by_discord_id": "344196393512075265",

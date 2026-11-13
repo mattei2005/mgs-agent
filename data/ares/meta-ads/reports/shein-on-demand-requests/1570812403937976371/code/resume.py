@@ -38,9 +38,9 @@ if mode=='apply':
  lines=old.splitlines(keepends=True);new=''.join(line.removeprefix(PREFIX) if line.rstrip('\n') in targets else line for line in lines)
  assert [l for l in old.splitlines() if RUNNER not in l]==[l for l in new.splitlines() if RUNNER not in l]
  (ROOT/'root-crontab-resume-before.txt').write_text(old);path=ROOT/'root-crontab-resume-proposed.txt';path.write_text(new);(ROOT/'root-crontab-resume-diff.txt').write_text(''.join(difflib.unified_diff(old.splitlines(True),new.splitlines(True))))
- subprocess.run(['crontab','-n',str(path)],capture_output=True,text=True,check=True)
+ subprocess.run(['crontab','-n',path.name],cwd=ROOT,capture_output=True,text=True,check=True)
  assert subprocess.check_output(['crontab','-l'],text=True)==old,'concurrent scheduler change'
- subprocess.run(['crontab',str(path)],capture_output=True,text=True,check=True)
+ subprocess.run(['crontab',path.name],cwd=ROOT,capture_output=True,text=True,check=True)
  back=subprocess.check_output(['crontab','-l'],text=True);assert back==new;(ROOT/'root-crontab-resume-readback.txt').write_text(back)
 else:
  assert mode=='verify';back=old;assert back==(ROOT/'root-crontab-resume-readback.txt').read_text();restored=[line for line in back.splitlines() if RUNNER in line and not line.lstrip().startswith('#')]

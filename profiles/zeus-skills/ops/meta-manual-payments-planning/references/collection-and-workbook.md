@@ -55,6 +55,12 @@ Rota: `/act_{account_id}/insights`, `level=account`, campos `account_id,account_
 - Ao usar `updateCells`, não incluir `textFormatRuns` numa máscara ampla sem fornecer os runs pretendidos: essa limpeza pode apagar `userEnteredFormat.textFormat.link` do nome. Preservar ou restaurar o link por write estreito de `userEnteredFormat.textFormat.link` e validar todos os IDs/URLs. Uma falha após o batch exige ler as linhas por ID e reparar somente a camada faltante, sem repetir a inclusão.
 - `setBasicFilter` com `sortSpecs` pode reordenar automaticamente o intervalo na própria requisição. Comparar todas as células/notas/formatos por ID exclusivamente dentro da faixa do grupo, com headers, subtotais, fórmulas, limites e demais abas estritos; não atribuir essa ordenação ao usuário ou a anomalia. Preservar o primeiro readback divergente. Validar aliases de cores em `backgroundColorStyle` e precisão float32 apenas quando equivalentes à cor solicitada.
 
+## UI nova e fonte H autorizada
+
+- H vigente por Rodolfo `1570815017794674749` é **Saldo pendente — Outstanding balance**, source `accounts_list_outstanding_balance`, com cabeçalho/BM/nome/ID e valor conferidos por linha nos pixels. A mudança de fonte supersede Current balance, não prova equivalência nem autoriza pagamento ou leitura de modal. Preservar horários e fontes históricas quando faltar prova nova; a recuperação deve exigir cobertura completa antes de declarar H integral.
+- A busca Accounts por nome e clique no controle exato da conta recuperam detalhes quando a URL antiga redireciona à lista. Na rota direta atual incluir `business_id`, `asset_id` e `payment_account_id` exatos em `business.facebook.com/latest/billing_hub/accounts/details/`; ausência do rótulo Digital Trust no AX não invalida a conta, mas os pixels devem confirmar URL/BM/ID antes da prova histórica. O canário do worker canônico deve retornar a conta e as transações corretas, não apenas HTTP/exit0.
+- Se o histórico só existir no AX abaixo do viewport, rolar dentro do painel visível com ponto fresco da captura. Scroll por elemento fora de tela pode ser no-op. Conferir deslocamento real; após no-op pixel comprovado, escalar uma vez a foreground, sem repetir inputs já eficazes. Somente screenshot com transações legíveis autoriza prova D.
+
 ## Histórico de cobrança versus instrumento
 
 Rota exercitada: `/act_{account_id}/activities`, `business_id` exato, `category=BUDGET`, janela `since`/`until` e campos `event_time,date_time_in_timezone,event_type,translated_event_type,extra_data`.

@@ -1,5 +1,13 @@
 # Accounts list — teste de busca por saldo
 
+## Fonte e UI vigentes
+
+Rodolfo `1570815017794674749`, em resposta à proposta explícita de trocar a fonte, delegou resolver a mudança. A fonte atual de H é **Outstanding balance**, literal da lista Accounts nova, com título **Saldo pendente — Outstanding balance** e source `accounts_list_outstanding_balance`. Isso supersede Current balance por `1564382301155098717`, sem alegar equivalência semântica e sem chamar saldo de Amount you can pay now. Aplicar a todos os `pay_now_account_ids` do contrato vigente (40 na recuperação de55contas), sem alterar contas/Meta/billing. Manifest `accounts_list_checks` exige também `balance_label='Outstanding balance'` e `authority_message_id='1570815017794674749'`; o publisher falha sem ambos. Evidência: `reports/meta-manual-payments-runs/manual-1570806033864069341/`;40linhas verificadas com hora própria.
+
+Na UI nova usar `https://business.facebook.com/latest/billing_hub/accounts/?business_id=155263197283282`. Não exigir o texto Digital Trust no AX: confirmar a BM nos pixels/URL e os resultados por ID/nome exatos. `bounds_scale` é heurística do conjunto AX e pode sugerir1.5 mesmo em captura nativa cujos bounds já coincidem com pixels. Com captura3200 e bounds frescos integralmente dentro da imagem, usar os pixels nativos sem dividir pela heurística; validar primeiro a caixa na própria imagem. Não reutilizar coordenadas históricas. Se a busca continuar vazia, verificar foco/texto antes de outra tentativa; ausência de filtro não é falta da conta nem logout.
+
+Os demais relatos abaixo preservam a autorização e a semântica **anteriores** para rastreabilidade; a fonte nova acima vence para execução atual.
+
 ## Autoridade e resultado
 
 Rodolfo autorizou testar cerca de cinco contas na mensagem `1564379257491296286`, thread `1563926766286803004`, usando Billing & payments > Accounts > Ad accounts e busca por nome. Teste somente leitura concluído em cinco contas, com pixels e AX reconciliados, em uma única aba própria e zero páginas de detalhes abertas. Evidência: `reports/meta-billing-accounts-search-1564379257491296286/collection.json` e `verified-results.json`. O teste inicial não autorizava rollout. **Autorização posterior `1564382301155098717` (“pode terminar o resto então”) aprovou concluir o mesmo workbook/38H pela busca Accounts validada.** Nesta recuperação, H recebe o Current balance da linha exata, com fonte `accounts_list_current_balance`, sem fingir leitura do modal ou prova de botão desabilitado. Preservar47IDs,moeda,notas/horários e demais colunas. A autorização não altera billing/cadência nem permite confundir a medida com limite do cartão.

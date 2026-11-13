@@ -4,7 +4,7 @@
 
 Resolver schema e escopo pelo contrato live. A sequência é funding → invoices → métricas API → Accounts/H → provas históricas D pendentes → reconciliação API final → validação independente. Preservar a aba e o job existentes; não inserir colunas nem congelar a quantidade de contas de linha a partir de um run anterior.
 
-Para H autorizado por Accounts, seguir `references/accounts-list-search.md`: coletar Current balance da linha com nome/ID exatos, verificar pixels e publicar com fonte `accounts_list_current_balance` e hora original individual. Não abrir detalhes/modais para essa simples consulta. E contém somente invoices ainda pendentes; invoice paga/due zero fica em branco. A competência de F acompanha a última invoice de mês fechado realmente gerada pela Meta, sem inventar invoice futura nem trocar o período de J.
+Para H autorizado por Accounts, seguir `references/accounts-list-search.md`: desde Rodolfo `1570815017794674749`, coletar **Outstanding balance** da linha com nome/ID exatos, conferir cabeçalho/BM nos pixels e publicar na mesma H com título **Saldo pendente — Outstanding balance**, fonte `accounts_list_outstanding_balance` e hora original individual. Isso supersede a fonte Current balance sem alegar equivalência ou valor de modal Pay now. Não abrir detalhes/modais para essa simples consulta. E contém somente invoices ainda pendentes; invoice paga/due zero fica em branco. A competência de F acompanha a última invoice de mês fechado realmente gerada pela Meta, sem inventar invoice futura nem trocar o período de J.
 
 ## Escopo e relógio
 

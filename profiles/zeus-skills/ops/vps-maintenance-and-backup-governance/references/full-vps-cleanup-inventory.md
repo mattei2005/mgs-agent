@@ -77,14 +77,14 @@ Exception: if audit, expected-service state, and the owning security checkpoint 
 
 #### Untracked targets and native batching
 
-When the reviewed targets are untracked, rerun `git ls-files -z` from the owning repository immediately before deletion and compare its paths programmatically against the exact target roots. If the intersection remains empty, leave the healthy auto-commit watcher running; pausing it adds no tracked-deletion protection. If any target became tracked, stop before deletion and apply the tracked-target closure above.
+Resolve Git ownership before running a tracked-file gate: walk the target's ancestors for a `.git` file/directory and confirm the worktree boundary. For a target inside a repository, rerun `git ls-files -z -- <exact paths>` from that owning repository immediately before deletion and compare paths programmatically. For a profile artifact outside the institutional repository with no owning Git root, record that structural exclusion; do not pass its absolute path to an unrelated repository and interpret an outside-repository error as either tracked or safely untracked. If the intersection remains empty, leave the healthy auto-commit watcher running; pausing it adds no tracked-deletion protection. If a repository appears or a target becomes tracked, stop before deletion and apply the tracked-target closure above.
 
 After filesystem acceptance, verify the governance artifacts independently of the deletion targets:
 
 1. Read the watcher's live batch-size and maximum-wait settings rather than guessing that a quiet period flushes it.
 2. Fetch the repository's remote and compare each scoped local artifact with `git show origin/main:<path>` by checksum. Include the frozen manifest, executor, approval receipt, final result/checksum and validation evidence.
 3. Parse the remote inventory and checkpoint blobs and require this operation's final status and result checksum. `HEAD == origin/main` alone does not prove closure: both refs can still point to the previous planning commit while completed local records await batching.
-4. If the watcher is active and the only gap is normal batching, wait in a bounded foreground loop within its configured maximum window, then fetch and repeat the scoped checks. Do not manufacture events, shorten batching or manually commit merely to accelerate a healthy writer.
+4. If the watcher is active and the only gap is normal batching, read its last batch-start time and maximum wait, then wait only the remaining window in bounded foreground chunks shorter than the observed tool transport limit. Persist the scoped mismatch list and synchronization receipt outside the sealed result. If a wait call times out, check whether its process survived and whether a PASS receipt was already written before starting another waiter; never replay deletion to recover a Git-closure timeout. Fetch and repeat the scoped checks after the batch flushes. Do not manufacture events, shorten batching or manually commit merely to accelerate a healthy writer.
 5. Keep the synchronization receipt outside the already-sealed result, or reseal that result if it is changed; otherwise recording the remote verification would invalidate the checksum just verified.
 
 ### 3.2 Upstream advancement discovered during cleanup
@@ -142,7 +142,9 @@ Scan writable persistent filesystems independently. At minimum on the MGS VPS:
 - scan `/boot/efi` separately when it is a different device;
 - inventory read-only loop/Snap mounts separately if relevant, but do not mix their immutable contents into deletion candidates.
 
-Record file count, directory count, logical bytes, allocated bytes, and errors for every scanned filesystem. Zero errors is required for a complete claim.
+Record file count, directory count, logical bytes, allocated bytes, and errors for every scanned filesystem. Install an `os.walk(..., onerror=...)` collector as well as per-entry `lstat` error handling; a traversal can otherwise suppress inaccessible-directory errors and falsely report complete coverage. Zero recorded errors is required for a complete claim.
+
+Persist the metadata ledger before beginning content hashes or remote verification so an interrupted expensive stage can resume without another filesystem sweep. Precompute string roots and use boundary-aware prefix tests in large walks rather than rebuilding `Path` objects against every category for every node. Hash selected regular-file batches with `sha256sum --zero -- <paths>` and, when needed, `md5sum --zero -- <paths>`; parse NUL-delimited output and recheck inode/size/mtime afterward. Preserve unmatched files and disclose excluded scopes instead of broadening a small verified reclaim amount into the whole parent-directory total.
 
 Inventory backups in two layers:
 
@@ -218,11 +220,11 @@ When the owner says a named browser session must survive cleanup, that protectio
 
 ### 5.3 Drive-backed local media must close by lineage
 
-For creative/media staging, remote existence is proven by the canonical Shared Drive—not by filename coincidence or an old success message.
+For creative/media staging, prove remote existence through the active approved storage backend and the canonical Service Account—not filename coincidence, an old success message or a permanently assumed Shared-Drive location.
 
-1. Validate the canonical Service Account and Shared Drive `driveId`.
-2. For uploaded/final media, require a live non-trashed destination ID plus exact size and MD5; require recorded SHA-256/readback parity when the operation manifest provides it.
-3. For execution trees containing raw and readback copies, require every completed item's destination ID live and its recorded size/hash valid. Empty abandoned execution directories may be classified separately as stale temporary material.
+1. Read the live storage binding and resolve the exact logical source ID, provider binary ID, stock/shortcut ID and approved archive root. For Shared-Drive storage, validate the expected `driveId`; for an approved owner-account archive, validate the pinned owner, root ancestry and logical/provider/stock contract instead of rejecting a valid My Drive object for lacking `driveId`.
+2. Require a live non-trashed provider ID, exact size/MD5 and recorded SHA-256 parity. Exercise the existing native media resolver with its mapping, ACK, stock, access and ancestry guards intact; stream and hash the full provider binary when proving owner-archive recovery. Keep this audit GET-only; do not move media, alter permissions, regenerate creative jobs or change campaign eligibility to make a read pass.
+3. Join each local raw/readback copy to a verified remote record by exact bytes and lineage, then deduplicate and count native IDs separately from local paths. Before approved deletion, refresh the native resolver/metadata and compare with the already-preserved full-stream proof; afterward, independently read back representative retained providers without reusing the pre-action metadata cache. Empty abandoned execution directories may be classified separately as stale temporary material.
 4. Derived frames/contact sheets may be deleted with their local batch only when their parent media has exact remote closure and no independent evidentiary retention applies.
 5. If legacy IDs are missing after a migration, exclude that local root from the destructive manifest. Do not infer a replacement by name alone.
 6. A future upload workflow may remove transient local media immediately after this readback, but must preserve a compact provenance manifest containing source ID, destination ID, filename, size, checksum, and status.
