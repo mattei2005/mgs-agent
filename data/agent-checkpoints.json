@@ -6238,22 +6238,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Dois lotes confirmados concluidos:28dumps e81alvos de testes;19.94GiB observados somados;disco75.25%/47.69GiBlivres no segundo poscheck. Nenhuma exclusao pendente nesses lotes. Demais classes e prevencao/retencao continuam separadas;nao inferir autorizacao de descarte nem fechamento global.",
-      "objective": "Descarte seguro financeiro/perfis/backups/runtimes e reorganizacao de produtores; manter operacao e recuperacao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-reorganization-1570447435074109502/cleanup-result.json;data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/cleanup-result.json",
-      "state": "two_confirmed_lots_completed_validated_broader_reorganization_not_closed",
+      "next_step": "Treslotesconfirmadosconcluidos:28dumpsduplicados;81alvostestes;27dumpslocaiscomremotoidentico(4.32GiB). Proximo ponto2copias de materiais deperfis;semoutrolotedestrutivoconfirmado.Retencaofuturanomexida.",
+      "objective": "Descarte seguro por lotes preservando dash,perfis,historico e recuperacao.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-review-1570799339108958250/finance-lot/cleanup-result.json",
+      "state": "three_confirmed_lots_completed_validated_broader_reorganization_not_closed",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-12T17:16:25+00:00"
+      "updated_at": "2026-11-13T14:36:02+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REVIEW-1570799339108958250",
-      "next_step": "Confirmacao1570808050183307336readback ligada ao hash534f424d;executorread-onlyPASS. Coletar baseline/provasexternas,aplicaruma vez,validarpreservacao egovernanca;semnovoescopo.",
-      "objective": "Excluir e validar27dumps do manifesto534f424d com confirmacao nativa1570808050183307336; depois informar proximo ponto.",
-      "source": "data/storage-review-1570799339108958250/finance-lot/manifest.json",
-      "state": "approved_preflight_in_progress",
+      "next_step": "27/27ausentes;4.32GiBefetivos;6tabelas+563arquivosiguais;27copiasremotasverificadas;4dumpslocaisretidos;3smokes/configsPASS;semrestart;REPORT1570809317819551866readback. Proximo:ponto2,revisar copias de materiais nos perfis,preservandohistorico/logins;nenhumaoutraexclusaoautorizada.",
+      "objective": "Lote27dumps confirmado, executado e validado; informar o proximo ponto sem ampliar exclusoes.",
+      "source": "data/storage-review-1570799339108958250/finance-lot/cleanup-result.json",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T14:30:55+00:00"
+      "updated_at": "2026-11-13T14:36:02+00:00"
     },
     {
       "agent": "zeus",
@@ -10187,5 +10187,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:35:05+00:00"
+  "updated_at": "2026-11-13T14:36:02+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "status": "filesystem_and_preservation_completed_report_pending",
+  "status": "completed_validated",
   "manifest_sha256": "534f424d1b06c1713f9bc27f7d701b49a37d963f6e3f2b427b8414ac237b645d",
   "confirmation_message_id": "1570808050183307336",
   "deleted_files": 27,
@@ -39,5 +39,15 @@
   "delivery_used_percent": 73.32565966697042,
   "delivery_available_bytes": 55184809984,
   "next_point": "2:review_profile_material_copies_no_deletion_authorized",
-  "completed_at": "2026-11-13T09:35:25.137824-05:00"
+  "completed_at": "2026-11-13T09:35:25.137824-05:00",
+  "report_infra": {
+    "message_id": "1570809317819551866",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-13T09:36:01.797168-05:00"
 }
