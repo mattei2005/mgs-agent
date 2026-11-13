@@ -6248,12 +6248,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REVIEW-1570799339108958250",
-      "next_step": "Apresentar hash534f424d1b06c1713f9bc27f7d701b49a37d963f6e3f2b427b8414ac237b645d;27arquivos4.32GiB;preflight e4negativospass. Comconfirmacao nativa posterior:remotehash+catalogo,baseline6tabelasfinanceiras,refs/schedulers/control,execapply,gatespost,REPORT. Nenhumaexclusao.",
-      "objective": "Executar somente27dumps locais excedentes apos confirmacao critica do manifesto fechado e validar dash/perfis.",
+      "next_step": "Confirmacao1570808050183307336readback ligada ao hash534f424d;executorread-onlyPASS. Coletar baseline/provasexternas,aplicaruma vez,validarpreservacao egovernanca;semnovoescopo.",
+      "objective": "Excluir e validar27dumps do manifesto534f424d com confirmacao nativa1570808050183307336; depois informar proximo ponto.",
       "source": "data/storage-review-1570799339108958250/finance-lot/manifest.json",
-      "state": "frozen_awaiting_post_manifest_critical_confirmation",
+      "state": "approved_preflight_in_progress",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T14:28:39+00:00"
+      "updated_at": "2026-11-13T14:30:55+00:00"
     },
     {
       "agent": "zeus",
@@ -7018,12 +7018,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-financial-source-1570801675239694367",
-      "next_step": "Inventariar consumidores ativos, contrato, renderer e testes; implementar camada comum com compatibilidade de snapshots e validar live/dry-run sem envios extras.",
-      "objective": "Corrigir todos os próximos relatórios SHEIN agendados e avulsos para investimento financeiro SB já ajustado, mantendo fonte financeira homogênea e histórico; preservar campanhas e horários/destinos.",
-      "source": "discord:1558146784554000467:1570801675239694367",
-      "state": "authorized_discovery_in_progress",
+      "next_step": "Nenhuma pendência desta correção. Intraday permanece suspenso sob ordem1570801075621986305; retomada depende de autorização na origem própria. D-1 segue ativo. Sem envios extras ou writes Meta/SB/scheduler.",
+      "objective": "Corrigir próximos relatórios financeiros SHEIN agendados e avulsos com investimento SB já ajustado.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein-financial-source-1570801675239694367/completion.json",
+      "state": "complete_implemented_207_tests_live36_350_campaigns_infra_get_verified",
       "thread_id": "1558146784554000467",
-      "updated_at": "2026-11-13T14:05:15+00:00"
+      "updated_at": "2026-11-13T14:35:05+00:00"
     },
     {
       "agent": "ares",
@@ -10187,5 +10187,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:28:39+00:00"
+  "updated_at": "2026-11-13T14:35:05+00:00"
 }

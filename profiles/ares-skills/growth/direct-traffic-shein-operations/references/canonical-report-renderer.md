@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Evitar divergência entre threads e uso de modelos históricos em pedidos genéricos. A política visual continua exclusivamente em `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. O índice `data/ares/discord/shein-intraday-report-bindings.json` vincula as 36 threads a contas exatas; não amplia autoridade. Ler ambos em cada pedido, não usar um snapshot de configuração como estado vigente. Resolva o layout efetivo combinando perfil, overrides da conta, políticas específicas e suas vigências; não use `revision` textual nem `columns` isolado como prova do padrão atual, pois esses campos podem conservar a descrição de uma etapa supersedida. Confira a resolução pelo resultado do renderer/gate, sem alterar o contrato para fazê-lo coincidir com o resumo textual.
+Usar o contrato vivo `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout` e o índice `data/ares/discord/shein-intraday-report-bindings.json` em cada pedido. O índice vincula contas/threads, não amplia autoridade. Resolver perfil, overrides e vigências pelo renderer/gate; `revision`, `columns` e snapshots isolados podem ser históricos. Não editar o contrato para coincidir com seu resumo. **Fonte financeira vigente:** carregar `references/financial-source-sb-adjusted.md`; ela supersede o gasto Meta no ROI dos novos snapshots SHEIN.
 
 ## Padrão global vigente — compacto de 14 colunas
 

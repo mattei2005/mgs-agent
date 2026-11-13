@@ -1,0 +1,43 @@
+{
+  "status": "filesystem_and_preservation_completed_report_pending",
+  "manifest_sha256": "534f424d1b06c1713f9bc27f7d701b49a37d963f6e3f2b427b8414ac237b645d",
+  "confirmation_message_id": "1570808050183307336",
+  "deleted_files": 27,
+  "observed_reclaim_bytes": 4639363072,
+  "financial_tables_unchanged": 6,
+  "preservation_files_unchanged": 563,
+  "profile_control_files_unchanged": 12,
+  "remote_recovery_files_verified": 27,
+  "retained_local_dumps": 4,
+  "profile_smokes": [
+    {
+      "profile": "zeus",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 10.75
+    },
+    {
+      "profile": "atena",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 14.09
+    },
+    {
+      "profile": "ares",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 10.02
+    }
+  ],
+  "gateway_pids_unchanged": true,
+  "failed_units": 0,
+  "financial_writes": 0,
+  "retention_changed": false,
+  "delivery_used_percent": 73.32565966697042,
+  "delivery_available_bytes": 55184809984,
+  "next_point": "2:review_profile_material_copies_no_deletion_authorized",
+  "completed_at": "2026-11-13T09:35:25.137824-05:00"
+}

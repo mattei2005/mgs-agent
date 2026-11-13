@@ -14447,6 +14447,24 @@
       "updated_at": "2026-10-29T12:26:43+00:00"
     },
     {
+      "canonical_key": "operations.SHEIN-US-DIRECT.reporting.financial-source",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares.shein-on-demand-reports",
+        "ares.shein-scheduled-reports"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-13T09:07:17.358319-05:00",
+      "id": "ares-shein-sb-financial-source-20261113",
+      "kind": "policy",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: investimento SB ajustado em relatórios financeiros futuros",
+      "updated_at": "2026-11-13T14:32:53+00:00"
+    },
+    {
       "canonical_key": "SHEIN-US-DIRECT.page_delegation_repair_authorizations.651566168029395",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -16963,5 +16981,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:18:03+00:00"
+  "updated_at": "2026-11-13T14:32:53+00:00"
 }
