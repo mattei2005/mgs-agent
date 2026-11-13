@@ -34,7 +34,18 @@ Rota: `/act_{account_id}/insights`, `level=account`, campos `account_id,account_
 - Mês inclui dia atual apenas como parcial, no fuso Meta da conta.
 - Média: obter data local via timezone Meta, janela de hoje−3 até hoje−1, soma/3. Datas sem linha de Insights contam como zero, não reduzem denominador.
 - Publicar média em centavos e validar soma das médias exibidas nos subtotais. Não confundir isso com projeção de pagamentos ou limite livre.
-- Para alias IANA válido ausente do Python, resolver Link em `/usr/share/zoneinfo/tzdata.zi`, preservar a string Meta original e não mudar TZ do host.
+- Antes dos lotes, resolver o dia final no timezone de cada conta. Para alias IANA válido ausente do Python, seguir entradas `L`/`Link` em `/usr/share/zoneinfo/tzdata.zi` até uma zona instalada, com detecção de ciclo; preservar a string Meta original e não substituir pelo fuso do operador nem alterar TZ do host.
+- Ao conferir dia parcial, coletar diário e agregado novos no mesmo lote GET-only. Se a soma divergir de um agregado anterior, preservar o primeiro recibo e repetir somente esse par com espera limitada: gasto intradiário pode ter mudado entre as leituras. Não atribuir a diferença a erro contábil nem refazer toda a varredura; manter lacuna explícita se a conciliação não fechar.
+
+## Cobertura de gasto fora da aba
+
+1. Resolver workbook e `gid` pelo contrato e ler a aba live pela SA canônica, incluindo headers, notas e links. Extrair IDs das notas `ID da conta:` e conferir com `asset_id` dos links; não comparar por nome, linha ou apenas pelo contrato, pois nomes podem se repetir e a aba pode ter mudado.
+2. Resolver a competência pelo header mensal e contrato. Na pergunta contextual sobre gasto fora dessa aba, consultar essa competência até hoje no fuso de cada conta e explicitar hoje parcial; não ampliar para lifetime ou outro mês. Limitar esta auditoria a inventário e Insights, sem coletar cartões, invoices ou UI desnecessariamente.
+3. Paginar owned/client com a credencial BM-admin existente e unir por ID, incluindo contas fechadas que podem ter gasto no período. Calcular em código `fora = IDs_BM - IDs_aba`; registrar separadamente IDs da aba ausentes do inventário, sem descartá-los para fazer a contagem bater.
+4. Consultar somente os IDs de fora por `/act_{id}/insights` com `level=account`, `time_increment=all_days`, `time_range` explícito e campos `account_id,account_name,account_currency,date_start,date_stop,spend`. Usar lotes limitados via `graph_batch_get`, com filhos exclusivamente GET; validar HTTP/body, identidade, moeda e paginação de cada filho.
+5. Persistir cada lote sanitizado e retomar somente IDs pendentes. Vincular a retomada à mesma BM, conjunto de IDs, competência e datas locais, para não misturar escopos ou dias. Resolver aliases antes das chamadas e aplicar a conciliação diário/agregado descrita acima às contas positivas.
+6. Reler os IDs da aba ao fechar. Exigir `fora = consultados_sem_erro ∪ pendentes`, sem sobreposição; separar positivo, zero confirmado e falha de consulta. Falha nunca conta como zero. Somar somente moedas iguais e reconciliar quantidade anunciada com a lista integral das faltantes.
+7. Entregar veredito e total omitido por moeda primeiro, depois nomes literais e gastos em ordem decrescente, competência, horário/fuso, cobertura e dia parcial. Declarar ausência de writes; recomendar inclusão separadamente, sem alterar a aba ou ampliar sua recorrência como efeito implícito da auditoria.
 
 ## Histórico de cobrança versus instrumento
 
@@ -65,7 +76,7 @@ Rota `/{business_id}/business_invoices`, paginação completa e projeção expl�
 ## Layout, mutação e validação Sheets
 
 - Resolver `spreadsheetId`, `sheetId`, header, schema e ID de conta nas notas antes de qualquer write; os índices mudam quando colunas/linhas são inseridas.
-- Modelo atual por `1564022485366734969`: A conta/B forma/C default/D última cobrança no cartão/E Invoice/F Setembro (saldo de invoice aberto)/G média3 dias/H Pay now/I current balance/J outubro. Esta regra supersede o schema anterior de sete/oito colunas; execução em `references/september-invoices.md`. D e Pay now exigem suas provas próprias, não se inferem de Invoice/Setembro.
+- Resolver o layout de dez colunas pelos headers e contrato vigentes: conta, forma, default, última cobrança no cartão, invoice, saldo aberto da competência de invoices, média de três dias, Pay now, saldo a pagar e gasto mensal autorizado. Não fixar nomes de meses no procedimento: competência de invoices e competência de gasto são independentes e devem ser confirmadas na aba live. O tratamento detalhado de invoices está em `references/september-invoices.md`; D e Pay now exigem provas próprias e não se inferem de invoice ou saldo aberto.
 - Grupo cartão e grupo linha separados, com faixas de contas e subtotais inequívocos. Se surgirem funding desconhecidos no novo escopo, manter bloco explícito; não enquadrar à força em cartão/linha.
 - Manter `RAW` para textos e números; usar `updateCells.userEnteredValue.formulaValue` ou modo USER_ENTERED apenas para fórmulas intencionais. Totais monetários: `ROUND(SUM(...),2)`.
 - Nome exato da conta permanece texto; billing link em `userEnteredFormat.textFormat.link.uri`, ID e fuso em `note`. Rota efetivamente mostrada pelo usuário: `https://adsmanager.facebook.com/adsmanager/billing_hub/accounts/details/?business_id=<BM_ID>&asset_id=<ACCOUNT_ID>`. Não substituir por `/adsmanager/manage/accounts?act=...` (Summary). O ambiente pode validar também a variante `business.facebook.com/latest/billing_hub/accounts/details/`; não acrescentar parâmetros opacos não provados.
