@@ -1,8 +1,8 @@
 {
   "status": "updated_metrics_pending_card_history",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261113T080549634434",
-  "collected_at": "2026-11-13T08:05:42.853422-05:00",
-  "accounts": 47,
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261113T092707421085",
+  "collected_at": "2026-11-13T09:27:03.081582-05:00",
+  "accounts": 55,
   "pending_ui": [
     {
       "account_id": "1150399088163771",
@@ -18,6 +18,26 @@
       "account_id": "1062446663435585",
       "name": "Escalatepower-US-SHEIN-EN-03-G003",
       "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1635726541410028",
+      "name": "Growpowerhub-US-SHEIN-EN-01-G001",
+      "reason": "no_prior_pc1_card_history_proof"
+    },
+    {
+      "account_id": "2323706575049143",
+      "name": "Growpowerhub-US-SHEIN-EN-03-G003",
+      "reason": "no_prior_pc1_card_history_proof"
+    },
+    {
+      "account_id": "1547524853816263",
+      "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+      "reason": "no_prior_pc1_card_history_proof"
+    },
+    {
+      "account_id": "1867022354284742",
+      "name": "Growpowerhub-US-SHEIN-EN-06-G006",
+      "reason": "no_prior_pc1_card_history_proof"
     },
     {
       "account_id": "1414197490675732",

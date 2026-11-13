@@ -180,6 +180,10 @@ When he says the answer is confusing, immediately narrow to the verified amount 
 
 When he asks whether deletion affects operation, memory or profiles, answer that precise safety question before discussing more cleanup. Revalidate the frozen lot, prove it does not overlap protected agent/session/browser/production roots, and name the irreversible historical loss separately. Use bounded language such as no impact expected from the checked dependencies; never promise zero risk or equate the ability to run new tests with recovery of their exact old state. A safety question is not approval. Once his later explicit confirmation resolves the unchanged disclosed lot, proceed without asking him to confirm it a third time.
 
+### Local Git history versus remote preservation
+
+When the owner asks why Git history remains on the VPS after a push, distinguish the working copy and `.git` metadata required by current automation from the optional depth of locally retained history. Verify remote refs, local-only commits/changes, `count-objects`, reachable-object disk usage and large-object paths. Zero garbage plus mostly reachable packs means ordinary GC cannot recover that history. Never claim a complete local history is inherently required: a shallow/partial working clone may preserve full remote history, but must be tested against auto-commit/push, rollback, historical-source recovery, worktrees and alternates before a separately confirmed migration. Do not delete `.git` or rewrite remote history as incidental disk cleanup. Identify accidentally versioned media, dependency environments and bulky generated evidence as producer/governance causes, not disposable loose-cache objects.
+
 ### Explain a high disk percentage
 
 For a focused **“why is the disk full?”** question, do not force the full maintenance template. Follow this read-only sequence:

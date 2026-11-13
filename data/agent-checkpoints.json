@@ -6248,12 +6248,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REVIEW-1570799339108958250",
-      "next_step": "Consulta encerrada com27dumps locais candidatos4.32GiB,latestlocal+3parciais+remotos preservados;novoslotes de perfis/runtimes/backups exigem gates do summary e confirmacao destrutiva exata. Direcao latest-only registrada nao implantada. REPORT1570805070377783378readback.",
-      "objective": "Responder1-8 com preservacao da dash/historico; nenhuma exclusao ou mudanca de retencao.",
-      "source": "data/storage-review-1570799339108958250/summary.json",
-      "state": "read_only_findings_completed_no_deletions",
+      "next_step": "Apresentar hash534f424d1b06c1713f9bc27f7d701b49a37d963f6e3f2b427b8414ac237b645d;27arquivos4.32GiB;preflight e4negativospass. Comconfirmacao nativa posterior:remotehash+catalogo,baseline6tabelasfinanceiras,refs/schedulers/control,execapply,gatespost,REPORT. Nenhumaexclusao.",
+      "objective": "Executar somente27dumps locais excedentes apos confirmacao critica do manifesto fechado e validar dash/perfis.",
+      "source": "data/storage-review-1570799339108958250/finance-lot/manifest.json",
+      "state": "frozen_awaiting_post_manifest_critical_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T14:18:59+00:00"
+      "updated_at": "2026-11-13T14:28:39+00:00"
     },
     {
       "agent": "zeus",
@@ -8638,12 +8638,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Inclusão concluída. Próximo refresh do mesmo job2ee720363d7d14:02Eastern cobre55IDs; resolver apenas evidênciaUIpendenteH/D,sem inferir valor ou instrumento;preservar recibos e sem novo job.",
-      "objective": "Acompanhar55 contas Digital Trust na mesma aba e job; Jnovembro,F invoicesoutubro; sem pagamentos ou billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/closure-current.json",
-      "state": "inclusão solicitada1570799435502588027 validada:8novas,55total,15cartão40linha. valores/notas/links das47anteriores e outraaba preservados. métricasapi novas8 publicadas;dryrun55diario/agregado e invoices55 validados. invoices30 usd417864.11,fora0. camposdnovos8 e hnovos4 vazios qualificados;43lacunasd totais,11eventos/históricos aguardamprova. h36históricos preservados;superfície anterioroutstandingbalance não equivalente comprovada. mesmojob atualizado55,horários08:02/14:02/21:02eastern intactos. semmetawrite/pagamento.",
+      "next_step": "Snapshot de todas abas antes de primeiro write;funding,invoices,C/G/I/J;investigar superfícieUIatualH/D com mesmosIDs;readbackintegral,report.",
+      "objective": "Atualização integral solicitada1570806033864069341 nas55contas; mesma aba/job,sem pagamento ou billing",
+      "source": "https://discord.com/channels/1185714635991679006/1563926766286803004/1570806033864069341",
+      "state": "preflight09:22eastern:55ids40linha,jobsemfireclaim,semworkersconcorrentes. chrome22596/131572vivo. coleta novaapi e validaçãoui necessárias; não repetir dados anteriores como novos.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-13T14:15:29+00:00"
+      "updated_at": "2026-11-13T14:24:12+00:00"
     },
     {
       "agent": "zeus",
@@ -10187,5 +10187,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:18:59+00:00"
+  "updated_at": "2026-11-13T14:28:39+00:00"
 }
