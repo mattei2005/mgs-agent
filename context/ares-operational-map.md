@@ -122,6 +122,19 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - Esta declaração registra conta, gestor e destino: não solicita campanha imediata, ativação, budget, cron, permissão, credencial ou migração de rotinas. Cada execução futura exige pedido e gates próprios. O alcance de gestão de campanhas vale somente para esta thread; não altera outras rotas.
 - Evidência Discord: GET da thread e leitura das mensagens `1569763937120026715` (título informado por Rodolfo) e `1569764042715955253` (confirmação anterior do Ares). A nova decisão acima explicita o ID da conta e prevalece sobre a confirmação anterior sem ID.
 
+### Escopo exclusivo — Yolokfx Conta 08 G006 Criação
+
+- Por decisão explícita de Rodolfo Mattei na mensagem `1570858078738583674`, reafirmada na Diretoria `1570858581945876672`, a thread `1570857869790945455`, pai `1548150155184701440` (G006/Nicolas), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-08-G006`, ID literal `1663268201836138`.
+- Fonte canônica: `data/ares/discord/thread-scopes/1570857869790945455.json`. Mensagem e pai autenticados por leitura Discord; checker corporativo confirmou `allowed=true` na BM Digital Trust. Nome informado pelo usuário, não identidade live confirmada pela Meta.
+- Preservar título manual `🎯Yolokfx Conta 08 Criar Camp`; o vínculo é pelo ID da thread, não pela referência anterior incorreta à Conta 02. Não herdar configuração, fontes ou parâmetros da conta 02, misturar outras contas nem usar esta conversa como rota de relatórios.
+- A declaração registra destino e escopo; não solicita campanha imediata, budget, cron, permissão ou credencial. Execução futura exige pedido próprio e preflight/readback da conta exata. A rota de relatórios da mesma conta é a thread `1570858183700910221`, definida separadamente abaixo; nenhum cron foi ativado por esta declaração.
+
+### Escopo exclusivo — Yolokfx Conta 08 G006 Relatórios
+
+- Por decisão explícita de Rodolfo Mattei na mensagem `1570858325695004685`, a thread `1570858183700910221`, pai `1558147364450074734`, é exclusiva para criação de relatórios da conta `Yolokfx-US-SHEIN-EN-08-G006`, ID literal `1663268201836138`, gestor G006. O recorte vale somente para esta thread, sem misturar outras contas nem restringir as demais conversas do canal pai.
+- Fonte canônica: `data/ares/discord/thread-scopes/1570858183700910221.json`. Mensagem autenticada por leitura Discord; checker corporativo confirmou `allowed=true` na BM Digital Trust. Nome informado pelo usuário, não identidade live confirmada pela Meta.
+- Preservar título manual `📈Yolokfx Conta 08 Intraday`. A declaração registra destino e escopo; não solicita relatório imediato, cron, reativação de rotina, alteração de campanhas, budget, credencial ou permissões. Antes de um relatório futuro, validar o estado live da conta exata e aplicar o contrato vigente.
+
 ### Relatórios — Yolokfx Conta 07 G002 (configuração pendente)
 
 - Rodolfo solicitou na mensagem `1569767544309420064`, origem Diretoria `1569764300665524224`, configurar a thread `1569767319339663361` e incluí-la no cron de relatórios da conta `1492168699397108` / `Yolokfx-US-SHEIN-EN-07-G002`, gestor G002. Discord GET confirmou título manual `📈Yolokfx Conta 07 Intraday` e pai `1558146629805023424`.
