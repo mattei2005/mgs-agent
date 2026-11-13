@@ -1,0 +1,10 @@
+{
+  "agent": "ares",
+  "id": "ARES-SHEIN-INTRADAY-CLEANUP-1570801075621986305",
+  "next_step": "Aguardar aviso explícito de Rodolfo nesta origem após concluir a solução na thread 1558146784554000467. Não retomar automaticamente. Fórmula e Diário D-1 não alterados.",
+  "objective": "Excluir Intradays SHEIN enviados em 13/11/2026 e suspender novos envios até aviso do Rodolfo; preservar humanos, investigação e Diário D-1.",
+  "source": "/root/mgs-agent/data/ares/discord/cleanup-1570801075621986305/final-reconciliation.json",
+  "state": "cleanup_complete_verified: nove reports, 42 mensagens removidas com get404/10008; 89 canais/threads preservados; 24 diários d-1 preservados. hold: cinco slots comentados no root crontab, política enabled=false, bloqueio runtime testado antes de resolver fontes.",
+  "thread_id": "1570801075621986305",
+  "updated_at": "2026-11-13T14:08:33+00:00"
+}

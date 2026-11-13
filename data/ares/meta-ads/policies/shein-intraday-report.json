@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
   "policy_id": "ARES-SHEIN-INTRADAY-5SLOTS-20261028",
-  "enabled": true,
+  "enabled": false,
+  "temporary_suspension": {
+    "active": true,
+    "source_message_id": "1570801075621986305",
+    "source_thread_id": "1570801075621986305",
+    "authorized_by_discord_id": "344196393512075265",
+    "reason": "Intraday reports withdrawn pending financial-window reconciliation discussed in thread 1558146784554000467.",
+    "resume_condition": "Explicit notice from Rodolfo in source thread after solution is finalized; no automatic resume.",
+    "preserve_daily_d1": true
+  },
   "authorized_by_discord_id": "344196393512075265",
   "source_thread_id": "1565155357074923732",
   "source_message_id": "1565155813922701353",

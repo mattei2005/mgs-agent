@@ -1,0 +1,383 @@
+#!/usr/bin/env python3
+"""Deterministic SHEIN D-1 reports; Meta/SB read-only, exact Discord delivery."""
+from __future__ import annotations
+import argparse,concurrent.futures,fcntl,hashlib,importlib.util,json,os,re,subprocess,sys,time,urllib.request,urllib.error
+from pathlib import Path
+from datetime import datetime,timedelta,date
+from zoneinfo import ZoneInfo
+from decimal import Decimal
+from collections import defaultdict,Counter
+from urllib.parse import urlsplit
+HOME=Path('/root/.hermes/profiles/ares');BASE=Path('/root/mgs-agent')
+POLICY=BASE/'data/ares/meta-ads/policies/shein-daily-report.json'
+CONTRACT=BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json'
+STATE=BASE/'data/ares/meta-ads/state/shein-daily-report'
+NY=ZoneInfo('America/New_York');BOT_ID='1508864261504630925'
+CAMP_FIELDS='id,account_id,name,status,effective_status,created_time,bid_strategy,budget_remaining,daily_budget,lifetime_budget'
+def now():return datetime.now(NY).isoformat()
+def save(path,value):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    temp=path.with_name(path.name+'.tmp')
+    with temp.open('w') as f:json.dump(value,f,ensure_ascii=False,indent=2,default=str);f.flush();os.fsync(f.fileno())
+    temp.chmod(0o600);os.replace(temp,path)
+def load(path):return json.loads(Path(path).read_text())
+def module(name,path):
+    spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m);return m
+
+def resolve(policy):
+    assert policy['enabled'] and policy['mode']=='read_only_sources_discord_reports_only'
+    assert policy['authorized_by_discord_id']=='344196393512075265'
+    bindings=load(BASE/'data/ares/discord/shein-intraday-report-bindings.json')['bindings']
+    catalog={c['account_id']:c for c in load(BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json')['accounts']}
+    excluded=set(policy['excluded_account_brands'])
+    chosen=[b for b in bindings if b['account_name'].split('-')[0].lower() not in excluded]
+    assert len(bindings)==36 and len(chosen)==24
+    assert len({b['account_id'] for b in chosen})==len({b['thread_id'] for b in chosen})==24
+    assert Counter(b['manager_code'] for b in chosen)=={f'g00{i}':4 for i in range(1,7)}
+    for b in chosen:
+        c=catalog[b['account_id']]
+        assert (c['name'],c['manager_code'].lower())==(b['account_name'],b['manager_code'])
+    assert set(policy['account_ids'])=={b['account_id'] for b in chosen}
+    assert set(policy['thread_ids'])=={b['thread_id'] for b in chosen}
+    for domain in sorted({b['account_name'].split('-')[0].lower()+'.com' for b in chosen}):
+        p=subprocess.run([sys.executable,str(BASE/'scripts/mgs-domain-scope.py'),'check','--agent','ares',domain],capture_output=True,text=True)
+        assert p.returncode==0,'Domain scope refused'
+    return chosen
+
+def report_date(at):return (at.astimezone(NY).date()-timedelta(days=1)).isoformat()
+def delivery_ready(at,day):
+    local=at.astimezone(NY)
+    return local.hour>=8 and report_date(local)==day
+def sumfield(rows,key,layout):
+    vals=[layout.number(r.get(key)) for r in rows]
+    return sum(vals,Decimal(0)) if vals and all(v is not None for v in vals) else None
+
+def reporting_product(name,layout):
+    try:return layout.product_from_campaign_name(name)
+    except layout.LayoutError:pass
+    # Legacy account names: remove only structural wrappers, never read an old label.
+    rest=re.sub(r'^\d+(?:\s*\[\d+\])?\s*-\s*','',name)
+    parts=re.split(r'\s+-\s*|\s*-\s+',rest);out=[]
+    for part in parts:
+        part=part.strip()
+        if not out and (re.fullmatch(r'\[?\d{1,2}/\d{1,2}\]?|\[\d+\]|LL|IMG|VID|IMAGEM|v[123]|COCAP|MAXVOL|BIDCAP|COSTCAP',part,re.I)):continue
+        if re.match(r'^(?:PRODUCTS|SHEIN$|ESCALA\b|COPY\b|Copy of\b|COCAP\b|MAXVOL\b|BIDCAP\b|COSTCAP\b|US-(?:EN|ES)\b|IMG$|VID$|IMAGEM$|\()',part,re.I):break
+        part=re.split(r'\s*\(US_APP\)|\s*\[LP|\s*\(b\d+fb|\s+event_add_to_wishlist',part,flags=re.I)[0].strip()
+        if part:out.append(part)
+    result=' - '.join(out)
+    assert result,'Unresolved legacy product name'
+    layout.validate_product_name(result)
+    return result
+
+def reporting_quiz(adrows,account_id,revenue_domain):
+    """Read quiz from actual ad destinations, not the SB revenue-domain key.
+
+    lp-yolo is the approved Yolokfx quiz entry (context/acquisition.md).
+    It is not a new publisher, account or revenue source.
+    """
+    hosts={revenue_domain}
+    if revenue_domain=='yolokfx.com':hosts.add('lp-yolo.com')
+    quizset=set();invalid=not bool(adrows)
+    for ad in adrows:
+        assert ad['account_id']==account_id
+        links=list(urls(ad.get('creative',{})))
+        if not links:invalid=True
+        for link in links:
+            u=urlsplit(link)
+            if u.hostname not in hosts:invalid=True;continue
+            match=re.search(r'/quiz/us/sh([123])-g\d{3}(?:/|$)',u.path)
+            if match:quizset.add('v'+match.group(1))
+    return next(iter(quizset)) if len(quizset)==1 and not invalid else 'misto' if len(quizset)>1 else 'n/d'
+
+def urls(value):
+    if isinstance(value,dict):
+        for k,v in value.items():
+            if k in ('link','website_url','link_url') and isinstance(v,str) and v.startswith('http'):yield v
+            else:yield from urls(v)
+    elif isinstance(value,list):
+        for v in value:yield from urls(v)
+
+class Runner:
+    def __init__(self,policy,root,bindings,day):
+        self.policy=policy;self.root=root;self.bindings=bindings;self.day=day
+        self.dates=[(date.fromisoformat(day)-timedelta(days=i)).isoformat() for i in range(6,-1,-1)]
+        os.environ['ARES_META_GRAPH_VERSION']='v26.0'
+        self.meta=module('daily_meta',BASE/'scripts/ares-meta-common.py')
+        self.sb=module('daily_sb',BASE/'scripts/ares-smartbidding-common.py')
+        self.layout=module('daily_layout',HOME/'scripts/shein-report-layout.py')
+        contract=load(CONTRACT)
+        self.token,_=self.meta.get_token_from_1password(contract['credential_architecture']['shared_car_shein_bisu']['token_item'])
+        self.domains={b['account_id']:b['account_name'].split('-')[0].lower()+'.com' for b in bindings}
+        self.pub={}
+    def graph(self,path,params):
+        st,data,_=self.meta.graph_get(path,self.token,params)
+        if st!=200:raise RuntimeError('META_READ_HTTP_'+str(st)+'_CODE_'+str(data.get('error',{}).get('code')))
+        return data
+    def paged(self,path,params):
+        rows=[];p=dict(params);seen=set();progress=None
+        if path.endswith('/ads'):
+            aid=path.split('/')[0].removeprefix('act_');progress=self.root/aid/'ads-pagination.json'
+            signature=hashlib.sha256(json.dumps(params,sort_keys=True).encode()).hexdigest()
+            if progress.exists():
+                prior=load(progress)
+                if prior['signature']==signature:
+                    rows=prior['rows'];p['after']=prior['after']
+        for _ in range(150):
+            data=self.graph(path,p);rows.extend(data.get('data',[]))
+            if not data.get('paging',{}).get('next'):return rows
+            cursor=data.get('paging',{}).get('cursors',{}).get('after');assert cursor and cursor not in seen
+            seen.add(cursor);p['after']=cursor
+            if progress:save(progress,{'signature':signature,'rows':rows,'after':cursor,'observed_at':now()})
+        raise RuntimeError('META_PAGINATION_BOUND')
+    def source(self,p,name,fn):
+        target=p/(name+'.json');stamp=p/(name+'-observed-at.json')
+        if target.exists() and stamp.exists():return load(target)
+        result=fn();save(target,result);save(stamp,{'observed_at':now()});return result
+    def sbquery(self,path,payload):
+        assert path in ('/report/performance_per_campaigns','/estimated/delay')
+        st,data,_=self.sb.api_request('POST',path,payload=payload)
+        assert st in (200,201),'SB_READ_FAILED'
+        return data
+    def publishers(self):
+        target=self.root/'publishers.json'
+        if target.exists():ps=load(target)
+        else:
+            st,data,_=self.sb.api_request('GET','/company');assert st==200
+            companies=data if isinstance(data,list) else data.get('data',[]);ps=[]
+            for c in companies:
+                for p in c.get('publishers',[]):
+                    if urlsplit(p.get('url','')).hostname in set(self.domains.values()):
+                        ps.append({'publisherId':p.get('publisherId',p.get('id')),'name':p.get('name'),'url':p.get('url')})
+            assert len(ps)==4 and len({p['publisherId'] for p in ps})==4
+            save(target,ps)
+        self.pub={urlsplit(p['url']).hostname:p for p in ps}
+    def validate_report_day(self,account):
+        tz=ZoneInfo(account['timezone_name']);assert self.day<datetime.now(tz).date().isoformat(),'Report day not closed'
+    def period_evidence(self):
+        return {'closed_day_report':{'policy_id':self.policy['policy_id'],'period':{'since':self.day,'until':self.day},'day_closed':True}}
+    def period_limitation(self):
+        return 'Relatório diário do dia fechado; horários de coleta/status/Bid/orçamento são atuais, não históricos.'
+    def history_partial(self,dt):
+        return False
+    def collect_account(self,b):
+        aid=b['account_id'];p=self.root/aid
+        account=self.source(p,'account',lambda:self.graph('act_'+aid,{'fields':'id,name,currency,timezone_name,account_status'}))
+        assert account['id'].removeprefix('act_')==aid and account['name']==b['account_name'] and account['currency']=='USD'
+        self.validate_report_day(account)
+        tr=json.dumps({'since':self.day,'until':self.day})
+        campaigns=self.source(p,'campaigns',lambda:self.paged('act_'+aid+'/campaigns',{'fields':CAMP_FIELDS,'limit':100}))
+        insights=self.source(p,'insights',lambda:self.paged('act_'+aid+'/insights',{'level':'campaign','time_range':tr,'use_unified_attribution_setting':'true','fields':'campaign_id,spend,impressions,purchase_roas,action_values','limit':500}))
+        selected=[r['campaign_id'] for r in insights if Decimal(r.get('spend','0'))>0 or int(r.get('impressions','0'))>0]
+        assert len(selected)==len(set(selected));cm={r['id']:r for r in campaigns}
+        for cid in set(selected)-set(cm):
+            cm[cid]=self.graph(cid,{'fields':CAMP_FIELDS});assert cm[cid]['account_id']==aid
+        save(p/'campaigns.json',list(cm.values()));save(p/'selected.json',selected)
+        pub=self.pub[self.domains[aid]]
+        def sbrows():
+            rows=self.sbquery('/report/performance_per_campaigns',{'initialDate':self.dates[0]+'T00:00:00.000Z','finalDate':self.day+'T23:59:59.999Z','publishers':[pub['publisherId']],'currency':'USD'})
+            assert isinstance(rows,list)
+            return [r for r in rows if str(r.get('CUSTOMER_ID','')).removeprefix('act_')==aid and str(r.get('DATE',''))[:10] in self.dates and r.get('DOMAIN') in (pub['name'],self.domains[aid]) and r.get('PUBLISHER')==pub['publisherId']]
+        self.source(p,'sb',sbrows)
+        self.source(p,'delay',lambda:self.sbquery('/estimated/delay',{'publisherIds':[pub['publisherId']],'currency':'USD'}))
+        if selected:
+            filt=json.dumps([{'field':'campaign.id','operator':'IN','value':selected}]);since=min(cm[c]['created_time'][:10] for c in selected)
+            self.source(p,'daily',lambda:self.paged('act_'+aid+'/insights',{'level':'campaign','time_increment':1,'time_range':json.dumps({'since':since,'until':self.day}),'fields':'campaign_id,date_start,impressions,spend','filtering':filt,'use_unified_attribution_setting':'true','limit':500}))
+            self.source(p,'adsets',lambda:self.paged('act_'+aid+'/adsets',{'fields':'id,campaign_id,bid_strategy,bid_amount,promoted_object','filtering':filt,'limit':500}))
+            self.source(p,'ads',lambda:self.paged('act_'+aid+'/ads',{'fields':'id,account_id,campaign_id,creative{id,object_story_spec,asset_feed_spec,link_url}','filtering':filt,'limit':50}))
+        else:
+            for n in ['daily','adsets','ads']:self.source(p,n,lambda:[])
+        self.recover_archived_configuration(p,aid,selected,cm)
+        return {'account_id':aid,'campaigns':len(selected)}
+    def recover_archived_configuration(self,p,aid,selected,cm):
+        # Account edges omit archived children by default, while Insights still
+        # includes their historical spend. Recover exact selected campaigns only;
+        # never drop a historical financial row or infer its configuration.
+        fields={'adsets':'id,campaign_id,bid_strategy,bid_amount,promoted_object',
+                'ads':'id,account_id,campaign_id,creative{id,object_story_spec,asset_feed_spec,link_url}'}
+        for edge in ('adsets','ads'):
+            rows=load(p/(edge+'.json'));present={r['campaign_id'] for r in rows};added=[]
+            for cid in selected:
+                if cid in present or cm[cid].get('status')!='ARCHIVED':continue
+                found=self.paged(cid+'/'+edge,{'fields':fields[edge],
+                    'effective_status':json.dumps(['ARCHIVED']),'limit':100})
+                assert all(r['campaign_id']==cid and (edge!='ads' or r['account_id']==aid) for r in found),'Archived configuration identity mismatch'
+                assert len({r['id'] for r in found})==len(found),'Duplicate archived configuration'
+                added.extend(found)
+            if added:
+                assert not ({r['id'] for r in rows}&{r['id'] for r in added}),'Archived configuration overlap'
+                save(p/(edge+'.json'),rows+added)
+                save(p/(edge+'-observed-at.json'),{'observed_at':now()})
+                save(p/(edge+'-archived-recovery.json'),{'observed_at':now(),
+                    'campaign_ids':sorted({r['campaign_id'] for r in added}),
+                    'child_ids':[r['id'] for r in added],'source':'exact_campaign_edge_effective_status_ARCHIVED'})
+    def collect(self):
+        self.publishers();results=[]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+            futures={pool.submit(self.collect_account,b):b for b in self.bindings}
+            for future in concurrent.futures.as_completed(futures):
+                results.append(future.result());save(self.root/'collection-progress.json',results)
+        assert len(results)==24
+    def capture(self):
+        target=self.root/'sb-visible-rps-capture.json'
+        if target.exists() and load(target).get('complete'):return
+        p=subprocess.run(['xvfb-run','-a','/root/mgs-agent/.venv-sb/bin/python',str(HOME/'scripts/shein-daily-rps-ui.py'),'--root',str(self.root)],capture_output=True,text=True,timeout=600)
+        save(self.root/'ui-result.json',{'returncode':p.returncode,'stdout':p.stdout[-2000:],'stderr':p.stderr[-1000:]})
+        assert p.returncode==0 and target.exists(),'RPS_UI_CAPTURE_FAILED'
+    def refresh(self):
+        requests=[]
+        for b in self.bindings:
+            for cid in load(self.root/b['account_id']/'selected.json'):
+                requests.append({'path':cid,'params':{'fields':CAMP_FIELDS}})
+        found={}
+        for start in range(0,len(requests),50):
+            st,responses,_=self.meta.graph_batch_get(self.token,requests[start:start+50]);assert st==200
+            assert len(responses)==len(requests[start:start+50])
+            for response in responses:
+                assert response['code']==200
+                obj=response['body'];obj=json.loads(obj) if not isinstance(obj,dict) else obj
+                found[obj['id']]=obj
+        for b in self.bindings:
+            p=self.root/b['account_id'];cm={r['id']:r for r in load(p/'campaigns.json')}
+            for cid in load(p/'selected.json'):
+                obj=found[cid];assert obj['account_id']==b['account_id'] and obj['name']==cm[cid]['name'],'Campaign identity drift'
+                cm[cid]=obj
+            save(p/'campaigns.json',list(cm.values()));save(p/'refresh-observed-at.json',{'observed_at':now()})
+    def materialize(self):
+        layout=self.layout;capture=load(self.root/'sb-visible-rps-capture.json')
+        assert capture['complete'] and capture['data_date']==self.day and capture['currency_evidence']['same_browser_context_as_capture']
+        uimap={(r['ACCOUNT_ID'].removeprefix('act_'),r['CAMPAIGN_ID']):r for r in capture['rows']};assert len(uimap)==len(capture['rows'])
+        caphash=hashlib.sha256((self.root/'sb-visible-rps-capture.json').read_bytes()).hexdigest()
+        coverage=[]
+        for b in self.bindings:
+            aid=b['account_id'];p=self.root/aid;read=lambda n:load(p/(n+'.json'));stamp=lambda n:read(n+'-observed-at')['observed_at']
+            cm={r['id']:r for r in read('campaigns')};im={r['campaign_id']:r for r in read('insights')};selected=read('selected');daily=read('daily');adsets=read('adsets');ads=read('ads');sbd=defaultdict(list);dm=defaultdict(list)
+            for row in read('sb'):sbd[(str(row['CAMPAIGN_ID']),str(row['DATE'])[:10])].append(row)
+            for row in daily:dm[row['campaign_id']].append(row)
+            refreshed=stamp('refresh')
+            model={'account':read('account'),'date':self.day,'history_dates':self.dates,'source_timestamps':{'insights':stamp('insights'),'sb':stamp('sb'),'configuration':max(stamp('adsets'),stamp('ads')),'status':refreshed,'budget':refreshed},'delay':read('delay'),'financial_snapshot_preserved':False,'validate_product_names':True,**self.period_evidence(),'rps_source':{'source_kind':'SB_DASH_VISIBLE_COLUMN','native_metric_id':'RPS','capture_method':'rendered_table_DOM','dashboard_url':'https://app.smartbiddingdigital.com/reports/adgroup','observed_at':capture['observed_at'],'data_date':self.day,'unit':'USD/1000_sessions','capture_sha256':caphash},'rows':[],'configuration_limitations':[self.period_limitation()+' Atraso GAM/SB é a leitura atual do publisher.']}
+            for cid in selected:
+                c=cm[cid];ins=im[cid];sp=layout.number(ins['spend']);rs=sbd[(cid,self.day)];net=sumfield(rs,'NET_REVENUE',layout);est=sumfield(rs,'REVENUE_ESTIMATED',layout)
+                first=min((r['date_start'] for r in dm[cid] if Decimal(r.get('spend','0'))>0 or int(r.get('impressions','0'))>0),default=None)
+                aset=[r for r in adsets if r['campaign_id']==cid];assert aset,'Missing adsets'
+                strategies={r.get('bid_strategy') or c.get('bid_strategy') for r in aset};strategy=next(iter(strategies)) if len(strategies)==1 else 'MIXED'
+                caps={Decimal(str(r['bid_amount']))/100 for r in aset if r.get('bid_amount') is not None};goal=next(iter(caps)) if strategy=='COST_CAP' and len(caps)==1 and all(r.get('bid_amount') is not None for r in aset) else None
+                adrows=[r for r in ads if r['campaign_id']==cid]
+                quiz=reporting_quiz(adrows,aid,self.domains[aid])
+                hnum=sumfield(rs,'CDP_IMPRESSIONS',layout);hden=sumfield(rs,'GAM_CODE_SERVED_COUNT',layout);health=None
+                if hnum is not None and hden is not None and hden>0:
+                    ratio=hnum*100/hden;health=max(Decimal(0),200-ratio if ratio>100 else ratio)
+                ui=uimap.get((aid,cid));cell=ui['RPS'] if ui else '';mon=re.sub(r'[^\d,.-]','',cell);rps=Decimal(mon.replace('.','').replace(',','.')) if mon else None
+                if rs and ui is None:raise RuntimeError('RPS_UI_COVERAGE_MISSING_'+aid)
+                roas=next((layout.number(r['value']) for r in ins.get('purchase_roas',[]) if r['action_type']=='omni_purchase'),None)
+                hist=[]
+                for dt in self.dates:
+                    spend=sp if dt==self.day else sum((Decimal(r['spend']) for r in dm[cid] if r['date_start']==dt),Decimal(0))
+                    rev=net if dt==self.day else sumfield(sbd[(cid,dt)],'NET_REVENUE',layout)
+                    hist.append({'date':dt,'spend':spend,'net_revenue':rev,'roi':layout.roi(rev,spend),'partial':self.history_partial(dt)})
+                prefix=re.match(r'\d+',c['name']);assert prefix
+                row={'id':cid,'name':c['name'],'number':prefix.group(),'product':reporting_product(c['name'],layout),'quiz':quiz,'bid':{'COST_CAP':'COCAP','LOWEST_COST_WITHOUT_CAP':'MAXVOL','LOWEST_COST_WITH_BID_CAP':'BIDCAP'}.get(strategy,'misto' if strategy=='MIXED' else 'n/d'),'spend':sp,'net_revenue':net,'estimated_revenue':est,'roi':layout.roi(net,sp),'estimated_roi':layout.roi(est,sp),'health':health,'roas':roas,'first_delivery':first,'history':hist,'budget_remaining':Decimal(c['budget_remaining'])/100 if c.get('budget_remaining') is not None else None,'daily_budget':Decimal(c['daily_budget'])/100 if c.get('daily_budget') is not None else None,'cost_per_result_goal':goal,'bid_strategy_live':strategy,'campaign_status':c['status'],'campaign_effective_status':c['effective_status'],'rps':rps}
+                model['rows'].append(row)
+                if net is None:model['configuration_limitations'].append('Receita SB indisponível em '+row['number']+'; não imputada como zero.')
+                if quiz=='n/d':model['configuration_limitations'].append('Quiz não confirmado em '+row['number']+'.')
+            save(p/'model.json',model);model=load(p/'model.json')
+            layout.check_thread_binding(model,b['thread_id'])
+            result=layout.render_model(model);save(p/'report.parts.json',result['parts']);(p/'report.md').write_text(result['text'])
+            receipt=layout.validate_report(model,result['text'],b['thread_id']);layout.register_report(result);save(p/'receipt.json',receipt)
+            coverage.append({'account_id':aid,'thread_id':b['thread_id'],'manager':b['manager_code'],'campaigns':len(selected),'parts':len(result['parts'])})
+        save(self.root/'acceptance.json',{'status':'ALL_24_RENDER_VALIDATED','accounts':len(coverage),'reports':coverage,'meta_writes':0,'date':self.day})
+
+class Discord:
+    def __init__(self):
+        vals={}
+        for line in (HOME/'.env').read_text().splitlines():
+            if line.strip() and not line.lstrip().startswith('#') and '=' in line:
+                k,v=line.split('=',1);vals[k.strip()]=v.strip().strip('"').strip("'")
+        self.token=vals['DISCORD_BOT_TOKEN']
+    def call(self,method,path,payload=None):
+        assert method in ('GET','POST')
+        if method=='POST':assert re.fullmatch(r'/channels/\d+/messages',path)
+        body=json.dumps(payload,ensure_ascii=False).encode() if payload is not None else None
+        req=urllib.request.Request('https://discord.com/api/v10'+path,data=body,method=method,headers={'Authorization':'Bot '+self.token,'Content-Type':'application/json','User-Agent':'MGS-Ares/1.0'})
+        for attempt in range(4):
+            try:
+                with urllib.request.urlopen(req,timeout=30) as res:return json.load(res)
+            except urllib.error.HTTPError as exc:
+                if exc.code!=429:raise RuntimeError('DISCORD_HTTP_'+str(exc.code)) from None
+                data=json.loads(exc.read());time.sleep(float(data.get('retry_after',2))+0.3)
+        raise RuntimeError('DISCORD_RATE_LIMIT')
+    def verify(self,bindings):
+        me=self.call('GET','/users/@me');assert me['id']==BOT_ID
+        rows=[]
+        for b in bindings:
+            ch=self.call('GET','/channels/'+b['thread_id'])
+            assert ch['id']==b['thread_id'] and ch['parent_id']==b['channel_id'] and ch['type'] in (11,12)
+            assert not ch.get('thread_metadata',{}).get('locked')
+            rows.append({'thread_id':ch['id'],'parent_id':ch['parent_id'],'name':ch['name']})
+        return {'bot_id':me['id'],'observed_at':now(),'threads':rows}
+
+def deliver_account(runner,b,discord,run_key=None):
+    p=runner.root/b['account_id'];model=load(p/'model.json');text=(p/'report.md').read_text()
+    runner.layout.validate_report(model,text,b['thread_id']);parts=load(p/'report.parts.json');assert '\n\n'.join(parts)==text
+    records=[]
+    for i,part in enumerate(parts):
+        ip=p/f'delivery-intent-{i}.json';sha=hashlib.sha256(part.encode()).hexdigest()
+        nonce=str(int(hashlib.sha256(((run_key or runner.day)+':'+b['account_id']+':'+str(i)+':'+sha).encode()).hexdigest()[:15],16))
+        intent=load(ip) if ip.exists() else {'thread_id':b['thread_id'],'part':i,'nonce':nonce,'sha256':sha,'status':'PREPARED'}
+        assert intent['sha256']==sha and intent['nonce']==nonce
+        mid=intent.get('message_id')
+        if not mid and intent['status']=='IN_FLIGHT':
+            recent=discord.call('GET','/channels/'+b['thread_id']+'/messages?limit=100')
+            found=[x for x in recent if x['author']['id']==BOT_ID and (str(x.get('nonce'))==nonce or x.get('content')==part)]
+            assert len(found)==1,'Ambiguous prior publication; refusing blind replay'
+            mid=found[0]['id'];intent.update(message_id=mid,status='POST_RETURNED');save(ip,intent)
+        if not mid:
+            intent.update(status='IN_FLIGHT',started_at=now());save(ip,intent)
+            response=discord.call('POST','/channels/'+b['thread_id']+'/messages',{'content':part,'allowed_mentions':{'parse':[],'users':[],'roles':[],'replied_user':False},'nonce':nonce,'enforce_nonce':True,'tts':False})
+            mid=response['id'];intent.update(message_id=mid,status='POST_RETURNED');save(ip,intent)
+        message=discord.call('GET','/channels/'+b['thread_id']+'/messages/'+mid)
+        assert message['channel_id']==b['thread_id'] and message['author']['id']==BOT_ID and message['content']==part
+        intent.update(status='GET_VERIFIED',verified_at=now());save(ip,intent);records.append({'id':mid,'part':i,'verified':True})
+    delivery={'account_id':b['account_id'],'thread_id':b['thread_id'],'manager':b['manager_code'],'parts':records,'campaigns':len(model['rows']),'status':'COMPLETE_GET_VERIFIED','completed_at':now()}
+    save(p/'delivery.json',delivery);return delivery
+
+def main(args):
+    policy=load(POLICY);bindings=resolve(policy);day=report_date(datetime.now(NY));root=STATE/day
+    if args.run_date:assert args.run_date==day,'Only current D-1 request may execute'
+    root.mkdir(parents=True,exist_ok=True,mode=0o700)
+    lock=(STATE/'run.lock').open('a+')
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:return {'status':'ALREADY_RUNNING'}
+    if (root/'completion.json').exists():return load(root/'completion.json')
+    request={'date':day,'bindings':bindings,'policy_id':policy['policy_id'],'source_thread_id':policy['source_thread_id'],'authorized_by':'344196393512075265','started_at':now(),'scope':'D-1 collection; no Meta/SB/finance write; no deletes'}
+    if not (root/'request.json').exists():save(root/'request.json',request)
+    else:assert load(root/'request.json')['bindings']==bindings
+    discord=Discord();save(root/'destinations-readback.json',discord.verify(bindings))
+    if args.verify_only:return {'status':'24_DESTINATIONS_VERIFIED','date':day}
+    runner=Runner(policy,root,bindings,day)
+    frozen=bool(list(root.glob('*/delivery-intent-*.json')))
+    if not frozen:
+        runner.collect();runner.capture()
+        # Prepare-only needs a validated snapshot now. Publication refreshes once
+        # below, after the 08h gate; never fetch the same live IDs twice in a row.
+        if args.prepare_only:runner.refresh();runner.materialize()
+    if args.prepare_only:return {'status':'24_D1_REPORTS_PREPARED','date':day,'acceptance':str(root/'acceptance.json')}
+    target=datetime.now(NY).replace(hour=8,minute=0,second=0,microsecond=0)
+    if datetime.now(NY)<target:time.sleep((target-datetime.now(NY)).total_seconds())
+    assert delivery_ready(datetime.now(NY),day),'Early delivery or crossed delivery day blocked'
+    # Do not rematerialize frozen reports once any part may have been sent.
+    if not list(root.glob('*/delivery-intent-*.json')):runner.refresh();runner.materialize()
+    save(root/'destinations-readback.json',discord.verify(bindings));deliveries=[]
+    for b in bindings:
+        deliveries.append(deliver_account(runner,b,discord));save(root/'delivery-progress.json',deliveries)
+    ids=[r['id'] for d in deliveries for r in d['parts']]
+    assert len(deliveries)==len({d['account_id'] for d in deliveries})==len({d['thread_id'] for d in deliveries})==24
+    assert len(ids)==len(set(ids)) and Counter(d['manager'] for d in deliveries)=={f'g00{i}':4 for i in range(1,7)}
+    result={'status':'COMPLETE_GET_VERIFIED','date':day,'accounts':24,'published_parts':len(ids),'campaigns':sum(d['campaigns'] for d in deliveries),'by_manager':dict(Counter(d['manager'] for d in deliveries)),'completed_at':now(),'meta_writes':0,'deletions':0,'deliveries':deliveries}
+    save(root/'completion.json',result);return {k:v for k,v in result.items() if k!='deliveries'}
+if __name__=='__main__':
+    ap=argparse.ArgumentParser();ap.add_argument('--prepare-only',action='store_true');ap.add_argument('--verify-only',action='store_true');ap.add_argument('--run-date');args=ap.parse_args()
+    try:print(json.dumps(main(args),ensure_ascii=False))
+    except Exception as exc:
+        # No response bodies, credentials, URLs or traces in cron stdout.
+        STATE.mkdir(parents=True,exist_ok=True);save(STATE/'last-error.json',{'at':now(),'type':type(exc).__name__,'reason':str(exc)[:250],'resumable':True})
+        print('Relatório diário SHEIN pendente de recuperação; nenhum envio é considerado concluído.',file=sys.stderr);sys.exit(1)

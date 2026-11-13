@@ -888,6 +888,25 @@
   },
   "reporting": {
     "on_demand_default_layout": {
+      "financial_source_standard": {
+        "status": "active",
+        "policy_id": "ARES-SHEIN-SB-FINANCIAL-SOURCE-20261113",
+        "effective_from_financial_snapshot": "2026-11-13T09:07:17.358319-05:00",
+        "authorized_by_discord_id": "344196393512075265",
+        "source_message_id": "1570801675239694367",
+        "source_thread_id": "1558146784554000467",
+        "scope": "all_canonical_SHEIN_report_bindings_scheduled_and_on_demand",
+        "financial_spend_source": "SB_INVESTIMENT_ADJUSTED",
+        "net_revenue_source": "SB_NET_REVENUE",
+        "estimated_revenue_source": "SB_REVENUE_ESTIMATED",
+        "history_spend_source": "SB_INVESTIMENT_ADJUSTED",
+        "missing_investment": "n/d_without_Meta_fallback",
+        "additional_timezone_shift": false,
+        "raw_meta_spend": "separate_audit_and_existing_Meta_BU_percent_only",
+        "selection": "union_Meta_delivery_and_SB_financial_day_activity",
+        "preserve": "historical_snapshots_schedules_destinations_status_and_campaigns",
+        "supersedes": "Meta spend denominator in new SHEIN financial ROI and seven-day financial history only"
+      },
       "status": "ACTIVE_UNTIL_EXPLICIT_REVISION",
       "owner": "Rodolfo Mattei",
       "authorized_by_discord_id": "344196393512075265",

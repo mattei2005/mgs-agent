@@ -1,0 +1,84 @@
+{
+  "type": 0,
+  "content": "",
+  "mentions": [],
+  "mention_roles": [],
+  "attachments": [],
+  "embeds": [
+    {
+      "type": "rich",
+      "title": "REPORT-INFRA — modificada",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Ação",
+          "value": "modificada",
+          "inline": true
+        },
+        {
+          "name": "Tipo",
+          "value": "cron/data/skill/checkpoint",
+          "inline": true
+        },
+        {
+          "name": "Host",
+          "value": "srv1767265",
+          "inline": true
+        },
+        {
+          "name": "Path",
+          "value": "root crontab (somente cinco slots SHEIN Intraday); data/ares/meta-ads/policies/shein-intraday-report.json; data/ares/discord/cleanup-1570801075621986305; skill meta-ads-intraday-operations; agent-checkpoints.json",
+          "inline": false
+        },
+        {
+          "name": "Motivo",
+          "value": "Rodolfo1570801075621986305: retirar Intradays de hoje até resolver conciliação financeira na thread1558146784554000467; aguardar aviso na origem.",
+          "inline": false
+        },
+        {
+          "name": "Evidência",
+          "value": "9 Intradays/42 mensagens removidos, cada ID GET404/10008;89 canais/threads preservados;24 Diários D-1 preservados.5 slots suspensos com backup,diff,crontab -n e readback exato;demais linhas intactas,sem novo job. Política disabled testada antes de fontes;knowledge validate OK. Skill acrescenta classificação D-1/Intraday e validação do cron instalado.",
+          "inline": false
+        },
+        {
+          "name": "Pendências Hermes",
+          "value": "indisponível",
+          "inline": false
+        },
+        {
+          "name": "Horário",
+          "value": "2026-11-13 09:09:26 EST",
+          "inline": true
+        }
+      ],
+      "content_scan_version": 0
+    }
+  ],
+  "timestamp": "2026-11-13T14:09:26.697000+00:00",
+  "edited_timestamp": null,
+  "flags": 0,
+  "components": [],
+  "id": "1570802779331625032",
+  "channel_id": "1498132022634483894",
+  "author": {
+    "id": "1508864261504630925",
+    "username": "Ares",
+    "avatar": "6413780f466432931425c2af3b68a24f",
+    "discriminator": "6628",
+    "public_flags": 0,
+    "flags": 0,
+    "bot": true,
+    "banner": null,
+    "accent_color": null,
+    "global_name": null,
+    "avatar_decoration_data": null,
+    "collectibles": null,
+    "display_name_styles": null,
+    "banner_color": null,
+    "clan": null,
+    "primary_guild": null
+  },
+  "pinned": false,
+  "mention_everyone": false,
+  "tts": false
+}

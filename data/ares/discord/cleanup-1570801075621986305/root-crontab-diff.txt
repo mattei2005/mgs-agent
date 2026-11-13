@@ -1,0 +1,19 @@
+--- 
++++ 
+@@ -145,11 +145,11 @@
+ 
+ # BEGIN SHEIN INTRADAY — Rodolfo1565157065234710681;current-day;24threads;D1 unchanged
+ CRON_TZ=America/New_York
+-32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
+-11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
+-2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
+-2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
+-31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
++# PAUSED Rodolfo1570801075621986305 pending ROI reconciliation | 32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
++# PAUSED Rodolfo1570801075621986305 pending ROI reconciliation | 11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
++# PAUSED Rodolfo1570801075621986305 pending ROI reconciliation | 2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
++# PAUSED Rodolfo1570801075621986305 pending ROI reconciliation | 2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
++# PAUSED Rodolfo1570801075621986305 pending ROI reconciliation | 31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1
+ # END SHEIN INTRADAY
+ 
+ # BEGIN ARES SHEIN CREATION COUNTS — Rodolfo1565429557547503729
