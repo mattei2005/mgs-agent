@@ -1,0 +1,25 @@
+{
+  "reason": "Resume same Kelly request after metadata-only Drive version advance; immutable request/batch, exact version CAS and full-byte checks retained",
+  "changed": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_flat_intake.py",
+      "sha256": "02deeb43c42b7bc0e531f87df3abcfba0a590097e4fda4e5b4b2d95dde1149d4"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_ares_flat_intake_version_proof.py",
+      "sha256": "6ed8a655d4d9057816e95290e8e24e364c5e8cb6781c3b9e4d262fc1445f9690"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/flat-upload-intake.md",
+      "sha256": "c8ba3dcf00b5053bdcac6a01af2289e9d0df0901413161a492004979d94af2b7"
+    }
+  ],
+  "backup": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1570875079363919935/recovery/ares_flat_intake.before.py",
+  "live_preflight": {
+    "batch_id": "9c0d0c49c00e14d7b8a5072580e46675",
+    "original_request_sources_unchanged": true,
+    "registered_source_digest": "07c8f42451c4244c05c8b50c3d2e607179f2e77c15ebed043e4de150bf139acc",
+    "remote_writes": 0,
+    "status": "verified"
+  }
+}

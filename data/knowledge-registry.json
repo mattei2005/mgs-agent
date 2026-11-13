@@ -3527,6 +3527,23 @@
       "updated_at": "2026-08-24T20:39:24+00:00"
     },
     {
+      "canonical_key": "creative_ops.flat_intake.metadata_version_proof",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/flat-upload-intake.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "creative_ops",
+      "effective_at": "2026-11-13T19:50:14+00:00",
+      "id": "ARES-FLAT-VERSION-PROOF-1570875079363919935",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reconciliacao de versao metadata-only no intake sem reescrever snapshots",
+      "updated_at": "2026-11-13T19:50:14+00:00"
+    },
+    {
       "canonical_key": "ares.meta-ads.internal-budget-limits",
       "canonical_source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
       "consumers": [
@@ -17154,5 +17171,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T19:15:53+00:00"
+  "updated_at": "2026-11-13T19:50:14+00:00"
 }
