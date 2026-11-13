@@ -1643,12 +1643,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1570875079363919935",
-      "next_step": "Executor canonico assumindo saldo. Reusar plano inteiro executions/intake-1570875079363919935/plan.json e prepared/reviews por sourceID;adapter scratch intake-1570875079363919935/intake_task.py com hashes validados. Item11 headline coloringkits sobre unhas,REVIEW_REQUIRED. Nao rebaixar provas ou repetir tratamento4completos. Final auditar16 originais/providers/READY e mapa16pares.",
+      "next_step": "Reconciliar CAS pela rota autorizada sem alterar snapshot/relaxar guard. Diagnostico intake-last-error.json e continuation-report.json;retomar mesmo batch e plano congelado,nao novo request.12concluidos nao repetir.4RAW em UPLOAD MANUAL. Item11 REVIEW_REQUIRED por headline coloringkits sobre unhas. Apos desbloqueio executar apenas saldo4,complete,monitor e auditoria16.",
       "objective": "Tratar e arquivar16videos Kelly US SHEIN EN common preservando RAW IDs reservas",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1570875079363919935/plan.json",
-      "state": "4/16complete;16/16prepared+reviewed;request786f2a28e7eec7877a86683cdf8840c8;canonical_scheduler_fire_claim_active;foreground_readonly",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1570875079363919935/continuation-report.json",
+      "state": "12/16concluidos e auditados permanent_verified;4/16pendentes preparados+qa;batch9c0d0c49c00e14d7b8a5072580e46675 bloqueado no claim flat_native_version_changed;fonte1hkye0ceozbxp-assfkmb2rtzljsw858o registrada v9/live v11;bytes sha md5 size intactos;sem mutacoes no batch pendente",
       "thread_id": "1570875079363919935",
-      "updated_at": "2026-11-13T19:13:58+00:00"
+      "updated_at": "2026-11-13T19:37:42+00:00"
     },
     {
       "agent": "ares",
@@ -10337,5 +10337,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T19:21:21+00:00"
+  "updated_at": "2026-11-13T19:37:42+00:00"
 }
