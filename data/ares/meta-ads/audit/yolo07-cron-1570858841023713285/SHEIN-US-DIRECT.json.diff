@@ -1,11 +1,40 @@
 --- 
 +++ 
-@@ -3836,7 +3836,7 @@
-           "1492168699397108": {
-             "account_name": "Yolokfx-US-SHEIN-EN-07-G002",
-             "thread_id": "1569767319339663361",
--            "manager_code": "g001"
-+            "manager_code": "g002"
-           }
-         },
-         "approved_preview_policy_id": "ARES-YOLO-G001-NO-STATUS-PREVIEW-20261019",
+@@ -1633,7 +1633,7 @@
+           "authorized_by_discord_id": "344196393512075265",
+           "confirmation_request_message_id": "1561845294080204821",
+           "effective_from_report_date": "2026-10-19",
+-          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
++          "effective_from_financial_snapshot": "2026-10-19T16:59:37.406578-04:00",
+           "metric": "daily_spend_over_daily_budget_percent",
+           "display_header": "B.U.%",
+           "formula": "100 * Meta campaign spend on report civil date / Meta campaign daily_budget",
+@@ -1642,7 +1642,8 @@
+           "approved_scope": "Substituir B.R.% por B.U.% nas36contas, preservando demais colunas, ordenacoes e historico; sem alterar budgets/status/automacoes",
+           "supersedes_for_this_account_only": "budget_remaining_over_daily_budget_percent",
+           "extension_authority_message_id": "1570858841023713285",
+-          "permission_approval_message_id": "1570860329947103396"
++          "permission_approval_message_id": "1570860329947103396",
++          "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00"
+         }
+       },
+       "account_column_overrides": {
+@@ -3281,7 +3282,7 @@
+           "manager_code": "g002",
+           "authorized_by_discord_id": "344196393512075265",
+           "source_thread_id": "1561752465978818722",
+-          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
++          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+           "scope": "explicit_Yolokfx07_G002_reporting_extension",
+           "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+           "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+@@ -3311,7 +3312,8 @@
+           "domain": "yolokfx.com",
+           "source_instruction_message_id": "1561784289786466416",
+           "extension_authority_message_id": "1570858841023713285",
+-          "permission_approval_message_id": "1570860329947103396"
++          "permission_approval_message_id": "1570860329947103396",
++          "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00"
+         }
+       },
+       "format_profiles": {

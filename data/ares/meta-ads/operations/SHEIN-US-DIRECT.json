@@ -1633,7 +1633,7 @@
           "authorized_by_discord_id": "344196393512075265",
           "confirmation_request_message_id": "1561845294080204821",
           "effective_from_report_date": "2026-10-19",
-          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
+          "effective_from_financial_snapshot": "2026-10-19T16:59:37.406578-04:00",
           "metric": "daily_spend_over_daily_budget_percent",
           "display_header": "B.U.%",
           "formula": "100 * Meta campaign spend on report civil date / Meta campaign daily_budget",
@@ -1642,7 +1642,24 @@
           "approved_scope": "Substituir B.R.% por B.U.% nas36contas, preservando demais colunas, ordenacoes e historico; sem alterar budgets/status/automacoes",
           "supersedes_for_this_account_only": "budget_remaining_over_daily_budget_percent",
           "extension_authority_message_id": "1570858841023713285",
-          "permission_approval_message_id": "1570860329947103396"
+          "permission_approval_message_id": "1570860329947103396",
+          "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00"
+        },
+        "1663268201836138": {
+          "status": "active",
+          "policy_id": "ARES-SHEIN-ALL36-BUDGET-USED-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-08-G006",
+          "source_thread_id": "1570858183700910221",
+          "authorization_source_thread_id": "1570858581945876672",
+          "authorized_by_discord_id": "344196393512075265",
+          "confirmation_request_message_id": "1570859539019079793",
+          "effective_from_report_date": "2026-11-13",
+          "effective_from_financial_snapshot": "2026-11-13T18:15:25.201165+00:00",
+          "metric": "daily_spend_over_daily_budget_percent",
+          "display_header": "B.U.%",
+          "formula": "100 * Meta campaign spend on report civil date / Meta campaign daily_budget",
+          "scope": "same_existing_SHEIN_report_layout_for_account08_only",
+          "request_text": "Incluir na rotina existente, seguindo os mesmos horarios e formato dos demais canais SHEIN."
         }
       },
       "account_column_overrides": {
@@ -3281,7 +3298,7 @@
           "manager_code": "g002",
           "authorized_by_discord_id": "344196393512075265",
           "source_thread_id": "1561752465978818722",
-          "effective_from_financial_snapshot": "2026-11-13T18:12:13.439139+00:00",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
           "scope": "explicit_Yolokfx07_G002_reporting_extension",
           "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
           "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
@@ -3311,7 +3328,40 @@
           "domain": "yolokfx.com",
           "source_instruction_message_id": "1561784289786466416",
           "extension_authority_message_id": "1570858841023713285",
-          "permission_approval_message_id": "1570860329947103396"
+          "permission_approval_message_id": "1570860329947103396",
+          "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00"
+        },
+        "1663268201836138": {
+          "status": "active",
+          "policy_id": "ARES-SHEIN-YOLO08-STANDARD-1570859539019079793",
+          "account_name": "Yolokfx-US-SHEIN-EN-08-G006",
+          "thread_id": "1570858183700910221",
+          "manager_code": "g006",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1570858581945876672",
+          "source_message_id": "1570859539019079793",
+          "effective_from_financial_snapshot": "2026-11-13T18:15:25.201165+00:00",
+          "scope": "same_existing_SHEIN_report_layout_for_account08_only",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "include_status": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "status_codes": {
+              "ACTIVE": "A",
+              "PAUSED": "P",
+              "DELETED": "D",
+              "ARCHIVED": "A"
+            },
+            "format_profile_id": "SHEIN_ALL36_UNIFORM_G001_CAPS_V1",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1570858581945876672",
+            "request_text": "Incluir Conta08 na rotina existente com os mesmos horarios e formato dos demais canais SHEIN."
+          },
+          "domain": "yolokfx.com"
         }
       },
       "format_profiles": {
@@ -3552,7 +3602,8 @@
           "869857549542755",
           "897046653487466",
           "937846586033361",
-          "1492168699397108"
+          "1492168699397108",
+          "1663268201836138"
         ],
         "thread_ids": [
           "1558146381871587390",
@@ -3591,7 +3642,8 @@
           "1558147440350076928",
           "1558147459698655425",
           "1558147479432601670",
-          "1569767319339663361"
+          "1569767319339663361",
+          "1570858183700910221"
         ],
         "effective_from_financial_snapshot": "2026-10-19T16:59:37.406578-04:00",
         "metric": "daily_spend_over_daily_budget_percent",
@@ -3650,7 +3702,8 @@
           "869857549542755",
           "897046653487466",
           "937846586033361",
-          "1492168699397108"
+          "1492168699397108",
+          "1663268201836138"
         ],
         "account_bindings": {
           "1018267074603840": {
@@ -3837,6 +3890,11 @@
             "account_name": "Yolokfx-US-SHEIN-EN-07-G002",
             "thread_id": "1569767319339663361",
             "manager_code": "g002"
+          },
+          "1663268201836138": {
+            "account_name": "Yolokfx-US-SHEIN-EN-08-G006",
+            "thread_id": "1570858183700910221",
+            "manager_code": "g006"
           }
         },
         "approved_preview_policy_id": "ARES-YOLO-G001-NO-STATUS-PREVIEW-20261019",

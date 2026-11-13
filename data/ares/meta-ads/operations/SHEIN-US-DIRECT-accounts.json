@@ -8,14 +8,14 @@
   "authorized_by": "344196393512075265",
   "source_thread_id": "1557274000680288307",
   "catalog_purpose": "exact account name/id lookup and manager/channel binding; not new campaign, permission, credential or onboarding authority",
-  "account_count": 37,
+  "account_count": 38,
   "counts_by_manager": {
     "G001": 6,
     "G002": 7,
     "G003": 6,
     "G004": 6,
     "G005": 6,
-    "G006": 6
+    "G006": 7
   },
   "accounts": [
     {
@@ -852,6 +852,26 @@
       "account_prerequisite_status": "REPORT_READ_ONLY_VALIDATED",
       "reporting_enrolled_at": "2026-11-13T18:12:13.439139+00:00",
       "reporting_source_message_id": "1570858841023713285"
+    },
+    {
+      "account_id": "1663268201836138",
+      "name": "Yolokfx-US-SHEIN-EN-08-G006",
+      "manager_code": "G006",
+      "manager_name": "Nicolas",
+      "manager_discord_id": "1055570806945620030",
+      "channel_id": "1548150155184701440",
+      "channel_name": "shein-g006",
+      "currency": "USD",
+      "timezone_name": "America/New_York",
+      "account_status": 1,
+      "relationship": "owned",
+      "engine_registered": false,
+      "registered_modes": [],
+      "single_clone_runtime_enabled": false,
+      "account_prerequisite_status": "LIVE_READ_ONLY_REPORTING_READY",
+      "read_only_onboarding_authority_message_id": "1570862320408596491",
+      "readback_at_utc": "2026-11-13T18:15:25.201165+00:00",
+      "reporting_authority_message_id": "1570859539019079793"
     }
   ],
   "last_scoped_reconciliation": {
