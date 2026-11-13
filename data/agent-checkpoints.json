@@ -2723,12 +2723,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-TWO-REPORTS-1570812403937976371",
-      "next_step": "Concluir/GET36 ontem;coletar/render/entregar/GET36 Intraday;reconciliar72;então inventariar/restaurar apenas cinco slots, política enabled/readback,sem catchup, REPORT-INFRA.",
+      "next_step": "Finalizar fontes13/11,render/QA/entrega/GET36;reconciliar ordem e72relatórios;após isso restaurar cinco slots com auditoria/readback,sem catchup.",
       "objective": "Entregar12/11fechado e13/11Intraday nas36threads;depois reativar cinco slots Intraday conforme emenda Rodolfo1570814262631473396.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/request.json",
-      "state": "collecting_yesterday: fontes/ui em andamento;36preflights confirmados;228testes ok. emenda autenticada permite retomar cron somente após concluir e verificar ambas fases.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570812403937976371/yesterday/final-reconciliation.json",
+      "state": "yesterday_complete_get_verified:36contas/449campanhas/169partes+1resumo em36threads;reconciliação remota integral salva. intraday_collecting: coleta financeira eui13/11 iniciadas somente após fechar12/11.",
       "thread_id": "1570801075621986305",
-      "updated_at": "2026-11-13T14:55:35+00:00"
+      "updated_at": "2026-11-13T15:17:18+00:00"
     },
     {
       "agent": "ares",
@@ -6248,22 +6248,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-PROFILES-1570811193906700471",
-      "next_step": "Confirmacao nativaSIM1570817191878721637 vinculada ao hash1290b048;executorpreflightPASS. Revalidar393IDsselecionados no caminho nativo,refs/baselines,aplicaruma vez e fecharreadbacks/smokes/REPORT. Pedido1570817230491492455:informarproximopasso.",
-      "objective": "Executar somente754copias locais confirmadas1570817191878721637 e informar proximo3;preservar30TB/historico/perfis/Atena.",
-      "source": "data/storage-profile-review-1570811193906700471/lot-754/manifest.json",
-      "state": "approved_preflight_in_progress",
+      "next_step": "754/754ausentes;0.53GiBefetivos;19protegidos/3browser/14evidenciasiguais;393IDsnativosrevalidados+2canariospos;3configs/3smokesPASS;semrestart;REPORT1570819075666481204readback. Proximo:ponto3backups antigosVPS/Hermes,manterultimovalidadodecadaclasse;nenhumoutrolotedestrutivoconfirmado.",
+      "objective": "Lote754copiasconfirmado,executado e validado;informarproximo3semampliar exclusoes.",
+      "source": "data/storage-profile-review-1570811193906700471/lot-754/cleanup-result.json",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T15:07:37+00:00"
+      "updated_at": "2026-11-13T15:14:46+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Ponto1concluido27dumps/4.32GiB. Ponto2revisado:754copiaslocaisAres0.53GiB prontasparaconfirmacaohash1290b048;Atenaeoutrosarquivospreservados. Nenhumalote2executado;retencaofuturanomexida.",
-      "objective": "Descarte seguro porlotes preservandodash,perfis,historico erecuperacao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-profile-review-1570811193906700471/summary.json",
-      "state": "three_lots_completed_profile754_lot_waiting_confirmation",
+      "next_step": "Concluidos28dumpsduplicados;81alvostestes;27dumpscomremotoidentico(4.32GiB);754copiasmidiasPOUPLIX(0.53GiB). Proximo:ponto3backups antigosVPS/Hermes comultimovalidadopreservado;semnovalista/confirmacaodestrutiva;retencaofuturanaomexida.",
+      "objective": "Descarte seguro porlotes preservando dash,perfis,historico erecuperacao.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-profile-review-1570811193906700471/lot-754/cleanup-result.json",
+      "state": "four_confirmed_lots_completed_validated_broader_reorganization_not_closed",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T15:03:19+00:00"
+      "updated_at": "2026-11-13T15:14:47+00:00"
     },
     {
       "agent": "zeus",
@@ -10207,5 +10207,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T15:07:37+00:00"
+  "updated_at": "2026-11-13T15:17:18+00:00"
 }

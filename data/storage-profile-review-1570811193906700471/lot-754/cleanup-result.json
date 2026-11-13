@@ -1,0 +1,57 @@
+{
+  "status": "completed_validated",
+  "manifest_sha256": "1290b048ad7080c958bc74a2c191c3cbd2537a850571aad06cfc1a310e434011",
+  "confirmation_message_id": "1570817191878721637",
+  "followup_next_step_message_id": "1570817230491492455",
+  "deleted_files": 754,
+  "observed_reclaim_bytes": 571994112,
+  "directories_deleted": 0,
+  "protected_files_unchanged": 19,
+  "browser_state_containers_unchanged": 3,
+  "retained_historical_jsons": 12,
+  "retained_evidence_files": 14,
+  "native_archive_ids_revalidated": 393,
+  "remote_post_canaries": 2,
+  "profile_smokes": [
+    {
+      "profile": "zeus",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 10.67
+    },
+    {
+      "profile": "ares",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 10.59
+    },
+    {
+      "profile": "atena",
+      "config_rc": 0,
+      "smoke_rc": 0,
+      "marker_present": true,
+      "elapsed_seconds": 10.78
+    }
+  ],
+  "gateway_pids_unchanged": true,
+  "failed_units": 0,
+  "remote_writes": 0,
+  "atena_targets": 0,
+  "retention_changed": false,
+  "delivery_used_percent": 73.18630734827535,
+  "delivery_available_bytes": 55473106944,
+  "next_point": "3: review old VPS/Hermes backups; retain latest validated recovery set per class; no other deletion authorized",
+  "completed_at": "2026-11-13T10:13:11.909131-05:00",
+  "report_infra": {
+    "message_id": "1570819075666481204",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-13T10:14:46.684694-05:00"
+}

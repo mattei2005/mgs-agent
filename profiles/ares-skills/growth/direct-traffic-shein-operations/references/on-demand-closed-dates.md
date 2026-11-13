@@ -11,6 +11,10 @@
 - Use o cabeçalho canônico `Relatório pontual`, dia fechado e `ATRASO GAM/SB ATUAL`. Status/Bid/budget/delay atuais nunca representam estado histórico. B.U.% continua gasto do dia solicitado dividido pelo budget vigente explicitamente datado.
 - Reutilize fontes já concluídas do mesmo request quando a correção for somente de materialização/gate; não recolete nem publique duas vezes. Revise o texto e os complementos ativos antes de entregar, com journal/nonce/GET de todas as partes.
 
+## Refresh de status recuperável
+
+Se batches de muitos objetos soltos tornarem a leitura de proveniência um gargalo local, faça a listagem paginada de campanhas por conta autorizada pelo mesmo helper produtivo, com concorrência limitada. Cruze apenas os selecionados, valide conta/nome e recupere por GET exato os selecionados ausentes, inclusive arquivados. Persista fonte e horário por conta concluída, retomando somente as faltantes; preserve financeiro e histórico congelados. Não contorne, desabilite nem substitua o guard. Teste fallback, replay sem API, conservação de budget e rejeição de conta divergente.
+
 ## Verificação
 
 Execute `python3 -m unittest discover -s /root/.hermes/profiles/ares/tests -p 'test_shein_report*.py' -q`. `test_shein_report_on_demand_closed.py` cobre prova positiva, data mais antiga, dia aberto, budget antigo, autor/bot, origem/pai, binding errado, parcial, data divergente, seis bindings G006 e integração do renderer sem mutação financeira. O ramo D-1 recorrente e seus testes permanecem inalterados.
