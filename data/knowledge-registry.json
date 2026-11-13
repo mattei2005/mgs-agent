@@ -5953,10 +5953,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-YOLO08-INTRADAY-ACTIVE-1570864612889600177",
+      "title": "Conta08 G006: incluir Intraday existente; pendente grant minimo Meta",
+      "updated_at": "2026-11-13T18:23:55+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reporting.account.1663268201836138.intraday-schedule",
+      "canonical_source": "data/ares/discord/thread-report-1570858183700910221.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.reporting",
+      "effective_at": "2026-11-13T18:23:55+00:00",
+      "id": "ARES-SHEIN-YOLO08-INTRADAY-ACTIVE-1570864612889600177",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Conta08 G006: incluir Intraday existente; pendente grant minimo Meta",
-      "updated_at": "2026-11-13T18:02:32+00:00"
+      "title": "Conta08 G006 incluida e validada no Intraday existente; D-1 preservado",
+      "updated_at": "2026-11-13T18:23:55+00:00"
     },
     {
       "canonical_key": "ares.discord.thread.1558138059344576593.scope",
@@ -17085,5 +17102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:02:52+00:00"
+  "updated_at": "2026-11-13T18:23:55+00:00"
 }
