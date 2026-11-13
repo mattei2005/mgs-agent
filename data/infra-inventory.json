@@ -64526,7 +64526,8 @@
       "type": "dependency-aware-lossless-historical-backup",
       "path": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333",
       "authority_message_ids": [
-        "1570876981178929333"
+        "1570876981178929333",
+        "1570888435353526397"
       ],
       "source_thread_id": "1569928464033783862",
       "status": "validated_protected_no_original_deletion",
@@ -64581,7 +64582,18 @@
       "report_infra_message_id": "1570886718242955375",
       "report_infra_readback": true,
       "result_sha256": "97436b31c691a2f773050cf2ae02e602ab4e41e2d689e6715c6f520a73198cb4",
-      "report_infra_status": "delivered_verified"
+      "report_infra_status": "delivered_verified",
+      "cleanup_status": "filesystem_and_recovery_validated_governance_pending",
+      "cleanup_result_path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/cleanup-result.json",
+      "deletion_confirmation_message_id": "1570888435353526397",
+      "deletion_question_message_id": "1570888113536901312",
+      "expanded_roots_retired": 12,
+      "regular_files_removed": 9984,
+      "directories_removed": 3318,
+      "observed_reclaimed_bytes": 5966258176,
+      "post_retirement_recovery_files_verified": 9984,
+      "required_bases_remain_protected": true,
+      "updated_at": "2026-11-13T15:04:42.517833-05:00"
     },
     {
       "id": "storage-compact-history-1570876981178929333",
@@ -64590,7 +64602,8 @@
       "path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333",
       "source_thread_id": "1569928464033783862",
       "authority_message_ids": [
-        "1570876981178929333"
+        "1570876981178929333",
+        "1570888435353526397"
       ],
       "status": "compact_preservation_completed_validated_deletion_waiting_new_confirmation",
       "result_path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/preservation-result.json",
@@ -64598,11 +64611,21 @@
       "reclaim_bytes_pending_confirmation": 5959327744,
       "deletions": 0,
       "next_step": "AsknewexactCriticalconfirmationfor12expandedroots/hash2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592;keepcompact+7bases+latest/safety+parentmanifests;revalidatebeforeanydeletion",
-      "updated_at": "2026-11-13T14:41:40.893655-05:00",
+      "updated_at": "2026-11-13T15:04:42.517718-05:00",
       "report_infra_message_id": "1570886718242955375",
       "report_infra_readback": true,
       "result_sha256": "97436b31c691a2f773050cf2ae02e602ab4e41e2d689e6715c6f520a73198cb4",
-      "report_infra_status": "delivered_verified"
+      "report_infra_status": "delivered_verified",
+      "cleanup_status": "filesystem_and_recovery_validated_governance_pending",
+      "cleanup_result_path": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/cleanup-result.json",
+      "deletion_confirmation_message_id": "1570888435353526397",
+      "deletion_question_message_id": "1570888113536901312",
+      "expanded_roots_retired": 12,
+      "regular_files_removed": 9984,
+      "directories_removed": 3318,
+      "observed_reclaimed_bytes": 5966258176,
+      "post_retirement_recovery_files_verified": 9984,
+      "required_bases_remain_protected": true
     }
   ],
   "profile_skill_references": [

@@ -112,6 +112,8 @@ Use this order:
 
 If anything writes the result after step 4, recompute the checksum and replace the inventory/audit receipt before closure. Never leave an intermediate checksum labeled as final.
 
+Render confirmation/question message IDs and the manifest identifier in closure documentation directly from the native approval receipt, rather than retyping them. Assert that the final document and result contain the receipt's exact IDs before publication/versioning; a documentation-only identifier error must be corrected from native evidence without replaying the filesystem action or rewriting the immutable approval.
+
 ### 3.4 No-tool profile availability smoke
 
 For filesystem-only cleanup, use a bounded, tool-disabled one-shot through the launcher reconciled with live gateway PIDs. Check the current CLI help before reusing flags, then run once for each named production profile:
