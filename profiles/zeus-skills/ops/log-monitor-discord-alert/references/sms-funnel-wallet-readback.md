@@ -20,6 +20,12 @@ Use for a live balance check or credits-vs-wallet alert diagnosis. Pair with loc
 
 A transferred API session that briefly renders the greeting then returns to login is not a completed dashboard check. Diagnose its status without claiming an IP/anti-bot cause. A successful fresh form login plus the loaded wallet card is the browser acceptance gate.
 
+## Deployed monitor acceptance
+
+The wallet-aware consumer is `/root/mgs-agent/scripts/monitor-sms-funnel-balance.py`. Preserve the approved 7,000-SMS policy using floor(available_micros / live SMS unit_price_micros), displaying BRL first and SMS equivalents only as estimated capacity. Do not impose a new arbitrary BRL budget/threshold. Require billing, monetary reconciliation and a valid unblocked live SMS tariff; missing data is unknown, never fallback to legacy credits. The wallet path must not depend on the frozen legacy endpoint. SMS-only duration estimates must explicitly exclude spend by other channels and must not use legacy `total_sent` as a wallet burn fallback. First migration is not a recharge; hold releases and price changes alone are not wallet deposits.
+
+Run `python3 -m unittest discover -s /root/mgs-agent/tests -p test_sms_funnel_balance_monitor.py`, then the exact deployed cron command with `--dry-run`. Publish a requested correction with `--current-report`, read back the precise message, then run the normal consumer and confirm silence/no duplicate. Shared state-level locking covers existing regular/Friday/manual entries without changing schedules. For user-authorized removal of false alerts, inventory exact bot-authored zero-SMS messages, retain a compact audit, delete sequentially, verify every ID returns Discord 404/10008, and preserve historical valid reports.
+
 ## Reporting
 
 Say separately: API balance confirmed, authenticated dashboard balance confirmed, comparison result, and monitor deployment state. Saving this procedure does not patch the credits-based monitor. Do not claim monitoring recovered until the consumer itself is corrected and tested.

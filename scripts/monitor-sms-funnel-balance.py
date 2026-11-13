@@ -147,6 +147,7 @@ def http_json(url: str, *, method: str = "GET", payload: dict[str, Any] | None =
             return response.status, json.loads(raw)
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:240].replace("\n", " ")
+        exc.close()
         raise RuntimeError(f"HTTP {exc.code} em {url.split('?')[0]}: {detail}") from exc
     except urllib.error.URLError as exc:
         raise RuntimeError(f"falha de rede em {url.split('?')[0]}: {exc.reason}") from exc
@@ -180,13 +181,13 @@ def read_credential(env: dict[str, str]) -> tuple[str, str]:
     return username, password
 
 
-def validate_metrics(data: Any) -> dict[str, int]:
+def validate_metrics(data: Any) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise RuntimeError("resposta de créditos não é um objeto")
     if "credits" not in data:
         raise RuntimeError("resposta de créditos sem saldo: estado desconhecido")
     keys = ["total_contracted", "total_sent", "total_reserved", "credits", "total_calculated_broadcasts"]
-    metrics: dict[str, int] = {}
+    metrics: dict[str, Any] = {}
     for key in keys:
         value = data.get(key, 0)
         if isinstance(value, bool) or not isinstance(value, (int, float)):
@@ -272,15 +273,17 @@ def probe_live(env: dict[str, str]) -> dict[str, Any]:
     _, billing = http_json(WALLET_BILLING_URL, headers=headers)
     if not isinstance(billing, dict) or billing.get("sms") not in {"wallet", "package", "credits"}:
         raise RuntimeError("origem da cobrança SMS desconhecida; não assumir pacote")
-    status, credits = http_json(CREDITS_URL, headers=headers)
-    if status != 200:
-        raise RuntimeError(f"consulta de créditos falhou com HTTP {status}")
-    metrics = validate_metrics(credits)
-    metrics["balance_basis"] = "package"
     if billing["sms"] == "wallet":
         _, wallet = http_json(WALLET_BALANCE_URL, headers=headers)
         _, prices = http_json(WALLET_PRICES_URL, headers=headers)
-        metrics = wallet_metrics(metrics, wallet, prices)
+        # Do not depend on the frozen legacy package endpoint after migration.
+        metrics = wallet_metrics({}, wallet, prices)
+    else:
+        status, credits = http_json(CREDITS_URL, headers=headers)
+        if status != 200:
+            raise RuntimeError(f"consulta de créditos falhou com HTTP {status}")
+        metrics = validate_metrics(credits)
+        metrics["balance_basis"] = "package"
     try:
         daily_status, daily_sents = http_json(DAILY_SENTS_URL, headers={"Authorization": f"Bearer {token}"})
         if daily_status == 200:
@@ -291,7 +294,7 @@ def probe_live(env: dict[str, str]) -> dict[str, Any]:
     return metrics
 
 
-def probe_fixture(path: Path) -> dict[str, int]:
+def probe_fixture(path: Path) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(data, dict) and data.get("error"):
         raise RuntimeError(str(data["error"]))
@@ -315,19 +318,24 @@ def fmt_money(micros: int) -> str:
     return "R$ " + value.translate(str.maketrans({",": ".", ".": ","}))
 
 
-def append_sample(state: dict[str, Any], metrics: dict[str, int], now_epoch: int) -> None:
+def append_sample(state: dict[str, Any], metrics: dict[str, Any], now_epoch: int) -> None:
     samples = [sample for sample in state.get("samples", []) if isinstance(sample, dict)]
-    samples.append({
-        "ts": now_epoch,
-        "credits": metrics["credits"],
-        "total_sent": metrics["total_sent"],
-        "total_contracted": metrics["total_contracted"],
-    })
+    if metrics.get("balance_basis") == "wallet":
+        samples.append({"ts": now_epoch, "balance_basis": "wallet",
+                        "available_micros": metrics["available_micros"],
+                        "balance_micros": metrics["balance_micros"]})
+    else:
+        samples.append({
+            "ts": now_epoch, "balance_basis": "package",
+            "credits": metrics["credits"],
+            "total_sent": metrics["total_sent"],
+            "total_contracted": metrics["total_contracted"],
+        })
     cutoff = now_epoch - 7 * 86400
     state["samples"] = [sample for sample in samples if int(sample.get("ts", 0)) >= cutoff][-200:]
 
 
-def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: int) -> dict[str, Any]:
+def burn_projection(state: dict[str, Any], metrics: dict[str, Any], now_epoch: int) -> dict[str, Any]:
     daily_average = int(metrics.get("daily_average_3d", 0) or 0)
     if daily_average > 0:
         return {
@@ -339,7 +347,7 @@ def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: i
         # Legacy total_sent can freeze after migration; never derive wallet burn from it.
         return {"daily_sent": None, "hours_left": None, "window_hours": 0.0}
     samples = [sample for sample in state.get("samples", []) if isinstance(sample, dict)]
-    candidates = [sample for sample in samples if now_epoch - int(sample.get("ts", 0)) <= 78 * 3600]
+    candidates = [sample for sample in samples if sample.get("balance_basis", "package") == "package" and now_epoch - int(sample.get("ts", 0)) <= 78 * 3600]
     if len(candidates) < 2:
         return {"daily_sent": None, "hours_left": None, "window_hours": 0.0}
     oldest = min(candidates, key=lambda sample: int(sample.get("ts", 0)))
@@ -369,7 +377,7 @@ def projection_text(projection: dict[str, Any]) -> str:
     return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · saldo para {remaining}."
 
 
-def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[dict[str, Any]]:
+def metric_fields(metrics: dict[str, Any], projection: dict[str, Any]) -> list[dict[str, Any]]:
     if metrics.get("balance_basis") == "wallet":
         projection_value = projection_text(projection)
         if projection.get("hours_left") is not None:
@@ -394,7 +402,7 @@ def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[d
     return fields
 
 
-def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any], *, reminder: bool = False) -> dict[str, Any]:
+def alert_payload(level: str, metrics: dict[str, Any], projection: dict[str, Any], *, reminder: bool = False) -> dict[str, Any]:
     titles = {
         "emergency": "Saldo SMS Funnel em emergência",
     }
@@ -414,7 +422,7 @@ def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any
     }
 
 
-def friday_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
+def friday_payload(metrics: dict[str, Any], projection: dict[str, Any]) -> dict[str, Any]:
     fields = metric_fields(metrics, projection)
     if alert_capacity(metrics) <= THRESHOLDS["emergency"]:
         fields.append({
@@ -433,7 +441,7 @@ def friday_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[
     }
 
 
-def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
+def activation_payload(metrics: dict[str, Any], projection: dict[str, Any]) -> dict[str, Any]:
     fields = metric_fields(metrics, projection)
     fields.append({
         "name": "Comportamento",
@@ -447,7 +455,7 @@ def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> d
     }
 
 
-def recharge_payload(previous: dict[str, Any], metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
+def recharge_payload(previous: dict[str, Any], metrics: dict[str, Any], projection: dict[str, Any]) -> dict[str, Any]:
     if metrics.get("balance_basis") == "wallet":
         fields = metric_fields(metrics, projection)
         fields.insert(1, {"name": "Variação do saldo total", "value": f"{fmt_money(previous['balance_micros'])} → {fmt_money(metrics['balance_micros'])}. Aumento detectado; não comprova pagamento novo.", "inline": False})
@@ -474,7 +482,7 @@ def current_payload(metrics: dict[str, Any], projection: dict[str, Any]) -> dict
     return {"content": "", "allowed_mentions": {"parse": []}, "embeds": [{"title": "Saldo SMS Funnel — correção e conferência atual", "color": LEVEL_COLOR[balance_level(alert_capacity(metrics))], "fields": fields}]}
 
 
-def recovery_payload(metrics: dict[str, int], projection: dict[str, Any], previous_level: str) -> dict[str, Any]:
+def recovery_payload(metrics: dict[str, Any], projection: dict[str, Any], previous_level: str) -> dict[str, Any]:
     fields = metric_fields(metrics, projection)
     fields.append({"name": "Estado", "value": f"Saldo saiu da faixa {previous_level}.", "inline": False})
     return {
@@ -554,14 +562,17 @@ def main() -> int:
 
     # Both existing cron locks and manual invocations share this state-level lock.
     args.state_file.parent.mkdir(parents=True, exist_ok=True)
-    run_lock = args.state_file.with_suffix(".run.lock").open("a")
-    os.chmod(run_lock.name, 0o600)
-    try:
-        fcntl.flock(run_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
-        print("SKIP monitor already_running")
-        return 0
+    with args.state_file.with_suffix(".run.lock").open("a") as run_lock:
+        os.chmod(run_lock.name, 0o600)
+        try:
+            fcntl.flock(run_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            print("SKIP monitor already_running")
+            return 0
+        return run_monitor(args)
 
+
+def run_monitor(args: argparse.Namespace) -> int:
     brazil_now = (
         datetime.fromisoformat(args.now_brazil).astimezone(ZoneInfo("America/Sao_Paulo"))
         if args.now_brazil

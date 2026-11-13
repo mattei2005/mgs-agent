@@ -4,7 +4,20 @@
 
 Use this reference when Rodolfo asks to monitor SMS Funnel credits, alert before depletion, confirm a recharge, or diagnose missing balance alerts.
 
-## Live contract validated 2026-07-16
+## Active contract — wallet-aware monitor
+
+The old credits-only contract below is superseded for channels billed to the monetary wallet. First resolve `GET /api/wallet/billing`. When `sms == wallet`, use `/api/wallet/balance` (BRL, integer millionths) and `/api/wallet/prices` (unblocked SMS/message product, live `unit_price_micros`); never use `/user-credits-info.credits` as wallet money. The deployed monitor does not depend on the legacy credit endpoint in wallet mode.
+
+- Display `available_micros / 1,000,000` in BRL as primary balance and `held_micros / 1,000,000` as reserved funds.
+- Preserve the approved 7,000-SMS alarm policy by comparing the wallet's SMS-equivalent capacity at the live SMS tariff against 7,000. Do not introduce an arbitrary BRL threshold. Label equivalents as estimated capacity, never purchased package credits.
+- Project using the last three completed days' SMS sends and the live price, explicitly excluding other channels from the duration estimate. Disable legacy-total counter fallback in wallet mode: those counters may freeze after migration. Unavailable data means unknown, not zero.
+- Fail closed on unknown billing, missing/invalid wallet amounts, non-BRL currency, inconsistent monetary reconciliation, or missing/invalid/blocked SMS price. Preserve the last validated state and alert on the existing probe-failure policy; never fall back to legacy zero.
+- Do not classify first migration as a recharge. Wallet balance increases are labeled increases, not proof of a payment. A reserve release or tariff change alone is not a recharge.
+- Preserve existing schedules, Friday guard/dedupe, 4h reminder and Discord destination. An internal state-level lock serializes regular, Friday and manual runs without changing cron entries.
+- Use `--current-report` for one explicitly requested current correction; verify its exact message/fields. Manual reporting does not impersonate a scheduled Friday slot. Confirm dry-run, offline regression suite, real delivery readback and silent ordinary rerun before declaring recovery.
+- Regression suite: `/root/mgs-agent/tests/test_sms_funnel_balance_monitor.py`, local fixtures/mock HTTP only. Procedure: `log-monitor-discord-alert/references/sms-funnel-wallet-readback.md`.
+
+## Historical package contract (only for explicitly package-billed channels)
 
 - Credential source: 1Password item `SMS Funnel Dashboard` in vault `MGS Conteúdo`.
 - Login: `POST https://web2.smsfunnel.com.br/api/login` with the dashboard email/password.
