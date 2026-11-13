@@ -7,7 +7,8 @@
     "1564115318887161857",
     "1564373157727576245",
     "1564382301155098717",
-    "1564382678168502295"
+    "1564382678168502295",
+    "1570799435502588027"
   ],
   "thread_id": "1563926766286803004",
   "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
@@ -61,7 +62,15 @@
     "787796726891306",
     "1600310064116258",
     "908704754163659",
-    "26632890069640784"
+    "26632890069640784",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
   ],
   "meta_token_item_id": "4c2p3bon37smfbklfhuej5ywkm",
   "meta_actor_id": "10233237854144701",
@@ -75,7 +84,7 @@
   ],
   "payments_authorized": false,
   "funding_regroup_authority": "1564115318887161857",
-  "funding_regroup_policy": "Read live funding; automatically move line-to-card accounts to upper card block in same worksheet, preserving all 47 IDs, data, notes, links and recalculated totals. Never change Meta billing. Reverse/unknown transitions remain fail-closed.",
+  "funding_regroup_policy": "Read live funding; automatically move line-to-card accounts to upper card block in same worksheet, preserving all authorized IDs from account_ids, data, notes, links and recalculated totals. Never change Meta billing. Reverse/unknown transitions remain fail-closed.",
   "priority_columns": [
     "G",
     "H",
@@ -636,7 +645,11 @@
     "787796726891306",
     "1600310064116258",
     "908704754163659",
-    "26632890069640784"
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
@@ -661,9 +674,7 @@
   "pending_outside_invoice_account_ids": [
     "1254066319219582",
     "2422027798240533",
-    "1034081997659047",
     "392558193256993",
-    "1542257646409395",
     "1430034464330819"
   ],
   "pending_sheet_reclassification": null,
@@ -751,5 +762,47 @@
     "report_infra_status": "sent_verified",
     "report_infra_message_id": "1566812346909851789",
     "report_infra_readback": true
-  }
+  },
+  "account_scope_authority_message": "1570799435502588027",
+  "account_scope_history": [
+    {
+      "authority_message_id": "1570799435502588027",
+      "prior_count": 47,
+      "new_count": 55,
+      "added_account_ids": [
+        "2323706575049143",
+        "1547524853816263",
+        "1867022354284742",
+        "1754588462350629",
+        "1542257646409395",
+        "1034081997659047",
+        "1492168699397108",
+        "1635726541410028"
+      ],
+      "added_at": "2026-11-13T09:02:04.761597-05:00",
+      "prior_scope_preserved": true
+    }
+  ],
+  "pending_new_account_fields": {
+    "authority_message_id": "1570799435502588027",
+    "H_account_ids": [
+      "1754588462350629",
+      "1542257646409395",
+      "1034081997659047",
+      "1492168699397108"
+    ],
+    "D_account_ids": [
+      "2323706575049143",
+      "1547524853816263",
+      "1867022354284742",
+      "1754588462350629",
+      "1542257646409395",
+      "1034081997659047",
+      "1492168699397108",
+      "1635726541410028"
+    ],
+    "reason": "New rows admitted under explicit authority; historical-card and UI-only H values remain blank until independently verified, never guessed.",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json"
+  },
+  "last_account_scope_expansion": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027/receipt.json"
 }

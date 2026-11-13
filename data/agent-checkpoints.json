@@ -7007,6 +7007,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-financial-source-1570801675239694367",
+      "next_step": "Inventariar consumidores ativos, contrato, renderer e testes; implementar camada comum com compatibilidade de snapshots e validar live/dry-run sem envios extras.",
+      "objective": "Corrigir todos os próximos relatórios SHEIN agendados e avulsos para investimento financeiro SB já ajustado, mantendo fonte financeira homogênea e histórico; preservar campanhas e horários/destinos.",
+      "source": "discord:1558146784554000467:1570801675239694367",
+      "state": "authorized_discovery_in_progress",
+      "thread_id": "1558146784554000467",
+      "updated_at": "2026-11-13T14:05:15+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-g002-g006-approved-20261019T221027",
       "next_step": "Sem pendencias. Proximos pedidos usam contrato/renderer vigente; preservar historico e nao reenviar lote concluido. IDs/partes e evidencias em completion.json e delivery.json por conta.",
       "objective": "Gerar e entregar30relatorios SHEIN G002-G006 no padrao G001 aprovado por Rodolfo",
@@ -10167,5 +10177,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T13:57:41+00:00"
+  "updated_at": "2026-11-13T14:05:15+00:00"
 }

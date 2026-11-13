@@ -1,0 +1,48 @@
+{
+  "status": "added8_verified_pending_ui_fields",
+  "source_message_id": "1570799435502588027",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/add8-1570799435502588027",
+  "accounts_before": 47,
+  "accounts_after": 55,
+  "added_accounts": 8,
+  "new_ids": [
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "groups": {
+    "Cartão de crédito": 15,
+    "Linha de crédito": 40
+  },
+  "prior47_cells_preserved_exact": true,
+  "other_sheets_authored_unchanged": true,
+  "entire_authored_workbook_expected_exact_by_id_inside_filter": true,
+  "pending_h_new_account_ids": [
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_d_new_account_ids": [
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "new_month_spend_usd": "3630.09",
+  "meta_writes": 0,
+  "payments_executed": 0,
+  "canary_restored": true,
+  "link_repairs": 55,
+  "recovery_diagnosis": "Broad textFormatRuns clearing removed links; repaired only link field for current exact row IDs. setBasicFilter applied existing sort specs to expanded range; complete row parity proved by ID, no factual mismatch. New pending-cell colors canonicalized only for redundant ColorStyle and float32.",
+  "verified_at": "2026-11-13T09:04:39.603377-05:00"
+}

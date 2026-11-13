@@ -10,6 +10,11 @@ import mgs_google_workspace_auth as g
 def money(v):return Decimal(str(v)).quantize(Decimal('.01'))
 def numeric(v):return isinstance(v,(int,float))and not isinstance(v,bool)
 
+def authorized_new_h_gap(contract,aid,value,note):
+ p=contract.get('pending_new_account_fields',{});auth=p.get('authority_message_id')
+ added={i for h in contract.get('account_scope_history',[])if h.get('authority_message_id')==auth for i in h.get('added_account_ids',[])}
+ return bool(auth and auth in contract.get('authorization_messages',[])and aid in added and aid in p.get('H_account_ids',[])and value=='' and 'PENDENTE_H_NOVA_CONTA:'in note and auth in note)
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--spreadsheet-id',required=True);p.add_argument('--sheet-id',type=int,required=True);p.add_argument('--business-id',required=True);a=p.parse_args()
  assert re.fullmatch(r'[A-Za-z0-9_-]+',a.spreadsheet_id)and a.sheet_id>=0 and a.business_id.isdigit(),'invalid_target_identifier'
@@ -25,7 +30,9 @@ def main():
   month_headers=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];assert forms[0][5]in [m+' — saldo em aberto'for m in month_headers],'invoice_period_header_invalid';expected[4:4]=['Invoice',forms[0][5]]
  assert len(forms[0])==len(expected)and all(str(v).startswith(pre)for v,pre in zip(forms[0],expected)),'header_schema_mismatch'
  width=len(expected);paycol=7 if september else 5;metrics=(6 if september else 4,width-2,width-1);special=((paycol,)if pay else())+((5,)if september else());financial=tuple(sorted(metrics+special));assert len(forms)==len(vals)
- accounts=[];ids=set();groups=Counter();totals=[];currencies=set()
+ from pathlib import Path
+ contract=json.loads(Path('/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json').read_text());assert a.spreadsheet_id==contract['spreadsheet_id']and a.sheet_id==contract['sheet_id']and a.business_id==contract['business_id'],'exact_contract_target_required'
+ accounts=[];ids=set();groups=Counter();totals=[];currencies=set();pending_new_h=[]
  for i,row in enumerate(vals):
   row=row+['']*(width-len(row));assert not any(isinstance(v,str)and v.startswith(('#REF!','#VALUE!','#DIV/0!','#ERROR!','#N/A'))for v in row),'formula_error'
   cells=grid[i].get('values',[])if i<len(grid)else[];note=cells[0].get('note','')if cells else'';m=re.search(r'^ID da conta: (\d+)\b',note)
@@ -39,7 +46,8 @@ def main():
     if row[1]=='Linha de crédito':
      sn=cells[paycol].get('note','');modal='Amount you can pay now'in sn;disabled=all(x in sn for x in ['current_balance_pay_now_unavailable','1564373157727576245','Pay now comprovadamente desabilitado','Leitura PC1 autenticada:'])
      listing=all(x in sn for x in ['accounts_list_current_balance','1564382301155098717','Current balance da linha Accounts:','Leitura PC1 autenticada:'])
-     assert numeric(row[paycol])and(modal or disabled or listing),'credit_line_pay_now_missing_or_no_source_note'
+     if authorized_new_h_gap(contract,aid,row[paycol],sn):pending_new_h.append({'account_id':aid,'row':i+1,'reason':'new_account_h_pending_independent_ui_evidence'})
+     else:assert numeric(row[paycol])and(modal or disabled or listing),'credit_line_pay_now_missing_or_no_source_note'
     else:assert row[paycol]=='','pay_now_scope_includes_unrequested_card_account'
    if september:
     if row[1]=='Linha de crédito':assert numeric(row[5]),'september_due_missing'
@@ -63,7 +71,7 @@ def main():
  from pathlib import Path
  contract=json.loads(Path(contract_path).read_text())
  if a.spreadsheet_id==contract['spreadsheet_id']and a.sheet_id==contract['sheet_id']:assert ids==set(contract['account_ids']),'contract_account_ids_mismatch'
- cards=[x for x in accounts if x['method']=='Cartão de crédito'];print(json.dumps({'status':'snapshot_readback_pass','spreadsheet_id':a.spreadsheet_id,'sheet_id':a.sheet_id,'business_id':a.business_id,'currency':next(iter(currencies)),'accounts':len(accounts),'groups':dict(groups),'card_charge_values_present':sum(numeric(x['values'][3])for x in cards),'card_charge_blank_rows':[x['row']for x in cards if x['values'][3]==''],'totals_validated_columns':[chr(65+c)for c in financial],'pay_now_values_present':sum(numeric(x['values'][paycol])for x in accounts)if pay else 0,'september_due_usd':str(money(grand[0][5]))if september else None,'all_account_billing_links_checked':True,'historical_instrument_not_revalidated_by_this_script':True,'google_write_calls':0,'meta_calls':0,'payments_executed':0},ensure_ascii=False))
+ cards=[x for x in accounts if x['method']=='Cartão de crédito'];print(json.dumps({'status':'snapshot_readback_pass','spreadsheet_id':a.spreadsheet_id,'sheet_id':a.sheet_id,'business_id':a.business_id,'currency':next(iter(currencies)),'accounts':len(accounts),'groups':dict(groups),'card_charge_values_present':sum(numeric(x['values'][3])for x in cards),'card_charge_blank_rows':[x['row']for x in cards if x['values'][3]==''],'totals_validated_columns':[chr(65+c)for c in financial],'pay_now_values_present':sum(numeric(x['values'][paycol])for x in accounts)if pay else 0,'september_due_usd':str(money(grand[0][5]))if september else None,'all_account_billing_links_checked':True,'historical_instrument_not_revalidated_by_this_script':True,'pending_new_h_rows':pending_new_h,'h_total_partial_due_to_missing_new_rows':bool(pending_new_h),'google_write_calls':0,'meta_calls':0,'payments_executed':0},ensure_ascii=False))
 if __name__=='__main__':
  try:main()
  except Exception as e:print(json.dumps({'status':'blocked','reason':str(e)[:200],'payments_executed':0}));sys.exit(2)
