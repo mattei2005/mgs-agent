@@ -6344,6 +6344,24 @@
       "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
+      "canonical_key": "ares.discord.thread.1569767319339663361.report-account-scope",
+      "canonical_source": "/root/mgs-agent/data/ares/discord/thread-report-1569767319339663361.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-11-13T18:33:43+00:00",
+      "id": "ARES-YOLO07-G002-REPORTING-ACTIVE-1570860329947103396",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Yolokfx07 G002: leitura ANALYZE e inclusão validada em D1 e Intraday existentes",
+      "updated_at": "2026-11-13T18:33:43+00:00"
+    },
+    {
       "canonical_key": "content.wordpress.scoped-author-security-exception-qa",
       "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/scoped-author-security-exception-qa.md",
       "consumers": [
@@ -14668,10 +14686,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-YOLO07-G002-REPORTING-ACTIVE-1570860329947103396",
       "title": "Yolokfx07 G002: destino de relatorios e inclusao solicitada no cron, pendente de grant Meta",
-      "updated_at": "2026-11-10T17:39:58+00:00"
+      "updated_at": "2026-11-13T18:33:43+00:00"
     },
     {
       "canonical_key": "content.qa.public-source-evidence",
@@ -17102,5 +17120,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:23:55+00:00"
+  "updated_at": "2026-11-13T18:33:43+00:00"
 }
