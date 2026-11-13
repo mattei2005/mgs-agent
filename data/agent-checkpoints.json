@@ -1493,12 +1493,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1570840632325578753",
-      "next_step": "coletar Meta/SB/RPS; materializar pela fonte financeira SB ajustada vigente; QA e entregar seis integrais e seis resumos com GET e reconciliacao final",
+      "next_step": "Concluido;nao reenviar.Boostingecon sem entrega receita/ROI/atraso n/d;demais atraso42min-1h42.Nova atualizacao requer novo pedido e fontes.",
       "objective": "Intraday atual nas seis threads G006 com resumo financeiro individual ao final",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/shein-1570840632325578753/request.json",
-      "state": "intake, gates e seis identidades meta usd america/new_york confirmados; coleta read-only em andamento",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1570840632325578753/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled:6pares conta/thread;71campanhas;27partes integrais e6resumos;33mensagens unicas relidas por get;resumos posteriores aos integrais;corte13/11/2026 11:42est;usd;fonte financeira sb ajustada;zero writes meta",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-13T16:43:52+00:00"
+      "updated_at": "2026-11-13T16:47:00+00:00"
     },
     {
       "agent": "ares",
@@ -10227,5 +10227,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T16:43:52+00:00"
+  "updated_at": "2026-11-13T16:47:00+00:00"
 }

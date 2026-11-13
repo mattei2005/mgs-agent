@@ -29,7 +29,14 @@ A camada offline é `scripts/shein_financial_source.py` do profile Ares. `Runner
 layout.apply_financial_source(model, sb_rows, layout.policy())
 ```
 
-Reutilize esse ponto em vez de copiar um materializador antigo. Ao adaptar código anterior à troca de fonte, atualize também asserts e resumos: `spend` financeiro e histórico conferem com `INVESTIMENT`; `meta_spend` confere com Insights. Um assert herdado de soma Meta pode rejeitar corretamente o novo modelo sem indicar falha da SB. Corrija o adaptador, não o Markdown nem o gate.
+Reutilize esse ponto em vez de copiar um materializador antigo. Antes de executar um adaptador anterior à troca de fonte, revise conjuntamente materialização, QA, resumo e reconciliador final:
+
+1. Confira `spend` financeiro e histórico contra `INVESTIMENT`; confira separadamente a soma de `meta_spend` dos IDs selecionados contra Insights. Não compare o gasto financeiro SB à soma Meta: as janelas podem divergir legitimamente.
+2. Agregue gasto com cobertura completa (`sumfield(rows, 'spend', layout)`), usando zero somente para seleção vazia validada. Calcule saldo apenas quando gasto e receita estiverem disponíveis; preserve n/d e valide receita líquida e estimada separadamente.
+3. Derive o corte financeiro do resumo, do QA e do recibo final de `source_timestamps.financial`, não de `insights`. Confira que esse corte é igual ao timestamp SB e posterior ao início do novo request; atualizar somente o renderer deixa o complemento ou a reconciliação rotulados com a fonte antiga.
+4. Descreva a seleção como recorte financeiro do dia ou união Meta/SB, não como campanhas com entrega Meta: IDs admitidos somente por atividade SB continuam válidos e não comprovam entrega Meta naquele dia.
+
+Um assert herdado de soma Meta pode rejeitar corretamente o novo modelo sem indicar falha da SB. Corrija o adaptador, não o Markdown nem o gate.
 
 Exija `financial_source` com hash das linhas SB sanitizadas, corte `source_timestamps.financial` igual ao da fonte SB, IDs exatos e coerência de métricas/histórico. Rode:
 
