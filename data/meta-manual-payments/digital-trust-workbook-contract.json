@@ -84,19 +84,19 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_validated_h_preserved_d_pending_provider_ui",
-    "scheduled_at": "2026-11-12T21:02:00-05:00",
-    "execution_id": "a152c98f4e0e4f97be56d252715d7494",
-    "verified_at": "2026-11-12T21:07:11.483833-05:00",
+    "scheduled_at": "2026-11-13T08:02:00-05:00",
+    "execution_id": "754ad1d89d1e47fc8fe3ebe793ed2c6b",
+    "verified_at": "2026-11-13T08:06:17.011826-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
     "fresh_metrics_count": 47,
-    "validated_metrics_at": "2026-11-12T21:06:31.789318-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261112T210634535416",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261112T210636414978",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261112T210612261770",
+    "validated_metrics_at": "2026-11-13T08:05:42.853422-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261113T080549634434",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261113T080551808260",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261113T080515524497",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -366,10 +366,6 @@
     "historical_d_verified_values": 12,
     "average_period": [
       {
-        "since": "2026-11-09",
-        "until": "2026-11-11"
-      },
-      {
         "since": "2026-11-10",
         "until": "2026-11-12"
       }
@@ -378,17 +374,13 @@
       {
         "since": "2026-11-01",
         "until": "2026-11-13"
-      },
-      {
-        "since": "2026-11-01",
-        "until": "2026-11-12"
       }
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "19447.70",
-      "balance": "598674.11",
-      "month_spend": "236728.52"
+      "average_daily": "19630.18",
+      "balance": "603525.42",
+      "month_spend": "243968.88"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -410,19 +402,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "5406.87"
+        "value": "6255.86"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3474.03"
+        "value": "3939.35"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "59194.95"
+        "value": "62007.00"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -434,7 +426,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "14040.83"
+        "value": "13374.32"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -446,13 +438,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "595200.08"
+        "value": "599586.07"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "177533.57"
+        "value": "181961.88"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -464,7 +456,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19447.70"
+        "value": "19630.18"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -476,13 +468,13 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "598674.11"
+        "value": "603525.42"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "236728.52"
+        "value": "243968.88"
       }
     ],
     "lease_free": true,
@@ -493,13 +485,13 @@
     "other_sheet_data_unchanged": true,
     "other_sheet_properties_unchanged": true,
     "other_sheet_count": 1,
-    "next_existing_run_at": "2026-11-13T08:02:00-05:00",
+    "next_existing_run_at": "2026-11-13T14:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "blocker": {
       "status": "blocked_provider_surface_contract",
       "kind": "meta_billing_ui_redirect_and_balance_metric_label_changed",
       "owner": "zeus",
-      "read_at": "2026-11-12T21:07:11.483665-05:00",
+      "read_at": "2026-11-13T08:06:17.010994-05:00",
       "cause_confirmed": "Fresh capture of approved Rodolfo Chrome and authorized business_id155263197283282 shows Accounts with literal Outstanding balance, not Current balance. No authentication/native gate observed. Known legacy collector heading cannot be satisfied by this surface; no input/reload/alternate profile attempted. Historical D exact-account route remains unresolved from prior diagnostic, not reattempted in this run.",
       "cause_unproven": "Equivalence of Outstanding balance to authorized Current balance and exact-account historical transaction route remain unestablished.",
       "h_action": "Preserve all H values and original collection timestamps; no old collector replay, semantic substitution, alternate profile or reload bypass.",
@@ -513,9 +505,9 @@
         "1290644206529750"
       ],
       "next_step": "Validate the provider metric and exact-account read-only history route before resuming missing H/D; same job and47IDs, no blind legacy collector retries and no new job.",
-      "evidence": "reports/meta-manual-payments-runs/cron-20261112T2102/closure-current.json",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/closure-current.json",
       "resume_via_existing_job": "2ee720363d7d",
-      "next_existing_run_at": "2026-11-13T08:02:00-05:00"
+      "next_existing_run_at": "2026-11-13T14:02:00-05:00"
     },
     "ui_cleanup": {
       "initial_browser_tabs_visually_counted": 6,
@@ -523,12 +515,10 @@
       "owned_tabs_created": 0,
       "owned_tabs_closed": 0,
       "lease_free": true,
-      "initial_screenshot": "reports/meta-manual-payments-runs/cron-20261112T2102/surface-initial.png"
+      "initial_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/surface-initial.png"
     },
-    "new_pending_d_account_ids": [
-      "2852476828464907"
-    ],
-    "prior_pending_d_count": 6
+    "new_pending_d_account_ids": [],
+    "prior_pending_d_count": 7
   },
   "pending_card_history": {
     "status": "events_pending_ui_route",
@@ -579,7 +569,7 @@
       }
     ],
     "historical_blank_count": 35,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261112T2102/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -607,7 +597,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-13T08:02:00-05:00",
+  "next_run_at": "2026-11-13T14:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
@@ -682,7 +672,7 @@
     "status": "blocked_provider_surface_contract",
     "kind": "meta_billing_ui_redirect_and_balance_metric_label_changed",
     "owner": "zeus",
-    "read_at": "2026-11-12T21:07:11.483665-05:00",
+    "read_at": "2026-11-13T08:06:17.010994-05:00",
     "cause_confirmed": "Fresh capture of approved Rodolfo Chrome and authorized business_id155263197283282 shows Accounts with literal Outstanding balance, not Current balance. No authentication/native gate observed. Known legacy collector heading cannot be satisfied by this surface; no input/reload/alternate profile attempted. Historical D exact-account route remains unresolved from prior diagnostic, not reattempted in this run.",
     "cause_unproven": "Equivalence of Outstanding balance to authorized Current balance and exact-account historical transaction route remain unestablished.",
     "h_action": "Preserve all H values and original collection timestamps; no old collector replay, semantic substitution, alternate profile or reload bypass.",
@@ -696,12 +686,12 @@
       "1290644206529750"
     ],
     "next_step": "Validate the provider metric and exact-account read-only history route before resuming missing H/D; same job and47IDs, no blind legacy collector retries and no new job.",
-    "evidence": "reports/meta-manual-payments-runs/cron-20261112T2102/closure-current.json",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T0802/closure-current.json",
     "resume_via_existing_job": "2ee720363d7d",
-    "next_existing_run_at": "2026-11-13T08:02:00-05:00"
+    "next_existing_run_at": "2026-11-13T14:02:00-05:00"
   },
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261112T210608778356",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261113T080511996611",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",

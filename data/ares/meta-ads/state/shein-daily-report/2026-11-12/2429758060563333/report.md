@@ -1,0 +1,190 @@
+## SHEIN · Yolokfx-US-SHEIN-EN-03-G005
+**12/11/2026 · dia fechado · USD**
+**⏱️ ATRASO GAM/SB ATUAL: 47min**
+Diário D-1: 12/11/2026 00:00–23:59 no fuso America/New_York; coleta em 13/11 07:48 EST.
+Financeiro: 13/11 07:48 EST. Bid: Meta 13/11 07:48 EST.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 13/11 08:08 EST.
+RPS: coluna da dash SB, consultada em 13/11 07:50 EST.
+Status dos blocos: Meta 13/11 08:08 EST.
+Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
+Gasto **2665,24** · Rev **3274,89** · Saldo **+609,65** · ROI **22,87%** · ROI E. **24,17%**.
+Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
+Histórico de 7 dias: número da campanha em ordem crescente.
+
+**SHEIN — principal · Campanhas ativas (48) · 1/5**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 12/11  | 263 CC CP261 v2 | WIRELESS SEA | 257,78  | 0,55 |  5,40  |  3,60%  |   6,26   |  +0,86  |  0,00%  |  15,93%  | 236,48%  | 2,08x
+🟢🟢 | 07/11  | 245 CC CP242 v2 | PAINT BY NUM | 518,85  | 0,65 |  6,16  |  4,11%  |  12,14   |  +5,98  | 100,00% |  97,08%  |  97,08%  | 1,97x
+🟢🟢 | 05/11  |    230 MV v2    | BEAUTY ADVEN | 483,62  |  —   | 30,71  | 76,78%  |  56,59   | +25,88  | 94,44%  |  84,27%  |  84,27%  | 2,45x
+🟢🟢 | 06/11  | 237 CC CP232 v2 | DIAMOND PAIN | 504,44  | 0,70 | 20,81  | 10,41%  |  36,77   | +15,96  | 98,39%  |  76,69%  |  76,69%  | 1,81x
+🟢🟢 | 06/11  | 236 CC CP232 v2 | DIAMOND PAIN | 526,98  | 0,70 | 28,88  | 14,44%  |  50,27   | +21,39  | 99,31%  |  74,07%  |  74,07%  | 1,46x
+🟢🟢 | 06/11  | 239 CC CP232 v2 | DIAMOND PAIN | 522,62  | 0,70 | 55,34  | 27,67%  |  95,01   | +39,67  | 96,67%  |  71,68%  |  71,68%  | 1,47x
+```
+
+**SHEIN — principal · Campanhas ativas (48) · 2/5**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 08/10  |    99 MV v2     | BAGS ESCALA  | 561,88  |  —   | 33,39  | 83,48%  |  56,64   | +23,25  | 95,58%  |  69,63%  |  69,63%  | 1,71x
+🟢🟢 | 07/11  |    240 MV v2    | Fleece-Lined | 466,24  |  —   | 72,47  | 90,59%  |  121,69  | +49,22  | 99,61%  |  67,92%  |  69,62%  | 1,84x
+🟢🟢 | 09/11  | 251 CC CP250 v2 | DIY MINIATUR | 515,98  | 0,75 | 36,67  | 24,45%  |  58,98   | +22,31  | 97,03%  |  60,84%  |  60,84%  | 1,56x
+🟢🟢 | 19/10  | 177 CC CP171 v2 | IMAGEM - PLU | 483,33  | 0,65 | 25,31  | 16,87%  |  40,45   | +15,14  | 95,15%  |  59,82%  |  59,86%  | 1,23x
+🟢🟢 | 11/11  |    261 MV v2    | WIRELESS SEA | 561,48  |  —   | 37,84  | 75,68%  |  58,11   | +20,27  | 98,74%  |  53,57%  |  54,89%  | 1,84x
+🟢🟢 | 12/11  | 267 CC CP261 v2 | WIRELESS SEA | 353,45  | 0,55 |  7,65  |  5,10%  |   9,23   |  +1,58  | 42,86%  |  20,65%  |  52,16%  | 1,91x
+🟢🟢 | 10/10  |    109 MV v2    | Plus Size Tw | 494,61  |  —   | 34,03  | 85,08%  |  51,19   | +17,16  | 97,42%  |  50,43%  |  50,43%  | 1,49x
+🟢🟢 | 09/11  | 259 CC CP249 v2 | PUNCH NEEDLE | 424,80  | 0,80 |  6,43  |  4,29%  |   9,55   |  +3,12  | 96,30%  |  48,52%  |  48,52%  | 1,76x
+🟢🟢 | 12/09  |    26 MV v2     | SURPRESA - A | 371,34  |  —   | 25,38  | 84,60%  |  37,43   | +12,05  | 98,13%  |  47,48%  |  47,48%  | 1,70x
+🟢🟢 | 16/10  |    171 MV v2    | PLUS SIZE JA | 565,12  |  —   | 29,36  | 97,87%  |  42,73   | +13,37  | 95,80%  |  45,54%  |  45,54%  | 1,39x
+🟢🟢 | 05/11  |    228 MV v2    | Matching Chr | 537,40  |  —   | 34,87  | 87,18%  |  50,31   | +15,44  | 96,67%  |  44,28%  |  44,25%  | 1,27x
+🟢🟢 | 22/10  |    185 MV v2    | Christmas Pr | 383,26  |  —   | 44,74  | 89,48%  |  64,50   | +19,76  | 95,90%  |  44,17%  |  44,17%  | 1,57x
+```
+
+**SHEIN — principal · Campanhas ativas (48) · 3/5**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 09/11  | 255 CC CP250 v2 | DIY MINIATUR | 460,33  | 0,75 | 27,18  | 18,12%  |  37,28   | +10,10  | 98,31%  |  37,16%  |  37,20%  | 1,39x
+🟢🟡 | 11/11  |    262 MV v2    | PLUS-SIZE SW | 497,81  |  —   | 39,31  | 98,28%  |  51,07   | +11,76  | 100,00% |  29,92%  |  32,92%  | 1,51x
+🟢🟡 | 06/11  | 235 CC CP232 v2 | DIAMOND PAIN | 463,05  | 0,70 | 210,43 | 105,22% |  277,55  | +67,12  | 97,38%  |  31,90%  |  31,90%  | 1,42x
+🟢🟡 | 19/10  | 175 CC CP171 v2 | IMAGEM - PLU | 477,62  | 0,90 | 172,41 | 114,94% |  226,11  | +53,70  | 96,53%  |  31,15%  |  31,14%  | 1,29x
+🟢🟡 | 08/10  |    96 MV v2     | BAGS ESCALA  | 453,66  |  —   | 35,50  | 88,75%  |  45,73   | +10,23  | 98,56%  |  28,82%  |  31,10%  | 1,82x
+🟢🟡 | 29/10  | 207 CC CP202 v2 | IMAGEM - Dia | 383,33  | 0,70 | 32,70  | 32,70%  |  42,43   |  +9,73  | 91,40%  |  29,76%  |  29,79%  | 1,24x
+🟢🟡 | 07/11  | 247 CC CP242 v2 | PAINT BY NUM | 345,00  | 0,65 |  2,97  |  1,98%  |   3,73   |  +0,76  | 100,00% |  25,59%  |  25,59%  | 2,29x
+🟢🟡 | 14/10  | 141 CC CP137 v2 | Plus Size Tw | 439,92  | 0,65 | 119,30 | 79,53%  |  148,07  | +28,77  | 95,08%  |  24,12%  |  24,12%  | 1,34x
+🟢🟡 | 30/10  | 211 CC CP202 v2 | IMAGEM - Dia | 426,21  | 0,70 | 90,07  | 60,05%  |  111,24  | +21,17  | 98,19%  |  23,50%  |  23,50%  | 1,34x
+🟢🟡 | 07/11  | 244 CC CP242 v2 | PAINT BY NUM | 339,72  | 0,65 | 27,07  | 18,05%  |  33,32   |  +6,25  | 97,70%  |  23,09%  |  23,09%  | 1,50x
+🟢🟡 | 15/10  |    154 MV v2    | MAKEUP       | 551,52  |  —   | 53,25  | 76,07%  |  65,52   | +12,27  | 97,28%  |  23,04%  |  23,04%  | 1,37x
+🟢🟡 | 09/11  | 253 CC CP250 v2 | DIY MINIATUR | 446,34  | 0,75 | 204,29 | 136,19% |  250,27  | +45,98  | 96,30%  |  22,51%  |  22,51%  | 1,40x
+```
+
+**SHEIN — principal · Campanhas ativas (48) · 4/5**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 09/11  |    248 MV v2    | MOSAIC ART K | 424,81  |  —   | 34,28  | 85,70%  |  41,29   |  +7,01  | 98,90%  |  20,45%  |  21,50%  | 1,53x
+🟢🟡 | 07/11  |    242 MV v2    | PAINT BY NUM | 417,09  |  —   | 98,32  | 98,32%  |  115,99  | +17,67  | 98,52%  |  17,97%  |  17,98%  | 1,34x
+🟢🟡 | 14/10  | 142 CC CP137 v2 | Plus Size Tw | 429,66  | 0,65 | 76,65  | 51,10%  |  90,10   | +13,45  | 98,40%  |  17,55%  |  17,55%  | 1,51x
+🟢🟡 | 06/11  | 238 CC CP232 v2 | DIAMOND PAIN | 478,70  | 0,70 | 237,20 | 118,60% |  264,52  | +27,32  | 96,98%  |  11,52%  |  11,52%  | 1,34x
+🟢🟡 | 29/10  |    202 MV v2    | Diamond Pain | 341,51  |  —   | 47,88  | 95,76%  |  52,86   |  +4,98  | 97,49%  |  10,40%  |  10,40%  | 1,44x
+🟢🔴 | 09/11  |    249 MV v2    | PUNCH NEEDLE | 432,48  |  —   | 43,01  | 86,02%  |  45,54   |  +2,53  | 97,46%  |  5,88%   |  5,88%   | 1,22x
+🔴🔴 | 12/11  | 265 CC CP261 v2 | WIRELESS SEA |  43,70  | 0,55 |  9,69  |  6,46%  |   1,07   |  -8,62  |  0,00%  | -88,96%  |  2,17%   | 1,54x
+🟢🔴 | 06/11  |    232 MV v2    | DIAMOND PAIN | 416,02  |  —   | 71,31  | 89,14%  |  71,52   |  +0,21  | 95,42%  |  0,29%   |  0,28%   | 1,24x
+🔴🔴 | 16/10  | 169 CC CP154 v2 | IMAGEM - MAK | 522,37  | 0,70 | 160,73 | 107,15% |  150,91  |  -9,82  | 98,90%  |  -6,11%  |  -4,88%  | 1,38x
+🔴🔴 | 09/11  | 256 CC CP249 v2 | PUNCH NEEDLE | 409,20  | 0,80 | 151,72 | 101,15% |  143,26  |  -8,46  | 96,08%  |  -5,58%  |  -5,58%  | 1,11x
+🔴🔴 | 19/10  | 174 CC CP171 v2 | IMAGEM - PLU | 485,73  | 0,65 | 42,89  | 28,59%  |  38,91   |  -3,98  | 96,18%  |  -9,28%  |  -9,28%  | 1,34x
+🔴🔴 | 09/11  |    250 MV v2    | DIY MINIATUR | 379,02  |  —   | 46,49  | 92,98%  |  41,95   |  -4,54  | 97,40%  |  -9,77%  |  -9,77%  | 1,09x
+```
+
+**SHEIN — principal · Campanhas ativas (48) · 5/5**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🔴🔴 | 09/11  | 260 CC CP249 v2 | PUNCH NEEDLE | 415,00  | 0,80 | 33,20  | 22,13%  |  29,13   |  -4,07  | 99,32%  | -12,26%  | -11,54%  | 1,25x
+🔴🔴 | 09/11  | 252 CC CP250 v2 | DIY MINIATUR | 388,81  | 0,75 | 44,17  | 29,45%  |  35,34   |  -8,83  | 95,93%  | -19,99%  | -19,99%  | 1,27x
+🔴🔴 | 12/11  | 266 CC CP261 v2 | WIRELESS SEA |  20,53  | 0,55 |  7,58  |  5,05%  |   0,35   |  -7,23  |  0,00%  | -95,38%  | -30,61%  | 1,24x
+🔴🔴 | 19/10  | 173 CC CP171 v2 | IMAGEM - PLU | 450,00  | 0,65 |  3,39  |  2,26%  |   1,62   |  -1,77  | 100,00% | -52,21%  | -52,21%  | 0,56x
+🔴🔴 | 09/11  | 254 CC CP250 v2 | DIY MINIATUR | 270,00  | 0,75 |  0,95  |  0,63%  |   0,25   |  -0,70  | 100,00% | -73,68%  | -73,68%  | 0,55x
+🔴🔴 | 12/11  | 264 CC CP261 v2 | WIRELESS SEA |  8,13   | 0,55 |  5,86  |  3,91%  |   0,11   |  -5,75  |  0,00%  | -98,12%  | -94,03%  | 1,46x
+```
+
+**SHEIN — principal · Campanhas pausadas (0) · 1/1**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (48) · 1/4**
+```text
+Início |       Nº        | Dia |  06/11  |  07/11  |  08/11  |  09/11  |  10/11  |  11/11  | 12/11  |   Média 7d  
+12/09  |    26 MV v2     | D62 | +16,6%  |  +4,5%  | -14,0%  | -10,6%  | +38,2%  |  -7,4%  | +47,5% |    +10,7%   
+08/10  |    96 MV v2     | D36 | +26,1%  | +10,9%  |  -2,3%  |  +9,5%  | +46,1%  | +35,3%  | +28,8% |    +22,1%   
+08/10  |    99 MV v2     | D36 | +44,4%  | +19,1%  |  -2,9%  | +17,0%  | +70,6%  | +41,2%  | +69,6% |    +37,0%   
+10/10  |    109 MV v2    | D34 | -19,4%  |  +6,1%  |  -2,0%  | +23,7%  | +71,1%  | +51,3%  | +50,4% |    +25,9%   
+14/10  | 141 CC CP137 v2 | D30 |  -5,2%  |  +4,7%  | -28,2%  | +23,3%  | +28,7%  | -20,0%  | +24,1% |    +3,9%    
+14/10  | 142 CC CP137 v2 | D30 |  -8,0%  | +13,7%  | +40,2%  | -22,0%  | +21,2%  | +23,2%  | +17,5% |    +12,2%   
+15/10  |    154 MV v2    | D29 | +20,9%  | +11,3%  | +24,6%  | +18,1%  | +42,8%  | +47,2%  | +23,0% |    +26,9%   
+16/10  | 169 CC CP154 v2 | D28 | -21,3%  | +25,3%  | +35,8%  |  +2,7%  | +124,2% | +54,1%  | -6,1%  |    +30,7%   
+16/10  |    171 MV v2    | D28 | +13,4%  |  +1,1%  | +22,6%  | +69,3%  |  +8,2%  | +17,0%  | +45,5% |    +25,3%   
+19/10  | 173 CC CP171 v2 | D25 | +24,6%  | -35,0%  | +28,7%  | +22,9%  | +24,3%  | +36,5%  | -52,2% |    +7,1%    
+19/10  | 174 CC CP171 v2 | D25 |  -7,4%  | +12,8%  |  +1,4%  | +33,1%  | +58,8%  |  -8,3%  | -9,3%  |    +11,6%   
+19/10  | 175 CC CP171 v2 | D25 | -25,1%  | +21,9%  | +24,5%  | +30,0%  | +10,6%  | +19,7%  | +31,1% |    +16,1%   
+19/10  | 177 CC CP171 v2 | D25 | +71,9%  |  +1,9%  |  +7,2%  | +25,8%  | +43,8%  | +32,1%  | +59,8% |    +34,6%   
+22/10  |    185 MV v2    | D22 | -19,7%  | +20,4%  | +18,5%  | +23,4%  | +45,6%  | +69,4%  | +44,2% |    +28,8%   
+29/10  |    202 MV v2    | D15 | +23,8%  | +24,8%  | +40,8%  | +45,4%  | +38,3%  | +31,5%  | +10,4% |    +30,7%   
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (48) · 2/4**
+```text
+Início |       Nº        | Dia |  06/11  |  07/11  |  08/11  |  09/11  |  10/11  |  11/11  | 12/11  |   Média 7d  
+29/10  | 207 CC CP202 v2 | D15 | +397,0% | +14,4%  | +104,7% | +108,4% | -19,7%  | +18,4%  | +29,8% |    +93,3%   
+30/10  | 211 CC CP202 v2 | D14 | -85,5%  | +242,7% | +32,8%  | +456,3% |  +2,8%  | -29,0%  | +23,5% |    +91,9%   
+05/11  |    228 MV v2    | D8  |  +6,1%  | +25,2%  | +17,3%  | +22,1%  | +31,8%  | +35,5%  | +44,3% |    +26,1%   
+05/11  |    230 MV v2    | D8  | +55,2%  | +47,6%  | +52,8%  | +63,3%  | +71,2%  | +31,1%  | +84,3% |    +57,9%   
+06/11  |    232 MV v2    | D7  | +86,5%  | +73,1%  | +81,2%  | +104,8% | +54,6%  | +19,3%  | +0,3%  |    +60,0%   
+06/11  | 235 CC CP232 v2 | D7  | +103,6% | +85,3%  | +201,2% | +49,9%  | +22,0%  | +40,4%  | +31,9% |    +76,3%   
+06/11  | 236 CC CP232 v2 | D7  | +74,3%  | +175,7% | +106,4% | +97,0%  | +40,1%  | +41,8%  | +74,1% |    +87,1%   
+06/11  | 237 CC CP232 v2 | D7  | +133,7% | +201,9% | +121,2% | +20,2%  | -15,2%  | +28,3%  | +76,7% |    +81,0%   
+06/11  | 238 CC CP232 v2 | D7  | +142,2% | +55,6%  | +153,5% | +25,8%  | +38,7%  | +225,2% | +11,5% |    +93,2%   
+06/11  | 239 CC CP232 v2 | D7  | +173,2% | +116,5% | +87,6%  | +87,2%  | +23,0%  | -30,0%  | +71,7% |    +75,6%   
+07/11  |    240 MV v2    | D6  |   n/d   | +48,4%  | +47,7%  | +57,7%  | +50,6%  | +41,5%  | +67,9% | +52,3% (6/7)
+07/11  |    242 MV v2    | D6  |   n/d   | +54,8%  | +20,9%  | +16,9%  |  -8,6%  | +14,1%  | +18,0% | +19,3% (6/7)
+07/11  | 244 CC CP242 v2 | D6  |   n/d   | -76,8%  | +25,6%  | +80,4%  |  +6,9%  | +18,4%  | +23,1% | +12,9% (6/7)
+07/11  | 245 CC CP242 v2 | D6  |   n/d   | +22,0%  |  +0,9%  | +49,0%  | +33,5%  | -10,1%  | +97,1% | +32,1% (6/7)
+07/11  | 247 CC CP242 v2 | D6  |   n/d   | +63,8%  | +12,9%  | +32,5%  | +47,4%  | -26,8%  | +25,6% | +25,9% (6/7)
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (48) · 3/4**
+```text
+Início |       Nº        | Dia |  06/11  |  07/11  |  08/11  |  09/11  |  10/11  |  11/11  | 12/11  |   Média 7d  
+09/11  |    248 MV v2    | D4  |   n/d   |   n/d   |   n/d   | +46,0%  | +40,1%  | +41,4%  | +20,4% | +37,0% (4/7)
+09/11  |    249 MV v2    | D4  |   n/d   |   n/d   |   n/d   |  -7,6%  |  -7,8%  | -12,5%  | +5,9%  | -5,5% (4/7) 
+09/11  |    250 MV v2    | D4  |   n/d   |   n/d   |   n/d   | +13,2%  |  -0,9%  | +14,2%  | -9,8%  | +4,2% (4/7) 
+09/11  | 251 CC CP250 v2 | D4  |   n/d   |   n/d   |   n/d   |  -6,1%  | +21,6%  | +16,8%  | +60,8% | +23,3% (4/7)
+09/11  | 252 CC CP250 v2 | D4  |   n/d   |   n/d   |   n/d   |  -7,7%  |  +5,8%  | +29,2%  | -20,0% | +1,8% (4/7) 
+09/11  | 253 CC CP250 v2 | D4  |   n/d   |   n/d   |   n/d   | -13,9%  | +10,5%  |  +4,3%  | +22,5% | +5,9% (4/7) 
+09/11  | 254 CC CP250 v2 | D4  |   n/d   |   n/d   |   n/d   |  -4,3%  | +54,0%  | +86,7%  | -73,7% | +15,7% (4/7)
+09/11  | 255 CC CP250 v2 | D4  |   n/d   |   n/d   |   n/d   | -37,4%  | +24,5%  | +35,2%  | +37,2% | +14,9% (4/7)
+09/11  | 256 CC CP249 v2 | D4  |   n/d   |   n/d   |   n/d   | -25,3%  | +14,1%  |  +4,3%  | -5,6%  | -3,1% (4/7) 
+09/11  | 259 CC CP249 v2 | D4  |   n/d   |   n/d   |   n/d   | -26,7%  | +28,2%  | +48,0%  | +48,5% | +24,5% (4/7)
+09/11  | 260 CC CP249 v2 | D4  |   n/d   |   n/d   |   n/d   | -29,6%  | +143,0% |  -5,1%  | -12,3% | +24,0% (4/7)
+11/11  |    261 MV v2    | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | +61,2%  | +53,6% | +57,4% (2/7)
+11/11  |    262 MV v2    | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | +16,1%  | +29,9% | +23,0% (2/7)
+12/11  | 263 CC CP261 v2 | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | +15,9% | +15,9% (1/7)
+12/11  | 264 CC CP261 v2 | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | -98,1% | -98,1% (1/7)
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (48) · 4/4**
+```text
+Início |       Nº        | Dia |  06/11  |  07/11  |  08/11  |  09/11  |  10/11  |  11/11  | 12/11  |   Média 7d  
+12/11  | 265 CC CP261 v2 | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | -89,0% | -89,0% (1/7)
+12/11  | 266 CC CP261 v2 | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | -95,4% | -95,4% (1/7)
+12/11  | 267 CC CP261 v2 | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | +20,7% | +20,7% (1/7)
+```
+
+**Histórico ROI real — 7 dias · Campanhas pausadas (0) · 1/1**
+```text
+Início |       Nº        | Dia |  06/11  |  07/11  |  08/11  |  09/11  |  10/11  |  11/11  | 12/11  |   Média 7d  
+```
+
+**📘 Legenda do Nº e blocos**
+- **Exemplo — 090 CC CP89 v3**: campanha 090 · COCAP · cópia da 89 · quiz v3.
+- **Lance**: CC = COCAP · MV = MAXVOL · BC = BIDCAP · MX = misto.
+- **CP** indica a origem direta da cópia; **v1/v2/v3** identifica o quiz.
+- **Blocos**: o título identifica o status configurado das campanhas na Meta; ativas e pausadas ficam separadas.
+
+**📊 Métricas**
+- **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
+- **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
+- **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
+- **ROAS**: valor de compras Meta ÷ gasto Meta.
+- **RPS**: coluna da dash SB, em USD por mil sessões.
+- **Média 7d**: média dos ROIs diários válidos; n/d não vira zero. (n/7) mostra a cobertura.
+
+**⏱️ Fontes e leitura**
+- **Fontes**: Meta Insights × Smart Bidding/Adgroup. Valores monetários em USD.
+- **Atraso GAM/SB**: informado pelo Smart Bidding nesta coleta; Receita e ROI podem estar defasados.
+- **Tetos visuais**: ROI/ROI E. 999,99% · ROAS 9,99x · Rev 9.999,99. Dados, cálculos, ranking e histórico usam valores reais.
+- **Layout**: Gasto, B.U.% e Saldo se adaptam aos números, sem cortar sinais ou casas decimais.
+
+**⚠️ Observações**
+- Relatório diário do dia fechado; horários de coleta/status/Bid/orçamento são atuais, não históricos. Atraso GAM/SB é a leitura atual do publisher.
+
+**Fim do relatório — 48 campanhas e histórico de 7 dias.**
