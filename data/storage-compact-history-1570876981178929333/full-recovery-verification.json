@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "snapshots": 12,
+  "files_reconstructed_hash_verified": 9984,
+  "unique_objects_verified": 2057,
+  "state_databases_covered": 12,
+  "unique_state_databases_sqlite_checked": 9,
+  "sqlite_results": [
+    {
+      "db_sha256": "e1e2f032279a91314b497a2345608041bd1f99133b0a09de59833c3db383de1e",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "69a4addd242eedefac48989ef4f1a6bfef1bc655db3d3e8635afd3e3a8eb7072",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "7dced85713f2cc19e0f460a49f369e928c9eb580bcee75a4224390c09e90b49f",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "734706326400b24e57a1a126463abe470a6160d856b6c137aad31a36be27ec7f",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "600e13a899bfeaaf45dbb9f1ea54cd9b4089ca1031b65c5969b1ab40eb8a4342",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "18299be5fdf385ef498816ef8df9110cb464967ddfed2d608edb0573bd366313",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "92523287ea6df2f8f3c802881a00a427cebfcddadba6354faa28da823556f2a9",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "5d9d48feedb80de15830923a50acca8e034c5306613c751ad93fd2973dacad04",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "6419e905fdbc997192545b7326c9cc504f6c179ac05a87ef972d70bebdfe2d9e",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    }
+  ],
+  "dependency_count": 7,
+  "dependencies_unchanged": true,
+  "original_snapshot_files_read_by_decoder": 0,
+  "persistent_db_staging_bytes": 0,
+  "restore_destination": null,
+  "recovery_layer": "exact file bytes reconstructed and hashed; DBs opened only as query-only RAM clones"
+}

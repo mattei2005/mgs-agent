@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "snapshots": 3,
+  "files_reconstructed_hash_verified": 1932,
+  "unique_objects_verified": 723,
+  "state_databases_covered": 3,
+  "unique_state_databases_sqlite_checked": 2,
+  "sqlite_results": [
+    {
+      "db_sha256": "92523287ea6df2f8f3c802881a00a427cebfcddadba6354faa28da823556f2a9",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    },
+    {
+      "db_sha256": "6419e905fdbc997192545b7326c9cc504f6c179ac05a87ef972d70bebdfe2d9e",
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "reconstructed_from_compact": true
+    }
+  ],
+  "dependency_count": 4,
+  "dependencies_unchanged": true,
+  "original_snapshot_files_read_by_decoder": 0,
+  "persistent_db_staging_bytes": 0,
+  "restore_destination": null,
+  "recovery_layer": "exact file bytes reconstructed and hashed; DBs opened only as query-only RAM clones"
+}

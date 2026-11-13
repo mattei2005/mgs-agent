@@ -1553,12 +1553,12 @@
     {
       "agent": "ares",
       "id": "ARES-HTTP400-1570877587851321374",
-      "next_step": "Validar proxima mensagem humana na origem1570857869790945455;nao declarar prevencao definitiva;manter evidencias e nao reenviar campanhas.",
+      "next_step": "Nenhuma validacao conversacional pendente; nao repetir testes, campanhas ou limpeza. Preservar evidencias; pedidos de campanha seguem preflight proprio.",
       "objective": "Recuperar resposta da conversa Yolokfx08 sem replay Meta ou troca de identidade",
-      "source": "reports/ares/http400-1570877587851321374/verification.json",
-      "state": "current_recovery_verified: gateway vivo mesma sessao completou2chamadas modelo comskill_view real e resposta discord get200;3residuos removidos get404/10008;humanos/titulo preservados. nenhum reset,restart,patch runtime,token ou write campanha. causa http400 nao comprovada; testes diretos e nativo agora pass.",
+      "source": "reports/ares/http400-1570877587851321374/human-ingress-verification.json",
+      "state": "completed_conversation_recovery_e2e_verified: nova mensagem humana1570880855457402904 recebeu resposta ares1570880887632035951 na origem; ambas relidas. soma prova de entrada humana a roundtrip real anterior. causa http400 permanece nao comprovada; nenhuma garantia de prevencao definitiva ou prontidao meta.",
       "thread_id": "1570877587851321374",
-      "updated_at": "2026-11-13T19:15:44+00:00"
+      "updated_at": "2026-11-13T19:21:21+00:00"
     },
     {
       "agent": "ares",
@@ -8778,12 +8778,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Refresh manual concluído;seguir mesmo job2ee720363d7d14:02/21:02Eastern com nova fonteH e mesmo55IDs;lacunas históricasD permanecem qualificadas sem inferir zero.",
-      "objective": "Atualizar55contas Digital Trust;H Outstanding balance autorizado;Jnovembro,F invoicesoutubro;sem pagamentos/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570806033864069341/closure-current.json",
-      "state": "refresh manual validado:55ids,15cartão40linha;api55em2026-11-13t10:26:37.855895-05:00;h40novo outstandingbalance lido2026-11-13t10:01:53.761038-05:00a2026-11-13t10:24:24.731026-05:00;d11provasatualizadas,pending_ui0,39lacunas históricas qualificadas. totaisusd{'average_daily': '20050.81', 'balance': '605572.33', 'month_spend': '249789.96', 'outstanding_line_accounts': '602287.31'};invoices30usd417864.11;outraaba preservada. hfonte autorizada1570815017794674749 e40receiptsverificados. sem pagamento/billing. mesmaagenda14:02próximo.",
+      "next_step": "Rodolfo concluir passkey Meta noChromePC1. Supervisor preservar operaçãoe67b9e22a17027e23728d532 e provar acesso positivo ao mesmo alvo antes de retomar apenasH40 noHrun jápreparado eD1414197490675732, depoisreconciliaçãoAPIfinal,validação eentrega canônica idempotente;semrepetirfunding/invoices nem criarjob.",
+      "objective": "Recuperar mesma ocorrência14:02 de2ee720363d7d;55IDs, H40 Outstanding balance, sem pagamentos/billing",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T1402/recovery-validation.json",
+      "state": "partial_validated_waiting_human_passkey:api55 e invoices30 us$417864.11 publicados/readback;c/g/i/j ee/f exatos;h40 anteriores ed preservados;pending_ui1414197490675732;meta exigiu passkey emsecurity/twofactor/reauth;lease livre;15testesoffline passaram;entrega de negócio não concluída",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-13T15:35:11+00:00"
+      "updated_at": "2026-11-13T19:16:39+00:00"
     },
     {
       "agent": "zeus",
@@ -10337,5 +10337,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T19:15:44+00:00"
+  "updated_at": "2026-11-13T19:21:21+00:00"
 }
