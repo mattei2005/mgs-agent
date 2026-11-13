@@ -6238,12 +6238,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUPS-1570830889359777924",
-      "next_step": "Revalidar conjuntoHermes04Nov e safetyVPSmaisrecente;classificar arquivos de backups antigos e dependencias;preservar historico/codigo unico e runtime;congelarmanifesto apenas do lote respaldado,aguardarconfirmacao critica.",
-      "objective": "Ponto3:inventariar backupsVPS/Hermes;preservar ultimo conjunto validado de cada classe;separarcodigo/evidencia e preparar lote exato,semexclusao.",
-      "source": "discord:1569928464033783862/1570830889359777924",
-      "state": "read_only_inventory_in_progress",
+      "next_step": "Pedirconfirmacao hash4c4c89490adcc8c6647799632ba459fe58996cd8fcacd4074f31e06c7a87bd25 para1arvore control-plane/4204arquivos+1089dirs+2links/3.23GiB.63retidos/3arquivosrecuperacao/40entradas/36DBsPASS;RAMshadow0staging;preflight4negativosPASS. Snapshotsantigosdiferentespreservados;naoinferirhistoricoindispensavel nemdescartavel. Nenhumapply.",
+      "objective": "Ponto3:primeiro lote comprovado de copia expandida3.23GiB;ultimo backup e snapshots nativos preservados;nenhuma exclusao semconfirmacao.",
+      "source": "data/storage-backup-review-1570830889359777924/summary.json",
+      "state": "one_exact_lot_frozen_waiting_confirmation_broader_review_not_closed",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T16:01:23+00:00"
+      "updated_at": "2026-11-13T16:28:41+00:00"
     },
     {
       "agent": "zeus",
@@ -6268,12 +6268,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Concluidos28dumpsduplicados;81alvostestes;27dumpscomremotoidentico(4.32GiB);754copiasmidiasPOUPLIX(0.53GiB). Proximo:ponto3backups antigosVPS/Hermes comultimovalidadopreservado;semnovalista/confirmacaodestrutiva;retencaofuturanaomexida.",
-      "objective": "Descarte seguro porlotes preservando dash,perfis,historico erecuperacao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-profile-review-1570811193906700471/lot-754/cleanup-result.json",
-      "state": "four_confirmed_lots_completed_validated_broader_reorganization_not_closed",
+      "next_step": "Pontos1e2/lotesconfirmadosconcluidos. Ponto3temprimeirolotebackupexpandido3.23GiBpronto,hash4c4c8949;aguardarconfirmacaoexata. UltimoHermes/safety/nativosvalidados;outrossnapshotsantigosdiferentesaindaemclassificacao. Nenhumoutroloteexcluido,nemretencaofuturaalterada.",
+      "objective": "Descarte por lotes preservando dash,historico,perfis e recuperacao;retencaodesejada latest-onlysemativacaoc ega.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-review-1570830889359777924/summary.json",
+      "state": "four_lots_completed_backup_expanded_copy_lot_waiting_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T15:14:47+00:00"
+      "updated_at": "2026-11-13T16:28:41+00:00"
     },
     {
       "agent": "zeus",
@@ -10217,5 +10217,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T16:01:23+00:00"
+  "updated_at": "2026-11-13T16:28:41+00:00"
 }

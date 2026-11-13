@@ -1,0 +1,10 @@
+{
+  "candidate_root": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/control-plane",
+  "archive": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+  "archive_sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005",
+  "regular_file_member_count": 4204,
+  "symlink_member_count": 2,
+  "every_payload_verified": true,
+  "source_to_member_ledger": "control-plane-archive-proof.json.gz",
+  "purpose": "Recovery continues from the retained compressed archive and native latest snapshots; original manifests and patches remain outside the retired expanded copy."
+}

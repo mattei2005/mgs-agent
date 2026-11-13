@@ -818,7 +818,13 @@
     745910,
     745935,
     745953,
-    745974
+    745974,
+    745995,
+    746016,
+    746036,
+    746059,
+    746080,
+    746099
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1367,9 +1373,9 @@
     "digital-trust|ducapesfinance|73|530": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:07.000Z",
+        "created_at": "2026-11-13T16:12:10.000Z",
         "domain": "ducapesfinance",
-        "notification_id": 744021,
+        "notification_id": 745995,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -1390,7 +1396,8 @@
       ],
       "notification_ids": [
         742682,
-        744021
+        744021,
+        745995
       ],
       "opened_at": "2026-11-11T07:12:16-05:00",
       "repeat_count": 0,
@@ -1671,9 +1678,9 @@
     "digital-trust|escalatepower|29|1539": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:28.000Z",
+        "created_at": "2026-11-13T16:12:49.000Z",
         "domain": "escalatepower",
-        "notification_id": 744149,
+        "notification_id": 746099,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 12,
@@ -1700,7 +1707,8 @@
         740394,
         741182,
         742788,
-        744149
+        744149,
+        746099
       ],
       "opened_at": "2026-11-03T19:12:19-05:00",
       "repeat_count": 0,
@@ -3437,9 +3445,9 @@
     "digital-trust|mavroa|27|1718": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:18.000Z",
+        "created_at": "2026-11-13T16:12:30.000Z",
         "domain": "mavroa",
-        "notification_id": 744111,
+        "notification_id": 746059,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -3468,7 +3476,8 @@
         740379,
         741165,
         742768,
-        744111
+        744111,
+        746059
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
       "repeat_count": 0,
@@ -3513,9 +3522,9 @@
     "digital-trust|newsounde|15|26": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:16.000Z",
+        "created_at": "2026-11-13T16:12:28.000Z",
         "domain": "newsounde",
-        "notification_id": 744083,
+        "notification_id": 746036,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 19,
@@ -3534,7 +3543,8 @@
         "1570471304723959870"
       ],
       "notification_ids": [
-        744083
+        744083,
+        746036
       ],
       "opened_at": "2026-11-12T11:12:16-05:00",
       "repeat_count": 0,
@@ -3797,9 +3807,9 @@
     "digital-trust|newsoun|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:11.000Z",
+        "created_at": "2026-11-13T16:12:19.000Z",
         "domain": "newsoun",
-        "notification_id": 744064,
+        "notification_id": 746016,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -3822,7 +3832,8 @@
         737504,
         741607,
         742744,
-        744064
+        744064,
+        746016
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -4332,9 +4343,9 @@
     "digital-trust|portalrelevante|74|1779": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:25.000Z",
+        "created_at": "2026-11-13T16:12:46.000Z",
         "domain": "portalrelevante",
-        "notification_id": 744125,
+        "notification_id": 746080,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Ready": 1
@@ -4352,7 +4363,8 @@
         "1570471311426195547"
       ],
       "notification_ids": [
-        744125
+        744125,
+        746080
       ],
       "opened_at": "2026-11-12T11:12:16-05:00",
       "repeat_count": 0,
@@ -5883,29 +5895,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-13T11:12:16-05:00",
+  "last_check": "2026-11-13T11:27:15-05:00",
   "last_delivery": {
-    "at": "2026-11-13T11:12:16-05:00",
+    "at": "2026-11-13T11:27:15-05:00",
     "cursor_ids": [
-      745852,
-      745868,
-      745889,
-      745910,
-      745935,
-      745953,
-      745974
+      745995,
+      746016,
+      746036,
+      746059,
+      746080,
+      746099
     ],
-    "message_ids": [
-      "1570833681688563813",
-      "1570833686914531389"
-    ],
-    "notification_ids": [
-      745852,
-      745889
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 745974,
+  "last_seen_id": 746099,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

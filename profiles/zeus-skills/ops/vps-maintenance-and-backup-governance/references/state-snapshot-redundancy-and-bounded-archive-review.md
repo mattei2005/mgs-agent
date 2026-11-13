@@ -46,6 +46,16 @@ A SQLite connection intended as read-only can still remove or recreate stale `st
 4. Revalidate the original tree after analysis. Missing or changed auxiliaries are an analysis-induced mutation, not harmless noise.
 5. If recovery is required, restore only from a same-profile file whose external checksum equals the frozen expected checksum, recreate an expected empty WAL exactly, and require the full backup checksum manifest to pass before closure. Record the incident and recovery explicitly.
 
+## Bounded RAM shadow for coherent standalone SQLite backups
+
+Use this optional integrity-check route only for already consistent, standalone backup DBs with no nonempty WAL/SHM sidecars. Do not use it for live databases or to infer WAL recovery or historical-row subsumption.
+
+1. Test `sqlite3.Connection.deserialize` on a synthetic fixture first, including `quick_check`, FK checks, known row counts and a `query_only` write rejection. A SQLite URI under `/proc/self/fd/<memfd>` may fail to open; do not keep retrying that route or touch the original snapshot to compensate.
+2. Before each DB, require live `MemAvailable >= 3 × DB logical bytes + 1 GiB`; process sequentially and release each connection/buffer before the next. Use a bytearray/readinto clone to avoid unnecessary full-buffer copies, `temp_store=MEMORY` and a bounded SQLite cache. Fall back to the separately capacity-gated file staging workflow when RAM cannot safely hold the clone.
+3. A coherent DB can retain SQLite WAL journal-format header bytes even after checkpointing. If deserialize cannot open that standalone form, normalize only header offsets 18 and 19 from 2 to 1 **in the disposable RAM clone**. First prove that exact two-byte transformation on a fixture; require the source signature and header versions, and never apply it to the original or to a DB requiring a nonempty WAL.
+4. Run `query_only=ON`, `quick_check` and `foreign_key_check` against the RAM clone only. Record checks and exception findings without exposing rows, messages, credentials or config contents. This is an integrity check of a coherent backup, not a production restore or proof that one snapshot subsumes another.
+5. Verify each original inode, size, nanosecond mtime and external SHA-256 before/after inspection. Reuse an integrity result only for an identical complete DB digest. Bind the validation to retained archive/snapshot manifests and record zero persistent staging bytes.
+
 ## Archive-member staging capacity gate
 
 Before extracting large SQLite members from a compressed archive:

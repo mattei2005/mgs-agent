@@ -73267,6 +73267,35 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "id": "storage-backup-review-1570830889359777924",
+      "agent": "zeus",
+      "type": "expanded_backup_copy_retirement_review",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1570830889359777924",
+      "status": "one_exact_expanded_backup_lot_frozen_waiting_confirmation",
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924",
+      "result_path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/summary.json",
+      "manifest_sha256": "4c4c89490adcc8c6647799632ba459fe58996cd8fcacd4074f31e06c7a87bd25",
+      "candidate_regular_files": 4204,
+      "candidate_directories": 1089,
+      "candidate_symlinks": 2,
+      "reclaim_bytes": 3469041664,
+      "retained_archive_and_native_recovery_validated": true,
+      "backup_db_integrity_checks": 36,
+      "persistent_sqlite_staging_bytes": 0,
+      "deletions": 0,
+      "older_differing_snapshots_retired": false,
+      "retention_policy_changed": false,
+      "skills_updated": [
+        "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+        "vps-maintenance-and-backup-governance/references/state-snapshot-redundancy-and-bounded-archive-review.md"
+      ],
+      "updated_at": "2026-11-13T11:29:31.140730-05:00",
+      "result_sha256": "b594e3e20cf9c7387432fef94515d010abffecfe0f8ddc43b6668fade80d697a",
+      "report_message_id": "1570837826419818668",
+      "report_readback": true
     }
   ],
   "mu_plugin_canonical": {

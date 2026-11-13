@@ -1,0 +1,79 @@
+[
+  {
+    "profile": "zeus",
+    "candidate_payload_files": 15,
+    "byte_identical": 11,
+    "unmatched": [
+      [
+        "state.db",
+        "different"
+      ],
+      [
+        "config.yaml",
+        "different"
+      ],
+      [
+        "channel_directory.json",
+        "different"
+      ],
+      [
+        "cron/executions.db",
+        "different"
+      ]
+    ]
+  },
+  {
+    "profile": "atena",
+    "candidate_payload_files": 12,
+    "byte_identical": 7,
+    "unmatched": [
+      [
+        "state.db",
+        "different"
+      ],
+      [
+        "auth.json",
+        "different"
+      ],
+      [
+        "config.yaml",
+        "different"
+      ],
+      [
+        "channel_directory.json",
+        "different"
+      ],
+      [
+        "cron/executions.db",
+        "different"
+      ]
+    ]
+  },
+  {
+    "profile": "ares",
+    "candidate_payload_files": 13,
+    "byte_identical": 8,
+    "unmatched": [
+      [
+        "state.db",
+        "different"
+      ],
+      [
+        "auth.json",
+        "different"
+      ],
+      [
+        "config.yaml",
+        "different"
+      ],
+      [
+        "channel_directory.json",
+        "different"
+      ],
+      [
+        "cron/executions.db",
+        "different"
+      ]
+    ]
+  }
+]

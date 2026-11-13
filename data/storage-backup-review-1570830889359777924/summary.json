@@ -1,0 +1,63 @@
+{
+  "status": "one_exact_expanded_backup_lot_ready_older_sets_not_retired",
+  "request_message_id": "1570830889359777924",
+  "manifest_sha256": "4c4c89490adcc8c6647799632ba459fe58996cd8fcacd4074f31e06c7a87bd25",
+  "target_root": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/control-plane",
+  "regular_files": 4204,
+  "directories": 1089,
+  "symlinks": 2,
+  "reclaim_bytes": 3469041664,
+  "latest_retained_hermes_set": "20261103-phase4-1567354570823172209: main+supplemental archives and retry-1 native snapshots",
+  "latest_retained_safety": "mgs-safety-20261110-034101.tar.gz",
+  "provider_backups_readback": [
+    {
+      "id": 58971908,
+      "created_at": "2026-11-08T10:12:08Z"
+    },
+    {
+      "id": 58045990,
+      "created_at": "2026-11-01T20:13:20Z"
+    }
+  ],
+  "provider_listing_is_restore_proof": false,
+  "snapshot_manifest_files_verified": 40,
+  "retained_or_archived_db_payloads_integrity_checked": 36,
+  "unique_db_payloads_checked": 28,
+  "scan_backup_sets": 45,
+  "scan_regular_files": 43331,
+  "scan_errors": 0,
+  "deletions": 0,
+  "persistent_db_staging_bytes": 0,
+  "all_candidate_payloads_inside_retained_archive": true,
+  "native_retained_files": 63,
+  "older_oct21_snapshot_classification": "payloads differ from retained latest; logical historical subsumption not proven, preserve pending comparison or exact explicit retirement override",
+  "old_vps_maintenance_and_code_classification": "mixed package rollback/source/patch/evidence sets; not blanket-deletable by date; kept outside this lot",
+  "legacy_latest_pointer": "vps-maintenance/latest.path points to July; not used as latest recovery authority; unchanged",
+  "retention_policy_changed": false,
+  "current_used_percent": 74.47240144998479,
+  "projected_used_percent": 72.79559223379242,
+  "diagnostic_recoveries": [
+    "Snapshot manifest is a list, parser corrected before any mutation",
+    "memfd SQLite URI rejected in synthetic fixture; bounded RAM deserialize fixture and 36 real backup integrity checks passed, no source SQL connection",
+    "two copied script symlinks classified and matched to archive link headers without following referents",
+    "Skill mirror auto-synchronization was already complete; duplicate paragraph introduced by explicit mirror edit was removed, equality verified, no operational source changed"
+  ],
+  "broader_point3_status": "not fully closed; independently safe lot is ready now, older differing snapshots remain under classification",
+  "report_infra": {
+    "message_id": "1570837826419818668",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "verified": true
+  },
+  "preflight": "PASS",
+  "negative_tests": [
+    "scope",
+    "metadata",
+    "count",
+    "missing_approval"
+  ],
+  "governance_errors": [],
+  "review_milestone_completed_at": "2026-11-13T11:29:31.140730-05:00"
+}

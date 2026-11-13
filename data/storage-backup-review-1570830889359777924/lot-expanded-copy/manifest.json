@@ -1,0 +1,294 @@
+{
+  "action": "delete_tree",
+  "current_used_percent": 74.47240144998479,
+  "executor_sha256": "6d7a3c5e8a1ce80b57b84779d538c275b864e97b256406da15497b599cdd3295",
+  "fingerprint": {
+    "allocated_bytes": 3469041664,
+    "device": 2049,
+    "directories": 1089,
+    "entries": 5295,
+    "files": 4204,
+    "root_inode": 870273,
+    "sha256": "df9d2d20c04a27ba5a0ee98c4adf2edf5d39af8b7b8c33d1a4e0004d9ea078b5",
+    "symlinks": 2
+  },
+  "frozen_at": "2026-11-13T11:25:14.192911-05:00",
+  "irreversible_effect": "Only expanded control-plane tree disappears; all its 4204 file payloads and two link targets are present in retained compressed backup. Live production files and link referents are not targets; no older differing historical snapshot is authorized for deletion.",
+  "origin": "pre-existing expanded preparation copy inside latest Nov4 Hermes backup set; not storage created by this review",
+  "projected_used_percent": 72.79559223379242,
+  "protected_launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "protected_sets": [
+    "latest retry-1 native profile snapshots",
+    "both main/supplemental Hermes recovery archives",
+    "safety operational archive 20261110",
+    "active and rollback Hermes runtimes",
+    "live profiles/state/browser/collector",
+    "all other historical backup/code/evidence sets",
+    "Hostinger and offsite recovery points"
+  ],
+  "reclaim_bytes": 3469041664,
+  "request_message_id": "1570830889359777924",
+  "retained_files": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/archive.sha256",
+      "sha256": "64725093931d5f8fb53f6c0de4a8558d965cc600e1e172da9aea89847ed4bfbe"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-nested-cron-sqlite.tar.gz",
+      "sha256": "4f06428caf2b56d9e5705d74d81dd6812fe364dc68d6c5aa7b310613697926ad"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/recovery-set.json",
+      "sha256": "d8d03ca82e0eb06214297df10fb8da5128a0dc8a6abeff633454a8381ab88f09"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/.env",
+      "sha256": "f8c5a5ee8c1e5cde2611841d554de31588722c4c6977f13613eabbbf984fe2ed"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/SOUL.md",
+      "sha256": "3f62bc240e255fc8b46bb5d430154b15b914e2c09a5aa09e00667efda7187ddd"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/auth.json",
+      "sha256": "e6d54b58fc580e7f138b59e8bdc096d75440b57e43988631849b65ef41f1bb26"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/channel_directory.json",
+      "sha256": "69906bdbb0c40ae56f425db277b9cca8b0dcb2daa6973841f8f17463d604f34e"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/config.yaml",
+      "sha256": "06f337e061e025ee6158c7fbdb80c03526b142b0ea09366719e490578715937d"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/cron/deliveries.db",
+      "sha256": "d1fc5a9aead96b37263951e56bafcd4f5f3fe1964233261a8abdca85aa474b1f"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/cron/executions.db",
+      "sha256": "486d24fc5ecef69ae2f04e3f6cfe16d8bfb958249c5272823d2e8bfc5f782f85"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/cron/notepad.db",
+      "sha256": "69f2fc55d25e4fd3bdcf216f5a28aa9769211b4681d1710a253f23fe130ce607"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/discord_threads.json",
+      "sha256": "2f888396b7d69d646f8b514619c800737e0e3aaa49fffba280f0a66c04b5f500"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/honcho.json",
+      "sha256": "eb1683045e40063c73bf1bb8d28682672897e4ca4e7eb683aa9da7b82ea4678c"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/projects.db",
+      "sha256": "c05bf8667ffca01e5a4dd96c1fcc27b338a739cf43d1262f8ee90217f09624a6"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/snapshot-manifest.json",
+      "sha256": "eec80c58c69f6cc84b28003777ffc4a29c94b18891d32371a17302093e739a9b"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/state.db",
+      "sha256": "0f36fecb51761b4a5706a143ab2dad763b7d82db842f0f27bcd7c031b7b26d77"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/verification_evidence.db",
+      "sha256": "e305e245a0ce5ba470f180dea4ce5c42e9b5e33e0a167594b3d2d607b98af478"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/.env",
+      "sha256": "38cc0df898dece05049936b6f79432fb491e3df892a02d0d2ed76c72f26c6c11"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/SOUL.md",
+      "sha256": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/auth.json",
+      "sha256": "ead6fb94d796f39c6cb4d045a3474449983a7d8ab99a758340e3256f812af39d"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/channel_directory.json",
+      "sha256": "6e665b60bd68b2cfca947bcd6f9a8a9ce8e42c97d1dafc8d2255277049d7ac66"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/config.yaml",
+      "sha256": "d7ce6f094f9090e97865b49eda5e4a0fa3d203c95e21e85798f0886cf235544d"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/cron/executions.db",
+      "sha256": "9424636f65e7da543cbd4aea04899f548ae5d9ca1f0151ff97ea3af5b87189f0"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/discord_threads.json",
+      "sha256": "76200e141f0dd1f5a80dfd8d1d97d90a8bc1ec7f87ade27a0f1ce46037b0bcaa"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/honcho.json",
+      "sha256": "02ecb0666e93ef21da772b2072a2f37f6370e27a8f518a9246f2fe32e1309958"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/kanban.db",
+      "sha256": "f2945411bc02ffc353e355983e1a064132366ac1ef7b06e5bafd423147020f6e"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/projects.db",
+      "sha256": "c05bf8667ffca01e5a4dd96c1fcc27b338a739cf43d1262f8ee90217f09624a6"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/snapshot-manifest.json",
+      "sha256": "37b1c1e527051289031e9a8913960fa153a21cff12460dcfdc9196e8d5e61921"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/state.db",
+      "sha256": "6f956b376cfc7710c66f134e76b97d4d58b8656141640d20a55a37bf94dd20f0"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/verification_evidence.db",
+      "sha256": "0c16a7792d1057aaacc345fc7e92b92f3962c4cbb684906e55573d126f507e7b"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/.env",
+      "sha256": "583a96bf31c9e1e27bf8edcec535f4091b964d1ea8def76ce3edade500604205"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/SOUL.md",
+      "sha256": "6df4eff21ee95f1f11e2f162fc68001095bb0d58b71cb11b616a89d84bf9aed4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/auth.json",
+      "sha256": "e029416663a52834cdd45a7eba586884fecb74ad6aece0586d61a4c472ee8e41"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/channel_directory.json",
+      "sha256": "aa09b90de94e6c7a25317c97cde901bc7ac486fa2df6eb4e91dc4781f4fc9a3f"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/config.yaml",
+      "sha256": "6547bdcc77aa2d6da2f30b1269a800c4af28fc23e7b6b5995624d1768577c257"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/cron/deliveries.db",
+      "sha256": "1b11e8e82db552b5d33b51c6fbf9dd9ad293a1cecca4366ff625b345399d5557"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/cron/executions.db",
+      "sha256": "d33c9bafb43324423fbf8599e12651599274809c01c349a4924f36adbb0dfd8a"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/cron/notepad.db",
+      "sha256": "69f2fc55d25e4fd3bdcf216f5a28aa9769211b4681d1710a253f23fe130ce607"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/discord_threads.json",
+      "sha256": "1bbf63e763b7835d96afa8b2a3f2afc03f12baab423898e00a6d014020b08131"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/honcho.json",
+      "sha256": "95ce4e682f338381868106d787ed5a645bca113976e706d5c2aafa4d96bb87d7"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/kanban.db",
+      "sha256": "f2945411bc02ffc353e355983e1a064132366ac1ef7b06e5bafd423147020f6e"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/projects.db",
+      "sha256": "c05bf8667ffca01e5a4dd96c1fcc27b338a739cf43d1262f8ee90217f09624a6"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/sessions/sessions.db",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/snapshot-manifest.json",
+      "sha256": "22d43291ead18ae2fa1f08a1ed0e0f4f08ee75460a43affdb70040e8e5136067"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/state.db",
+      "sha256": "79bee2a527c78aa875fff806ecffb9ceedd14c16392fe785a32d83065dfea044"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/verification_evidence.db",
+      "sha256": "b0a8be98e1fba47742a7970d3c9d9af80690665c39a5b3ef88bf52e30077e3a2"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/rollback-manifest.json",
+      "sha256": "266b2fef1fd93fcbbb84662cd6ff8fafa18ef411c84a713c7f72db074b447e2b"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/runtime-working.patch",
+      "sha256": "68565e48ffec04899dda235de0ae75590e3f523f130fd55f7fbf5a1c2f24fc1e"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/ares/cron/deliveries.db",
+      "sha256": "1241e4120f3e69e4efc92fb4368efd56afefdcaaaf1280095f8b3c2af174c1ec"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/ares/cron/executions.db",
+      "sha256": "1de0125c1d147b604c3e6caa0be1ee27f4553790db424960e857fc8ced79c0e3"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/ares/cron/notepad.db",
+      "sha256": "4727aef7eaedc1417590d33e29b72e1d3e6a25156f21000ef76567772b2e6587"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/atena/cron/executions.db",
+      "sha256": "12b146638f2dd09b8d88b141a85d38a89e2b3c8bc1753e2098446c4239bc57d9"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/zeus/cron/deliveries.db",
+      "sha256": "40c61d51696ef12d10c51df3e68a047b5c6fba9fce9cedda56a9311830b7d36f"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/zeus/cron/executions.db",
+      "sha256": "85814de79a8d07048fe936694181989cea5c7ce209024cbff913f6d155995dca"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental-sqlite/zeus/cron/notepad.db",
+      "sha256": "4727aef7eaedc1417590d33e29b72e1d3e6a25156f21000ef76567772b2e6587"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/supplemental.sha256",
+      "sha256": "32114e1e101f2b48925aecd82e2d94515b230ef4662d5b955f3f0b9bab68cf89"
+    },
+    {
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20261110-034101.tar.gz",
+      "sha256": "69fcf7c26b392fdd2ca5d18d25608e4c11cb1c19dc78f1c16afead9518f3dceb"
+    },
+    {
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/control-plane-archive-proof.json.gz",
+      "sha256": "fbd213f9da705f1ce7648bdf0bcd4786e9fafc439a21f4e130c30fcf27d50f2e"
+    },
+    {
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/dependency-check.json",
+      "sha256": "b1b7deca7e4e4e5065f0b265e5d603d977807d262b947576e19c558444053e6f"
+    },
+    {
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/expanded-copy-to-retained-archive.json",
+      "sha256": "9758b5a17fc1ea9d9f44ae74d0ef5fad2ed2e47d5593269885a699f14486d3b7"
+    },
+    {
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/retained-archives-validation.json",
+      "sha256": "023f701c636d9b268bd242004cc521bcc3acf075324fe75ec5258c10c0f2ef48"
+    },
+    {
+      "path": "/root/mgs-agent/data/storage-backup-review-1570830889359777924/retained-db-integrity.json",
+      "sha256": "46609f45bf2f430f80cb24bde7eea428cba336a86286566f9af7ba39258466d6"
+    }
+  ],
+  "sql_validation": "36 coherent backup DBs/28 unique payloads quick_check and FK passed through bounded RAM-only clones; original backups unchanged, zero persistent staging bytes.",
+  "status": "frozen_waiting_exact_critical_confirmation",
+  "symlink_referents_protected": [
+    "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+    "/root/mgs-agent/scripts/ares-creditoparaveiculo-reconcile.py"
+  ],
+  "target": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/control-plane",
+  "target_untracked": true,
+  "thread_id": "1569928464033783862"
+}
