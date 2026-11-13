@@ -1,0 +1,89 @@
+{
+  "status": "compact_preservation_completed_validated_deletion_waiting_new_confirmation",
+  "request_message_id": "1570876981178929333",
+  "thread_id": "1569928464033783862",
+  "source_review": "data/storage-snapshot-review-1570868136066949244/review-result.json",
+  "archive_path": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333/historical-snapshots.tar",
+  "archive_sha256": "e457fb3a585154ae756410efcb24bbde80e44d288b2c7d0c8c53e8b64ec6321b",
+  "archive_logical_bytes": 387584000,
+  "compact_set_allocated_bytes": 393609216,
+  "directory_mode": "0700",
+  "file_modes": "0600",
+  "self_contained": false,
+  "recovery_dependencies": {
+    "retained-file-4": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/.env",
+      "sha256": "f8c5a5ee8c1e5cde2611841d554de31588722c4c6977f13613eabbbf984fe2ed"
+    },
+    "retained-file-18": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/.env",
+      "sha256": "38cc0df898dece05049936b6f79432fb491e3df892a02d0d2ed76c72f26c6c11"
+    },
+    "retained-file-43": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/sessions/sessions.db",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "retained-archive": {
+      "kind": "archive",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005"
+    },
+    "native-db-zeus": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/state.db",
+      "sha256": "79bee2a527c78aa875fff806ecffb9ceedd14c16392fe785a32d83065dfea044"
+    },
+    "native-db-atena": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/state.db",
+      "sha256": "6f956b376cfc7710c66f134e76b97d4d58b8656141640d20a55a37bf94dd20f0"
+    },
+    "native-db-ares": {
+      "kind": "file",
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/state.db",
+      "sha256": "0f36fecb51761b4a5706a143ab2dad763b7d82db842f0f27bcd7c031b7b26d77"
+    }
+  },
+  "source_snapshot_count": 12,
+  "source_regular_files": 9984,
+  "all_original_file_bytes_reconstructible": true,
+  "reconstructed_unique_objects": 2057,
+  "state_databases_covered": 12,
+  "unique_state_databases_integrity_fk_checked": 9,
+  "source_originals_and_sidecars_unchanged": true,
+  "original_sqlite_connections": 0,
+  "persistent_real_db_restore_staging_bytes": 0,
+  "restoration_acceptance": "exact9984filehashes/12snapshotimages reconstructed independently;9unique old DB images quick/FK checked inRAM;fixture materialized separately, no production profile restore",
+  "native_codec_tests": 6,
+  "wrapper_fixture": "PASS",
+  "deletion_manifest": "/root/mgs-agent/data/storage-compact-history-1570876981178929333/deletion-manifest.json",
+  "deletion_manifest_sha256": "2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592",
+  "validator_sha256": "34ecc84a1a6513531de2347d3ce79b38974a5bccbda81b1bf886ea451132192a",
+  "future_deletion_targets": 12,
+  "future_deletion_directories": 3318,
+  "future_deletion_regular_files": 9984,
+  "future_reclaim_bytes": 5959327744,
+  "destructive_preflight": "PASS",
+  "negative_tests": [
+    "scope_reduction_rejected",
+    "count_drift_rejected",
+    "metadata_drift_rejected_without_modifying_original",
+    "missing_deletion_approval_rejected"
+  ],
+  "deletion_approval_present": false,
+  "deletions": 0,
+  "observed_reclaimed_bytes": 0,
+  "retention_policy_changed": false,
+  "services_restarted": false,
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "failed_units": 0,
+  "next_step": "AsknewexactCriticalconfirmationfor12expandedroots/hash2da08240d943ea86e8439afbdde8e07a01e29c688e7c9a16d864ca7dc91df592;keepcompact+7bases+latest/safety+parentmanifests;revalidatebeforeanydeletion",
+  "completed_at": "2026-11-13T14:35:42.839934-05:00"
+}
