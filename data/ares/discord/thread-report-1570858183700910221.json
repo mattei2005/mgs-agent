@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "request_id": "ares-yolo08-g006-recovery-1570859539019079793",
+  "source": "discord:1185714635991679006/1570858581945876672/1570859539019079793",
+  "authorized_by_discord_id": "344196393512075265",
+  "account_id": "1663268201836138",
+  "account_name_declared": "Yolokfx-US-SHEIN-EN-08-G006",
+  "manager_code": "g006",
+  "thread_id": "1570858183700910221",
+  "channel_id": "1558147364450074734",
+  "thread_name": "📈Yolokfx Conta 08 Intraday",
+  "creation_thread_id": "1570857869790945455",
+  "status": "PENDING_META_ASSET_GRANT_CONFIRMATION",
+  "report_mode": "read_only_sources_discord_reports_only",
+  "title_policy": "preserve_manual_title",
+  "layout_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout",
+  "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+  "existing_schedules": {
+    "timezone": "America/New_York",
+    "intraday_slots": ["09:32", "14:11", "16:02", "20:02", "23:31"],
+    "daily_d1_change_authorized": false
+  },
+  "preflight": {
+    "account_scope_allowed": true,
+    "business_id": "155263197283282",
+    "discord_thread_get_verified": true,
+    "corporate_identity_http": 200,
+    "corporate_identity_id": "122095869861482193",
+    "corporate_identity_name": "minibot System User",
+    "corporate_identity_business_id": "155263197283282",
+    "target_account_http": 403,
+    "target_account_error_code": 200,
+    "target_account_error": "Ad account owner has NOT grant ads_management or ads_read permission",
+    "account_identity_currency_timezone": "not available: asset access denied",
+    "credential_changed": false,
+    "permission_changed": false
+  },
+  "next_action": "Obter confirmacao critica de Rodolfo para delegar somente leitura/ANALYZE da conta1663268201836138 ao System User corporativo existente122095869861482193, preservando tarefas existentes e sem trocar token. Fazer pre-read de atribuicao antes de qualquer write e readback pelo token original. Depois completar identidade/catalogo/binding, estender exclusivamente Intraday nos seletores/contagens para25 sem ampliar D-1, smoke e auditoria de agenda antes da ativacao.",
+  "cron_membership": "pending; existing24report consumers unchanged; no duplicate cron created",
+  "meta_campaign_writes": 0,
+  "dashboard_writes": 0,
+  "deletes": 0
+}
