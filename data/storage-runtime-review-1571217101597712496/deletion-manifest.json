@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "preparation_authority_message_id": "1571217101597712496",
+  "deletion_approval_message_id": null,
+  "thread_id": "1569928464033783862",
+  "targets": [
+    {
+      "path": "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+      "action": "delete_tree",
+      "metadata_fingerprint": "8d198e6da3f597033c14b35943b83ddd1d5a937a514e1eaacc54bac1709ffd20",
+      "frozen_metadata_ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-frozen-metadata.jsonl.gz",
+      "ledger_sha256": "0465bf52a2b829df9878cbdacb987e6546bd98ad1bab8871cc8730e827474442",
+      "counts": {
+        "directories": 3251,
+        "regular_files": 44287,
+        "symlinks": 4
+      }
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c",
+      "action": "delete_tree",
+      "metadata_fingerprint": "5cc2dbe2e50fa4abefea98953959ae384803aafce6a444827a59932186e88e43",
+      "frozen_metadata_ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/clean-target-7cc3fb8c-frozen-metadata.jsonl.gz",
+      "ledger_sha256": "b83fbcd1fb4cc79678232f7d460e53d2f8cbb9ac95dbc02556ca97139c6ada8c",
+      "counts": {
+        "directories": 1238,
+        "regular_files": 18319
+      }
+    }
+  ],
+  "counts": {
+    "directories": 4489,
+    "regular_files": 62606,
+    "symlinks": 4
+  },
+  "naive_unique_target_allocated_bytes": 1820164096,
+  "inode_aware_reclaim_bytes": 1793200128,
+  "blocks_held_by_external_hardlinks_bytes": 26963968,
+  "new_preservation_and_all_review_metadata_allocated_bytes": 14069760,
+  "estimated_structural_net_reduction_bytes": 1779130368,
+  "code_archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-differences-and-git-metadata.tar.gz",
+  "code_preservation_manifest": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-preservation-manifest.json",
+  "retained_files": [
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/old-venv-package-graph.json",
+      "sha256": "b95000eb3b1e2c2f14de8d697cfd1c62bfffa461218ea262fc700ec4017d74a4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/clean-target-7cc3fb8c-frozen-metadata.jsonl.gz",
+      "sha256": "b83fbcd1fb4cc79678232f7d460e53d2f8cbb9ac95dbc02556ca97139c6ada8c"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-differences-and-git-metadata.tar.gz",
+      "sha256": "8c487534ea40f0ca4736bc68eb87b32c009ea57a44980b95f102d30ecc161812"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-46904a3b-mgs-metadata.jsonl.gz",
+      "sha256": "25d993879c7648f7af033f608b3edf30e6787ea4b965ac168babb509c3f615d0"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-3f2afed3-mgs-20261021-metadata.jsonl.gz",
+      "sha256": "1f62b590b87e37690e111cd84ca491dcd9319cf7726b7c7553560fa87d1f1df9"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-59004a62-mgs-metadata.jsonl.gz",
+      "sha256": "eb0c0b88024ffe7c10221781e83b224cfdfe92bbab7549c93cfef520c1bca6f0"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-metadata.jsonl.gz",
+      "sha256": "6e7583d7b55908096234e452ee1fbe0f2fc0063432072487896d084acd6d49ff"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-29a61cb7-mgs-20261103-metadata.jsonl.gz",
+      "sha256": "9337f1f36a1feb48b0d11fe773b37f61afb718c4ba2dfb1809357c20ca6c28b6"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-frozen-metadata.jsonl.gz",
+      "sha256": "0465bf52a2b829df9878cbdacb987e6546bd98ad1bab8871cc8730e827474442"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-preservation-manifest.json",
+      "sha256": "502d2012036cee5994d016350f2cc97bd59248825ded3101889015fa2ff8ebac"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-metadata.jsonl.gz",
+      "sha256": "03366a6b8aa403c8490c26e09e101b35737543efda623aa6462399d87c356fb4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-ad2d4822-mgs-metadata.jsonl.gz",
+      "sha256": "69a24d1739f616b2e397c00b56b9cc23592a9bdeae6839bc3a90260928916042"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/old-venv-local-overrides.tar.gz",
+      "sha256": "37dc48c1191421193236fb77afc4d4955d8fe1e582d4c49fc421fff5cd073e91"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/EVIDENCE-SHA256SUMS",
+      "sha256": "d608ba367a44e01a604fd829da43176a11037a76b3be47fa9f5c9e6e61eeccc4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/EVIDENCE-SEAL.sha256",
+      "sha256": "cb6c9f1263128223570275e215844fce4d670eaf6a0f3be01ad2addcdffc4321"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch",
+      "sha256": "54a21f52c3e8dce1ddc1538c3f1add20b40e50d77d0f8229f29b23de9a57da2e"
+    }
+  ],
+  "git_recovery_bases": [
+    {
+      "repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "commit": "e6ad505398ac5956bdbefd9e111a598c5e6b6575"
+    },
+    {
+      "repository": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "commit": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e"
+    }
+  ],
+  "required_retained_git_repositories": [
+    "/root/.hermes/hermes-agent",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs"
+  ],
+  "historical_reader_state": "/root/mgs-agent/data/ares/meta-ads/landing-followup/supervised-repeat-20261016-062358/normal-results.json",
+  "historical_reader_script": "/root/mgs-agent/scripts/ares-direct-traffic-supervised-repeat.py",
+  "historical_reader_script_sha256": "a45b8ec3550ca09ef2325d91e037e342473f5bfae9bb7095b894103e4270a59b",
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "active_launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "profile_roots_protected": [
+    "/root/.hermes/profiles/zeus",
+    "/root/.hermes/profiles/ares",
+    "/root/.hermes/profiles/atena",
+    "/root/.hermes/state.db",
+    "/root/.hermes/sessions",
+    "/root/.hermes/auth.json"
+  ],
+  "other_old_roots_preserved": [
+    "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs"
+  ],
+  "git_assertions_frozen": {
+    "stage_standalone_primary_worktree": true,
+    "stage_modified_source_files": 5,
+    "stage_untracked_source_files": 1,
+    "stage_committed_tree_readable_from_retained_repository": true,
+    "stage_refs_and_381_unreachable_objects_found_in_retained_repositories": true,
+    "nested_plain_code_copy_not_git_worktree": true
+  },
+  "effect": "Retire only the old stage runtime and one nested code reproduction. Committed code and local changes remain recoverable from retained Git plus private capsule. The obsolete virtualenv/generated bytecode would be removed and must be rebuilt if a historical replay is ever needed; full old virtualenv rebuild has not been tested. Keep old historical replay helper and all operation records; no replay/Meta/PC1 action. Parent backup evidence and latest archives remain.",
+  "disk_before_preparation": {
+    "used_bytes": 146274885632,
+    "available_bytes": 60608618496,
+    "used_percent": 70.70398688795356
+  },
+  "projected_disk_used_percent": 69.8372188314291,
+  "prepared_at": "2026-11-14T13:02:24.974626-05:00"
+}
