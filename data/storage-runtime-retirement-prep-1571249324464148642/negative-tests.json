@@ -1,0 +1,18 @@
+{
+  "scope_reduction": "REJECTED_without_source_write",
+  "count_drift": "REJECTED_without_source_write",
+  "metadata_drift": "REJECTED_without_source_write",
+  "missing_approval": "REJECTED_before_audit_start_or_deletion",
+  "targets_after_negatives": {
+    "status": "PASS",
+    "mode": "preflight",
+    "target_paths": 4,
+    "counts": {
+      "files": 165180,
+      "directories": 11236,
+      "symlinks": 113
+    },
+    "recovery": null,
+    "deletions_by_validator": 0
+  }
+}

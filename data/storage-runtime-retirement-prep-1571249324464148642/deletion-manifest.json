@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "lot_id": "runtime-retirement-1571249324464148642",
+  "authority": {
+    "owner_id": "344196393512075265",
+    "preparation_message_id": "1571249324464148642",
+    "thread_id": "1569928464033783862"
+  },
+  "no_deletion_authorization": true,
+  "targets": [
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "action": "delete_tree",
+      "fingerprint": "1c2234bcdc37ab0963635b3d9e030564ddafcf27c8f390e4cc7ae5a1b2b18805",
+      "counts": {
+        "files": 37358,
+        "directories": 2890,
+        "symlinks": 4
+      },
+      "root_identity": {
+        "dev": 2049,
+        "ino": 795023,
+        "mode": 16877
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "action": "native_git_worktree_remove",
+      "fingerprint": "a695082d9bb8ac0c8c293d55557c1ea1db5d1a1b96f293f8122007e0328b38af",
+      "counts": {
+        "files": 127814,
+        "directories": 8343,
+        "symlinks": 108
+      },
+      "root_identity": {
+        "dev": 2049,
+        "ino": 861735,
+        "mode": 16877
+      }
+    },
+    {
+      "path": "/root/.local/bin/hermes-main-ad2d4822-mgs",
+      "action": "delete_symlink",
+      "fingerprint": "736db3fb5f185009749810d50e4f2d8b63209ee81013b69e0d4e23781e6b96fb",
+      "counts": {
+        "files": 0,
+        "directories": 0,
+        "symlinks": 1
+      },
+      "root_identity": {
+        "dev": 2049,
+        "ino": 603368,
+        "mode": 41471
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/worktrees",
+      "action": "native_worktree_admin_cleanup",
+      "fingerprint": "13a8c8fb30e0b1e859b1f95fbd6fe68d0981bd8146f03c8a02aba0f68ad0311a",
+      "counts": {
+        "files": 8,
+        "directories": 3,
+        "symlinks": 0
+      },
+      "root_identity": {
+        "dev": 2049,
+        "ino": 861732,
+        "mode": 16877
+      }
+    }
+  ],
+  "counts": {
+    "files": 165180,
+    "directories": 11236,
+    "symlinks": 113
+  },
+  "naive_allocated_bytes": 3408879616,
+  "inode_aware_reclaim_bytes": 3010691072,
+  "new_preservation_and_evidence_bytes_at_freeze": 420196352,
+  "estimated_net_reduction_vs_preparation_start_bytes": 2590494720,
+  "full_old_python_environment_rebuilt": false,
+  "irreversible_effect": "Old paths, legacy launcher and linked-worktree registration disappear; exact code/state/Node payloads and Python local adjustments are preserved, but old Python environments stop being ready-to-run and require recreation. No claim of full runnable old-Python restoration.",
+  "native_admin_scope": "Only .git/worktrees/hermes-agent-port-main-ad2d4822-mgs exists in the frozen admin parent. Native git worktree remove --force removes the linked checkout/registration; the exact parent is removed only if empty. No object store, branch ref, other worktree or common Git root is deleted.",
+  "retained_paths": [
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "/root/.hermes/hermes-agent",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/objects",
+    "/root/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu/bin/python3.14",
+    "/root/.hermes/profiles/zeus",
+    "/root/.hermes/profiles/ares",
+    "/root/.hermes/profiles/atena",
+    "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/conditional-code-state-and-git-admin.tar.gz",
+    "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/python-local-overrides.tar.gz",
+    "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz",
+    "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642"
+  ],
+  "retained_hashes": [
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "sha256": "759fd44d90b85d4bb9d69cba0e4a179ea11c57d6740b3a8076bbc52f940a0c99",
+      "size": 16138
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "sha256": "883cd858d79d4bb7d093beb1a2a5cf0123eaf39cbe70e01b5c65482336721dee",
+      "size": 12297
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-49-20261013-state.json",
+      "sha256": "4ff801469da00690a75ec089c2b28375032b031f048d3d8ada88274454b3c477",
+      "size": 11234
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "sha256": "06bbd85873f456b55ab1e95a7cc5c334344c28b14cacd9552fd9624d009827b5",
+      "size": 28783
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
+      "sha256": "22ad0877e0d8062a2cc00f7345dd92b558a119353dc28cca5834427af7dd24d8",
+      "size": 38007
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/config.yaml",
+      "sha256": "6547bdcc77aa2d6da2f30b1269a800c4af28fc23e7b6b5995624d1768577c257",
+      "size": 21814
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/SOUL.md",
+      "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+      "size": 15362
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "sha256": "e0af0a659b446532872f308dced2510c5b0282ccfc556a410c6ad86af4d6b5eb",
+      "size": 145034
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/SOUL.md",
+      "sha256": "f567c09353a59876c14a3bcf7d10ff64275fc586a503ceb06758d7e3d427b889",
+      "size": 22951
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/config.yaml",
+      "sha256": "d7ce6f094f9090e97865b49eda5e4a0fa3d203c95e21e85798f0886cf235544d",
+      "size": 16437
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/SOUL.md",
+      "sha256": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e",
+      "size": 16354
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/config",
+      "sha256": "b9d018c29b8b52298cbcc13349d65fe39a46e3bf210faa1d9c1ccc1d4d7c42aa"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/HEAD",
+      "sha256": "876cb0fa304a61e1538a1f6aaa26c8d44dd72606acf0116eb102467c80801214"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/packed-refs",
+      "sha256": "2b95e5030bdf61c58b9e2abd0313df147065c836d3de35a84c5bcad22ceb18c8"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git/config",
+      "sha256": "78299728185b8a0a553f8b576f1398c68a9e684df6dbc5fcd8a15b0c9287406c"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git/HEAD",
+      "sha256": "37182b44ca6bef09e50a04d02e4df7f0c9af0183f42d2d50198f026d8f79092c"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git/packed-refs",
+      "sha256": "a9a83ba974096f980349ccea083ec6f2529b68256ffe73c67954d18e64824309"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+      "sha256": "2acdfc04357da4f621f7f674f273f075db2435d43874ad1a9d8cac492b3c11e4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/conditional-code-state-and-git-admin.tar.gz",
+      "sha256": "6c68b0ef4d0e494d332ebc240b98d554f5c9525f80b9bfab416564bde7055db4"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/python-local-overrides.tar.gz",
+      "sha256": "3a35097015c7bfe5d8ecc0cf7fbdb65c22ca3f3a865415f1f5ea9e8aabc7e86c"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/python-local-overrides.tar.gz.members.json.gz",
+      "sha256": "861011082ddf9b4b61ded356d5505e1a304d2ad4a942999ba00ef4145a6861e5"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz",
+      "sha256": "d3aed435a8726d51e888e04163ac409f7565f889f4a640f96c2eb937cb3faf67"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/hermes-agent-port-main-46904a3b-mgs-unique-objects.pack",
+      "sha256": "c9752edc7aff535b69e60afdef79ffc8ad7bea6369edb73edc4761718ad608d2"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz.members.json.gz",
+      "sha256": "f866d4b0ba982fee88f15b1102ba5924a49a85617ee286e09d9fd1c0b5316fdb"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/hermes-agent-port-main-ad2d4822-mgs-python-audit.json",
+      "sha256": "31ac6a6bec89bf8c4cfaa87fb981002ec3d17fcbadb0e39aca13c15807660bd9"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/hermes-agent-port-main-46904a3b-mgs-python-audit.json",
+      "sha256": "4536069f117103aa1ef5917c8bd1ac0884818a8e317dc42e1f80ba4b39ce09e0"
+    },
+    {
+      "path": "/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/bin/python3.14",
+      "sha256": "1e9b4c71f4ece5e87e45e05df0d63482d8eb54633484542d42db20462db4514d"
+    }
+  ],
+  "live_launcher_target": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "helper_sha256": {
+    "verify-lot.py": "75c7b6672cf630ba7956b92e15e11e1908049d99ddf33267b31d0b44960a7ea6",
+    "recover-retained.py": "47ad86421bfd391a197e672b50b47bd2be0ea7b41e8dad40c236920c3f8d125b",
+    "execute-lot.py": "73e846d5989673826aa2d0ba2461a6adc0aaacc4833a6de3247c1ff8243746ef"
+  },
+  "filesystem_before": {
+    "used_bytes": 145104740352,
+    "available_bytes": 61778763776,
+    "used_percent": 70.14,
+    "projected_after_delete_percent": 68.68
+  },
+  "required_approval": "Fresh native Rodolfo confirmation of this exact manifest SHA256 and executor SHA256, after disclosure; no prior lot approval transfers.",
+  "created_at": "2026-11-14T14:57:09.070533-05:00"
+}
