@@ -283,12 +283,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1571247080448720938",
-      "next_step": "Validar coleta live e testes; primeira entrega; auditoria e agenda finita",
+      "next_step": "Inicial14:41EST11campanhas GET verificado; seis novas292-297 e cinco alteradas208278285288291. 19slots14:43-23:43EST; expira15/11 00hEST antesAPI;22testes PASS, auditoria pós zero conflitos;coorte futura apenas novas criadas14nov. Nenhum write Meta/SB.",
       "objective": "CPR e ROI cada30min novas campanhas14nov incluindo futuras e cinco alteradas antes pedido",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1571247080448720938/manifest.json",
-      "state": "preparing",
+      "state": "scheduled_initial_get_verified",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-14T19:39:06+00:00"
+      "updated_at": "2026-11-14T19:42:49+00:00"
     },
     {
       "agent": "ares",
@@ -2359,6 +2359,16 @@
       "state": "complete: campanha001/120251850362450087, um conjunto e dois anuncios habilitados, usd35/dia cost_cap usd0.90, qa semantico/renderizado e ids conferidos; anuncios pending_review. url e copy literais. mesmos ids apos recovery; fonte preservada.",
       "thread_id": "1570857869790945455",
       "updated_at": "2026-11-14T19:33:29+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1571246023119081574",
+      "next_step": "Concluir pos-processamento e ativacao central; validar IDs budget lance horario tracking e acervo; entrega nativa com bloco Iris",
+      "objective": "Concluir oito clones da C105 Mavroa06 G006 com vinte imagens e grupos literais",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1571246023119081574/state.json",
+      "state": "oito campanhas e vinte anuncios criados paused; qa renderizado completo; continuacao foreground do mesmo request em pos-processamento; sem replay de criacao",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-14T19:47:00+00:00"
     },
     {
       "agent": "ares",
@@ -6487,6 +6497,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-RUNTIME-LOT-1571249324464148642",
+      "next_step": "Auditar RECORDs e Git;fechar recuperação/dependências;congelar lote e testar verificador não mutante antes de pedir confirmação crítica.",
+      "objective": "Verificar ambientes46904a3b/ad2d4822, preservar diferenças e preparar manifesto exato incluindo atalho/registro linked-worktree;sem exclusão ou Meta/PC1.",
+      "source": "context/storage-reorganization-20261112.md;data/digitaltrust-runtime-migration-1571245557316452364/result.json",
+      "state": "in_progress_environment_audit",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T19:45:47+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-RUNTIME-RETIRE-1571231699172462614",
       "next_step": "Loteencerrado semretry/confirmacao;readbackGItantesentregaemcleanup-git-sync.json;manter6roots/capsulas/Gitbases/perfis;46904a3b/ad2d4822seguemcondicionais,semexclusaoadicionalautorizada.",
       "objective": "2treesconfirmadasretiradas1.67GiBdf;57protegidosiguais;161replays+18319SHAsposdelete;3configs/3smokesPASS;REPORT1571235481952198710GETverified;semrestart.",
@@ -6788,12 +6808,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-roi-1571247040074219553",
-      "next_step": "Validar descoberta Activities/Meta, ROI SB, primeira entrega e agenda finita",
-      "objective": "Relatorios CPR e ROI a cada 30 min de criadas/alteradas hoje, incluindo novas, Mavroa04 G004, somente 14/11/2026",
+      "next_step": "Executar slots de 30 minutos de 14:58 ate23:58 EST; encerrar 15/11 00:00, preservar recibos e retomar somente camada faltante",
+      "objective": "CPR Meta e ROI real SB, campanhas criadas/alteradas em 14/11/2026 Mavroa04 G004; descoberta futura da mesma conta/data",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1571247040074219553/manifest.json",
-      "state": "preparing",
+      "state": "active_finite_schedule_verified",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-14T19:38:14+00:00"
+      "updated_at": "2026-11-14T19:47:38+00:00"
     },
     {
       "agent": "ares",
@@ -10567,5 +10587,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T19:39:06+00:00"
+  "updated_at": "2026-11-14T19:47:38+00:00"
 }
