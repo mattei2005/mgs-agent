@@ -1,0 +1,48 @@
+{
+  "native_watcher_pathspecs_applied": true,
+  "durable_files": [
+    "data/storage-runtime-review-1571217101597712496/allocation-summary.json",
+    "data/storage-runtime-review-1571217101597712496/code-preservation-result.json",
+    "data/storage-runtime-review-1571217101597712496/collect-metadata.py",
+    "data/storage-runtime-review-1571217101597712496/consumer-references.json",
+    "data/storage-runtime-review-1571217101597712496/deletion-manifest-and-verifier.sha256",
+    "data/storage-runtime-review-1571217101597712496/deletion-manifest.json",
+    "data/storage-runtime-review-1571217101597712496/dependency-classification.json",
+    "data/storage-runtime-review-1571217101597712496/git-roots.json",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-29a61cb7-mgs-20261103-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-3f2afed3-mgs-20261021-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-46904a3b-mgs-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-46904a3b-mgs-ignored.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-59004a62-mgs-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-ad2d4822-mgs-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-port-main-ad2d4822-mgs-ignored.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-git.json.gz",
+    "data/storage-runtime-review-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-ignored.json.gz",
+    "data/storage-runtime-review-1571217101597712496/metadata-batch-1.json",
+    "data/storage-runtime-review-1571217101597712496/metadata-batch-2.json",
+    "data/storage-runtime-review-1571217101597712496/negative-tests.json",
+    "data/storage-runtime-review-1571217101597712496/nested-code-comparison.json",
+    "data/storage-runtime-review-1571217101597712496/nested-code-expected.json.gz",
+    "data/storage-runtime-review-1571217101597712496/nested-historical-evidence-coverage.json",
+    "data/storage-runtime-review-1571217101597712496/old-venv-integrity.json",
+    "data/storage-runtime-review-1571217101597712496/preflight.json",
+    "data/storage-runtime-review-1571217101597712496/preserve-code.py",
+    "data/storage-runtime-review-1571217101597712496/report-readback.json",
+    "data/storage-runtime-review-1571217101597712496/retained-git-connectivity.json",
+    "data/storage-runtime-review-1571217101597712496/review-result.json",
+    "data/storage-runtime-review-1571217101597712496/review-result.sha256",
+    "data/storage-runtime-review-1571217101597712496/stage-ref-recovery-availability.json",
+    "data/storage-runtime-review-1571217101597712496/stage-unreachable-objects.json",
+    "data/storage-runtime-review-1571217101597712496/stage-unreachable-recovery.json",
+    "data/storage-runtime-review-1571217101597712496/venv-overrides-recovery.json",
+    "data/storage-runtime-review-1571217101597712496/verify-lot.py"
+  ],
+  "excluded_intermediate_files": [
+    {
+      "path": "data/storage-runtime-review-1571217101597712496/dependency-state.json",
+      "native_rule": ":(exclude)data/**/*-state.json",
+      "purpose": "intermediate projection; immutable delivery is dependency-classification.json"
+    }
+  ]
+}

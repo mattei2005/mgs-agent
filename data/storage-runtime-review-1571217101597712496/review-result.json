@@ -1,0 +1,122 @@
+{
+  "status": "two_exact_code_runtime_targets_ready_awaiting_critical_confirmation",
+  "authority_message_id": "1571217101597712496",
+  "thread_id": "1569928464033783862",
+  "top_level_runtime_roots_reviewed": 7,
+  "nested_plain_code_roots_reviewed": 1,
+  "total_code_roots_reviewed": 8,
+  "source_scan_errors": 0,
+  "target_count": 2,
+  "target_counts": {
+    "directories": 4489,
+    "regular_files": 62606,
+    "symlinks": 4
+  },
+  "inode_aware_reclaim_bytes": 1793200128,
+  "estimated_structural_net_reduction_bytes": 1779130368,
+  "new_review_and_preservation_bytes": 14069760,
+  "protected_code_roots": {
+    "/root/.hermes/hermes-agent": "canonical update source and customizations",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103": "live gateways",
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021": "immediate rollback and code preservation base",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs": "inbound alternates from rollback/other copies, shared worktree store and configured legacy commands",
+    "/root/.hermes/hermes-agent-port-main-46904a3b-mgs": "literal dependency of DigitalTrust helper whose 49-item state remains blocked; no producer/campaign changes authorized",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs": "registered dirty linked worktree, legacy launcher and generated test-state not yet proven disposable"
+  },
+  "candidate_paths": [
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c"
+  ],
+  "code_capsule": {
+    "status": "code_preservation_and_focused_replay_validated",
+    "authority_message_id": "1571217101597712496",
+    "archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-differences-and-git-metadata.tar.gz",
+    "archive_sha256": "8c487534ea40f0ca4736bc68eb87b32c009ea57a44980b95f102d30ecc161812",
+    "archive_allocated_bytes": 2412544,
+    "self_contained": false,
+    "required_retained_repositories": [
+      "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+      "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "/root/.hermes/hermes-agent"
+    ],
+    "stage_base_commit": "e6ad505398ac5956bdbefd9e111a598c5e6b6575",
+    "nested_base_commit": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e",
+    "stage_modified_files_replayed": 5,
+    "stage_overlay_files_replayed": 15,
+    "nested_modified_or_extra_files_replayed": 101,
+    "nested_unchanged_base_files_verified": 18218,
+    "git_metadata_members": 5316,
+    "preserved_members": 5429,
+    "original_overlay_hashes_and_metadata_unchanged": true,
+    "no_live_profile_or_sqlite_open": true,
+    "full_old_virtualenv_rebuilt": false,
+    "old_environment_cache_disposal_requires_exact_confirmation": true,
+    "scratch_replay_root": "/root/.hermes/profiles/zeus/cache/scratch/runtime-code-replay-1571217101597712496",
+    "created_at": "2026-11-14T12:55:44.560906-05:00"
+  },
+  "nested_original_checksum_rows_reconstructible": 18319,
+  "old_venv_distribution_count": 123,
+  "old_venv_record_payloads_checked": 8326,
+  "old_venv_local_override_payloads_verified": 45,
+  "full_old_virtualenv_rebuild_tested": false,
+  "deletion_manifest_sha256": "a4a87b9230a8e38a8ff0cf847c0de071947d42aa9ec1990a8e0ee315b2da0bb6",
+  "verifier_sha256": "71bf2aed3d78997405c1d64902da91d0fafd2f89a94aae3c7dd4bbbc5d0377e8",
+  "preflight": {
+    "status": "PASS",
+    "mode": "preflight",
+    "targets": 2,
+    "counts": {
+      "directories": 4489,
+      "regular_files": 62606,
+      "symlinks": 4
+    },
+    "retained_code_capsule_verified": true,
+    "retained_git_base_archives_readable": true,
+    "live_target_consumers": 0,
+    "deletions": 0
+  },
+  "negative_tests": {
+    "scope_reduction": "rejected_without_source_write",
+    "metadata_drift": "rejected_without_source_write",
+    "count_drift": "rejected_without_source_write",
+    "missing_approval": "rejected"
+  },
+  "deletions": 0,
+  "gateway_pids_unchanged": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "runtime_or_profile_mutations": 0,
+  "campaign_pc1_or_meta_actions": 0,
+  "retention_changed": false,
+  "protected_live_profile_roots_outside_targets": true,
+  "source_metadata_frozen_twice_and_readback_passed": true,
+  "operation_created_scratch": [
+    "/root/.hermes/profiles/zeus/cache/scratch/runtime-code-replay-1571217101597712496",
+    "/root/.hermes/profiles/zeus/cache/scratch/runtime-lot-negatives-1571217101597712496"
+  ],
+  "diagnostic_recoveries": [
+    "Generic Hermes skill was disabled: read its canonical profile file directly without enabling it.",
+    "Wrong reference namespace corrected; matching VPS reference loaded.",
+    "Nested reproduction has no .git: classified as plain code, not damaged repository.",
+    "Original historical seal uses relative names; initial zero-row absolute-prefix check rejected and corrected; 18319 rows then matched.",
+    "Optional tar payload type narrowed explicitly after static diagnostic; same non-mutating preflight passed."
+  ],
+  "created_at": "2026-11-14T13:09:53.305087-05:00",
+  "skill_updated": "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+  "skill_live_mirror_equal": true,
+  "report_infra": {
+    "message_id": "1571226375589724343",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T13:13:42.204143-05:00"
+  },
+  "governance_errors": [],
+  "review_milestone_completed_at": "2026-11-14T13:13:42.204660-05:00"
+}

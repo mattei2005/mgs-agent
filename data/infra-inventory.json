@@ -64932,6 +64932,83 @@
       "authority_message_id": "1571217766256742420",
       "diagnosis": "Ares aplicou gate de dominio ao link informado como campo de campanha. security-policies.md Politica 3 inclui explicitamente destino de campanha; alterar essa fonte requer confirmacao adicional do Critical Subset. Nenhuma politica, SOUL, skill Ares, cadastro de dominio ou campanha alterados.",
       "updated_at": "2026-11-14T17:41:00.845976+00:00"
+    },
+    {
+      "id": "storage-runtime-review-1571217101597712496",
+      "agent": "zeus",
+      "type": "read_only_runtime_redundancy_and_exact_lot_preparation",
+      "authority_message_id": "1571217101597712496",
+      "thread_id": "1569928464033783862",
+      "status": "two_exact_code_runtime_targets_ready_awaiting_critical_confirmation",
+      "path": "/root/mgs-agent/data/storage-runtime-review-1571217101597712496",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "result_path": "/root/mgs-agent/data/storage-runtime-review-1571217101597712496/review-result.json",
+      "top_level_roots": 7,
+      "nested_code_roots": 1,
+      "reviewed_roots": 8,
+      "target_roots": 2,
+      "target_files": 62606,
+      "target_directories": 4489,
+      "target_symlinks": 4,
+      "inode_aware_reclaim_bytes": 1793200128,
+      "structural_net_reduction_estimate_bytes": 1779130368,
+      "manifest_sha256": "a4a87b9230a8e38a8ff0cf847c0de071947d42aa9ec1990a8e0ee315b2da0bb6",
+      "verifier_sha256": "71bf2aed3d78997405c1d64902da91d0fafd2f89a94aae3c7dd4bbbc5d0377e8",
+      "deletions": 0,
+      "deletion_authorized": false,
+      "source_code_replay_validated": true,
+      "full_old_venv_rebuild_tested": false,
+      "other_roots_preserved": 6,
+      "skill_updated": "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+      "skill_mirror_equal": true,
+      "updated_at": "2026-11-14T13:12:39.050380-05:00",
+      "review_result_sha256": "af4308d1c32ccd60b0d975296c926528396e2a9ce61ea102e1686b6d2eeab04b",
+      "report_infra_message_id": "1571226375589724343",
+      "report_infra_readback": true
+    },
+    {
+      "id": "hermes-code-recovery-capsule-1571217101597712496",
+      "agent": "zeus",
+      "type": "private_code_overlays_git_administration_and_old_env_overrides",
+      "path": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496",
+      "status": "validated_protected_dependency_set",
+      "self_contained": false,
+      "preservation_authority_message_id": "1571217101597712496",
+      "code_archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-differences-and-git-metadata.tar.gz",
+      "code_archive_sha256": "8c487534ea40f0ca4736bc68eb87b32c009ea57a44980b95f102d30ecc161812",
+      "recovery_dependencies": [
+        {
+          "repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+          "commit": "e6ad505398ac5956bdbefd9e111a598c5e6b6575"
+        },
+        {
+          "repository": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+          "commit": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e"
+        }
+      ],
+      "required_git_repositories": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-59004a62-mgs"
+      ],
+      "dependency_guard": "Do not retire required object stores/commits until successor or rebase restoration is validated. Preserve source artifacts even after the two originals are deleted under separate confirmation.",
+      "local_code_replay_checked": {
+        "stage_modified": 5,
+        "stage_extra_ignored": 10,
+        "nested_changed_extra": 101,
+        "original_nested_manifest_rows": 18319
+      },
+      "old_venv_local_overrides": 45,
+      "old_venv_record_payloads_checked": 8326,
+      "old_venv_distribution_graph": 123,
+      "full_old_venv_rebuild_tested": false,
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "result_path": "/root/mgs-agent/data/storage-runtime-review-1571217101597712496/code-preservation-result.json",
+      "updated_at": "2026-11-14T13:12:39.050380-05:00",
+      "review_result_sha256": "af4308d1c32ccd60b0d975296c926528396e2a9ce61ea102e1686b6d2eeab04b",
+      "report_infra_message_id": "1571226375589724343",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
