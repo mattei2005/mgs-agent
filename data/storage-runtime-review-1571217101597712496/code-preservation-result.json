@@ -1,0 +1,28 @@
+{
+  "status": "code_preservation_and_focused_replay_validated",
+  "authority_message_id": "1571217101597712496",
+  "archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/code-differences-and-git-metadata.tar.gz",
+  "archive_sha256": "8c487534ea40f0ca4736bc68eb87b32c009ea57a44980b95f102d30ecc161812",
+  "archive_allocated_bytes": 2412544,
+  "self_contained": false,
+  "required_retained_repositories": [
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "/root/.hermes/hermes-agent"
+  ],
+  "stage_base_commit": "e6ad505398ac5956bdbefd9e111a598c5e6b6575",
+  "nested_base_commit": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e",
+  "stage_modified_files_replayed": 5,
+  "stage_overlay_files_replayed": 15,
+  "nested_modified_or_extra_files_replayed": 101,
+  "nested_unchanged_base_files_verified": 18218,
+  "git_metadata_members": 5316,
+  "preserved_members": 5429,
+  "original_overlay_hashes_and_metadata_unchanged": true,
+  "no_live_profile_or_sqlite_open": true,
+  "full_old_virtualenv_rebuilt": false,
+  "old_environment_cache_disposal_requires_exact_confirmation": true,
+  "scratch_replay_root": "/root/.hermes/profiles/zeus/cache/scratch/runtime-code-replay-1571217101597712496",
+  "created_at": "2026-11-14T12:55:44.560906-05:00"
+}
