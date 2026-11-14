@@ -1,0 +1,42 @@
+{
+  "state": "consumer_and_native_scope_verified_backup_and_frozen_manifest_pending",
+  "packages": [
+    {
+      "name": "linux-tools-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "installed_size_KiB": 19342
+    },
+    {
+      "name": "linux-tools-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "installed_size_KiB": 630
+    },
+    {
+      "name": "linux-tools-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "installed_size_KiB": 19348
+    },
+    {
+      "name": "linux-tools-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "installed_size_KiB": 636
+    }
+  ],
+  "native_simulation": [
+    "Purg linux-tools-6.8.0-138-generic [6.8.0-138.138]",
+    "Purg linux-tools-6.8.0-138 [6.8.0-138.138]",
+    "Purg linux-tools-6.8.0-142-generic [6.8.0-142.142]",
+    "Purg linux-tools-6.8.0-142 [6.8.0-142.142]"
+  ],
+  "kernel_running": "6.8.0-147-generic",
+  "default_perf": "perf version 6.8.12",
+  "default_perf_resolves_by_running_kernel": true,
+  "static_references": [],
+  "root_crontab_references": [],
+  "process_references": [],
+  "structural_aliases_excluded": [],
+  "metadata_node_count": 65,
+  "intermediate_duplicate_count": 11,
+  "no_deletions": true,
+  "at": "2026-11-14T18:53:45.718362-05:00"
+}
