@@ -115,5 +115,17 @@ Fonte ativa: `data/storage-compact-history-1570876981178929333/cleanup-result.js
 
 Este lote está concluído. O pedido amplo de revisão/retirada de outros backups não foi encerrado nem ampliado: próximo ponto é a revisão read-only dos conjuntos antigos em `/root/.hermes/secure-backups/vps-maintenance`. Latest Hermes de novembro, compacto/bases, safety de 10/11, backups remotos, runtime e demais cópias fora desse lote permanecem preservados. Nenhuma retenção futura ou automação de exclusão foi alterada.
 
+## Ponto 3: revisão dos conjuntos antigos VPS-maintenance — 14/11
+
+Continuação autorizada por Rodolfo `1571144515673260184`, na mesma thread. Revisão delimitada executada sobre `/root/.hermes/secure-backups/vps-maintenance`: 36 entradas na raiz (35 diretórios e o ponteiro legado), 2.675 arquivos regulares, 353 diretórios e 16 links simbólicos; 1.022.234.624 bytes alocados únicos (~0,95 GiB), sem erros de varredura ou alterações dos bytes/metadados originais. As 36 entradas não são 36 backups completos da VPS.
+
+Composição aditiva: 756.748.288 bytes em pacotes/arquivos de recuperação diversos; 109.936.640 bytes em árvores expandidas de verificação de pacotes; 120.754.176 bytes em seis arquivos históricos de controle dos perfis Hermes; 12.783.616 bytes em estados antigos de audit/inventory; 22.011.904 bytes em evidências, código e configuração compactos. Classificação por tipo não comprova elegibilidade para descarte, nem autoriza alterar manifests/checksums acoplados.
+
+Os 103 arquivos comprimidos examinados passaram em gzip e listagem tar integral. Os dois arquivos Hermes retidos de novembro conferiram com seus SHA-256 históricos; todos os membros regulares foram lidos em stream, sem extração nem conexão SQLite. Cada um dos seis arquivos antigos de perfis contém payloads não cobertos byte a byte por esses dois arquivos de novembro; alguns incluem versões históricas de bancos. Isso não demonstra ausência global nem perda de conversas vivas, apenas impede afirmar substituição integral dos arquivos antigos. Não somar os membros diferentes entre arquivos sobrepostos como fatos únicos. Nenhuma referência cwd/exe/fd aos alvos foi detectada; isso não substitui a resolução de consumidores e dos contratos de recuperação.
+
+**Resultado desta revisão:** classificação concluída, zero exclusões, zero bytes de novo lote destrutivo integralmente validado; a retirada ampla solicitada continua pendente, não foi cancelada nem convertida em retenção definitiva. Para retirar os conjuntos antigos sem perda histórica, a próxima proposta é preservar/consolidar suas diferenças e evidências antes de preparar um manifesto de exclusão; autorização dessa preservação e confirmação destrutiva são gates separados. Pacotes antigos, fontes reproduzíveis e histórico de perfis não devem ser descartados em bloco por data. Nenhuma retenção, credencial, produção ou gateway foi alterado.
+
+Fonte ativa desta etapa: `data/storage-vps-legacy-review-1571144515673260184/review-result.json`; inventário detalhado e comparação dos membros comprimidos preservados ao lado. Checkpoint `ZEUS-STORAGE-VPS-LEGACY-1571144515673260184`. A lista remota Hostinger não foi consultada novamente nesta etapa; nenhuma nova comprovação de restore remoto é alegada.
+
 
 

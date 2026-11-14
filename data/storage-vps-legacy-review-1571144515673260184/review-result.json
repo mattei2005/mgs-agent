@@ -1,0 +1,499 @@
+{
+  "status": "classification_complete_preservation_required_before_broad_retirement",
+  "request_message_id": "1571144515673260184",
+  "thread_id": "1569928464033783862",
+  "observed_at": "2026-11-14T07:51:09.291140-05:00",
+  "root": "/root/.hermes/secure-backups/vps-maintenance",
+  "entries": 36,
+  "directories_at_root": 35,
+  "regular_files": 2675,
+  "symlinks": 16,
+  "directories": 353,
+  "occupied_inode_unique_bytes": 1022234624,
+  "category_totals": {
+    "compact_evidence_code_configuration": {
+      "regular_files": 1128,
+      "allocated_bytes": 22011904
+    },
+    "package_payload_and_other_recovery_archives": {
+      "regular_files": 216,
+      "allocated_bytes": 756748288
+    },
+    "historical_audit_inventory_state": {
+      "regular_files": 14,
+      "allocated_bytes": 12783616
+    },
+    "historical_hermes_control_plane_archives": {
+      "regular_files": 6,
+      "allocated_bytes": 120754176
+    },
+    "expanded_package_verification": {
+      "regular_files": 1311,
+      "allocated_bytes": 109936640
+    }
+  },
+  "sets": {
+    "20260710-004112": {
+      "regular_files": 7,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 2682880,
+      "categories": {
+        "compact_evidence_code_configuration": 6,
+        "package_payload_and_other_recovery_archives": 1
+      }
+    },
+    "20260726-224122": {
+      "regular_files": 6,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 8978432,
+      "categories": {
+        "compact_evidence_code_configuration": 4,
+        "package_payload_and_other_recovery_archives": 2
+      }
+    },
+    "20260802-174737": {
+      "regular_files": 13,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 61571072,
+      "categories": {
+        "compact_evidence_code_configuration": 6,
+        "package_payload_and_other_recovery_archives": 7
+      }
+    },
+    "20260810T235019-0400": {
+      "regular_files": 12,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 7073792,
+      "categories": {
+        "compact_evidence_code_configuration": 11,
+        "package_payload_and_other_recovery_archives": 1
+      }
+    },
+    "20260817-20260817T121253Z": {
+      "regular_files": 44,
+      "directories": 4,
+      "symlinks": 0,
+      "allocated_bytes": 31440896,
+      "categories": {
+        "compact_evidence_code_configuration": 28,
+        "package_payload_and_other_recovery_archives": 16
+      }
+    },
+    "20260817-reboot-post-cleanup-20260817T155103Z": {
+      "regular_files": 11,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 102400,
+      "categories": {
+        "compact_evidence_code_configuration": 11
+      }
+    },
+    "20260821T013506Z-kvm4-full-update": {
+      "regular_files": 18,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 319488,
+      "categories": {
+        "compact_evidence_code_configuration": 16,
+        "package_payload_and_other_recovery_archives": 2
+      }
+    },
+    "20260821T020202Z-events-audit-nul-repair": {
+      "regular_files": 6,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 5873664,
+      "categories": {
+        "historical_audit_inventory_state": 6
+      }
+    },
+    "20260821T020852Z-events-audit-jsonl-normalization": {
+      "regular_files": 6,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 5877760,
+      "categories": {
+        "historical_audit_inventory_state": 6
+      }
+    },
+    "20260824T192548Z-vps-hermes-update": {
+      "regular_files": 17,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 24911872,
+      "categories": {
+        "compact_evidence_code_configuration": 12,
+        "package_payload_and_other_recovery_archives": 5
+      }
+    },
+    "20260901T190009Z-vps-full-update": {
+      "regular_files": 83,
+      "directories": 6,
+      "symlinks": 0,
+      "allocated_bytes": 41259008,
+      "categories": {
+        "compact_evidence_code_configuration": 42,
+        "package_payload_and_other_recovery_archives": 41
+      }
+    },
+    "20260905T142152Z-vps-snap-kernel139": {
+      "regular_files": 24,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 180224,
+      "categories": {
+        "compact_evidence_code_configuration": 24
+      }
+    },
+    "20260910T081107-0400": {
+      "regular_files": 2,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 1036288,
+      "categories": {
+        "compact_evidence_code_configuration": 0,
+        "historical_audit_inventory_state": 2
+      }
+    },
+    "20260910T081838-0400-vps-hermes-v0211": {
+      "regular_files": 189,
+      "directories": 4,
+      "symlinks": 0,
+      "allocated_bytes": 61038592,
+      "categories": {
+        "compact_evidence_code_configuration": 161,
+        "historical_hermes_control_plane_archives": 1,
+        "package_payload_and_other_recovery_archives": 27
+      }
+    },
+    "20260910T194957Z-vps-new-security10": {
+      "regular_files": 44,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 18178048,
+      "categories": {
+        "compact_evidence_code_configuration": 34,
+        "package_payload_and_other_recovery_archives": 10
+      }
+    },
+    "20260910T213059-0400-hermes-main-45a6101f": {
+      "regular_files": 159,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 4259840,
+      "categories": {
+        "compact_evidence_code_configuration": 157,
+        "package_payload_and_other_recovery_archives": 1,
+        "historical_hermes_control_plane_archives": 1
+      }
+    },
+    "20260914T165558Z-vps-hermes-v0213": {
+      "regular_files": 37,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 25071616,
+      "categories": {
+        "compact_evidence_code_configuration": 35,
+        "historical_hermes_control_plane_archives": 1,
+        "package_payload_and_other_recovery_archives": 1
+      }
+    },
+    "20260914T180134Z-vps-hermes-main-14efb460": {
+      "regular_files": 34,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 25137152,
+      "categories": {
+        "compact_evidence_code_configuration": 32,
+        "historical_hermes_control_plane_archives": 1,
+        "package_payload_and_other_recovery_archives": 1
+      }
+    },
+    "20260919T-context872": {
+      "regular_files": 14,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 565248,
+      "categories": {
+        "compact_evidence_code_configuration": 14
+      }
+    },
+    "20260919T155128Z-vps-hermes-update": {
+      "regular_files": 98,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 39571456,
+      "categories": {
+        "compact_evidence_code_configuration": 95,
+        "historical_hermes_control_plane_archives": 1,
+        "package_payload_and_other_recovery_archives": 2
+      }
+    },
+    "20260919T181046Z-hermes-005c746d": {
+      "regular_files": 19,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 22810624,
+      "categories": {
+        "compact_evidence_code_configuration": 18,
+        "historical_hermes_control_plane_archives": 1
+      }
+    },
+    "20260923T141350-0400-kernel142": {
+      "regular_files": 33,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 294912,
+      "categories": {
+        "compact_evidence_code_configuration": 33
+      }
+    },
+    "20260923T205433Z-nodejs-22.23.3": {
+      "regular_files": 21,
+      "directories": 3,
+      "symlinks": 0,
+      "allocated_bytes": 44392448,
+      "categories": {
+        "compact_evidence_code_configuration": 18,
+        "package_payload_and_other_recovery_archives": 3
+      }
+    },
+    "20260923T214843Z-full-vps-hermes-audit": {
+      "regular_files": 147,
+      "directories": 12,
+      "symlinks": 0,
+      "allocated_bytes": 8327168,
+      "categories": {
+        "compact_evidence_code_configuration": 145,
+        "package_payload_and_other_recovery_archives": 2
+      }
+    },
+    "20260925T115521Z-apt11": {
+      "regular_files": 28,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 3342336,
+      "categories": {
+        "compact_evidence_code_configuration": 16,
+        "package_payload_and_other_recovery_archives": 12
+      }
+    },
+    "20260925T120252Z-hermes-port-59004a62": {
+      "regular_files": 5,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 1339392,
+      "categories": {
+        "compact_evidence_code_configuration": 4,
+        "package_payload_and_other_recovery_archives": 1
+      }
+    },
+    "20261002-vps-1555704911805808712": {
+      "regular_files": 39,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 104312832,
+      "categories": {
+        "compact_evidence_code_configuration": 21,
+        "package_payload_and_other_recovery_archives": 18
+      }
+    },
+    "20261012-1559192694096404537": {
+      "regular_files": 1416,
+      "directories": 266,
+      "symlinks": 16,
+      "allocated_bytes": 204275712,
+      "categories": {
+        "compact_evidence_code_configuration": 88,
+        "package_payload_and_other_recovery_archives": 17,
+        "expanded_package_verification": 1311
+      }
+    },
+    "20261012-monarx-1559266729031635005": {
+      "regular_files": 27,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 11440128,
+      "categories": {
+        "compact_evidence_code_configuration": 25,
+        "package_payload_and_other_recovery_archives": 2
+      }
+    },
+    "20261021-1562331354568589393": {
+      "regular_files": 46,
+      "directories": 6,
+      "symlinks": 0,
+      "allocated_bytes": 105926656,
+      "categories": {
+        "compact_evidence_code_configuration": 35,
+        "package_payload_and_other_recovery_archives": 11
+      }
+    },
+    "latest.path": {
+      "regular_files": 1,
+      "directories": 0,
+      "symlinks": 0,
+      "allocated_bytes": 4096,
+      "categories": {
+        "compact_evidence_code_configuration": 1
+      }
+    },
+    "mattei-reboots-20261021": {
+      "regular_files": 1,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 8192,
+      "categories": {
+        "compact_evidence_code_configuration": 1
+      }
+    },
+    "node-security-1562896598286078085": {
+      "regular_files": 20,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 126099456,
+      "categories": {
+        "compact_evidence_code_configuration": 16,
+        "package_payload_and_other_recovery_archives": 4
+      }
+    },
+    "php-security-20261021-1562585423589412987": {
+      "regular_files": 13,
+      "directories": 1,
+      "symlinks": 0,
+      "allocated_bytes": 3121152,
+      "categories": {
+        "compact_evidence_code_configuration": 8,
+        "package_payload_and_other_recovery_archives": 5
+      }
+    },
+    "reboot-20260811T123633Z": {
+      "regular_files": 8,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 86016,
+      "categories": {
+        "compact_evidence_code_configuration": 8
+      }
+    },
+    "ubuntu-pro-esm-20260811T123045Z": {
+      "regular_files": 27,
+      "directories": 2,
+      "symlinks": 0,
+      "allocated_bytes": 21319680,
+      "categories": {
+        "compact_evidence_code_configuration": 3,
+        "package_payload_and_other_recovery_archives": 24
+      }
+    }
+  },
+  "archive_checks": {
+    "checked": 103,
+    "failed": 0
+  },
+  "historical_profile_archive_comparison": [
+    {
+      "relative_path": "20260910T081838-0400-vps-hermes-v0211/hermes-profile-control-plane-pre-v0211.tar.gz",
+      "regular_members": 5893,
+      "matched_payloads": 3791,
+      "unmatched_payloads": 2102,
+      "unmatched_logical_bytes": 18307141,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 2097,
+        "database": 5
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    },
+    {
+      "relative_path": "20260910T213059-0400-hermes-main-45a6101f/hermes-profile-control-plane.tar.gz",
+      "regular_members": 12,
+      "matched_payloads": 2,
+      "unmatched_payloads": 10,
+      "unmatched_logical_bytes": 169872,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 10
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    },
+    {
+      "relative_path": "20260914T165558Z-vps-hermes-v0213/hermes-profile-control-plane-pre-v0213.tar.gz",
+      "regular_members": 5953,
+      "matched_payloads": 3830,
+      "unmatched_payloads": 2123,
+      "unmatched_logical_bytes": 21271982,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 2117,
+        "database": 6
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    },
+    {
+      "relative_path": "20260914T180134Z-vps-hermes-main-14efb460/hermes-profile-control-plane-pre-main.tar.gz",
+      "regular_members": 5953,
+      "matched_payloads": 3830,
+      "unmatched_payloads": 2123,
+      "unmatched_logical_bytes": 21303957,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 2117,
+        "database": 6
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    },
+    {
+      "relative_path": "20260919T155128Z-vps-hermes-update/hermes-profile-control-plane-pre-update.tar.gz",
+      "regular_members": 5923,
+      "matched_payloads": 3860,
+      "unmatched_payloads": 2063,
+      "unmatched_logical_bytes": 20835095,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 2056,
+        "database": 7
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    },
+    {
+      "relative_path": "20260919T181046Z-hermes-005c746d/profiles-control-plane.tar.gz",
+      "regular_members": 4077,
+      "matched_payloads": 3676,
+      "unmatched_payloads": 401,
+      "unmatched_logical_bytes": 15874901,
+      "unmatched_classes": {
+        "configuration_auth_or_other_control_plane": 401
+      },
+      "classification": "preserve_unproven_historical_subsumption"
+    }
+  ],
+  "retained_archives": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "sha256": "930124ca9b6b26015aa46611ea6298e73741ce43554f5ee97423432a716e5005",
+      "files_streamed": 4206,
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-nested-cron-sqlite.tar.gz",
+      "sha256": "4f06428caf2b56d9e5705d74d81dd6812fe364dc68d6c5aa7b310613697926ad",
+      "files_streamed": 9,
+      "recorded_hash_matches": true
+    }
+  ],
+  "process_references": [],
+  "process_fd_directories_unreadable": 0,
+  "scan_errors": [],
+  "source_metadata_drift": [],
+  "source_payloads_unchanged": true,
+  "eligible_frozen_reclaim_bytes": 0,
+  "deletions": 0,
+  "retention_changed": false,
+  "disk": {
+    "used_bytes": 142839410688,
+    "available_bytes": 64044093440,
+    "used_percent": 69.04340260962732
+  },
+  "scope_boundary": "Only the old VPS-maintenance root was reviewed; no new full-VPS or runtime cleanup, no SQLite connection or DB restore, no credential changes. Archive comparison proves member-byte differences against the two latest Hermes archives, not global uniqueness or loss of live history.",
+  "recommendation": "Preserve historical control-plane differences and checksum-coupled evidence before any broader old-maintenance retirement; do not treat the entire root as one redundant VPS backup. A preservation/repack proposal and a later exact deletion gate are distinct from this read-only review."
+}

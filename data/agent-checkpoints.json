@@ -6437,6 +6437,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-VPS-LEGACY-1571144515673260184",
+      "next_step": "Inventariar 36 entradas e classificar recuperacao/redundancia; preparar somente lote independentemente comprovado ou explicar bloqueio historico, sem apagar.",
+      "objective": "Revisar os conjuntos antigos VPS-maintenance, distinguindo rollback de pacotes, historico de perfis e evidencias; preservar bases e operacao; nenhuma exclusao autorizada.",
+      "source": "discord:1569928464033783862/1571144515673260184;context/storage-reorganization-20261112.md",
+      "state": "review_in_progress",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T12:48:42+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-VPS-1555704911805808712",
       "next_step": "Nenhum no escopo de update/reboot; ocorrência histórica do validador corrigida e preservada; sosreport faseado",
       "objective": "Atualizar somente VPS: pacotes APT/npm, backup, reboot validado; Hermes inalterado",
@@ -10407,5 +10417,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T12:11:19+00:00"
+  "updated_at": "2026-11-14T12:48:42+00:00"
 }
