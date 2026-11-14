@@ -6447,6 +6447,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-RUNTIMES-1571217101597712496",
+      "next_step": "Resolverativacao/rollback;inventariarbytesinode/Git/consumidores/alternates;congelarsomentearvoressemusoerecuperaveis;naoexcluirsemnovaconfirmacao.",
+      "objective": "Revisar7copiascodigo/runtimeHermes e launchers;protegerativo,rollbackimediato,clonecanonicofetch,profiles,alternates e worktrees;prepararloteexatoapenasaposprova.",
+      "source": "discord:1569928464033783862/1571217101597712496;context/storage-reorganization-20261112.md",
+      "state": "read_only_runtime_classification_in_progress",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T17:37:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-SNAPSHOTS-1570868136066949244",
       "next_step": "SeguirZEUS-STORAGE-COMPACT-1570876981178929333paraformatodefechamento;5.56GiBobservados. Guardarcompacto+7basesnovembro. Nenhumsnapshotdestelotependedeconfirmacao;outrosbackupsforaescopo.",
       "objective": "12snapshotshistoricosmigradoscompactamenteeremovidossobconfirmacao1570888435353526397;nenhumaperdadeconteudocomprovadopor9984SHAs.",
@@ -10467,5 +10477,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T17:22:30+00:00"
+  "updated_at": "2026-11-14T17:37:08+00:00"
 }
