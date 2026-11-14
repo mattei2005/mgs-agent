@@ -94,6 +94,8 @@ def build(request, source, number, account_config):
             child['_primary_text'] = group['primary_text']
             if 'headline' in group:
                 child['_headline'] = group['headline']
+            if 'description' in group:
+                child['_description'] = group['description']
             one = _build_one(child, source, number+offset, account_config)
             payload = payload or one; campaigns.extend(one['campaigns'])
         payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
@@ -261,7 +263,9 @@ def _build_one(request, source, number, account_config):
                 vd.update(video_id=asset['vertical_video_id'], image_url=asset['thumbnail_url'])
             if not vd['title']:
                 raise ValueError('copy headline missing')
-            if media.get('link_description') or media.get('description'):
+            if '_description' in request:
+                vd['link_description'] = request['_description']
+            elif media.get('link_description') or media.get('description'):
                 vd['link_description'] = media.get('link_description') or media['description']
             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},

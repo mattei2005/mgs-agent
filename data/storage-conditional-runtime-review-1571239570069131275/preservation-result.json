@@ -1,0 +1,101 @@
+{
+  "status": "source_patch_and_small_historical_state_replay_validated_not_disposal_ready",
+  "archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/conditional-code-state-and-git-admin.tar.gz",
+  "archive_sha256": "6c68b0ef4d0e494d332ebc240b98d554f5c9525f80b9bfab416564bde7055db4",
+  "archive_bytes": 4661749,
+  "archive_allocated": 4665344,
+  "preserved_payload_entries": 187,
+  "replays": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "modified_source_files_replayed": 1,
+      "overlay_files_replayed": 11,
+      "historical_test_state_files_replayed": 0
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "modified_source_files_replayed": 7,
+      "overlay_files_replayed": 93,
+      "historical_test_state_files_replayed": 12
+    }
+  ],
+  "ref_recovery": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "base": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+      "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "full_base_archive_readable": true,
+      "distinct_ref_targets": 171,
+      "ref_objects_missing_in_retained": []
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "base": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+      "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "full_base_archive_readable": true,
+      "distinct_ref_targets": 116,
+      "ref_objects_missing_in_retained": []
+    }
+  ],
+  "self_contained": false,
+  "required_retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+  "source_overlays_and_git_admin_unchanged": true,
+  "live_sqlite_opened": false,
+  "historical_sqlite_logical_restore_tested": false,
+  "old_virtualenv_rebuilt": false,
+  "old_virtualenv_local_overrides_audited": false,
+  "node_modules_rebuilt": false,
+  "ignored_build_assets_preserved": true,
+  "inactive_adapter_gate_tests": [
+    {
+      "state": "meta-digital-trust-40-20261007-state.json",
+      "real_adapter_result": {
+        "kind": "blocked",
+        "reason": "checkpoint_not_executable"
+      },
+      "subprocess_calls": 0
+    },
+    {
+      "state": "meta-digital-trust-49-20261013-state.json",
+      "real_adapter_result": {
+        "kind": "blocked",
+        "reason": "checkpoint_not_executable"
+      },
+      "subprocess_calls": 0
+    }
+  ],
+  "static_migration_api_review": [
+    {
+      "source": "pm/environments.py",
+      "symbols": {
+        "activate_dependencies": {
+          "old_and_current_signature_equal": true
+        }
+      }
+    },
+    {
+      "source": "tools/computer_use/tool.py",
+      "symbols": {
+        "handle_computer_use": {
+          "old_and_current_signature_equal": false
+        },
+        "release_computer_use_session": {
+          "old_and_current_signature_equal": true
+        }
+      }
+    },
+    {
+      "source": "tools/computer_use/cua_backend.py",
+      "symbols": {
+        "_cua_configured_ax_max_elements": {
+          "old_and_current_signature_equal": true
+        }
+      }
+    }
+  ],
+  "pc1_meta_campaign_actions": 0,
+  "production_code_changes": 0,
+  "deletions": 0,
+  "scratch": "/root/.hermes/profiles/zeus/cache/scratch/conditional-runtime-replay-1571239570069131275",
+  "created_at": "2026-11-14T14:12:02.483410-05:00"
+}

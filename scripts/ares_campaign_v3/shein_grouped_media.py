@@ -26,10 +26,12 @@ def validate_groups(request):
     files=[]
     for g in groups:
         required = {'files','product_label','primary_text'}
-        if not isinstance(g,dict) or not required <= set(g) or set(g) - (required | {'headline'}):
-            raise ValueError('group requires files, product_label, primary_text and permits optional headline only')
+        if not isinstance(g,dict) or not required <= set(g) or set(g) - (required | {'headline','description'}):
+            raise ValueError('group requires files, product_label, primary_text and permits optional headline/description only')
         if 'headline' in g and (not isinstance(g['headline'],str) or not g['headline'].strip()):
             raise ValueError('optional group headline must be a nonempty literal string')
+        if 'description' in g and (not isinstance(g['description'],str) or not g['description'].strip()):
+            raise ValueError('optional group description must be a nonempty literal string')
         if not isinstance(g['files'],list) or not 1<=len(g['files'])<=5:
             raise ValueError('group requires one through five media files')
         if not all(isinstance(g[k],str) and g[k].strip() for k in ['product_label','primary_text']):

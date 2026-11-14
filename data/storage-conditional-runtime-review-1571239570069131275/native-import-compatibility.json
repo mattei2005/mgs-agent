@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "interpreter": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python",
+      "returncode": 0,
+      "probe": {
+        "adapter_call_signature_accepted": true,
+        "imports_ok": true,
+        "handler_called": false,
+        "activate_dependencies_called": false,
+        "pc1_calls": 0,
+        "signature": "(args: 'Dict[str, Any]', **kwargs) -> 'Any'"
+      },
+      "stderr_tail": ""
+    },
+    {
+      "runtime": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "native_selection": {
+        "python": "/root/.hermes/installs/66b1c9be2d8811ff/environments/5e79db02fd2c420db995ae9871583fef/venv/bin/python",
+        "environment": "/root/.hermes/installs/66b1c9be2d8811ff/environments/5e79db02fd2c420db995ae9871583fef/venv",
+        "site_packages": "/root/.hermes/installs/66b1c9be2d8811ff/environments/5e79db02fd2c420db995ae9871583fef/venv/lib/python3.14/site-packages"
+      },
+      "returncode": 0,
+      "probe": {
+        "adapter_call_signature_accepted": true,
+        "imports_ok": true,
+        "handler_called": false,
+        "activate_dependencies_called": false,
+        "pc1_calls": 0,
+        "signature": "(args: 'dict[str, Any]', **kwargs) -> 'Any'"
+      },
+      "stderr_tail": ""
+    }
+  ],
+  "live_adapter_or_runtime_modified": false,
+  "full_pc1_behavior_tested": false,
+  "diagnostic_recovery": "Two obsolete in-tree venv assumptions failed before import. Resolved MainPID executable and read-only pm.environments.project_python; selected managed generation, then exercised real imports and signature binding in isolated scratch home. No activation/recovery/install helper invoked."
+}

@@ -865,13 +865,19 @@
       "timezone_name": "America/New_York",
       "account_status": 1,
       "relationship": "owned",
-      "engine_registered": false,
-      "registered_modes": [],
-      "single_clone_runtime_enabled": false,
-      "account_prerequisite_status": "LIVE_READ_ONLY_REPORTING_READY",
+      "engine_registered": true,
+      "registered_modes": [
+        "from_zero_prestaged"
+      ],
+      "single_clone_runtime_enabled": true,
+      "account_prerequisite_status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
       "read_only_onboarding_authority_message_id": "1570862320408596491",
       "readback_at_utc": "2026-11-13T18:15:25.201165+00:00",
-      "reporting_authority_message_id": "1570859539019079793"
+      "reporting_authority_message_id": "1570859539019079793",
+      "assets_access_verified": true,
+      "approved_page_id": "1250640494803108",
+      "live_verified_at": "2026-11-14T19:15:19.381087+00:00",
+      "creation_onboarding_authority_message_id": "1571238745909493853"
     }
   ],
   "last_scoped_reconciliation": {

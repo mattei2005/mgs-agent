@@ -38,6 +38,12 @@ Use esta receita somente após aprovação específica para conceder leitura à 
 5. Faça readback administrativo paginado, confirme a união esperada das tarefas e a preservação das demais atribuições. Depois repita o GET da conta pela credencial corporativa original, sem mudar a referência produtiva. Exija ambos os readbacks: POST aceito não comprova grant aplicado, e grant aplicado não comprova acesso do consumidor.
 6. Registre nome, moeda e timezone efetivamente retornados. Trate uma divergência de fuso como dependência do relatório, não como autorização para alterar o fuso da conta ou copiar o período de outra operação. Concessão de leitura concluída não significa conta incluída no cron, coleta financeira validada ou entrega publicada; retome essas camadas pela rota própria e pelo mesmo pedido, salvo pausa ou mudança de escopo do operador.
 
+### Acrescentar ADVERTISE a uma conta já delegada
+
+Exija confirmação crítica específica para a conta e o System User existentes; um pedido de campanha não autoriza alterar tarefas. Use a mesma separação de provisioning, pre-read paginado, journal antes do POST e readback com a identidade corporativa original descrita acima. Preserve as tarefas existentes e solicite somente a união com `ADVERTISE`, sem trocar token nem acrescentar `MANAGE`.
+
+A Meta pode normalizar a atribuição pedida `{ANALYZE, ADVERTISE}` para `{ANALYZE, ADVERTISE, DRAFT}`. Quando isso ocorrer, não repita o POST nem tente remover `DRAFT` às cegas: compare os conjuntos nos readbacks administrativo e corporativo e registre `DRAFT` como tarefa implicitamente materializada pela plataforma. Aceite apenas esse extra conhecido, além das tarefas anteriores e da tarefa aprovada; qualquer outra ampliação não solicitada exige diagnóstico antes de seguir. Persista também a projeção normalizada ou digest das demais atribuições no pre-read, antes da mutação, para comprovar sua preservação mesmo se a verificação for interrompida. Concessão concluída não comprova cadastro do executor, escolha da Page ou campanha criada.
+
 ### Reparar delegação de uma Página adicionada ao portfólio
 
 Use esta sequência quando houver autorização explícita para corrigir permissões da Página; o pedido de campanha sozinho não autoriza atribuir ativos.

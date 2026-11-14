@@ -1,0 +1,200 @@
+{
+  "status": "review_completed_preserved_dependencies_pending",
+  "authority_message_id": "1571239570069131275",
+  "thread_id": "1569928464033783862",
+  "review_scope": [
+    "46904a3b",
+    "ad2d4822"
+  ],
+  "roots": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "metadata_entries_unchanged": 40252,
+      "counts": {
+        "dir": 2890,
+        "file": 37358,
+        "link": 4
+      },
+      "inode_unique_occupied_bytes": 1044033536,
+      "conditional_reclaim_bytes_not_eligible": 659869696,
+      "base_commit": "1da62dd8d142bf732e1acaa61d88c233d238aa5e"
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "metadata_entries_unchanged": 136265,
+      "counts": {
+        "dir": 8343,
+        "file": 127814,
+        "link": 108
+      },
+      "inode_unique_occupied_bytes": 2351448064,
+      "conditional_reclaim_bytes_not_eligible": 2348867584,
+      "base_commit": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e"
+    }
+  ],
+  "protected_file_hashes_unchanged": 11,
+  "all_hermes_launchers_unchanged": 5,
+  "gateway_pids_unchanged": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "services_active": 3,
+  "deletions": 0,
+  "source_runtime_mutations": 0,
+  "campaign_meta_pc1_actions": 0,
+  "cron_or_retention_changes": 0,
+  "new_eligible_reclaim_bytes": 0,
+  "occupied_and_hypothetical_reclaim_are_not_disposal_authority": true,
+  "preservation": {
+    "status": "source_patch_and_small_historical_state_replay_validated_not_disposal_ready",
+    "archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/conditional-code-state-and-git-admin.tar.gz",
+    "archive_sha256": "6c68b0ef4d0e494d332ebc240b98d554f5c9525f80b9bfab416564bde7055db4",
+    "archive_bytes": 4661749,
+    "archive_allocated": 4665344,
+    "preserved_payload_entries": 187,
+    "replays": [
+      {
+        "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+        "modified_source_files_replayed": 1,
+        "overlay_files_replayed": 11,
+        "historical_test_state_files_replayed": 0
+      },
+      {
+        "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+        "modified_source_files_replayed": 7,
+        "overlay_files_replayed": 93,
+        "historical_test_state_files_replayed": 12
+      }
+    ],
+    "ref_recovery": [
+      {
+        "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+        "base": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+        "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "full_base_archive_readable": true,
+        "distinct_ref_targets": 171,
+        "ref_objects_missing_in_retained": []
+      },
+      {
+        "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+        "base": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+        "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "full_base_archive_readable": true,
+        "distinct_ref_targets": 116,
+        "ref_objects_missing_in_retained": []
+      }
+    ],
+    "self_contained": false,
+    "required_retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "source_overlays_and_git_admin_unchanged": true,
+    "live_sqlite_opened": false,
+    "historical_sqlite_logical_restore_tested": false,
+    "old_virtualenv_rebuilt": false,
+    "old_virtualenv_local_overrides_audited": false,
+    "node_modules_rebuilt": false,
+    "ignored_build_assets_preserved": true,
+    "inactive_adapter_gate_tests": [
+      {
+        "state": "meta-digital-trust-40-20261007-state.json",
+        "real_adapter_result": {
+          "kind": "blocked",
+          "reason": "checkpoint_not_executable"
+        },
+        "subprocess_calls": 0
+      },
+      {
+        "state": "meta-digital-trust-49-20261013-state.json",
+        "real_adapter_result": {
+          "kind": "blocked",
+          "reason": "checkpoint_not_executable"
+        },
+        "subprocess_calls": 0
+      }
+    ],
+    "static_migration_api_review": [
+      {
+        "source": "pm/environments.py",
+        "symbols": {
+          "activate_dependencies": {
+            "old_and_current_signature_equal": true
+          }
+        }
+      },
+      {
+        "source": "tools/computer_use/tool.py",
+        "symbols": {
+          "handle_computer_use": {
+            "old_and_current_signature_equal": false
+          },
+          "release_computer_use_session": {
+            "old_and_current_signature_equal": true
+          }
+        }
+      },
+      {
+        "source": "tools/computer_use/cua_backend.py",
+        "symbols": {
+          "_cua_configured_ax_max_elements": {
+            "old_and_current_signature_equal": true
+          }
+        }
+      }
+    ],
+    "pc1_meta_campaign_actions": 0,
+    "production_code_changes": 0,
+    "deletions": 0,
+    "scratch": "/root/.hermes/profiles/zeus/cache/scratch/conditional-runtime-replay-1571239570069131275",
+    "created_at": "2026-11-14T14:12:02.483410-05:00"
+  },
+  "native_import_probe_status": "2/2 real imports and call binding passed; no desktop handler or activation called",
+  "blocked_adapter_early_return_tests": "2/2 passed with subprocess tripwire",
+  "remaining_gates": {
+    "46904a3b": [
+      "Two technical helper literals still select the old Python/runtime.",
+      "49-item DigitalTrust request remains blocked and must not be resumed/cancelled by cleanup.",
+      "Any helper migration requires bounded staging/validation separate from business execution.",
+      "Old virtualenv payload/local overrides have not been fully audited/rebuilt."
+    ],
+    "ad2d4822": [
+      "Configured legacy executable symlink still points into this root.",
+      "Dirty linked Git worktree must use native retirement with exact admin scope, not raw tree removal.",
+      "Old virtualenv payload/local overrides have not been fully audited/rebuilt."
+    ]
+  },
+  "preserved_test_state": "12 MagicMock historical files reproduced byte-for-byte; original SQLite files not opened; no logical database restore claimed",
+  "no_deletion_manifest_prepared": true,
+  "separate_broad_cleanup_not_closed": true,
+  "next_recommended_decision": "Authorize only technical helper migration preparation/cutover with no Meta/PC1 calls or cron/campaign/batch resumption; then freeze a new exact runtime/legacy-launcher lot if all remaining gates pass. No deletion is authorized by this review.",
+  "skill_updated": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+  "skill_mirror": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+  "skill_live_mirror_sha256": "8d285edf681deedd292a8440bec12d73504f5cb1868a3dfebbe8761a525dbacf",
+  "diagnostic_recoveries": [
+    "Disabled generic Hermes skill read directly without enabling it.",
+    "Legacy interpreter assumptions failed before imports; live MainPID and read-only native project_python resolver selected managed generation; both actual import probes passed.",
+    "Tool file-copy adapter refused formatted display then returned read dedup; copied only authored source files byte-for-byte and verified external SHA-256 equality."
+  ],
+  "private_preservation_root": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275",
+  "analysis_created_scratch_roots": [
+    "/root/.hermes/profiles/zeus/cache/scratch/conditional-runtime-replay-1571239570069131275",
+    "/root/.hermes/profiles/zeus/cache/scratch/conditional-native-import-1571239570069131275"
+  ],
+  "disk_observed": {
+    "available_bytes": 62353113088,
+    "used_bytes": 144530391040,
+    "used_percent": 69.86
+  },
+  "observed_at": "2026-11-14T14:16:58.718558-05:00",
+  "report_infra": {
+    "message_id": "1571242852636426242",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "mentions": 0,
+    "embeds": 1,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T14:18:54.029932-05:00"
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-14T14:18:54.029932-05:00"
+}
