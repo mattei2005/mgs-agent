@@ -46,7 +46,7 @@ Do not call a multi-gigabyte cache tree a multi-gigabyte saving when most blocks
 - Freeze cache roots as exact `delete_tree` targets only after proving each root is a directory, not a symlink or mount, and has zero process references.
 - For APT, enumerate exact current `.deb` files as `delete_file` targets. Preserve `/var/cache/apt/archives`, `lock`, and `partial`; do not delete the cache root.
 - Store a metadata fingerprint per target over relative path, type, size, blocks, nanosecond mtime, inode, link count, and symlink target without following symlinks.
-- Keep large fingerprint streams outside Git, preferably under `/run`; persist only the hash and compact manifest needed for audit.
+- Keep large fingerprint streams outside Git. In Hermes foreground work, use the profile's canonical scratch for transient work or a private durable evidence store for retained ledgers; reserve `/run` for standalone privileged jobs whose lifecycle explicitly requires it. Persist only hashes and compact manifests in Git.
 - Volatile `/tmp` targets may drift between proposal and confirmation. Revalidate every fingerprint immediately before deletion. Any added, removed, or changed target—including a reduction—invalidates the manifest and requires a new confirmation.
 
 ### Coherent freeze for caches that mutate during enumeration
@@ -70,6 +70,15 @@ A user message such as “apaga” before the target hash is shown authorizes pr
 - Distinguish browser binaries from persistent browser profiles. A disposable Playwright temp profile is not equivalent to a named authenticated profile.
 - Identify Hugging Face model families from cache metadata and active transcription configuration before classifying them.
 - Check systemd, cron, scripts, process cwd/exe/cmdline, and open file descriptors for target references.
+
+## Native kernel retirement and installed-SDK download caches
+
+- Treat kernel retirement as a separately confirmed system-package change, not ordinary cache removal. Freeze exact package/version pairs and a native APT simulation with no extra installs/removals; preserve the running kernel, the validated previous fallback, and an already-installed pending kernel independently. Never accept `autoremove` suggestions as authority or delete package-owned trees with raw recursive removal.
+- Inventory package ownership plus generated initramfs/module metadata. Reject unknown files or live consumers, bind the complete payload metadata to the manifest, and disclose native GRUB/initramfs/dpkg side effects. Any leftover generated-file or empty-root cleanup must also be enumerated and bounded; never broaden it after a purge.
+- Inspect native post-hooks before promising no restart. Where the installed needrestart source supports it, enforce `NEEDRESTART_MODE=l` for the transaction and preserve gateway PIDs/boot identity; default restart behavior is not a safety guarantee.
+- If rollback DEBs are reconstructed from installed payloads, label them reconstructed, not original repository packages. Verify Package/Version, every regular payload/link through an archive reader, source stability and a local APT reinstall dependency simulation. Report that this does not exercise actual package reinstallation or a boot. A saved dpkg status database is audit/control evidence, never a standalone package rollback.
+- Validate cached DEBs through both metadata and a complete native payload-decompression stream before disposal. A downloaded SDK archive can be redundant after every archive member is proven subsumed by the retained installed SDK; preserve the installed toolchain and its QA environments. Neither check authorizes deletion without the exact manifest confirmation.
+- Count new rollback/analysis storage separately from pre-existing residue, subtract it from structural net estimates, and exclude unmeasured future Git growth explicitly. Exercise the real preflight and prove that reduced scope, altered fingerprints and missing owner confirmation are blocked before destructive writes; exercise the post-collector against the pre-state as an expected rejection rather than claiming post-cleanup success.
 
 ## Post-deletion acceptance
 
