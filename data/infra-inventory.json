@@ -14112,61 +14112,75 @@
       "agent": "zeus",
       "backup": "/root/mgs-agent/backups/b0137-pause-1570701181922320515",
       "effective_schedule": "2-59/9 0,8-23 * * * plus overnight job f42618f5ced7 at 2-59/10 1-7 * * *",
-      "enabled": false,
+      "enabled": true,
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
       "job_id": "498fb0d95e10",
       "last_pause": {
         "paused_at": "2026-09-04T14:36:20.755349-04:00",
         "reason": "B013-4 restricted; held until B013-5 replacement validation."
       },
-      "last_run_at": "2026-09-24T15:42:43.511985-04:00",
+      "last_run_at": "2026-11-13T21:49:53.830310-05:00",
       "last_status": "ok",
       "name": "b013-dtr-link-watch",
-      "next_run_at": "2026-09-24T15:47:00-04:00",
+      "next_run_at": "2026-11-13T21:56:00-05:00",
       "overnight_job_id": "f42618f5ced7",
-      "paused_at": "2026-11-13T02:26:34.272093-05:00",
       "previous_report": "discord:#alerts-infra/1545836604520669265",
-      "purpose": "Active B013-7 DTR/ChatPion monitor with fail-closed Sheet reconciliation, connection alerts, dynamic profile metadata and current+predecessor Invest Hoje/Invest 3D lineage enrichment.",
+      "purpose": "Active B013-8 DTR/ChatPion monitor with fail-closed Sheet reconciliation, connection alerts, dynamic profile metadata and current+predecessor Invest Hoje/Invest 3D lineage enrichment.",
       "replaces": "b012-dtr-link-watch",
-      "report_readback": "Exact GET HTTP 200; expected embed and fields; empty content; no mentions.",
+      "report_readback": "Exact GET HTTP 200; one embed; required fields; empty content; zero mentions; no thread.",
       "schedule": "2-59/9 0,8-23 * * *",
       "script": "b013-dtr-link-watch.sh",
       "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
-      "source_report": "discord:#alerts-infra/1570701554674302989",
-      "state": "paused",
+      "source_report": "discord:#alerts-infra/1570994412865986601",
+      "state": "scheduled",
       "timezone": "America/New_York",
       "type": "hermes_cron",
-      "updated_at": "2026-11-13T02:27:12-05:00",
-      "validation": "Persisted jobs.json readback: both B013 day/night jobs disabled; no active B013 canonical lock; other jobs unchanged.",
-      "pause_reason": "Manual pause requested by Rodolfo for B013-7",
-      "source_message_id": "1570701181922320515",
-      "source_thread_id": "1570701181922320515"
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "validation": "Both original jobs resumed on unchanged schedules; full native B013-8 cycle 21:49:53 EST: 105 targets, 10 linked, 95 unlinked, 0 unknown; capability healthy; zero Sheet updates and mismatches.",
+      "source_message_id": "1570986493059793000",
+      "source_thread_id": "1570980148361039935",
+      "pause_history": [
+        {
+          "pause_reason": "Manual pause requested by Rodolfo for B013-7",
+          "paused_at": "2026-11-13T02:26:34.272093-05:00",
+          "superseded_by": "1570986493059793000",
+          "resumed_at": "2026-11-13T21:39:34.077157-05:00"
+        }
+      ]
     },
     {
       "agent": "zeus",
       "backup": "/root/mgs-agent/backups/b0137-pause-1570701181922320515",
-      "enabled": false,
+      "enabled": true,
       "id": "zeus-hermes-cron-b013-dtr-link-watch-overnight",
       "job_id": "f42618f5ced7",
       "lock": "/var/lock/b013-dtr-link-watch.lock",
       "name": "b013-dtr-link-watch overnight",
-      "next_run_at": "2026-09-25T01:02:00-04:00",
-      "paused_at": "2026-11-13T02:26:34.296523-05:00",
-      "purpose": "Overnight continuation of the canonical B013-7 DTR/ChatPion link monitor at a 10-minute cadence, preserving the daytime 9-minute job and two-minute offset.",
-      "report_readback": "Exact GET HTTP 200; expected embed and fields; empty content; no mentions.",
+      "next_run_at": "2026-11-14T01:02:00-05:00",
+      "purpose": "Overnight continuation of the canonical B013-8 DTR/ChatPion link monitor at a 10-minute cadence, preserving the daytime 9-minute job and two-minute offset.",
+      "report_readback": "Exact GET HTTP 200; one embed; required fields; empty content; zero mentions; no thread.",
       "requested_by": "Rodolfo Mattei",
       "schedule": "2-59/10 1-7 * * *",
       "script": "b013-dtr-link-watch.sh",
-      "source_message_id": "1570701181922320515",
+      "source_message_id": "1570986493059793000",
       "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
-      "source_report": "discord:#alerts-infra/1570701554674302989",
-      "state": "paused",
+      "source_report": "discord:#alerts-infra/1570994412865986601",
+      "state": "scheduled",
       "timezone": "America/New_York",
       "type": "hermes_cron",
-      "updated_at": "2026-11-13T02:27:12-05:00",
-      "validation": "Persisted jobs.json readback: both B013 day/night jobs disabled; no active B013 canonical lock; other jobs unchanged.",
-      "pause_reason": "Manual pause requested by Rodolfo for B013-7",
-      "source_thread_id": "1570701181922320515"
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "validation": "Both original jobs resumed on unchanged schedules; full native B013-8 cycle 21:49:53 EST: 105 targets, 10 linked, 95 unlinked, 0 unknown; capability healthy; zero Sheet updates and mismatches.",
+      "source_thread_id": "1570980148361039935",
+      "pause_history": [
+        {
+          "pause_reason": "Manual pause requested by Rodolfo for B013-7",
+          "paused_at": "2026-11-13T02:26:34.296523-05:00",
+          "superseded_by": "1570986493059793000",
+          "resumed_at": "2026-11-13T21:39:34.077157-05:00"
+        }
+      ],
+      "last_run_at": "2026-11-13T21:39:47.959416-05:00",
+      "last_status": "ok"
     },
     {
       "agent": "zeus",
@@ -17632,35 +17646,42 @@
         "test_path": "/root/mgs-agent/tests/test_b013_sheets_transport.py",
         "validation": "bash -n PASS; 32 tests PASS; live canonical SA Sheets read 49 targets; scheduler 2026-10-22T07:01:23-04:00 OK/failure_streak=0; healthy capability, zero Sheet updates and alerts."
       },
-      "operational_status": "contained_baseline_in_progress",
+      "operational_status": "active",
       "overnight_cron_job_id": "f42618f5ced7",
       "owner": "Zeus/Ops",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "pause_reason": "Manual B013-7 cron pause; both dedicated day/night jobs disabled.",
-      "paused_at": "2026-11-13T02:27:12-05:00",
       "pending_cutover": {
         "from": "B013-7",
         "to": "B013-8",
-        "status": "baseline_clean_repeat_pending",
+        "status": "completed",
         "source_message_id": "1570980148361039935",
         "reactivation_message_id": "1570986493059793000",
         "checkpoint_id": "META-APP-B0137-B0138-1570980148361039935",
         "process_session_id": "proc_f8cda304539f",
-        "evidence": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935"
+        "evidence": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935",
+        "completed_at": "2026-11-13T21:50:55.310416-05:00",
+        "scheduled_receipt": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935/scheduled-readback.json",
+        "active_blockers": [],
+        "next_step": "Normal unchanged day/night monitoring; profile holders reconnect the 95 unlinked assignments."
       },
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1552768370183508089 in channel 1498132022634483894, authored by Zeus, with empty content and no thread.",
+      "report_readback": "Exact GET HTTP 200; one embed; required fields; empty content; zero mentions; no thread.",
       "risk": "medium",
       "schedule": "2-59/9 0,8-23 * * *; 2-59/10 1-7 * * *",
       "sha256": "08c07e1ceaea02a0b538d755f179eaddd58fd3e32faeb2ebfcdafbd86e772e5b",
       "size_bytes": 68612,
       "source_message_id": "1570980148361039935",
-      "source_report": "discord:#alerts-infra/1552768370183508089",
+      "source_report": "discord:#alerts-infra/1570994412865986601",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0136-b0046-b0064-cutovers-20260924-151444/b013-dtr-link-monitor-state.json.before",
       "type": "profile_script",
-      "updated_at": "2026-11-13T21:29:34.941029-05:00",
-      "validation": "48 focused native-interpreter tests PASS; full read-only canary 105 targets; app-bound credential gate PASS; actual baseline denied stale-row payload safely; fresh identity remap recovery running.",
-      "pause_source_message_id": "1570701181922320515"
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "validation": "48 native-interpreter tests PASS; original wrong-row fixture reproduced red; fixed payload green; same completed scan safely synced 90 current-identity cells; immediate parity 105/105; clean repeat zero writes; scheduled full cycle healthy and fresh SA parity zero mismatches.",
+      "superseded_pause": {
+        "pause_reason": "Manual B013-7 cron pause; both dedicated day/night jobs disabled.",
+        "paused_at": "2026-11-13T02:27:12-05:00",
+        "pause_source_message_id": "1570701181922320515",
+        "superseded_by": "1570986493059793000"
+      }
     },
     {
       "agent": "zeus",
@@ -18647,9 +18668,9 @@
         "/root/mgs-agent/backups/meta-app-b0135-to-b0136-cutover-20260915-172020",
         "/root/mgs-agent/backups/meta-app-b0136-b0046-b0064-cutovers-20260924-151444"
       ],
-      "description": "Canonical current Meta app routing registry; B004-7, B006-5 and B011-5 are on the generic roles route, while B013-7 is the dedicated DTR/ChatPion generation.",
+      "description": "Canonical current Meta app routing registry; all B013 generations use dedicated DTR/ChatPion route; current B013-8 preserves channel 1522830283240505385.",
       "id": "zeus-meta-app-registry",
-      "last_change": "Replaced B004-6→B004-7, B006-4→B006-5, B011-4→B011-5 and dedicated B013-6→B013-7 while preserving channels and route ownership.",
+      "last_change": "Replaced only B013-7 with validated B013-8 / Eduarda Oliveira; immutable item and dedicated channel preserved.",
       "mode": "manual-authorized",
       "modified_at": "2026-09-24T15:33:08-04:00",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
@@ -18674,8 +18695,9 @@
       "size_bytes": 17108,
       "source_report": "discord:#alerts-infra/1552768370183508089",
       "type": "operational_registry",
-      "updated_at": "2026-09-24T15:52:23-04:00",
-      "validation": "B004-7, B006-5, B011-5 and B013-7 exact 1Password items and app_name values; app metadata, /roles, /me and debug_token HTTP 200 with valid app-bound tokens; canonical Sheet has 10/15/14/44 current rows and zero predecessor rows; isolated canaries PASS; first full scheduled 12-app cycle processed all registry items with zero errors."
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "validation": "B004-7, B006-5, B011-5 and B013-7 exact 1Password items and app_name values; app metadata, /roles, /me and debug_token HTTP 200 with valid app-bound tokens; canonical Sheet has 10/15/14/44 current rows and zero predecessor rows; isolated canaries PASS; first full scheduled 12-app cycle processed all registry items with zero errors.",
+      "source_message_id": "1570980148361039935"
     },
     {
       "adops_pending": true,
@@ -64677,8 +64699,8 @@
       "type": "monitor_replacement_and_safe_recovery",
       "source_message_id": "1570980148361039935",
       "source_thread_id": "1570980148361039935",
-      "updated_at": "2026-11-13T21:29:34.941029-05:00",
-      "status": "clean_repeat_pending",
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "status": "completed",
       "paths": [
         "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
         "/root/mgs-agent/tests/test_b013_profile_removal_alert.py",
@@ -64687,7 +64709,18 @@
       ],
       "evidence": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935",
       "cause": "98/105 rows moved during scan; exact composed-identity set unchanged; scope guard blocked all stale-row writes",
-      "tests": 48
+      "tests": 48,
+      "scheduled_receipt": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935/scheduled-readback.json",
+      "active_blockers": [],
+      "outcome": {
+        "targets": 105,
+        "linked": 10,
+        "unlinked_confirmed": 95,
+        "unknown": 0,
+        "marker_mismatches": 0
+      },
+      "source_report": "discord:#alerts-infra/1570994412865986601",
+      "report_readback": "Exact GET HTTP 200; one embed; required fields; empty content; zero mentions; no thread."
     }
   ],
   "profile_skill_references": [
@@ -72353,7 +72386,9 @@
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 144609,
       "md5": "e1b1ad432911644950448db2d8860b83",
-      "modified_at": "2026-11-13T02:32:38-05:00"
+      "modified_at": "2026-11-13T02:32:38-05:00",
+      "updated_at": "2026-11-13T21:50:55.310416-05:00",
+      "validation": "Fresh B013-8 app-scoped baseline and completed scheduled receipt 2026-11-13T21:49:53-05:00; 105 current assignments; 10 linked, 95 unlinked, zero unknown and marker mismatches."
     },
     {
       "path": "/root/mgs-agent/data/bitninja-verification-20261031.json",

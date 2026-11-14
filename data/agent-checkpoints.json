@@ -3779,12 +3779,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0137-B0138-1570980148361039935",
-      "next_step": "Ambos os jobs reativados e lidos de volta; aguardar ciclo nativo completo posterior à reativação, validar Sheet por identidade e publicar REPORT-INFRA",
-      "objective": "Concluir B013-8 e reativar mesmos crons no canal 1522830283240505385",
+      "next_step": "Monitoramento normal ativo: ambos os jobs habilitados; ciclo agendado 21:49:53 EST e Sheet íntegros. 95/105 perfis ainda não vinculados ao novo app; reconexões serão reconhecidas pelo fluxo normal. Sem bloqueio técnico do monitor. REPORT-INFRA 1570994412865986601 verificado.",
+      "objective": "Validar B013-8 e reativar mesmos crons no canal 1522830283240505385",
       "source": "discord:1570986493059793000",
-      "state": "scheduled_validation",
+      "state": "completed",
       "thread_id": "1570980148361039935",
-      "updated_at": "2026-11-14T02:39:34+00:00"
+      "updated_at": "2026-11-14T02:51:29+00:00"
     },
     {
       "agent": "zeus",
@@ -10387,5 +10387,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T02:39:34+00:00"
+  "updated_at": "2026-11-14T02:51:29+00:00"
 }
