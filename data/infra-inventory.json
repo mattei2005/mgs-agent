@@ -1592,6 +1592,34 @@
     },
     {
       "agent": "zeus",
+      "authority_message_ids": ["1571201800063680562"],
+      "checkpoint": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
+      "id": "finance-charge-date-1571201800063680562",
+      "type": "finance_presentation_only",
+      "status": "production_verified",
+      "release_id": "charge-date-1571201800063680562",
+      "origin_thread_id": "1571201800063680562",
+      "report": "reports/finance-charge-date-1571201800063680562.md",
+      "private_artifacts": "apps/finance-system/private/charge-date-1571201800063680562/",
+      "paths": [
+        "apps/finance-system/public/app.js",
+        "apps/finance-system/public/app.css",
+        "apps/finance-system/public/history-dashboard.js",
+        "apps/finance-system/tests/expense-sort.test.mjs",
+        "profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md"
+      ],
+      "runtime_sha256": {
+        "public/app.js": "a9d1bff4c1d48b191274e4ab7e0802fc8617e7977d5eb25a982c1c6f50603291",
+        "public/app.css": "bb1c3cbfee2561aeceb87a14f4b6f9784c1bfbd7206d7f0be9ba868d2a908340",
+        "public/history-dashboard.js": "94c2a823c53e944030a71cc87740138b2a9b1c1c374a9a505031cb7aa04992ce",
+        "tests/expense-sort.test.mjs": "c35c56d85d17471f6d72d42e34de3669aa47e87cf44694f21236e1327228b604"
+      },
+      "validation": "Canonical release committed with 7 exact destinations, rollback backups and HTTPS/remote/local hash parity. Node290/Python253 full gates with zero skips. Stage12; production12 native+21 historical views on1440/1280/390px;24 individually reachable mobile columns. Same dates, duplicate charges and nulls preserved. Nine production table fingerprints plus business audit and expense rows identical;zero financial writes. Finance service/socket/PostgreSQL active. No cron, deletion, credentials/MFA or gateway change.",
+      "infra_readback": "sent_verified",
+      "infra_message_id": "1571213392528806083"
+    },
+    {
+      "agent": "zeus",
       "authority_message_ids": [
         "1569165518093426809",
         "1569167402279764110"

@@ -4945,12 +4945,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
-      "next_step": "finance_release.py publish; readback HTTPS/browser em produção; fingerprints pós e encerramento canônico",
+      "next_step": "Pai verificar independentemente executor-summary.json, assets produtivos, hashes e relatório; comunicar Rodolfo na origem. Sem pendência técnica ou autoação agendada.",
       "objective": "Exibir Data da cobrança em Despesas Gerais sem mutação financeira",
-      "source": "apps/finance-system/private/charge-date-1571201800063680562/manifest.json; candidate/private/charge-date-final-gates/; before-publish.json",
-      "state": "gates finais completos pass: node290/290 sem skips; python253 sem skips. stage12 views e24 alcances mobile pass. finance_release.py check validated; snapshots/fingerprints produtivos pré congelados. publicação controlada é próxima fase.",
+      "source": "reports/finance-charge-date-1571201800063680562.md",
+      "state": "completed",
       "thread_id": "1571201800063680562",
-      "updated_at": "2026-11-14T17:13:55+00:00"
+      "updated_at": "2026-11-14T17:22:30+00:00"
     },
     {
       "agent": "zeus",
@@ -10467,5 +10467,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T17:13:55+00:00"
+  "updated_at": "2026-11-14T17:22:30+00:00"
 }
