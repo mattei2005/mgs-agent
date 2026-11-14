@@ -1,0 +1,61 @@
+{
+  "at": "2026-11-14T17:12:59.688194-05:00",
+  "remaining_payloads": [
+    {
+      "path": "/lib",
+      "ownership_returncode": 0,
+      "owners": "diversion by base-files from: /lib\ndiversion by base-files to: /lib.usr-is-merged\ntailscale, linux-modules-6.8.0-149-generic, linux-headers-6.8.0-149-generic, linux-modules-6.8.0-137-generic, apparmor, base-files, libntfs-3g89t64:amd64, ubuntu-pro-client, rsyslog, multipath-tools, kpartx, console-setup-linux, php-common, linux-modules-6.8.0-124-generic, linux-modules-6.8.0-136-generic, linux-modules-6.8.0-147-generic, linux-headers-6.8.0-147-generic, linux-modules-6.8.0-134-generic, linux-modules-6.8.0-146-generic, linux-headers-6.8.0-146-generic, hdparm, friendly-recovery, update-notifier-common, usb-modeswitch, usb-modeswitch-data, unattended-upgrades, xfsprogs, cloud-initramfs-copymods, mdadm, lxd-agent-loader, grub-common, finalrd, tpm-udev, cryptsetup, liblzo2-2:amd64, libunwind8:amd64, libcryptsetup12:amd64, libfuse3-3:amd64, systemd-hwe-hwdb, networkd-dispatcher, linux-modules-6.8.0-117-generic: /lib",
+      "mode": 41471,
+      "size": 7,
+      "mtime_ns": 1713791283000000000,
+      "ctime_ns": 1779109227007164042,
+      "same_metadata": true
+    }
+  ],
+  "packages": [
+    {
+      "package": "linux-headers-6.8.0-138",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-headers-6.8.0-138-generic",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-headers-6.8.0-142",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-headers-6.8.0-142-generic",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-image-6.8.0-138-generic",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-image-6.8.0-142-generic",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-modules-6.8.0-138-generic",
+      "query_rc": 1,
+      "status": ""
+    },
+    {
+      "package": "linux-modules-6.8.0-142-generic",
+      "query_rc": 1,
+      "status": ""
+    }
+  ],
+  "downloads_absent": 29,
+  "journal_entries": 29,
+  "journal_unique_paths": 29,
+  "unexpected_journal_paths": []
+}

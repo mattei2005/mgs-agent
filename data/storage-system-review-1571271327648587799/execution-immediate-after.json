@@ -1,0 +1,26 @@
+{
+  "at": "2026-11-14T17:12:15.006603-05:00",
+  "filesystems": [
+    {
+      "mount": "/",
+      "total_bytes": 206900281344,
+      "used_bytes": 141629034496,
+      "available_bytes": 65254469632
+    },
+    {
+      "mount": "/boot",
+      "total_bytes": 923156480,
+      "used_bytes": 177905664,
+      "available_bytes": 680607744
+    },
+    {
+      "mount": "/boot/efi",
+      "total_bytes": 109395456,
+      "used_bytes": 6399488,
+      "available_bytes": 102995968
+    }
+  ],
+  "executor_returncode": 1,
+  "executor_stdout": "",
+  "executor_stderr": "BLOCKED: old kernel payload remains"
+}

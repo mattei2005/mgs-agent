@@ -1,0 +1,55 @@
+{
+  "at": "2026-11-14T17:11:54.347554-05:00",
+  "filesystems": [
+    {
+      "mount": "/",
+      "total_bytes": 206900281344,
+      "used_bytes": 142333206528,
+      "available_bytes": 64550297600
+    },
+    {
+      "mount": "/boot",
+      "total_bytes": 923156480,
+      "used_bytes": 288968704,
+      "available_bytes": 569544704
+    },
+    {
+      "mount": "/boot/efi",
+      "total_bytes": 109395456,
+      "used_bytes": 6399488,
+      "available_bytes": 102995968
+    }
+  ],
+  "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "auxiliary_tools": {
+    "linux-tools-6.8.0-138": "ii \t6.8.0-138.138",
+    "linux-tools-6.8.0-138-generic": "ii \t6.8.0-138.138",
+    "linux-tools-6.8.0-142": "ii \t6.8.0-142.142",
+    "linux-tools-6.8.0-142-generic": "ii \t6.8.0-142.142"
+  },
+  "reboot_marker_preexisting": true,
+  "two_quiet_preflights": [
+    {
+      "status": "PASS",
+      "mode": "preflight",
+      "packages": 8,
+      "download_files": 29,
+      "kernel_payload_nodes": 55082,
+      "deletions_by_verifier": 0
+    },
+    {
+      "status": "PASS",
+      "mode": "preflight",
+      "packages": 8,
+      "download_files": 29,
+      "kernel_payload_nodes": 55082,
+      "deletions_by_verifier": 0
+    }
+  ],
+  "transient_initial_guard": "Initial preflight saw active package/target consumer; absent at immediate diagnostic and two quiet preflights. PID/cause not captured; no attribution claimed and no manifest drift."
+}
