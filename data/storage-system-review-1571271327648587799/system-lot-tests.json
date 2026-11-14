@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "case": "real_preflight",
+      "result": {
+        "status": "PASS",
+        "mode": "preflight",
+        "packages": 8,
+        "download_files": 29,
+        "kernel_payload_nodes": 55082,
+        "deletions_by_verifier": 0
+      }
+    },
+    {
+      "case": "reduced_file_scope",
+      "correctly_blocked": true,
+      "reason": "file scope drift"
+    },
+    {
+      "case": "reduced_package_scope",
+      "correctly_blocked": true,
+      "reason": "package scope drift"
+    },
+    {
+      "case": "outside_root",
+      "correctly_blocked": true,
+      "reason": "path scope drift"
+    },
+    {
+      "case": "kernel_count_drift",
+      "correctly_blocked": true,
+      "reason": "kernel count drift"
+    },
+    {
+      "case": "kernel_fingerprint_drift",
+      "correctly_blocked": true,
+      "reason": "kernel metadata drift"
+    },
+    {
+      "case": "post_collector_rejects_undeleted_targets",
+      "correctly_blocked": true
+    },
+    {
+      "case": "execution_without_owner_confirmation",
+      "correctly_blocked": true
+    },
+    {
+      "case": "reconstructed_debs_local_apt_reinstall_simulation",
+      "exact_packages": 8,
+      "no_installation_executed": true
+    }
+  ],
+  "test_count": 9,
+  "source_file_metadata_unchanged": true,
+  "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
+  "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+  "approval_exists": false,
+  "execution_marker_exists": false
+}
