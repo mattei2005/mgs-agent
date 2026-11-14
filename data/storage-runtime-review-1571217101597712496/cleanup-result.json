@@ -1,5 +1,5 @@
 {
-  "status": "filesystem_and_code_recovery_validated_governance_closure_pending",
+  "status": "completed_validated",
   "confirmation_message_id": "1571231699172462614",
   "question_message_id": "1571227762734141462",
   "thread_id": "1569928464033783862",
@@ -77,5 +77,19 @@
   ],
   "preparation_result_immutable": "review-result.json",
   "completed_at": "2026-11-14T13:46:42.373388-05:00",
-  "next_step": "This exact lot is complete; other six roots remain, including two conditional older roots requiring independent dependency/state resolution. No additional deletion authorized."
+  "next_step": "This exact lot is complete; other six roots remain, including two conditional older roots requiring independent dependency/state resolution. No additional deletion authorized.",
+  "report_infra": {
+    "message_id": "1571235481952198710",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "fields_verified": true,
+    "path_field_exact_manifest_targets": true,
+    "same_message_path_label_corrected_before_closure": true,
+    "verified": true,
+    "verified_at": "2026-11-14T13:49:54.550275-05:00"
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-14T13:49:54.550730-05:00"
 }
