@@ -1,0 +1,512 @@
+{
+  "groups_naive_allocated": {
+    "/root/.hermes/installs": 4840550400,
+    "/swapfile": 4294971392,
+    "/root/.local/share": 1020977152,
+    "/root/.hermes/tools": 1001222144,
+    "/root/.hermes/cache": 963981312,
+    "/usr/lib/x86_64-linux-gnu": 907427840,
+    "/var/lib/snapd": 529039360,
+    "/root/go/pkg": 365920256,
+    "/var/cache/apt": 349175808,
+    "/usr/lib/python3": 306577408,
+    "/var/log/journal": 289443840,
+    "/var/lib/apt": 218738688,
+    "/usr/lib/llvm-18": 188022784,
+    "/usr/lib/modules": 172011520,
+    "/usr/local/lib": 152240128,
+    "/root/zeus-vps-maintenance-1565730926233657347/rollback": 134795264,
+    "/usr/src/linux-headers-6.8.0-149": 133414912,
+    "/usr/src/linux-headers-6.8.0-147": 133328896,
+    "/usr/src/linux-headers-6.8.0-138": 133316608,
+    "/usr/src/linux-headers-6.8.0-142": 133312512,
+    "/usr/src/linux-headers-6.8.0-146": 133312512,
+    "/usr/bin/node": 124907520,
+    "/usr/share/fonts": 119328768,
+    "/usr/lib/snapd": 117948416,
+    "/usr/share/doc": 106512384,
+    "/root/.codex/.tmp": 102084608,
+    "/usr/libexec/gcc": 94019584,
+    "/usr/share/nodejs": 82997248,
+    "/root/.hermes/bin": 72564736,
+    "/usr/include/node": 67760128,
+    "/var/lib/dpkg": 67690496,
+    "/root/.local/bin": 56504320,
+    "/usr/lib/python3.12": 56352768,
+    "/usr/share/icons": 48799744,
+    "/usr/bin/op": 47345664,
+    "/root/zeus-vps-maintenance-1565730926233657347/original-vendor-debs": 46223360,
+    "/usr/sbin/tailscaled": 43941888,
+    "/usr/share/vim": 43610112,
+    "/usr/share/pocketsphinx": 37892096,
+    "/usr/share/man": 37797888,
+    "/usr/bin/tailscale": 34353152,
+    "/usr/share/locale": 32464896,
+    "/usr/share/python-babel-localedata": 31776768,
+    "/boot/initrd.img-6.8.0-149-generic": 31064064,
+    "/boot/initrd.img-6.8.0-147-generic": 31059968,
+    "/boot/initrd.img-6.8.0-146-generic": 31055872,
+    "/boot/initrd.img-6.8.0-142-generic": 31047680,
+    "/boot/initrd.img-6.8.0-138-generic": 31031296,
+    "/usr/src/linux-headers-6.8.0-149-generic": 29650944,
+    "/usr/src/linux-headers-6.8.0-147-generic": 29622272,
+    "/usr/src/linux-headers-6.8.0-138-generic": 29614080,
+    "/usr/src/linux-headers-6.8.0-146-generic": 29614080,
+    "/usr/src/linux-headers-6.8.0-142-generic": 29614080,
+    "/usr/bin/x86_64-linux-gnu-lto-dump-13": 29356032,
+    "/var/log/syslog.1": 28233728,
+    "/usr/share/perl5": 26263552,
+    "/usr/lib/gcc": 25595904,
+    "/var/cache/fwupd": 24731648,
+    "/var/log/syslog": 23814144,
+    "/usr/share/perl": 22663168
+  },
+  "other_roots_naive": {
+    "/root/.hermes/installs": 4840550400,
+    "/root/.local/share": 1020977152,
+    "/root/.hermes/tools": 1001222144,
+    "/root/.hermes/cache": 963981312,
+    "/root/go/pkg": 365920256,
+    "/root/zeus-vps-maintenance-1565730926233657347/rollback": 134795264,
+    "/root/.codex/.tmp": 102084608,
+    "/root/.hermes/bin": 72564736,
+    "/root/.local/bin": 56504320,
+    "/root/zeus-vps-maintenance-1565730926233657347/original-vendor-debs": 46223360,
+    "/root/mgs-agent-backups/wp-file-manager-openzed": 20258816,
+    "/opt/mgs-router/mgs-router": 18624512,
+    "/root/.hermes/shared": 17756160,
+    "/root/.hermes/skills": 12357632,
+    "/root/.hermes/state-snapshots": 4759552,
+    "/root/.hermes/models_dev_cache.json": 3629056,
+    "/root/.config/intelephense": 3043328,
+    "/root/.config/browser-harness": 2899968,
+    "/root/.config/google-chrome-for-testing": 2871296,
+    "/root/.codex/state_5.sqlite-wal": 2134016,
+    "/root/.hermes/state.db": 1216512,
+    "/root/zeus-vps-maintenance-1565730926233657347/system-config.tgz": 1040384,
+    "/root/mgs-agent-backups/chat-sms-rollout": 913408,
+    "/memfd:mgs-midturn-fifo-index (deleted)": 892928,
+    "/root/.local/state": 884736,
+    "/root/Downloads/7_PG.pdf": 851968,
+    "/root/Downloads/7_PG (1).pdf": 851968,
+    "/root/.hermes/kanban.db": 704512,
+    "/root/.codex/skills": 626688,
+    "/root/meta31_github_search.json": 524288,
+    "/root/mgs-agent-backups/chat-timezone-rollout": 495616,
+    "/root/.hermes/sessions": 376832,
+    "/root/.hermes/kanban": 311296,
+    "/root/.config/go": 307200,
+    "/root/.codex/thread_history_1.sqlite-wal": 299008
+  },
+  "temporary_log_cache_groups_naive": {
+    "/var/cache/apt": 349175808,
+    "/var/log/journal": 289443840,
+    "/var/log/syslog.1": 28233728,
+    "/var/cache/fwupd": 24731648,
+    "/var/log/syslog": 23814144,
+    "/var/log/auth.log": 16769024,
+    "/var/log/auth.log.1": 15400960,
+    "/var/log/sysstat": 8347648,
+    "/var/cache/swcatalog": 8187904,
+    "/var/cache/apparmor": 6168576,
+    "/var/cache/snapd": 5148672,
+    "/var/log/syslog.3.gz": 5029888,
+    "/var/cache/debconf": 4997120,
+    "/var/log/syslog.4.gz": 3739648,
+    "/tmp/pytest-of-root/pytest-2": 3493888,
+    "/tmp/pytest-of-root/pytest-1": 3493888,
+    "/var/log/syslog.2.gz": 3149824,
+    "/var/cache/man": 2154496,
+    "/var/log/btmp": 2101248,
+    "/var/cache/fontconfig": 1617920,
+    "/var/log/auth.log.3.gz": 1261568,
+    "/var/log/auth.log.2.gz": 1249280,
+    "/var/log/auth.log.4.gz": 1249280,
+    "/var/log/cloud-init.log.1": 1101824,
+    "/var/log/cloud-init.log": 593920,
+    "/var/log/btmp.1": 368640,
+    "/tmp/.org.chromium.Chromium.2ey9NW": 262144,
+    "/tmp/.org.chromium.Chromium.j5BxCd": 262144,
+    "/tmp/pytest-of-root/pytest-0": 217088,
+    "/var/log/apt": 196608,
+    "/var/log/wtmp": 135168,
+    "/var/log/dpkg.log.1": 135168,
+    "/var/log/unattended-upgrades": 126976,
+    "/tmp/.local/share": 81920,
+    "/var/log/cloud-init-output.log": 77824
+  },
+  "maintenance_artifact_top": {
+    "rollback": 134795264,
+    "original-vendor-debs": 46223360,
+    "system-config.tgz": 1040384,
+    "apt-install.log": 12288,
+    "prestate.json": 8192,
+    "backup-result.json": 8192,
+    "service-prestate.json": 4096,
+    "install-result.json": 4096,
+    "rollback.sha256": 4096
+  },
+  "large_system_candidates_metadata_only": [
+    {
+      "path": "/root/.hermes/tools/chromium-1208/chrome-linux64/chrome",
+      "allocated": 269783040,
+      "logical": 269778136,
+      "mtime_ns": 1790682554700410475,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/libpython3.14.so.1.0",
+      "allocated": 248410112,
+      "logical": 248404536,
+      "mtime_ns": 1704067200000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.local/share/mgs-router-toolchain/qa-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "allocated": 126603264,
+      "logical": 126595440,
+      "mtime_ns": 1790956819938911271,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "allocated": 123465728,
+      "logical": 123459976,
+      "mtime_ns": 1783786323399162517,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/bin/python3.14",
+      "allocated": 115752960,
+      "logical": 115747328,
+      "mtime_ns": 1704067200000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "allocated": 77844480,
+      "logical": 77839409,
+      "mtime_ns": 1790955865083726195,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.local/share/mgs-router-toolchain/go1.27.1.linux-amd64.tar.gz",
+      "allocated": 70561792,
+      "logical": 70553950,
+      "mtime_ns": 1790956198979017569,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/ctranslate2/_ext.cpython-314-x86_64-linux-gnu.so",
+      "allocated": 61579264,
+      "logical": 61575025,
+      "mtime_ns": 1790955864752725608,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/bin/uv",
+      "allocated": 60186624,
+      "logical": 60184464,
+      "mtime_ns": 1780525169000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/var/cache/apt/pkgcache.bin",
+      "allocated": 59441152,
+      "logical": 59434005,
+      "mtime_ns": 1794688159360672922,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/var/cache/apt/srcpkgcache.bin",
+      "allocated": 59400192,
+      "logical": 59392934,
+      "mtime_ns": 1794688159303672785,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/root/.local/bin/uv",
+      "allocated": 56107008,
+      "logical": 56107008,
+      "mtime_ns": 1785525771000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/uv-0.12.3-linux-x64/uv",
+      "allocated": 56008704,
+      "logical": 56004256,
+      "mtime_ns": 1786119267000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/cua-driver-0.21.0-linux-x64/cua-driver",
+      "allocated": 47132672,
+      "logical": 47126648,
+      "mtime_ns": 1787174681000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/git-v1/db/7d3b3876de1b5270/.git/objects/pack/pack-bad2fd04d408cc4dd1f9c15a7565feeb500ab1d6.pack",
+      "allocated": 41472000,
+      "logical": 41463896,
+      "mtime_ns": 1793765817443424514,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/git-v1/checkouts/7d3b3876de1b5270/380bd2b5/.git/objects/pack/pack-bad2fd04d408cc4dd1f9c15a7565feeb500ab1d6.pack",
+      "allocated": 41472000,
+      "logical": 41463896,
+      "mtime_ns": 1793765817443424514,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/git-v0/db/7d3b3876de1b5270/.git/objects/pack/pack-089b48d8d6242b2bf16c5948e54f265d3146f974.pack",
+      "allocated": 41463808,
+      "logical": 41460834,
+      "mtime_ns": 1790991800592918092,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/git-v0/checkouts/7d3b3876de1b5270/380bd2b5/.git/objects/pack/pack-089b48d8d6242b2bf16c5948e54f265d3146f974.pack",
+      "allocated": 41463808,
+      "logical": 41460834,
+      "mtime_ns": 1790991800592918092,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.6_amd64.deb",
+      "allocated": 40779776,
+      "logical": 40771946,
+      "mtime_ns": 1794354199000000000,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.4_amd64.deb",
+      "allocated": 40759296,
+      "logical": 40753264,
+      "mtime_ns": 1793146528000000000,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.2_amd64.deb",
+      "allocated": 40542208,
+      "logical": 40540234,
+      "mtime_ns": 1792521943000000000,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/root/zeus-vps-maintenance-1565730926233657347/original-vendor-debs/tailscale_1.104.2_amd64.deb",
+      "allocated": 40542208,
+      "logical": 40540234,
+      "mtime_ns": 1792521943000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/zeus-vps-maintenance-1565730926233657347/rollback/tailscale/tailscale-installed-payload.deb",
+      "allocated": 40263680,
+      "logical": 40259440,
+      "mtime_ns": 1793373656005028267,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/zeus-vps-maintenance-1565730926233657347/rollback/tailscale/data.tar.gz",
+      "allocated": 40263680,
+      "logical": 40258390,
+      "mtime_ns": 1793373655617027825,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/cua-driver-0.21.0-linux-x64/libcua_driver_sdk.so",
+      "allocated": 39317504,
+      "logical": 39311208,
+      "mtime_ns": 1787174681000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/tools/tirith-0.4.2-linux-x64/tirith",
+      "allocated": 38912000,
+      "logical": 38911512,
+      "mtime_ns": 1789144350000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/var/cache/apt/archives/nodejs_22.23.4-1nodesource1_amd64.deb",
+      "allocated": 37818368,
+      "logical": 37816336,
+      "mtime_ns": 1792599395000000000,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/var/cache/apt/archives/snapd_2.77.1+ubuntu24.04_amd64.deb",
+      "allocated": 33193984,
+      "logical": 33191424,
+      "mtime_ns": 1791390319000000000,
+      "nlink": 1,
+      "category": "05_system_package_caches"
+    },
+    {
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.cpython-314-x86_64-linux-gnu.so",
+      "allocated": 30597120,
+      "logical": 30595744,
+      "mtime_ns": 1790629807556712865,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-b8dabf9849074b2ab7fbcdb2f8874fdd/venv/bin/ty",
+      "allocated": 30179328,
+      "logical": 30174368,
+      "mtime_ns": 1793765834137438846,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-29dad5b63c5740a9aa88a7528d7b5e07/venv/bin/ty",
+      "allocated": 30179328,
+      "logical": 30174368,
+      "mtime_ns": 1793765834137438846,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/archive-v0/M85G_1QYe9AXMoTE/ty-0.0.89.data/scripts/ty",
+      "allocated": 30179328,
+      "logical": 30174368,
+      "mtime_ns": 1793765834137438846,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+      "allocated": 28987392,
+      "logical": 28985152,
+      "mtime_ns": 1790629807124712347,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.local/share/mgs-router-toolchain/go/pkg/tool/linux_amd64/compile",
+      "allocated": 28241920,
+      "logical": 28238898,
+      "mtime_ns": 1787934006000000000,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/var/log/syslog.1",
+      "allocated": 28233728,
+      "logical": 28227610,
+      "mtime_ns": 1794118599770479307,
+      "nlink": 1,
+      "category": "05_system_logs"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-b8dabf9849074b2ab7fbcdb2f8874fdd/venv/bin/ruff",
+      "allocated": 27836416,
+      "logical": 27832160,
+      "mtime_ns": 1793765834029438753,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-29dad5b63c5740a9aa88a7528d7b5e07/venv/bin/ruff",
+      "allocated": 27836416,
+      "logical": 27832160,
+      "mtime_ns": 1793765834029438753,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/archive-v0/O8KGqg-tQutGt4W2/ruff-0.15.22.data/scripts/ruff",
+      "allocated": 27836416,
+      "logical": 27832160,
+      "mtime_ns": 1793765834029438753,
+      "nlink": 3,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/environments/e9be17224cff4a3387996f2a44f499d2/venv/lib/python3.14/site-packages/nemo_relay/_native.abi3.so",
+      "allocated": 26779648,
+      "logical": 26774048,
+      "mtime_ns": 1793765827173432857,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/environments/5e79db02fd2c420db995ae9871583fef/venv/lib/python3.14/site-packages/nemo_relay/_native.abi3.so",
+      "allocated": 26779648,
+      "logical": 26774048,
+      "mtime_ns": 1793765827173432857,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-b8dabf9849074b2ab7fbcdb2f8874fdd/venv/lib/python3.14/site-packages/nemo_relay/_native.abi3.so",
+      "allocated": 26779648,
+      "logical": 26774048,
+      "mtime_ns": 1793765827173432857,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/66b1c9be2d8811ff/test-environment/gen-29dad5b63c5740a9aa88a7528d7b5e07/venv/lib/python3.14/site-packages/nemo_relay/_native.abi3.so",
+      "allocated": 26779648,
+      "logical": 26774048,
+      "mtime_ns": 1793765827173432857,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/cache/uv/archive-v0/bLLAda5OGdULFnAn/nemo_relay/_native.abi3.so",
+      "allocated": 26779648,
+      "logical": 26774048,
+      "mtime_ns": 1793765827173432857,
+      "nlink": 5,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-ff84a88b.so",
+      "allocated": 25370624,
+      "logical": 25368113,
+      "mtime_ns": 1791049911248990208,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification"
+    },
+    {
+      "path": "/root/.codex/.tmp/plugins/.git/objects/pack/pack-b47ba99a82baf33d199fe2fade35e487058e521f.pack",
+      "allocated": 24207360,
+      "logical": 24205517,
+      "mtime_ns": 1790257802586914357,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification"
+    }
+  ],
+  "not_a_deletion_manifest": true
+}

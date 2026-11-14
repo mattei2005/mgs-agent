@@ -1,0 +1,2974 @@
+{
+  "status": "metadata_inventory_completed",
+  "authority_message_id": "1571271327648587799",
+  "schema": [
+    "path",
+    "mode",
+    "uid",
+    "gid",
+    "size",
+    "mtime_ns",
+    "ctime_ns",
+    "allocated",
+    "dev",
+    "ino",
+    "nlink",
+    "category",
+    "optional_link_target"
+  ],
+  "filesystems": [
+    {
+      "filesystem_root": "/",
+      "device": 2049,
+      "counts": {
+        "dir": 195525,
+        "link": 24588,
+        "file": 1579646,
+        "other": 268
+      },
+      "logical_regular_bytes": 154563793867,
+      "ledger": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/root.jsonl.gz",
+      "ledger_sha256": "e9c0a41c4e5312803d4b8459d610ab5d7dcec0058c319a9a52232d8e7ff6c9cb"
+    },
+    {
+      "filesystem_root": "/boot",
+      "device": 66304,
+      "counts": {
+        "dir": 7,
+        "file": 595,
+        "link": 4
+      },
+      "logical_regular_bytes": 287715175,
+      "ledger": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/boot.jsonl.gz",
+      "ledger_sha256": "4ac25cf69f5e34032d743a2208c706f2602cc8c72de3b46e9fc8b19ed66b3b8f"
+    },
+    {
+      "filesystem_root": "/boot/efi",
+      "device": 2063,
+      "counts": {
+        "dir": 4,
+        "file": 8
+      },
+      "logical_regular_bytes": 6394684,
+      "ledger": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/boot-efi.jsonl.gz",
+      "ledger_sha256": "087b2b25615e40574b0fffe062c41af7f45aa5513338cc556a77286f9ad3fa1f"
+    }
+  ],
+  "scan_errors": [],
+  "technical_exclusions": [
+    {
+      "path": "/boot",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/sys",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/proc",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cache/scratch/storage-system-review-1571271327648587799",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/dev",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/run",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/canonical-livepatch/418",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/canonical-livepatch/414",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/snapd/28254",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/snapd/28332",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/core22/2987",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/snap/core22/2955",
+      "reason": "technical_mount_or_analysis_workspace"
+    },
+    {
+      "path": "/boot/efi",
+      "reason": "technical_mount_or_analysis_workspace"
+    }
+  ],
+  "categories_inode_unique_allocated": {
+    "05_other_roots_need_classification": 5274406912,
+    "05_system_and_services": 9528071680,
+    "05_system_logs": 403083264,
+    "03_recovery_sets": 10637172736,
+    "05_system_coredumps": 4096,
+    "05_system_temporaries": 8355840,
+    "05_system_package_caches": 402296832,
+    "07_package_tool_caches_and_stores": 9783611392,
+    "06_mgs_controlplane_sources": 43149701120,
+    "shared_hardlinks": 1814474752,
+    "06_mgs_data_reports": 10029998080,
+    "08_institutional_git": 8962351104,
+    "04_retained_hermes_runtimes": 7757053952,
+    "02_profiles_and_work": 33786327040,
+    "07_profile_caches": 829743104
+  },
+  "groups_inode_unique_allocated": {
+    "/root/mgs-agent": 62142050304,
+    "/root/.hermes": 56497225728,
+    "/root/.cache": 7335604224,
+    "/swapfile": 4294971392,
+    "/root/.npm": 2226417664,
+    "/usr/lib": 1989083136,
+    "shared_hardlinks": 1814474752,
+    "/root/.local": 1297657856,
+    "/usr/src": 814891008,
+    "/usr/share": 724484096,
+    "/var/lib": 565293056,
+    "/usr/bin": 407683072,
+    "/var/log": 403083264,
+    "/var/cache": 402296832,
+    "/root/go": 365924352,
+    "/root/zeus-vps-maintenance-1565730926233657347": 182104064,
+    "/usr/local": 152338432,
+    "/root/.codex": 105988096,
+    "/usr/include": 99840000,
+    "/usr/libexec": 96833536,
+    "/usr/sbin": 78807040,
+    "/boot/initrd.img-6.8.0-149-generic": 31064064,
+    "/boot/initrd.img-6.8.0-147-generic": 31059968,
+    "/boot/initrd.img-6.8.0-146-generic": 31055872,
+    "/boot/initrd.img-6.8.0-142-generic": 31047680,
+    "/boot/initrd.img-6.8.0-138-generic": 31031296,
+    "/root/mgs-agent-backups": 21721088,
+    "/opt/mgs-router": 18632704,
+    "/boot/vmlinuz-6.8.0-149-generic": 15110144,
+    "/boot/vmlinuz-6.8.0-147-generic": 15085568,
+    "/boot/vmlinuz-6.8.0-146-generic": 15069184,
+    "/boot/vmlinuz-6.8.0-142-generic": 15065088,
+    "/boot/vmlinuz-6.8.0-138-generic": 15056896,
+    "/boot/grub": 11124736,
+    "/root/.config": 9191424,
+    "/boot/System.map-6.8.0-149-generic": 9154560,
+    "/boot/System.map-6.8.0-147-generic": 9146368,
+    "/boot/System.map-6.8.0-142-generic": 9138176,
+    "/boot/System.map-6.8.0-138-generic": 9138176,
+    "/boot/System.map-6.8.0-146-generic": 9138176,
+    "/tmp/pytest-of-root": 7208960,
+    "/boot/efi": 6399488,
+    "/var/backups": 3719168,
+    "/root/Downloads": 1708032,
+    "/etc/apparmor.d": 1163264,
+    "/memfd:mgs-midturn-fifo-index (deleted)": 892928,
+    "/var/snap": 761856,
+    "/etc/ssh": 684032,
+    "/etc/ssl": 581632,
+    "/root/meta31_github_search.json": 524288,
+    "/etc/ImageMagick-6": 327680,
+    "/etc/systemd": 290816,
+    "/boot/config-6.8.0-149-generic": 290816,
+    "/boot/config-6.8.0-147-generic": 290816,
+    "/boot/config-6.8.0-138-generic": 290816,
+    "/boot/config-6.8.0-142-generic": 290816,
+    "/boot/config-6.8.0-146-generic": 290816,
+    "/etc/vmware-tools": 286720,
+    "/etc/cloud": 270336,
+    "/tmp/.org.chromium.Chromium.2ey9NW": 262144,
+    "/tmp/.org.chromium.Chromium.j5BxCd": 262144,
+    "/etc/X11": 229376,
+    "/etc/console-setup": 204800,
+    "/etc/php": 176128,
+    "/root/.pytest_cache": 172032,
+    "/etc/apt": 159744,
+    "/etc/lvm": 159744,
+    "/etc/grub.d": 151552,
+    "/root/meta31_search.json": 118784,
+    "/etc/init.d": 110592,
+    "/etc/fonts": 106496,
+    "/etc/pam.d": 94208,
+    "/etc/needrestart": 90112,
+    "/etc/udev": 90112,
+    "/tmp/.local": 86016,
+    "/etc/default": 86016,
+    "/var/tmp": 81920,
+    "/etc/mime.types": 77824,
+    "/root/.pki": 77824,
+    "/etc/libibverbs.d": 73728,
+    "/etc/initramfs-tools": 69632,
+    "/tmp": 65536,
+    "/etc/logrotate.d": 61440,
+    "/etc/update-motd.d": 61440,
+    "/etc/cron.daily": 61440,
+    "/etc/pki": 61440,
+    "/etc/security": 61440,
+    "/home/user": 57344,
+    "/etc/iproute2": 57344,
+    "/etc/ufw": 57344,
+    "/root/amphtml-roblox-336x280": 57344,
+    "/etc/sysctl.d": 53248,
+    "/root/.ssh": 53248,
+    "/etc/kernel": 49152,
+    "/root/mgs-agent-rescue": 49152,
+    "/root/Roblox_336x280_AMPHTML.zip": 49152,
+    "/root/Roblox_336x280_AMPHTML_GameZoneAd.zip": 49152,
+    "/etc/cron.d": 45056,
+    "/var/spool": 40960,
+    "/etc/ghostscript": 40960,
+    "/etc/ld.so.cache": 40960,
+    "/etc/profile.d": 36864,
+    "/etc/xml": 36864,
+    "/etc/dpkg": 36864,
+    "/etc/modprobe.d": 36864,
+    "/etc/openal": 32768,
+    "/etc/fwupd": 32768,
+    "/etc/xdg": 28672,
+    "/etc/logcheck": 28672,
+    "/etc/networkd-dispatcher": 28672,
+    "/tmp/snap-private-tmp": 24576,
+    "/etc/iscsi": 24576,
+    "/etc/sos": 24576,
+    "/root/visual-direction-matrix.json": 24576,
+    "/etc/update-manager": 20480,
+    "/etc/network": 20480,
+    "/etc/cron.weekly": 20480,
+    "/root/meta_marketing_api_architectures.json": 20480,
+    "/root/.ruff_cache": 20480,
+    "/root/snap": 20480,
+    "/lost+found": 16384,
+    "/etc/sysstat": 16384,
+    "/etc/ld.so.conf.d": 16384,
+    "/etc/lighttpd": 16384,
+    "/etc/rsyslog.d": 16384,
+    "/etc/vulkan": 16384,
+    "/etc/dbus-1": 16384,
+    "/etc/apport": 16384,
+    "/etc/libblockdev": 16384,
+    "/etc/skel": 16384,
+    "/etc/services": 16384,
+    "/etc/login.defs": 16384,
+    "/etc/pm": 16384,
+    "/root/.bash_history": 16384,
+    "/boot/lost+found": 16384,
+    "/tmp/com.agilebits.op.0": 12288,
+    "/etc": 12288,
+    "/etc/nanorc": 12288,
+    "/etc/locale.gen": 12288,
+    "/etc/qemu": 12288,
+    "/etc/supercat": 12288,
+    "/etc/PackageKit": 12288,
+    "/etc/gtk-3.0": 12288,
+    "/etc/ModemManager": 12288,
+    "/etc/vim": 12288,
+    "/etc/sgml": 12288,
+    "/etc/libnl-3": 12288,
+    "/etc/byobu": 12288,
+    "/etc/dhcp": 12288,
+    "/etc/cron.yearly": 12288,
+    "/etc/perl": 12288,
+    "/etc/cron.hourly": 12288,
+    "/etc/pulse": 12288,
+    "/etc/groff": 12288,
+    "/etc/cron.monthly": 12288,
+    "/etc/sensors3.conf": 12288,
+    "/etc/apache2": 12288,
+    "/etc/sudo_logsrvd.conf": 12288,
+    "/etc/multipath": 12288,
+    "/etc/sudoers.d": 12288,
+    "/etc/udisks2": 12288,
+    "/root/.gnupg": 12288,
+    "/root/lace_article.json": 12288,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-mgs-router.service-Gi74mg": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-systemd-timesyncd.service-uacBjl": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-systemd-logind.service-Yfjxjr": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-ModemManager.service-KYR3m2": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-polkit.service-WB4MhL": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-systemd-resolved.service-wlsLLE": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-ares-shein-request-queue.service-s40Jk7": 8192,
+    "/tmp/systemd-private-b371ea792c764cf6916978c370088660-fwupd.service-iTCBF0": 8192,
+    "/etc/overlayroot.conf": 8192,
+    "/etc/wgetrc": 8192,
+    "/etc/sudo.conf": 8192,
+    "/etc/tmpfiles.d": 8192,
+    "/etc/terminfo": 8192,
+    "/etc/ubuntu-advantage": 8192,
+    "/etc/gnutls": 8192,
+    "/etc/glvnd": 8192,
+    "/etc/ca-certificates.conf": 8192,
+    "/etc/ca-certificates.conf.dpkg-old": 8192,
+    "/etc/ldap": 8192,
+    "/etc/depmod.d": 8192,
+    "/etc/newt": 8192,
+    "/etc/manpath.config": 8192,
+    "/etc/alternatives": 8192,
+    "/etc/hdparm.conf": 8192,
+    "/etc/python3": 8192,
+    "/etc/polkit-1": 8192,
+    "/etc/gss": 8192,
+    "/etc/dconf": 8192,
+    "/etc/ca-certificates": 8192,
+    "/etc/apparmor": 8192,
+    "/etc/mdadm": 8192,
+    "/etc/netplan": 8192,
+    "/etc/python3.12": 8192,
+    "/etc/selinux": 8192,
+    "/etc/bash_completion.d": 8192,
+    "/etc/cryptsetup-initramfs": 8192,
+    "/root/.mem0": 8192,
+    "/root/.mgs-secure-backups": 8192,
+    "/root/.cua-driver": 8192,
+    "/root/amphtml-roblox-336x280-inline": 8192,
+    "/root/.pytest-cache": 8192,
+    "/": 4096,
+    "/home": 4096,
+    "/var": 4096,
+    "/var/.updated": 4096,
+    "/var/local": 4096,
+    "/var/mail": 4096,
+    "/var/opt": 4096,
+    "/var/crash": 4096,
+    "/mnt": 4096,
+    "/sbin.usr-is-merged": 4096,
+    "/tmp/hermes-gw-23eff238c7568dfb": 4096,
+    "/tmp/hermes-gw-50bde1791e348403": 4096,
+    "/tmp/hermes-gw-58a2d324259b0766": 4096,
+    "/tmp/hermes-gw-59e400355a413e6b": 4096,
+    "/tmp/hermes-gw-ec23d2162de2d362": 4096,
+    "/tmp/hermes-gw-74f23579f7d52bc1": 4096,
+    "/tmp/org.chromium.Chromium.DzjFs4": 4096,
+    "/tmp/hermes-gw-ac4006ae59722276": 4096,
+    "/tmp/.font-unix": 4096,
+    "/tmp/hermes-gw-865a67f548122980": 4096,
+    "/tmp/hermes-gw-ec9e486bbf8a4caf": 4096,
+    "/tmp/hermes-gw-cd8302152c2025c2": 4096,
+    "/tmp/hermes-gw-7305f59abb34f62c": 4096,
+    "/tmp/hermes-gw-eeec4c0d34f31be6": 4096,
+    "/tmp/hermes-gw-1ba3ec434b44d9fb": 4096,
+    "/tmp/hermes-gw-9606c7bdcf872d37": 4096,
+    "/tmp/org.chromium.Chromium.glDWhZ": 4096,
+    "/tmp/hbh-41bdc81302a5": 4096,
+    "/tmp/hermes-gw-c424c22223ea3a30": 4096,
+    "/tmp/hermes-gw-15c1ab44a8a6f9ba": 4096,
+    "/tmp/hermes-gw-2d83cd5e8e30e0f5": 4096,
+    "/tmp/hermes-gw-d2c9cbd5f64cd91b": 4096,
+    "/tmp/hermes-gw-77924f50cbfdc251": 4096,
+    "/tmp/org.chromium.Chromium.BWCFBI": 4096,
+    "/tmp/hermes-gw-24b053e4281aee4b": 4096,
+    "/tmp/hermes-gw-e8d52e8b5a3362e6": 4096,
+    "/tmp/sb-broadcast-template-repair.lock": 4096,
+    "/tmp/hermes-gw-c5f36b74ba8f7a8a": 4096,
+    "/tmp/hermes-gw-a3e41de4bdc06c11": 4096,
+    "/tmp/hermes-gw-5a87553ab55a3f7f": 4096,
+    "/tmp/org.chromium.Chromium.lTUgP3": 4096,
+    "/tmp/hermes-gw-ce6670267cf4f542": 4096,
+    "/tmp/hermes-gw-ea75c5032644ba7c": 4096,
+    "/tmp/hermes-gw-67035d37a3a7a1c7": 4096,
+    "/tmp/hermes-gw-ce95e19c7bef6714": 4096,
+    "/tmp/hermes-gw-1eece3b4a270aef1": 4096,
+    "/tmp/org.chromium.Chromium.pWs4qu": 4096,
+    "/tmp/hermes-gw-f115e03400a80aa5": 4096,
+    "/tmp/hermes-gw-943c378ff38b814f": 4096,
+    "/tmp/.ICE-unix": 4096,
+    "/tmp/hermes-gw-7146277abaab3b4a": 4096,
+    "/tmp/hbh-bcadc0784510": 4096,
+    "/tmp/hermes-gw-75717a3034322981": 4096,
+    "/tmp/hermes-gw-0431803074a75698": 4096,
+    "/tmp/hermes-gw-011063ba0e7d26d5": 4096,
+    "/tmp/hermes-gw-b1e92822a19abc1a": 4096,
+    "/tmp/hermes-gw-fc79966ec1f921cf": 4096,
+    "/tmp/hermes-gw-30c6ccaa9dff788b": 4096,
+    "/tmp/hermes-gw-bf83a020dfbcdf63": 4096,
+    "/tmp/sb-utility-candidate-approval.lock": 4096,
+    "/tmp/hermes-gw-56baf0866a2b7cda": 4096,
+    "/tmp/.XIM-unix": 4096,
+    "/tmp/.X11-unix": 4096,
+    "/tmp/org.chromium.Chromium.3FBEy4": 4096,
+    "/tmp/hermes-gw-9222fffc8ea240ea": 4096,
+    "/tmp/hermes-gw-d92a5a7163ed792b": 4096,
+    "/tmp/hermes-gw-7e9b65d9dc693bf2": 4096,
+    "/tmp/hermes-gw-ad284785107394de": 4096,
+    "/tmp/hermes-gw-6232ccbbae0c2d2d": 4096,
+    "/tmp/hermes-gw-1fe46a90d9b9007f": 4096,
+    "/tmp/hermes-gw-b8e76c17b38742b1": 4096,
+    "/tmp/hermes-gw-b67f660ad2a3bd7e": 4096,
+    "/tmp/hermes-gw-e045c6b52bd87f3f": 4096,
+    "/tmp/hermes-gw-16ba2436b34d9154": 4096,
+    "/tmp/org.chromium.Chromium.UTgSMS": 4096,
+    "/tmp/org.chromium.Chromium.JOxEIN": 4096,
+    "/tmp/hbh-919af0cdb9f2": 4096,
+    "/tmp/hermes-gw-21027a1e3a8125df": 4096,
+    "/tmp/tmux-0": 4096,
+    "/tmp/hermes-gw-5106a5e7214395a6": 4096,
+    "/usr": 4096,
+    "/usr/games": 4096,
+    "/usr/lib64": 4096,
+    "/bin.usr-is-merged": 4096,
+    "/lib.usr-is-merged": 4096,
+    "/media": 4096,
+    "/srv": 4096,
+    "/etc/deluser.conf": 4096,
+    "/etc/pollinate": 4096,
+    "/etc/bash_completion": 4096,
+    "/etc/.updated": 4096,
+    "/etc/host.conf": 4096,
+    "/etc/networks": 4096,
+    "/etc/ec2_version": 4096,
+    "/etc/environment": 4096,
+    "/etc/fuse.conf": 4096,
+    "/etc/multipath.conf": 4096,
+    "/etc/rc4.d": 4096,
+    "/etc/protocols": 4096,
+    "/etc/ucf.conf": 4096,
+    "/etc/dhcpcd.conf": 4096,
+    "/etc/rsyslog.conf": 4096,
+    "/etc/profile": 4096,
+    "/etc/papersize": 4096,
+    "/etc/hosts": 4096,
+    "/etc/pam.conf": 4096,
+    "/etc/nsswitch.conf": 4096,
+    "/etc/legal": 4096,
+    "/etc/crontab": 4096,
+    "/etc/crypttab": 4096,
+    "/etc/gai.conf": 4096,
+    "/etc/rcS.d": 4096,
+    "/etc/issue": 4096,
+    "/etc/locale.conf": 4096,
+    "/etc/usb_modeswitch.conf": 4096,
+    "/etc/credstore": 4096,
+    "/etc/gshadow": 4096,
+    "/etc/shadow-": 4096,
+    "/etc/group-": 4096,
+    "/etc/modules": 4096,
+    "/etc/hostname": 4096,
+    "/etc/credstore.encrypted": 4096,
+    "/etc/bindresvport.blacklist": 4096,
+    "/etc/magic": 4096,
+    "/etc/modules-load.d": 4096,
+    "/etc/shadow": 4096,
+    "/etc/libpaper.d": 4096,
+    "/etc/gshadow-": 4096,
+    "/etc/hosts.deny": 4096,
+    "/etc/adduser.conf": 4096,
+    "/etc/passwd-": 4096,
+    "/etc/inputrc": 4096,
+    "/etc/lsb-release": 4096,
+    "/etc/ld.so.conf": 4096,
+    "/etc/libaudit.conf": 4096,
+    "/etc/rc2.d": 4096,
+    "/etc/sudoers": 4096,
+    "/etc/bash.bashrc": 4096,
+    "/etc/issue.net": 4096,
+    "/etc/group": 4096,
+    "/etc/e2scrub.conf": 4096,
+    "/etc/rc5.d": 4096,
+    "/etc/binfmt.d": 4096,
+    "/etc/overlayroot.local.conf": 4096,
+    "/etc/rc6.d": 4096,
+    "/etc/screenrc": 4096,
+    "/etc/zsh_command_not_found": 4096,
+    "/etc/monarx-agent.conf": 4096,
+    "/etc/debconf.conf": 4096,
+    "/etc/update-notifier": 4096,
+    "/etc/passwd": 4096,
+    "/etc/ethertypes": 4096,
+    "/etc/magic.mime": 4096,
+    "/etc/sysctl.conf": 4096,
+    "/etc/xattr.conf": 4096,
+    "/etc/.resolv.conf.systemd-resolved.bak": 4096,
+    "/etc/sensors.d": 4096,
+    "/etc/hosts.allow": 4096,
+    "/etc/fstab": 4096,
+    "/etc/gprofng.rc": 4096,
+    "/etc/rpc": 4096,
+    "/etc/shells": 4096,
+    "/etc/timezone": 4096,
+    "/etc/mke2fs.conf": 4096,
+    "/etc/nftables.conf": 4096,
+    "/etc/rc3.d": 4096,
+    "/etc/usb_modeswitch.d": 4096,
+    "/etc/rc1.d": 4096,
+    "/etc/logrotate.conf": 4096,
+    "/etc/landscape": 4096,
+    "/etc/locale.alias": 4096,
+    "/etc/opt": 4096,
+    "/etc/machine-id": 4096,
+    "/etc/vdpau_wrapper.cfg": 4096,
+    "/etc/netconfig": 4096,
+    "/etc/debian_version": 4096,
+    "/etc/rc0.d": 4096,
+    "/etc/plymouth": 4096,
+    "/root": 4096,
+    "/root/.claude": 4096,
+    "/root/.profile": 4096,
+    "/root/Roblox_336x280_AMPHTML_INLINE.zip": 4096,
+    "/root/search_yahoo.py": 4096,
+    "/root/search_brave.py": 4096,
+    "/root/tmp": 4096,
+    "/root/.bashrc": 4096,
+    "/root/.lesshst": 4096,
+    "/root/meta31_search.py": 4096,
+    "/root/html_to_text.py": 4096,
+    "/root/.zshrc": 4096,
+    "/root/mgs-bootstrap-20260618-165056.log": 4096,
+    "/root/.mgs-backups": 4096,
+    "/root/search_web.py": 4096,
+    "/root/search_bing.py": 4096,
+    "/opt": 4096,
+    "/.pytest-cache": 4096,
+    "/.pytest-cache/gw-adapter-guard-7ae0fefdf804e9f0": 4096,
+    "/snap": 4096,
+    "/snap/canonical-livepatch": 4096,
+    "/snap/README": 4096,
+    "/snap/bin": 4096,
+    "/snap/snapd": 4096,
+    "/snap/core22": 4096,
+    "/boot": 4096,
+    "/sbin": 0,
+    "/var/lock": 0,
+    "/var/run": 0,
+    "/lib": 0,
+    "/tmp/monitor-auto-push.lock": 0,
+    "/tmp/.org.chromium.Chromium.OJqT8z": 0,
+    "/tmp/uv-e8c3ace850a98d6c.lock": 0,
+    "/lib64": 0,
+    "/.hstgr-1788325579.usage-telemetry.py": 0,
+    "/bin": 0,
+    "/etc/vconsole.conf": 0,
+    "/etc/mtab": 0,
+    "/etc/resolv.conf": 0,
+    "/etc/localtime": 0,
+    "/etc/rmt": 0,
+    "/etc/vtrgb": 0,
+    "/etc/os-release": 0,
+    "/etc/subuid": 0,
+    "/etc/subgid": 0,
+    "/etc/.pwd.lock": 0,
+    "/.pytest-cache/.gw-adapter-guard-7ae0fefdf804e9f0.lock": 0,
+    "/boot/vmlinuz": 0,
+    "/boot/vmlinuz.old": 0,
+    "/boot/initrd.img.old": 0,
+    "/boot/initrd.img": 0
+  },
+  "largest_regular_files": [
+    {
+      "allocated": 4294971392,
+      "path": "/swapfile",
+      "logical": 4294967296,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1783905538957428263
+    },
+    {
+      "allocated": 2077720576,
+      "path": "/root/mgs-agent/backups/safety/mgs-safety-20261114-034102.tar.gz",
+      "logical": 2077716447,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794645814709763998
+    },
+    {
+      "allocated": 1963122688,
+      "path": "/root/.hermes/profiles/zeus/state.db",
+      "logical": 1963114496,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794690919486831507
+    },
+    {
+      "allocated": 1758969856,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-162c7d602c39742af22dc85515c553d9990f740d.pack",
+      "logical": 1758961691,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794690952157902482
+    },
+    {
+      "allocated": 1620373504,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/state.db",
+      "logical": 1620361216,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793770434688240678
+    },
+    {
+      "allocated": 1620373504,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/zeus/state.db",
+      "logical": 1620361216,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793769476483095724
+    },
+    {
+      "allocated": 1530163200,
+      "path": "/root/.hermes/profiles/ares/state.db",
+      "logical": 1530150912,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794689884771526679
+    },
+    {
+      "allocated": 1506078720,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/hermes-control-plane-and-sqlite.tar.gz",
+      "logical": 1506066150,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793764245602501334
+    },
+    {
+      "allocated": 1183518720,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-69422f4fafeda0b3783fb0be42a333f83dce6a5f.pack",
+      "logical": 1183511539,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794553666185146137
+    },
+    {
+      "allocated": 1097826304,
+      "path": "/root/.hermes/profiles/zeus/state-snapshots/20261012-162355-pre-hermes-7cc3fb8c-1559238059541659689/state.db",
+      "logical": 1097822208,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1791822238565225070
+    },
+    {
+      "allocated": 1066602496,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-9c574320f39c0aa7ce38c477353e059e6b9714c2.pack",
+      "logical": 1066594578,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1791039161120563479
+    },
+    {
+      "allocated": 1013280768,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/state.db",
+      "logical": 1013268480,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793770182982937374
+    },
+    {
+      "allocated": 1013063680,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/ares/state.db",
+      "logical": 1013051392,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793769283874876591
+    },
+    {
+      "allocated": 912060416,
+      "path": "/root/.hermes/profiles/zeus/checkpoints/store/objects/pack/pack-6f317b1e5b60eb065dfa1609c3a7575dde363d06.pack",
+      "logical": 912053982,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794672066419875035
+    },
+    {
+      "allocated": 911974400,
+      "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+      "logical": 911970072,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1794671914826498513
+    },
+    {
+      "allocated": 773414912,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-04dbbe425994ca8a18fe01cfe5826da99060ba0e.pack",
+      "logical": 773407640,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465169062755989
+    },
+    {
+      "allocated": 726962176,
+      "path": "/root/.hermes/profiles/zeus/secure-backups/finance-security-1551287899746598946/state-before.db",
+      "logical": 726958080,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1789926345813300601
+    },
+    {
+      "allocated": 725749760,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.git/objects/pack/pack-bfabafe6bda44a23268ac4a02abdfd3691140a52.pack",
+      "logical": 725740443,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793765708766333471
+    },
+    {
+      "allocated": 683065344,
+      "path": "/root/.hermes/profiles/zeus/checkpoints/store/objects/pack/pack-4244719a98a48828ea08b1ec0353c56ef70f4a91.pack",
+      "logical": 683053836,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794675618048280497
+    },
+    {
+      "allocated": 676331520,
+      "path": "/root/.hermes/profiles/atena/state.db",
+      "logical": 676323328,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794690464816836651
+    },
+    {
+      "allocated": 672284672,
+      "path": "/root/.hermes/profiles/ares/checkpoints/store/objects/pack/pack-1743cdf2177e6b3d7a3fdccc78205f872ea0182d.pack",
+      "logical": 672276807,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794689095459759910
+    },
+    {
+      "allocated": 616456192,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-b5648df1d1d613bb94416d417f4e4e40080d1c4f.pack",
+      "logical": 616448245,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794406153330308140
+    },
+    {
+      "allocated": 611274752,
+      "path": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/before-main-state.db",
+      "logical": 611270656,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1792510808711922258
+    },
+    {
+      "allocated": 605999104,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-d5702a07328539619a2c4f606b7d96a78713b45c.pack",
+      "logical": 605993768,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1791002515541285755
+    },
+    {
+      "allocated": 585396224,
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/objects/pack/pack-61803ae92b603e372496e5f1727b83a8c974f162.pack",
+      "logical": 585390662,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793758386766544928
+    },
+    {
+      "allocated": 559112192,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/state.db",
+      "logical": 559104000,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793770242650008861
+    },
+    {
+      "allocated": 559112192,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/atena/state.db",
+      "logical": 559104000,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1793769394169001078
+    },
+    {
+      "allocated": 534495232,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-visual-1555301641287114806/main-before.json",
+      "logical": 534489355,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790883562665113137
+    },
+    {
+      "allocated": 527454208,
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git/objects/pack/pack-21068576d423bcc3d477ae062c4f78aca46c4b18.pack",
+      "logical": 527447600,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793758386259544729
+    },
+    {
+      "allocated": 509550592,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-e7b0eb2d9926d070e16066cccf80a4c4e1cd250f.pack",
+      "logical": 509544515,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465171657761383
+    },
+    {
+      "allocated": 490885120,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-884ca1f6c6be94562da5e53c58695e57de84fe61.pack",
+      "logical": 490878739,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465168634755100
+    },
+    {
+      "allocated": 483553280,
+      "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-small/blobs/3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+      "logical": 483546902,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1782930408541676153
+    },
+    {
+      "allocated": 459866112,
+      "path": "/root/.hermes/profiles/zeus/browser-binaries/chromium-1187/chrome-linux/chrome",
+      "logical": 459860328,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790346225048135448
+    },
+    {
+      "allocated": 403382272,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-88e3551539e6a9cb3ed6bbc2ef0462e72f041610.pack",
+      "logical": 403377014,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789407994867866208
+    },
+    {
+      "allocated": 394235904,
+      "path": "/root/.hermes/profiles/zeus/workspace/carcreditad-audit/logs-response.json",
+      "logical": 394231250,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790041387133593362
+    },
+    {
+      "allocated": 387588096,
+      "path": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333/historical-snapshots.tar",
+      "logical": 387584000,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1794597556845349496
+    },
+    {
+      "allocated": 373309440,
+      "path": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/before-snapshot-state.db",
+      "logical": 373305344,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1792510810043924159
+    },
+    {
+      "allocated": 373309440,
+      "path": "/root/.hermes/profiles/ares/state-snapshots/20261012-162359-pre-hermes-7cc3fb8c-1559238059541659689/state.db",
+      "logical": 373305344,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1792510995836185391
+    },
+    {
+      "allocated": 368943104,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-20260922/before-portalbrasilnews.com.json",
+      "logical": 368936014,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790077628120815210
+    },
+    {
+      "allocated": 368930816,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-20260922/after-portalbrasilnews.com.json",
+      "logical": 368923945,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790078335340544722
+    },
+    {
+      "allocated": 366313472,
+      "path": "/root/.hermes/profiles/atena/checkpoints/store/objects/pack/pack-38de139a5c5ebd7e438032e247835f33ba00a7f1.pack",
+      "logical": 366308006,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1794411038092327694
+    },
+    {
+      "allocated": 358273024,
+      "path": "/root/.hermes/profiles/zeus/workspace/carcreditad-audit/logs.json",
+      "logical": 358266855,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790041391213598385
+    },
+    {
+      "allocated": 340340736,
+      "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz",
+      "logical": 340335372,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1794685789001797021
+    },
+    {
+      "allocated": 310435840,
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-full-post-1545874044757344417.json",
+      "logical": 310428807,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788635716315347581
+    },
+    {
+      "allocated": 310431744,
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-user-layout-pre-1545874044757344417.json",
+      "logical": 310423568,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788635549514187990
+    },
+    {
+      "allocated": 308764672,
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-feasibility-1545869802898194432.json",
+      "logical": 308759074,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788634561696271955
+    },
+    {
+      "allocated": 308760576,
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-prewrite.json",
+      "logical": 308758873,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788630887645244075
+    },
+    {
+      "allocated": 308760576,
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-postwrite.json",
+      "logical": 308759819,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788631000724484482
+    },
+    {
+      "allocated": 304291840,
+      "path": "/root/.hermes/profiles/zeus/browser-binaries/chromium_headless_shell-1187/chrome-linux/headless_shell",
+      "logical": 304286872,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790346229306140529
+    },
+    {
+      "allocated": 293289984,
+      "path": "/root/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "logical": 293285184,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789651204824948672
+    },
+    {
+      "allocated": 292675584,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-58041c73f6012bdd6bb72fcde4352ed61423c735.pack",
+      "logical": 292668966,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794684615088327700
+    },
+    {
+      "allocated": 290619392,
+      "path": "/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+      "logical": 290614600,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789727506195966017
+    },
+    {
+      "allocated": 284487680,
+      "path": "/root/.npm/_npx/f4a9a6fe740fa973/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex",
+      "logical": 284479848,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956369911869958
+    },
+    {
+      "allocated": 284487680,
+      "path": "/root/.npm/_npx/2f9d908f9cfda204/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex",
+      "logical": 284479848,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956678392849834
+    },
+    {
+      "allocated": 284487680,
+      "path": "/root/.npm/_npx/0d710a328f2801a9/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex",
+      "logical": 284479848,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956392202859220
+    },
+    {
+      "allocated": 278573056,
+      "path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "logical": 278568152,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1785773899648378545
+    },
+    {
+      "allocated": 269783040,
+      "path": "/root/.hermes/tools/chromium-1208/chrome-linux64/chrome",
+      "logical": 269778136,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1790682554700410475
+    },
+    {
+      "allocated": 269783040,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/chromium-1208/chrome-linux64/chrome",
+      "logical": 269778136,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793765841416445121
+    },
+    {
+      "allocated": 262864896,
+      "path": "/root/.npm/_npx/c8ab89660c602c20/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex",
+      "logical": 262858016,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790257787265895372
+    },
+    {
+      "allocated": 255422464,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-visual-1555301641287114806/main-verified-final.json",
+      "logical": 255416962,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790888231424753089
+    },
+    {
+      "allocated": 248410112,
+      "path": "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/libpython3.14.so.1.0",
+      "logical": 248404536,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1704067200000000000
+    },
+    {
+      "allocated": 228859904,
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/upstream-7cc3fb8c.tar",
+      "logical": 228853760,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1791820250748134219
+    },
+    {
+      "allocated": 228126720,
+      "path": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/finance-before.dump",
+      "logical": 228119546,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791264553671526778
+    },
+    {
+      "allocated": 228126720,
+      "path": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/finance-before.dump",
+      "logical": 228120779,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791260477223253988
+    },
+    {
+      "allocated": 228122624,
+      "path": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/finance-before.dump",
+      "logical": 228117364,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791264240523086978
+    },
+    {
+      "allocated": 225746944,
+      "path": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/finance-before.dump",
+      "logical": 225742480,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791169856376909529
+    },
+    {
+      "allocated": 225726464,
+      "path": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/finance-before.dump",
+      "logical": 225718514,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791138151634079466
+    },
+    {
+      "allocated": 224178176,
+      "path": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/finance-before.dump",
+      "logical": 224170032,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791037190985523729
+    },
+    {
+      "allocated": 224145408,
+      "path": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/finance-before.dump",
+      "logical": 224140386,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791035391157484042
+    },
+    {
+      "allocated": 222617600,
+      "path": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/before.dump",
+      "logical": 222610357,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790951257268764399
+    },
+    {
+      "allocated": 222597120,
+      "path": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/finance-before.dump",
+      "logical": 222590752,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790987502945080368
+    },
+    {
+      "allocated": 222597120,
+      "path": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/finance-before.dump",
+      "logical": 222591673,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790979613869801158
+    },
+    {
+      "allocated": 221859840,
+      "path": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/mgs_finance-before.dump",
+      "logical": 221854062,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790946491016791639
+    },
+    {
+      "allocated": 220393472,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-usage-prepaid-1555464947394285580/finance-before.dump",
+      "logical": 220387557,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790926147343969862
+    },
+    {
+      "allocated": 217681920,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-direct-1555422806940983327/finance-before.dump",
+      "logical": 217674729,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790913590312162669
+    },
+    {
+      "allocated": 212193280,
+      "path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/pre-sync.dump",
+      "logical": 212188781,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790834908491215461
+    },
+    {
+      "allocated": 207867904,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261114T080318-0500/mgs_finance-before.dump",
+      "logical": 207860485,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794662251737888521
+    },
+    {
+      "allocated": 205860864,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261113T080319-0500/mgs_finance-before.dump",
+      "logical": 205856374,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794575559222331042
+    },
+    {
+      "allocated": 199008256,
+      "path": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/mgs_finance-before.dump",
+      "logical": 199000696,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790771218289485654
+    },
+    {
+      "allocated": 197427200,
+      "path": "/root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 197422408,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789651212394958927
+    },
+    {
+      "allocated": 196980736,
+      "path": "/root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 196975952,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789727513702967987
+    },
+    {
+      "allocated": 196571136,
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/sheets-repair-before.json",
+      "logical": 196563726,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788808842256116603
+    },
+    {
+      "allocated": 196571136,
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/sheets-repair-after.json",
+      "logical": 196565031,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788809076406344829
+    },
+    {
+      "allocated": 193290240,
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/verified-db-backup-abab4f4f-5752-4582-bab3-a585f4253908.tar",
+      "logical": 193284608,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794675120347304037
+    },
+    {
+      "allocated": 193290240,
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/verified-db-backup-46e32259-786a-4a9d-9372-aa65e690e8a7.tar",
+      "logical": 193284608,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794675660290363710
+    },
+    {
+      "allocated": 189505536,
+      "path": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953/backup/mgs_finance-before.dump",
+      "logical": 189502998,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790428244582882752
+    },
+    {
+      "allocated": 189501440,
+      "path": "/root/mgs-agent/apps/finance-system/private/spyflix-credit-1553049180434604103/backup/mgs_finance-before.dump",
+      "logical": 189494412,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790351514575105502
+    },
+    {
+      "allocated": 189186048,
+      "path": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "logical": 189181152,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1785773907761388512
+    },
+    {
+      "allocated": 185843712,
+      "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/finance-before.dump",
+      "logical": 185837253,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1793626319514557064
+    },
+    {
+      "allocated": 184999936,
+      "path": "/root/mgs-agent/apps/finance-system/private/payments-1546642267291394199/production-before.json",
+      "logical": 184999655,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788818879833698158
+    },
+    {
+      "allocated": 179724288,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+      "logical": 179716562,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1793449052248481007
+    },
+    {
+      "allocated": 177672192,
+      "path": "/root/mgs-agent/apps/finance-system/private/pushalert-1553059046360350835/backup/mgs_finance-before.dump",
+      "logical": 177666599,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790348659930493156
+    },
+    {
+      "allocated": 174141440,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-c3fb6ee3dd707495c3d37e849245858f82a01656.pack",
+      "logical": 174133671,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1790336449757617933
+    },
+    {
+      "allocated": 170553344,
+      "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/catalog-backup/mgs_finance-before.dump",
+      "logical": 170547523,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1793194385836661118
+    },
+    {
+      "allocated": 169283584,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+      "logical": 169277338,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1793189878373007727
+    },
+    {
+      "allocated": 164827136,
+      "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/workspaces.json",
+      "logical": 164821767,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790172297106223029
+    },
+    {
+      "allocated": 164200448,
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/backup/mgs_finance-before.dump",
+      "logical": 164193063,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790347007671660837
+    },
+    {
+      "allocated": 162189312,
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/objects/pack/pack-2669a31bd492ee55ce9acf83e1d9ce261c53b9d5.pack",
+      "logical": 162184664,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793758386766544928
+    },
+    {
+      "allocated": 159150080,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-final-closure-20260922/live-portalbrasilnews.com.json",
+      "logical": 159145703,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790103392554181395
+    },
+    {
+      "allocated": 157388800,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-containment-20260922/before-portalbrasilnews.com.json",
+      "logical": 157381908,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790092721781313912
+    },
+    {
+      "allocated": 153440256,
+      "path": "/root/mgs-agent/apps/finance-system/private/rede2-gross-1554177164872519692/snapshots.json",
+      "logical": 153435914,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790615315829578821
+    },
+    {
+      "allocated": 153407488,
+      "path": "/root/mgs-agent/apps/finance-system/private/receipt-review-1554155424285069372/snapshots.json",
+      "logical": 153402261,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790610134095415755
+    },
+    {
+      "allocated": 153141248,
+      "path": "/root/mgs-agent/apps/finance-system/private/yolo-close-1562816076503449702/attrib-before.dump",
+      "logical": 153135908,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792675113463849010
+    },
+    {
+      "allocated": 150913024,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-70df740fc158305dd4106c3b3bbd226423f7adf5.pack",
+      "logical": 150910381,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465174034766324
+    },
+    {
+      "allocated": 150724608,
+      "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/expenses-backup/mgs_finance-before.dump",
+      "logical": 150719903,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790341576816283727
+    },
+    {
+      "allocated": 150355968,
+      "path": "/root/.cache/uv/archive-v0/L1K6UaR2GdAJHSI-/playwright/driver/node",
+      "logical": 150348872,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794550027109924876
+    },
+    {
+      "allocated": 150355968,
+      "path": "/root/.cache/uv/archive-v0/4RLEWd32dfo_Mi52/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 150348872,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794550027109924876
+    },
+    {
+      "allocated": 150327296,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/node-26.12.1-linux-x64/bin/node",
+      "logical": 150319168,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1792566537000000000
+    },
+    {
+      "allocated": 149520384,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/attrib-before.dump",
+      "logical": 149516904,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792644008300174544
+    },
+    {
+      "allocated": 148254720,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/m2close-before.dump",
+      "logical": 148248901,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792638797273054991
+    },
+    {
+      "allocated": 147783680,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/ffmpeg-9.0.1-linux-x64/bin/ffplay",
+      "logical": 147776944,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1788182439000000000
+    },
+    {
+      "allocated": 146927616,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/googleclose-before.dump",
+      "logical": 146922902,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792629181071763217
+    },
+    {
+      "allocated": 145858560,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/ffmpeg-9.0.1-linux-x64/bin/ffmpeg",
+      "logical": 145852304,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1788182439000000000
+    },
+    {
+      "allocated": 145649664,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/ffmpeg-9.0.1-linux-x64/bin/ffprobe",
+      "logical": 145643408,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1788182439000000000
+    },
+    {
+      "allocated": 145604608,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/fbclose-before.dump",
+      "logical": 145600075,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792625684877438793
+    },
+    {
+      "allocated": 145223680,
+      "path": "/root/.hermes/profiles/ares/stt-runtime/models/blobs/0c/0c4d8d814973160f53608ff0aa1618a90abbce9ed632bbc54930475ba82ce973",
+      "logical": 145217532,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1791921207328002370
+    },
+    {
+      "allocated": 145219584,
+      "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-base/blobs/d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+      "logical": 145217532,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1781835218260072192
+    },
+    {
+      "allocated": 144310272,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/rede2-before.dump",
+      "logical": 144305523,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792624245628909953
+    },
+    {
+      "allocated": 143548416,
+      "path": "/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1",
+      "logical": 143545784,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1776791747000000000
+    },
+    {
+      "allocated": 143015936,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/rede1-before.dump",
+      "logical": 143007985,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792619503898781175
+    },
+    {
+      "allocated": 137732096,
+      "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/mgs_finance-before.dump",
+      "logical": 137724417,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790340280801559251
+    },
+    {
+      "allocated": 136998912,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/libpython3.14.so.1.0",
+      "logical": 136993528,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1704067200000000000
+    },
+    {
+      "allocated": 136564736,
+      "path": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled/archives/mgs-agent-untracked.tar.zst",
+      "logical": 136560510,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1790631516457625716
+    },
+    {
+      "allocated": 133505024,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-d7fd7b08394297f61cbd5f4d4075a805c9bffb1c.pack",
+      "logical": 133498374,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794575365875769896
+    },
+    {
+      "allocated": 133193728,
+      "path": "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493/before.dump",
+      "logical": 133185539,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790099516682151641
+    },
+    {
+      "allocated": 133156864,
+      "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/before.dump",
+      "logical": 133150001,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790113619502938334
+    },
+    {
+      "allocated": 133156864,
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/before.dump",
+      "logical": 133150087,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790115294868397696
+    },
+    {
+      "allocated": 133156864,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/mgs_finance-before.dump",
+      "logical": 133149072,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790123408015629406
+    },
+    {
+      "allocated": 133152768,
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/mgs_finance-before.dump",
+      "logical": 133148321,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790118518068644187
+    },
+    {
+      "allocated": 131035136,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+      "logical": 131028380,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1792239099102783814
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/mgs-agent/backups/download-protection-1556452175473803376/qa-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.local/share/mgs-router-toolchain/qa-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1790956819938911271
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/z3wWYKD_QL24Wc79/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/kWFwGMkq5uKGg5Np/lib/python3.14/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/Xfd0D8rzPkx3KX9Y/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/RFgDtxqD2OYCbUC4/lib/python3.14/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/PKPY7yNz2nAuM4x0/lib/python3.14/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126603264,
+      "path": "/root/.cache/uv/archive-v0/M-1j6aQl_e5O-Y_G/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 126595440,
+      "nlink": 7,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790426516785614807
+    },
+    {
+      "allocated": 126578688,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-b37901ac50d26e13e5be733cf81f3a18a4c7b86f.pack",
+      "logical": 126571398,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794327160399341924
+    },
+    {
+      "allocated": 124907520,
+      "path": "/usr/bin/node",
+      "logical": 124902584,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1792526220000000000
+    },
+    {
+      "allocated": 123662336,
+      "path": "/root/mgs-agent/.venv-sb/lib/python3.11/site-packages/playwright/driver/node",
+      "logical": 123656816,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1785775360187177324
+    },
+    {
+      "allocated": 123465728,
+      "path": "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "logical": 123459976,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1783786323399162517
+    },
+    {
+      "allocated": 123215872,
+      "path": "/usr/lib/llvm-18/lib/libLLVM.so.1",
+      "logical": 123215144,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1716798380000000000
+    },
+    {
+      "allocated": 121618432,
+      "path": "/root/.hermes/profiles/zeus/cache/playwright-audit-venv/lib/python3.14/site-packages/playwright/driver/node",
+      "logical": 121613584,
+      "nlink": 2,
+      "category": "07_profile_caches",
+      "mtime_ns": 1790346217929126953
+    },
+    {
+      "allocated": 121618432,
+      "path": "/root/.cache/uv/archive-v0/dVaUoGFSVNhEYkuX/playwright/driver/node",
+      "logical": 121613584,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790346217929126953
+    },
+    {
+      "allocated": 120512512,
+      "path": "/root/mgs-agent/apps/finance-system/private/review-deductions-1553399478248017973/snapshots.json",
+      "logical": 120506795,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790429817717805244
+    },
+    {
+      "allocated": 120336384,
+      "path": "/root/mgs-agent/apps/finance-system/private/session-rateio-dicas-1551947602562392085/mgs_finance-before.dump",
+      "logical": 120331334,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790084242872942363
+    },
+    {
+      "allocated": 120324096,
+      "path": "/root/mgs-agent/apps/finance-system/private/login-redirect-1551937825073790986/mgs_finance-before.dump",
+      "logical": 120321499,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790082104870468098
+    },
+    {
+      "allocated": 120315904,
+      "path": "/root/mgs-agent/apps/finance-system/private/finc-review-1551931759061631058/mgs_finance-before.dump",
+      "logical": 120308902,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790080311400520657
+    },
+    {
+      "allocated": 119296000,
+      "path": "/root/mgs-agent/apps/finance-system/private/vigency-release-1551783001678024736/mgs_finance-before.dump",
+      "logical": 119288496,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790045259778085155
+    },
+    {
+      "allocated": 119287808,
+      "path": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/mgs_finance-before.dump",
+      "logical": 119287741,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790039530972509225
+    },
+    {
+      "allocated": 119283712,
+      "path": "/root/mgs-agent/apps/finance-system/private/cutoff-1551913189355028501/mgs_finance-before.dump",
+      "logical": 119279160,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790077097143270494
+    },
+    {
+      "allocated": 119279616,
+      "path": "/root/mgs-agent/apps/finance-system/private/simple-review-1551798771661275147/mgs_finance-before.dump",
+      "logical": 119278223,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790048630756730761
+    },
+    {
+      "allocated": 119201792,
+      "path": "/root/mgs-agent/apps/finance-system/private/conference-access-1551924862854107256/mgs_finance-before.dump",
+      "logical": 119197352,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790078788127019920
+    },
+    {
+      "allocated": 118353920,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-85f77815ef0a8668f11d6315179750fc2b76cd4f.pack",
+      "logical": 118348610,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794684010604990014
+    },
+    {
+      "allocated": 117751808,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-visual-1555301641287114806/main-august.json",
+      "logical": 117745382,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790883501525033938
+    },
+    {
+      "allocated": 117587968,
+      "path": "/root/mgs-agent/apps/finance-system/private/payments-edit-1551700964975714437/mgs_finance-before.dump",
+      "logical": 117582550,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790026182775508828
+    },
+    {
+      "allocated": 117563392,
+      "path": "/root/mgs-agent/apps/finance-system/private/openzed-icaro-1551714950781866035/mgs_finance-before.dump",
+      "logical": 117560884,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790028358882783654
+    },
+    {
+      "allocated": 117174272,
+      "path": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/finance-before.dump",
+      "logical": 117166384,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791673676880663610
+    },
+    {
+      "allocated": 117170176,
+      "path": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789/finance-before.dump",
+      "logical": 117163195,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791643250505012634
+    },
+    {
+      "allocated": 117166080,
+      "path": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541/finance-before.dump",
+      "logical": 117160125,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791641348477489458
+    },
+    {
+      "allocated": 115863552,
+      "path": "/root/mgs-agent/apps/finance-system/private/august-adjust-1551644766125428847/mgs_finance-before.dump",
+      "logical": 115858893,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790011643745668879
+    },
+    {
+      "allocated": 115752960,
+      "path": "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/bin/python3.14",
+      "logical": 115747328,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1704067200000000000
+    },
+    {
+      "allocated": 115752960,
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/bootstrap/hermes/.venv/bin/python",
+      "logical": 115747328,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1704067200000000000
+    },
+    {
+      "allocated": 113631232,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-video-layout-1555338586327613623/media/Record_2026_10_01_17_57_42_424.mp4",
+      "logical": 113623142,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790892141172628685
+    },
+    {
+      "allocated": 113278976,
+      "path": "/root/.hermes/profiles/ares/artifacts/google-library/1565450301228584960/SHEIN_US_Google_2026-10-29_REFERENCIAS_PARCIAL.zip",
+      "logical": 113274472,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1793304622369675950
+    },
+    {
+      "allocated": 111833088,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/mgs_finance-before.dump",
+      "logical": 111825881,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791472074959604131
+    },
+    {
+      "allocated": 111788032,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774/finance-before.dump",
+      "logical": 111780787,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791387666301968766
+    },
+    {
+      "allocated": 111788032,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248/finance-before.dump",
+      "logical": 111781076,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791390567687603295
+    },
+    {
+      "allocated": 110108672,
+      "path": "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/mgs_finance-before.dump",
+      "logical": 110100939,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791384035002344482
+    },
+    {
+      "allocated": 109244416,
+      "path": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/mgs_finance-before.dump",
+      "logical": 109237312,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791296072974320085
+    },
+    {
+      "allocated": 108564480,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-5aa58ad6bd03b0bbd28a3569f572065edacafed5.pack",
+      "logical": 108563733,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796582640152
+    },
+    {
+      "allocated": 104882176,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-4aa51412c23a0368e9c2117cb0f947429e894c8a.pack",
+      "logical": 104874765,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794246858304833854
+    },
+    {
+      "allocated": 101994496,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-video-layout-1555338586327613623/august-reference.json",
+      "logical": 101988534,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790894033866978323
+    },
+    {
+      "allocated": 100339712,
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-close-1551587001629937686/mgs_finance-before.dump",
+      "logical": 100332166,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789998166396223108
+    },
+    {
+      "allocated": 97779712,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-export-1555274844109803522/main-before.json",
+      "logical": 97775418,
+      "nlink": 2,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790877075720613572
+    },
+    {
+      "allocated": 97779712,
+      "path": "/root/mgs-agent/apps/finance-system/private/september-export-1555274844109803522/final-922/main-before.json",
+      "logical": 97775418,
+      "nlink": 2,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790877075720613572
+    },
+    {
+      "allocated": 97460224,
+      "path": "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064/before.dump",
+      "logical": 97454093,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789935457017078657
+    },
+    {
+      "allocated": 95580160,
+      "path": "/root/mgs-agent/apps/finance-system/private/adops-1551275920671776839/before.dump",
+      "logical": 95579575,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789924295637884308
+    },
+    {
+      "allocated": 95318016,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-109d49cf1ffa9fec148203bb620e2f160e192ec6.pack",
+      "logical": 95310360,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796581640173
+    },
+    {
+      "allocated": 95289344,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-b840ee667f42f8dd466f8b3995500e3daa6bda98.pack",
+      "logical": 95284406,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794599105264832610
+    },
+    {
+      "allocated": 93515776,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-788e8f69f77fc742abe353853b42e89d50dcb6ed.pack",
+      "logical": 93509692,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465173382764969
+    },
+    {
+      "allocated": 89763840,
+      "path": "/root/mgs-agent/reports/hermes-updates/20261103-preparation-1567354570823172209/candidate-source.tar.gz",
+      "logical": 89758976,
+      "nlink": 1,
+      "category": "06_mgs_data_reports",
+      "mtime_ns": 1793762142679865820
+    },
+    {
+      "allocated": 88625152,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-7a30e2be115f32b1be6c635a68f667a94633cf56.pack",
+      "logical": 88619253,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1793624800822488378
+    },
+    {
+      "allocated": 88608768,
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite/base/5/16442",
+      "logical": 88604672,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788807810789235348
+    },
+    {
+      "allocated": 82677760,
+      "path": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/historical.json",
+      "logical": 82671044,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1791672846737671123
+    },
+    {
+      "allocated": 82530304,
+      "path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/dashboard-before.json",
+      "logical": 82523340,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790834087001355031
+    },
+    {
+      "allocated": 80781312,
+      "path": "/root/.cache/uv/archive-v0/OCmWiZgefzC0gwjn/ctranslate2.libs/libctranslate2-a7a60d30.so.4.8.5",
+      "logical": 80773681,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794070743879025677
+    },
+    {
+      "allocated": 80781312,
+      "path": "/root/.cache/uv/archive-v0/FfHdaQ0wF4WoPrUR/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-a7a60d30.so.4.8.5",
+      "logical": 80773681,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794070743879025677
+    },
+    {
+      "allocated": 80691200,
+      "path": "/root/.cache/uv/archive-v0/DJVvGhox7oyIdEA6/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-42c542ff.so.4.8.4",
+      "logical": 80683337,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487944324873
+    },
+    {
+      "allocated": 80691200,
+      "path": "/root/.cache/uv/archive-v0/5y1v_ID8uGmh1ob0/ctranslate2.libs/libctranslate2-42c542ff.so.4.8.4",
+      "logical": 80683337,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487944324873
+    },
+    {
+      "allocated": 80691200,
+      "path": "/root/.cache/uv/archive-v0/4_WMuv-uBQRNbqG1/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-42c542ff.so.4.8.4",
+      "logical": 80683337,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487944324873
+    },
+    {
+      "allocated": 78991360,
+      "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1546607083468623912/sheets-before.json",
+      "logical": 78984782,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788810696023614439
+    },
+    {
+      "allocated": 78987264,
+      "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1546607083468623912/sheets-after.json",
+      "logical": 78984782,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788811457370440737
+    },
+    {
+      "allocated": 78987264,
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/sheets-before.json",
+      "logical": 78983836,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788808597753888418
+    },
+    {
+      "allocated": 78585856,
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "logical": 78578896,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1704067200000000000
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.hermes/profiles/ares/stt-runtime/.venv/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.cache/uv/archive-v0/pDUQ5NWQvx5-OgDR/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.cache/uv/archive-v0/kRF1FJyLW8pgv3jl/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.cache/uv/archive-v0/hrWrNEIz8Ss54LDW/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.cache/uv/archive-v0/WB2JvvGMipgLbb4V/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77848576,
+      "path": "/root/.cache/uv/archive-v0/N6x5Y2Jip-fGJvAW/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-bdb19cbc.so.4.8.3",
+      "logical": 77843505,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987395549962
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1790955865083726195
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.cache/uv/archive-v0/_RbKvWBpWfgj5iNo/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038585352999580
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.cache/uv/archive-v0/InuB1vdy0fgsKzGq/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790955865083726195
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.cache/uv/archive-v0/AYGHA6jLJI1wROg2/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1788543928580009205
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.cache/uv/archive-v0/7BHiMMQJBUoZJa78/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038585352999580
+    },
+    {
+      "allocated": 77844480,
+      "path": "/root/.cache/uv/archive-v0/6T8Jcy1PDyWQTGcD/ctranslate2.libs/libctranslate2-fd146744.so.4.8.2",
+      "logical": 77839409,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038585352999580
+    },
+    {
+      "allocated": 77774848,
+      "path": "/root/.hermes/profiles/zeus/cache/video_triage/pubguru_profit_1532777326969098311/whisper-venv/lib/python3.12/site-packages/ctranslate2.libs/libctranslate2-23004c3b.so.4.8.1",
+      "logical": 77770369,
+      "nlink": 1,
+      "category": "07_profile_caches",
+      "mtime_ns": 1785513077201633929
+    },
+    {
+      "allocated": 77623296,
+      "path": "/var/lib/snapd/snaps/core22_2987.snap",
+      "logical": 77619200,
+      "nlink": 2,
+      "category": "05_system_and_services",
+      "mtime_ns": 1793624830023533785
+    },
+    {
+      "allocated": 77623296,
+      "path": "/var/lib/snapd/cache/2d862fd36044c06adf873ff49fff9e6fb6a3a78c039979900eb367e2f524e4871a89c8dfc59f10c25d0827875fae7b4b",
+      "logical": 77619200,
+      "nlink": 2,
+      "category": "05_system_and_services",
+      "mtime_ns": 1793624830023533785
+    },
+    {
+      "allocated": 77578240,
+      "path": "/var/lib/snapd/snaps/core22_2955.snap",
+      "logical": 77574144,
+      "nlink": 2,
+      "category": "05_system_and_services",
+      "mtime_ns": 1789135685279155256
+    },
+    {
+      "allocated": 77578240,
+      "path": "/var/lib/snapd/cache/f9ef8626ccda54c0d973d0fcd5759c9c1e32ad59f33baf864eed49bc196dd337f94860607db96052617aad934b7beba6",
+      "logical": 77574144,
+      "nlink": 2,
+      "category": "05_system_and_services",
+      "mtime_ns": 1789135685279155256
+    },
+    {
+      "allocated": 77496320,
+      "path": "/root/.cache/uv/archive-v0/qWkh98-qD4rosiGb/ctranslate2.libs/libctranslate2-5a650b64.so.4.7.1",
+      "logical": 77490833,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789844240961250551
+    },
+    {
+      "allocated": 76791808,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-2875c3d6913c15681384d968f0154fa866a2b451.pack",
+      "logical": 76788404,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796582640152
+    },
+    {
+      "allocated": 75538432,
+      "path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-tiny/blobs/dcb76c6586fc06cbdac6dd21f14cfd129cc4cdd9dce19bf4ffa62e59cbe6e6d1",
+      "logical": 75538270,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1782930392722659350
+    },
+    {
+      "allocated": 75067392,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-full-20260922/portal-classification-conservative.json",
+      "logical": 75066808,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790087507019364717
+    },
+    {
+      "allocated": 74166272,
+      "path": "/root/.cache/uv/archive-v0/NOL74VyXVfaXXJ4o/cv2/cv2.abi3.so",
+      "logical": 74161369,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793303151567298825
+    },
+    {
+      "allocated": 73912320,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-bc82fdfe06e1109f1fa9ef92e6720fc5e09c4145.pack",
+      "logical": 73904487,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796582640152
+    },
+    {
+      "allocated": 73879552,
+      "path": "/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20261001/.admin-venv/lib/python3.12/site-packages/cv2/cv2.abi3.so",
+      "logical": 73874137,
+      "nlink": 5,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790629807805713164
+    },
+    {
+      "allocated": 73879552,
+      "path": "/root/.cache/uv/archive-v0/eRJYC4MBYY4QCfwV/lib/python3.14/site-packages/cv2/cv2.abi3.so",
+      "logical": 73874137,
+      "nlink": 5,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629807805713164
+    },
+    {
+      "allocated": 73879552,
+      "path": "/root/.cache/uv/archive-v0/ZHLQUbW4kVliAn5M/cv2/cv2.abi3.so",
+      "logical": 73874137,
+      "nlink": 5,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629807805713164
+    },
+    {
+      "allocated": 73879552,
+      "path": "/root/.cache/uv/archive-v0/EdH5H5xzKAT2aQ73/lib/python3.14/site-packages/cv2/cv2.abi3.so",
+      "logical": 73874137,
+      "nlink": 5,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629807805713164
+    },
+    {
+      "allocated": 73879552,
+      "path": "/root/.cache/uv/archive-v0/7MNfZxo2hB23jsG9/lib/python3.14/site-packages/cv2/cv2.abi3.so",
+      "logical": 73874137,
+      "nlink": 5,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629807805713164
+    },
+    {
+      "allocated": 73379840,
+      "path": "/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_universe_binary-amd64_Packages",
+      "logical": 73379142,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1714046184000000000
+    },
+    {
+      "allocated": 73285632,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-dd8d19a2c39afe610c347ff360273116e25f86a8.pack",
+      "logical": 73279259,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794683407195022412
+    },
+    {
+      "allocated": 73216000,
+      "path": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-full-20260922/portal-classification.json",
+      "logical": 73214964,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790087273565117499
+    },
+    {
+      "allocated": 73207808,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-4f66d4d4450a12e5e45eefc2a954e75c65e88822.pack",
+      "logical": 73200907,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794277007082354954
+    },
+    {
+      "allocated": 71667712,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-25e2f849347a8e53cba924f0cc7a544eee1f87fb.pack",
+      "logical": 71660062,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1790199982749889235
+    },
+    {
+      "allocated": 71503872,
+      "path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/policy-refresh-documents.json",
+      "logical": 71496368,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790834824018124730
+    },
+    {
+      "allocated": 71499776,
+      "path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/prepared-history-documents.json",
+      "logical": 71496368,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790834377024651425
+    },
+    {
+      "allocated": 71417856,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-0272a08e0037845c6afd7a7da609dc7bd683e2cb.pack",
+      "logical": 71412357,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794575365409768475
+    },
+    {
+      "allocated": 71323648,
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git/objects/pack/pack-549a6d7cb96226e24b182968164a80c7b537e373.pack",
+      "logical": 71316781,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1793758386248544724
+    },
+    {
+      "allocated": 70610944,
+      "path": "/root/.npm/_npx/f4a9a6fe740fa973/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host",
+      "logical": 70603664,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956370279869767
+    },
+    {
+      "allocated": 70610944,
+      "path": "/root/.npm/_npx/2f9d908f9cfda204/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host",
+      "logical": 70603664,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956678866849980
+    },
+    {
+      "allocated": 70606848,
+      "path": "/root/.npm/_npx/0d710a328f2801a9/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host",
+      "logical": 70603664,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790956392586859050
+    },
+    {
+      "allocated": 70561792,
+      "path": "/root/.local/share/mgs-router-toolchain/go1.27.1.linux-amd64.tar.gz",
+      "logical": 70553950,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1790956198979017569
+    },
+    {
+      "allocated": 70258688,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-c25d79af13e7a7d0d621b1514859fb1e6c59ad14.pack",
+      "logical": 70257373,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789830791305317467
+    },
+    {
+      "allocated": 70123520,
+      "path": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/finance-canary.dump",
+      "logical": 70118832,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789341917183407498
+    },
+    {
+      "allocated": 69439488,
+      "path": "/root/.npm/_npx/c8ab89660c602c20/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host",
+      "logical": 69431360,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790257787478895636
+    },
+    {
+      "allocated": 69181440,
+      "path": "/root/.cache/uv/archive-v0/OCmWiZgefzC0gwjn/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 69173817,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794070743465025718
+    },
+    {
+      "allocated": 69181440,
+      "path": "/root/.cache/uv/archive-v0/FfHdaQ0wF4WoPrUR/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 69173817,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1794070743465025718
+    },
+    {
+      "allocated": 68792320,
+      "path": "/root/.cache/uv/archive-v0/DJVvGhox7oyIdEA6/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 68784313,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487553324385
+    },
+    {
+      "allocated": 68792320,
+      "path": "/root/.cache/uv/archive-v0/5y1v_ID8uGmh1ob0/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 68784313,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487553324385
+    },
+    {
+      "allocated": 68792320,
+      "path": "/root/.cache/uv/archive-v0/4_WMuv-uBQRNbqG1/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 68784313,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1793143487553324385
+    },
+    {
+      "allocated": 66097152,
+      "path": "/root/mgs-agent/logs/auto-commit-watcher.log",
+      "logical": 66085803,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794690978665960034
+    },
+    {
+      "allocated": 64798720,
+      "path": "/usr/lib/llvm-18/lib/libclang-cpp.so.18.1",
+      "logical": 64796088,
+      "nlink": 1,
+      "category": "05_system_and_services",
+      "mtime_ns": 1716798380000000000
+    },
+    {
+      "allocated": 64512000,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-1b7da4ccd2c2f0e66ee4fbcf05682c05c158477d.pack",
+      "logical": 64506045,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794683406526020910
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.hermes/profiles/ares/stt-runtime/.venv/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.cache/uv/archive-v0/pDUQ5NWQvx5-OgDR/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.cache/uv/archive-v0/kRF1FJyLW8pgv3jl/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.cache/uv/archive-v0/hrWrNEIz8Ss54LDW/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.cache/uv/archive-v0/WB2JvvGMipgLbb4V/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 64184320,
+      "path": "/root/.cache/uv/archive-v0/N6x5Y2Jip-fGJvAW/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 64176305,
+      "nlink": 6,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791919987056549509
+    },
+    {
+      "allocated": 62033920,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-2481c26b99f2c9ff117f8517a5056179c17d0d32.pack",
+      "logical": 62030374,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796582640152
+    },
+    {
+      "allocated": 61636608,
+      "path": "/root/.hermes/profiles/zeus/cache/video_triage/pubguru_profit_1532777326969098311/whisper-venv/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 61632369,
+      "nlink": 1,
+      "category": "07_profile_caches",
+      "mtime_ns": 1785513076919633565
+    },
+    {
+      "allocated": 61636608,
+      "path": "/root/.cache/uv/archive-v0/_RbKvWBpWfgj5iNo/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 61632369,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038584894999162
+    },
+    {
+      "allocated": 61636608,
+      "path": "/root/.cache/uv/archive-v0/7BHiMMQJBUoZJa78/lib/python3.12/site-packages/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 61632369,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038584894999162
+    },
+    {
+      "allocated": 61636608,
+      "path": "/root/.cache/uv/archive-v0/6T8Jcy1PDyWQTGcD/ctranslate2/_ext.cpython-312-x86_64-linux-gnu.so",
+      "logical": 61632369,
+      "nlink": 3,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1791038584894999162
+    },
+    {
+      "allocated": 61579264,
+      "path": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/venv/lib/python3.14/site-packages/ctranslate2/_ext.cpython-314-x86_64-linux-gnu.so",
+      "logical": 61575025,
+      "nlink": 2,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1790955864752725608
+    },
+    {
+      "allocated": 61579264,
+      "path": "/root/.cache/uv/archive-v0/InuB1vdy0fgsKzGq/ctranslate2/_ext.cpython-314-x86_64-linux-gnu.so",
+      "logical": 61575025,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790955864752725608
+    },
+    {
+      "allocated": 60788736,
+      "path": "/root/.hermes/secure-backups/tooling/uv-20260802-2318/uv-0.11.21",
+      "logical": 60783384,
+      "nlink": 1,
+      "category": "03_recovery_sets",
+      "mtime_ns": 1781200402000000000
+    },
+    {
+      "allocated": 60727296,
+      "path": "/root/.cache/uv/archive-v0/AYGHA6jLJI1wROg2/ctranslate2/_ext.cpython-311-x86_64-linux-gnu.so",
+      "logical": 60723065,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1788543928024009000
+    },
+    {
+      "allocated": 60719104,
+      "path": "/root/.cache/uv/archive-v0/qWkh98-qD4rosiGb/ctranslate2/_ext.cpython-311-x86_64-linux-gnu.so",
+      "logical": 60718849,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1789844240085249650
+    },
+    {
+      "allocated": 60190720,
+      "path": "/root/.hermes/profiles/zeus/bin/uv",
+      "logical": 60184464,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1780525169000000000
+    },
+    {
+      "allocated": 60186624,
+      "path": "/root/.hermes/bin/uv",
+      "logical": 60184464,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1780525169000000000
+    },
+    {
+      "allocated": 59441152,
+      "path": "/var/cache/apt/pkgcache.bin",
+      "logical": 59434005,
+      "nlink": 1,
+      "category": "05_system_package_caches",
+      "mtime_ns": 1794688159360672922
+    },
+    {
+      "allocated": 59400192,
+      "path": "/var/cache/apt/srcpkgcache.bin",
+      "logical": 59392934,
+      "nlink": 1,
+      "category": "05_system_package_caches",
+      "mtime_ns": 1794688159303672785
+    },
+    {
+      "allocated": 58507264,
+      "path": "/root/.hermes/profiles/atena/work/seo-review-1562828122762649781/official-assets/roblox-tech.zip",
+      "logical": 58502347,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1792678304712700050
+    },
+    {
+      "allocated": 56365056,
+      "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1/base/5/16442",
+      "logical": 56360960,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788758730922741565
+    },
+    {
+      "allocated": 56287232,
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/before-publish.json",
+      "logical": 56282954,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794676371022777283
+    },
+    {
+      "allocated": 56287232,
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/baseline.json",
+      "logical": 56282283,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794674437858918329
+    },
+    {
+      "allocated": 56287232,
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/after-publish.json",
+      "logical": 56282954,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794676669939375774
+    },
+    {
+      "allocated": 56107008,
+      "path": "/root/.local/bin/uv",
+      "logical": 56107008,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1785525771000000000
+    },
+    {
+      "allocated": 56008704,
+      "path": "/root/.hermes/tools/uv-0.12.3-linux-x64/uv",
+      "logical": 56004256,
+      "nlink": 1,
+      "category": "05_other_roots_need_classification",
+      "mtime_ns": 1786119267000000000
+    },
+    {
+      "allocated": 55455744,
+      "path": "/root/mgs-agent/.git/objects/pack/pack-11be2fa238f37417513f82c80f1f84b9ec92fdfa.pack",
+      "logical": 55449183,
+      "nlink": 1,
+      "category": "08_institutional_git",
+      "mtime_ns": 1794465173592765405
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20261001/.admin-venv/lib/python3.12/site-packages/ddddocr/common.onnx",
+      "logical": 54088521,
+      "nlink": 2,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790878451630930651
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/eRJYC4MBYY4QCfwV/lib/python3.14/site-packages/ddddocr/common.onnx",
+      "logical": 54088400,
+      "nlink": 4,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629808099713517
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/SgLNWdR1l6unTNM1/ddddocr/common.onnx",
+      "logical": 54088400,
+      "nlink": 1,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790878417825896608
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/Il2OcQ8jg8KeUpmB/ddddocr/common.onnx",
+      "logical": 54088521,
+      "nlink": 2,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790878451630930651
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/EdH5H5xzKAT2aQ73/lib/python3.14/site-packages/ddddocr/common.onnx",
+      "logical": 54088400,
+      "nlink": 4,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629808099713517
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/7MNfZxo2hB23jsG9/lib/python3.14/site-packages/ddddocr/common.onnx",
+      "logical": 54088400,
+      "nlink": 4,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629808099713517
+    },
+    {
+      "allocated": 54095872,
+      "path": "/root/.cache/uv/archive-v0/3nCzslz-M7B_LQdg/ddddocr/common.onnx",
+      "logical": 54088400,
+      "nlink": 4,
+      "category": "07_package_tool_caches_and_stores",
+      "mtime_ns": 1790629808099713517
+    },
+    {
+      "allocated": 52916224,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-871ececa4a16c58f5385656017adab0e457a2b1e.pack",
+      "logical": 52912263,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789404996802201726
+    },
+    {
+      "allocated": 52744192,
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/security-host/state/plugins/codex-security/codex-home/thread_history_1.sqlite",
+      "logical": 52740096,
+      "nlink": 1,
+      "category": "02_profiles_and_work",
+      "mtime_ns": 1790969200682281585
+    },
+    {
+      "allocated": 52523008,
+      "path": "/root/.hermes/hermes-agent/.git/objects/pack/pack-66eb7c2f5843e434853117885e4f4e8fb6854b10.pack",
+      "logical": 52514939,
+      "nlink": 1,
+      "category": "04_retained_hermes_runtimes",
+      "mtime_ns": 1789092796585640088
+    },
+    {
+      "allocated": 51789824,
+      "path": "/root/mgs-agent/apps/finance-system/private/gamezone-geizian-1548133712795795506/mgs_finance-before.dump",
+      "logical": 51784198,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789174529034290322
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788703668831882750
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790115547867396108
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789945128016172103
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1789945966792738228
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/pgdata/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1788643760124187700
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1794189454299816053
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790121437944556905
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790123376224601573
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790123111886357650
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790122881563119389
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790122351665436615
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790122057605204422
+    },
+    {
+      "allocated": 51056640,
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2/base/5/16399",
+      "logical": 51052544,
+      "nlink": 1,
+      "category": "06_mgs_controlplane_sources",
+      "mtime_ns": 1790121956835117374
+    }
+  ],
+  "multilink_inode_count": 48910,
+  "scanned_allocated_bytes": 142366651904,
+  "root_df_used_bytes": 142162554880,
+  "root_df_available_bytes": 64720949248,
+  "ledger_workspace_is_analysis_created_and_excluded": "/root/.hermes/profiles/zeus/cache/scratch/storage-system-review-1571271327648587799",
+  "elapsed_seconds": 125.1,
+  "observed_at": "2026-11-14T16:17:24.659080-05:00",
+  "ledger_publication": "Moved only the three analysis-created ledgers to durable private evidence; source inode/payload hashes retained. No source filesystem payload moved or deleted."
+}
