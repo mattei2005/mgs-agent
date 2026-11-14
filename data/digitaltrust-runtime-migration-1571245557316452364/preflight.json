@@ -1,0 +1,141 @@
+{
+  "authority_message_id": "1571245557316452364",
+  "thread_id": "1569928464033783862",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "before": "/root/.hermes/secure-backups/digitaltrust-runtime-migration/1571245557316452364/meta-digital-trust-hourly40-run.py.before",
+      "sha256": "e3638719113765f25a4462e7cb90f9cb24c57d817f1b0550cb823fdc7202a129",
+      "mode": 33188
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "before": "/root/.hermes/secure-backups/digitaltrust-runtime-migration/1571245557316452364/meta-digital-trust-pc1-create-one.py.before",
+      "sha256": "b9cca91b1da4e078fc610e09e5d9c224410721484b282dfd37ae066c488c5214",
+      "mode": 33188
+    }
+  ],
+  "protected": [
+    {
+      "path": "/etc/cron.d/.placeholder",
+      "sha256": "49674d9b1bd433cdb58f30497f6c441dc823de549160eef5c1acec4c20786810"
+    },
+    {
+      "path": "/etc/cron.d/e2scrub_all",
+      "sha256": "d4df081b982b23e66cac7102f9d91032f296caf13031991d90af44ee6cbf6e3b"
+    },
+    {
+      "path": "/etc/cron.d/monarx-update",
+      "sha256": "d15f42af5188d967a5256d4341c696ad6db411d0711985152a0be40afa0999cb"
+    },
+    {
+      "path": "/etc/cron.d/php",
+      "sha256": "cde3e914bfaf28862ca4a00bdf972a7ebe57676c895df86e7a5f105fb59155c7"
+    },
+    {
+      "path": "/etc/cron.d/sysstat",
+      "sha256": "47a67deba0d029d43209e6e512399543a945172f2a640021a6c21422a66adb1a"
+    },
+    {
+      "path": "/etc/crontab",
+      "sha256": "ffb48ad57868ed639fad049d11ef4b9bcdd3d2d3e556754ce69b4d6b016969a3"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "sha256": "e0af0a659b446532872f308dced2510c5b0282ccfc556a410c6ad86af4d6b5eb"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "sha256": "92d23a8a7403ada86acf096e4ca927c5cebd0cdf98fa349367112f643df62366"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/config.yaml",
+      "sha256": "d7ce6f094f9090e97865b49eda5e4a0fa3d203c95e21e85798f0886cf235544d"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/cron/jobs.json",
+      "sha256": "4bd189cc7250d7626aa7c4021e01470b05ceecd19c22d152c75d968991430bbf"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/config.yaml",
+      "sha256": "6547bdcc77aa2d6da2f30b1269a800c4af28fc23e7b6b5995624d1768577c257"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cron/dispatch_held.json",
+      "sha256": "13c3a485d04fb42f17d8afe86cc18507c5c3339f8132279cf639e35df5ae2abf"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "sha256": "4758c0689957153b20b0e2836d5f2e95b03196f43638b72ec538fa5f7686feb4"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-pc1-intent.json",
+      "sha256": "c54457bedad2d2617468544e2916e8e32bcfdee661f294d3c2ed7940eb9b1012"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-schedule-post.json",
+      "sha256": "1b745a9ee7f5f53b8ec77606197491847d795ec23ef449fa639fab44291f964d"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-schedule-pre.json",
+      "sha256": "1b745a9ee7f5f53b8ec77606197491847d795ec23ef449fa639fab44291f964d"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
+      "sha256": "22ad0877e0d8062a2cc00f7345dd92b558a119353dc28cca5834427af7dd24d8"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-49-20261013-state.json",
+      "sha256": "4ff801469da00690a75ec089c2b28375032b031f048d3d8ada88274454b3c477"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",
+      "sha256": "5639a1dce1f875667f64711311ebe1daa5bde998a36dfbda0ae5314efe9ef0c9"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-preflight.json",
+      "sha256": "77e1ea76219071bddfb5f53f4fd33742610980e78cd1365af593f92363dd9952"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-postwrite.json",
+      "sha256": "ad1663c4094d6cb5e191add4cc5abed9ec8ec81510805af2efa021a179eb4d65"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-preflight.json",
+      "sha256": "949f432be9644c09b19193c04b5b0a57e175561aff5c6b6af8d651f3ab411d3a"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "sha256": "06bbd85873f456b55ab1e95a7cc5c334344c28b14cacd9552fd9624d009827b5"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-success-popup-resume-20260907-postwrite.json",
+      "sha256": "89590e39cb6069325bfbe2d9f508984ac8f8726d1ccf26b4869176b60b5cf96b"
+    },
+    {
+      "path": "/var/spool/cron/crontabs/root",
+      "sha256": "0050e1c1f77552ed2df7ef3f7c56574849ac591479fa7a5c798ee0972d57a4bd"
+    }
+  ],
+  "runtime": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+  "launcher_target": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "launcher_sha256": "2acdfc04357da4f621f7f674f273f075db2435d43874ad1a9d8cac492b3c11e4",
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "stage": "/root/.hermes/profiles/zeus/cache/scratch/digitaltrust-runtime-migration-1571245557316452364",
+  "stage_hashes": {
+    "meta-digital-trust-hourly40-run.py": "759fd44d90b85d4bb9d69cba0e4a179ea11c57d6740b3a8076bbc52f940a0c99",
+    "meta-digital-trust-pc1-create-one.py": "883cd858d79d4bb7d093beb1a2a5cf0123eaf39cbe70e01b5c65482336721dee"
+  },
+  "created_at": "2026-11-14T14:30:56.365037-05:00",
+  "exclusions": [
+    "Meta/PC1/business calls",
+    "batch49/state changes",
+    "cron/campaign changes",
+    "deletion",
+    "gateway/runtime activation or restart"
+  ]
+}

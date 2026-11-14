@@ -1,0 +1,71 @@
+{
+  "status": "completed_validated",
+  "authority_message_id": "1571245557316452364",
+  "thread_id": "1569928464033783862",
+  "changed_scripts": [
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "before_sha256": "e3638719113765f25a4462e7cb90f9cb24c57d817f1b0550cb823fdc7202a129",
+      "after_sha256": "759fd44d90b85d4bb9d69cba0e4a179ea11c57d6740b3a8076bbc52f940a0c99",
+      "backup": "/root/.hermes/secure-backups/digitaltrust-runtime-migration/1571245557316452364/meta-digital-trust-hourly40-run.py.before"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "before_sha256": "b9cca91b1da4e078fc610e09e5d9c224410721484b282dfd37ae066c488c5214",
+      "after_sha256": "883cd858d79d4bb7d093beb1a2a5cf0123eaf39cbe70e01b5c65482336721dee",
+      "backup": "/root/.hermes/secure-backups/digitaltrust-runtime-migration/1571245557316452364/meta-digital-trust-pc1-create-one.py.before"
+    }
+  ],
+  "runtime_root": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+  "staged_and_deployed_tests": {
+    "unit_tests_each": 7,
+    "asserted_scenarios_each": 13,
+    "status": "PASS"
+  },
+  "protected_static_files_unchanged": 22,
+  "native_scheduler_configurations_unchanged": 3,
+  "scheduler_native_execution_metadata_may_advance": true,
+  "blocked49_checkpoint_unchanged": true,
+  "gateway_pids_unchanged": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "launcher_unchanged": true,
+  "deletions": 0,
+  "pc1_or_meta_calls": 0,
+  "cron_or_campaign_changes": 0,
+  "runtime_activations_or_restarts": 0,
+  "real_import_and_binding_checked": true,
+  "live_desktop_behavior_tested": false,
+  "old_runtime_roots_still_preserved": true,
+  "remaining_cleanup_gates": [
+    "Old virtualenv provenance/overrides audit before deletion scope",
+    "ad2d4822 legacy executable symlink and linked-worktree native retirement",
+    "New exact manifest and Critical confirmation for any deletion"
+  ],
+  "validated_at": "2026-11-14T14:34:31.520447-05:00",
+  "report_infra": {
+    "message_id": "1571247322975834267",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "mentions": 0,
+    "embeds": 1,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T14:36:48.867849-05:00"
+  },
+  "skill_updated": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+  "skill_mirror_sha256": "8b2ee2990dafb36b6d64249821024198532ce3e0220b2965dc6a2190668ae197",
+  "skill_mirror_verified": true,
+  "diagnostic_recoveries": [
+    "Initial pre-apply whole-ledger hash guard aborted before writes on normal Zeus scheduler execution updates; reconciled native runtime markers and cron/jobs.py writer, froze configuration-only projection for all three profiles; post-apply definitions unchanged.",
+    "Initial live/mirror comparison raced the native skill sync; no second report sent, both hashes subsequently matched before closure."
+  ],
+  "operation_created_scratch": [
+    "/root/.hermes/profiles/zeus/cache/scratch/digitaltrust-runtime-migration-1571245557316452364",
+    "/root/.hermes/profiles/zeus/cache/scratch/digitaltrust-migration-import-1571245557316452364"
+  ],
+  "closed_at": "2026-11-14T14:36:48.867849-05:00",
+  "governance_errors": []
+}

@@ -282,6 +282,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1571247080448720938",
+      "next_step": "Validar coleta live e testes; primeira entrega; auditoria e agenda finita",
+      "objective": "CPR e ROI cada30min novas campanhas14nov incluindo futuras e cinco alteradas antes pedido",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1571247080448720938/manifest.json",
+      "state": "preparing",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-14T19:39:06+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -2339,6 +2349,16 @@
       "state": "complete: campanhas160-169,10campanhas/10conjuntos/20ads configuradosactive; qa10/10 e igualdade idscheckpoint/readback,8idsoriginais preservados; budgetsusd85cada,deltausd850/dia,cost_cap0.95. get conta ativausd9496.03/dia. início160-16701:00est,168-16901:20:27est;active confirmado01:54est12nov2026;19ads effectiveactive,1análise164 no snapshot;20postsnovos;fonte018semwrite. entregairis única getmessage1570332611354693663.",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-12T07:01:50+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1571214894114541621",
+      "next_step": "Entregar conclusao e bloco Iris nativamente; aguardar revisao Meta sem nova criacao ou ativacao implicita.",
+      "objective": "Criar uma campanha WATER BOTTLES FREE na Yolokfx08 G006, referencia384 da conta02, Page Trending Offers e dois videos expressamente escolhidos.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571214894114541621/final-verification.json",
+      "state": "complete: campanha001/120251850362450087, um conjunto e dois anuncios habilitados, usd35/dia cost_cap usd0.90, qa semantico/renderizado e ids conferidos; anuncios pending_review. url e copy literais. mesmos ids apos recovery; fonte preservada.",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-14T19:33:29+00:00"
     },
     {
       "agent": "ares",
@@ -4725,12 +4745,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-DIGITALTRUST-RUNTIME-MIGRATION-1571245557316452364",
-      "next_step": "Confirmar autor nativo;preservar scripts/checkpoints/crons;validar mudanca isolada antes de aplicar e testar gates bloqueados com dispatch proibido.",
-      "objective": "Migrar apenas dependencia tecnica do auxiliar DigitalTrust para runtime atual;sem executar lote49/PC1/Meta,sem cron/campanha/exclusao/restart.",
-      "source": "data/storage-conditional-runtime-review-1571239570069131275/review-result.json",
-      "state": "in_progress_preflight",
+      "next_step": "Nenhuma acao pendente desta migracao. Exclusao segue fora de escopo: antes requer provas dos ambientes antigos e lote exato de runtime/atalho/worktree com nova confirmacao. Validar entrega Git dos artefatos sem repetir alteracoes.",
+      "objective": "Migracao tecnica2scripts concluida;7testes/13cenarios antes/depois PASS;22estaticos+3configs crons preservados;lote49 bloqueado;REPORT1571247322975834267GET;zero Meta/PC1/delete/restart.",
+      "source": "context/storage-reorganization-20261112.md;data/digitaltrust-runtime-migration-1571245557316452364/result.json",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T19:29:26+00:00"
+      "updated_at": "2026-11-14T19:37:05+00:00"
     },
     {
       "agent": "zeus",
@@ -6418,12 +6438,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-CONDITIONAL-RUNTIMES-1571239570069131275",
-      "next_step": "Decisao proposta: migracao tecnica limitada do auxiliar DigitalTrust, sem executar o lote49 bloqueado;depois auditoria do ambiente e eventual manifesto novo para runtime/atalho/worktree. Nenhum lote destrutivo pronto ou autorizado.",
-      "objective": "Revisao2/2 concluida;112arquivos de fonte/overlay reconstituidos e2imports reais PASS;dois runtimes preservados;nenhuma exclusao/migracao/Meta/PC1/cron.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-conditional-runtime-review-1571239570069131275/review-result.json",
-      "state": "review_completed_preserved_dependencies_pending",
+      "next_step": "Fonte atual da dependencia resolvida:ZEUS-DIGITALTRUST-RUNTIME-MIGRATION-1571245557316452364. Ambientes/atalho/worktree seguem condicionais;nenhum lote de exclusao pronto ou autorizado.",
+      "objective": "Revisao2/2 encerrada;dependencia auxiliar469 resolvida na migracao1571245557316452364. Preservacao codigo/estado validada;duas raizes antigas presentes.",
+      "source": "context/storage-reorganization-20261112.md;data/digitaltrust-runtime-migration-1571245557316452364/result.json",
+      "state": "review_completed_helper_dependency_resolved",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T19:18:08+00:00"
+      "updated_at": "2026-11-14T19:37:05+00:00"
     },
     {
       "agent": "zeus",
@@ -6764,6 +6784,16 @@
       "state": "primeira16:06est get verificada gastousd0 sem resultados.40checks pass. agenda finita revisada no mesmo job por concorrencia:16:14-23:44est; inicial e coorte preservadas",
       "thread_id": "1558147134040178828",
       "updated_at": "2026-11-11T21:09:39+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-cpr-roi-1571247040074219553",
+      "next_step": "Validar descoberta Activities/Meta, ROI SB, primeira entrega e agenda finita",
+      "objective": "Relatorios CPR e ROI a cada 30 min de criadas/alteradas hoje, incluindo novas, Mavroa04 G004, somente 14/11/2026",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1571247040074219553/manifest.json",
+      "state": "preparing",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-14T19:38:14+00:00"
     },
     {
       "agent": "ares",
@@ -10537,5 +10567,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T19:29:26+00:00"
+  "updated_at": "2026-11-14T19:39:06+00:00"
 }

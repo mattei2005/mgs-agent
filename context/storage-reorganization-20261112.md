@@ -191,5 +191,17 @@ Após os testes, 40.252 e 136.265 entradas de metadados das duas árvores perman
 
 Recomendação para a etapa seguinte: migração técnica delimitada do auxiliar DigitalTrust para o runtime gerenciado atual, sem executar/retomar/cancelar o pedido de 49 contas nem alterar campanhas/crons; depois concluir as provas de ambiente e preparar eventual novo manifesto exato de runtime/atalho/worktree. Essa migração não foi executada por implicação do pedido de revisão; qualquer exclusão futura exige novo lote e confirmação crítica. As quatro outras raízes e todas as bases de recuperação continuam protegidas. O procedimento de seleção do interpretador foi salvo na referência de backup/manutenção, com cópia ativa e espelho de mesmo hash.
 
+## 6. Migração técnica do auxiliar DigitalTrust — autoridade 1571245557316452364
+
+Rodolfo confirmou somente a migração técnica proposta, preservando o lote de 49 contas bloqueado, os crons/campanhas, as cópias antigas e os gateways. Fonte ativa desta etapa: `data/digitaltrust-runtime-migration-1571245557316452364/result.json`; checkpoint `ZEUS-DIGITALTRUST-RUNTIME-MIGRATION-1571245557316452364`. Este resultado supersede especificamente a pendência de caminhos fixos do auxiliar na revisão do ponto 5; o restante daquela classificação e seus recibos imutáveis são preservados.
+
+**Aplicado e validado:** `meta-digital-trust-hourly40-run.py` resolve somente leitura o Python da geração gerenciada selecionada pelo runtime do launcher canônico, sem fixar uma geração descartável. `meta-digital-trust-pc1-create-one.py` deriva a raiz pelo mesmo launcher. Os dois scripts não contêm mais referência a `46904a3b`; os originais foram preservados em `/root/.hermes/secure-backups/digitaltrust-runtime-migration/1571245557316452364/`. A comparação AST confirma que as funções de negócio do adapter são idênticas e que no runner somente a seleção do interpretador mudou, além da nova função resolvedora.
+
+**Testes reais e limites:** sete testes com 13 cenários passaram antes e depois da implantação; resolver/imports/vinculação de assinatura usaram a geração gerenciada real. Os despachos de negócio/preflight foram interceptados em teste, não enviados ao PC1; os gates reais completed/bloqueado retornaram antes de qualquer subprocesso. Zero chamadas Meta/PC1, contas criadas, alterações de cron/campanha, exclusões ou reinícios. O checkpoint de 49 contas continua `blocked`, com zero criadas, de mesmo hash. Launcher e PIDs Zeus/Ares/Atena preservados, três serviços ativos.
+
+A primeira proteção por hash integral do ledger nativo de crons abortou antes da implantação porque a execução normal atualizou metadados de Zeus. O writer `cron/jobs.py` e marcadores dos jobs existentes explicam essa atualização; não houve restauração ou alteração do ledger. Antes da escrita dos scripts, foram congeladas as definições dos três perfis sem os campos documentados de execução; depois da implantação todas permaneceram iguais, assim como 22 arquivos estáticos/checkpoints protegidos. A projeção e a observação original permanecem nas evidências. O procedimento reutilizável foi salvo na skill de manutenção, com espelho conferido.
+
+**Fora desta autorização:** excluir runtimes, retirar atalho/worktree legado, alterar retenção ou retomar o lote de contas. As duas cópias antigas seguem presentes. Antes de eventual exclusão ainda faltam as provas de proveniência/overrides dos ambientes e o manifesto exato que trate o atalho/linked worktree por fluxo nativo, seguido de nova confirmação crítica.
+
 
 

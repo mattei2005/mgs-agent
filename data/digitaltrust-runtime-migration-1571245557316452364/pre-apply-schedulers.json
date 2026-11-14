@@ -1,0 +1,32 @@
+{
+  "schedulers": [
+    {
+      "path": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "job_count": 54,
+      "configuration_sha256": "e96bd288decf646673085da6528aba79d0a433627723f99eb16a821525a6d9bf"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/cron/jobs.json",
+      "job_count": 1,
+      "configuration_sha256": "c28d985ba6d82cf9a25727dfc7e355af5678a3eb85b362386e86616b89852fe8"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "job_count": 24,
+      "configuration_sha256": "d8edc5a5b9fc4ac7d2576a13e874d6ded2ecb36536361af61cf9ef8f7e784a65"
+    }
+  ],
+  "excluded_native_runtime_fields": [
+    "failure_streak",
+    "fire_claim",
+    "last_delivery_error",
+    "last_dispatch",
+    "last_error",
+    "last_failure",
+    "last_run_at",
+    "last_status",
+    "next_run_at"
+  ],
+  "reconciled_preflight_failure": "No writes occurred: initial whole-file hash changed for Zeus native cron ledger while existing jobs 0cc7ed1e587e/453bfdd275b0 completed. Native cron/jobs.py:1562 rewrites updated_at/status. Before mutation, freeze all remaining job-definition keys separately; keep original whole-file observation as historical. No scheduler configuration modified.",
+  "timestamp": "2026-11-14T14:33:50.568302-05:00"
+}

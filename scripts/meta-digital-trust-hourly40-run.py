@@ -68,6 +68,31 @@ def load_env() -> dict[str, str]:
     return env
 
 
+def pc1_runtime_python() -> str:
+    """Resolve the canonical managed interpreter without activating/installing anything."""
+    launcher = Path('/root/.local/bin/hermes').resolve(strict=True)
+    runtime = launcher.parents[2]
+    if launcher != runtime / '.hermes/bin/hermes' or not (runtime / 'pm/environments.py').is_file():
+        raise RuntimeError('pc1_runtime_launcher_layout_mismatch')
+    bootstraps = [p for p in (runtime / '.hermes/runtime').glob('*/bin/python3') if p.is_file()]
+    if len(bootstraps) != 1:
+        raise RuntimeError('pc1_runtime_bootstrap_nonunique')
+    resolver = (
+        'import sys,json; from pathlib import Path; '
+        f'sys.path.insert(0, {str(runtime)!r}); '
+        'from pm.environments import project_python; '
+        f'print(json.dumps(str(project_python(Path({str(runtime)!r})))))'
+    )
+    resolved = subprocess.run(
+        [str(bootstraps[0]), '-I', '-B', '-c', resolver],
+        capture_output=True, text=True, timeout=30, check=True,
+    )
+    interpreter = Path(json.loads(resolved.stdout))
+    if not interpreter.is_absolute() or not interpreter.is_file():
+        raise RuntimeError('pc1_runtime_interpreter_missing')
+    return str(interpreter)
+
+
 def run_node(preflight: bool = False) -> dict:
     route_state = json.loads(STATE_PATH.read_text())
     if route_state.get('execution_backend') == 'pc1_native':
@@ -77,7 +102,7 @@ def run_node(preflight: bool = False) -> dict:
         }
         if (STATE_PATH.name, route_state.get('request_id'), route_state.get('target')) not in allowed_pc1_scopes or route_state.get('business_id') != '155263197283282':
             return {'kind': 'blocked', 'reason': 'pc1_backend_scope_mismatch'}
-        command = ['/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python', str(ROOT / 'scripts/meta-digital-trust-pc1-create-one.py')]
+        command = [pc1_runtime_python(), str(ROOT / 'scripts/meta-digital-trust-pc1-create-one.py')]
     else:
         command = ['node', str(NODE_HELPER)]
     if preflight:

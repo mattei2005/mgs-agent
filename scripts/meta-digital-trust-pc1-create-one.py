@@ -14,7 +14,10 @@ SCOPES={
 }
 LEASE=ROOT/'scripts/mgs-pc1-computer-use-lock.py'
 URL='https://business.facebook.com/latest/settings/ad_accounts?business_id=155263197283282&selected_asset_id=120252962963100222&selected_asset_type=ad-account'
-RUNTIME=Path('/root/.hermes/hermes-agent-port-main-46904a3b-mgs')
+_RUNTIME_LAUNCHER=Path('/root/.local/bin/hermes').resolve(strict=True)
+RUNTIME=_RUNTIME_LAUNCHER.parents[2]
+if _RUNTIME_LAUNCHER != RUNTIME/'.hermes/bin/hermes' or not (RUNTIME/'pm/environments.py').is_file():
+    raise RuntimeError('pc1_runtime_launcher_layout_mismatch')
 SESSION=os.environ.get('MGS_PC1_SESSION') or 'pc1-native-'+uuid.uuid4().hex
 mutation=False
 handler=None

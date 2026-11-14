@@ -1,0 +1,25 @@
+def pc1_runtime_python() -> str:
+    """Resolve the canonical managed interpreter without activating/installing anything."""
+    launcher = Path('/root/.local/bin/hermes').resolve(strict=True)
+    runtime = launcher.parents[2]
+    if launcher != runtime / '.hermes/bin/hermes' or not (runtime / 'pm/environments.py').is_file():
+        raise RuntimeError('pc1_runtime_launcher_layout_mismatch')
+    bootstraps = [p for p in (runtime / '.hermes/runtime').glob('*/bin/python3') if p.is_file()]
+    if len(bootstraps) != 1:
+        raise RuntimeError('pc1_runtime_bootstrap_nonunique')
+    resolver = (
+        'import sys,json; from pathlib import Path; '
+        f'sys.path.insert(0, {str(runtime)!r}); '
+        'from pm.environments import project_python; '
+        f'print(json.dumps(str(project_python(Path({str(runtime)!r})))))'
+    )
+    resolved = subprocess.run(
+        [str(bootstraps[0]), '-I', '-B', '-c', resolver],
+        capture_output=True, text=True, timeout=30, check=True,
+    )
+    interpreter = Path(json.loads(resolved.stdout))
+    if not interpreter.is_absolute() or not interpreter.is_file():
+        raise RuntimeError('pc1_runtime_interpreter_missing')
+    return str(interpreter)
+
+

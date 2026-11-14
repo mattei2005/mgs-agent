@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "source": "/root/.hermes/profiles/zeus/cache/scratch/digitaltrust-runtime-migration-1571245557316452364",
+  "unit_tests_run": 7,
+  "asserted_scenarios": [
+    "Synthetic wrong identity rejected before dispatch",
+    "Synthetic changed account defaults rejected before dispatch",
+    "Synthetic future window deferred before dispatch",
+    "meta-digital-trust-40-20261007-state.json: real gate blocked, zero subprocess calls",
+    "meta-digital-trust-49-20261013-state.json: real gate blocked, zero subprocess calls",
+    "Legacy Node command and 240s timeout unchanged; dispatch intercepted",
+    "AST proves all adapter business functions unchanged; runner changes interpreter only",
+    "meta-digital-trust-40-20261007-state.json: intercepted command/timeout, preflight=False",
+    "meta-digital-trust-40-20261007-state.json: intercepted command/timeout, preflight=True",
+    "meta-digital-trust-49-20261013-state.json: intercepted command/timeout, preflight=False",
+    "meta-digital-trust-49-20261013-state.json: intercepted command/timeout, preflight=True",
+    "Real managed interpreter selection and current-source imports/binding; no handler called",
+    "Wrong PC1 scope refused before interpreter resolution"
+  ],
+  "scenario_count": 13,
+  "errors": 0,
+  "failures": 0,
+  "business_pc1_calls": 0,
+  "live_business_preflight_executed": false,
+  "finished_at": "2026-11-14T14:32:30.220669-05:00"
+}
