@@ -47,6 +47,10 @@ def verify(m,post=False):
  for row in m['file_targets']:
   p=pathlib.Path(row['path']);assert str(p)==GO_ARCHIVE or(p.parent==pathlib.Path('/var/cache/apt/archives')and p.suffix=='.deb'),'path scope drift'
  assert m['executor_sha256']==sha(__file__),'executor drift'
+ allowed_generated={'modules.dep','modules.dep.bin','modules.alias','modules.alias.bin','modules.symbols','modules.symbols.bin','modules.softdep','modules.devname','modules.builtin.bin','modules.builtin.alias.bin'}
+ assert len(m['generated_kernel_metadata'])==20
+ for path in m['generated_kernel_metadata']:
+  p=pathlib.Path(path);assert p.name in allowed_generated and str(p.parent)in ['/lib/modules/6.8.0-138-generic','/lib/modules/6.8.0-142-generic']
  assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==m['boot_id'],'unexpected reboot'
  assert subprocess.check_output(['uname','-r'],text=True).strip()==m['running_kernel']
  for name,version in m['protected_package_versions'].items():assert installed_package(name)=='ii \t'+version,'protected kernel package changed: '+name
@@ -73,7 +77,20 @@ def verify(m,post=False):
   for row in m['packages']:assert installed_package(row['name'])=='ii \t'+row['version'],'package identity drift'
   for row in m['file_targets']:
    assert metadata(row['path'])==row['metadata'],'cached file metadata drift';assert sha(row['path'])==row['sha256']
-  expected=json.load(gzip.open(m['kernel_metadata'],'rt'));actual=[metadata(r['path'])for r in expected];assert fingerprint(actual)==m['kernel_fingerprint'],'kernel metadata drift'
+  expected=json.load(gzip.open(m['kernel_metadata'],'rt'));expected_paths={r['path']for r in expected};observed=set()
+  for root in m['kernel_payload_roots']:
+   assert not os.path.ismount(root),'target unexpectedly mounted'
+   p=pathlib.Path(root)
+   if p.is_dir():
+    assert not p.is_symlink(),'kernel tree is a symlink'
+    for directory,dirs,files in os.walk(p,followlinks=False):
+     for name in list(dirs):
+      q=pathlib.Path(directory,name)
+      if q.is_symlink():observed.add(str(q));dirs.remove(name)
+     observed.update(str(pathlib.Path(directory,name))for name in files)
+   else:observed.add(root)
+  assert observed<=expected_paths,'unclassified new payload in kernel tree'
+  actual=[metadata(r['path'])for r in expected];assert fingerprint(actual)==m['kernel_fingerprint'],'kernel metadata drift'
   assert len(actual)==m['kernel_payload_count'],'kernel count drift'
   simulate(m['packages'])
  return {'status':'PASS','mode':'post'if post else'preflight','packages':8,'download_files':29,'kernel_payload_nodes':m['kernel_payload_count'],'deletions_by_verifier':0}
@@ -94,6 +111,10 @@ def execute(m):
   for path in m['generated_kernel_metadata']:
    if os.path.lexists(path):
     s=os.lstat(path);assert stat.S_ISREG(s.st_mode)or stat.S_ISLNK(s.st_mode);os.unlink(path)
+  for version in m['retired_kernel_versions']:
+   assert version in ['6.8.0-138-generic','6.8.0-142-generic'];p=pathlib.Path('/lib/modules')/version
+   if p.exists():
+    assert p.is_dir()and not p.is_symlink()and not any(p.iterdir()),'unexpected nonempty module residue';p.rmdir()
   for row in m['file_targets']:
    p=pathlib.Path(row['path']);assert p.parent==pathlib.Path('/var/cache/apt/archives')or str(p)==GO_ARCHIVE
    assert metadata(p)==row['metadata']and sha(p)==row['sha256'],'cache drift after native transaction; do not expand scope';os.unlink(p)
