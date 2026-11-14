@@ -1482,6 +1482,16 @@
       "name": "minibot",
       "cross_business_app_ownership_allowed": true,
       "app_ownership_grants_no_operational_account_scope": true
+    },
+    {
+      "app_id": "953171080682697",
+      "name": "minibot m6",
+      "operation_scope": "Eggbev advertiser Ana Cunha only",
+      "account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"],
+      "authority_message_id": "1571263998102343752",
+      "policy_source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
+      "app_ownership_grants_no_operational_account_scope": true,
+      "future_accounts_require_positive_scope_and_individual_onboarding": true
     }
   ],
   "permission_or_credential_changes_authorized": false,

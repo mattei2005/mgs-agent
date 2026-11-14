@@ -31,7 +31,7 @@
   "supported_modes": [],
   "requested_modes_pending_readiness": ["pure_clone"],
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
-  "advertiser_profile_selection_note": "Ana Cunha selected for existing and future Eggbev accounts by Rodolfo 1571262328715088024. Identity and account tasks validated; token issuer minibot m6 differs from allowed minibot, so app migration confirmation and Page/pixel checks remain pending; no runtime cutover or write-readiness implied.",
+  "advertiser_profile_selection_note": "Ana Cunha selected for existing/future Eggbev by Rodolfo 1571262328715088024; minibot m6 approved in 1571263998102343752. Identity/account tasks/pixel validated. Source Page direct GET still fails Meta code10 with this credential despite token scopes; no runtime cutover, permission write or campaign write-readiness implied.",
   "credential_model": "exact advertiser-profile individual User Access Token; never System User or another advertiser fallback",
   "token_item": null,
   "advertiser_identity": null,
@@ -55,5 +55,5 @@
     "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
   },
   "unset_not_inherited": ["advertiser credential", "Pages other than the read-only source reference", "UTM defaults", "copy templates", "Messenger JSON defaults", "naming defaults", "start-time defaults", "thresholds", "guardrail state", "schedules", "denylist state", "baselines", "performance", "source-account write flags"],
-  "next_step": "Ana Cunha was selected by Rodolfo 1571262328715088024; consult advertiser_profile_selection_policy. Confirm issuer-app migration before cutover, validate source Page and pixel access, then complete same-account capabilities. Keep write/activation disabled; do not inherit account01 readiness or reuse retired advertisers."
+  "next_step": "Ana Cunha/minibot m6 approved by Rodolfo 1571263998102343752; consult advertiser_profile_selection_policy. Resolve source Page access (fresh direct GET code10), repeat exact Page read, then complete same-account credential consumer cutover/capabilities. Keep write/activation disabled; do not inherit account01 readiness or reuse retired advertisers."
 }

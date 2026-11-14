@@ -13,7 +13,7 @@
     "supersedes": "older per-Page prefix/C001/AdG1 creation naming only; preserve historical manifests and clone naming contracts"
   },
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
-  "advertiser_profile_selection_note": "Ana Cunha selected for existing and future Eggbev accounts by Rodolfo 1571262328715088024. Current runtime binding below is not yet migrated: new token issuer minibot m6 differs from allowed minibot; app migration confirmation pending. Prior profiles must not be reused as fallback.",
+  "advertiser_profile_selection_note": "Ana Cunha selected for existing/future Eggbev by Rodolfo 1571262328715088024; minibot m6 953171080682697 approved in 1571263998102343752. Identity, three ad accounts and Eggbev pixel validated; exact Page reads still denied by Meta code10 despite token scopes. Runtime binding below is not yet migrated: finalize Page access and complete consumer cutover first. Prior profiles must not be reused as fallback. New app live tier development_access; do not inherit prior standard_access.",
   "advertiser_binding_reconciliation_authority": {
     "policy_source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
     "authority_message_id": "1567907415394099351",

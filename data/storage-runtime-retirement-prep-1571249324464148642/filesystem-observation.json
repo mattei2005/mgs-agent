@@ -1,0 +1,17 @@
+{
+  "executor_returncode": 0,
+  "executor_stdout": "{\"status\": \"PASS\", \"mode\": \"post\", \"target_paths\": 4, \"counts\": {\"files\": 165180, \"directories\": 11236, \"symlinks\": 113}, \"recovery\": {\"source_and_state_files_replayed\": 112, \"python_override_payloads_verified\": 273, \"node_payloads_verified\": 92556, \"reads_original_runtime_paths\": false, \"old_python_environment_rebuilt\": false, \"live_profile_or_SQLite_opened\": false}, \"deletions_by_validator\": 0}\n",
+  "executor_stderr": "",
+  "before": {
+    "used_bytes": 145073278976,
+    "available_bytes": 61810225152,
+    "observed_at": "2026-11-14T15:50:37.001489-05:00"
+  },
+  "after": {
+    "used_bytes": 142062575616,
+    "available_bytes": 64820928512,
+    "observed_at": "2026-11-14T15:51:18.058000-05:00"
+  },
+  "observed_available_delta_bytes": 3010703360,
+  "global_delta_not_exclusive_attribution": true
+}

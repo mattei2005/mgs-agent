@@ -2205,10 +2205,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ANA-M6-1571263998102343752",
+      "title": "Ana Cunha selecionada para Eggbev existente e futuro; emissor minibot m6 aguarda confirmacao para migracao",
+      "updated_at": "2026-11-14T20:49:17+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.advertiser-profile",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-11-14T20:49:17+00:00",
+      "id": "ARES-EGGBEV-ANA-M6-1571263998102343752",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ana Cunha selecionada para Eggbev existente e futuro; emissor minibot m6 aguarda confirmacao para migracao",
-      "updated_at": "2026-11-14T20:38:35+00:00"
+      "title": "Ana Cunha/minibot m6 aprovados para Eggbev; validacao de Page bloqueia cutover produtivo",
+      "updated_at": "2026-11-14T20:49:17+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
@@ -17261,5 +17278,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:40:37+00:00"
+  "updated_at": "2026-11-14T20:49:17+00:00"
 }

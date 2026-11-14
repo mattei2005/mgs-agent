@@ -22,7 +22,7 @@
     "expires_at": 1799872399,
     "expires_at_et": "2027-01-13T15:33:19-05:00",
     "data_access_expires_at": 1802464399,
-    "observation_note": "Metadata da resposta de introspeccao self-only observada no transporte canônico; guard manteve ScopeError por emissor diferente do app permitido. Isto nao e aprovacao do novo app."
+    "observation_note": "Introspeccao self-only repetida com HTTP200 apos confirmacao explicita de Rodolfo 1571263998102343752 e ajuste restrito do emissor esperado no grant tecnico da conta01. Identidade, USER, validade e app conferidos sem bypass."
   },
   "account_readbacks": {
     "1034081997659047": {"http": 200, "name": "Eggbev-US-CC-EN-01", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]},
@@ -35,7 +35,7 @@
   },
   "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
   "prior_profile_retirement_authority_message_id": "1571250965313486889",
-  "implementation_status": "IDENTITY_AND_THREE_ACCOUNTS_VALIDATED_APP_MIGRATION_CONFIRMATION_PENDING",
+  "implementation_status": "APP_APPROVED_IDENTITY_ACCOUNTS_PIXEL_VALIDATED_PAGE_ACCESS_BLOCKED",
   "current_runtime_app_id": "1299247318762949",
   "current_runtime_app_name": "minibot",
   "app_migration_authorized": true,
@@ -46,8 +46,15 @@
   "approved_app_name": "minibot m6",
   "runtime_bindings_changed": false,
   "pages_pixels_validated": false,
+  "operational_pixel_validation": {"pixel_id": "935354115143283", "name": "Eggbev-US-CC-EN", "http": 200, "account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"]},
+  "page_access_validation": {"status": "BLOCKED_REMOTE_META_CODE10", "historical_account_page_dependencies_checked": 115, "page_reads_passed": 0, "direct_rechecks": ["1272524399287905", "1342451482280266", "1306762309190521"], "direct_rechecks_http": 400, "code": 10, "scope_present_in_token": "pages_read_engagement", "cause_limit": "Token scopes present and three direct Page reads denied; this does not alone distinguish missing profile/Page grant from app feature/access restrictions. No permission change authorized or executed."},
+  "marketing_api_access_tier_live": "development_access",
+  "marketing_api_access_tier_note": "Header vivo das tres contas no app novo; nao herdar standard_access historico do minibot anterior.",
+  "technical_guard_validation": "12 own-credential metadata tests and 13 operational asset-scope tests passed; corporate app exception/account allowlist unchanged.",
+  "live_validation_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/live-validation.json",
+  "page_access_diagnostic_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/page-access-diagnostic.json",
   "future_account_requirements": ["positive account scope checker", "Ana Cunha identity and approved issuer-app validation", "exact account tasks and Page/pixel access", "separate onboarding and per-request campaign gates"],
-  "next_step": "Confirmar com Rodolfo adocao do minibot m6 para Eggbev ou emissao de token Ana Cunha no minibot atual; depois validar Pages/pixel e consumidores antes de qualquer cutover.",
+  "next_step": "App minibot m6 confirmado. Resolver acesso efetivo de Ana Cunha/as Pages pelo app: conferir atribuicao do perfil e selecao de Pages no consentimento; scopes no token nao comprovam grant do ativo. Depois repetir GET das Pages exatas, finalizar inventario de consumidores/caches e aplicar cutover do mesmo pedido. Nao usar os perfis antigos como fallback; nao alterar permissoes remotamente sem gate proprio.",
   "excluded": ["remote permission changes", "new app allowlist or guard bypass without explicit authorization", "token revocation or vault deletion", "campaign creation/activation", "budget or billing changes", "automatic onboarding of future accounts"],
   "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024"
 }

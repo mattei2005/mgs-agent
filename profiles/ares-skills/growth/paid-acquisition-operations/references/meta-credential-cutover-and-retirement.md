@@ -34,6 +34,12 @@ Never print or persist the credential value, authorization code or App Secret.
 
 - Após aprovação do ajuste técnico, usar `ares-meta-common.py::graph_get_credential_metadata(account_id, token, inspect_token=False|True)`, nunca transporte paralelo: o guard carrega a autorização canônica da conta e permite exclusivamente `me:id,name` e `debug_token` quando `input_token` é o próprio token autenticado. Validar concordância do user ID entre identidade e introspecção, app emissor, validade, conta/Page/pixel e binding do runtime; não promover IDs de identidade ou granular scopes a ativos autorizados. Manter o `/me` corporativo e o inventário de ativos inalterados fora desse contexto. Regressão mínima: outra conta, grant ausente, token alheio, POST, discovery, campos extras e app divergente continuam negados antes do transporte ou no readback. A liberação técnica não autoriza o cutover sem seu gate próprio, nem criação de campanha.
 
+### Cutover entre apps: emissor e capacidade são por operação
+
+- Após confirmação explícita do novo app, parametrizar somente o emissor esperado do grant técnico da conta/ operação aprovada; não substituir um App ID global nem estender a exceção técnica às outras operações. Testar novo emissor exato, app anterior/incorreto, token alheio, outra conta, discovery e POST; todos os casos fora do recorte continuam negados. Aceitação no guard não comprova acesso à Page.
+- Recoletar `ads_api_access_tier` nos headers vivos de cada conta com o token novo. Não transportar `standard_access` histórico para outro app: um token válido com scopes equivalentes pode retornar `development_access`, exigindo a quota correspondente na futura lane.
+- Diante de Page `code=10`, comparar scopes da introspecção com um GET direto das Pages exatas antes de culpar o token ou o batch. Scopes presentes e `target_ids` ausentes na introspecção não distinguem sozinhos falta de vínculo do perfil, consentimento do ativo ou restrição de feature/acesso do app. Preservar evidência, suspender o cutover dependente e pedir apenas a conferência/autoridade faltante; não conceder permissões ou trocar para outro perfil como fallback.
+
 ## 3. Inventory the complete consumer chain
 
 Do not stop at the central Engine config. Traverse every live path:

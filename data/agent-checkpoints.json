@@ -1353,12 +1353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-USER-TOKEN-REPLACEMENT-1571250965313486889",
-      "next_step": "Persistir autorizacao, validar guard e identidade/app; conferir Pages/pixel; realizar cutover somente dos bindings/caches aprovados e smokes read-only sem ativar onboarding/campanhas.",
-      "objective": "Adotar Ana Cunha / minibot m6 para Eggbev 01/02/03 e documentacao futura.",
-      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;discord:1185714635991679006/1571249921242435695/1571263998102343752",
-      "state": "app_migration_authorized_validating_assets. confirmacao sim de rodolfo 1571263998102343752 autenticada na origem e vinculada a pergunta 1571263188513595533. inventariando consumidores e preparando guard emissor restrito, sem writes meta.",
+      "next_step": "Rodolfo conferir acesso de Ana Cunha as Pages e selecao delas no consentimento minibot m6. Se exigir atribuicao/permissao nova, obter autorizacao critica exata. Revalidar GETs diretos (Pages 1272524399287905,1342451482280266,1306762309190521); se liberadas, completar consumidores/caches e cutover do mesmo pedido sem usar Mhd/Carla como fallback; preservar write flags das contas02/03.",
+      "objective": "Adotar Ana Cunha/minibot m6 para Eggbev existente/futuro, com cutover validado das contas01/02/03.",
+      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/live-validation.json",
+      "state": "app_approved_page_access_external_blocker. confirmacao 1571263998102343752 aplicada ao registro, app tecnico restrito e grant self-only da conta01. identidade/debug http200, contas01/02/03 http200 advertise/analyze, pixel eggbev http200. pages derivadas de adsets paginados: 115 gets code10; tres pages atuais/referencia tambem falham individualmente. token inclui pages_read_engagement; isso nao prova grant ou advanced access. tier novo development_access. zero cutover produtivo/caches/campanha/cron/permissao remota; 25 testes guard/scope passaram.",
       "thread_id": "1571249921242435695",
-      "updated_at": "2026-11-14T20:43:17+00:00"
+      "updated_at": "2026-11-14T20:49:17+00:00"
     },
     {
       "agent": "ares",
@@ -6508,12 +6508,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-RUNTIME-LOT-1571249324464148642",
-      "next_step": "Aguardar nova confirmacao nativa de Rodolfo para SHA843d8b4aa7be43b4b95888f707d675438fb0e2c091f10d622b1211f7d6a2a756/executor73e846d5989673826aa2d0ba2461a6adc0aaacc4833a6de3247c1ff8243746ef;sem novo OK nao criar approval nem executar. Antes de delete validar semGit nosalvos;posdelete4ausentes/journal/readerretido/df/PIDs/3configs+3smokes/governanca.",
-      "objective": "Lote4paths preparado/validado;165180files;2.804GiBbrutos/2.413GiBnet;16018RECORDs/273overrides/92556Node/112replays/5Git protegidos;REPORT1571253834448244880GET;zero delete.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-runtime-retirement-prep-1571249324464148642/preparation-result.json",
-      "state": "prepared_validated_awaiting_new_critical_confirmation",
+      "next_step": "Executar somente execute-lot.py --execute uma vez;antes DF/log duravel. Apos:4ausentes/journal/recoveryretida/df/PIDs/3configs+3smokes;REPORT/inventario/Git. Nao repetir delete apos efeito parcial.",
+      "objective": "Confirmacao nativa1571265639241224325 vinculada a pergunta1571254663523737784;SHA843d8b4aa7be43b4b95888f707d675438fb0e2c091f10d622b1211f7d6a2a756/executor inalterados;preflight4pathsPASS.",
+      "source": "data/storage-runtime-retirement-prep-1571249324464148642/approval.json;data/storage-runtime-retirement-prep-1571249324464148642/deletion-manifest.json",
+      "state": "approved_preflight_validated_execution_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T20:02:56+00:00"
+      "updated_at": "2026-11-14T20:50:26+00:00"
     },
     {
       "agent": "zeus",
@@ -10597,5 +10597,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:43:17+00:00"
+  "updated_at": "2026-11-14T20:50:26+00:00"
 }
