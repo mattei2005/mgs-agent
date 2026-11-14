@@ -1,0 +1,56 @@
+{
+  "digital_trust": [
+    {
+      "file": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
+      "state": {
+        "status": "completed",
+        "completed": {
+          "collection_count": 40
+        },
+        "target": 40,
+        "execution_backend": "pc1_native",
+        "request_id": "meta-digital-trust-40-1557475850310393879"
+      }
+    },
+    {
+      "file": "/root/mgs-agent/data/meta-digital-trust-49-20261013-state.json",
+      "state": {
+        "status": "blocked",
+        "completed": {
+          "collection_count": 0
+        },
+        "target": 49,
+        "execution_backend": "pc1_native",
+        "request_id": "meta-digital-trust-49-1559685342083153942"
+      }
+    }
+  ],
+  "supervised_repeat": {
+    "path": "/root/mgs-agent/data/ares/meta-ads/landing-followup/supervised-repeat-20261016-062358/normal-results.json",
+    "round_complete": true,
+    "item_count": 33,
+    "item_states": {
+      "PASS_LEAN": 33
+    }
+  },
+  "scheduled_references": [],
+  "nested_code_roots": [
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c"
+  ],
+  "owning_review_evidence": [
+    {
+      "id": "ARES-LANDING-CONTINUOUS-UNIFICATION-20261016",
+      "state": "completed_activated_verified;277tests_pass;real_continuous_batch4uniquepass_and1noad;4cards_get;real_normal_blank_probe_nourl_noseries_closed_preserved;original21jobs_and33links_no_revisit;reportinfra1560660031442124811_get",
+      "next_step": "Operacao normal pelo timer existente; mapas completos antes de navegar;deadline60s duravel ao fim de3+1;apenas1recuperacaoextra;semloopinfinito nem reabrirPASS. Medir proximos lotes autorizados sem criar canario.",
+      "source": "data/ares/meta-ads/audit/landing-continuous-unification-20261016/change-inventory.json",
+      "updated_at": "2026-10-16T14:26:58+00:00"
+    },
+    {
+      "id": "ARES-LANDING-FLOW-REVIEW-20261016",
+      "state": "review_findings_resolved_by_ares-landing-continuous-unification-20261016;continuous_normal_only_repair_per_item_auto60s_activated_verified",
+      "next_step": "Nenhuma implementacao pendente desta revisao; usar verificacao final da unificacao e contrato ativo. Relatorio anterior permanece historico, nao lista atual de pendencias. Nao reabrir33aprovados.",
+      "source": "data/ares/meta-ads/audit/landing-continuous-unification-20261016/final-verification.json",
+      "updated_at": "2026-10-16T14:30:49+00:00"
+    }
+  ]
+}
