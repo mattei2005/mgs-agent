@@ -1,0 +1,495 @@
+{
+  "status": "candidate_metadata_collected_not_executed",
+  "packages": [
+    {
+      "name": "linux-headers-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 20033
+    },
+    {
+      "name": "linux-headers-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 10259
+    },
+    {
+      "name": "linux-headers-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 20032
+    },
+    {
+      "name": "linux-headers-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 10259
+    },
+    {
+      "name": "linux-image-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 9
+    },
+    {
+      "name": "linux-image-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 9
+    },
+    {
+      "name": "linux-modules-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 1316
+    },
+    {
+      "name": "linux-modules-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 1316
+    }
+  ],
+  "kernel_versions_to_retire": [
+    "6.8.0-138-generic",
+    "6.8.0-142-generic"
+  ],
+  "protected_running_prior_and_pending_kernels": [
+    "6.8.0-146-generic",
+    "6.8.0-147-generic",
+    "6.8.0-149-generic"
+  ],
+  "running_kernel": "6.8.0-147-generic",
+  "payload_roots": [
+    "/usr/src/linux-headers-6.8.0-138",
+    "/usr/src/linux-headers-6.8.0-138-generic",
+    "/lib/modules/6.8.0-138-generic",
+    "/boot/initrd.img-6.8.0-138-generic",
+    "/boot/vmlinuz-6.8.0-138-generic",
+    "/boot/config-6.8.0-138-generic",
+    "/boot/System.map-6.8.0-138-generic",
+    "/usr/src/linux-headers-6.8.0-142",
+    "/usr/src/linux-headers-6.8.0-142-generic",
+    "/lib/modules/6.8.0-142-generic",
+    "/boot/initrd.img-6.8.0-142-generic",
+    "/boot/vmlinuz-6.8.0-142-generic",
+    "/boot/config-6.8.0-142-generic",
+    "/boot/System.map-6.8.0-142-generic"
+  ],
+  "payload_file_or_link_count": 55082,
+  "unrecognized_unowned_files": [],
+  "recognized_generated_module_metadata": [
+    "/lib/modules/6.8.0-138-generic/modules.dep",
+    "/lib/modules/6.8.0-138-generic/modules.symbols.bin",
+    "/lib/modules/6.8.0-138-generic/modules.builtin.alias.bin",
+    "/lib/modules/6.8.0-138-generic/modules.devname",
+    "/lib/modules/6.8.0-138-generic/modules.alias",
+    "/lib/modules/6.8.0-138-generic/modules.dep.bin",
+    "/lib/modules/6.8.0-138-generic/modules.alias.bin",
+    "/lib/modules/6.8.0-138-generic/modules.softdep",
+    "/lib/modules/6.8.0-138-generic/modules.builtin.bin",
+    "/lib/modules/6.8.0-138-generic/modules.symbols",
+    "/lib/modules/6.8.0-142-generic/modules.dep",
+    "/lib/modules/6.8.0-142-generic/modules.symbols.bin",
+    "/lib/modules/6.8.0-142-generic/modules.builtin.alias.bin",
+    "/lib/modules/6.8.0-142-generic/modules.devname",
+    "/lib/modules/6.8.0-142-generic/modules.alias",
+    "/lib/modules/6.8.0-142-generic/modules.dep.bin",
+    "/lib/modules/6.8.0-142-generic/modules.alias.bin",
+    "/lib/modules/6.8.0-142-generic/modules.softdep",
+    "/lib/modules/6.8.0-142-generic/modules.builtin.bin",
+    "/lib/modules/6.8.0-142-generic/modules.symbols"
+  ],
+  "potential_file_reclaim_by_device": {
+    "66304": 111058944,
+    "2049": 357773312
+  },
+  "potential_file_reclaim_bytes": 468832256,
+  "directory_blocks_not_credited": true,
+  "protected_boot_files": [
+    {
+      "path": "/boot/initrd.img-6.8.0-146-generic",
+      "sha256": "38d8422c2783415bd2bd58b0c66f5c72ffc923bf1ac2863a65bd6eea961b5a65"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-146-generic",
+      "sha256": "bae162f72d687f8f87909f1dfedea1dfe16adefe40da51f649d9a9b6d498342b"
+    },
+    {
+      "path": "/boot/config-6.8.0-146-generic",
+      "sha256": "90ded03cb0bfd9b3839fd4b1d25f7b932aaa278b93a0545a2630175544403354"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-146-generic",
+      "sha256": "1f2c7547363ed50f70a7e7c154eac7da8f52b0ec90a94851bae58be6dec3f662"
+    },
+    {
+      "path": "/boot/initrd.img-6.8.0-147-generic",
+      "sha256": "137f55c1ba01816e4ecd93a7ff2ba65789327a1ded3c2acdb29e9384c994783a"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-147-generic",
+      "sha256": "41ba36d860aa0b0cd995f4ca8856d80249b244577e704929b55be13fbd1ebd2f"
+    },
+    {
+      "path": "/boot/config-6.8.0-147-generic",
+      "sha256": "cf8454bc2e67effab87a5bff3c39042f2d8d106b6a777c4302e52f50d23b7400"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-147-generic",
+      "sha256": "2cbb8be5b2501a60c5b2e29371bf18a5eb4b468bb4485206a45bf178b1191a11"
+    },
+    {
+      "path": "/boot/initrd.img-6.8.0-149-generic",
+      "sha256": "f5d9061ff3a8d34c3d057505242d3729e5519a74a452b3f1637fd8d3837eadd7"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-149-generic",
+      "sha256": "9e9bb539fbf5e25c3fa737180e3586dacd0922257cdffe319daf8e5ceecaeaf0"
+    },
+    {
+      "path": "/boot/config-6.8.0-149-generic",
+      "sha256": "1addff02f85a47fb16c401618d47523421c655e9b458f675d07d9f61b7b26753"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-149-generic",
+      "sha256": "0c8bcd23bc0b544634c6202238033ba8077ec95e8f9a0dd724e3034f772c2176"
+    }
+  ],
+  "custom_executable_or_boot_policy_references": [],
+  "cached_debs": [
+    {
+      "path": "/var/cache/apt/archives/open-vm-tools_2%3a13.0.10-0ubuntu0.24.04.2_amd64.deb",
+      "bytes": 723634,
+      "allocated": 724992,
+      "nlink": 1,
+      "metadata": {
+        "Package": "open-vm-tools",
+        "Version": "2:13.0.10-0ubuntu0.24.04.2",
+        "Architecture": "amd64"
+      },
+      "sha256": "36cf753dfab7f65ba257fedc0be7c840abb44974acc08c0a7da920fd50b1b6f3"
+    },
+    {
+      "path": "/var/cache/apt/archives/gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb",
+      "bytes": 183412,
+      "allocated": 184320,
+      "nlink": 1,
+      "metadata": {
+        "Package": "gir1.2-glib-2.0",
+        "Version": "2.80.0-6ubuntu3.10",
+        "Architecture": "amd64"
+      },
+      "sha256": "8fea23cc31ce22d9623049b966a1c6cda2c08da7ef7fedc9b51ffcb9602fdd3d"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb",
+      "bytes": 97922,
+      "allocated": 98304,
+      "nlink": 1,
+      "metadata": {
+        "Package": "libglib2.0-bin",
+        "Version": "2.80.0-6ubuntu3.10",
+        "Architecture": "amd64"
+      },
+      "sha256": "0c60e75d4b5acadc44196bc9fd07eb15d6921c6d4f0a43406f028ed3c8aa458d"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-agent_4.3.85-master_amd64.deb",
+      "bytes": 5725992,
+      "allocated": 5726208,
+      "nlink": 1,
+      "metadata": {
+        "Package": "monarx-agent",
+        "Version": "4.3.85-master",
+        "Architecture": "amd64"
+      },
+      "sha256": "a7dd37b9f29f3f2a36efb8a2eb18ce32b1937a831e37c460e1aaaf118d790bc3"
+    },
+    {
+      "path": "/var/cache/apt/archives/apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+      "bytes": 639878,
+      "allocated": 643072,
+      "nlink": 1,
+      "metadata": {
+        "Package": "apparmor",
+        "Version": "4.0.1really4.0.1-0ubuntu0.24.04.9",
+        "Architecture": "amd64"
+      },
+      "sha256": "59af23f557d666039708ec176aa056d2fd85125dabd452accf6d86f5c608fb74"
+    },
+    {
+      "path": "/var/cache/apt/archives/1password-cli_2.41.0-1_amd64.deb",
+      "bytes": 11263682,
+      "allocated": 11264000,
+      "nlink": 1,
+      "metadata": {
+        "Package": "1password-cli",
+        "Version": "2.41.0-1",
+        "Architecture": "amd64"
+      },
+      "sha256": "0b7b215d46d7b425582e061a75f9e29a55e67bc04fe57a23deb33f5d20e8b99a"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.6_amd64.deb",
+      "bytes": 40771946,
+      "allocated": 40779776,
+      "nlink": 1,
+      "metadata": {
+        "Package": "tailscale",
+        "Version": "1.104.6",
+        "Architecture": "amd64"
+      },
+      "sha256": "193acb9d298f2a00f157217cf574820a7ebea691d41afbb8ca40c1d54e888d3e"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-cli_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "bytes": 1931822,
+      "allocated": 1933312,
+      "nlink": 1,
+      "metadata": {
+        "Package": "php8.3-cli",
+        "Version": "8.3.6-0ubuntu0.24.04.13",
+        "Architecture": "amd64"
+      },
+      "sha256": "6868966e46f777624f8cdfd3c38dfb2a7b6c2654bcacda57dc2049ecc9ca566b"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.4_amd64.deb",
+      "bytes": 40753264,
+      "allocated": 40759296,
+      "nlink": 1,
+      "metadata": {
+        "Package": "tailscale",
+        "Version": "1.104.4",
+        "Architecture": "amd64"
+      },
+      "sha256": "8768973def76dd530b53a0fe74ca396252fff050f955aeebfabd33c77960625d"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb",
+      "bytes": 1547558,
+      "allocated": 1548288,
+      "nlink": 1,
+      "metadata": {
+        "Package": "libglib2.0-0t64",
+        "Version": "2.80.0-6ubuntu3.10",
+        "Architecture": "amd64"
+      },
+      "sha256": "ff1b650f655b36dfe202fdbae6bb02b363c7257b6dd23e4f95ab61f716190df3"
+    },
+    {
+      "path": "/var/cache/apt/archives/distro-info-data_2026.10.12-0ubuntu0.24.04.1_all.deb",
+      "bytes": 7836,
+      "allocated": 8192,
+      "nlink": 1,
+      "metadata": {
+        "Package": "distro-info-data",
+        "Version": "2026.10.12-0ubuntu0.24.04.1",
+        "Architecture": "all"
+      },
+      "sha256": "67404a569b4c1faa333f30424fe6bcc01fcf39297014efd720b47ab7a8b03154"
+    },
+    {
+      "path": "/var/cache/apt/archives/xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb",
+      "bytes": 877038,
+      "allocated": 880640,
+      "nlink": 1,
+      "metadata": {
+        "Package": "xvfb",
+        "Version": "2:21.1.12-1ubuntu1.9",
+        "Architecture": "amd64"
+      },
+      "sha256": "2011271eabcc2eb460e99995c5ef26e46633e87d04f570e305b62f178f7b452c"
+    },
+    {
+      "path": "/var/cache/apt/archives/ubuntu-pro-client_38ubuntu0~24.04_amd64.deb",
+      "bytes": 259430,
+      "allocated": 262144,
+      "nlink": 1,
+      "metadata": {
+        "Package": "ubuntu-pro-client",
+        "Version": "38ubuntu0~24.04",
+        "Architecture": "amd64"
+      },
+      "sha256": "ca79c208feedf4e49ec7165a4a36f9a648b77b0e5d7f443c728c1478ef45f84d"
+    },
+    {
+      "path": "/var/cache/apt/archives/1password-cli_2.41.1-1_amd64.deb",
+      "bytes": 11284766,
+      "allocated": 11288576,
+      "nlink": 1,
+      "metadata": {
+        "Package": "1password-cli",
+        "Version": "2.41.1-1",
+        "Architecture": "amd64"
+      },
+      "sha256": "5e3b3dde1e2d76e8d32e662993d068c775f643095cf5ba4e0761d2b47a7ceb01"
+    },
+    {
+      "path": "/var/cache/apt/archives/snapd_2.77.1+ubuntu24.04_amd64.deb",
+      "bytes": 33191424,
+      "allocated": 33193984,
+      "nlink": 1,
+      "metadata": {
+        "Package": "snapd",
+        "Version": "2.77.1+ubuntu24.04",
+        "Architecture": "amd64"
+      },
+      "sha256": "d4c38581f084bc1a17623cdd69e60ad5bdc7e4f1376c4f7931edaeee51746840"
+    },
+    {
+      "path": "/var/cache/apt/archives/cloud-init_26.2-0ubuntu1~24.04.2_all.deb",
+      "bytes": 633882,
+      "allocated": 634880,
+      "nlink": 1,
+      "metadata": {
+        "Package": "cloud-init",
+        "Version": "26.2-0ubuntu1~24.04.2",
+        "Architecture": "all"
+      },
+      "sha256": "69b18aec8d2dfa6dc16caf93c317c01c3205c1593e22768c3ef70c808539601a"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-protect-autodetect_5.2.73-master_amd64.deb",
+      "bytes": 5066,
+      "allocated": 8192,
+      "nlink": 1,
+      "metadata": {
+        "Package": "monarx-protect-autodetect",
+        "Version": "5.2.73-master",
+        "Architecture": "amd64"
+      },
+      "sha256": "d185bdfff13c9070cfb3e8bf32936a87069dbb22692458141f6be1d10d81e7e6"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-opcache_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "bytes": 372318,
+      "allocated": 372736,
+      "nlink": 1,
+      "metadata": {
+        "Package": "php8.3-opcache",
+        "Version": "8.3.6-0ubuntu0.24.04.13",
+        "Architecture": "amd64"
+      },
+      "sha256": "bb320f77b1439e33e8867990d7fa666579685f0f1583502f39b45636f855a47c"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.2_amd64.deb",
+      "bytes": 40540234,
+      "allocated": 40542208,
+      "nlink": 1,
+      "metadata": {
+        "Package": "tailscale",
+        "Version": "1.104.2",
+        "Architecture": "amd64"
+      },
+      "sha256": "4c342bece5cffda61407099e41ab8de663426246dd2c4ebbb1d11f3db0b989f6"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-common_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "bytes": 747814,
+      "allocated": 749568,
+      "nlink": 1,
+      "metadata": {
+        "Package": "php8.3-common",
+        "Version": "8.3.6-0ubuntu0.24.04.13",
+        "Architecture": "amd64"
+      },
+      "sha256": "801cae4e842e1b9e9d60a542bf18ba831bf504b2f3070404892bf3f8fb943ea4"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-readline_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "bytes": 13614,
+      "allocated": 16384,
+      "nlink": 1,
+      "metadata": {
+        "Package": "php8.3-readline",
+        "Version": "8.3.6-0ubuntu0.24.04.13",
+        "Architecture": "amd64"
+      },
+      "sha256": "521280a3bc72eeab32e0329c91cb6172f9e2ee24e57d1f8fd31c05f091a62db5"
+    },
+    {
+      "path": "/var/cache/apt/archives/tmux_3.4-1ubuntu0.2_amd64.deb",
+      "bytes": 479630,
+      "allocated": 483328,
+      "nlink": 1,
+      "metadata": {
+        "Package": "tmux",
+        "Version": "3.4-1ubuntu0.2",
+        "Architecture": "amd64"
+      },
+      "sha256": "fd14ca543ca0c00c7314c7bb524be40f3d058d9e587a5f47d9b35e851d9bd67d"
+    },
+    {
+      "path": "/var/cache/apt/archives/xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb",
+      "bytes": 35008,
+      "allocated": 36864,
+      "nlink": 1,
+      "metadata": {
+        "Package": "xserver-common",
+        "Version": "2:21.1.12-1ubuntu1.9",
+        "Architecture": "all"
+      },
+      "sha256": "ceeac76b9c94973c71e4e6566fa9ff5d3caae9716775d840810a4e1ad749a737"
+    },
+    {
+      "path": "/var/cache/apt/archives/nodejs_22.23.4-1nodesource1_amd64.deb",
+      "bytes": 37816336,
+      "allocated": 37818368,
+      "nlink": 1,
+      "metadata": {
+        "Package": "nodejs",
+        "Version": "22.23.4-1nodesource1",
+        "Architecture": "amd64"
+      },
+      "sha256": "e40ba508b45b2782ed453047d8e73fb9c4dd5358b70644eb9cc0e059ea2c959d"
+    },
+    {
+      "path": "/var/cache/apt/archives/libapparmor1_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+      "bytes": 51476,
+      "allocated": 53248,
+      "nlink": 1,
+      "metadata": {
+        "Package": "libapparmor1",
+        "Version": "4.0.1really4.0.1-0ubuntu0.24.04.9",
+        "Architecture": "amd64"
+      },
+      "sha256": "75b570d7517e24c3693c4503b4691ac1fd82934d93faa91460309f22104c5617"
+    },
+    {
+      "path": "/var/cache/apt/archives/ubuntu-pro-client-l10n_38ubuntu0~24.04_amd64.deb",
+      "bytes": 19818,
+      "allocated": 20480,
+      "nlink": 1,
+      "metadata": {
+        "Package": "ubuntu-pro-client-l10n",
+        "Version": "38ubuntu0~24.04",
+        "Architecture": "amd64"
+      },
+      "sha256": "a68e70663ed3b7afa40614120a7af1bd924d12e668057449518a4d6660080d62"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-protect_5.2.73-master_amd64.deb",
+      "bytes": 167642,
+      "allocated": 167936,
+      "nlink": 1,
+      "metadata": {
+        "Package": "monarx-protect",
+        "Version": "5.2.73-master",
+        "Architecture": "amd64"
+      },
+      "sha256": "c1b0e9fa73798558be608300180ff112c9033c4d5895fa79dc9b440d5aae63d3"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-data_2.80.0-6ubuntu3.10_all.deb",
+      "bytes": 50240,
+      "allocated": 53248,
+      "nlink": 1,
+      "metadata": {
+        "Package": "libglib2.0-data",
+        "Version": "2.80.0-6ubuntu3.10",
+        "Architecture": "all"
+      },
+      "sha256": "f196e280e4286f6dfc5ddaaf8c09cc6e8502e0de77619385e3fde19ea2739122"
+    }
+  ],
+  "cached_deb_allocated": 230252544,
+  "native_purge_updates_grub_initramfs_and_dpkg_metadata": true,
+  "no_autoremove_or_reboot": true,
+  "deletions": 0,
+  "created_at": "2026-11-14T16:26:38.886516-05:00"
+}
