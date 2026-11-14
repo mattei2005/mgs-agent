@@ -1,0 +1,20 @@
+{
+  "command": [
+    "tar",
+    "--create",
+    "--file",
+    "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+    "--use-compress-program=xz -T2 -6",
+    "--format=pax",
+    "--acls",
+    "--xattrs",
+    "--xattrs-include=*",
+    "--numeric-owner",
+    "--sparse",
+    "--directory",
+    "/root/.hermes/secure-backups",
+    "vps-maintenance"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}
