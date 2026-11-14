@@ -1,5 +1,5 @@
 {
-  "status": "preservation_created_all_payloads_verified_materialized_fixture_pending",
+  "status": "preservation_completed_validated_deletion_not_authorized",
   "authority_message_id": "1571190519713759264",
   "thread_id": "1569928464033783862",
   "source_root": "/root/.hermes/secure-backups/vps-maintenance",
@@ -22,5 +22,50 @@
   "retention_changed": false,
   "services_restarted": false,
   "source_manifest_sha256": "104e7f51fe6e404e1338abcb4e38c5405cc381c60de20112b4d1f602602d6727",
-  "created_at": "2026-11-14T10:59:17.917071-05:00"
+  "created_at": "2026-11-14T10:59:17.917071-05:00",
+  "fixture_restore": {
+    "materialized_fixture": {
+      "status": "restored_verified",
+      "self_contained": true,
+      "counts": {
+        "files": 3,
+        "directories": 2,
+        "symlinks": 2
+      },
+      "isolated_root": "/root/.hermes/profiles/zeus/cache/scratch/vps-preserve-fixture-1571190519713759264/portable-tool-restored/vps-maintenance"
+    },
+    "existing_destination_rejected": true,
+    "corruption_rejected": true
+  },
+  "portable_recovery_real_readback": {
+    "status": "verified",
+    "self_contained": true,
+    "counts": {
+      "files": 2675,
+      "directories": 353,
+      "symlinks": 16
+    }
+  },
+  "retained_set_allocated_bytes": 913543168,
+  "proposed_inode_aware_gross_reclaim_bytes": 1022230528,
+  "net_reduction_after_hypothetical_source_retirement_bytes": 108687360,
+  "scheduler_files_checked": 18,
+  "scheduler_active_references": 0,
+  "historical_units_preserved_disabled": [
+    "mgs-vps-maintenance-1555704911805808712.service",
+    "mgs-vps-maintenance-1559192694096404537.service",
+    "mgs-vps-maintenance-1562331354568589393.service"
+  ],
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "checkpoint_metadata_schema_repair": {
+    "target": "AUTOMATION-RECOVERY-b49d55bba2937a60710f1fba",
+    "field_added": "updated_at",
+    "semantic_state_changed": false
+  },
+  "deletion_manifest": "/root/mgs-agent/data/storage-vps-preservation-1571190519713759264/deletion-manifest.json",
+  "deletion_approval_present": false
 }

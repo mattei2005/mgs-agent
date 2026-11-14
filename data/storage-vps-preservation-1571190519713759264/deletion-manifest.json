@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "source_root": "/root/.hermes/secure-backups/vps-maintenance",
+  "preservation_authority_message_id": "1571190519713759264",
+  "thread_id": "1569928464033783862",
+  "deletion_authorized": false,
+  "approval_message_id": null,
+  "target_count": 36,
+  "top_entries": [
+    "20260710-004112",
+    "20260726-224122",
+    "20260802-174737",
+    "20260810T235019-0400",
+    "20260817-20260817T121253Z",
+    "20260817-reboot-post-cleanup-20260817T155103Z",
+    "20260821T013506Z-kvm4-full-update",
+    "20260821T020202Z-events-audit-nul-repair",
+    "20260821T020852Z-events-audit-jsonl-normalization",
+    "20260824T192548Z-vps-hermes-update",
+    "20260901T190009Z-vps-full-update",
+    "20260905T142152Z-vps-snap-kernel139",
+    "20260910T081107-0400",
+    "20260910T081838-0400-vps-hermes-v0211",
+    "20260910T194957Z-vps-new-security10",
+    "20260910T213059-0400-hermes-main-45a6101f",
+    "20260914T165558Z-vps-hermes-v0213",
+    "20260914T180134Z-vps-hermes-main-14efb460",
+    "20260919T-context872",
+    "20260919T155128Z-vps-hermes-update",
+    "20260919T181046Z-hermes-005c746d",
+    "20260923T141350-0400-kernel142",
+    "20260923T205433Z-nodejs-22.23.3",
+    "20260923T214843Z-full-vps-hermes-audit",
+    "20260925T115521Z-apt11",
+    "20260925T120252Z-hermes-port-59004a62",
+    "20261002-vps-1555704911805808712",
+    "20261012-1559192694096404537",
+    "20261012-monarx-1559266729031635005",
+    "20261021-1562331354568589393",
+    "latest.path",
+    "mattei-reboots-20261021",
+    "node-security-1562896598286078085",
+    "php-security-20261021-1562585423589412987",
+    "reboot-20260811T123633Z",
+    "ubuntu-pro-esm-20260811T123045Z"
+  ],
+  "targets": [
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260726-224122",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260802-174737",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260810T235019-0400",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260817-20260817T121253Z",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260817-reboot-post-cleanup-20260817T155103Z",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260821T013506Z-kvm4-full-update",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260821T020202Z-events-audit-nul-repair",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260821T020852Z-events-audit-jsonl-normalization",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260901T190009Z-vps-full-update",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260910T081107-0400",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260914T165558Z-vps-hermes-v0213",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260914T180134Z-vps-hermes-main-14efb460",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260919T-context872",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260919T181046Z-hermes-005c746d",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260923T141350-0400-kernel142",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260923T205433Z-nodejs-22.23.3",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260923T214843Z-full-vps-hermes-audit",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260925T115521Z-apt11",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20260925T120252Z-hermes-port-59004a62",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/latest.path",
+      "action": "delete_file"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/mattei-reboots-20261021",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/node-security-1562896598286078085",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/php-security-20261021-1562585423589412987",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/reboot-20260811T123633Z",
+      "action": "delete_tree"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/vps-maintenance/ubuntu-pro-esm-20260811T123045Z",
+      "action": "delete_tree"
+    }
+  ],
+  "regular_files": 2675,
+  "directories": 352,
+  "symlinks": 16,
+  "inode_aware_reclaim_bytes": 1022230528,
+  "retained_set_allocated_bytes": 913543168,
+  "net_reduction_vs_pre_preservation_bytes": 108687360,
+  "retained_archive": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+  "retained_archive_sha256": "077f322590054310042d0edac93ed328047fb29b01c360358e39902ca0b7e721",
+  "source_manifest": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/source-manifest.json",
+  "source_manifest_sha256": "104e7f51fe6e404e1338abcb4e38c5405cc381c60de20112b4d1f602602d6727",
+  "recover_tool": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/recover.py",
+  "historical_units": [
+    "mgs-vps-maintenance-1555704911805808712.service",
+    "mgs-vps-maintenance-1559192694096404537.service",
+    "mgs-vps-maintenance-1562331354568589393.service"
+  ],
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "scheduler_sources_checked": 18,
+  "scheduler_references": [],
+  "protected_roots": [
+    "/root/.hermes/profiles",
+    "/root/mgs-agent",
+    "/root/.hermes/secure-backups/hermes-update",
+    "/root/.hermes/secure-backups/hermes-history",
+    "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264"
+  ],
+  "effect": "Original 35 maintenance directories and legacy latest.path pointer would disappear, keeping parent root. Historical disabled-unit replay or recovery must first reconstruct their old paths from self-contained archive. No installed unit, current runtime, offsite backup, latest Hermes recovery, compact history bases, live agent data or retention would be changed.",
+  "prepared_at": "2026-11-14T11:03:37.341919-05:00"
+}
