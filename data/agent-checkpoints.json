@@ -6488,12 +6488,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Fonte atual ZEUS-STORAGE-RUNTIME-LOT-1571249324464148642 e cleanup-result.json;sem confirmacao/delecao pendente deste lote. Manter runtime ativo/rollback/fonte/Gitstores/perfis/capsulas;nao reabrir nem apagar outra classe por inferencia.",
-      "objective": "Lote legado469/ad2+atalho/adminGit retirado e validado;fase de runtimes deixa4raizes protegidas. Lotes anteriores e migracao do auxiliar mantidos concluidos.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-runtime-retirement-prep-1571249324464148642/cleanup-result.json",
-      "state": "runtime_cleanup_completed_four_protected_roots_retained",
+      "next_step": "Ponto5 em ZEUS-STORAGE-SYSTEM-1571271327648587799;somente classificacao/preservacao/preparacao. Pedir somente gates destrutivos exatos;nao declarar reorganizacao completa por lote parcial ou disco abaixo do alerta.",
+      "objective": "Concluir revisao exaustiva do disco e identificar tudo que e inutil, nao parar por folga/urgencia. Lotes1-4 anteriores encerrados;seguir5sistema,6dados/trabalhos,7caches,8Git e produtores/recorrencia.",
+      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571271327648587799",
+      "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T21:00:15+00:00"
+      "updated_at": "2026-11-14T21:13:29+00:00"
     },
     {
       "agent": "zeus",
@@ -6544,6 +6544,16 @@
       "state": "historical_snapshots_archived_and_expanded_copies_removed",
       "thread_id": "1569928464033783862",
       "updated_at": "2026-11-13T20:04:42+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
+      "next_step": "Inventario metadata /,/boot,/boot/efi;APT/Snap/kernels/logs/temporarios/softwareauxiliar;consumidores/protecao/manifesto antes de qualquer exclusao. Manter pontos6dados/trabalhos,7caches,8Git abertos.",
+      "objective": "Ponto5: auditar sistema e demais arquivos em todos os filesystems persistentes, classificar residuos e preparar eventual lote exato;sem exclusao. Dono exige finalizar toda revisao, independente de urgencia/percentual.",
+      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571271327648587799",
+      "state": "in_progress_readonly_system_inventory",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T21:13:29+00:00"
     },
     {
       "agent": "zeus",
@@ -10597,5 +10607,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T21:00:15+00:00"
+  "updated_at": "2026-11-14T21:13:29+00:00"
 }
