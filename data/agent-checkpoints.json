@@ -3779,12 +3779,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0137-B0138-1570980148361039935",
-      "next_step": "Consumir baseline e repetição contidos do processo proc_90f4d96c3b1f; reativar mesmos jobs somente com paridade; validar ciclo agendado e report",
-      "objective": "Validar substituição B013-7 para B013-8 e reativar a mesma rota DTR",
-      "source": "discord:1570980148361039935",
+      "next_step": "Consumir baseline/repetição do processo proc_90f4d96c3b1f; reativar mesmos jobs e verificar ciclo agendado no canal preservado",
+      "objective": "Concluir B013-8 e reativar cron no canal 1522830283240505385, reconfirmado por Rodolfo na mensagem 1570986493059793000",
+      "source": "discord:1570986493059793000",
       "state": "baseline",
       "thread_id": "1570980148361039935",
-      "updated_at": "2026-11-14T02:16:15+00:00"
+      "updated_at": "2026-11-14T02:19:54+00:00"
     },
     {
       "agent": "zeus",
@@ -10387,5 +10387,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T02:16:15+00:00"
+  "updated_at": "2026-11-14T02:19:55+00:00"
 }
