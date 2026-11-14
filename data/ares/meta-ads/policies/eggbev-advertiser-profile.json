@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "canonical_key": "ares.eggbev.advertiser-profile",
+  "status": "active",
+  "authorized_by": "Rodolfo Mattei",
+  "authorized_by_discord_id": "344196393512075265",
+  "authority_message_id": "1571262328715088024",
+  "authority_thread_id": "1571249921242435695",
+  "scope": "Perfil anunciante escolhido para contas Eggbev existentes e futuras dentro do escopo positivo Digital Trust; nao autoriza descoberta global nem ingresso automatico de novas contas.",
+  "existing_account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"],
+  "selected_profile": "Ana Cunha",
+  "credential_model": "individual User Access Token; never System User fallback",
+  "onepassword_item_id": "xxgqyiuijcu4rfrcmfmme6iduq",
+  "onepassword_item_title": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+  "identity_live": {"http": 200, "id": "122147293515218951", "name": "Ana Cunha"},
+  "token_metadata_observed": {
+    "app_id": "953171080682697",
+    "application": "minibot m6",
+    "type": "USER",
+    "is_valid": true,
+    "user_id": "122147293515218951",
+    "expires_at": 1799872399,
+    "expires_at_et": "2027-01-13T15:33:19-05:00",
+    "data_access_expires_at": 1802464399,
+    "observation_note": "Metadata da resposta de introspeccao self-only observada no transporte canônico; guard manteve ScopeError por emissor diferente do app permitido. Isto nao e aprovacao do novo app."
+  },
+  "account_readbacks": {
+    "1034081997659047": {"http": 200, "name": "Eggbev-US-CC-EN-01", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]},
+    "1001115192056600": {"http": 200, "name": "Eggbev-US-CC-EN-02 (FAX-US-03)", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]},
+    "1481815942722118": {"http": 200, "name": "Eggbev-US-CC-EN-03 (FAX-US-02)", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]}
+  },
+  "prior_profiles": {
+    "Mhd Aldy": "uso futuro proibido pelo operador; preservar somente historico, sem fallback",
+    "Carla Nunes": "uso futuro proibido pelo operador; item de mesmo ID foi renomeado/substituido no cofre pelo operador; nao assumir identidade por ID/titulo historico"
+  },
+  "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
+  "prior_profile_retirement_authority_message_id": "1571250965313486889",
+  "implementation_status": "IDENTITY_AND_THREE_ACCOUNTS_VALIDATED_APP_MIGRATION_CONFIRMATION_PENDING",
+  "current_runtime_app_id": "1299247318762949",
+  "current_runtime_app_name": "minibot",
+  "app_migration_authorized": false,
+  "runtime_bindings_changed": false,
+  "pages_pixels_validated": false,
+  "future_account_requirements": ["positive account scope checker", "Ana Cunha identity and approved issuer-app validation", "exact account tasks and Page/pixel access", "separate onboarding and per-request campaign gates"],
+  "next_step": "Confirmar com Rodolfo adocao do minibot m6 para Eggbev ou emissao de token Ana Cunha no minibot atual; depois validar Pages/pixel e consumidores antes de qualquer cutover.",
+  "excluded": ["remote permission changes", "new app allowlist or guard bypass without explicit authorization", "token revocation or vault deletion", "campaign creation/activation", "budget or billing changes", "automatic onboarding of future accounts"],
+  "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024"
+}

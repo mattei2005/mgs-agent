@@ -30,6 +30,8 @@
   "engine_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json",
   "supported_modes": [],
   "requested_modes_pending_readiness": ["pure_clone"],
+  "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
+  "advertiser_profile_selection_note": "Ana Cunha selected for existing and future Eggbev accounts by Rodolfo 1571262328715088024. Identity and account tasks validated; token issuer minibot m6 differs from allowed minibot, so app migration confirmation and Page/pixel checks remain pending; no runtime cutover or write-readiness implied.",
   "credential_model": "exact advertiser-profile individual User Access Token; never System User or another advertiser fallback",
   "token_item": null,
   "advertiser_identity": null,
@@ -53,5 +55,5 @@
     "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
   },
   "unset_not_inherited": ["advertiser credential", "Pages other than the read-only source reference", "UTM defaults", "copy templates", "Messenger JSON defaults", "naming defaults", "start-time defaults", "thresholds", "guardrail state", "schedules", "denylist state", "baselines", "performance", "source-account write flags"],
-  "next_step": "Identify the existing advertiser profile that actually holds Brunetz Finance Page access; validate it read-only and complete account capabilities before presenting the duplicate plan. Any new credential or asset-permission change requires its own authorization."
+  "next_step": "Ana Cunha was selected by Rodolfo 1571262328715088024; consult advertiser_profile_selection_policy. Confirm issuer-app migration before cutover, validate source Page and pixel access, then complete same-account capabilities. Keep write/activation disabled; do not inherit account01 readiness or reuse retired advertisers."
 }

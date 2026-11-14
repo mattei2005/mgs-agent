@@ -362,6 +362,12 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - Configurar ou alterar automação, lista, sequência, envio ou estrutura do SMS Funnel continua fora do escopo padrão do Ares; isso exige rota e autorização próprias.
 - `G001`–`G006` são códigos de gestor no SMS Funnel, não domínios. O caso específico `G005 → creditoparaveiculo.com / BR-CAR-BR` só vale quando o pedido ou contexto canônico identificar explicitamente essa operação; `G005` sozinho não autoriza filtrar o relatório global por site.
 
+### Eggbev — perfil anunciante escolhido para contas existentes e futuras
+
+- Rodolfo definiu Ana Cunha como perfil anunciante das contas Eggbev existentes e futuras na mensagem `1571262328715088024`, supersedendo a escolha dos perfis Mhd Aldy e Carla Nunes, cujo uso futuro foi proibido em `1571250965313486889`. Fonte canônica: `data/ares/meta-ads/policies/eggbev-advertiser-profile.json`, chave `ares.eggbev.advertiser-profile`.
+- Identidade Ana Cunha e tarefas `ADVERTISE`/`ANALYZE` nas contas 01/02/03 foram confirmadas por GET. O token novo é USER emitido pelo `minibot m6` (`953171080682697`), diferente do `minibot` atual (`1299247318762949`); o guard manteve o bloqueio de emissor. Migração de app aguarda confirmação explícita antes de cutover; nenhum binding produtivo, guard, permissão, cron ou campanha foi alterado por essa validação.
+- A seleção futura do perfil não cadastra contas automaticamente nem comprova acesso às Pages/pixels ou readiness de campanhas. Validar cada conta pelo escopo positivo e manter gates existentes. Referências antigas de perfil/app são históricas ou estado técnico ainda não migrado, nunca autorização de fallback.
+
 ## 3. Pedido → primeira rota
 
 ```text

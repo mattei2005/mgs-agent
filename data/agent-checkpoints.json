@@ -1353,12 +1353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-USER-TOKEN-REPLACEMENT-1571250965313486889",
-      "next_step": "Aguardar Rodolfo informar nome do novo perfil e referência do item no 1Password, sem segredo no chat. Antes de qualquer cutover, validar identidade, app, acesso às três contas e Pages/pixel de cada operação; inventariar consumidores e observar confirmação crítica do recorte. Não inferir revogação, exclusão ou ampliação de permissões.",
-      "objective": "Substituir os perfis antigos por novo perfil com User Access Token para Eggbev 01, 02 e 03, conforme decisão de Rodolfo.",
-      "source": "discord:1185714635991679006/1571249921242435695/1571250965313486889",
-      "state": "aguardando_novo_perfil_no_cofre. rodolfo decidiu não usar mais mhd aldy nem carla nunes no eggbev e informou que colocará um novo perfil para as três contas. decisão aplicável aos próximos pedidos; nenhum cutover técnico, suspensão de cron, revogação, exclusão ou alteração de campanha executado. identidade nova e item do cofre ainda não informados. preservar registros e credenciais antigas sem usá-las como fallback em novas execuções.",
+      "next_step": "Validar identidade/app/scopes e contas 01/02/03 pelo transporte guardado; inventariar consumidores; atualizar somente camadas autorizadas com backup, readback e report.",
+      "objective": "Validar Ana Cunha e corrigir documentacao e bindings Eggbev existentes e futuros conforme Rodolfo 1571262328715088024.",
+      "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024",
+      "state": "validating. item do cofre identificado pelo titulo exato ana cunha; mesmo id anteriormente associado a carla nunes, exigir identidade viva e nao confiar no titulo. sem writes meta ou cutover ainda.",
       "thread_id": "1571249921242435695",
-      "updated_at": "2026-11-14T19:50:53+00:00"
+      "updated_at": "2026-11-14T20:36:16+00:00"
     },
     {
       "agent": "ares",
@@ -10597,5 +10597,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:02:56+00:00"
+  "updated_at": "2026-11-14T20:36:16+00:00"
 }
