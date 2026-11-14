@@ -38,7 +38,7 @@ Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é
 
 ## Fechamento de campanhas — mensagem para Iris/AdOps
 
-Ao concluir qualquer pedido autorizado de criação, duplicação ou clonagem de campanhas, incluir na própria resposta final um bloco `text` pronto para o gestor copiar e colar para `@Iris` no canal de adops, solicitando o pré-cadastro dos key values no GAM. Esta entrega é obrigatória para tráfego direto e BOT, em todas as operações do escopo Ares; não altera o executor nem acrescenta callback, cron, write GAM ou envio automático para Iris.
+Ao concluir qualquer pedido autorizado de criação, duplicação ou clonagem de campanhas, incluir na própria resposta final um bloco `text` pronto para o gestor copiar e colar para `@Iris#6164` no canal de adops, solicitando o pré-cadastro dos key values no GAM. Esta entrega é obrigatória para tráfego direto e BOT, em todas as operações do escopo Ares; não altera o executor nem acrescenta callback, cron, write GAM ou envio automático para Iris.
 
 Antes de fechar, confira separadamente a execução Meta e a entrega ao operador: receipt, checkpoint ou mensagem de recuperação sem o bloco copiável não completam a entrega das UTMs. Se a resposta for interrompida ou o usuário informar que o bloco não chegou, recupere os mesmos IDs e a última prova válida; faça GET read-only do tracking quando ele pedir nova conferência ou houver dúvida de frescor, extraia os valores de todos os anúncios e entregue o bloco na resposta nativa. Não retome o writer, recrie campanhas nem altere tracking para reparar comunicação. Uma nova instrução de pausa/horário com alvo ambíguo recebe somente a pergunta de escopo necessária, sem reter o resultado e as UTMs já verificados do pedido anterior.
 
@@ -47,12 +47,13 @@ Antes de fechar, confira separadamente a execução Meta e a entrega ao operador
 - No tráfego direto, listar `utm_adgroup` e `utm_campaign`; no BOT, listar somente `utm_campaign`, preservando o padrão real da operação (por exemplo, `pg_512`). Não impor o padrão de uma operação às demais.
 - Consolidar e deduplicar valores por chave/domínio/estratégia, mantendo a ordem da primeira ocorrência. Excluir objetos não concluídos e valores exclusivos das fontes; valor compartilhado preservado por contrato BOT não é excluído se estiver comprovadamente instalado no alvo novo.
 - Se o resultado for parcial, identificar a parcialidade e incluir apenas a parte efetivamente concluída e verificada; retomar o saldo no mesmo request. Valor ausente, dinâmico não resolvido ou divergente permanece pendência explícita, nunca confirmação de pré-cadastro.
+- Usar literalmente `@Iris#6164` dentro de todo bloco copiável para AdOps, tanto em tráfego direto quanto em BOT; não abreviar para `@Iris`, remover `#6164` nem substituir por mention técnica do Discord. O gestor precisa copiar e colar o identificador completo. Correção prospectiva de Rodolfo na mensagem `1571189825422364712`, supersedendo o identificador abreviado dos modelos anteriores.
 - Ares apenas prepara a mensagem: o gestor copia e envia; Iris executa o pré-cadastro. Não afirmar envio, cadastro ou sucesso no GAM sem evidência própria e autorização correspondente.
 
 Formato de tráfego direto (substituir os marcadores por dados reais validados):
 
 ```text
-@Iris preciso pré-cadastrar os key values utm_adgroup no <domínio validado>:
+@Iris#6164 preciso pré-cadastrar os key values utm_adgroup no <domínio validado>:
 <um valor real por linha>
 
 E os utm_campaign:
@@ -62,7 +63,7 @@ E os utm_campaign:
 Formato BOT:
 
 ```text
-@Iris pré-cadastra no <domínio validado> os utm_campaign:
+@Iris#6164 pré-cadastra no <domínio validado> os utm_campaign:
 <um valor real por linha>
 ```
 

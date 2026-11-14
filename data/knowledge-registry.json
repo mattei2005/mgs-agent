@@ -3643,15 +3643,34 @@
         "paid-acquisition-operations"
       ],
       "domain": "growth.campaign-operations",
-      "effective_at": "2026-11-10T03:24:55+00:00",
-      "id": "ARES-IRIS-ADOPS-KEYVALUES-1569553206055280715",
+      "effective_at": "2026-11-14T15:48:40+00:00",
+      "id": "ARES-IRIS-ADOPS-DISCRIMINATOR-1571189825422364712",
       "kind": "procedure",
       "owner": "Rodolfo Mattei / Ares",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Conclusão de campanhas: bloco copiável AdOps usa literalmente @Iris#6164",
+      "updated_at": "2026-11-14T15:48:40+00:00"
+    },
+    {
+      "canonical_key": "ares.campaigns.completion.iris-adops-key-values",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "paid-acquisition-operations"
+      ],
+      "domain": "growth.campaign-operations",
+      "effective_at": "2026-11-10T03:24:55+00:00",
+      "id": "ARES-IRIS-ADOPS-KEYVALUES-1569553206055280715",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-IRIS-ADOPS-DISCRIMINATOR-1571189825422364712",
       "title": "Conclusão de criação/duplicação/clone inclui mensagem copiável de key values para Iris/AdOps",
-      "updated_at": "2026-11-10T03:24:55+00:00"
+      "updated_at": "2026-11-14T15:48:40+00:00"
     },
     {
       "canonical_key": "ares.creative.manager-folder-delivery",
@@ -17171,5 +17190,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-13T19:50:14+00:00"
+  "updated_at": "2026-11-14T15:48:40+00:00"
 }
