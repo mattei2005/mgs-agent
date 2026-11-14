@@ -1,0 +1,81 @@
+{
+  "status": "filesystem_and_code_recovery_validated_governance_closure_pending",
+  "confirmation_message_id": "1571231699172462614",
+  "question_message_id": "1571227762734141462",
+  "thread_id": "1569928464033783862",
+  "manifest_sha256": "a4a87b9230a8e38a8ff0cf847c0de071947d42aa9ec1990a8e0ee315b2da0bb6",
+  "verifier_sha256": "71bf2aed3d78997405c1d64902da91d0fafd2f89a94aae3c7dd4bbbc5d0377e8",
+  "executor_sha256": "b19f9899e2cbc37a366c963988eacd0c28011cbb6ac18df151fb89a982acc132",
+  "removed_targets": [
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c"
+  ],
+  "target_count_removed": 2,
+  "counts_removed": {
+    "directories": 4489,
+    "regular_files": 62606,
+    "symlinks": 4
+  },
+  "all_targets_absent": true,
+  "observed_reclaimed_bytes": 1793224704,
+  "disk_before": {
+    "used_bytes": 146286354432,
+    "available_bytes": 60597149696,
+    "used_percent": 70.70953049088524
+  },
+  "disk_after_immediate": {
+    "used_bytes": 144493129728,
+    "available_bytes": 62390374400,
+    "used_percent": 69.84275055521164
+  },
+  "preservation_and_review_allocated_bytes": 14069760,
+  "structural_net_reduction_estimate_bytes": 1779130368,
+  "post_removal_code_recovery": {
+    "phase": "after",
+    "status": "PASS",
+    "focused_recovered_files": 161,
+    "stage_modified": 5,
+    "stage_extra_and_ignored": 10,
+    "nested_changed_extra": 101,
+    "old_venv_local_overrides": 45,
+    "nested_original_checksum_rows_reconstructed": 18319,
+    "candidate_sources_read": false,
+    "full_old_venv_rebuilt": false,
+    "production_code_imported": false,
+    "live_profile_or_sqlite_opened": false,
+    "scratch": "/root/.hermes/profiles/zeus/cache/scratch/runtime-delete-replay-1571231699172462614/after",
+    "observed_at": "2026-11-14T13:45:07.547898-05:00"
+  },
+  "old_virtualenv_rebuilt": false,
+  "old_virtualenv_rebuild_not_an_acceptance_gate_for_owner_approved_retirement": true,
+  "source_environment_bytecode_and_packages_not_claimed_recovered": true,
+  "protected_files_unchanged": 57,
+  "configured_launcher_symlinks_unchanged": 3,
+  "six_retained_code_roots_present": true,
+  "historical_parent_evidence_unchanged": true,
+  "configs_passed": 3,
+  "no_tool_smokes_passed": 3,
+  "gateway_pids_unchanged": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "launcher_unchanged": true,
+  "failed_units": 0,
+  "retention_changed": false,
+  "runtime_activation_changed": false,
+  "credentials_changed": false,
+  "Meta_or_PC1_actions": 0,
+  "services_restarted": false,
+  "partial_failure": false,
+  "journal_exact_two_targets_verified": true,
+  "capsule_recovery_dependencies_preserved": [
+    "/root/.hermes/hermes-agent",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs"
+  ],
+  "preparation_result_immutable": "review-result.json",
+  "completed_at": "2026-11-14T13:46:42.373388-05:00",
+  "next_step": "This exact lot is complete; other six roots remain, including two conditional older roots requiring independent dependency/state resolution. No additional deletion authorized."
+}
