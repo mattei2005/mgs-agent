@@ -64924,14 +64924,14 @@
       "id": "ares-campaign-url-1571217766256742420",
       "agent": "zeus",
       "type": "diagnostic_checkpoint_and_rollback_backup",
-      "status": "policy_applied_behavior_validation_pending",
+      "status": "completed_validated",
       "path": "/root/mgs-agent/backups/ares-campaign-url-1571217766256742420",
       "checkpoint_id": "ares-campaign-destination-url-1571217766256742420",
       "source_thread_id": "1571217766256742420",
       "target_thread_id": "1570857869790945455",
       "authority_message_id": "1571217766256742420",
       "diagnosis": "Ares aplicou gate de dominio ao link informado como campo de campanha. security-policies.md Politica 3 inclui explicitamente destino de campanha; alterar essa fonte requer confirmacao adicional do Critical Subset. Nenhuma politica, SOUL, skill Ares, cadastro de dominio ou campanha alterados.",
-      "updated_at": "2026-11-14T18:32:01.432423+00:00",
+      "updated_at": "2026-11-14T18:34:03.792467+00:00",
       "confirmation_message_id": "1571230350749859881",
       "changed_paths": [
         "context/security-policies.md",
@@ -64944,7 +64944,9 @@
       ],
       "evidence_path": "/root/mgs-agent/reports/ares/campaign-url-1571230350749859881.json",
       "handoff_message_id": "1571231015220019383",
-      "result": "Canonical security policy, Ares scope/map/SOUL and Zeus procedure corrected; tests passed. No allowlist inclusion, session reset, restart or Meta write. Awaiting actual Ares reply."
+      "result": "Canonical security policy, Ares scope/map/SOUL and Zeus procedure corrected. Native session-only refresh epoch1 adopted, same session/history. Ares retification verified. No site enrollment, reset, restart or Meta write.",
+      "ares_reply_message_id": "1571231561225863319",
+      "prompt_refresh_epoch": 1
     },
     {
       "id": "storage-runtime-review-1571217101597712496",
