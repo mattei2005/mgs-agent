@@ -17615,14 +17615,14 @@
     },
     {
       "agent": "zeus",
-      "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157",
+      "backup": "/root/mgs-agent/backups/meta-app-b0137-to-b0138-1570980148361039935",
       "backup_validation": "SHA256SUMS manifest contains four files and sha256sum -c returned 4/4 OK before production writes.",
       "cron_job_id": "498fb0d95e10",
-      "description": "Dedicated current B013-7 DTR/ChatPion monitor with fail-closed Sheet reconciliation, healthy-capability suppression of false app-restriction alerts, anti-false-positive confirmation and current+predecessor investment-lineage enrichment from OBS.",
+      "description": "Dedicated current B013-8 DTR/ChatPion monitor with fail-closed Sheet reconciliation, healthy-capability suppression of false app-restriction alerts, anti-false-positive confirmation and current+predecessor investment-lineage enrichment from OBS.",
       "id": "zeus-b013-dtr-link-watch-script",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
-      "last_change": "Bounded Google OAuth transport-only retry (3 attempts, 1s/2s backoff) before Sheets read; HTTP and credential errors remain immediate failures. No scope/cadence/credential changes.",
+      "last_change": "B013-8 replacement; reload and remap Sheet marker writes by composed identity after confirmed live sorting; preserve unknown and reassigned rows.",
       "modified_at": "2026-10-13T12:56:27.130920-04:00",
       "oauth_transport_recovery": {
         "backup": "/root/mgs-agent/backups/b013-oauth-transport-1562778876256587777",
@@ -17632,36 +17632,34 @@
         "test_path": "/root/mgs-agent/tests/test_b013_sheets_transport.py",
         "validation": "bash -n PASS; 32 tests PASS; live canonical SA Sheets read 49 targets; scheduler 2026-10-22T07:01:23-04:00 OK/failure_streak=0; healthy capability, zero Sheet updates and alerts."
       },
-      "operational_status": "paused_by_rodolfo",
+      "operational_status": "contained_baseline_in_progress",
       "overnight_cron_job_id": "f42618f5ced7",
       "owner": "Zeus/Ops",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
       "pause_reason": "Manual B013-7 cron pause; both dedicated day/night jobs disabled.",
       "paused_at": "2026-11-13T02:27:12-05:00",
       "pending_cutover": {
-        "canary_validation": "One-target and full dry-runs completed without Sheet write, state persistence or Discord alert; first baseline suppressed alerts and second cycle verified canonical state.",
-        "checkpoint_id": "META-APP-B0137-CUTOVER-20260924",
-        "credential_correction_message_id": "1552757099505647679",
-        "credential_gate": "/me HTTP 200; debug_token is_valid=true; app_id match; app metadata and /roles HTTP 200.",
-        "from": "B013-6",
-        "production_readback": "Scheduled cycle 2026-09-24T15:42:34-04:00; alerts 1552767220990476431, 1552767255602012221, 1552767256558313473, 1552767257975849153.",
-        "source_message_id": "1552752306058174555",
-        "source_thread_id": "1552752306058174555",
-        "status": "completed",
-        "to": "B013-7"
+        "from": "B013-7",
+        "to": "B013-8",
+        "status": "baseline_clean_repeat_pending",
+        "source_message_id": "1570980148361039935",
+        "reactivation_message_id": "1570986493059793000",
+        "checkpoint_id": "META-APP-B0137-B0138-1570980148361039935",
+        "process_session_id": "proc_f8cda304539f",
+        "evidence": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935"
       },
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
       "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1552768370183508089 in channel 1498132022634483894, authored by Zeus, with empty content and no thread.",
       "risk": "medium",
       "schedule": "2-59/9 0,8-23 * * *; 2-59/10 1-7 * * *",
-      "sha256": "96cf7f4e543b6730cb83b57f6fc0b94507ec0edc862e6edd1e91b49e8170fa55",
-      "size_bytes": 62596,
-      "source_message_id": "1559609250567684157",
+      "sha256": "08c07e1ceaea02a0b538d755f179eaddd58fd3e32faeb2ebfcdafbd86e772e5b",
+      "size_bytes": 68612,
+      "source_message_id": "1570980148361039935",
       "source_report": "discord:#alerts-infra/1552768370183508089",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0136-b0046-b0064-cutovers-20260924-151444/b013-dtr-link-monitor-state.json.before",
       "type": "profile_script",
-      "updated_at": "2026-11-13T02:27:12-05:00",
-      "validation": "13 unittest tests PASS; both real production loaders INVEST_3D_OK with 152 profiles; positive/zero/missing renderer branches PASS; B004-8/B006-6/B011-6 pauses preserved.",
+      "updated_at": "2026-11-13T21:29:34.941029-05:00",
+      "validation": "48 focused native-interpreter tests PASS; full read-only canary 105 targets; app-bound credential gate PASS; actual baseline denied stale-row payload safely; fresh identity remap recovery running.",
       "pause_source_message_id": "1570701181922320515"
     },
     {
@@ -64672,6 +64670,24 @@
         "summary": "Validate active fire claim by owner and slot; renewable heartbeat at may advance. No writes replayed after validator-only failure."
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "b0138-sheet-identity-sync-1570980148361039935",
+      "agent": "zeus",
+      "type": "monitor_replacement_and_safe_recovery",
+      "source_message_id": "1570980148361039935",
+      "source_thread_id": "1570980148361039935",
+      "updated_at": "2026-11-13T21:29:34.941029-05:00",
+      "status": "clean_repeat_pending",
+      "paths": [
+        "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+        "/root/mgs-agent/tests/test_b013_profile_removal_alert.py",
+        "/root/mgs-agent/tests/test_b013_sheet_identity_sync.py",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b013-replacement-validation.md"
+      ],
+      "evidence": "/root/mgs-agent/reports/meta-app-b0138-1570980148361039935",
+      "cause": "98/105 rows moved during scan; exact composed-identity set unchanged; scope guard blocked all stale-row writes",
+      "tests": 48
     }
   ],
   "profile_skill_references": [

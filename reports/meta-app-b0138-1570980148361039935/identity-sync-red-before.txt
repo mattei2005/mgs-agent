@@ -1,0 +1,25 @@
+test_actual_sync_uses_fresh_row_and_preserves_unknown (test_b013_sheet_identity_sync.SheetIdentitySyncTests.test_actual_sync_uses_fresh_row_and_preserves_unknown) ... FAIL
+
+======================================================================
+FAIL: test_actual_sync_uses_fresh_row_and_preserves_unknown (test_b013_sheet_identity_sync.SheetIdentitySyncTests.test_actual_sync_uses_fresh_row_and_preserves_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_b013_sheet_identity_sync.py", line 45, in test_actual_sync_uses_fresh_row_and_preserves_unknown
+    self.assertEqual(calls[0]['data'], [{'range': "'Fixture'!A19:A19", 'majorDimension': 'ROWS', 'values': [['X']]}])
+AssertionError: Lists differ: [{'range': "'Fixture'!A7:A7", 'majorDimension': 'ROWS', 'values': [['X']]}] != [{'range': "'Fixture'!A19:A19", 'majorDimension': 'ROWS', 'values': [['X']]}]
+
+First differing element 0:
+{'range': "'Fixture'!A7:A7", 'majorDimension': 'ROWS', 'values': [['X']]}
+{'range': "'Fixture'!A19:A19", 'majorDimension': 'ROWS', 'values': [['X']]}
+
+- [{'majorDimension': 'ROWS', 'range': "'Fixture'!A7:A7", 'values': [['X']]}]
+?                                                  ^  ^
+
++ [{'majorDimension': 'ROWS', 'range': "'Fixture'!A19:A19", 'values': [['X']]}]
+?                                                  ^^  ^^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.081s
+
+FAILED (failures=1)
