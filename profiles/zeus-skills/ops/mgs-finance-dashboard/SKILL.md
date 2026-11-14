@@ -80,6 +80,12 @@ Use `references/adops-monthly-source-reconciliation.md` for source-quality gates
 
 ## Financial-system implementation
 
+### Presentation-only changes
+
+Treat a request to expose an existing field as a read-only presentation change unless Rodolfo separately authorizes data correction. Reuse the saved metadata and existing editor; do not backfill missing values or change calculations merely to populate a new column. Keep charge dates distinct from review dates, preserve repeated charge components, and show unknown dates as `—`. Follow `references/billing-origin-meta-id-and-brand.md#charge-date-presentation` for the expense-data recipe.
+
+Finish focused semantic and desktop/mobile layout checks before freezing the candidate for the full release gates; a later CSS or JavaScript edit invalidates the earlier candidate proof. Report the published user-visible result and preserved financial data concisely, keeping detailed test logs in evidence.
+
 ### Individual correction notices and acknowledgement
 
 1. **Choose the smallest truthful message before building.** For correction pop-ups, prefer Rodolfo's concise, nonnumeric explanation: affected sites and period, what was missing from the individual result, that it has been corrected, and where to consult current data. Omit monetary values, reduction percentages and personalized bracket commentary unless explicitly requested in the final wording. A notification is not a second financial report; removing numbers avoids stale comparisons without concealing the correction. Resolve exact approved copy, recipients and publication state from the canonical notice document and checkpoint, not from an earlier chat draft.

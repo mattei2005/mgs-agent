@@ -11,6 +11,14 @@ Rodolfo `1546618148571058266`, critical auxiliary-service confirmation `15466196
 - `apply_expense_changes` must receive actual monthly CAD/unit divisors in both worker and company-allocation graph paths. Missing/invalid divisor fails closed.
 - FX is dynamic until the specific monthly rate is fixed. Existing quote collector runs every 30 minutes; UI polls every 5 minutes except during open editors. Current financial values use the app's own quote lifecycle, not a fresh import from Sheets at every render. Rate key for USD/BRL is `principal|CAIXA SINTETICO|J2`; `source` is a descriptive label, not stable identity.
 
+## Charge-date presentation
+
+1. Inspect the persisted expense definition and final `/api/workspace` payload before changing the UI. Use the assembled API metadata, not only `result.domain.expenses`: saved `additions` can overlay charge and review fields without replacing the calculated result.
+2. Read billing dates from each `charges` component (`id`, `date`, `amount`); keep `checked_on` exclusively for the review date. Render saved date-only values as DD/MM/AAAA without timezone conversion, and use `—` for missing dates; never infer a charge date from the selected month, current clock, review status or review date.
+3. Preserve component order and multiplicity. For several charges, show every date with its component number and original amount/currency; do not deduplicate equal dates, because separate debits can occur on the same day. Keep the existing editor when it already captures these fields.
+4. Scope the column and its CSS to the requested expense list. Inspect native and historical renderers separately; where a historical source has no charge dates, display `—` without modifying immutable history or unrelated dashboard summaries and personnel lists.
+5. Test single, multiple, repeated-date and null-date expenses against the API, then open/cancel the editor and reload. Check desktop column fit and mobile reachability for every column, not only table overflow. Finish with unchanged expense definitions and financial fingerprints; presentation acceptance must not depend on saving a real expense.
+
 ## Account creation — live BM, not cached optional inventory
 - New registrations: ID is the only editable identity field. Sites remain selectable per month. Name, currency and IANA timezone are readonly and filled by a real BM read.
 - `meta-lookup.mjs` exposes authenticated/CSRF-protected start/status endpoints. Numeric literal ID only (no silent act_ cleanup). Queue is private filesystem JSON with UUID handles, 16 pending cap, timeout and readiness checks.
