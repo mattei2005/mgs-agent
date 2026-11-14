@@ -3778,6 +3778,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0137-B0138-1570980148361039935",
+      "next_step": "Corrigir apenas metadado de perfil legado comprovado; validar Sheet e canário; baseline novo e ciclo agendado",
+      "objective": "Validar substituição B013-7 para B013-8 e reativar a mesma rota DTR",
+      "source": "discord:1570980148361039935",
+      "state": "preflight",
+      "thread_id": "1570980148361039935",
+      "updated_at": "2026-11-14T01:56:11+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0137-CUTOVER-20260924",
       "next_step": "Operação normal; monitores continuam no cadence vigente e só exigem intervenção diante de novo alerta real.",
       "objective": "Concluir cutovers B013-6→B013-7, B004-6→B004-7, B006-4→B006-5 e B011-4→B011-5 com credenciais Graph válidas, canários isolados, produção, cron, Sheet e alertas validados.",
@@ -10377,5 +10387,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:46:52+00:00"
+  "updated_at": "2026-11-14T01:56:11+00:00"
 }
