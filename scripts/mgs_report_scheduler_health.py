@@ -7,12 +7,32 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 SHEIN_ROOT = Path('/root/mgs-agent/data/ares/meta-ads/state')
+POLICY_ROOT = SHEIN_ROOT.parent / 'policies'
 REPORTS = {
-    'ares/shein-daily-cron.py': ('shein-daily-report', 24, 36 * 3600),
+    'ares/shein-daily-cron.py': ('shein-daily-report', None, 36 * 3600),
     # 23:31 -> 09:32 is a deliberate overnight gap, including DST variation.
-    'ares/shein-intraday-cron.py': ('shein-intraday-report', 24, 12 * 3600),
+    'ares/shein-intraday-cron.py': ('shein-intraday-report', None, 12 * 3600),
     'ares/shein-campaign-creation-cron.py': ('shein-campaign-creation-daily', 36, 36 * 3600),
 }
+
+
+def policy_report_count(directory, policy_root):
+    """Read approved membership, never infer expected coverage from a receipt."""
+    policy = json.loads((Path(policy_root) / (directory + '.json')).read_text())
+    if not isinstance(policy, dict):
+        raise ValueError('invalid report policy')
+    expected = policy.get('expected_reports')
+    accounts, threads = policy.get('account_ids'), policy.get('thread_ids')
+    if (policy.get('enabled') is not True
+            or policy.get('authorized_by_discord_id') != '344196393512075265'
+            or type(expected) is not int or expected <= 0
+            or not isinstance(accounts, list) or not isinstance(threads, list)):
+        raise ValueError('invalid approved report membership')
+    if (not all(isinstance(x, str) and x.isdigit() for x in accounts + threads)
+            or len(accounts) != len(threads) or len(accounts) != expected
+            or len(set(accounts)) != expected or len(set(threads)) != expected):
+        raise ValueError('incomplete or duplicate report membership')
+    return expected
 
 
 def daily_recovery_receipt(home, attempt, expected):
@@ -79,13 +99,15 @@ def daily_recovery_receipt(home, attempt, expected):
     return path, completion
 
 
-def report_health(script, now, log_mtime=0, root=None):
+def report_health(script, now, log_mtime=0, root=None, policy_root=None):
     if script not in REPORTS:
         return None
     root = Path(root or SHEIN_ROOT)
     directory, expected, threshold = REPORTS[script]
     home = root / directory
     try:
+        if expected is None:
+            expected = policy_report_count(directory, policy_root or POLICY_ROOT)
         if directory == 'shein-campaign-creation-daily':
             candidates = sorted(home.glob('????-??-??/run.json'))
             if not candidates:

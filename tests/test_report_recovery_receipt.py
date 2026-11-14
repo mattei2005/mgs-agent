@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 from datetime import datetime, timezone
 
 spec = importlib.util.spec_from_file_location('recovery_health', Path(__file__).resolve().parents[1] / 'scripts/mgs_report_scheduler_health.py')
@@ -17,6 +18,15 @@ report_health = module.report_health
 
 class DailyRecoveryTests(unittest.TestCase):
     def fixture(self, root):
+        policies = root/'policies'
+        policies.mkdir()
+        self.save(policies/'shein-daily-report.json', {
+            'enabled': True, 'authorized_by_discord_id': '344196393512075265',
+            'expected_reports': 24, 'account_ids': [str(1000+i) for i in range(24)],
+            'thread_ids': [str(2000+i) for i in range(24)]})
+        mocked = patch.object(module, 'POLICY_ROOT', policies)
+        mocked.start()
+        self.addCleanup(mocked.stop)
         self.now = datetime(2026, 11, 11, 14, 0, tzinfo=timezone.utc).timestamp()
         self.stamp = '2026-11-11T08:48:30-05:00'
         home = root / 'shein-daily-report'

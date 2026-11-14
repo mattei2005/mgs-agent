@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 from datetime import datetime, timezone
 
 BASE = Path('/root/mgs-agent')
@@ -18,6 +19,17 @@ spec.loader.exec_module(m)
 class ReceiptTests(unittest.TestCase):
     def setup_receipt(self, root, script, **changes):
         directory, expected, threshold = m.REPORTS[script]
+        if expected is None:
+            expected = 24
+            policies = root/'policies'
+            policies.mkdir(exist_ok=True)
+            (policies/(directory+'.json')).write_text(json.dumps({
+                'enabled': True, 'authorized_by_discord_id': '344196393512075265',
+                'expected_reports': expected, 'account_ids': [str(1000+i) for i in range(expected)],
+                'thread_ids': [str(2000+i) for i in range(expected)]}))
+            mocked = patch.object(m, 'POLICY_ROOT', policies)
+            mocked.start()
+            self.addCleanup(mocked.stop)
         now = time.time()
         payload = dict(status='COMPLETE_GET_VERIFIED', accounts=expected, completed_at=datetime.fromtimestamp(now, timezone.utc).isoformat())
         payload.update(changes)
