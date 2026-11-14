@@ -4944,6 +4944,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
+      "next_step": "Adicionar somente apresentação; testes unitários, gates completos, stage API/browser e publicação controlada",
+      "objective": "Exibir Data da cobrança em Despesas Gerais sem mutação financeira",
+      "source": "apps/finance-system/private/charge-date-1571201800063680562/baseline.json; model-evidence.json; authority.json",
+      "state": "modelo autenticado astra alias/wire 872000 confirmado; autoridade original rodolfo validada. contrato: charges[].date e amount distintos de checked_on. dados produtivos reais incluem múltiplas datas, duplicatas e nulos; candidato source-only preparado com suplemento de fixtures sob shared admission.",
+      "thread_id": "1571201800063680562",
+      "updated_at": "2026-11-14T16:41:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-CHARGES-1553040522287784077",
       "next_step": "TDD/API/UI, ensaio/backup, publicação coordenada, exclusões e readback integral",
       "objective": "Cobranças com datas/valores desde setembro, remover legenda extra e cinco despesas desde agosto",
@@ -10457,5 +10467,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T16:28:06+00:00"
+  "updated_at": "2026-11-14T16:41:32+00:00"
 }

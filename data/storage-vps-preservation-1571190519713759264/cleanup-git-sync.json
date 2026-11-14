@@ -1,0 +1,21 @@
+{
+  "status": "scoped_cleanup_result_and_exact_inventory_checkpoint_remote_verified",
+  "containing_commit": "6a57350dc356780d080f73c6c438669cb5063ae6",
+  "durable_artifact_files_verified": 31,
+  "inventory_records_verified": 2,
+  "checkpoint_records_verified": 5,
+  "sealed_result_sha256": "630f2dad96edfe28ca94f6a9ae16fad69fff010b5ec8924fdcd29bf094890067",
+  "excluded_local_coordination_files": [
+    {
+      "path": "data/storage-vps-preservation-1571190519713759264/cleanup-execution.lock",
+      "native_rule": ".gitignore:71:*.lock\tdata/storage-vps-preservation-1571190519713759264/cleanup-execution.lock",
+      "purpose": "local exclusive execution lock, not versioned evidence"
+    }
+  ],
+  "initial_validator_timeout_recovery": "No original waiter survived; exact mismatch was native-ignored zero-byte execution lock, not failed commit/push. Durable artifacts and own parsed inventory/checkpoint rows already matched origin.",
+  "watcher_unchanged": true,
+  "manual_commit_or_push": false,
+  "learning_reference": "vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+  "learning_live_mirror_equal": true,
+  "observed_at": "2026-11-14T11:37:52.895664-05:00"
+}
