@@ -6368,12 +6368,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUPS-1570830889359777924",
-      "next_step": "FecharreportGItfilhoZEUS-STORAGE-COMPACT-1570876981178929333;depoisproximopontoerevisaoread-only/root/.hermes/secure-backups/vps-maintenance;naoapagardemaisclassesnemruntimeouretencaoautomaticamente.",
-      "objective": "Expandido3.23GiBfechado;12snapshotspreservadoscompactamenteeexcluidos5.56GiB;demaisbackupsVPSaindanaorevisadosintegralmente.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-compact-history-1570876981178929333/cleanup-result.json",
-      "state": "confirmed_snapshot_lot_completed_older_vps_maintenance_review_next",
+      "next_step": "SeguirZEUS-STORAGE-VPS-LEGACY-1571144515673260184:decisaosobrepreservacao/consolidacaodashistoricasantesdemanifestodestrutivo;naoexcluirantigosporidade;compacto375MiB+7bases/latest/safety/offsiteprotegidos.",
+      "objective": "Lotesexpandidosanterioresfechados;revisaoremanescenteVPSmaintenanceconcluida0.95GiB;103archivesPASS;retiradaamplaaindapendente.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-legacy-review-1571144515673260184/review-result.json",
+      "state": "legacy_vps_review_completed_historical_preservation_gate",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T20:04:42+00:00"
+      "updated_at": "2026-11-14T12:53:59+00:00"
     },
     {
       "agent": "zeus",
@@ -6408,12 +6408,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "ResultadoativoZEUS-STORAGE-COMPACT-1570876981178929333;12pastas/9984filesremovidosconfirm1570888435353526397,compacto+7basesprotegidos. Proximoponto:revisaobackupsantigosVPSmaintenance;semoutrosdescarte,semalterarretencaoouproducao.",
-      "objective": "Lotesanteriorespreservados;mais12copiasdesnapshotsremovidasaposcompactacaocomprovada;5.56GiBrecuperadosnestelote.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-compact-history-1570876981178929333/cleanup-result.json",
-      "state": "confirmed_snapshot_lot_completed_legacy_vps_review_next",
+      "next_step": "FonteativaZEUS-STORAGE-VPS-LEGACY-1571144515673260184;103gzip/tarPASS;6archivesHermescomversoesnaointeiramentecobertasporlatest;decidirpreservacaoantesdeprepararretirada;semoutraexclusaoautorizada.",
+      "objective": "Lotesanterioresconcluidos;revisaoVPSlegacy35pastas2675files0.95GiBsemdelete;reorganizacaoamplaaindanaofechada.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-legacy-review-1571144515673260184/review-result.json",
+      "state": "legacy_vps_classified_historical_preservation_gate",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-13T20:04:43+00:00"
+      "updated_at": "2026-11-14T12:53:59+00:00"
     },
     {
       "agent": "zeus",
@@ -6438,12 +6438,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-LEGACY-1571144515673260184",
-      "next_step": "Inventariar 36 entradas e classificar recuperacao/redundancia; preparar somente lote independentemente comprovado ou explicar bloqueio historico, sem apagar.",
-      "objective": "Revisar os conjuntos antigos VPS-maintenance, distinguindo rollback de pacotes, historico de perfis e evidencias; preservar bases e operacao; nenhuma exclusao autorizada.",
-      "source": "discord:1569928464033783862/1571144515673260184;context/storage-reorganization-20261112.md",
-      "state": "review_in_progress",
+      "next_step": "Decidir preservacao/consolidacao das diferencas historicas antes de preparar retirada ampla;nao apagar ou alterarretencao;report/inventory/evidence em storage-vps-legacy-review-1571144515673260184.",
+      "objective": "Revisao delimitada:35pastas+ponteiro/2675files/0.95GiB;103gzip/tarPASS;6arquivosHermesantigosnaointeiramentecobertospornovembro;zeroexclusoes.",
+      "source": "discord:1569928464033783862/1571144515673260184;data/storage-vps-legacy-review-1571144515673260184/review-result.json;context/storage-reorganization-20261112.md",
+      "state": "classification_complete_historical_preservation_decision_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T12:48:42+00:00"
+      "updated_at": "2026-11-14T12:53:24+00:00"
     },
     {
       "agent": "zeus",
@@ -10417,5 +10417,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T12:48:42+00:00"
+  "updated_at": "2026-11-14T12:53:59+00:00"
 }

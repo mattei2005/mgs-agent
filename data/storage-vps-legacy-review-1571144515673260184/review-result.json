@@ -495,5 +495,32 @@
     "used_percent": 69.04340260962732
   },
   "scope_boundary": "Only the old VPS-maintenance root was reviewed; no new full-VPS or runtime cleanup, no SQLite connection or DB restore, no credential changes. Archive comparison proves member-byte differences against the two latest Hermes archives, not global uniqueness or loss of live history.",
-  "recommendation": "Preserve historical control-plane differences and checksum-coupled evidence before any broader old-maintenance retirement; do not treat the entire root as one redundant VPS backup. A preservation/repack proposal and a later exact deletion gate are distinct from this read-only review."
+  "recommendation": "Preserve historical control-plane differences and checksum-coupled evidence before any broader old-maintenance retirement; do not treat the entire root as one redundant VPS backup. A preservation/repack proposal and a later exact deletion gate are distinct from this read-only review.",
+  "report_infra": {
+    "message_id": "1571146032446840964",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T07:53:58.987044-05:00"
+  },
+  "gateway_services": {
+    "zeus": {
+      "MainPID": "2241212",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "ares": {
+      "MainPID": "2233587",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "atena": {
+      "MainPID": "2237072",
+      "ActiveState": "active",
+      "SubState": "running"
+    }
+  }
 }

@@ -64721,6 +64721,32 @@
       },
       "source_report": "discord:#alerts-infra/1570994412865986601",
       "report_readback": "Exact GET HTTP 200; one embed; required fields; empty content; zero mentions; no thread."
+    },
+    {
+      "id": "storage-vps-legacy-review-1571144515673260184",
+      "agent": "zeus",
+      "type": "read_only_old_vps_maintenance_classification",
+      "path": "/root/mgs-agent/data/storage-vps-legacy-review-1571144515673260184",
+      "authority_message_id": "1571144515673260184",
+      "thread_id": "1569928464033783862",
+      "status": "classification_complete_preservation_required_before_broad_retirement",
+      "result_path": "/root/mgs-agent/data/storage-vps-legacy-review-1571144515673260184/review-result.json",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "root_entries": 36,
+      "regular_files": 2675,
+      "occupied_unique_allocated_bytes": 1022234624,
+      "compressed_archives_checked": 103,
+      "compressed_archive_failures": 0,
+      "historical_hermes_archives_not_wholly_subsumed": 6,
+      "deletions": 0,
+      "frozen_eligible_reclaim_bytes": 0,
+      "retention_changed": false,
+      "original_bytes_and_metadata_unchanged": true,
+      "next_gate": "Owner decision on preserving/consolidating historical differences before exact destructive lot; broad retirement remains pending",
+      "updated_at": "2026-11-14T07:53:24.052123-05:00",
+      "result_sha256": "8cd368cb58f1cd6e0c2758aeb809ca4049b13c00de189ef91a230279700d8eda",
+      "report_infra_message_id": "1571146032446840964",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
