@@ -1,0 +1,59 @@
+{
+  "status": "completed_validated",
+  "confirmation_message_id": "1571285972589477891",
+  "question_message_id": "1571285763813806183",
+  "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
+  "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+  "exact_packages_removed": 8,
+  "download_files_removed": 29,
+  "version_specific_payload_nodes_absent": 55081,
+  "shared_usrmerge_lib_preserved": true,
+  "out_of_scope_auxiliary_packages_preserved": 4,
+  "protected_hashes_unchanged": 47,
+  "configs_passed": 3,
+  "smokes_passed": 3,
+  "same_gateway_pids": true,
+  "same_boot_id": true,
+  "new_critical_journal_events": 0,
+  "observed_immediate_available_delta_by_filesystem": {
+    "/": 704172032,
+    "/boot": 111063040,
+    "/boot/efi": 0
+  },
+  "observed_immediate_available_delta_bytes": 815235072,
+  "observed_immediate_available_delta_GiB": 0.759,
+  "initial_estimated_net_bytes": 562642944,
+  "analysis_preservation_at_freeze_bytes": 207003648,
+  "global_df_delta_not_exclusive_attribution": true,
+  "later_filesystem_observation": [
+    {
+      "mount": "/",
+      "used_bytes": 141604339712,
+      "available_bytes": 65279164416,
+      "available_GiB": 60.8,
+      "used_percent": 68.45
+    },
+    {
+      "mount": "/boot",
+      "used_bytes": 177905664,
+      "available_bytes": 680607744,
+      "available_GiB": 0.63,
+      "used_percent": 20.72
+    },
+    {
+      "mount": "/boot/efi",
+      "used_bytes": 6399488,
+      "available_bytes": 102995968,
+      "available_GiB": 0.1,
+      "used_percent": 5.85
+    }
+  ],
+  "original_executor_returncode": 1,
+  "postcheck_failure_recovered_without_new_mutation": "Shared /lib usr-merge alias was a structural witness rather than disposable payload. Original helper left it intact; separate corrected collector passed. Native purge was not repeated.",
+  "rollback_archive_readback_after_source_absence": true,
+  "actual_rollback_reinstallation_or_boot_exercised": false,
+  "no_autoremove_or_restart_or_reboot": true,
+  "parent_review_complete": false,
+  "next_step": "read-only review of four auxiliary linux-tools packages and other point5 residues; then6data7caches8Git and recurrence",
+  "validated_at": "2026-11-14T17:18:40.793540-05:00"
+}
