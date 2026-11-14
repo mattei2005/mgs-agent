@@ -64924,14 +64924,27 @@
       "id": "ares-campaign-url-1571217766256742420",
       "agent": "zeus",
       "type": "diagnostic_checkpoint_and_rollback_backup",
-      "status": "blocked_critical_confirmation",
+      "status": "policy_applied_behavior_validation_pending",
       "path": "/root/mgs-agent/backups/ares-campaign-url-1571217766256742420",
       "checkpoint_id": "ares-campaign-destination-url-1571217766256742420",
       "source_thread_id": "1571217766256742420",
       "target_thread_id": "1570857869790945455",
       "authority_message_id": "1571217766256742420",
       "diagnosis": "Ares aplicou gate de dominio ao link informado como campo de campanha. security-policies.md Politica 3 inclui explicitamente destino de campanha; alterar essa fonte requer confirmacao adicional do Critical Subset. Nenhuma politica, SOUL, skill Ares, cadastro de dominio ou campanha alterados.",
-      "updated_at": "2026-11-14T17:41:00.845976+00:00"
+      "updated_at": "2026-11-14T18:32:01.432423+00:00",
+      "confirmation_message_id": "1571230350749859881",
+      "changed_paths": [
+        "context/security-policies.md",
+        "context/ares-asset-scope.md",
+        "context/ares-operational-map.md",
+        "profiles/ares-soul.md",
+        "profiles/zeus-skills/ops/discord-ops/SKILL.md",
+        "/root/.hermes/profiles/ares/SOUL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
+      ],
+      "evidence_path": "/root/mgs-agent/reports/ares/campaign-url-1571230350749859881.json",
+      "handoff_message_id": "1571231015220019383",
+      "result": "Canonical security policy, Ares scope/map/SOUL and Zeus procedure corrected; tests passed. No allowlist inclusion, session reset, restart or Meta write. Awaiting actual Ares reply."
     },
     {
       "id": "storage-runtime-review-1571217101597712496",

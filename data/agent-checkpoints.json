@@ -6658,12 +6658,12 @@
     {
       "agent": "zeus",
       "id": "ares-campaign-destination-url-1571217766256742420",
-      "next_step": "Aplicar excecao delimitada de URL-dado; sincronizar fontes e SOUL; validar e retificar na origem sem criar campanhas",
+      "next_step": "Conferir resposta do Ares ao handoff1571231015220019383 e publicar REPORT-INFRA; nao executar campanha nem resetar sessao",
       "objective": "Corrigir recusa de URL como parametro de campanha; preservar escopo de sites e executor Ares",
-      "source": "context/ares-asset-scope.md",
-      "state": "applying_confirmed_1571230350749859881",
+      "source": "reports/ares/campaign-url-1571230350749859881.json",
+      "state": "policy_applied_ares_retification_pending",
       "thread_id": "1571217766256742420",
-      "updated_at": "2026-11-14T18:29:02+00:00"
+      "updated_at": "2026-11-14T18:32:01+00:00"
     },
     {
       "agent": "ares",
@@ -10487,5 +10487,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T18:29:02+00:00"
+  "updated_at": "2026-11-14T18:32:01+00:00"
 }
