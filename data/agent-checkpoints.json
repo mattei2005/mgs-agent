@@ -6488,12 +6488,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Ponto5 em ZEUS-STORAGE-SYSTEM-1571271327648587799;somente classificacao/preservacao/preparacao. Pedir somente gates destrutivos exatos;nao declarar reorganizacao completa por lote parcial ou disco abaixo do alerta.",
-      "objective": "Concluir revisao exaustiva do disco e identificar tudo que e inutil, nao parar por folga/urgencia. Lotes1-4 anteriores encerrados;seguir5sistema,6dados/trabalhos,7caches,8Git e produtores/recorrencia.",
+      "next_step": "Lote de sistema preparado em ZEUS-STORAGE-SYSTEM-1571271327648587799, aguardando nova confirmacao critica; nenhuma exclusao de sistema. Preservar restantes5 e categorias6-8 ate concluir provas e gates proprios.",
+      "objective": "Concluir revisao exaustiva de ocupacao inutil: pontos5-8 e produtores; espaco livre/urgencia nao encerram a iniciativa.",
       "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571271327648587799",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T21:13:29+00:00"
+      "updated_at": "2026-11-14T22:02:15+00:00"
     },
     {
       "agent": "zeus",
@@ -6548,12 +6548,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Inventario metadata /,/boot,/boot/efi;APT/Snap/kernels/logs/temporarios/softwareauxiliar;consumidores/protecao/manifesto antes de qualquer exclusao. Manter pontos6dados/trabalhos,7caches,8Git abertos.",
-      "objective": "Ponto5: auditar sistema e demais arquivos em todos os filesystems persistentes, classificar residuos e preparar eventual lote exato;sem exclusao. Dono exige finalizar toda revisao, independente de urgencia/percentual.",
-      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571271327648587799",
-      "state": "in_progress_readonly_system_inventory",
+      "next_step": "Confirmacao pendente do manifesto 3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f: 8 pacotes de boot antigos e29 downloads, nao os4 linux-tools auxiliares. Sem approval/execution. Depois executar lote inalterado, validar e continuar5auxiliares/outros roots/temporarios,6dados,7caches,8Git e recorrencia.",
+      "objective": "Ponto5: revisao exaustiva sistema/demais arquivos; preservar operacao; preparar descarte exato e continuar outras categorias.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-system-review-1571271327648587799/system-lot-tests.json;discord:1569928464033783862/1571271327648587799",
+      "state": "prepared_validated_waiting_new_critical_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T21:13:29+00:00"
+      "updated_at": "2026-11-14T22:02:15+00:00"
     },
     {
       "agent": "zeus",
@@ -10607,5 +10607,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T21:13:29+00:00"
+  "updated_at": "2026-11-14T22:02:15+00:00"
 }

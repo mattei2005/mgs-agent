@@ -893,6 +893,69 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "storage-system-review-1571271327648587799",
+      "agent": "zeus",
+      "type": "readonly_exhaustive_system_storage_review_and_frozen_retirement_lot",
+      "status": "prepared_validated_waiting_new_critical_confirmation_parent_open",
+      "updated_at": "2026-11-14T17:02:14.701850-05:00",
+      "source_thread_id": "1569928464033783862",
+      "authority_message_id": "1571271327648587799",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "evidence": "data/storage-system-review-1571271327648587799/system-lot-tests.json",
+      "manifest": "data/storage-system-review-1571271327648587799/system-lot.json",
+      "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
+      "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+      "verification": {
+        "persistent_filesystems_scanned": [
+          "/",
+          "/boot",
+          "/boot/efi"
+        ],
+        "scan_errors": 0,
+        "regular_files_scanned": 1580249,
+        "kernel_packages": 8,
+        "download_files": 29,
+        "payload_nodes": 55082,
+        "tests_passed": 9,
+        "potential_file_reclaim_bytes": 769646592,
+        "analysis_and_rollback_allocated_at_freeze": 207003648,
+        "estimated_net_bytes": 562642944,
+        "actual_reclaim_claimed": false,
+        "deletions": 0,
+        "packages_installed_or_removed": 0,
+        "reboots": 0,
+        "approval_exists": false,
+        "execution_start_exists": false
+      },
+      "excluded_old_version_auxiliary_packages": [
+        {
+          "package": "linux-tools-6.8.0-138",
+          "live_status": "ii  6.8.0-138.138"
+        },
+        {
+          "package": "linux-tools-6.8.0-138-generic",
+          "live_status": "ii  6.8.0-138.138"
+        },
+        {
+          "package": "linux-tools-6.8.0-142",
+          "live_status": "ii  6.8.0-142.142"
+        },
+        {
+          "package": "linux-tools-6.8.0-142-generic",
+          "live_status": "ii  6.8.0-142.142"
+        }
+      ],
+      "skill_reference_mirror_sha256": "da33fe288a70a05ca6634befb45e30b0f91a660bf708a0b35df19f51bf72fe7e",
+      "remaining_categories": [
+        "5_auxiliary_tools_other_roots_and_temporaries",
+        "6_data_and_work",
+        "7_caches_and_managed_stores",
+        "8_git",
+        "producer_recurrence"
+      ],
+      "policy": "Do not close for healthy headroom; exact frozen-lot confirmation still required; core-kernel lot does not include four versioned auxiliary linux-tools packages."
+    },
+    {
       "id": "runtime-code-retirement-1571265639241224325",
       "agent": "zeus",
       "type": "exact_owner_confirmed_legacy_runtime_worktree_retirement",

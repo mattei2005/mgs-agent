@@ -14410,6 +14410,23 @@
       "updated_at": "2026-11-12T14:54:44+00:00"
     },
     {
+      "canonical_key": "storage.exhaustive-review.1571271327648587799",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-14T22:02:15+00:00",
+      "id": "ZEUS-STORAGE-EXHAUSTIVE-1571271327648587799",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Concluir revisao exaustiva do disco independente de folga ou urgencia",
+      "updated_at": "2026-11-14T22:02:15+00:00"
+    },
+    {
       "canonical_key": "zeus.web.auto_recovery_threshold",
       "canonical_source": "profiles/zeus-soul.md",
       "consumers": [
@@ -17295,5 +17312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:55:36+00:00"
+  "updated_at": "2026-11-14T22:02:15+00:00"
 }
