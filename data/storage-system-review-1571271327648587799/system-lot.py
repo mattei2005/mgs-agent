@@ -72,6 +72,8 @@ def verify(m,post=False):
   assert all(v in grub for v in m['retained_kernel_versions'])
   assert not subprocess.check_output(['dpkg','--audit'],text=True).strip(),'dpkg audit findings'
  else:
+  for row in m['pre_mutation_hashes']:assert sha(row['path'])==row['sha256'],'package control script/list drift'
+  assert sha(m['kernel_metadata'])==m['kernel_metadata_sha256'],'kernel ledger drift'
   assert not consumers(m),'active package/target consumer'
   assert not set(subprocess.check_output(['apt-mark','showhold'],text=True).splitlines())&EXPECTED_PACKAGES,'held package'
   for row in m['packages']:assert installed_package(row['name'])=='ii \t'+row['version'],'package identity drift'

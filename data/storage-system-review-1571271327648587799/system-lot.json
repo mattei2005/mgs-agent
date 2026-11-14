@@ -1,0 +1,1118 @@
+{
+  "schema_version": 1,
+  "status": "frozen_waiting_new_owner_critical_confirmation",
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "preparation_authority": "1571271327648587799",
+  "created_at": "2026-11-14T16:48:53.396800-05:00",
+  "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+  "packages": [
+    {
+      "name": "linux-headers-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 20033
+    },
+    {
+      "name": "linux-headers-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 10259
+    },
+    {
+      "name": "linux-headers-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 20032
+    },
+    {
+      "name": "linux-headers-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 10259
+    },
+    {
+      "name": "linux-image-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 9
+    },
+    {
+      "name": "linux-image-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 9
+    },
+    {
+      "name": "linux-modules-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "owned_path_count": 1316
+    },
+    {
+      "name": "linux-modules-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "owned_path_count": 1316
+    }
+  ],
+  "file_targets": [
+    {
+      "path": "/var/cache/apt/archives/open-vm-tools_2%3a13.0.10-0ubuntu0.24.04.2_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/open-vm-tools_2%3a13.0.10-0ubuntu0.24.04.2_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 723634,
+        "allocated": 724992,
+        "mtime_ns": 1789574456000000000,
+        "ctime_ns": 1792589022020863292,
+        "dev": 2049,
+        "ino": 1826,
+        "nlink": 1
+      },
+      "sha256": "36cf753dfab7f65ba257fedc0be7c840abb44974acc08c0a7da920fd50b1b6f3",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 183412,
+        "allocated": 184320,
+        "mtime_ns": 1791460531000000000,
+        "ctime_ns": 1793374073075503679,
+        "dev": 2049,
+        "ino": 59048,
+        "nlink": 1
+      },
+      "sha256": "8fea23cc31ce22d9623049b966a1c6cda2c08da7ef7fedc9b51ffcb9602fdd3d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 97922,
+        "allocated": 98304,
+        "mtime_ns": 1791460530000000000,
+        "ctime_ns": 1793374072927503510,
+        "dev": 2049,
+        "ino": 59047,
+        "nlink": 1
+      },
+      "sha256": "0c60e75d4b5acadc44196bc9fd07eb15d6921c6d4f0a43406f028ed3c8aa458d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-agent_4.3.85-master_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/monarx-agent_4.3.85-master_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 5725992,
+        "allocated": 5726208,
+        "mtime_ns": 1793313219000000000,
+        "ctime_ns": 1793374072778503340,
+        "dev": 2049,
+        "ino": 59045,
+        "nlink": 1
+      },
+      "sha256": "a7dd37b9f29f3f2a36efb8a2eb18ce32b1937a831e37c460e1aaaf118d790bc3",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 639878,
+        "allocated": 643072,
+        "mtime_ns": 1790257756000000000,
+        "ctime_ns": 1792589022181863524,
+        "dev": 2049,
+        "ino": 2188,
+        "nlink": 1
+      },
+      "sha256": "59af23f557d666039708ec176aa056d2fd85125dabd452accf6d86f5c608fb74",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/1password-cli_2.41.0-1_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/1password-cli_2.41.0-1_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 11263682,
+        "allocated": 11264000,
+        "mtime_ns": 1792513628000000000,
+        "ctime_ns": 1792589021445862460,
+        "dev": 2049,
+        "ino": 672,
+        "nlink": 1
+      },
+      "sha256": "0b7b215d46d7b425582e061a75f9e29a55e67bc04fe57a23deb33f5d20e8b99a",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.6_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/tailscale_1.104.6_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 40771946,
+        "allocated": 40779776,
+        "mtime_ns": 1794354199000000000,
+        "ctime_ns": 1794457875408559350,
+        "dev": 2049,
+        "ino": 82,
+        "nlink": 1
+      },
+      "sha256": "193acb9d298f2a00f157217cf574820a7ebea691d41afbb8ca40c1d54e888d3e",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-cli_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/php8.3-cli_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 1931822,
+        "allocated": 1933312,
+        "mtime_ns": 1792590198000000000,
+        "ctime_ns": 1792622007160615991,
+        "dev": 2049,
+        "ino": 1819,
+        "nlink": 1
+      },
+      "sha256": "6868966e46f777624f8cdfd3c38dfb2a7b6c2654bcacda57dc2049ecc9ca566b",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.4_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/tailscale_1.104.4_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 40753264,
+        "allocated": 40759296,
+        "mtime_ns": 1793146528000000000,
+        "ctime_ns": 1793374072827503396,
+        "dev": 2049,
+        "ino": 59043,
+        "nlink": 1
+      },
+      "sha256": "8768973def76dd530b53a0fe74ca396252fff050f955aeebfabd33c77960625d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 1547558,
+        "allocated": 1548288,
+        "mtime_ns": 1791460530000000000,
+        "ctime_ns": 1793374073337503978,
+        "dev": 2049,
+        "ino": 59049,
+        "nlink": 1
+      },
+      "sha256": "ff1b650f655b36dfe202fdbae6bb02b363c7257b6dd23e4f95ab61f716190df3",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/distro-info-data_2026.10.12-0ubuntu0.24.04.1_all.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/distro-info-data_2026.10.12-0ubuntu0.24.04.1_all.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 7836,
+        "allocated": 8192,
+        "mtime_ns": 1791995449000000000,
+        "ctime_ns": 1792589022119863435,
+        "dev": 2049,
+        "ino": 1828,
+        "nlink": 1
+      },
+      "sha256": "67404a569b4c1faa333f30424fe6bcc01fcf39297014efd720b47ab7a8b03154",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 877038,
+        "allocated": 880640,
+        "mtime_ns": 1790364178000000000,
+        "ctime_ns": 1792589023213865016,
+        "dev": 2049,
+        "ino": 2525,
+        "nlink": 1
+      },
+      "sha256": "2011271eabcc2eb460e99995c5ef26e46633e87d04f570e305b62f178f7b452c",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/ubuntu-pro-client_38ubuntu0~24.04_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/ubuntu-pro-client_38ubuntu0~24.04_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 259430,
+        "allocated": 262144,
+        "mtime_ns": 1788990706000000000,
+        "ctime_ns": 1793374073357504001,
+        "dev": 2049,
+        "ino": 59051,
+        "nlink": 1
+      },
+      "sha256": "ca79c208feedf4e49ec7165a4a36f9a648b77b0e5d7f443c728c1478ef45f84d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/1password-cli_2.41.1-1_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/1password-cli_2.41.1-1_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 11284766,
+        "allocated": 11288576,
+        "mtime_ns": 1792627414000000000,
+        "ctime_ns": 1793374072546503075,
+        "dev": 2049,
+        "ino": 59044,
+        "nlink": 1
+      },
+      "sha256": "5e3b3dde1e2d76e8d32e662993d068c775f643095cf5ba4e0761d2b47a7ceb01",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/snapd_2.77.1+ubuntu24.04_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/snapd_2.77.1+ubuntu24.04_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 33191424,
+        "allocated": 33193984,
+        "mtime_ns": 1791390319000000000,
+        "ctime_ns": 1792589023203865001,
+        "dev": 2049,
+        "ino": 2256,
+        "nlink": 1
+      },
+      "sha256": "d4c38581f084bc1a17623cdd69e60ad5bdc7e4f1376c4f7931edaeee51746840",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/cloud-init_26.2-0ubuntu1~24.04.2_all.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/cloud-init_26.2-0ubuntu1~24.04.2_all.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 633882,
+        "allocated": 634880,
+        "mtime_ns": 1792714679000000000,
+        "ctime_ns": 1793374073418504070,
+        "dev": 2049,
+        "ino": 59053,
+        "nlink": 1
+      },
+      "sha256": "69b18aec8d2dfa6dc16caf93c317c01c3205c1593e22768c3ef70c808539601a",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-protect-autodetect_5.2.73-master_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/monarx-protect-autodetect_5.2.73-master_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 5066,
+        "allocated": 8192,
+        "mtime_ns": 1792687270000000000,
+        "ctime_ns": 1793089210707933507,
+        "dev": 2049,
+        "ino": 7043,
+        "nlink": 1
+      },
+      "sha256": "d185bdfff13c9070cfb3e8bf32936a87069dbb22692458141f6be1d10d81e7e6",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-opcache_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/php8.3-opcache_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 372318,
+        "allocated": 372736,
+        "mtime_ns": 1792590189000000000,
+        "ctime_ns": 1792622006899615454,
+        "dev": 2049,
+        "ino": 1786,
+        "nlink": 1
+      },
+      "sha256": "bb320f77b1439e33e8867990d7fa666579685f0f1583502f39b45636f855a47c",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/tailscale_1.104.2_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/tailscale_1.104.2_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 40540234,
+        "allocated": 40542208,
+        "mtime_ns": 1792521943000000000,
+        "ctime_ns": 1792589021787862955,
+        "dev": 2049,
+        "ino": 1815,
+        "nlink": 1
+      },
+      "sha256": "4c342bece5cffda61407099e41ab8de663426246dd2c4ebbb1d11f3db0b989f6",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-common_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/php8.3-common_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 747814,
+        "allocated": 749568,
+        "mtime_ns": 1792590197000000000,
+        "ctime_ns": 1792622007200616073,
+        "dev": 2049,
+        "ino": 1837,
+        "nlink": 1
+      },
+      "sha256": "801cae4e842e1b9e9d60a542bf18ba831bf504b2f3070404892bf3f8fb943ea4",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/php8.3-readline_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/php8.3-readline_8.3.6-0ubuntu0.24.04.13_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 13614,
+        "allocated": 16384,
+        "mtime_ns": 1792590188000000000,
+        "ctime_ns": 1792622006377614379,
+        "dev": 2049,
+        "ino": 1752,
+        "nlink": 1
+      },
+      "sha256": "521280a3bc72eeab32e0329c91cb6172f9e2ee24e57d1f8fd31c05f091a62db5",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/tmux_3.4-1ubuntu0.2_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/tmux_3.4-1ubuntu0.2_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 479630,
+        "allocated": 483328,
+        "mtime_ns": 1791470794000000000,
+        "ctime_ns": 1793374073386504034,
+        "dev": 2049,
+        "ino": 59052,
+        "nlink": 1
+      },
+      "sha256": "fd14ca543ca0c00c7314c7bb524be40f3d058d9e587a5f47d9b35e851d9bd67d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 35008,
+        "allocated": 36864,
+        "mtime_ns": 1790364179000000000,
+        "ctime_ns": 1792589023204865003,
+        "dev": 2049,
+        "ino": 2278,
+        "nlink": 1
+      },
+      "sha256": "ceeac76b9c94973c71e4e6566fa9ff5d3caae9716775d840810a4e1ad749a737",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/nodejs_22.23.4-1nodesource1_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/nodejs_22.23.4-1nodesource1_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 37816336,
+        "allocated": 37818368,
+        "mtime_ns": 1792599395000000000,
+        "ctime_ns": 1792694283650396046,
+        "dev": 2049,
+        "ino": 2165,
+        "nlink": 1
+      },
+      "sha256": "e40ba508b45b2782ed453047d8e73fb9c4dd5358b70644eb9cc0e059ea2c959d",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/libapparmor1_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/libapparmor1_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 51476,
+        "allocated": 53248,
+        "mtime_ns": 1790257756000000000,
+        "ctime_ns": 1792589022122863439,
+        "dev": 2049,
+        "ino": 2054,
+        "nlink": 1
+      },
+      "sha256": "75b570d7517e24c3693c4503b4691ac1fd82934d93faa91460309f22104c5617",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/ubuntu-pro-client-l10n_38ubuntu0~24.04_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/ubuntu-pro-client-l10n_38ubuntu0~24.04_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 19818,
+        "allocated": 20480,
+        "mtime_ns": 1788990706000000000,
+        "ctime_ns": 1793374073338503979,
+        "dev": 2049,
+        "ino": 59050,
+        "nlink": 1
+      },
+      "sha256": "a68e70663ed3b7afa40614120a7af1bd924d12e668057449518a4d6660080d62",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/monarx-protect_5.2.73-master_amd64.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/monarx-protect_5.2.73-master_amd64.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 167642,
+        "allocated": 167936,
+        "mtime_ns": 1792687270000000000,
+        "ctime_ns": 1793089210665933456,
+        "dev": 2049,
+        "ino": 1780,
+        "nlink": 1
+      },
+      "sha256": "c1b0e9fa73798558be608300180ff112c9033c4d5895fa79dc9b440d5aae63d3",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/var/cache/apt/archives/libglib2.0-data_2.80.0-6ubuntu3.10_all.deb",
+      "metadata": {
+        "path": "/var/cache/apt/archives/libglib2.0-data_2.80.0-6ubuntu3.10_all.deb",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 50240,
+        "allocated": 53248,
+        "mtime_ns": 1791460530000000000,
+        "ctime_ns": 1793374072647503190,
+        "dev": 2049,
+        "ino": 59046,
+        "nlink": 1
+      },
+      "sha256": "f196e280e4286f6dfc5ddaaf8c09cc6e8502e0de77619385e3fde19ea2739122",
+      "origin": "pre_existing_residue",
+      "kind": "cached_deb"
+    },
+    {
+      "path": "/root/.local/share/mgs-router-toolchain/go1.27.1.linux-amd64.tar.gz",
+      "metadata": {
+        "path": "/root/.local/share/mgs-router-toolchain/go1.27.1.linux-amd64.tar.gz",
+        "mode": 33188,
+        "uid": 0,
+        "gid": 0,
+        "size": 70553950,
+        "allocated": 70561792,
+        "mtime_ns": 1790956198979017569,
+        "ctime_ns": 1790956198979017569,
+        "dev": 2049,
+        "ino": 3211316,
+        "nlink": 1
+      },
+      "sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+      "origin": "pre_existing_residue",
+      "kind": "installed_go_download_cache"
+    }
+  ],
+  "kernel_metadata": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/old-kernel-payload-metadata.json.gz",
+  "kernel_metadata_sha256": "4f9907de42b842434cc34b8f7173cdc5fe706e4df885663676222a697f073171",
+  "kernel_fingerprint": "ad5fbe08154ab13c84de6b3dc57c1ffbda3f7d61283facf17d8ddae7c15b285e",
+  "kernel_payload_count": 55082,
+  "kernel_payload_roots": [
+    "/usr/src/linux-headers-6.8.0-138",
+    "/usr/src/linux-headers-6.8.0-138-generic",
+    "/lib/modules/6.8.0-138-generic",
+    "/boot/initrd.img-6.8.0-138-generic",
+    "/boot/vmlinuz-6.8.0-138-generic",
+    "/boot/config-6.8.0-138-generic",
+    "/boot/System.map-6.8.0-138-generic",
+    "/usr/src/linux-headers-6.8.0-142",
+    "/usr/src/linux-headers-6.8.0-142-generic",
+    "/lib/modules/6.8.0-142-generic",
+    "/boot/initrd.img-6.8.0-142-generic",
+    "/boot/vmlinuz-6.8.0-142-generic",
+    "/boot/config-6.8.0-142-generic",
+    "/boot/System.map-6.8.0-142-generic"
+  ],
+  "generated_kernel_metadata": [
+    "/lib/modules/6.8.0-138-generic/modules.dep",
+    "/lib/modules/6.8.0-138-generic/modules.symbols.bin",
+    "/lib/modules/6.8.0-138-generic/modules.builtin.alias.bin",
+    "/lib/modules/6.8.0-138-generic/modules.devname",
+    "/lib/modules/6.8.0-138-generic/modules.alias",
+    "/lib/modules/6.8.0-138-generic/modules.dep.bin",
+    "/lib/modules/6.8.0-138-generic/modules.alias.bin",
+    "/lib/modules/6.8.0-138-generic/modules.softdep",
+    "/lib/modules/6.8.0-138-generic/modules.builtin.bin",
+    "/lib/modules/6.8.0-138-generic/modules.symbols",
+    "/lib/modules/6.8.0-142-generic/modules.dep",
+    "/lib/modules/6.8.0-142-generic/modules.symbols.bin",
+    "/lib/modules/6.8.0-142-generic/modules.builtin.alias.bin",
+    "/lib/modules/6.8.0-142-generic/modules.devname",
+    "/lib/modules/6.8.0-142-generic/modules.alias",
+    "/lib/modules/6.8.0-142-generic/modules.dep.bin",
+    "/lib/modules/6.8.0-142-generic/modules.alias.bin",
+    "/lib/modules/6.8.0-142-generic/modules.softdep",
+    "/lib/modules/6.8.0-142-generic/modules.builtin.bin",
+    "/lib/modules/6.8.0-142-generic/modules.symbols"
+  ],
+  "retired_kernel_versions": [
+    "6.8.0-138-generic",
+    "6.8.0-142-generic"
+  ],
+  "retained_kernel_versions": [
+    "6.8.0-146-generic",
+    "6.8.0-147-generic",
+    "6.8.0-149-generic"
+  ],
+  "running_kernel": "6.8.0-147-generic",
+  "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+  "protected_package_versions": {
+    "linux-headers-6.8.0-146": "6.8.0-146.146",
+    "linux-headers-6.8.0-146-generic": "6.8.0-146.146",
+    "linux-headers-6.8.0-147": "6.8.0-147.147",
+    "linux-headers-6.8.0-147-generic": "6.8.0-147.147",
+    "linux-headers-6.8.0-149": "6.8.0-149.149",
+    "linux-headers-6.8.0-149-generic": "6.8.0-149.149",
+    "linux-image-6.8.0-146-generic": "6.8.0-146.146",
+    "linux-image-6.8.0-147-generic": "6.8.0-147.147",
+    "linux-image-6.8.0-149-generic": "6.8.0-149.149",
+    "linux-modules-6.8.0-146-generic": "6.8.0-146.146",
+    "linux-modules-6.8.0-147-generic": "6.8.0-147.147",
+    "linux-modules-6.8.0-149-generic": "6.8.0-149.149",
+    "linux-tools-6.8.0-146": "6.8.0-146.146",
+    "linux-tools-6.8.0-146-generic": "6.8.0-146.146",
+    "linux-tools-6.8.0-147": "6.8.0-147.147",
+    "linux-tools-6.8.0-147-generic": "6.8.0-147.147",
+    "linux-tools-6.8.0-149": "6.8.0-149.149",
+    "linux-tools-6.8.0-149-generic": "6.8.0-149.149"
+  },
+  "protected_hashes": [
+    {
+      "path": "/boot/initrd.img-6.8.0-146-generic",
+      "sha256": "38d8422c2783415bd2bd58b0c66f5c72ffc923bf1ac2863a65bd6eea961b5a65"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-146-generic",
+      "sha256": "bae162f72d687f8f87909f1dfedea1dfe16adefe40da51f649d9a9b6d498342b"
+    },
+    {
+      "path": "/boot/config-6.8.0-146-generic",
+      "sha256": "90ded03cb0bfd9b3839fd4b1d25f7b932aaa278b93a0545a2630175544403354"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-146-generic",
+      "sha256": "1f2c7547363ed50f70a7e7c154eac7da8f52b0ec90a94851bae58be6dec3f662"
+    },
+    {
+      "path": "/boot/initrd.img-6.8.0-147-generic",
+      "sha256": "137f55c1ba01816e4ecd93a7ff2ba65789327a1ded3c2acdb29e9384c994783a"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-147-generic",
+      "sha256": "41ba36d860aa0b0cd995f4ca8856d80249b244577e704929b55be13fbd1ebd2f"
+    },
+    {
+      "path": "/boot/config-6.8.0-147-generic",
+      "sha256": "cf8454bc2e67effab87a5bff3c39042f2d8d106b6a777c4302e52f50d23b7400"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-147-generic",
+      "sha256": "2cbb8be5b2501a60c5b2e29371bf18a5eb4b468bb4485206a45bf178b1191a11"
+    },
+    {
+      "path": "/boot/initrd.img-6.8.0-149-generic",
+      "sha256": "f5d9061ff3a8d34c3d057505242d3729e5519a74a452b3f1637fd8d3837eadd7"
+    },
+    {
+      "path": "/boot/vmlinuz-6.8.0-149-generic",
+      "sha256": "9e9bb539fbf5e25c3fa737180e3586dacd0922257cdffe319daf8e5ceecaeaf0"
+    },
+    {
+      "path": "/boot/config-6.8.0-149-generic",
+      "sha256": "1addff02f85a47fb16c401618d47523421c655e9b458f675d07d9f61b7b26753"
+    },
+    {
+      "path": "/boot/System.map-6.8.0-149-generic",
+      "sha256": "0c8bcd23bc0b544634c6202238033ba8077ec95e8f9a0dd724e3034f772c2176"
+    },
+    {
+      "path": "/boot/efi/EFI/BOOT/BOOTX64.EFI",
+      "sha256": "6fe6e1bcbe6cf6baec8e056d40361ca1aa715cc04ddcc2855351de060b84350b"
+    },
+    {
+      "path": "/boot/efi/EFI/BOOT/fbx64.efi",
+      "sha256": "8f57751703470403ff7377c26a90a810eba9f6db36f262ac6ad94d132ddc5a60"
+    },
+    {
+      "path": "/boot/efi/EFI/BOOT/mmx64.efi",
+      "sha256": "d2fa8e52fddc99dad94a0009fee23cb2478c28373b777d50b2f784eb4e96f88e"
+    },
+    {
+      "path": "/boot/efi/EFI/ubuntu/BOOTX64.CSV",
+      "sha256": "01c3fe5a779f0204a10631793596d8e9acecfcf3e0c6b52ad73ea492c7797c28"
+    },
+    {
+      "path": "/boot/efi/EFI/ubuntu/grub.cfg",
+      "sha256": "15e12f83e85437bd9277e872c12419bddfe2ce5ea1e1a90be8eac14844dcfe10"
+    },
+    {
+      "path": "/boot/efi/EFI/ubuntu/grubx64.efi",
+      "sha256": "a831af01e4fb5e3c9457120e1d08ea13d98a0a47b62728c284b7f502d535965c"
+    },
+    {
+      "path": "/boot/efi/EFI/ubuntu/mmx64.efi",
+      "sha256": "d2fa8e52fddc99dad94a0009fee23cb2478c28373b777d50b2f784eb4e96f88e"
+    },
+    {
+      "path": "/boot/efi/EFI/ubuntu/shimx64.efi",
+      "sha256": "6fe6e1bcbe6cf6baec8e056d40361ca1aa715cc04ddcc2855351de060b84350b"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/01-vendor-ubuntu",
+      "sha256": "364d5eeac5475b7dddfd629899ea88b91ed8d8e8e319c29bb9dbd6772e87ed55"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/01autoremove",
+      "sha256": "35b4360d9126e5e5efc1ce42cea8a957ba42921de749ad8502922d536c9f385c"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/10periodic",
+      "sha256": "82d9ce0d3f5d2c66945d8a1267445e9955409d1ef3cb9934107adccb46bf5f6a"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/15update-stamp",
+      "sha256": "174cdb519fd06372847e23c20db869b2ff4b593252c0d2a6274d770eae2d92c9"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20apt-esm-hook.conf",
+      "sha256": "f7ab45bab1355711fcd031d78299cc3c7767654e7bf3f66a716ee3f2eae93733"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20archive",
+      "sha256": "4a569793b6a530904ff0dfd160bbc069c8a5b247d72f5756d62e6aeb31eabfdc"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20auto-upgrades",
+      "sha256": "b81a3a01864d5ed7f8d023f3fa86d65087ad6b85706d399dc229a60b1c784807"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20canonical-livepatch",
+      "sha256": "24b722ee788dd502d7f62e803d07b94bf054c02b870290782897fa229a230b34"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20packagekit",
+      "sha256": "549185db9256e57eaa25406d25ff52c339155cba1e5318148f1893bf728463c3"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/20snapd.conf",
+      "sha256": "4f1a710936d83d53caa575af269db4311d7b461bdb1bb94ced5b1d331b0886ac"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/50appstream",
+      "sha256": "8e89df0e4cfa24c7db4a165e776f40af7e0477f0d290bea4334edf6655db72bd"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/50command-not-found",
+      "sha256": "3a6f9f5244e49bee66ce65101fb73e16ba90f7a6cbd19befeefdf2c63209e2f1"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/50unattended-upgrades",
+      "sha256": "ac8eb4fbfeb483815e5a7a224a86d4242f70bdb41ceb84333b05a9a39f5296be"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/70debconf",
+      "sha256": "db749e19baf3b72ca2c157c70c52522cae23d94bc8b2dc5793fd43d427445367"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/99needrestart",
+      "sha256": "d453d945957bf2fb33a26cb74eacd38244291919715a1bb1d6179d0290c95c52"
+    },
+    {
+      "path": "/etc/apt/apt.conf.d/99update-notifier",
+      "sha256": "c01bac21ce3df26d6a5ef0bcd6fae53c924d6915121f20f1d412824367bfe930"
+    },
+    {
+      "path": "/etc/default/grub",
+      "sha256": "bd54bc36fdab22929038c3261a53f628da27cf9fc486a2988caa2ab3baba8ec1"
+    },
+    {
+      "path": "/etc/kernel/postrm.d/initramfs-tools",
+      "sha256": "8f5ac23f5b0fab071ddc302c3df769b07de0368267fd9cb635d507e2fec387ce"
+    },
+    {
+      "path": "/etc/kernel/postrm.d/zz-update-grub",
+      "sha256": "e35c9b73e608042a6a30ef3e9a053d61257cb0ed113a979d3e880e6618345e19"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "sha256": "e0af0a659b446532872f308dced2510c5b0282ccfc556a410c6ad86af4d6b5eb"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/config.yaml",
+      "sha256": "d7ce6f094f9090e97865b49eda5e4a0fa3d203c95e21e85798f0886cf235544d"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/config.yaml",
+      "sha256": "6547bdcc77aa2d6da2f30b1269a800c4af28fc23e7b6b5995624d1768577c257"
+    },
+    {
+      "path": "/root/.local/share/mgs-router-toolchain/go/bin/go",
+      "sha256": "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "sha256": "759fd44d90b85d4bb9d69cba0e4a179ea11c57d6740b3a8076bbc52f940a0c99"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "sha256": "883cd858d79d4bb7d093beb1a2a5cf0123eaf39cbe70e01b5c65482336721dee"
+    },
+    {
+      "path": "/usr/lib/needrestart/apt-pinvoke",
+      "sha256": "ee34cc66a524a871515f2aaf23e558f1f29382c499fd3918136f2371820df0ca"
+    },
+    {
+      "path": "/usr/sbin/needrestart",
+      "sha256": "1ecfa621b808bf68ef2745c5cbd2aceb6dff8e646965edf4928cb8d99f15d4e1"
+    }
+  ],
+  "pre_mutation_hashes": [
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-138.list",
+      "sha256": "9b8b8f74e0ad67ecb4de4af66672a648bb61b99668dc7e46dbda774ffd8fb51e"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-138.md5sums",
+      "sha256": "0906c8ecedd91852b4613106549d6e7ecdfcebe066f576bbbb881387ae7a52b6"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-138-generic.list",
+      "sha256": "9bc18dfeb5930364982155951390f8d19d2a4714eb5bfe0b0427de7ce584013f"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-138-generic.md5sums",
+      "sha256": "a8bdf467c3171cf041e45ce8f501f450644bcb557dcbc26129b222f80a087da9"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-138-generic.postinst",
+      "sha256": "7f8866353b7ff4c704529208c1afb96f62247b5c0173ed278153f9f80383d64d"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-142.list",
+      "sha256": "9250fcb7d6d88d1ac7be38640bc0d92601e84ca8ff08b215e75a8835e1d2d823"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-142.md5sums",
+      "sha256": "6281ae4dc904461f71e14788e3d9514793a3571e208e5a2e0971aec95ea7d172"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-142-generic.list",
+      "sha256": "03fe2bf66d5907a5f6fb098e9e5d0764a917d5038350c578b5414169cd8e7ea8"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-142-generic.md5sums",
+      "sha256": "ee4e082e05c944926cf319ab8f3ad0ff738fedeceb459888d7109fda9c218592"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-headers-6.8.0-142-generic.postinst",
+      "sha256": "77011981f443caaf0b15140a889a3dc5b71f743fb18d6058aced0852f5c9ea44"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.list",
+      "sha256": "1ecb18601512ab71effe060ef30887beb47e5e1273237fe1a68ce7e8ea01fc16"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.md5sums",
+      "sha256": "c1b310dbbb74960f384dd17f2f9d75a8a2deeedd835f1fad7dc8bb51aa3102f9"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.preinst",
+      "sha256": "7d7013b072c0879782f7a742c9ddc51953124e9a3174af963e21b8a10306e6c1"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.postinst",
+      "sha256": "774d55c589d8c6623b175897555abaea93020bc6404825e90def2432757219ea"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.prerm",
+      "sha256": "3dbf41ec2aaea2f755d1f85d9f8435474de966f405fd8776042b41e780c1b4a2"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.postrm",
+      "sha256": "489f136daae5abc156b5bfdcd37e148d3e5d70694d7759fb57271c748a8badac"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-138-generic.triggers",
+      "sha256": "a0b50c0dd604b397492995e452dc644afbd4f10ae0eb45832c9abafacc7ca882"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.list",
+      "sha256": "4a7819b5046b4b0a3cdc7c36bcd9de83a289350118490e336704f44565774bc5"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.md5sums",
+      "sha256": "1feb2450b283d615d98175987b549ca19723881e9517451bea1945483ae4e5b7"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.preinst",
+      "sha256": "335e80b0a0e495fb3e695b5e4ff0eed26ce530e4de09a19763440177367f2b18"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.postinst",
+      "sha256": "a07465e6d842e89e3a0c13d79c90621138948bbd7c9f037d0f810a0e14c28ea8"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.prerm",
+      "sha256": "e6419f4cecc232d2938c453de38373f0faa711e505ae7759beede457055f55b4"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.postrm",
+      "sha256": "cbcb3224f68f178e36554cb71f36b0ff7bbfbba3d8cb6fb444168970cc284267"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-image-6.8.0-142-generic.triggers",
+      "sha256": "04f7a3ae5509a7eb9174a8b9a4d2b94c582a8b5d68c52b87c84e082d02c3359f"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-138-generic.list",
+      "sha256": "bb21baac37e50b8f26925430992148cd4822b1a866a2a95f1a5d5ebe1045d0c0"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-138-generic.md5sums",
+      "sha256": "f0335e2501b0620328738ab37c40c219863262f76f0f9e80028c313dc8838795"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-138-generic.postinst",
+      "sha256": "c2f39a8e2155a4ab578ca7d3e8dc60d0b97338f1e52a8d41d91c2e1714ec3ebb"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-138-generic.postrm",
+      "sha256": "8b66fadf751d38cde118da4709076e965b9a0c45cd3a9b0c0b4ebca25f28bb14"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-142-generic.list",
+      "sha256": "cdc05ebdd6767b6a93319928cd4c9ced5e06a68675fa62b956f3ec1d14eae6b1"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-142-generic.md5sums",
+      "sha256": "1e0b0f8d015268f74f9bc3a6542cc82d1373e25cc5f6444de91e92666ee8d943"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-142-generic.postinst",
+      "sha256": "de294e2443cc89eaacec28818259937a47b45c46364af7cc7ecba5f4e3fe5b88"
+    },
+    {
+      "path": "/var/lib/dpkg/info/linux-modules-6.8.0-142-generic.postrm",
+      "sha256": "daeca28b472c4446e04999621fe8f912551461ea62356ceaa1608b073eab2504"
+    }
+  ],
+  "rollback_packages": [
+    {
+      "package": "linux-headers-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-headers-6.8.0-138_6.8.0-138.138_reconstructed.deb",
+      "sha256": "491684aa597cf9b827a3cf7fd8b29dc25fcbb272a7d69e7916b317118506e095",
+      "allocated": 22192128,
+      "members_verified": 16299,
+      "regular_payloads_verified": 16282,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-headers-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-headers-6.8.0-138-generic_6.8.0-138.138_reconstructed.deb",
+      "sha256": "b0b8480cd6a250517f92ac0c1495dc7e5dfeef13d0bbcbb9f30a2b4cd7311115",
+      "allocated": 9822208,
+      "members_verified": 10206,
+      "regular_payloads_verified": 9796,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-headers-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-headers-6.8.0-142_6.8.0-142.142_reconstructed.deb",
+      "sha256": "566ccbc5622cb619d9606b56e1c9946efaa5f38fa52c0d09edff27ce6b8fcd0f",
+      "allocated": 22196224,
+      "members_verified": 16298,
+      "regular_payloads_verified": 16281,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-headers-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-headers-6.8.0-142-generic_6.8.0-142.142_reconstructed.deb",
+      "sha256": "1aef193a3a2750f757838362760c8f26e074ff16743d8b00029b06c9c3909e32",
+      "allocated": 9826304,
+      "members_verified": 10206,
+      "regular_payloads_verified": 9796,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-image-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-image-6.8.0-138-generic_6.8.0-138.138_reconstructed.deb",
+      "sha256": "ffe7c4864a73e76fb5a01e9552ba46742597144c906f89159e5c3146485079e3",
+      "allocated": 14852096,
+      "members_verified": 3,
+      "regular_payloads_verified": 3,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-image-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-image-6.8.0-142-generic_6.8.0-142.142_reconstructed.deb",
+      "sha256": "98906e78ef4af5c9bd4156161f9e777d3f3f1df38d5fe64c12355d4f86ab9590",
+      "allocated": 14856192,
+      "members_verified": 3,
+      "regular_payloads_verified": 3,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-modules-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-modules-6.8.0-138-generic_6.8.0-138.138_reconstructed.deb",
+      "sha256": "7709887d5f28d657e4ae0c1129118f868b49ff80300efb76ed7e121d0453f5bf",
+      "allocated": 30466048,
+      "members_verified": 1024,
+      "regular_payloads_verified": 1021,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-modules-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback/linux-modules-6.8.0-142-generic_6.8.0-142.142_reconstructed.deb",
+      "sha256": "9a77c2bec4e66c86ba41af04d8914dde3bd7bfaeac5543a653032acb33d769d2",
+      "allocated": 30453760,
+      "members_verified": 1024,
+      "regular_payloads_verified": 1021,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    }
+  ],
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "potential_file_reclaim_by_device": {
+    "66304": 111058944,
+    "2049": 658587648
+  },
+  "potential_file_reclaim_bytes": 769646592,
+  "new_analysis_and_rollback_allocated_at_freeze": 207003648,
+  "estimated_net_from_start_of_this_review": 562642944,
+  "estimate_excludes_directory_blocks_and_future_git_growth": true,
+  "native_side_effects": [
+    "dpkg/APT installed-package metadata update",
+    "regenerated GRUB menu removing only retired versions",
+    "removal of retired initramfs files",
+    "cleanup of exactly listed generated module metadata and now-empty retired module roots"
+  ],
+  "service_restart_mode": "NEEDRESTART_MODE=l",
+  "no_autoremove": true,
+  "no_reboot": true,
+  "source_rollback_limitation": "Reconstructed installed-payload DEBs: every file/link was roundtrip-verified and local reinstall dependency simulation passed; actual package reinstallation/boot was not exercised. Retained active/fallback/pending kernels remain unchanged."
+}
