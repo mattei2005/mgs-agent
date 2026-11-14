@@ -4,6 +4,7 @@ Never changes candidates, scheduler history or delivery. Historical success is
 valid only for the exact native contract/slot and independently read artifacts.
 """
 from datetime import datetime
+import fcntl
 import hashlib
 import importlib.util
 import json
@@ -46,9 +47,18 @@ def local_validation(base=BASE):
         raise ValueError('Canonical candidate runner unavailable')
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
+    # Reuse the canonical lock without creating/truncating or taking a lease.
+    with runner.LOCK_PATH.open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
+        return _validate_locked(base, raw, runner)
+
+
+def _validate_locked(base, raw, runner):
     catalog = json.loads(raw)
-    bank = json.loads((base / 'data/utility-message-bank.json').read_text())
-    state = json.loads((base / 'data/sb-utility-candidate-approval-state.json').read_text())
+    bank_path = base / 'data/utility-message-bank.json'
+    state_path = base / 'data/sb-utility-candidate-approval-state.json'
+    bank_raw, state_raw = bank_path.read_bytes(), state_path.read_bytes()
+    bank, state = json.loads(bank_raw), json.loads(state_raw)
     all_candidates = [runner.formatted_candidate(c, v)
                       for v, items in catalog['candidates'].items() for c in items]
     for values in ([c['candidate_id'] for c in all_candidates],
@@ -79,6 +89,9 @@ def local_validation(base=BASE):
         raise ValueError('Original audit scope mismatch')
     if {v: r['available'] for v, r in event['coverage'].items()} != COVERAGE:
         raise ValueError('Original audit coverage mismatch')
+    if ((base / 'data/sb-utility-generated-candidates.json').read_bytes() != raw
+            or bank_path.read_bytes() != bank_raw or state_path.read_bytes() != state_raw):
+        raise ValueError('Concurrent reservoir inputs changed; retain pending verification')
     return {'catalog_sha256': CATALOG_SHA, 'available': available, 'candidate_id': CANDIDATE}
 
 

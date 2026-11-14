@@ -7517,6 +7517,16 @@
     },
     {
       "agent": "zeus",
+      "id": "automation-reservoir-recovery-673b5f8f33b370cfd870301d",
+      "next_step": "Supervisor dono 4082861 deve concluir worker; próximo tick natural deve recolher observação OK e GET original, completar mesma fila e entregar notificação canônica. Não editar fila/histórico ou executar reposição.",
+      "objective": "Fechar a mesma recuperação do reservatório Utility por recibo independente sem repetir reposição ou REPORT-INFRA original",
+      "source": "discord:1569193434189668453;operation:673b5f8f33b370cfd870301d;scripts/mgs_sb_reservoir_continuity.py;report:1571126195251187714",
+      "state": "receipt_adapter_deployed_and_live_verified",
+      "thread_id": "1535306062457081926",
+      "updated_at": "2026-11-14T12:11:19+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "b0015-connect-autoscan-20260926",
       "next_step": "Restaurar tarefas/acesso Facebook das 8 páginas ainda ausentes dos perfis; depois reconectar e disparar Auto Scan. Não repetir Auto Scan da Bruna sem nova instrução.",
       "objective": "Ignorar Tier 1 Loan e Greta Baumann; conectar as outras páginas B001-5 e disparar Auto Scan nas comprovadamente conectadas",
@@ -10397,5 +10407,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T11:33:19+00:00"
+  "updated_at": "2026-11-14T12:11:19+00:00"
 }
