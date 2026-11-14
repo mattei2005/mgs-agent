@@ -44,7 +44,17 @@ Drive e Sheets de produção MGS usam somente a Service Account `mgsagent@mgs-co
 
 Ares e Atena podem listar, confirmar, consultar ou operar somente domínios presentes em `/root/mgs-agent/data/mgs-domain-scope.json`. A ausência no registro significa bloqueio, nunca permissão implícita.
 
-Esta política se aplica quando o domínio é alvo operacional, destino de campanha/publicação, inventário, propriedade, hospedagem ou infraestrutura. Ela não transforma sites externos usados apenas como fonte pública de pesquisa em ativos MGS.
+Esta política se aplica quando o domínio é alvo operacional de consulta/administração de site, publicação no site, inventário, propriedade, hospedagem ou infraestrutura. Ela não transforma sites externos usados apenas como fonte pública de pesquisa em ativos MGS. Para Ares, URL fornecida pelo solicitante autorizado somente como parâmetro de destino de anúncio/campanha Meta não é domínio-alvo: aplica-se a exceção delimitada abaixo.
+
+### Ares — URL como dado de campanha, não administração de domínio
+
+Autoridade: Rodolfo Mattei, pedido `1571217766256742420`, confirmação crítica `1571230350749859881`, thread `1571217766256742420`. Esta decisão supersede somente a inclusão automática de todo destino de campanha no gate de domínio da Política 3 e da Política 4; Atena e os demais alvos permanecem inalterados.
+
+- Ares pode receber, repetir no pedido e usar no payload Meta a URL de destino fornecida por solicitante autorizado para campanha em conta autorizada, mesmo sem cadastro do host na SB ou na allowlist institucional. O alvo da operação é a conta/anúncio Meta, não o site. Não executar o checker de propriedade do domínio para decidir se esse campo pode ser utilizado.
+- Preservar literalmente a URL, caminho e UTMs; validar formato HTTP(S), host e ausência de credenciais sem navegar no site. URL malformada exige correção do campo, não a recusa de propriedade MGS. Não inventar, substituir ou normalizar tracking.
+- A URL pode integrar o request/journal/readback da campanha como dado operacional; isso não declara propriedade MGS nem permite cadastrá-la no registro de domínios, SB ou inventário institucional. Não copiar a URL para memória, SOUL ou skill como ativo autorizado.
+- Esta exceção não autoriza consultar ou alterar site, quiz, DNS, hospedagem, WordPress, Cloudflare, Router ou qualquer infraestrutura do destino, nem enumerar ativos externos. Se houver pedido dessas ações, aplicar os gates específicos de domínio e autoridade separadamente.
+- Permanecem identidade/permissão do solicitante, conta e partição autorizadas, gates de orçamento/estratégia/início, credenciais, billing e Critical Subset. Aceitar o campo não cria autorização de execução: exemplo ou pedido marcado como não executar permanece sem write Meta.
 
 ### Regras operacionais:
 
@@ -71,7 +81,7 @@ Esta política se aplica quando o domínio é alvo operacional, destino de campa
 
 Autoridade: Rodolfo Mattei, confirmação `1562127427151339701`. Fonte e snapshot positivos: `context/ares-asset-scope.md` e `data/ares/asset-scope.json`.
 
-Ares opera somente contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados no catálogo Smart Bidding. Executar `mgs-ares-asset-scope.py check-account` antes de consultas/escritas Meta e `mgs-domain-scope.py check --agent ares` antes de domínio/URL. Pedidos globais de produto não excepcionam esse limite. O override positivo de Ares no registro de domínios prevalece sobre a lista geral; Atena não muda.
+Ares opera somente contas de anúncio da BM Digital Trust (`155263197283282`) e, para operações sobre sites, hosts corporativos cadastrados no catálogo Smart Bidding. Executar `mgs-ares-asset-scope.py check-account` antes de consultas/escritas Meta e `mgs-domain-scope.py check --agent ares` antes de consultar/administrar domínio-alvo. URL recebida apenas como dado de destino de campanha segue a exceção da Política 3, confirmação `1571230350749859881`, sem inclusão do host no escopo de sites. Pedidos globais de produto não excepcionam os demais limites. O override positivo de Ares no registro de domínios prevalece sobre a lista geral; Atena não muda.
 
 O app minibot (`1299247318762949`) continua autorizado como dependência técnica; seu ownership em outro portfólio não autoriza contas ou domínios desse proprietário. Preservar app, credenciais, permissões, campanhas e budgets. Nenhuma alteração de permissão Meta foi autorizada neste cutover; exige confirmação separada com alvos exatos.
 

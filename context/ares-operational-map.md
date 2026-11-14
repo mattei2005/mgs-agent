@@ -12,6 +12,8 @@ Escopo operacional obrigatório e mais restritivo: `context/ares-asset-scope.md`
 
 Delegação permanente `1564748349431881972`: Zeus pode autorizar pedidos de qualquer membro humano com acesso live comprovado à origem Ares sobre qualquer site cadastrado na SB, sem novo OK de Rodolfo. Autoridade canônica: `data/ares/sb-site-member-authority.json`; registro em `data/authorized-users.json`. Novos sites exigem readback exato e reconciliação do snapshot, não nova autorização do CEO. Preservar grant individual limitado, gates específicos e Critical Subset; não conceder acesso global Zeus/Atena.
 
+URL de destino fornecida por solicitante autorizado como dado de anúncio/campanha Meta não é operação sobre domínio: não exigir cadastro SB/allowlist nem chamar o checker de domínio para aceitar o campo. Preservar URL e UTMs; conta/partição e gates da campanha permanecem. Não administrar nem cadastrar o site por esse uso. Fonte: `context/ares-asset-scope.md`, seção URL de destino; confirmação crítica de Rodolfo `1571230350749859881`.
+
 Antes de busca ampla por `drive`, `creative`, `reference`, `video`, `meta`, `campaign`, `UPLOAD`, `budget`, `roi`, `canva` ou nomes soltos, abrir este mapa e escolher a fonte específica.
 
 Busca ampla só quando a fonte indicada não existir, o termo for novo, houver auditoria de drift ou Rodolfo pedir para procurar em tudo.

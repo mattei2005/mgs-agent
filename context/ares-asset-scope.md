@@ -8,6 +8,14 @@ A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digita
 
 O app `minibot` (`1299247318762949`) permanece autorizado como dependência técnica, inclusive quando seu proprietário é outro portfólio. Ownership, aprovação, credencial ou capacidade técnica desse app não autorizam leitura/operação de contas, sites ou inventários do portfólio proprietário. Não revogar app, tokens ou permissões Meta neste cutover.
 
+## URL de destino como dado de campanha Meta
+
+Decisão vigente de Rodolfo Mattei: pedido `1571217766256742420`, confirmação crítica `1571230350749859881`, thread `1571217766256742420`. Supersede a leitura anterior que equiparava automaticamente URL de anúncio a operação sobre domínio; não amplia cadastro de sites, contas Meta nem escopo da Atena. Regra de segurança correspondente: `context/security-policies.md`, Política 3, exceção Ares.
+
+O alvo de criar/editar anúncio é a conta Meta autorizada. URL fornecida pelo solicitante autorizado apenas como campo de destino pode ser recebida, repetida, persistida no request/journal e usada no payload/readback da campanha mesmo sem cadastro do host na SB ou na allowlist. Não executar `mgs-domain-scope.py check` para autorizar esse campo. Validar formato HTTP(S), host e ausência de credenciais sem navegar; preservar literalmente caminho e UTMs, sem inferir propriedade ou cadastrar o host como ativo MGS.
+
+Isso não autoriza consulta/administração do site, quiz, DNS, WordPress, hospedagem, Cloudflare ou Router: essas ações continuam sujeitas ao gate de domínio e autoridade próprios. Conta/partição, solicitante, orçamento, estratégia, início, credenciais, billing e Critical Subset permanecem. Aceitar URL não autoriza executar um exemplo ou pedido marcado como não executar.
+
 ## Esclarecimento vigente — sites cadastrados na SB
 
 Rodolfo reafirmou na mensagem `1564745626388922459`, thread `1564744929660637264`: “os sites dentro da SB, podemos atuar”. O cadastro do host no catálogo corporativo Smart Bidding é critério suficiente de inclusão no escopo operacional do Ares; não exigir também cadastro editorial em `data/sites.json`, presença na allowlist geral da Atena ou outra comprovação independente de propriedade. Permanecem a validação do host exato no snapshot autorizado, a autoridade do solicitante e os gates da ação concreta.
@@ -40,7 +48,7 @@ Para alvo SB ainda ausente do snapshot, Zeus comprova a correspondência exata n
 ## Gate obrigatório anterior à ferramenta
 
 - Conta de anúncio: `python3 /root/mgs-agent/scripts/mgs-ares-asset-scope.py check-account <ID-ou-act_ID> --json`; exigir allowed=true antes de qualquer consulta de campanhas, gasto, billing, permissões ou write.
-- Domínio/URL: `python3 /root/mgs-agent/scripts/mgs-domain-scope.py check --agent ares <host-ou-URL>`; correspondência exata, www somente como alias e nenhum subdomínio implícito.
+- Domínio/URL como alvo de consulta/administração de site: `python3 /root/mgs-agent/scripts/mgs-domain-scope.py check --agent ares <host-ou-URL>`; correspondência exata, www somente como alias e nenhum subdomínio implícito. Não aplicar esse gate a URL usada somente como dado de destino de campanha Meta, conforme exceção acima; validar a conta Meta e a ação concreta.
 - Pedido global de Meta/SB não supera esse limite. Listar somente cadastros positivos locais aprovados; não enumerar outros portfólios ou provedores globais. Operação mista processa somente alvos permitidos, sem eco dos demais.
 - IDs não cadastrados falham fechado. Atualização do snapshot exige readback da BM/SB pelo Zeus e a autoridade vigente; nunca inferir inclusão pelo nome ou pelo proprietário do app.
 

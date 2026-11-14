@@ -6658,12 +6658,12 @@
     {
       "agent": "zeus",
       "id": "ares-campaign-destination-url-1571217766256742420",
-      "next_step": "Rodolfo confirmar ajuste delimitado da Politica 3 de security-policies.md; depois harmonizar fonte, SOUL vivo/mirror, validar contexto e retificar na origem. Sem campanhas de exemplo nem alteracao de allowlist.",
-      "objective": "Corrigir recusa indevida de URL como dado de campanha Meta; preservar escopo de sites e executor Ares",
+      "next_step": "Aplicar excecao delimitada de URL-dado; sincronizar fontes e SOUL; validar e retificar na origem sem criar campanhas",
+      "objective": "Corrigir recusa de URL como parametro de campanha; preservar escopo de sites e executor Ares",
       "source": "context/ares-asset-scope.md",
-      "state": "blocked_critical_confirmation",
+      "state": "applying_confirmed_1571230350749859881",
       "thread_id": "1571217766256742420",
-      "updated_at": "2026-11-14T17:41:01+00:00"
+      "updated_at": "2026-11-14T18:29:02+00:00"
     },
     {
       "agent": "ares",
@@ -10487,5 +10487,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T18:12:39+00:00"
+  "updated_at": "2026-11-14T18:29:02+00:00"
 }
