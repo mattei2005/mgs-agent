@@ -1,0 +1,25 @@
+{
+  "ts": "2026-11-14T13:43:31.122148-05:00",
+  "event": "hermes_runtime_exact_cleanup_started",
+  "actor": "zeus",
+  "confirmation_message_id": "1571231699172462614",
+  "question_message_id": "1571227762734141462",
+  "manifest_sha256": "a4a87b9230a8e38a8ff0cf847c0de071947d42aa9ec1990a8e0ee315b2da0bb6",
+  "verifier_sha256": "71bf2aed3d78997405c1d64902da91d0fafd2f89a94aae3c7dd4bbbc5d0377e8",
+  "executor_sha256": "b19f9899e2cbc37a366c963988eacd0c28011cbb6ac18df151fb89a982acc132",
+  "approval_receipt_sha256": "80d9aefc5757eba00d1f7d326b0163dcff44c8afa77dd329ba951d89e5f27516",
+  "targets": [
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c"
+  ],
+  "counts": {
+    "directories": 4489,
+    "regular_files": 62606,
+    "symlinks": 4
+  },
+  "disk_before": {
+    "used_bytes": 146286354432,
+    "available_bytes": 60597149696,
+    "used_percent": 70.70953049088524
+  }
+}

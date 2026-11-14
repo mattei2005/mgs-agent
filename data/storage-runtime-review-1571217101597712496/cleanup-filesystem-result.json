@@ -1,0 +1,28 @@
+{
+  "status": "filesystem_deletion_completed_postchecks_pending",
+  "confirmation_message_id": "1571231699172462614",
+  "question_message_id": "1571227762734141462",
+  "manifest_sha256": "a4a87b9230a8e38a8ff0cf847c0de071947d42aa9ec1990a8e0ee315b2da0bb6",
+  "removed_targets": [
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/clean-target-7cc3fb8c"
+  ],
+  "removed_target_count": 2,
+  "counts_removed": {
+    "directories": 4489,
+    "regular_files": 62606,
+    "symlinks": 4
+  },
+  "disk_before": {
+    "used_bytes": 146286354432,
+    "available_bytes": 60597149696,
+    "used_percent": 70.70953049088524
+  },
+  "disk_after_immediate": {
+    "used_bytes": 144493129728,
+    "available_bytes": 62390374400,
+    "used_percent": 69.84275055521164
+  },
+  "observed_reclaimed_bytes": 1793224704,
+  "completed_at": "2026-11-14T13:43:33.276702-05:00"
+}
