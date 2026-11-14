@@ -4,11 +4,13 @@ from pathlib import Path
 import sys
 import tempfile
 from typing import Any
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, '/root/mgs-agent/scripts')
 import mgs_sb_reservoir_continuity as m  # pyright: ignore[reportMissingImports]
+from mgs_automation_continuity import Queue  # pyright: ignore[reportMissingImports]
 
 
 class ReservoirReceiptTests(unittest.TestCase):
@@ -113,6 +115,97 @@ class ReservoirReceiptTests(unittest.TestCase):
             (base / 'data/sb-utility-generated-candidates.json').write_text('{}')
             with self.assertRaisesRegex(ValueError, 'catalog drift'):
                 m.local_validation(base)
+
+    def certificate_fixture(self, root):
+        q = Queue(Path(root) / 'queue.sqlite3')
+        source = {'kind': 'native', 'profile': 'zeus', 'job_id': m.JOB,
+                  'thread_id': m.THREAD, 'contract_hash': m.CONTRACT}
+        evidence = {'status': 'OK', 'verified': True, 'target': 'native:zeus:' + m.JOB,
+                    'source': source, 'slot': m.SLOT, 'evidence': copy.deepcopy(self.evidence),
+                    'receipt': f'reservoir:{m.KEY};catalog:{m.CATALOG_SHA};discord:{m.CHANNEL}/{m.REPORT}',
+                    'at': 1794658624.0897899}
+        row = q.enqueue('native:zeus:' + m.JOB, source, 'fixture', now=1794656223)
+        q.db.execute('UPDATE requests SET key=? WHERE key=?', (m.KEY, row['key']))
+        q.complete(m.KEY, evidence, now=1794658629.9883673)
+        self.addCleanup(q.close)
+        return q
+
+    def test_same_slot_certification_survives_later_inventory_consumption(self):
+        with tempfile.TemporaryDirectory() as root:
+            q = self.certificate_fixture(root)
+            self.assertEqual(m.certified_occurrence(q.path),
+                             {'request_key': m.KEY, 'verified_at': 1794658624.0897899})
+
+    def test_unfinished_foreign_or_owned_certificate_is_not_accepted(self):
+        with tempfile.TemporaryDirectory() as root:
+            q = self.certificate_fixture(root)
+            for field, value in (('state', 'running'), ('source_key', 'native:zeus:other'),
+                                 ('owner', 'another-writer')):
+                original = q.get(m.KEY)[field]
+                q.db.execute(f'UPDATE requests SET {field}=? WHERE key=?', (value, m.KEY))
+                self.assertIsNone(m.certified_occurrence(q.path))
+                q.db.execute(f'UPDATE requests SET {field}=? WHERE key=?', (original, m.KEY))
+
+    def test_missing_or_changed_independent_completion_event_fails_closed(self):
+        with tempfile.TemporaryDirectory() as root:
+            q = self.certificate_fixture(root)
+            q.db.execute("UPDATE events SET detail='{}' WHERE kind='completed_validated'")
+            self.assertIsNone(m.certified_occurrence(q.path))
+
+    def test_other_slot_or_contract_or_unverified_receipt_cannot_certify(self):
+        with tempfile.TemporaryDirectory() as root:
+            q = self.certificate_fixture(root)
+            original = json.loads(q.get(m.KEY)['evidence'])
+            for change in ({'slot': '2026-11-15T06:30:00-05:00'}, {'verified': False},
+                           {'receipt': 'worker said resolved'},
+                           {'source': original['source'] | {'contract_hash': 'changed'}}):
+                altered = original | change
+                q.db.execute('UPDATE requests SET evidence=? WHERE key=?',
+                             (json.dumps(altered), m.KEY))
+                q.db.execute("UPDATE events SET detail=? WHERE kind='completed_validated'",
+                             (json.dumps(altered),))
+                self.assertIsNone(m.certified_occurrence(q.path))
+
+    def local_fixture(self, root):
+        base = Path(root)
+        (base / 'data').mkdir()
+        (base / 'logs').mkdir()
+        candidates = [{'candidate_id': m.CANDIDATE if i == 0 else f'fixture-{i}',
+                       'text': f'fixture text {i}', 'text_cta_hash': f'fixture-hash-{i}'}
+                      for i in range(107)]
+        raw = json.dumps({'candidates': {'fixture': candidates}}).encode()
+        (base / 'data/sb-utility-generated-candidates.json').write_bytes(raw)
+        (base / 'data/utility-message-bank.json').write_text('{"records":{}}')
+        (base / 'data/sb-utility-candidate-approval-state.json').write_text('{}')
+        event = {'event': 'sb_utility_candidate_catalog_replenished',
+                 'ts': '2026-11-14T11:34:11.458931+00:00', 'source_thread_id': m.THREAD,
+                 'candidate_ids_added': [m.CANDIDATE], 'verticals_changed': {'US-JOB-ES': 1},
+                 'smart_bidding_templates_changed': False,
+                 'coverage': {v: {'available': n} for v, n in m.COVERAGE.items()}}
+        (base / 'logs/events-audit.jsonl').write_text(json.dumps(event) + '\n')
+        runner = SimpleNamespace(
+            formatted_candidate=lambda c, v: c,
+            repair=SimpleNamespace(normalized=lambda t: t.lower()),
+            select_catalog_candidates=lambda c, v, n, b, s, t:
+                [None] * (m.COVERAGE[v] - (1 if v == 'US-JOB-ES' else 0)))
+        return base, raw, runner
+
+    def test_live_shortfall_does_not_close_without_independent_certification(self):
+        with tempfile.TemporaryDirectory() as root:
+            base, raw, runner = self.local_fixture(root)
+            with patch.object(m, 'certified_occurrence', return_value=None):
+                with self.assertRaisesRegex(ValueError, 'without certified occurrence'):
+                    m._validate_locked(base, raw, runner)
+
+    def test_historical_inventory_is_labeled_separately_from_current_inventory(self):
+        with tempfile.TemporaryDirectory() as root:
+            base, raw, runner = self.local_fixture(root)
+            with patch.object(m, 'certified_occurrence', return_value={
+                    'request_key': m.KEY, 'verified_at': 1794658624.0897899}):
+                result = m._validate_locked(base, raw, runner)
+                self.assertEqual(result['available'], m.COVERAGE)
+                self.assertEqual(result['current_available']['US-JOB-ES'], 3)
+                self.assertEqual(result['certified_occurrence']['request_key'], m.KEY)
 
 
 if __name__ == '__main__':

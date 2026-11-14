@@ -7527,6 +7527,16 @@
     },
     {
       "agent": "zeus",
+      "id": "automation-reservoir-recovery-28380d05a695a1475cd9aef0",
+      "next_step": "Supervisor dono 4167062 deve recolher recibo independente após saída deste worker e fechar a operação atual. Não repetir geração, aprovação, relatório original nem editar histórico cron. Cobertura histórica 24/19/4 certificada; estoque atual 24/19/3 após ciclo US-JOB-ES 41 iniciado pelo dispatcher.",
+      "objective": "Reconciliar a mesma ocorrência já certificada do reservatório sem repetir reposição após consumo legítimo",
+      "source": "discord:1569193434189668453;operation:28380d05a695a1475cd9aef0;prior-completed:673b5f8f33b370cfd870301d;report:1571126195251187714;evidence:/root/.hermes/shared/automation-continuity/runs/28380d05a695a1475cd9aef0/consumption-reconciliation.json",
+      "state": "historical_receipt_reconciled_live_verified",
+      "thread_id": "1535306062457081926",
+      "updated_at": "2026-11-14T13:07:00+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "automation-reservoir-recovery-673b5f8f33b370cfd870301d",
       "next_step": "Supervisor dono 4082861 deve concluir worker; próximo tick natural deve recolher observação OK e GET original, completar mesma fila e entregar notificação canônica. Não editar fila/histórico ou executar reposição.",
       "objective": "Fechar a mesma recuperação do reservatório Utility por recibo independente sem repetir reposição ou REPORT-INFRA original",
@@ -10417,5 +10427,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T12:53:59+00:00"
+  "updated_at": "2026-11-14T13:07:00+00:00"
 }

@@ -4,11 +4,13 @@ Never changes candidates, scheduler history or delivery. Historical success is
 valid only for the exact native contract/slot and independently read artifacts.
 """
 from datetime import datetime
+from contextlib import closing
 import fcntl
 import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import sqlite3
 import subprocess
 import time
 
@@ -26,6 +28,44 @@ REPORT = '1571126195251187714'
 CHANNEL = '1498132022634483894'
 CANDIDATE = 'us-job-es-20261114-01'
 COVERAGE = {'US-CC-EN': 24, 'US-CC-ES': 19, 'US-JOB-ES': 4}
+QUEUE_DB = Path('/root/.hermes/shared/automation-continuity/queue.sqlite3')
+
+
+def certified_occurrence(path=QUEUE_DB):
+    """Read the independent, completed same-slot receipt, never worker text.
+
+    Later legitimate consumption is not failure of an already certified
+    replenishment. The current catalog hash and original report are still read
+    independently; this receipt cannot certify any later native occurrence.
+    """
+    with closing(sqlite3.connect(f'file:{path}?mode=ro', uri=True, timeout=15)) as db:
+        db.row_factory = sqlite3.Row
+        row = db.execute('SELECT * FROM requests WHERE key=?', (KEY,)).fetchone()
+        if (row is None or row['state'] != 'completed_validated'
+                or row['owner'] is not None or row['source_key'] != 'native:zeus:' + JOB):
+            return None
+        source = json.loads(row['source'])
+        evidence = json.loads(row['evidence'] or '{}')
+        expected_source = {'kind': 'native', 'profile': 'zeus', 'job_id': JOB,
+                           'thread_id': THREAD, 'contract_hash': CONTRACT}
+        expected_receipt = f'reservoir:{KEY};catalog:{CATALOG_SHA};discord:{CHANNEL}/{REPORT}'
+        if (any(source.get(k) != v for k, v in expected_source.items())
+                or evidence.get('source') != expected_source
+                or evidence.get('status') != 'OK' or evidence.get('verified') is not True
+                or evidence.get('target') != 'native:zeus:' + JOB
+                or evidence.get('slot') != SLOT or evidence.get('receipt') != expected_receipt
+                or evidence.get('evidence') != {'catalog_sha256': CATALOG_SHA,
+                                               'candidate_id': CANDIDATE,
+                                               'available': COVERAGE}
+                or not (datetime.fromisoformat(LAST_RUN).timestamp()
+                        <= float(evidence.get('at', 0)) <= row['updated'] <= time.time())):
+            return None
+        events = db.execute("SELECT at,detail FROM events WHERE request_key=? AND kind='completed_validated'",
+                            (KEY,)).fetchall()
+        if (len(events) != 1 or events[0]['at'] != row['updated']
+                or json.loads(events[0]['detail']) != evidence):
+            return None
+        return {'request_key': KEY, 'verified_at': evidence['at']}
 
 
 def scope(job):
@@ -67,16 +107,20 @@ def _validate_locked(base, raw, runner):
         if len(values) != 107 or len(set(values)) != 107 or not all(values):
             raise ValueError('Recovered catalog uniqueness mismatch')
     available = {}
-    for vertical, required in COVERAGE.items():
+    certified = None
+    for vertical in COVERAGE:
         selected = runner.select_catalog_candidates(catalog, vertical, 10000, bank, state, set())
         available[vertical] = len(selected)
-        if len(selected) < required:
-            raise ValueError('Recovered candidate coverage changed: ' + vertical)
     added = [c for c in all_candidates if c['candidate_id'] == CANDIDATE]
     bank_texts = {runner.repair.normalized(r.get('text', '')) for r in bank['records'].values()}
-    if (len(added) != 1 or added[0]['text_cta_hash'] in bank['records']
+    if len(added) != 1:
+        raise ValueError('Original candidate missing or ambiguous')
+    if (any(available[v] < n for v, n in COVERAGE.items())
+            or added[0]['text_cta_hash'] in bank['records']
             or runner.repair.normalized(added[0]['text']) in bank_texts):
-        raise ValueError('Original candidate no longer eligible')
+        certified = certified_occurrence()
+        if certified is None:
+            raise ValueError('Recovered candidate eligibility changed without certified occurrence')
     events = [json.loads(line) for line in (base / 'logs/events-audit.jsonl').read_text().splitlines()
               if 'sb_utility_candidate_catalog_replenished' in line
               and '2026-11-14T11:34:11.458931+00:00' in line]
@@ -92,7 +136,11 @@ def _validate_locked(base, raw, runner):
     if ((base / 'data/sb-utility-generated-candidates.json').read_bytes() != raw
             or bank_path.read_bytes() != bank_raw or state_path.read_bytes() != state_raw):
         raise ValueError('Concurrent reservoir inputs changed; retain pending verification')
-    return {'catalog_sha256': CATALOG_SHA, 'available': available, 'candidate_id': CANDIDATE}
+    result = {'catalog_sha256': CATALOG_SHA, 'available': available, 'candidate_id': CANDIDATE}
+    if certified is not None:
+        result.update(available=dict(COVERAGE), current_available=available,
+                      certified_occurrence=certified)
+    return result
 
 
 def read_local(base):
