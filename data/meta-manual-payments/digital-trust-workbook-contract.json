@@ -175,8 +175,16 @@
   },
   "pending_card_history": {
     "status": "waiting_human_meta_passkey_new_event_pending",
-    "account_ids": ["1414197490675732"],
-    "pending_ui": [{"account_id": "1414197490675732", "name": "Mavroa-US-SHEIN-ES-02-G002", "reason": "new_generic_payment_since_pc1_proof"}],
+    "account_ids": [
+      "1414197490675732"
+    ],
+    "pending_ui": [
+      {
+        "account_id": "1414197490675732",
+        "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
     "historical_blank_count": 39,
     "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T1402/recovery-validation.json"
   },
@@ -281,7 +289,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261113T141012053711",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261113T210538824736",
   "pay_now_rule_authority_message": "1570815017794674749",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",
