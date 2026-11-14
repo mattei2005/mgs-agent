@@ -6467,6 +6467,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-VPS-RETIRE-1571196199548092428",
+      "next_step": "Conferir mesmoshashes/preflight/retidos/smokes;executar36alvosumavezcomjournal;validar ausenciae recuperacaoposexclusao;report/inventory/Git.",
+      "objective": "Executar uma vez o lote de35pastas+latest.path confirmado1571196199548092428,manifestof5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91;preservarconsolidadoeoperacao.",
+      "source": "discord:1569928464033783862/1571196199548092428;data/storage-vps-preservation-1571190519713759264/deletion-manifest.json",
+      "state": "approved_preflight_in_progress",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T16:14:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-VPS-1555704911805808712",
       "next_step": "Nenhum no escopo de update/reboot; ocorrência histórica do validador corrigida e preservada; sosreport faseado",
       "objective": "Atualizar somente VPS: pacotes APT/npm, backup, reboot validado; Hermes inalterado",
@@ -10447,5 +10457,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T16:08:49+00:00"
+  "updated_at": "2026-11-14T16:14:10+00:00"
 }
