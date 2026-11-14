@@ -896,8 +896,8 @@
       "id": "storage-system-review-1571271327648587799",
       "agent": "zeus",
       "type": "readonly_exhaustive_system_storage_review_and_frozen_retirement_lot",
-      "status": "prepared_validated_waiting_new_critical_confirmation_parent_open",
-      "updated_at": "2026-11-14T17:02:14.701850-05:00",
+      "status": "approved_lot_completed_validated_remaining_review_open",
+      "updated_at": "2026-11-14T17:23:26.800895-05:00",
       "source_thread_id": "1569928464033783862",
       "authority_message_id": "1571271327648587799",
       "canonical_source": "context/storage-reorganization-20261112.md",
@@ -905,7 +905,34 @@
       "manifest": "data/storage-system-review-1571271327648587799/system-lot.json",
       "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
       "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
-      "verification": {
+      "excluded_old_version_auxiliary_packages": [
+        {
+          "package": "linux-tools-6.8.0-138",
+          "live_status": "ii  6.8.0-138.138"
+        },
+        {
+          "package": "linux-tools-6.8.0-138-generic",
+          "live_status": "ii  6.8.0-138.138"
+        },
+        {
+          "package": "linux-tools-6.8.0-142",
+          "live_status": "ii  6.8.0-142.142"
+        },
+        {
+          "package": "linux-tools-6.8.0-142-generic",
+          "live_status": "ii  6.8.0-142.142"
+        }
+      ],
+      "skill_reference_mirror_sha256": "abf38cb9e09932c94f2150f08d1c4fdbd3ad75e7489e58483e23484ab620dab2",
+      "remaining_categories": [
+        "5_auxiliary_tools_other_roots_and_temporaries",
+        "6_data_and_work",
+        "7_caches_and_managed_stores",
+        "8_git",
+        "producer_recurrence"
+      ],
+      "policy": "Confirmed8 core packages and29 downloads removed once. Shared structural /lib preserved; validator-only failure reconciled without mutation retry. Remaining categories stay open.",
+      "preparation_verification": {
         "persistent_filesystems_scanned": [
           "/",
           "/boot",
@@ -927,33 +954,67 @@
         "approval_exists": false,
         "execution_start_exists": false
       },
-      "excluded_old_version_auxiliary_packages": [
-        {
-          "package": "linux-tools-6.8.0-138",
-          "live_status": "ii  6.8.0-138.138"
+      "confirmation_message_id": "1571285972589477891",
+      "latest_cleanup_result": "data/storage-system-review-1571271327648587799/cleanup-result.json",
+      "verification": {
+        "status": "completed_validated",
+        "confirmation_message_id": "1571285972589477891",
+        "question_message_id": "1571285763813806183",
+        "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
+        "executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+        "exact_packages_removed": 8,
+        "download_files_removed": 29,
+        "version_specific_payload_nodes_absent": 55081,
+        "shared_usrmerge_lib_preserved": true,
+        "out_of_scope_auxiliary_packages_preserved": 4,
+        "protected_hashes_unchanged": 47,
+        "configs_passed": 3,
+        "smokes_passed": 3,
+        "same_gateway_pids": true,
+        "same_boot_id": true,
+        "new_critical_journal_events": 0,
+        "observed_immediate_available_delta_by_filesystem": {
+          "/": 704172032,
+          "/boot": 111063040,
+          "/boot/efi": 0
         },
-        {
-          "package": "linux-tools-6.8.0-138-generic",
-          "live_status": "ii  6.8.0-138.138"
-        },
-        {
-          "package": "linux-tools-6.8.0-142",
-          "live_status": "ii  6.8.0-142.142"
-        },
-        {
-          "package": "linux-tools-6.8.0-142-generic",
-          "live_status": "ii  6.8.0-142.142"
-        }
-      ],
-      "skill_reference_mirror_sha256": "da33fe288a70a05ca6634befb45e30b0f91a660bf708a0b35df19f51bf72fe7e",
-      "remaining_categories": [
-        "5_auxiliary_tools_other_roots_and_temporaries",
-        "6_data_and_work",
-        "7_caches_and_managed_stores",
-        "8_git",
-        "producer_recurrence"
-      ],
-      "policy": "Do not close for healthy headroom; exact frozen-lot confirmation still required; core-kernel lot does not include four versioned auxiliary linux-tools packages."
+        "observed_immediate_available_delta_bytes": 815235072,
+        "observed_immediate_available_delta_GiB": 0.759,
+        "initial_estimated_net_bytes": 562642944,
+        "analysis_preservation_at_freeze_bytes": 207003648,
+        "global_df_delta_not_exclusive_attribution": true,
+        "later_filesystem_observation": [
+          {
+            "mount": "/",
+            "used_bytes": 141604339712,
+            "available_bytes": 65279164416,
+            "available_GiB": 60.8,
+            "used_percent": 68.45
+          },
+          {
+            "mount": "/boot",
+            "used_bytes": 177905664,
+            "available_bytes": 680607744,
+            "available_GiB": 0.63,
+            "used_percent": 20.72
+          },
+          {
+            "mount": "/boot/efi",
+            "used_bytes": 6399488,
+            "available_bytes": 102995968,
+            "available_GiB": 0.1,
+            "used_percent": 5.85
+          }
+        ],
+        "original_executor_returncode": 1,
+        "postcheck_failure_recovered_without_new_mutation": "Shared /lib usr-merge alias was a structural witness rather than disposable payload. Original helper left it intact; separate corrected collector passed. Native purge was not repeated.",
+        "rollback_archive_readback_after_source_absence": true,
+        "actual_rollback_reinstallation_or_boot_exercised": false,
+        "no_autoremove_or_restart_or_reboot": true,
+        "parent_review_complete": false,
+        "next_step": "read-only review of four auxiliary linux-tools packages and other point5 residues; then6data7caches8Git and recurrence",
+        "validated_at": "2026-11-14T17:18:40.793540-05:00"
+      }
     },
     {
       "id": "runtime-code-retirement-1571265639241224325",

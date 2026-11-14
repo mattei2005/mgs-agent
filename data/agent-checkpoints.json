@@ -6488,12 +6488,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lote de sistema preparado em ZEUS-STORAGE-SYSTEM-1571271327648587799, aguardando nova confirmacao critica; nenhuma exclusao de sistema. Preservar restantes5 e categorias6-8 ate concluir provas e gates proprios.",
-      "objective": "Concluir revisao exaustiva de ocupacao inutil: pontos5-8 e produtores; espaco livre/urgencia nao encerram a iniciativa.",
-      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571271327648587799",
+      "next_step": "Lote de sistema8+29 confirmado1571285972589477891 concluido e validado; continuar restante5 e categorias6-8 com gates proprios. Proximo somente leitura:4 linux-tools, roots legados e temporarios; nenhuma nova exclusao autorizada.",
+      "objective": "Concluir revisao exaustiva do disco ate classificar toda ocupacao inutil; nao encerrar por espaco livre/urgencia.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-system-review-1571271327648587799/cleanup-result.json;discord:1569928464033783862/1571285972589477891",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T22:02:15+00:00"
+      "updated_at": "2026-11-14T22:23:28+00:00"
     },
     {
       "agent": "zeus",
@@ -6548,12 +6548,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Native purge8 e downloads29 ja ausentes. Nao reexecutar executor nem remover /lib: falha de poscheck inclui alias usr-merge compartilhado intacto. Validar coletor complementar, arquivos de rollback somente retidos,47 hashes,3smokes,disco e governanca. Continuar demais categorias apos fechamento.",
-      "objective": "Concluir o lote aprovado8 pacotes de boot e29 downloads, preservar o restante e manter revisao exaustiva aberta.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-system-review-1571271327648587799/postcheck-diagnostic.json;discord:1569928464033783862/1571285972589477891",
-      "state": "approved_mutation_landed_validating_usrmerge_postcheck",
+      "next_step": "Leitura dos4 linux-tools iniciada em next-point5-review.json: payload stock54 nos,0consumidores vivos, ainda sem fechamento consumidores estaticos/rollback/manifesto. Outros roots e temporarios5 seguem; nao excluir ate nova prova e confirmacao exata. Depois6dados7caches8Git e recorrencia.",
+      "objective": "Concluir ponto5 sistema/demais arquivos sem apagar material nao comprovado. Lote8+29 encerrado, revisao restante continua.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-system-review-1571271327648587799/cleanup-result.json;data/storage-system-review-1571271327648587799/next-point5-review.json",
+      "state": "in_progress_remaining_point5_readonly_review",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T22:15:57+00:00"
+      "updated_at": "2026-11-14T22:23:27+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-SYSTEM-LOT-1571285972589477891",
+      "next_step": "Nenhuma nova aprovacao ou reexecucao deste lote. Fontes: cleanup-result e poscoletor corrigido; /lib estrutural preservado. Continuar revisao global no checkpoint de sistema original.",
+      "objective": "Executar e validar somente o lote8 pacotes de boot e29 downloads confirmado por Rodolfo.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-system-review-1571271327648587799/cleanup-result.json;discord:1569928464033783862/1571285972589477891",
+      "state": "completed_validated",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T22:23:27+00:00"
     },
     {
       "agent": "zeus",
@@ -10607,5 +10617,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T22:15:57+00:00"
+  "updated_at": "2026-11-14T22:23:28+00:00"
 }

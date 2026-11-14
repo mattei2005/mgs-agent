@@ -13,7 +13,8 @@
     {
       "id": "S5-KERNEL-APT-GO",
       "class": "eligible_under_current_policy",
-      "state": "frozen_waiting_exact_critical_confirmation",
+      "state": "completed_validated_confirmation_1571285972589477891",
+      "result": "cleanup-result.json",
       "origin": "pre_existing_residue",
       "packages": 8,
       "download_files": 29,
@@ -64,6 +65,11 @@
   ],
   "producer_recurrence_status": "not_closed_no_automatic_cleanup_enabled",
   "analysis_created_artifacts": "207003648 bytes at freeze, including reconstructed kernel rollback; non-additive with source residue; subsequent governance/Git growth excluded from net estimate",
-  "deletions_this_phase": 0,
-  "packages_installed_or_removed": 0
+  "deletions_this_phase": 29,
+  "deletion_count_unit": "explicit download files; native package payload removals recorded separately",
+  "kernel_packages_removed": 8,
+  "kernel_payload_file_or_link_nodes_absent": 55081,
+  "shared_structural_lib_alias_preserved": true,
+  "packages_installed_or_removed": 8,
+  "package_installations": 0
 }
