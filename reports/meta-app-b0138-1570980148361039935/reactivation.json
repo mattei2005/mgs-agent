@@ -1,0 +1,37 @@
+{
+  "reactivated_at": "2026-11-13T21:39:34.077157-05:00",
+  "authorized_by": "344196393512075265",
+  "source_message_ids": [
+    "1570980148361039935",
+    "1570986493059793000"
+  ],
+  "jobs": [
+    {
+      "id": "498fb0d95e10",
+      "enabled": true,
+      "state": "scheduled",
+      "last_run_at": "2026-11-13T00:57:17.075832-05:00",
+      "last_status": "ok",
+      "next_run_at": "2026-11-13T08:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/9 0,8-23 * * *",
+        "display": "2-59/9 0,8-23 * * *"
+      }
+    },
+    {
+      "id": "f42618f5ced7",
+      "enabled": true,
+      "state": "scheduled",
+      "last_run_at": "2026-11-13T02:32:38.690558-05:00",
+      "last_status": "ok",
+      "next_run_at": "2026-11-13T02:42:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/10 1-7 * * *",
+        "display": "2-59/10 1-7 * * *"
+      }
+    }
+  ],
+  "channel_id": "1522830283240505385"
+}
