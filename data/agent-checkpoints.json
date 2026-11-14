@@ -9718,12 +9718,22 @@
     {
       "agent": "ares",
       "id": "shein-1571236664389537833",
-      "next_step": "Validar plano e executar pelo Engine v3 com QA global e readback integral",
+      "next_step": "Entregar conclusao nativa com valores literais de utm_adgroup e utm_campaign para Iris; nenhuma nova mutacao Meta",
       "objective": "Duplicar C290 quatro vezes na Yolokfx 04 G004 com USD150 por dia por campanha e COCAP USD0.90, inicio imediato",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571236664389537833/request.json",
-      "state": "intake registrado; scope permitido; lease anterior concluida; preflight e plano em validacao",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571236664389537833/final-verification.json",
+      "state": "complete: c292 c293 c294 c295 criadas e active; quatro conjuntos e 12 anuncios configurados active; usd150/dia cada, delta usd600/dia, cocap usd0.90; qa semantico e renderizado integral; ids iguais ao checkpoint; nove anuncios pending_review no get final; posts novos; budget ativo da conta usd2717.88/dia",
       "thread_id": "1558131278589460584",
-      "updated_at": "2026-11-14T18:54:48+00:00"
+      "updated_at": "2026-11-14T19:01:16+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-1571238720177180733",
+      "next_step": "Entregar conclusao nativa e bloco Iris com tracking verificado; nenhuma nova mutacao Meta",
+      "objective": "Duplicar C289 duas vezes na Yolokfx 04 G004, USD150/dia cada, Cost per result goal USD0.90 e inicio imediato",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571238720177180733/final-verification.json",
+      "state": "complete: c296 e c297 active com dois conjuntos e seis anuncios habilitados; usd150/dia cada, delta usd300/dia, cocap usd0.90; qa semantico e renderizado integral; ids preservados; meta ainda processando ou analisando anuncios; posts novos; budget ativo da conta usd3017.88/dia",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-14T19:05:26+00:00"
     },
     {
       "agent": "ares",
@@ -10507,5 +10517,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T18:54:48+00:00"
+  "updated_at": "2026-11-14T19:05:26+00:00"
 }
