@@ -135,11 +135,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         profiles = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
         profile, reference = configure(request, profile, profiles, op, driver.lookup_account)
         profile['reference_profile'] = reference
-    scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',profile['destination_base']],capture_output=True,timeout=20)
-    if scope.returncode!=0:raise ValueError('operational domain scope rejected')
-    if request.get('source_account'):
-        scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',reference['destination_base']],capture_output=True,timeout=20)
-        if scope.returncode!=0:raise ValueError('operational domain scope rejected')
+    driver.validate_request_destinations(request, profile)
     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
     if request.get('source_account'):
         marker = driver.CURRENT_PROFILE.set(profile)

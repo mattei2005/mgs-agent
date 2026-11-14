@@ -221,11 +221,7 @@ def authorize_queue_request(request, base=BASE):
     profile = {**profile, 'channel_authorization_policy': operation['channel_authorization_policy']}
     authorize(request, profile, force=True)
     driver.validate_request(driver.apply_request_defaults(copy.deepcopy(request), operation))
-    scope = subprocess.run([sys.executable, str(base / 'scripts/mgs-domain-scope.py'),
-                            'check', '--agent', 'ares', profile['destination_base']],
-                           capture_output=True, timeout=20)
-    if scope.returncode:
-        raise ValueError('queue operational domain scope rejected')
+    driver.validate_request_destinations(request, profile)
     return account
 
 

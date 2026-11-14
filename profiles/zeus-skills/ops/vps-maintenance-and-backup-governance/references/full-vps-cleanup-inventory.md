@@ -113,6 +113,8 @@ Use this order:
 
 If anything writes the result after step 4, recompute the checksum and replace the inventory/audit receipt before closure. Never leave an intermediate checksum labeled as final.
 
+Separate result-producing collectors from read-only receipt verification. Before a collector opens an existing result for writing, reject reruns when that result is already sealed with verified transport/closure evidence; otherwise a later validation can silently reset report status, timestamps and the inventory-bound checksum. Exercise this guard after sealing: require its explicit refusal and identical external SHA-256 values before and after, without replaying the operation. Put subsequent health observations or Git-delivery receipts in separate artifacts, and use a reader—not the original result-producing collector—to verify the completed receipt.
+
 Render confirmation/question message IDs and the manifest identifier in closure documentation directly from the native approval receipt, rather than retyping them. Build report target/path fields from the frozen manifest as well: shortening a directory name into a nonexistent path is not a valid summary. Assert exact identifiers and target values before publication/versioning. Correct a documentation-only error from native evidence without replaying the filesystem action or rewriting approval; if an already-posted owned report needs correction, update that same message, preserve its silent embed-only delivery and read back the exact fields again before sealing the result. Do not send a duplicate report to repair a field.
 
 ### 3.4 No-tool profile availability smoke

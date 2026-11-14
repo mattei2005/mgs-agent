@@ -4724,6 +4724,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-DIGITALTRUST-RUNTIME-MIGRATION-1571245557316452364",
+      "next_step": "Confirmar autor nativo;preservar scripts/checkpoints/crons;validar mudanca isolada antes de aplicar e testar gates bloqueados com dispatch proibido.",
+      "objective": "Migrar apenas dependencia tecnica do auxiliar DigitalTrust para runtime atual;sem executar lote49/PC1/Meta,sem cron/campanha/exclusao/restart.",
+      "source": "data/storage-conditional-runtime-review-1571239570069131275/review-result.json",
+      "state": "in_progress_preflight",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T19:29:26+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-DOWNLOAD-PROTECTION-1556452175473803376",
       "next_step": "Nao repetir instalacao; SMSownership/linkintegrity e retencao financeira continuam frentes distintas; nao excluir18diretorios",
       "objective": "Instalar item5 nos2runners/helperAtena sem CTA/SMS/exclusoes",
@@ -10527,5 +10537,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T19:18:08+00:00"
+  "updated_at": "2026-11-14T19:29:26+00:00"
 }

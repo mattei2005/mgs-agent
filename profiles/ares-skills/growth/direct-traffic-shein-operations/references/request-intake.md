@@ -9,6 +9,10 @@ Use ao converter pedidos naturais em input do runner comum. Para mídia, autorid
 3. Reúna todas as partes de uma correção dividida em mensagens antes de executar. Antes de selar o manifest, incorpore somente os campos corrigidos ao input e registre a supersessão. Depois de selado ou de qualquer write, preserve documentos e IDs imutáveis e use a recuperação central aplicável; não sobrescreva manifests históricos.
 4. Aplique a correção ao campo explicitamente indicado. Texto fornecido em `headline` continua sendo headline, mesmo que o operador o chame informalmente de botão. Preserve-o literalmente e mantenha a CTA nativa e os demais textos quando não houver outra alteração expressa.
 
+### Descrição expressa em grupos de mídia
+
+Aceite `campaign_groups[].description` como string não vazia e preserve literalmente em `video_data.link_description` ou `link_data.description` dos novos anúncios. Sem o campo, herde a descrição viva da fonte; headline, Primary text e CTA nativa continuam independentes. Esta regra supersede a limitação histórica de grupo com somente headline opcional em `general-campaign-fast-route.md`. Não descarte a descrição solicitada para contornar rejeição de schema nem altere a campanha-fonte. Verificação: `tests/test_shein_group_description.py` cobre vídeo/imagem, referência entre contas, espaços literais, tipos inválidos, herança por omissão e fonte imutável.
+
 ### Cancelamento durante o intake e pedido posterior
 
 1. Ao receber cancelamento explícito durante a preparação, interrompa o avanço antes do próximo passo mutável. Use o estágio efetivamente executado para delimitar o efeito: se houve somente leitura, ajuda de CLI ou dry-run sem entrada no writer, confirme brevemente que a duplicação não foi executada. Não rode execute apenas para encerrar o pedido.
@@ -33,6 +37,8 @@ Use ao converter pedidos naturais em input do runner comum. Para mídia, autorid
 - Sem alteração de lance pedida, preserve a herança da fonte real; a tradução de aliases não autoriza inventar um cap.
 
 ## 3. Escolher o preflight correto
+
+URL explícita de destino Meta é dado da campanha, não alvo de administração de site: conforme `context/ares-asset-scope.md` e confirmação `1571230350749859881`, valide HTTP(S), host e ausência de credenciais sem navegar nem exigir cadastro SB/allowlist. Preserve URL/caminho/UTMs literais e todos os gates de conta/partição/autoridade. Na referência entre contas, não confunda o host do perfil histórico com uma restrição de propriedade do destino solicitado; `tests/test_shein_campaign_destination_data.py` verifica essa separação e a rejeição de campos malformados. Esta regra supersede menções históricas de gate de domínio para esse campo, sem liberar qualquer consulta/administração do site.
 
 - **Referência explícita entre contas:** use `reference-preflight --input <request.json> --dry-run`, com `source_account`, antes da preparação. Esse subcomando verifica o contrato de referência entre contas; não é o preflight genérico de clones na mesma conta.
 - **Clone na mesma conta com grupos de arquivos do gestor:** confira admissão/lease e resolva a pasta canônica; execute `prepare-media --input <request.json> --confirm-execute`. Depois use `campaign --input <request-ready.json> --dry-run`; somente com plano aprovado execute o mesmo `campaign --confirm-execute`.

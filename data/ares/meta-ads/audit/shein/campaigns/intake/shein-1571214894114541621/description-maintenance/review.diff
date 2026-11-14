@@ -1,0 +1,39 @@
+--- shein_grouped_media.py.before
++++ shein_grouped_media.py
+@@ -26,10 +26,12 @@
+     files=[]
+     for g in groups:
+         required = {'files','product_label','primary_text'}
+-        if not isinstance(g,dict) or not required <= set(g) or set(g) - (required | {'headline'}):
+-            raise ValueError('group requires files, product_label, primary_text and permits optional headline only')
++        if not isinstance(g,dict) or not required <= set(g) or set(g) - (required | {'headline','description'}):
++            raise ValueError('group requires files, product_label, primary_text and permits optional headline/description only')
+         if 'headline' in g and (not isinstance(g['headline'],str) or not g['headline'].strip()):
+             raise ValueError('optional group headline must be a nonempty literal string')
++        if 'description' in g and (not isinstance(g['description'],str) or not g['description'].strip()):
++            raise ValueError('optional group description must be a nonempty literal string')
+         if not isinstance(g['files'],list) or not 1<=len(g['files'])<=5:
+             raise ValueError('group requires one through five media files')
+         if not all(isinstance(g[k],str) and g[k].strip() for k in ['product_label','primary_text']):
+--- shein_general.py.before
++++ shein_general.py
+@@ -94,6 +94,8 @@
+             child['_primary_text'] = group['primary_text']
+             if 'headline' in group:
+                 child['_headline'] = group['headline']
++            if 'description' in group:
++                child['_description'] = group['description']
+             one = _build_one(child, source, number+offset, account_config)
+             payload = payload or one; campaigns.extend(one['campaigns'])
+         payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
+@@ -261,7 +263,9 @@
+                 vd.update(video_id=asset['vertical_video_id'], image_url=asset['thumbnail_url'])
+             if not vd['title']:
+                 raise ValueError('copy headline missing')
+-            if media.get('link_description') or media.get('description'):
++            if '_description' in request:
++                vd['link_description'] = request['_description']
++            elif media.get('link_description') or media.get('description'):
+                 vd['link_description'] = media.get('link_description') or media['description']
+             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
+                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},

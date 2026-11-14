@@ -12,6 +12,22 @@ from urllib.parse import parse_qsl, urlparse
 RODOLFO = '344196393512075265'
 
 
+def validate_destination(value):
+    """Validate a literal Meta field, without asserting site ownership/access."""
+    if not isinstance(value, str) or not value or any(c.isspace() or ord(c) < 32 for c in value):
+        raise ValueError('invalid literal campaign destination URL')
+    try:
+        url = urlparse(value)
+        port = url.port
+        if (url.scheme not in {'http', 'https'} or not url.hostname
+                or url.username is not None or url.password is not None
+                or (port is not None and not 1 <= port <= 65535)):
+            raise ValueError('invalid literal campaign destination URL')
+    except ValueError:
+        raise ValueError('invalid literal campaign destination URL') from None
+    return url
+
+
 def validate_intent(request):
     if 'source_account' not in request:
         if 'source_campaign_id' in request or 'website_url' in request:
@@ -41,10 +57,7 @@ def target_profile(request, target, source, policy):
             raise ValueError('reference partition, language or currency mismatch')
     if target['currency'] != 'USD' or not target.get('page_id') or not target.get('pixel_id'):
         raise ValueError('approved target Page/pixel/currency unavailable')
-    url = urlparse(request['website_url'])
-    if (url.scheme != 'https' or url.username or url.password or url.fragment
-            or url.port not in {None, 443} or url.hostname != target.get('operational_domain', urlparse(target.get('destination_base', '')).hostname)):
-        raise ValueError('literal target Website URL identity mismatch')
+    url = validate_destination(request['website_url'])
     if not re.fullmatch(r'/quiz/us/sh[123]-' + target['manager_code'].lower() + r'/', url.path):
         raise ValueError('literal target quiz/manager route mismatch')
     pairs = parse_qsl(url.query, keep_blank_values=True)

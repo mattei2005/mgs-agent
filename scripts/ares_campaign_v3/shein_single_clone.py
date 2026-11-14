@@ -816,6 +816,22 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
         CURRENT_PROFILE.reset(marker)
 
 
+def validate_request_destinations(request, profile):
+    # Rodolfo 1571230350749859881: an explicit Meta URL is data, not a site target.
+    if request.get('source_account') and request.get('website_url'):
+        from .shein_reference import validate_destination
+        validate_destination(request['website_url'])
+        return
+    import subprocess
+    destination = profile.get('destination_base')
+    if profile and not destination:
+        raise RouteBlocked('account has no approved destination/reference; onboarding prerequisite, not requester restriction')
+    scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', destination or 'yolokfx.com'],
+                           capture_output=True, text=True, timeout=20)
+    if scope.returncode != 0:
+        raise RouteBlocked('operational domain scope rejected')
+
+
 def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
     from .shein_manual_takeover import deny_replay
     from .shein_prewrite_amendment import require_request
@@ -831,18 +847,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
     received, timing_basis = request_clock(request)
     if received and received > started_at:
         raise RouteBlocked('request receipt timestamp is in the future')
-    destination = (CURRENT_PROFILE.get() or {}).get('destination_base')
-    if CURRENT_PROFILE.get() and not destination:
-        raise RouteBlocked('account has no approved destination/reference; onboarding prerequisite, not requester restriction')
-    scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', destination or 'yolokfx.com'],
-                           capture_output=True, text=True, timeout=20)
-    if scope.returncode != 0:
-        raise RouteBlocked('operational domain scope rejected')
-    if request.get('source_account'):
-        ref_domain = (CURRENT_PROFILE.get() or {})['reference_profile']['destination_base']
-        scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', ref_domain], capture_output=True, text=True, timeout=20)
-        if scope.returncode != 0:
-            raise RouteBlocked('operational domain scope rejected')
+    validate_request_destinations(request, CURRENT_PROFILE.get() or {})
     auth = json.loads((BASE / 'data/authorized-users.json').read_text())
     if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
         if not (CURRENT_PROFILE.get() or {}).get('channel_authorization_policy', {}).get('enabled'):
