@@ -49,12 +49,16 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         }
         return row
 
-    def test_current_generation_is_b0137(self):
+    def test_current_generation_matches_canonical_registry(self):
+        import json
+        registry = json.loads(Path('/root/mgs-agent/data/meta-app-registry.json').read_text())
+        active = [row['app'] for row in registry['apps'] if row['app'].startswith('B013-')]
+        self.assertEqual(len(active), 1)
         source = SCRIPT.read_text(encoding='utf-8')
         self.assertIn("CONFIG_ITEM_ID = 's2dnq2ipplrfmetbj66taasmde'", source)
         self.assertIn("CONFIG_ITEM = os.environ.get('MGS_B013_CONFIG_ITEM', CONFIG_ITEM_ID)", source)
-        self.assertIn("if app_name != 'B013-7':", source)
-        self.assertIn("!= 'B013-7':", source)
+        self.assertIn(f"if app_name != '{active[0]}':", source)
+        self.assertIn(f"!= '{active[0]}':", source)
         self.assertIn('f"Meta APP - {config[\'app_name\']}"', source)
         self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-5", source)
 

@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-11-06T12:06:29.976042-05:00",
+  "updated_at": "2026-11-13T21:15:40.634639-05:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1568277865219358791",
+  "source_message_id": "1570980148361039935",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -121,13 +121,13 @@
       "expected_sheet_roles": 8
     },
     {
-      "app": "B013-7",
+      "app": "B013-8",
       "channel_id": "1522830283240505385",
       "channel_name": "b013-2-app-status",
-      "admin": "Giselle Santos",
+      "admin": "Eduarda Oliveira",
       "backup_profile": "Emgai Datquang",
       "onepassword_item_id": "s2dnq2ipplrfmetbj66taasmde",
-      "onepassword_item_title": "BOT B013-7 Token - Giselle Santos, backup: Emgai Datquang"
+      "onepassword_item_title": "BOT B013-8 Token -  Eduarda Oliveira, backup: Emgai Datquang"
     }
   ],
   "discord_readback": {
@@ -513,7 +513,8 @@
     "1552763265061232721",
     "1556677754899136686",
     "1556684020123705426",
-    "1556684132891754546"
+    "1556684132891754546",
+    "1570980148361039935"
   ],
   "retired_apps": [
     {
@@ -571,6 +572,13 @@
       "retired_at": "2026-11-06T12:06:29.976067-05:00",
       "source_message_id": "1568277865219358791",
       "backup": "/root/mgs-agent/backups/meta-app-b00410-to-b00411-1568277865219358791"
+    },
+    {
+      "app": "B013-7",
+      "replacement": "B013-8",
+      "retired_at": "2026-11-13T21:15:40.634639-05:00",
+      "source_message_id": "1570980148361039935",
+      "backup": "/root/mgs-agent/backups/meta-app-b0137-to-b0138-1570980148361039935"
     }
   ]
 }
