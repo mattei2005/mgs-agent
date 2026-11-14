@@ -1,0 +1,115 @@
+{
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "sha256": "759fd44d90b85d4bb9d69cba0e4a179ea11c57d6740b3a8076bbc52f940a0c99",
+      "size": 16138
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "sha256": "883cd858d79d4bb7d093beb1a2a5cf0123eaf39cbe70e01b5c65482336721dee",
+      "size": 12297
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-49-20261013-state.json",
+      "sha256": "4ff801469da00690a75ec089c2b28375032b031f048d3d8ada88274454b3c477",
+      "size": 11234
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "sha256": "06bbd85873f456b55ab1e95a7cc5c334344c28b14cacd9552fd9624d009827b5",
+      "size": 28783
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
+      "sha256": "22ad0877e0d8062a2cc00f7345dd92b558a119353dc28cca5834427af7dd24d8",
+      "size": 38007
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/config.yaml",
+      "sha256": "6547bdcc77aa2d6da2f30b1269a800c4af28fc23e7b6b5995624d1768577c257",
+      "size": 21814
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/SOUL.md",
+      "sha256": "253fd637c39929bd714ee2abebe446c0ae17f73db1ce65e210048c9f8a6a8db7",
+      "size": 15362
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "sha256": "e0af0a659b446532872f308dced2510c5b0282ccfc556a410c6ad86af4d6b5eb",
+      "size": 145034
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/SOUL.md",
+      "sha256": "f567c09353a59876c14a3bcf7d10ff64275fc586a503ceb06758d7e3d427b889",
+      "size": 22951
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/config.yaml",
+      "sha256": "d7ce6f094f9090e97865b49eda5e4a0fa3d203c95e21e85798f0886cf235544d",
+      "size": 16437
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/SOUL.md",
+      "sha256": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e",
+      "size": 16354
+    }
+  ],
+  "services": {
+    "zeus": {
+      "pid": 2241212,
+      "active": true,
+      "runtime_paths": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent"
+      ],
+      "executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14"
+    },
+    "ares": {
+      "pid": 2233587,
+      "active": true,
+      "runtime_paths": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent"
+      ],
+      "executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14"
+    },
+    "atena": {
+      "pid": 2237072,
+      "active": true,
+      "runtime_paths": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent"
+      ],
+      "executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14"
+    }
+  },
+  "launchers": {
+    "/root/.local/bin/hermes": {
+      "symlink": true,
+      "target": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+      "sha256": "2acdfc04357da4f621f7f674f273f075db2435d43874ad1a9d8cac492b3c11e4"
+    },
+    "/root/.local/bin/hermes-acp": {
+      "symlink": false,
+      "target": null,
+      "sha256": "7f31f38560fa9284e7cdda8b596e891aa10578f6e83cae99283f8ffcb78e3c99"
+    },
+    "/root/.local/bin/hermes-main-59004a62-mgs": {
+      "symlink": true,
+      "target": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.venv/bin/hermes",
+      "sha256": "95a9b011f96b388b47bea16852632bd1335b885f5fad3fc61dca99266ac7b38b"
+    },
+    "/root/.local/bin/hermes-agent": {
+      "symlink": false,
+      "target": null,
+      "sha256": "0e234a4d94079e46398d60b6cad885aaee69a8da7b4858bb8ee3b618d3485538"
+    },
+    "/root/.local/bin/hermes-main-ad2d4822-mgs": {
+      "symlink": true,
+      "target": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/hermes",
+      "sha256": "5ad2b9c40e6072c475226ad0656525a276000fa3144b24620030b482982537e8"
+    }
+  }
+}

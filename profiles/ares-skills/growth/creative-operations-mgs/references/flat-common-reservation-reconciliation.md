@@ -1,0 +1,11 @@
+# Reserva de intake common versus reserva de campanha
+
+Use quando a fila SHEIN apontar um `reservation_request_id` que corresponde ao `flat_request_id` da linhagem selecionada, sem state de campanha anterior.
+
+1. Consultar `30tb-archive/flat-intake-requests.json#/requests` como mapa, não lista. Exigir request anterior `status=complete`, `destination_mode=common` e mesma operação. Ausência de state SHEIN não comprova, sozinha, término, reserva órfã ou ausência de efeitos.
+2. Exigir seleção humana explícita dos arquivos na pasta do gestor autorizado, stock shortcuts live únicos com cobertura integral e `mgsArchiveLogicalSource == asset_drive_id`. Confirmar ausência de uso e de reserva de campanha concorrente. Upload de origem common não se torna exclusividade do uploader pelo campo `source_manager`; não transferir reserva exclusiva/ativa nem ampliar elegibilidade global.
+3. Sob locks dispatch, conta e `assets.jsonl.lock`, reler os registros, preservar backup e receipt de status/intake, autoridade humana, IDs e localização observada. Atualizar somente `reservation_request_id` para o request real e anexar `reservation_history`; preservar reserva do gestor, inelegibilidade, hashes, IDs e todos os demais campos. Usar `shein_media_handoff._ops(base).atomic_inventory(rows)`. Não fabricar state terminal SHEIN para intake Creative Ops.
+4. Testar cobertura exata das linhagens, diff limitado aos dois campos e igualdade integral de linhas não selecionadas. Registrar manutenção em REPORT-INFRA. Lock ocupado exige diagnóstico do dono/camada; não executar preparador após falha da reconciliação. Encadear com retorno verificado.
+5. Retomar o mesmo `prepare-media`, request-ready, dry-run e Engine central. `PRESTAGED_GROUPS_READY` prova preparação, não campanha. Encerrar apenas com QA completo, IDs checkpoint iguais ao readback ACTIVE, orçamento/lance/horário/copy/tracking conferidos e pós-processamento do acervo concluído.
+
+Validação do procedimento: asserções de cobertura live, identidade lógica, common terminal, ausência de uso, campos preservados e linhas não selecionadas; preparação/dry-run reais; comparação semântica central de todos os anúncios e igualdade integral de IDs na conclusão. Não usar fixtures como prova de estado remoto.

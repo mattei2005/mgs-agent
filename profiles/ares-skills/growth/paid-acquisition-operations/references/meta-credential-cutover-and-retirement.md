@@ -2,6 +2,14 @@
 
 Use this route when replacing a Meta User Access Token or Business Integration System User token, migrating active consumers, or cleaning obsolete 1Password items.
 
+## 0. Inventário de perfis e tokens sem iniciar migração
+
+1. Resolva as contas do recorte no catálogo positivo e aplique o checker de conta antes da leitura Meta. Leia os nós exatos de `accounts/<ACCOUNT_ID>.json`, dos contratos da operação e de `engine-v3/config.json#/accounts/<ACCOUNT_ID>`; projete apenas nome/ID da conta, `token_1password_item` ou `token_item`, `token_identity`, tipo e estado de onboarding. Não percorra nem imprima a configuração inteira: ela mistura operações e transforma uma consulta pequena em inventário irrelevante.
+2. Quando a pergunta incluir tokens guardados, use `op item list --vault 'MGS Conteúdo' --format json` por subprocesso com stdout capturado; filtre em memória pela operação **e por Meta**, projetando somente ID/título. Correspondência apenas pelo nome da operação pode incluir credenciais de outros serviços. Faça a contagem após esse filtro e deduplique por item ID; não leia valores secretos para simplesmente listar cadastros.
+3. Cruze os itens com os bindings atuais e marque separadamente `cadastrado`, `vinculado ao runtime`, `histórico/substituído` e `pendente`. A ausência de arquivo ou nó do Engine prova apenas ausência nessa fonte: reconcilie os contratos consultados antes de declarar que não existe binding. Não apresente metadados de identidade de um audit antigo como readback vivo.
+4. Se fizer validação atual, use o transporte guardado e a referência exata da conta. Diante de falha de autenticação em cache, confirme uma vez com o item atual do cofre, mantendo o segredo em memória; não substitua a credencial produtiva para testar outra identidade. Capture HTTP, código, subcódigo e mensagem sanitizada no mesmo resultado, sem repetir GETs apenas para recuperar o diagnóstico omitido. Classifique pela mensagem: `code=190` sozinho não prova expiração. Se a resposta exigir login e instruções do Facebook, informe essa ação concreta sem chamar o token de expirado nem prometer recuperação automática.
+5. Entregue primeiro os perfis e o papel de cada um, depois as contas sem vínculo confirmado e qualquer falha atual. Declare a cobertura e se houve apenas leitura; não inicie renovação, coleta via AdsPower ou cutover por uma pergunta de inventário.
+
 ## 1. Freeze the intended scope
 
 - Identify the operations, exact accounts, Pages, Pixels, managers and active consumers covered by the cutover.
@@ -50,9 +58,9 @@ Include report jobs, monitors, guardrails, recovery runners and paused jobs that
 3. Make runtime modules load `token_1password_item` or the operation credential reference instead of duplicating item titles.
 4. Give the replacement a distinct cache path and require the cache payload's `item` to match the requested item.
 5. Remove stale credential caches only after the replacement cache is mode `0600`, names the new item and contains a credential.
-6. Preserve the old credential as inactive rollback when the identity changes or write capability has not yet been proven.
+6. Preserve the old credential as inactive rollback when the identity changes or write capability has not yet been proven. If the operator has explicitly prohibited its further use, retain it only as historical material pending authorized retirement; never reactivate it as fallback. A checkpoint recording that decision does not disable existing schedulers or remove their bindings, so report those technical effects only after their own verified execution.
 
-For a replacement token with the same app-scoped System User, App ID, scopes and target-asset readback, a narrower prior grant may be retired after the replacement proves equivalent access. A different human/system-user identity remains rollback until an authorized controlled write proves the new identity.
+For a replacement token with the same app-scoped System User, App ID, scopes and target-asset readback, a narrower prior grant may be retired after the replacement proves equivalent access. For a different human/system-user identity, retain the prior credential until an authorized controlled write proves the replacement, unless separately authorized retirement applies; retention never overrides an explicit prohibition on reusing that identity.
 
 ## 5. Verify every consumer without side effects
 

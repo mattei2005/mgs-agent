@@ -127,6 +127,11 @@ Nunca chame a operação de rápida usando apenas o tempo interno do Engine quan
 
 Enquanto `data/ares/meta-ads/policies/global-budget-limit-policy.json` estiver `INACTIVE_UNTIL_EXPLICIT_REACTIVATION`, nenhum cap, piso, envelope, pool ou teto interno de budget pode bloquear ou reduzir um pedido autorizado em qualquer conta de anúncio. O budget exato continua obrigatório e sujeito à autoridade vigente; pre-read e readback permanecem obrigatórios. Billing, `account_spend_limit`, credenciais e automatic scaling continuam separados. Valores históricos locais ficam apenas para auditoria. Só Rodolfo pode reativar a política explicitamente.
 
+## Inventário e substituição de perfis anunciantes
+
+- Em perguntas sobre quais perfis têm token configurado, diferencie **cadastrado no cofre**, **vinculado ao runtime** e **validado agora**; um item guardado não prova uso atual, e um binding não prova autenticação válida. Resolva primeiro as contas e suas referências exatas, sem abrir AdsPower ou iniciar emissão de tokens para responder ao inventário. Receita: `references/meta-credential-cutover-and-retirement.md`, seção de inventário.
+- Quando o operador decidir abandonar perfis e informar que fornecerá um substituto, registre a decisão e a pendência no checkpoint canônico, respeite o não uso nos novos pedidos e aguarde apenas a referência segura do novo item. Não confunda esse registro com cutover concluído, suspensão de rotinas existentes, exclusão ou revogação; preserve os gates de cada ação e não use o perfil abandonado como fallback. Um perfil novo destinado a várias contas exige validação separada de cada conta e seus ativos antes de alterar vínculos.
+
 ## Guided Meta setup — standing interaction rule
 
 When Rodolfo asks for step-by-step Meta dashboard setup:

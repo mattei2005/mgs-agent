@@ -1,0 +1,89 @@
+{
+  "status": "python_RECORD_audit_and_private_preservation_validated",
+  "authority_message_id": "1571249324464148642",
+  "python_roots": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "site_packages": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/lib/python3.14/site-packages",
+      "distribution_count": 123,
+      "record_hashes_checked": 8325,
+      "record_mismatches": 0,
+      "record_missing_paths": [],
+      "preserved_regular_overrides": 139,
+      "preserved_symlinks": 4,
+      "python_base_symlinks": [
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python",
+          "target": "/root/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu/bin/python3.14",
+          "referent_exists": true
+        },
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python3.14",
+          "target": "python",
+          "referent_exists": true
+        },
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python3",
+          "target": "python",
+          "referent_exists": true
+        }
+      ],
+      "full_old_environment_rebuilt": false
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "site_packages": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages",
+      "distribution_count": 118,
+      "record_hashes_checked": 7693,
+      "record_mismatches": 0,
+      "record_missing_paths": [],
+      "preserved_regular_overrides": 134,
+      "preserved_symlinks": 4,
+      "python_base_symlinks": [
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/python",
+          "target": "/root/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu/bin/python3.14",
+          "referent_exists": true
+        },
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/python3.14",
+          "target": "python",
+          "referent_exists": true
+        },
+        {
+          "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/python3",
+          "target": "python",
+          "referent_exists": true
+        }
+      ],
+      "full_old_environment_rebuilt": false
+    }
+  ],
+  "python_overrides": {
+    "archive": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/python-local-overrides.tar.gz",
+    "sha256": "3a35097015c7bfe5d8ecc0cf7fbdb65c22ca3f3a865415f1f5ea9e8aabc7e86c",
+    "allocated": 700416,
+    "members": 281,
+    "payloads_verified": 273,
+    "member_manifest": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/python-local-overrides.tar.gz.members.json.gz"
+  },
+  "node_trees": [
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/node_modules",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/web/node_modules",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests-js/node_modules",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/apps/desktop/node_modules",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/ui-tui/node_modules"
+  ],
+  "node_preservation": {
+    "archive": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz",
+    "sha256": "d3aed435a8726d51e888e04163ac409f7565f889f4a640f96c2eb937cb3faf67",
+    "allocated": 340340736,
+    "members": 98259,
+    "payloads_verified": 92556,
+    "member_manifest": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/historical-installed-node-trees.tar.gz.members.json.gz"
+  },
+  "full_old_python_environment_rebuilt": false,
+  "node_environment_executed": false,
+  "deletions": 0,
+  "created_at": "2026-11-14T14:50:04.331141-05:00"
+}

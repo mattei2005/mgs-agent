@@ -83,6 +83,8 @@ Se o gestor subir o original antes do tratamento, o tratado correspondente conti
 
 ## Recuperar drift de nomes e reposições na pasta do gestor
 
+Para `reservation_request_id == flat_request_id` de um intake common já concluído, aplicar `references/flat-common-reservation-reconciliation.md` antes de classificá-lo como reserva de campanha ativa. Não fabricar state terminal SHEIN nem tomar reserva exclusiva/ativa.
+
 - Se o preparador rejeitar nome ausente/ambíguo, liste por API a pasta exata inteira antes de pedir outro arquivo: o Drive pode conter todos os nomes literais enquanto o inventário mantém nomes anteriores. Compare também os IDs dos registros cujo nome já coincide; coincidência de nome não garante o arquivo certo.
 - Para renomeação no mesmo ID, exija igualdade de MD5/tamanho live com o registro. Para reposição com ID novo, baixe a cópia selecionada, confira MD5/tamanho do Drive, SHA256 contra a linhagem existente e metadata clean; preserve os IDs anteriores e histórico Meta. Checksum idêntico é a mesma linhagem, não um asset novo.
 - Trate trocas de nomes como um mapa completo antes de editar: um nome solicitado pode apontar no cache a outra linhagem cujo tratado está na lixeira. Confirme cada ID antigo por GET, preserve backup e histórico, reconcilie apenas registros comprovados sob lock e valide unicidade de todos os nomes solicitados contra seus IDs live. Não renomeie o Drive, apague histórico ou descarte uma colisão apenas para satisfazer o lookup; registro histórico retirado do lookup precisa conservar nome anterior e evidência da retirada. Registre manutenção de dados em REPORT-INFRA.

@@ -1,0 +1,591 @@
+{
+  "archive": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/conditional-code-state-and-git-admin.tar.gz",
+  "sha256": "6c68b0ef4d0e494d332ebc240b98d554f5c9525f80b9bfab416564bde7055db4",
+  "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+  "roots": [
+    {
+      "label": "hermes-agent-port-main-46904a3b-mgs",
+      "base": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+      "modified_paths": [
+        "plugins/platforms/discord/adapter.py"
+      ],
+      "expected_files": [
+        {
+          "path": "plugins/platforms/discord/adapter.py",
+          "sha256": "eb8f37c6480bfcb6001c7256a1857168dd4c449fc4d26f6831e87cb35af7a9e4",
+          "mode": 420
+        },
+        {
+          "path": "tests/gateway/test_discord_thread_initial_name_suffix.py",
+          "sha256": "a84e9679e4a1e409dc1dd36e5922588c2c19400fabe01664881843d41271eebd",
+          "mode": 420
+        },
+        {
+          "path": ".bytecode-fingerprint",
+          "sha256": "31bac1d7938a1895846a10c55447a3e4e78068b070841f2b010b18d0fe8f55b0",
+          "mode": 420
+        },
+        {
+          "path": ".hermes/bin/hermes",
+          "sha256": "2f8159b4bc6ad280ae575e090ecb6b6f3b366625553cea06e2233cc4ed84b77c",
+          "mode": 493
+        },
+        {
+          "path": ".hermes/bin/hermes-acp",
+          "sha256": "83448aa115b1ecd913a7f4afae47eedab8dfd1a5dc60768560b8dc58bb8462e7",
+          "mode": 493
+        },
+        {
+          "path": "hermes_agent.egg-info/PKG-INFO",
+          "sha256": "a2c5a1675e8fe6e5432e6c6d6ef4bc01304a1c950d3b17481512a4aa91921d77",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/SOURCES.txt",
+          "sha256": "4bfa4b3cfc7c187e168019fad91ef66e5a155c4056a2f4615b783f2775bd64ac",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/dependency_links.txt",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/entry_points.txt",
+          "sha256": "d410a612ab7c6c766b972a4cbfdee716d43a2d411d44270c51bf8f063d7e22ee",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/requires.txt",
+          "sha256": "fe7772283f330cdfd2f038d2d0371d6eb846c3fec0c48d39ec20e19fdaeea590",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/top_level.txt",
+          "sha256": "c7c778d2f69ea974fb4eba53b1db744d9368fc6f4703476d9fe5089474888d7f",
+          "mode": 420
+        },
+        {
+          "path": "test_durations.json",
+          "sha256": "eb3fa0b9f03e2f72ce9c5e807837121ed1e4b9ffa1168945a362a15514e7bf88",
+          "mode": 420
+        }
+      ]
+    },
+    {
+      "label": "hermes-agent-port-main-ad2d4822-mgs",
+      "base": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+      "modified_paths": [
+        "gateway/run_turn.py",
+        "hermes_cli/_early_recovery.py",
+        "hermes_cli/config_defaults.py",
+        "tests/home_io_guard.py",
+        "tests/tools/test_checkpoint_manager.py",
+        "tools/browser_use_cli.py",
+        "tools/mcp_tool_registration.py"
+      ],
+      "expected_files": [
+        {
+          "path": "gateway/run_turn.py",
+          "sha256": "7e837eac0b265a9c7c56ebffb3183b9c43834d7be99b31628ac54e39e9e57cd3",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/_early_recovery.py",
+          "sha256": "32e432866b3d2363d77f219a9015e184ef95cd6b212581bd52ca6cb8a8daff60",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/config_defaults.py",
+          "sha256": "ed09ae567cd58faad22868bbf495d12b1c76a640e38986fbcd4869af20f27b10",
+          "mode": 420
+        },
+        {
+          "path": "tests/home_io_guard.py",
+          "sha256": "1f60f92c43ffde92b08ee9210f3fd1b9ab03c9c57a98d521641fb27cbc9790c2",
+          "mode": 420
+        },
+        {
+          "path": "tests/tools/test_checkpoint_manager.py",
+          "sha256": "bbc89384a79c56485bf6611b02f0d5f13561568c44693220b644c5810b28b67f",
+          "mode": 420
+        },
+        {
+          "path": "tools/browser_use_cli.py",
+          "sha256": "8fb947168c6c66a954270975c1a233e85745e79100c541fce79d9790a77760d2",
+          "mode": 420
+        },
+        {
+          "path": "tools/mcp_tool_registration.py",
+          "sha256": "67a3bf5c5f3801f65a1cfd6f7e2c619ef1f7d13a5c79369f8d1ed396bc851b42",
+          "mode": 420
+        },
+        {
+          "path": "tests/gateway/test_mgs_configured_hygiene_threshold.py",
+          "sha256": "a763ba8fcf27f8538239bd35e2b53e4fba0dff90821a3dab35805f27b76ce07d",
+          "mode": 420
+        },
+        {
+          "path": "tests/tools/test_mgs_browser_resource_budget.py",
+          "sha256": "919ed9596e8154847458d712c7230bbfdd35e013ff226077bcf680ca74d56403",
+          "mode": 420
+        },
+        {
+          "path": "tests/tools/test_mgs_mcp_sdk_readonly.py",
+          "sha256": "a3e1fa42ef1071db3da183ba5bc6e68e9e69d862f0bdcd81d5cf223af61fee12",
+          "mode": 420
+        },
+        {
+          "path": ".bytecode-fingerprint",
+          "sha256": "72465e72258cfc6a51e531f9e4c304abd53eb1ccb49b6b53a25b1069bc649771",
+          "mode": 420
+        },
+        {
+          "path": ".hermes/bin/hermes",
+          "sha256": "a7a0b47bd56d2c26a10a784d3ae9feacbeeede053c219810cfeb14a5a6faf97f",
+          "mode": 493
+        },
+        {
+          "path": ".hermes/bin/hermes-acp",
+          "sha256": "f815f36ebee528cdfca42bfe8b57208b7b33199a85ef16d46838b8b9beb9b6e4",
+          "mode": 493
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/SOUL.md",
+          "sha256": "36c1f5a2e92cd1d018311eaf4c8f1e8886672eae78212e033c681d0e3d5d506f",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/cache/schema_columns.json",
+          "sha256": "e043f57b95682aafd4debccb2e45f87aebbf3a170a3c853ff146e77a7a8a89c3",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db",
+          "sha256": "ae50e3c674753f93d5d48f8499e98a57804efc48be4652da76bf9e822244dd76",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db-shm",
+          "sha256": "20a62fda4c4f7a77405fe001aea679fcf95c69f0bffda41a708e47298bbbf4db",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db-wal",
+          "sha256": "e7d7943a1dff765012f254cd939a9e4d7e9b4382dfb5223d19e36a42d922ff55",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db.fts_rebuild.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db.quarantine.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/SOUL.md",
+          "sha256": "36c1f5a2e92cd1d018311eaf4c8f1e8886672eae78212e033c681d0e3d5d506f",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/cache/schema_columns.json",
+          "sha256": "e043f57b95682aafd4debccb2e45f87aebbf3a170a3c853ff146e77a7a8a89c3",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/state.db",
+          "sha256": "16551123d3c85733e89da39f04799bf2090aecdc17f1613595c9007a32fa117f",
+          "mode": 384
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/state.db.fts_rebuild.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/state.db.quarantine.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/PKG-INFO",
+          "sha256": "e0168bb90d04e4d668c3a32c0d8f35e879dddd153df90044c7bac493f7718dd8",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/SOURCES.txt",
+          "sha256": "bc5fa24b23c9251098e046e8603d686e5c5c30e82cb46fff5e2b148cd70b847b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/dependency_links.txt",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/entry_points.txt",
+          "sha256": "d410a612ab7c6c766b972a4cbfdee716d43a2d411d44270c51bf8f063d7e22ee",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/requires.txt",
+          "sha256": "8c1e5fd82b475c0511ab3bd28e6ed9d9d53780e17eb61df6c47c7587a4d0dfac",
+          "mode": 420
+        },
+        {
+          "path": "hermes_agent.egg-info/top_level.txt",
+          "sha256": "0e2366a158e9fabf1e871a4c3794590500412aa7c16a9992ca8b06a533382253",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/.hermes-product",
+          "sha256": "7511f4df586ddc996d2af1a0e266e69e148069601e6812d5462e132269e32efc",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/AnalyticsPage-BnoC9IVZ.js",
+          "sha256": "ae8a117b23a1feee5b878460b506f1bfeb8a50e20ff471ab520339853f10ee3b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ChannelsPage-Cr19yF1e.js",
+          "sha256": "f82cdad44fa7cd3b04421f4ca41c16382b5fd2d1d0f73b5459ace8bc7dd0c013",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ChatPage-Cg4e_5k5.js",
+          "sha256": "085bad5383e7e029b6d717bad77cacf1d108bd25edaabe334914fb74c3bd2537",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/Collapse-Bold-mgICk9-_.woff2",
+          "sha256": "cb1bc6803168cffb3ef7b8113f95f82480a6d0f46d6e37edc854259377c6c00b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/Collapse-Regular-DysayoTY.woff2",
+          "sha256": "ce8c481f56da3a46074ab696c16481bea49ea83e75e7eb7cb42fd2114593f33a",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ConfigPage-DvRix8Om.js",
+          "sha256": "e522a4b9a7b111e5453ba0bb23360f221861b10c566512d386267ccd7cd474ef",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/CronPage-DrmvP7CO.js",
+          "sha256": "44676b5a18d00d3b80e246867bc3f83a451ebcfdad2a079f93f449581b8bf921",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/DeleteConfirmDialog-B_74FcsY.js",
+          "sha256": "7272c9ece7a2867b7d7ddb0c938978cd1591274282565bf568cc4173d37ae1c5",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/DocsPage-Dhavtszo.js",
+          "sha256": "b51eccb168594f371cdd6027c5622c5be100e6d0eb07a0130c9adde591aab9ec",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/EnvPage-MoWSXt_7.js",
+          "sha256": "9ea97709b8ae67068adfb44f746e050931916c7b2ed9bf27b6aa52694cb71d84",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/FilesPage-B5SjuqMO.js",
+          "sha256": "6ecd184fba6d4bfc4467c7bb0e0e201fa30e86c1ea5ddb8300a75395e4b211d2",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/LoadErrorNotice-DoQhD03J.js",
+          "sha256": "d7ac4e266e8d1f4a8c72ea3e2f6761e2e8917e3f0fabf2f75bb22ad96d7a6cd7",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/LogsPage-BQjaOQUr.js",
+          "sha256": "fe154af4a25903d80a7299c255489a9c7c7b3236a7e95984c45e202586563a7e",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/McpPage-BUIg32Y2.js",
+          "sha256": "385595cc75dedb18af4c7d4a38762b53204798e5684d4ddfde743bc561eef944",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ModelReloadConfirm-ClwvAC7X.js",
+          "sha256": "5d164675612be9e150aac78880cf5ba2dea587e8d88295b15ac2176e1ff55cd9",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ModelsPage-CJ2d-2C6.js",
+          "sha256": "c9ecab7b5c11ae3ff15868ef9e1a9e62f00354891dc7635c8d440d9d74b86a89",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/Mondwest-Regular-CWscgue7.woff2",
+          "sha256": "9cf6e6e1cba70f7e991a92ce4225785725b6cc9a48cc77cbfaabeba26c18f072",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/PairingPage-x5VQtNUR.js",
+          "sha256": "4b180bdf71e191449aa15ef977eff8e8c93302e3b071fa7681c8edeb6247ab3c",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/PluginsPage-CV3k_tTu.js",
+          "sha256": "9e6bf8baeb881756ca6aa2c21f7ac20594673e6bf9a9e586041689396be9a347",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ProfileBuilderPage-DnHSp8SV.js",
+          "sha256": "733b6cd6f307d7e927a17d9eb288605d4a66cd98379362d5f7c2a46aa31b18af",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ProfilesPage-B-PmERM6.js",
+          "sha256": "a6441b5832937bc041eace5b1fc7c1467fbc3ab02ae228dee932faf3cdef7c5c",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/RulesCompressed-Medium-CA76_CrB.woff2",
+          "sha256": "d865cf7154121265d3d65c0931ec27dc289aa438cd62ffad2f38e05ae79956a3",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/RulesCompressed-Regular-BSXFyF4x.woff2",
+          "sha256": "3bcbc330183f49cd49c72d4cdb3d1fbc675cf4e3000b06fd1c606ffc31b73e5f",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/RulesExpanded-Bold-DZA7s8Pa.woff2",
+          "sha256": "f2295406de2272086d5395af32b50ac51b15d75294c25a04094c8b1f85757931",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/RulesExpanded-Regular-l8uVympt.woff2",
+          "sha256": "e8062ac4889b0f05de94035571e86991b6efd03539775cfe0790e37da75434db",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/SessionsPage-DCYr563V.js",
+          "sha256": "eba57e5877bec54b825c830d9bd4aa0cf90b6e1f6f126d8a4f8e3b39b9456c96",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/SkillsPage-CPsNc04R.js",
+          "sha256": "25f9fa67831508d01ddfdb1192e8869f5e4fdf399374e7eccc13ddb3788a4784",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/SystemPage-BIZyrLrk.js",
+          "sha256": "ea5ade478644dc19e0cf5e623d9e97cf5f3ba4aa60d718e4d6cc1f8dda010f6c",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/WebhooksPage-Ec0SG3yG.js",
+          "sha256": "616124cc248e73f3daabb00de21d9ce549ffe38e46b1da9707d6bfb82e46ee0d",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/api-CTDekXfk.js",
+          "sha256": "03eb2ec8faa87a92e44305e6298fd16c803eb7a667e10626dedb56ebeb056a61",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/chat-activation-BiaqYo9D.js",
+          "sha256": "7004d70c867166566771fd7dba6147eaa80e12e0627ef58812b0a39d06d7dab0",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/clipboard-owkvc3zk.js",
+          "sha256": "5bab3f289333862bdf2e27f7e643d6c79db0162a606a644410d783fd858a104a",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/i18n-DSmwHjjf.js",
+          "sha256": "5df85fc8d4614276ee2bdfcd0c99ae88c144ce71fe84f1401da3d31cafd6779a",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/index-CVz44OD6.css",
+          "sha256": "d4a32fe9dda35c05b0f7ddc9c3633a4787ff1afeed31527c33d8edbc08d15f33",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/index-CWJPQ_Tc.js",
+          "sha256": "f0e984414433840e9c68da9de708b35b5737160fb300e850d0a0e3b795767e5d",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/mcp-server-create-B0VgoYzF.js",
+          "sha256": "b86eab185584423fc1e5b3152afaf16e2c4306739fe159f21cb2459216d151d4",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/page-header-context-Cv8A-rTa.js",
+          "sha256": "e3855d1a0ef04413e8f9900923df8d259ce2c4568e6fcb51c192f1bbcf64184d",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/plugins-Bp5y43jM.js",
+          "sha256": "cbe48e4cf5762b9c5e5327acbb5b24496098602762c4d1f9e5558f9506d8f273",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/react-vendor-BoVnYuL4.js",
+          "sha256": "6483be7bb6009e38e7c9e0a8c0e62233a4f1834c45d15ef3eb2d134130f11a80",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/rolldown-runtime-CbXtAM7H.js",
+          "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/terminal-font-refit-Dmois6_8.js",
+          "sha256": "e714d4ffc514de8fae089d55fedff494c7542eed3fee2d786cb15ddc102bd7fa",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/themes-CrnQ4p60.js",
+          "sha256": "c65d6cf350d6b3300865fa9da6f54dd7dacbe8abebb39a8316e54ca415b0c955",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/ui-bBVPPEcD.js",
+          "sha256": "e2361d5ef745b279645a3f441641081bfa0609c1b5ae70c4e9c26d34d92def2e",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/useModalBehavior-oWox1GPh.js",
+          "sha256": "ca1398fc8c431f338b2a04f41596010c2e96e510c30790717423710f69d81197",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/usePageHeader-BtGwRGnc.js",
+          "sha256": "81a4642a4ef62b774974ed4f0d9f98f060dbf8160ce26ab747a48f4927f76259",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/useProfileScope-CZ2qacRL.js",
+          "sha256": "30ce4d4ddb70f269c706bf18d56688b2bfc1ecfd29b554d4830dfe2e2c316269",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/utils-DYyongUp.js",
+          "sha256": "2d8fe5e8b2b727674e99d2e7c86f48474477337606691a33eed7b2f8430408c6",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/vendor-C3j-S1CW.js",
+          "sha256": "b4633096a5f5f320765e4c8ed073bfa8e9c8f4205d5373fa0acb507ecdc86ad6",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/xterm-BrP-ENHg.css",
+          "sha256": "0e5386f16cb4be78a2fe911e014a810da76ea2db47d8c8b2a966516b2fd5270b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/assets/xterm-CXxU4Y2B.js",
+          "sha256": "462aedc6a17c42fa884426a21bb3ac0108842d9ad7bd3270a0be29c7dda5b2db",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/favicon.ico",
+          "sha256": "ed23beefe5e78526e6f3a73fc7362a47dbd660c31ff7b0a5e63532321563483f",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts-terminal/JetBrainsMono-Bold.woff2",
+          "sha256": "08863c7964612257a90bd821e3127dc5ccb0b5046f881673a1ade5809eb21d0f",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts-terminal/JetBrainsMono-Italic.woff2",
+          "sha256": "9f158b85eca345daeee01dfffa602709a905ea08b0cc60dbf6153cbbd97da08f",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts-terminal/JetBrainsMono-Regular.woff2",
+          "sha256": "f1a7a03672cdd494ce0d5543fac6e4360fe22403c6de297fdc2e55a815f7baff",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/Collapse-Bold.woff2",
+          "sha256": "cb1bc6803168cffb3ef7b8113f95f82480a6d0f46d6e37edc854259377c6c00b",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/Collapse-Regular.woff2",
+          "sha256": "ce8c481f56da3a46074ab696c16481bea49ea83e75e7eb7cb42fd2114593f33a",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/Mondwest-Regular.woff2",
+          "sha256": "9cf6e6e1cba70f7e991a92ce4225785725b6cc9a48cc77cbfaabeba26c18f072",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/RulesCompressed-Medium.woff2",
+          "sha256": "d865cf7154121265d3d65c0931ec27dc289aa438cd62ffad2f38e05ae79956a3",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/RulesCompressed-Regular.woff2",
+          "sha256": "3bcbc330183f49cd49c72d4cdb3d1fbc675cf4e3000b06fd1c606ffc31b73e5f",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/RulesExpanded-Bold.woff2",
+          "sha256": "f2295406de2272086d5395af32b50ac51b15d75294c25a04094c8b1f85757931",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/fonts/RulesExpanded-Regular.woff2",
+          "sha256": "e8062ac4889b0f05de94035571e86991b6efd03539775cfe0790e37da75434db",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/hermes-build.json",
+          "sha256": "98021722c41de204d3d074cd2900c3ab7f7f3598d8a4c8d0a1c15127dab37db0",
+          "mode": 420
+        },
+        {
+          "path": "hermes_cli/web_dist/index.html",
+          "sha256": "e8fe4090d40e50a4fdbb1a639c2d150fdd0d1757e52d22b71f9cc71e8d017deb",
+          "mode": 420
+        },
+        {
+          "path": "test_durations.json",
+          "sha256": "587e4161c80c8f06d09302bbc29200be2fd0c3a5dcaf74ac8779fb47bf94022f",
+          "mode": 420
+        },
+        {
+          "path": "ui-tui/dist/.hermes-product",
+          "sha256": "7511f4df586ddc996d2af1a0e266e69e148069601e6812d5462e132269e32efc",
+          "mode": 420
+        },
+        {
+          "path": "ui-tui/dist/entry.js",
+          "sha256": "3183112afa2db2cf0f2c81ff99c25852057dbc542c8999c6dd7e17de92137b0c",
+          "mode": 493
+        },
+        {
+          "path": "ui-tui/dist/hermes-build.json",
+          "sha256": "89069799957dc365616ada706fd32d220deaaca4707a334ba050bdc523340b8d",
+          "mode": 420
+        },
+        {
+          "path": "ui-tui/packages/hermes-ink/dist/entry-exports.js",
+          "sha256": "20a00e874ac7145c88ed358c3db33150dfcc865df7767e2fc07106ce837ea9fd",
+          "mode": 420
+        }
+      ]
+    }
+  ]
+}

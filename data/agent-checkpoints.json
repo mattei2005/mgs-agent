@@ -1352,6 +1352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV-USER-TOKEN-REPLACEMENT-1571250965313486889",
+      "next_step": "Aguardar Rodolfo informar nome do novo perfil e referência do item no 1Password, sem segredo no chat. Antes de qualquer cutover, validar identidade, app, acesso às três contas e Pages/pixel de cada operação; inventariar consumidores e observar confirmação crítica do recorte. Não inferir revogação, exclusão ou ampliação de permissões.",
+      "objective": "Substituir os perfis antigos por novo perfil com User Access Token para Eggbev 01, 02 e 03, conforme decisão de Rodolfo.",
+      "source": "discord:1185714635991679006/1571249921242435695/1571250965313486889",
+      "state": "aguardando_novo_perfil_no_cofre. rodolfo decidiu não usar mais mhd aldy nem carla nunes no eggbev e informou que colocará um novo perfil para as três contas. decisão aplicável aos próximos pedidos; nenhum cutover técnico, suspensão de cron, revogação, exclusão ou alteração de campanha executado. identidade nova e item do cofre ainda não informados. preservar registros e credenciais antigas sem usá-las como fallback em novas execuções.",
+      "thread_id": "1571249921242435695",
+      "updated_at": "2026-11-14T19:50:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV-ZERO-PIXEL-SUSPENSION-20260902",
       "next_step": "Não reativar a etapa de pixel zero até nova instrução explícita de gestor autorizado; quando houver ordem, restaurar a etapa no wrapper, reabilitar runtime e validar por readback sem alterar LEADS ou restrição DTR",
       "objective": "Manter somente o guardrail Eggbev de pixel zero suspenso e reativar exclusivamente campanhas pausadas por ele, preservando LEADS e restrição DTR",
@@ -2363,12 +2373,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1571246023119081574",
-      "next_step": "Concluir pos-processamento e ativacao central; validar IDs budget lance horario tracking e acervo; entrega nativa com bloco Iris",
+      "next_step": "Campanhas e acervo concluidos; nao repetir criacao/ativacao. Resposta nativa com numeros budget horario e bloco Iris; sem envio GAM automatico.",
       "objective": "Concluir oito clones da C105 Mavroa06 G006 com vinte imagens e grupos literais",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1571246023119081574/state.json",
-      "state": "oito campanhas e vinte anuncios criados paused; qa renderizado completo; continuacao foreground do mesmo request em pos-processamento; sem replay de criacao",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1571246023119081574/independent-final-verification.json",
+      "state": "complete; campanhas c171-c178 active; 8 campanhas/8 conjuntos/20 anuncios; lote usd280.00/dia; conta ativa usd380.00/dia; cost_cap90 centavos; inicio configurado 14/11/2026 14:45 est; leitura active 14:53:27 est; qa integral; ids preservados; acervo20 usados bytes iguais; fila foreground_complete; entrega nativa a seguir",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-14T19:47:00+00:00"
+      "updated_at": "2026-11-14T19:55:56+00:00"
     },
     {
       "agent": "ares",
@@ -10587,5 +10597,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T19:47:38+00:00"
+  "updated_at": "2026-11-14T19:55:56+00:00"
 }

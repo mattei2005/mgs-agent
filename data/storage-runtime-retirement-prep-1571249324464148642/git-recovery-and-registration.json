@@ -1,0 +1,31 @@
+{
+  "git_object_coverage": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "all_objects_including_alternates": 496547,
+      "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "objects_not_in_retained": 5,
+      "missing_object_pack": {
+        "path": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/hermes-agent-port-main-46904a3b-mgs-unique-objects.pack",
+        "sha256": "c9752edc7aff535b69e60afdef79ffc8ad7bea6369edb73edc4761718ad608d2",
+        "verified_objects": 5,
+        "retained_bare_store": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642/hermes-agent-port-main-46904a3b-mgs-unique.git"
+      }
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "all_objects_including_alternates": 455966,
+      "retained_repository": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "objects_not_in_retained": 0,
+      "missing_object_pack": null
+    }
+  ],
+  "code_recovery_files": 112,
+  "worktree_admin_root": "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/worktrees",
+  "worktree_admin_children": [
+    "hermes-agent-port-main-ad2d4822-mgs"
+  ],
+  "worktree_registry_only_expected_root": true,
+  "all_source_refs_and_unreachable_objects_preserved_or_retained": true,
+  "created_at": "2026-11-14T14:51:31.600940-05:00"
+}
