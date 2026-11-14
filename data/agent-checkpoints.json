@@ -2,6 +2,15 @@
   "checkpoints": [
     {
       "agent": "zeus",
+      "id": "AUTOMATION-RECOVERY-b49d55bba2937a60710f1fba",
+      "objective": "Reconcile same SHEIN D-1 producer request without business replay; correct observer cardinality drift",
+      "source": "/root/.hermes/shared/automation-continuity/runs/b49d55bba2937a60710f1fba/checkpoint.json",
+      "thread_id": "1569185140502954077",
+      "state": "recovery_validated_awaiting_independent_supervisor:2026-11-13 reports25accounts/121parts GET verified; observer uses approved per-policy counts;23tests PASS; REPORT-INFRA1571153089853923439 GET verified; no new business POST or campaign/cron changes",
+      "next_step": "Owning supervisor20639 performs independent verification and queue transition from existing receipts; no report replay."
+    },
+    {
+      "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
       "next_step": "Encerrado o último ciclo autorizado; nenhuma próxima data ou recorrência. Zero pendências operacionais.",
       "objective": "Rotina finita de aquecimento dos quatro perfis autorizados; zero comentários",

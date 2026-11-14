@@ -4,7 +4,7 @@
 
 - D-1: `data/ares/meta-ads/policies/shein-daily-report.json`.
 - Intraday: `data/ares/meta-ads/policies/shein-intraday-report.json`, autorizado por Rodolfo na thread `1565155357074923732`, confirmação `1565157065234710681`.
-- Resolver as mesmas24 contas/threads do D-1; quatro por G001–G006; Boostingecon e Growpowerhub continuam excluídos. Não herdar o catálogo36 como cobertura automática.
+- Resolver contas/threads e contagens por gestor de cada política vigente, validando IDs únicos e cardinalidade; não fixar24 nem presumir igualdade D-1/intraday após extensões autorizadas. Boostingecon e Growpowerhub continuam excluídos. Não herdar o catálogo36 como cobertura automática. Observadores de saúde também devem ler `expected_reports` e as listas aprovadas, fail-closed se ausentes/inconsistentes; nunca deduzir a cobertura esperada do próprio recibo. Antes de retry por divergência de contagem, reconciliar matrícula autorizada, request congelado, completion, intents e GETs: entrega íntegra requer corrigir o observador, não republicar o relatório.
 - `SHEIN-US-DIRECT.json#/reporting` aponta as duas políticas. O dispatcher único é root crontab; não criar um segundo job Hermes.
 
 ## Semântica e isolamento
