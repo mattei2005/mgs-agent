@@ -47,6 +47,8 @@ Compute hardlink closure across the **whole confirmed target set**, not independ
 
 ## 3. Post-deletion acceptance
 
+Before gating REPORT-INFRA on an own-profile skill's versioned mirror, synchronize and compare that exact selective mirror explicitly. Native export may wait for the next auto-versioning batch; successful `skill_manage` does not prove immediate mirror parity. Use the canonical scoped exporter, or apply the identical targeted edit to this profile's MGS mirror and verify external SHA-256 equality, without changing another profile or bypassing native Git batching. This is a governance-delivery issue, not a failed filesystem operation: never repeat deletion to fix it.
+
 Before declaring success, verify:
 
 - every confirmed target is absent;

@@ -1,5 +1,5 @@
 {
-  "status": "filesystem_and_profiles_validated_governance_pending",
+  "status": "completed_validated",
   "confirmation_message_id": "1571265639241224325",
   "question_message_id": "1571254663523737784",
   "thread_id": "1569928464033783862",
@@ -48,6 +48,37 @@
   "new_confirmation_required_for_additional_deletion": true,
   "validated_at": "2026-11-14T15:53:22.746496-05:00",
   "report_infra": {
-    "status": "pending"
-  }
+    "message_id": "1571268187754995795",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "mentions": 0,
+    "embeds": 1,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T15:59:22.071627-05:00"
+  },
+  "governance_errors": [],
+  "retained_import_selectors": {
+    "managed_environment_pth_files_checked": 20,
+    "references_to_deleted_runtime_roots": [],
+    "legacy_venvs_already_checked": true
+  },
+  "skill_updates": [
+    {
+      "live": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+      "sha256": "b9173f508cbd775e90222596ef82f5ad585b9274bb45f09399e99d247724581c",
+      "readback_verified": true
+    },
+    {
+      "live": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+      "sha256": "6292c38702c16cf1a2c6e7cf342627b7dd5b208a1d39f40bf3ffb43de5fbee60",
+      "readback_verified": true
+    }
+  ],
+  "diagnostic_recoveries": [
+    "REPORT preparation stopped with AssertionError on an unsynchronized own-profile skill mirror before posting. Native export was still awaiting its auto-versioning batch. Applied only the identical targeted lesson to own versioned mirrors and verified SHA256 parity before one successful REPORT; no deletion repeated."
+  ],
+  "closed_at": "2026-11-14T15:59:22.071627-05:00"
 }

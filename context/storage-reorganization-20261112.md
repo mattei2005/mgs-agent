@@ -219,5 +219,17 @@ Manifesto SHA-256 `843d8b4aa7be43b4b95888f707d675438fb0e2c091f10d622b1211f7d6a2a
 
 **Estado:** preparado e validado, aguardando nova confirmação crítica de Rodolfo para este manifesto e executor. Zero exclusões, mudanças de campanhas/crons ou chamadas Meta/PC1. Não executar nem criar recibo de aprovação por inferência deste `continue`. Após eventual confirmação, revalidar o lote sem rodar Git nos alvos congelados; executar uma vez, conferir ausência/journal, recuperação somente por fontes retidas, hashes/PIDs, delta de disco e três configs/smokes sem ferramentas dos perfis, e só então fechar inventário/REPORT/Git. Se metadados, paths, hashes de helper ou scope mudarem, parar e obter confirmação de um novo lote congelado.
 
+### Encerramento do lote — confirmação 1571265639241224325
+
+A confirmação crítica de Rodolfo `1571265639241224325` respondeu à pergunta `1571254663523737784`, que divulgou o manifesto inalterado `843d8b4aa7be43b4b95888f707d675438fb0e2c091f10d622b1211f7d6a2a756` e a limitação de recriação dos ambientes Python históricos. O recibo nativo está em `data/storage-runtime-retirement-prep-1571249324464148642/approval.json`. Esta confirmação e o resultado abaixo resolvem o gate pendente da preparação; não há nova autorização ou repetição a pedir para este mesmo lote.
+
+**Executado uma vez e validado:** quatro paths ausentes e exatamente quatro entradas no journal, sem alvos extras. Foram retirados os 165.180 arquivos regulares, 11.236 diretórios e 113 symlinks congelados. `ad2d4822` foi removido pelo fluxo nativo de worktree; o atalho e o registro exclusivo também estão ausentes. A comparação imediata do filesystem mostrou aumento de 3.010.703.360 bytes disponíveis (aproximadamente 2,80 GiB). É delta global observado, não atribuição exclusiva de toda atividade concorrente. A estimativa estrutural líquida da preparação era aproximadamente 2,41 GiB após suas novas preservações.
+
+**Recuperação depois da ausência real dos originais:** o mesmo leitor conferiu 112 arquivos de código/estado, 273 payloads de ajustes/metadados Python e 92.556 payloads Node, somente com Git/cápsulas retidas. Os 27 hashes protegidos permaneceram iguais. Não foi reconstruído nem executado um ambiente Python histórico completo; essa limitação foi divulgada na confirmação e permanece explícita. O replay não abriu SQLite ou perfis vivos.
+
+As quatro raízes restantes são a fonte canônica `hermes-agent`, o runtime ativo `29a61cb7`, o rollback `3f2afed3` e a base/objetos/legados `59004a62`. Os 132 refs compartilhados previamente registrados foram preservados e resta somente o worktree principal de `59004a62`. Os seletores `.pth` das venvs legadas retidas e 20 seletores em gerações gerenciadas foram conferidos sem dependência dos paths removidos. Três configs e três smokes de disponibilidade sem ferramentas passaram, com resposta final exata, serviços ativos e mesmos PIDs de Zeus/Ares/Atena. Sem restart ou ações de campanha/cron/Meta/PC1.
+
+Fonte ativa de conclusão: `data/storage-runtime-retirement-prep-1571249324464148642/cleanup-result.json`; inventário `runtime-code-retirement-1571265639241224325`; checkpoint `ZEUS-STORAGE-RUNTIME-LOT-1571249324464148642`. Manifesto e resultado de preparação permanecem históricos e não representam um pedido de exclusão ainda aberto. Nenhuma outra pasta, atalho, objeto Git ou preservação foi excluída. As quatro bases restantes continuam protegidas; este lote não autoriza nova limpeza por inferência.
+
 
 

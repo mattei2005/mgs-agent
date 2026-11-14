@@ -64,14 +64,24 @@
   "runtime_bindings_changed": false,
   "pages_pixels_validated": false,
   "operational_pixel_validation": {"pixel_id": "935354115143283", "name": "Eggbev-US-CC-EN", "http": 200, "account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"]},
-  "page_access_validation": {"status": "BLOCKED_REMOTE_META_CODE10", "historical_account_page_dependencies_checked": 115, "page_reads_passed": 0, "direct_rechecks": ["1272524399287905", "1342451482280266", "1306762309190521"], "direct_rechecks_http": 400, "code": 10, "scope_present_in_token": "pages_read_engagement", "cause_limit": "Token scopes present and three direct Page reads denied; this does not alone distinguish missing profile/Page grant from app feature/access restrictions. No permission change authorized or executed."},
+  "page_access_validation": {"status": "BLOCKED_REMOTE_META_CODE10", "scope": "Historical ad-account Page dependencies, not a verified inventory of Pages linked to Ana Cunha", "blocks_profile_adoption": false, "scope_correction_authority_message_id": "1571266743157002423", "historical_account_page_dependencies_checked": 115, "page_reads_passed": 0, "direct_rechecks": ["1272524399287905", "1342451482280266", "1306762309190521"], "direct_rechecks_http": 400, "code": 10, "scope_present_in_token": "pages_read_engagement", "cause_limit": "Token scopes present and three direct Page reads denied; this does not alone distinguish missing profile/Page grant from app feature/access restrictions. No permission change authorized or executed."},
   "marketing_api_access_tier_live": "development_access",
   "marketing_api_access_tier_note": "Header vivo das tres contas no app novo; nao herdar standard_access historico do minibot anterior.",
   "technical_guard_validation": "12 own-credential metadata tests and 13 operational asset-scope tests passed; corporate app exception/account allowlist unchanged.",
   "live_validation_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/live-validation.json",
   "page_access_diagnostic_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/page-access-diagnostic.json",
   "future_account_requirements": ["positive account scope checker", "Ana Cunha identity and approved issuer-app validation", "exact account tasks and Page/pixel access", "separate onboarding and per-request campaign gates"],
-  "next_step": "Concluir inventario/cutover no mesmo pedido usando Ana Cunha/minibot m6 e a Page realmente vinculada/selecionada no recorte atual, nao Pages antigas da conta. Se a identidade da unica Page atual nao estiver recuperavel pela rota autorizada, pedir somente nome/ID/pg dessa Page; futuras Pages serao resolvidas no pedido correspondente, sem novo OK de escopo e sem importacao na BM. Nao exigir liberacao do historico nem usar Mhd/Carla como fallback; acesso real e demais gates permanecem.",
+  "campaign_intake_handoff": {
+    "authority_message_id": "1571267646597628087",
+    "requester": "Nicolas",
+    "scope": "Eggbev accounts01/02/03 in their respective existing account channels/threads",
+    "operator_will_provide": ["Page name", "campaign creation request"],
+    "continue_in_account_origin": true,
+    "repeat_profile_or_app_approval_required": false,
+    "page_identity_required_in_director_thread_now": false,
+    "no_campaign_created_by_this_handoff": true
+  },
+  "next_step": "Aguardar Nicolas informar a Page e o pedido de criacao na origem especifica da conta Eggbev01/02/03; continuar nessa mesma origem a resolucao/validacao da Page escolhida via Ana Cunha/minibot m6 e completar a camada tecnica de cutover/onboarding que faltar antes do write. Nao pedir agora a Page na Diretoria nem reabrir aprovacao de perfil/app/escopo de Pages ja concedida. Preservar autorizacoes/gates por conta e por pedido, sem BM import, sem fallback Mhd/Carla e sem prometer executor pronto antes de validacao.",
   "excluded": ["remote permission changes", "new app allowlist or guard bypass without explicit authorization", "token revocation or vault deletion", "campaign creation/activation", "budget or billing changes", "automatic onboarding of future accounts"],
   "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024"
 }

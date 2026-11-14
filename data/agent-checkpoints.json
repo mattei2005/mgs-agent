@@ -1353,12 +1353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-USER-TOKEN-REPLACEMENT-1571250965313486889",
-      "next_step": "Rodolfo conferir acesso de Ana Cunha as Pages e selecao delas no consentimento minibot m6. Se exigir atribuicao/permissao nova, obter autorizacao critica exata. Revalidar GETs diretos (Pages 1272524399287905,1342451482280266,1306762309190521); se liberadas, completar consumidores/caches e cutover do mesmo pedido sem usar Mhd/Carla como fallback; preservar write flags das contas02/03.",
-      "objective": "Adotar Ana Cunha/minibot m6 para Eggbev existente/futuro, com cutover validado das contas01/02/03.",
-      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/live-validation.json",
-      "state": "app_approved_page_access_external_blocker. confirmacao 1571263998102343752 aplicada ao registro, app tecnico restrito e grant self-only da conta01. identidade/debug http200, contas01/02/03 http200 advertise/analyze, pixel eggbev http200. pages derivadas de adsets paginados: 115 gets code10; tres pages atuais/referencia tambem falham individualmente. token inclui pages_read_engagement; isso nao prova grant ou advanced access. tier novo development_access. zero cutover produtivo/caches/campanha/cron/permissao remota; 25 testes guard/scope passaram.",
+      "next_step": "Receber pedido de Nicolas na origem da conta exata, resolver a Page informada com Ana Cunha/minibot m6, reconciliar e completar somente camadas tecnicas faltantes antes do write. Preservar gates por conta/budget/campanha; sem novo OK de perfil/app, sem fallback antigo e sem criacao automatica por este handoff.",
+      "objective": "Continuar Ana Cunha/minibot m6 nas origens Eggbev01/02/03 quando Nicolas informar Page e criacao.",
+      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;discord:1185714635991679006/1571249921242435695/1571267646597628087",
+      "state": "awaiting_nicolas_account_requests. rodolfo 1571267646597628087 definiu que nicolas informara nome da page e criacao nos canais das respectivas contas01/02/03. nao cobrar page na diretoria agora. perfil/app e pages atuais/futuras ja autorizados, sem bm; executor/cutover ainda dependem de validacao pontual na continuacao.",
       "thread_id": "1571249921242435695",
-      "updated_at": "2026-11-14T20:49:17+00:00"
+      "updated_at": "2026-11-14T20:57:23+00:00"
     },
     {
       "agent": "ares",
@@ -10597,5 +10597,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:50:26+00:00"
+  "updated_at": "2026-11-14T20:57:23+00:00"
 }
