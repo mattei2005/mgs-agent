@@ -6378,12 +6378,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUPS-1570830889359777924",
-      "next_step": "SeguirZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;manterlatest/compacto7bases/safety/offsite/runtime;nenhumaexclusaonovaconfirmada.",
-      "objective": "Lotesanterioresfechados;35conjuntosVPSmaintenancepreservadoseverificadosconsolidados.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
-      "state": "vps_legacy_preserved_exact_retirement_pending",
+      "next_step": "FechamentoativoZEUS-STORAGE-VPS-RETIRE-1571196199548092428;depoisrevisaodecopiascodigo/runtimeHermesseparada,semexclusaoautomatica;manterlatest/compactos/bases/safety/offsite.",
+      "objective": "Lotesexpandidosanterioresfechados;35conjuntosVPSmaintenanceconsolidadoseoriginaisretiradosvalidados.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json",
+      "state": "vps_maintenance_lot_retired_validated_next_runtime_review",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T16:08:48+00:00"
+      "updated_at": "2026-11-14T16:26:04+00:00"
     },
     {
       "agent": "zeus",
@@ -6418,12 +6418,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "FonteativaZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;ganholiquidoprojetado103.65MiB;confirmacaodestrutivanovapendente;outrascategoriasnaoampliadas.",
-      "objective": "Lotesanterioresconcluidos;VPSmaintenancepreservacaoautossuficiente871MiB;retiradaoriginaisaindanaoexecutada.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
-      "state": "vps_legacy_preserved_retirement_confirmation_pending",
+      "next_step": "SeguirZEUS-STORAGE-VPS-RETIRE-1571196199548092428parafechamento;proximapontorevisaocopiascodigo/runtimeHermes,protegendoativo+rollback+perfis;naoampliarexclusao.",
+      "objective": "Lotesanteriorespreservados;originaisVPSmaintenanceconfirmadosretirados;0.975GiBdfagora/103.65MiBreducaoliquidaconjunto.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json",
+      "state": "confirmed_vps_legacy_lot_completed_other_classes_not_deleted",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T16:08:49+00:00"
+      "updated_at": "2026-11-14T16:26:04+00:00"
     },
     {
       "agent": "zeus",
@@ -6448,32 +6448,32 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-LEGACY-1571144515673260184",
-      "next_step": "SeguirZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;decisionpreservacaoanteriorresolvida,aguardarsomenteconfirmacaoexatanovaretirada;semdelete.",
-      "objective": "Revisaofechada;preservacaodiferencasautorizada1571190519713759264econcluida.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
-      "state": "historical_differences_preserved_retirement_confirmation_pending",
+      "next_step": "Seguircleanup-result.jsoneZEUS-STORAGE-VPS-RETIRE-1571196199548092428;naorepedirpreservacaoouexclusaodesselote.",
+      "objective": "Revisaolegacyconcluida;preservacaoeaposentadoriaoriginaisexecutadascomconfirmacao1571196199548092428.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json",
+      "state": "legacy_originals_retired_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T16:08:48+00:00"
+      "updated_at": "2026-11-14T16:26:04+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-PRESERVE-1571190519713759264",
-      "next_step": "Aguardarnovaconfirmacaodo manifestof5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91;36alvos/2675files/352dirs/16links;liberacao974.88MiBbruta,ganholiquido103.65MiB;naoapagarsemconfirmacao.",
-      "objective": "Preservacaoautossuficiente871MiB/2675filesvalidada;nenhumdelete;4negativos/preflightPASS.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
-      "state": "preservation_completed_validated_awaiting_exact_source_retirement_confirmation",
+      "next_step": "SeguirZEUS-STORAGE-VPS-RETIRE-1571196199548092428;confirmacaonovaresolvida;naohaoutrolotedestrutivoaberto.",
+      "objective": "Preservacaoautossuficientevalidada;originaisretiradoseverificadossobconfirmacao1571196199548092428.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json",
+      "state": "originals_retired_follow_cleanup_receipt",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T16:08:48+00:00"
+      "updated_at": "2026-11-14T16:26:03+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-RETIRE-1571196199548092428",
-      "next_step": "Conferir mesmoshashes/preflight/retidos/smokes;executar36alvosumavezcomjournal;validar ausenciae recuperacaoposexclusao;report/inventory/Git.",
-      "objective": "Executar uma vez o lote de35pastas+latest.path confirmado1571196199548092428,manifestof5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91;preservarconsolidadoeoperacao.",
-      "source": "discord:1569928464033783862/1571196199548092428;data/storage-vps-preservation-1571190519713759264/deletion-manifest.json",
-      "state": "approved_preflight_in_progress",
+      "next_step": "Loteencerradosemretry/confirmacaopendente. RecibodeGit:cleanup-git-sync.json.Verificarreadbackremotoantesentrega;manterconsolidado871MiB/compacto7bases/Safety14Nov/offsite.Proximaclasse:revisaocopiascodigo/runtimeHermes,semexclusaoautomatica.",
+      "objective": "36alvosconfirmadosretirados;2675payloadsrecuperadosposdelete;30protegidosiguais;3configs/3smokesPASS;REPORT1571199552688619643GETverified;nenhumrestart.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json;report:1571199552688619643",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T16:14:10+00:00"
+      "updated_at": "2026-11-14T16:28:06+00:00"
     },
     {
       "agent": "zeus",
@@ -10457,5 +10457,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T16:14:10+00:00"
+  "updated_at": "2026-11-14T16:28:06+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "status": "filesystem_and_preservation_completed_governance_closure_pending",
+  "status": "completed_validated",
   "confirmation_message_id": "1571196199548092428",
   "question_message_id": "1571195735423062158",
   "thread_id": "1569928464033783862",
@@ -63,5 +63,17 @@
   "initial_validation_recovery": "Stale safety Nov10 path was replaced by validated native latest safety Nov14; resolved from producer policy, current manifest and native log; no deletion until recovery.",
   "preservation_result_immutable": "preservation-result.json",
   "completed_at": "2026-11-14T11:24:13.681235-05:00",
-  "next_step": "This exact backup lot is complete. Broader reorganization remains distinct; next class is old Hermes code/runtime copies, not automatically deleted."
+  "next_step": "This exact backup lot is complete. Broader reorganization remains distinct; next class is old Hermes code/runtime copies, not automatically deleted.",
+  "report_infra": {
+    "message_id": "1571199552688619643",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T11:26:46.221067-05:00"
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-14T11:26:46.221892-05:00"
 }
