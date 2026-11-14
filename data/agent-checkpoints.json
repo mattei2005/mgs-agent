@@ -4945,12 +4945,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
-      "next_step": "Adicionar somente apresentação; testes unitários, gates completos, stage API/browser e publicação controlada",
+      "next_step": "Consumir gates finais; validar hash e fingerprints pré; publicar via finance_release.py; readback produtivo desktop/mobile e fingerprints pós",
       "objective": "Exibir Data da cobrança em Despesas Gerais sem mutação financeira",
-      "source": "apps/finance-system/private/charge-date-1571201800063680562/baseline.json; model-evidence.json; authority.json",
-      "state": "modelo autenticado astra alias/wire 872000 confirmado; autoridade original rodolfo validada. contrato: charges[].date e amount distintos de checked_on. dados produtivos reais incluem múltiplas datas, duplicatas e nulos; candidato source-only preparado com suplemento de fixtures sob shared admission.",
+      "source": "apps/finance-system/private/charge-date-1571201800063680562/stage-proof.json; production-preflight-api.json; final gate processes proc_2677555783ef/proc_b7c567c7e8af",
+      "state": "candidato isolado implementado. stage real api/model 12 views pass; todas 7 colunas cabem em1280/1440, 24 alcances mobile sem overflow. datas duplicadas/nulas preservadas e editor existente validado sem salvar. login/mfa owner produtivo normal e health confirmados. gates iniciais cancelados para refino mobile; ambos gates integrais finais em execução silenciosa, nada publicado.",
       "thread_id": "1571201800063680562",
-      "updated_at": "2026-11-14T16:41:32+00:00"
+      "updated_at": "2026-11-14T17:00:21+00:00"
     },
     {
       "agent": "zeus",
@@ -10467,5 +10467,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T16:41:32+00:00"
+  "updated_at": "2026-11-14T17:00:21+00:00"
 }
