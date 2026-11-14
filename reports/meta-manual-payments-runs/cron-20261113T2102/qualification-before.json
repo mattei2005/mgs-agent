@@ -1,0 +1,70 @@
+{
+  "status": "full_refresh_validated_with_historical_d_gaps",
+  "source_message_id": "1570806033864069341",
+  "h_source_authority_message_id": "1570815017794674749",
+  "verified_at": "2026-11-13T10:32:19.338762-05:00",
+  "accounts": 55,
+  "groups": {
+    "Cartão de crédito": 15,
+    "Linha de crédito": 40
+  },
+  "fresh_metrics_count": 55,
+  "validated_metrics_at": "2026-11-13T10:26:37.855895-05:00",
+  "fresh_h_count": 40,
+  "h_source": "accounts_list_outstanding_balance",
+  "h_header": "Saldo pendente — Outstanding balance",
+  "h_read_at_min": "2026-11-13T10:01:53.761038-05:00",
+  "h_read_at_max": "2026-11-13T10:24:24.731026-05:00",
+  "fresh_d_proof_count": 11,
+  "fresh_d_account_ids": [
+    "1150399088163771",
+    "1481815942722118",
+    "1062446663435585",
+    "1635726541410028",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907",
+    "1290644206529750"
+  ],
+  "pending_ui": [],
+  "historical_blank_d_count": 39,
+  "average_periods": [
+    "{\"since\": \"2026-11-10\", \"until\": \"2026-11-12\"}"
+  ],
+  "month_periods": [
+    "{\"since\": \"2026-11-01\", \"until\": \"2026-11-13\"}"
+  ],
+  "totals_usd": {
+    "average_daily": "20050.81",
+    "balance": "605572.33",
+    "month_spend": "249789.96",
+    "outstanding_line_accounts": "602287.31"
+  },
+  "invoices": {
+    "period": "2026-10-01",
+    "pending": 30,
+    "due_usd": "417864.11",
+    "outside": 0,
+    "collected_at": "2026-11-13T10:30:50.023655-05:00"
+  },
+  "source_to_live_sheet_cgij_exact": true,
+  "h_source_to_live_sheet_and_note_exact": true,
+  "d_ledger_to_live_sheet_exact": true,
+  "invoice_source_to_live_sheet_ef_exact": true,
+  "other_sheet_data_unchanged": true,
+  "workbook_sheets": 2,
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1570806033864069341",
+  "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261113T102642117618",
+  "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261113T092709427874",
+  "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261113T103050023401",
+  "next_run_at": "2026-11-13T14:02:00-05:00",
+  "same_job_id": "2ee720363d7d",
+  "schedule_unchanged": true,
+  "payments_executed": 0,
+  "billing_changes": 0,
+  "meta_writes": 0,
+  "report_infra_status": "pending"
+}

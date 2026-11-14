@@ -64640,6 +64640,38 @@
       "cleanup_report_message_id": "1570892341189943489",
       "cleanup_report_readback": true,
       "skill_closure_reference": "vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md"
+    },
+    {
+      "id": "meta-manual-payments-refresh-cron-20261113T2102",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh_and_claim_validation_lesson",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "updated_at": "2026-11-13T21:09:35.369460-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T2102/closure-current.json",
+      "source_thread_id": "1563926766286803004",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "preserved_h": 40,
+        "pending_d": 3,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef": true,
+        "historical_h_d_ledger_parity": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      },
+      "procedural_learning": {
+        "target": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md",
+        "sha256": "8e2798d3c435d0367ddf814896cc6ecb0fba66a973f00d8ecdcf0813d3283851",
+        "mirror_equal": true,
+        "summary": "Validate active fire claim by owner and slot; renewable heartbeat at may advance. No writes replayed after validator-only failure."
+      },
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [

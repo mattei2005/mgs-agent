@@ -1,0 +1,73 @@
+{
+  "id": "2ee720363d7d",
+  "name": "Digital Trust · planilha de pagamentos 3x/dia",
+  "prompt": "Atualização financeira recorrente autorizada de Rodolfo344196393512075265,thread1563926766286803004. Escopo vigente55IDs do account_ids em data/meta-manual-payments/digital-trust-workbook-contract.json, BM155263197283282,spreadsheet1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU,sheet271321738. Inclusão8contas autorizada1570799435502588027 supersede fixação47IDs; não adicionar novos IDs nem excluir zeros por inferência. MESMO job, cadência08:02/14:02/21:02America/New_York, writer.lock e leasePC1; sem writer/job paralelos. Carregar skill meta-manual-payments-planning e refs recurring-refresh.md,accounts-list-search.md,collection-and-workbook.md,funding-regroup-priority.md,september-invoices.md. Fonte H VIGENTE por Rodolfo1570815017794674749: Saldo pendente — Outstanding balance da linha Accounts exata,source accounts_list_outstanding_balance. Essa decisão supersede a exigência antiga de Current balance; não bloqueie só porque o header é Outstanding balance. Não afirmar equivalência entre métricas nem valor permitido no modal Pay now. Contrato h_source,pay_now_column e histórico de fonte são canônicos. Preflight identidade/superfície e concorrência; backup de todasabas antes de primeiro write. Regroup_funding.py --apply,refresh_september_invoices.py --apply,refresh_workbook.py --apply --allow-history-pending nessa ordem. E somente invoices pendentes reais;Paid/due0 vazio;F latest_closed_generated atualmente outubro2026;Jnovembro2026 de2026-11-01a2026-11-30 limitado ao dia atual de cada conta com hoje parcial. C/G/I/J em55IDs;Insightsdiário/agregado reconciliados e média de3diascompletos. D somente com prova histórica de cartão, nunca inferir instrumento por default/eventogenérico; resolver pending_ui pelo worker UI canônico e inspeção real de screenshot. Rota nova detalhes exigebusiness_id,asset_id,payment_account_id exatos em business.facebook.com/latest/billing_hub/accounts/details/; não exigir Digital Trust noAX, confirmarBM/conta em pixels. Para H,publish_pay_now.py --prepare resolve40targets atuais; read_pc1_accounts_list.py emlotes6foreground, umaaba própria porlote,mesmoChromeRodolfo,leaseglobal; não abrir detalhes/modais para saldo. Captura nativa3200; bounds_scale pode ser heurística incorreta: o worker validado usa bounds frescos dentro da imagem sem divisão cega. Inspecionar cada imagem comvision_analyze; nomes/IDs/BM/Outstandingbalance e valores exatos; crop do mesmoarquivo paraambiguidadeOCR antes de repetir navegação. Manifest exigeverified_account_ids e accounts_list_checks[ID]={valid_billing_list:true,business_id:'155263197283282',row_account_id:ID,name:NOME_EXATO,balance_usd:VALOR_LITERAL,balance_label:'Outstanding balance',authority_message_id:'1570815017794674749'}. Publicar comworker canônico;preservar fonteshorasindividualizadas,sem dados fabricados. Se bloqueio real,interromper sembypass/reload/perfilalternativo;--verified-only --apply sóevidências realmente vistas,qualificar parcial. Depois D,reconciliar refreshAPI final,somente pending_ui novos;máximo2reconciliações por evento. Validar55IDs,grupos,links,notas,moedas,subtotais/total F/G/H/I/J;fonteparidadeporID com planosAPI,ledgerH40 e ledgerD. Htitle real,não modal;camposDhistóricos semprova ficamvaziosqualificados,semzero. Resolver somente pendências autorizadas,sem ampliar escopo. Header/coluna não devem ser inseridos novamente. Em ordenação porfiltro,comparar linhas completas porID somente na faixa;demaiscélulas/fórmulas/limites/outrasabas estritos. Atualizarcontrato/checkpoint/audit/inventário/REPORT quando aplicável e remover pendênciasHsomente após prova. Preservar sessão,fechar sóabaspróprias,liberarlease. Proibidos pagamento,billing/default,budget,credenciais/permissões e novosjobs. FinalPTBRcurto nesta thread,semtraces/anexos/mentions;distinguir métricasAPI,H e históricoD;não chamarparcialdeintegral. Continuidade meta-manual-payments-digital-trust;recuperaçãoUI/H em reports/meta-manual-payments-runs/manual-1570806033864069341/.",
+  "skills": [
+    "meta-manual-payments-planning",
+    "google-drive-agent-automation",
+    "secure-remote-windows-automation"
+  ],
+  "skill": "meta-manual-payments-planning",
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": null,
+  "no_agent": false,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "2 8,14,21 * * *",
+    "display": "2 8,14,21 * * *"
+  },
+  "schedule_display": "2 8,14,21 * * *",
+  "repeat": {
+    "times": null,
+    "completed": 57
+  },
+  "enabled": true,
+  "state": "scheduled",
+  "paused_at": null,
+  "paused_reason": null,
+  "created_at": "2026-10-25T13:42:18.304561-04:00",
+  "next_run_at": "2026-11-14T08:02:00-05:00",
+  "last_run_at": "2026-11-13T14:05:43.743450-05:00",
+  "last_status": "error",
+  "last_error": "RuntimeError: HTTP 400: {\"detail\":\"Bad Request\"}",
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": {
+    "at": "2026-11-13T14:05:43.743450-05:00",
+    "detail": "RuntimeError: HTTP 400: {\"detail\":\"Bad Request\"}"
+  },
+  "failure_streak": 1,
+  "deliver": "discord:1496267442899521627:1563926766286803004",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1563926766286803004",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Nessa Planilha Que Crie Uma - Rodolfo",
+    "thread_id": "1563926766286803004",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "discord:1496267442899521627:1563926766286803004",
+  "last_dispatch": {
+    "scheduled_at": "2026-11-13T21:02:00-05:00",
+    "dispatched_at": "2026-11-13T21:02:46.441541-05:00",
+    "lateness_seconds": 46.4,
+    "kind": "on_time"
+  },
+  "fire_claim": {
+    "at": "2026-11-13T21:08:47.804014-05:00",
+    "by": "srv1767265:2241212:57ee66f7e9254847b1bdb923b510fea2"
+  },
+  "canonical_completions": [
+    "8cf31bddc14049fab1081932656dfd4a"
+  ],
+  "timezone": "America/New_York"
+}

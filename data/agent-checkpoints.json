@@ -8828,12 +8828,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Rodolfo concluir passkey Meta noChromePC1. Supervisor preservar operaçãoe67b9e22a17027e23728d532 e provar acesso positivo ao mesmo alvo antes de retomar apenasH40 noHrun jápreparado eD1414197490675732, depoisreconciliaçãoAPIfinal,validação eentrega canônica idempotente;semrepetirfunding/invoices nem criarjob.",
-      "objective": "Recuperar mesma ocorrência14:02 de2ee720363d7d;55IDs, H40 Outstanding balance, sem pagamentos/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T1402/recovery-validation.json",
-      "state": "partial_validated_waiting_human_passkey:api55 e invoices30 us$417864.11 publicados/readback;c/g/i/j ee/f exatos;h40 anteriores ed preservados;pending_ui1414197490675732;meta exigiu passkey emsecurity/twofactor/reauth;lease livre;15testesoffline passaram;entrega de negócio não concluída",
+      "next_step": "Passkey Meta deve ser concluída por humano no ChromeRodolfo PC1; depois provar mesmo alvo e retomar H40 no run preparado e D1414197490675732,1543098427832443,2852476828464907;API final e validação antes de fechamento. Não criar job nem duplicar writer;gate anterior e67b9e22a17027e23728d532 preservado, sem declarar ocorrência14:02 concluída.",
+      "objective": "Atualização recorrente21:02 do mesmo job2ee720363d7d:55IDs, H40 Outstanding balance; preservar ocorrência14:02 aberta e gates billing.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T2102/closure-current.json",
+      "state": "partial_validated_waiting_human_meta_passkey:api55 coletada21:06est;15cartão/40linha;invoices outubro30 usd417864.11;h40 históricos10:01–10:24 preservados e d anteriores preservados;3eventosd recentes pendentes;39vazios históricos qualificados;c/g/i/j ee/f fontes exatas;outraaba intacta;lease livre. skill claim heartbeat corrigida, espelho igual;report-infra pendente por entrega somente cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-13T19:16:39+00:00"
+      "updated_at": "2026-11-14T02:10:34+00:00"
     },
     {
       "agent": "zeus",
@@ -10387,5 +10387,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T01:56:11+00:00"
+  "updated_at": "2026-11-14T02:10:34+00:00"
 }
