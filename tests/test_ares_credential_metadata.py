@@ -32,6 +32,20 @@ class CredentialMetadataTests(unittest.TestCase):
  def test_wrong_app_or_invalid_token_denied(self):
   for payload in [{'is_valid':True,'app_id':'1234567','user_id':'1234567'},{'is_valid':False,'app_id':scope.APP_ID,'user_id':'1234567'}]:
    with self.subTest(payload=payload),self.assertRaises(scope.ScopeError):scope.observe_credential_metadata('debug_token',{'input_token':'synthetic-own-token'},{'data':payload},'1034081997659047','synthetic-own-token')
+ def test_approved_account_issuer_override_is_exact(self):
+  self.grant['technical_identity_validation']['expected_app_id']='953171080682697'
+  self.policy.write_text(json.dumps(self.grant))
+  params={'input_token':'synthetic-own-token'}
+  payload={'data':{'is_valid':True,'app_id':'953171080682697','user_id':'1234567'}}
+  scope.observe_credential_metadata('debug_token',params,payload,'1034081997659047','synthetic-own-token')
+  for app in [scope.APP_ID,'1234567']:
+   payload['data']['app_id']=app
+   with self.assertRaises(scope.ScopeError):scope.observe_credential_metadata('debug_token',params,payload,'1034081997659047','synthetic-own-token')
+  with self.assertRaises(scope.ScopeError):scope.observe_credential_metadata('debug_token',params,payload,'1481815942722118','synthetic-own-token')
+ def test_malformed_issuer_override_fails_closed(self):
+  self.grant['technical_identity_validation']['expected_app_id']='not-an-app'
+  self.policy.write_text(json.dumps(self.grant))
+  with self.assertRaises(scope.ScopeError):scope.observe_credential_metadata('debug_token',{'input_token':'synthetic-own-token'},{'data':{'is_valid':True,'app_id':'not-an-app','user_id':'1234567'}},'1034081997659047','synthetic-own-token')
  def test_unknown_account_denied_before_http(self):
   with patch.object(common.urllib.request,'urlopen') as http:
    with self.assertRaises(ValueError):common.graph_get_credential_metadata('999999999999999999','synthetic-own-token')

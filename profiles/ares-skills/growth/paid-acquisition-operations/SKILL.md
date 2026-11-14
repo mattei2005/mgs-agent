@@ -42,7 +42,7 @@ Ao concluir qualquer pedido autorizado de criação, duplicação ou clonagem de
 
 Antes de fechar, confira separadamente a execução Meta e a entrega ao operador: receipt, checkpoint ou mensagem de recuperação sem o bloco copiável não completam a entrega das UTMs. Se a resposta for interrompida ou o usuário informar que o bloco não chegou, recupere os mesmos IDs e a última prova válida; faça GET read-only do tracking quando ele pedir nova conferência ou houver dúvida de frescor, extraia os valores de todos os anúncios e entregue o bloco na resposta nativa. Não retome o writer, recrie campanhas nem altere tracking para reparar comunicação. Uma nova instrução de pausa/horário com alvo ambíguo recebe somente a pergunta de escopo necessária, sem reter o resultado e as UTMs já verificados do pedido anterior.
 
-- Resolver o domínio real da operação e validar o escopo pelo checker canônico antes de mencioná-lo. Em pedido com vários domínios, separar um bloco por domínio e estratégia.
+- No bloco para Iris/AdOps, usar somente o **domínio da operação/site monetizado no GAM**, resolvido pelo binding canônico da conta/operação e validado pelo checker; nunca a URL nem o host da landing/quiz, encurtador ou redirecionador do anúncio. Mostrar apenas o domínio, sem caminho, query ou UTMs. Se o destino Meta estiver em outro host, manter integralmente o link e o tracking da campanha: essa diferença não autoriza alterá-los. Não deduzir o domínio AdOps do campo Website URL; se o binding estiver ausente ou ambíguo, resolver a fonte canônica e perguntar somente quando a informação não puder ser recuperada. Em pedidos com várias operações, separar por domínio monetizado e estratégia. Correção permanente de Rodolfo `1571263266141900941`: neste pedido, o domínio AdOps é `yolokfx.com`; a regra vale para todos os gestores e operações Ares, em pedidos atuais e futuros. Supersede explicitamente qualquer interpretação anterior que usasse o host do quiz como domínio do pré-cadastro; preserva `@Iris#6164`, as UTMs literais e os demais requisitos desta seção.
 - Extrair os valores literais do tracking final efetivamente conferido no readback dos objetos novos do mesmo pedido, respeitando a localização contratada (Website URL, `url_tags` ou tracking BOT comprovado). Não deduzir UTMs somente pelo nome da campanha, não inventar valores e não alterar tracking para produzir a mensagem.
 - No tráfego direto, listar `utm_adgroup` e `utm_campaign`; no BOT, listar somente `utm_campaign`, preservando o padrão real da operação (por exemplo, `pg_512`). Não impor o padrão de uma operação às demais.
 - Consolidar e deduplicar valores por chave/domínio/estratégia, mantendo a ordem da primeira ocorrência. Excluir objetos não concluídos e valores exclusivos das fontes; valor compartilhado preservado por contrato BOT não é excluído se estiver comprovadamente instalado no alvo novo.
@@ -53,7 +53,7 @@ Antes de fechar, confira separadamente a execução Meta e a entrega ao operador
 Formato de tráfego direto (substituir os marcadores por dados reais validados):
 
 ```text
-@Iris#6164 preciso pré-cadastrar os key values utm_adgroup no <domínio validado>:
+@Iris#6164 preciso pré-cadastrar os key values utm_adgroup no <domínio validado da operação>:
 <um valor real por linha>
 
 E os utm_campaign:
@@ -63,7 +63,7 @@ E os utm_campaign:
 Formato BOT:
 
 ```text
-@Iris#6164 pré-cadastra no <domínio validado> os utm_campaign:
+@Iris#6164 pré-cadastra no <domínio validado da operação> os utm_campaign:
 <um valor real por linha>
 ```
 

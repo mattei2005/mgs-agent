@@ -118,7 +118,11 @@ def observe_credential_metadata(path,params,payload,account_id,authentication_to
  if not isinstance(payload,dict):raise ScopeError(DENY)
  identity=payload if clean=='me' else payload.get('data',{})
  if clean=='me' and (not re.fullmatch(r'[0-9]{5,30}',str(identity.get('id',''))) or not isinstance(identity.get('name'),str)):raise ScopeError(DENY)
- if clean=='debug_token' and (not isinstance(identity,dict) or identity.get('is_valid') is not True or str(identity.get('app_id',''))!=APP_ID or not re.fullmatch(r'[0-9]{5,30}',str(identity.get('user_id','')))):raise ScopeError(DENY)
+ if clean=='debug_token':
+  try:grant=json.loads(CREDENTIAL_IDENTITY_POLICY.read_text()).get('technical_identity_validation',{})
+  except (OSError,ValueError):raise ScopeError(DENY) from None
+  expected_app=str(grant.get('expected_app_id',APP_ID))
+  if not re.fullmatch(r'[0-9]{5,30}',expected_app) or not isinstance(identity,dict) or identity.get('is_valid') is not True or str(identity.get('app_id',''))!=expected_app or not re.fullmatch(r'[0-9]{5,30}',str(identity.get('user_id',''))):raise ScopeError(DENY)
 
 def enforce_meta_path(path,params=None,method='GET'):
  if not is_ares_context():return

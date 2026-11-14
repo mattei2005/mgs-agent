@@ -35,7 +35,10 @@
   "supersedes": "Exigencia de nova confirmacao de Rodolfo a cada reconciliacao de binding equivalente dentro deste recorte; demais gates criticos permanecem.",
   "technical_identity_validation": {
     "status": "active",
-    "authority_message_id": "1567911802774360195",
+    "authority_message_id": "1571263998102343752",
+    "previous_authority_message_id": "1567911802774360195",
+    "expected_app_id": "953171080682697",
+    "issuer_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
     "authorized_by_discord_id": "344196393512075265",
     "account_id": "1034081997659047",
     "allowed_reads": ["me:id,name", "debug_token:self_only"],

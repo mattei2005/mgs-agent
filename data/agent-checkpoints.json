@@ -1353,12 +1353,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV-USER-TOKEN-REPLACEMENT-1571250965313486889",
-      "next_step": "Rodolfo confirma se deseja adotar minibot m6 ou emitir Ana Cunha no minibot atual. Apos gate proprio, validar Pages/pixel e inventariar consumidores/caches para cutover controlado. Nao criar campanhas, conceder permissoes ou excluir/revogar tokens.",
-      "objective": "Validar Ana Cunha e corrigir documentacao Eggbev existente e futura conforme Rodolfo 1571262328715088024.",
-      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;discord:1185714635991679006/1571249921242435695/1571262328715088024",
-      "state": "partial_validated_app_confirmation_pending. ana cunha user valida; get das tres contas http200 com analyze/advertise na bm digital trust. emissor real minibot m6 953171080682697 difere de minibot permitido 1299247318762949; guard manteve scopeerror, sem bypass. decisao de perfil documentada canonicamente; bindings produtivos preservados sem cutover. item do cofre e mesmo id anteriormente carla, agora ana; nao usar perfis antigos como fallback.",
+      "next_step": "Persistir autorizacao, validar guard e identidade/app; conferir Pages/pixel; realizar cutover somente dos bindings/caches aprovados e smokes read-only sem ativar onboarding/campanhas.",
+      "objective": "Adotar Ana Cunha / minibot m6 para Eggbev 01/02/03 e documentacao futura.",
+      "source": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json;discord:1185714635991679006/1571249921242435695/1571263998102343752",
+      "state": "app_migration_authorized_validating_assets. confirmacao sim de rodolfo 1571263998102343752 autenticada na origem e vinculada a pergunta 1571263188513595533. inventariando consumidores e preparando guard emissor restrito, sem writes meta.",
       "thread_id": "1571249921242435695",
-      "updated_at": "2026-11-14T20:38:35+00:00"
+      "updated_at": "2026-11-14T20:43:17+00:00"
     },
     {
       "agent": "ares",
@@ -10597,5 +10597,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:38:35+00:00"
+  "updated_at": "2026-11-14T20:43:17+00:00"
 }
