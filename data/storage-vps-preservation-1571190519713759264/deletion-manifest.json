@@ -222,5 +222,8 @@
     "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264"
   ],
   "effect": "Original 35 maintenance directories and legacy latest.path pointer would disappear, keeping parent root. Historical disabled-unit replay or recovery must first reconstruct their old paths from self-contained archive. No installed unit, current runtime, offsite backup, latest Hermes recovery, compact history bases, live agent data or retention would be changed.",
-  "prepared_at": "2026-11-14T11:03:37.341919-05:00"
+  "prepared_at": "2026-11-14T11:03:37.341919-05:00",
+  "recover_tool_sha256": "dafe8501e9a483c3ad893046acc5c41bf6ad85c25eaaeb26ecc9c74c1777996d",
+  "secure_checksum_manifest": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/SHA256SUMS",
+  "secure_checksum_manifest_sha256": "5f6f8bfdb153af25463c05bda89659b3f97d26a730c46ce7d07b90f5242796ee"
 }

@@ -6378,12 +6378,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUPS-1570830889359777924",
-      "next_step": "SeguirZEUS-STORAGE-VPS-LEGACY-1571144515673260184:decisaosobrepreservacao/consolidacaodashistoricasantesdemanifestodestrutivo;naoexcluirantigosporidade;compacto375MiB+7bases/latest/safety/offsiteprotegidos.",
-      "objective": "Lotesexpandidosanterioresfechados;revisaoremanescenteVPSmaintenanceconcluida0.95GiB;103archivesPASS;retiradaamplaaindapendente.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-legacy-review-1571144515673260184/review-result.json",
-      "state": "legacy_vps_review_completed_historical_preservation_gate",
+      "next_step": "SeguirZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;manterlatest/compacto7bases/safety/offsite/runtime;nenhumaexclusaonovaconfirmada.",
+      "objective": "Lotesanterioresfechados;35conjuntosVPSmaintenancepreservadoseverificadosconsolidados.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
+      "state": "vps_legacy_preserved_exact_retirement_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T12:53:59+00:00"
+      "updated_at": "2026-11-14T16:08:48+00:00"
     },
     {
       "agent": "zeus",
@@ -6418,12 +6418,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "FonteativaZEUS-STORAGE-VPS-LEGACY-1571144515673260184;103gzip/tarPASS;6archivesHermescomversoesnaointeiramentecobertasporlatest;decidirpreservacaoantesdeprepararretirada;semoutraexclusaoautorizada.",
-      "objective": "Lotesanterioresconcluidos;revisaoVPSlegacy35pastas2675files0.95GiBsemdelete;reorganizacaoamplaaindanaofechada.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-vps-legacy-review-1571144515673260184/review-result.json",
-      "state": "legacy_vps_classified_historical_preservation_gate",
+      "next_step": "FonteativaZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;ganholiquidoprojetado103.65MiB;confirmacaodestrutivanovapendente;outrascategoriasnaoampliadas.",
+      "objective": "Lotesanterioresconcluidos;VPSmaintenancepreservacaoautossuficiente871MiB;retiradaoriginaisaindanaoexecutada.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
+      "state": "vps_legacy_preserved_retirement_confirmation_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T12:53:59+00:00"
+      "updated_at": "2026-11-14T16:08:49+00:00"
     },
     {
       "agent": "zeus",
@@ -6448,22 +6448,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-LEGACY-1571144515673260184",
-      "next_step": "Decidir preservacao/consolidacao das diferencas historicas antes de preparar retirada ampla;nao apagar ou alterarretencao;report/inventory/evidence em storage-vps-legacy-review-1571144515673260184.",
-      "objective": "Revisao delimitada:35pastas+ponteiro/2675files/0.95GiB;103gzip/tarPASS;6arquivosHermesantigosnaointeiramentecobertospornovembro;zeroexclusoes.",
-      "source": "discord:1569928464033783862/1571144515673260184;data/storage-vps-legacy-review-1571144515673260184/review-result.json;context/storage-reorganization-20261112.md",
-      "state": "classification_complete_historical_preservation_decision_pending",
+      "next_step": "SeguirZEUS-STORAGE-VPS-PRESERVE-1571190519713759264;decisionpreservacaoanteriorresolvida,aguardarsomenteconfirmacaoexatanovaretirada;semdelete.",
+      "objective": "Revisaofechada;preservacaodiferencasautorizada1571190519713759264econcluida.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
+      "state": "historical_differences_preserved_retirement_confirmation_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T12:53:24+00:00"
+      "updated_at": "2026-11-14T16:08:48+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-PRESERVE-1571190519713759264",
-      "next_step": "Revalidar ledger/hash;criararquivoautossuficienteprivado;restaurarisoladamenteeverificarbytes/tipos/links/metadados;depoisprepararretiradasegurasemexecutar.",
-      "objective": "Preservacao consolidada autorizada dos35conjuntoslegadosVPSmaintenance;validarrestauracaoexata2675filessemexclusoes.",
-      "source": "discord:1569928464033783862/1571190519713759264;data/storage-vps-legacy-review-1571144515673260184/review-result.json",
-      "state": "preservation_in_progress",
+      "next_step": "Aguardarnovaconfirmacaodo manifestof5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91;36alvos/2675files/352dirs/16links;liberacao974.88MiBbruta,ganholiquido103.65MiB;naoapagarsemconfirmacao.",
+      "objective": "Preservacaoautossuficiente871MiB/2675filesvalidada;nenhumdelete;4negativos/preflightPASS.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/preservation-result.json",
+      "state": "preservation_completed_validated_awaiting_exact_source_retirement_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-14T15:52:07+00:00"
+      "updated_at": "2026-11-14T16:08:48+00:00"
     },
     {
       "agent": "zeus",
@@ -10447,5 +10447,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T15:52:07+00:00"
+  "updated_at": "2026-11-14T16:08:49+00:00"
 }

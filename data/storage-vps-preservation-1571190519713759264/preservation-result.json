@@ -1,5 +1,5 @@
 {
-  "status": "preservation_completed_validated_deletion_not_authorized",
+  "status": "preservation_completed_validated_source_retirement_waiting_new_confirmation",
   "authority_message_id": "1571190519713759264",
   "thread_id": "1569928464033783862",
   "source_root": "/root/.hermes/secure-backups/vps-maintenance",
@@ -46,9 +46,9 @@
       "symlinks": 16
     }
   },
-  "retained_set_allocated_bytes": 913543168,
+  "retained_set_allocated_bytes": 913547264,
   "proposed_inode_aware_gross_reclaim_bytes": 1022230528,
-  "net_reduction_after_hypothetical_source_retirement_bytes": 108687360,
+  "net_reduction_after_hypothetical_source_retirement_bytes": 108683264,
   "scheduler_files_checked": 18,
   "scheduler_active_references": 0,
   "historical_units_preserved_disabled": [
@@ -67,5 +67,48 @@
     "semantic_state_changed": false
   },
   "deletion_manifest": "/root/mgs-agent/data/storage-vps-preservation-1571190519713759264/deletion-manifest.json",
-  "deletion_approval_present": false
+  "deletion_approval_present": false,
+  "deletion_manifest_sha256": "f5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91",
+  "lot_verifier_sha256": "fb8af00042d35e924908992522633d02981d0ed4102c0a8b992dace6dab11ccb",
+  "negative_tests": {
+    "scope_reduction": "rejected_without_original_mutation",
+    "count": "rejected_without_original_mutation",
+    "metadata": "rejected_without_original_mutation",
+    "missing_deletion_approval": "rejected"
+  },
+  "skills_live_mirrors_equal": true,
+  "skills_updated": [
+    "references/backup-retention-scope-and-redundancy.md",
+    "references/inventory-generation-and-autopush-safety.md"
+  ],
+  "completed_at": "2026-11-14T11:07:18.337354-05:00",
+  "operation_created_scratch_paths": [
+    "/root/.hermes/profiles/zeus/cache/scratch/vps-preserve-fixture-1571190519713759264",
+    "/root/.hermes/profiles/zeus/cache/scratch/vps-preservation-negatives-1571190519713759264"
+  ],
+  "scratch_cleanup_executed": false,
+  "report_infra": {
+    "message_id": "1571195210632011930",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "fields_verified": true,
+    "verified": true,
+    "verified_at": "2026-11-14T11:09:20.959960-05:00"
+  },
+  "preflight": {
+    "status": "PASS",
+    "mode": "preflight",
+    "targets": 36,
+    "files": 2675,
+    "directories": 352,
+    "symlinks": 16,
+    "source_originals_checked": true,
+    "retained_recovery_verified": true,
+    "process_refs": 0,
+    "deletions": 0
+  },
+  "governance_errors": [],
+  "closed_at": "2026-11-14T11:09:30.521290-05:00"
 }

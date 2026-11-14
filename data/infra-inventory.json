@@ -64771,7 +64771,8 @@
       "updated_at": "2026-11-14T07:53:24.052123-05:00",
       "result_sha256": "8cd368cb58f1cd6e0c2758aeb809ca4049b13c00de189ef91a230279700d8eda",
       "report_infra_message_id": "1571146032446840964",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "preservation_followup": "storage-vps-preservation-1571190519713759264"
     },
     {
       "id": "meta-manual-payments-refresh-cron-20261114T0802",
@@ -64798,6 +64799,48 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "storage-vps-preservation-1571190519713759264",
+      "agent": "zeus",
+      "type": "self_contained_historical_maintenance_preservation",
+      "authority_message_id": "1571190519713759264",
+      "source_thread_id": "1569928464033783862",
+      "status": "preservation_completed_validated_source_retirement_waiting_new_confirmation",
+      "path": "/root/mgs-agent/data/storage-vps-preservation-1571190519713759264",
+      "secure_set": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264",
+      "archive_path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+      "archive_sha256": "077f322590054310042d0edac93ed328047fb29b01c360358e39902ca0b7e721",
+      "self_contained": true,
+      "external_base_dependencies": 0,
+      "regular_files_verified": 2675,
+      "directories_covered": 353,
+      "symlinks_covered": 16,
+      "real_recovery": "all file bytes and metadata streamed and checked; materialized restore fixture only",
+      "retained_set_allocated_bytes": 913547264,
+      "proposed_gross_reclaim_bytes": 1022230528,
+      "net_after_hypothetical_source_retirement_bytes": 108683264,
+      "deletion_manifest_sha256": "f5a7f0f9b63e26c5297fa8756b4158c2e3a637991491bb66da41bdb061a1ab91",
+      "verifier_sha256": "fb8af00042d35e924908992522633d02981d0ed4102c0a8b992dace6dab11ccb",
+      "deletion_authorized": false,
+      "deletions": 0,
+      "retention_changed": false,
+      "source_originals_unchanged": true,
+      "skills_updated": [
+        "references/backup-retention-scope-and-redundancy.md",
+        "references/inventory-generation-and-autopush-safety.md"
+      ],
+      "skill_mirrors_equal": true,
+      "checkpoint_metadata_only_repair": {
+        "target": "AUTOMATION-RECOVERY-b49d55bba2937a60710f1fba",
+        "field_added": "updated_at",
+        "semantic_state_changed": false
+      },
+      "result_path": "/root/mgs-agent/data/storage-vps-preservation-1571190519713759264/preservation-result.json",
+      "updated_at": "2026-11-14T11:08:48.512538-05:00",
+      "result_sha256": "64823ea5d0b4ae1b3e3846b8272b6415b942369a4d647a4627eab8ff0fe7def0",
+      "report_infra_message_id": "1571195210632011930",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
