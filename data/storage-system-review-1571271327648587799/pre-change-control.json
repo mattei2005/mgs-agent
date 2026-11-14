@@ -1,0 +1,14 @@
+{
+  "path": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/pre-retirement-system-control.tar.gz",
+  "sha256": "41bdc276888995119fbd8310012f0877eca9c55aaa32b6150715fceba8a32693",
+  "members": [
+    "/etc/default/grub",
+    "/boot/grub/grub.cfg",
+    "/boot/grub/grubenv",
+    "/var/lib/dpkg/status",
+    "/var/lib/apt/extended_states"
+  ],
+  "purpose": "pre-change metadata/audit only; do not restore dpkg status by itself as package rollback",
+  "cached_deb_full_payload_streams_validated": 28,
+  "rollback_local_apt_reinstall_simulation_passed": true
+}
