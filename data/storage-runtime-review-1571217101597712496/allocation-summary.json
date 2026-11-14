@@ -1,0 +1,21 @@
+{
+  "roots": 7,
+  "counts": {
+    "regular_files": 335489,
+    "directories": 25251,
+    "symlinks": 1185
+  },
+  "scan_errors": 0,
+  "joint_inode_unique_allocated_bytes": 12730712064,
+  "shared_between_roots_bytes": 348921856,
+  "exclusive_per_root": {
+    "/root/.hermes/hermes-agent": 1912950784,
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103": 2829189120,
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021": 1769783296,
+    "/root/.hermes/hermes-agent-port-main-46904a3b-mgs": 695111680,
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs": 1268289536,
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs": 2348933120,
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs": 1557532672
+  },
+  "stage_only_conditional_inode_reclaim_bytes": 1530568704
+}
