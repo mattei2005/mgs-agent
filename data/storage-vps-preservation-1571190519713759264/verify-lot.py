@@ -60,6 +60,8 @@ def main():
  for profile,pid in m['gateway_pids'].items():
   now=subprocess.run(['systemctl','show',profile+'-gateway.service','-p','MainPID','--value'],capture_output=True,text=True,check=True).stdout.strip();assert now==str(pid),'Gateway PID drift'
  launcher=os.path.realpath('/root/.local/bin/hermes');assert launcher==m['launcher'],'Launcher drift'
+ for key,field in [('retained_archive','retained_archive_sha256'),('recover_tool','recover_tool_sha256'),('secure_checksum_manifest','secure_checksum_manifest_sha256')]:
+  actual=subprocess.run(['sha256sum',m[key]],capture_output=True,text=True,check=True).stdout.split()[0];assert actual==m[field],'Retained artifact or recovery helper drift'
  r=subprocess.run(['python3',m['recover_tool']],capture_output=True,text=True);assert r.returncode==0,'Retained recovery validation failed'
  print(json.dumps({'status':'PASS','mode':'post' if a.post else 'preflight','targets':36,'files':2675,'directories':352,'symlinks':16,'source_originals_checked':not a.post,'retained_recovery_verified':True,'process_refs':0,'deletions':0}))
 if __name__=='__main__':main()
