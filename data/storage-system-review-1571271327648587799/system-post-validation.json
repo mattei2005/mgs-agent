@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "confirmation_message_id": "1571285972589477891",
+  "manifest_sha256": "3181fa69cc038fff1ea409892b4d9bcc9099656637d5258ce31f0907b70eb00f",
+  "frozen_executor_sha256": "1e49fd4425ef4124b15bcfe720c2747f2b5ed750a76ddaee3c8d028a1dcb061f",
+  "frozen_executor_not_modified_or_reexecuted": true,
+  "frozen_executor_historical_postcheck": "failed only because shared /lib usr-merge infrastructure alias was included as an absence witness, not a native disposal action",
+  "usrmerge_shared_alias_preserved_unchanged": true,
+  "removed_kernel_packages": [
+    "linux-headers-6.8.0-138-generic",
+    "linux-headers-6.8.0-138",
+    "linux-headers-6.8.0-142-generic",
+    "linux-headers-6.8.0-142",
+    "linux-image-6.8.0-138-generic",
+    "linux-image-6.8.0-142-generic",
+    "linux-modules-6.8.0-138-generic",
+    "linux-modules-6.8.0-142-generic"
+  ],
+  "download_files_absent": 29,
+  "retired_payload_nodes_absent": 55081,
+  "shared_infrastructure_witnesses_retained": 1,
+  "old_version_roots_absent": 14,
+  "rollback_readback": [
+    {
+      "package": "linux-headers-6.8.0-138",
+      "archive_sha256_unchanged": true,
+      "members_read": 16299,
+      "regular_payloads_read": 16282,
+      "retained_stream_digest": "bfee25c4a7a8f60cacda4d4fed073f0e8c767f0dd2419549fa453aee84981056"
+    },
+    {
+      "package": "linux-headers-6.8.0-138-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 10206,
+      "regular_payloads_read": 9796,
+      "retained_stream_digest": "8742a6636756bfe5e5b32ce8c936ec16a2f97d04d60827bb397d4539ef350039"
+    },
+    {
+      "package": "linux-headers-6.8.0-142",
+      "archive_sha256_unchanged": true,
+      "members_read": 16298,
+      "regular_payloads_read": 16281,
+      "retained_stream_digest": "f192896bed8446c2b299fe107fee26efee17a0085930f62894595eb043f5aeb6"
+    },
+    {
+      "package": "linux-headers-6.8.0-142-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 10206,
+      "regular_payloads_read": 9796,
+      "retained_stream_digest": "37040ec7331cd0592fb9797c9ed98d5ad5ffbf517948054bfd62e3cab4add09a"
+    },
+    {
+      "package": "linux-image-6.8.0-138-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 3,
+      "regular_payloads_read": 3,
+      "retained_stream_digest": "a245075815b3d8efdbf862efe090e5d7eefdb40fb830e474bf060b7017179a18"
+    },
+    {
+      "package": "linux-image-6.8.0-142-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 3,
+      "regular_payloads_read": 3,
+      "retained_stream_digest": "a9169f5bfab6b3b3a7cc5cb88ccf65486d1a7494bf45e349b02c054cb7c42d67"
+    },
+    {
+      "package": "linux-modules-6.8.0-138-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 1024,
+      "regular_payloads_read": 1021,
+      "retained_stream_digest": "24ca6bc0bd139f670893db95eb729ffd2b5af0a9f529d745d927a00a07a7a5eb"
+    },
+    {
+      "package": "linux-modules-6.8.0-142-generic",
+      "archive_sha256_unchanged": true,
+      "members_read": 1024,
+      "regular_payloads_read": 1021,
+      "retained_stream_digest": "0b13731ff65ac6c2bc0b4e5b3227803a6a90a0c0058e89226079d2b0bd9adf2c"
+    }
+  ],
+  "rollback_reinstallation_or_boot_exercised": false,
+  "out_of_scope_auxiliary_tools_preserved": 4,
+  "protected_hashes_verified": 47,
+  "gateway_pids_unchanged": true,
+  "boot_identity_unchanged": true,
+  "no_new_native_installs": true,
+  "filesystems": [
+    {
+      "mount": "/",
+      "used_bytes": 141604007936,
+      "available_bytes": 65279496192,
+      "used_percent": 68.45,
+      "available_delta_bytes": 729198592
+    },
+    {
+      "mount": "/boot",
+      "used_bytes": 177905664,
+      "available_bytes": 680607744,
+      "used_percent": 20.72,
+      "available_delta_bytes": 111063040
+    },
+    {
+      "mount": "/boot/efi",
+      "used_bytes": 6399488,
+      "available_bytes": 102995968,
+      "used_percent": 5.85,
+      "available_delta_bytes": 0
+    }
+  ],
+  "observed_global_available_delta_bytes": 840261632,
+  "delta_not_exclusive_attribution": true,
+  "parent_review_complete": false,
+  "checked_at": "2026-11-14T17:15:45.930026-05:00"
+}
