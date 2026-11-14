@@ -6407,6 +6407,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-CONDITIONAL-RUNTIMES-1571239570069131275",
+      "next_step": "Inventariar duas raizes, dependencias Git/launchers/DigitalTrust e estado local; fechar classificacao com evidencia antes de novo lote.",
+      "objective": "Revisar somente leitura 46904a3b e ad2d4822; mapear consumidores e preservar/comprovar codigo e estado exclusivo; sem apagar, migrar runtime, executar Meta/PC1 ou alterar crons.",
+      "source": "context/storage-reorganization-20261112.md",
+      "state": "in_progress_readonly",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-14T19:08:22+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-GENERATED-TESTS-1570473727043436596",
       "next_step": "Nenhuma pendencia no lote confirmado1570486008917655623:81/81alvos/61283arquivos ausentes;15.94GiB efetivos;6tabelasfinanceiras/12arquivoscontroleperfis/3fontes/4raizesretidas iguais;3configs/3smokes/PIDs passaram;REPORT1570487273534005391readback. Retencao futura e outras categorias fora deste lote.",
       "objective": "Aposentar o lote exato de testes isolados confirmado sem tocar operacao financeira, memoria ou perfis.",
@@ -8928,12 +8938,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Humano conclui passkey Meta no mesmo ChromeRodolfo PC1;Zeus revalida mesmo alvo antes de retomar H40 no run preparado e somente7pendênciasD atuais;API final/readback antes de conclusão. Sem outrojob/writer;hold e67b9e22a17027e23728d532 preservado.",
-      "objective": "Atualização recorrente14/11 08:02 do mesmo job2ee720363d7d:55IDs,H40Outstanding balance;preservar incidente14:02 anterior e gates billing.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261114T0802/closure-current.json",
-      "state": "parcial validada:api55 às08:06est;15cartão/40linha;invoices outubro30 usd417864.11;h40históricos13/11 10:01–10:24 e d anteriores preservados;7eventosd recentes pendentes (4novos);39vazioshistóricos;paridade c/g/i/j,e/f e ledgerh/d;outraaba intacta;lease livre;report-infra pendente por proibição de envio direto no cron.",
+      "next_step": "Gate humano: concluir passkey Meta no mesmo ChromeRodolfo PC1;Zeus revalida alvo antes de retomar H40 e pendênciasD atuais; API final/readback antes da conclusão. Sem outrojob/writer;hold e67b9e22a17027e23728d532 preservado.",
+      "objective": "Atualização recorrente 2026-11-14T14:02:00-05:00 do mesmo job2ee720363d7d:55IDs,H40Outstanding balance; preservar incidente anterior e gates billing.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261114T1402/closure-current.json",
+      "state": "parcial validada; api55 em 2026-11-14t14:06:29.051162-05:00;15cartão/40linha; invoices outubro 30 usd417864.11; h40 históricos 2026-11-13t10:01:53.761038-05:00 a 2026-11-13t10:24:24.731026-05:00 preservados; 7 eventosd pendentes, mesmos ids da ocorrência anterior; 39 vazios históricos; paridade c/g/i/j,e/f e ledgerh/d; outraaba intacta;lease livre;report-infra pendente pela restrição de envio direto do cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-14T13:10:19+00:00"
+      "updated_at": "2026-11-14T19:08:53+00:00"
     },
     {
       "agent": "zeus",
@@ -10517,5 +10527,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T19:05:26+00:00"
+  "updated_at": "2026-11-14T19:08:53+00:00"
 }

@@ -1,0 +1,157 @@
+{
+  "roots": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "head": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+      "counts": {
+        "dir": 2890,
+        "file": 37358,
+        "link": 4
+      },
+      "top_naive_allocations": {
+        ".venv": 431763456,
+        ".git": 194629632,
+        "tests": 162615296,
+        "apps": 52948992,
+        "hermes_cli": 32718848,
+        "website": 29626368,
+        "tools": 18128896,
+        "agent": 16842752,
+        "plugins": 16740352,
+        "optional-skills": 15523840,
+        "gateway": 13086720,
+        "contributors": 7090176
+      },
+      "ignored_classes": {
+        ".bytecode-fingerprint": 1,
+        ".hermes": 2,
+        ".pytest-cache": 2,
+        ".pytest_cache": 5,
+        ".venv": 11403,
+        "__pycache__": 54,
+        "acp_adapter": 14,
+        "agent": 335,
+        "apps": 7,
+        "cron": 35,
+        "docker": 1,
+        "evals": 145,
+        "gateway": 185,
+        "hermes_agent.egg-info": 6,
+        "hermes_cli": 681,
+        "hermes_platform": 16,
+        "nix": 2,
+        "optional-skills": 105,
+        "plugins": 263,
+        "pm": 53,
+        "providers": 4,
+        "scripts": 117,
+        "skills": 50,
+        "test_durations.json": 1,
+        "tests": 5761,
+        "tools": 402,
+        "tui_gateway": 101,
+        "website": 7
+      },
+      "modified_files": 1,
+      "untracked_files": 1,
+      "postgres_clusters": [],
+      "sqlite_like_files": [],
+      "newest_mtime_ns": 1794578698824476248,
+      "metadata_ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/hermes-agent-port-main-46904a3b-mgs-metadata.jsonl.gz",
+      "metadata_ledger_sha256": "9f3767b5cf66c3f86b035098d5e67de32c508983a2fb5051a47ebed1add786f8",
+      "inode_unique_occupied_bytes": 1044033536,
+      "exclusive_reclaim_if_all_other_gates_pass": 659869696
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "head": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+      "counts": {
+        "dir": 8343,
+        "file": 127814,
+        "link": 108
+      },
+      "top_naive_allocations": {
+        "node_modules": 1200721920,
+        ".venv": 423665664,
+        "apps": 368013312,
+        "tests": 156721152,
+        "hermes_cli": 34050048,
+        "website": 29560832,
+        "plugins": 17539072,
+        "tools": 16523264,
+        "agent": 16220160,
+        "optional-skills": 15523840,
+        "web": 13762560,
+        "gateway": 12779520
+      },
+      "ignored_classes": {
+        ".bytecode-fingerprint": 1,
+        ".hermes": 2,
+        ".pytest-cache": 1,
+        ".pytest_cache": 5,
+        ".venv": 10473,
+        "MagicMock": 12,
+        "__pycache__": 49,
+        "acp_adapter": 14,
+        "agent": 309,
+        "apps": 570,
+        "cron": 33,
+        "docker": 1,
+        "evals": 146,
+        "gateway": 176,
+        "hermes_agent.egg-info": 6,
+        "hermes_cli": 687,
+        "hermes_platform": 12,
+        "nix": 2,
+        "node_modules": 91614,
+        "optional-skills": 105,
+        "plugins": 241,
+        "pm": 48,
+        "providers": 2,
+        "scripts": 118,
+        "skills": 50,
+        "test_durations.json": 1,
+        "tests-js": 29,
+        "tests": 5629,
+        "tools": 341,
+        "tui_gateway": 99,
+        "ui-tui": 235,
+        "web": 225,
+        "website": 7
+      },
+      "modified_files": 7,
+      "untracked_files": 3,
+      "postgres_clusters": [],
+      "sqlite_like_files": [
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db",
+          "bytes": 270336,
+          "allocated": 270336
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db-shm",
+          "bytes": 32768,
+          "allocated": 32768
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232311921504/state.db-wal",
+          "bytes": 803432,
+          "allocated": 806912
+        },
+        {
+          "path": "MagicMock/mock._routing_home/126232331872512/state.db",
+          "bytes": 270336,
+          "allocated": 270336
+        }
+      ],
+      "newest_mtime_ns": 1790987806986299109,
+      "metadata_ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571239570069131275/hermes-agent-port-main-ad2d4822-mgs-metadata.jsonl.gz",
+      "metadata_ledger_sha256": "b155ae3b3722d5d2fe6ffb93c9f575605094e78e00de8250efc16f42fe4d23b2",
+      "inode_unique_occupied_bytes": 2351448064,
+      "exclusive_reclaim_if_all_other_gates_pass": 2348867584
+    }
+  ],
+  "scan_errors": [],
+  "shared_within_target_set_bytes": 2514944,
+  "combined_reclaim_if_all_other_gates_pass": 3008737280
+}

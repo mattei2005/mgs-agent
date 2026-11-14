@@ -1,0 +1,132 @@
+{
+  "reference_source_count": 3413,
+  "references": [
+    {
+      "file": "/root/.local/bin/hermes-main-ad2d4822-mgs",
+      "type": "symlink",
+      "needles": [
+        "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+        "ad2d4822"
+      ],
+      "target": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/hermes"
+    },
+    {
+      "file": "/root/.local/bin/hermes-main-ad2d4822-mgs",
+      "type": "content",
+      "hits": [
+        {
+          "line": 1,
+          "needles": [
+            "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+            "ad2d4822"
+          ],
+          "comment_only": true
+        }
+      ]
+    },
+    {
+      "file": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "type": "content",
+      "hits": [
+        {
+          "line": 427,
+          "needles": [
+            "ad2d4822"
+          ],
+          "comment_only": false
+        },
+        {
+          "line": 546,
+          "needles": [
+            "ad2d4822"
+          ],
+          "comment_only": false
+        }
+      ]
+    },
+    {
+      "file": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "type": "content",
+      "hits": [
+        {
+          "line": 80,
+          "needles": [
+            "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+            "46904a3b",
+            "meta-digital-trust-pc1-create-one.py"
+          ],
+          "comment_only": false
+        }
+      ]
+    },
+    {
+      "file": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "type": "content",
+      "hits": [
+        {
+          "line": 17,
+          "needles": [
+            "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+            "46904a3b"
+          ],
+          "comment_only": false
+        }
+      ]
+    }
+  ],
+  "source_errors": [],
+  "process_references": [],
+  "auditor_ancestors_excluded": [
+    392751,
+    392753,
+    2241212
+  ],
+  "alternates": [
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "common": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.git",
+      "alternates": [
+        "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/objects"
+      ]
+    },
+    {
+      "root": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "common": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.git",
+      "alternates": [
+        "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/objects"
+      ]
+    }
+  ],
+  "digital_trust_states": [
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-49-20261013-state.json",
+      "request_id": "meta-digital-trust-49-1559685342083153942",
+      "target": 49,
+      "next_due_at": "2026-10-13T22:27:00-04:00",
+      "completed": 0,
+      "status": "blocked",
+      "updated_at": "2026-10-13T22:07:54.995738+00:00",
+      "execution_backend": "pc1_native"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "request_id": "meta-digital-trust-hourly40-20260906-r1",
+      "target": 40,
+      "next_due_at": "2026-09-08T15:38:00-04:00",
+      "completed": 40,
+      "status": "completed",
+      "updated_at": "2026-09-08T15:09:20.034611-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
+      "request_id": "meta-digital-trust-40-1557475850310393879",
+      "target": 40,
+      "next_due_at": "2026-10-11T04:27:00-04:00",
+      "completed": 40,
+      "status": "completed",
+      "updated_at": "2026-10-11T04:01:14.453081-04:00",
+      "execution_backend": "pc1_native"
+    }
+  ],
+  "pc1_meta_campaign_actions": 0
+}
