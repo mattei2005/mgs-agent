@@ -853,7 +853,9 @@
     746890,
     746913,
     746933,
-    746951
+    746951,
+    747387,
+    747407
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3347,9 +3349,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-13T00:05:00.000Z",
+        "created_at": "2026-11-14T00:07:52.000Z",
         "domain": "lyzmo",
-        "notification_id": 745146,
+        "notification_id": 747387,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -3382,7 +3384,8 @@
         740210,
         740995,
         743346,
-        745146
+        745146,
+        747387
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -4091,6 +4094,39 @@
         743368
       ],
       "opened_at": "2026-11-04T19:12:14-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|1750": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-14T00:08:06.000Z",
+        "domain": "openzed",
+        "notification_id": 747407,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 15,
+          "Broadcast": 288,
+          "On-hold": 85,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "1750",
+        "segurador_name": "Yasmym Sillva'h",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-11-13T19:12:09-05:00",
+      "message_ids": [
+        "1570954457112383609"
+      ],
+      "notification_ids": [
+        747407
+      ],
+      "opened_at": "2026-11-13T19:12:09-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -5953,45 +5989,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-13T18:57:10-05:00",
+  "last_check": "2026-11-13T19:12:09-05:00",
   "last_delivery": {
-    "at": "2026-11-13T15:12:34-05:00",
+    "at": "2026-11-13T19:12:09-05:00",
     "cursor_ids": [
-      746362,
-      746391,
-      746404,
-      746426,
-      746446,
-      746471,
-      746496,
-      746511,
-      746530,
-      746556,
-      746582,
-      746596,
-      746618,
-      746636,
-      746661,
-      746679,
-      746702,
-      746721,
-      746741,
-      746761,
-      746784,
-      746812,
-      746825,
-      746847,
-      746868,
-      746890,
-      746913,
-      746933,
-      746951
+      747387,
+      747407
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1570954457112383609"
+    ],
+    "notification_ids": [
+      747407
+    ]
   },
   "last_error": null,
-  "last_seen_id": 746951,
+  "last_seen_id": 747407,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
