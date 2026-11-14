@@ -1,0 +1,700 @@
+{
+  "files": [
+    {
+      "area": "stage-modified",
+      "path": "agent/credential_pool.py",
+      "sha256": "a3a25e26a2678ddf3e56e7a146e9585ca393b8bf305e5fc559e1c344350f029d",
+      "size": 153327
+    },
+    {
+      "area": "stage-modified",
+      "path": "hermes_cli/auth.py",
+      "sha256": "97c92277dc6b4c104b922f7c9a6b4c7bac26675fa862da495a94b5bcc39d06f3",
+      "size": 126209
+    },
+    {
+      "area": "stage-modified",
+      "path": "hermes_cli/auth_codex.py",
+      "sha256": "5f29bbab2b6076a6c0778ea7ed92166f9d8bca23d4fcc1af86bbad4408ece98e",
+      "size": 60525
+    },
+    {
+      "area": "stage-modified",
+      "path": "plugins/platforms/discord/adapter.py",
+      "sha256": "c204808f5bd265998bb142aafe0179623d94c36ed7606fe5d75f20356ce68858",
+      "size": 420526
+    },
+    {
+      "area": "stage-modified",
+      "path": "tests/conftest.py",
+      "sha256": "f8215c0dfb3a23b52bb57e3c30f07d6cab2741f2a4c2abe856d749454c083796",
+      "size": 68984
+    },
+    {
+      "area": "stage-overlay",
+      "path": "tests/agent/test_mgs_codex_refresh_integrity.py",
+      "sha256": "a0325355c557045a80b8b4d75c8df0a21c008df7d608ec3832def847d70083a1",
+      "size": 7135
+    },
+    {
+      "area": "stage-overlay",
+      "path": ".bytecode-fingerprint",
+      "sha256": "7a65441817285da5196a321700771c2e874cc4bf67166d7f99bc9d1b43eee7dd",
+      "size": 49
+    },
+    {
+      "area": "stage-overlay",
+      "path": ".pytest-cache/gw-adapter-guard-efe136911156d438",
+      "sha256": "3b066804f6d1d077173cfe4d06002e6a61e6f21c2b2e648417962115f1afcd8e",
+      "size": 5
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/PKG-INFO",
+      "sha256": "03ce7d4ef2e65fe1dbd99558e2cf667c51830f481ac759388d1bbec02d1a4017",
+      "size": 29865
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/SOURCES.txt",
+      "sha256": "494fca15be607bc018d47eb811cdc9a6a129ac7d631791c68b32bec2f1e73ff8",
+      "size": 69175
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/dependency_links.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/entry_points.txt",
+      "sha256": "d410a612ab7c6c766b972a4cbfdee716d43a2d411d44270c51bf8f063d7e22ee",
+      "size": 121
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/requires.txt",
+      "sha256": "e95f59a157e7c1d8ce8af9b219442fe98917af8ae9402a76efeceb3c4e7bf60a",
+      "size": 5812
+    },
+    {
+      "area": "stage-overlay",
+      "path": "hermes_agent.egg-info/top_level.txt",
+      "sha256": "e57288a2f302bda7dfe51850ff346bd69601848014f9590a78bdd72480bd98da",
+      "size": 1084
+    },
+    {
+      "area": "stage-overlay",
+      "path": "test_durations.json",
+      "sha256": "1e532a6768dff5c3e0bf90cc99269ad1095d861960dc4f811ee9ecf046cbcc8f",
+      "size": 5320
+    },
+    {
+      "area": "nested-overlay",
+      "path": "agent/background_review.py",
+      "sha256": "e0dcbb6269b2568d4ea4a41db9f3030ac49be14bdbce0ab666d9aab16a40c23b",
+      "size": 79727
+    },
+    {
+      "area": "nested-overlay",
+      "path": "agent/turn_tool_validation.py",
+      "sha256": "32d45c792acba45bc53cb48e96101ab18ede6fa81c4de9e49e79c8f00249cb07",
+      "size": 13738
+    },
+    {
+      "area": "nested-overlay",
+      "path": "agent/turn_truncation.py",
+      "sha256": "5a1679af15f52f195ecc0a1b67cc30f8dc4a8146e82769d0ddde4ba105c760ab",
+      "size": 41389
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/platforms/base.py",
+      "sha256": "60963e13f25a6d75f3de79126813f6b6b052a1bf5e87951b0b9900164b47d909",
+      "size": 279124
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run.py",
+      "sha256": "82848e8680e3f1b5c5e6ce27e064ca92f1d925c673c4ee4f1e2a333b4b1e924f",
+      "size": 326588
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_busy.py",
+      "sha256": "251f4d631e69556cf850f56811e083e27d675b2b0b9dd9d93211aa666bca7eb9",
+      "size": 91645
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_config_loaders.py",
+      "sha256": "05cc8e6c688bb1ea3d2cd6205bb0e602f0a38fae244001211d8dbea8630efd5c",
+      "size": 31492
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_inbound.py",
+      "sha256": "9a57dca52be5682291e633b55729ac924fe69d9aebb80d7e70d3d4c896e7bd16",
+      "size": 117895
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_shutdown.py",
+      "sha256": "5a05c2d4b086aa69274a9b7bf6b62c2305b4e743639bc943e1afda6fb2773237",
+      "size": 127024
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_startup.py",
+      "sha256": "0a0bc165c44128ccda0fd552716a7a8bf19647c2c1dcb199ff22cf698df1912b",
+      "size": 110905
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_topics.py",
+      "sha256": "69dab86ce01131b485db74577d5464db88a20c930e548f3c44430f2c3c29d7c9",
+      "size": 36831
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_turn.py",
+      "sha256": "eee4fc778a650cffdaca94c54f2873d51a3c53f5cbe59c64aaab48c073c4b474",
+      "size": 260910
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/run_turn_runner.py",
+      "sha256": "0d92ad324b1ad3e5de64949e4307ac4ff9da9e7427017e68aa1689408756fc27",
+      "size": 119057
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/slash_commands_model.py",
+      "sha256": "a8383a3cc52a7994f85025a97c03143b929643e0790b83a05630da371840360b",
+      "size": 49600
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/turn_context.py",
+      "sha256": "be15ad7952b3d0a56f421f37f8a8f874508cbeb567f03f15e933d0c12a04d206",
+      "size": 5183
+    },
+    {
+      "area": "nested-overlay",
+      "path": "hermes_cli/_early_recovery.py",
+      "sha256": "3be2002a2a8e9c0ae8174d87c00742b66f347d514207bb9900d61b0ef7a80115",
+      "size": 72163
+    },
+    {
+      "area": "nested-overlay",
+      "path": "hermes_cli/config_defaults.py",
+      "sha256": "5e0ffe95ed4ac79d03c474125b87499acf8309dc674d434786580e7f6eb4fa03",
+      "size": 215493
+    },
+    {
+      "area": "nested-overlay",
+      "path": "plugins/platforms/discord/adapter.py",
+      "sha256": "f61e8c5cc26fe696861882b7f4aa449a65e831836740f1fe43bcb3d555754f03",
+      "size": 419332
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/autonomous-ai-agents/computer-use/SKILL.md",
+      "sha256": "df49d629efe655881167285230d98c1091c9af1cf62fddbd4a5830928472e734",
+      "size": 18161
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/creative/ascii-video/SKILL.md",
+      "sha256": "b842146ac04bfd9cb3fa2577689623dc47b93053f62789879d8a073c130627f6",
+      "size": 15489
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/SKILL.md",
+      "sha256": "9d34e0896621d66756166270f8501695defef78036786d9b8a95343475a463c3",
+      "size": 1101
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/references/daily-brief.md",
+      "sha256": "876a7615b1cd37c2d9bda7c9c2455a5bb53ed18696d3e3fb42251e8f448ddd76",
+      "size": 409
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/references/gmail-search-syntax.md",
+      "sha256": "876a7615b1cd37c2d9bda7c9c2455a5bb53ed18696d3e3fb42251e8f448ddd76",
+      "size": 409
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/scripts/_hermes_home.py",
+      "sha256": "4610fe0947c78579ebf9dfac8e49f7504af52fb58897bf3187a650b9f82eba72",
+      "size": 1588
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/scripts/google_api.py",
+      "sha256": "d44401d4f6269bb3407519d6b244fa855794377af1e17a6a1dc72a2a4284bee9",
+      "size": 336
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/scripts/gws_bridge.py",
+      "sha256": "6f08f31d393ae8e293d79163d17bd9adc94fdc6fa86c4f4cf11d716ec08e9ddf",
+      "size": 303
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/google-workspace/scripts/setup.py",
+      "sha256": "e0177241696034ec6782bc25dfc0639507f8c6c14b9b57e57a708d63c4ce679c",
+      "size": 395
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/productivity/xlsx/SKILL.md",
+      "sha256": "63701413fcce808ec0ef9e3bdd045ddd057f21f7000bbab04239b1a80fb84abb",
+      "size": 9664
+    },
+    {
+      "area": "nested-overlay",
+      "path": "skills/research/grounded-citations/SKILL.md",
+      "sha256": "f31821f68f98713dcc88d12c12a5bdcfa74ecf41170ade20501cee20eb454b61",
+      "size": 12662
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/agent/test_background_review_summary.py",
+      "sha256": "ebbd13279884f2a0834d6c3951a0484ec2d204709308b858cfc49b9158a4944d",
+      "size": 5353
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/agent/test_background_review_toolset_restriction.py",
+      "sha256": "b1a39c6bcaab65526c8760294b5ad099a2f917d95e937e5d563d0d76fdea52cb",
+      "size": 11244
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/agent/test_run_agent.py",
+      "sha256": "9ad353fe7c94cf45d91a6bd611a0f835030cc20cbe5db48877f3ce1f18074807",
+      "size": 301050
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/conftest.py",
+      "sha256": "835e2682b725dc2150ef02c3e4cfda1d413579366b783a1b78b59e70012f1702",
+      "size": 68091
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_busy_session_ack.py",
+      "sha256": "a664703a2db87fbc758940293ea8a7f72807e97730af1ffea23b6b9202aa89b1",
+      "size": 45803
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_busy_steer_origin.py",
+      "sha256": "f6bb4173b5085fd26dbb6ab0d9c0ff48c3451da8701f54015063e67193a898cc",
+      "size": 4189
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_busy_steer_subagent_fanout.py",
+      "sha256": "d8b5d7f483c059f12df1c4d6bbd52236030497f2d1c37bf504e0778fb396ef72",
+      "size": 2292
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_channel_controls.py",
+      "sha256": "0891a1af15894293e7d4846387f30799f97a8def44334fee5e27d7c47dbd097f",
+      "size": 9897
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_edit_message_overflow.py",
+      "sha256": "1138fb93430b3292de0581038de5459d7df17f886894aae5b7e9a1d485b1d52a",
+      "size": 15921
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_free_response.py",
+      "sha256": "045bf675c5399babf1762a1f0be07b8551fd3290a422d4b76cc0dcb276f2f5fa",
+      "size": 56732
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_send.py",
+      "sha256": "9e1b0868acde2f7729c5b3b8265310bc7c39a23181c3d535c3dae272d1799640",
+      "size": 24258
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_slash_commands.py",
+      "sha256": "8153ea903f07c32c10347906ce146ceff60c9a86f528237b93c84050bc65147f",
+      "size": 27821
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_split_cap.py",
+      "sha256": "0f4649a26953bd7992620e3ce248f19bf098d6823e4a11111868d556005d95db",
+      "size": 7260
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_extract_local_files.py",
+      "sha256": "734dc9d2a0f449c6b8891e863a730dc13f83336a84d418f27f044dced2cbea10",
+      "size": 8282
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_fast_command.py",
+      "sha256": "96bcc4bc2cf7f1906858c871fe3982dd9a14f86b88386538c0b8b2249bb619f0",
+      "size": 13745
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_mirror.py",
+      "sha256": "7389616c166298f92c38e27903a798f0ec35216a4c544f8855ff79b05212c7ca",
+      "size": 11814
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_multiplex_toolsets_profile_isolation.py",
+      "sha256": "dc5da574ae74ae3fac7c0383d01302a8f5bfbdf871cf8087169cf4c5aed422f0",
+      "size": 7780
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_reasoning_command.py",
+      "sha256": "c76ec583eb92c3ca1ad72f1120b96588699550f3a827e867a64155819e6cd51c",
+      "size": 9671
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_restart_resume_pending.py",
+      "sha256": "7853a57bb52d04a9ebd223a0472f3ebf0092d3501e936f2f7981e88e1464e959",
+      "size": 74773
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_run_progress_topics.py",
+      "sha256": "eac6aceaa9cf10a71998f9a44c12025a36dc84257698e074389364e1978c8832",
+      "size": 82421
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_session.py",
+      "sha256": "1bfd8e39202449849fd6a44257b73c25c7cbe56c5c359883ee33fc169d3daeb9",
+      "size": 68901
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_telegram_photo_interrupts.py",
+      "sha256": "f458966703a5aff765e21959fe05e8630fe544032fb9f5e002d2eb186f749f41",
+      "size": 3156
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/hermes_cli/test_config_validation.py",
+      "sha256": "75b01456990e6bffdb0629444ad8c893c0dfa3acb28531ba8038a6fa19200f16",
+      "size": 7939
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/hermes_cli/test_doctor.py",
+      "sha256": "6dececb1cc63c90ae4465131248b41b9c179ab5522c2cb482aae87efcb1eb73f",
+      "size": 65657
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/hermes_cli/test_tools_config.py",
+      "sha256": "91ee61b6b77fbadb5036225edc35c459c1f563fffd5efa89270e6fdd99a6b07c",
+      "size": 42642
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/hermes_cli/test_tui_resume_flow.py",
+      "sha256": "a7c719238f88c28eb0100e3bf61038f353dba9332b374ec3190c3258fa13e1c1",
+      "size": 17944
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/home_io_guard.py",
+      "sha256": "ea5790d823fb8450cffa618faffe0f59e4128524da97e0d49175a78ad9b827e5",
+      "size": 12126
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_checkpoint_manager.py",
+      "sha256": "9744e23a5021dc7e7bb25a438e721ca03e27dae27d5f9db78e64aae37c99bc53",
+      "size": 60062
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_memory_tool.py",
+      "sha256": "341a3793c750e8a3b69af1a9877cbabfa4e14343b96f9da819dc279aaed2a4bd",
+      "size": 51489
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_skills_tool.py",
+      "sha256": "1bb7f52c1110e013e04eb740270d1656721b05c42b88a74a667efb455a1a54df",
+      "size": 51721
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/browser_use_cli.py",
+      "sha256": "755395f24613fda7eaa78b47506948683f2f3e6c61ff3474337e20057a292730",
+      "size": 49325
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/checkpoint_manager.py",
+      "sha256": "b91a9949434ef65787cfdbac33e00082c5f2bb69d2b7084de5aa581011d4e7da",
+      "size": 71674
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/memory_tool.py",
+      "sha256": "c1ad877d2a7d2a67478bf010781579f5f78e6ada84b050d5c7734d2cc198dec3",
+      "size": 28002
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/memory_tool_store.py",
+      "sha256": "4a91732a0bd116aebbad831c15ff9d96160fa1731071e6bcc4abe67a6ec0edb8",
+      "size": 38210
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/skill_manager_tool.py",
+      "sha256": "551542e01b757d8b5476608fab4f3a324a7e451c4b73b54e3902f7b69cb1282c",
+      "size": 49310
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/skills_tool.py",
+      "sha256": "40084625b738a804243c6e6c17fc54aa7fb451d9c5f5f2e34ef9dbe328f36fb3",
+      "size": 45063
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/write_approval.py",
+      "sha256": "f07bf0dce982dc0512088385c3e8a9f5ed840703dcfe5a9647b51149369346bb",
+      "size": 22873
+    },
+    {
+      "area": "nested-overlay",
+      "path": "gateway/reasoning_router.py",
+      "sha256": "c96c10d37b083229c6765850d761e2d45aebb1331e112751ba43dba361a16a4b",
+      "size": 5846
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/agent/test_hidden_truncated_tool_recovery.py",
+      "sha256": "eb500c78ca885676b04cf9ac1f5c7fd8acd943cdfa0c431c82aa07d4be5ccdf9",
+      "size": 5499
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/HANDOFF.md",
+      "sha256": "7f258c8dc2059fb25e6967f75e9c20acb25b76fa25747caceff97afda23b6bd9",
+      "size": 2508
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/LICENSE",
+      "sha256": "821556e6336796450ab852d375117b48a4887e71d255794fd6318d99982a5ab6",
+      "size": 1070
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/README.md",
+      "sha256": "58c12155dc7fba90dab89b34447049707a0a8e84108e9bee3556d7ff9c38ffdb",
+      "size": 32237
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/__init__.py",
+      "sha256": "b52002ca2299b8c0ba6b6c2939b0a2e81471c6ef6a3594dbb92969ef16325bc2",
+      "size": 67981
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/_shared_query_rewrite.py",
+      "sha256": "968aed23fd2a0d6c79866d0ed0c997be0a01b56282c37fece622d50033ca1ca4",
+      "size": 4679
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/cli.py",
+      "sha256": "92d7769ae60c1e69568e51a11e38d11e466e581b5503cebca0ea606cb4e2b917",
+      "size": 92025
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/client.py",
+      "sha256": "f7224713d9e898d977c1010f77b1cfbf33c4ad41cd5431f8f8c02ff2a0f727d1",
+      "size": 34511
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/client_cache.py",
+      "sha256": "c4e6b5b6bd615651211fde01084a880022db248c7e466060a0730399d38f20d0",
+      "size": 8632
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/config_schema.py",
+      "sha256": "d9c755a50f8b7da8108e27d87826f00dac3d9f9e3c65605340171ecf5983c1c3",
+      "size": 9639
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/dialectic.py",
+      "sha256": "6808f2758d99f7bf01f8d12595943069da98e06eb7088a89c507590b366cac5b",
+      "size": 10516
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/oauth.py",
+      "sha256": "4c6c1ace252b298a630cf47f6a0f01d33d46e0624bb8960209972057b848dddd",
+      "size": 21372
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/oauth_flow.py",
+      "sha256": "bc2d2c77be725c84bae2e0ed66fe45f5ea9119df87999d3c6d50f66bfd493135",
+      "size": 21749
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/plugin.yaml",
+      "sha256": "bf592e7539f22d49abd149bd023bc03bd00f9efd574cec1d1c6500c5ad1f8572",
+      "size": 222
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/pyproject.toml",
+      "sha256": "26210f755f59c48544e98f85d07b18f1a9b9a9a1a3c70af857cdf6053b5e48e0",
+      "size": 503
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/recall_sync.py",
+      "sha256": "8b0ed81b4218b31d4df08cb78634167c1e384244733e46e4e65c2c81d1213803",
+      "size": 5755
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/session.py",
+      "sha256": "823be81ba82fa3280693c614f15ee5fd98c09be6db6ef9b911b9aad5b8877114",
+      "size": 36037
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/session_auth.py",
+      "sha256": "b75857a39e7e8bca0009d9d6166a61dccfda2eaac17d68132d4c8067771f6e52",
+      "size": 6897
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/session_context.py",
+      "sha256": "0beb8664a058eda95ed48eef67f586577854ca3d9f8f65e1e41e68fa7f537ef7",
+      "size": 23286
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/session_migration.py",
+      "sha256": "4c9e651614af6fff457ffb4aff8c1cacf853bd26afeea1dd19d176dd88068598",
+      "size": 3826
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/session_peers.py",
+      "sha256": "37b3d895ee1d3ba96e64e772ea5b453384c4fc597d0d905e3fe3c31c31a3a481",
+      "size": 8899
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/fixtures/mgs_honcho_plugin/tool_schemas.py",
+      "sha256": "904059718e3dcb6963ef54abb0a8f83ef667f4395b3b438e3892b945ccfe6d03",
+      "size": 8562
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_auto_reasoning_routing.py",
+      "sha256": "4ca304346bd85c6dd28eaa6da25a8d52a5d3e92cb362134f09c22d634fb9708e",
+      "size": 8780
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_auto_thread_origin.py",
+      "sha256": "ba97ad249ca13960c8fe4e3d1aef14f3ab26bead3e5b62b583fbc7885aed4a98",
+      "size": 3998
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_bot_filter.py",
+      "sha256": "4771b5491cf5911725ced20207df9e643c7aaa8e5cd10d1720120adcb4b85461",
+      "size": 7600
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_thread_auto_add_by_channel.py",
+      "sha256": "fddbac6daa549d1d6d7ae49c6a27b299f8f1fa0e7e48e219ce2f64a3456a4bf6",
+      "size": 3770
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_discord_thread_initial_name_suffix.py",
+      "sha256": "a84e9679e4a1e409dc1dd36e5922588c2c19400fabe01664881843d41271eebd",
+      "size": 4205
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/gateway/test_mgs_configured_hygiene_threshold.py",
+      "sha256": "a763ba8fcf27f8538239bd35e2b53e4fba0dff90821a3dab35805f27b76ce07d",
+      "size": 1092
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/plugins/test_honcho_startup_fail_open.py",
+      "sha256": "aa8331f1379551b4c275780fcde09ed8dd1babebe14687a78548835faaa4695a",
+      "size": 25235
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_memory_capacity_dead_letter.py",
+      "sha256": "f988ed799c1eb1594a1ac9d351ff5bd3ad98377099b2603d171b42534385a260",
+      "size": 9439
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_mgs_browser_resource_budget.py",
+      "sha256": "919ed9596e8154847458d712c7230bbfdd35e013ff226077bcf680ca74d56403",
+      "size": 5694
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_mgs_mcp_sdk_readonly.py",
+      "sha256": "a3e1fa42ef1071db3da183ba5bc6e68e9e69d862f0bdcd81d5cf223af61fee12",
+      "size": 3029
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tests/tools/test_write_trace.py",
+      "sha256": "ff3bfecdd37e4436c6ad152e32f5a14459889cbbf0d51570185fb30dc9a355e6",
+      "size": 5212
+    },
+    {
+      "area": "nested-overlay",
+      "path": "tools/write_trace.py",
+      "sha256": "62089d5bd00087335bebe69f2032f4e731056b1bcccd92129b85c94148f4e31a",
+      "size": 5279
+    }
+  ]
+}

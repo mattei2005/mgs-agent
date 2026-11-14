@@ -1,0 +1,58 @@
+{
+  "phase": "before",
+  "passed": true,
+  "results": {
+    "zeus": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "zeus",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-zeus-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "zeus",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-zeus-smoke.log"
+      },
+      "elapsed_seconds": 9.35
+    },
+    "ares": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "ares",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-ares-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "ares",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-ares-smoke.log"
+      },
+      "elapsed_seconds": 9.56
+    },
+    "atena": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "atena",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-atena-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "atena",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/runtime-retire-checks-1571231699172462614/before-atena-smoke.log"
+      },
+      "elapsed_seconds": 13.05
+    }
+  },
+  "observed_at": "2026-11-14T13:38:10.954380-05:00"
+}
