@@ -2372,6 +2372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-BID-1570961764814684163",
+      "next_step": "Concluido;semnovaativacao,cronoureplaydewrite",
+      "objective": "Ajustar bid de22campanhas nominais Mavroa06 G006 paraUSD0.90",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/manual-actions/1570961764814684163/bid-request.json",
+      "state": "complete_verified:22/22cost_cap usd0.90 porgetintegral;21adsetsalterados,146janoalvo;status,budgets,filhos,tracking preservados",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-14T00:46:52+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BID-BUDGETR-1558147479432601670",
       "next_step": "Concluido:74campanhas/518células históricas/13partes publicadas e GET verificadas; financeiro07:02EDT preservado, Meta configuração12:37EDT;39testes;contrato scoped,skill,registry e REPORT-INFRA com readback. Sem Meta write,cron ou restart.",
       "objective": "Adicionar Bid antes de Gasto e Budget R. antes de Receita; relatorio conta1583000095650153 na thread corrigida1558147479432601670; sem write Meta",
@@ -2729,6 +2739,16 @@
       "state": "complete_verified:72/72 campanhas paused nos tres estados via batch final integral;72 alteradas,0ja pausadas;budgets,lances,nomes,programacao e identidade preservados;reconciliacao pos-timeout somente get,0postadicional;lease complete.",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-12T15:32:13+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-PAUSE-1570961803163472073",
+      "next_step": "Concluido;semnovaativacao,cronoureplaydewrite",
+      "objective": "Desativar 073,046,123 na Mavroa06 G006",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/manual-actions/1570961764814684163/pause-request.json",
+      "state": "complete_verified:3/3paused,3writes;budgets,lances,nomes,programacao preservados",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-14T00:46:52+00:00"
     },
     {
       "agent": "ares",
@@ -10357,5 +10377,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:14:46+00:00"
+  "updated_at": "2026-11-14T00:46:52+00:00"
 }
