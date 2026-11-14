@@ -1,0 +1,121 @@
+{
+  "state": "readonly_review_started_no_new_deletion_lot_approved",
+  "source_authority": "1571271327648587799",
+  "packages": [
+    {
+      "name": "linux-tools-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "installed_size_KiB": 19342
+    },
+    {
+      "name": "linux-tools-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "installed_size_KiB": 630
+    },
+    {
+      "name": "linux-tools-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "installed_size_KiB": 19348
+    },
+    {
+      "name": "linux-tools-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "installed_size_KiB": 636
+    }
+  ],
+  "payload_nodes": 54,
+  "structural_aliases_excluded": [],
+  "inode_closed_potential_file_bytes": 38653952,
+  "version_specific_roots": [
+    "/usr/lib/linux-tools-6.8.0-138",
+    "/usr/lib/linux-tools/6.8.0-138-generic",
+    "/usr/lib/linux-tools-6.8.0-142",
+    "/usr/lib/linux-tools/6.8.0-142-generic"
+  ],
+  "live_process_consumer_hits": [],
+  "dpkg_payload_verification": "PASS",
+  "still_missing": [
+    "script_timer_cron_and_dynamic_launcher_consumer_closure",
+    "retained_rollback_artifacts_and_roundtrip",
+    "native_simulation_and_exact_manifest",
+    "new_critical_confirmation"
+  ],
+  "other_point5_roots_first_level": {
+    "/root/zeus-vps-maintenance-1565730926233657347": [
+      {
+        "entry": "apt-install.log",
+        "type": "file",
+        "size_if_file": 10857
+      },
+      {
+        "entry": "backup-result.json",
+        "type": "file",
+        "size_if_file": 5315
+      },
+      {
+        "entry": "install-result.json",
+        "type": "file",
+        "size_if_file": 1974
+      },
+      {
+        "entry": "original-vendor-debs",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "prestate.json",
+        "type": "file",
+        "size_if_file": 4887
+      },
+      {
+        "entry": "rollback",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "rollback.sha256",
+        "type": "file",
+        "size_if_file": 2029
+      },
+      {
+        "entry": "service-prestate.json",
+        "type": "file",
+        "size_if_file": 1286
+      },
+      {
+        "entry": "system-config.tgz",
+        "type": "file",
+        "size_if_file": 1039434
+      }
+    ],
+    "/root/mgs-agent-backups": [
+      {
+        "entry": "chat-sms-manager-map",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "chat-sms-rollout",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "chat-timezone-rollout",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "mu-plugin-bak-purge",
+        "type": "directory",
+        "size_if_file": null
+      },
+      {
+        "entry": "wp-file-manager-openzed",
+        "type": "directory",
+        "size_if_file": null
+      }
+    ]
+  },
+  "deletions": 0,
+  "observed_at": "2026-11-14T17:20:32.882073-05:00"
+}
