@@ -9607,6 +9607,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1571009723203850401",
+      "next_step": "Operacao Meta concluida; entregar resumo e key values Iris na resposta nativa. Sem novas mutacoes ou recorrencia.",
+      "objective": "Duplicar duas vezes a campanha 04 da Mavroa Conta 02 G002 para 14/11/2026 00:00 America/New_York.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571009723203850401/final-verified-receipt.json",
+      "state": "complete_future_active: c027 e c028, 2 campanhas/2 conjuntos/4 anuncios active, qa semantico e renderizado integral, mesmos ids reconciliados. usd179.19/dia por campanha; delta usd358.38/dia; cost_cap usd0.90; inicio 14/11/2026 00:00 est. orçamento ativo da conta usd3548.28/dia. recuperacao parcial concluida e user_age_unknown restaurado ao valor da fonte somente nos dois alvos, com get verificado.",
+      "thread_id": "1558126806127611966",
+      "updated_at": "2026-11-14T03:57:42+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -10387,5 +10397,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T02:51:29+00:00"
+  "updated_at": "2026-11-14T03:57:42+00:00"
 }
