@@ -42,7 +42,8 @@ def main():
    seen.add(mem.name)
    if mem.name not in expected:assert mem.name in ['stage-working-tree.patch','stage-refs.json'];continue
    r=expected[mem.name]
-   if 'sha256' in r:assert hashlib.sha256(tf.extractfile(mem).read()).hexdigest()==r['sha256']
+   if 'sha256' in r:
+    payload=tf.extractfile(mem);assert payload is not None,'Missing file payload';assert hashlib.sha256(payload.read()).hexdigest()==r['sha256']
    else:assert mem.issym() and mem.linkname==r['link_target']
  assert seen==set(expected)|{'stage-working-tree.patch','stage-refs.json'}
  for r in m['git_recovery_bases']:
