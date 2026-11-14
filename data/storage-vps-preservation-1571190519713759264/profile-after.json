@@ -1,0 +1,58 @@
+{
+  "phase": "after",
+  "passed": true,
+  "results": {
+    "zeus": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "zeus",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-zeus-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "zeus",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-zeus-smoke.log"
+      },
+      "elapsed_seconds": 9.86
+    },
+    "ares": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "ares",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-ares-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "ares",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-ares-smoke.log"
+      },
+      "elapsed_seconds": 9.41
+    },
+    "atena": {
+      "config": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "atena",
+        "tools_disabled": false,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-atena-config.log"
+      },
+      "smoke": {
+        "returncode": 0,
+        "passed": true,
+        "profile_explicit": "atena",
+        "tools_disabled": true,
+        "private_log": "/root/.hermes/profiles/zeus/cache/scratch/vps-retire-checks-1571196199548092428/after-atena-smoke.log"
+      },
+      "elapsed_seconds": 9.48
+    }
+  },
+  "observed_at": "2026-11-14T11:22:24.497635-05:00"
+}
