@@ -3982,6 +3982,16 @@
     },
     {
       "agent": "zeus",
+      "id": "REVENUE-MESSENGER-3D-1571311723217035436",
+      "next_step": "Zeus mantém cron diário 08:17 America/New_York; três datas incluindo hoje parcial. Nenhuma ação de Rodolfo. Evidência: backups/sb-messenger-revenue-sheet/change-1571311723217035436/acceptance.json",
+      "objective": "Corrigir coluna C de sete para três dias de receita e manter automação diária.",
+      "source": "scripts/sync-sb-messenger-revenue-sheet.py",
+      "state": "completed_validated",
+      "thread_id": "1571311723217035436",
+      "updated_at": "2026-11-14T23:57:48+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "RUNCLOUD-QUOTA-1561029089458917528",
       "next_step": "Nenhuma decisao pendente. Cron ativo respeita bloqueio persistente ate reset informado pela RunCloud; nao declarar recuperacao da API sem coleta integra.",
       "objective": "Aplicar cadencia RunCloud aprovada: saude2h e status de backups24h, preservando execucao dos backups, bloqueio de quota e billing",
@@ -10627,5 +10637,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T23:49:34+00:00"
+  "updated_at": "2026-11-14T23:57:48+00:00"
 }

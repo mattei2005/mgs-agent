@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "packages": [
+    {
+      "package": "linux-tools-6.8.0-138",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-point5-followup-1571310958830166148/auxiliary-rollback/linux-tools-6.8.0-138_6.8.0-138.138_reconstructed.deb",
+      "sha256": "039c51f6ef7fcddc57d1f70e6ddda7b35cdedd3ab5f847d8d73ce3501aa50e59",
+      "allocated": 7147520,
+      "members_verified": 14,
+      "regular_payloads_verified": 14,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-tools-6.8.0-138-generic",
+      "version": "6.8.0-138.138",
+      "path": "/root/.hermes/secure-backups/storage-point5-followup-1571310958830166148/auxiliary-rollback/linux-tools-6.8.0-138-generic_6.8.0-138.138_reconstructed.deb",
+      "sha256": "02ea6be4222f34f0ac17d822ab6b28a8aa54d2bce4b28dfd670751f8d385dcd6",
+      "allocated": 4096,
+      "members_verified": 13,
+      "regular_payloads_verified": 1,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-tools-6.8.0-142",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-point5-followup-1571310958830166148/auxiliary-rollback/linux-tools-6.8.0-142_6.8.0-142.142_reconstructed.deb",
+      "sha256": "46df6798f6de4a478023f866488f1b5e382e41e528f2694a808772e25de051ea",
+      "allocated": 7151616,
+      "members_verified": 14,
+      "regular_payloads_verified": 14,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    },
+    {
+      "package": "linux-tools-6.8.0-142-generic",
+      "version": "6.8.0-142.142",
+      "path": "/root/.hermes/secure-backups/storage-point5-followup-1571310958830166148/auxiliary-rollback/linux-tools-6.8.0-142-generic_6.8.0-142.142_reconstructed.deb",
+      "sha256": "64c34d9e0a363b9b48dc5fc3145f59a43747c34ec8cdaed0fea1fb685bdf0294",
+      "allocated": 4096,
+      "members_verified": 13,
+      "regular_payloads_verified": 1,
+      "artifact_type": "reconstructed_installed_payload_not_original_repository_deb",
+      "full_payload_roundtrip": "PASS",
+      "package_reinstallation_executed": false
+    }
+  ],
+  "packages_verified": 4,
+  "allocated_total": 14307328,
+  "payload_members_verified": 54,
+  "no_packages_installed_or_removed": true,
+  "created_at": "2026-11-14T18:55:58.253967-05:00"
+}
