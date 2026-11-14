@@ -1,0 +1,22 @@
+{
+  "status": "safe_retained_set_resolved_current_producer",
+  "initial_check_failed": "Historical Nov10 safety path was already superseded by the keep-latest-1 native producer before this cleanup; no deletion had started",
+  "retained_safety": {
+    "created_at": "2026-11-14T03:43:34-05:00",
+    "archive": "/root/mgs-agent/backups/safety/mgs-safety-20261114-034102.tar.gz",
+    "sha256": "dc8cd4fe6952ca661451844329fc7020253dfff95cabd7da85575f1706e8e2d2",
+    "size_bytes": "2077716447"
+  },
+  "gzip_rc": 0,
+  "tar_rc": 0,
+  "producer_script": "scripts/mgs-safety-backup.sh",
+  "keep_latest": 1,
+  "native_log_evidence": [
+    "[2026-11-14T03:41:02-05:00] mgs-safety-backup: START interval=3d keep_latest=1 archive=/root/mgs-agent/backups/safety/mgs-safety-20261114-034102.tar.gz",
+    "[2026-11-14T03:44:24-05:00] mgs-safety-backup: rm safety backup beyond latest-1 /root/mgs-agent/backups/safety/mgs-safety-20261110-034101.tar.gz",
+    "[2026-11-14T03:44:24-05:00] mgs-safety-backup: rm safety manifest beyond latest-1 /root/mgs-agent/backups/safety/mgs-safety-20261110-034101.manifest.txt",
+    "[2026-11-14T03:44:24-05:00] mgs-safety-backup: END OK archive=/root/mgs-agent/backups/safety/mgs-safety-20261114-034102.tar.gz size=1981.46MB manifest=/root/mgs-agent/backups/safety/mgs-safety-20261114-034102.manifest.txt"
+  ],
+  "confirmation_scope_unchanged": true,
+  "deletions": 0
+}
