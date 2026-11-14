@@ -31,7 +31,7 @@
   "supported_modes": [],
   "requested_modes_pending_readiness": ["pure_clone"],
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
-  "advertiser_profile_selection_note": "Ana Cunha selected for existing/future Eggbev by Rodolfo 1571262328715088024; minibot m6 approved in 1571263998102343752. Identity/account tasks/pixel validated. Source Page direct GET still fails Meta code10 with this credential despite token scopes; no runtime cutover, permission write or campaign write-readiness implied.",
+  "advertiser_profile_selection_note": "Ana Cunha/minibot m6 approved. Rodolfo 1571266743157002423 authorizes current/future Pages linked to Ana without BM import or another Page-scope approval. Historical source Page denial does not globally block the new advertiser; a clone preserving that exact old Page still needs its actual access. New requested Page must be resolved and verified individually; runtime cutover/campaign readiness not yet completed.",
   "credential_model": "exact advertiser-profile individual User Access Token; never System User or another advertiser fallback",
   "token_item": null,
   "advertiser_identity": null,
@@ -55,5 +55,5 @@
     "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
   },
   "unset_not_inherited": ["advertiser credential", "Pages other than the read-only source reference", "UTM defaults", "copy templates", "Messenger JSON defaults", "naming defaults", "start-time defaults", "thresholds", "guardrail state", "schedules", "denylist state", "baselines", "performance", "source-account write flags"],
-  "next_step": "Ana Cunha/minibot m6 approved by Rodolfo 1571263998102343752; consult advertiser_profile_selection_policy. Resolve source Page access (fresh direct GET code10), repeat exact Page read, then complete same-account credential consumer cutover/capabilities. Keep write/activation disabled; do not inherit account01 readiness or reuse retired advertisers."
+  "next_step": "Consult advertiser_profile_selection_policy and its page_model. Resolve actual Ana-linked Page for the requested campaign without BM import or blanket historical Page access. If request preserves old source Page, validate that exact Page separately; otherwise do not force its grant. Complete same-account credential consumer cutover/capabilities without inheriting account01 readiness or reusing retired advertisers; write/activation remain disabled pending existing onboarding gates."
 }

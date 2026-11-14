@@ -1,0 +1,53 @@
+{
+  "status": "filesystem_and_profiles_validated_governance_pending",
+  "confirmation_message_id": "1571265639241224325",
+  "question_message_id": "1571254663523737784",
+  "thread_id": "1569928464033783862",
+  "manifest_sha256": "843d8b4aa7be43b4b95888f707d675438fb0e2c091f10d622b1211f7d6a2a756",
+  "executor_sha256": "73e846d5989673826aa2d0ba2461a6adc0aaacc4833a6de3247c1ff8243746ef",
+  "removed_targets": [
+    "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+    "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+    "/root/.local/bin/hermes-main-ad2d4822-mgs",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs/.git/worktrees"
+  ],
+  "removed_counts": {
+    "files": 165180,
+    "directories": 11236,
+    "symlinks": 113
+  },
+  "exact_journal_entries": 4,
+  "all_targets_absent": true,
+  "observed_reclaimed_bytes": 3010703360,
+  "global_df_delta_not_exclusive_attribution": true,
+  "preparation_structural_net_estimate_bytes": 2590494720,
+  "retained_code_and_test_state_files_replayed_after_delete": 112,
+  "retained_python_override_payloads_verified_after_delete": 273,
+  "retained_node_payloads_verified_after_delete": 92556,
+  "full_historical_python_environment_rebuilt": false,
+  "protected_hashes_unchanged": 27,
+  "remaining_runtime_roots": [
+    "/root/.hermes/hermes-agent",
+    "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "/root/.hermes/hermes-agent-port-main-59004a62-mgs"
+  ],
+  "old_shared_git_refs_preserved": 132,
+  "shared_git_remaining_worktrees": 1,
+  "retained_pth_dependencies_on_deleted_roots": 0,
+  "gateway_pids_unchanged": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "configs_passed": 3,
+  "no_tool_smokes_passed": 3,
+  "services_restarted": false,
+  "campaign_cron_or_Meta_PC1_actions": 0,
+  "only_confirmed_lot_deleted": true,
+  "new_confirmation_required_for_additional_deletion": true,
+  "validated_at": "2026-11-14T15:53:22.746496-05:00",
+  "report_infra": {
+    "status": "pending"
+  }
+}
