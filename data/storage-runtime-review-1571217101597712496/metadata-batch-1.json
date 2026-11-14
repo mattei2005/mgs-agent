@@ -1,0 +1,77 @@
+{
+  "roots": [
+    {
+      "path": "/root/.hermes/hermes-agent",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-metadata.jsonl.gz",
+      "ledger_sha256": "6e7583d7b55908096234e452ee1fbe0f2fc0063432072487896d084acd6d49ff",
+      "counts": {
+        "regular_files": 18758,
+        "directories": 1897,
+        "symlinks": 0
+      },
+      "allocated_unique_within_root": 1912950784,
+      "errors": [],
+      "top_allocations": {
+        ".git": 1488461824,
+        "tests": 197115904,
+        "apps": 49717248,
+        "website": 28143616,
+        "hermes_cli": 24387584,
+        "plugins": 17534976,
+        "web": 14409728,
+        "infographic": 13918208,
+        "tools": 12259328,
+        "agent": 10772480
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-29a61cb7-mgs-20261103-metadata.jsonl.gz",
+      "ledger_sha256": "9337f1f36a1feb48b0d11fe773b37f61afb718c4ba2dfb1809357c20ca6c28b6",
+      "counts": {
+        "regular_files": 36081,
+        "directories": 3231,
+        "symlinks": 1061
+      },
+      "allocated_unique_within_root": 2829189120,
+      "errors": [],
+      "top_allocations": {
+        ".hermes": 1504714752,
+        ".git": 951455744,
+        "tests": 88059904,
+        "apps": 62337024,
+        "hermes_cli": 38883328,
+        "website": 30990336,
+        "agent": 19496960,
+        "plugins": 18731008,
+        "tools": 18026496,
+        "gateway": 17874944
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-3f2afed3-mgs-20261021-metadata.jsonl.gz",
+      "ledger_sha256": "1f62b590b87e37690e111cd84ca491dcd9319cf7726b7c7553560fa87d1f1df9",
+      "counts": {
+        "regular_files": 43637,
+        "directories": 3085,
+        "symlinks": 4
+      },
+      "allocated_unique_within_root": 1769783296,
+      "errors": [],
+      "top_allocations": {
+        ".git": 843386880,
+        ".venv": 443412480,
+        "tests": 199262208,
+        "apps": 57757696,
+        "hermes_cli": 37113856,
+        "website": 31666176,
+        "agent": 18530304,
+        "tools": 18292736,
+        "plugins": 18001920,
+        "optional-skills": 17321984
+      }
+    }
+  ],
+  "observed_at": "2026-11-14T12:42:04.658943-05:00"
+}

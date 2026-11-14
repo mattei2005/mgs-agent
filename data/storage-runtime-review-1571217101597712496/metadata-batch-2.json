@@ -1,0 +1,101 @@
+{
+  "roots": [
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-46904a3b-mgs-metadata.jsonl.gz",
+      "ledger_sha256": "25d993879c7648f7af033f608b3edf30e6787ea4b965ac168babb509c3f615d0",
+      "counts": {
+        "regular_files": 37358,
+        "directories": 2890,
+        "symlinks": 4
+      },
+      "allocated_unique_within_root": 1044033536,
+      "errors": [],
+      "top_allocations": {
+        ".venv": 431763456,
+        ".git": 194629632,
+        "tests": 162615296,
+        "apps": 52948992,
+        "hermes_cli": 32718848,
+        "website": 29626368,
+        "tools": 18128896,
+        "agent": 16842752,
+        "plugins": 16740352,
+        "optional-skills": 15523840
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-59004a62-mgs-metadata.jsonl.gz",
+      "ledger_sha256": "eb0c0b88024ffe7c10221781e83b224cfdfe92bbab7549c93cfef520c1bca6f0",
+      "counts": {
+        "regular_files": 27554,
+        "directories": 2554,
+        "symlinks": 4
+      },
+      "allocated_unique_within_root": 1614696448,
+      "errors": [],
+      "top_allocations": {
+        ".git": 923705344,
+        ".venv": 409071616,
+        "tests": 65007616,
+        "apps": 47783936,
+        "website": 29286400,
+        "hermes_cli": 24244224,
+        "plugins": 16535552,
+        "agent": 15183872,
+        "tools": 14802944,
+        "optional-skills": 13402112
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-port-main-ad2d4822-mgs-metadata.jsonl.gz",
+      "ledger_sha256": "69a24d1739f616b2e397c00b56b9cc23592a9bdeae6839bc3a90260928916042",
+      "counts": {
+        "regular_files": 127814,
+        "directories": 8343,
+        "symlinks": 108
+      },
+      "allocated_unique_within_root": 2351448064,
+      "errors": [],
+      "top_allocations": {
+        "node_modules": 1189277696,
+        ".venv": 423665664,
+        "apps": 368013312,
+        "tests": 156721152,
+        "hermes_cli": 34050048,
+        "website": 29560832,
+        "plugins": 17539072,
+        "tools": 16523264,
+        "agent": 16220160,
+        "optional-skills": 15523840
+      }
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+      "ledger": "/root/.hermes/secure-backups/runtime-review/20261114-1571217101597712496/hermes-agent-stage-main-7cc3fb8c-mgs-metadata.jsonl.gz",
+      "ledger_sha256": "03366a6b8aa403c8490c26e09e101b35737543efda623aa6462399d87c356fb4",
+      "counts": {
+        "regular_files": 44287,
+        "directories": 3251,
+        "symlinks": 4
+      },
+      "allocated_unique_within_root": 1557532672,
+      "errors": [],
+      "top_allocations": {
+        ".git": 685924352,
+        ".venv": 437743616,
+        "tests": 169037824,
+        "apps": 54890496,
+        "hermes_cli": 34455552,
+        "website": 29917184,
+        "agent": 17788928,
+        "optional-skills": 17362944,
+        "tools": 17334272,
+        "plugins": 16404480
+      }
+    }
+  ],
+  "observed_at": "2026-11-14T12:42:22.879656-05:00"
+}
