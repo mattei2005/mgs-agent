@@ -29,7 +29,16 @@
   },
   "engine_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json",
   "supported_modes": [],
-  "requested_modes_pending_readiness": ["pure_clone"],
+  "cross_account_clone_implementation_authority": {
+    "policy_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+    "authority_message_id": "1571652369467445359",
+    "source_account_id": "1034081997659047",
+    "target_account_id": "1481815942722118",
+    "status": "authorized_implementation_pending",
+    "capability_enabled": false,
+    "publication_approval_required_separately": true
+  },
+  "requested_modes_pending_readiness": ["pure_clone", "cross_account_clone_with_new_media"],
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
   "advertiser_profile_selection_note": "Ana Cunha/minibot m6 approved. Rodolfo 1571266743157002423 authorizes current/future Pages linked to Ana without BM import or another Page-scope approval. Historical source Page denial does not globally block the new advertiser; a clone preserving that exact old Page still needs its actual access. New requested Page must be resolved and verified individually; runtime cutover/campaign readiness not yet completed.",
   "credential_model": "exact advertiser-profile individual User Access Token; never System User or another advertiser fallback",

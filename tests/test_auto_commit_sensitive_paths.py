@@ -394,6 +394,34 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_cross_account_maintenance_staged_exclusion(self):
+        base = "data/ares/meta-ads/audit/maintenance/t_e524bad0/"
+        ignored = [
+            base + "staged/scripts/mgs_private_backup_transport.py",
+            base + "staged/tests/test_ares_credential_metadata.py",
+            base + "staged/scripts/ares_campaign_v3/engine.py",
+        ]
+        included = [
+            base + "launch.py",
+            base + "staged-other/scripts/mgs_private_backup_transport.py",
+            "data/ares/meta-ads/audit/maintenance/other/staged/scripts/mgs_private_backup_transport.py",
+            "work/" + base + "staged/scripts/mgs_private_backup_transport.py",
+            "scripts/mgs_private_backup_transport.py",
+            "tests/test_ares_credential_metadata.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_active_intake_journal_exclusions(self):
         base = (
             "data/ares/creative-ops/executions/intake-1571355399272145028/"

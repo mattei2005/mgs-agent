@@ -1,0 +1,17 @@
+{
+  "status": "blocked_by_global_autocommit_sensitive_path_guard",
+  "cleanup_completed_validated": true,
+  "scoped_local_changes_pending": true,
+  "watcher_active": true,
+  "head": "5b8a12a028e892cb6e362a9f73d81b151289798e",
+  "origin_main_observed": "5b8a12a028e892cb6e362a9f73d81b151289798e",
+  "blocking_external_task": "t_e524bad0",
+  "blocking_external_path_prefix": "data/ares/meta-ads/audit/maintenance/t_e524bad0/staged/",
+  "last_observed_guard_rejection": "2026-11-15 17:38:59 EST",
+  "actual_credential_leak_proven": false,
+  "no_manual_commit_or_guard_override": true,
+  "result_sha256": "c23e49249641f38a5412ceb225bd44a7d9d1b013b77bf6499038f082e2a4f845",
+  "owner": "Zeus/Infra",
+  "recommended_next_step": "Authorize manual scoped versioning of this cleanup only, without adding the other integration files or weakening the security guard.",
+  "at": "2026-11-15T22:40:08.816667+00:00"
+}

@@ -175,3 +175,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # never publish runtime grant/move intents. Exact snapshot only, not siblings.
 /data/ares/creative-ops/executions/intake-1571355399272145028/recovery-1571372290707562638/private-journal-before-negative-intent-reconciliation.json
 
+# Reconciled active Eggbev01-to03 maintenance offline copies (t_e524bad0).
+# Preserve local staging and business ownership; evidence siblings remain visible.
+/data/ares/meta-ads/audit/maintenance/t_e524bad0/staged/
+

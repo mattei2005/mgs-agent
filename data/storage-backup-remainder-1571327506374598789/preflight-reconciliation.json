@@ -1,0 +1,25 @@
+{
+  "status": "authorized_concurrent_change_reconciled_not_anomaly",
+  "changes": [
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "previous_sha256": "e0af0a659b446532872f308dced2510c5b0282ccfc556a410c6ad86af4d6b5eb",
+      "current_sha256": "412184cc642af66b12e003f98d7b7d142b725a60defbc50617884d8e5392963d"
+    }
+  ],
+  "report_infra_message_id": "1571555165872455681",
+  "source_human_message_id": "1571553655499259929",
+  "versioned_commit": "a929cfaf9a0c041b3d471374bf14c1652e57814c",
+  "typed_changes": [
+    "/discord/channel_prompts/1541578622106865815",
+    "/discord/channel_prompts/1541578556037927053",
+    "/discord/channel_prompts/1565032661557313747",
+    "/discord/channel_prompts/1565032671669919827"
+  ],
+  "live_mirror_typed_equal": true,
+  "scope_unchanged": true,
+  "original_manifest_unchanged": true,
+  "new_critical_confirmation_required": true,
+  "deletions": 0,
+  "at": "2026-11-15T22:32:26.736045+00:00"
+}

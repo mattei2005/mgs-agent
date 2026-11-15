@@ -155,6 +155,17 @@ Freeze and exercise the **same** validator that will close the cleanup before cr
 4. Keep irreversible acceptance independent from ancillary governance parsing: first prove exact target absence, retained recovery paths, observed `df` delta, runtime/services and real profile smokes; then update inventory/checkpoints/reporting. If an ancillary parser fails after deletion, preserve the deletion result and classify **governance closure** as blocked—never retry `rm` or describe the filesystem action as uncertain.
 5. Make profile scope explicit in smokes. A default/root probe and named production profiles are separate checks; environment inheritance must not let one profile masquerade as another.
 
+#### Protected-baseline drift after approval
+
+Use this branch when the frozen preflight fails on a retained file rather than a deletion target. This is a revalidation procedure, not evidence that deletion succeeded.
+
+1. Read execution-start markers, the per-target journal and exact target existence before retrying; a failed wrapper may have written already. If no destructive boundary was crossed, record the native approval as received but execution not started.
+2. Compare every protected digest and return only mismatched paths and old/current hashes. Separately verify the complete deletion path/action list, counts and target fingerprint, so a changed protected configuration is not mislabeled as a new cleanup target.
+3. Attribute the changed file through audit, inventory, the exact REPORT-INFRA embed and Git, then session history only if still needed. For structured configuration, parse both versions and report changed key paths and live/mirror typed equality, not their values. Do not redact a raw diff by splitting each line at a colon: multiline YAML scalars can expose whole prompts before that separator and swamp the diagnostic output. Preserve byte hashes separately because semantically equal YAML can serialize differently.
+4. Preserve the authorized live change. Never restore an older protected configuration, omit its hash check, substitute an in-memory relaxed manifest or patch the frozen verifier merely to make the approved deletion pass. Unattributed or conflicting changes remain blocked; attribution does not itself satisfy the frozen predicate.
+5. If the hard-bound baseline must change, retain the old manifest, checksum, verifier and approval unchanged; prepare a separately versioned successor with an explicit predecessor link. Refresh only proven baseline/continuity fields, programmatically compare the rest against the original, and rerun the real read-only preflight, retained-only recovery, scope/count/fingerprint negatives and missing-new-approval rejection. Do not copy the old approval into the successor or count these tests as destructive acceptance.
+6. Update the specific lot checkpoint, parent checkpoint and inventory to the same successor and gate; supersede obsolete pending pointers so another resumption cannot execute the old plan. Explain the blocker once in plain language: approval received, nothing deleted, exact authorized concurrent change identified, same targets or actual target changes, tests passed and the precise renewed confirmation required. Keep estimated savings distinct from observed savings, which remain zero before execution.
+
 ## 4. Validate what remains
 
 ### Interrupted encrypted restore: verified input reuse and isolated replay

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "journal_entries": 2,
+  "exact_journal_scope_verified": true,
+  "independent_post": {
+    "status": "PASS",
+    "mode": "post",
+    "targets": 2,
+    "regular_files": 915,
+    "directories": 188,
+    "deletions_by_verifier": 0,
+    "site_files_verified": 948,
+    "historical_vendor_member_verified": true,
+    "original_target_payloads_read": 0
+  },
+  "critical_journal_events": 0,
+  "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "same_gateway_pids": true,
+  "same_boot_id": true,
+  "protected_hashes_unchanged": 55,
+  "recovery_hashes_unchanged": 8,
+  "at": "2026-11-15T17:37:11.435190-05:00"
+}

@@ -3559,6 +3559,23 @@
       "updated_at": "2026-10-28T16:09:35+00:00"
     },
     {
+      "canonical_key": "ares.eggbev03.cross-account-clone-capability",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-15T22:25:24.770000+00:00",
+      "id": "ARES-EGGBEV03-CROSS-AUTH-1571652369467445359",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rodolfo autoriza implementar rota clone Eggbev01 para03 com nova midia; publicacao separada",
+      "updated_at": "2026-11-15T22:26:40+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev.account03.nicolas-campaign-authority",
       "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json",
       "consumers": [
@@ -17467,5 +17484,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T15:59:08+00:00"
+  "updated_at": "2026-11-15T22:26:40+00:00"
 }

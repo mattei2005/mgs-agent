@@ -297,6 +297,22 @@ Manifesto SHA-256 `19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f
 
 O restante do root de manutenção contém pacotes/configurações históricas sem substituição integral comprovada; não foi declarado inútil nem indispensável. Os controles compactos e os outros conjuntos de sites ficam preservados. As diferenças únicas e a recorrência continuam no ledger; este lote parcial não encerra o pedido global. Dependências de recuperação devem proteger o novo compacto de sites e o consolidado histórico anterior. A próxima ação destrutiva exige nova confirmação exata, sem alterar instalação, site, credenciais, retenção ou gateway.
 
+### Confirmação recebida e revalidação bloqueada — 15/11
+
+Rodolfo confirmou o manifesto anterior em `1571653126639849513`, após a pergunta `1571336731318292593`; aprovação nativa registrada em `data/storage-backup-remainder-1571327506374598789/approval.json`. **Nenhuma exclusão foi iniciada.** O preflight congelado bloqueou por hash alterado de um arquivo protegido externo aos alvos: a configuração do Ares. A origem foi reconciliada como alteração autorizada dos quatro prompts Eggbev, pedido Nicolas `1571553655499259929`, REPORT-INFRA `1571555165872455681`, commit `a929cfaf9a0c041b3d471374bf14c1652e57814c`; live/mirror tipados concordam. Não é anomalia, não houve restauração da configuração antiga nem afrouxamento do verificador.
+
+Os **mesmos dois alvos**, 915 arquivos e 188 diretórios, mantiveram exatamente o fingerprint original. Manifesto/verificador originais ficam imutáveis. Novo freeze em `data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/`, SHA-256 `342901f75d27371867e60945b2af5779581a4ee035be867e7e3f014973417300`, conserva o executor original e atualiza somente a baseline protegida e metadados de continuidade. Preflight real e quatro negativos passaram; replay retido verificou 948 arquivos e instalador histórico. O ganho líquido estrutural continua estimado em 20,38 MiB, sem economia realizada. A confirmação anterior não é reaplicada automaticamente ao novo manifesto. Gate ativo: nova confirmação desse freeze, sem alteração do escopo e sem terceira execução/retry do antigo. Fonte: `preflight-reconciliation.json`; parent amplo permanece aberto.
+
+### Lote revalidado executado — confirmação 1571654863576891465
+
+A confirmação nativa de Rodolfo `1571654863576891465`, em resposta à pergunta `1571654521573212262`, resolveu o gate do manifesto `342901f75d27371867e60945b2af5779581a4ee035be867e7e3f014973417300`. **Execução única concluída e validada:** os dois alvos estão ausentes, com 915 arquivos e 188 diretórios retirados, zero links; journal de dois alvos exatos. Pais, manifests históricos, demais backups, código vivo, perfis, programas instalados e sites não foram alterados por esta exclusão. A configuração autorizada atual do Ares foi preservada.
+
+Depois da ausência real dos originais, o mesmo verificador e uma passagem independente conferiram novamente a recuperação de 948 arquivos do compacto de sites e do instalador no consolidado histórico, sem ler os alvos antigos. Os 55 hashes protegidos e oito insumos de recuperação permaneceram iguais. Três configs e três smokes explícitos sem ferramentas passaram; gateways mantiveram seus PIDs/boot, zero eventos novos de prioridade crítica e nenhum restart. A validação foi em stream; não houve restauração materializada sobre site ou VPS produtiva.
+
+O intervalo imediato registrou 25.137.152 bytes (~23,97 MiB) de aumento no espaço disponível do filesystem, medição global sujeita a atividade concorrente. Não equivale ao ganho líquido estrutural estimado de 20,38 MiB, calculado antes e já descontando a preservação criada pela análise. Medição pós-validação: 69,72% de uso, 58,34 GiB disponíveis. Fonte ativa: `data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json`. Nenhuma confirmação, retry ou exclusão está pendente neste lote; os freezes anteriores ficam somente como histórico imutável.
+
+O pedido global permanece aberto nos checkpoints de sistema e reorganização: classificar o restante de manutenção/configurações históricas e dados/trabalhos, depois caches e Git/recorrência (pontos 5–8). Nenhum outro descarte, política de retenção ou automação nova foi autorizado por esta confirmação.
+
 
 
 

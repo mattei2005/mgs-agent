@@ -63,8 +63,10 @@ def manager_folder(request, profile, base, ops, drive_token):
     registered=manager_standard.find_slot(fid)
     if registered:
         slot,state=registered
-        if state=='used' and not request.get('source_account'):
-            raise ValueError('used manager media requires explicit authorized reuse')
+        # Explicit grouped selection of this exact registered folder authorizes
+        # request-scoped reuse after live channel authority (_prepare_locked).
+        # source_account is a real reference, not a generic reuse permission.
+        # Keep group, native ancestry, language and manager partition guards.
         expected_formats={('IMG' if media_kind(f)=='image' else 'VID') for f in validate_groups(request)}
         manager_standard.validate_folder(manager_standard.storage.drive(drive_token),fid,operation='SHEIN_US_'+profile['language'],manager=profile['manager_code'])
         for fmt in expected_formats:

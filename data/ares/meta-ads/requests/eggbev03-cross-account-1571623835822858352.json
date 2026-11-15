@@ -55,7 +55,9 @@
     "target_engine_ad_serving_route": null,
     "consumer_active": false,
     "cross_account_clone_route_ready": false,
-    "cross_account_clone_route_authority_verified": false,
+    "cross_account_clone_route_authority_verified": true,
+    "cross_account_clone_route_authority_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+    "cross_account_clone_route_authority_message_id": "1571652369467445359",
     "source_reader_exclusion": {
       "request_id": "eggbev-pg23189-1571342489162489937",
       "status": "RECOVERY_PENDING",
@@ -67,11 +69,35 @@
     "source_campaign_live_verified": false,
     "media_live_verified": false
   },
-  "phase": "TECHNICAL_READINESS_PENDING",
+  "phase": "IMPLEMENTATION_AUTHORIZED",
+  "implementation_task_id": "t_e524bad0",
+  "preparation_task_id": "t_26342647",
+  "technical_authority_message_id": "1571652369467445359",
   "campaign_writes_this_request": 0,
   "media_uploads_this_request": 0,
   "asset_reservations_this_request": 0,
   "manifest_sealed": false,
+  "execution_instruction": {
+    "message_id": "1571655254162800732",
+    "author_discord_id": "344196393512075265",
+    "content": "Execute agora e avise quando terminar aqui",
+    "timestamp": "2026-11-15T22:36:52.535000+00:00",
+    "live_author_verified": true,
+    "scope": "Execute the same five-campaign Nicolas request as soon as the already-running integration and mandatory technical/publication gates permit, then notify only the verified completion in the original thread.",
+    "commercial_execution_authorized": true,
+    "sealed_manifest_approval_inferred": false,
+    "no_expansion_of_account_budget_media_page_or_source_mutation": true
+  },
+  "completion_delivery": {
+    "requested_by_message_id": "1571655254162800732",
+    "platform": "discord",
+    "channel_id": "1565032671669919827",
+    "delivery_owner_task_id": "t_26342647",
+    "notify_on_verified_completion": true,
+    "routine_intermediate_updates": false,
+    "exact_message_readback_required": true,
+    "new_notifier_or_cron": false
+  },
   "final_publication_approval": null,
-  "next_step": "Obtain only the missing structural authority for a deterministic Eggbev01-to-Eggbev03 clone-with-new-media capability; complete already-approved account03 onboarding/binding in isolated maintenance with tests and no campaign canary. Preserve the existing source-account recovery and wait for its canonical reader release. Then verify the exact source/Page, requested media and account03 mode, reconcile/reserve/prestage only in target account, prepare the sealed summary and obtain the required request-specific final OK. Preserve explicit immediate-start intent, budget and all literal media/copy; do not use a different advertiser, request or from-zero conversion as a workaround."
+  "next_step": "Structural authority is resolved by Rodolfo1571652369467445359. Isolated implementation owner t_e524bad0 must install and verify the exact cross-account capability and complete already-approved account03 binding with tests and no campaign canary. Dependent preparation owner t_26342647 verifies installation receipts and resumes this same request, preserving the existing source-account recovery and canonical reader exclusion. Then verify exact source/Page/media, reconcile/reserve/prestage only in target03, prepare and deliver the sealed final summary and await the required request-specific final OK. Do not ask for structural authority, budget or immediate-start intent again. No foreground parallel writer, different advertiser/request or silent from-zero conversion."
 }

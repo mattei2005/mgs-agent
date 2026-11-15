@@ -1413,12 +1413,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV03-CROSS-1571623835822858352",
-      "next_step": "Pedir somente autorizacao estrutural de Rodolfo para rota Eggbev01->03 com nova midia; concluir onboarding/binding ja aprovado em manutencao isolada sem canario. Nao interromper writer01 nem converter em from-zero. Apos liberacao reader01 e integracao, conferir fonte/Page/midia e preparar resumo selado para OK final por pedido; preservar budget/ASAP literais.",
-      "objective": "Duplicar 5 vezes Moorcroft 303 da Eggbev01 na Eggbev03 com 15 videos Nicolas, USD35 por campanha e inicio imediato explicito",
-      "source": "data/ares/meta-ads/requests/eggbev03-cross-account-1571623835822858352.json",
-      "state": "technical_readiness_pending. remetente autenticado. escopo duas contas permitido. ana cunha leu conta03 http200/usd/new_york/advertise. conta03 ainda consumer candidato, binding nao migrado, supported_modes vazio/write false. rota cross-account com midia nova nao habilitada/autoridade estrutural nao comprovada. conta01 reader lease recovery_pending de pedido distinto preservada. page probe barrado localmente antes de http; nao alegar falha remota. nenhum write campanha/upload/reserva. inputs 5 campanhas e15 filenames conferidos.",
+      "next_step": "Concluir instalacao/testes e aceitar receipts; avancar mesmo pedido pelas verificacoes/preparacao e gates finais reais ate execucao/readback/postprocess terminal. Dono existente avisa somente conclusao real nesta thread com Iris/AdOps; decisao nova indispensavel e unica excecao ao silencio intermediario. Nao pedir novamente estrutura/budget/ASAP.",
+      "objective": "Executar5 clones Moorcroft303 Eggbev01->03,15 videos Nicolas,USD35/camp e ASAP; aviso de conclusao nesta origem",
+      "source": "data/ares/meta-ads/requests/eggbev03-cross-account-1571623835822858352.json;data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+      "state": "implementation_in_progress_execution_requested. ceo1571655254162800732 autenticado ordenou execute agora e avise quando terminar aqui. request guarda execution_instruction/completion_delivery. integrador t_e524bad0 em implementacao staged; entrega t_26342647 continua mesmo owner e dependente do aceite. sem novo writer ou cron. ordem comercial nao fabrica ok de futuro manifest; gate final preservado.",
       "thread_id": "1565032671669919827",
-      "updated_at": "2026-11-15T20:35:24+00:00"
+      "updated_at": "2026-11-15T22:38:31+00:00"
     },
     {
       "agent": "ares",
@@ -2483,12 +2483,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1571617866556514480",
-      "next_step": "Obter autorização específica de manutenção na origem para suporte a reuso explícito de Usados no executor central; corrigir/testar em manutenção separada e retomar mesmo request/relógio. Nenhum consumidor automático armado.",
-      "objective": "Duplicar C007 Yolokfx08 G006 cinco vezes, 12 vídeos Nicolas Usados, USD35/dia COCAP USD0.90, início15/11/2026 15:30EST",
-      "source": "data/ares/meta-ads/audit/shein/preflight-blockers/shein-1571617866556514480/request.json",
-      "state": "technical_maintenance_authority_required: prepare-media rejeita pasta usada para clone na mesma conta; 12 reservas claimadas comprovadas; nenhum upload ou write de campanha tentado; state/engine/checkpoint e queue job ausentes. não contornar com source_account fictício. pedido integral preservado no blocker canônico.",
+      "next_step": "Pedido operacional verificado; entregar conclusão nativa com bloco Iris/AdOps. Aguardar revisão Meta; não repetir writer nem ativação.",
+      "objective": "Concluir os cinco clones C007 Yolokfx08 G006 com12 vídeos NicolasUsados,USD35 eCOCAP0.90",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571617866556514480/final-verification.json",
+      "state": "complete_verified: campanhas010-014 active;5 conjuntos e12 anúncios configuradosactive;9pending_review e3active no readback17:38est;usd35/dia ecost_cap0.90 cada,delta175,totalativo490usd/dia;grupos3/2/2/3/2 ecopy literal,qa eids preservados;drive12/12 nicolasusados verificado;fonte007 budget/lance preservados. horário original15:30 não cumprido,inícios17:30:32/17:31:09/17:31:45est via política mesmo-dia. manutenção autorizada1571652194527219788,40 testes verdes ereport-infra confirmado.",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-15T20:12:46+00:00"
+      "updated_at": "2026-11-15T22:38:58+00:00"
     },
     {
       "agent": "ares",
@@ -6568,12 +6568,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789",
-      "next_step": "Novo gate manifesto19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f: 1 arvore local de backup WP File Manager+1 instalador duplicado;2alvos915arquivos188dirs;20.38MiB net estimado.8testesPASS. Sem approval/start/exclusao. Recuperacao depende do novo arquivo sites e do historico retido anterior.",
-      "objective": "Revisar restantes de manutencao/backups; preservar integralmente historico e preparar apenas disposicao comprovada.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json;discord:1569928464033783862/1571327506374598789",
-      "state": "prepared_validated_waiting_new_critical_confirmation",
+      "next_step": "Nao reexecutar delete nem pedir confirmacao destrutiva.2alvos ausentes915files188dirs;recovery948+instalador/55protegidos/8recovery/3configs3smokesPASS;REPORT1571655662998655153GET. Gitaguardaguard globalt_e524bad0/staged;naoalterarprotecaonemwriteralheio. Zeusrecomendaautorizacaodeversionamentomanualsomentedosregistrosdestelote. Parent5-8aberto.",
+      "objective": "Lote2alvos concluido/validado; sincronizacao dos registros separadamente bloqueada pelo guard global de outra integracao.",
+      "source": "data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-git-sync.json",
+      "state": "completed_validated_git_sync_blocked",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T01:22:03+00:00"
+      "updated_at": "2026-11-15T22:40:09+00:00"
     },
     {
       "agent": "zeus",
@@ -6638,12 +6638,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Preparado novo lote de copias locais com recuperacao compactada,2alvos manifesto19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f; exige nova confirmacao. Restante5,6dados/trabalhos,7caches,8Git e recorrencia continuam abertos.",
-      "objective": "Concluir revisao exaustiva da ocupacao inutil, nao parar por urgencia/folga e nao confundir cobertura parcial com conclusao global.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json",
+      "next_step": "Lotebackup2alvos encerrado e validado1571654863576891465;nenhuma confirmacao destrutiva pendente. Proximo:classificar restantes5manutencao/configs e6dados/trabalhos,7caches,8Git/recorrencia;sem novo delete autorizado. Nao encerrar revisao global por este lote.",
+      "objective": "Revisao exaustiva da ocupacao inutil com recuperacao e operacao preservadas; fechamento do lote confirmado separado do parent.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T01:22:03+00:00"
+      "updated_at": "2026-11-15T22:38:29+00:00"
     },
     {
       "agent": "zeus",
@@ -6698,12 +6698,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Aguardar novo gate2alvos em ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789. Demais pacotes/configs e evidencias historicas mantidos sem substituicao integral provada; outros5 e6-8 permanecem. Nao apagar root backup completo por idade.",
-      "objective": "Concluir classificacao sistema/demais arquivos sem perda de recuperacao; lotes anteriores nao serao repetidos.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json",
-      "state": "backup_remainder_lot_waiting_critical_parent_open",
+      "next_step": "Lote2alvos encerrado fontecleanup-result revalidated-1571653126639849513;nao executar freezes antigos nem pedir confirmacao. Preservar demais pacotes/configs sem cobertura. Proxima revisao somente leitura do restante5 e dados/trabalhos6;7-8abertos.",
+      "objective": "Revisao exaustiva da ocupacao inutil com recuperacao e operacao preservadas; fechamento do lote confirmado separado do parent.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json",
+      "state": "in_progress_remaining_classification",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T01:22:03+00:00"
+      "updated_at": "2026-11-15T22:38:29+00:00"
     },
     {
       "agent": "zeus",
@@ -10186,6 +10186,16 @@
       "updated_at": "2026-11-02T22:10:41+00:00"
     },
     {
+      "agent": "ares",
+      "id": "t_e524bad0",
+      "next_step": "Baseline offline, módulo e binding03 staged, testes red/green e instalação CAS.",
+      "objective": "Implementar capability central Eggbev01 para03 sem campanha write",
+      "source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+      "state": "manutenção isolada; escopo e autoridade lidos, único integrador confirmado. source reader exclusion preservada.",
+      "thread_id": "1565032671669919827",
+      "updated_at": "2026-11-15T22:30:26+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "us-emp-cc-messenger-flow-20260810",
       "next_step": "Nenhum; Excel completo validado e pronto para entrega",
@@ -10797,5 +10807,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T20:35:24+00:00"
+  "updated_at": "2026-11-15T22:40:09+00:00"
 }
