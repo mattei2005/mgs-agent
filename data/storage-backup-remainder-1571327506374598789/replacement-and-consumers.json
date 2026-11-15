@@ -1,0 +1,32 @@
+{
+  "state": "replacement_proven_exact_scope_freeze_pending",
+  "target_tree": "/root/mgs-agent-backups/wp-file-manager-openzed/20260819T184628-0400/wp-file-manager",
+  "target_file": "/root/zeus-vps-maintenance-1565730926233657347/original-vendor-debs/monarx-agent_4.3.82-master_amd64.deb",
+  "site_source_manifest": "/root/mgs-agent-backups/wp-file-manager-openzed/20260819T184628-0400/manifest.json",
+  "site_backup_manifest_files": 914,
+  "historical_archive_member": "vps-maintenance/20261012-monarx-1559266729031635005/monarx-agent_4.3.82-master_amd64.deb",
+  "historical_member_sha256": "663c03e36a86590a5c31c65d7499e40ca780ab783dfb2002cdc89b69a75549ec",
+  "checked_active_source_roots": [
+    "/root/mgs-agent/scripts",
+    "/etc/systemd/system",
+    "/etc/cron.d",
+    "/usr/local/bin",
+    "/usr/local/sbin",
+    "/root/.local/bin",
+    "/root/.hermes/profiles/zeus/scripts",
+    "/root/.hermes/profiles/zeus/hooks",
+    "/root/.hermes/profiles/zeus/cron",
+    "/root/.hermes/profiles/ares/scripts",
+    "/root/.hermes/profiles/ares/hooks",
+    "/root/.hermes/profiles/ares/cron",
+    "/root/.hermes/profiles/atena/scripts",
+    "/root/.hermes/profiles/atena/hooks",
+    "/root/.hermes/profiles/atena/cron"
+  ],
+  "active_executable_references": [],
+  "process_references": [],
+  "historical_recovery_verifier": "PASS2675 files353 dirs16 links",
+  "site_recovery_verifier": "PASS948 files234dirs",
+  "deletions": 0,
+  "at": "2026-11-14T20:09:00.730764-05:00"
+}

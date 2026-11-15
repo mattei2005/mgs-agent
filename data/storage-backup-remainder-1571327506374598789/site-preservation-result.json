@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "archive": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/site-backup-history.tar.xz",
+  "archive_sha256": "3133c44a7904c602d516060d4deb39cb06813a542162986fdbe56f1f6d221636",
+  "manifest": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/site-source-manifest.json",
+  "recovery_reader": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/recover.py",
+  "proof": {
+    "status": "verified",
+    "self_contained": true,
+    "counts": {
+      "files": 948,
+      "directories": 234,
+      "symlinks": 0
+    }
+  },
+  "source_bytes_unchanged": true,
+  "archive_allocated": 3788800,
+  "self_contained_byte_and_metadata_recovery": true,
+  "full_materialized_restore_executed": false,
+  "origin": "analysis_created_recovery_artifact",
+  "no_deletions": true,
+  "created_at": "2026-11-14T20:06:36.825337-05:00"
+}
