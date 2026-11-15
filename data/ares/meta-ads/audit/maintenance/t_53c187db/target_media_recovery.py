@@ -301,6 +301,8 @@ def recover(path,runner,approved_digest,approval_message_id,*,runtime_factory=Ru
     from .coordination import AccountWriterLeaseStore
     with request_lock(path):
         g,cfg,q,payload=local(path,runner,approved_digest,approval_message_id)
+        if (Path(path).parent/'final.json').exists():
+            return terminal_readback(path,runner,g,cfg,q,payload,runtime_factory)
         leases=AccountWriterLeaseStore(cfg['state_root']);leases.claim(q['account_id'],q['request_id'],status='RECOVERY_PENDING')
         runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;home=Path(path).parent/'media-recovery';home.mkdir(exist_ok=True)
         runtime.authority();runtime.source_page()
@@ -443,3 +445,38 @@ def finalize(path,runner,approved_digest,approval_message_id,*,runtime_factory=R
             fl={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
             for p in [g['checkpoint_path'],g['audit_path'],str(Path(path).parent/'engine-result.json')]:cas_link(p,'independent_media_finalization',fl,home/'original'/Path(p).name)
             leases.release(q['account_id'],q['request_id']);return final
+
+def independent_completion(checkpoint,record,request_id,account_id,ids,*,audit_root=None):
+    """Source admission can use independent completion without rewriting FAILED.
+    Hash links and all stock receipts are required; never infer success by status.
+    """
+    link=checkpoint.get('independent_media_finalization')
+    require(isinstance(link,dict) and link.get('phase')=='COMPLETE_INDEPENDENT','independent completion link absent')
+    fp=Path(link['path']).resolve()
+    if audit_root is None:audit_root=Path('/root/mgs-agent/data/ares/meta-ads/audit/eggbev')
+    require(fp.is_relative_to(Path(audit_root).resolve()) and fp.name=='final.json' and file_sha(fp)==link['sha256'],'independent completion path/hash')
+    final=load(fp);n=3;assignments=final.get('assignments',[])
+    require(final.get('phase')=='COMPLETE' and final.get('independent_recovery') is True and final.get('request_id')==request_id and final.get('campaign_ids')==[ids['campaign_id_1']] and final.get('final_ads')==n and final.get('technical_paused_seeds')==n and len(assignments)==n and len(final.get('manager_stock_readbacks',[]))==n,'independent completion identity/cardinality')
+    for i,a in enumerate(assignments,1):
+        require(a.get('ad_id')==ids[f'copied_ad_id_1_{i}'] and a.get('campaign_id')==ids['campaign_id_1'] and a.get('adset_id')==ids['adset_id_1'],'independent completion assignment')
+        stock=final['manager_stock_readbacks'][i-1];require(file_sha(stock['path'])==stock['sha256'],'stock receipt hash')
+        proof=load(stock['path'])
+        require(proof.get('schema')=='mgs.manager.standard.use.v1' and proof.get('status')=='verified' and proof.get('request_id')==request_id and proof.get('asset_id')==a['asset_id'] and proof.get('stock_file_id')==stock['stock_file_id'] and proof.get('assignment')=={k:a[k] for k in ['campaign_id','adset_id','ad_id','creative_id']},'independent stock assignment')
+    receipt=final.get('recovery_receipt',{});require(file_sha(receipt['path'])==receipt['sha256'],'independent media receipt hash');r=load(receipt['path'])
+    require(r.get('schema')==SCHEMA and r.get('request_id')==request_id and r.get('ids')==ids and r.get('phase')=='RECOVERY_VERIFIED_INDEPENDENT' and len(r.get('pairs',[]))==6 and len(r.get('downloads',[]))==12,'independent media receipt coverage')
+    return fp
+
+def terminal_readback(path,runner,g,cfg,q,payload,runtime_factory):
+    import ares_manager_storage_standard as standard
+    checkpoint=load(g['checkpoint_path']);fp=independent_completion(checkpoint,{},q['request_id'],q['account_id'],g['ids'],audit_root=Path(path).parent)
+    final=load(fp);link={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
+    for p in [g['audit_path'],str(Path(path).parent/'engine-result.json')]:require(load(p).get('independent_media_finalization')==link,'terminal completion partial links; resume finalize')
+    runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;runtime.authority();runtime.source_page()
+    with continuation.admission(path,payload,cfg,meta=runtime.meta,token=runtime.token):
+        selected=load(Path(path).parent/'selected-assets.json');semantic(payload,g['ids'],selected,runtime.read(),g['pairs'],'ACTIVE')
+        for asset in selected:
+            result=standard.confirm_usage(asset['asset_id'],q['request_id'],apply=False)
+            require(result.get('status') in {'verified_plan','verified'} and result.get('same_ids') is True and result.get('remote_writes',0)==0,'terminal stock readback')
+    ledger=load(runner.R/runner.naming.load_policy()['ledger_path'])['allocations'][q['request_id']]
+    require(ledger.get('status')=='COMMITTED' and ledger.get('campaign_ids')==[g['ids']['campaign_id_1']],'terminal ledger')
+    return final

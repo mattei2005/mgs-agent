@@ -84,16 +84,21 @@ def source_seed_proof(q):
     if len(records)!=1:raise ValueError('source checkpoint ambiguous or missing')
     record=records[0];ids=record.get('target_clone_ids')
     if not ids:return None  # Ordinary sources retain the exact cardinality gate.
-    if checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('status')!='COMPLETE' or record.get('status')!='COMPLETE':raise ValueError('source target clone checkpoint incomplete')
+    independent_path=None
+    if checkpoint.get('independent_media_finalization'):
+        from ares_campaign_v3.target_media_recovery import independent_completion
+        independent_path=independent_completion(checkpoint,record,request_id,ACCOUNT,ids)
+        if checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('campaign_ids') not in [[],[sid]]:raise ValueError('independent source checkpoint identity')
+    elif checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('status')!='COMPLETE' or record.get('status')!='COMPLETE':raise ValueError('source target clone checkpoint incomplete')
     n=len(q['media_filenames']);pairs=[[ids.get(f'copied_ad_id_1_{i}'),ids.get(f'seed_ad_id_1_{i}')] for i in range(1,n+1)]
     expected={'campaign_id_1','adset_id_1'}|{f'{key}_1_{i}' for i in range(1,n+1) for key in ['copied_ad_id','seed_ad_id','creative_id']}
     if set(ids)!=expected or any(not isinstance(v,str) or not v.isdigit() or int(v)==0 for v in ids.values()):raise ValueError('source checkpoint slots missing or extra')
     finals=[a for a,_ in pairs];seeds=[a for _,a in pairs]
-    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or checkpoint.get('campaign_ids')!=[sid] or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or len(record.get('ad_ids',[]))!=n or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
+    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or (not independent_path and checkpoint.get('campaign_ids')!=[sid]) or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or len(record.get('ad_ids',[]))!=n or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
     evidence={'request_id':request_id,'checkpoint_path':str(checkpoint_path),'checkpoint_sha256':hashlib.sha256(checkpoint_path.read_bytes()).hexdigest(),'adset_id':ids['adset_id_1'],'pairs':pairs}
     # Independent recovery is terminal only with its exact COMPLETE receipt.
-    if checkpoint.get('recovery_result'):
-        final_path=Path(checkpoint['recovery_result']).resolve()
+    if checkpoint.get('recovery_result') or independent_path:
+        final_path=independent_path or Path(checkpoint['recovery_result']).resolve()
         if not final_path.is_relative_to((R/'data/ares/meta-ads/audit/eggbev').resolve()) or final_path.name!='final.json':raise ValueError('source completion receipt outside canonical audit')
         final=load(final_path);assignments=final.get('assignments',[])
         if final.get('phase')!='COMPLETE' or final.get('request_id')!=request_id or final.get('campaign_ids')!=[sid] or final.get('final_ads')!=n or final.get('technical_paused_seeds')!=n or len(assignments)!=n or {a.get('ad_id') for a in assignments}!=set(finals) or any(a.get('campaign_id')!=sid or a.get('adset_id')!=ids['adset_id_1'] for a in assignments):raise ValueError('source completion receipt mismatch')

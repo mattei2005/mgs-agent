@@ -1,0 +1,180 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "verified_at": "2026-11-15T01:34:39.629507-05:00",
+  "state": "target_recovered_independent_closure_pending",
+  "previous_checkpoint": "/root/mgs-agent/reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/independent-readback-20261115T012419-0500.json",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "author_id_GET_verified": "344196393512075265",
+    "content_GET_verified": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "thread_GET_verified": "1569185140502954077",
+    "parent_channel_GET_verified": "1496267442899521627",
+    "current_registry_authorized": true
+  },
+  "source_alert_GET_verified": {
+    "id": "1571381759860408423",
+    "channel_id": "1498132022634483894"
+  },
+  "source": {
+    "alert_channel": "1498132022634483894",
+    "alert_id": "1571381759860408423",
+    "alert_url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1571381759860408423",
+    "contract_hash": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+    "job_id": "44671121f3cc",
+    "kind": "native",
+    "profile": "zeus",
+    "thread_id": "1511521657922261082",
+    "time_sensitive": false
+  },
+  "contract_hash_live": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1434935",
+    "owner_process_start_ticks": "213411947",
+    "worker": {
+      "pid": 1435140,
+      "start_ticks": "213413012",
+      "started": 1794724332.19439,
+      "state": "running"
+    },
+    "worker_live_start_ticks": "213413012",
+    "worker_bound_to_owner": true,
+    "lease_until": 1794725532.186712,
+    "lease_valid": true,
+    "attempts": 13,
+    "failures": 0,
+    "service": {
+      "heartbeat": {
+        "at": 1794724332.1839483,
+        "phase": "dispatching",
+        "pid": 1434935
+      },
+      "worker_failure_streak": 0
+    },
+    "standalone_watchdog_processes": []
+  },
+  "target": {
+    "id": "44671121f3cc",
+    "enabled": true,
+    "state": "scheduled",
+    "schedule": {
+      "kind": "interval",
+      "minutes": 360,
+      "display": "every 360m"
+    },
+    "last_run_at": "2026-11-14T23:26:38.510400-05:00",
+    "last_status": "error",
+    "last_error": "Script exited with code 1",
+    "next_run_at": "2026-11-15T05:26:38.510400-05:00",
+    "fire_claim": null
+  },
+  "hash_checks": {
+    "/root/mgs-agent/scripts/check-retired-host-references.py": {
+      "sha256": "0c54aa1c95440df4abe3c5e78212880858e66983d6abd79e9f1cd803b7e96082",
+      "matches_recorded": true
+    },
+    "/root/mgs-agent/tests/test_retired_host_reference_guard.py": {
+      "sha256": "05261648fcc8f597d2462cf6e0f0d072eaec7f9982269a012d0ef0c550751acc",
+      "matches_recorded": true
+    },
+    "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-pitfalls.md": {
+      "sha256": "48281253f8d135e8d67b90e6dba03c7ca66ae516e2f4dae1a904d94d4f66c1f0",
+      "matches_recorded": true
+    }
+  },
+  "canonical_mirror_identical": true,
+  "watchdog_state": {
+    "status": "ok",
+    "last_failure_rc": 0,
+    "last_alert_sent": null,
+    "last_check": "2026-11-14T23:32:52-05:00"
+  },
+  "latest_wrapper_marker": "[2026-11-14T23:32:52-05:00] watchdog-wrapper: OK: ensure-hermes-mgs-patches passed",
+  "native_recent_executions": [
+    {
+      "id": "c2fe7ec77c8244249a07991087837563",
+      "status": "failed",
+      "pid": 1201405,
+      "started_at": "2026-11-14T23:24:48.920763-05:00",
+      "finished_at": "2026-11-14T23:26:38.516545-05:00",
+      "error": "Script exited with code 1"
+    },
+    {
+      "id": "0c01bfe170954417b507550144e63f35",
+      "status": "completed",
+      "pid": 661550,
+      "started_at": "2026-11-14T17:21:47.639495-05:00",
+      "finished_at": "2026-11-14T17:24:35.679784-05:00",
+      "error": null
+    }
+  ],
+  "delivery": [
+    {
+      "message_id": "1571382457620758560",
+      "GET_verified": true,
+      "embed_title": "Hermes patch watchdog recuperado",
+      "content_empty": true,
+      "mentions_empty": true
+    },
+    {
+      "message_id": "1571382948165591142",
+      "GET_verified": true,
+      "embed_title": "REPORT-INFRA — modificada",
+      "content_empty": true,
+      "mentions_empty": true
+    }
+  ],
+  "recent_queue_events": [
+    {
+      "id": 6627,
+      "at": 1794724332.186712,
+      "request_key": "b0bf8a238e1a068b6c86b7f1",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1434935\", \"previous_state\": \"retry_scheduled\"}"
+    },
+    {
+      "id": 6612,
+      "at": 1794723870.118922,
+      "request_key": "b0bf8a238e1a068b6c86b7f1",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794724170.118922, \"state\": \"retry_scheduled\"}"
+    },
+    {
+      "id": 6611,
+      "at": 1794723731.8002503,
+      "request_key": "b0bf8a238e1a068b6c86b7f1",
+      "kind": "claimed",
+      "detail": "{\"owner\": \"supervisor:1423320\", \"previous_state\": \"retry_scheduled\"}"
+    },
+    {
+      "id": 6596,
+      "at": 1794723257.976345,
+      "request_key": "b0bf8a238e1a068b6c86b7f1",
+      "kind": "deferred",
+      "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794723557.976345, \"state\": \"retry_scheduled\"}"
+    }
+  ],
+  "pending": {
+    "stage": "Natural native occurrence and independent closure by existing supervisor",
+    "next_native_occurrence": "2026-11-15T05:26:38.510400-05:00",
+    "consumer_cron": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+    "consumer_live_pid_verified": 1434935,
+    "human_decision_required": false,
+    "queue_closure_verified": false,
+    "new_native_execution_after_original_failure": false,
+    "next_action": "Observe existing native occurrence; no wrapper replay, duplicate delivery or second queue writer."
+  },
+  "lookup_failover": {
+    "hermes-agent skill_view": "disabled; canonical installed SKILL.md read directly"
+  },
+  "actions_not_performed": [
+    "repair_or_wrapper_replay",
+    "queue_transition",
+    "scheduler_history_or_cadence_change",
+    "new_dispatcher",
+    "Discord_POST_or_PATCH",
+    "infrastructure_or_skill_change",
+    "gateway_restart"
+  ]
+}

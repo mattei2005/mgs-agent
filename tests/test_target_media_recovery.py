@@ -30,6 +30,7 @@ def full_fixture():
   # FIXTURE ONLY, not real GET evidence. Tests for absent fields reject the
   # original snapshot; production always requires a new full readback.
   for k,v in PAYLOAD['campaigns'][0]['adset_create'].items():s['adsets'][0].setdefault(k,copy.deepcopy(v))
+  for k,v in PAYLOAD['campaigns'][0]['campaign_create'].items():s['campaign'].setdefault(k,copy.deepcopy(v))
  return s
 
 class MediaTests(unittest.TestCase):
@@ -131,6 +132,12 @@ mutations={
  'utm':lambda x:first(x)['creative'].update(url_tags='other'),
  'rules':lambda x:first(x)['creative']['asset_feed_spec'].update(asset_customization_rules=[]),
  'seedactive':lambda x:next(a for a in x.s['ads'] if a['id']==x.g['ids']['seed_ad_id_1_1']).update(status='ACTIVE'),
+ 'seedcreative':lambda x:next(a for a in x.s['ads'] if a['id']==x.g['ids']['seed_ad_id_1_1'])['creative'].update(id='123'),
+ 'seedlineage':lambda x:next(a for a in x.s['ads'] if a['id']==x.g['ids']['seed_ad_id_1_1']).update(source_ad_id='123'),
+ 'objective':lambda x:x.s['campaign'].update(objective='OUTCOME_TRAFFIC'),
+ 'buyingtype':lambda x:x.s['campaign'].update(buying_type='RESERVED'),
+ 'specialcategory':lambda x:x.s['campaign'].update(special_ad_categories=[]),
+ 'specialcountry':lambda x:x.s['campaign'].update(special_ad_category_country=['BR']),
  'lineage':lambda x:first(x).update(source_ad_id='123'),
 }
 for n,f in mutations.items():mutation_test(n,f)
@@ -165,7 +172,7 @@ class PipelineTests(unittest.TestCase):
  def tearDown(self):
   for p in reversed(self.patches):p.stop()
   self.temp.cleanup()
- def run_recovery(self):return rec.recover(self.path,SimpleNamespace(),G['original_approved_digest'],G['approval_message_id'],runtime_factory=self.runtime)
+ def run_recovery(self):return rec.recover(self.path,getattr(self,'runner',SimpleNamespace()),G['original_approved_digest'],G['approval_message_id'],runtime_factory=self.runtime)
  def test_recover_allslots_statusonly_receipt_and_retry(self):
   result=self.run_recovery();self.assertEqual('POSTPROCESS_PENDING',result['phase']);self.assertEqual(1,self.activate_count)
   self.run_recovery();self.assertEqual(1,self.activate_count)
@@ -249,6 +256,12 @@ class FinalizeTests(PipelineTests):
   self.assertFalse(self.stock_calls)
  def test_recover_terminal_then_finalize_no_post(self):
   self.run_recovery();f=self.finish();self.run_recovery();self.assertEqual(f,self.finish());self.assertEqual(1,self.activate_count)
+  self.assertFalse(rec.load(Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json")['blocks_readers'])
+ def test_independent_source_proof_requires_all_stock_receipts(self):
+  self.run_recovery();self.finish();cp=rec.load(self.g['checkpoint_path'])
+  fp=rec.independent_completion(cp,{},self.q['request_id'],self.q['account_id'],self.g['ids'],audit_root=self.h);self.assertEqual(self.h/'final.json',fp)
+  proof=Path(rec.load(fp)['manager_stock_readbacks'][0]['path']);v=rec.load(proof);v['stock_file_id']='wrong';rec.atomic(proof,v)
+  with self.assertRaises(ValueError):rec.independent_completion(cp,{},self.q['request_id'],self.q['account_id'],self.g['ids'],audit_root=self.h)
 
 class AdapterTests(unittest.TestCase):
  def test_status_transport_only_existing_parent_exact_body(self):
@@ -288,6 +301,12 @@ class AdapterTests(unittest.TestCase):
    with patch.object(standard.b,'BASE',root),patch.object(standard,'HOME',home),patch.object(standard.b,'queue_lock',queue),patch.object(standard.b,'Drive',return_value=SimpleNamespace(token='offline')),patch.object(storage,'resolve_media',return_value=record),patch.object(standard,'find_slot',return_value=({'used_id':'used'},'exclusive')),patch.object(standard,'mark_used',used),patch.object(standard,'apply_use_result',side_effect=lambda r,v:r.update(manager_storage_state='used',manager_media_folder_id=v['folder_id'])):
     rec.repair_partial_stock(standard,asset,a,q)
    used.assert_called_once();self.assertEqual('exclusive',used.call_args.args[2]['ready_parent_id']);self.assertEqual('used',json.loads(inv.read_text())['manager_storage_state'])
+ def test_failed_transport_still_observes_quota_headers(self):
+  from unittest.mock import Mock
+  for method in ['activate','read']:
+   r=rec.Runtime.__new__(rec.Runtime);r.g=G;r.payload=PAYLOAD;r.lane=('app','account');r.reserve=Mock();r.quota=Mock();r.transport=Mock();r.transport.last_outer_headers={'x-app-usage':'{}'};r.transport.execute.side_effect=RuntimeError('offline failure')
+   with self.assertRaises(RuntimeError):getattr(r,method)()
+   r.quota.observe_headers.assert_called_once_with(r.lane,r.transport.last_outer_headers)
  def test_receipt_content_hash_cannot_replace_proven_media(self):
   v={'x':1};self.assertNotEqual(rec.digest(v),rec.digest({'x':2}))
 
