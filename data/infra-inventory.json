@@ -15922,6 +15922,19 @@
         "restore": "940e9827b1ac"
       },
       "id": "mgs-disaster-recovery-offsite-20260716",
+      "upload_recovery_30e890e4a3e5d052791e2ada": {
+        "authority_message_id": "1569193434189668453",
+        "cause": "Drive HTTP 500 UNKNOWN on resumable chunk; original remote slot remained empty and local temporary payload was discarded.",
+        "correction": "Probe same upload session before retry; resume acknowledged offset; respect Retry-After; stop after five failed probes or no-progress attempts.",
+        "script_sha256": "95508f145d637c07c00e0bcb13eb650d711b3b4d2d3227cddb1ab0c8bd8a330c",
+        "tests": "25 unittest tests PASS, including seven upload recovery cases",
+        "receipt": "reports/automation-recovery-30e890e4a3e5d052791e2ada/independent-readback.json",
+        "remote_file_id": "1nZjELCY2DU_nH8WOlNBOSdJYr60VyNU9",
+        "ack_id": "1Be8V1dgjj0nc66aX-I5rvfcehKOHWyTE",
+        "status": "current_recovery_point_GET_verified; independent_supervisor_closure_pending",
+        "historical_gap": "Original 05:23 snapshot cannot be recreated; empty slot 1C9iZRhIlGKRGXWguhpFj3GJKbkqp6oIQ preserved.",
+        "preserved": "Native contract, cadence, credentials, permissions, retention and scheduler failure history; no deletion or gateway restart."
+      },
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "lock_contention_recovery": {
         "cause": "Daily full backup held the shared exclusive lock from 04:16 to 04:27 EDT; hourly backup at 04:24 failed immediately.",
@@ -69930,8 +69943,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-offsite-backup.py",
-      "size_bytes": 61681,
-      "modified_at": "2026-11-08T06:07:23-05:00"
+      "size_bytes": 64354,
+      "modified_at": "2026-11-15T05:34:46-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-offsite-restore-test.sh",

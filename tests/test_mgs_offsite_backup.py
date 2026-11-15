@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import email.message
 import fcntl
 import importlib.util
 import io
@@ -42,7 +43,9 @@ class OffsiteBackupTests(unittest.TestCase):
         return calls, open_url
 
     def upload_error(self, code, **headers):
-        return urllib.error.HTTPError('https://upload.invalid/same-session', code, 'fixture', headers, None)
+        message = email.message.Message()
+        for key, value in headers.items(): message[key] = value
+        return urllib.error.HTTPError('https://upload.invalid/same-session', code, 'fixture', message, None)
 
     def run_upload_fixture(self, replies):
         calls, opener = self.upload_fixture(replies)

@@ -1,0 +1,75 @@
+{
+  "operation": "30e890e4a3e5d052791e2ada",
+  "verified_at": 1794739380.639002,
+  "remote": {
+    "id": "1nZjELCY2DU_nH8WOlNBOSdJYr60VyNU9",
+    "name": "mgs-dr-hourly-20261115T103657Z.zip.gpg",
+    "trashed": false,
+    "parents": [
+      "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V"
+    ],
+    "appProperties": {
+      "mode": "quick",
+      "tier": "hourly",
+      "sha256": "3da5a14492ec6d6c882e7a5a699399116a1983ec5ed46e257f16a63fbbd9c9ec",
+      "mgs_dr": "true"
+    },
+    "md5Checksum": "3f200bc9de63f9301dc18ac55d5b03d1",
+    "sha256Checksum": "3da5a14492ec6d6c882e7a5a699399116a1983ec5ed46e257f16a63fbbd9c9ec",
+    "size": "1892829458"
+  },
+  "ack_id": "1Be8V1dgjj0nc66aX-I5rvfcehKOHWyTE",
+  "ack": {
+    "archive_root_id": "1RUhlFEH3213YShql5kLgmeQhBstRL8Nw",
+    "archive_trash_enabled": false,
+    "canonical_sa_upload": true,
+    "file_id": "1nZjELCY2DU_nH8WOlNBOSdJYr60VyNU9",
+    "independent_sa_stream_verified": true,
+    "md5": "3f200bc9de63f9301dc18ac55d5b03d1",
+    "parent_id": "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V",
+    "schema": "mgs.backup.direct.archive.ack.v1",
+    "sha256": "3da5a14492ec6d6c882e7a5a699399116a1983ec5ed46e257f16a63fbbd9c9ec",
+    "size": "1892829458",
+    "status": "verified",
+    "tier": "hourly"
+  },
+  "original_empty_slot": {
+    "id": "1C9iZRhIlGKRGXWguhpFj3GJKbkqp6oIQ",
+    "name": "mgs-dr-hourly-20261115T102347Z.zip.gpg",
+    "mimeType": "application/pgp-encrypted",
+    "trashed": false,
+    "parents": [
+      "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V"
+    ],
+    "createdTime": "2026-11-15T10:27:44.399Z",
+    "capabilities": {
+      "canAddChildren": false,
+      "canEdit": true
+    },
+    "md5Checksum": "d41d8cd98f00b204e9800998ecf8427e",
+    "size": "0"
+  },
+  "business_recovery": "new_current_recovery_point_verified; original 05:23 snapshot unavailable",
+  "canonical_result": {
+    "status": "PASS",
+    "mode": "quick",
+    "created_at_utc": "2026-11-15T10:42:21.933664+00:00",
+    "remote_file_id": "1nZjELCY2DU_nH8WOlNBOSdJYr60VyNU9",
+    "remote_size_bytes": 1892829458,
+    "encrypted_sha256": "3da5a14492ec6d6c882e7a5a699399116a1983ec5ed46e257f16a63fbbd9c9ec",
+    "encrypted_md5": "3f200bc9de63f9301dc18ac55d5b03d1",
+    "archive_sha256_stream_verified": true,
+    "retention_applied": false,
+    "retention_trashed_count": 0
+  },
+  "native_job": {
+    "id": "3ff8bd8ca40d",
+    "enabled": true,
+    "state": "scheduled",
+    "last_status": "error",
+    "last_run_at": "2026-11-15T05:28:52.460668-05:00",
+    "next_run_at": "2026-11-15T06:23:00-05:00"
+  },
+  "contract_unchanged": true,
+  "supervisor_closure": "pending_independent_verifier; do not rerun completed backup"
+}
