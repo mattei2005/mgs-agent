@@ -57,13 +57,13 @@ def authority(live=False):
  if live:
   for block in [a,acl]:
    for key in ['question','approval']:
-    old=block[key]
+    old=block[key];m:Any=None
     for attempt in range(3):
      try:m=flat.discord_get('channels/'+THREAD+'/messages/'+old['id']);break
      except __import__('urllib.error',fromlist=['HTTPError']).HTTPError as exc:
       if exc.code!=429 or attempt==2:raise
       details=json.loads(exc.read());delay=float(details.get('retry_after',5));require(0<delay<=180,'RECOVERY_DISCORD_COOLDOWN_EXCEEDS_WINDOW');time.sleep(delay+.2)
-    require({'id':m['id'],'channel_id':m['channel_id'],'author_id':m['author']['id'],'content':m['content']}==old,'RECOVERY_NATIVE_AUTHORITY_CHANGED')
+    require(m is not None and {'id':m['id'],'channel_id':m['channel_id'],'author_id':m['author']['id'],'content':m['content']}==old,'RECOVERY_NATIVE_AUTHORITY_CHANGED')
  return True
 
 def file_meta(d,fid):
@@ -261,7 +261,7 @@ def private_tick(max_files=4):
  # Do not refetch four Discord messages every four files.
  authority(False)
  with intake.locked_state() as state:
-  bid=read(H/'batch-binding.json')['batch_id'];entry=state['claims'].get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM');validate_batch(entry['batch'])
+  bid=read(H/'batch-binding.json')['batch_id'];claims:Any=state['claims'];entry:Any=claims.get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM');validate_batch(entry['batch'])
   if entry['status']=='complete':return {'status':'complete','replay':True,'remaining':0,'verified':len(read(H/'private-progress.json',{'verified':{}})['verified'])}
   with b.queue_lock() as lease:
    sa=b.Drive(True);plan=verify_plan(sa);progress=read(H/'private-progress.json',{'verified':{}});remaining=[x for x in plan['objects'] if x['key'] not in progress['verified']]

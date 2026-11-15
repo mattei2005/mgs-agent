@@ -1,0 +1,25 @@
+--- /root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/before/config.json
++++ /root/mgs-agent/data/ares/meta-ads/engine-v3/config.json
+@@ -358,6 +358,12 @@
+             "receipt_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-continuations/eggbev-pg23187-1570285402068091011-1034081997659047.json",
+             "sha256": "199cf547bce2826bb8b42085aab01f08fc7061eed5be2108168193cd43322664"
+           }
++        },
++        "start_revisions": {
++          "eggbev-pg23189-1571342489162489937": {
++            "receipt_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-start-grants/eggbev-pg23189-1571342489162489937-1034081997659047.json",
++            "sha256": "58a022b9cbe85179f85f06cc0bb1671625c09137b55c397d7add394db3349f14"
++          }
+         }
+       },
+       "campaign_policy": {
+@@ -370,7 +376,8 @@
+           "eggbev-pg-5024-20260830-nicolas-01",
+           "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01",
+           "eggbev-modelo-1567803920217022545",
+-          "eggbev-301-pg23186-1569925441127579672"
++          "eggbev-301-pg23186-1569925441127579672",
++          "eggbev-pg23189-1571342489162489937"
+         ],
+         "immediate_start_authorized_managers": [
+           "Nicolas Holanda"

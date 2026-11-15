@@ -1,7 +1,7 @@
 import hashlib,json,sys,subprocess
 from pathlib import Path
 R=Path('/root/mgs-agent');M=R/'data/ares/meta-ads/audit/maintenance/t_3950b5d9'
-suites=[row['suite'] for row in json.loads((R/'data/ares/meta-ads/audit/maintenance/t_6dd59a8e/installed-final-tests.json').read_text()) if row['success']]+['test_target_start_revision']
+suites=[row['suite'] for row in json.loads((R/'data/ares/meta-ads/audit/maintenance/t_6dd59a8e/installed-final-tests.json').read_text()) if row['success']]+['test_target_start_revision','test_eggbev_creation_call','test_eggbev_daily_route','test_eggbev_fixed_routes','test_eggbev_page_lead_thread_route','test_eggbev_roas_automation']
 files={str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'scripts/ares_campaign_v3').glob('*.py')}
 files.update({str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [R/'scripts/ares-eggbev-target-clone.py',R/'scripts/ares-eggbev-creation.py',*[R/'tests'/f'{s}.py' for s in suites]]})
 (M/'tested-runtime-hashes.json').write_text(json.dumps(files,indent=2)+'\n')
