@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-14T19:31:36.758160-05:00",
+  "filesystems": [
+    {
+      "mount": "/",
+      "used_bytes": 141439881216,
+      "available_bytes": 65443622912
+    },
+    {
+      "mount": "/boot",
+      "used_bytes": 177905664,
+      "available_bytes": 680607744
+    },
+    {
+      "mount": "/boot/efi",
+      "used_bytes": 6399488,
+      "available_bytes": 102995968
+    }
+  ],
+  "gateway_pids": {
+    "zeus": 2241212,
+    "ares": 2233587,
+    "atena": 2237072
+  },
+  "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+  "running_kernel": "6.8.0-147-generic"
+}

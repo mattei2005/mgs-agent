@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "profile": "zeus",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "marker_present": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 11.26,
+      "status": "PASS"
+    },
+    {
+      "profile": "ares",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "marker_present": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 10.74,
+      "status": "PASS"
+    },
+    {
+      "profile": "atena",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "marker_present": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 12.04,
+      "status": "PASS"
+    }
+  ],
+  "configs_passed": 3,
+  "smokes_passed": 3,
+  "explicit_profiles": true,
+  "proves": "current profile/provider text availability; not browser login, historical package reinstatement, or boot"
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-14T19:31:47.314105-05:00",
+  "filesystems": [
+    {
+      "mount": "/",
+      "used_bytes": 141334011904,
+      "available_bytes": 65549492224
+    },
+    {
+      "mount": "/boot",
+      "used_bytes": 177905664,
+      "available_bytes": 680607744
+    },
+    {
+      "mount": "/boot/efi",
+      "used_bytes": 6399488,
+      "available_bytes": 102995968
+    }
+  ],
+  "executor_returncode": 0,
+  "stdout": "{\"status\": \"PASS\", \"mode\": \"post\", \"packages\": 4, \"duplicate_files\": 11, \"metadata_nodes\": 65, \"retained_byte_readback\": true, \"deletions_by_validator\": 0}",
+  "stderr": ""
+}
