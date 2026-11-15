@@ -3284,12 +3284,12 @@
     {
       "agent": "zeus",
       "id": "AUTOMATION-RECOVERY-706e2608cfdf1a3a60b7dfc5",
-      "next_step": "Validar flush/push natural do PID2640095, HEAD GitHub, monitor canônico e REPORT-INFRA GET; devolver ao supervisor para verificação independente",
+      "next_step": "Verificador independente do supervisor encerra o mesmo pedido;sem retry de campanha,sem novo writer,cron ou restart",
       "objective": "Recuperar o mesmo auto-push bloqueado por backup local da manutenção Ares, sem tocar negócio",
-      "source": "discord:1571663883171795076;authority:1569193434189668453;business:1571652369467445359;runs/706e2608cfdf1a3a60b7dfc5",
-      "state": "correcao_testada_aguardando_writer_nativo:exclusao_ancorada_foreground-before-install;14paths+40watcher+17monitorpass;19arquivos_preservados;sem_restart_commit_push_manual",
+      "source": "/root/.hermes/shared/automation-continuity/runs/706e2608cfdf1a3a60b7dfc5/recovery-evidence.json;discord:1571665868788600883",
+      "state": "resultado_e_entrega_validados:71testespass;19arquivosintactos;push_nativo7ccf6989a18h18et;githubheadigual;monitor0;recuperacao1571665786760601631get;report1571665868788600883get;supervisor_fecha_independentemente",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-11-15T23:16:36+00:00"
+      "updated_at": "2026-11-15T23:19:36+00:00"
     },
     {
       "agent": "zeus",
@@ -6648,12 +6648,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REMAINDER-1571661469475672075",
-      "next_step": "Levantamento367401files/2056unidadesPASS0erro;0delete/0novoeligivel. Potencialduplicado475.27MiBnaocertificado;import_snapshot+SHAconsumemfontehistorica. Proposta5capturas1.44GiBpreservarcompacto privado com validacao integral,sem apagar originais,aguarda decisao. Parent5-8aberto.",
-      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
-      "state": "review_completed_waiting_preservation_decision",
+      "next_step": "0delete/0eligivel. Proposta5capturas1.44GiBcompactoprivadoevalidacaobyte/metadadossemoriginaisdeleteaguardadecisao. 407grupos475.27MiBpotencialnaocertificado;importer/checksumpreservados. Gitconsumer mgs-autocommit active,retry nativo bloqueadoporevidenciat_e524bad0;naomodificaroutraoperacao/guard/commitmanual. Reconciliar remoto antes de proximaexecucao. Parent5-8aberto.",
+      "objective": "Revisao read-only local concluida; proposta5capturas pendente de decisao e Git dos novos registros bloqueado por guard externo, sem contorno.",
+      "source": "data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json;data/storage-remainder-review-1571661469475672075/git-sync-status.json",
+      "state": "review_completed_preservation_decision_git_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T23:13:23+00:00"
+      "updated_at": "2026-11-15T23:18:16+00:00"
     },
     {
       "agent": "zeus",
@@ -10837,5 +10837,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T23:16:36+00:00"
+  "updated_at": "2026-11-15T23:19:36+00:00"
 }

@@ -1,0 +1,20 @@
+{
+  "status": "pending_native_autocommit_sensitive_path_guard",
+  "owner": "Zeus/Infra",
+  "authority_message_id": "1571661469475672075",
+  "scoped_manual_commit_not_authorized": true,
+  "guard_unchanged": true,
+  "scoped_remote_artifacts_verified": 0,
+  "scoped_remote_artifacts_expected": 10,
+  "last_remote_commit_observed": "7ccf6989a4be604bf3d28c5756d31b48879fd039",
+  "last_native_guard_rejection": "[2026-11-15 18:14:19] BLOQUEADO: arquivo sensível detectado; commit automático abortado",
+  "blocking_external_paths": [
+    "[2026-11-15 18:10:49]   sensitive: data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-before-install/tests/test_ares_credential_metadata.py",
+    "[2026-11-15 18:14:19]   sensitive: data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-before-install/tests/test_ares_credential_metadata.py"
+  ],
+  "native_retry_consumer": "mgs-autocommit.service",
+  "consumer_active": true,
+  "originals_preserved": true,
+  "deletions": 0,
+  "at": "2026-11-15T23:18:16.424614+00:00"
+}
