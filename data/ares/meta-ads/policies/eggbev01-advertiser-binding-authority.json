@@ -11,7 +11,7 @@
   "authority_literal": "Sim para pedidos como esse e futuros.",
   "approved_action": "Reconciliar somente o vinculo produtivo Eggbev01 para a credencial existente do perfil anunciante correto identificado no pedido autorizado; aplicacao atual Carla Nunes para Mhd Aldy.",
   "current_approved_source_reference": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
-  "current_approved_target_reference": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
+  "current_approved_target_reference": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
   "repeat_approval_required_within_same_scope": false,
   "future_scope": "Pedidos equivalentes da mesma conta, com perfil anunciante correto explicitamente identificado, credencial ja cadastrada e validacao de identidade/app/ativos antes do cutover. Nao e fallback oportunista entre anunciantes.",
   "required_gates": [
@@ -41,11 +41,19 @@
     "issuer_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
     "authorized_by_discord_id": "344196393512075265",
     "account_id": "1034081997659047",
-    "allowed_reads": ["me:id,name", "debug_token:self_only"],
+    "allowed_reads": [
+      "me:id,name",
+      "debug_token:self_only"
+    ],
     "scope": "Only authenticated credential own identity and issuer-app introspection for this account binding validation. No remote permission changes, new assets, foreign-token introspection or general discovery."
   },
-  "implementation_status": "CUTOVER_READBACK_PASSED",
+  "implementation_status": "ANA_M6_EGGBEV01_CUTOVER_READBACK_PASSED",
   "resolved_previous_blocker": "User-token own identity and self-only issuer-app introspection validated through the restricted account-scoped guard approved in 1567911802774360195. No asset scope or remote permission change.",
   "pending_reason": null,
-  "evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/post-cutover-readback.json"
+  "evidence": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
+  "previous_target_reference_history": {
+    "target": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
+    "superseded_by": "1571262328715088024;1571263998102343752",
+    "reuse_allowed": false
+  }
 }

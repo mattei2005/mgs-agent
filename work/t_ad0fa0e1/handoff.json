@@ -1,0 +1,37 @@
+{
+  "task_id": "t_ad0fa0e1",
+  "status": "FIXTURE_RECONCILED_WITH_SEPARATE_QA_DEBT",
+  "changed_files": [
+    "tests/test_eggbev_clone_v3.py"
+  ],
+  "only_approved_method_changed_ast_verified": true,
+  "test_file_sha256": "3ec8b37a9183d73cc157f146d2b5cacfb9ae3776e0b5736d57b2cf566d8f55cf",
+  "production_code_unchanged_across_baseline_and_final": true,
+  "guard_changed": false,
+  "real_transport_calls": 0,
+  "target_and_guard": {
+    "passed": 10,
+    "failed": 0
+  },
+  "full_combined_suite": {
+    "run": 20,
+    "passed": 16,
+    "failures": 3,
+    "errors": 1
+  },
+  "remaining_cause": "Four legacy app_key fixtures mismatch installed Ana binding; outside this single-fixture scope",
+  "remaining_debt_task": "t_512ccc7a",
+  "remaining_debt_assignee": "ares",
+  "viewer_loan_preparation_blocked_by_this_task": false,
+  "evidence_paths": [
+    "/root/mgs-agent/work/t_ad0fa0e1/baseline.json",
+    "/root/mgs-agent/work/t_ad0fa0e1/baseline.log",
+    "/root/mgs-agent/work/t_ad0fa0e1/target-and-guard.json",
+    "/root/mgs-agent/work/t_ad0fa0e1/target-and-guard.log",
+    "/root/mgs-agent/work/t_ad0fa0e1/full-suite.json",
+    "/root/mgs-agent/work/t_ad0fa0e1/full-suite.log",
+    "/root/mgs-agent/work/t_ad0fa0e1/fixture.patch"
+  ],
+  "infrastructure_reporting_required": false,
+  "reporting_reason": "Only existing test fixture and task-local work evidence changed; no script/config/skill/operational data change by this task"
+}

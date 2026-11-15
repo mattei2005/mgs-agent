@@ -168,6 +168,7 @@ def main() -> int:
     token_item = str(account.get("token_1password_item") or "").strip()
     if not token_item:
         raise RuntimeError("account has no canonical Meta token reference")
+    meta.configure_account_cache(account)
     token, _ = meta.get_token_from_1password(item_name=token_item)
     meta_snapshot = meta_video_titles(meta, token, max(25, args.meta_video_limit_per_account))
     title_rows = [(row, norm(row.get("title"))) for row in meta_snapshot["videos"]]

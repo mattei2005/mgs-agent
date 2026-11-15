@@ -48,10 +48,19 @@ Nunca inferir identidade, conta, Page, UTM, budget, threshold, horários, autori
 
 1. Resolver a thread ou `operation_id` no registro de consumidores.
 2. Confirmar que o consumidor está `active`; candidato de onboarding não é operação ativa.
-3. Abrir o contrato da família e o contrato exato da operação.
+3. Abrir o contrato da família e o contrato exato da operação. Antes de carregar qualquer token ou chamar o runtime, resolver no registro institucional e no checkpoint a seleção vigente de perfil anunciante e app, seguindo a fonte canônica apontada; comparar essa decisão com os bindings da conta e do Engine. Um binding ainda instalado pode estar supersedido e não comprova qual identidade deve ser usada.
 4. Carregar somente a rota pedida: `rules`, `campaign_creation`, `campaign_cloning`, `roas_cycle`, `daily_reporting` ou `page_guardrails`.
 5. Consultar conta, runner, state e audit declarados pela operação somente quando a rota exigir. Em JSONs grandes, projetar primeiro os campos da rota e a conta exata; para checkpoints/registry, filtrar cada registro por request, thread ou chave canônica antes de imprimir. Não selecionar um contêiner inteiro porque sua representação contém o termo buscado: isso despeja registros não relacionados e pode truncar justamente a evidência necessária.
 6. Falhar fechado quando houver binding ausente, ambíguo ou divergente.
+
+### Correção do perfil anunciante
+
+- Antes de pedir login, OAuth ou verificação humana após erro de autenticação, conferir se a consulta usou o perfil/app atualmente aprovados. Um erro do perfil aposentado não estabelece uma obrigação de recuperá-lo; reconciliar a decisão vigente, sem testar credenciais alternativas por conveniência.
+- Quando o operador identificar um substituto, recuperar primeiro a autorização canônica já existente. Se a validação estiver autorizada, testar a identidade e o emissor da própria credencial, a conta exata e somente a Page escolhida no pedido. Não exigir acesso a todas as Pages históricas da conta como condição para adotar o perfil.
+- Separar **acesso validado**, **integração do executor concluída**, **pedido preparado** e **campanha publicada**. Uma leitura bem-sucedida com o substituto não muda os bindings do runner nem libera write; preservar o mesmo request, parâmetros e OK comercial durante a integração isolada e manter o gate posterior do manifest.
+- Na resposta, corrigir brevemente a orientação anterior, informar os acessos realmente comprovados e nomear a camada ainda pendente. Não repetir uma ação humana que a seleção correta tornou desnecessária nem chamar o teste de acesso de migração concluída.
+
+Para o diagnóstico protegido, carregar na skill `paid-acquisition-operations` a referência **Meta Facebook Login for Business — seleção de token**, seção **Validar substituição de perfil antes do cutover**.
 
 ## Responsabilidade operacional e encaminhamentos
 
@@ -106,6 +115,14 @@ Um parâmetro específico nunca sobe automaticamente para a família. Uma regra 
 - atualizar a rota funcional afetada e a thread Regras desse consumidor;
 - não alterar outros consumidores;
 - registrar a versão anterior como superseded.
+
+### Simplificação de confirmações solicitada pelo gestor
+
+1. Separar a aprovação do pedido atual da proposta de mudar pedidos futuros. Registrar o aceite comercial no mesmo request e informar o dono da continuação; não abrir outra execução nem descartar o aceite porque a política futura ainda não foi decidida.
+2. Priorizar a experiência desejada pelo operador: pedido completo, execução autorizada e resumo verificado do resultado, sem perguntas ou confirmações redundantes. Conferir primeiro a autoridade e o contrato vigente para determinar quais confirmações são realmente obrigatórias; entendimento do processo, acesso técnico e escolha de budget não equivalem a poder remover um gate definido por outra autoridade.
+3. Se o contrato exigir aprovação posterior a um resumo selado ainda não apresentado, preservar essa ordem. Não transformar um aceite antecipado em aprovação de um manifest futuro ou de detalhes técnicos ainda não informados. Explicar a diferença uma única vez, sem repetir a cobrança enquanto a preparação não estiver pronta.
+4. Quando a dispensa permanente exceder a delegação vigente, capturá-la como candidato não ativo e encaminhar somente a decisão à autoridade competente. Não bloquear preflight, reconciliação, mídia ou plan por essa ratificação quando essas etapas já estiverem autorizadas; a campanha continua com seu dono e seus parâmetros originais.
+5. Após eventual ratificação, superseder a regra canônica, integrar e validar o executor e sincronizar as projeções afetadas antes de anunciar a dispensa como ativa. Não gravar na skill uma exceção de uma operação como autorização universal de publicação.
 
 ### Regra de extração
 

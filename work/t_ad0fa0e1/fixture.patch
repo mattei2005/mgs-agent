@@ -1,0 +1,30 @@
+diff --git a/tests/test_eggbev_clone_v3.py b/tests/test_eggbev_clone_v3.py
+index 075a2514d..b1f28c52c 100644
+--- a/tests/test_eggbev_clone_v3.py
++++ b/tests/test_eggbev_clone_v3.py
+@@ -196,10 +196,23 @@ class EggbevCloneV3Tests(unittest.TestCase):
+             'start_time': future_midnight(),
+             'status': 'ACTIVE',
+             'campaign_updates': {'daily_budget': '5500'},
++            # Copy policy requires source-linked slots, never opaque deep-copy.
++            'source_adset_id': 'source-adset',
++            'adset_name': 'AdG1',
++            'ads': [
++                {
++                    'name': 'Ad 1',
++                    'source_ad_id': 'source-ad-1',
++                    'creative_payload': creative_payload(1),
++                },
++            ],
+         }
+         bundle = Planner(bundle_size=2, max_ads_per_batch=10).build(Manifest.from_dict(manifest_payload(campaign))).lanes[ACCOUNT_ID][0]
+-        self.assertEqual([stage.name for stage in bundle.stages], ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback'])
+-        update = bundle.stages[1].operations[0]
++        self.assertEqual([stage.name for stage in bundle.stages], [
++            'campaign_copy', 'adset_copy', 'campaign_adset_update',
++            'ad_copy_with_creative', 'ad_name_update', 'consolidated_readback',
++        ])
++        update = bundle.stages[2].operations[0]
+         self.assertEqual(update.body, {
+             'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
+             'daily_budget': '5500',

@@ -440,6 +440,7 @@ def main() -> int:
             os.environ.setdefault("ARES_META_TOKEN_CACHE_PATH", "/root/.cache/mgs/ares-meta-token-eggbev-us-cc-en-01-g006.json")
             lead_module = load_module("ares_eggbev_lead_guardrail_for_restrictions", LEAD_GUARDRAIL_PATH)
             meta_common = load_module("ares_meta_common_eggbev_restrictions", META_COMMON_PATH)
+            meta_common.configure_account_cache(account)
             token, token_field = meta_common.get_token_from_1password(account.get("token_1password_item"))
             run["credential_readback"] = {"item": account.get("token_1password_item"), "field": token_field, "token_len": len(token)}
             status, live_account, _ = meta_common.graph_get("act_" + account_id, token, {"fields": "id,name,account_status,currency,timezone_name,disable_reason"})

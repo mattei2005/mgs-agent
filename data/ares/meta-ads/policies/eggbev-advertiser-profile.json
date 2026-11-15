@@ -7,12 +7,20 @@
   "authority_message_id": "1571262328715088024",
   "authority_thread_id": "1571249921242435695",
   "scope": "Perfil anunciante escolhido para contas Eggbev existentes e futuras dentro do escopo positivo Digital Trust; nao autoriza descoberta global nem ingresso automatico de novas contas.",
-  "existing_account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"],
+  "existing_account_ids": [
+    "1034081997659047",
+    "1001115192056600",
+    "1481815942722118"
+  ],
   "selected_profile": "Ana Cunha",
   "credential_model": "individual User Access Token; never System User fallback",
   "onepassword_item_id": "xxgqyiuijcu4rfrcmfmme6iduq",
   "onepassword_item_title": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
-  "identity_live": {"http": 200, "id": "122147293515218951", "name": "Ana Cunha"},
+  "identity_live": {
+    "http": 200,
+    "id": "122147293515218951",
+    "name": "Ana Cunha"
+  },
   "token_metadata_observed": {
     "app_id": "953171080682697",
     "application": "minibot m6",
@@ -25,9 +33,45 @@
     "observation_note": "Introspeccao self-only repetida com HTTP200 apos confirmacao explicita de Rodolfo 1571263998102343752 e ajuste restrito do emissor esperado no grant tecnico da conta01. Identidade, USER, validade e app conferidos sem bypass."
   },
   "account_readbacks": {
-    "1034081997659047": {"http": 200, "name": "Eggbev-US-CC-EN-01", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]},
-    "1001115192056600": {"http": 200, "name": "Eggbev-US-CC-EN-02 (FAX-US-03)", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]},
-    "1481815942722118": {"http": 200, "name": "Eggbev-US-CC-EN-03 (FAX-US-02)", "account_status": 1, "business_id": "155263197283282", "currency": "USD", "timezone_name": "America/New_York", "user_tasks": ["DRAFT", "ANALYZE", "ADVERTISE"]}
+    "1034081997659047": {
+      "http": 200,
+      "name": "Eggbev-US-CC-EN-01",
+      "account_status": 1,
+      "business_id": "155263197283282",
+      "currency": "USD",
+      "timezone_name": "America/New_York",
+      "user_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE"
+      ]
+    },
+    "1001115192056600": {
+      "http": 200,
+      "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+      "account_status": 1,
+      "business_id": "155263197283282",
+      "currency": "USD",
+      "timezone_name": "America/New_York",
+      "user_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE"
+      ]
+    },
+    "1481815942722118": {
+      "http": 200,
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "account_status": 1,
+      "business_id": "155263197283282",
+      "currency": "USD",
+      "timezone_name": "America/New_York",
+      "user_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE"
+      ]
+    }
   },
   "prior_profiles": {
     "Mhd Aldy": "uso futuro proibido pelo operador; preservar somente historico, sem fallback",
@@ -35,7 +79,7 @@
   },
   "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
   "prior_profile_retirement_authority_message_id": "1571250965313486889",
-  "implementation_status": "APP_PROFILE_APPROVED_DYNAMIC_PAGE_SCOPE_RECORDED_RUNTIME_CUTOVER_PENDING",
+  "implementation_status": "EGGBEV01_CUTOVER_READBACK_VALIDATED_OTHER_ACCOUNTS_PENDING",
   "page_model": {
     "authority_message_id": "1571266743157002423",
     "authority_live_verified": true,
@@ -50,7 +94,14 @@
     "system_user_fallback_allowed": false,
     "repeat_profile_page_scope_approval_required": false,
     "page_resolution": "Resolve only the Page/pg chosen in each campaign request and validate its real access via Ana Cunha User Access Token; Page token stays ephemeral. No blanket scan or requirement to access all historical account Pages.",
-    "preserved_gates": ["exact requested Page identity", "real API access", "Page eligibility/restriction policy", "account scope and onboarding", "per-request campaign approval and budget", "remote permission changes require their own authorization"],
+    "preserved_gates": [
+      "exact requested Page identity",
+      "real API access",
+      "Page eligibility/restriction policy",
+      "account scope and onboarding",
+      "per-request campaign approval and budget",
+      "remote permission changes require their own authorization"
+    ],
     "supersedes": "Using denial on legacy account Pages as a global blocker for Ana Cunha, or requiring those historical Pages to be selected/linked or imported into the BM. Historical denied reads remain evidence only for those exact objects."
   },
   "current_runtime_app_id": "1299247318762949",
@@ -61,27 +112,87 @@
   "app_migration_authority_live_verified": true,
   "approved_app_id": "953171080682697",
   "approved_app_name": "minibot m6",
-  "runtime_bindings_changed": false,
+  "runtime_bindings_changed": true,
   "pages_pixels_validated": false,
-  "operational_pixel_validation": {"pixel_id": "935354115143283", "name": "Eggbev-US-CC-EN", "http": 200, "account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"]},
-  "page_access_validation": {"status": "BLOCKED_REMOTE_META_CODE10", "scope": "Historical ad-account Page dependencies, not a verified inventory of Pages linked to Ana Cunha", "blocks_profile_adoption": false, "scope_correction_authority_message_id": "1571266743157002423", "historical_account_page_dependencies_checked": 115, "page_reads_passed": 0, "direct_rechecks": ["1272524399287905", "1342451482280266", "1306762309190521"], "direct_rechecks_http": 400, "code": 10, "scope_present_in_token": "pages_read_engagement", "cause_limit": "Token scopes present and three direct Page reads denied; this does not alone distinguish missing profile/Page grant from app feature/access restrictions. No permission change authorized or executed."},
+  "operational_pixel_validation": {
+    "pixel_id": "935354115143283",
+    "name": "Eggbev-US-CC-EN",
+    "http": 200,
+    "account_ids": [
+      "1034081997659047",
+      "1001115192056600",
+      "1481815942722118"
+    ]
+  },
+  "page_access_validation": {
+    "status": "BLOCKED_REMOTE_META_CODE10",
+    "scope": "Historical ad-account Page dependencies, not a verified inventory of Pages linked to Ana Cunha",
+    "blocks_profile_adoption": false,
+    "scope_correction_authority_message_id": "1571266743157002423",
+    "historical_account_page_dependencies_checked": 115,
+    "page_reads_passed": 0,
+    "direct_rechecks": [
+      "1272524399287905",
+      "1342451482280266",
+      "1306762309190521"
+    ],
+    "direct_rechecks_http": 400,
+    "code": 10,
+    "scope_present_in_token": "pages_read_engagement",
+    "cause_limit": "Token scopes present and three direct Page reads denied; this does not alone distinguish missing profile/Page grant from app feature/access restrictions. No permission change authorized or executed."
+  },
   "marketing_api_access_tier_live": "development_access",
   "marketing_api_access_tier_note": "Header vivo das tres contas no app novo; nao herdar standard_access historico do minibot anterior.",
   "technical_guard_validation": "12 own-credential metadata tests and 13 operational asset-scope tests passed; corporate app exception/account allowlist unchanged.",
   "live_validation_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/live-validation.json",
   "page_access_diagnostic_evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev-ana-m6-1571263998102343752/page-access-diagnostic.json",
-  "future_account_requirements": ["positive account scope checker", "Ana Cunha identity and approved issuer-app validation", "exact account tasks and Page/pixel access", "separate onboarding and per-request campaign gates"],
+  "future_account_requirements": [
+    "positive account scope checker",
+    "Ana Cunha identity and approved issuer-app validation",
+    "exact account tasks and Page/pixel access",
+    "separate onboarding and per-request campaign gates"
+  ],
   "campaign_intake_handoff": {
     "authority_message_id": "1571267646597628087",
     "requester": "Nicolas",
     "scope": "Eggbev accounts01/02/03 in their respective existing account channels/threads",
-    "operator_will_provide": ["Page name", "campaign creation request"],
+    "operator_will_provide": [
+      "Page name",
+      "campaign creation request"
+    ],
     "continue_in_account_origin": true,
     "repeat_profile_or_app_approval_required": false,
     "page_identity_required_in_director_thread_now": false,
     "no_campaign_created_by_this_handoff": true
   },
-  "next_step": "Aguardar Nicolas informar a Page e o pedido de criacao na origem especifica da conta Eggbev01/02/03; continuar nessa mesma origem a resolucao/validacao da Page escolhida via Ana Cunha/minibot m6 e completar a camada tecnica de cutover/onboarding que faltar antes do write. Nao pedir agora a Page na Diretoria nem reabrir aprovacao de perfil/app/escopo de Pages ja concedida. Preservar autorizacoes/gates por conta e por pedido, sem BM import, sem fallback Mhd/Carla e sem prometer executor pronto antes de validacao.",
-  "excluded": ["remote permission changes", "new app allowlist or guard bypass without explicit authorization", "token revocation or vault deletion", "campaign creation/activation", "budget or billing changes", "automatic onboarding of future accounts"],
-  "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024"
+  "next_step": "Eggbev01 integration installed; preparation of the preserved Viewer Loan request belongs to dependent owner and requires final summary OK before campaign execution. Eggbev02/03 unchanged; no automatic onboarding or fallback.",
+  "excluded": [
+    "remote permission changes",
+    "new app allowlist or guard bypass without explicit authorization",
+    "token revocation or vault deletion",
+    "campaign creation/activation",
+    "budget or billing changes",
+    "automatic onboarding of future accounts"
+  ],
+  "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024",
+  "runtime_bindings_changed_scope": [
+    "1034081997659047"
+  ],
+  "account_runtime_bindings": {
+    "1034081997659047": {
+      "app_id": "953171080682697",
+      "token_identity": "Ana Cunha",
+      "app_key": "mgs-meta-app-953171080682697",
+      "readback": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
+      "tier": "development_access"
+    }
+  },
+  "current_runtime_app_fields_scope": "Legacy default for not-yet-migrated accounts; account_runtime_bindings is authoritative for installed per-account exceptions.",
+  "pages_pixels_validated_scope": {
+    "account_id": "1034081997659047",
+    "page_id": "1355561690982225",
+    "pixel_id": "935354115143283",
+    "pbia_initialized": false,
+    "evidence": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json"
+  }
 }

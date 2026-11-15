@@ -13,7 +13,7 @@
     "supersedes": "older per-Page prefix/C001/AdG1 creation naming only; preserve historical manifests and clone naming contracts"
   },
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
-  "advertiser_profile_selection_note": "Ana Cunha/minibot m6 selected and approved by Rodolfo 1571262328715088024/1571263998102343752. Page model corrected in 1571266743157002423: all current/future Pages actually linked to Ana are authorized; no BM import and no blanket historical-account-Page access prerequisite. Validate only the requested Page via the advertiser User Access Token. Identity/accounts/Eggbev pixel passed; runtime binding below is not yet migrated. Prior profiles forbidden as fallback; new app live tier development_access.",
+  "advertiser_profile_selection_note": "Ana Cunha/minibot m6 installed and live readback validated ONLY Eggbev01; tier development_access. Requested Page validated via ephemeral Page token. Other accounts remain unchanged and need individual cutover. Prior profiles forbidden as fallback.",
   "advertiser_binding_reconciliation_authority": {
     "policy_source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
     "authority_message_id": "1567907415394099351",
@@ -22,17 +22,18 @@
     "credential_cutover_requires_identity_and_app_validation": true
   },
   "advertiser_binding_current": {
-    "token_item": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
-    "token_identity": "Mhd Aldy",
-    "token_user_id": "1700526774973769",
-    "meta_app_id": "1299247318762949",
-    "authority_message_id": "1567907415394099351",
-    "technical_validation_authority_message_id": "1567911802774360195",
-    "validation_audit": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/live-validation.json",
-    "rollback": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/previous-binding.json",
-    "supersedes": "meta_app_profile_token_cutover_20260902 advertiser binding only; historical evidence preserved",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+    "token_identity": "Ana Cunha",
+    "token_user_id": "122147293515218951",
+    "meta_app_id": "953171080682697",
+    "authority_message_id": "1571263998102343752",
+    "technical_validation_authority_message_id": "1571263998102343752",
+    "validation_audit": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
+    "rollback": "data/ares/meta-ads/audit/maintenance/t_247b861d/backup",
+    "supersedes": "Mhd binding; preserved in maintenance backup, no fallback allowed",
     "remote_permission_changes": false,
-    "campaign_write_authorized_by_cutover": false
+    "campaign_write_authorized_by_cutover": false,
+    "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json"
   },
   "account_timezone": "America/New_York",
   "global_budget_limit_policy": {
@@ -438,7 +439,11 @@
       "pattern": "[global_campaign_number] - [exact Page name] - ENG - US - (pg_XXXXX) - CXX",
       "reference_example": "300 - Georgina Whitford - ENG - US - (pg_23156) - C01",
       "adset_name": "ADGROUP 01",
-      "superseded_creation_naming_history": {"pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX", "adset_name": "AdG1", "superseded_by": "1567964887353663610"},
+      "superseded_creation_naming_history": {
+        "pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX",
+        "adset_name": "AdG1",
+        "superseded_by": "1567964887353663610"
+      },
       "status": "approved_by_nicolas_and_materialized"
     },
     "duplicate_sequence": "first duplicate DUP01; then DUP02, DUP03 and so on; duplicating a campaign already ending in DUPnn reuses the same base and advances to the next free number",
@@ -866,7 +871,10 @@
         "exact_thread_prompt": "data/ares/discord/thread-prompts/1543333373945053184.txt",
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
         "scope": "Page warmup through from-zero creation, clone or duplication at exact low budget supplied per request; after warmup continue in 1541578556037927053",
-        "intent_contracts": ["campaign_creation_policy", "campaign_cloning_policy"],
+        "intent_contracts": [
+          "campaign_creation_policy",
+          "campaign_cloning_policy"
+        ],
         "continuation_thread_id": "1541578556037927053",
         "source_message_id": "1565033982603829441",
         "supersedes": "historical/redirect-only classification under 1565033184574308513, for this warmup scope only",

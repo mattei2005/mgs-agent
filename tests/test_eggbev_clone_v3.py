@@ -143,9 +143,10 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertEqual(len(parsed.ads), 5)
 
     def test_clone_page_switch_accepts_source_ads_without_new_media(self):
+        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         campaign = {
             'idempotency_key': 'page-switch',
-            'app_key': 'mgs-meta-app-1299247318762949',
+            'app_key': config['accounts'][ACCOUNT_ID]['app_key'],
             'account_id': ACCOUNT_ID,
             'mode': 'clone_page_switch',
             'source_campaign_id': 'source-campaign',
@@ -175,7 +176,6 @@ class EggbevCloneV3Tests(unittest.TestCase):
         self.assertIn('source_ad_lineage', sealed['prevalidation']['checks'])
         self.assertNotIn('media_registry_exact', sealed['prevalidation']['checks'])
 
-        config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         with self.assertRaisesRegex(ManifestError, 'does not support mode clone_page_switch'):
             validate_account_policy(Manifest.from_dict(sealed), config)
 
@@ -196,10 +196,23 @@ class EggbevCloneV3Tests(unittest.TestCase):
             'start_time': future_midnight(),
             'status': 'ACTIVE',
             'campaign_updates': {'daily_budget': '5500'},
+            # Copy policy requires source-linked slots, never opaque deep-copy.
+            'source_adset_id': 'source-adset',
+            'adset_name': 'AdG1',
+            'ads': [
+                {
+                    'name': 'Ad 1',
+                    'source_ad_id': 'source-ad-1',
+                    'creative_payload': creative_payload(1),
+                },
+            ],
         }
         bundle = Planner(bundle_size=2, max_ads_per_batch=10).build(Manifest.from_dict(manifest_payload(campaign))).lanes[ACCOUNT_ID][0]
-        self.assertEqual([stage.name for stage in bundle.stages], ['pure_clone_copy', 'pure_clone_update', 'consolidated_readback'])
-        update = bundle.stages[1].operations[0]
+        self.assertEqual([stage.name for stage in bundle.stages], [
+            'campaign_copy', 'adset_copy', 'campaign_adset_update',
+            'ad_copy_with_creative', 'ad_name_update', 'consolidated_readback',
+        ])
+        update = bundle.stages[2].operations[0]
         self.assertEqual(update.body, {
             'name': '162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01',
             'daily_budget': '5500',
@@ -226,7 +239,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         campaign = {
             'idempotency_key': 'policy-valid',
-            'app_key': 'mgs-meta-app-1299247318762949',
+            'app_key': config['accounts'][ACCOUNT_ID]['app_key'],
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
@@ -241,7 +254,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         base = {
             'idempotency_key': 'policy-invalid',
-            'app_key': 'mgs-meta-app-1299247318762949',
+            'app_key': config['accounts'][ACCOUNT_ID]['app_key'],
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',
@@ -269,7 +282,7 @@ class EggbevCloneV3Tests(unittest.TestCase):
         config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         campaign = {
             'idempotency_key': 'policy-restricted-page',
-            'app_key': 'mgs-meta-app-1299247318762949',
+            'app_key': config['accounts'][ACCOUNT_ID]['app_key'],
             'account_id': ACCOUNT_ID,
             'mode': 'pure_clone',
             'source_campaign_id': 'source-campaign',

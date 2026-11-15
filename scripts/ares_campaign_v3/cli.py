@@ -54,6 +54,7 @@ def real_transport_factory(config: dict[str, Any], manifest: Manifest):
         token_item = account_cfg.get("token_item")
         if not token_item:
             raise RuntimeError(f"missing token_item for account {account}")
+        common.configure_account_cache(account_cfg)
         token, _ = common.get_token_from_1password(item_name=token_item)
         tokens[account] = token
     require_proof = config.get("require_appsecret_proof") is True

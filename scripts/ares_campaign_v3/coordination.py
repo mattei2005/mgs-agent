@@ -68,12 +68,18 @@ class AccountWriterLeaseStore:
         return updated
 
     def claim(self, account_id: str, request_id: str, *, status: str = "IN_PROGRESS") -> dict[str, Any]:
+        from .operator_suspension import deny_replay
+        deny_replay(self.root.parent, account_id, request_id)
         request_id = str(request_id)
         from .shein_manual_takeover import deny_engine_replay
         deny_engine_replay(self.root.parent, request_id)
 
         def mutate(current: dict[str, Any]) -> dict[str, Any]:
             from .shein_manual_takeover import STATUS, lease_idle
+            deny_replay(self.root.parent, account_id, request_id)
+            from .operator_suspension import STATUS as SUSPENDED, lease_valid
+            if current.get('status') == SUSPENDED and not lease_valid(self.root.parent, current):
+                raise WriterLeaseConflict('invalid operator suspension receipt; cannot admit writer')
             deny_engine_replay(self.root.parent, request_id)
             if current.get('status') == STATUS and not lease_idle(self.root.parent,current):
                 raise WriterLeaseConflict('invalid manual takeover lease; cannot admit writer')
@@ -119,6 +125,23 @@ class AccountWriterLeaseStore:
         return self._locked_update(account_id, mutate)
 
 
+    def suspend_operator(self, account_id: str, request_id: str, *, expected_sha256: str) -> dict[str, Any]:
+        """Retire only coordination under exact receipt and CAS; never campaign COMPLETE."""
+        import hashlib
+        from .operator_suspension import validate, path, STATUS, lease_valid
+        validate(self.root.parent, account_id, request_id)
+        receipt_sha = hashlib.sha256(path(self.root.parent, account_id, request_id).read_bytes()).hexdigest()
+        def mutate(current):
+            if current.get('status') == STATUS and lease_valid(self.root.parent, current):
+                return current
+            if (current.get('account_id') != account_id or current.get('request_id') != request_id
+                    or current.get('status') != 'RECOVERY_PENDING' or current.get('blocks_readers') is not True
+                    or hashlib.sha256(self.path(account_id).read_bytes()).hexdigest() != expected_sha256):
+                raise WriterLeaseConflict('operator suspension lease CAS/owner/state mismatch')
+            return {**current, 'status':STATUS, 'blocks_readers':False, 'campaign_qa_complete':False,
+                    'released_at_utc':_utc(), 'updated_at_utc':_utc(), 'operator_suspension_sha256':receipt_sha}
+        return self._locked_update(account_id, mutate)
+
     def retire_manual(self, account_id: str, request_id: str, *, expected_sha256: str) -> dict[str, Any]:
         """Receipt-bound coordination retirement; never QA COMPLETE or reservation release."""
         from . import shein_manual_takeover as manual
@@ -153,6 +176,9 @@ def reader_block_reason(
     operation_state: Path | str | None = None,
 ) -> dict[str, Any] | None:
     lease = _load(AccountWriterLeaseStore(state_root).path(account_id))
+    from .operator_suspension import STATUS as SUSPENDED, lease_valid
+    if lease.get('status') == SUSPENDED and not lease_valid(state_root, lease):
+        return {'source':'operator_suspension_invalid','request_id':lease.get('request_id'),'status':SUSPENDED}
     from .shein_manual_takeover import STATUS, lease_idle
     if lease.get('status') == STATUS and not lease_idle(state_root, lease):
         return {'source':'manual_takeover_invalid', 'request_id':lease.get('request_id'), 'status':STATUS}

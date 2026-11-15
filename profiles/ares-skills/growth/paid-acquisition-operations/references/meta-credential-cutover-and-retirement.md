@@ -70,6 +70,9 @@ For a replacement token with the same app-scoped System User, App ID, scopes and
 
 ## 5. Verify every consumer without side effects
 
+- Em migração entre apps, teste novamente os materializadores com a configuração **já instalada**, além do staging: um smoke pode passar com o app antigo e falhar após o cutover porque o builder conservou um default histórico. Passe `app_key` explicitamente do nó exato da conta a cada consumidor live; mantenha defaults de fixtures/compatibilidade fora do runtime produtivo. Exercite também a troca de conta no mesmo processo: o cache opt-in de uma conta não pode vazar como default para a seguinte. Cache precisa continuar exigindo igualdade de `item`, mesmo com caminho dedicado.
+- Quando o operador já concluiu manualmente e proibiu alterações, reconcilie somente a coordenação com receipt de suspensão, CAS/locks e fence durável por request. Libere leitores apenas após validar o receipt; não use `release/COMPLETE`, não marque QA concluído e não reabra o recovery antigo. Preserve checkpoint, IDs, journals, reservas e incertezas; um writer novo substituir a lease não pode apagar a proibição de replay. Teste receipt corrompido, CAS divergente, outra conta e nova admissão sem nenhum POST Meta.
+
 - Import/read back runtime constants and resolved account/operation references.
 - Run shell syntax and Python compile checks.
 - Execute live `--dry-run` or read-only smokes for every distinct consumer family, suppressing Discord posts and Meta writes.

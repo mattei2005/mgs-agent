@@ -1709,6 +1709,9 @@ class CampaignEngine:
 
     @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
+        from .operator_suspension import deny_replay
+        for campaign in manifest.campaigns:
+            deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
         from .target_continuation import require_execution
         require_execution(manifest)
         from .shein_manual_takeover import deny_engine_replay

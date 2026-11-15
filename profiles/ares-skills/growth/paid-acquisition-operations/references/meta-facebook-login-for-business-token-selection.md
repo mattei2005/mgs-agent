@@ -2,13 +2,25 @@
 
 ## Regra de decisão
 
-Antes da escolha, ler o contrato operacional e o checkpoint canônico. A automação contínua, sozinha, não autoriza trocar a identidade planejada do token.
+Antes da escolha, ler o contrato operacional, o checkpoint e a política vigente de seleção de perfil/app apontada no registro institucional. Comparar a decisão aprovada com as referências instaladas antes de carregar o token: configuração ainda produtiva pode estar supersedida. A automação contínua, sozinha, não autoriza trocar a identidade planejada do token.
 
 - Se a operação registra `one_user_access_token_per_manager_profile=true` ou exige um token separado por perfil pessoal anunciante, usar **User access token**. O fato de o uso posterior ser automatizado não converte essa arquitetura em system-user.
 - Use **Business Integration System User access token** quando a unidade de identidade pretendida for o Business Portfolio cliente e seus ativos explicitamente delegados, com ações programáticas/automatizadas server-to-server ou necessidade de evitar reautenticação futura.
 - Use **User access token** também quando as ações ocorrerem em tempo real a partir da interação do usuário, quando a API exigir permissão administrativa do usuário ou quando os ativos só estiverem acessíveis pelo perfil pessoal e não puderem ser delegados por um Business Portfolio cliente.
 
 Trocar User por system-user em uma iniciativa existente é mudança de arquitetura, não otimização local; exige confirmação explícita do dono e atualização/supersessão do contrato canônico antes de continuar.
+## Validar substituição de perfil antes do cutover
+
+Use quando houver correção explícita do anunciante ou divergência entre seleção aprovada e binding instalado; não transforme este diagnóstico em introspecção obrigatória de pedidos rotineiros.
+
+1. Resolva na fonte canônica a credencial existente, identidade esperada, app emissor e autoridade para validação/cutover. Preserve título literal informado pelo operador como referência de busca, mas confronte-o com o item ID canônico e a identidade retornada: rótulo do perfil ou do cofre não prova titularidade. Se a substituição já estiver aprovada no mesmo recorte, não peça novamente esse OK; ausência de autoridade exige o gate próprio, não fallback.
+2. Carregue `ares-meta-common.py` e resolva somente o item aprovado com `get_token_from_1password(item_name)`, cache-first. Em sondagem separada, configure `ARES_META_TOKEN_CACHE_PATH` antes de importar o módulo, usando cache protegido específico da identidade/app; não sobrescreva o cache do anunciante anterior nem use `force_refresh=True` por padrão.
+3. Sob grant técnico aplicável, valide a própria credencial com `graph_get_credential_metadata(account_id, token)` e `graph_get_credential_metadata(account_id, token, inspect_token=True)`. Exija HTTP 200, identidade exata, tipo esperado, `is_valid=true`, emissor aprovado e igualdade do `user_id` entre as duas leituras. Nunca faça introspecção de token alheio, bypass do guard ou impressão do segredo. Persista somente a projeção sanitizada dos campos necessários.
+4. Após o checker positivo da conta, faça `GET act_<ACCOUNT_ID>` com `id,name,business,currency,timezone_name,account_status,user_tasks`. Confirme fonte/hierarquia e Page exatas do pedido, com mapping e denylist quando aplicáveis; resolva o Page Access Token apenas em memória. Para BOT com resolvedor canônico, use `eggbev_page_identity.resolve(..., ensure_pbia=False)` na sondagem: GET da Page e disponibilidade de token são evidências distintas da existência da PBIA. PBIA vazia não prova falta de acesso à Page e não autoriza inicialização durante um teste read-only; essa camada pertence à preparação persistida autorizada.
+5. Compare o resultado com conta, contrato v3, configuração do Engine e binding efetivo do runner, incluindo `app_key` e tier observado. Registre separadamente acesso aprovado e integração pendente; não copie o tier histórico de outro app nem sele o manifest com identidade antiga. Se faltar integração de código, conduza manutenção isolada com verificação própria antes de retomar a transação. O teste acima não comprova cutover, write de campanha ou serving.
+
+Ao encontrar erro no perfil antigo, confira essa seleção antes de pedir reautenticação ao operador: recuperar uma identidade aposentada pode não ser necessário para o pedido atual. Não promova resultados de leitura a um procedimento de migração concluído.
+
 ## Pré-requisitos do system-user
 
 Antes de concluir a configuração:

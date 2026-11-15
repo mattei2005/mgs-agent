@@ -48,6 +48,25 @@ def load_json(path):
 def account_config(account_id):
     return load_json(BASE / 'accounts' / f'{account_id}.json')['accounts'][0]
 
+def configure_account_cache(account):
+    """Apply an explicit account cache binding; never guess or share across identities."""
+    path = account.get('token_cache_path')
+    if path:
+        global TOKEN_CACHE_PATH, TOKEN_CACHE_LOCK_PATH
+        candidate = Path(path)
+        if not candidate.is_absolute() or candidate.parent != Path('/root/.cache/mgs') or not candidate.name.startswith('ares-meta-token-') or candidate.suffix != '.json':
+            raise ValueError('invalid explicit account credential cache')
+        TOKEN_CACHE_PATH = candidate
+        TOKEN_CACHE_LOCK_PATH = Path(str(candidate) + '.lock')
+    else:
+        TOKEN_CACHE_PATH = DEFAULT_TOKEN_CACHE_PATH
+        TOKEN_CACHE_LOCK_PATH = DEFAULT_TOKEN_CACHE_LOCK_PATH
+
+
+DEFAULT_TOKEN_CACHE_PATH = TOKEN_CACHE_PATH
+DEFAULT_TOKEN_CACHE_LOCK_PATH = TOKEN_CACHE_LOCK_PATH
+
+
 def _identify_token_field(data):
     for field in data.get('fields', []):
         label = (field.get('label') or field.get('id') or '').lower()

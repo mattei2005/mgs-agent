@@ -543,6 +543,11 @@ def build_summary(
     }
 
 
+def runtime_app_key() -> str:
+    """Exact account app binding; never inherit the previous issuer in a live manifest."""
+    return load_json(CONFIG_PATH)["accounts"][ACCOUNT_ID]["app_key"]
+
+
 def seal_manifest_from_state(state: dict[str, Any], start_time: str) -> tuple[dict[str, Any], dict[str, Any]]:
     selected = list(state.get("selected_assets") or [])
     refs = [
@@ -552,6 +557,7 @@ def seal_manifest_from_state(state: dict[str, Any], start_time: str) -> tuple[di
     registry = MediaRegistry(REGISTRY_PATH)
     payload = build_eggbev_from_zero_manifest(
         registry=registry,
+        app_key=runtime_app_key(),
         request_id=str(state["request_id"]),
         page_id=str(state["page"]["id"]),
         instagram_user_id=str(state["page"]["instagram_user_id"]),
@@ -897,7 +903,7 @@ def offline_smoke(output: Path | None) -> dict[str, Any]:
         registry.register(account_id=ACCOUNT_ID, asset_id=asset_id, checksum=checksum, vertical_video_id=f"v-{index + 1:02d}", square_video_id=f"s-{index + 1:02d}", ready=True, source="offline-smoke", upload_edge="ad_account_advideos", association_verified=True)
         refs.append({"asset_id": asset_id, "checksum": checksum})
     start = (datetime.now(ET) + timedelta(days=2)).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
-    payload = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-offline-smoke", page_id="123456789012345", instagram_user_id="17841400000000000", page_name="Amy Shook", page_token="pg_5024", page_sequence=162, campaign_sequences=[1, 2, 3], daily_budgets_minor=[5000, 5000, 5000], start_time=start, asset_refs=refs, ad_names=[f"AMY AD {index + 1:02d}" for index in range(9)])
+    payload = build_eggbev_from_zero_manifest(registry=registry, app_key=runtime_app_key(), request_id="eggbev-offline-smoke", page_id="123456789012345", instagram_user_id="17841400000000000", page_name="Amy Shook", page_token="pg_5024", page_sequence=162, campaign_sequences=[1, 2, 3], daily_budgets_minor=[5000, 5000, 5000], start_time=start, asset_refs=refs, ad_names=[f"AMY AD {index + 1:02d}" for index in range(9)])
     # Frozen offline fixture exercises the historical contract, not a live reservation.
     payload["created_at"] = "2026-08-30T00:00:00+00:00"
     config = load_json(CONFIG_PATH)
@@ -1064,7 +1070,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         atomic_json(audit_path, state)
         return {"status": "PRESTAGE_DEFERRED", "request_id": args.request_id, "ready": len(ready_refs), "required": required, "writes": {"campaign": 0, "media_uploads_possible": processed_now * 2}, "next_action": "rerun prepare with the same request_id after quota capacity is available"}
 
-    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, request_id=args.request_id, page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names, campaign_numbers=state.get("global_campaign_numbers"), adset_name=state.get("adset_name", "AdG1"))
+    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, app_key=runtime_app_key(), request_id=args.request_id, page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names, campaign_numbers=state.get("global_campaign_numbers"), adset_name=state.get("adset_name", "AdG1"))
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(manifest_payload), config)
     sealed = prevalidate_payload(manifest_payload, registry)

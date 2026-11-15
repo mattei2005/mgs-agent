@@ -162,3 +162,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # auto-publish the staging tree. Evidence siblings and deployed code stay tracked.
 /data/ares/meta-ads/audit/maintenance/t_ee2d9949/staging/
 
+# Reconciled Eggbev01 maintenance offline test tree (REPORT-INFRA 1571350236171866173).
+# Keep copied sources local; preserve evidence siblings and the sensitive-name guard.
+/data/ares/meta-ads/audit/maintenance/t_247b861d/isolated/
+

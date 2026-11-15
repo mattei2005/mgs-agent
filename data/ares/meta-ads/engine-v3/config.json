@@ -327,14 +327,14 @@
       "credential_cutover_source": "discord:thread:1549416017430839367"
     },
     "1034081997659047": {
-      "app_key": "mgs-meta-app-1299247318762949",
+      "app_key": "mgs-meta-app-953171080682697",
       "alias": "Eggbev-US-CC-EN-01-G006",
       "operation": "Eggbev-US-CC-EN-BOT",
-      "token_item": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
       "token_type": "user_access_token",
-      "meta_app_id": "1299247318762949",
-      "token_identity": "Mhd Aldy",
-      "marketing_api_access_tier": "standard_access",
+      "meta_app_id": "953171080682697",
+      "token_identity": "Ana Cunha",
+      "marketing_api_access_tier": "development_access",
       "timezone": "America/New_York",
       "ad_serving_route": "direct_and_lineage_verified",
       "supported_modes": [
@@ -350,14 +350,15 @@
         "account_id": "1034081997659047",
         "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
         "runner": "scripts/ares-eggbev-target-clone.py",
-        "continuations": {
+        "continuations": {},
+        "legacy_copied_adset_page_switch_enabled": false,
+        "live_campaign_acceptance_verified": false,
+        "suspended_continuations": {
           "eggbev-pg23187-1570285402068091011": {
             "receipt_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-continuations/eggbev-pg23187-1570285402068091011-1034081997659047.json",
             "sha256": "199cf547bce2826bb8b42085aab01f08fc7061eed5be2108168193cd43322664"
           }
-        },
-        "legacy_copied_adset_page_switch_enabled": false,
-        "live_campaign_acceptance_verified": false
+        }
       },
       "campaign_policy": {
         "name_regex": ".+ DUP[0-9]{2,}$",
@@ -369,8 +370,7 @@
           "eggbev-pg-5024-20260830-nicolas-01",
           "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01",
           "eggbev-modelo-1567803920217022545",
-          "eggbev-301-pg23186-1569925441127579672",
-          "eggbev-pg23187-1570285402068091011"
+          "eggbev-301-pg23186-1569925441127579672"
         ],
         "immediate_start_authorized_managers": [
           "Nicolas Holanda"
@@ -495,7 +495,10 @@
             }
           }
         }
-      }
+      },
+      "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json",
+      "token_user_id": "122147293515218951",
+      "credential_binding_readback": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json"
     },
     "2429758060563333": {
       "app_key": "mgs-meta-app-1299247318762949",

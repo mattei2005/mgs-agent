@@ -222,6 +222,7 @@ def build_eggbev_from_zero_manifest(
     status: str = "ACTIVE",
     campaign_numbers: list[int] | None = None,
     adset_name: str = "AdG1",
+    app_key: str = APP_KEY,
 ) -> dict[str, Any]:
     request_id = _clean_display(request_id, "request_id")
     page_id = _clean_display(page_id, "page_id")
@@ -295,7 +296,7 @@ def build_eggbev_from_zero_manifest(
         campaigns.append(
             {
                 "idempotency_key": f"{request_id}-c{sequence:03d}",
-                "app_key": APP_KEY,
+                "app_key": _clean_display(app_key, "app_key"),
                 "account_id": ACCOUNT_ID,
                 "mode": "from_zero_prestaged",
                 "name": campaign_name,

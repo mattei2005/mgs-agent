@@ -1382,6 +1382,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV01-ANA-INTEGRATION-t_247b861d",
+      "next_step": "Dono dependente t_99deb773 verifica receipts e usa mesmo request para preparacao aprovada; PBIA continua vazio, inicializacao somente no prepare. Conferir horario literal antes; se vencido perguntar apenas novo horario. Resumo selado e OK posterior obrigatorios; sem execute nesta manutencao.",
+      "objective": "Integrar Ana/minibot m6 somente Eggbev01 em manutencao isolada, sem campanha",
+      "source": "data/ares/meta-ads/audit/maintenance/t_247b861d/install-receipt.json",
+      "state": "installed_readback_validated; ana122147293515218951/app953171080682697, conta/page viewer loan/pixel935354115143283/source303 passaram guard; development_access; 222 testes pertinentes passam. lease antiga suspended_by_operator com fence, sem qa complete. zero meta writes/reservas/uploads/prepare. outras contas e gates intactos.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-15T02:23:57+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-EGGBEV03-DUPLICATE-1565063126771040317",
       "next_step": "Resolver perfil da Page Brunetz Finance; concluir readiness fora da transacao; esclarecer inicio com Nicolas; apresentar resumo exato e aguardar OK final antes de selar/executar, preservando o mesmo request.",
       "objective": "Duplicar uma vez campanha 219 Brunetz Finance pg_23150 na conta03 com USD20/dia, horario solicitado ainda ambiguo",
@@ -1569,6 +1579,16 @@
       "state": "complete_get_verified_and_reconciled:6 pares conta/thread;71 campanhas;27 partes integrais e6 resumos;33 mensagens unicas relidas por get;resumos posteriores aos integrais;corte13/11/2026 17:18-17:19est;usd;fonte financeira sb ajustada;zero writes meta",
       "thread_id": "1567162580273729629",
       "updated_at": "2026-11-13T22:23:16+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1571346743327461509",
+      "next_step": "Concluido;nao reenviar.Boostingecon sem entrega, receita/ROI/atraso n/d;demais atraso14min-2h14.Nova atualizacao exige novo pedido e fontes.",
+      "objective": "Intraday atual nas seis threads do lote G006 anterior com resumo financeiro individual ao final",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1571346743327461509/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled:6 pares conta/thread;49 campanhas no recorte financeiro;25 partes integrais e6 resumos;31 mensagens unicas relidas por get;resumos posteriores aos integrais;corte14/11/2026 21:14est;usd;fonte financeira sb ajustada;zero writes meta",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-15T02:19:08+00:00"
     },
     {
       "agent": "ares",
@@ -2980,6 +3000,16 @@
       "state": "deleted: rodolfo confirmou sim após segunda confirmação crítica; 30/30 arquivos e 6/6 pastas excluídos definitivamente com http 404; inventário 30 removido e 0 restante; sheet plano imagens es-en 30 linhas restauradas para a produzir com links vazios; 12 artefatos técnicos removidos; fontes/referências preservadas; independent all_pass=true; report-infra 1538975224580800625.",
       "thread_id": "1538949395586875564",
       "updated_at": "2026-08-17T18:18:24+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-VIEWER-LOAN-1571342489162489937",
+      "next_step": "Conferir admissao, identidade, conta, fonte e Page; preparador canonico; QA visual; resumo e OK posterior",
+      "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/request.json",
+      "state": "preparation_preflight; handoff e hashes instalados verificados; mesmo request preservado; sem campanha publicada",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-15T02:28:04+00:00"
     },
     {
       "agent": "ares",
@@ -7377,6 +7407,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1571344040648249394",
+      "next_step": "Operação Meta concluída; entregar confirmação nativa e bloco Iris com os key values conferidos, sem envio automático AdOps.",
+      "objective": "Duplicar C105 em 15 campanhas Mavroa G006 com 30 vídeos e copies explicitamente solicitados.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571344040648249394/final-readback.json",
+      "state": "complete: c179–c193, 15 campanhas, 15 conjuntos e 30 anúncios active por get; usd35/dia cada, lote usd525/dia, conta ativa usd940/dia; cost_cap usd0.90; início 15/11/2026 00:15 america/new_york. qa integral, ids preservados, 30 assets pós-processados; utms verificadas.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-15T02:34:30+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-all36-approved-compact-20261019T233015",
       "next_step": "Sem pendencias. Proximos relatorios SHEIN usam compact_identity_standard automaticamente;BUsobrebudgetvigenteneverinicial,reconciliar antesfinalrender. Consultar completion/latest-deliveries;nao reenviar nem excluir outros historicos sempedido.",
       "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;corrigir BU com budget vigente e explicar na legenda",
@@ -8418,12 +8458,12 @@
     {
       "agent": "ares",
       "id": "eggbev-pg23189-1571342489162489937",
-      "next_step": "Nicolas concluir checkpoint do perfil anunciante Mhd Aldy no Facebook e avisar. Repetir GET com mesma credencial/identidade sem fallback; reconciliar coordenação antiga sem retomar nem alterar 303; validar fonte e hierarquia manual ao vivo, Page/denylist, arquivos/pasta e readiness antes de reserva/prestage/manifest. Preservar horário; se vencer, perguntar somente novo início. Apresentar resumo e aguardar OK posterior antes de executar.",
-      "objective": "Duplicar uma vez a 303 para pg_23189 com vídeos 166/167/168, copy literal, USD35/dia e início 2026-11-15 00:02 America/New_York; preservar fonte e exigir resumo/OK posterior.",
-      "source": "discord:1541578556037927053:1571342489162489937",
-      "state": "blocked_meta_advertiser_checkpoint: get da própria conta retornou http400 oauth190/459: anunciante precisa entrar no facebook e seguir instruções. zero upload, reserva ou write de campanha neste request. lease histórica ainda aponta request pg23187; checkpoint e discord confirmam ordem 1570338387380936737 de não alterar fonte e recuperação antiga arquivada. nenhuma retomada/liberação realizada; fresh get impossível até login. request literal preservado em data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/request.json.",
+      "next_step": "t_99deb773 continua pelo mesmo input/runner central, pre-read de admissao e receipts; preparar somente apos verificar horario futuro (se vencido perguntar apenas novo horario), inicializar PBIA conforme request aprovado e entregar resumo selado para OK posterior. Nao retomar recovery antigo; sem fallback Mhd/Carla.",
+      "objective": "Preparar clone unico da303 para Viewer Loan pg23189 com request literal preservado, sem publicar antes de resumo e OK posterior",
+      "source": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
+      "state": "manutencao_ana_m6_validada; conta01/app e cache canonicos instalados, runtime get identidade/conta/page/pixel/source3ads passou; lease historica suspensa por ordem manual sem alterar303; leitor novo admitido. nenhuma reserva/upload/prepare/campanha realizado. pbia get vazio preservado.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T01:56:23+00:00"
+      "updated_at": "2026-11-15T02:23:58+00:00"
     },
     {
       "agent": "ares",
@@ -9089,11 +9129,11 @@
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
       "next_step": "Gate humano: concluir passkey Meta no mesmo ChromeRodolfo PC1;Zeus revalida alvo antes de retomar H40 e pendênciasD atuais; API final/readback antes da conclusão. Sem outrojob/writer;hold e67b9e22a17027e23728d532 preservado.",
-      "objective": "Atualização recorrente 2026-11-14T14:02:00-05:00 do mesmo job2ee720363d7d:55IDs,H40Outstanding balance; preservar incidente anterior e gates billing.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261114T1402/closure-current.json",
-      "state": "parcial validada; api55 em 2026-11-14t14:06:29.051162-05:00;15cartão/40linha; invoices outubro 30 usd417864.11; h40 históricos 2026-11-13t10:01:53.761038-05:00 a 2026-11-13t10:24:24.731026-05:00 preservados; 7 eventosd pendentes, mesmos ids da ocorrência anterior; 39 vazios históricos; paridade c/g/i/j,e/f e ledgerh/d; outraaba intacta;lease livre;report-infra pendente pela restrição de envio direto do cron.",
+      "objective": "Atualização recorrente 2026-11-14T21:02:00-05:00 do mesmo job2ee720363d7d:55IDs,H40Outstanding balance; preservar incidente anterior e gates billing.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261114T2102/closure-current.json",
+      "state": "parcial validada; api55 em 2026-11-14t21:05:48.494111-05:00;15cartão/40linha; invoices outubro 30 usd417864.11; h40 históricos 2026-11-13t10:01:53.761038-05:00 a 2026-11-13t10:24:24.731026-05:00 preservados; 8 eventosd pendentes; novo evento em eggbev-us-cc-en-03 (fax-us-02), demais7 já pendentes; 39 vazios históricos; paridade c/g/i/j,e/f e ledgerh/d; outraaba intacta;lease livre;report-infra pendente pela restrição de envio direto do cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-14T19:08:53+00:00"
+      "updated_at": "2026-11-15T02:07:48+00:00"
     },
     {
       "agent": "zeus",
@@ -10677,5 +10717,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T01:56:23+00:00"
+  "updated_at": "2026-11-15T02:34:30+00:00"
 }

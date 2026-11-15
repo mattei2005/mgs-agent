@@ -8,19 +8,19 @@
   "status": "onboarded_validate_plan_enabled_write_per_request_gated",
   "account_id": "1034081997659047",
   "account_alias": "Eggbev-US-CC-EN-01-G006",
-  "app_key": "mgs-meta-app-1299247318762949",
-  "meta_app_id": "1299247318762949",
-  "meta_app_name": "minibot",
-  "token_identity": "Mhd Aldy",
+  "app_key": "mgs-meta-app-953171080682697",
+  "meta_app_id": "953171080682697",
+  "meta_app_name": "minibot m6",
+  "token_identity": "Ana Cunha",
   "credential_model": "advertiser-profile-scoped individual User Access Token; linked Pages are resolved through this advertiser; System User fallback is forbidden",
-  "token_item": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
-  "credential_cutover_at_utc": "2026-11-05T14:45:08.592752+00:00",
-  "credential_cutover_source": "discord:thread:1541578556037927053#1567907415394099351",
-  "credential_cutover_rollback": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/previous-binding.json",
+  "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+  "credential_cutover_at_utc": "2026-11-15T02:10:45.183345+00:00",
+  "credential_cutover_source": "discord:1571263998102343752;1571344888992112781",
+  "credential_cutover_rollback": "data/ares/meta-ads/audit/maintenance/t_247b861d/backup",
   "timezone": "America/New_York",
   "graph_version": "v26.0",
-  "access_tier": "standard_access",
-  "access_tier_evidence": "two independent Meta Graph v26 X-Business-Use-Case-Usage readbacks on 2026-09-14",
+  "access_tier": "development_access",
+  "access_tier_evidence": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
   "hot_path_optimization": {
     "page_model": "dynamic requested pg_XXXXX via the exact advertiser profile's individual User Access Token, direct /{page_id}?fields=access_token readback, ephemeral Page Access Token and PBIA; no Business Manager Page import requirement and no System User fallback",
     "page_scale": "approximately 3000 Pages; never scan me/accounts for creation, query only the requested identity and batch cross-account naming history",
@@ -238,5 +238,6 @@
     "direct_publication_without_summary": false,
     "per_request_only": true,
     "recovery": "readback first, preserve request and IDs, write only missing or invalid layers, never replay a non-idempotent POST blindly"
-  }
+  },
+  "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json"
 }
