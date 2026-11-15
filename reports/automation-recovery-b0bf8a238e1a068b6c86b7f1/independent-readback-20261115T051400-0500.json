@@ -1,0 +1,89 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "verified_at": "2026-11-15T05:14:00-05:00",
+  "state": "target_recovered_independent_closure_pending",
+  "previous_checkpoint": "/root/mgs-agent/reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/independent-readback-20261115T050347-0500.json",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "GET_http_status": 200,
+    "author_id_GET_verified": "344196393512075265",
+    "content_GET_verified": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "thread_GET_verified": "1569185140502954077",
+    "parent_channel_GET_verified": "1496267442899521627",
+    "guild_GET_verified": "1185714635991679006",
+    "current_registry_authorized": true
+  },
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1637292",
+    "owner_process": {"pid": 1637292, "ppid": 1637291, "start_ticks": "214731926", "alive": true},
+    "worker": {"pid": 1637523, "start_ticks": "214732844", "started": 1794737530.5103881, "state": "running"},
+    "worker_process": {"pid": 1637523, "ppid": 1637292, "start_ticks": "214732844", "alive": true},
+    "worker_receipt_identity_verified": true,
+    "worker_ppid_equals_owner": true,
+    "previous_owner_processes": [{"pid": 1629771, "alive": false}, {"pid": 1629818, "alive": false}],
+    "lease_until": 1794738730.506168,
+    "lease_valid": true,
+    "attempts": 35,
+    "failures": 0,
+    "service_heartbeat": {"at": 1794737530.5014436, "phase": "dispatching", "pid": 1637292},
+    "worker_failure_streak": 0,
+    "latest_claim_event": {"id": 6952, "at": 1794737530.506168, "owner": "supervisor:1637292", "previous_state": "retry_scheduled"},
+    "previous_defer_event": {"id": 6937, "at": 1794737082.1043677, "due": 1794737382.1043677, "state": "retry_scheduled"},
+    "target_script_processes": [],
+    "queue_modified_by_worker": false
+  },
+  "target": {
+    "id": "44671121f3cc",
+    "enabled": true,
+    "state": "scheduled",
+    "last_run_at": "2026-11-14T23:26:38.510400-05:00",
+    "last_status": "error",
+    "last_error": "Script exited with code 1",
+    "next_run_at": "2026-11-15T05:26:38.510400-05:00",
+    "fire_claim": null,
+    "schedule": {"kind": "interval", "minutes": 360, "display": "every 360m"},
+    "ticker_heartbeat_observed": {"at": 1794737626.7403584, "pid": 2241212},
+    "ticker_last_success_observed": 1794737626.7657802
+  },
+  "contract_hash_live": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+  "contract_matches_source": true,
+  "all_three_changed_hashes_match_recorded": true,
+  "canonical_mirror_identical": true,
+  "watchdog_state": {"status": "ok", "last_failure_rc": 0, "last_alert_sent": null, "last_check": "2026-11-14T23:32:52-05:00"},
+  "native_recent_executions": [
+    {"id": "c2fe7ec77c8244249a07991087837563", "status": "failed", "pid": 1201405, "started_at": "2026-11-14T23:24:48.920763-05:00", "finished_at": "2026-11-14T23:26:38.516545-05:00", "error": "Script exited with code 1"},
+    {"id": "0c01bfe170954417b507550144e63f35", "status": "completed", "pid": 661550, "started_at": "2026-11-14T17:21:47.639495-05:00", "finished_at": "2026-11-14T17:24:35.679784-05:00", "error": null}
+  ],
+  "independent_observation": {
+    "source_key": "native:zeus:44671121f3cc",
+    "at": 1794737524.9301405,
+    "status": "ERROR",
+    "receipt": {"at": 1794716798.5104, "receipt": "monitor-predicate:Hermes MGS patch watchdog; last execution failed (details retained in scheduler)", "status": "ERROR", "target": "native:zeus:44671121f3cc", "verified": false}
+  },
+  "source_alert_GET_verified": "1571381759860408423",
+  "delivery": [
+    {"message_id": "1571382457620758560", "channel_id": "1498132022634483894", "GET_http_status": 200, "GET_verified": true, "embed_title": "Hermes patch watchdog recuperado", "content_empty": true, "mentions_empty": true},
+    {"message_id": "1571382948165591142", "channel_id": "1498132022634483894", "GET_http_status": 200, "GET_verified": true, "embed_title": "REPORT-INFRA — modificada", "content_empty": true, "mentions_empty": true}
+  ],
+  "prior_infrastructure_accounting_reconciled": {
+    "inventory_id": "hermes-watchdog-recovery-b0bf8a238e1a068b6c86b7f1",
+    "audit_event": "hermes_patch_watchdog_recovered_native_validation_pending",
+    "audit_timestamp": "2026-11-14T23:35:15.035397-05:00"
+  },
+  "pending": {
+    "stage": "Observe existing natural native occurrence, then existing supervisor independent acceptance and closure",
+    "next_native_occurrence": "2026-11-15T05:26:38.510400-05:00",
+    "consumer_cron_verified": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+    "consumer_and_current_owner_verified": true,
+    "human_decision_required": false,
+    "queue_closure_verified": false,
+    "handoff": "Return to current supervisor. Missing stage is native scheduled execution and independent readback only. Preserve original request and natural recurrence. Do not replay wrapper, rewrite native history, dispatch another worker or resend verified delivery. Recheck the native execution receipt after the scheduled occurrence finishes."
+  },
+  "actions_not_performed": ["repair_or_wrapper_replay", "queue_transition", "scheduler_history_or_cadence_change", "new_dispatcher", "Discord_POST_or_PATCH", "infrastructure_or_skill_change", "gateway_restart"],
+  "local_lookup_failures": [
+    {"operation": "skill_view hermes-agent", "diagnosis": "Skill disabled in loader", "recovery": "Read canonical SKILL.md directly without changing configuration"}
+  ],
+  "only_foreground_write": "This local evidence checkpoint"
+}
