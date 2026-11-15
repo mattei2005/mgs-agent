@@ -6467,6 +6467,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789",
+      "next_step": "Inventariar remanescente115MB manutencao e5 classes de backups locais; buscar fontes retidas e consumidores. Hash/arquivo valido sozinho nao prova redundancia; nao excluir por idade.",
+      "objective": "Revisar restantes das pastas antigas de manutencao e backups locais; provar substituicao e recuperacao antes de propor descarte, sem repetir lotes encerrados.",
+      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571327506374598789",
+      "state": "in_progress_readonly_replacement_proof",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-15T00:56:21+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUPS-1570830889359777924",
       "next_step": "FechamentoativoZEUS-STORAGE-VPS-RETIRE-1571196199548092428;depoisrevisaodecopiascodigo/runtimeHermesseparada,semexclusaoautomatica;manterlatest/compactos/bases/safety/offsite.",
       "objective": "Lotesexpandidosanterioresfechados;35conjuntosVPSmaintenanceconsolidadoseoriginaisretiradosvalidados.",
@@ -10657,5 +10667,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:37:05+00:00"
+  "updated_at": "2026-11-15T00:56:21+00:00"
 }
