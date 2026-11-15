@@ -13,6 +13,7 @@ import tempfile
 import threading
 import time
 import unittest
+import urllib.error
 import zipfile
 from pathlib import Path
 from unittest.mock import patch
@@ -25,6 +26,70 @@ spec.loader.exec_module(mod)
 
 
 class OffsiteBackupTests(unittest.TestCase):
+    def upload_fixture(self, replies):
+        calls = []
+        class Response:
+            headers = {'Location': 'https://upload.invalid/same-session'}
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def read(self): return b'{"id":"same-slot"}'
+        def open_url(req, **kwargs):
+            calls.append(req)
+            if len(calls) == 1: return Response()
+            reply = replies.pop(0)
+            if isinstance(reply, Exception): raise reply
+            return Response()
+        return calls, open_url
+
+    def upload_error(self, code, **headers):
+        return urllib.error.HTTPError('https://upload.invalid/same-session', code, 'fixture', headers, None)
+
+    def run_upload_fixture(self, replies):
+        calls, opener = self.upload_fixture(replies)
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            path = Path(raw) / 'fixture.gpg'; path.write_bytes(b'abcd')
+            with patch.object(mod.urllib.request, 'urlopen', side_effect=opener), patch.object(mod.time, 'sleep') as sleep:
+                result = mod.Drive('fixture').upload_resumable('parent', path, tier='hourly', mode='quick', sha256='fixture')
+        return result, calls, sleep
+
+    def test_upload_500_probes_committed_offset_before_resuming(self):
+        result, calls, sleep = self.run_upload_fixture([
+            self.upload_error(500, **{'Retry-After': '7'}),
+            self.upload_error(308, Range='bytes=0-1'), None])
+        self.assertEqual(result['id'], 'same-slot')
+        self.assertEqual([r.get_method() for r in calls], ['POST', 'PUT', 'PUT', 'PUT'])
+        self.assertEqual(calls[2].get_header('Content-range'), 'bytes */4')
+        self.assertEqual(calls[3].get_header('Content-range'), 'bytes 2-3/4')
+        self.assertEqual(calls[3].data, b'cd')
+        sleep.assert_called_once_with(7.0)
+
+    def test_upload_ambiguous_final_is_read_back_without_data_replay(self):
+        result, calls, _ = self.run_upload_fixture([self.upload_error(503), None])
+        self.assertEqual(result['id'], 'same-slot')
+        self.assertEqual(len(calls), 3)
+        self.assertEqual(calls[-1].data, b'')
+
+    def test_upload_timeout_probes_before_data_replay(self):
+        _, calls, _ = self.run_upload_fixture([TimeoutError(), self.upload_error(308), None])
+        self.assertEqual(calls[2].data, b'')
+        self.assertEqual(calls[3].data, b'abcd')
+
+    def test_upload_rejects_impossible_committed_offset(self):
+        with self.assertRaisesRegex(RuntimeError, 'invalid committed range'):
+            self.run_upload_fixture([self.upload_error(500), self.upload_error(308, Range='bytes=0-9')])
+
+    def test_upload_status_failure_stops_after_five_probes(self):
+        with self.assertRaisesRegex(RuntimeError, 'after five probes'):
+            self.run_upload_fixture([self.upload_error(500)] + [self.upload_error(503) for _ in range(5)])
+
+    def test_upload_long_cooldown_is_not_shortened(self):
+        with self.assertRaisesRegex(RuntimeError, 'cooldown pending; Retry-After=120'):
+            self.run_upload_fixture([self.upload_error(429, **{'Retry-After': '120'})])
+
+    def test_upload_no_progress_is_bounded(self):
+        with self.assertRaisesRegex(RuntimeError, 'no progress after five'):
+            self.run_upload_fixture([self.upload_error(308) for _ in range(5)])
+
     def test_restore_staging_is_released_before_sequential_profile_imports(self) -> None:
         with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
             root = Path(raw)

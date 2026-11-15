@@ -1,0 +1,123 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "verified_at": "2026-11-15T05:30:57.474409-05:00",
+  "state": "native_recovery_validated_supervisor_closure_pending",
+  "previous_checkpoint": "/root/mgs-agent/reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/independent-readback-20261115T051400-0500.json",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "GET_verified": true,
+    "author_id_GET_verified": "344196393512075265",
+    "content_GET_verified": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "thread_GET_verified": "1569185140502954077",
+    "parent_channel_GET_verified": "1496267442899521627",
+    "guild_GET_verified": "1185714635991679006",
+    "current_registry_authorized": true
+  },
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1640888",
+    "owner_process": {"pid": 1640888, "ppid": 1640886, "start_ticks": "214791930", "alive_at_reconciliation": true},
+    "worker": {"pid": 1641459, "start_ticks": "214792745", "started": 1794738129.5227804, "state": "running"},
+    "worker_ppid_GET_proc_verified": 1640888,
+    "worker_receipt_identity_verified": true,
+    "previous_owner_processes_not_present": [1637292, 1637523],
+    "lease_until": 1794739329.5193026,
+    "lease_valid_at_readback": true,
+    "attempts": 36,
+    "failures": 0,
+    "latest_claim_event_id": 6965,
+    "service_heartbeat_at_reconciliation": {"at": 1794738129.5164826, "phase": "dispatching", "pid": 1640888},
+    "worker_failure_streak": 0,
+    "queue_modified_by_worker": false
+  },
+  "target": {
+    "id": "44671121f3cc",
+    "enabled": true,
+    "state": "scheduled",
+    "last_run_at": "2026-11-15T05:29:57.998803-05:00",
+    "last_status": "ok",
+    "last_error": null,
+    "last_delivery_error": null,
+    "failure_streak": 0,
+    "fire_claim": null,
+    "next_run_at": "2026-11-15T11:29:57.998803-05:00",
+    "schedule": {"kind": "interval", "minutes": 360, "display": "every 360m"},
+    "last_dispatch": {
+      "scheduled_at": "2026-11-15T05:26:38.510400-05:00",
+      "dispatched_at": "2026-11-15T05:26:46.446951-05:00",
+      "lateness_seconds": 7.9,
+      "kind": "on_time"
+    },
+    "native_execution": {
+      "id": "5d3933814c384b809b161da3ca4d3a06",
+      "source": "builtin",
+      "process_id": "693f6770830f4a88a3447973976b4c43",
+      "pid": 1646987,
+      "process_started_at": 214820446,
+      "status": "completed",
+      "claimed_at": "2026-11-15T05:26:46.476148-05:00",
+      "started_at": "2026-11-15T05:26:47.971462-05:00",
+      "finished_at": "2026-11-15T05:29:58.005809-05:00",
+      "scheduled_instant": "2026-11-15T10:26:38.510400+00:00",
+      "error": null,
+      "handoff_pending": 0,
+      "delivery_outcome": "suppressed"
+    },
+    "delivery_policy": "local; native suppressed delivery is expected, original recovery and REPORT-INFRA messages separately GET-verified",
+    "original_failed_execution_preserved": "c2fe7ec77c8244249a07991087837563",
+    "native_log_result": {"files": 36, "tests_passed": 733, "tests_failed": 0, "runner_wall_seconds": 68.1},
+    "watchdog_state": {"status": "ok", "last_failure_rc": 0, "last_alert_sent": null, "last_check": "2026-11-15T05:29:57-05:00"}
+  },
+  "contract_hash_live": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+  "contract_matches_source": true,
+  "all_three_changed_hashes_match_recorded": true,
+  "canonical_mirror_identical": true,
+  "fresh_readonly_independent_collector": {
+    "status": "OK",
+    "verified": true,
+    "target": "native:zeus:44671121f3cc",
+    "receipt": "monitor-predicate:Hermes MGS patch watchdog; scheduler completion and delivery checked",
+    "at": 1794738597.998803,
+    "source": {
+      "kind": "native",
+      "profile": "zeus",
+      "job_id": "44671121f3cc",
+      "thread_id": "1511521657922261082",
+      "time_sensitive": false,
+      "contract_hash": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd"
+    },
+    "method": "mgs_automation_supervisor.collect() only; no main(), Queue(), drive() or dispatcher started"
+  },
+  "persisted_supervisor_coverage_at_readback": {
+    "source_key": "native:zeus:44671121f3cc",
+    "at": 1794738124.3452337,
+    "status": "ERROR",
+    "receipt_at": 1794716798.5104,
+    "diagnosis": "Pre-run observation retained by active supervisor while waiting for this worker; fresh collector is now verified OK. Worker must return before the owner can finish and a natural tick can accept closure."
+  },
+  "source_alert_GET_verified": "1571381759860408423",
+  "delivery": [
+    {"message_id": "1571382457620758560", "channel_id": "1498132022634483894", "GET_verified": true, "embed_title": "Hermes patch watchdog recuperado", "content_empty": true, "mentions_empty": true},
+    {"message_id": "1571382948165591142", "channel_id": "1498132022634483894", "GET_verified": true, "embed_title": "REPORT-INFRA — modificada", "content_empty": true, "mentions_empty": true}
+  ],
+  "prior_infrastructure_accounting_reconciled": {
+    "inventory_id": "hermes-watchdog-recovery-b0bf8a238e1a068b6c86b7f1",
+    "audit_event": "hermes_patch_watchdog_recovered_native_validation_pending",
+    "audit_timestamp": "2026-11-14T23:35:15.035397-05:00"
+  },
+  "pending": {
+    "stage": "Existing supervisor independent queue acceptance, completion notice GET and legacy reconciliation only",
+    "consumer_cron_verified": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+    "consumer_and_current_owner_verified": true,
+    "human_decision_required": false,
+    "queue_closure_verified": false,
+    "completion_notice_exists": false,
+    "handoff": "Return to current supervisor now. Native natural execution completed and fresh canonical collector verifies OK. Let existing owner/natural tick reconcile this exact request, GET-verify its canonical completion notice and update legacy state. Do not replay watchdog, alter native history/cadence, start another dispatcher or resend the already verified recovery/REPORT-INFRA messages."
+  },
+  "actions_not_performed": ["repair_or_wrapper_replay", "queue_transition", "scheduler_history_or_cadence_change", "new_dispatcher", "Discord_POST_or_PATCH", "infrastructure_or_skill_change", "gateway_restart"],
+  "local_lookup_failures": [
+    {"operation": "skill_view hermes-agent", "diagnosis": "Skill disabled in loader", "recovery": "Read canonical SKILL.md and background-systems reference directly without changing configuration"}
+  ],
+  "explicit_foreground_write": "This local evidence checkpoint"
+}

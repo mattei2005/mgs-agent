@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import base64
 import datetime as dt
+import email.utils
 import fcntl
 import hashlib
 import json
@@ -344,12 +345,35 @@ class Drive:
         chunk_size = 8 * 1024 * 1024
         sent = 0
         final: dict[str, Any] | None = None
+
+        def committed(headers, lower, upper):
+            value = headers.get("Range", "")
+            match = re.fullmatch(r"bytes=0-([0-9]+)", value)
+            offset = int(match.group(1)) + 1 if match else 0
+            if (value and not match) or not lower <= offset <= upper:
+                raise RuntimeError("Drive resumable status has invalid committed range")
+            return offset
+
+        def cooldown(headers, attempt):
+            value = headers.get("Retry-After", "")
+            if value:
+                try:
+                    delay = float(value)
+                except ValueError:
+                    delay = (email.utils.parsedate_to_datetime(value) - utcnow()).total_seconds()
+                if delay > 60:
+                    raise RuntimeError(f"Drive upload cooldown pending; Retry-After={value}")
+            else:
+                delay = min(32, 2 ** attempt)
+            time.sleep(max(0, delay))
+
+        stalled = 0
         with path.open("rb") as fh:
             while sent < size:
+                fh.seek(sent)
                 chunk = fh.read(chunk_size)
                 start = sent
                 end = sent + len(chunk) - 1
-                sent += len(chunk)
                 chunk_headers = {
                     "Content-Type": mime,
                     "Content-Length": str(len(chunk)),
@@ -359,16 +383,43 @@ class Drive:
                 try:
                     with urllib.request.urlopen(chunk_request, timeout=300) as response:
                         raw = response.read()
-                        if sent == size:
-                            final = json.loads(raw)
+                        final = json.loads(raw)
+                        sent = size
                 except urllib.error.HTTPError as exc:
                     if exc.code == 308:
-                        continue
-                    detail = exc.read().decode(errors="ignore")[:500]
-                    raise RuntimeError(f"Drive upload HTTP {exc.code}: {detail}") from exc
+                        sent = committed(exc.headers, start, end + 1)
+                    elif exc.code in {429, 500, 502, 503, 504}:
+                        sent, final = self._reconcile_upload(session_url, size, start, end + 1, cooldown, committed, exc.headers)
+                    else:
+                        raise RuntimeError(f"Drive upload HTTP {exc.code}; session requires reconciliation") from None
+                except (TimeoutError, urllib.error.URLError):
+                    sent, final = self._reconcile_upload(session_url, size, start, end + 1, cooldown, committed, {})
+                stalled = stalled + 1 if sent == start else 0
+                if stalled >= 5:
+                    raise RuntimeError("Drive upload made no progress after five reconciled attempts")
         if not final:
             raise RuntimeError("Drive resumable upload ended without final metadata")
         return final
+
+    def _reconcile_upload(self, session_url, size, lower, upper, cooldown, committed, headers):
+        """Probe the SAME session after an ambiguous PUT; never replay blindly."""
+        for attempt in range(5):
+            cooldown(headers, attempt)
+            probe = urllib.request.Request(session_url, data=b"", method="PUT", headers={
+                "Content-Length": "0", "Content-Range": f"bytes */{size}",
+            })
+            try:
+                with urllib.request.urlopen(probe, timeout=90) as response:
+                    return size, json.loads(response.read())
+            except urllib.error.HTTPError as exc:
+                if exc.code == 308:
+                    return committed(exc.headers, lower, upper), None
+                if exc.code not in {429, 500, 502, 503, 504}:
+                    raise RuntimeError(f"Drive upload status HTTP {exc.code}; no replay") from None
+                headers = exc.headers
+            except (TimeoutError, urllib.error.URLError):
+                headers = {}
+        raise RuntimeError("Drive upload status unavailable after five probes; no replay")
 
     def download(self, file_id: str, output: Path) -> None:
         url = f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media&supportsAllDrives=true"
