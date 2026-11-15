@@ -8417,6 +8417,16 @@
     },
     {
       "agent": "ares",
+      "id": "eggbev-pg23189-1571342489162489937",
+      "next_step": "Nicolas concluir checkpoint do perfil anunciante Mhd Aldy no Facebook e avisar. Repetir GET com mesma credencial/identidade sem fallback; reconciliar coordenação antiga sem retomar nem alterar 303; validar fonte e hierarquia manual ao vivo, Page/denylist, arquivos/pasta e readiness antes de reserva/prestage/manifest. Preservar horário; se vencer, perguntar somente novo início. Apresentar resumo e aguardar OK posterior antes de executar.",
+      "objective": "Duplicar uma vez a 303 para pg_23189 com vídeos 166/167/168, copy literal, USD35/dia e início 2026-11-15 00:02 America/New_York; preservar fonte e exigir resumo/OK posterior.",
+      "source": "discord:1541578556037927053:1571342489162489937",
+      "state": "blocked_meta_advertiser_checkpoint: get da própria conta retornou http400 oauth190/459: anunciante precisa entrar no facebook e seguir instruções. zero upload, reserva ou write de campanha neste request. lease histórica ainda aponta request pg23187; checkpoint e discord confirmam ordem 1570338387380936737 de não alterar fonte e recuperação antiga arquivada. nenhuma retomada/liberação realizada; fresh get impossível até login. request literal preservado em data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/request.json.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-15T01:56:23+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "eggbev-skill-route-cron-governance-20260831",
       "next_step": "Use current cron inventory and route map; no unresolved schedule decision remains in this checkpoint.",
       "objective": "Separar rotas Eggbev em skills funcionais e institucionalizar política global de anti-colisão de cron",
@@ -10667,5 +10677,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T01:22:03+00:00"
+  "updated_at": "2026-11-15T01:56:23+00:00"
 }
