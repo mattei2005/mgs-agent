@@ -19,7 +19,7 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 
 ## Safety model
 
-Follow Rodolfo's numbered questions in order. Verify completed copies with live reads; distinguish deliberate changes from accepted missing fields and ACTIVE from actual delivery. Prove permanent rules in code/tests, not only documentation.
+Answer Rodolfo’s questions in order. Verify copies live; distinguish intentional deltas, accepted omissions and ACTIVE from delivery. Prove permanent rules in code/tests. CTA preflight: `references/exact-source-cta-preflight.md`.
 
 Separate API enrollment from screenshot proof. For WhatsApp TXT, attach UTF-8 grouped by manager, feature state and account/campaign; separate unknowns, date snapshots on resends and verify exported totals in code. Screenshot recipe: `references/faithful-creative-copy-documentation.md`.
 
