@@ -286,7 +286,7 @@ def _main(argv: list[str] | None = None) -> int:
         print(json.dumps({"status": "VALID", "request_id": manifest.request_id, "campaigns": len(manifest.campaigns), "digest": manifest.digest}))
         return 0
     if args.command == "plan":
-        engine = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account))
+        engine = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account),read_only=True)
         print(json.dumps(engine.dry_run(manifest), ensure_ascii=False, indent=2))
         return 0
     if not args.confirm_execute:

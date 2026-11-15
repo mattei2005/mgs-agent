@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "canonical_key": "ares.eggbev03.cross-account-clone-capability",
-  "status": "authorized_implementation_pending",
+  "status": "active",
   "authorized_by": "Rodolfo Mattei",
   "authorized_by_discord_id": "344196393512075265",
   "authority_message_id": "1571652369467445359",
@@ -13,7 +13,9 @@
   "authority_live_verified": true,
   "source_account_id": "1034081997659047",
   "target_account_id": "1481815942722118",
-  "allowed_request_ids": ["eggbev03-cross-account-1571623835822858352"],
+  "allowed_request_ids": [
+    "eggbev03-cross-account-1571623835822858352"
+  ],
   "scope": "Implement and enable in the central Campaign Engine v3 a deterministic Eggbev01-to-Eggbev03 duplication route with new media, preserving the exact source Page and source-derived campaign/adset settings except explicit request deltas. Complete the previously approved account03 integration with the approved existing advertiser identity/app. Authority is structural; implementation and campaign execution remain separate.",
   "authorized_work": [
     "isolated implementation and integration of the exact cross-account route",
@@ -49,8 +51,49 @@
     "other account pairs or global cross-account allowlist",
     "silent conversion to an existing from-zero operation"
   ],
-  "implementation_verified": false,
+  "implementation_verified": true,
   "campaign_publication_authorized_by_this_message": false,
   "campaign_writes_at_registration": 0,
-  "source": "discord:1185714635991679006/1565032671669919827/1571652369467445359"
+  "source": "discord:1185714635991679006/1565032671669919827/1571652369467445359",
+  "capability": {
+    "enabled": true,
+    "mode": "clone_cross_account_prestaged",
+    "authority_message_id": "1571652369467445359",
+    "source_account_id": "1034081997659047",
+    "target_account_id": "1481815942722118",
+    "policy_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+    "semantics": "source_derived_shell_local_seed_copy",
+    "runner": "scripts/ares-eggbev-target-clone.py",
+    "live_campaign_acceptance_verified": false,
+    "serving_verified": false,
+    "maintenance_canary_authorized": false
+  },
+  "advertiser_binding": {
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+    "token_identity": "Ana Cunha",
+    "token_user_id": "122147293515218951",
+    "meta_app_id": "953171080682697",
+    "app_key": "mgs-meta-app-953171080682697",
+    "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json",
+    "marketing_api_access_tier": "development_access"
+  },
+  "implementation_receipt": "data/ares/meta-ads/audit/maintenance/t_e524bad0/acceptance.json",
+  "remote_page_access_verified": false,
+  "technical_identity_validation": {
+    "status": "active",
+    "account_id": "1481815942722118",
+    "authorized_by_discord_id": "344196393512075265",
+    "authority_message_id": "1571652369467445359",
+    "allowed_reads": [
+      "me:id,name",
+      "debug_token:self_only"
+    ],
+    "expected_app_id": "953171080682697",
+    "scope": "Own approved advertiser credential metadata only; no asset enumeration, grants, credential replacement or Page ACL write"
+  },
+  "naming_scope": {
+    "policy": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+    "mode": "clone_cross_account_prestaged",
+    "scope": "Exact allowlisted cross-account request only; preserve other naming modes and accounts"
+  }
 }

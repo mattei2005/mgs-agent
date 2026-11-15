@@ -458,6 +458,22 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_cross_account_foreground_backup_exclusion(self):
+        base = "data/ares/meta-ads/audit/maintenance/t_e524bad0/"
+        ignored = [base + "foreground-before-install/tests/test_ares_credential_metadata.py",
+                   base + "foreground-before-install/scripts/ares_campaign_v3/engine.py"]
+        included = [base + "foreground-before-install-other/tests/test_ares_credential_metadata.py",
+                    base + "credentials.txt", base + "foreground_install.py",
+                    base.replace("t_e524bad0", "other") + "foreground-before-install/tests/test_ares_credential_metadata.py",
+                    "work/" + ignored[0], "tests/test_ares_credential_metadata.py"]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

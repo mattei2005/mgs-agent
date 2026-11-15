@@ -893,6 +893,28 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-recovery-706e2608cfdf1a3a60b7dfc5",
+      "agent": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "status": "correction_tested_awaiting_native_push",
+      "authority_message_id": "1569193434189668453",
+      "business_authority_message_id": "1571652369467445359",
+      "source_alert_id": "1571663883171795076",
+      "cause": "Foreground installation rollback source copies matched sensitive filenames before commit/push",
+      "exact_exclusion": "/data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-before-install/",
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/706e2608cfdf1a3a60b7dfc5/recovery-evidence.json",
+      "paths": [".gitignore", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py", "profiles/zeus-skills/ops/log-monitor-discord-alert/references/cron-autocommit-guardrails-2026-05-16.md"],
+      "tests_passed": {"paths": 14, "watcher": 40, "monitor": 17},
+      "preserved_files": 19,
+      "guard_unchanged": true,
+      "business_writer_preserved": true,
+      "manual_commit_or_push": false,
+      "watcher_restart": false,
+      "cron_changed": false,
+      "campaign_writes": false,
+      "rollback": "Remove only the exact new ignore rule and its regression methods; retain all local backup bytes"
+    },
+    {
       "id": "autopush-recovery-6a277a3d48b16fa9cf9b1dca",
       "agent": "zeus",
       "type": "autocommit_guardrail_recovery",
@@ -66334,6 +66356,63 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "storage-remainder-review-1571661469475672075",
+      "agent": "zeus",
+      "type": "bounded_readonly_metadata_dependency_duplicate_review",
+      "status": "review_completed_waiting_preservation_decision",
+      "updated_at": "2026-11-15T23:13:23.263619+00:00",
+      "authority_message_id": "1571661469475672075",
+      "source_thread_id": "1569928464033783862",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "evidence": "data/storage-remainder-review-1571661469475672075/review-result.json",
+      "roots": [
+        "/root/mgs-agent",
+        "/root/mgs-agent-backups",
+        "/root/zeus-vps-maintenance-1565730926233657347"
+      ],
+      "verification": {
+        "metadata_files": 367401,
+        "units": 2056,
+        "errors": 0,
+        "actual_hashes": 1213,
+        "duplicate_groups": 407,
+        "duplicate_potential_not_eligible_bytes": 498360320,
+        "processes_checked": 202,
+        "process_hits": 0,
+        "metadata_fixture": "PASS hardlink/symlink/external link",
+        "eligible_now_bytes": 0,
+        "deletions": 0,
+        "financial_or_database_operations": 0
+      },
+      "private_evidence": [
+        {
+          "path": "/root/.hermes/secure-backups/storage-remainder-review-1571661469475672075/duplicate-and-reference-ledger.json.gz",
+          "sha256": "90a80d9ba7b86548a5425982e5ddf55644c5fb58f613be5bd3671244153a082b",
+          "allocated_bytes": 634880
+        },
+        {
+          "path": "/root/.hermes/secure-backups/storage-remainder-review-1571661469475672075/metadata.jsonl.gz",
+          "sha256": "050a85b2166fb601a2ce82cb00303f33cb4d0465f51ce9cf6e81fb1d3886392e",
+          "allocated_bytes": 10104832
+        }
+      ],
+      "proposal": {
+        "path": "data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
+        "files": 5,
+        "occupied_bytes": 1547153408,
+        "authorized": false,
+        "archive_created": false,
+        "originals_will_remain": true
+      },
+      "whole_disk_review_complete": false,
+      "result_sha256": "247a58dc4fdedce829800e032b9862500b2dcf62d25fca4d395190dba26e3084",
+      "report_infra": {
+        "message_id": "1571664446894383146",
+        "channel_id": "1498132022634483894",
+        "readback_verified": true
+      }
     }
   ],
   "profile_skill_references": [

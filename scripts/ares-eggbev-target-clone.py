@@ -210,7 +210,7 @@ def source_rematerialization(source):
     return result
 
 
-def build(q,source,page,selected,registry,allocation):
+def build(q,source,page,selected,registry,allocation,*,account_id=ACCOUNT,mode=MODE):
     resolved_source=source_rematerialization(source)
     campaign={k:copy.deepcopy(source['campaign'][k]) for k in ['objective','buying_type','bid_strategy','special_ad_categories','special_ad_category_country']}
     minor=Decimal(q['daily_budget_usd'])*100
@@ -220,16 +220,21 @@ def build(q,source,page,selected,registry,allocation):
     adset={k:copy.deepcopy(source_set[k]) for k in keys if k in source_set};adset['promoted_object']['page_id']=page['id']
     ads=[]
     for i,(asset,original,(cta,source_creative)) in enumerate(zip(selected,source['ads'],resolved_source),1):
-        media=registry.require_ready(ACCOUNT,asset['asset_id'],asset['clean_checksum'])
+        media=registry.require_ready(account_id,asset['asset_id'],asset['clean_checksum'])
         prefix=hashlib.sha256((q['request_id']+str(i)).encode()).hexdigest()[:14]
-        payload=_creative_payload(media=media,page_id=page['id'],instagram_user_id=page['instagram_user_id'],page_token=page['page_token'],label_prefix='target_'+prefix,primary_text=q['copy']['primary_text'],headlines=[q['copy']['headline']],description=q['copy']['description'],cta=cta)
+        primary=q['copy']['primary_text']
+        if mode=='clone_cross_account_prestaged':
+            from ares_campaign_v3.eggbev_cross_account import primary_text
+            primary=primary_text(source_creative)
+        headlines=q['copy']['headlines'] if mode=='clone_cross_account_prestaged' else [q['copy']['headline']]
+        payload=_creative_payload(media=media,page_id=page['id'],instagram_user_id=page['instagram_user_id'],page_token=page['page_token'],label_prefix='target_'+prefix,primary_text=primary,headlines=headlines,description=q['copy']['description'],cta=cta)
         for key in ['degrees_of_freedom_spec','contextual_multi_ads']:
             if key in source_creative:payload[key]=copy.deepcopy(source_creative[key])
             else:payload.pop(key,None)
         source_tags=source_creative.get('url_tags') or ''
         payload['url_tags']=re.sub(r'(^|&)utm_campaign=pg_[0-9]+(?=&|$)',lambda match:match.group(1)+'utm_campaign='+page['page_token'],source_tags,count=1)
         ads.append({'name':f'AD {i:02d} - {Path(asset["canonical_filename"]).stem}','source_ad_id':original['id'],'media':{k:media[k] for k in ['asset_id','checksum','vertical_video_id','square_video_id','ready','upload_edge','association_verified']},'creative_payload':payload})
-    return {'schema_version':3,'request_id':q['request_id'],'operation':q['operation'],'graph_version':'v26.0','created_at':datetime.now(timezone.utc).isoformat(),'campaigns':[{'idempotency_key':q['request_id']+'-1','app_key':load(CONFIG)['accounts'][ACCOUNT]['app_key'],'account_id':ACCOUNT,'mode':MODE,'source_campaign_id':source['campaign']['id'],'source_adset_id':source_set['id'],'campaign_create':campaign,'adset_create':adset,'adset_name':'ADGROUP 01','name':allocation['names'][0],'start_time':q['start_time'],'status':'ACTIVE','ads':ads}]}
+    return {'schema_version':3,'request_id':q['request_id'],'operation':q['operation'],'graph_version':'v26.0','created_at':datetime.now(timezone.utc).isoformat(),'campaigns':[{'idempotency_key':q['request_id']+'-1','app_key':load(CONFIG)['accounts'][account_id]['app_key'],'account_id':account_id,'mode':mode,'source_campaign_id':source['campaign']['id'],'source_adset_id':source_set['id'],'campaign_create':campaign,'adset_create':adset,'adset_name':'ADGROUP 01','name':allocation['names'][0],'start_time':q['start_time'],'status':'ACTIVE','ads':ads}]}
 
 def prepare(path,confirm=False):
     if not confirm:raise ValueError('prepare requires --confirm-prepare')
@@ -432,6 +437,9 @@ def finalize(path,approved_digest=None,approval_message_id=None):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize','check-continuation','recover-media']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
+    if load(a.input).get('target_account_id')=='1481815942722118':
+        from ares_campaign_v3.eggbev_cross_account import dispatch
+        print(json.dumps(dispatch(a,sys.modules[__name__]),ensure_ascii=False,indent=2));return
     if a.command=='recover-media' or (a.command=='finalize' and (a.input.parent/'media-recovery'/'verified.json').exists()):
         from ares_campaign_v3 import target_media_recovery as recovery
         runner=sys.modules[__name__]

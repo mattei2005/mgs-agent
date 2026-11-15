@@ -19,7 +19,11 @@ class CredentialMetadataTests(unittest.TestCase):
  def test_foreign_token_denied(self):
   with self.assertRaises(scope.ScopeError):self.enforce('debug_token',{'input_token':'synthetic-other-token'})
  def test_other_account_denied(self):
-  with self.assertRaises(scope.ScopeError):self.enforce(account='1481815942722118')
+  # Account03 now has its own separately authorized grant. This fixture tests
+  # absence of that grant, not the superseded assumption it can never exist.
+  from ares_campaign_v3 import eggbev_cross_account as cross
+  with patch.object(cross,'POLICY',Path(self.tmp.name)/'absent-cross-grant.json'):
+   with self.assertRaises(scope.ScopeError):self.enforce(account='1481815942722118')
  def test_missing_grant_denied(self):
   self.policy.write_text('{}')
   with self.assertRaises(scope.ScopeError):self.enforce()

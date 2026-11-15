@@ -79,7 +79,7 @@
   },
   "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
   "prior_profile_retirement_authority_message_id": "1571250965313486889",
-  "implementation_status": "EGGBEV01_CUTOVER_READBACK_VALIDATED_OTHER_ACCOUNTS_PENDING",
+  "implementation_status": "EGGBEV01_AND03_BINDINGS_INSTALLED_03_REQUESTED_PAGE_GATE_REQUIRED",
   "page_model": {
     "authority_message_id": "1571266743157002423",
     "authority_live_verified": true,
@@ -165,7 +165,7 @@
     "page_identity_required_in_director_thread_now": false,
     "no_campaign_created_by_this_handoff": true
   },
-  "next_step": "Eggbev01 integration installed; preparation of the preserved Viewer Loan request belongs to dependent owner and requires final summary OK before campaign execution. Eggbev02/03 unchanged; no automatic onboarding or fallback.",
+  "next_step": "Eggbev03 exact cross-account capability installed; fresh requested Page/source/media readiness and final summary OK remain. Eggbev02 unchanged; no new credential or permissions.",
   "excluded": [
     "remote permission changes",
     "new app allowlist or guard bypass without explicit authorization",
@@ -176,7 +176,8 @@
   ],
   "source": "discord:1185714635991679006/1571249921242435695/1571262328715088024",
   "runtime_bindings_changed_scope": [
-    "1034081997659047"
+    "1034081997659047",
+    "1481815942722118"
   ],
   "account_runtime_bindings": {
     "1034081997659047": {
@@ -185,6 +186,15 @@
       "app_key": "mgs-meta-app-953171080682697",
       "readback": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
       "tier": "development_access"
+    },
+    "1481815942722118": {
+      "app_id": "953171080682697",
+      "token_identity": "Ana Cunha",
+      "app_key": "mgs-meta-app-953171080682697",
+      "readback": "data/ares/meta-ads/audit/maintenance/t_e524bad0/live-target-readback.json",
+      "tier": "development_access",
+      "Page_readiness_verified": false,
+      "capability_authority": "1571652369467445359"
     }
   },
   "current_runtime_app_fields_scope": "Legacy default for not-yet-migrated accounts; account_runtime_bindings is authoritative for installed per-account exceptions.",

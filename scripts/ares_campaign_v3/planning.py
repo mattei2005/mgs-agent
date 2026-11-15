@@ -291,7 +291,7 @@ class Planner:
                 legacy_pure_clone = mode == "pure_clone" and all(not campaign.ads for campaign in chunk)
                 if mode == "pure_clone" and not (tracking_aware_pure_clone or legacy_pure_clone):
                     raise ValueError("a pure_clone bundle cannot mix legacy deep-copy and tracking-aware routes")
-                if mode == "clone_target_prestaged":
+                if mode in {"clone_target_prestaged", "clone_cross_account_prestaged"}:
                     from .target_page_clone import stages as target_stages
                     stages = (*target_stages(chunk), self._readback_placeholders(chunk))
                     outer_write_calls = 7

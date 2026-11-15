@@ -1413,12 +1413,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV03-CROSS-1571623835822858352",
-      "next_step": "Concluir instalacao/testes e aceitar receipts; avancar mesmo pedido pelas verificacoes/preparacao e gates finais reais ate execucao/readback/postprocess terminal. Dono existente avisa somente conclusao real nesta thread com Iris/AdOps; decisao nova indispensavel e unica excecao ao silencio intermediario. Nao pedir novamente estrutura/budget/ASAP.",
-      "objective": "Executar5 clones Moorcroft303 Eggbev01->03,15 videos Nicolas,USD35/camp e ASAP; aviso de conclusao nesta origem",
-      "source": "data/ares/meta-ads/requests/eggbev03-cross-account-1571623835822858352.json;data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
-      "state": "implementation_in_progress_execution_requested. ceo1571655254162800732 autenticado ordenou execute agora e avise quando terminar aqui. request guarda execution_instruction/completion_delivery. integrador t_e524bad0 em implementacao staged; entrega t_26342647 continua mesmo owner e dependente do aceite. sem novo writer ou cron. ordem comercial nao fabrica ok de futuro manifest; gate final preservado.",
+      "next_step": "Perguntar somente disposicao sobre suspender recuperacao automatica anterior ViewerLoan sem alterar objetos remotos;autorizacao comercial/tecnica atuais nao cancelam outro pedido. Apos decisao, reconciliar/retirar so hold canonico e continuar MESMO request foreground. Nao retomar background,nem criar outro executor/notifier. Depoispreflight fonte/Page/midia,selarresumo/OK obrigatorio,execute/finalize/readback/Usados e conclusao Iris.",
+      "objective": "Concluir5 clones Moorcroft303 Eggbev01->03 em foreground visivel,15 videos,USD35/camp e ASAP",
+      "source": "data/ares/meta-ads/requests/eggbev03-cross-account-1571623835822858352.json;data/ares/meta-ads/audit/maintenance/t_e524bad0/acceptance.json",
+      "state": "foreground_blocked_source_coordination. background reclaim e despacho estacionados; zero workers em execucao. 23arquivos instalados com backup/cas/hashes.451/451 testes instalados passaram;engine64pass/10falhas baseline identicas. acesso03/ana/m6 e moorcroft/pbia reconfirmados live. prepare real central bloqueou leitura01 antes de reserva/upload/write. lease07h do viewerloan preservada byte-identical;nicolas1571551009858265191 informou correcao manual15h42,mas nao ha suspensao/completion canonica.23pins/acceptance comprovados. skill do motor atualizada/readback3checks;zero campanhas deste pedido.",
       "thread_id": "1565032671669919827",
-      "updated_at": "2026-11-15T22:38:31+00:00"
+      "updated_at": "2026-11-15T23:12:08+00:00"
     },
     {
       "agent": "ares",
@@ -3280,6 +3280,16 @@
       "state": "delegation_applied_inspection_completed_openzed_active_cliquet_preexisting_inactive_live_checks_verified",
       "thread_id": "1565555821188878377",
       "updated_at": "2026-10-30T17:29:22+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "AUTOMATION-RECOVERY-706e2608cfdf1a3a60b7dfc5",
+      "next_step": "Validar flush/push natural do PID2640095, HEAD GitHub, monitor canônico e REPORT-INFRA GET; devolver ao supervisor para verificação independente",
+      "objective": "Recuperar o mesmo auto-push bloqueado por backup local da manutenção Ares, sem tocar negócio",
+      "source": "discord:1571663883171795076;authority:1569193434189668453;business:1571652369467445359;runs/706e2608cfdf1a3a60b7dfc5",
+      "state": "correcao_testada_aguardando_writer_nativo:exclusao_ancorada_foreground-before-install;14paths+40watcher+17monitorpass;19arquivos_preservados;sem_restart_commit_push_manual",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-15T23:16:36+00:00"
     },
     {
       "agent": "zeus",
@@ -6638,22 +6648,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REMAINDER-1571661469475672075",
-      "next_step": "Inventariar em metadados roots remanescentes5 e dados/work6; persistir ledger, classificar ativos/recuperacao/sobras e validar somente lotes independentes. Nao repetir lotes encerrados nem alterar caches/Git/retencao.",
-      "objective": "Revisar restantes de manutencao e trabalho: ocupacao, consumidores, recuperacao e descartabilidade; zero delete por este Continue.",
-      "source": "discord:1569928464033783862/1571661469475672075;context/storage-reorganization-20261112.md",
-      "state": "in_progress_readonly_classification",
+      "next_step": "Levantamento367401files/2056unidadesPASS0erro;0delete/0novoeligivel. Potencialduplicado475.27MiBnaocertificado;import_snapshot+SHAconsumemfontehistorica. Proposta5capturas1.44GiBpreservarcompacto privado com validacao integral,sem apagar originais,aguarda decisao. Parent5-8aberto.",
+      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
+      "state": "review_completed_waiting_preservation_decision",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T23:02:35+00:00"
+      "updated_at": "2026-11-15T23:13:23+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lotebackup2alvos encerrado e validado1571654863576891465;nenhuma confirmacao destrutiva pendente. Proximo:classificar restantes5manutencao/configs e6dados/trabalhos,7caches,8Git/recorrencia;sem novo delete autorizado. Nao encerrar revisao global por este lote.",
-      "objective": "Revisao exaustiva da ocupacao inutil com recuperacao e operacao preservadas; fechamento do lote confirmado separado do parent.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json",
-      "state": "in_progress_remaining_categories_5_to_8",
+      "next_step": "Nova revisao read-only1571661469475672075 concluida no recorte:50.34GiBmetadados/227work2.88GiB/maintenance105.61MiB;475.27MiBduplicatasnaoprontas. Gate:autorizarpreservacaocompacta5capturas1.44GiBsemdelete;semcancelarretiradaglobal.7caches/8Gitrecorrenciaabertos;naorepetirlotesencerrados.",
+      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
+      "state": "awaiting_preservation_decision_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T22:38:29+00:00"
+      "updated_at": "2026-11-15T23:13:23+00:00"
     },
     {
       "agent": "zeus",
@@ -6708,12 +6718,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Lote2alvos encerrado fontecleanup-result revalidated-1571653126639849513;nao executar freezes antigos nem pedir confirmacao. Preservar demais pacotes/configs sem cobertura. Proxima revisao somente leitura do restante5 e dados/trabalhos6;7-8abertos.",
-      "objective": "Revisao exaustiva da ocupacao inutil com recuperacao e operacao preservadas; fechamento do lote confirmado separado do parent.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json",
-      "state": "in_progress_remaining_classification",
+      "next_step": "Restantes legacymanutenção105.61MiBpreservadosporrollback/configsemcoberturaintegralcertificada. Trabalho6:proposta5capturas1.44GiBpreservarcompacto;aguardadecisao1571661469475672075.0delete/0loteready;5-8globaisabertos. Fonte nova review-result.",
+      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
+      "state": "reviewed_preservation_proposal_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T22:38:29+00:00"
+      "updated_at": "2026-11-15T23:13:23+00:00"
     },
     {
       "agent": "zeus",
@@ -10827,5 +10837,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T23:02:35+00:00"
+  "updated_at": "2026-11-15T23:16:36+00:00"
 }

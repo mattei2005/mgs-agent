@@ -5,26 +5,55 @@
   "creation_naming_policy": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
   "future_creation_adset_name": "ADGROUP 01",
   "operation": "Eggbev-US-CC-EN-BOT",
-  "status": "registered_fail_closed_page_access_pending",
+  "status": "installed_guarded_request_scoped",
   "account_id": "1481815942722118",
   "account_alias": "Eggbev-US-CC-EN-03",
-  "app_key": "mgs-meta-app-1299247318762949",
-  "meta_app_id": "1299247318762949",
-  "token_item": null,
+  "app_key": "mgs-meta-app-953171080682697",
+  "meta_app_id": "953171080682697",
+  "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
   "credential_model": "advertiser-profile individual User Access Token, exact source Page access required before binding",
   "timezone": "America/New_York",
   "currency": "USD",
   "graph_version": "v26.0",
-  "thread_ids": {"campaign_creation": "1565032671669919827", "campaign_cloning": "1565032671669919827"},
-  "supported_modes": [],
-  "requested_modes_pending_readiness": ["pure_clone"],
-  "ad_serving_route": null,
-  "write_enabled": false,
-  "activation_enabled": false,
+  "thread_ids": {
+    "campaign_creation": "1565032671669919827",
+    "campaign_cloning": "1565032671669919827"
+  },
+  "supported_modes": [
+    "clone_cross_account_prestaged"
+  ],
+  "requested_modes_pending_readiness": [
+    "pure_clone"
+  ],
+  "ad_serving_route": "lineage_required_for_new_media",
+  "write_enabled": true,
+  "activation_enabled": true,
   "final_summary_and_ok_required": true,
   "immediate_start_authority_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json#/authority",
-  "immediate_start_request_ids": [],
+  "immediate_start_request_ids": [
+    "eggbev03-cross-account-1571623835822858352"
+  ],
   "recurring_automation_enabled": false,
-  "blocked_reason": "Account and exact source hierarchy are readable, but the correct advertiser profile with Page 1306762309190521 access is not identified; both existing Eggbev candidates returned code 10 on direct Page GET. No production or technical canary write is authorized by onboarding alone.",
-  "read_only_evidence": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
+  "blocked_reason": "Not a blanket write release: exact source reader, requested Page/PBIA, media, sealed summary and subsequent explicit OK remain mandatory.",
+  "read_only_evidence": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585",
+  "token_identity": "Ana Cunha",
+  "token_user_id": "122147293515218951",
+  "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json",
+  "marketing_api_access_tier": "development_access",
+  "media_upload_enabled": true,
+  "runner": "scripts/ares-eggbev-target-clone.py",
+  "cross_account_clone": {
+    "enabled": true,
+    "mode": "clone_cross_account_prestaged",
+    "authority_message_id": "1571652369467445359",
+    "source_account_id": "1034081997659047",
+    "target_account_id": "1481815942722118",
+    "policy_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
+    "semantics": "source_derived_shell_local_seed_copy",
+    "runner": "scripts/ares-eggbev-target-clone.py",
+    "live_campaign_acceptance_verified": false,
+    "serving_verified": false,
+    "maintenance_canary_authorized": false
+  },
+  "live_campaign_acceptance_verified": false
 }

@@ -4,16 +4,26 @@
   "creation_naming_policy": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
   "naming_policy_scope_note": "prospective naming only; onboarding, credential and write-readiness remain unchanged",
   "engine_operation": "Eggbev-US-CC-EN-BOT",
-  "status": "onboarding_read_only_validated_page_access_pending",
-  "strategy_binding": {"family_id": "chatpion_bot_messenger", "contract": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json"},
-  "account": {"account_id": "1481815942722118", "operational_name": "Eggbev-US-CC-EN-03", "account_contract": "data/ares/meta-ads/accounts/1481815942722118.json"},
+  "status": "cross_account_capability_installed_remote_Page_readiness_required",
+  "strategy_binding": {
+    "family_id": "chatpion_bot_messenger",
+    "contract": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json"
+  },
+  "account": {
+    "account_id": "1481815942722118",
+    "operational_name": "Eggbev-US-CC-EN-03",
+    "account_contract": "data/ares/meta-ads/accounts/1481815942722118.json"
+  },
   "country": "US",
   "vertical": "CC",
   "language": "EN",
   "site_host": null,
   "currency": "USD",
   "timezone": "America/New_York",
-  "owners": ["Rodolfo Mattei", "Nicolas Holanda"],
+  "owners": [
+    "Rodolfo Mattei",
+    "Nicolas Holanda"
+  ],
   "authority": {
     "status": "active",
     "authorized_by_discord_id": "344196393512075265",
@@ -23,32 +33,65 @@
     "account_id": "1481815942722118",
     "authorized_manager_discord_id": "1055570806945620030",
     "authorized_manager": "Nicolas Holanda",
-    "scope": ["campaign budget selection and exact-value writes", "campaign creation, clone and duplication requests", "per-request campaign activation including explicit immediate start", "separate operational onboarding of this account"],
-    "required_controls": ["explicit request", "exact budget and currency", "live scoped preflight", "correct advertiser identity and Page access", "sealed manifest and plan", "final summary and explicit request OK", "central Engine v3 only", "Meta readback"],
-    "excluded": ["billing", "account_spend_limit", "credential changes", "app or asset permission changes", "automatic scaling", "recurring automation", "other accounts"]
+    "scope": [
+      "campaign budget selection and exact-value writes",
+      "campaign creation, clone and duplication requests",
+      "per-request campaign activation including explicit immediate start",
+      "separate operational onboarding of this account"
+    ],
+    "required_controls": [
+      "explicit request",
+      "exact budget and currency",
+      "live scoped preflight",
+      "correct advertiser identity and Page access",
+      "sealed manifest and plan",
+      "final summary and explicit request OK",
+      "central Engine v3 only",
+      "Meta readback"
+    ],
+    "excluded": [
+      "billing",
+      "account_spend_limit",
+      "credential changes",
+      "app or asset permission changes",
+      "automatic scaling",
+      "recurring automation",
+      "other accounts"
+    ]
   },
   "engine_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json",
-  "supported_modes": [],
+  "supported_modes": [
+    "clone_cross_account_prestaged"
+  ],
   "cross_account_clone_implementation_authority": {
     "policy_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
     "authority_message_id": "1571652369467445359",
     "source_account_id": "1034081997659047",
     "target_account_id": "1481815942722118",
-    "status": "authorized_implementation_pending",
-    "capability_enabled": false,
+    "status": "active",
+    "capability_enabled": true,
     "publication_approval_required_separately": true
   },
-  "requested_modes_pending_readiness": ["pure_clone", "cross_account_clone_with_new_media"],
+  "requested_modes_pending_readiness": [
+    "pure_clone",
+    "cross_account_clone_with_new_media"
+  ],
   "advertiser_profile_selection_policy": "data/ares/meta-ads/policies/eggbev-advertiser-profile.json",
   "advertiser_profile_selection_note": "Ana Cunha/minibot m6 approved. Rodolfo 1571266743157002423 authorizes current/future Pages linked to Ana without BM import or another Page-scope approval. Historical source Page denial does not globally block the new advertiser; a clone preserving that exact old Page still needs its actual access. New requested Page must be resolved and verified individually; runtime cutover/campaign readiness not yet completed.",
   "credential_model": "exact advertiser-profile individual User Access Token; never System User or another advertiser fallback",
-  "token_item": null,
-  "advertiser_identity": null,
-  "write_enabled": false,
-  "activation_enabled": false,
-  "media_upload_enabled": false,
+  "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+  "advertiser_identity": "Ana Cunha",
+  "write_enabled": true,
+  "activation_enabled": true,
+  "media_upload_enabled": true,
   "recurring_automation_enabled": false,
-  "routes": {"campaign_creation": "1565032671669919827", "campaign_cloning": "1565032671669919827", "daily_reporting": "1565032126137503759", "campaign_warmup": "1565032888347664495", "rules": "1541578622106865815"},
+  "routes": {
+    "campaign_creation": "1565032671669919827",
+    "campaign_cloning": "1565032671669919827",
+    "daily_reporting": "1565032126137503759",
+    "campaign_warmup": "1565032888347664495",
+    "rules": "1541578622106865815"
+  },
   "source_binding_authority": "1565033323808424127",
   "internal_note_policy": "FAX-US-02 is an internal observation only, not an operational alias; correction authority 1565034226951131249",
   "readiness": {
@@ -60,9 +103,41 @@
     "source_adset_count": 1,
     "source_ad_count": 3,
     "page_access_verified": false,
-    "reason": "Existing Eggbev advertiser candidates can read account03 but direct GET of the source Page fails with Meta code 10; no suitable advertiser binding is proven. This does not prove the token lacks a permission scope.",
-    "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
+    "reason": "Exact requested Page live read must pass; source reader exclusion respected. Historical other-Page denials are not a global grant conclusion.",
+    "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585",
+    "historical_other_Page_evidence": {
+      "account_live_verified": true,
+      "business_id_verified": "155263197283282",
+      "source_campaign_live_verified": "120250674979590507",
+      "source_page_id": "1306762309190521",
+      "source_page_token": "pg_23150",
+      "source_adset_count": 1,
+      "source_ad_count": 3,
+      "page_access_verified": false,
+      "reason": "Existing Eggbev advertiser candidates can read account03 but direct GET of the source Page fails with Meta code 10; no suitable advertiser binding is proven. This does not prove the token lacks a permission scope.",
+      "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
+    },
+    "requested_page_token": "pg_23187",
+    "requested_page_id_candidate": "1272524399287905",
+    "maintenance_evidence": "data/ares/meta-ads/audit/maintenance/t_e524bad0/live-target-readback.json"
   },
-  "unset_not_inherited": ["advertiser credential", "Pages other than the read-only source reference", "UTM defaults", "copy templates", "Messenger JSON defaults", "naming defaults", "start-time defaults", "thresholds", "guardrail state", "schedules", "denylist state", "baselines", "performance", "source-account write flags"],
-  "next_step": "Consult advertiser_profile_selection_policy and its page_model. Resolve actual Ana-linked Page for the requested campaign without BM import or blanket historical Page access. If request preserves old source Page, validate that exact Page separately; otherwise do not force its grant. Complete same-account credential consumer cutover/capabilities without inheriting account01 readiness or reusing retired advertisers; write/activation remain disabled pending existing onboarding gates."
+  "unset_not_inherited": [
+    "advertiser credential",
+    "Pages other than the read-only source reference",
+    "UTM defaults",
+    "copy templates",
+    "Messenger JSON defaults",
+    "naming defaults",
+    "start-time defaults",
+    "thresholds",
+    "guardrail state",
+    "schedules",
+    "denylist state",
+    "baselines",
+    "performance",
+    "source-account write flags"
+  ],
+  "next_step": "Same central prepare --input preserved request --confirm-prepare. No campaign writes; gate may defer source reader or report exact requested Page access. Delivery owner posts sealed full summary including15 preserved PAUSED seeds and awaits subsequent explicit OK.",
+  "meta_app_id": "953171080682697",
+  "write_scope_note": "Exact request-specific capability only; fresh Page/advertiser/source/media gates and subsequent final summary OK required. Installation is not Page access, publication or serving proof."
 }

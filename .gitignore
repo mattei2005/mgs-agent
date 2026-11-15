@@ -179,3 +179,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Preserve local staging and business ownership; evidence siblings remain visible.
 /data/ares/meta-ads/audit/maintenance/t_e524bad0/staged/
 
+# Reconciled rollback copies from the same foreground maintenance installation.
+# Keep local bytes and sibling evidence; never relax the sensitive-name guard.
+/data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-before-install/
+

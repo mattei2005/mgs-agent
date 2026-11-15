@@ -1,0 +1,70 @@
+{
+  "status": "read_only_review_delivered_preservation_proposal_pending",
+  "authority_message_id": "1571661469475672075",
+  "scope": "Bounded repository sources/work/data/reports plus two legacy maintenance/site-backup roots; not whole VPS",
+  "roots": [
+    "/root/mgs-agent",
+    "/root/mgs-agent-backups",
+    "/root/zeus-vps-maintenance-1565730926233657347"
+  ],
+  "metadata_unit_count": 2056,
+  "metadata_regular_files": 367401,
+  "metadata_directories": 25569,
+  "metadata_symlinks": 351,
+  "metadata_scan_errors": 0,
+  "unique_occupied_bytes": 54049128448,
+  "unique_occupied_GiB": 50.34,
+  "category_bytes": {
+    "repository_sources_configuration_or_evidence": 859533312,
+    "operational_recovery_sets": 4960751616,
+    "historical_working_material": 3096596480,
+    "local_application_code_and_historical_recovery": 34609561600,
+    "operational_and_transaction_evidence": 4576886784,
+    "operational_ledgers_and_evidence": 5835063296,
+    "legacy_site_or_system_recovery": 110735360
+  },
+  "working_directories_count": 227,
+  "working_directories_allocated_bytes": 3096596480,
+  "legacy_maintenance_site_allocated_bytes": 110735360,
+  "content_hashes_checked": 1213,
+  "content_hash_metadata_stability_verified": true,
+  "duplicate_groups": 407,
+  "duplicate_potential_upper_bound_bytes": 498360320,
+  "duplicate_potential_MiB": 475.27,
+  "duplicate_potential_not_disposal_proof": true,
+  "processes_checked": 202,
+  "process_reference_hits": 0,
+  "executable_dependency_detected": "apps/finance-system/import_snapshot.py verifies every SHA256SUMS member and reads retained finance-final-reaudit source path; verification/test helpers import the audit module.",
+  "checksum_coupled_duplicate_detected": "finance-final-reaudit/final/principal.json is listed in SHA256SUMS.json; preserve the exact layout.",
+  "postgres_cluster_roots_detected": 34,
+  "database_clusters_started_or_opened": 0,
+  "financial_semantics_audited": false,
+  "current_application_release_or_financial_data_changed": false,
+  "preservation_proposal_files": 5,
+  "preservation_proposal_occupied_bytes": 1547153408,
+  "preservation_proposal_occupied_GiB": 1.44,
+  "eligible_now_files": 0,
+  "eligible_now_bytes": 0,
+  "archive_or_migration_created": false,
+  "deletions": 0,
+  "actual_reclaimed_bytes": 0,
+  "whole_vps_coverage_claimed": false,
+  "whole_disk_review_complete": false,
+  "next_gate": "Owner decision on private lossless preservation of exactly five large historical audit captures; not a deletion approval. Keep other working data and checksum-coupled sources intact.",
+  "at": "2026-11-15T23:11:07.077775+00:00",
+  "private_evidence": [
+    {
+      "path": "/root/.hermes/secure-backups/storage-remainder-review-1571661469475672075/duplicate-and-reference-ledger.json.gz",
+      "sha256": "90a80d9ba7b86548a5425982e5ddf55644c5fb58f613be5bd3671244153a082b",
+      "allocated_bytes": 634880
+    },
+    {
+      "path": "/root/.hermes/secure-backups/storage-remainder-review-1571661469475672075/metadata.jsonl.gz",
+      "sha256": "050a85b2166fb601a2ce82cb00303f33cb4d0465f51ce9cf6e81fb1d3886392e",
+      "allocated_bytes": 10104832
+    }
+  ],
+  "analysis_created_occupancy_not_reclaimed_bytes": 12754944,
+  "report_infra_message_id": "1571664446894383146",
+  "report_exact_readback_verified": true
+}

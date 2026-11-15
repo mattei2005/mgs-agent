@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "actual_inventory_execution": "PASS367401files0errors",
+  "duplicate_scan_actual_execution": "PASS1213hashes407groups",
+  "metadata_algorithm_fixture": {
+    "nodes": {
+      "directory": 3,
+      "file": 3,
+      "link": 1
+    },
+    "cross_unit_hardlinks_credited_once": true,
+    "external_hardlink_allocation_not_reclaim": true,
+    "symlink_not_followed": true,
+    "path": "/root/.hermes/profiles/zeus/cache/scratch/storage-remainder-fixture-tmqg2we3"
+  },
+  "source_scripts_compile": true,
+  "post_execution_script_changes": "Type annotations and explicit integer sort key only; fixture exercises the current collector algorithm.",
+  "deletions": 0
+}

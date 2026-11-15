@@ -281,7 +281,11 @@ def run(engine,bundle,transport,record):
     record['seed_ad_ids']=[ids[f'seed_ad_id_{ci}_{ai}'] for ci,c in enumerate(bundle.campaigns,1) for ai in range(1,len(c.ads)+1)]
     record['creative_ids']=[ids[f'creative_id_{ci}_{ai}'] for ci,c in enumerate(bundle.campaigns,1) for ai in range(1,len(c.ads)+1)]
     record['created_children']=len(record['ad_ids']);record['stage']='children_created_readback_pending';_save()
-    results=engine._batch(bundle,transport,engine._readback_ops(campaign_ids),'consolidated_readback')
+    ops=engine._readback_ops(campaign_ids)
+    if bundle.campaigns[0].mode=='clone_cross_account_prestaged':
+        from .eggbev_cross_account import readback_ops
+        ops=readback_ops(ops)
+    results=engine._batch(bundle,transport,ops,'consolidated_readback')
     record['readback_results']=[{'name':x.name,'code':x.code,'body':x.body} for x in results]
     try:
         verify(bundle,record)
@@ -331,3 +335,6 @@ def verify(bundle,record):
             installed=actual.get('additional_data',{}).get('page_welcome_message')
             if (json.loads(installed) if isinstance(installed,str) else installed) != json.loads(messenger_welcome_message()):
                 raise ValueError('target installed JSON-AGT differs from canonical file')
+    if bundle.campaigns[0].mode=='clone_cross_account_prestaged':
+        from .eggbev_cross_account import verify_bundle
+        verify_bundle(bundle,record)

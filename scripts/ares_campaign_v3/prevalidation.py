@@ -121,6 +121,9 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             if set(policy['allowed_ad_counts']) != {1, 2, 3, 4, 5}:
                 raise ManifestError('cross-account explicit ad-count capability unavailable')
         required_operation = str(account.get("operation") or "").strip()
+        if campaign.mode == "clone_cross_account_prestaged":
+            from .eggbev_cross_account import validate_capability
+            validate_capability(manifest, config)
         if campaign.mode == "clone_target_prestaged":
             from .target_page_clone import validate_capability
             validate_capability(campaign, account, manifest.operation)

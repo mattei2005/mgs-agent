@@ -1,0 +1,21 @@
+# Eggbev — clone entre contas com mídia nova
+
+## Escopo e semântica
+
+Resolver autoridade e par origem/alvo em `data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json`, contratos da operação e config do Engine. A capability instalada `clone_cross_account_prestaged` é explícita e request-scoped: não habilita outras contas/pedidos nem é `from_zero_prestaged` ou cópia nativa entre contas. Preserva configurações lidas da fonte, cria shells derivados no alvo, sementes PAUSED locais e anúncios finais por cópia das sementes na mesma Page/conta. Identidades da fonte externa são referências READ_ONLY; `source_ad_id` final comprova linhagem local da semente, não prova social herdada.
+
+## Procedimento
+
+1. Conferir instalação/receipts/hashes e o estado real do request. Pré-stage somente no alvo exato. Antes de reservar mídia ou consultar a fonte, usar a coordenação de leitura da origem; lease de outro pedido não deve ser removida ou substituída por conveniência.
+2. Usar o runner central registrado: `ares-eggbev-target-clone.py prepare --input <request> --confirm-prepare`. Resolve perfil/app aprovados, conta e Page exatas via SB+Meta/PBIA, fonte, inventário, slots, reservas, naming, variantes e associação advideos. Prepare nunca publica campanha. Page Access Token fica somente em memória; a sondagem read-only não inicializa PBIA.
+3. Preservar Primary text da fonte inclusive quando explicitamente vazio. Ausência/ambiguidade do campo é distinta de texto vazio: nunca preencher por default. As headlines/descrição expressas e o JSON-AGT devem cobrir todos os anúncios.
+4. Conferir o manifest selado e resumo integral; informar anúncios finais e sementes técnicas PAUSED separadamente. Manter selo no receipt interno, sem impor digest bruto à mensagem humana. A aprovação deve ser posterior ao resumo e autenticada; uma ordem comercial antecipada não aprova um manifest futuro. Não transformar autorização de implementação em publicação.
+5. Sob aprovação válida, chamar `execute` com o mesmo input, digest e aprovação pela rota central. Falha preserva IDs/journal e requer readback-first. Não trocar modo, começar outro request ou renovar relógio de conjuntos já criados para contornar um gate.
+6. Concluir pelo `finalize` da mesma rota. O módulo `eggbev_cross_account_completion` exige readback fresco de todos os bundles, hierarquia/configurações, copy/Page/JSON/tracking/mídia/lineage e ausência de issues. Exige cardinalidade não vazia e exata; não deduz equivalência de IDs de vídeo derivados. Drift exige manutenção/recuperação especificamente suportada, sem enfraquecer o comparador.
+7. Inventário e controlador de Usados só avançam após a prova Meta. Verificar cada receipt `status=verified`, asset exato e `same_ids=true`; movimento parcial retoma somente finalize, sem recriar campanhas. Comprometer numeração/liberar lease apenas após cobertura completa. ACTIVE não comprova serving.
+
+## Aceite técnico
+
+Usar suítes de clone cross-account e completion com transporte fake em namespace sem rede e root produtivo read-only. Cobrir stock parcial/retry, issue Meta, deriva de mídia, seeds ativadas, IDs faltantes, vazio, imutabilidade e texto vazio. Rodar também regressão de contas/modos existentes. Fixtures antigas de identidade não podem assumir que uma conta com novo grant próprio permanece universalmente proibida: testar ausência do grant em fixture local, mantendo guard produtivo. Comparar falhas de baseline por identidade, sem somar reproduções red/repetições como novos testes de aceite.
+
+Instalação exige CAS/backup/hashes, novos testes sobre o código instalado e REPORT-INFRA silencioso com readback. Prova offline e acesso Page/conta não comprovam campanha publicada. Comunicação final segue paid-acquisition-operations, incluindo Iris/AdOps somente para a parte realmente concluída.

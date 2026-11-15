@@ -88,11 +88,12 @@ def _copied_id(result: BatchResult, *keys: str) -> str:
 
 
 class CampaignEngine:
-    def __init__(self, config: dict[str, Any], *, transport_factory: Callable[[str], Any]):
+    def __init__(self, config: dict[str, Any], *, transport_factory: Callable[[str], Any], read_only: bool = False):
         self.config = config
+        self.read_only = read_only
         self.transport_factory = transport_factory
         self.planner = Planner(bundle_size=int(config.get("bundle_size", 2)), max_ads_per_batch=int(config.get("max_ads_per_batch", 10)))
-        self.quota = LaneQuotaStore(
+        self.quota = None if read_only else LaneQuotaStore(
             config["state_root"],
             soft_score=int(config.get("soft_score", 100)),
             hard_score=int(config.get("hard_score", 120)),
@@ -100,7 +101,7 @@ class CampaignEngine:
             development_score_max=int(config.get("development_access_score_max", 60)),
             standard_score_max=int(config.get("standard_access_score_max", 9000)),
         )
-        self.writer_leases = AccountWriterLeaseStore(config["state_root"])
+        self.writer_leases = None if read_only else AccountWriterLeaseStore(config["state_root"])
         self.audit_root = Path(config["audit_root"])
         self._audit_lock = threading.Lock()
 
@@ -1617,7 +1618,7 @@ class CampaignEngine:
                 from .shein_reviewed_background import resolve_bundle
                 bundle = resolve_bundle(self, bundle, transport, record)
                 mode = bundle.campaigns[0].mode
-                if mode == "clone_target_prestaged":
+                if mode in {"clone_target_prestaged", "clone_cross_account_prestaged"}:
                     from .target_page_clone import run as run_target_clone
                     ids = run_target_clone(self, bundle, transport, record)
                 elif previous_failed is not None:
@@ -1709,6 +1710,9 @@ class CampaignEngine:
 
     @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
+        if self.read_only:raise EngineDisabled('read-only planner cannot execute')
+        from .eggbev_cross_account import require_execution as require_cross_execution
+        require_cross_execution(manifest,self.config)
         from .operator_suspension import deny_replay
         for campaign in manifest.campaigns:
             deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)

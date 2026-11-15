@@ -47,6 +47,7 @@ State/lanes      /root/mgs-agent/data/ares/meta-ads/engine-v3/state/
 3. Migração e rollback v2→v3 → `references/migration-v2-to-v3.md`.
 4. Pesquisa da Meta → `references/official-meta-sources.md`.
 5. Recuperar post existente com vídeos/variantes AFS → `references/existing-post-afs-recovery.md`.
+6. Eggbev entre contas com nova mídia → `references/eggbev-cross-account-clone.md`; capability e request exatos, sem tratar fonte externa como lineage local.
 
 Carregue somente a referência do branch atual.
 

@@ -27,11 +27,9 @@
         "campaign_warmup": "1565035308565667851",
         "campaign_cloning": "1569924446956027945"
       }
-    }
-  },
-  "onboarding_candidates": {
+    },
     "Eggbev-US-CC-EN-03-BOT": {
-      "status": "read_only_account_verified_source_Page_access_pending",
+      "status": "installed_guarded_exact_cross_account_request",
       "account_id": "1481815942722118",
       "channel_id": "1539422731727147079",
       "operation_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json",
@@ -43,10 +41,19 @@
         "rules": "1541578622106865815"
       },
       "authority_message_id": "1565068890860560585",
-      "write_enabled": false,
-      "activation_enabled": false,
-      "recurring_automation_enabled": false
-    },
+      "write_enabled": true,
+      "activation_enabled": true,
+      "recurring_automation_enabled": false,
+      "supported_modes": [
+        "clone_cross_account_prestaged"
+      ],
+      "media_upload_enabled": true,
+      "capability_authority": "1571652369467445359",
+      "runner": "scripts/ares-eggbev-target-clone.py",
+      "live_page_access_verified": false
+    }
+  },
+  "onboarding_candidates": {
     "financeadx-us-cc-en": {
       "status": "channel_prepared_no_workflow",
       "channel_id": "1544117442589106328"

@@ -58,6 +58,10 @@ Every writer claims a persisted per-account lease before preflight and keeps it 
 3. Compare runner, checkpoint e journal com GET dos pais e dos edges `/adsets` e `/ads`, em Graph Batch e com paginação conferida. Um bundle em `shells_normalized` com `ad_ids` ausente pode já ter anúncios externos; mapeie cada filho por pai, slot e definição aprovada antes de classificar algo como faltante. Guarde os IDs observados separadamente da lacuna do checkpoint, sem inventar conclusão do bundle ou repetir cópias.
 4. Retome somente depois de comprovar ausência de writer concorrente e admissão pela rota central. Se a retomada retornar `QUEUED`, diagnostique essa nova camada pelo job e pelas dependências; não interprete `campaign_writes=0` dessa tentativa como ausência dos writes anteriores. A coleta de IDs e o diagnóstico do gate não comprovam reparo, QA ou ativação.
 
+### Troca explícita para foreground
+
+Quando o operador exigir condução visível na conversa, superseder somente o transporte/ownership do pedido, preservando parâmetros e autoridade. Interromper os próximos efeitos do worker existente, estacionar o dependente para impedir despacho automático e usar reclaim canônico quando necessário; conferir ausência de processos-filhos e reconciliar staging, arquivos instalados, journal e efeitos antes de assumir. Uma mensagem de coordenação não comprova takeover. Continuar os comandos determinísticos em foreground na origem, com marcos reais curtos, sem criar outro worker, cron ou notificador. Nunca manter a execução oculta e apresentar polling como se fosse trabalho foreground. Reportar uma lacuna técnica descoberta na revisão e testá-la antes de instalar; suíte de criação isolada não prova fechamento de inventário.
+
 ### Diagnóstico de lease antes da preparação
 
 1. Ler somente `state/writer-leases/<account_id>.json` e projetar `request_id`, `status`, `blocks_readers` e timestamps antes de trabalho caro; consultar também o estado operacional indicado pelo contrato. Ausência de lock de processo não prova disponibilidade, pois a lease persiste entre tentativas.

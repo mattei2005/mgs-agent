@@ -74,7 +74,9 @@ def _dependency_for_node(node,data):
  if live and all(allowed_account(a,data) for a in live.get('account_ids',[])):
   # Cached Page provenance cannot hide a fresh, narrower same-account PBIA
   # metadata context. Conflicting provenance remains fail-closed.
-  if row and (row.get('source')!='scoped_graph_dependency' or row.get('kind')!='page' or not set(live['account_ids']).issubset(accounts)):raise ScopeError(DENY)
+  permitted_cached_source=live.get('authorized_cached_dependency_source_account')
+  exact_cross=(permitted_cached_source=='1034081997659047' and live.get('account_ids')==['1481815942722118'] and set(accounts)=={permitted_cached_source})
+  if row and (row.get('source')!='scoped_graph_dependency' or row.get('kind')!='page' or (not set(live['account_ids']).issubset(accounts) and not exact_cross)):raise ScopeError(DENY)
   return live
  if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts):return row
  return None
@@ -96,12 +98,19 @@ def _enforce_dependency(clean,params,method,row,data):
 
 CREDENTIAL_IDENTITY_POLICY=Path('/root/mgs-agent/data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json')
 
+def _credential_identity_policy(account_id):
+ if str(account_id)=='1481815942722118':
+  from ares_campaign_v3.eggbev_cross_account import policy,TARGET
+  p=policy('eggbev03-cross-account-1571623835822858352')
+  return {**p,'account_id':TARGET}
+ return json.loads(CREDENTIAL_IDENTITY_POLICY.read_text())
+
 def enforce_credential_metadata(path,params,method,account_id,authentication_token):
  """Approved own-credential metadata only; never an asset/discovery grant."""
  import hmac
  data=load_scope()
  if not allowed_account(account_id,data):raise ScopeError(DENY)
- try:policy=json.loads(CREDENTIAL_IDENTITY_POLICY.read_text())
+ try:policy=_credential_identity_policy(account_id)
  except (OSError,ValueError):raise ScopeError(DENY) from None
  grant=policy.get('technical_identity_validation',{})
  if policy.get('status')!='active' or policy.get('account_id')!=str(account_id) or grant.get('status')!='active' or grant.get('account_id')!=str(account_id) or grant.get('authorized_by_discord_id')!='344196393512075265' or not re.fullmatch(r'[0-9]{17,20}',str(grant.get('authority_message_id',''))):raise ScopeError(DENY)
@@ -119,7 +128,7 @@ def observe_credential_metadata(path,params,payload,account_id,authentication_to
  identity=payload if clean=='me' else payload.get('data',{})
  if clean=='me' and (not re.fullmatch(r'[0-9]{5,30}',str(identity.get('id',''))) or not isinstance(identity.get('name'),str)):raise ScopeError(DENY)
  if clean=='debug_token':
-  try:grant=json.loads(CREDENTIAL_IDENTITY_POLICY.read_text()).get('technical_identity_validation',{})
+  try:grant=_credential_identity_policy(account_id).get('technical_identity_validation',{})
   except (OSError,ValueError):raise ScopeError(DENY) from None
   expected_app=str(grant.get('expected_app_id',APP_ID))
   if not re.fullmatch(r'[0-9]{5,30}',expected_app) or not isinstance(identity,dict) or identity.get('is_valid') is not True or str(identity.get('app_id',''))!=expected_app or not re.fullmatch(r'[0-9]{5,30}',str(identity.get('user_id',''))):raise ScopeError(DENY)

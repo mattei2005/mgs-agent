@@ -12,8 +12,16 @@
   },
   "thread_projection_reconciliation_message_id": "1567979089896407112",
   "effective_at": "2026-11-05T18:19:14Z",
-  "account_ids": ["1034081997659047", "1001115192056600", "1481815942722118"],
-  "account_aliases": ["Eggbev-US-CC-EN-01", "Eggbev-US-CC-EN-02", "Eggbev-US-CC-EN-03"],
+  "account_ids": [
+    "1034081997659047",
+    "1001115192056600",
+    "1481815942722118"
+  ],
+  "account_aliases": [
+    "Eggbev-US-CC-EN-01",
+    "Eggbev-US-CC-EN-02",
+    "Eggbev-US-CC-EN-03"
+  ],
   "mode": "from_zero_prestaged",
   "minimum_global_number": 300,
   "pattern": "{global_number} - {exact_page_name} - ENG - US - ({pg_token}) - C{page_campaign_sequence:02d}",
@@ -42,7 +50,9 @@
     "authority_message_id": "1569923369284149249",
     "authorized_by_discord_id": "1055570806945620030",
     "source_thread_id": "1541578556037927053",
-    "account_ids": ["1034081997659047"],
+    "account_ids": [
+      "1034081997659047"
+    ],
     "intent": "Prospective duplications like the operator example: reuse a source campaign structure while explicitly replacing the destination Page, creative assets and copy.",
     "pattern_source": "pattern in this same canonical policy",
     "global_number": "next shared global number from the exact three-account history and the existing atomic ledger; do not reuse the source prefix",
@@ -56,6 +66,25 @@
   "reservation": "atomic shared ledger, request+account idempotency; live complete histories of all three and existing reservations prevent duplicates; no allocation without a real request",
   "ledger_path": "data/ares/meta-ads/state/eggbev-us-en-global-creation-numbers.json",
   "supersedes": "For future from-zero requests in this group only: per-Page stable numeric prefix, missing separator before C, C001 formatting and AdG1 default. Historical requests/manifests remain versioned.",
-  "preserved_gates": ["account scope and per-account operational readiness", "Page eligibility", "exact budget and authority", "media reconciliation", "manifest/plan/final OK", "credentials/permissions/billing", "Meta readback"],
-  "current_adset_rename_evidence": "data/ares/meta-ads/audit/eggbev/naming-1567964887353663610/adset-after.json"
+  "preserved_gates": [
+    "account scope and per-account operational readiness",
+    "Page eligibility",
+    "exact budget and authority",
+    "media reconciliation",
+    "manifest/plan/final OK",
+    "credentials/permissions/billing",
+    "Meta readback"
+  ],
+  "current_adset_rename_evidence": "data/ares/meta-ads/audit/eggbev/naming-1567964887353663610/adset-after.json",
+  "cross_account_replacement_extension": {
+    "status": "active",
+    "authority_message_id": "1571652369467445359",
+    "source_account_id": "1034081997659047",
+    "target_account_id": "1481815942722118",
+    "mode": "clone_cross_account_prestaged",
+    "allowed_request_ids": [
+      "eggbev03-cross-account-1571623835822858352"
+    ],
+    "scope": "Exact request only, same global/page sequence and ledger; supersedes no existing mode; no DUP suffix; source unchanged."
+  }
 }

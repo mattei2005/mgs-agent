@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
@@ -212,6 +213,7 @@ class CampaignSpec:
     start_intent: str = "SCHEDULED"
     bid_override: bool = False
     reference: dict[str, Any] = field(default_factory=dict)
+    cross_account_source: dict[str, Any] = field(default_factory=dict)
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
@@ -240,7 +242,7 @@ class CampaignSpec:
                 raise ManifestError('exact numeric reference identities required')
             if 'target_page_id' in reference and re.fullmatch(r'[1-9][0-9]+', str(reference['target_page_id'])) is None:
                 raise ManifestError('exact numeric target Page identity required')
-        if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged", "clone_target_prestaged"}:
+        if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged", "clone_target_prestaged", "clone_cross_account_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
@@ -264,8 +266,8 @@ class CampaignSpec:
         ads = tuple(
             AdSpec.from_dict(
                 item,
-                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch", "clone_target_prestaged"} or tracking_aware_pure_clone),
-                require_media=(mode in {"clone_prestaged", "from_zero_prestaged", "clone_target_prestaged"}),
+                require_source_lineage=(mode in {"clone_prestaged", "clone_page_switch", "clone_target_prestaged", "clone_cross_account_prestaged"} or tracking_aware_pure_clone),
+                require_media=(mode in {"clone_prestaged", "from_zero_prestaged", "clone_target_prestaged", "clone_cross_account_prestaged"}),
             )
             for item in (value.get("ads") or [])
         )
@@ -276,7 +278,7 @@ class CampaignSpec:
         adset_create = value.get("adset_create") or {}
         if not isinstance(campaign_create, dict) or not isinstance(adset_create, dict):
             raise ManifestError("campaign_create and adset_create must be objects")
-        if mode == "clone_target_prestaged":
+        if mode in {"clone_target_prestaged", "clone_cross_account_prestaged"}:
             if not source_campaign_id or not source_adset_id:
                 raise ManifestError("clone_target_prestaged requires exact source campaign/adset references")
         elif mode == "clone_prestaged":
@@ -433,11 +435,14 @@ class CampaignSpec:
             start_intent=start_intent,
             bid_override=bid_override,
             reference=reference,
+            cross_account_source=copy.deepcopy(value.get('cross_account_source') or {}),
         )
         from .shein_native_inheritance import require_shape
-        if mode == "clone_target_prestaged":
+        if mode in {"clone_target_prestaged", "clone_cross_account_prestaged"}:
             from .target_page_clone import validate_shape
             validate_shape(result)
+        from .eggbev_cross_account import validate_shape as validate_cross_shape
+        validate_cross_shape(result)
         try:
             require_shape(result)
             from .shein_reference_destination import require_shape as require_reference_shape
