@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "test_count": 8,
+  "tests": [
+    {
+      "case": "real_preflight",
+      "result": {
+        "status": "PASS",
+        "mode": "preflight",
+        "targets": 2,
+        "regular_files": 915,
+        "directories": 188,
+        "deletions_by_verifier": 0,
+        "site_files_verified": 948,
+        "historical_vendor_member_verified": true,
+        "original_target_payloads_read": 0
+      }
+    },
+    {
+      "case": "reduced_scope",
+      "correctly_blocked": true,
+      "reason": "scope drift"
+    },
+    {
+      "case": "outside_scope",
+      "correctly_blocked": true,
+      "reason": "scope drift"
+    },
+    {
+      "case": "node_count_drift",
+      "correctly_blocked": true,
+      "reason": "metadata/count drift"
+    },
+    {
+      "case": "metadata_fingerprint_drift",
+      "correctly_blocked": true,
+      "reason": "metadata/count drift"
+    },
+    {
+      "case": "post_collector_rejects_pre_state",
+      "correctly_blocked": true
+    },
+    {
+      "case": "missing_new_confirmation",
+      "correctly_blocked": true
+    },
+    {
+      "case": "retained_only_replay",
+      "result": {
+        "site_files_verified": 948,
+        "historical_vendor_member_verified": true,
+        "original_target_payloads_read": 0
+      }
+    }
+  ],
+  "manifest_sha256": "19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f",
+  "executor_sha256": "e9a7de171a902288f6191823da793ec20abf1274c9fdbe4c9d088c2fe522a382",
+  "source_fingerprint_unchanged": true,
+  "targets": 2,
+  "regular_files": 915,
+  "directories": 188,
+  "symlinks": 0,
+  "potential_reclaim_bytes": 25923584,
+  "analysis_created_bytes": 4554752,
+  "estimated_net_bytes": 21368832,
+  "estimated_net_MiB": 20.38,
+  "estimated_net_MiB_rounded": 20,
+  "current_root_used_percent": 68.34,
+  "projected_root_used_percent": 68.33,
+  "approval_exists": false,
+  "execution_started": false,
+  "deletions": 0,
+  "whole_disk_review_complete": false
+}

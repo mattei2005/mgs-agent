@@ -35,7 +35,7 @@ def verify(m,post=False):
   assert pathlib.Path(TREE).is_dir()and not pathlib.Path(TREE).is_symlink()and not os.path.ismount(TREE)
   assert pathlib.Path(FILE).is_file()and not pathlib.Path(FILE).is_symlink()and not os.path.ismount(FILE)
   assert str(pathlib.Path(TREE).resolve())==TREE and str(pathlib.Path(FILE).resolve())==FILE
-  actual=nodes();assert len(actual)==m['node_count']and lib.fingerprint(actual)==m['node_fingerprint'],'metadata/count drift'
+  actual=nodes();assert all(x['dev']==os.stat(TREE).st_dev and not os.path.ismount(x['path'])for x in actual),'mount boundary drift';assert len(actual)==m['node_count']and lib.fingerprint(actual)==m['node_fingerprint'],'metadata/count drift'
   assert not lib.consumers({'kernel_payload_roots':[TREE],'file_targets':[{'path':FILE}]}),'active consumer'
  proof=retained(m)
  return dict(status='PASS',mode='post'if post else'preflight',targets=2,regular_files=m['regular_files'],directories=m['directories'],deletions_by_verifier=0,**proof)
