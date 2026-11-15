@@ -3347,6 +3347,24 @@
       "updated_at": "2026-08-29T18:18:36+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.three-account-operational-standard",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev-three-account-operational-standard.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-15T15:59:08+00:00",
+      "id": "ARES-EGGBEV-THREE-ACCOUNT-STANDARD-1571553655499259929",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mesmo procedimento operacional nas tres threads Eggbev, sem confundir padrao salvo com readiness identica",
+      "updated_at": "2026-11-15T15:59:08+00:00"
+    },
+    {
       "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -17449,5 +17467,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T15:45:39+00:00"
+  "updated_at": "2026-11-15T15:59:08+00:00"
 }

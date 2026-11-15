@@ -59,6 +59,10 @@ Aceite: mesmo campaign ID antes/depois, payload exclusivamente `name`, nome lite
 - Antes de publicar em thread arquivada, ler título, parent, archived e locked. Reabrir somente se necessário para a projeção autorizada, publicar e conferir a mensagem; restaurar o estado archived original no finally, preservando título, parent e locked. Não criar outra thread, desbloquear permissões ou apagar histórico.
 - Uma confirmação de padrão salvo não comprova que a conta está pronta para publicar campanhas. Distinguir cobertura de contexto da operação/credencial/readiness, sem cobrar novamente aprovação já concedida para a regra.
 
+## Preflight de tamanho e efeitos parciais do sincronizador
+
+- Calcular o tamanho UTF-8 do mapping tipado final de todos os prompts-alvo antes de qualquer mutação. A rotina instalada pode gravar primeiro o YAML versionado e só depois rejeitar o tamanho do argumento CLI; esse erro não prova efeito zero. Reler fonte, versionado, runtime e mensagens exatas antes de retomar, preservando a primeira evidência e alterando somente as camadas divergentes. Não truncar o mapping, apagar prompts alheios, editar YAML ativo à mão ou remover o guard produtivo para fazê-lo passar. Qualquer transporte alternativo deve manter o CLI de configuração autorizado, limites reais de argumento, lock, merge tipado e igualdade integral antes/depois, com a preservação dos valores não solicitados testada; uma execução pontual não altera o sincronizador instalado.
+
 ## Drift
 
 Qualquer diferença entre família, contrato da operação, registry, prompt, config ativo ou projeção Discord deixa a sincronização incompleta. Não declarar atualização antes de todos os readbacks aplicáveis fecharem.
