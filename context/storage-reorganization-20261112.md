@@ -259,6 +259,21 @@ O `Sim` nativo de Rodolfo `1571285972589477891` respondeu à pergunta exata `157
 
 Fonte ativa deste lote: `data/storage-system-review-1571271327648587799/cleanup-result.json`; os recibos anteriores são históricos e não representam nova confirmação pendente deste mesmo lote. A observação final registrou `/` em 68,45% e aproximadamente 60,80 GiB disponíveis. A reorganização global permanece aberta: a revisão somente leitura dos quatro auxiliares iniciou em `next-point5-review.json`, sem consumidores vivos encontrados e sem nova exclusão, ainda faltando fechamento de consumidores estáticos, recuperação e novo manifesto. Outros roots/temporários do ponto5, dados/trabalhos6, caches7, Git8 e recorrência não foram encerrados. O procedimento usr-merge/pós-falha foi salvo na skill de manutenção e espelhado para versionamento.
 
+## 9. Continuação do ponto5 — autoridade 1571310958830166148
+
+O pedido `continua` abre a continuação somente leitura, sem reaproveitar a confirmação de oito pacotes/29 downloads já encerrada. Fonte: `data/storage-point5-followup-1571310958830166148/`; checkpoint `ZEUS-STORAGE-POINT5-FOLLOWUP-1571310958830166148`. A comunicação desta etapa deve se limitar ao que foi comprovado e ao novo gate, sem tratar a revisão inteira como concluída.
+
+**Novo lote comprovado, ainda não executado:** quatro `linux-tools` das ABIs138/142 e 11 arquivos intermediários `data.tar.gz` sob o rollback histórico `zeus-vps-maintenance-1565730926233657347`. Cada intermediário é idêntico, byte por byte, ao membro comprimido do DEB completo que permanece no mesmo diretório. Todos os DEBs retidos passaram por leitura integral do payload e o leitor independente validou os 11 membros sem ler os originais propostos para exclusão. Os 12 itens do checksum original permanecem e validam; nenhum dos 11 intermediários faz parte desse conjunto imutável. Não é proposta de apagar a pasta de backup inteira.
+
+Os quatro pacotes têm 54 arquivos/links específicos de versão, com integridade dpkg conferida e sem aliases estruturais. A simulação seleciona somente os quatro pacotes; wrappers normais usam o kernel atual147, e o `perf --version` atual respondeu. Não foram encontradas referências nas fontes ativas verificadas (scripts, crons, unidades e launchers) ou processos. Quatro DEBs de recuperação foram reconstituídos e tiveram todos os 54 membros conferidos; a simulação de reinstalação seleciona somente os mesmos quatro. Reinstalação real continua não exercitada.
+
+**Escopo e medição:** 4 pacotes +11 arquivos exatos, 65 nós de payload/metadados; potencial por inode de 105.820.160 bytes, com 14.389.248 bytes novos de preservação/análise no freeze. Estimativa líquida: 91.430.912 bytes (87,20 MiB), sem creditar diretórios ou crescimento Git posterior. Observação de `/`: 68,37%, projeção68,32% após eventual exclusão. São previsões, não espaço já liberado nesta etapa.
+
+Manifesto SHA-256 `a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c`; executor `3217d8c96fda7631acc6b76c480a64e9df87174257d2fa9d430485fde48dc6ba`. Oito testes passaram: preflight real, redução de escopos, caminho proibido, contagem/fingerprint divergentes, recusa correta do pós-coletor no estado anterior e bloqueio sem nova confirmação. `approval.json` e `execution-start.json` estão ausentes. Nenhuma exclusão ou desinstalação ocorreu nesta etapa. Não há autoremove, reboot, restart ou mudança de retenção no lote proposto.
+
+**Fora do lote:** o restante do root de manutenção conserva DEBs de recuperação, originais do fornecedor, configuração de sistema e evidências. Os 948 arquivos dos cinco conjuntos de backup de sites permanecem como classe independente, sem substituição comprovada; não são declarados indispensáveis nem descartáveis por idade. Temporários e testes permanecem condicionados a prova de encerramento/consumidores. Essas pendências e as categorias6dados/trabalhos,7caches,8Git e recorrência continuam no ledger global. A regra de comparação de intermediários DEB foi salva na referência de caches/recuperação.
+
+
 
 
 

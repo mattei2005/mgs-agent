@@ -1,0 +1,71 @@
+{
+  "app": "B008-3",
+  "started_at": "2026-11-14T19:08:53-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:08:59-05:00",
+  "app_id": "2446249215865565",
+  "roles": [
+    {
+      "id": "1379140514427246",
+      "name": "Refi Aldiyansyah",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1379140514427246",
+      "name": "Refi Aldiyansyah",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 1,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 200,
+      "ok": true
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 1,
+    "resolved_count": 1,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 1,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "1538f2634e698adc9e909b62acda3f9c9b40717cc49b7bbf457ecb5824e62209"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 1,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": true,
+  "token_app_matches": true
+}

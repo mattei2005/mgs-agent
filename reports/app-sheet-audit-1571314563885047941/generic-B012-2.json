@@ -1,0 +1,101 @@
+{
+  "app": "B012-2",
+  "started_at": "2026-11-14T19:09:26-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:09:31-05:00",
+  "app_id": "1410110707711819",
+  "roles": [
+    {
+      "id": "1610966117482945",
+      "name": "Bình Hòa Trần",
+      "role": "administrators"
+    },
+    {
+      "id": "1829115031587291",
+      "name": "Ione Silva",
+      "role": "administrators"
+    },
+    {
+      "id": "1018356354538950",
+      "name": "Maricel Taruc Ronquillo",
+      "role": "administrators"
+    },
+    {
+      "id": "4506595882912622",
+      "name": "Posisi Nek Endi Iki",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1610966117482945",
+      "name": "Bình Hòa Trần",
+      "role": "administrators"
+    },
+    {
+      "id": "1829115031587291",
+      "name": "Ione Silva",
+      "role": "administrators"
+    },
+    {
+      "id": "1018356354538950",
+      "name": "Maricel Taruc Ronquillo",
+      "role": "administrators"
+    },
+    {
+      "id": "4506595882912622",
+      "name": "Posisi Nek Endi Iki",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 4,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 200,
+      "ok": true
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 4,
+    "resolved_count": 4,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 4,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "d064591df302ddad6bdef1aa0ccbde31d3aae2efd38e7dda748769cc3adc0991"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 4,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": true,
+  "token_app_matches": true
+}

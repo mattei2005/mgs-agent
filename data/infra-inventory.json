@@ -893,6 +893,38 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "storage-point5-followup-1571310958830166148",
+      "agent": "zeus",
+      "type": "readonly_old_tools_and_duplicate_backup_intermediates_review",
+      "status": "frozen_validated_waiting_new_critical_confirmation",
+      "updated_at": "2026-11-14T19:10:57.585437-05:00",
+      "source_thread_id": "1569928464033783862",
+      "authority_message_id": "1571310958830166148",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "evidence": "data/storage-point5-followup-1571310958830166148/preparation-result.json",
+      "manifest": "data/storage-point5-followup-1571310958830166148/deletion-manifest.json",
+      "manifest_sha256": "a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c",
+      "executor_sha256": "3217d8c96fda7631acc6b76c480a64e9df87174257d2fa9d430485fde48dc6ba",
+      "verification": {
+        "tests_passed": 8,
+        "packages": 4,
+        "duplicate_intermediates": 11,
+        "payload_nodes": 65,
+        "potential_file_reclaim_bytes": 105820160,
+        "analysis_and_preservation_bytes_at_freeze": 14389248,
+        "estimated_net_bytes": 91430912,
+        "retained_only_reader_original_source_reads": 0,
+        "original_checksum_manifest_retained_entries": 12,
+        "deletions": 0,
+        "installs_or_uninstalls": 0,
+        "approval_exists": false,
+        "execution_started": false
+      },
+      "protected": "Current tools/kernel/agents, retained full DEBs, original vendor files, system configuration, legacy12-entry checksums, site backups and user data. No reboot/restart/autoremove/policy change.",
+      "skill_mirror_sha256": "c7b5218ec1135488aef487cf9e469044489ddfad74cdf946b9d0c197878f50c0",
+      "parent_review_complete": false
+    },
+    {
       "id": "storage-system-review-1571271327648587799",
       "agent": "zeus",
       "type": "readonly_exhaustive_system_storage_review_and_frozen_retirement_lot",

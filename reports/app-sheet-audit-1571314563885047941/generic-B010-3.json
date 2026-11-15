@@ -1,0 +1,126 @@
+{
+  "app": "B010-3",
+  "started_at": "2026-11-14T19:09:12-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:09:17-05:00",
+  "app_id": "1793972988287575",
+  "roles": [
+    {
+      "id": "1639545637588177",
+      "name": "Alexandre Jonas",
+      "role": "administrators"
+    },
+    {
+      "id": "1745184510085086",
+      "name": "Crislaine Carvalho",
+      "role": "administrators"
+    },
+    {
+      "id": "2868686233496857",
+      "name": "Daniel Gomes",
+      "role": "administrators"
+    },
+    {
+      "id": "27633841186317389",
+      "name": "Dayanne Costa",
+      "role": "administrators"
+    },
+    {
+      "id": "28755380847388487",
+      "name": "Dhiemas Gilang Fergusson",
+      "role": "administrators"
+    },
+    {
+      "id": "1679245586506940",
+      "name": "Semakin Sadar",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1639545637588177",
+      "name": "Alexandre Jonas",
+      "role": "administrators"
+    },
+    {
+      "id": "1745184510085086",
+      "name": "Crislaine Carvalho",
+      "role": "administrators"
+    },
+    {
+      "id": "2868686233496857",
+      "name": "Daniel Gomes",
+      "role": "administrators"
+    },
+    {
+      "id": "27633841186317389",
+      "name": "Dayanne Costa",
+      "role": "administrators"
+    },
+    {
+      "id": "28755380847388487",
+      "name": "Dhiemas Gilang Fergusson",
+      "role": "administrators"
+    },
+    {
+      "id": "1679245586506940",
+      "name": "Semakin Sadar",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 6,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 400,
+      "ok": false,
+      "error": {
+        "code": 100,
+        "error_subcode": null,
+        "type": "GraphMethodException"
+      }
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 6,
+    "resolved_count": 6,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 6,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "bed87204d50783f2aa1eb60b44427288957584944b49e00b006868cd94898bc6"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 6,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": true,
+  "token_app_matches": true
+}
