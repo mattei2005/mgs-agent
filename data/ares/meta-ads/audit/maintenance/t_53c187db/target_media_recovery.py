@@ -168,9 +168,12 @@ def semantic(payload,ids,selected,snapshot,pairs,parent_status):
     st=sets[0];require(st.get('status')=='ACTIVE' and st.get('name')==c['adset_name'],'adset status/name')
     require(datetime.fromisoformat(st['start_time'])==datetime.fromisoformat(c['start_time']),'start_time drift')
     for k,v in c['adset_create'].items():_require_subset(st.get(k),v,'adset.'+k)
+    for key,value in c['campaign_create'].items():
+        semantic_subset(snapshot['campaign'].get(key),value,'campaign.'+key)
     byid={a['id']:a for a in snapshot['ads']}
     for i,a in enumerate(c['ads'],1):
         final=byid[ids[f'copied_ad_id_1_{i}']];seed=byid[ids[f'seed_ad_id_1_{i}']]
+        require(seed.get('creative',{}).get('id')==ids[f'creative_id_1_{i}'] and seed.get('source_ad_id') in {None,'0'},'seed creative/journal lineage mismatch')
         require(final.get('status')=='ACTIVE' and seed.get('status')=='PAUSED' and final.get('source_ad_id')==seed['id'] and final.get('name')==a['name'],'final/seed status/lineage')
         actual=final['creative'];expected=a['creative_payload']
         for k in ['object_story_spec','instagram_user_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads']:
@@ -264,10 +267,12 @@ class Runtime:
     def read(self):
         from .engine import CampaignEngine
         self.reserve(3);ops=CampaignEngine._readback_ops([self.g['ids']['campaign_id_1']])
+        extra_parent=','.join(k for k in self.payload['campaigns'][0]['campaign_create'] if k not in ops[0].relative_url.split('?fields=')[1].split(','))
+        if extra_parent:ops[0]=replace(ops[0],relative_url=ops[0].relative_url+','+extra_parent)
         extra=','.join(k for k in self.payload['campaigns'][0]['adset_create'] if k not in ops[1].relative_url.split('?fields=')[1].split('&')[0].split(','))
         if extra:ops[1]=replace(ops[1],relative_url=ops[1].relative_url.replace('&limit=',','+extra+'&limit='))
-        rows=self.transport.execute(ops,'independent_media_readback')
-        self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
+        try:rows=self.transport.execute(ops,'independent_media_readback')
+        finally:self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
         require(len(rows)==3 and all(x.code==200 for x in rows),'fresh hierarchy GET failed')
         b={x.name:x.body for x in rows};sets=b['readback_adsets_1'];ads=b['readback_ads_1']
         require(not sets.get('paging',{}).get('next') and not ads.get('paging',{}).get('next'),'unread pagination')
@@ -285,7 +290,8 @@ class Runtime:
         from .transport import BatchOperation
         self.reserve(3)
         op=BatchOperation('independent_media_parent_activate','POST',self.g['ids']['campaign_id_1'],{'status':'ACTIVE'},kind='campaign_finalize')
-        rows=self.transport.execute([op],'independent_media_parent_activate');self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
+        try:rows=self.transport.execute([op],'independent_media_parent_activate')
+        finally:self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
         require(len(rows)==1 and rows[0].code==200 and rows[0].body.get('success') is True,'parent status outcome uncertain; GET before retry')
 
 def receipt_value(g,payload,path,ps,snapshot,downloads):
