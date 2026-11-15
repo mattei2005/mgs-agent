@@ -45,13 +45,16 @@ def module(name,path):
     if spec is None or spec.loader is None:raise ValueError('canonical module unavailable')
     m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 
-def request_load(path):
+def request_load(path,*,temporal=None):
     q=load(path)
     if q.get('account_id')!=ACCOUNT or q.get('operation')!='Eggbev-US-CC-EN-BOT' or q.get('duplicate_count')!=1:
         raise ValueError('this intake requires one exact Eggbev01 replacement request; use independent requests for batches')
     if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',q.get('request_id','')) is None:raise ValueError('safe exact request_id required')
     if not q.get('commercial_ok_message_id') or not q.get('media_filenames') or len(q['media_filenames']) not in {1,2,3,4,5} or len(set(q['media_filenames']))!=len(q['media_filenames']):raise ValueError('approved exact unique request/media missing')
-    if datetime.fromisoformat(q['start_time'])<=datetime.now(timezone.utc):
+    if temporal is not None:
+        from ares_campaign_v3.target_start_revision import validate_local
+        validate_local(path,load(CONFIG),temporal['grant']['approved_digest'],temporal['grant']['approval_message_id'])
+    elif datetime.fromisoformat(q['start_time'])<=datetime.now(timezone.utc):
         from ares_campaign_v3.target_continuation import validate_local
         validate_local(path,load(Path(path).parent/'manifest.json'),load(CONFIG))
     for value in [ACCOUNT,*naming.load_policy()['account_ids']]:
@@ -113,7 +116,8 @@ def classify_source(campaign,sets,ads,count,proof=None):
         if len(pairs)!=count or len(set(final_ids+seed_ids))!=2*count or set(byid)!=set(final_ids+seed_ids) or proof['adset_id']!=sets[0]['id']:raise ValueError('source final/seed identity or cardinality drift')
         if any(byid[seed].get('status')!='PAUSED' or byid[final].get('status')!='ACTIVE' or byid[final].get('source_ad_id')!=seed or byid[seed].get('source_ad_id') not in {None,'0'} for final,seed in pairs):raise ValueError('source final/seed status or lineage drift')
         selected=[byid[a] for a in final_ids];seeds=[byid[a] for a in seed_ids]
-    return copy.deepcopy({'campaign':campaign,'adset':sets[0],'ads':selected,'all_ads':ads,'technical_seed_ads':seeds,'source_selection':{'final_count':len(selected),'seed_count':len(seeds),'total_count':len(ads),'proof':proof}})
+    # Separate deepcopy calls break cross-edge aliases without changing slot order.
+    return {'campaign':copy.deepcopy(campaign),'adset':copy.deepcopy(sets[0]),'ads':copy.deepcopy(selected),'all_ads':copy.deepcopy(ads),'technical_seed_ads':copy.deepcopy(seeds),'source_selection':copy.deepcopy({'final_count':len(selected),'seed_count':len(seeds),'total_count':len(ads),'proof':proof})}
 
 
 def source_read(q,common,meta,token):
@@ -283,13 +287,36 @@ def prepare(path,confirm=False):
 
 def execute(path,confirm=False,approved_digest=None,approval_message_id=None,check_only=False):
     if not confirm or not approval_message_id:raise ValueError('execute requires explicit final OK, digest and --confirm-execute')
-    q=request_load(path);home=Path(path).parent;payload=load(home/'manifest.json')
+    # Same lock for CLI and imported calls; lease spans revision through Engine.
+    home=Path(path).parent;q=load(path);cfg=load(CONFIG)
+    with (home/'target-clone.lock').open('a+') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        checkpoint=Path(cfg['state_root'])/'checkpoints'/f"{q['request_id']}-{ACCOUNT}.json"
+        engine_audit=Path(cfg['audit_root'])/f"{q['request_id']}.json"
+        leases=AccountWriterLeaseStore(cfg['state_root']) if not check_only and not checkpoint.exists() and not engine_audit.exists() else None
+        if leases:leases.claim(ACCOUNT,q['request_id'],status='PREFLIGHT_ACTIVE')
+        try:return _execute(path,confirm,approved_digest,approval_message_id,check_only)
+        finally:
+            # Once Engine owns durable state, only its continuation may retire it.
+            checkpoint=Path(cfg['state_root'])/'checkpoints'/f"{q['request_id']}-{ACCOUNT}.json"
+            if leases and not checkpoint.exists():leases.release(ACCOUNT,q['request_id'])
+
+
+def _execute(path,confirm=False,approved_digest=None,approval_message_id=None,check_only=False):
+    if not confirm or not approval_message_id:raise ValueError('execute requires explicit final OK, digest and --confirm-execute')
+    home=Path(path).parent;gate_config=load(CONFIG);raw=load(path);temporal=None
+    from ares_campaign_v3 import target_start_revision as revision
+    if (home/'operator-start-override.json').exists() or raw.get('request_id') in gate_config['accounts'][ACCOUNT].get('target_page_replacement',{}).get('start_revisions',{}):
+        temporal=revision.validate_local(path,gate_config,approved_digest,approval_message_id)
+    q=request_load(path,temporal=temporal);payload=load(home/'manifest.json')
     gate_config=load(CONFIG);conflict=reader_block_reason(ACCOUNT,gate_config['state_root'])
     if conflict and conflict.get('request_id')!=q['request_id']:raise ValueError('another request owns account; approved request remains resumable')
-    if approved_digest!=payload.get('prevalidation',{}).get('content_digest') or not verify_prevalidation(payload):raise ValueError('approved manifest digest mismatch')
+    if (not temporal and approved_digest!=payload.get('prevalidation',{}).get('content_digest')) or not verify_prevalidation(payload):raise ValueError('approved manifest digest mismatch')
     # A pre-intake commercial OK is not a later manifest/technical-seed approval.
     if approval_message_id==q.get('commercial_ok_message_id'):raise ValueError('final summary requires a subsequent explicit OK message')
-    common,meta,sb,token=runtime();current=source_read(q,common,meta,token);original=load(home/'source-live.json')
+    common,meta,sb,token=runtime()
+    if temporal:revision.live_authority(temporal,meta=meta,token=token)
+    current=source_read(q,common,meta,token);original=load(home/'source-live.json')
     if not check_only:
         target=home/'source-current-before-execute.json'
         if target.exists():target=home/('source-current-before-resume-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'.json')
@@ -313,6 +340,22 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None,che
     from contextlib import nullcontext
     from ares_campaign_v3.target_continuation import admission,expired
     cfg=load(CONFIG)
+    if temporal:
+        # No reservation/upload/Page initialization, and never revise existing shells.
+        temporal=revision.validate_local(path,cfg,approved_digest,approval_message_id)
+        if check_only:
+            if temporal['pending']:raise ValueError('pending ASAP CAS requires execute recovery before continuation check')
+        elif not any(p.exists() for p in revision.effect_paths(temporal,cfg)):
+            live_campaigns=common.fetch_all_meta(meta,token,'act_'+ACCOUNT+'/campaigns',{'fields':'id,name,status','limit':100})
+            revision.require_no_effects(temporal,cfg,live_campaigns=live_campaigns)
+            creation=module('target_asap_clock',R/'scripts/ares-eggbev-creation.py')
+            payload=revision.materialize(temporal,cfg,registry=MediaRegistry(R/'data/ares/meta-ads/engine-v3/media-registry.json'),dry_run=lambda p:CampaignEngine(cfg,transport_factory=lambda account:None).dry_run(Manifest.from_dict(p)),start_factory=creation.immediate_execute_start)
+        elif not temporal['last'] or temporal['pending']:
+            revision.require_no_effects(temporal,cfg)
+        # Recheck exact mapping and live instructions immediately before Engine.
+        temporal=revision.validate_local(path,cfg,approved_digest,approval_message_id)
+        revision.live_authority(temporal,meta=meta,token=token)
+        payload=load(home/'manifest.json')
     scope=admission(path,payload,cfg,meta=meta,token=token) if expired(payload) else nullcontext(None)
     with scope as continuation:
         manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
@@ -325,7 +368,15 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None,che
             checked_record=copy.deepcopy(continuation['record'])
             proof=reconcile_existing(engine,bundle,engine.transport_factory(ACCOUNT),checked_record,require_shells=True)
             return {'phase':'CONTINUATION_VERIFIED_READ_ONLY','request_id':q['request_id'],'manifest_digest':manifest.digest,'confirmed_ids':proof,'known_media_observations':checked_record.get('target_clone_known_media_observed',{}),'media_qa_bypass':False,'meta_writes':0,'drive_writes':0}
-        if not continuation:save(home/'final-approval.json',{'message_id':approval_message_id,'approved_digest':approved_digest})
+        if not continuation:
+            effective=payload['prevalidation']['content_digest']
+            approval={'message_id':approval_message_id,'approved_digest':effective}
+            if temporal:approval=revision.approval_payload(temporal['grant'],temporal['last'][1])
+            if (home/'final-approval.json').exists() and load(home/'final-approval.json')!=approval:
+                if not temporal:raise ValueError('final approval CAS mismatch')
+                # validate_local proved this is a prior preserved temporal mapping.
+                revision.validate_local(path,cfg,approved_digest,approval_message_id)
+            save(home/'final-approval.json',approval)
         result=engine.execute(manifest)
     save(home/'engine-result.json',result)
     # Exact assignment finalization is resumed independently if any readback or
@@ -373,6 +424,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize','check-continuation']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
     # One foreground/request owner across preparation and engine invocation.
     q=load(a.input);lock=Path(a.input).parent/'target-clone.lock'
+    if a.command in {'execute','check-continuation'}:
+        value=execute(a.input,a.confirm_execute or a.command=='check-continuation',a.approved_digest,a.approval_message_id,check_only=a.command=='check-continuation')
+        print(json.dumps(value,ensure_ascii=False,indent=2));return
     with lock.open('a+') as stream:
         fcntl.flock(stream,fcntl.LOCK_EX|fcntl.LOCK_NB)
         if a.command=='prepare':
@@ -380,6 +434,6 @@ def main():
             leases=AccountWriterLeaseStore(load(CONFIG)['state_root']);leases.claim(ACCOUNT,q['request_id'],status='PREFLIGHT_ACTIVE')
             try:value=prepare(a.input,a.confirm_prepare)
             finally:leases.release(ACCOUNT,q['request_id'])
-        else:value=finalize(a.input) if a.command=='finalize' else execute(a.input,a.confirm_execute or a.command=='check-continuation',a.approved_digest,a.approval_message_id,check_only=a.command=='check-continuation')
+        else:value=finalize(a.input)
     print(json.dumps(value,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

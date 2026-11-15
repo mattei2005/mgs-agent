@@ -13,7 +13,7 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; preserve IDs/relógio/selos. Headline≠CTA; conferir≠escrever. Separe manual/lote/emenda. URL herdada: não peça link. Paridade preserva identidade.
+SHEIN≠CAR/CPV. Preserve IDs/relógio/selos. Headline≠CTA. Separe manual/lote/emenda. Herde URL; renumere UTMs. Paridade preserva identidade. Conte ads pelos grupos, não pela fonte.
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 

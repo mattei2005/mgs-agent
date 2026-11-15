@@ -394,6 +394,37 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_active_intake_journal_exclusions(self):
+        base = (
+            "data/ares/creative-ops/executions/intake-1571355399272145028/"
+            "recovery-1571372290707562638/"
+        )
+        ignored = [
+            base + "last-private-result.json",
+            base + "private-journal.json",
+            base + "private-progress.json",
+        ]
+        included = [
+            base + "phase.json",
+            base + "move-plan.json",
+            base + "private-credentials.json",
+            base + "private-progress.json.other",
+            base.replace("1571372290707562638", "other") + "private-progress.json",
+            "work/" + base + "private-progress.json",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

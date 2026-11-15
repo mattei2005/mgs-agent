@@ -18,6 +18,9 @@ class ScopeTests(unittest.TestCase):
  def test_folder_permission_write_rejected_before_rpc(self):
   with patch.object(r,'file_meta',return_value={'mimeType':r.b.FOLDER}):
    with self.assertRaises(r.RecoveryError):r._grant_existing(object(),object(),{'id':'forbidden-folder'},object())
+ def test_shortcut_permission_write_rejected_before_rpc(self):
+  with patch.object(r,'file_meta',return_value={'mimeType':'application/vnd.google-apps.shortcut'}):
+   with self.assertRaises(r.RecoveryError):r._grant_existing(object(),object(),{'id':'stock','kind':'move_shortcut'},object())
  def test_existing_access_unchanged_needs_no_grant(self):self.assertEqual(r.assert_acl_transition(BASE,BASE),set())
  def test_only_original_geizian_writer_can_be_restored(self):self.assertEqual(r.assert_acl_transition(BASE,BASE[:1]),{'g'})
  def test_new_principal_is_rejected(self):
@@ -53,6 +56,16 @@ class CatalogueTests(unittest.TestCase):
  def test_content_drift_rejected(self):
   self.pm['sha256Checksum']='c'*64
   with self.assertRaises(r.RecoveryError):self.resolve()
+ def test_inherited_alias_acl_and_full_target_content_acl(self):
+  self.entry['stock_permissions_expected']=BASE[:1]
+  def meta(d,fid):return copy.deepcopy(self.pm if fid=='provider-new' else self.sm)
+  with patch.object(r,'_binding_remote'),patch.object(r,'file_meta',side_effect=meta),patch.object(r,'acl',side_effect=lambda d,fid:BASE if fid=='provider-new' else BASE[:1]):
+   self.assertEqual(r.resolve_entry(object(),self.entry,self.binding)['provider_id'],'provider-new')
+ def test_inherited_alias_cannot_hide_missing_content_access(self):
+  self.entry['stock_permissions_expected']=BASE[:1]
+  def meta(d,fid):return copy.deepcopy(self.pm if fid=='provider-new' else self.sm)
+  with patch.object(r,'_binding_remote'),patch.object(r,'file_meta',side_effect=meta),patch.object(r,'acl',return_value=BASE[:1]):
+   with self.assertRaises(r.RecoveryError):r.resolve_entry(object(),self.entry,self.binding)
  def test_provider_parent_drift_rejected(self):
   self.pm['parents']=['other-parent']
   with self.assertRaises(r.RecoveryError):self.resolve()

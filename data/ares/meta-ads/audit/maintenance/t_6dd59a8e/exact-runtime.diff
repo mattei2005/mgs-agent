@@ -1,0 +1,12 @@
+--- scripts/ares-eggbev-target-clone.py.before
++++ scripts/ares-eggbev-target-clone.py.after
+@@ -113,7 +113,8 @@
+         if len(pairs)!=count or len(set(final_ids+seed_ids))!=2*count or set(byid)!=set(final_ids+seed_ids) or proof['adset_id']!=sets[0]['id']:raise ValueError('source final/seed identity or cardinality drift')
+         if any(byid[seed].get('status')!='PAUSED' or byid[final].get('status')!='ACTIVE' or byid[final].get('source_ad_id')!=seed or byid[seed].get('source_ad_id') not in {None,'0'} for final,seed in pairs):raise ValueError('source final/seed status or lineage drift')
+         selected=[byid[a] for a in final_ids];seeds=[byid[a] for a in seed_ids]
+-    return copy.deepcopy({'campaign':campaign,'adset':sets[0],'ads':selected,'all_ads':ads,'technical_seed_ads':seeds,'source_selection':{'final_count':len(selected),'seed_count':len(seeds),'total_count':len(ads),'proof':proof}})
++    # Separate deepcopy calls break cross-edge aliases without changing slot order.
++    return {'campaign':copy.deepcopy(campaign),'adset':copy.deepcopy(sets[0]),'ads':copy.deepcopy(selected),'all_ads':copy.deepcopy(ads),'technical_seed_ads':copy.deepcopy(seeds),'source_selection':copy.deepcopy({'final_count':len(selected),'seed_count':len(seeds),'total_count':len(ads),'proof':proof})}
+ 
+ 
+ def source_read(q,common,meta,token):

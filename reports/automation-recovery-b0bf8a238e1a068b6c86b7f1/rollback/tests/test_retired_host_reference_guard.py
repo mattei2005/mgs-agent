@@ -1,0 +1,304 @@
+"""Immutable inventory evidence must not disable operational host protection."""
+import hashlib
+import importlib.util
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+SCRIPT = Path(__file__).resolve().parents[1] / "scripts/check-retired-host-references.py"
+SPEC = importlib.util.spec_from_file_location("retired_host_guard", SCRIPT)
+assert SPEC is not None and SPEC.loader is not None
+guard = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(guard)
+
+
+class HistoricalEvidenceTests(unittest.TestCase):
+    def scan(self, relative, content, allowed_relative=None, allowed_content=None):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+            allowlist = {}
+            if allowed_relative is not None:
+                assert allowed_content is not None
+                allowlist[allowed_relative] = hashlib.sha256(allowed_content).hexdigest()
+            result = subprocess.CompletedProcess([], 0, relative.encode() + b"\0")
+            failures = []
+            with patch.object(guard, "REPO", root), patch.object(
+                guard, "HISTORICAL_EVIDENCE_SHA256", allowlist
+            ), patch.object(guard.subprocess, "run", return_value=result):
+                guard.tracked_repo_failures(failures)
+            return failures
+
+    def test_verified_immutable_snapshot_is_preserved(self):
+        relative = "data/zeus/example/inventory-before-runtime-entry.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(self.scan(relative, content, relative, content), [])
+
+    def test_modified_snapshot_still_blocks(self):
+        relative = "data/zeus/example/inventory-before-runtime-entry.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_sibling_operational_file_still_blocks(self):
+        relative = "data/zeus/example/connection.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content, "data/zeus/example/inventory-before-runtime-entry.json", content),
+            [f"repo:{relative}"],
+        )
+
+    def test_unregistered_inventory_snapshot_still_blocks(self):
+        relative = "data/zeus/other/inventory-before-runtime-entry.json"
+        self.assertEqual(self.scan(relative, guard.RETIRED_HOST.encode()), [f"repo:{relative}"])
+
+    def test_profile_operational_surface_still_blocks(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "config.yaml"
+            target.write_text(guard.RETIRED_HOST)
+            failures = []
+            guard.scan_tree(target, "profile-zeus", failures)
+            self.assertEqual(failures, [f"profile-zeus:{target}"])
+
+    def test_adspower_amendment_snapshot_registration_is_exact(self):
+        relative = "data/adspower-warming-20261008/delivery-amendment-1559206352956432395/inventory-before.json"
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+
+    def test_registered_production_snapshot_hash_matches(self):
+        for relative, expected in guard.HISTORICAL_EVIDENCE_SHA256.items():
+            with self.subTest(relative=relative):
+                self.assertEqual(hashlib.sha256((guard.REPO / relative).read_bytes()).hexdigest(), expected)
+
+    def test_php_recheck_registration_is_exact_negative_evidence(self):
+        relative = "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json"
+        content = (guard.REPO / relative).read_bytes()
+        hits = [line for line in content.decode().splitlines() if guard.RETIRED_HOST in line]
+        self.assertEqual(len(hits), 1)
+        self.assertIn(f"retired agent {guard.RETIRED_HOST} not probed.", hits[0])
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+        self.assertEqual(self.scan(relative, content, relative, content), [])
+        self.assertEqual(
+            self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_payment_schedule_snapshot_registration_is_exact_removed_history(self):
+        relative = "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json"
+        content = (guard.REPO / relative).read_bytes()
+        self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+        records = json.loads(content)["runtime_artifacts"]
+        hits = [row for row in records if guard.RETIRED_HOST in json.dumps(row)]
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(hits[0]["id"], "runcloud-retired-ssh-allow-removal-20260712")
+        self.assertEqual(hits[0]["status"], "removed_validated")
+        self.assertIn(guard.RETIRED_HOST, hits[0]["removed_rule"])
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+        self.assertEqual(self.scan(relative, content, relative, content), [])
+        self.assertEqual(
+            self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_payment_schedule_sibling_connection_target_still_blocks(self):
+        evidence = "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json"
+        relative = "reports/meta-manual-payments-scheduling-1563960345826037821/connection.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content, evidence, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_payment_followup_snapshots_are_exact_removed_history(self):
+        relatives = (
+            "reports/meta-pay-now-1563981039230255186/inventory-pre-update.json",
+            "reports/meta-september-invoices-1564022485366734969/inventory-before.json",
+            "reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json",
+        )
+        canonical = json.loads((guard.REPO / "data/infra-inventory.json").read_text())
+        removed = [row for row in canonical["runtime_artifacts"]
+                   if row.get("id") == "runcloud-retired-ssh-allow-removal-20260712"]
+        self.assertEqual(len(removed), 1)
+        self.assertEqual(removed[0]["status"], "removed_validated")
+        for relative in relatives:
+            with self.subTest(relative=relative):
+                content = (guard.REPO / relative).read_bytes()
+                self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+                hits = [row for row in json.loads(content)["runtime_artifacts"]
+                        if guard.RETIRED_HOST in json.dumps(row)]
+                self.assertEqual(hits, removed)
+                self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+                self.assertFalse(any(relative.startswith(prefix)
+                                     for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+                self.assertEqual(self.scan(relative, content, relative, content), [])
+                self.assertEqual(
+                    self.scan(relative, content + b" changed", relative, content),
+                    [f"repo:{relative}"],
+                )
+                sibling = str(Path(relative).with_name("connection.json"))
+                self.assertEqual(
+                    self.scan(sibling, guard.RETIRED_HOST.encode(), relative, content),
+                    [f"repo:{sibling}"],
+                )
+
+    def test_php_report_sibling_connection_target_still_blocks(self):
+        relative = "reports/php-security-20261021/connection.json"
+        evidence = "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content, evidence, content),
+            [f"repo:{relative}"],
+        )
+
+
+    def inventory_fixture(self):
+        relative = "reports/meta-manual-payments-runs/pay-now-20261027T080326229843/inventory-before-closure.json"
+        inventory = json.loads((guard.REPO / relative).read_text())
+        removed = [row for row in inventory["runtime_artifacts"]
+                   if guard.RETIRED_HOST in json.dumps(row)]
+        self.assertEqual(len(removed), 1)
+        canonical = json.loads((guard.REPO / "data/infra-inventory.json").read_text())
+        self.assertEqual(removed, [row for row in canonical["runtime_artifacts"]
+                                  if row.get("id") == "runcloud-retired-ssh-allow-removal-20260712"])
+        return {"_meta": inventory["_meta"], "runtime_artifacts": removed}
+
+    def test_new_inventory_before_image_accepts_only_pinned_history(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        inventory = self.inventory_fixture()
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+        inventory["_meta"]["updated_at"] = "later snapshot"
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+
+    def test_inventory_additional_targets_still_block(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        for location in ("runtime_artifacts", "scripts", "connection"):
+            with self.subTest(location=location):
+                inventory = self.inventory_fixture()
+                if location == "runtime_artifacts":
+                    inventory[location].append({"target": guard.RETIRED_HOST})
+                else:
+                    inventory[location] = {"target": guard.RETIRED_HOST}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_work_inventory_before_image_accepts_only_pinned_history(self):
+        inventory = self.inventory_fixture()
+        for relative in ("work/task/infra-inventory-before.json",
+                         "work/task/backup/infra-inventory-before.json",
+                         "work/task/rollback/inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+
+    def test_work_inventory_changed_or_additional_targets_still_block(self):
+        relative = "work/task/backup/infra-inventory-before.json"
+        for change in ("record", "connection", "key", "provenance"):
+            with self.subTest(change=change):
+                inventory = self.inventory_fixture()
+                if change == "record":
+                    inventory["runtime_artifacts"][0]["status"] = "active"
+                elif change == "connection":
+                    inventory["connection"] = {"host": guard.RETIRED_HOST}
+                elif change == "key":
+                    inventory[guard.RETIRED_HOST] = "target"
+                else:
+                    inventory["_meta"] = {}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()),
+                                 [f"repo:{relative}"])
+
+    def test_work_non_inventory_and_operational_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("work/task/connection.json", "work/task/config.yaml",
+                         "scripts/infra-inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_work_real_before_images_are_only_canonical_removed_history(self):
+        relatives = ("work/t_7ab9e9ba/infra-inventory-before.json",
+                     "work/t_8364ae25/backup/infra-inventory-before.json",
+                     "work/t_8426333c/backup/infra-inventory-before.json",
+                     "work/t_8e65299d/rollback/infra-inventory-before.json",
+                     "work/t_fc58be96/backup/infra-inventory-before.json")
+        for relative in relatives:
+            with self.subTest(relative=relative):
+                content = (guard.REPO / relative).read_bytes()
+                self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
+                self.assertEqual(self.scan(relative, content), [])
+
+    def test_pre_closure_inventory_accepts_only_pinned_history(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/pre-closure-inventory.json",
+                         "data/task/pre-closure-inventory.json",
+                         "work/task/pre-closure-inventory.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [])
+
+    def test_pre_closure_inventory_changed_or_additional_targets_still_block(self):
+        relative = "reports/future-run/pre-closure-inventory.json"
+        for change in ("record", "connection", "key", "provenance"):
+            with self.subTest(change=change):
+                inventory = self.inventory_fixture()
+                if change == "record":
+                    inventory["runtime_artifacts"][0]["status"] = "active"
+                elif change == "connection":
+                    inventory["connection"] = {"host": guard.RETIRED_HOST}
+                elif change == "key":
+                    inventory[guard.RETIRED_HOST] = "target"
+                else:
+                    inventory["_meta"] = {}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()),
+                                 [f"repo:{relative}"])
+
+    def test_pre_closure_inventory_siblings_and_operational_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/connection.json",
+                         "reports/future-run/pre-closure-inventory-live.json",
+                         "scripts/pre-closure-inventory.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_real_pre_closure_inventory_is_only_canonical_removed_history(self):
+        relative = "reports/meta-manual-payments-runs/pay-now-20261101T130528612926/pre-closure-inventory.json"
+        content = (guard.REPO / relative).read_bytes()
+        self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
+        self.assertEqual(self.scan(relative, content), [])
+
+    def test_inventory_modified_removed_record_still_blocks(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        inventory = self.inventory_fixture()
+        inventory["runtime_artifacts"][0]["status"] = "active"
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_inventory_sibling_and_non_inventory_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/connection.json", "scripts/inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_inventory_missing_provenance_still_blocks(self):
+        relative = "reports/future-run/inventory-before.json"
+        inventory = self.inventory_fixture()
+        inventory["_meta"] = {}
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_inventory_json_escaped_additional_target_still_blocks(self):
+        relative = "reports/future-run/inventory-before.json"
+        inventory = self.inventory_fixture()
+        inventory["connection"] = {"target": guard.RETIRED_HOST}
+        content = json.dumps(inventory).encode()
+        needle = guard.RETIRED_HOST.encode()
+        index = content.rfind(needle)
+        content = content[:index + 1] + b"\\u0037" + content[index + 2:]
+        self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+        self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+
+if __name__ == "__main__":
+    unittest.main()

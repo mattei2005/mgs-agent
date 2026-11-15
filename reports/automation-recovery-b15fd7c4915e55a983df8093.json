@@ -1,0 +1,75 @@
+{
+  "operation_id": "b15fd7c4915e55a983df8093",
+  "mode": "resume_safe",
+  "state": "target_recovered_independent_closure_pending",
+  "source_alert_id": "1571380886749057048",
+  "source_alert_channel": "1498132022634483894",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "thread_id": "1569185140502954077",
+    "author_id_GET_verified": "344196393512075265",
+    "registry_current_authorized": true,
+    "content": "pode implementar entao as correcoes e prevencoes de tudo."
+  },
+  "reconciliation": {
+    "queue_owner": "supervisor:1207007",
+    "worker_pid": 1218619,
+    "worker_start_ticks": "212716496",
+    "same_incident_native_operation": "b0bf8a238e1a068b6c86b7f1",
+    "native_job_id": "44671121f3cc",
+    "native_source_thread": "1511521657922261082",
+    "existing_repair_receipt": "reports/automation-recovery-b0bf8a238e1a068b6c86b7f1.json",
+    "existing_repair_audit_event": "hermes_patch_watchdog_recovered_native_validation_pending",
+    "existing_inventory_id": "hermes-watchdog-recovery-b0bf8a238e1a068b6c86b7f1",
+    "existing_checkpoint_id": "watchdog-b0bf8a238e1a068b6c86b7f1",
+    "repair_or_wrapper_replayed": false
+  },
+  "diagnosis": {
+    "failure_at": "2026-11-14T23:26:38-05:00",
+    "failure_rc": 1,
+    "cause": "The guard treated work/t_e6a20db6/infra-inventory.json.before as an operational surface although its sole retired-host reference is canonical removed_validated firewall history.",
+    "already_corrected_by_original_worker": true,
+    "snapshot_sha256": "26af28d51ca8fd1a46b3e796c6079591a2d174bb0c24f409c583e29bb8b33d78"
+  },
+  "validation_this_round": {
+    "source_alert_exact_GET": true,
+    "authority_exact_GET": true,
+    "guard_live_rc": 0,
+    "guard_live_stdout": "OK retired-host-reference guard: no operational references or hashed known-host entries",
+    "unittest_command": "python3 -m unittest discover -s tests -p 'test_retired_host_reference_guard.py' -q",
+    "unittest_rc": 0,
+    "unittest_tests_passed": 30,
+    "watchdog_state": "ok",
+    "watchdog_last_check": "2026-11-14T23:32:52-05:00",
+    "canonical_wrapper_log_result": "733 tests passed, 0 failed; wrapper rc=0 at 23:32:52 EST",
+    "guard_sha256": "0c54aa1c95440df4abe3c5e78212880858e66983d6abd79e9f1cd803b7e96082",
+    "guard_tests_sha256": "05261648fcc8f597d2462cf6e0f0d072eaec7f9982269a012d0ef0c550751acc",
+    "recovery_delivery_exact_GET_verified": "1571382457620758560",
+    "report_infra_exact_GET_verified": "1571382948165591142",
+    "delivery_channel": "1498132022634483894",
+    "delivery_content_empty": true,
+    "delivery_mentions_empty": true
+  },
+  "pending": {
+    "owner": "existing automation supervisor",
+    "stage": "Independent acceptance and queue/legacy closure of this alert, reconciled with native operation b0bf8a238e1a068b6c86b7f1; no repair or watchdog replay.",
+    "native_last_status_preserved": "error",
+    "native_next_run_at_preserved": "2026-11-15T05:26:38.510400-05:00",
+    "native_enabled": true,
+    "native_schedule_minutes_preserved": 360,
+    "native_history_not_rewritten": true
+  },
+  "this_round_side_effects": {
+    "evidence_report_only": true,
+    "script_config_cron_skill_mutations": 0,
+    "gateway_restarts": 0,
+    "business_writes": 0,
+    "discord_posts": 0,
+    "queue_writes": 0
+  },
+  "diagnostic_tool_issues": [
+    "hermes-agent skill was disabled through skill_view; read its canonical SKILL.md directly without enabling or changing configuration.",
+    "An independent read-only combined terminal invocation was refused by the gateway safety classifier; exact GET and git-log reads completed separately without any gateway lifecycle command.",
+    "Default Python lacked pytest; the actual unittest-based regression suite completed with stdlib unittest, without installing dependencies."
+  ]
+}

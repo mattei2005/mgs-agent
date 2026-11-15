@@ -166,3 +166,9 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Keep copied sources local; preserve evidence siblings and the sensitive-name guard.
 /data/ares/meta-ads/audit/maintenance/t_247b861d/isolated/
 
+# Active authorized Ares intake recovery journals: preserve locally without
+# publishing mutable private-lane state. Exact files only; siblings remain visible.
+/data/ares/creative-ops/executions/intake-1571355399272145028/recovery-1571372290707562638/last-private-result.json
+/data/ares/creative-ops/executions/intake-1571355399272145028/recovery-1571372290707562638/private-journal.json
+/data/ares/creative-ops/executions/intake-1571355399272145028/recovery-1571372290707562638/private-progress.json
+

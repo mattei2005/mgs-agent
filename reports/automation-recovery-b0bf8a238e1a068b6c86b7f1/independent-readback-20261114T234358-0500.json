@@ -1,0 +1,72 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "scope_this_round": "read_only_reconciliation_of_already_recovered_target_and_delivery",
+  "verified_at": "2026-11-14T23:43:58.076683-05:00",
+  "target_recovery_verified": true,
+  "required_existing_deliveries_GET_verified": true,
+  "queue_closure_verified": false,
+  "authority": {
+    "message_id": "1569193434189668453",
+    "channel_id": "1569185140502954077",
+    "author_id": "344196393512075265",
+    "GET_content": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "current_zeus_registry_authorized": true
+  },
+  "owner_readback": {
+    "state": "running",
+    "owner": "supervisor:1227064",
+    "attempts": 2,
+    "failures": 0
+  },
+  "job_readback": {
+    "id": "44671121f3cc",
+    "enabled": true,
+    "state": "scheduled",
+    "contract_hash": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+    "last_run_at": "2026-11-14T23:26:38.510400-05:00",
+    "last_status": "error",
+    "next_run_at": "2026-11-15T05:26:38.510400-05:00",
+    "fire_claim": null
+  },
+  "existing_recovery_evidence": {
+    "wrapper_rc": 0,
+    "wrapper_finished_at": "2026-11-14T23:32:52.892472-05:00",
+    "live_state_status": "ok",
+    "live_state_last_check": "2026-11-14T23:32:52-05:00",
+    "live_log_final_marker": "watchdog-wrapper: OK: ensure-hermes-mgs-patches passed",
+    "stored_guard_test_summary": "Ran 30 tests in 3.421s; OK",
+    "stored_hermes_test_summary": "36 files, 733 tests passed, 0 failed (100% complete)",
+    "tests_rerun_this_round": false,
+    "recorded_script_test_and_skill_sha256_all_match_live_files": true,
+    "canonical_skill_and_versioned_mirror_identical": true,
+    "inventory_and_checkpoint_same_operation_verified": true,
+    "recovery_message_GET": "1571382457620758560",
+    "report_infra_message_GET": "1571382948165591142",
+    "delivery_channel_id": "1498132022634483894",
+    "both_delivery_authors": "1496296175014252634",
+    "both_delivery_content_empty": true,
+    "both_delivery_mentions_empty": true
+  },
+  "remaining_gate": {
+    "kind": "independent_supervisor_observation_acceptance",
+    "diagnosis": "The target recovered through its canonical wrapper, but the independent supervisor collect() still explicitly forces native verified=false/status=ERROR while the unchanged scheduler last_status is error. Worker wording or this local receipt does not override that predicate.",
+    "source_locations": [
+      "scripts/mgs_automation_supervisor.py:119",
+      "scripts/mgs_automation_supervisor.py:130",
+      "scripts/mgs_automation_supervisor.py:236"
+    ],
+    "next_existing_validation_opportunity": "2026-11-15T05:26:38.510400-05:00",
+    "recommendation": "Preserve the owner and existing native schedule. Do not replay repair or wrapper; use the next natural native result and existing supervisor readback for closure. No credential, human authorization or new business execution gate is outstanding."
+  },
+  "actions_not_performed": [
+    "watchdog_or_repair_replay",
+    "business_mutation",
+    "queue_transition_or_owner_override",
+    "scheduler_history_rewrite",
+    "script_config_skill_inventory_or_checkpoint_change",
+    "new_discord_message",
+    "cron_run_create_or_cadence_change",
+    "gateway_restart"
+  ]
+}

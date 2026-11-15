@@ -5243,6 +5243,23 @@
       "updated_at": "2026-10-08T04:40:07+00:00"
     },
     {
+      "canonical_key": "ares.shein.meta-destination.inherited-preflight",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/inherited-destination-data.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-15T04:31:32+00:00",
+      "id": "ARES-SHEIN-INHERITED-DESTINATION-PREFLIGHT",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Preflight read-only de destino herdado por referência Meta",
+      "updated_at": "2026-11-15T04:31:32+00:00"
+    },
+    {
       "canonical_key": "ares.shein.standard-copy.inherited-feature-routing-procedure",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/inherited-feature-duplication-route.md",
       "consumers": [
@@ -17380,5 +17397,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T04:17:08+00:00"
+  "updated_at": "2026-11-15T04:31:32+00:00"
 }

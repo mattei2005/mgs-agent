@@ -1,0 +1,76 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "state": "target_recovered_independent_closure_pending",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "thread_id": "1569185140502954077",
+    "author_id_GET_verified": "344196393512075265",
+    "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "current_registry_authorized": true
+  },
+  "source": {
+    "profile": "zeus",
+    "job_id": "44671121f3cc",
+    "thread_id": "1511521657922261082",
+    "contract_hash": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+    "failed_execution_id": "c2fe7ec77c8244249a07991087837563",
+    "failed_last_run_at": "2026-11-14T23:26:38.510400-05:00",
+    "owner": "supervisor:1207007",
+    "worker_pid": 1207244,
+    "parallel_writer_found": false
+  },
+  "diagnosis": {
+    "cause": "Historical inventory before-image infra-inventory.json.before rejected by filename classifier, not an active retired-host target.",
+    "snapshot_path": "work/t_e6a20db6/infra-inventory.json.before",
+    "snapshot_sha256": "26af28d51ca8fd1a46b3e796c6079591a2d174bb0c24f409c583e29bb8b33d78",
+    "literal_hits": 1,
+    "matches_canonical_removed_record": true,
+    "removed_record_sha256": "5671c8b06110f9417fd6dd7a7cf2a84e9f79d15d7a0a798089495b5efa84bf2a",
+    "original_infra_report_GET_verified": "1571359539574607876"
+  },
+  "correction": {
+    "paths": ["scripts/check-retired-host-references.py", "tests/test_retired_host_reference_guard.py"],
+    "change": "Recognize only exact basename infra-inventory.json.before on existing evidence roots. Preserve provenance, pinned removed record hash, full parsed-document scan and operational target rejection.",
+    "evidence_file_preserved": true,
+    "backup_root": "reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/rollback",
+    "learning": "hermes-agent-operations/references/hermes-update-pitfalls.md",
+    "canonical_mirror_md5": "ef7bd2083fa2018e6461773305d31790"
+  },
+  "validation": {
+    "guard_regression_tests_passed": 30,
+    "hermes_test_files": 36,
+    "hermes_tests_passed": 733,
+    "hermes_tests_failed": 0,
+    "canonical_watchdog_rc": 0,
+    "canonical_watchdog_finished_at": "2026-11-14T23:32:52.892472-05:00",
+    "patch_application_disabled": true,
+    "watchdog_stdout_bytes": 0,
+    "watchdog_stderr_bytes": 0,
+    "watchdog_state_readback": "ok",
+    "runtime_python_files_unchanged": 10692,
+    "gateway_services_active_since": "2026-11-04",
+    "gateway_restart_performed": false,
+    "recovery_alert_GET_verified": "1571382457620758560",
+    "recovery_alert_channel": "1498132022634483894",
+    "recovery_alert_content_empty": true,
+    "native_contract_unchanged": true,
+    "native_history_not_rewritten": true,
+    "native_last_status": "error",
+    "native_next_run_at_unchanged": "2026-11-15T05:26:38.510400-05:00"
+  },
+  "pending": {
+    "owner": "existing automation supervisor",
+    "stage": "Independent observer acceptance and queue closure, not another repair or watchdog replay.",
+    "expected_existing_validation_opportunity": "2026-11-15T05:26:38.510400-05:00",
+    "note": "Manual canonical script recovery does not rewrite native scheduler history. No cronjob run/create, second dispatcher, new job or business operation was started."
+  },
+  "report_infra": {
+    "state": "canonical_helper_sent_exact_GET_verified",
+    "message_id": "1571382948165591142",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "mentions": [],
+    "receipt": "reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/report-infra-readback.json"
+  }
+}

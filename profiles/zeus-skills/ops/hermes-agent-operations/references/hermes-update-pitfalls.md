@@ -2,6 +2,11 @@
 
 > Extracted from the former monolithic `SKILL.md` on 2026-07-10. Load this file only when its branch is relevant.
 
+## Retired-host guard versus inventory rollback evidence
+
+- When the watchdog reports a retired host inside an inventory before-image, reconcile audit → canonical inventory → original REPORT-INFRA GET → Git before classifying it as an operational target. Preserve the evidence file. Extend only an exact inventory basename when the parsed document proves `generated_by: infra-discovery.sh`, exactly one literal hit, the pinned unchanged `removed_validated` firewall record, and no additional decoded target anywhere, including JSON keys/escaped values. Never exempt a directory, generic `.before` suffix, or a live connection file. Cover altered provenance/record, sibling filenames, operational roots and escaped additional targets with regression tests.
+- Recover through the canonical watchdog with patch application disabled, verify its state, test summary and exact recovery-message GET, and preserve the native job contract/history/cadence. A manual script recovery is not a successful native scheduler occurrence: leave independent queue closure pending until its existing observer accepts real evidence; do not rewrite `last_status` or start another dispatcher to make telemetry green.
+
 ## Launcher publication and externally managed runtime ownership
 
 Use this branch when the launcher changes during candidate startup or a controlled cutover reports launcher drift.

@@ -57,7 +57,12 @@ def authority(live=False):
  if live:
   for block in [a,acl]:
    for key in ['question','approval']:
-    old=block[key];m=flat.discord_get('channels/'+THREAD+'/messages/'+old['id'])
+    old=block[key]
+    for attempt in range(3):
+     try:m=flat.discord_get('channels/'+THREAD+'/messages/'+old['id']);break
+     except __import__('urllib.error',fromlist=['HTTPError']).HTTPError as exc:
+      if exc.code!=429 or attempt==2:raise
+      details=json.loads(exc.read());delay=float(details.get('retry_after',5));require(0<delay<=180,'RECOVERY_DISCORD_COOLDOWN_EXCEEDS_WINDOW');time.sleep(delay+.2)
     require({'id':m['id'],'channel_id':m['channel_id'],'author_id':m['author']['id'],'content':m['content']}==old,'RECOVERY_NATIVE_AUTHORITY_CHANGED')
  return True
 
@@ -222,6 +227,7 @@ def validate_plan_objects(plan):
 def _grant_existing(owner,sa,item,journal):
  import mgs_flat_layout as f
  require(file_meta(sa,item['id']).get('mimeType')!=b.FOLDER,'RECOVERY_FOLDER_GRANT_FORBIDDEN')
+ require(item.get('kind')!='move_shortcut','RECOVERY_SHORTCUT_ACL_INHERITED_NOT_DIRECTLY_WRITABLE')
  current=acl(sa,item['id']);missing=assert_acl_transition(item['permissions_expected'],current)
  for pid in missing:
   key='grant:'+item['id']+':'+pid;payload={'type':'user','emailAddress':EMAIL,'role':'writer'}
@@ -236,11 +242,24 @@ def _grant_existing(owner,sa,item,journal):
   journal.landed(key,pid)
  require(same_access(item['permissions_expected'],acl(sa,item['id'])),'RECOVERY_FINAL_ACCESS_CHANGED')
 
+def shortcut_access(sa,item,plan):
+ """Google shortcut ACL is immutable/inherited; preserve content access on target.
+ Confined to the nine stock aliases in this exact frozen recovery. Never grant
+ their folder, nor pretend the alias ACL was independently writable.
+ """
+ require(item['kind']=='move_shortcut' and item['role']=='clean' and item['destination_parent']==USED and any(m['stock_id']==item['id'] and m['provider_id']==item['provider_id'] for m in plan['media'].values()),'RECOVERY_SHORTCUT_ACCESS_SCOPE')
+ stock=file_meta(sa,item['id']);require(stock.get('shortcutDetails',{}).get('targetId')==item['provider_id'],'RECOVERY_SHORTCUT_ACCESS_TARGET')
+ require(same_access(item['permissions_expected'],acl(sa,item['provider_id'])),'RECOVERY_TARGET_CONTENT_ACCESS_NOT_PRESERVED')
+ require(same_access(plan['folder_permissions'][USED],acl(sa,USED)) and same_access(plan['folder_permissions'][USED],acl(sa,item['id'])),'RECOVERY_SHORTCUT_PARENT_ACCESS_CHANGED')
+ return True
+
 def private_tick(max_files=4):
  """Called only inside existing mgs_flat_maintenance private subprocess."""
  import ares_autonomous_intake as intake,mgs_archive_owner_transport as t,mgs_flat_layout as f
  require(type(max_files) is int and 1<=max_files<=4,'RECOVERY_PRIVATE_BOUND')
- authority(True)
+ # SA-published plan plus pinned native captures authorize the private phase.
+ # Do not refetch four Discord messages every four files.
+ authority(False)
  with intake.locked_state() as state:
   bid=read(H/'batch-binding.json')['batch_id'];entry=state['claims'].get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM');validate_batch(entry['batch'])
   with b.queue_lock() as lease:
@@ -269,7 +288,8 @@ def private_tick(max_files=4):
        raise RecoveryError('RECOVERY_MOVE_READBACK')
       journal.landed(key,fid)
     else:require(now['parents']==[item['source_parent']],'RECOVERY_PROVIDER_PARENT_CHANGED')
-    _grant_existing(owner,sa,item,journal)
+    if item['kind']=='move_shortcut':shortcut_access(sa,item,plan)
+    else:_grant_existing(owner,sa,item,journal)
     after=file_meta(sa,fid);require(not after.get('driveId') and after.get('trashed') is False and after['name']==before['name'] and after['parents']==[item['destination_parent']] and any(o.get('emailAddress')==b.ACCOUNT for o in after.get('owners',[])),'RECOVERY_OWNER_OR_LOCATION_READBACK')
     if item['kind']!='move_shortcut':verify_hashes(sa,fid,item['hashes'])
     progress['verified'][item['key']]={'id':fid,'metadata_after':after,'permissions_after':acl(sa,fid),'hashes':item['hashes'],'same_id':True,'verified_at':b.now_iso()};save(H/'private-progress.json',progress);done.append(item['key'])
@@ -305,7 +325,7 @@ def resolve_entry(d,entry,binding=None):
  require(pm.get('size')==entry['size'] and pm.get('md5Checksum')==entry['md5'] and pm.get('sha256Checksum')==entry['sha256'],'RECOVERY_PROVIDER_CONTENT')
  require(sm.get('trashed') is False and not sm.get('driveId') and sm['parents']==[entry['stockParentId']] and sm['name']==entry['name'],'RECOVERY_STOCK_LOCATION')
  if sm['id']!=pm['id']:require(sm.get('shortcutDetails',{}).get('targetId')==pm['id'],'RECOVERY_STOCK_TARGET')
- require(same_access(entry['permissions_expected'],acl(d,pm['id'])) and same_access(entry['permissions_expected'],acl(d,sm['id'])),'RECOVERY_ACCESS_CHANGED')
+ require(same_access(entry['permissions_expected'],acl(d,pm['id'])) and same_access(entry.get('stock_permissions_expected',entry['permissions_expected']),acl(d,sm['id'])),'RECOVERY_ACCESS_CHANGED')
  return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','mapping_kind':'reupload_recovery_verified','stock_representation':entry['representation'],'id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':pm['id'],'stock_file_id':sm['id'],'name':entry['name'],'mimeType':pm['mimeType'],'size':pm['size'],'md5Checksum':pm['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':None,'parents':sm['parents'],'trashed':False,'capabilities':{**sm.get('capabilities',{}),'canDownload':pm.get('capabilities',{}).get('canDownload',False)},'provider_metadata':pm,'stock_metadata':sm,'archive_job_id':'reupload-recovery-'+APPROVAL,'lineage_id':entry['lineageId'],'recovery_authority_message_id':APPROVAL}
 
 def stock_aliases():
@@ -317,7 +337,9 @@ def audit_and_activate(d):
  plan=verify_plan(d);progress=read(H/'private-progress.json',{});require(set(progress.get('verified',{}))=={x['key'] for x in plan['objects']},'RECOVERY_PRIVATE_INCOMPLETE')
  def audit(item):
   from ares_archive_storage import drive
-  c=drive(d.token);m=file_meta(c,item['id']);require(m['parents']==[item['destination_parent']] and not m.get('driveId') and m['name']==item['metadata_before']['name'] and m['trashed'] is False,'RECOVERY_AUDIT_NATIVE_LOCATION');require(same_access(item['permissions_expected'],acl(c,m['id'])),'RECOVERY_AUDIT_ACCESS')
+  c=drive(d.token);m=file_meta(c,item['id']);require(m['parents']==[item['destination_parent']] and not m.get('driveId') and m['name']==item['metadata_before']['name'] and m['trashed'] is False,'RECOVERY_AUDIT_NATIVE_LOCATION')
+  if item['kind']=='move_shortcut':shortcut_access(c,item,plan)
+  else:require(same_access(item['permissions_expected'],acl(c,m['id'])),'RECOVERY_AUDIT_ACCESS')
   if item['kind']!='move_shortcut':
    verify_hashes(c,item['id'],item['hashes'])
    if item['role']=='clean':
@@ -330,7 +352,7 @@ def audit_and_activate(d):
  mappings={};object_by_key={x['key']:x for x in plan['objects']}
  for aid,media in plan['media'].items():
   item=object_by_key['stock:'+media['stock_id']];provider_item=object_by_key.get('provider:'+media['provider_id'],item);pm=proofs[provider_item['key']]['metadata'];sm=proofs[item['key']]['metadata'];h=item['hashes']
-  mappings[media['logical_id']]={'mapping_kind':'reupload_recovery_verified','sourceId':media['logical_id'],'archiveId':media['provider_id'],'stockShortcutId':media['stock_id'],'archiveParentId':pm['parents'][0],'stockParentId':USED,'lineageId':aid,'role':'clean','name':media['name'],'mimeType':'video/mp4','size':h['size'],'md5':h['md5'],'sha256':h['sha256'],'representation':media['representation'],'permissions_expected':item['permissions_expected'],'authority_message_id':APPROVAL,'verified':True,'stockTransferredToArchive':True,'owner':b.ACCOUNT}
+  mappings[media['logical_id']]={'mapping_kind':'reupload_recovery_verified','sourceId':media['logical_id'],'archiveId':media['provider_id'],'stockShortcutId':media['stock_id'],'archiveParentId':pm['parents'][0],'stockParentId':USED,'lineageId':aid,'role':'clean','name':media['name'],'mimeType':'video/mp4','size':h['size'],'md5':h['md5'],'sha256':h['sha256'],'representation':media['representation'],'permissions_expected':item['permissions_expected'],'stock_permissions_expected':plan['folder_permissions'][USED] if item['kind']=='move_shortcut' else item['permissions_expected'],'authority_message_id':APPROVAL,'verified':True,'stockTransferredToArchive':True,'owner':b.ACCOUNT}
  for item in plan['objects']:
   if item['role']!='original':continue
   h=item['hashes'];mappings[item['id']]={'mapping_kind':'reupload_recovery_verified','sourceId':item['id'],'archiveId':item['id'],'stockShortcutId':item['id'],'archiveParentId':LEGACY,'stockParentId':LEGACY,'lineageId':item['asset_id'],'role':'original','name':item['metadata_before']['name'],'mimeType':'video/mp4','size':h['size'],'md5':h['md5'],'sha256':h['sha256'],'representation':'same_id_preserved_original','permissions_expected':item['permissions_expected'],'authority_message_id':APPROVAL,'verified':True,'stockTransferredToArchive':True,'owner':b.ACCOUNT}
@@ -360,7 +382,7 @@ def finalize_inventory(receipt):
     new={'source_drive_id':x['source_id'],'original_filename':x['original_filename'],'canonical_filename':media[aid]['name'],'original_checksum':x['raw_sha256'],'thread_id':THREAD,'request_message_id':'1571370959926198374','recovery_authority_message_id':APPROVAL,'native_parent_id':LEGACY}
     existing=[v for v in links if v.get('source_drive_id')==x['source_id']];require(not existing or existing==[new],'RECOVERY_DUPLICATE_LINK_CHANGED')
     if not existing:links.append(new)
-   m=media[aid];row.update(duplicate_source_drive_ids=ids,duplicate_sources=links,asset_provider_id=m['provider_id'],asset_stock_file_id=m['stock_id'],manager_media_folder_id=USED,manager_storage_code='g006',manager_storage_state='used',asset_path='MGS-ARQUIVO/CRIATIVOS/'+OP+'/VID/NICOLAS - Usados/'+canonical_name(row),webViewLink='https://drive.google.com/file/d/'+m['stock_id']+'/view',storage_availability='verified_recovered_used_reserved',reupload_recovery_receipt=str(H/'receipt.json'),reupload_recovery_authority=APPROVAL,historical_usage_reconfirmation_authority=APPROVAL)
+   m=media[aid];row.update(duplicate_source_drive_ids=ids,duplicate_sources=links,asset_provider_id=m['provider_id'],asset_stock_file_id=m['stock_id'],manager_media_folder_id=USED,manager_storage_code='g006',manager_storage_state='used',asset_path='MGS-ARQUIVO/CRIATIVOS/'+OP+'/VID/NICOLAS - Usados/'+canonical_name(row),webViewLink='https://drive.google.com/file/d/'+m['provider_id']+'/view',storage_availability='verified_recovered_used_reserved',reupload_recovery_receipt=str(H/'receipt.json'),reupload_recovery_authority=APPROVAL,historical_usage_reconfirmation_authority=APPROVAL)
    # Missing old operation metadata is repaired from the exact frozen naming;
    # its prior value remains in the complete immutable inventory-before snapshot.
    if row.get('operation') is None:row['operation']=OP
@@ -396,6 +418,8 @@ def complete(batch,owner):
     save(H/'phase.json',{'phase':'private_moves','pid':os.getpid(),'batch_id':batch['batch_id'],'verified':len(progress['verified']),'objects':len(plan['objects']),'at':b.now_iso()})
     p=subprocess.run([sys.executable,str(b.BASE/'scripts/mgs_flat_maintenance.py'),'--apply','--recovery-id',APPROVAL],capture_output=True,text=True,timeout=540)
     save(H/'last-private-result.json',{'at':b.now_iso(),'returncode':p.returncode,'stdout':p.stdout[-3000:],'stderr':p.stderr[-1000:]})
+    if p.returncode and any(reason in p.stderr+p.stdout for reason in ['HTTP Error 429','DRIVE_HTTP_429','Too Many Requests']):
+     save(H/'rate-limit-cooldown.json',{'at':b.now_iso(),'batch_id':batch['batch_id'],'verified_objects':len(progress['verified']),'cooldown_seconds':60,'reason':'Native read rate limit; retain same plan, IDs and intents; reconcile before any resumed mutation.'});time.sleep(60);continue
     require(p.returncode==0,'RECOVERY_PRIVATE_PHASE_FAILED:'+p.stderr[-180:]+p.stdout[-180:]);result=json.loads(p.stdout)
     require(result.get('status') in ['complete','in_progress'],'RECOVERY_PRIVATE_NO_PROGRESS');print('recovery_private_progress',result.get('verified'),len(plan['objects']),flush=True)
    require(len(read(H/'private-progress.json',{'verified':{}})['verified'])==len(plan['objects']),'RECOVERY_BOUND_REACHED_RESUMABLE')
