@@ -3630,6 +3630,23 @@
       "updated_at": "2026-11-13T19:50:14+00:00"
     },
     {
+      "canonical_key": "ares.shein.g006.intraday.on-demand-batch.1567162580273729629",
+      "canonical_source": "data/ares/discord/thread-report-batch-1567162580273729629.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.reporting",
+      "effective_at": "2026-11-15T15:44:06.250000+00:00",
+      "id": "ARES-G006-INTRADAY-BATCH-1571551376834564302",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "G006: futuros lotes Intraday com sete contas e resumo individual",
+      "updated_at": "2026-11-15T15:45:39+00:00"
+    },
+    {
       "canonical_key": "ares.meta-ads.internal-budget-limits",
       "canonical_source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
       "consumers": [
@@ -14566,6 +14583,24 @@
       "updated_at": "2026-10-22T20:48:59+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.recovery.manual-creative-reinsert",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-15T15:43:40+00:00",
+      "id": "ares-eggbev-creative-reinsert-learning-1571551009858265191",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reinsercao manual pontual de criativo com erro relatada por Nicolas; nao comprova causa ou fallback API",
+      "updated_at": "2026-11-15T15:43:40+00:00"
+    },
+    {
       "canonical_key": "ares.eggbev.manual-recovery.operator-confirmed",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md",
       "consumers": [
@@ -17414,5 +17449,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T07:06:44+00:00"
+  "updated_at": "2026-11-15T15:45:39+00:00"
 }

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "status": "active",
+  "operation": "SHEIN-US-DIRECT",
+  "source_thread_id": "1567162580273729629",
+  "source_message_id": "1571551376834564302",
+  "requested_by_discord_id": "1055570806945620030",
+  "effective_at": "2026-11-15T15:44:06.250000+00:00",
+  "class": "on_demand_intraday_batch_default",
+  "scope": "future Intraday batches requested in this origin; explicit account selection can override",
+  "bindings": [
+    {
+      "account_id": "2235938116947880",
+      "account_name": "Boostingecon-US-SHEIN-ES-06-G006",
+      "thread_id": "1558147369868992653",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "1498990138663094",
+      "account_name": "Escalatepower-US-SHEIN-EN-06-G006",
+      "thread_id": "1558147388730908714",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "1867022354284742",
+      "account_name": "Growpowerhub-US-SHEIN-EN-06-G006",
+      "thread_id": "1558147411900366861",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "937846586033361",
+      "account_name": "Mavroa-US-SHEIN-ES-06-G006",
+      "thread_id": "1558147440350076928",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "869857549542755",
+      "account_name": "Vizioid-US-SHEIN-EN-06-G006",
+      "thread_id": "1558147459698655425",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "1583000095650153",
+      "account_name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "thread_id": "1558147479432601670",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    },
+    {
+      "account_id": "1663268201836138",
+      "account_name": "Yolokfx-US-SHEIN-EN-08-G006",
+      "thread_id": "1570858183700910221",
+      "channel_id": "1558147364450074734",
+      "manager_code": "g006"
+    }
+  ],
+  "binding_count": 7,
+  "summary_required_each": true,
+  "summary_order": [
+    "spend",
+    "net_revenue",
+    "balance",
+    "roi",
+    "estimated_roi"
+  ],
+  "template_antecedent_request_id": "1571548228208427089",
+  "selection_change": "add account1663268201836138/thread1570858183700910221 to the six-account prior batch for future requests only",
+  "historical_requests_unchanged": true,
+  "publish_now": false,
+  "campaign_writes_authorized": false,
+  "cron_change_authorized": false,
+  "daily_d1_change_authorized": false,
+  "existing_intraday_enrollment": "already active; preserve existing policy and schedules",
+  "validation": {
+    "human_message_get_verified": true,
+    "destination_get_verified": true,
+    "canonical_binding_matched": true,
+    "catalog_account_matched": true,
+    "account_scope_allowed": true
+  }
+}

@@ -25,6 +25,7 @@ Identificar assunto
 - Esta definição específica prevalece nesta thread sobre a instrução genérica de usar uma única conta vinculada por thread; não altera os bindings das demais threads nem o isolamento entre gestores.
 - Responder na própria thread e preservar seu título manual. A definição não solicita um relatório agora, não ativa cron, não redireciona envios automáticos e não autoriza writes em campanhas.
 - Autoridade e fonte: Rodolfo Mattei, mensagem `1567162998949417113`, na própria thread. Esta é a fonte canônica do recorte multicontas desta rota.
+- Lote avulso vigente: `data/ares/discord/thread-report-batch-1567162580273729629.json`. Nicolas acrescentou expressamente Yolokfx Conta 08 G006 (`1663268201836138`), destino `1570858183700910221`, aos futuros Intradays pela mensagem `1571551376834564302`: o lote passa das seis contas anteriores para sete, cada relatório na respectiva thread com resumo financeiro ao final. Nos próximos pedidos genéricos deste lote, resolver os sete pares dessa fonte e revalidar os bindings atuais; não copiar silenciosamente a seleção de seis de recibos históricos. Seleção expressa diferente continua válida. Preservar pedidos concluídos; esta inclusão não pede envio imediato, mudança de campanha, cron ou Diário D-1. A Conta 08 já tem enrollment Intraday ativo separado; não duplicar cadastro/agenda.
 
 ### Eggbev — relatórios de contas de anúncio
 
