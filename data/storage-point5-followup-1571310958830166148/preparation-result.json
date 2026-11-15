@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "test_count": 8,
+  "tests": [
+    {
+      "case": "real_preflight",
+      "result": {
+        "status": "PASS",
+        "mode": "preflight",
+        "packages": 4,
+        "duplicate_files": 11,
+        "metadata_nodes": 65,
+        "retained_byte_readback": true,
+        "deletions_by_validator": 0
+      }
+    },
+    {
+      "case": "reduced_package_scope",
+      "blocked": true,
+      "reason": "package scope drift"
+    },
+    {
+      "case": "reduced_file_scope",
+      "blocked": true,
+      "reason": "duplicate scope drift"
+    },
+    {
+      "case": "wrong_file_root",
+      "blocked": true,
+      "reason": "file scope drift"
+    },
+    {
+      "case": "node_count_drift",
+      "blocked": true,
+      "reason": "metadata/count drift"
+    },
+    {
+      "case": "fingerprint_drift",
+      "blocked": true,
+      "reason": "metadata/count drift"
+    },
+    {
+      "case": "post_collector_rejects_pre_state",
+      "blocked": true
+    },
+    {
+      "case": "no_new_confirmation_rejects_execution",
+      "blocked": true
+    }
+  ],
+  "manifest_sha256": "a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c",
+  "executor_sha256": "3217d8c96fda7631acc6b76c480a64e9df87174257d2fa9d430485fde48dc6ba",
+  "scope_unchanged": true,
+  "deletions": 0,
+  "approval_exists": false,
+  "execution_start_exists": false,
+  "filesystem_observation": {
+    "root_used_percent": 68.37,
+    "root_available_GiB": 60.94,
+    "projected_root_used_percent": 68.32
+  },
+  "estimated_net_MiB": 87.2
+}

@@ -1,0 +1,91 @@
+{
+  "app": "B005-4",
+  "started_at": "2026-11-14T19:06:15-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:06:21-05:00",
+  "app_id": "1435923918412022",
+  "roles": [
+    {
+      "id": "1764481747892600",
+      "name": "Alessandra Furtado",
+      "role": "administrators"
+    },
+    {
+      "id": "1780731036692301",
+      "name": "Bernadete Do Socorro Rodrigues",
+      "role": "administrators"
+    },
+    {
+      "id": "122169887120714464",
+      "name": "Taina Rocha Silveira",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1764481747892600",
+      "name": "Alessandra Furtado",
+      "role": "administrators"
+    },
+    {
+      "id": "1780731036692301",
+      "name": "Bernadete Do Socorro Rodrigues",
+      "role": "administrators"
+    },
+    {
+      "id": "122169887120714464",
+      "name": "Taina Rocha Silveira",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 3,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 200,
+      "ok": true
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 3,
+    "resolved_count": 3,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 3,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "55ffc467209c61835d3981239b3f859c403542e74665fce8e70c979513568597"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 3,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": true,
+  "token_app_matches": true
+}

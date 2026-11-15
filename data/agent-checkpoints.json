@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "APP-SHEET-AUDIT-1571314563885047941",
+      "next_step": "Zeus coleta roles das 12 rotas genéricas e vínculos DTR da rota B013 sob locks nativos; cruza cada ocorrência e relata divergências, sem writes produtivos.",
+      "objective": "Conferir seguradores, coluna I NO APP e X da coluna A contra Meta e DTR atuais sem alterar vínculos/marcadores.",
+      "source": "reports/app-sheet-audit-1571314563885047941/sheet-frozen.json",
+      "state": "read_only_audit_running",
+      "thread_id": "1571311723217035436",
+      "updated_at": "2026-11-15T00:05:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ARES-ARCHIVE-CATALOGUE-RECOVERY-20261101",
       "next_step": "28 links e28jobs verificados integralmente; somente webViewLink alterado. Namespace aceita uso historico nativo ja aprovado sem inventar recibo de entrega antigo;89 testes PASS. Job236d8c5a0251b513943ec053aad945e8:2retiradas nativas e2downloads pos-retirada validados. Monitor originalok semblocked;demais pares seguem limites originais. REPORT-INFRA pendente porque cron proibe envio direto.",
       "objective": "Recuperar referencia direta de staging no lote 1565451863040589865 sem duplicar arquivos ou alterar reservas",
@@ -10637,5 +10647,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-14T23:57:48+00:00"
+  "updated_at": "2026-11-15T00:05:30+00:00"
 }

@@ -1,0 +1,91 @@
+{
+  "app": "B007-4",
+  "started_at": "2026-11-14T19:08:44-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:08:49-05:00",
+  "app_id": "2184276329181779",
+  "roles": [
+    {
+      "id": "1812360387211959",
+      "name": "Jerom Castańaday",
+      "role": "administrators"
+    },
+    {
+      "id": "1019787764426699",
+      "name": "Phạm Mộng Vy",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1812360387211959",
+      "name": "Jerom Castańaday",
+      "role": "administrators"
+    },
+    {
+      "id": "1019787764426699",
+      "name": "Phạm Mộng Vy",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 2,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 400,
+      "ok": false,
+      "error": {
+        "code": 190,
+        "error_subcode": null,
+        "type": "OAuthException"
+      }
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": false,
+      "error": {
+        "code": null,
+        "error_subcode": null,
+        "type": null
+      }
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 2,
+    "resolved_count": 2,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 2,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "ad1647e4debb657ba10a4dcb40d588b85350552787a0dcf395b240ab0dd92af3"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 2,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": false,
+  "token_app_matches": true
+}

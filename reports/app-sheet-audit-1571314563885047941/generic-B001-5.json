@@ -1,0 +1,101 @@
+{
+  "app": "B001-5",
+  "started_at": "2026-11-14T19:05:42-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:05:48-05:00",
+  "app_id": "28152750157707455",
+  "roles": [
+    {
+      "id": "122194477562714491",
+      "name": "Debora Monteiro Lima",
+      "role": "administrators"
+    },
+    {
+      "id": "1410529451218922",
+      "name": "Ethan IBet",
+      "role": "administrators"
+    },
+    {
+      "id": "122196219140682172",
+      "name": "Ricardo Gabriel Monteiro",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "122194477562714491",
+      "name": "Debora Monteiro Lima",
+      "role": "administrators"
+    },
+    {
+      "id": "1410529451218922",
+      "name": "Ethan IBet",
+      "role": "administrators"
+    },
+    {
+      "id": "122196219140682172",
+      "name": "Ricardo Gabriel Monteiro",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 3,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 400,
+      "ok": false,
+      "error": {
+        "code": 190,
+        "error_subcode": null,
+        "type": "OAuthException"
+      }
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": false,
+      "error": {
+        "code": null,
+        "error_subcode": null,
+        "type": null
+      }
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 3,
+    "resolved_count": 3,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 3,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "d206492a0093159ef326939ee46abb223869b9d8c0a06d28cc18c51b893500c6"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 3,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": false,
+  "token_app_matches": true
+}

@@ -1,0 +1,81 @@
+{
+  "app": "B006-10",
+  "started_at": "2026-11-14T19:06:25-05:00",
+  "credential_app_name_matches": true,
+  "status": "CHECKED",
+  "checked_at": "2026-11-14T19:06:29-05:00",
+  "app_id": "1457205169895253",
+  "roles": [
+    {
+      "id": "1129239392828016",
+      "name": "Millena Kelly",
+      "role": "administrators"
+    }
+  ],
+  "operational_roles": [
+    {
+      "id": "1129239392828016",
+      "name": "Millena Kelly",
+      "role": "administrators"
+    }
+  ],
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 1,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 400,
+      "ok": false,
+      "error": {
+        "code": 190,
+        "error_subcode": null,
+        "type": "OAuthException"
+      }
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": false,
+      "error": {
+        "code": null,
+        "error_subcode": null,
+        "type": null
+      }
+    }
+  },
+  "identity": {
+    "status": 200,
+    "requested_count": 1,
+    "resolved_count": 1,
+    "unresolved_count": 0,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 1,
+    "individual_limit": 20,
+    "individual_requested_count": 0,
+    "individual_resolved_count": 0,
+    "individual_statuses": [],
+    "baseline_applied": false,
+    "role_ids_sha256": "6c19f6bc4e6dfe2335a260f075750eec0b0c6b174d9f874d2e2ec416023ee782"
+  },
+  "reconciliation": {
+    "mode": "graph_names",
+    "status": "not_configured",
+    "safe_for_sheet": true,
+    "raw_role_count": 1,
+    "unresolved_meta_names_count": 0
+  },
+  "token_valid": false,
+  "token_app_matches": true
+}
