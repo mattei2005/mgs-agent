@@ -70213,8 +70213,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 32983,
-      "modified_at": "2026-11-14T07:09:23-05:00"
+      "size_bytes": 33251,
+      "modified_at": "2026-11-15T05:54:22-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",
@@ -70360,6 +70360,16 @@
       "path": "/root/mgs-agent/scripts/mgs_sb_reservoir_continuity.py",
       "size_bytes": 10218,
       "modified_at": "2026-11-14T08:06:48-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_dr_recovery_continuity.py",
+      "size_bytes": 5911,
+      "modified_at": "2026-11-15T05:55:45-05:00",
+      "operation": "30e890e4a3e5d052791e2ada",
+      "purpose": "Read-only exact-slot closure adapter; corporate SA Drive metadata/ACK and existing REPORT-INFRA GET; no backup replay or scheduler mutation.",
+      "tests": "tests/test_dr_recovery_continuity.py; 8 tests PASS; combined suite 50 PASS",
+      "sha256": "f65a7828710b2cb08e2dcb10c453d83fcd0748b83e05b8e965ce5089628f1ef3",
+      "authority_message_id": "1569193434189668453"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_sb_session.py",

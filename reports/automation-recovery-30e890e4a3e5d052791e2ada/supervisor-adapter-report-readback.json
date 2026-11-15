@@ -1,0 +1,35 @@
+{
+  "operation": "30e890e4a3e5d052791e2ada",
+  "report_infra": {
+    "id": "1571479361952153715",
+    "channel_id": "1498132022634483894",
+    "GET_verified": true,
+    "empty_content": true,
+    "mentions": 0,
+    "embeds": 1,
+    "path_field_contains": "mgs_dr_recovery_continuity.py"
+  },
+  "live_queue_readback": {
+    "state": "running",
+    "owner": "supervisor:1662786",
+    "lease_until": 1794741133.546156,
+    "delivery_id": null,
+    "supervisor_and_worker_alive": true
+  },
+  "consumer": {
+    "schedule": "2-57/5 * * * *",
+    "command": "flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+    "heartbeat_phase": "dispatching",
+    "heartbeat_at": 1794739933.5368686
+  },
+  "native_job": {
+    "enabled": true,
+    "state": "scheduled",
+    "schedule": "23 * * * *",
+    "last_status": "error",
+    "last_run_at": "2026-11-15T05:28:52.460668-05:00",
+    "next_run_at": "2026-11-15T06:23:00-05:00",
+    "contract_unchanged": true
+  },
+  "production_closure": "PENDING: do not replay backup; existing supervisor must collect fresh adapter evidence and GET-verify its own notice after this worker returns"
+}

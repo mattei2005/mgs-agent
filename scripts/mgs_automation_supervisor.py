@@ -141,6 +141,10 @@ def collect(base=BASE,profiles=PROFILES):
                 from mgs_sb_reservoir_continuity import observation as reservoir_observation
                 recovered=reservoir_observation(j,base=base)
                 if recovered is not None:observations[key]=recovered
+            if profile=='zeus' and j['id']=='3ff8bd8ca40d':
+                from mgs_dr_recovery_continuity import observation as dr_observation
+                recovered=dr_observation(j,base=base)
+                if recovered is not None:observations[key]=recovered
     # Inventory every system cron entry, not just MGS filenames.
     for p in [Path('/etc/crontab'),*Path('/etc/cron.d').glob('*')]:
         if not p.is_file():continue

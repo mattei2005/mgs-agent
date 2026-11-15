@@ -1,0 +1,31 @@
+{
+  "operation": "30e890e4a3e5d052791e2ada",
+  "mode": "resume_safe",
+  "authority": "Discord GET 1569193434189668453, author 344196393512075265; current authorized-users Super Admin validated; original DR approval messages and preceding confirmation scope reconciled",
+  "owner": "supervisor:1662786",
+  "worker_pid": 1663373,
+  "business_replay": false,
+  "correction": "Read-only exact-occurrence DR recovery adapter integrated in supervisor collect(). No scheduler history rewrite.",
+  "tests": {
+    "dr_backup_reservoir": {"run": "python3 -m unittest test_dr_recovery_continuity test_mgs_offsite_backup test_sb_reservoir_continuity", "tests": 50, "result": "OK"},
+    "supervisor_lifecycle_notice_health": {"run": "python3 -m unittest test_continuity_integration test_continuity_worker_lifecycle test_continuity_notice_delivery test_automation_continuity_health", "tests": 18, "result": "OK"},
+    "isolated_closure": "test_isolated_independent_supervisor_closure: completed_validated without calling business runner"
+  },
+  "deployed_collect_readback": {
+    "status": "OK",
+    "verified": true,
+    "target": "native:zeus:3ff8bd8ca40d",
+    "at": 1794740184.897796,
+    "slot": "2026-11-15T05:23:00-05:00",
+    "remote_id": "1nZjELCY2DU_nH8WOlNBOSdJYr60VyNU9",
+    "ack_id": "1Be8V1dgjj0nc66aX-I5rvfcehKOHWyTE",
+    "report_id": "1571476086137819247",
+    "size": "1892829458",
+    "sha256": "3da5a14492ec6d6c882e7a5a699399116a1983ec5ed46e257f16a63fbbd9c9ec",
+    "recovery": "current_protection_restored",
+    "historical_snapshot_recreated": false
+  },
+  "skill_readback": "Canonical and mirror SHA256 both 766d6bd3f11f5420391066fae0683ce3506d8cfef55fd4e7e370c6a78949400e",
+  "production_closure": "Pending existing owner and next natural supervisor collect; this worker does not change the live queue or send the supervisor diagnosis.",
+  "rollback": "Remove only the four-line 3ff8bd8ca40d adapter integration from supervisor collect; preserve adapter, receipts, original error and backup. No deletion or gateway restart required."
+}
