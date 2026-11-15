@@ -65902,6 +65902,71 @@
       "report_infra_message_id": "1571385000220295281",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "eggbev-target-asap-revision-t_3950b5d9",
+      "agent": "zeus",
+      "status": "installed_validated",
+      "updated_at": "2026-11-15T05:15:59.870587+00:00",
+      "request_id": "eggbev-pg23189-1571342489162489937",
+      "execution_owner_task": "t_bdfc754f",
+      "paths": [
+        "/root/mgs-agent/scripts/ares-eggbev-target-clone.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/target_start_revision.py",
+        "/root/mgs-agent/tests/test_target_start_revision.py",
+        "/root/mgs-agent/tests/test_eggbev_source_selection.py",
+        "/root/mgs-agent/tests/test_native_thumbnail_equivalence.py",
+        "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+        "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md",
+        "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md",
+        "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-start-grants/eggbev-pg23189-1571342489162489937-1034081997659047.json"
+      ],
+      "sha256": {
+        "/root/mgs-agent/scripts/ares-eggbev-target-clone.py": "a08d0a524d63190f9388d6adbf9a05669813f1675b2d31651cef9c8be0c73d8b",
+        "/root/mgs-agent/scripts/ares_campaign_v3/target_start_revision.py": "83216d43bbf911ecd849c46931b2c389b1663fa64d67ccb56112950a6085a31f",
+        "/root/mgs-agent/tests/test_target_start_revision.py": "80f2d6d97f1cc5057efde2d80f73f3b90bcd30bd9d2d5ab61a8aa9fce7c0c2df",
+        "/root/mgs-agent/tests/test_eggbev_source_selection.py": "d964f9260d7cf035dc4e07cc546511f9e88674a1915c56d65e8f0c7db30bf414",
+        "/root/mgs-agent/tests/test_native_thumbnail_equivalence.py": "16d30b19187e2219a9f29c731ddf53cde701e7d9773509587fd6ce378b995cf0",
+        "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json": "2a403396b31044078671f9b19f8830bc4f919cabd93ae3ec34ce2be211d23dbc",
+        "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md": "d7d597d67e803711c8f37305fe7f2bcdd252f24bc2d1f510fdc110ae17c65e45",
+        "/root/mgs-agent/profiles/ares-skills/growth/meta-campaign-engine-v3/references/target-page-replacement-clone.md": "d7d597d67e803711c8f37305fe7f2bcdd252f24bc2d1f510fdc110ae17c65e45",
+        "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-start-grants/eggbev-pg23189-1571342489162489937-1034081997659047.json": "58a022b9cbe85179f85f06cc0bb1671625c09137b55c397d7add394db3349f14"
+      },
+      "receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/install-receipt.json",
+      "receipt_sha256": "de11276bedb7733c35f8907f85a8de0570dae0e5a9f057c5e7ea5c389b4b7c08",
+      "grant_install_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/grant-install-receipt.json",
+      "backup_dir": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/before",
+      "tests": {
+        "passed": 456,
+        "modules": 24,
+        "new_temporal_tests": 42,
+        "previous_regression_tests": 287,
+        "additional_routes_roas_tests": 127,
+        "native_python314_temporal": 42,
+        "legacy_extra_passed": 8,
+        "legacy_extra_failed": 1,
+        "legacy_cause": "preexisting fixture standard_access versus preserved development_access; same failure before and after grant",
+        "skill_documental": 28
+      },
+      "runtime_hashes": 113,
+      "modified_existing_ast": [
+        "request_load",
+        "execute",
+        "main"
+      ],
+      "other_existing_ast_unchanged": true,
+      "skill_owner_task": "t_2b06442a",
+      "skill_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_2b06442a/receipt.json",
+      "protected_whole_files_unchanged": 39,
+      "external_inventory_changes": "73 rows authorized reupload recovery 1571372290707562638; no Eggbev row changes; preserved",
+      "temporal_revision_materialized": false,
+      "meta_drive_writes": 0,
+      "operational_engine_calls": 0,
+      "request_allowlist_only": true,
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1571393267512250370",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
