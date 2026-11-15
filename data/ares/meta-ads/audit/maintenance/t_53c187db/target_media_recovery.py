@@ -18,7 +18,7 @@ from . import target_start_revision as revision
 from .target_page_clone import verify
 
 GRANT_PATH=Path('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_53c187db/media-grant.json')
-GRANT_SHA256='ac247f2228ffe33662438c3e5cec74c0d6a487410e47277c6494bc06b0d3d03b'
+GRANT_SHA256='d81812abe663306c32b037bc9a2b5cceb3ff95a373e8b6b48b40d23a4c70905c'
 MAX_ATTESTATION_AGE=86400
 MAX_FRESH_SECONDS=600
 MAX_VIDEO_BYTES=100*1024*1024
@@ -178,6 +178,8 @@ def semantic(payload,ids,selected,snapshot,pairs,parent_status):
         actual=final['creative'];expected=a['creative_payload']
         for k in ['object_story_spec','instagram_user_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads']:
             if k in expected:_require_subset(actual.get(k),expected[k],k)
+        from .shein_reference import verify_degrees
+        verify_degrees(actual.get('degrees_of_freedom_spec'),expected.get('degrees_of_freedom_spec'))
         afs=actual['asset_feed_spec'];ex=expected['asset_feed_spec']
         for k in ex:
             if k in {'additional_data','videos'}:continue
@@ -412,6 +414,11 @@ def finalize(path,runner,approved_digest,approval_message_id,*,runtime_factory=R
     with request_lock(path):
         g,cfg,q,payload=local(path,runner,approved_digest,approval_message_id);home=Path(path).parent/'media-recovery'
         require((home/'verified.json').exists(),'independent recovery required; never replay Engine')
+        fp=Path(path).parent/'final.json'
+        if fp.exists():
+            fl={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
+            if all(load(p).get('independent_media_finalization')==fl for p in [g['checkpoint_path'],g['audit_path'],str(Path(path).parent/'engine-result.json')]):
+                return terminal_readback(path,runner,g,cfg,q,payload,runtime_factory)
         link=load(home/'verified.json');receipt=validate_receipt(link,g,payload,path,allow_stale=True);fresh(receipt['fresh_at'],limit=MAX_ATTESTATION_AGE)
         leases=AccountWriterLeaseStore(cfg['state_root']);leases.claim(q['account_id'],q['request_id'],status='POSTPROCESS_PENDING')
         runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;runtime.authority();runtime.source_page()

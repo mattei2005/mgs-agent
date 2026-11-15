@@ -1,5 +1,6 @@
-"""OFFLINE ONLY. Real 3-slot media evidence; synthetic GET supplement explicitly
-marked in setUp until owner provides a fuller real adset snapshot. No API writes.
+"""OFFLINE ONLY. Real 3-slot snapshots plus owner GET-only supplement.
+Every positive fixture field comes from stored Graph GETs, never manifest values.
+No API writes; transport/crash simulations remain explicitly test doubles.
 """
 import copy,hashlib,importlib.util,json,os,socket,sys,tempfile,unittest
 from contextlib import contextmanager
@@ -24,13 +25,15 @@ def runner_load():
 
 def full_fixture():
  s=copy.deepcopy(SNAP)
- supplement=M/'owner-supplement.json'
- if supplement.exists():s['adsets']=[rec.load(supplement)]
- else:
-  # FIXTURE ONLY, not real GET evidence. Tests for absent fields reject the
-  # original snapshot; production always requires a new full readback.
-  for k,v in PAYLOAD['campaigns'][0]['adset_create'].items():s['adsets'][0].setdefault(k,copy.deepcopy(v))
-  for k,v in PAYLOAD['campaigns'][0]['campaign_create'].items():s['campaign'].setdefault(k,copy.deepcopy(v))
+ supplement=rec.load(H/'origin-supplemental-live-readback-20261115T063608Z.json')
+ assert supplement['request_id']==G['request_id'] and supplement['meta_writes']==0
+ for section,target in [('campaign',s['campaign']),('adset',s['adsets'][0])]:
+  row=supplement[section];assert row['http_status']==200 and target['id']==row['body']['id']
+  for k,v in row['body'].items():
+   if k in target:
+    if k=='start_time':assert datetime.fromisoformat(target[k])==datetime.fromisoformat(v)
+    else:assert target[k]==v,(k,target[k],v)
+   else:target[k]=copy.deepcopy(v)
  return s
 
 class MediaTests(unittest.TestCase):
@@ -138,6 +141,7 @@ mutations={
  'buyingtype':lambda x:x.s['campaign'].update(buying_type='RESERVED'),
  'specialcategory':lambda x:x.s['campaign'].update(special_ad_categories=[]),
  'specialcountry':lambda x:x.s['campaign'].update(special_ad_category_country=['BR']),
+ 'feature_extra_optin':lambda x:first(x)['creative']['degrees_of_freedom_spec']['creative_features_spec'].update(unapproved_feature={'enroll_status':'OPT_IN'}),
  'lineage':lambda x:first(x).update(source_ad_id='123'),
 }
 for n,f in mutations.items():mutation_test(n,f)
@@ -257,6 +261,22 @@ class FinalizeTests(PipelineTests):
  def test_recover_terminal_then_finalize_no_post(self):
   self.run_recovery();f=self.finish();self.run_recovery();self.assertEqual(f,self.finish());self.assertEqual(1,self.activate_count)
   self.assertFalse(rec.load(Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json")['blocks_readers'])
+ def test_terminal_finalize_is_readonly_no_lease_reopen(self):
+  self.run_recovery();f=self.finish()
+  lease=Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json"
+  before={p:p.read_bytes() for p in [self.inv,self.ledger,lease]}
+  with patch.object(rec,'write_assignments',side_effect=AssertionError('terminal write forbidden')):
+   self.assertEqual(f,self.finish())
+  self.assertEqual(before,{p:p.read_bytes() for p in before})
+ def test_crash_after_final_before_links_repaired_by_finalize(self):
+  self.run_recovery();real=rec.cas_link
+  def crash(p,k,v,b):
+   if k=='independent_media_finalization':raise RuntimeError('offline crash before links')
+   return real(p,k,v,b)
+  with patch.object(rec,'cas_link',side_effect=crash):
+   with self.assertRaises(RuntimeError):self.finish()
+  self.assertTrue((self.h/'final.json').exists());self.assertEqual(3,len(self.moved))
+  f=self.finish();self.assertEqual('COMPLETE',f['phase']);self.assertEqual(1,self.activate_count)
  def test_independent_source_proof_requires_all_stock_receipts(self):
   self.run_recovery();self.finish();cp=rec.load(self.g['checkpoint_path'])
   fp=rec.independent_completion(cp,{},self.q['request_id'],self.q['account_id'],self.g['ids'],audit_root=self.h);self.assertEqual(self.h/'final.json',fp)
