@@ -15,6 +15,22 @@ SPEC.loader.exec_module(MODULE)
 
 
 class EggbevCreationIntakeTests(unittest.TestCase):
+    def setUp(self):
+        # Freeze only this module's clock; never mutate the shared datetime module.
+        self.now = dt.datetime(2026, 11, 14, 20, 0, tzinfo=ZoneInfo("America/New_York"))
+        case = self
+
+        class FrozenDatetime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return case.now.astimezone(tz) if tz else case.now.replace(tzinfo=None)
+
+        clock = mock.Mock(wraps=dt)
+        clock.datetime = FrozenDatetime
+        patcher = mock.patch.object(MODULE, "dt", clock)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def make_args(self, **overrides):
         values = {
             "page_token": "pg_5024",
@@ -56,6 +72,19 @@ class EggbevCreationIntakeTests(unittest.TestCase):
         now = dt.datetime(2026, 8, 29, 20, 0, tzinfo=ZoneInfo("America/New_York"))
         self.assertEqual(MODULE.next_midnight(now), "2026-08-30T00:00:00-04:00")
 
+    def test_next_midnight_obeys_dst_at_the_target_calendar_day(self):
+        cases = [
+            ("2026-08-29T20:00:00-04:00", "2026-08-30T00:00:00-04:00"),
+            ("2026-11-14T20:00:00-05:00", "2026-11-15T00:00:00-05:00"),
+            ("2026-03-08T00:30:00-05:00", "2026-03-09T00:00:00-04:00"),
+            ("2026-11-01T00:30:00-04:00", "2026-11-02T00:00:00-05:00"),
+        ]
+        for current, expected in cases:
+            with self.subTest(current=current):
+                self.now = dt.datetime.fromisoformat(current).astimezone(ZoneInfo("America/New_York"))
+                self.assertEqual(MODULE.next_midnight(), expected)
+                self.assertEqual(MODULE.next_midnight(self.now), expected)
+
     @mock.patch.object(MODULE, "live_page_check")
     def test_minimal_request_applies_defaults_and_requires_nine_unique_assets(self, page_check):
         page_check.return_value = self.page_fixture()
@@ -63,13 +92,24 @@ class EggbevCreationIntakeTests(unittest.TestCase):
         self.assertEqual(result["request"]["required_unique_assets"], 9)
         self.assertEqual(result["defaults_applied"]["structure"], "3 campaigns x 1 ad set x 3 ads")
         self.assertFalse(result["defaults_applied"]["creative_reuse_across_campaigns"])
-        self.assertTrue(result["defaults_applied"]["start_time"].endswith("T00:00:00-04:00"))
+        self.assertEqual(result["defaults_applied"]["start_time"], "2026-11-15T00:00:00-05:00")
         self.assertEqual(result["status"], "NEEDS_INPUT")
         self.assertEqual(
             result["missing_user_inputs"],
             ["daily_budget_usd_per_campaign"],
         )
         self.assertEqual(result["provided_inputs"]["automatic_ad_name_template"], "AD NN - {canonical_stem}")
+        self.assertEqual(result["meta_writes"], 0)
+        self.assertEqual(result["reservations_written"], 0)
+
+    @mock.patch.object(MODULE, "live_page_check")
+    def test_minimal_request_keeps_summer_offset(self, page_check):
+        page_check.return_value = self.page_fixture()
+        self.now = dt.datetime(2026, 8, 29, 20, 0, tzinfo=ZoneInfo("America/New_York"))
+        result = MODULE.simulate(self.make_args())
+        self.assertEqual(result["defaults_applied"]["start_time"], "2026-08-30T00:00:00-04:00")
+        self.assertEqual(result["defaults_applied"]["timezone"], "America/New_York")
+        self.assertEqual(result["request"]["required_unique_assets"], 9)
         self.assertEqual(result["meta_writes"], 0)
         self.assertEqual(result["reservations_written"], 0)
 

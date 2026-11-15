@@ -66,6 +66,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         )
         payload = build_eggbev_from_zero_manifest(
             registry=self.registry,
+            app_key=CONFIG["accounts"][ACCOUNT_ID]["app_key"],
             request_id="eggbev-test-request",
             page_id="123456789012345",
             instagram_user_id="17841400000000000",
@@ -102,6 +103,13 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         payload = self._build(campaigns=1, ads_per_campaign=5)
         validate_account_policy(Manifest.from_dict(payload), CONFIG)
         self.assertEqual(len(payload["campaigns"][0]["ads"]), 5)
+
+    def test_policy_rejects_app_key_mismatch(self) -> None:
+        payload = self._build(campaigns=1)
+        self.assertEqual(payload["campaigns"][0]["app_key"], CONFIG["accounts"][ACCOUNT_ID]["app_key"])
+        payload["campaigns"][0]["app_key"] += "-wrong-binding"
+        with self.assertRaisesRegex(ManifestError, "app_key mismatch"):
+            validate_account_policy(Manifest.from_dict(payload), CONFIG)
 
     def test_manual_placements_exclude_audience_network(self) -> None:
         payload = self._build(campaigns=1)
@@ -236,7 +244,10 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         validate_account_policy(Manifest.from_dict(payload), CONFIG)
         sealed = prevalidate_payload(payload, self.registry)
         manifest = Manifest.from_dict(sealed)
-        engine = CampaignEngine(CONFIG, transport_factory=lambda account: FakeBatchTransport(account))
+        config = copy.deepcopy(CONFIG)
+        config["state_root"] = str(Path(self.tmp.name) / "state")
+        config["audit_root"] = str(Path(self.tmp.name) / "audit")
+        engine = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account))
         dry_run = engine.dry_run(manifest)
         self.assertEqual(dry_run["writes"], 0)
         plan = Planner(bundle_size=2, max_ads_per_batch=10).build(manifest)

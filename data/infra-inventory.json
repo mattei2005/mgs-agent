@@ -65674,6 +65674,37 @@
       "source_campaign_unchanged": true,
       "historical_coordination": "SUSPENDED_BY_OPERATOR; never campaign COMPLETE",
       "other_accounts_unchanged": true
+    },
+    {
+      "id": "ares-eggbev-source-cta-t_2559be3f",
+      "agent": "zeus",
+      "type": "source_cta_shape_normalization",
+      "status": "installed_verified_no_live_prepare",
+      "updated_at": "2026-11-14T21:46:14.207807-05:00",
+      "source_task": "t_2559be3f",
+      "delivery_owner": "ares",
+      "delivery_task": "t_99deb773",
+      "request_id": "eggbev-pg23189-1571342489162489937",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_2559be3f/install-receipt.json",
+      "changed_files": {
+        "/root/mgs-agent/scripts/ares-eggbev-target-clone.py": "8fa8c28709044338239414ccf255d6958ff6f227537ddb4c97fb616ae072c8aa",
+        "/root/mgs-agent/tests/test_eggbev_source_cta.py": "99672dc4ef1a647b00f8b66f29f8c7a90932b654b1cafb2f7c61930cb9609875",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md": "7590dcf32226c0f883d7b585193f009d1eca469c2e70a2c1578a08a8daa94e95",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/exact-source-cta-preflight.md": "ef7f61c947a98aa63739f03b3ee8bcd53c984bb75e53f78f3f77220a4227c22f",
+        "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/SKILL.md": "7590dcf32226c0f883d7b585193f009d1eca469c2e70a2c1578a08a8daa94e95",
+        "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/exact-source-cta-preflight.md": "ef7f61c947a98aa63739f03b3ee8bcd53c984bb75e53f78f3f77220a4227c22f"
+      },
+      "tests_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_2559be3f/installed-tests.json",
+      "tests_passed": 146,
+      "tests_modules": 9,
+      "new_cta_tests": 23,
+      "meta_writes": 0,
+      "drive_writes": 0,
+      "live_prepare": false,
+      "source_unchanged": true,
+      "reservations_and_uploads_reused_not_replayed": true,
+      "legacy_qa_followup": "t_19e512e1",
+      "source_comparison_and_slots_unchanged": true
     }
   ],
   "profile_skill_references": [
@@ -66956,6 +66987,22 @@
       "modified_at": "2026-11-04T05:28:53.096489+00:00",
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-update-core.md",
       "sha256": "d55663a7f223705260ef2f2cc811a5fd05f42bb27dc40cdefd2c0b96ddf6d8f6"
+    },
+    {
+      "agent": "zeus",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md",
+      "sha256": "7590dcf32226c0f883d7b585193f009d1eca469c2e70a2c1578a08a8daa94e95",
+      "modified_at": "2026-11-14T21:46:14.207807-05:00",
+      "description": "Exact native/AFS CTA preflight; no execution or comparator changes",
+      "maintenance_task": "t_2559be3f"
+    },
+    {
+      "agent": "zeus",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/exact-source-cta-preflight.md",
+      "sha256": "ef7f61c947a98aa63739f03b3ee8bcd53c984bb75e53f78f3f77220a4227c22f",
+      "modified_at": "2026-11-14T21:46:14.207807-05:00",
+      "description": "Exact native/AFS CTA preflight; no execution or comparator changes",
+      "maintenance_task": "t_2559be3f"
     }
   ],
   "systemd_services": [
@@ -68290,8 +68337,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-target-clone.py",
-      "size_bytes": 31639,
-      "modified_at": "2026-11-14T21:18:49-05:00"
+      "size_bytes": 34031,
+      "modified_at": "2026-11-14T21:40:34.680823-05:00",
+      "sha256": "8fa8c28709044338239414ccf255d6958ff6f227537ddb4c97fb616ae072c8aa"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-thread-reconcile.py",
