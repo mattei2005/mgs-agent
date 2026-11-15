@@ -3014,12 +3014,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIEWER-LOAN-1571342489162489937",
-      "next_step": "Aguardar handoff/hash instalado da manutencao;retomar MESMO prepare sem replay;revalidar inicio literal e perguntar SO novo horario se vencer;entregar resumo selado e aguardar OK posterior;nao execute",
+      "next_step": "Retomar somente prepare canonico;validar selo e QA;entregar resumo na origem;aguardar OK posterior sem execute",
       "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
-      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/prepare-legacy-feature-readback.json",
-      "state": "prepare_pending_legacy_feature_maintenance:cta3slots passou;3registry_hits;6ids epbia verificados;zero uploads/campanhas novos;standard_enhancements legado falha schema;manutencao isolada t_e6a20db6;origem avisada por1571358145392025701 getverificado",
+      "source": "data/ares/meta-ads/audit/maintenance/t_e6a20db6/handoff.json",
+      "state": "maintenance_verified:13receipt hashes,105protected,86runtime iguais;writer livre;mesmo request/start/reservas/6ids preservados;retomada prepare autorizada",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T02:56:30+00:00"
+      "updated_at": "2026-11-15T03:04:56+00:00"
     },
     {
       "agent": "ares",
@@ -10727,5 +10727,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T03:00:04+00:00"
+  "updated_at": "2026-11-15T03:04:56+00:00"
 }
