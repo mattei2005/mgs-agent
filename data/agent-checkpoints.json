@@ -1723,12 +1723,12 @@
     {
       "agent": "ares",
       "id": "ARES-JOE-CUSTOM-LAYOUT-1571317231135096843",
-      "next_step": "Backup e patch dos renderers; testar snapshots reais e limites Discord; persistir politica e validar readback",
+      "next_step": "Proximas entregas usam o mesmo cron existente e layout aprovado; nenhuma atualizacao extra ou reativacao autorizada. Recorrencias finitas encerram15nov00hEST.",
       "objective": "Aplicar tabela compacta aprovada aos relatorios customizados Joe G004, sem mudar fontes, coortes, agendas ou destinos",
-      "source": "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-roi-20261114.py",
-      "state": "dois jobs cpr+roi habilitados identificados; alterar somente renderizacao, preservar historico e jobs concluidos",
+      "source": "data/ares/meta-ads/policies/joe-custom-report-layout.json",
+      "state": "implemented_validated: renderers mavroa04 e yolokfx04 em colunas; seis grupos de testes pass e ambos wrappers dry-run live19:18est aprovados,16/11campanhas,zero publicacao/writemeta; politica e skill persistidas/readback; jobs/wrappers preservados",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-15T00:14:42+00:00"
+      "updated_at": "2026-11-15T00:19:10+00:00"
     },
     {
       "agent": "ares",
@@ -10657,5 +10657,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:16:42+00:00"
+  "updated_at": "2026-11-15T00:19:10+00:00"
 }
