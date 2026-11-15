@@ -262,6 +262,7 @@ def private_tick(max_files=4):
  authority(False)
  with intake.locked_state() as state:
   bid=read(H/'batch-binding.json')['batch_id'];entry=state['claims'].get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM');validate_batch(entry['batch'])
+  if entry['status']=='complete':return {'status':'complete','replay':True,'remaining':0,'verified':len(read(H/'private-progress.json',{'verified':{}})['verified'])}
   with b.queue_lock() as lease:
    sa=b.Drive(True);plan=verify_plan(sa);progress=read(H/'private-progress.json',{'verified':{}});remaining=[x for x in plan['objects'] if x['key'] not in progress['verified']]
    if not remaining:return {'status':'complete','verified':len(progress['verified']),'remaining':0}
@@ -335,6 +336,10 @@ def stock_aliases():
 def audit_and_activate(d):
  import concurrent.futures,mgs_flat_cutover as cut
  plan=verify_plan(d);progress=read(H/'private-progress.json',{});require(set(progress.get('verified',{}))=={x['key'] for x in plan['objects']},'RECOVERY_PRIVATE_INCOMPLETE')
+ previous=read(H/'receipt.json')
+ if previous is not None:
+  validate_receipt_replay(plan,previous)
+  return activate_receipt(d,plan,previous)
  def audit(item):
   from ares_archive_storage import drive
   c=drive(d.token);m=file_meta(c,item['id']);require(m['parents']==[item['destination_parent']] and not m.get('driveId') and m['name']==item['metadata_before']['name'] and m['trashed'] is False,'RECOVERY_AUDIT_NATIVE_LOCATION')
@@ -358,6 +363,19 @@ def audit_and_activate(d):
   h=item['hashes'];mappings[item['id']]={'mapping_kind':'reupload_recovery_verified','sourceId':item['id'],'archiveId':item['id'],'stockShortcutId':item['id'],'archiveParentId':LEGACY,'stockParentId':LEGACY,'lineageId':item['asset_id'],'role':'original','name':item['metadata_before']['name'],'mimeType':'video/mp4','size':h['size'],'md5':h['md5'],'sha256':h['sha256'],'representation':'same_id_preserved_original','permissions_expected':item['permissions_expected'],'authority_message_id':APPROVAL,'verified':True,'stockTransferredToArchive':True,'owner':b.ACCOUNT}
  require(len(mappings)==189,'RECOVERY_MAPPING_COUNT')
  receipt={'schema':'mgs.creative.reupload.recovery.receipt.v1','status':'verified','authority_message_id':APPROVAL,'acl_authority_message_id':ACL_APPROVAL,'source_count':116,'lineage_count':73,'plan_sha256':plan['plan_sha256'],'all_full_streams_verified':True,'same_raw_ids':True,'existing_logical_ids_preserved':True,'folder_permissions_unchanged':True,'proofs':proofs,'mappings':mappings,'verified_at':b.now_iso()};save(H/'receipt.json',receipt)
+ return activate_receipt(d,plan,receipt)
+
+def validate_receipt_replay(plan,receipt):
+ require(receipt.get('schema')=='mgs.creative.reupload.recovery.receipt.v1' and receipt.get('status')=='verified' and receipt.get('authority_message_id')==APPROVAL and receipt.get('acl_authority_message_id')==ACL_APPROVAL and receipt.get('plan_sha256')==plan['plan_sha256'] and receipt.get('source_count')==116 and receipt.get('lineage_count')==73 and receipt.get('all_full_streams_verified') is True,'RECOVERY_REPLAY_RECEIPT_SCOPE')
+ require(set(receipt['proofs'])=={x['key'] for x in plan['objects']} and len(receipt['mappings'])==189,'RECOVERY_REPLAY_RECEIPT_MEMBERSHIP')
+ for item in plan['objects']:
+  proof=receipt['proofs'][item['key']];m=proof['metadata'];expected_acl=plan['folder_permissions'][USED] if item['kind']=='move_shortcut' else item['permissions_expected']
+  require(proof['verified'] is True and proof['hashes']==item['hashes'] and m['id']==item['id'] and m['parents']==[item['destination_parent']] and m['name']==item['metadata_before']['name'] and same_access(expected_acl,proof['permissions']),'RECOVERY_REPLAY_PROOF_CHANGED')
+ return True
+
+def activate_receipt(d,plan,receipt):
+ import mgs_flat_cutover as cut
+ validate_receipt_replay(plan,receipt);mappings=receipt['mappings']
  fid,checksum=cut.publish(d,'reupload-recovery-receipt-'+APPROVAL+'.json','reupload-recovery-receipt:'+APPROVAL,receipt)
  binding={'schema':'mgs.creative.reupload.recovery.binding.v1','phase':'active','approval_message_id':APPROVAL,'acl_approval_message_id':ACL_APPROVAL,'source_manifest_sha256':DISP_SHA,'plan_publication':read(H/'plan-publication.json'),'receipt_publication':{'file_id':fid,'sha256':checksum},'source_count':116,'lineage_count':73,'mappings':mappings};binding['binding_sha256']=digest(binding)
  # Validate the exact catalogue before publishing its local active switch.

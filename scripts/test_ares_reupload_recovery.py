@@ -41,6 +41,17 @@ class ScopeTests(unittest.TestCase):
    p={'phase':'active','approval_message_id':r.APPROVAL,'acl_approval_message_id':r.ACL_APPROVAL,'source_manifest_sha256':r.DISP_SHA,'binding_sha256':'wrong'}
    (pathlib.Path(d)/'binding.json').write_text(json.dumps(p))
    with self.assertRaises(r.RecoveryError):r.active_binding()
+ def test_receipt_replay_keeps_first_actual_proofs(self):
+  receipt=r.read(r.H/'receipt.json');plan=r.read(r.H/'move-plan.json')
+  if receipt is None:self.skipTest('Real receipt not yet produced')
+  before=r.digest(receipt);self.assertTrue(r.validate_receipt_replay(plan,receipt));self.assertEqual(r.digest(receipt),before)
+ def test_receipt_replay_rejects_other_plan(self):
+  with self.assertRaises(r.RecoveryError):r.validate_receipt_replay({'plan_sha256':'expected'},{'status':'verified','plan_sha256':'other'})
+ def test_receipt_replay_rejects_changed_actual_source_proof(self):
+  receipt=r.read(r.H/'receipt.json');plan=r.read(r.H/'move-plan.json')
+  if receipt is None:self.skipTest('Real receipt not yet produced')
+  changed=copy.deepcopy(receipt);key=next(iter(changed['proofs']));changed['proofs'][key]['metadata']['parents']=['unapproved-parent']
+  with self.assertRaises(r.RecoveryError):r.validate_receipt_replay(plan,changed)
 
 class CatalogueTests(unittest.TestCase):
  def setUp(self):

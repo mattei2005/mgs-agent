@@ -219,6 +219,9 @@ class InstalledRunnerTests(unittest.TestCase):
             home = Path(temp); a, b = snapshot(OLD), snapshot(NEW)
             runner.save(home / 'source-live.json', a); runner.save(home / 'manifest.json', {'prevalidation': {'content_digest': 'a' * 64}})
             q = dict(request_id=CONTEXT['request_id'], source_campaign_id_candidate='456', commercial_ok_message_id='earlier', target_page_token='pg_23189')
+            runner.save(home/'request.json',q);config=home/'config.json'
+            runner.save(config,{'state_root':str(home/'state'),'audit_root':str(home/'audit'),'accounts':{runner.ACCOUNT:{}}})
+            stack.enter_context(patch.object(runner,'CONFIG',config))
             # Match runner's exact account without touching production input.
             for s in (a, b): s['campaign']['account_id'] = runner.ACCOUNT
             runner.save(home / 'source-live.json', a)

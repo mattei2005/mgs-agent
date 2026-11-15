@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-15T00:01:02-05:00",
+    "updated_at": "2026-11-15T00:01:37-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -892,6 +892,33 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "autopush-recovery-48c10aa22ccc9b5aa0b7ee5b",
+      "agent": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "status": "target_and_delivery_validated_supervisor_closure_pending",
+      "validated_native_commit": "1135dded86719abab9b4cfe9007cf15a6f90edf5",
+      "head_equals_origin_main": true,
+      "monitor_total_failures": 0,
+      "monitor_consecutive_failures": 0,
+      "native_recovery_message_GET_verified": "1571390013395177483",
+      "report_infra_message_GET_verified": "1571390095565521001",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1571388310058836049",
+      "business_authority_message_id": "1571372290707562638",
+      "business_writer_preserved": true,
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/48c10aa22ccc9b5aa0b7ee5b/recovery-evidence.json",
+      "correction": "Three anchored exact .gitignore exclusions for untracked local intake journals; sensitive guard unchanged; no restart, schedule, credential, permission or business writes.",
+      "changed_paths": [
+        ".gitignore",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py",
+        "log-monitor-discord-alert/references/route-pack-06.md"
+      ],
+      "tests_passed": 48,
+      "manual_commit_or_push": false,
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/48c10aa22ccc9b5aa0b7ee5b/"
+    },
     {
       "id": "hermes-watchdog-recovery-b0bf8a238e1a068b6c86b7f1",
       "agent": "zeus",
@@ -73933,14 +73960,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 118328,
-      "md5": "63b1e7a39b2c289cffda3a80ad3cd3c1",
-      "modified_at": "2026-11-15T00:01:02-05:00"
+      "md5": "7d9b0cc2a6bc04dd602b4b6248e0e523",
+      "modified_at": "2026-11-15T00:02:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "1072116148af5ba5e555c393886145b8",
-      "modified_at": "2026-11-15T00:01:02-05:00"
+      "md5": "fc78b1dcd38c060aea3fd63c9dc92a8d",
+      "modified_at": "2026-11-15T00:02:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -74034,9 +74061,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3564214,
-      "md5": "9d71200b27a3025f7a21fb968961af55",
-      "modified_at": "2026-11-14T23:48:29-05:00"
+      "size_bytes": 3564386,
+      "md5": "fb115d1f6abde175f0011041a763782e",
+      "modified_at": "2026-11-15T00:01:35-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -74089,8 +74116,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 103369,
-      "md5": "17afb213a3699f5bee9b48d39a68e2eb",
-      "modified_at": "2026-11-14T23:59:07-05:00"
+      "md5": "f45c1d58412802c0d918585b53946317",
+      "modified_at": "2026-11-15T00:02:07-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",

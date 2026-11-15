@@ -157,9 +157,13 @@ def validate_local(path,config,approved_digest,approval_message_id):
         raise ValueError('ASAP identity/approval/digest/allowlist mismatch')
     _authority(grant)
     originals=_original(home,grant);base=load_bytes(originals['manifest.json'])
+    original_request=load_bytes(originals['request.json']);original_summary=load_bytes(originals['summary.json'])
     if (not verify_prevalidation(base) or base['prevalidation']['content_digest']!=approved_digest
             or base.get('request_id')!=rid or base.get('operation')!=OPERATION or len(base.get('campaigns',[]))!=1
-            or base['campaigns'][0].get('mode')!=MODE or base['campaigns'][0].get('account_id')!=aid):
+            or base['campaigns'][0].get('mode')!=MODE or base['campaigns'][0].get('account_id')!=aid
+            or base['campaigns'][0].get('start_time')!=original_request.get('start_time')
+            or original_summary.get('start_time')!=original_request.get('start_time')
+            or original_summary.get('digest')!=approved_digest):
         raise ValueError('ASAP original approved sealed manifest mismatch')
     current,last,pending=_transactions(home,grant,originals)
     for name in grant['files']:
@@ -214,7 +218,8 @@ def live_authority(context,*,meta,token,get_message=None):
     issuer=issuer.get('data') or {}
     if (code!=200 or issuer_code!=200 or identity.get('id')!=grant['meta_actor_id']
             or issuer.get('is_valid') is not True or str(issuer.get('user_id'))!=grant['meta_actor_id']
-            or str(issuer.get('app_id'))!=grant['account_identity']['meta_app_id']):
+            or str(issuer.get('app_id'))!=grant['account_identity']['meta_app_id']
+            or issuer.get('type')!=grant.get('meta_token_type','USER')):
         raise ValueError('ASAP live advertiser identity/app mismatch')
 
 
@@ -234,6 +239,9 @@ def _redo(folder,tx,before,following,home,after_write):
         installed=folder.parent/f"{tx['index']:06d}"
         if installed.exists():raise ValueError('ASAP staged transaction collision')
         os.rename(folder,installed);folder=installed
+        fd=os.open(folder.parent,os.O_RDONLY)
+        try:os.fsync(fd)
+        finally:os.close(fd)
     for name in MUTABLE:
         raw=(home/name).read_bytes()
         if raw not in {before[name],following[name]}:raise ValueError('ASAP CAS conflict; foreign file preserved')

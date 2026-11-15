@@ -66,7 +66,8 @@ class RevisionTests(unittest.TestCase):
         from ares_campaign_v3.prevalidation import content_digest
         self.payload['prevalidation']['content_digest']=content_digest(self.payload);self.approved=self.payload['prevalidation']['content_digest'];self.grant['approved_digest']=self.approved
         rev.atomic_json(self.path,self.q);rev.atomic_json(self.home/'manifest.json',self.payload)
-        for name in ['request.json','manifest.json']:self.grant['files'][name]=rev.file_digest(self.home/name)
+        summary=rev.load(self.home/'summary.json');summary.update(start_time=old,digest=self.approved);rev.atomic_json(self.home/'summary.json',summary)
+        for name in ['request.json','manifest.json','summary.json']:self.grant['files'][name]=rev.file_digest(self.home/name)
         self.repin();self.assertTrue(verify_prevalidation(self.materialize()))
     def repin(self):
         gp=Path(self.cfg['accounts'][AID]['target_page_replacement']['start_revisions'][RID]['receipt_path']);rev.atomic_json(gp,self.grant);self.cfg['accounts'][AID]['target_page_replacement']['start_revisions'][RID]['sha256']=rev.file_digest(gp)
@@ -103,6 +104,14 @@ class RevisionTests(unittest.TestCase):
         with self.assertRaises(ValueError):rev.live_authority(self.binding(),meta=self.meta(),token='synthetic',get_message=self.get)
     def test_wrong_credential_identity(self):
         meta=self.meta();meta.graph_get_credential_metadata=lambda *a,**kw:(200,{'id':'999'},{})
+        with self.assertRaises(ValueError):rev.live_authority(self.binding(),meta=meta,token='synthetic',get_message=self.get)
+    def test_wrong_token_type_denied(self):
+        meta=self.meta();original=meta.graph_get_credential_metadata
+        def wrong(*a,**kw):
+            code,body,headers=original(*a,**kw)
+            if kw.get('inspect_token'):body['data']['type']='SYSTEM_USER'
+            return code,body,headers
+        meta.graph_get_credential_metadata=wrong
         with self.assertRaises(ValueError):rev.live_authority(self.binding(),meta=meta,token='synthetic',get_message=self.get)
     def test_non_start_delta_denied(self):
         p=copy.deepcopy(self.payload);p['campaigns'][0]['campaign_create']['daily_budget']='3600'
@@ -227,6 +236,16 @@ class RevisionTests(unittest.TestCase):
         runner,fake,_=self.runner_setup()
         with self.assertRaises(ValueError):runner.execute(self.path,True,'f'*64,self.approval)
         self.assertFalse(fake.calls);self.assertFalse((self.home/'start-revisions').exists())
+    def test_full_execute_expired_original(self):
+        old=(datetime.now(timezone.utc)-timedelta(days=1)).isoformat()
+        from ares_campaign_v3.prevalidation import content_digest
+        self.payload['campaigns'][0]['start_time']=old;self.payload['prevalidation']['content_digest']=content_digest(self.payload)
+        self.approved=self.payload['prevalidation']['content_digest'];self.grant['approved_digest']=self.approved;self.q['start_time']=old
+        rev.atomic_json(self.path,self.q);rev.atomic_json(self.home/'manifest.json',self.payload)
+        summary=rev.load(self.home/'summary.json');summary.update(start_time=old,digest=self.approved);rev.atomic_json(self.home/'summary.json',summary)
+        for name in ['request.json','manifest.json','summary.json']:self.grant['files'][name]=rev.file_digest(self.home/name)
+        self.repin();runner,fake,_=self.runner_setup()
+        self.assertEqual(runner.execute(self.path,True,self.approved,self.approval)['phase'],'POSTPROCESS_PENDING');self.assertTrue(fake.calls)
     def test_full_execute_missing_grant_before_engine(self):
         runner,fake,config=self.runner_setup();self.cfg['accounts'][AID]['target_page_replacement']['start_revisions']={};rev.atomic_json(config,self.cfg)
         with self.assertRaises(ValueError):runner.execute(self.path,True,self.approved,self.approval)
