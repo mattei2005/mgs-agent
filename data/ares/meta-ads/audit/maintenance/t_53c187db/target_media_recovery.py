@@ -75,10 +75,13 @@ def local(path,runner,approved_digest,approval_message_id):
     require(cfg.get('enabled') is True and cfg.get('write_enabled') is True,'runtime write gates')
     temporal=revision.validate_local(path,cfg,approved_digest,approval_message_id)
     require(temporal['last'] and not temporal['pending'],'committed original ASAP mapping')
+    require(runner.request_load(path,temporal=temporal)==q,'fresh request/domain/account scope')
     ctx=continuation.validate_local(path,payload,cfg)
     # validate_record needs the exact elapsed admission; no schema bypass.
     marker=continuation.CURRENT.set(ctx)
-    try:ids=continuation.validate_record(payload,ctx['record'])
+    try:
+        ids=continuation.validate_record(payload,ctx['record'])
+        runner.validate_account_policy(runner.Manifest.from_dict(payload),cfg)
     finally:continuation.CURRENT.reset(marker)
     require(ids==g['ids'] and ctx['record'].get('target_clone_ids')==ids and len(ids)==11,'all confirmed children/journal')
     require(ctx['record'].get('ad_ids')==[ids[f'copied_ad_id_1_{i}'] for i in range(1,4)],'final slot list')
@@ -316,7 +319,9 @@ def recover(path,runner,approved_digest,approval_message_id,*,runtime_factory=Ru
             proof=load(g['proof_path']);downloads=[];started=utc()
             for p in ps:
                 for vid in [p['expected_video_id'],p['observed_video_id']]:
-                    meta=runtime.video(vid);expected=validate_video(meta,p,proof);downloads.append(inspect_bytes(fetch_video(meta['source']),expected))
+                    meta=runtime.video(vid);require(meta.get('id')==vid,'video GET returned a different requested ID')
+                    expected=validate_video(meta,p,proof);downloads.append(inspect_bytes(fetch_video(meta['source']),expected))
+            validate_media_coverage({'pairs':ps,'downloads':downloads},g,payload)
             fresh(started);runtime.authority();runtime.source_page()
             # Re-read after long downloads. No stale hierarchy can activate.
             snapshot=runtime.read();semantic(payload,g['ids'],selected,snapshot,g['pairs'],state)
@@ -341,6 +346,12 @@ def validate_receipt(link,g,payload,path,allow_stale=False):
         and v.get('request_id')==g['request_id'] and v.get('grant_sha256')==GRANT_SHA256 and v.get('ids')==g['ids']
         and v.get('request_sha256')==file_sha(path) and v.get('manifest_digest')==digest(payload) and v.get('approval_message_id')==g['approval_message_id']
         and v.get('original_approved_digest')==g['original_approved_digest'] and len(v.get('pairs',[]))==6 and len(v.get('downloads',[]))==12,'receipt binding/coverage')
+    validate_media_coverage(v,g,payload)
+    if not allow_stale:fresh(v['fresh_at'])
+    return v
+
+def validate_media_coverage(v,g,payload):
+    """Before ACTIVE, require all 12 distinct requested IDs/bytes/frames."""
     expected_downloads=[]
     proof=load(g['proof_path'])
     expected_pairs=[]
@@ -352,8 +363,6 @@ def validate_receipt(link,g,payload,path,allow_stale=False):
             d=next(d for d in proof['downloads'] if d['video_id']==vid)
             expected_downloads.append({'video_id':vid,'sha256':d['sha256'],'bytes':d['bytes'],'frames':[f['sha256'] for f in d['frames']],'dimensions':[d['width'],d['height']]})
     require(v['pairs']==expected_pairs and v['downloads']==expected_downloads,'receipt proof contents differ from pinned bytes/frames/slots')
-    if not allow_stale:fresh(v['fresh_at'])
-    return v
 
 def assignments_for(ps,snapshot,selected,ids):
     byid={a['id']:a for a in snapshot['ads']};out=[]
@@ -486,4 +495,13 @@ def terminal_readback(path,runner,g,cfg,q,payload,runtime_factory):
             require(result.get('status') in {'verified_plan','verified'} and result.get('same_ids') is True and result.get('remote_writes',0)==0,'terminal stock readback')
     ledger=load(runner.R/runner.naming.load_policy()['ledger_path'])['allocations'][q['request_id']]
     require(ledger.get('status')=='COMMITTED' and ledger.get('campaign_ids')==[g['ids']['campaign_id_1']],'terminal ledger')
+    # A crash after installing final links but before release must not leave
+    # readers blocked. Never claim a new lease, nor release another request.
+    from .coordination import AccountWriterLeaseStore
+    leases=AccountWriterLeaseStore(cfg['state_root']);lp=leases.path(q['account_id'])
+    if lp.exists():
+        lease=load(lp)
+        if lease.get('blocks_readers'):
+            require(lease.get('request_id')==q['request_id'],'terminal lease belongs to another request')
+            leases.release(q['account_id'],q['request_id'])
     return final

@@ -198,6 +198,20 @@ class PipelineTests(unittest.TestCase):
   next(a for a in self.s['ads'] if a['id']==G['ids']['copied_ad_id_1_1'])['creative']['asset_feed_spec']['additional_data']['page_welcome_message']='{}'
   with self.assertRaises(ValueError):self.run_recovery()
   self.assertEqual(0,self.activate_count)
+ def test_wrong_requested_video_id_never_activates(self):
+  original=self.runtime.video
+  def wrong(runtime,vid):
+   p=next(p for p in G['pairs'] if vid in [p['expected_video_id'],p['observed_video_id']])
+   return original(runtime,p['expected_video_id'])
+  with patch.object(self.runtime,'video',wrong):
+   with self.assertRaises(ValueError):self.run_recovery()
+  self.assertEqual(0,self.activate_count);self.assertFalse((self.h/'media-recovery'/'verified.json').exists())
+ def test_duplicate_download_coverage_never_activates(self):
+  d=PROOF['downloads'][0]
+  duplicate={'video_id':d['video_id'],'sha256':d['sha256'],'bytes':d['bytes'],'frames':[f['sha256'] for f in d['frames']],'dimensions':[d['width'],d['height']]}
+  with patch.object(rec,'inspect_bytes',return_value=duplicate):
+   with self.assertRaises(ValueError):self.run_recovery()
+  self.assertEqual(0,self.activate_count)
  def test_receipt_tamper(self):
   r=self.run_recovery();p=Path(r['recovery_receipt']['path']);v=rec.load(p);v['request_id']='other';rec.atomic(p,v)
   with self.assertRaises(ValueError):rec.validate_receipt(r['recovery_receipt'],self.g,self.payload,self.path)
@@ -277,6 +291,20 @@ class FinalizeTests(PipelineTests):
    with self.assertRaises(RuntimeError):self.finish()
   self.assertTrue((self.h/'final.json').exists());self.assertEqual(3,len(self.moved))
   f=self.finish();self.assertEqual('COMPLETE',f['phase']);self.assertEqual(1,self.activate_count)
+ def test_crash_before_release_terminal_retry_releases_same_lease(self):
+  from ares_campaign_v3.coordination import AccountWriterLeaseStore
+  self.run_recovery()
+  with patch.object(AccountWriterLeaseStore,'release',side_effect=RuntimeError('offline crash before release')):
+   with self.assertRaises(RuntimeError):self.finish()
+  lease=Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json"
+  self.assertTrue(rec.load(lease)['blocks_readers'])
+  self.assertEqual('COMPLETE',self.finish()['phase']);self.assertFalse(rec.load(lease)['blocks_readers']);self.assertEqual(1,self.activate_count)
+ def test_terminal_never_releases_other_request_lease(self):
+  self.run_recovery();self.finish()
+  lease=Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json"
+  v=rec.load(lease);v.update(request_id='another-request',blocks_readers=True);rec.atomic(lease,v)
+  with self.assertRaises(ValueError):self.finish()
+  self.assertEqual(v,rec.load(lease))
  def test_independent_source_proof_requires_all_stock_receipts(self):
   self.run_recovery();self.finish();cp=rec.load(self.g['checkpoint_path'])
   fp=rec.independent_completion(cp,{},self.q['request_id'],self.q['account_id'],self.g['ids'],audit_root=self.h);self.assertEqual(self.h/'final.json',fp)

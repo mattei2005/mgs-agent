@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Eggbev target-Page/media/copy replacement intake; writes only via Engine v3.
+"""Eggbev target-Page/media/copy replacement intake.
 
 Prepare is explicitly gated and may reserve/prestage but never publish. Execute
 requires the sealed digest and a fresh explicit final approval after its summary.
+Recover-media independently reconciles the same complete children, with only a
+status-only existing-parent activation; never replays Engine creation.
 """
 from __future__ import annotations
 import argparse,copy,fcntl,hashlib,importlib.util,json,os,re,subprocess,sys
