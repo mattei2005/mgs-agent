@@ -160,7 +160,7 @@ class PipelineTests(unittest.TestCase):
   self.runtime=FakeRuntime
   @contextmanager
   def admission(*args,**kwargs):yield None
-  self.patches=[patch.object(rec,'local',side_effect=lambda *a:(self.g,self.cfg,self.q,self.payload)),patch.object(rec.continuation,'admission',admission),patch.object(rec,'fetch_video',side_effect=lambda vid:Path(next(x['path'] for x in PROOF['downloads'] if x['video_id']==vid)).read_bytes()),patch.object(rec,'inspect_bytes',side_effect=lambda raw,d:{'video_id':d['video_id'],'sha256':rec.sha(raw)})]
+  self.patches=[patch.object(rec,'local',side_effect=lambda *a:(self.g,self.cfg,self.q,self.payload)),patch.object(rec.continuation,'admission',admission),patch.object(rec,'fetch_video',side_effect=lambda vid:Path(next(x['path'] for x in PROOF['downloads'] if x['video_id']==vid)).read_bytes()),patch.object(rec,'inspect_bytes',side_effect=lambda raw,d:{'video_id':d['video_id'],'sha256':rec.sha(raw),'bytes':len(raw),'frames':[f['sha256'] for f in d['frames']],'dimensions':[d['width'],d['height']]})]
   for p in self.patches:p.start()
  def tearDown(self):
   for p in reversed(self.patches):p.stop()
@@ -196,6 +196,100 @@ class PipelineTests(unittest.TestCase):
  def test_receipt_missing_download(self):
   r=self.run_recovery();v=rec.load(r['recovery_receipt']['path']);v['downloads'].pop();p=self.h/'media-recovery'/('receipt-'+rec.digest(v)+'.json');rec.atomic(p,v)
   with self.assertRaises(ValueError):rec.validate_receipt({'path':str(p),'sha256':rec.file_sha(p)},self.g,self.payload,self.path)
+
+class FinalizeTests(PipelineTests):
+ def setUp(self):
+  super().setUp()
+  import ares_manager_storage_standard as standard
+  self.standard=standard;self.inv=self.root/'data/ares/creative-ops/inventory/assets.jsonl';self.inv.parent.mkdir(parents=True)
+  rows=copy.deepcopy(SELECTED)
+  for r in rows:r.update(used_by='ARES_IN_FLIGHT',reservation_request_id=self.q['request_id'])
+  self.inv.write_text(''.join(json.dumps(r)+'\n' for r in rows));self.stock=self.root/'stock';self.stock.mkdir()
+  self.ledger=self.root/'ledger.json';rec.atomic(self.ledger,{'allocations':{self.q['request_id']:{'account_id':self.q['account_id'],'names':[PAYLOAD['campaigns'][0]['name']],'status':'RESERVED'}}})
+  self.runner=SimpleNamespace(INVENTORY=self.inv,R=self.root,naming=SimpleNamespace(load_policy=lambda:{'ledger_path':'ledger.json'}))
+  self.stock_calls=[];self.fail_slot=None;self.failed=False;self.moved=set()
+  def controller(asset_id,rid,apply=False):
+   self.stock_calls.append(asset_id)
+   if self.fail_slot==asset_id and not self.failed:self.failed=True;raise RuntimeError('offline stock partial failure')
+   rows=[json.loads(s) for s in self.inv.read_text().splitlines()];row=next(r for r in rows if r['asset_id']==asset_id)
+   p=self.stock/('use-'+rec.sha(standard.b.canonical([rid,row['asset_drive_id']]))+'.json')
+   v={'schema':'mgs.manager.standard.use.v1','status':'verified','request_id':rid,'asset_id':asset_id,'logical_id':row['asset_drive_id'],'stock_file_id':'stock_'+asset_id,'sha256':row['clean_checksum'],'folder_id':'used_folder','assignment':{'campaign_id':row['used_by'],'adset_id':row['meta_adset_id'],'ad_id':row['meta_ad_id'],'creative_id':row['meta_creative_id']}}
+   if p.exists():self.assertEqual(v,rec.load(p))
+   else:rec.atomic(p,v);self.moved.add(asset_id)
+   row.update(manager_media_folder_id='used_folder',manager_storage_state='used',manager_use_request_id=rid);self.inv.write_text(''.join(json.dumps(r)+'\n' for r in rows))
+   return {'status':'verified','asset_id':asset_id,'destination':'used_folder','same_ids':True}
+  self.extra=[patch.object(standard,'HOME',self.stock),patch.object(standard,'confirm_usage',controller),patch.object(rec,'repair_partial_stock',return_value=None)]
+  for p in self.extra:p.start()
+ def tearDown(self):
+  for p in reversed(self.extra):p.stop()
+  super().tearDown()
+ def finish(self):return rec.finalize(self.path,self.runner,G['original_approved_digest'],G['approval_message_id'],runtime_factory=self.runtime)
+ def test_finalize_real_ids_usados_then_ledger_and_retry(self):
+  self.run_recovery();f=self.finish();self.assertEqual('COMPLETE',f['phase']);self.assertEqual(3,len(self.moved));self.assertEqual(f,self.finish());self.assertEqual(1,self.activate_count)
+  rows=[json.loads(s) for s in self.inv.read_text().splitlines()]
+  for row in rows:self.assertEqual(next(p['observed_video_id'] for p in G['pairs'] if p['asset_id']==row['asset_id'] and p['labels'][0].endswith('_vertical')),row['meta_video_id'])
+  self.assertEqual('COMMITTED',rec.load(self.ledger)['allocations'][self.q['request_id']]['status'])
+  self.assertFalse(rec.load(Path(self.cfg['state_root'])/'writer-leases'/f"{self.q['account_id']}.json")['blocks_readers'])
+ def test_partial_stock_retry_missing_only_keeps_ledger_uncommitted(self):
+  self.run_recovery();self.fail_slot=SELECTED[1]['asset_id']
+  with self.assertRaises(RuntimeError):self.finish()
+  self.assertEqual({SELECTED[0]['asset_id']},self.moved);self.assertEqual('RESERVED',rec.load(self.ledger)['allocations'][self.q['request_id']]['status'])
+  self.finish();self.assertEqual(3,len(self.moved));self.assertEqual(1,self.activate_count)
+ def test_no_receipt_no_finalize(self):
+  with self.assertRaises(ValueError):self.finish()
+  self.assertFalse(self.stock_calls)
+ def test_fake_stock_receipt_does_not_commit(self):
+  self.run_recovery()
+  with patch.object(self.standard,'confirm_usage',return_value={'status':'verified','asset_id':SELECTED[0]['asset_id'],'same_ids':True,'destination':'used_folder'}):
+   with self.assertRaises(FileNotFoundError):self.finish()
+  self.assertEqual('RESERVED',rec.load(self.ledger)['allocations'][self.q['request_id']]['status'])
+ def test_final_get_drift_blocks_finalize(self):
+  self.run_recovery();self.s['adsets'][0]['targeting']['age_min']=30
+  with self.assertRaises(ValueError):self.finish()
+  self.assertFalse(self.stock_calls)
+ def test_recover_terminal_then_finalize_no_post(self):
+  self.run_recovery();f=self.finish();self.run_recovery();self.assertEqual(f,self.finish());self.assertEqual(1,self.activate_count)
+
+class AdapterTests(unittest.TestCase):
+ def test_status_transport_only_existing_parent_exact_body(self):
+  from unittest.mock import Mock
+  r=rec.Runtime.__new__(rec.Runtime);r.g=G;r.lane=('app','account');r.reserve=Mock();r.quota=Mock();r.transport=Mock();r.transport.last_outer_headers={}
+  r.transport.execute.return_value=[SimpleNamespace(code=200,body={'success':True})];r.activate()
+  ops,stage=r.transport.execute.call_args.args;self.assertEqual(1,len(ops));self.assertEqual('POST',ops[0].method);self.assertEqual(G['ids']['campaign_id_1'],ops[0].relative_url);self.assertEqual({'status':'ACTIVE'},ops[0].body);r.reserve.assert_called_once_with(3)
+ def test_uncertain_status_response_requires_get_no_second_post(self):
+  from unittest.mock import Mock
+  r=rec.Runtime.__new__(rec.Runtime);r.g=G;r.lane=('app','account');r.reserve=Mock();r.quota=Mock();r.transport=Mock();r.transport.last_outer_headers={};r.transport.execute.return_value=[SimpleNamespace(code=200,body={})]
+  with self.assertRaises(ValueError):r.activate()
+  self.assertEqual(1,r.transport.execute.call_count)
+ def test_quota_blocks_before_status_post(self):
+  from unittest.mock import Mock
+  r=rec.Runtime.__new__(rec.Runtime);r.reserve=Mock(side_effect=RuntimeError('quota'));r.transport=Mock()
+  with self.assertRaises(RuntimeError):r.activate()
+  r.transport.execute.assert_not_called()
+ def test_extra_required_fields_are_requested_readonly(self):
+  from unittest.mock import Mock
+  r=rec.Runtime.__new__(rec.Runtime);r.g=G;r.payload=PAYLOAD;r.lane=('app','account');r.reserve=Mock();r.quota=Mock();r.transport=Mock();r.transport.last_outer_headers={}
+  r.transport.execute.return_value=[SimpleNamespace(name='readback_campaign_1',code=200,body=SNAP['campaign']),SimpleNamespace(name='readback_adsets_1',code=200,body={'data':SNAP['adsets']}),SimpleNamespace(name='readback_ads_1',code=200,body={'data':SNAP['ads']})];r.read()
+  ops,_=r.transport.execute.call_args.args;self.assertTrue(all(op.method=='GET' for op in ops))
+  for k in PAYLOAD['campaigns'][0]['adset_create']:self.assertIn(k,ops[1].relative_url)
+ def test_partial_remote_move_reuses_original_source_and_stock_id(self):
+  import ares_manager_storage_standard as standard
+  import ares_archive_storage as storage
+  from unittest.mock import Mock
+  @contextmanager
+  def queue():yield
+  with tempfile.TemporaryDirectory(dir=os.environ['TMPDIR']) as td:
+   root=Path(td);inv=root/'data/ares/creative-ops/inventory/assets.jsonl';inv.parent.mkdir(parents=True);home=root/'receipts';home.mkdir()
+   asset=copy.deepcopy(SELECTED[0]);asset['manager_media_folder_id']='exclusive';row=copy.deepcopy(asset);row.update(manager_storage_state='exclusive',reservation_request_id=G['request_id']);inv.write_text(json.dumps(row)+'\n')
+   a={'campaign_id':'11','adset_id':'22','ad_id':'33','creative_id':'44'};q={'request_id':G['request_id']};key=rec.sha(standard.b.canonical([q['request_id'],asset['asset_drive_id']]))
+   old={'status':'intent','stock_file_id':'stock1','assignment':a,'request_id':q['request_id']};rec.atomic(home/('use-'+key+'.json'),old)
+   record={'parents':['used'],'stock_file_id':'stock1','sha256Checksum':asset['clean_checksum'],'md5Checksum':asset['clean_md5']}
+   result={'folder_id':'used','manager_code':'g006','request_id':q['request_id']};used=Mock(return_value=result)
+   with patch.object(standard.b,'BASE',root),patch.object(standard,'HOME',home),patch.object(standard.b,'queue_lock',queue),patch.object(standard.b,'Drive',return_value=SimpleNamespace(token='offline')),patch.object(storage,'resolve_media',return_value=record),patch.object(standard,'find_slot',return_value=({'used_id':'used'},'exclusive')),patch.object(standard,'mark_used',used),patch.object(standard,'apply_use_result',side_effect=lambda r,v:r.update(manager_storage_state='used',manager_media_folder_id=v['folder_id'])):
+    rec.repair_partial_stock(standard,asset,a,q)
+   used.assert_called_once();self.assertEqual('exclusive',used.call_args.args[2]['ready_parent_id']);self.assertEqual('used',json.loads(inv.read_text())['manager_storage_state'])
+ def test_receipt_content_hash_cannot_replace_proven_media(self):
+  v={'x':1};self.assertNotEqual(rec.digest(v),rec.digest({'x':2}))
 
 if __name__=='__main__':
  with patch.object(socket.socket,'connect',side_effect=AssertionError('offline network forbidden')):unittest.main()

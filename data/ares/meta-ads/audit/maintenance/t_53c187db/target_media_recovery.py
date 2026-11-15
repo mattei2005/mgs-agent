@@ -112,6 +112,23 @@ def pair_expectations(payload,ids,selected,snapshot,pairs):
     require(len(expected_seen)==len(observed_seen)==6,'incomplete bijection')
     return result
 
+def semantic_subset(actual,expected,path=''):
+    """Read-only semantic projection: Graph adds numeric label IDs and returns
+    adlabels as an unordered membership set. Preserve rule/asset list order,
+    reject extra/missing/duplicate memberships; never mutate either input.
+    """
+    if path.endswith('adlabels'):
+        require(isinstance(actual,list) and isinstance(expected,list),'label list shape')
+        a=[x.get('name') for x in actual];b=[x.get('name') for x in expected]
+        require(len(a)==len(set(a))==len(b)==len(set(b)) and set(a)==set(b),'label membership drift');return
+    if isinstance(expected,dict):
+        require(isinstance(actual,dict),'semantic object missing: '+path)
+        for k,v in expected.items():require(k in actual,'semantic field missing: '+path+'.'+k);semantic_subset(actual[k],v,path+'.'+k)
+    elif isinstance(expected,list):
+        require(isinstance(actual,list) and len(actual)==len(expected),'semantic cardinality: '+path)
+        for a,b in zip(actual,expected):semantic_subset(a,b,path+'[]')
+    else:require(actual==expected,'semantic value drift: '+path)
+
 def semantic(payload,ids,selected,snapshot,pairs,parent_status):
     """Only expectations change; raw response hashes must remain unchanged."""
     # All callers enter the existing continuation context before schema parsing.
@@ -161,8 +178,13 @@ def semantic(payload,ids,selected,snapshot,pairs,parent_status):
         afs=actual['asset_feed_spec'];ex=expected['asset_feed_spec']
         for k in ex:
             if k in {'additional_data','videos'}:continue
-            _require_subset(afs.get(k),ex[k],'asset_feed_spec.'+k)
-        for v,w in zip(afs['videos'],ex['videos']):_require_subset(v,w,'video')
+            # Graph exposes the approved CTA as call_to_action_types, omitting
+            # write-only call_to_actions. Destination is separately proven by
+            # the fresh adset.destination_type=MESSENGER, never defaulted.
+            if k=='call_to_actions' and k not in afs:
+                require(afs.get('call_to_action_types')==ex['call_to_action_types'] and st.get('destination_type')=='MESSENGER','CTA/destination projection');continue
+            semantic_subset(afs.get(k),ex[k],'asset_feed_spec.'+k)
+        for v,w in zip(afs['videos'],ex['videos']):semantic_subset(v,w,'video')
         raw=afs.get('additional_data',{}).get('page_welcome_message');parsed=json.loads(raw) if isinstance(raw,str) else raw
         require(parsed==json.loads(messenger_welcome_message()),'JSON-AGT/envelope/flags mismatch')
     require(digest(snapshot)==before,'raw GET mutation forbidden')
@@ -219,7 +241,9 @@ class Runtime:
         self.common,self.meta,self.sb,self.token=runner.runtime()
         self.quota=LaneQuotaStore(cfg['state_root'],soft_score=cfg['soft_score'],hard_score=cfg['hard_score'],window_seconds=cfg['score_window_seconds'],development_score_max=cfg['development_access_score_max'],standard_score_max=cfg['standard_access_score_max'])
         self.lane=(payload['campaigns'][0]['app_key'],q['account_id']);self.n=0;self.run=utc()
-        self.transport=GraphBatchTransport(q['account_id'],payload['graph_version'],self.token)
+        app_secret=os.environ.get('ARES_META_APP_SECRET')
+        require(cfg.get('require_appsecret_proof') is not True or bool(app_secret),'required appsecret proof unavailable')
+        self.transport=GraphBatchTransport(q['account_id'],payload['graph_version'],self.token,app_secret=app_secret)
     def reserve(self,points):
         self.n+=1;return self.quota.reserve(self.lane,points,request_id=self.q['request_id']+':media:'+self.run+':'+str(self.n))
     def authority(self):
@@ -307,6 +331,17 @@ def validate_receipt(link,g,payload,path,allow_stale=False):
         and v.get('request_id')==g['request_id'] and v.get('grant_sha256')==GRANT_SHA256 and v.get('ids')==g['ids']
         and v.get('request_sha256')==file_sha(path) and v.get('manifest_digest')==digest(payload) and v.get('approval_message_id')==g['approval_message_id']
         and v.get('original_approved_digest')==g['original_approved_digest'] and len(v.get('pairs',[]))==6 and len(v.get('downloads',[]))==12,'receipt binding/coverage')
+    expected_downloads=[]
+    proof=load(g['proof_path'])
+    expected_pairs=[]
+    for pair in g['pairs']:
+        variant='vertical' if pair['labels'][0].endswith('_vertical') else 'square'
+        slot=payload['campaigns'][0]['ads'][pair['slot']-1]
+        expected_pairs.append({**pair,'variant':variant,'checksum':slot['media']['checksum']})
+        for vid in [pair['expected_video_id'],pair['observed_video_id']]:
+            d=next(d for d in proof['downloads'] if d['video_id']==vid)
+            expected_downloads.append({'video_id':vid,'sha256':d['sha256'],'bytes':d['bytes'],'frames':[f['sha256'] for f in d['frames']],'dimensions':[d['width'],d['height']]})
+    require(v['pairs']==expected_pairs and v['downloads']==expected_downloads,'receipt proof contents differ from pinned bytes/frames/slots')
     if not allow_stale:fresh(v['fresh_at'])
     return v
 
