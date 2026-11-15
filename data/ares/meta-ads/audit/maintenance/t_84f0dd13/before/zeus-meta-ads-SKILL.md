@@ -1,0 +1,647 @@
+---
+name: meta-ads-api-operations
+description: "Use when operating MGS Meta Ads or asset permissions."
+tags: [meta-ads, ares, growth, marketing-api, billing, spend, card-risk, proxy, 1password, campaigns, troubleshooting]
+---
+
+# Meta Ads API Operations — Ares/MGS
+
+## When to use
+
+Use this skill when working on Meta Ads / Facebook Marketing API operations for MGS, especially when:
+
+- Ares needs to read Meta campaign/adset/ad/creative data.
+- Rodolfo sends a Smart Bidding/Spidey UTM duplicate or mismatch alert that must be traced to exact Meta objects.
+- Ares is testing replacement campaign creation, clone-source, or intraday rule execution.
+- Rodolfo suspects VPS/datacenter IP reputation, proxy, AdsPower, Webshare, token, or app trust issues.
+- Meta returns endpoint-specific errors such as `code=31`, `subcode=3858385`, `Autentica tu cuenta`, `code=100`, or `messenger_doc` validation problems.
+- You need to compare direct VPS vs residential/proxy behavior without exposing credentials.
+
+## Safety model
+
+Answer Rodolfo’s questions in order. Verify copies live; distinguish intentional deltas, accepted omissions and ACTIVE from delivery. Prove permanent rules in code/tests. CTA preflight: `references/exact-source-cta-preflight.md`.
+
+Separate API enrollment from screenshot proof. For WhatsApp TXT, attach UTF-8 grouped by manager, feature state and account/campaign; separate unknowns, date snapshots on resends and verify exported totals in code. Screenshot recipe: `references/faithful-creative-copy-documentation.md`.
+
+Active Meta-copy exception approved permanently by Rodolfo `1568722979569930414`: apply `context/meta-creative-copy-policy.md` to all authorized duplications, not only SHEIN. Turn inherited enabled `image_background_gen` off only on the copy, without another question; keep source and all other features intact. This supersedes older per-occurrence approval/preservation gates for this feature alone. Verify central build/resume/materialization/QA implementation, not just policy text.
+
+1. **Read-only and dry-run first.** Always verify token/account/campaign visibility before write.
+2. **Project Graph output before printing or saving it.** Keep 1Password tokens/proxies and raw Graph responses in process memory; emit only allowlisted identity/result fields. Consume `paging.next` internally and report `has_more` or cursor progress instead of the URL, because Graph embeds access tokens in pagination links even on ordinary campaign GETs. Apply the same projection to nested batch bodies and exception messages; removing a top-level `access_token` key alone is insufficient.
+3. **Write tests must be controlled.** Campaigns/adsets/ads should be created `PAUSED`, with budget guardrails and a known loser/source campaign.
+4. **Reconcile partials immediately; do not delete implicitly.** If a write fails after materializing objects, read back and journal their exact IDs/statuses, keep the authorized paused-test objects non-delivering, and recover only missing layers within the original scope. Delete/archive only when that cleanup action is explicitly authorized and any required confirmation is satisfied; verify the actual terminal status by GET. A creation failure alone does not authorize deletion.
+5. **Interpret failures by endpoint.** If campaign/adset/adcreative creation succeeds but `POST /ads` fails, do not call it a general account/IP failure.
+6. **Preflight credential cutovers before confirmation.** Inventory exact 1Password item IDs/titles, compare paired token fields in-process without printing values or hashes, then prove app/user/account/scopes and the live Marketing API tier. Do not change active references until the critical credential confirmation is received.
+7. **Diff authorization against the executable selection before every irreversible stage.** Materialize the last explicitly approved campaign count, asset count, partition/mix, IDs, budgets and statuses, then compare them programmatically with the concrete runtime selection before reservation/release, Meta media pre-stage, upload and campaign write. “Execute tudo” authorizes only the immediately preceding enumerated scope; an engine requirement or newly discovered stock need never widens it. On any mismatch—even a small increase or reduction—persist the current state, block new writes, report the exact delta and wait for Rodolfo. Do not roll back, release or delete already-mutated objects without the authorization required for that separate action.
+8. **Treat repair and replacement as different scopes.** If Rodolfo changes an in-flight instruction from missing-only recovery to “delete and recreate,” stop repairing the old objects immediately. Read back the named targets, perform only the authorized terminal transition, verify it, close/supersede the old checkpoint and use a new request/idempotency identity for the replacement. Never add a missing ad to an old campaign after the user explicitly ordered replacement, and never claim `DELETED` when the live result is `ARCHIVED`, `PAUSED`, blocked, or ambiguous.
+9. **Keep temporary benchmark exceptions narrow.** When Rodolfo explicitly classifies a campaign batch as a temporary test, he may waive `ares_eligible`, manager-reservation or legacy-reconciliation status as blockers for that named benchmark. Do not generalize the waiver to production. Still prove exact Drive identity/checksum, uniqueness within the batch, no forbidden lifecycle/folder movement, no collision with production use and the exact no-auto-delete contract.
+10. **Cancellation is not cleanup.** A stop request must terminate future work promptly and reconcile side effects; it does not prove that already-created campaigns, ads or media were removed. Persist a pre-upload request/asset checkpoint and per-media state before the first upload, use cooperative cancellation between assets, and report `stopped` separately from `cleaned`. Never promise reversibility for temporary media unless a working cleanup route for the same object type/account/identity is already proven or the owner explicitly accepts residue risk.
+
+### Page-access workflow and Rodolfo's onboarding preference
+
+- Handle Page onboarding on demand by explicitly supplied IDs; Rodolfo prefers this to a recurring permission-grant cron. Do not create a scheduler or grant access to future assets unless he explicitly reopens automation.
+- Resolve the active operation's token architecture from its contract and registry before diagnosing permissions; remembered global restrictions can be superseded for one operation without changing others.
+- Preflight the exact destination ad account independently of Page linkage, using the same operational token for the account GET and a small campaign GET. Full Page management does not grant ad-account access. A campaign-creation request does not implicitly authorize a new account permission grant: diagnose with the existing approved BM-admin credential, obtain the required authorization for the exact account/actor/tasks, and do not substitute the admin token into Campaign Ops.
+- Respect the access level explicitly requested: when Rodolfo asks for complete Page linkage, validate Page management tasks rather than silently granting advertising-only access. Preserve existing complete assignments and unrelated people/partners.
+- Keep the exact approved ID set as the batch identity. Page names are labels, not keys: equal names may represent distinct Pages. Resolve an ambiguous campaign Page from an explicit ID or verified account/creative evidence; BM ownership and an empty account history cannot choose between duplicate names. Ask only for the unresolved ID rather than granting or selecting both. New IDs supplied during execution require a tracked scope revision and fresh preflight, not a new unrelated request or an unrecorded broader selection.
+- For a Page-only administrative handoff, keep Zeus's provisioning and Ares's Campaign Ops as separate execution scopes. Reuse an existing exact Page/account/actor/task authorization only after validating its source and continued applicability; durable approval does not authorize other assets, a recurring grant job, or weakening Ares's dependency guard. Return the verified provisioning receipt to Ares in the origin thread without taking over the campaign writer.
+- Report confirmed permission recovery separately from campaign-edit success. When asked whether a retry will work, say which blocker is resolved with the same operational token; do not guarantee the remaining write before exercising it.
+- Before API-to-browser fallback, verify the browser's actual Facebook actor and exact source Page ad-creation access; profile labels/account visibility prove neither. Separate browser Page warnings from API failures; they do not invalidate the token or prove UI duplication works. Before requesting another profile or permission repair, read the unchanged production token's /me, exact account tasks and paginated /me/accounts tasks. Report existing BISU ADVERTISE access as present. Check approved sessions/identity mappings before asking for a new session; never infer authorization for grants or credential substitution from a browser warning.
+- Do not make PC1 authentication or browser availability a new prerequisite for a previously API-operated clone repair without proving that dependency. When Rodolfo points to a prior thread and time window, collect the complete window, read it chronologically and inspect the supplied screenshots before another experiment; distinguish the successful preservation method from remaining tracking/integration defects without asking him to repeat established requirements.
+
+For the ordered diagnostic, administrative prerequisites, grant payload and resumable verification recipe, load `references/meta-page-delegation-diagnostics.md`.
+
+For an explicitly authorized paused cross-account technical test, source-template validation, Meta normalization reporting, Page-backed Instagram error 2238011 recovery and protected cleanup inventory, load `references/meta-cross-account-paused-canary.md`. This is not a substitute for the normal production engine.
+
+### Live execution audit after Marketing API Full/Standard activation
+
+When Rodolfo asks whether `standard_access` made campaign creation faster, audit the complete route rather than trusting the final summary or Discord wall time:
+
+1. Confirm the exact app, user/token route and ad account with a fresh read-only request whose live usage header says `ads_api_access_tier=standard_access`. A stale operation label such as `active_guarded_development_access` is bookkeeping drift, not tier proof.
+2. Freeze the approved execution contract: campaign numbers/count, mode, vehicle or other partitions, READY/TESTED mix, exact asset set, budget, status and schedule. Compare it with reservation audit, inventory readback, media registry, sealed manifest and engine checkpoint before allowing the next stage.
+3. Reconstruct timestamps separately for analysis, human decision wait, cleanup, Drive moves, selection/reconciliation, local derivative rendering, Meta media pre-stage, manifest build/prevalidation, engine writes, recovery/readback and post-processing. Report each phase distinctly.
+4. Compare the engine/API segment—not the entire conversation—to the prior development-tier baseline. Standard access should remove only the fixed development cooldown; it does not make research, custom scripting, Drive work, video rendering or post-processing faster.
+5. Treat live `Searching`, broad file reads, helper-script authoring or patching after execution approval as route overhead and automation debt when the operation should already be covered by the deterministic campaign engine. Measure that overhead separately from Meta latency and identify which input/contract is missing from the canonical runner.
+6. Verify the external outcome independently: campaign/adset/ad cardinality, IDs, lineage/source IDs, budget, status/start time, Page/UTM, video readiness/association, Drive parents/statuses, inventory history, budget envelope and all recovery effects. A successful command or agent narrative is not completion.
+7. If monitoring another active agent reveals scope drift, send one precise fail-closed gate to the active execution: stop only future writes, preserve current state/IDs, avoid automatic rollback, identify the approved versus selected delta and require Rodolfo’s explicit decision. Validate both message readback and acknowledgement by the target agent.
+8. Before a high-volume benchmark, validate campaign-number uniqueness across every non-deleted live object in each account and prove that downstream first-delivery/guardrail consumers accept the exact provenance emitted by the planned engine. A `created_time` tie is not a valid source selector, and a stale provenance allowlist can make creation succeed while safety monitoring is dead. Any ambiguity or repeated guardrail failure stops the run before media reservation/upload or Meta writes. After Rodolfo cleans the live sequence and explicitly orders a fresh start, require a new request ID, checkpoint, manifest and reservations; exclude the aborted zero-write attempt from primary throughput timing while retaining it as preflight-overhead evidence.
+
+For the development-tier baseline and phase accounting, see `references/meta-campaign-throughput-diagnosis-cpv-2026-08-28.md`.
+
+Do not infer engine behavior from a shared/global tier cache alone. Compare it with the active bundle checkpoint's `quota.ads_api_access_tier`, effective ceiling and wait records. If the global request says `standard_access` but the bundle begins with tier `null` and the unknown-tier 100/120 limits, report a tier-propagation/observability gap; do not credit Standard for removed cooldowns until the lane itself proves it. Preserve error chronology as well: an initial transient child `code=2` and a later reconciled `3858385` authentication blocker are separate stages, not competing summaries.
+
+Session-specific partial evidence, phase timings and final acceptance gates: `references/meta-standard-access-live-run-audit-2026-09-05.md`.
+
+Multi-account high-volume benchmark preflight, duplicate numbering, downstream guardrail-provenance compatibility and fresh-request restart semantics: `references/meta-high-volume-benchmark-preflight-2026-09-05.md`.
+
+### Meta app/token cutover preflight
+
+For a requested production token replacement:
+
+1. Inventory exact current and candidate 1Password items. Similar titles or date-prefixed duplicates are distinct candidates; never choose by partial title alone.
+2. Fetch each item once with `op item get --format json --reveal`, select the first **non-empty** approved secret field (`credential`, then `token`), and keep values only in process memory.
+3. When both a generic token item and an account-specific item were supplied, verify their secrets are equal internally. Report only item names, lengths and equality; never print the value or a secret-derived hash.
+4. Probe the candidate read-only with `/debug_token`, `/me`, paginated `/me/permissions`, the exact `act_{account_id}` identity, and a one-row campaign GET. Validate expected `app_id`, user identity, account name/status/currency/timezone and every required scope.
+5. Parse `X-Ad-Account-Usage` and `X-Business-Use-Case-Usage` independently. Advanced Access on every scope does **not** prove Marketing API Full Access; only a live `ads_api_access_tier=standard_access` does. If the candidate still returns `development_access`, say before confirmation that the cutover will not remove the development cooldown.
+6. Present the critical confirmation with exact account scope, current app/user/tier, candidate app/user/tier, rollback preservation and validation plan. Do not widen the swap to another account merely because it shares the old token or app key.
+7. After confirmation, use an app-specific key/cache path, retain the old reference/cache for rollback, update every active consumer, run a read-only/dry-run smoke and read back the credential item actually resolved. Deleting/revoking the prior token is a separate critical operation.
+
+### Meta app administrator inventory
+
+When Rodolfo asks which Facebook profiles administer an app, read the live App Roles edge instead of inferring administrators from campaign tokens, operational mappings, app ownership notes, or cached documentation:
+
+1. Resolve the exact 1Password item that contains the target app's `app id` and `app secret`; fetch it once with `op item get --format json --reveal`, validate the retrieved app ID against the requested ID, and keep both secrets only in process memory.
+2. Construct the app access token as `{app_id}|{app_secret}` internally and call the current Graph route `/{app_id}/roles`, following `paging.next` until absent. A User Access Token is the wrong credential for this edge and returns `code=15` even when that user is an app administrator.
+3. Do not add `fields=id,name,role` to the roles request: on current Graph versions that projection can return only `role` and hide the profile identifier. Use the default edge response, where each row carries `user` and `role`.
+4. Filter the complete result to `role=administrators`, then resolve each returned `user` with `/{user_id}?fields=id,name` using the same app access token. Keep the role ID as authoritative and treat the name as a display label.
+5. Verify the enumerated count equals the paginated administrator count before answering. Report one concise `name: profile ID` list, identify the live `/{app_id}/roles` readback as the source, and state that the read-only check made no change.
+6. Never print the app secret, app access token, token-bearing request URL, raw 1Password item, or secret-derived hash; sanitized error code/subcode and field lengths are sufficient diagnostics.
+
+### Multi-account cutovers, Page parity and token retirement
+
+- **App role is not token identity.** Adding Rafael/another profile as app admin does not switch Ares, mutate an existing token or prove which user a 1Password field represents. After any mid-session 1Password edit, re-read the exact item and use `/debug_token` + `/me`; never infer identity from the title, prior read or the user's role assignment.
+- **Revalidate each account independently.** A token that passes one ad account cannot be propagated to another just because the app and scopes match. For every target, check exact account name/status/currency/timezone, one campaign read, expected pixel/dataset and every Page/identity dependency.
+- **Page-backed operations require Page parity, not account visibility.** Before replacing a Messenger/Eggbev-style token, paginate `/me/accounts?fields=id,name,tasks` for both old and candidate tokens. Require the candidate to cover every Page the old route may use with `ADVERTISE` (and any additional required tasks). Account HTTP 200, pixel visibility and complete OAuth scopes are insufficient if Page sets differ.
+- **Prefer catalog comparison before an all-ads crawl.** Comparing the paginated old-token and candidate-token Page inventories is faster and more decisive for credential eligibility. Scan ads only when the canonical Page set cannot be derived from the old token, operation registry or current request.
+- **Fail closed per account.** If one account passes and another lacks Page coverage, do not perform the original all-account cutover. Report the exact per-account result; a reduced cutover needs fresh authorization because its scope changed.
+- **Retire credentials only after a consumer sweep.** Inventory active config, account registries, operation sources, cron/runtime scripts, monitor allowlists, cache paths and executable rollback/recovery scripts. Historical audits/backups may retain item names as evidence, but no executable path may depend on the item being removed.
+- **Exercise every legacy consumer after a cutover.** Engine/auth smokes do not prove reports and guardrails migrated: live profile scripts may still hardcode an old `META_ITEM` or inherit the generic token cache. Resolve the item from the account registry, force an account-specific cache path before importing the shared Meta helper, then validate the next real scheduler tick for each report/guardrail lane and require its failure streak to return to zero.
+- **Name every deletion target.** “Delete the old token” is ambiguous when accounts use different users/items. State each exact 1Password item and which account it serves. `op item delete` moves an item to Recently Deleted for 30 days; `--archive` is different. Deletion remains a separate critical confirmation even after the credential swap is approved.
+
+Session-specific proof and safe branching: `references/multi-account-token-cutover-page-parity-2026-09-02.md`.
+
+Detailed permission/tier and cutover verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
+
+## Keyword inventory and scheduled name maintenance
+
+Use this workflow when Rodolfo supplies ad-account names/screenshots, asks how many campaigns or ad sets contain a term, or schedules removal of that term from campaign names.
+
+1. **Resolve the supplied accounts exactly.** Extract screenshot names, resolve candidate IDs from the operation contract, then batch-GET `act_{id}?fields=account_id,name,account_status,timezone_name` for every target. A writer-account registry may cover only onboarded accounts; consult the operation's account grants before treating missing registry entries as inaccessible. For an all-account audit, also paginate the relevant Business's `owned_ad_accounts` and `client_ad_accounts`, union their exact account IDs with every authorized token's paginated `/me/adaccounts` inventory, and read each missing campaign edge before declaring coverage complete. `/me/adaccounts` alone can omit BM-owned accounts even when the same token can read their campaigns. Persist per-source inventories, deduplicate by account ID and report inaccessible edges as gaps, never as zero matches. When the requested keyword may appear inside longer names, compute case-insensitive substring and isolated-word matches separately; explicitly distinguish `Game` from `gamecontroller`, `gameficacao` or `GAMER` rather than silently choosing one interpretation.
+2. **Enumerate both object levels completely.** Read `/campaigns` with `id,name,status,effective_status` and `/adsets` with those fields plus `campaign_id`. Batch independent first pages, finish pagination per edge, persist collected rows, then deduplicate/count by ID in code. Set the status coverage explicitly; distinguish active/paused, archived and deleted objects instead of presenting a historical-inclusive count as the current operational total. When DELETED is excluded, request only `effective_status=[ACTIVE,PAUSED,ARCHIVED]` and filter returned `status` locally; adding DELETED to the campaign-edge request can fail on Graph v26.0 with `100/1815001` (deleted-object requests unsupported). Diagnose that projection error and retry the read-only request with the authorized status set; never change the mutation scope.
+3. **Separate literal matches from parent membership.** Count campaign-name matches, ad-set-name matches, and ad sets belonging to matching campaigns as three different measures. Join the third measure by `campaign_id`; zero ad-set-name matches does not imply zero ad sets inside those campaigns. Report one compact per-account block with the status inclusion rule and this distinction spelled out.
+4. **Explain the proposed rename before applying when requested.** State the exact account/campaign scope, treatment of archived objects, all-occurrences versus single-occurrence removal, and one real before/after example. Preserve unrelated name tokens and object types; fixing separators left by removal is not permission to normalize the whole name. Inspect relevant creative URL/tag fields for dynamic campaign-name tracking before promising tracking is unaffected; a placeholder is dependency evidence, not proof that renaming changes its resolved value.
+5. **Resolve a future time from each account's live timezone.** For an account-timezone request, use `timezone_name`, not the operator's preferred timezone. If zones differ, materialize each account's local civil date and UTC-offset instant separately. Persist an immutable baseline containing account IDs/names/timezones, campaign IDs/original names, per-account and total counts, status policy, authorized transformation, authorization source and delivery thread outside prunable scratch storage.
+6. **Schedule execution, not merely a reminder.** Apply the global scheduler workflow from `log-monitor-discord-alert`; use a self-contained one-shot prompt referencing the durable baseline and approved mutation scope. Require a fresh paginated count/ID/name comparison at execution time, before the first write. Apply the existing scope-diff safety gate even when the total is unchanged: swapped IDs or concurrent name edits are drift. Keep run results and recovery journals separate from the immutable baseline.
+7. **Verify scheduling independently from mutation.** Read back the enabled job, absolute next-run timestamp/offset, finite repeat count, delivery target and attached skill. Confirm to Rodolfo with local date/time, account timezone and the drift-stop policy; say no campaign has been changed yet. A successful scheduler readback proves only `scheduled`, not a tested rename runner or a completed Meta operation. At execution, require a name-only canary and exact GET readback for every approved ID before declaring completion.
+8. **Allow bounded read-only propagation reconciliation after a successful rename.** A name-only POST can return HTTP 200 / `success=true` while the immediately following GET still shows the original name. Preserve the mutation intent and before snapshot, poll GET only with bounded backoff (for example 1, 2, 4, 8 seconds), and validate both the planned name and unchanged status/budget/schedule/account fields. Never replay the POST solely because the first GET was stale. When resuming a blocked batch, first reconcile the exact ID: an already-planned name with a matching journaled intent counts as recovered, not a new mutation; an unjournaled concurrent rename is a scope conflict. Keep immutable authorization baselines and per-ID before/after snapshots, and repaginate all target accounts independently at closure.
+
+## Read-only billing and card-risk analysis
+
+Use this route when Rodolfo asks which accounts use cards, their current default card, the origin of an issuer charge, card-funded spend, whether a card reorganization propagated, or how account-to-card allocation should look.
+
+**Choose the smallest branch first:** for a payment-method inventory, enumerate accounts and read current funding only; for an issuer-charge trace, add billing activities and exact charge readback; calculate Insights, burn and issuer capacity only when spend/risk/allocation is requested. For an executive trace without a named Business, discover every Business inside the authorized audit scope and union fully paginated owned/client inventories with `/me/adaccounts`; do not silently restrict the search to the BM audited previously. Current default card is not evidence of the card actually used for a historical charge.
+
+1. Freeze the exact account IDs, comparison period, currency, and any prior validated payment snapshot. Treat the prior mapping only as comparison evidence; never reuse it as the current state.
+2. Read every account live with `account_id,name,account_status,currency,timezone_name,business,funding_source_details,balance,amount_spent,spend_cap,is_prepay_account,user_tasks`. Require exact identity/name/currency; identify a default card only from a visible sanitized brand plus last four digits. Preserve accounts with missing card details as explicit visibility gaps rather than dropping them or blocking unrelated verified fields. Diff the live source against the prior snapshot and report every changed account explicitly.
+3. Query account-level `/insights` daily and aggregate for the identical period; require complete pagination and daily-versus-total reconciliation within the currency's smallest reporting unit.
+4. Calculate ongoing burn from the last seven fully closed dates in each account's Meta timezone, not from the current partial day. Show per-account daily burn, 30-day projection, current card and current Meta balance; mark the open day partial with the readback time.
+5. Group projected burn by the **current live** funding source. Consolidate different masked suffixes into one physical card only when Rodolfo explicitly confirmed that relationship. Also show account count, share of total burn and the largest concentration.
+6. Label historical spend precisely: grouping past spend by the card assigned now describes the spend of the accounts currently on that card; it does **not** prove those historical amounts were charged to that card. Use `/activities` charge events when actual historical card settlement is requested.
+7. Do not assign the current Meta balance conclusively to a newly selected card. Pre-switch accrual and already-initiated charges can still settle on the old source; state that caveat in every post-reorganization report.
+8. Base allocation advice on issuer capacity. If current limits or available credit are missing, report the gap and make any reshuffle conditional. Prefer isolating the dominant account and moving the next-largest account only when the destination card's capacity can absorb its projected burn; do not present equal splitting as feasible when one account alone dominates.
+9. For actual card charges, use `/activities` with the `BUDGET` category and retain exact charge/decline/refund event types. Parse a `payment_amount` event's `new_value` as minor units, but do **not** classify it as a card charge from event type, `payment_amount`, `action=67`, amount size or current default funding: Advertising credit can have the identical event shape. For card-only reporting, positively identify the transaction's historical instrument through Billing UI/transaction evidence; exclude promotional/ad-credit settlements and leave an explicit verification gap if the method is unavailable. Keep transaction IDs protected and use half-open account-timezone windows with deduplication when a high-volume range cannot paginate reliably.
+10. Treat Business `business_invoices` as monthly-invoicing data joined by exact `ad_account_ids`, not a substitute for card-charge activity. Never force spend, settled charges and current Meta balance to equal; opening balance and settlement timing differ, while the issuer's live available credit remains authoritative for limit risk.
+11. Match the output to the selected branch. For payment-method inventories, present one complete account-first list sorted by exact account name, with brand and masked suffix; separate confirmed card type with unidentified card from unknown funding, and identify the Business where names are ambiguous. For charge tracing, give account, amount/currency, exact date/time/timezone and current default separately from proof of the charged card; show competing same-value matches and label unresolved issuer reconciliation. For risk/allocation, add a compact card summary, complete per-account block, burn change, concentration and capacity gap. State explicitly that the check made no Meta or billing change.
+12. Any payment-method change remains a Critical Subset billing operation. Pre-read exact current sources and targets, name the intended destination and rollback/readback plan, then obtain double-confirmation before using the Billing UI.
+
+API fields, activity parsing, pagination recovery and reconciliation details: `references/meta-card-billing-risk-analysis-2026-09-09.md`.
+
+### Read-only diagnosis of payment-form validation errors
+
+Use this branch when Rodolfo asks to investigate an error while adding a payment method; do not start the spend/workbook workflow unless requested.
+
+1. Read the supplied screenshot, preserve the exact error text, and resolve the named account to its live ID and Business. For PC1, load `secure-remote-windows-automation`, acquire the shared desktop lease, and inspect the approved Chrome window in an owned tab. Reduce window discovery output before printing: browser titles can contain OAuth callback codes even when the target window is unrelated to authentication.
+2. Open the exact account's Billing details and record the current funding method. Inspect the form without entering card data or submitting it. For an authorized inspection, the path `Add payment method → Debit or credit card → Next` can expose the blank form; treat `Save`, final payment submission and any billing edit as mutation boundaries, not diagnostic clicks. Verify the current screen before each transition rather than assuming button semantics remain unchanged.
+3. For country/address errors, distinguish the card's billing address, the account's payment profile, and the Business's legal entity. When Billing details has no Business info section, inspect `Legal entities → exact entity → Addresses` and identify any `Default billing` label. This proves the entity's address, not that the same country is populated or accepted in the account's payment profile. Do not infer billing country from an account-name suffix, dollar sign or timezone.
+4. Supplement UI evidence with a narrow account GET using supported fields such as `account_id,name,currency,timezone_name,business,business_country_code,business_state,business_zip,business_city`. Preserve the distinction between omitted keys, explicit empty values and returned values: an omitted country is a visibility gap, not proof that the stored country is missing. Neither an omitted field nor an absent country selector establishes a root cause.
+5. State whether the error was reproduced by an authorized submission or only observed in the user's screenshot. A blank form without an error does not prove recovery; a country-validation message does not establish an issuer decline or rule out a card problem. Do not save an unconfirmed cause or an untested workaround as a reliable fix.
+6. Report in concise numbered **Problema, Causa, Solução** groups, marking unproven causes explicitly. If escalation is necessary, supply the exact account/payment-account ID and the observed field/error mismatch without card details; do not change legal-entity country or recreate an account as a speculative repair. Close only tabs created by the investigation, verify the remaining window, release the lease, and state whether any billing mutation or payment occurred.
+
+### Billing inventory in an existing spreadsheet
+
+For Rodolfo's recurring **manual card-payment planning**, load `meta-manual-payments-planning`: it is the dedicated canonical owner of the workbook, card-only charge evidence, three-closed-day averages, invoice/Pay now distinctions and multi-card planning. This generic skill remains the owner of shared Meta transport and API primitives; creating a planning skill never authorizes billing writes.
+
+1. Load `google-drive-agent-automation` for Google authentication and publication gates. Freeze the named BM's complete account-ID set before collecting payment and spend fields; include inactive, zero-spend and unidentified-funding accounts unless the user requested a narrower set. Use bounded GET-only Graph batches and persist sanitized results after each batch so collection and publication can resume independently.
+2. Preserve the requested column count and order. For an account/payment/default-card/balance/month-spend report, create one new operational tab, sort by exact account name with account ID as the tie-breaker, and keep distinct same-name accounts as separate rows. Put account IDs, source timezone and exact-account links in cell notes/link formatting rather than adding unsolicited technical columns or altering names.
+3. Keep financial cells numeric and display each row's original currency explicitly with a Sheets number format such as `"USD" #,##0.00`. Do not silently convert currencies or calculate a mixed-currency grand total. Document `balance` as the current Meta account balance, not overdue invoices or monthly spend; obtain the requested month's spend from Insights rather than lifetime `amount_spent`.
+4. Distinguish `Cartão de crédito` with `Não identificado pela Meta` in the default-card cell from an entirely unidentified payment method. Use `Não se aplica` for the card on confirmed credit-line funding. Missing funding never means no payment method, and zero spend does not resolve that uncertainty.
+5. Publish the exact date range, collection timestamp, account-timezone convention and open-day qualification in header/cell notes. Identify a one-off export as a snapshot, not an automatic refresh. Verify every output row, per-row currency format and account-ID note against the frozen source, reconcile account-ID set equality, and confirm the previous tabs' values/formulas and properties remain unchanged before returning the direct new-tab link.
+
+## Standard diagnostic flow
+
+### Advertiser-restriction checks with an identical-clone canary
+
+1. Resolve the supplied thread to its operation/account registry, then verify the actual operational token actor with `GET /me?fields=id,name` and the account with `GET /act_{id}?fields=id,name,account_status,disable_reason`. Keep **profile identity**, **ad-account state**, **write permission**, and **delivery eligibility** as separate findings: HTTP 200 and an active account do not establish that the profile can advertise.
+2. Check the operation's effective per-mode status policy, canonical runner's canary support and persistent per-account writer lease together before broad campaign scans, manifest construction, requesting an exception or promising execution. Reconcile a pending lease with its request/checkpoint; never mistake an idle process lock for a free account. If temporary isolation is explicitly authorized, hold the original engine/runner request locks, atomically transfer ownership to the canary without an unowned gap, retain the same shared quota/state root, and restore/read back the original lease and checkpoint without resuming the old request. If the technical-test contract requires `PAUSED` but live prevalidation requires `ACTIVE`, identify a local policy conflict, not a Meta rejection. Do not activate the test, edit a copied config to weaken the gate, or substitute a direct writer; resolve the narrow exception through the authorized owner before continuing. Do not encode the current conflict as a permanent claim that the engine cannot run paused tests.
+3. Select a real populated source, not merely the newest campaign or a row marked `ACTIVE`. Read and paginate `/{source_campaign_id}/adsets` and `/ads`; require the expected nonempty hierarchy before sealing the scope. If a candidate is an empty shell, discover a populated candidate through `act_{id}/ads?fields=id,campaign{id,name,status,daily_budget},adset_id`, then enumerate that exact campaign fully. Freeze source IDs/configuration, exact child counts, budget, Page eligibility, target name and the authorized one-copy scope.
+4. Use the canonical native-copy path only after its gates pass; retain source media, copy, targeting and tracking according to the operation's exact-clone contract. Reconcile every returned or potentially materialized ID before retrying; never treat `execution_options=[validate_only]` on `/copies` as a safe dry-run, because copy endpoints can create real objects despite that parameter.
+5. Compare source configuration semantically during a native-copy canary: signed CDN `asset_feed_spec.videos[].thumbnail_url` values can rotate between GETs while the same creative ID, video ID, labels and all other fields remain identical. Ignore only that proven serving-URL volatility; never ignore destination URLs, tracking, copy, status, budget or media identity changes. Report the furthest stage actually exercised: **local prevalidation only**, **Meta copy submitted and rejected**, **copy created but incomplete**, or **complete paused hierarchy verified**. A local block means write eligibility remains untested; a complete paused copy proves that write route, not auction entry or unrestricted delivery. Preserve partials and the original campaign; cleanup and activation remain separate scopes.
+
+6. Do not close an authorized failed-clone investigation after merely exhausting identical bulk retries. After reconciling all IDs, isolate the same approved hierarchy with native shallow campaign/adset copies and per-ad copies through the canonical engine. For Eggbev, compile `pure_clone` with explicit `source_adset_id`, `adset_name` and source-linked ads/creative payloads; the existing planner then selects shallow shells plus `ad_copy_with_creative`. Preserve the same request, single target, budget, Page, media, copy and tracking, recover only missing layers and keep the technical test PAUSED. Use the Messenger restoration recipe in `references/meta-native-clone-standard-enhancements-2026-06-18.md` for `1815675`. Report the actionable layer proven by the granular test without pretending Meta exposed the internal cause of an earlier generic code 2.
+
+### Fast status check for Ares OpenzedFinanzas-CC-ES
+
+When Rodolfo asks whether Ares is already analyzing/running Spain credit-card campaigns in Spanish, answer from runtime/config rather than memory:
+
+1. Check `ares-gateway.service` is active.
+2. Inspect `/root/.hermes/profiles/ares/cron/jobs.json` for these jobs:
+   - `Ares Meta intraday R1-R5 dry-run` (`aa9e01a5ec4a`) — every 30m, read-only/dry-run.
+   - `Ares Meta reativar-todas dry-run` (`c6c737070d3f`) — daily aligned to 00:30 Europe/Madrid, read-only/dry-run.
+   - `Ares Meta HOA manager report - Openzed ES` (`e84a8db81fb3` or documented successor) — manager checkpoints, read-only/dry-run.
+3. Inspect `/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json` and `/root/mgs-agent/data/ares/meta-ads/accounts/1356770869843984.json` for scope.
+4. Report the operational truth concisely: account `act_1356770869843984`, observed name `OpenzedFinanzas-ES-CC-ES-03`, country `ES`, vertical `CC`, timezone `Europe/Madrid`, current mode `read-only/dry-run`, and whether write is enabled.
+5. Do not say Ares is executing campaign changes unless config says `write_enabled=true` and a validated write log exists.
+
+### Phase 1 — Credential/proxy intake
+
+For Webshare/AdsPower proxy items in 1Password, the known-good field mapping is:
+
+```text
+1Password field  Meaning
+---------------  ---------------------------------------
+Username         proxy username
+Credential       proxy password
+Host             proxy host/address
+Port             proxy port
+Protocol         usually `http` for Webshare tests
+```
+
+Use `Protocol=http` first unless Webshare explicitly shows SOCKS5. Even when calling `https://graph.facebook.com`, the proxy URL is commonly `http://user:pass@host:port`; the HTTP proxy performs CONNECT tunneling.
+
+### Phase 2 — Validate egress IP before touching Meta
+
+Compare direct VPS egress with proxied egress:
+
+```bash
+curl -fsS https://api.ipify.org
+HTTPS_PROXY="$PROXY_URL" HTTP_PROXY="$PROXY_URL" curl -fsS https://api.ipify.org
+```
+
+Expected MGS pattern observed:
+
+```text
+Direct VPS       Hetzner / Ashburn / datacenter
+Webshare proxy   Comcast or other residential/ISP-looking IP
+```
+
+If the proxied IP does not change, stop before Meta testing.
+
+### Phase 3 — Meta dry-run through proxy
+
+Run the relevant Ares script with proxy environment variables and `--dry-run` first. Python `urllib.request` honors `HTTPS_PROXY` / `HTTP_PROXY`, so a code change is not required for initial proxy isolation if the script uses urllib.
+
+Example shape:
+
+```bash
+HTTPS_PROXY="$PROXY_URL" HTTP_PROXY="$PROXY_URL" \
+python3 /root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py \
+  --loser-campaign-id <campaign_id> \
+  --daily-budget-usd 25 \
+  --creative-count 3 \
+  --creative-mode video_data_minimal \
+  --dry-run
+```
+
+### Phase 4 — Controlled write, only after explicit approval
+
+Write tests may create real Meta objects, even if paused. Get explicit confirmation before running without `--dry-run`.
+
+Use the corrected video/image asset flow for Messenger clone-source tests:
+
+```bash
+HTTPS_PROXY="$PROXY_URL" HTTP_PROXY="$PROXY_URL" \
+python3 /root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py \
+  --loser-campaign-id <campaign_id> \
+  --daily-budget-usd 25 \
+  --creative-count 3 \
+  --creative-mode video_data_minimal
+```
+
+## Interpretation rules
+
+### Marketing API Full access: interpret Dashboard screenshots precisely
+
+When Rodolfo asks whether an app can already apply for the higher Marketing API tier, separate **eligibility**, **submission**, **approval**, and **live activation**:
+
+1. Use the current labels **Marketing API Access Tier: Limited access / Full access**. Older pages may still say Ads Management Standard Access or show superseded thresholds.
+2. Treat a green combined requirement such as **“at least 500 Marketing API calls with error rate below 15%”** as proof that this eligibility gate is satisfied. Do not derive the error rate from a large activity count alone.
+3. A green Business Verification gate plus a green call/error gate means the app is eligible to request Full access. A gray **App Review** gate means review is still pending/not approved; it does not negate eligibility to submit.
+4. Answer “yes, eligible to apply” separately from “approved.” The app remains Limited/development tier until Meta approves the review and the live header reads `ads_api_access_tier=standard_access`.
+5. The normal submission route is `App Review > Permissions and Features > Marketing API Access Tier > +Upgrade`. If a screenshot cuts the Action column (for example, only `No A…` is visible), never reconstruct the hidden label or claim the button is present. State that eligibility is proven, but request a full-width/live view only if the action control itself must be diagnosed.
+6. Prefer the live App Dashboard requirement indicators and Meta’s current Marketing API Rate Limiting documentation over stale cached authorization text during a nomenclature/threshold transition.
+7. Before advising any checkbox or text field, identify the exact form surface: **Requests**, **Renewal**, **Allowed usage**, **Data handling**, or platform-specific **Reviewer instructions**. A checkbox in Renewal certifies existing approved access; it does not request a new upgrade.
+8. Keep guidance field-scoped and minimal. Preserve accurate pre-filled website instructions that already passed review; do not replace them with server-side operations the reviewer cannot click. If extra Marketing API context is useful, append it as clearly labeled context, not as a website test step.
+9. For controller/processor questions, explain the decision criterion without exposing agents, credentials, vault items, or topology. Prefill proves only the prior submitted answer, and the controller country follows the responsible legal entity—not the human reviewer.
+10. After submission, report **Review in progress**, not approval. Do not call the tier active while the live quota header remains `ads_api_access_tier=development_access`.
+11. On the post-review page, a top-level **Not submitted** plus “Nothing has been added to this submission yet” can describe a new empty draft after Meta finished the prior request. Read **Previous submissions** before classifying the review as failed or withdrawn.
+12. **No items in API Access Tier** on that summary page is not, by itself, proof that the tier upgrade was omitted or rejected. Verify the token’s exact `app_id`, then make a real read-only ad-account request and parse both quota-header families. `ads_api_access_tier=standard_access` proves the Full tier is operationally active; a missing Dashboard screenshot is then a visual-evidence gap, not a runtime blocker. If the header still says `development_access`, do not claim activation.
+13. After activation, hand off testing to the owning acquisition agent with the exact app ID and sanitized proof. Require independent app/token/tier verification and read-only/dry-run consumer smokes; a `PAUSED` write canary still needs an already authorized exact operation scope.
+
+Detailed requirements and post-approval verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
+
+For the complete reusable submission flow—including Allowed usage text, Requests versus Renewal, Data handling/controller/processor rules, Reviewer instructions, pre-submit checks, and live post-approval proof—load `references/meta-marketing-api-full-access-app-review.md`.
+
+### Resolve token architecture per operation before diagnosis
+
+Follow the operation-specific architecture gate in **Page-access workflow and Rodolfo's onboarding preference**. For SHEIN direct traffic, begin with `operations/SHEIN-US-DIRECT.json` and its active registry source; resolve other operations independently. Validate the actual actor with `/me`, and validate type/app with `/debug_token` authenticated by an app access token. An authorized direct-traffic BISU does not change the separately approved BOT/Messenger architecture.
+
+### SHEIN recovery gates
+
+For inert decision waits versus active writers and coordinated takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer historical targeting approval.
+
+Elapsed partials: SHEIN → `references/shein-explicit-partial-schedule.md`; ASAP target → `references/target-asap-partial-continuation.md`. Preserve seals/IDs/clock and QA.
+
+### Recurring SHEIN clone defects — repair acceptance
+
+When Rodolfo asks to fix the shared executor and resume interrupted duplications:
+
+1. Define two deliverables: a correction integrated into the common execution path, and recovery of each named original request in its own thread. Resolve requests separately by account, source, approved parameters and existing IDs; a shared defect does not make them one campaign transaction.
+2. Preserve inherited source settings and the established renumbering/tracking rules together. An enabled background-generation setting is not, by itself, a reason to ask whether to disable it. Do not substitute opt-out, relocated UTMs or stale source tracking for a faithful standard copy. Distinguish the manager's “same creative” (same media, copy and configuration) from equality of the immutable API creative_id; a new technical ID does not by itself change the requested creative. When the source carries UTMs in Website URL, keep the new campaign's UTMs in that URL, not the separate URL parameters/url_tags field. When Rodolfo rejects relocating UTMs, withdraw the proposal and its pending-approval checkpoint; do not offer it again unless he reopens it.
+3. Retrieve the final receipt of any earlier test cited as successful and compare it with the route actually selected by the installed executor. Build a compact acceptance checklist for source-feature preservation, target website URL and effective UTMs, and common-path integration. Mark each item proved or unproved from its own readback; do not dismiss the demonstrated feature-preservation method merely because tracking remains incomplete, or promote that partial success as a complete clone.
+4. Before another live experiment, compare its endpoint, creative reference versus reconstruction, supplied top-level overrides and expected result with the existing attempt journal. Require a concrete reason it can close an unproved acceptance item; a different API version, another wrapper or a field's mere presence in an SDK is not that reason. Verify that the candidate is valid for the source creative subtype, and separate malformed/inapplicable probes from genuine fidelity rejections; neither a successful diagnostic process exit nor a count of rejected variants proves a repair or a vendor-only limitation. Keep rejected attempts in request evidence, not in the reusable recipe. Once a compatible path is proved, integrate its selection and recovery into the shared executor rather than leaving a per-request script as the delivery.
+5. Promote a repair only after the authorized central path passes semantic/rendered QA and live readback with both inherited settings and target tracking correct. Then recover only missing layers of each original request and verify completion in its own origin. Do not expand one failed payload into a claim of universal API impossibility.
+
+For documentation-led investigation of reuse, fresh creation, Website URL edits, legacy feature flags and manual controls, load [Faithful creative copy documentation](references/faithful-creative-copy-documentation.md). Keep writable fields, enrollment, eligibility and rendered behavior separate; this reference does not authorize opt-out or a weaker acceptance contract.
+6. When Rodolfo repeats that only the executor needs fixing and the other patterns must remain, acknowledge the contract once and proceed from the last proved stage; do not return another long recap or ask him to restate normal numbering, UTMs or immediate-start intent. Report the functional verdict first: patch installed or not, requests completed or pending, and the exact remaining dependency. A new decision question must identify a genuinely different acceptance delta, preserve the outstanding original scope, and distinguish a documented hypothesis from a live-validated alternative; do not repeatedly seek the same unanswered workaround approval without material new evidence. Documentation, diagnostics and permission recovery are not executor repair. Restart only after demonstrating a runtime-loading dependency, not as a speculative response to remote parameter validation.
+
+### Fresh creative readback after asynchronous processing
+
+Treat core `COMPLETE` as materialization, not activation acceptance. Save projected GET responses before assertions and re-read after processing; absence is not explicit `OPT_OUT`. Bind any approved uncertainty to the exact request/account/objects/payloads, keep defaults strict elsewhere, and resume only missing QA/activation without another approval or creation replay. Keep one shared-code integrator and one campaign writer per account. Report verified counts/status/budget/tracking first, with accepted uncertainty—not another recap. Follow **Post-creation feature normalization** in `references/faithful-creative-copy-documentation.md` for typed receipts, recovery pagination and normal-runner resumption.
+
+### SHEIN grouped static images
+
+For IMG PNG/JPG requests, central typed image pre-stage, exact-hash QA, ambiguous-upload recovery and the offline-versus-live readiness boundary, load `references/shein-static-image-prestage.md`. Do not treat generic media authority as implementation evidence or fix only the filename regex.
+
+### Replacement campaigns: clone first, do not build from zero
+
+For MGS replacement campaigns, the correct primary route is **native Meta clone/copy**, not manual campaign/adset/ad creation from zero. Creating from zero can hit page permission, account authentication, or `POST /ads` checkpoints and does not prove the clone route is blocked.
+
+Operational sequence:
+
+1. Choose a known source campaign/adset/ad that is already working.
+2. Prefer native copy endpoints (`/{campaign_id}/copies`, `/{adset_id}/copies`, `/{ad_id}/copies`) and keep copied objects `PAUSED`.
+3. If copy fails with `code=100` / `error_subcode=3858504` / `El anuncio no debe incluir mejoras estándar`, treat it as a source-ad `standard_enhancements` legacy-field problem.
+4. If diagnostic source selection is explicitly flexible, compare a newer source without the legacy field. If the request fixes the source campaign/ad, preserve that identity: changing the source is a scope change, not a faithful-clone repair. Investigate a documented normalization into individual feature controls and verify every required enrollment after creation; an omitted or empty block is not proof of inheritance.
+5. Do not keep creating/deleting fresh campaigns from scratch unless the test is explicitly diagnostic and approved.
+
+Reference: `references/meta-native-clone-standard-enhancements-2026-06-18.md`.
+
+### Campaign clone rate limits: development tier is not production capacity
+
+When a clone/create workflow returns `code=17` / `error_subcode=2446079`, inspect the live tier and both quota-header families before retrying. A valid token with `ads_management` can still be on `development_access`; Meta documents that tier as a 60-point ad-account score ceiling, while writes generally cost 3 points. Project the complete plan—including `validate_only` mutation calls and final-readback reserve—before the first write.
+
+Operational rules:
+
+1. Parse `X-Ad-Account-Usage` independently from `X-Business-Use-Case-Usage`; a low BUC percentage does not prove ad-account score capacity.
+2. Upgrade the MGS-controlled app to Marketing API Full Access for production capacity and validate `ads_api_access_tier=standard_access` by live header. This does not require a System User.
+3. For faithful deep copy above the synchronous child limit, use native `/{campaign_id}/copies` through `/{ad_account_id}/async_batch_requests`, keep the copy `PAUSED`, poll with bounded backoff, and read back the source-to-copy ID map.
+4. Do not treat Graph batch as a quota bypass: every child operation still counts.
+5. On `17/2446079`, preserve valid PAUSED objects and defer readback until the header reset; do not clean them up solely because the final GET was throttled.
+6. While the live tier remains `development_access`, use one campaign per five-minute window, pre-upload/cache media IDs, and move heavy historical reconciliation outside the mutation window.
+
+Full causal proof, current Meta limits, MGS reconstructed score, implementation order, and verification checklist: `references/meta-clone-development-tier-rate-limit-2026-08-20.md`.
+
+For bulk/high-scale work, do not optimize only the quota wrapper. Separate pure clone from new-media replacement, eliminate live `Searching`/patching, pre-stage media IDs, use independent account lanes, batch dependencies and native future scheduling. Current CPV code/file findings, benchmark math, target architecture and rollout gates: `references/meta-campaign-engine-high-scale-architecture-2026-08-21.md`.
+
+For Meta App Review and maximum useful Ares access, distinguish per-permission Advanced Access, Marketing API Access Tier Full Access, and actual Business/Page/IG/pixel assignments. Exact core, MGS creative/Messenger, optional modules, security and readback checklist: `references/meta-app-full-access-permissions-2026-08-21.md`.
+
+### Proxy/IP isolation
+
+If the same payload/token fails direct from Hetzner and also fails through Webshare/AdsPower residential proxy, do **not** conclude “it is just Hetzner.” The likely problem is app/token/API trust or the specific Marketing API endpoint.
+
+If it passes through proxy and fails direct from VPS, then IP/reputation is strongly implicated.
+
+### `POST /ads` can be separately blocked
+
+Observed durable pattern:
+
+```text
+Campaign API       OK
+Adset API          OK
+Adcreative API     OK, including video_id flow
+POST /ads          blocked: code=31 / subcode=3858385 / Autentica tu cuenta
+```
+
+This means the account/token can perform some write actions, but Meta blocks ad creation/modification specifically. Report the endpoint boundary clearly.
+
+Additional readback rules for `3858385` and native Ad Copies:
+
+1. `ACTIVE`/`LEARNING` at campaign or ad-set level is not proof of a complete `1×1×3`. Paginate the live ads edge and validate every expected slot independently.
+2. The Ads Manager acknowledgement **“Confio nesse anúncio e ele está correto”** is a human UI gate; do not invent an undocumented Marketing API parameter for it. Treat the checkbox plus **Publicar** as operator evidence only, then prove clearance with a fresh API write/readback.
+3. Do not assume one UI acknowledgement clears the account globally. A fresh ad or fully recreated campaign may still receive `3858385`; classify deletion/recreation as a diagnostic canary, not a cure.
+4. A native `/{ad_id}/copies` child can return HTTP success without `copied_ad_id` and still materialize the ad. Before retrying, perform bounded live GET reconciliation in the target ad set by expected slot/name, asset or creative identity, and `source_ad_id`. If the ad exists—even `PAUSED/WITH_ISSUES`—persist its ID and never replay that slot.
+5. `DELETE`/archive and even status edits may themselves be blocked by the same pending action. Report the exact live status and preserve the partial state; do not rewrite a failed terminal transition as completed.
+6. Before diagnosing cache, IP or acknowledgement behavior, prove **actor parity**: the Facebook profile that completed Ads Manager authentication must equal the live token actor returned by `/me` (and `/debug_token.user_id` when needed). A vault item named for Rafael can still contain Roosevelt's token; app ID, scopes, Page tasks and `standard_access` do not prove user identity. After a vault correction, force a protected account-specific refresh and re-run `/me` before the write.
+7. Native ad copies initially inherit source-style names such as `AD 03`; the canonical Drive-derived name is applied by a later normalization stage. If a sibling failure interrupts the batch, reconcile successful child IDs and normalize those exact ads before declaring completion. Correct creative media/name does not compensate for a stale live ad name.
+
+Observed evidence, the identity-mismatch resolution, interrupted naming behavior and the Standard-access audit gates are in `references/meta-standard-access-live-run-audit-2026-09-05.md`.
+
+### Advanced Access app/token is not sufficient proof
+
+If Rodolfo swaps to a Meta app/token with Advanced Access and the failure still appears only at `POST /ads`, do **not** keep treating ordinary app permissions as the primary hypothesis. A 2026-06-18 retest with a new Advanced Access app/token reproduced the same boundary: dry-run OK, campaign/adset/adcreative OK, `POST /ads` failed with `code=31 / subcode=3858385`, and cleanup verified the partial campaign as `DELETED`.
+
+Interpretation: Advanced Access can be necessary, but it is not sufficient to clear this checkpoint. The next decisive isolation test is same script/token/payload from a different host/IP/datacenter, preferably Hostinger when comparing against Bruno Okamoto/student success patterns.
+
+### `messenger_doc` is not valid input for rebuilt creatives
+
+For Messenger campaigns, do not blindly resend `object_story_spec` / `asset_feed_spec` as returned by Meta if it contains `https://fb.com/messenger_doc/`. Meta may expose it in existing creatives but reject it as an external destination when creating a new adcreative.
+
+Prefer clone-source based on clean assets:
+
+```text
+video_id      for existing video creatives
+image_hash    for existing image creatives
+```
+
+Use `ares-meta-replacement-clone-videoid.py` / `video_data_minimal` when available.
+
+### OpenzedFinanzas clone/replacement permission bundle
+
+For OpenzedFinanzas clone/replacement, the relevant token/app permission bundle is:
+
+```text
+read_insights
+pages_show_list
+ads_management
+ads_read
+business_management
+instagram_basic
+pages_read_engagement
+pages_read_user_content
+pages_manage_engagement
+pages_manage_ads
+pages_messaging
+pages_manage_metadata
+pages_manage_posts
+```
+
+### Clone vs create-from-zero: do not conflate routes
+
+When Rodolfo asks to clone Meta campaigns, do **not** implement it as “create a new campaign from generic Ares defaults” and call that a clone. There are two separate modes:
+
+```text
+Mode                         Meaning
+---------------------------- ------------------------------------------------
+Replacement Ares padrão      1 campaign / 1 adset / 3 ads / USD 25 / PAUSED
+Clone fiel                   Copy the source campaign/adsets/ads structure and writable fields
+```
+
+For clone fiel, first build a source mirror via GET:
+
+```text
+1. GET source campaign
+2. GET all source adsets
+3. GET all source ads/creatives
+4. Classify fields as writable vs read-only/derived
+5. Create/copy PAUSED objects step-by-step
+6. Validate source vs clone with GET after each step
+```
+
+Do not accept a structurally working clone as “perfect” if critical writable fields differ. A 2026-06-19 Elena Santana test proved campaign/adset/ad creation and activation can work, but the clone was not perfect because attribution changed from `7-day click + 1-day view` to `1-day click`.
+
+### Attribution 7/1 clone diagnostic before declaring “inevitable”
+
+If a source adset shows `7-day click + 1-day view` but the clone comes back as `1-day click`, do not immediately call it a Meta limitation. First rule out our own payload bug:
+
+```text
+1. GET source adset with attribution_spec, attribution_setting, use_unified_attribution_setting.
+2. GET clone adset with the same fields.
+3. Check scripts for hardcoded 1-day click attribution_spec.
+4. Test one PAUSED adset using attribution_setting=7d_click_1d_view, not attribution_spec.
+5. If needed, test use_unified_attribution_setting=true + attribution_setting=7d_click_1d_view.
+6. Only after those fail, investigate native/async copy or UI automation.
+```
+
+Native/async copy is the preferred path for a true Meta clone because it may preserve internal metadata not exposed in manual create payloads. But it is not proof that rebuild is impossible until `attribution_setting=7d_click_1d_view` has been tested directly. If native/async copy preserves 7/1, promote it to the official clone-fiel route. If public API/tier blocks native copy while Ads Manager UI duplicates normally, the fallback is AdsPower/UI automation rather than accepting a non-identical clone.
+
+See `references/openzedfinanzas-clone-attribution-native-copy-2026-06-19.md` for the session-specific details and message template used to align Ares.
+
+## Ares Meta cron failures / `#logs-aquisicao` spam
+
+When Meta cron jobs in Ares repeatedly timeout or spam `#logs-aquisicao`, first inspect `/root/.hermes/profiles/ares/cron/jobs.json` and the no-agent script path. For job `aa9e01a5ec4a` (`Ares Meta intraday R1-R5 dry-run`), repeated 120s timeouts can be caused by an invalid/deleted Meta app token, not by Hostinger. The observed durable signature is Graph API `HTTP 400`, `OAuthException code 190`, message `Error validating application. Application has been deleted.` In that case, pause the affected Meta cron jobs (`aa9e01a5ec4a`, `c6c737070d3f`, `0598c0dc469f`) to stop Discord spam, set a clear `paused_reason`, and wait for the `Token Meta API` 1Password credential to be replaced. Details: `references/meta-cron-invalid-app-token-timeout-2026-06-18.md`.
+
+### 1Password throttling in recurring Meta crons
+
+If the intraday wrapper emits `runner_exit_1` repeatedly and the runner fails before writing a new audit, test the credential lookup separately. The durable signature is `Too many requests` / `rate-limited` from the 1Password CLI while `op whoami` may still look healthy.
+
+Operational rules:
+
+1. Pause the affected Ares cron immediately to stop repeated Discord alerts and additional 1Password requests.
+2. The shared Meta helper is **cache-first**: use the fresh protected cache before contacting 1Password. The default refresh interval is 24 hours; do not regress to one `op item get` on every cron run.
+3. Refresh with exactly one `op item get --format json --reveal`. Never probe candidate field labels separately.
+4. Serialize refreshes with a cross-process lock and double-check the cache after acquiring it. This prevents simultaneous cron processes from creating a credential-read stampede.
+5. Persist the token only in `/root/.cache/mgs/ares-meta-token.json`, with parent mode `0700`, cache and lock mode `0600`, and atomic replacement. The path stays outside Git.
+6. A transient 1Password failure may use the bounded stale cache for at most 7 days. An explicit/forced refresh fails closed and must not fall back to a rejected token.
+7. Validate concurrency synthetically: several simultaneous processes must produce one refresh, preserve permissions, and expose no token. Then run two real read-only Meta auth checks and confirm `cached_at` does not change, followed by an intraday dry-run with `exit 0`, `errors=[]`, and `write_enabled=false`.
+8. Resume a paused cron only after those checks pass. If no valid cache exists, keep it paused until one successful 1Password lookup seeds the cache.
+
+Implementation: `/root/mgs-agent/scripts/ares-meta-common.py`.
+
+Detailed incident signature, reproduction boundary, cache contract, and resume checklist: `references/ares-intraday-1password-rate-limit-2026-07-10.md`.
+
+## Meta Business browser writes with a logged Facebook user
+
+When Rodolfo asks to create ad accounts or change Business Settings using a Facebook user already logged into the persistent browser profile, preserve that exact identity and use manual passkey/2FA through localhost-only noVNC. Confirm the Business target and current assets before write, read disabled controls/tooltips, and validate each new Ad Account ID plus `Owned by` after creation. Do not silently substitute a different API user/token.
+
+Treat Meta reauthentication as an explicit auth gate during preflight. Check both the final URL (including `/security/twofactor/reauth/`) and visible text such as `2FA Entry`, `Confirm it's you with your passkey`, or `Try another way`; generic `Log in` regexes alone miss this state. A redirect away from the requested Business URL with zero assets is not proof that access was lost: capture the final URL, title, and a short sanitized body excerpt, classify the reauth gate, and stop before any write.
+
+For manual reauthentication, keep the protected persistent profile under an exclusive lock and open a headed localhost-only noVNC session. If the canonical login helper intentionally allowlists only Meta Ad Library URLs, do not weaken that allowlist as a shortcut: start it on its permitted URL, then invoke the exact Playwright Chromium executable with the same `--user-data-dir` and `--no-sandbox` to forward the Business Settings URL through Chromium ProcessSingleton. Before giving Rodolfo an authentication link, verify noVNC HTTP readiness, loopback-only VNC/noVNC listeners and the marker `Opening in existing browser session.`. Separate session readiness from target-page verification: ProcessSingleton forwarding can open another tab while the login helper's status still describes its original Ad Library page. Inspect the actual Business tab's URL/text before claiming that the authentication gate is displayed; otherwise report only that the session and navigation handoff are ready. Deliver the local SSH-forward command and clickable localhost noVNC link together; explain that authentication must occur in this same remote browser, not a separate local Facebook session. Never request credentials in chat. After Rodolfo reports completion, close the headed context gracefully, wait for helper cleanup and profile-lock release, then run the canonical read-only preflight. Treat his acknowledgement as the trigger to validate, not proof of recovery. Concrete handoff and cleanup recipe: `references/meta-business-ad-account-browser-creation.md`.
+
+For the approved Rodolfo Facebook identity, the current MGS TOTP source is the exact 1Password item `accountscenter.facebook.com` in vault `MGS Conteúdo`, field type `one-time password`. At a Meta passkey reauthentication gate, select `Try another way` → `Authentication app`, retrieve one fresh six-digit OTP internally with `op item get <exact-item-id> --vault 'MGS Conteúdo' --otp`, enter it without printing, logging or placing it on the clipboard, and submit before expiry. Fail closed if the exact item is missing, duplicated, inaccessible or does not return one six-digit OTP; never expose the secret or generated code. This route handles an authenticator-code option only and does not bypass an exclusive passkey, device approval, checkpoint or security review. Validate success by disappearance of the reauth gate followed by the canonical read-only Business preflight; a blank Business content pane alone is a known render condition and is not sufficient to classify authentication as failed.
+
+Validated sequence, evidence and recovery boundaries: `references/meta-business-1password-totp-reauth-2026-09-08.md`.
+
+Ad-hoc Node/Playwright probes that import the residential `proxy-config` directly must receive exported 1Password environment variables. Merely `source`-ing `/root/mgs-agent/.env` in a non-exporting shell can leave `OP_SERVICE_ACCOUNT_TOKEN` unavailable to the child process even though the variable exists in the shell file. Use the credential-safe launch shape `bash -lc 'set -a; source /root/mgs-agent/.env >/dev/null 2>&1; set +a; exec node <probe>'`, and validate only presence/length when diagnosing—never print the value. Canonical helpers that already do `set -a` should remain the preferred route.
+
+For an explicitly authorized batch, checkpoint every account independently and persist unique IDs before continuing. Meta list rows are virtualized, `selected_asset_id` is not necessarily the real Ad Account ID, and an error modal can be ambiguous about whether the write committed. Never retry an ambiguous creation until a before/after asset-ID readback proves that no new account appeared. Do not randomize timing to simulate a human or evade activity controls; use a transparent fixed cadence and stop on any security/restriction gate. Direct person assignment is a separate permission change: if an account is BM-owned but shows `0 people`, report the gap and get the required confirmation before assigning anyone. For access validation, never parse `0 people`, `1 person`, a user name, or `Full access` from the whole page body: the virtualized account list contains counts from unrelated rows. Navigate the captured asset directly, click the exact `People` tab by semantic role, and wait for both the selected account's assignment sentence and the expected person/access row before classifying access.
+
+When Rodolfo requests continuation of a paused partial batch, first resolve the existing scheduler job to its script wrapper and exact durable state path; read the batch's `status`, `blocked`, `completed`, acceptance contract and remaining scheduler repeats together. Pause an enabled dispatcher before recovery so silent blocked ticks cannot consume its finite repeat budget or race the foreground canary. Inspect the durable mutation intent/receipt before clearing the blocker: an already-checkpointed success receipt plus a failure proven to precede the mutation establishes zero write for that failed tick; a submitted-unconfirmed intent still requires live reconciliation and must never be replayed. Treat scheduler `enabled=true` or `last_status=ok` as dispatch health only: a script can exit successfully without creating anything while its checkpoint remains blocked. Do not initialize a fresh batch, reset progress or clear the blocker merely because continuation was authorized. Preserve the original target/defaults/completed IDs, run the canonical read-only preflight against the same `business_id`, and classify any passkey/2FA redirect before write. If reauthentication prevents reconciliation of an earlier ambiguous mutation, persist both dependencies separately; report `target − confirmed` as unconfirmed remainder, not as accounts proven never created. After authentication, reconcile the live account-ID set against `preexisting IDs ∪ completed IDs` and prove the previously failed mutation still had no side effect. Resolve any popup-confirmed entry with an unknown account ID through its captured asset and exact ID/owner readback before treating another visible ID as an extra creation; virtualized lists and incomplete baselines cannot prove when an account was created. If a confirmed account remains outside the reconciled set, preserve the authorized target and confirmed count, record authentication as recovered but execution as reconciliation-blocked, and ask Rodolfo only for the unresolved origin and whether that account belongs to the batch. Do not silently count it, delete it, replay a creation or call it an anomaly. Only after reconciliation mark the execution blocker as resolved and continue the missing sequence numbers. A changed count, BM, name, timezone, currency, usage, permission assignment, cadence, or payment scope is a new authorization scope, not a resume.
+
+For long-running batches, keep Rodolfo informed without streaming raw logs. Default to a concise progress checkpoint after authentication/preflight, every five confirmed creations, and immediately on any pause, retry, block, or stop; if he asks for a tighter cadence, report after each confirmed account when the platform permits controlled in-thread updates. Every checkpoint must state `Criadas X/Y`, `Faltam Z`, and the current state. A partial stop must clearly separate validated creations from the unattempted remainder, and automatic background-completion notifications remain disabled.
+
+When Rodolfo explicitly changes a named batch's acceptance rule so the exact Meta success modal (`Ad account created` / `Ad account created successfully`) is sufficient, count that modal as one successful creation even if the subsequent account list or `People` tab is blank. Preserve the account ID/access fields as unverified when they cannot be read; never rewrite them as verified. A Meta error popup stops the batch immediately with no automatic retry. If neither a success modal nor an error popup is captured after a mutation, stop as an ambiguous outcome rather than replaying the write. If the canonical account page is blank before any mutation and therefore the `Add` control is unavailable, record zero side effect, defer that tick and retry at the next fixed cadence instead of blocking the whole batch; the global repeated-failure intervention/stop limits still apply.
+
+### Scheduled one-account-per-interval batches
+
+When Rodolfo requests a future start time and a slow cadence such as one new ad account per hour, use a deterministic script-only scheduler rather than a long-lived browser process or a fresh reasoning agent at every tick:
+
+1. Freeze the target Business, total, account defaults, first eligible time, cadence, identity/access requirement, payment scope and reporting thread in a durable state file before scheduling.
+2. Audit all MGS schedulers under the global cron policy. If the requested exact minute collides, choose the first collision-free minute that still falls within the requested hour and disclose the physical stagger; do not silently change the hourly cadence.
+3. Enforce `not_before`, `next_due_at`, a maximum of one write per tick, a hard target count, unique-ID reconciliation and both a run lock and the protected browser-profile lock. The target guard—not the cron repeat count—is what prevents account 41.
+4. A recurring job created before the start time may consume a silent pre-start tick, and enabled ticks against a blocked checkpoint can consume repeats without creating anything. Budget finite repeats as `pre-start ticks + requested writes + bounded recovery reserve`; at each resume, compare `total repeats − consumed ticks` with the remaining creations plus recovery reserve. Extend a nonterminal job in place only when insufficient, preserving its consumed counter; replace only a terminal exhausted dispatcher against the same batch state. After the target completes, remaining ticks must emit nothing and perform no Meta write.
+5. Run a real read-only Meta preflight plus a scheduler gate smoke that proves pre-start stdout is empty and the state hash is unchanged. A validated setup is still `scheduled`, not `operationally proven`, until the first natural scheduler tick satisfies the active acceptance contract: normally creation plus ID/asset readback; under an explicit success-popup override, the exact Meta success modal plus a persisted unverified-identity record when the UI cannot render the details.
+6. Under the default contract, validate after each successful tick the exact Ad Account ID, Business owner, the selected account's semantic `People` tab, expected person with Full access and absence of payment changes before advancing `next_due_at`. Under an explicit success-popup override, make those checks best-effort and non-blocking after the success modal; persist unavailable ID, ownership or access as `null`/unverified, never as validated.
+7. Under the default contract, a visual mutation error permits at most one later controlled retry only after exact no-side-effect reconciliation. Under an explicit success-popup override, any Meta error popup stops immediately with no automatic retry. In both modes, reauth, security, maximum-account, multiple-new-ID or an outcome with neither captured success nor captured error blocks future writes and preserves the checkpoint.
+8. A user-requested cadence change during an active batch is a new authorization scope, but not a new batch. Preserve the request ID, target, completed IDs, preexisting-ID set, defaults and recovery history; reconcile the live checkpoint before changing future ticks.
+9. Treat the new cadence as a coupled scheduler migration. Re-audit every minute residue introduced by the new expression across the global scheduling horizon; never turn an hourly minute into `minute,minute+30` blindly. If the added residue collides, select the nearest pair that preserves the exact interval, has zero non-baseline operational start collisions and does not share the browser/state lock, then disclose the physical minute shift.
+10. Change every cadence-bearing layer together: runner slot calculation, minimum-elapsed guard, durable `schedule`/`schedule_minutes`/`cadence_minutes`/`next_due_at`, scheduler expression and human-visible job name. Preserve consumed finite repeats and recompute whether the remaining repeat budget still covers `remaining writes + bounded recovery reserve`; extend only when it no longer does, never reset the counter.
+11. Before the migration, back up runner, state and scheduler config. Hold the run/state lock while rewriting the checkpoint, perform no Meta mutation during the cadence change, then run syntax checks plus a pre-due gate smoke proving zero stdout and an unchanged state hash.
+12. Read back scheduler and durable state independently, repeat the collision/resource audit, and update checkpoint, audit, inventory and infrastructure report. Classify the lane as `scheduled under the new cadence` until the first natural tick creates and validates one account; calculate any finish forecast from the remaining count and label it conditional on no Meta block.
+
+Validated setup pattern and its still-pending first-natural-tick boundary: `references/meta-business-hourly-scheduled-batch-2026-09-06.md`.
+
+Success-popup acceptance override, correct interpretation of `people_tab_count_0`, recovery of a post-success blocked tick, and replacement of an exhausted terminal recurring cron: `references/meta-business-success-popup-acceptance-and-cron-replacement-2026-09-07.md`.
+
+Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, BM target correction, batch-safe ID reconciliation, new-portfolio limit handling, repeated generic rejection handling, and shutdown readback: `references/meta-business-ad-account-browser-creation.md` and `references/meta-business-ad-account-batch-reconciliation.md`.
+
+## Meta Business Manager inventory / asset access audits
+
+### Cross-reference BM accounts with the Smart Bidding domain catalog
+
+For a Zeus-authorized Digital Trust inventory, paginate only the named BM's owned/client edges, then cross-reference the exact account IDs with the SB corporate domain catalog and its account registrations. Resolve the frontend's current read route before use; the validated account route is `GET /accounts/Facebook` with explicit `companies[]=digital-trust`, `companies[]=digital-trust-2` and `source=Facebook`. That response is credential-bearing (`ACCESS_TOKEN`, `APP_SECRET`): keep raw objects only in process memory and persist/output only allowlisted account identity, domain and active fields. Join `ACCOUNT_ID` after removing only the documented `act_` prefix; names alone can miss aliases such as `Conecta` mapped to `conectageral`.
+
+Report exact SB-registered IDs separately from additional BM accounts whose names match catalog publishers; a naming match is not verified registration or proof of current delivery. Preserve accounts with generic names as unmapped rather than assigning them by guess. Include registered inactive publishers when the request is catalog-wide, and distinguish account enablement from campaigns spending. On a 403 from a narrower operational SB identity, diagnose its validity/access and use Zeus's existing approved administrative route for this Zeus audit; never widen Ares's catalog authority or rotate production references. Generate one Ads Manager link per verified Meta account ID and assert link-ID set equality and unique counts before delivery.
+
+Use this skill not only for campaign operations, but also when Rodolfo asks to inventory a Meta Business Manager: ad accounts, people/users, pixels/datasets, pages, system users, and asset-to-account relationships.
+
+Critical rules for BM audits:
+
+1. **Token capability and coverage first.** Test candidate 1Password token items read-only with `me`, `me/permissions`, `me/businesses`, and a small BM/account edge. A token with `ads_read` but `business_management=declined` may read some ad data but is not sufficient for BM-wide user/asset inventory. Granted `business_management`, HTTP 200 and exhausted pagination still do not prove BM-wide visibility: a campaign-scoped BISU/System User grant can return only assigned assets, including on `owned_ad_accounts`. For a BM-wide request, resolve an existing broad BM-admin user credential from 1Password and compare its fully paginated owned/client inventory against the operational grant; never change credentials or permissions to expand visibility. Treat the narrower result as a visible subset, not the BM total. Likewise, `/me/adaccounts` can omit accounts present on the Business edge; union by exact account ID and preserve per-source counts. If broad coverage cannot be validated, explicitly report the visibility gap instead of declaring an exhaustive total.
+2. **Always paginate.** Never treat the first Graph API page as the total. BM counts can be badly underreported if you stop at the initial edge response. Page `owned_ad_accounts`, `client_ad_accounts`, `business_users`, `owned_pixels`, and `client_pixels` until no `paging.next` remains.
+3. **Define “users” by surface.** `/{business_id}/business_users` returns direct BM users and can expose e-mail, but UI totals may include users assigned through assets/partners. To map operational access, scan `/{act_id}/assigned_users?business={business_id}` across every owned/client ad account and dedupe IDs.
+4. **E-mail caveat — verify docs before blaming rate limit.** If Rodolfo challenges blank e-mails, check the current Meta docs and `debug_token` rather than repeating an assumption. As of Graph v25.0, the Ad Account `assigned_users` edge documents only `tasks`/`permitted_tasks` additions on AssignedUser nodes and returns `id,name,tasks`; it silently omits `email` even when requested and even with `business_management=granted`. The `email` field is documented on the `BusinessUser` node (`/{business_user_id}` / `/{business_id}/business_users`) as “User's email as provided in Business Manager.” Join e-mails only for users also present in `business_users`; otherwise leave e-mail blank and escalate to UI/internal-request extraction rather than inventing or deriving it.
+5. **Pixels/datasets route.** For the Meta UI “Data Sources → Datasets & pixels” audit, use `/{business_id}/owned_pixels`, `/{business_id}/client_pixels`, and `/{act_id}/adspixels`. Dataset-named edges may be absent depending on Graph version; do not block the audit if pixel edges provide the visible data-source inventory.
+6. **Throttle long scans.** A full BM traversal may require hundreds of Graph calls. Use bounded backoff/throttle and summarize final counts; do not stream raw API output into Discord.
+7. **Sheets export shape.** If Rodolfo asks for a Google Sheet export, create exactly the requested operational tabs unless he asks for a summary. For this audit class, the proven tabs are `Contas x Perfis` and `Pixels x Contas`, then verify readback row counts after write.
+
+Session-specific references: `references/meta-business-manager-inventory-sheets-2026-07-06.md`, `references/meta-bm-inventory-sheets-2026-07-06.md`, and `references/bm-audit-assigned-users-email-visibility-2026-07-06.md` (endpoint list, Sheets tab layouts, row deletion by profile, and the documented distinction between BusinessUser email visibility and Ad Account assigned_users e-mail omission).
+
+## Meta Social Technologies MCP — app diagnostics
+
+For links under `/documentation/mcp/devtools-mcp`, load `references/meta-social-technologies-mcp.md`. Distinguish the app-diagnostics server (`/devtools`) from Ads MCP (`/ads`), check Meta's explicit supported-client list independently of Hermes protocol compatibility, and never equate easier diagnosis with measured API acceleration. A read-only pilot must also exclude webhook test sends, which can trigger production receivers. When interpreting screenshots of a ChatGPT MCP answer, distinguish the assistant's summary from the original tool response: reconcile App Review status, history, privileges and requirements per tool before declaring approval, rejection or inconsistency, and do not assign a time window to a quota value unless the tool supplies it. Retaining Manage access at Rodolfo's request does not authorize management calls in a read-only pilot. When Rodolfo asks what comes next after supplying results, resume from the completed stage: lead with what is already demonstrated, the remaining gap and one targeted next step; do not restart setup or repeat successful discovery. Resolve the app by the named consumer's current registry and Rodolfo's corrections, keeping campaign/SB apps separate from segurador/BOT apps. Sharing an app does not establish shared token identity or asset grants. Treat an app excluded from the pilot as out of scope, not as authorization to delete it or revoke credentials.
+
+## Meta Ads MCP Server evaluation and pilots
+
+Use this path when Rodolfo asks whether Meta's Ads MCP Server can help Ares, connect an app directly, discover accounts/Pages, reduce Graph API wiring, or bypass verification/checkpoints.
+
+1. **Separate discovery from authorization.** The MCP can list ad accounts and Pages already accessible to the authenticated user, but it does not verify, release, assign, or grant those assets.
+2. **Never present it as a bypass.** Do not claim it replaces App Review, Advanced Access, Business Verification, user authentication, BM/Page permissions, account restrictions, or Meta checkpoints.
+3. **Use an MGS-controlled app for production assets.** An app owned by a friend/vendor may demonstrate feature availability, but MGS assets should authenticate through an app institutionally owned and controlled by MGS.
+4. **Ares is technically compatible.** Hermes supports remote HTTP MCP servers, OAuth, pre-registered OAuth clients, and per-server tool filtering. Validate the exact Meta OAuth flow in a pilot rather than assuming compatibility from protocol support alone.
+5. **Pilot read-only first.** Compare MCP account/Page discovery, campaign inventory, and reporting against current Graph API/readback before exposing write tools.
+6. **Keep writes paused and bounded.** For a controlled write, create only approved `PAUSED` objects, do not expose activation initially, verify by GET/UI, and clean partials using this skill's normal safety model.
+7. **Treat endpoint isolation as a test, not a conclusion.** Because the MCP is Meta-hosted, it is a useful alternative route for the known `POST /ads` checkpoint boundary. The docs do not promise a bypass; only a controlled comparison can show whether the same `code=31` boundary reproduces.
+8. **Use Meta's own controls.** Where available, enforce Business Suite Ads MCP rules for campaign creation and budget changes in addition to Hermes tool filtering and MGS authorization gates.
+
+Detailed official-source findings, tool names, permissions, interpretation, and pilot checklist: `references/meta-ads-mcp-server-assessment-2026-07-17.md`.
+
+## Meta Ad Library discovery and creative extraction
+
+Use this path when Rodolfo asks to enumerate Pages, domains, ads, or creatives from a public Meta Ad Library keyword/domain URL.
+
+1. **Choose the source by market and ad class.** The official Ad Library API is useful for structured catalogue queries, but ordinary commercial ads outside the UK/EU may not be covered. For active Brazilian commercial ads, inspect the normal Ad Library page and its rendered serialized payload first.
+2. **Keep identifiers distinct.** Report the payload's `page_id` as the Page ID. A different number in `snapshot.page_profile_uri`—often beginning with `615...`—is a profile URL identifier and must not be substituted for `page_id`.
+3. **Account for collation.** Search-result totals, visible cards, and unique Pages are different measures. Deduplicate on `page_id` and preserve `collation_count`/Library IDs if counting ads or versions.
+4. **Inventory domains Page by Page.** Open each Page through `view_all_page_id=<page_id>`, parse every `snapshot.link_url`, and recursively inspect URL-valued query parameters such as `url=`. Report unique registrable domains separately from hostnames/subdomains.
+5. **Treat API tokens correctly.** A valid Marketing API token with `ads_read` does not prove Ad Library API authorization. Probe `/me/permissions`, then a small read-only `/ads_archive` call. `code=10`, `error_subcode=2332002` means the app lacks permission for this action; do not rotate a working Marketing API token on that evidence alone.
+6. **Do not expose token-bearing URLs.** `ad_snapshot_url` and Graph paging URLs can embed access tokens. Summarize IDs/counts and sanitize URLs before reporting.
+7. **Set the right expectation.** The API returns structured metadata and snapshots; it is not a direct bulk JPG/MP4 download endpoint. Creative files still require individual snapshot extraction under Meta's analysis/storage terms.
+
+Detailed field map, safe token probe, coverage boundary, payload extraction procedure, and pitfalls: `references/meta-ad-library-api-browser-extraction-2026-07-12.md`.
+
+## Reporting format
+
+### Cancellation versus cleanup — executive answer first
+
+When Rodolfo asks whether a Meta batch was cancelled and “everything was undone,” do not answer with the full benchmark audit first. Lead with two short groups:
+
+```text
+Cancelado/parado     processes, campaigns, ads, spend and future writes
+Não desfeito         exact residual objects and why cleanup did not complete
+```
+
+State the practical verdict plainly: `cancelado e limpo`, `cancelado com resíduos`, or `não cancelado`. A deleted Discord thread and zero running processes prove the monitor/execution stopped; they do not prove Meta media deletion. If cleanup failed, name the remaining object count, account split, reference/spend risk and exact next authorization dependency. Put timing, p50/p95 and architecture findings after this direct answer, not before it.
+
+### Executive health verdicts for Rodolfo
+
+When Rodolfo asks whether “reports, crons, agents and campaign creation are all working,” do not answer with a credential-cutover narrative or a long inventory dump. Audit the full named operation first, then lead with one plain verdict:
+
+- **Tudo operacional** — every required lane has a successful real tick/readback.
+- **Quase tudo operacional** — normal use works, but name each remaining unproven or degraded lane.
+- **Não operacional** — identify the exact blocker and affected functions.
+
+Then summarize in at most three short groups:
+
+1. **Funcionando:** agent/gateway, reports, enabled crons, creation/cloning and verified Discord/Meta readbacks.
+2. **Ressalvas:** stale historical badges, intentionally disabled jobs, external data delay, or a lane awaiting its first real post-fix tick.
+3. **Ação necessária:** say explicitly whether Rodolfo must do anything.
+
+Keep technical health separate from campaign performance: an active, correctly reporting campaign with poor ROI is **operational but performing badly**, not an automation failure. Likewise, a prepared channel with no implemented workflow is **not broken**; label it “ainda não implantado.” Do not call a repaired cron fully green until either its own scheduler records `last_status=ok` and `failure_streak=0`, or clearly label the distinction between a successful manual recovery and the pending real tick.
+
+### Ares HOA gestor reports: no `ID REC` column
+
+For HOA/checkpoint reports intended for gestores, do **not** show an `ID REC` column in the Discord table. Rodolfo corrected that this is visual pollution: the complete campaign name with its numeric suffix is already unique enough for human operation, e.g. `Elena Santana - ES - ESP - 004`.
+
+Operational rule:
+
+1. Keep recommendation IDs only in JSON/audit/state if needed for technical traceability.
+2. The human table starts with `Nome campanha`, then `Início`, `Status`, metrics, `Ação`, and `Motivo`.
+3. The header/instructions should tell Rodolfo/gestores to respond with the **full campaign name**.
+4. If a response uses only a partial name and matches multiple campaigns, ask for disambiguation rather than requiring `ID REC`.
+
+Session detail: `references/hoa-report-no-id-rec-2026-07-09.md`.
+
+### Ares intraday / reativar-todas row visibility
+
+Ares Meta intraday and reativar-todas Discord reports must show every candidate row in-channel/thread. Do not replace tail rows with `... +N linhas no audit local`; Rodolfo expects the operational report itself to contain all rows. If the message exceeds Discord length, split into multiple valid chunks while preserving readable fenced/table formatting.
+
+Keep Rodolfo’s report concise and separate evidence from interpretation:
+
+```text
+Teste                         Resultado
+----------------------------  -----------------------------------
+Proxy validado                IP mudou de Hetzner para ISP/proxy
+Dry-run                       OK
+Campaign PAUSED               OK
+Adset PAUSED                  OK
+Adcreative por video_id       OK
+POST /ads                     Falhou code/subcode
+Cleanup                       DELETED verificado
+
+Conclusão: [IP confirmado / IP descartado como único fator / endpoint-specific block]
+```
+
+## References
+
+- `references/proposed-gam-utm-postrequest-pc1.md` — approved design for all direct-traffic niches (CAR, SHEIN and future), awaiting Ares implementation: PC1 follow-up after the manager's creation-completed reply; sequential new landing-page tabs, 20-second observed visibility, one-minute retry before missing-ad escalation in the coordination thread. Source approval 1559951763019145247; design approval is not runtime-validation proof.
+- `references/webshare-adspower-meta-post-ads-proxy-test-2026-06-18.md` — session-specific diagnostic: Webshare proxy from 1Password, direct vs proxied egress, dry-run/write results, cleanup, and conclusion for `POST /ads` block.
+- `references/advanced-access-app-token-post-ads-2026-06-18.md` — session-specific diagnostic: new Advanced Access Meta app/token still reproduced the same `POST /ads` checkpoint while campaign/adset/adcreative creation and cleanup worked.

@@ -288,7 +288,7 @@ Follow the operation-specific architecture gate in **Page-access workflow and Ro
 
 For inert decision waits versus active writers and coordinated takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer historical targeting approval.
 
-Elapsed partials: SHEIN → `references/shein-explicit-partial-schedule.md`; ASAP target → `references/target-asap-partial-continuation.md`. Preserve seals/IDs/clock and QA.
+Elapsed: `references/shein-explicit-partial-schedule.md`, `references/target-asap-partial-continuation.md`. Discord429: `references/discord-authority-get-rate-limits.md`.
 
 ### Recurring SHEIN clone defects — repair acceptance
 
