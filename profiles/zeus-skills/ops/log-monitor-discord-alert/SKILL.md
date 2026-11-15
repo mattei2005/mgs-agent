@@ -37,6 +37,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
 - **DR SLA: origem correta, dedupe, recuperação e readback sem repost** → `references/stateful-dr-sla-alerts.md`
+- **DR upload HTTP 500/timeout, sessão resumível e snapshot histórico perdido** → `references/dr-resumable-upload-recovery.md`
 - **RunCloud: coleta, orçamento de API, cooldown, cadência e avaliação SSH/API híbrida** → `references/runcloud-initial-monitoring.md`
 - **SHEIN D-1 e cinco rodadas intraday: estado/nonce por slot, lock compartilhado, UI Today e validação sem publicação antecipada** → `references/shein-daily-and-intraday-reports.md`
 - **SMS Funnel: saldo monetário, billing por canal e conferência independente API × dashboard autenticada** → `references/sms-funnel-wallet-readback.md`
