@@ -1,0 +1,14 @@
+{
+  "initial_image": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261115T1402/initial.png",
+  "initial_surface": "Chrome PC1, profile Rodolfo confirmed in fresh AX; business.facebook.com/latest/billing_hub/accounts/ and business_id 155263197283282 confirmed in pixels; Outstanding balance header present. Already-rendered page alone does not prove new-navigation authentication.",
+  "blocked_image": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261115T140456975042/blocked.png",
+  "blocked_image_inspected_with": "vision_analyze",
+  "observed_gate": "Confirm it's you with your passkey",
+  "observed_route": "business.facebook.com/security/twofactor/reauth/",
+  "accounts_table_available_after_navigation": false,
+  "fresh_h_verified_ids": [],
+  "human_gate": true,
+  "ui_stopped_without_bypass": true,
+  "historical_d_not_revalidated": true,
+  "initial_capture_recovery": "AX capture returned no screenshot_path; obtained separate native vision capture without input. Initial missing-file diagnostic was not billing/credit failure."
+}
