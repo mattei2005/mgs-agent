@@ -6468,12 +6468,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789",
-      "next_step": "Inventariar remanescente115MB manutencao e5 classes de backups locais; buscar fontes retidas e consumidores. Hash/arquivo valido sozinho nao prova redundancia; nao excluir por idade.",
-      "objective": "Revisar restantes das pastas antigas de manutencao e backups locais; provar substituicao e recuperacao antes de propor descarte, sem repetir lotes encerrados.",
-      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571327506374598789",
-      "state": "in_progress_readonly_replacement_proof",
+      "next_step": "Novo gate manifesto19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f: 1 arvore local de backup WP File Manager+1 instalador duplicado;2alvos915arquivos188dirs;20.38MiB net estimado.8testesPASS. Sem approval/start/exclusao. Recuperacao depende do novo arquivo sites e do historico retido anterior.",
+      "objective": "Revisar restantes de manutencao/backups; preservar integralmente historico e preparar apenas disposicao comprovada.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json;discord:1569928464033783862/1571327506374598789",
+      "state": "prepared_validated_waiting_new_critical_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T00:56:21+00:00"
+      "updated_at": "2026-11-15T01:22:03+00:00"
     },
     {
       "agent": "zeus",
@@ -6538,12 +6538,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lote4+11 confirmado1571321515683618887 executado e validado; fonte cleanup-result. Informar somente proximo passo, restante de manutencao/backups locais sob leitura, conforme pedido. Demais5,6dados7caches8Git e recorrencia permanecem abertos.",
-      "objective": "Concluir classificacao exaustiva da ocupacao inutil do disco, independente de folga/urgencia, sem comprometer operacao ou recuperacao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-point5-followup-1571310958830166148/cleanup-result.json;discord:1569928464033783862/1571321515683618887",
+      "next_step": "Preparado novo lote de copias locais com recuperacao compactada,2alvos manifesto19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f; exige nova confirmacao. Restante5,6dados/trabalhos,7caches,8Git e recorrencia continuam abertos.",
+      "objective": "Concluir revisao exaustiva da ocupacao inutil, nao parar por urgencia/folga e nao confundir cobertura parcial com conclusao global.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T00:37:05+00:00"
+      "updated_at": "2026-11-15T01:22:03+00:00"
     },
     {
       "agent": "zeus",
@@ -6598,12 +6598,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Proximo passo a informar: revisar restantes de manutencao e backups locais para provar substituicao/recuperacao. Nao presumir inutilidade por idade. Nenhuma proxima exclusao autorizada; restante5 e6-8 continuam.",
-      "objective": "Concluir revisao de sistema/demais arquivos; lotes8+29 e4+11 ja encerrados. Preservar recuperacao e dados nao comprovados descartaveis.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-point5-followup-1571310958830166148/cleanup-result.json",
-      "state": "remaining_system_roots_readonly_review_pending",
+      "next_step": "Aguardar novo gate2alvos em ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789. Demais pacotes/configs e evidencias historicas mantidos sem substituicao integral provada; outros5 e6-8 permanecem. Nao apagar root backup completo por idade.",
+      "objective": "Concluir classificacao sistema/demais arquivos sem perda de recuperacao; lotes anteriores nao serao repetidos.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/preparation-result.json",
+      "state": "backup_remainder_lot_waiting_critical_parent_open",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T00:37:05+00:00"
+      "updated_at": "2026-11-15T01:22:03+00:00"
     },
     {
       "agent": "zeus",
@@ -10667,5 +10667,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:56:21+00:00"
+  "updated_at": "2026-11-15T01:22:03+00:00"
 }

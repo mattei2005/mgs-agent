@@ -893,6 +893,74 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "storage-backup-remainder-1571327506374598789",
+      "agent": "zeus",
+      "type": "archive_backed_local_backup_disposal_preparation",
+      "status": "prepared_validated_waiting_new_critical_confirmation",
+      "updated_at": "2026-11-14T20:22:02.693748-05:00",
+      "source_thread_id": "1569928464033783862",
+      "authority_message_id": "1571327506374598789",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "evidence": "data/storage-backup-remainder-1571327506374598789/preparation-result.json",
+      "manifest": "data/storage-backup-remainder-1571327506374598789/deletion-manifest.json",
+      "manifest_sha256": "19e552cca8acb81afe4618c4f2408e6d9d80b68288e9601319a2c95a70d3f41f",
+      "executor_sha256": "e9a7de171a902288f6191823da793ec20abf1274c9fdbe4c9d088c2fe522a382",
+      "verification": {
+        "targets": 2,
+        "regular_files": 915,
+        "directories": 188,
+        "symlinks": 0,
+        "tests_passed": 8,
+        "gross_reclaim_bytes": 25923584,
+        "new_preservation_bytes_at_freeze": 4554752,
+        "net_estimate_bytes": 21368832,
+        "site_archive_regular_members_verified": 948,
+        "site_archive_directories_verified": 234,
+        "historical_archive_full_regular_members_verified": 2675,
+        "retained_only_reader_original_payload_reads": 0,
+        "full_materialized_restore_executed": false,
+        "deletions": 0,
+        "approval_exists": false,
+        "execution_started": false
+      },
+      "recovery_dependencies": [
+        {
+          "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+          "sha256": "077f322590054310042d0edac93ed328047fb29b01c360358e39902ca0b7e721"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/source-manifest.json",
+          "sha256": "104e7f51fe6e404e1338abcb4e38c5405cc381c60de20112b4d1f602602d6727"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/recover.py",
+          "sha256": "dafe8501e9a483c3ad893046acc5c41bf6ad85c25eaaeb26ecc9c74c1777996d"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/SHA256SUMS",
+          "sha256": "5f6f8bfdb153af25463c05bda89659b3f97d26a730c46ce7d07b90f5242796ee"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/site-backup-history.tar.xz",
+          "sha256": "3133c44a7904c602d516060d4deb39cb06813a542162986fdbe56f1f6d221636"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/site-source-manifest.json",
+          "sha256": "1eb295555c24c9384cf1286dd70734613b2b1f8e9e8f078429e6671581651eb2"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/recover.py",
+          "sha256": "0977018b58e862ad306c61c879013fd470de3d2033f2bf579d5f092dd39af4b8"
+        },
+        {
+          "path": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/SHA256SUMS",
+          "sha256": "17435267b192e71c39dfde828aa4b6f1053fa4c8146f51339523f2bdcf0a0a2a"
+        }
+      ],
+      "protected": "Both compressed recovery sets, live programs/sites/profiles, historical manifests, parents and other source backup families. No live WordPress/OS/config or retention change.",
+      "parent_review_complete": false
+    },
+    {
       "id": "app-sheet-audit-1571314563885047941",
       "type": "read_only_app_sheet_audit",
       "owner": "Zeus",
