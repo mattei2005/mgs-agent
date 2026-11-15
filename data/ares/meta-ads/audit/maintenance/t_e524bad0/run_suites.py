@@ -11,7 +11,7 @@ def local_process(argv,*args,**kwargs):
  if not isinstance(argv,list) or not argv:raise AssertionError('OFFLINE subprocess denied')
  executable=Path(argv[0]).name
  media=executable in {'ffmpeg','ffprobe'} and not any('://' in str(v) for v in argv)
- checker=executable in {'python3','python3.14'} and len(argv)>1 and argv[1]=='/root/mgs-agent/scripts/mgs-ares-asset-scope.py'
+ checker=executable in {'python','python3','python3.14'} and len(argv)>1 and argv[1] in {'/root/mgs-agent/scripts/mgs-ares-asset-scope.py','/root/mgs-agent/scripts/mgs-domain-scope.py'}
  if not media and not checker:raise AssertionError('OFFLINE transport subprocess denied')
  return real_popen(argv,*args,**kwargs)
 subprocess.Popen=local_process
