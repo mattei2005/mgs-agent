@@ -933,12 +933,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-1571355399272145028",
-      "next_step": "Aguardar Nicolas confirmar se116reenvios foram intencionais ou se pretendia outro lote inédito. Não mover usados/reservados para Exclusivos, criar nova linhagem ou repetir15concluídos. Se intencionais, retomar somente reconciliação dos mesmos116IDs, com gate próprio se precisar recuperar acesso ou migrar histórico.",
-      "objective": "Tratar, renomear e entregar131vídeos Nicolas SHEIN_US_EN/VID/Exclusivos",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1571355399272145028/task-audit.json",
-      "state": "partial_needs_input:15novos entregues em nicolas - exclusivos, request ba828b84f0920f7dbc6eb9ccd9409967 complete,4claims completos; auditoria independente15/15 raw same-id,estoque raw/clean,providers,hashes,clean=true,recibos e reserva.116reenvios de73linhagens continuam intactos no upload manual, relidos e comparados.99com referência usada/reservada por campanha,17reserva anterior. referências antigas indisponíveis:43sem mapping,30mapping não resolve(9provider acessíveis,21indisponíveis). sem alteração histórica,acl,meta,cron ou scripts produtivos.",
+      "next_step": "Solicitar a Rodolfo na própria origem aceite delimitado para recuperar/repor referências históricas e entregar esses116IDs/73linhagens em Usados, preservando asset_id,naming,originais,hashes,reservas,histórico e inelegibilidade; sem ACL,credencial,exclusão,campanha ou guard global. Após aceite, validar rota técnica antes de writes. Não repetir15novos nem pedir novamente intenção a Nicolas.",
+      "objective": "Entregar15novos Exclusivos e recuperar116reenvios para reutilização em Nicolas Usados, SHEIN_US_EN/VID",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1571355399272145028/reuse-used-request-1571370959926198374.json",
+      "state": "awaiting_scoped_historical_recovery_authority. nicolas confirmou reuso e destino nicolas - usados em1571370959926198374; esclarecimento anterior encerrado.116mesmos ids permanecem intactos na entrada; pasta usados viva validada.15novos concluídos em exclusivos permanecem intocados.73linhagens históricas não resolvem clean atual; rota permanente de entrega nova é exclusivos, migração histórica excluída.17fontes/9linhagens são coorte usados172 já aprovada por rodolfo;99fontes têm referências antigas de request/campanha, sem novo get meta.",
       "thread_id": "1571355399272145028",
-      "updated_at": "2026-11-15T03:38:13+00:00"
+      "updated_at": "2026-11-15T03:50:09+00:00"
     },
     {
       "agent": "zeus",
@@ -3014,12 +3014,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIEWER-LOAN-1571342489162489937",
-      "next_step": "Retomar somente prepare canonico;validar selo e QA;entregar resumo na origem;aguardar OK posterior sem execute",
+      "next_step": "Aguardar OK explicito POSTERIOR ao resumo1571371155317850153 para mesmo digest;esta tarefa nao executa Engine. Antes de qualquer futura execucao revalidar autoridade/admissao/source_comparison/horario;se inicio vencer perguntar SOMENTE novo horario;nao repetir PBIA/uploads/reservas/naming nem retomar recovery antigo",
       "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
-      "source": "data/ares/meta-ads/audit/maintenance/t_e6a20db6/handoff.json",
-      "state": "maintenance_verified:13receipt hashes,105protected,86runtime iguais;writer livre;mesmo request/start/reservas/6ids preservados;retomada prepare autorizada",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/approval-summary-delivery.json",
+      "state": "prepared_awaiting_final_approval:prepare exit0;manifest/plan/summary selados digest7fb94557a6302e97bcc5239ad7f7758052555203f3ff15c360e1ffef55c5afba;1camp/1set/3finais+3seedspaused;usd35;inicio2026-11-15t00:02:00-05:00;3reservas/6ids preservados;3registry_hits/0uploads;qaclean/visual6variantes;0campaign_writes;resumo1571371155317850153 getverificado semanexos",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T03:04:56+00:00"
+      "updated_at": "2026-11-15T03:49:03+00:00"
     },
     {
       "agent": "ares",
@@ -8468,12 +8468,12 @@
     {
       "agent": "ares",
       "id": "eggbev-pg23189-1571342489162489937",
-      "next_step": "t_99deb773 continua pelo mesmo input/runner central, pre-read de admissao e receipts; preparar somente apos verificar horario futuro (se vencido perguntar apenas novo horario), inicializar PBIA conforme request aprovado e entregar resumo selado para OK posterior. Nao retomar recovery antigo; sem fallback Mhd/Carla.",
-      "objective": "Preparar clone unico da303 para Viewer Loan pg23189 com request literal preservado, sem publicar antes de resumo e OK posterior",
-      "source": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json",
-      "state": "manutencao_ana_m6_validada; conta01/app e cache canonicos instalados, runtime get identidade/conta/page/pixel/source3ads passou; lease historica suspensa por ordem manual sem alterar303; leitor novo admitido. nenhuma reserva/upload/prepare/campanha realizado. pbia get vazio preservado.",
+      "next_step": "Aguardar OK posterior ao resumo;nao executar neste preparo. Revalidar horario/admissao/fonte antes de execucao futura;se vencido perguntar somente novo horario,manter budget/copy/assets. Historico anterior continua suspenso sem replay",
+      "objective": "Preparar clone unico da303 para Viewer Loan pg23189 sem publicar antes do OK posterior ao resumo",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/approval-summary-delivery.json",
+      "state": "prepared_awaiting_final_approval;fonte canonicade continuidade ares-viewer-loan-1571342489162489937 eapproval-summary-delivery.json;digest7fb94557a6302e97bcc5239ad7f7758052555203f3ff15c360e1ffef55c5afba;resumo1571371155317850153 getverificado;3reservas/6ids/pbia preservados;nenhuma campanha publicada",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T02:23:58+00:00"
+      "updated_at": "2026-11-15T03:49:03+00:00"
     },
     {
       "agent": "ares",
@@ -10727,5 +10727,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T03:38:13+00:00"
+  "updated_at": "2026-11-15T03:50:09+00:00"
 }
