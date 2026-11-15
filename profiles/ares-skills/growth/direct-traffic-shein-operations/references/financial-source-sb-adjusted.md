@@ -20,6 +20,7 @@ Use para gerar, corrigir ou validar relatórios financeiros SHEIN, tanto agendad
 - Após a vigência, use **INVESTIMENT + NET_REVENUE + REVENUE_ESTIMATED do mesmo retorno SB** para Gasto, Saldo, ROI, ROI E., histórico de sete datas e complementos. O investimento já contém o ajuste upstream; não aplique outro deslocamento horário.
 - Preserve `meta_spend` no principal e no histórico para auditoria. B.U.% operacional conserva gasto bruto Meta/daily_budget atual; ROAS continua Meta. Identifique essas fontes distintas no relatório, sem trocar silenciosamente a fórmula de B.U.% para acompanhar o Gasto financeiro.
 - Persista cada fonte com seu timestamp. Em coleta longa, separe unidades recuperáveis por conta ou batch limitado e salve cada uma ao terminar; manter todos os readbacks apenas em memória faz um timeout descartar leituras válidas. Retome só as unidades faltantes do mesmo request, sem chamar novamente a coleta financeira já congelada.
+- Valide a evidência do atraso GAM/SB antes de renderizar: `totalMinutes=0` junto de `currentFillTime=null` e `confident=false` não comprova atraso zero. Preserve o retorno bruto em `delay.json`, represente o indicador normalizado como `n/d` no modelo e acrescente a limitação; esse retorno sem preenchimento pode aparecer mesmo com HTTP de sucesso. Não deduza receita zero nem falha das demais fontes a partir dele. Preserve um zero realmente validado pela fonte e os atrasos positivos válidos.
 
 ### 3. Materializar pelo ponto comum
 
@@ -48,7 +49,7 @@ Ausência de investimento resulta em Gasto/Saldo/ROI n/d, nunca fallback Meta. Z
 
 ### 4. Validar, revisar e entregar
 
-- Rode `test_shein_report_financial_source.py` e as regressões renderer/Intraday/D-1. Cubra fonte ausente/zero, duplicatas, hash, histórico, preservação Meta/B.U./ROAS e replay anterior.
+- Rode `test_shein_report_financial_source.py` e as regressões renderer/Intraday/D-1. No profile Ares, execute `python3 -m unittest discover -s /root/.hermes/profiles/ares/tests -p '<nome-do-arquivo>'` para cada um de `test_shein_report_financial_source.py`, `test_shein_report_layout.py`, `test_shein_report_intraday.py` e `test_shein_report_daily_d1.py`; use o runtime validado do projeto se as dependências exigirem. Cubra fonte ausente/zero, duplicatas, hash, histórico, preservação Meta/B.U./ROAS e replay anterior. Na normalização de atraso, confira separadamente zero sem evidência de preenchimento → n/d com limitação, zero validado → zero e valor positivo válido → atraso preservado; verifique que o retorno bruto permanece intacto.
 - Em testes offline de um produtor suspenso, use uma fixture explícita habilitada somente em memória para o caminho positivo e um teste negativo que prove bloqueio antes de API/transporte. Não reative produção para deixar a suíte verde nem aceite uma falha por suspensão como prova de outro gate.
 - Faça QA live no universo autorizado e derive contagens dos pares conta/thread e campaign IDs efetivamente coletados; cardinalidades de outro lote não são critérios de aceitação. Confira cobertura da captura RPS e término da paginação.
 - Renderize e valide com o renderer canônico. Revise o texto antes do POST e entregue as partes exatas com journal, nonce e GET de cada mensagem. Se já publicou pelo transporte, não repita o corpo na resposta nativa.
