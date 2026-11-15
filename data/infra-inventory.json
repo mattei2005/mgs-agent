@@ -66042,6 +66042,54 @@
       "report_infra_message_id": "1571398423083749447",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "discord-authority-get-rate-limit-t_84f0dd13",
+      "agent": "zeus",
+      "status": "installed_validated",
+      "updated_at": "2026-11-15T05:56:38.716119+00:00",
+      "task_id": "t_84f0dd13",
+      "request_id": "eggbev-pg23189-1571342489162489937",
+      "execution_owner_task": "t_bdfc754f",
+      "paths": [
+        "/root/mgs-agent/scripts/ares_campaign_v3/shein_channel_authority.py",
+        "/root/mgs-agent/tests/test_discord_authority_transport.py",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/discord-authority-get-rate-limits.md"
+      ],
+      "sha256": {
+        "/root/mgs-agent/scripts/ares_campaign_v3/shein_channel_authority.py": "e0cdc2f8e1a032c405f0bee636b02aabe7b40dda1bbdf6a9a67826ba3078b6eb",
+        "/root/mgs-agent/tests/test_discord_authority_transport.py": "70073fd88339700f5294cecb42300391d68084b2b223ce75e82ae11261e8ba31",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md": "9d4a54f0ee726fa5fc2d15ace0d1fee11c896290639dc15c22b0dbfa3a8d0332",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/discord-authority-get-rate-limits.md": "71ba9311296a0c319f72a93899c32719d99dff3976185ab45f30abb1fe5b6967"
+      },
+      "verification": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/verification.json",
+      "verification_sha256": "8f15a3f9ddc773c36afb66e6d3960f2776a4609b6df3b61fcdb979e7461d6e32",
+      "receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/install-receipt.json",
+      "receipt_sha256": "2475cd076c3fa58a7cd223274566eebc40017f1aa67eba6245a1882dbf4f9980",
+      "backup_dir": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/before",
+      "tested_runtime_hashes": 176,
+      "protected_files_unchanged": 192,
+      "tests": {
+        "pertinent_passed": 519,
+        "new_transport_tests": 32,
+        "native_python314_new_tests_passed": 32,
+        "shared_unittest_tests": 616,
+        "shared_baseline_failed_suites": 13,
+        "shared_failure_entries_baseline_identical": 19,
+        "pytest_tests": 151,
+        "pytest_passed": 139,
+        "pytest_failed_preexisting": 12,
+        "all_baseline_failure_ids_identical": true
+      },
+      "scope": "read-only Discord GET pacing and bounded429; all authority equality/re-reads preserved",
+      "fresh_authority_gets": 15,
+      "engine_meta_drive_calls": 0,
+      "request_config_manifest_start_grant_continuation_comparers_QA_quota_unchanged": true,
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1571403533738057810",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
