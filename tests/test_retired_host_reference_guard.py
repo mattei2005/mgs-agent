@@ -270,6 +270,48 @@ class HistoricalEvidenceTests(unittest.TestCase):
         self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
         self.assertEqual(self.scan(relative, content), [])
 
+    def test_dot_before_inventory_accepts_only_pinned_history(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("work/task/infra-inventory.json.before",
+                         "data/task/infra-inventory.json.before",
+                         "reports/task/infra-inventory.json.before"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [])
+
+    def test_dot_before_inventory_changed_or_additional_targets_still_block(self):
+        relative = "work/task/infra-inventory.json.before"
+        for change in ("record", "connection", "key", "provenance", "escaped"):
+            with self.subTest(change=change):
+                inventory = self.inventory_fixture()
+                if change == "record":
+                    inventory["runtime_artifacts"][0]["status"] = "active"
+                elif change in ("connection", "escaped"):
+                    inventory["connection"] = {"host": guard.RETIRED_HOST}
+                elif change == "key":
+                    inventory[guard.RETIRED_HOST] = "target"
+                else:
+                    inventory["_meta"] = {}
+                content = json.dumps(inventory).encode()
+                if change == "escaped":
+                    index = content.rfind(guard.RETIRED_HOST.encode())
+                    content = content[:index + 1] + b"\\u0037" + content[index + 2:]
+                    self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_dot_before_inventory_siblings_and_operational_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("work/task/connection.json.before",
+                         "work/task/infra-inventory.json.before-live",
+                         "scripts/infra-inventory.json.before"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_real_dot_before_inventory_is_only_canonical_removed_history(self):
+        relative = "work/t_e6a20db6/infra-inventory.json.before"
+        content = (guard.REPO / relative).read_bytes()
+        self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
+        self.assertEqual(self.scan(relative, content), [])
+
     def test_inventory_modified_removed_record_still_blocks(self):
         relative = "reports/future-authorized-run/inventory-before-closure.json"
         inventory = self.inventory_fixture()

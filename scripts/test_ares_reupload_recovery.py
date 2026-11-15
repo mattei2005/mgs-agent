@@ -10,6 +10,14 @@ class ScopeTests(unittest.TestCase):
  def test_frozen_exact_approved_scope(self):
   x=r.frozen();self.assertEqual(len(x),116);self.assertEqual(len({s['asset_id'] for s in x}),73)
  def test_both_actual_approvals_digest_bound_offline(self):self.assertTrue(r.authority(False))
+ def test_existing_canonical_name_is_not_reallocated(self):self.assertEqual(r.canonical_name({'canonical_filename':'SHEIN_US_EN_VID_FREE_TEST_PV_001.mp4'}),'SHEIN_US_EN_VID_FREE_TEST_PV_001.mp4')
+ def test_unknown_null_name_cannot_be_restored(self):
+  with self.assertRaises(r.RecoveryError):r.canonical_name({'canonical_filename':None,'asset_id':'unapproved-asset'})
+ def test_wrong_batch_scope_rejected(self):
+  with self.assertRaises(r.RecoveryError):r.validate_batch({'scope_type':'other','recovery_approval_message_id':r.APPROVAL})
+ def test_folder_permission_write_rejected_before_rpc(self):
+  with patch.object(r,'file_meta',return_value={'mimeType':r.b.FOLDER}):
+   with self.assertRaises(r.RecoveryError):r._grant_existing(object(),object(),{'id':'forbidden-folder'},object())
  def test_existing_access_unchanged_needs_no_grant(self):self.assertEqual(r.assert_acl_transition(BASE,BASE),set())
  def test_only_original_geizian_writer_can_be_restored(self):self.assertEqual(r.assert_acl_transition(BASE,BASE[:1]),{'g'})
  def test_new_principal_is_rejected(self):

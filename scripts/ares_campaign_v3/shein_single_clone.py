@@ -881,14 +881,19 @@ def preflight_inherited_destination(request, profile, config, common, token):
     if not inherited_destination_request(request):
         return None
     from .shein_general import authorize
-    authorize(request, profile, force=True)
-    validate_request_destinations(request, profile)
+    from .shein_channel_authority import CACHE
+    # Share one fresh authority proof within this serial preflight only. Direct
+    # prepare-media callers do not necessarily have run_request's cache context.
+    auth_marker = CACHE.set(CACHE.get() if CACHE.get() is not None else {})
     marker = CURRENT_PROFILE.set(profile)
     try:
+        authorize(request, profile, force=True)
+        validate_request_destinations(request, profile)
         prepared, _ = _prepare(request, config, ReadOnlyClient(common), token, source_only=True)
         return prepared
     finally:
         CURRENT_PROFILE.reset(marker)
+        CACHE.reset(auth_marker)
 
 
 def validate_request_destinations(request, profile):

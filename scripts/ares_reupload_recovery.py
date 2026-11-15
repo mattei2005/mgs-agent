@@ -30,8 +30,23 @@ def inventory()->list[dict[str,Any]]:return [json.loads(l) for l in INV.read_tex
 def frozen():
  require(sha((O/'disposition.json').read_bytes())==DISP_SHA,'RECOVERY_SOURCE_MANIFEST_DIGEST')
  d=read(O/'disposition.json');sources=d['duplicates'];require(len(sources)==116 and len({s['source_id'] for s in sources})==116 and len({s['asset_id'] for s in sources})==73,'RECOVERY_SOURCE_SET')
- require(all(re.fullmatch(r'SHEIN_US_EN_VID_[A-Z0-9_]+_(?:PV|NV|PH|NH)_[0-9]{3}\.mp4',s['canonical_filename']) for s in sources),'RECOVERY_CANONICAL_NAMES')
+ require(all((isinstance(s['canonical_filename'],str) and re.fullmatch(r'SHEIN_US_EN_VID_[A-Z0-9_]+_(?:PV|NV|PH|NH)_[0-9]{3}\.mp4',s['canonical_filename'])) or (s['canonical_filename'] is None and s['asset_id']=='asset_2fbf02f7ba2f8336d804') for s in sources),'RECOVERY_CANONICAL_NAMES')
  return sources
+
+def canonical_name(row):
+ if row.get('canonical_filename') is not None:return row['canonical_filename']
+ require(row['asset_id']=='asset_2fbf02f7ba2f8336d804','RECOVERY_UNEXPECTED_RETIRED_NAME')
+ p=read(H/'naming-supplement.json');require(p and p['asset_id']==row['asset_id'] and p['clean_sha256']==row['clean_checksum'] and p['approval_message_id']==APPROVAL and p['previous_name']==row['previous_canonical_filename'],'RECOVERY_RETIRED_NAME_BINDING')
+ return p['canonical_filename']
+
+def freeze_naming():
+ if read(H/'naming-supplement.json'):return
+ rows=inventory();row=next(x for x in rows if x['asset_id']=='asset_2fbf02f7ba2f8336d804');require(row['canonical_filename'] is None and row['legacy_reconciliation']['status']=='confirmed_permanent_discard_of_this_source','RECOVERY_RETIRED_NAME_HISTORY')
+ import ares_archive_locations as locations
+ d=b.Drive(False);names={x['canonical_filename'] for x in rows if x.get('canonical_filename')}
+ for fid in [USED,locations.stock_folder_for_path(d,[OP,'VID','01_READY'])]:names.update(x['name'] for x in d.listing(fid))
+ group='SHEIN_US_EN_VID_FREE_LAWN_MOWER_PV';variants=[int(m[1]) for n in names if (m:=re.fullmatch(re.escape(group)+r'_(\d{3})\.mp4',n))];v=max(variants,default=0)+1;require(v<=999,'RECOVERY_VARIANT_EXHAUSTED');name=f'{group}_{v:03}.mp4';require(name not in names,'RECOVERY_NAME_COLLISION')
+ save(H/'naming-supplement.json',{'asset_id':row['asset_id'],'source_filename':'nicolas (73).mp4','previous_name':row['previous_canonical_filename'],'previous_canonical_filename':None,'canonical_filename':name,'variant':f'{v:03}','clean_sha256':row['clean_checksum'],'approval_message_id':APPROVAL,'reason':'Restore same approved historical lineage; previous canonical name was retired for a verified collision. Reserve the next free name, not a new candidate.','visual_qa':{'claim':'FREE LAWN MOWER','p_orient':'PV','language':'EN','corrupt':False},'reverse_mapping':{'canonical_filename':None,'status':row['status']},'created_at':b.now_iso()})
 
 def authority(live=False):
  import ares_flat_intake as flat
@@ -69,11 +84,18 @@ def assert_acl_transition(before,current):
 def raw_descriptor(x,p):
  return {'source_id':x['source_id'],'name':p['name'],'size':p['size'],'md5':p['md5Checksum'],'sha256':p['raw_sha256'],'mime_type':'video/mp4','source_parent_id':'1ARBvLammWUHuAclNmcriwkkgeedKryBd','operation':OP,'manager_name':'Nicolas','manager_code':'g006'}
 
+def validate_batch(batch):
+ require(batch.get('schema')=='mgs.intake.batch.v1' and batch.get('scope_type')=='explicit_reupload_recovery' and batch.get('recovery_approval_message_id')==APPROVAL and batch.get('acl_approval_message_id')==ACL_APPROVAL,'RECOVERY_BATCH_APPROVAL_SCOPE')
+ require(batch.get('operation')==OP and batch.get('manager_name')=='Nicolas' and batch.get('manager_code')=='g006' and batch.get('requested_by_discord_id')=='1055570806945620030' and batch.get('request_channel_id')==THREAD and batch.get('request_message_id')=='1571370959926198374','RECOVERY_BATCH_HUMAN_CONTEXT')
+ require(batch.get('batch_id')==digest({k:v for k,v in batch.items() if k!='batch_id'})[:32],'RECOVERY_BATCH_DIGEST')
+ require(len(batch['sources'])==116 and {x['source_id'] for x in batch['sources']}=={x['source_id'] for x in frozen()},'RECOVERY_BATCH_EXACT_SOURCES')
+ return True
+
 def register():
  import ares_autonomous_intake as intake
- authority(True);sources=frozen();prepared={x['id']:x for x in read(O/'prepared.json')['items']};rows={r['asset_id']:r for r in inventory()};d=b.Drive(False)
+ authority(True);sources=frozen();freeze_naming();prepared={x['id']:x for x in read(O/'prepared.json')['items']};rows={r['asset_id']:r for r in inventory()};d=b.Drive(False)
  identity={'schema':'mgs.intake.batch.v1','scope_type':'explicit_reupload_recovery','operation':OP,'manager_name':'Nicolas','manager_code':'g006','requested_by_discord_id':'1055570806945620030','request_message_id':'1571370959926198374','request_channel_id':THREAD,'recovery_approval_message_id':APPROVAL,'acl_approval_message_id':ACL_APPROVAL,'sources':[raw_descriptor(x,prepared[x['source_id']]) for x in sources]}
- identity['batch_id']=digest(identity)[:32];batch=identity;bid=batch['batch_id']
+ identity['batch_id']=digest(identity)[:32];batch=identity;bid=batch['batch_id'];validate_batch(batch)
  with intake.locked_state() as state:
   active=[c for c in state['claims'].values() if c['status']!='complete' and c['batch']['batch_id']!=bid];require(not active,'RECOVERY_OTHER_INTAKE_ACTIVE')
   for x in sources:intake.assert_source_writer(x['source_id'],bid)
@@ -121,7 +143,7 @@ def prepare():
   local=Path(p['clean_path']);require(local.exists() and not local.is_symlink() and sha(local.read_bytes())==row['clean_checksum'],'RECOVERY_PREPARED_MEDIA_HASH');clean_verify(local)
   current=state['media'].get(aid)
   if current:
-   m=file_meta(d,current['stock_id']);require(m['name']==row['canonical_filename'],'RECOVERY_PREPARED_NAME_CHANGED');continue
+   m=file_meta(d,current['stock_id']);require(m['name']==canonical_name(row),'RECOVERY_PREPARED_NAME_CHANGED');continue
   old=old_resolution[aid];provider=None
   if old.get('provider_available') is True:
    try:
@@ -133,16 +155,16 @@ def prepare():
    key='recovery-stock:'+APPROVAL+':'+aid;prior=d.one(ready,key)
    if prior:sid=prior['id']
    else:
-    intent=H/('shortcut-intent-'+aid+'.json');require(read(intent) is None,'RECOVERY_AMBIGUOUS_SHORTCUT_NO_REPLAY');save(intent,{'status':'creating','asset_id':aid,'provider_id':provider['id'],'parent':ready,'name':row['canonical_filename']})
-    try:sid=d.api('POST','files',{'supportsAllDrives':'true','fields':'id'},{'name':row['canonical_filename'],'mimeType':'application/vnd.google-apps.shortcut','parents':[ready],'shortcutDetails':{'targetId':provider['id']},'properties':{'mgsArchiveKey':key,'mgsArchiveType':'recovered_stock','mgsArchiveLogicalSource':row['asset_drive_id'],'mgsRecoveryAuthority':APPROVAL}})['id']
+    intent=H/('shortcut-intent-'+aid+'.json');require(read(intent) is None,'RECOVERY_AMBIGUOUS_SHORTCUT_NO_REPLAY');save(intent,{'status':'creating','asset_id':aid,'provider_id':provider['id'],'parent':ready,'name':canonical_name(row)})
+    try:sid=d.api('POST','files',{'supportsAllDrives':'true','fields':'id'},{'name':canonical_name(row),'mimeType':'application/vnd.google-apps.shortcut','parents':[ready],'shortcutDetails':{'targetId':provider['id']},'properties':{'mgsArchiveKey':key,'mgsArchiveType':'recovered_stock','mgsArchiveLogicalSource':row['asset_drive_id'],'mgsRecoveryAuthority':APPROVAL}})['id']
     except Exception:
      landed=d.one(ready,key);require(landed is not None,'RECOVERY_SHORTCUT_AMBIGUOUS');sid=landed['id']
    m=file_meta(d,sid);require(m.get('shortcutDetails',{}).get('targetId')==provider['id'] and m['parents']==[ready],'RECOVERY_SHORTCUT_READBACK')
-   current={'asset_id':aid,'logical_id':row['asset_drive_id'],'provider_id':provider['id'],'stock_id':sid,'representation':'recovered_shortcut','clean_sha256':row['clean_checksum'],'name':row['canonical_filename'],'width':p['width'],'height':p['height']}
+   current={'asset_id':aid,'logical_id':row['asset_drive_id'],'provider_id':provider['id'],'stock_id':sid,'representation':'recovered_shortcut','clean_sha256':row['clean_checksum'],'name':canonical_name(row),'width':p['width'],'height':p['height']}
   else:
-   sid=d.upload_once(ready,row['canonical_filename'],local.read_bytes(),'video/mp4','recovery-clean:'+APPROVAL+':'+aid,'recovered_clean')
+   sid=d.upload_once(ready,canonical_name(row),local.read_bytes(),'video/mp4','recovery-clean:'+APPROVAL+':'+aid,'recovered_clean')
    require(d.hashes(sid)=={'size':str(p['clean_size']),'md5':p['clean_md5'],'sha256':p['clean_sha256']},'RECOVERY_UPLOAD_READBACK')
-   current={'asset_id':aid,'logical_id':row['asset_drive_id'],'provider_id':sid,'stock_id':sid,'representation':'recovered_retained_source','clean_sha256':row['clean_checksum'],'name':row['canonical_filename'],'width':p['width'],'height':p['height']}
+   current={'asset_id':aid,'logical_id':row['asset_drive_id'],'provider_id':sid,'stock_id':sid,'representation':'recovered_retained_source','clean_sha256':row['clean_checksum'],'name':canonical_name(row),'width':p['width'],'height':p['height']}
   state['media'][aid]=current;save(H/'prepare-state.json',state);print('recovery_prepared',len(state['media']),flush=True)
  require(len(state['media'])==73,'RECOVERY_UNIQUE_LINEAGE_COUNT')
  objects=[];source_acl={}
@@ -182,10 +204,10 @@ def validate_plan_objects(plan):
  objects={x['key']:x for x in plan['objects']};require(len(objects)==len(plan['objects']),'RECOVERY_OBJECT_KEY_UNIQUENESS')
  expected_keys=set();stock_ids=set()
  for aid,media in plan['media'].items():
-  row=baseline[aid];require(media['asset_id']==aid and media['logical_id']==row['asset_drive_id'] and media['name']==row['canonical_filename'] and media['clean_sha256']==row['clean_checksum'],'RECOVERY_MEDIA_PRIMARY_IDENTITY')
+  row=baseline[aid];require(media['asset_id']==aid and media['logical_id']==row['asset_drive_id'] and media['name']==canonical_name(row) and media['clean_sha256']==row['clean_checksum'],'RECOVERY_MEDIA_PRIMARY_IDENTITY')
   require(media['stock_id'] not in stock_ids and media['stock_id'] not in sources,'RECOVERY_STOCK_UNIQUENESS');stock_ids.add(media['stock_id'])
   key='stock:'+media['stock_id'];expected_keys.add(key);item=objects.get(key);require(item and item['id']==media['stock_id'] and item['logical_id']==media['logical_id'] and item['role']=='clean' and item['destination_parent']==USED and item['hashes']['sha256']==row['clean_checksum'],'RECOVERY_STOCK_OBJECT_SCOPE')
-  require(item['metadata_before']['name']==row['canonical_filename'] and item['kind']==('move_shortcut' if media['stock_id']!=media['provider_id'] else 'move_binary'),'RECOVERY_STOCK_KIND')
+  require(item['metadata_before']['name']==canonical_name(row) and item['kind']==('move_shortcut' if media['stock_id']!=media['provider_id'] else 'move_binary'),'RECOVERY_STOCK_KIND')
   member=next(x for x in sources.values() if x['asset_id']==aid);expected_acl=preflight[member['source_id']]['permissions_before'];require(same_access(item['permissions_expected'],expected_acl),'RECOVERY_STOCK_ACCESS_BINDING')
   if media['stock_id']!=media['provider_id']:
    key='provider:'+media['provider_id'];expected_keys.add(key);provider=objects.get(key);old={x['asset_id']:x for x in read(O/'duplicate-resolution-preflight.json')['lineages']}[aid]
@@ -199,6 +221,7 @@ def validate_plan_objects(plan):
 
 def _grant_existing(owner,sa,item,journal):
  import mgs_flat_layout as f
+ require(file_meta(sa,item['id']).get('mimeType')!=b.FOLDER,'RECOVERY_FOLDER_GRANT_FORBIDDEN')
  current=acl(sa,item['id']);missing=assert_acl_transition(item['permissions_expected'],current)
  for pid in missing:
   key='grant:'+item['id']+':'+pid;payload={'type':'user','emailAddress':EMAIL,'role':'writer'}
@@ -219,7 +242,7 @@ def private_tick(max_files=4):
  require(type(max_files) is int and 1<=max_files<=4,'RECOVERY_PRIVATE_BOUND')
  authority(True)
  with intake.locked_state() as state:
-  bid=read(H/'batch-binding.json')['batch_id'];entry=state['claims'].get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM')
+  bid=read(H/'batch-binding.json')['batch_id'];entry=state['claims'].get(bid);require(entry and entry['owner']==OWNER and entry['batch'].get('recovery_approval_message_id')==APPROVAL,'RECOVERY_CANONICAL_CLAIM');validate_batch(entry['batch'])
   with b.queue_lock() as lease:
    sa=b.Drive(True);plan=verify_plan(sa);progress=read(H/'private-progress.json',{'verified':{}});remaining=[x for x in plan['objects'] if x['key'] not in progress['verified']]
    if not remaining:return {'status':'complete','verified':len(progress['verified']),'remaining':0}
@@ -329,24 +352,33 @@ def finalize_inventory(receipt):
    row=json.loads(line);aid=row['asset_id']
    if aid not in affected:out.append(line);continue
    require(aid not in seen,'RECOVERY_DUPLICATE_INVENTORY_LINEAGE');seen.add(aid);old=before[aid]
-   require(all(row.get(k)==old.get(k) for k in ['asset_id','source_drive_id','asset_drive_id','canonical_filename','original_checksum','clean_checksum']),'RECOVERY_EXISTING_PRIMARY_IDENTITY_CHANGED')
+   require(all(row.get(k)==old.get(k) for k in ['asset_id','source_drive_id','asset_drive_id','original_checksum','clean_checksum']),'RECOVERY_EXISTING_PRIMARY_IDENTITY_CHANGED')
+   require(row.get('canonical_filename') in [old.get('canonical_filename'),media[aid]['name']],'RECOVERY_CANONICAL_NAME_CHANGED')
    members=[x for x in sources if x['asset_id']==aid];ids=list(row.get('duplicate_source_drive_ids') or []);links=list(row.get('duplicate_sources') or [])
    for x in members:
     if x['source_id'] not in ids:ids.append(x['source_id'])
-    new={'source_drive_id':x['source_id'],'original_filename':x['original_filename'],'canonical_filename':x['canonical_filename'],'original_checksum':x['raw_sha256'],'thread_id':THREAD,'request_message_id':'1571370959926198374','recovery_authority_message_id':APPROVAL,'native_parent_id':LEGACY}
+    new={'source_drive_id':x['source_id'],'original_filename':x['original_filename'],'canonical_filename':media[aid]['name'],'original_checksum':x['raw_sha256'],'thread_id':THREAD,'request_message_id':'1571370959926198374','recovery_authority_message_id':APPROVAL,'native_parent_id':LEGACY}
     existing=[v for v in links if v.get('source_drive_id')==x['source_id']];require(not existing or existing==[new],'RECOVERY_DUPLICATE_LINK_CHANGED')
     if not existing:links.append(new)
-   m=media[aid];row.update(duplicate_source_drive_ids=ids,duplicate_sources=links,asset_provider_id=m['provider_id'],asset_stock_file_id=m['stock_id'],manager_media_folder_id=USED,manager_storage_code='g006',manager_storage_state='used',asset_path='MGS-ARQUIVO/CRIATIVOS/'+OP+'/VID/NICOLAS - Usados/'+row['canonical_filename'],webViewLink='https://drive.google.com/file/d/'+m['stock_id']+'/view',storage_availability='verified_recovered_used_reserved',reupload_recovery_receipt=str(H/'receipt.json'),reupload_recovery_authority=APPROVAL,historical_usage_reconfirmation_authority=APPROVAL)
+   m=media[aid];row.update(duplicate_source_drive_ids=ids,duplicate_sources=links,asset_provider_id=m['provider_id'],asset_stock_file_id=m['stock_id'],manager_media_folder_id=USED,manager_storage_code='g006',manager_storage_state='used',asset_path='MGS-ARQUIVO/CRIATIVOS/'+OP+'/VID/NICOLAS - Usados/'+canonical_name(row),webViewLink='https://drive.google.com/file/d/'+m['stock_id']+'/view',storage_availability='verified_recovered_used_reserved',reupload_recovery_receipt=str(H/'receipt.json'),reupload_recovery_authority=APPROVAL,historical_usage_reconfirmation_authority=APPROVAL)
    # Missing old operation metadata is repaired from the exact frozen naming;
    # its prior value remains in the complete immutable inventory-before snapshot.
    if row.get('operation') is None:row['operation']=OP
-   require(all(row.get(k)==old.get(k) for k in ['asset_id','source_drive_id','asset_drive_id','canonical_filename','original_checksum','clean_checksum','source_manager','ares_eligible','used_by','campaign_owner','reservation_status','reservation_request_id','meta_ad_id','meta_video_id','meta_creative_id','status','first_seen_at']),'RECOVERY_PROTECTED_HISTORY_CHANGED')
+   if old.get('canonical_filename') is None:
+    require(aid=='asset_2fbf02f7ba2f8336d804' and old.get('status')=='TRASHED','RECOVERY_EXACT_RETIRED_LINEAGE_ONLY')
+    naming=read(H/'naming-supplement.json');row['canonical_filename']=naming['canonical_filename'];row['variant']=naming['variant'];row['status']='01_READY'
+    history=list(row.get('reupload_restoration_history') or [])
+    if not any(x.get('authority_message_id')==APPROVAL for x in history):history.append({'authority_message_id':APPROVAL,'at':b.now_iso(),'previous_status':old['status'],'new_status':'01_READY','previous_canonical_filename':None,'previous_disposed_name':old['previous_canonical_filename'],'new_canonical_filename':naming['canonical_filename'],'same_asset_id':True,'same_logical_id':True})
+    row['reupload_restoration_history']=history
+   else:require(row['canonical_filename']==old['canonical_filename'] and row.get('status')==old.get('status'),'RECOVERY_UNRELATED_NAMING_OR_STATUS_CHANGE')
+   require(all(row.get(k)==old.get(k) for k in ['asset_id','source_drive_id','asset_drive_id','original_checksum','clean_checksum','source_manager','ares_eligible','used_by','campaign_owner','reservation_status','reservation_request_id','meta_ad_id','meta_video_id','meta_creative_id','first_seen_at']),'RECOVERY_PROTECTED_HISTORY_CHANGED')
    out.append(json.dumps(row,ensure_ascii=False,separators=(',',':')))
   require(seen==affected,'RECOVERY_INVENTORY_COVERAGE');payload='\n'.join(out)+'\n';temp=INV.with_suffix('.reupload-recovery.new');temp.write_text(payload);os.replace(temp,INV);require(INV.read_text()==payload,'RECOVERY_INVENTORY_READBACK')
 
 
 def complete(batch,owner):
  import ares_autonomous_intake as intake
+ validate_batch(batch)
  require(owner==OWNER and batch.get('scope_type')=='explicit_reupload_recovery' and batch.get('recovery_approval_message_id')==APPROVAL and batch['batch_id']==read(H/'batch-binding.json')['batch_id'],'RECOVERY_COMPLETE_SCOPE')
  H.mkdir(parents=True,exist_ok=True)
  with (H/'writer.lock').open('a+') as lock:

@@ -43,7 +43,7 @@ class _PinnedHTTPS(http.client.HTTPSConnection):
         # validated numeric IP; TLS still verifies www.facebook.com (no rebinding).
         answers = socket.getaddrinfo(self.host, 443, type=socket.SOCK_STREAM)
         ips = list(dict.fromkeys(str(row[4][0]) for row in answers))
-        if not ips or any(not ipaddress.ip_address(ip).is_global for ip in ips):
+        if not ips or any(not ipaddress.ip_address(ip).is_global or ipaddress.ip_address(ip).is_multicast or ipaddress.ip_address(ip).is_reserved for ip in ips):
             raise ValueError('native thumbnail DNS rejected')
         raw = socket.create_connection((ips[0], 443), self.timeout)
         try:

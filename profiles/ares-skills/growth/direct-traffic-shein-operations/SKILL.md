@@ -17,7 +17,7 @@ SHEIN≠CAR/CPV; preserve IDs/relógio/selos. Headline≠CTA; conferir≠escreve
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
-Projete antes de imprimir; truncar não sanitiza. `references/campaign-runtime-recovery.md`.
+Destinos e diagnóstico: `references/inherited-destination-data.md`.
 
 ## Duplicação e recuperação — precedência obrigatória
 

@@ -14,7 +14,8 @@ RODOLFO = '344196393512075265'
 
 def validate_destination(value):
     """Validate a literal Meta field, without asserting site ownership/access."""
-    if not isinstance(value, str) or not value or any(c.isspace() or ord(c) < 32 for c in value):
+    if (not isinstance(value, str) or not value
+            or any(c.isspace() or ord(c) < 32 or ord(c) == 127 or c == '\\' for c in value)):
         raise ValueError('invalid literal campaign destination URL')
     try:
         url = urlparse(value)
@@ -23,7 +24,16 @@ def validate_destination(value):
                 or url.username is not None or url.password is not None
                 or (port is not None and not 1 <= port <= 65535)):
             raise ValueError('invalid literal campaign destination URL')
-    except ValueError:
+        host = url.hostname
+        if ':' in host:
+            import ipaddress
+            ipaddress.IPv6Address(host)
+        else:
+            host = host.encode('idna').decode('ascii').rstrip('.')
+            if len(host) > 253 or not all(re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?', label)
+                                          for label in host.split('.')):
+                raise ValueError('invalid literal campaign destination URL')
+    except (ValueError, UnicodeError):
         raise ValueError('invalid literal campaign destination URL') from None
     return url
 

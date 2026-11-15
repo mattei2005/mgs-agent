@@ -199,7 +199,7 @@ class TransportTests(unittest.TestCase):
             with self.subTest(shape=url), self.assertRaises(ValueError): proof._cdn_redirect(url)
 
     def test_private_or_mixed_dns_rejected_before_connect(self):
-        for addresses in [['127.0.0.1'], ['169.254.169.254'], ['::1'], ['157.240.1.1', '10.0.0.1']]:
+        for addresses in [['127.0.0.1'], ['169.254.169.254'], ['::1'], ['224.0.0.1'], ['157.240.1.1', '10.0.0.1']]:
             rows = [(socket.AF_INET, socket.SOCK_STREAM, 6, '', (ip, 443)) for ip in addresses]
             with patch.object(socket, 'getaddrinfo', return_value=rows), patch.object(socket, 'create_connection') as create:
                 with self.assertRaises(ValueError): proof._PinnedHTTPS('www.facebook.com', timeout=1).connect()
