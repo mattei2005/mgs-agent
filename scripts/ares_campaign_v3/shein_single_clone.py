@@ -558,7 +558,7 @@ def resolve_intent(request, source, *, now=None, profile=None):
     return resolved
 
 
-def _prepare(request, config, common, token, *, reference_only=False):
+def _prepare(request, config, common, token, *, reference_only=False, source_only=False):
     profile = CURRENT_PROFILE.get() or {}
     reference = profile.get('reference_profile')
     queries = [
@@ -600,6 +600,9 @@ def _prepare(request, config, common, token, *, reference_only=False):
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,bid_amount,bid_constraints,bid_strategy,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
         {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,ad_schedule_start_time,ad_schedule_end_time,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+    expected_source_account = (reference or profile).get('account_id') or account_id()
+    if raw['campaign'].get('id') != cid or raw['campaign'].get('account_id') != expected_source_account:
+        raise RouteBlocked('live source campaign/account binding mismatch')
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     if len(sets) != 1 or not 1 <= len(ads) <= 5:
@@ -621,6 +624,8 @@ def _prepare(request, config, common, token, *, reference_only=False):
                 ad['creative']['object_story_spec'] = parent['object_story_spec']
                 ad['creative']['instagram_user_id'] = parent.get('instagram_user_id')
     source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads, 'ad_schedule_fields_verified': True}
+    if inherited_destination_request(request):
+        validate_inherited_source(request, profile, source)
     if raw['campaign'].get('status') in {'DELETED', 'ARCHIVED'}:
         raise RouteBlocked('reference campaign is terminal')
     source_video_ids = sorted({vid for ad in ads for vid in video_slots({**ad['creative'], 'object_story_spec': _story(ad)}).values()})
@@ -644,6 +649,8 @@ def _prepare(request, config, common, token, *, reference_only=False):
         links = []
         for ad in ads:
             for link in source_links(ad.get('creative') or {}, _story(ad)):
+                from .shein_reference import validate_destination
+                validate_destination(link)
                 approved_source = reference or compiler_profile
                 if urlparse(link).hostname != urlparse(approved_source['destination_base']).hostname:
                     raise RouteBlocked('source destination does not match approved account site')
@@ -696,10 +703,10 @@ def _prepare(request, config, common, token, *, reference_only=False):
                 raise RouteBlocked('target Page Instagram read identity mismatch')
             compiler_config['shein_profile']['instagram_user_id'] = (identity.get('instagram_business_account') or {}).get('id')
     compiled_request = resolve_intent(request, source)
-    if reference_only:
-        if not reference:
+    if reference_only or source_only:
+        if reference_only and not reference:
             raise RouteBlocked('reference preflight requires explicit cross-account origin')
-        return {'source': source, 'account': a, 'reference_account': pre['reference_account'],
+        return {'source': source, 'account': a, 'reference_account': pre.get('reference_account'),
                 'prerequisites': gate, 'number': number, 'page_id': page_id,
                 'compiler_config': compiler_config, 'resolved_request': compiled_request,
                 'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}, page_token
@@ -816,12 +823,88 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
         CURRENT_PROFILE.reset(marker)
 
 
+def inherited_destination_request(request):
+    """Explicit same-account source selection supplies the Meta field by reference.
+
+    A profile alone, an implicit from-zero template, or a site operation does not.
+    Live source binding must still pass before assets are prepared or reserved.
+    """
+    return (not request.get('source_account') and not request.get('website_url')
+            and request.get('mode', 'pure_clone') in {'pure_clone', 'clone_prestaged'}
+            and re.fullmatch(r'[1-9][0-9]*', str(request.get('source_number') or '')) is not None)
+
+
+def validate_inherited_source(request, profile, source):
+    from .shein_general import authorize
+    from .shein_reference import validate_destination
+    authorize(request, profile)
+    campaign = source['campaign']; adset = source['adset']; ads = source['ads']
+    number = re.match(r'^([0-9]+)\s*-', str(campaign.get('name') or ''))
+    if (not inherited_destination_request(request)
+            or request.get('account') not in {profile['account_id'], profile['account_name']}
+            or campaign.get('account_id') != profile['account_id'] or not campaign.get('id')
+            or not number or int(number[1]) != int(request['source_number'])
+            or not adset.get('id') or not ads):
+        raise RouteBlocked('inherited destination requires exact same-account live source')
+    if (campaign.get('objective') != 'OUTCOME_SALES'
+            or adset.get('optimization_goal') != 'OFFSITE_CONVERSIONS'
+            or adset.get('promoted_object', {}).get('custom_event_type') != 'ADD_TO_WISHLIST'):
+        raise RouteBlocked('source fixed SHEIN event mismatch')
+    host = validate_destination(profile['destination_base']).hostname
+    token = re.search(r'\((' + re.escape(profile['tracking_prefix']) + r'c([0-9]+))\)', campaign['name'])
+    if not token or int(token[2]) != int(request['source_number']) or token[1] + 'g01' not in adset['name']:
+        raise RouteBlocked('source literal tracking/number mismatch')
+    bases = set()
+    for ad in ads:
+        creative = ad.get('creative') or {}; story = _story(ad)
+        if (ad.get('adset_id') != adset['id'] or not story.get('page_id')
+                or not str(creative.get('effective_object_story_id') or '').startswith(str(story['page_id']) + '_')):
+            raise RouteBlocked('source Page/adset/post lineage mismatch')
+        links = source_links(creative, story)
+        if not links:
+            raise RouteBlocked('source campaign destination unavailable')
+        for link in links:
+            parsed = validate_destination(link)
+            if parsed.hostname != host:
+                raise RouteBlocked('source destination does not match account reference')
+            params = dict(parse_qsl(parsed.query)); params.update(dict(parse_qsl(creative.get('url_tags') or '')))
+            if (params.get('utm_medium') != profile['utm_medium'] or params.get('utm_campaign') != token[1]
+                    or params.get('utm_adgroup') != token[1] + 'g01'):
+                raise RouteBlocked('source effective tracking mismatch')
+            bases.add(link.split('?')[0])
+    if len(bases) != 1:
+        raise RouteBlocked('source uses multiple unresolved destination bases')
+
+
+def preflight_inherited_destination(request, profile, config, common, token):
+    """Read-only source/account/Page/pixel gates, before any asset side effect."""
+    if not inherited_destination_request(request):
+        return None
+    from .shein_general import authorize
+    authorize(request, profile, force=True)
+    validate_request_destinations(request, profile)
+    marker = CURRENT_PROFILE.set(profile)
+    try:
+        prepared, _ = _prepare(request, config, ReadOnlyClient(common), token, source_only=True)
+        return prepared
+    finally:
+        CURRENT_PROFILE.reset(marker)
+
+
 def validate_request_destinations(request, profile):
     # Rodolfo 1571230350749859881: an explicit Meta URL is data, not a site target.
     if request.get('source_account') and request.get('website_url'):
         from .shein_reference import validate_destination
         validate_destination(request['website_url'])
         return
+    if inherited_destination_request(request):
+        from .shein_general import authorize
+        from .shein_reference import validate_destination
+        authorize(request, profile)
+        if request.get('account') not in {profile.get('account_id'), profile.get('account_name')}:
+            raise RouteBlocked('inherited destination account binding mismatch')
+        validate_destination(profile.get('destination_base'))
+        return  # Admission only; _prepare validates the live selected source.
     import subprocess
     destination = profile.get('destination_base')
     if profile and not destination:

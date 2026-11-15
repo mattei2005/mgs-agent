@@ -129,4 +129,10 @@ def run(apply=False,canary=False):
    b.atomic_json(HOME/'maintenance-last-tick.json',{'at':b.now_iso(),**out});return out
 
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--canary',action='store_true');a=p.parse_args();print(json.dumps(run(a.apply,a.canary),ensure_ascii=False))
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--canary',action='store_true');p.add_argument('--recovery-id');a=p.parse_args()
+ if a.recovery_id:
+  import ares_reupload_recovery as recovery
+  recovery.require(a.recovery_id==recovery.APPROVAL and a.apply and not a.canary,'RECOVERY_PRIVATE_EXACT_INVOCATION')
+  result=recovery.private_tick(max_files=4)
+ else:result=run(a.apply,a.canary)
+ print(json.dumps(result,ensure_ascii=False))

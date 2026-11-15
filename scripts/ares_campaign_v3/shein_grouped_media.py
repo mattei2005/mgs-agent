@@ -137,6 +137,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         profile['reference_profile'] = reference
     driver.validate_request_destinations(request, profile)
     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
+    driver.preflight_inherited_destination(request, profile, cfg, common, token)
     if request.get('source_account'):
         marker = driver.CURRENT_PROFILE.set(profile)
         try:

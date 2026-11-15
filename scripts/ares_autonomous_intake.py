@@ -218,6 +218,8 @@ def monitor(polls=3,interval=20):
                 return {'status':'archive_ready','batch_id':item['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+item['batch']['batch_id']+'.json')),'flat_delivery_pending':True}
         if active:
             entry=sorted(active,key=lambda x:x['claimed_at'])[0];status='resume'
+            if entry['batch'].get('scope_type')=='explicit_reupload_recovery':
+                return {'status':'resume','mechanical_only':True,'batch_id':entry['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+entry['batch']['batch_id']+'.json'))}
             if entry.get('status')=='treated_waiting_archive':
                 import ares_intake_archive_pipeline as pipeline
                 if entry['batch'].get('scope_type')=='flat_request' and pipeline.enabled():
@@ -286,6 +288,10 @@ def main():
             if cfg.get('enabled') is not True or args.owner!=cfg.get('owner_job_id'):raise IntakeError('ACTIVE_NATIVE_OWNER_REQUIRED')
             if not re.fullmatch('[a-f0-9]{32}',args.batch_id or ''):raise IntakeError('BATCH_ID')
             batch=bridge.read_json(DATA/'intake-batches'/('batch-'+args.batch_id+'.json'));assert batch and batch['batch_id']==args.batch_id
+            if args.action=='complete' and batch.get('scope_type')=='explicit_reupload_recovery':
+                import ares_reupload_recovery as recovery
+                result=recovery.complete(batch,args.owner)
+                print(json.dumps(result,ensure_ascii=False));return 0
             with locked_state() as state:
                 if args.action=='claim':
                     if args.batch_id not in state['claims']:validate_new_batch(bridge.Drive(),batch,bridge.read_json(DATA/'upload-context-layout.json'))

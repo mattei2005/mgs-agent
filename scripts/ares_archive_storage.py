@@ -74,6 +74,9 @@ def meta(d,fid):
     return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,size,md5Checksum,sha256Checksum,version,createdTime,parents,driveId,trashed,owners(emailAddress),permissions(type,emailAddress,role),shortcutDetails(targetId),properties,lastModifyingUser(permissionId,emailAddress),capabilities(canEdit,canDownload,canMoveItemWithinDrive)'})
 
 def mapping(source_id,index=None):
+    import ares_reupload_recovery as recovery
+    restored=recovery.mapping(source_id)
+    if restored is not None:return restored
     index=index or b.read_json(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}});entry=index['mappings'].get(source_id)
     if entry:require_registered_mapping(entry,index)
     elif historical_enabled():entry=historical_mapping(source_id)
@@ -83,6 +86,9 @@ def resolve_media(source_id,token=None):
     if not enabled():return None
     entry=mapping(source_id)
     if not entry:return None
+    if entry.get('mapping_kind')=='reupload_recovery_verified':
+        import ares_reupload_recovery as recovery
+        return recovery.resolve_entry(drive(token),entry)
     if entry.get('mapping_kind')=='historical_verified':
         d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or entry.get('approvedStockId') or source_id)
         require_historical_ack(d,entry)
@@ -100,7 +106,11 @@ def resolve_media(source_id,token=None):
 def project_stock(rows,token=None):
     if not enabled():return rows
     index=b.read_json(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}});maps=index['mappings'];aliases={v.get('stockShortcutId'):k for k,v in maps.items() if v.get('stockShortcutId')};out=[]
+    import ares_reupload_recovery as recovery
+    restored_aliases=recovery.stock_aliases()
     for row in rows:
+        if row['id'] in restored_aliases:
+            out.append(resolve_media(restored_aliases[row['id']],token));continue
         logical=aliases.get(row['id'])
         if logical:
             record=resolve_media(logical,token)
@@ -178,6 +188,9 @@ def _move_checked_entry(d,entry,target_parent_id,expected_parent_id,*,technical=
 
 def move_stock(record,target_parent_id,expected_parent_id,token=None):
     if record.get('record_kind')!='mgs.logical.media.v1':return None
+    if record.get('mapping_kind')=='reupload_recovery_verified':
+        if record.get('parents')==[expected_parent_id] and expected_parent_id==target_parent_id:return resolve_media(record['id'],token)
+        raise StorageError('RECOVERED_USED_MOVE_REQUIRES_SCOPED_REQUEST')
     d=drive(token,True);entry=mapping(record['id']);assert entry
     if entry.get('mapping_kind')=='historical_verified':
         return move_historical_retained_stock(d,entry,target_parent_id,expected_parent_id)

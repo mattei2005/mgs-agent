@@ -171,6 +171,13 @@ def claim_terminal(request, account_id, base=BASE):
         config = json.loads((base / 'data/ares/meta-ads/engine-v3/config.json').read_text())
         common = driver._load_common()
         token, _ = common.get_token_from_1password(config['accounts'][account_id]['token_item'])
+        # A queued request may transfer reservations only after the selected
+        # source is proven live. Enqueue/admission alone never proves inheritance.
+        if driver.inherited_destination_request(request):
+            profile = copy.deepcopy(json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles'][account_id])
+            operation = json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+            profile['channel_authorization_policy'] = operation['channel_authorization_policy']
+            driver.preflight_inherited_destination(request, profile, config, common, token)
         proofs = {}
         for row in conflicts:
             aid = row.get('meta_ad_id')

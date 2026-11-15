@@ -13,11 +13,11 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; preserve IDs/relógio/selos. Headline≠CTA; conferir≠escrever. Separe manual/lote/emenda.
+SHEIN≠CAR/CPV; preserve IDs/relógio/selos. Headline≠CTA; conferir≠escrever. Separe manual/lote/emenda. URL herdada: não peça link. Paridade preserva identidade.
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
 
-Diagnóstico: projete campos aninhados antes de imprimir; truncar JSON bruto não sanitiza fonte/erros. Receita: `references/campaign-runtime-recovery.md`.
+Projete antes de imprimir; truncar não sanitiza. `references/campaign-runtime-recovery.md`.
 
 ## Duplicação e recuperação — precedência obrigatória
 

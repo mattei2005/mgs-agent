@@ -1,7 +1,8 @@
 """Strict pairwise native Facebook thumbnail byte proof; never a URL normalizer.
 
 Receipts are evidence, not authorization or a cache: every production comparison
-fetches both URLs afresh. No cookies, tokens, proxies or redirects are used.
+fetches both URLs afresh. No cookies, tokens or proxies are used. Only one
+strictly validated HTTPS image-CDN redirect is accepted.
 """
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ import re
 import socket
 import ssl
 from urllib.parse import urlsplit
+from typing import Any
 
 MAX_BYTES = 4 * 1024 * 1024
 TIMEOUT = 10
@@ -40,24 +42,47 @@ class _PinnedHTTPS(http.client.HTTPSConnection):
         # Resolve once, reject mixed private/public answers, connect to the exact
         # validated numeric IP; TLS still verifies www.facebook.com (no rebinding).
         answers = socket.getaddrinfo(self.host, 443, type=socket.SOCK_STREAM)
-        ips = list(dict.fromkeys(row[4][0] for row in answers))
+        ips = list(dict.fromkeys(str(row[4][0]) for row in answers))
         if not ips or any(not ipaddress.ip_address(ip).is_global for ip in ips):
             raise ValueError('native thumbnail DNS rejected')
         raw = socket.create_connection((ips[0], 443), self.timeout)
         try:
-            self.sock = self._context.wrap_socket(raw, server_hostname=self.host)
+            self.sock = getattr(self, '_context').wrap_socket(raw, server_hostname=self.host)
         except BaseException:
             raw.close()
             raise
 
 
+def _cdn_redirect(url):
+    # Exactly one image CDN hop is intrinsic to /ads/image/. Never a generic
+    # redirect follower: no ports/userinfo/fragments, HTML paths or arbitrary host.
+    if not isinstance(url, str) or len(url) > 8192 or not re.fullmatch(r'[\x21-\x7e]+', url):
+        raise ValueError('native thumbnail CDN redirect rejected')
+    p = urlsplit(url)
+    if p.scheme != 'https' or not re.fullmatch(r'scontent-[a-z0-9-]+\.xx\.fbcdn\.net', p.netloc) or p.fragment:
+        raise ValueError('native thumbnail CDN endpoint rejected')
+    if not re.fullmatch(r'/v/t[0-9.]+-[0-9]+/[0-9]+_[0-9]+_[0-9]+_n\.(?:jpg|png|webp)', p.path):
+        raise ValueError('native thumbnail CDN image path rejected')
+    from urllib.parse import parse_qsl
+    pairs = parse_qsl(p.query, keep_blank_values=True, strict_parsing=True)
+    if not pairs or len({k for k, _ in pairs}) != len(pairs) or any(not v or not (re.fullmatch(r'_nc_[a-z]+', k) or k in {'oh', 'oe', 'ccb'}) for k, v in pairs):
+        raise ValueError('native thumbnail CDN query rejected')
+    return p
+
+
 def fetch_native(url):
     validate_url(url)
     conn = _PinnedHTTPS('www.facebook.com', timeout=TIMEOUT, context=ssl.create_default_context())
+    headers = {'Accept': 'image/*', 'User-Agent': 'python-requests/2.32.3', 'Connection': 'close'}
     try:
-        conn.request('GET', '/ads/image/?' + urlsplit(url).query,
-                     headers={'Accept': 'image/*', 'User-Agent': 'MGS-Thumbnail-Proof/1.0', 'Connection': 'close'})
+        conn.request('GET', '/ads/image/?' + urlsplit(url).query, headers=headers)
         response = conn.getresponse()
+        if response.status in {301, 302, 303, 307, 308}:
+            target = _cdn_redirect(response.getheader('Location'))
+            conn.close()
+            conn = _PinnedHTTPS(target.netloc, timeout=TIMEOUT, context=ssl.create_default_context())
+            conn.request('GET', target.path + '?' + target.query, headers=headers)
+            response = conn.getresponse()
         if response.status != 200 or response.getheader('Location') is not None:
             raise ValueError('native thumbnail fetch status/redirect rejected')
         if response.getheader('Content-Encoding', 'identity') != 'identity':
@@ -84,7 +109,7 @@ def fetch_native(url):
         conn.close()
 
 
-def _diff(a, b, path=()):
+def _diff(a: Any, b: Any, path: tuple = ()) -> list[tuple]:
     if type(a) is not type(b):
         return [path]
     if isinstance(a, dict):

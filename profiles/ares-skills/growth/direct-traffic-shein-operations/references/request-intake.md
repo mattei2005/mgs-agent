@@ -11,7 +11,7 @@ Use ao converter pedidos naturais em input do runner comum. Para mídia, autorid
 
 ### Descrição expressa em grupos de mídia
 
-Aceite `campaign_groups[].description` como string não vazia e preserve literalmente em `video_data.link_description` ou `link_data.description` dos novos anúncios. Sem o campo, herde a descrição viva da fonte; headline, Primary text e CTA nativa continuam independentes. Esta regra supersede a limitação histórica de grupo com somente headline opcional em `general-campaign-fast-route.md`. Não descarte a descrição solicitada para contornar rejeição de schema nem altere a campanha-fonte. Verificação: `tests/test_shein_group_description.py` cobre vídeo/imagem, referência entre contas, espaços literais, tipos inválidos, herança por omissão e fonte imutável.
+Aceite `campaign_groups[].description` como string não vazia e preserve literalmente em `video_data.link_description` ou `link_data.description` dos novos anúncios. Para uma emenda que vale para todo o lote, materialize o valor em cada grupo e confira cobertura integral antes de preparar mídia; não acrescente `description` no topo do request nem invente campos de autoridade como `description_source_message_id`, pois o schema rejeita campos desconhecidos antes do preflight. Registre a mensagem complementar e sua autoridade separadamente no checkpoint/recibo do mesmo pedido. Sem o campo no grupo, herde a descrição viva da fonte; headline, Primary text e CTA nativa continuam independentes. Esta regra supersede a limitação histórica de grupo com somente headline opcional em `general-campaign-fast-route.md`. Não descarte a descrição solicitada para contornar rejeição de schema nem altere a campanha-fonte. Verificação: `tests/test_shein_group_description.py` cobre vídeo/imagem, referência entre contas, espaços literais, tipos inválidos, herança por omissão e fonte imutável.
 
 ### Cancelamento durante o intake e pedido posterior
 
@@ -36,7 +36,22 @@ Aceite `campaign_groups[].description` como string não vazia e preserve literal
 - Para Cost per result goal, informe `COCAP` e o `bid_usd` exato solicitado. O compiler resolve o enum Meta `COST_CAP`; não envie esse enum no lugar do alias de intake.
 - Sem alteração de lance pedida, preserve a herança da fonte real; a tradução de aliases não autoriza inventar um cap.
 
-## 3. Escolher o preflight correto
+## 3. Resolver herança e paridade técnica antes da preparação
+
+### Destino herdado e UTMs por campanha
+
+1. Quando o operador confirmar que o destino acompanha a fonte com UTMs próprias de cada cópia, registre essa intenção no mesmo pedido e recupere o destino efetivo de todos os anúncios paginados da fonte exata. Confira concordância, conta e localização do tracking; não use o host do profile como substituto de evidência viva nem peça o link novamente se ele já puder ser recuperado.
+2. Preserve base, caminho e campos não alterados; rematerialize somente os tokens dependentes do número-alvo previstos no contrato. Não mova tracking da Website URL para `url_tags`, nem faça o inverso, apenas para facilitar o payload.
+3. Classifique uma rejeição local do destino separadamente da escolha comercial. Se a rota instalada não representar a herança autorizada, mantenha o mesmo request e conduza manutenção separada com os gates canônicos; não invente `source_account`, troque o destino ou amplie allowlist. A instrução de herdar não comprova que a validação já foi corrigida, não autoriza administrar o site e não dispensa aceite técnico/readback.
+
+### Cadastro técnico equivalente a outra conta
+
+1. Resolva os IDs das duas contas pelos bindings canônicos, valide o escopo e a autoridade do pedido e confira lease/efeitos existentes antes de mudar dados. Uma conta citada como referência de cadastro não se torna fonte de campanha ou mídia.
+2. Compare o registro do Engine chave a chave, separando capacidades compartilháveis de identidade e parâmetros próprios. Quando os modos forem a única diferença técnica, concilie somente `accounts[alvo].supported_modes` e sua projeção `registered_modes` no catálogo; não copie o objeto inteiro, `shein_profile`, alias, tracking, Page, pixel ou referência de credencial.
+3. Preserve um recibo de intenção com valores anteriores/desejados e autoridade, aplique o menor diff e confira igualdade dos modos com a referência e consistência Engine×catálogo. Mantenha os demais campos e outras contas intactos; não transforme a equiparação em alteração de credenciais, permissões ou política global.
+4. Registre o cadastro canônico e o audit exigido, depois revalide a rota central do mesmo pedido. Cadastro reconciliado não prova mídia pronta, planner aprovado, campanha criada ou ativação; informe essas etapas separadamente.
+
+## 4. Escolher o preflight correto
 
 Classifique o alvo antes de chamar qualquer checker: URL explícita de destino Meta é dado da campanha, não alvo de administração de site. Pela regra vigente em `context/ares-asset-scope.md`, valide HTTP(S), host e ausência de credenciais sem navegar nem exigir cadastro SB/allowlist. Preserve URL/caminho/UTMs literais e todos os gates de conta/partição/autoridade. Na referência entre contas, não imponha igualdade entre o host histórico do perfil e o destino solicitado. Confira a mesma semântica nos entrypoints de referência, fila e preparação, pois um preflight aprovado não exercita necessariamente os demais gates. Se houver divergência de implementação, diagnostique a camada e faça somente manutenção autorizada separada; não cadastre o host, troque o link ou altere a allowlist para acomodar o runtime. `tests/test_shein_campaign_destination_data.py` cobre a separação entre dado Meta e alvo de site. Operações sobre o site continuam com seus próprios gates.
 
@@ -46,6 +61,6 @@ Classifique o alvo antes de chamar qualquer checker: URL explícita de destino M
 
 A ausência de `asset_refs` antes de preparar mídia nova não exige referências artificiais nem mudança de modo: o preparador canônico produz o request-ready. Antes de retomar uma preparação interrompida, reconcilie uploads e reservas já existentes conforme a referência de recuperação; não interprete uma rejeição posterior ao upload como prova de ausência de mídia.
 
-## 4. Validar o input antes do writer
+## 5. Validar o input antes do writer
 
 Exija quantidade de grupos igual à quantidade solicitada, arquivos únicos por linhagem e contagem exata de assets. Compare fonte, budget, lance, início, idioma, arquivos, textos e headlines com a intenção corrigida, não com exemplos ou pedidos anteriores. Confirme no dry-run que criação PAUSED e barreira global de QA preservam o status final aprovado. Preparação bem-sucedida e dry-run não comprovam campanha criada, ativação ou serving.
