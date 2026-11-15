@@ -1,0 +1,91 @@
+{
+  "operation_id": "b0bf8a238e1a068b6c86b7f1",
+  "mode": "resume_safe",
+  "verified_at": "2026-11-15T04:53:43-05:00",
+  "state": "target_recovered_independent_closure_pending",
+  "previous_checkpoint": "/root/mgs-agent/reports/automation-recovery-b0bf8a238e1a068b6c86b7f1/independent-readback-20261115T044355-0500.json",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "GET_http": 200,
+    "author_id_GET_verified": "344196393512075265",
+    "content_GET_verified": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "thread_GET_verified": "1569185140502954077",
+    "parent_channel_GET_verified": "1496267442899521627",
+    "guild_GET_verified": "1185714635991679006",
+    "current_registry_authorized": true
+  },
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1609245",
+    "owner_process": {"pid": 1609245, "ppid": 1609244, "state": "S", "start_ticks": "214611910", "alive": true},
+    "worker": {"pid": 1609831, "start_ticks": "214612877", "started": 1794736330.84161, "state": "running"},
+    "worker_process": {"pid": 1609831, "ppid": 1609245, "state": "S", "start_ticks": "214612877", "alive": true},
+    "worker_receipt_identity_verified": true,
+    "worker_ppid_equals_owner": true,
+    "previous_owner_processes": [{"pid": 1604612, "alive": false}, {"pid": 1604815, "alive": false}],
+    "lease_until": 1794737530.8370693,
+    "lease_valid": true,
+    "attempts": 33,
+    "failures": 0,
+    "service": {"enabled": true, "heartbeat": {"at": 1794736330.8324711, "phase": "dispatching", "pid": 1609245}, "worker_failure_streak": 0},
+    "latest_claim_event": {"id": 6921, "at": 1794736330.8370693, "owner": "supervisor:1609245", "previous_state": "retry_scheduled"},
+    "previous_defer_event": {"id": 6907, "at": 1794735891.4328744, "due": 1794736191.4328744, "state": "retry_scheduled"},
+    "target_script_processes": [],
+    "queue_modified_by_worker": false
+  },
+  "target": {
+    "id": "44671121f3cc",
+    "enabled": true,
+    "state": "scheduled",
+    "last_run_at": "2026-11-14T23:26:38.510400-05:00",
+    "last_status": "error",
+    "last_error": "Script exited with code 1",
+    "next_run_at": "2026-11-15T05:26:38.510400-05:00",
+    "fire_claim": null,
+    "schedule": {"kind": "interval", "minutes": 360, "display": "every 360m"},
+    "ticker_heartbeat_observed": {"at": 1794736366.4739878, "pid": 2241212},
+    "ticker_last_success_observed": 1794736366.4759562,
+    "ticker_age_seconds_at_final_check": 57.1
+  },
+  "contract_hash_live": "8c4a6f179cdfb61663e3bd4fca9bff3f1f724c5b2a03e30514827f06d84c65fd",
+  "contract_matches_source": true,
+  "hash_checks": {
+    "/root/mgs-agent/scripts/check-retired-host-references.py": {"sha256": "0c54aa1c95440df4abe3c5e78212880858e66983d6abd79e9f1cd803b7e96082", "matches_recorded": true},
+    "/root/mgs-agent/tests/test_retired_host_reference_guard.py": {"sha256": "05261648fcc8f597d2462cf6e0f0d072eaec7f9982269a012d0ef0c550751acc", "matches_recorded": true},
+    "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-pitfalls.md": {"sha256": "48281253f8d135e8d67b90e6dba03c7ca66ae516e2f4dae1a904d94d4f66c1f0", "matches_recorded": true}
+  },
+  "canonical_mirror_identical": true,
+  "watchdog_state": {"status": "ok", "last_failure_rc": 0, "last_alert_sent": null, "last_check": "2026-11-14T23:32:52-05:00"},
+  "native_recent_executions": [
+    {"id": "c2fe7ec77c8244249a07991087837563", "status": "failed", "pid": 1201405, "started_at": "2026-11-14T23:24:48.920763-05:00", "finished_at": "2026-11-14T23:26:38.516545-05:00", "error": "Script exited with code 1"},
+    {"id": "0c01bfe170954417b507550144e63f35", "status": "completed", "pid": 661550, "started_at": "2026-11-14T17:21:47.639495-05:00", "finished_at": "2026-11-14T17:24:35.679784-05:00", "error": null}
+  ],
+  "independent_observation": {
+    "source_key": "native:zeus:44671121f3cc",
+    "at": 1794736324.4915931,
+    "status": "ERROR",
+    "receipt": {"at": 1794716798.5104, "receipt": "monitor-predicate:Hermes MGS patch watchdog; last execution failed (details retained in scheduler)", "status": "ERROR", "target": "native:zeus:44671121f3cc", "verified": false}
+  },
+  "source_alert_GET_verified": "1571381759860408423",
+  "delivery": [
+    {"message_id": "1571382457620758560", "channel_id": "1498132022634483894", "GET_http": 200, "GET_verified": true, "embed_title": "Hermes patch watchdog recuperado", "content_empty": true, "mentions_empty": true},
+    {"message_id": "1571382948165591142", "channel_id": "1498132022634483894", "GET_http": 200, "GET_verified": true, "embed_title": "REPORT-INFRA — modificada", "content_empty": true, "mentions_empty": true}
+  ],
+  "pending": {
+    "stage": "Observe existing natural native occurrence, then existing supervisor independent acceptance and closure",
+    "next_native_occurrence": "2026-11-15T05:26:38.510400-05:00",
+    "seconds_to_native_at_final_check": 1974.9,
+    "dependency_outside_current_900_second_round": true,
+    "consumer_cron_verified": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+    "consumer_and_current_owner_verified": true,
+    "human_decision_required": false,
+    "queue_closure_verified": false,
+    "handoff": "Return to current supervisor. Preserve original request, source, native recurrence and independent verifier. Do not replay wrapper, rewrite native history or create another dispatcher."
+  },
+  "actions_not_performed": ["repair_or_wrapper_replay", "queue_transition", "scheduler_history_or_cadence_change", "new_dispatcher", "Discord_POST_or_PATCH", "infrastructure_or_skill_change", "gateway_restart"],
+  "local_lookup_failures": [
+    {"operation": "skill_view hermes-agent", "diagnosis": "Skill disabled in loader", "recovery": "Read canonical SKILL.md directly without changing configuration"},
+    {"operation": "Read-only queue SQL lookup", "diagnosis": "no such column: operation_key", "recovery": "Consulted observed schema and repeated SELECT using the existing key column; successful"}
+  ],
+  "only_foreground_write": "This local evidence checkpoint"
+}
