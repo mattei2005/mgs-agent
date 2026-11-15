@@ -11,6 +11,13 @@ Use only when all approved children exist and the unchanged verifier rejected re
 7. Finalize with actual final vertical video IDs and original/derived lineage. Require three real same-stock manager-controller receipts before naming COMMITTED. After partial movement reconcile same stock ID/existing intent and finish missing layers only.
 8. Terminal retry must not reopen a lease. After verifying links, fresh hierarchy, stock and ledger, release only a still-blocking lease owned by the same request. Never release another request's lease. Test crash after complete links but before release, wrong response IDs and duplicate download coverage.
 
+## Image HARD_ERROR during independent recovery
+
+- Treat `issues_info.error_code=2446386` / `HARD_ERROR` and `WITH_ISSUES` as a real gate even when MP4 equivalence, previews and CDN thumbnails succeed. Never force a paused final ad ACTIVE or weaken semantic QA to bypass it.
+- Inspect both the creative's top-level `thumbnail_url` and each AFS video thumbnail/preferred thumbnail. Top-level thumbnail success, byte equality to a seed, and accessible video thumbnails do not identify the rejected internal image dependency; absent `image_hash`/`image_url`/AFS `images` is not proof that no image dependency exists.
+- Distinguish a story GET `code=10` from missing token scopes. Check the same actor/app's debug metadata and `/me/permissions`: `pages_read_engagement=granted` can coexist with that endpoint error. A matching error on a healthy control ad proves a diagnostic-route limitation, not the cause of the faulty ad. Do not grant permissions, substitute a Page/other token, or claim a missing scope based on that message alone.
+- If the exact rejected image cannot be identified within the approved identity/read scope, preserve projected GET evidence, original grants/runtime pins and same IDs, then block the owner with the exact diagnostic gap. Request the specific Ads Manager/Meta support image diagnosis (or explicit scope authorization for a distinct read route) before designing a replacement creative/thumbnail contract. Never infer causal repair from an HTTP200 image or manufacture a repair approval.
+
 ## Central route and ownership
 
 `/root/mgs-agent/scripts/ares-eggbev-target-clone.py` exposes `recover-media` and receipt-aware `finalize`, requiring unchanged `--input`, `--approved-digest` and `--approval-message-id`. `ares_campaign_v3/target_media_recovery.py` fails closed to its request-pinned grant, not a global derived-ID allowlist. Source and registry remain unchanged.
