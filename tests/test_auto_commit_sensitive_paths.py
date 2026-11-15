@@ -403,12 +403,17 @@ fi
             base + "last-private-result.json",
             base + "private-journal.json",
             base + "private-progress.json",
+            base + "private-journal-before-negative-intent-reconciliation.json",
         ]
         included = [
             base + "phase.json",
             base + "move-plan.json",
             base + "private-credentials.json",
             base + "private-progress.json.other",
+            base + "private-journal-before-negative-intent-reconciliation.json.other",
+            base + "private-journal-before-other-reconciliation.json",
+            base.replace("1571372290707562638", "other") + "private-journal-before-negative-intent-reconciliation.json",
+            "work/" + base + "private-journal-before-negative-intent-reconciliation.json",
             base.replace("1571372290707562638", "other") + "private-progress.json",
             "work/" + base + "private-progress.json",
         ]

@@ -125,7 +125,10 @@ exec {self.real_git} "$@"
             / "recovery-1571372290707562638"
         )
         base.mkdir(parents=True)
-        for name in ("last-private-result.json", "private-journal.json", "private-progress.json"):
+        for name in (
+            "last-private-result.json", "private-journal.json", "private-progress.json",
+            "private-journal-before-negative-intent-reconciliation.json",
+        ):
             (base / name).write_text('{"synthetic_fixture":true}\n')
         return base
 

@@ -893,6 +893,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-recovery-6a277a3d48b16fa9cf9b1dca",
+      "agent": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "status": "correction_tested_native_flush_validation_pending",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1571395861303402617",
+      "business_writer_preserved": true,
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/6a277a3d48b16fa9cf9b1dca/recovery-evidence.json",
+      "correction": "One anchored exact .gitignore exclusion for the local journal before-image; sensitive guard unchanged; no business writes, restart or cadence change.",
+      "changed_paths": [
+        ".gitignore",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py",
+        "log-monitor-discord-alert/references/route-pack-06.md"
+      ],
+      "tests_passed": 48,
+      "manual_commit_or_push": false,
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/6a277a3d48b16fa9cf9b1dca/"
+    },
+    {
       "id": "autopush-recovery-48c10aa22ccc9b5aa0b7ee5b",
       "agent": "zeus",
       "type": "autocommit_guardrail_recovery",
