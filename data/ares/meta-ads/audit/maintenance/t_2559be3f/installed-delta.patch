@@ -1,0 +1,90 @@
+--- scripts/ares-eggbev-target-clone.py.before
++++ scripts/ares-eggbev-target-clone.py
+@@ -142,7 +142,57 @@
+         if edge!='ads' and edge in value:value[edge].sort(key=lambda x:x['id'])
+     return value
+ 
++def source_cta(creative):
++    """Read exact CTA evidence; never default, normalize text or prefer a shape."""
++    if not isinstance(creative,dict):raise ValueError('source CTA creative must be an object')
++    afs=creative.get('asset_feed_spec',{});story=creative.get('object_story_spec',{})
++    if not isinstance(afs,dict) or not isinstance(story,dict):raise ValueError('source CTA shape malformed')
++    observed=[];native=[]
++    def record(value):
++        if not isinstance(value,str) or re.fullmatch(r'[A-Z][A-Z0-9_]*',value) is None:raise ValueError('source CTA type missing or malformed')
++        observed.append(value)
++    def action(value):
++        if not isinstance(value,dict):raise ValueError('source CTA action malformed')
++        record(value.get('type'))
++        if 'value' in value:
++            destination=value['value']
++            if not isinstance(destination,dict):raise ValueError('source CTA value malformed')
++            if 'app_destination' in destination and destination['app_destination']!='MESSENGER':raise ValueError('source CTA destination conflicts with Messenger mode')
++    if 'call_to_action_types' in afs:
++        types=afs['call_to_action_types']
++        if not isinstance(types,list) or len(types)!=1:raise ValueError('source CTA must be read exactly before rematerialization')
++        record(types[0])
++    if 'call_to_actions' in afs:
++        actions=afs['call_to_actions']
++        if not isinstance(actions,list) or len(actions)!=1:raise ValueError('source CTA actions ambiguous or malformed')
++        action(actions[0])
++    for key,data in story.items():
++        if not key.endswith('_data'):continue
++        if not isinstance(data,dict):raise ValueError('source CTA native shape malformed')
++        if 'call_to_action' not in data:continue
++        if key not in {'video_data','link_data'}:raise ValueError('source CTA native shape unsupported')
++        native.append(key);action(data['call_to_action'])
++    if len(native)>1:raise ValueError('source CTA native branches ambiguous')
++    if not observed:raise ValueError('source CTA missing before rematerialization')
++    if len(set(observed))!=1:raise ValueError('source CTA evidence conflicts')
++    return observed[0]
++
++
++def source_rematerialization(source):
++    """Validate every source slot before PBIA, reservation or media side effects."""
++    from ares_campaign_v3.creative_copy_policy import effective
++    result=[]
++    for original in source['ads']:
++        creative=original.get('creative');cta=source_cta(creative)
++        resolved=effective(creative)
++        tags=resolved.get('url_tags') or ''
++        if not isinstance(tags,str) or len(re.findall(r'(?:^|&)utm_campaign=pg_[0-9]+(?=&|$)',tags))!=1:raise ValueError('source Page tracking missing or ambiguous')
++        result.append((cta,resolved))
++    return result
++
++
+ def build(q,source,page,selected,registry,allocation):
++    resolved_source=source_rematerialization(source)
+     campaign={k:copy.deepcopy(source['campaign'][k]) for k in ['objective','buying_type','bid_strategy','special_ad_categories','special_ad_category_country']}
+     minor=Decimal(q['daily_budget_usd'])*100
+     if minor!=minor.to_integral_value() or minor<=0:raise ValueError('exact positive budget required')
+@@ -150,20 +200,14 @@
+     source_set=source['adset'];keys=['billing_event','optimization_goal','destination_type','targeting','promoted_object','attribution_spec','is_dynamic_creative','regional_regulated_categories','regional_regulation_identities','bid_amount','bid_constraints','optimization_sub_event']
+     adset={k:copy.deepcopy(source_set[k]) for k in keys if k in source_set};adset['promoted_object']['page_id']=page['id']
+     ads=[]
+-    for i,(asset,original) in enumerate(zip(selected,source['ads']),1):
++    for i,(asset,original,(cta,source_creative)) in enumerate(zip(selected,source['ads'],resolved_source),1):
+         media=registry.require_ready(ACCOUNT,asset['asset_id'],asset['clean_checksum'])
+-        observed_ctas=original.get('creative',{}).get('asset_feed_spec',{}).get('call_to_action_types')
+-        if not isinstance(observed_ctas,list) or len(observed_ctas)!=1:raise ValueError('source CTA must be read exactly before rematerialization')
+-        cta=observed_ctas[0]
+         prefix=hashlib.sha256((q['request_id']+str(i)).encode()).hexdigest()[:14]
+         payload=_creative_payload(media=media,page_id=page['id'],instagram_user_id=page['instagram_user_id'],page_token=page['page_token'],label_prefix='target_'+prefix,primary_text=q['copy']['primary_text'],headlines=[q['copy']['headline']],description=q['copy']['description'],cta=cta)
+-        from ares_campaign_v3.creative_copy_policy import effective
+-        source_creative=effective(original['creative'])
+         for key in ['degrees_of_freedom_spec','contextual_multi_ads']:
+             if key in source_creative:payload[key]=copy.deepcopy(source_creative[key])
+             else:payload.pop(key,None)
+         source_tags=source_creative.get('url_tags') or ''
+-        if len(re.findall(r'(?:^|&)utm_campaign=pg_[0-9]+(?:&|$)',source_tags))!=1:raise ValueError('source Page tracking missing or ambiguous')
+         payload['url_tags']=re.sub(r'(^|&)utm_campaign=pg_[0-9]+(?=&|$)',lambda match:match.group(1)+'utm_campaign='+page['page_token'],source_tags,count=1)
+         ads.append({'name':f'AD {i:02d} - {Path(asset["canonical_filename"]).stem}','source_ad_id':original['id'],'media':{k:media[k] for k in ['asset_id','checksum','vertical_video_id','square_video_id','ready','upload_edge','association_verified']},'creative_payload':payload})
+     return {'schema_version':3,'request_id':q['request_id'],'operation':q['operation'],'graph_version':'v26.0','created_at':datetime.now(timezone.utc).isoformat(),'campaigns':[{'idempotency_key':q['request_id']+'-1','app_key':load(CONFIG)['accounts'][ACCOUNT]['app_key'],'account_id':ACCOUNT,'mode':MODE,'source_campaign_id':source['campaign']['id'],'source_adset_id':source_set['id'],'campaign_create':campaign,'adset_create':adset,'adset_name':'ADGROUP 01','name':allocation['names'][0],'start_time':q['start_time'],'status':'ACTIVE','ads':ads}]}
+@@ -179,6 +223,7 @@
+     conflict=reader_block_reason(ACCOUNT,cfg['state_root'])
+     if conflict and conflict.get('request_id')!=q['request_id']:raise ValueError('another request owns account; no media writes')
+     common,meta,sb,token=runtime();source=source_read(q,common,meta,token)
++    source_rematerialization(source)
+     page=resolve_page(meta,sb,token,ACCOUNT,q['target_page_token'],ensure_pbia=True,request_path=path)
+     save(home/'source-live.json',source);save(home/'target-page-live.json',page)
+     import ares_manager_storage_standard as standard

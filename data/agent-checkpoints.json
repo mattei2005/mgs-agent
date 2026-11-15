@@ -3004,12 +3004,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIEWER-LOAN-1571342489162489937",
-      "next_step": "Conferir admissao, identidade, conta, fonte e Page; preparador canonico; QA visual; resumo e OK posterior",
+      "next_step": "Aguardar handoff instalado da manutencao, verificar hashes; mesmo prepare idempotente; revalidar horario literal e se vencido perguntar somente novo horario; sem execute",
       "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
-      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/request.json",
-      "state": "preparation_preflight; handoff e hashes instalados verificados; mesmo request preservado; sem campanha publicada",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/prepare-failure-readback.json",
+      "state": "prepare_pending_maintenance: pbia verificado; 3reservas e6uploads registry/live ready; qa visual passou; sem manifest/plan/summary ou campanha; normalizacao cta nativa em manutencao t_2559be3f",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T02:28:04+00:00"
+      "updated_at": "2026-11-15T02:36:40+00:00"
     },
     {
       "agent": "ares",
@@ -10717,5 +10717,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T02:34:30+00:00"
+  "updated_at": "2026-11-15T02:36:40+00:00"
 }
