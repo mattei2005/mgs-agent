@@ -896,7 +896,10 @@
     749432,
     749454,
     749475,
-    749497
+    749497,
+    749884,
+    749904,
+    749926
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3409,9 +3412,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-14T00:07:52.000Z",
+        "created_at": "2026-11-15T12:04:32.000Z",
         "domain": "lyzmo",
-        "notification_id": 747387,
+        "notification_id": 749884,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -3445,7 +3448,8 @@
         740995,
         743346,
         745146,
-        747387
+        747387,
+        749884
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -3701,9 +3705,9 @@
     "digital-trust|newsounfinanzas|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-06T12:07:17.000Z",
+        "created_at": "2026-11-15T12:05:31.000Z",
         "domain": "newsounfinanzas",
-        "notification_id": 737528,
+        "notification_id": 749926,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2,
@@ -3726,7 +3730,8 @@
         706753,
         734381,
         735846,
-        737528
+        737528,
+        749926
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -4269,6 +4274,39 @@
         745167
       ],
       "opened_at": "2026-11-12T19:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|316": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-15T12:05:02.000Z",
+        "domain": "openzed",
+        "notification_id": 749904,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 15,
+          "Broadcast": 288,
+          "On-hold": 85,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "316",
+        "segurador_name": "Rosana Oliveira",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-11-15T07:12:10-05:00",
+      "message_ids": [
+        "1571498040315871257"
+      ],
+      "notification_ids": [
+        749904
+      ],
+      "opened_at": "2026-11-15T07:12:09-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -6071,39 +6109,23 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-15T06:57:09-05:00",
+  "last_check": "2026-11-15T07:12:10-05:00",
   "last_delivery": {
-    "at": "2026-11-14T19:12:27-05:00",
+    "at": "2026-11-15T07:12:10-05:00",
     "cursor_ids": [
-      749032,
-      749056,
-      749074,
-      749097,
-      749120,
-      749139,
-      749158,
-      749181,
-      749203,
-      749224,
-      749243,
-      749268,
-      749284,
-      749307,
-      749330,
-      749347,
-      749372,
-      749393,
-      749411,
-      749432,
-      749454,
-      749475,
-      749497
+      749884,
+      749904,
+      749926
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1571498040315871257"
+    ],
+    "notification_ids": [
+      749904
+    ]
   },
   "last_error": null,
-  "last_seen_id": 749497,
+  "last_seen_id": 749926,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
