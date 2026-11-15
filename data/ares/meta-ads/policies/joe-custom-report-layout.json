@@ -1,0 +1,14 @@
+{
+  "policy_id": "ARES-JOE-CUSTOM-REPORT-LAYOUT-1571317231135096843",
+  "status": "active",
+  "authority": {"discord_user_id": "344196393512075265", "message_id": "1571317231135096843", "thread_id": "1558147152528674957", "approved_example_message_id": "1571316730209505401"},
+  "scope": {"manager_code": "G004", "requester_discord_id": "1214246869484576890", "report_class": "custom_campaign_metric_reports", "exclude": ["canonical_full_intraday", "daily_D_minus_1", "other_managers", "completed_job_replays"]},
+  "layout": {"format": "discord_monospaced_columns", "column_order": ["Camp", "Status", "CPR", "Gasto", "Res.", "ROI"], "minimum_widths": [4, 6, 4, 6, 4, 8], "separator": " | ", "max_message_chars": 2000, "currency_in_header": true, "roi_positive_sign": true, "preserve_groups": true, "repeat_title_and_column_header_per_part": true, "missing": "n/d"},
+  "metric_policy": "Presentation only. Include only the metrics actually requested and available in each authorized custom report; do not collect ROI for a CPR-only request. Gasto and CPR retain their existing Meta source; ROI retains the approved SB adjusted-investment model.",
+  "preserve": ["account", "cohort", "group_membership", "metric_values", "source_timestamps", "financial_formulas", "schedule", "cadence", "expiry", "destination", "alert_thresholds", "idempotency", "completed_receipts", "manual_thread_titles"],
+  "current_consumers": [
+    {"request_id": "1571247040074219553", "scheduler_job_id": "66d9bf48ab4c", "account_id": "2852476828464907", "thread_id": "1558147152528674957"},
+    {"request_id": "1571247080448720938", "scheduler_job_id": "49e9d41be420", "account_id": "781612907182683", "thread_id": "1558147211026501643"}
+  ],
+  "future_requests": "Resolve this policy when preparing Joe G004 custom campaign-metric reports. Validate each request's authority and scope independently. This policy neither creates nor renews a schedule. Adapt the approved column order to the requested metrics without fabricating fields."
+}

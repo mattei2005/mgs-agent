@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "APP-SHEET-AUDIT-1571314563885047941",
-      "next_step": "Zeus coleta roles das 12 rotas genéricas e vínculos DTR da rota B013 sob locks nativos; cruza cada ocorrência e relata divergências, sem writes produtivos.",
+      "next_step": "Conferência concluída: 186 linhas verificadas sem divergência de X; 10 linhas dependem de recuperação/substituição autorizada dos apps restritos B004-11 e B011-10. Zeus preserva pausas; não inferir X nem alterar apps. Ciclo B013 atualizou 3 marcadores legitimamente.",
       "objective": "Conferir seguradores, coluna I NO APP e X da coluna A contra Meta e DTR atuais sem alterar vínculos/marcadores.",
-      "source": "reports/app-sheet-audit-1571314563885047941/sheet-frozen.json",
-      "state": "read_only_audit_running",
+      "source": "reports/app-sheet-audit-1571314563885047941/acceptance.json",
+      "state": "completed_with_external_restriction_limits",
       "thread_id": "1571311723217035436",
-      "updated_at": "2026-11-15T00:05:30+00:00"
+      "updated_at": "2026-11-15T00:16:42+00:00"
     },
     {
       "agent": "zeus",
@@ -1719,6 +1719,16 @@
       "state": "coleta encerrada com cobertura parcial: 53 contas consultadas integralmente de 351; outras 298 http403/código200 pela credencial corporativa atual. confirmadas 78 campanhas criadas hoje, 54 também agendadas amanhã; 159 anúncios/creatives lidos. 78 utm_campaign + 78 utm_adgroup únicos em três domínios validados. sem writes meta/gam.",
       "thread_id": "1569552761673089126",
       "updated_at": "2026-11-10T03:36:40+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-JOE-CUSTOM-LAYOUT-1571317231135096843",
+      "next_step": "Backup e patch dos renderers; testar snapshots reais e limites Discord; persistir politica e validar readback",
+      "objective": "Aplicar tabela compacta aprovada aos relatorios customizados Joe G004, sem mudar fontes, coortes, agendas ou destinos",
+      "source": "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-roi-20261114.py",
+      "state": "dois jobs cpr+roi habilitados identificados; alterar somente renderizacao, preservar historico e jobs concluidos",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-15T00:14:42+00:00"
     },
     {
       "agent": "ares",
@@ -10647,5 +10657,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:10:58+00:00"
+  "updated_at": "2026-11-15T00:16:42+00:00"
 }

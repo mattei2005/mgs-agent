@@ -1,0 +1,47 @@
+{
+  "status": "AUDIT_COMPLETE_WITH_EXTERNAL_RESTRICTION_LIMITS",
+  "verified_at": "2026-11-14T19:16:42-05:00",
+  "requested_apps": 13,
+  "checked_generic_routes": 12,
+  "joined_b013_cycle": "2026-11-14T19:13:39-05:00",
+  "assigned_profiles": 196,
+  "profiles_verified": 186,
+  "present_or_linked": 40,
+  "absent_or_unlinked": 146,
+  "restriction_unverified": 10,
+  "apps_restricted": [
+    "B004-11",
+    "B011-10"
+  ],
+  "marker_mismatches": 0,
+  "assigned_app_labels_outside_registry": 0,
+  "cross_app_membership_matches": 0,
+  "unassigned_roles": 0,
+  "native_cron_marker_clearances": [
+    {
+      "segurador": "Mary Pessoa Neres",
+      "app": "B013-8",
+      "before": "X",
+      "after": ""
+    },
+    {
+      "segurador": "Lan Bui",
+      "app": "B013-8",
+      "before": "X",
+      "after": ""
+    },
+    {
+      "segurador": "Tiger",
+      "app": "B013-8",
+      "before": "X",
+      "after": ""
+    }
+  ],
+  "current_x_total": 153,
+  "restricted_x": 7,
+  "direct_traffic_exceptions": 6,
+  "auxiliary_records_excluded": 13,
+  "pause_sets_preserved": true,
+  "audit_production_writes": false,
+  "contention_recovery": "Two bounded lock waits expired before audit collector entry; no duplicate collector or effects. Joined the completed scheduled B013 cycle and verified exact current Sheet parity."
+}
