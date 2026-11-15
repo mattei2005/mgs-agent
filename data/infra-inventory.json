@@ -919,9 +919,9 @@
     {
       "id": "storage-point5-followup-1571310958830166148",
       "agent": "zeus",
-      "type": "readonly_old_tools_and_duplicate_backup_intermediates_review",
-      "status": "frozen_validated_waiting_new_critical_confirmation",
-      "updated_at": "2026-11-14T19:10:57.585437-05:00",
+      "type": "exact_old_tools_and_duplicate_backup_intermediates_retirement",
+      "status": "completed_validated_parent_review_open",
+      "updated_at": "2026-11-14T19:37:04.804737-05:00",
       "source_thread_id": "1569928464033783862",
       "authority_message_id": "1571310958830166148",
       "canonical_source": "context/storage-reorganization-20261112.md",
@@ -929,7 +929,10 @@
       "manifest": "data/storage-point5-followup-1571310958830166148/deletion-manifest.json",
       "manifest_sha256": "a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c",
       "executor_sha256": "3217d8c96fda7631acc6b76c480a64e9df87174257d2fa9d430485fde48dc6ba",
-      "verification": {
+      "protected": "Current tools/kernel/agents, retained full DEBs, original vendor files, system configuration, legacy12-entry checksums, site backups and user data. No reboot/restart/autoremove/policy change.",
+      "skill_mirror_sha256": "c7b5218ec1135488aef487cf9e469044489ddfad74cdf946b9d0c197878f50c0",
+      "parent_review_complete": false,
+      "preparation_verification": {
         "tests_passed": 8,
         "packages": 4,
         "duplicate_intermediates": 11,
@@ -944,9 +947,54 @@
         "approval_exists": false,
         "execution_started": false
       },
-      "protected": "Current tools/kernel/agents, retained full DEBs, original vendor files, system configuration, legacy12-entry checksums, site backups and user data. No reboot/restart/autoremove/policy change.",
-      "skill_mirror_sha256": "c7b5218ec1135488aef487cf9e469044489ddfad74cdf946b9d0c197878f50c0",
-      "parent_review_complete": false
+      "confirmation_message_id": "1571321515683618887",
+      "latest_cleanup_result": "data/storage-point5-followup-1571310958830166148/cleanup-result.json",
+      "verification": {
+        "status": "completed_validated",
+        "confirmation_message_id": "1571321515683618887",
+        "question_message_id": "1571318246555259092",
+        "manifest_sha256": "a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c",
+        "executor_sha256": "3217d8c96fda7631acc6b76c480a64e9df87174257d2fa9d430485fde48dc6ba",
+        "native_executor_returncode": 0,
+        "removed_packages": [
+          "linux-tools-6.8.0-138-generic",
+          "linux-tools-6.8.0-138",
+          "linux-tools-6.8.0-142-generic",
+          "linux-tools-6.8.0-142"
+        ],
+        "explicit_duplicate_files_removed": 11,
+        "exact_journal_paths_verified": true,
+        "package_file_link_nodes_absent": 54,
+        "all_retained_original_checksum_entries_valid": 12,
+        "retained_only_duplicate_reader_passed": 11,
+        "original_sources_read_by_retained_reader": 0,
+        "tools_rollback_archives_native_streams_readable": 4,
+        "actual_package_rollback_reinstallation_exercised": false,
+        "protected_hashes_unchanged": 54,
+        "same_gateway_pids": true,
+        "same_boot_id": true,
+        "structural_aliases_preserved": 4,
+        "configs_passed": 3,
+        "smokes_passed": 3,
+        "new_critical_journal_events": 0,
+        "no_autoremove_restart_or_reboot": true,
+        "immediate_available_delta_bytes_by_filesystem": {
+          "/": 105869312,
+          "/boot": 0,
+          "/boot/efi": 0
+        },
+        "observed_immediate_delta_bytes": 105869312,
+        "observed_immediate_delta_MiB": 100.96,
+        "observed_immediate_delta_MiB_rounded": 101,
+        "global_filesystem_delta_not_exclusive_attribution": true,
+        "initial_structural_net_estimate_bytes": 91430912,
+        "current_root_used_percent": 68.32,
+        "current_root_available_GiB": 61.05,
+        "next_step": "Review remaining old maintenance/site-backup roots read-only for replacement/recovery coverage; not another deletion approval. Parent5-8 remains open.",
+        "next_phase_execution_started": false,
+        "parent_review_complete": false,
+        "validated_at": "2026-11-14T19:35:19.102696-05:00"
+      }
     },
     {
       "id": "storage-system-review-1571271327648587799",

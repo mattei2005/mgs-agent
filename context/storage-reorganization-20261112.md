@@ -273,6 +273,17 @@ Manifesto SHA-256 `a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848db
 
 **Fora do lote:** o restante do root de manutenção conserva DEBs de recuperação, originais do fornecedor, configuração de sistema e evidências. Os 948 arquivos dos cinco conjuntos de backup de sites permanecem como classe independente, sem substituição comprovada; não são declarados indispensáveis nem descartáveis por idade. Temporários e testes permanecem condicionados a prova de encerramento/consumidores. Essas pendências e as categorias6dados/trabalhos,7caches,8Git e recorrência continuam no ledger global. A regra de comparação de intermediários DEB foi salva na referência de caches/recuperação.
 
+### Encerramento do lote — confirmação 1571321515683618887
+
+Rodolfo confirmou `sim depois me fala o proximo passo.` na mensagem `1571321515683618887`, em resposta à pergunta `1571318246555259092` que divulgou o manifesto inalterado `a75b698ce881f5a7577fd978dc64df51ae2dd0e516910ea1e69c3b7b848dbd7c`. O recibo nativo está em `approval.json`. A autorização cobre somente os quatro pacotes e os 11 intermediários, com comunicação do próximo passo após validar; não cobre executar a próxima exclusão.
+
+**Executado uma vez e validado:** APT removeu exatamente os quatro `linux-tools` previstos, sem instalação ou remoção extra. Os 54 arquivos/links específicos de versão estão ausentes. Os 11 intermediários estão ausentes e o journal contém exatamente seus 11 paths únicos. O mesmo pós-coletor passou, sem correções de escopo ou retry de mutação. A observação imediata registrou aumento de 105.869.312 bytes disponíveis em `/` (100,96 MiB, aproximadamente101 MiB); `/boot` e EFI não mudaram. É delta global observado, não atribuição exclusiva nem a estimativa líquida de87,20MiB anterior à preservação.
+
+Os 12 itens do checksum histórico validam intactos; o leitor recuperou os 11 membros usando somente os DEBs sobreviventes, sem ler os arquivos excluídos. Os quatro DEBs de rollback continuam legíveis em streaming nativo; reinstalação real não foi exercitada. Os 54 hashes protegidos, quatro aliases estruturais, PIDs dos três agentes e boot identity permaneceram iguais. Três configs e três smokes com ferramentas desativadas passaram; dpkg audit vazio e zero novos erros críticos no journal. Sem autoremove, reboot ou restart.
+
+Fonte ativa: `data/storage-point5-followup-1571310958830166148/cleanup-result.json`; a preparação permanece histórica e não é confirmação pendente deste mesmo lote. Na validação, `/` estava em68,32%, com61,05GiB disponíveis. O próximo passo a informar ao dono é revisar o restante das pastas antigas de manutenção e backups locais, buscando substituição/recuperação comprovada antes de novo descarte. Essa próxima etapa não foi executada por implicação deste `sim`. O restante5 e as categorias6dados/trabalhos,7caches,8Git e recorrência continuam abertos no checkpoint pai.
+
+
 
 
 
