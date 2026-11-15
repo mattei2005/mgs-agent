@@ -3024,12 +3024,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIEWER-LOAN-1571342489162489937",
-      "next_step": "Aguardar OK explicito POSTERIOR ao resumo1571371155317850153 para mesmo digest;esta tarefa nao executa Engine. Antes de qualquer futura execucao revalidar autoridade/admissao/source_comparison/horario;se inicio vencer perguntar SOMENTE novo horario;nao repetir PBIA/uploads/reservas/naming nem retomar recovery antigo",
-      "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
-      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/approval-summary-delivery.json",
-      "state": "prepared_awaiting_final_approval:prepare exit0;manifest/plan/summary selados digest7fb94557a6302e97bcc5239ad7f7758052555203f3ff15c360e1ffef55c5afba;1camp/1set/3finais+3seedspaused;usd35;inicio2026-11-15t00:02:00-05:00;3reservas/6ids preservados;3registry_hits/0uploads;qaclean/visual6variantes;0campaign_writes;resumo1571371155317850153 getverificado semanexos",
+      "next_step": "Owner t_57bde091 valida comparador central exatoparaequivalênciabytessem relaxar campos/slots,gates,sourceoumanifest;receipt/teste/CAS/REPORT. Ownerúnico t_bdfc754f verificaaceiteereexecutamesmorequest/digest/finalOK,campanhareadback/QA/finalize estoque/ledger e relatórionativoIris/BOT. Não pedirmaisOKcomercial. Se inícioexpirarsem efeitos perguntar SOMENTEnovohorário;se efeitos usarreadbackfirstmissingonly. Não retomar recovery303 antigo.",
+      "objective": "Publicar e conferir clone304ViewerLoan do mesmo request, finalOKNicolas1571376388437577861 posterior ao resumo selado,USD35/dia,start15/11/2026 00:02EST,JSON-AGT3ads e3seedsPAUSED preservados.",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/operator-execution-approval.json;data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/execution-prewrite-drift-diagnostic.json",
+      "state": "final_ok_verified. foreground executou runner central comdigest7fb94557a6302e97bcc5239ad7f7758052555203f3ff15c360e1ffef55c5afba;falhou pre-write na comparação da fonte;nenhum checkpoint/auditengine nem campanha alvo. diffread-only comprovou só nativeimage_url facebook/ads/image?d,mesmos3ids/ordem e demais campos iguais. ambasthumbshttp200206678bytesshacecad814d1ed30da4307ca7f86704385306b085ea813e14d9f4af3e436c76c7c iguais. snapshots/manifestintactos;provaexecution-prewrite-drift-diagnostic.json. manutençãoisoladat_57bde091 eexecuçãodependentet_bdfc754f criadassemnovorequest;mainnãorodaráwriterconcorrente. pedido defuturewaiverreafirmadomesmacard/candidato,nãoativo.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T03:49:03+00:00"
+      "updated_at": "2026-11-15T04:12:46+00:00"
     },
     {
       "agent": "ares",
@@ -10737,5 +10737,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T04:08:48+00:00"
+  "updated_at": "2026-11-15T04:12:46+00:00"
 }

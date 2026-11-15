@@ -118,7 +118,7 @@ Um parâmetro específico nunca sobe automaticamente para a família. Uma regra 
 
 ### Simplificação de confirmações solicitada pelo gestor
 
-1. Separar a aprovação do pedido atual da proposta de mudar pedidos futuros. Registrar o aceite comercial no mesmo request e informar o dono da continuação; não abrir outra execução nem descartar o aceite porque a política futura ainda não foi decidida.
+1. Separar a aprovação do pedido atual da proposta de mudar pedidos futuros e classificá-la pela ordem real da conversa. Antes do resumo selado, registrar aceite comercial; depois do resumo e de esclarecimentos que confirmem o mesmo payload/digest, registrar o OK final e avançar o mesmo request, sem outra confirmação redundante. Não rebaixar um OK final válido a mero aceite comercial porque a mesma mensagem também pede uma dispensa futura ainda não ratificada.
 2. Priorizar a experiência desejada pelo operador: pedido completo, execução autorizada e resumo verificado do resultado, sem perguntas ou confirmações redundantes. Conferir primeiro a autoridade e o contrato vigente para determinar quais confirmações são realmente obrigatórias; entendimento do processo, acesso técnico e escolha de budget não equivalem a poder remover um gate definido por outra autoridade.
 3. Se o contrato exigir aprovação posterior a um resumo selado ainda não apresentado, preservar essa ordem. Não transformar um aceite antecipado em aprovação de um manifest futuro ou de detalhes técnicos ainda não informados. Explicar a diferença uma única vez, sem repetir a cobrança enquanto a preparação não estiver pronta.
 4. Quando a dispensa permanente exceder a delegação vigente, capturá-la como candidato não ativo e encaminhar somente a decisão à autoridade competente. Não bloquear preflight, reconciliação, mídia ou plan por essa ratificação quando essas etapas já estiverem autorizadas; a campanha continua com seu dono e seus parâmetros originais.
@@ -139,6 +139,14 @@ Quando uma mudança específica revelar um procedimento reutilizável, promover 
 - Concluir com o nome literal confirmado e uma frase sobre os campos preservados. Detalhes de coordenação, digests e arquivos ficam no audit; não transformar uma correção simples de nome em nova rodada de intake ou explicação técnica longa.
 
 Receita de rename, sequência e projeções: `references/thread-projection-and-synchronization.md`.
+
+## Resumos de preparação e entrega Messenger
+
+1. Conferir o JSON de cada anúncio contra o arquivo e o nome de template exigidos pelo contrato antes de compor o resumo. Não inferir inclusão apenas pelo nome da operação, pela Page ou por um anúncio amostrado; para a receita de envelope e conteúdo, carregar na skill `meta-campaign-engine-v3` a referência **Duplicação com Page, mídia e copy substituídas**, seção **Validação e relato do JSON Messenger**.
+2. Mencionar explicitamente o **JSON Messenger**, o **nome exato do template** e a cobertura conferida em todos os anúncios, junto de Page, orçamento, início, mídia/copy e estrutura. Não deixar o gestor deduzir que o JSON está incluído porque o destino é Messenger. Não despejar o JSON inteiro nem anexar arquivo sem pedido.
+3. Distinguir no texto **incluído e conferido na preparação** de **aplicado e conferido na Meta**. Reservar “criada e pronta” para a publicação e o pós-processamento efetivamente verificados; um manifest selado não comprova instalação do JSON nem agendamento remoto. No relatório final, declarar o template aplicado somente após GET dos creatives reais.
+4. Se o gestor perguntar pelo JSON omitido no resumo, verificar os payloads de todos os anúncios e esclarecer o estado sem recriar ou alterar o pedido. Preservar resumo/digest; uma confirmação posterior ao esclarecimento aprova o mesmo plano quando não houve delta material, observados os gates vigentes.
+5. Priorizar o relatório do resultado operacional solicitado. Não transformar conclusões de testes ou manutenção em uma sequência de mensagens comerciais; comunicar somente mudança material de fase/bloqueio, decisão necessária ou divulgação obrigatória de persistência, consolidando detalhes internos.
 
 ## Rotas funcionais
 

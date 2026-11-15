@@ -1,0 +1,141 @@
+import argparse
+import datetime as dt
+import importlib.util
+import unittest
+from pathlib import Path
+from unittest import mock
+from zoneinfo import ZoneInfo
+
+
+SCRIPT = Path(__file__).resolve().parents[1] / "scripts/ares-eggbev-creation-intake-simulate.py"
+SPEC = importlib.util.spec_from_file_location("eggbev_creation_intake", SCRIPT)
+assert SPEC is not None and SPEC.loader is not None
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+
+
+class EggbevCreationIntakeTests(unittest.TestCase):
+    def setUp(self):
+        # Freeze only this module's clock; never mutate the shared datetime module.
+        self.now = dt.datetime(2026, 11, 14, 20, 0, tzinfo=ZoneInfo("America/New_York"))
+        case = self
+
+        class FrozenDatetime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return case.now.astimezone(tz) if tz else case.now.replace(tzinfo=None)
+
+        clock = mock.Mock(wraps=dt)
+        clock.datetime = FrozenDatetime
+        patcher = mock.patch.object(MODULE, "dt", clock)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def make_args(self, **overrides):
+        values = {
+            "page_token": "pg_5024",
+            "campaign_count": 3,
+            "creatives_per_campaign": 3,
+            "source_folder": "cc en us",
+            "daily_budget_usd": None,
+            "creation_reference": None,
+            "primary_text": None,
+            "headline": None,
+            "description": None,
+            "cta": None,
+            "campaign_name_template": None,
+            "ad_name_template": None,
+            "tracking_reference": None,
+            "placements_reference": None,
+            "live_page_check": True,
+            "output": None,
+        }
+        values.update(overrides)
+        return argparse.Namespace(**values)
+
+    def page_fixture(self):
+        return {
+            "page_token": "pg_5024",
+            "smart_bidding_page_rows": 1,
+            "unique_page_identity": True,
+            "page_id_present": True,
+            "meta_page_read_http": 200,
+            "meta_page_accessible": True,
+            "page_name": "Amy Shook",
+            "leads_snapshot": 65,
+            "messenger_source_ready": False,
+            "messenger_source_reason": "smart_bidding_freshness_unverifiable",
+            "existing_campaign_name_matches": 0,
+        }
+
+    def test_next_midnight_uses_new_york_and_next_calendar_day(self):
+        now = dt.datetime(2026, 8, 29, 20, 0, tzinfo=ZoneInfo("America/New_York"))
+        self.assertEqual(MODULE.next_midnight(now), "2026-08-30T00:00:00-04:00")
+
+    def test_next_midnight_obeys_dst_at_the_target_calendar_day(self):
+        cases = [
+            ("2026-08-29T20:00:00-04:00", "2026-08-30T00:00:00-04:00"),
+            ("2026-11-14T20:00:00-05:00", "2026-11-15T00:00:00-05:00"),
+            ("2026-03-08T00:30:00-05:00", "2026-03-09T00:00:00-04:00"),
+            ("2026-11-01T00:30:00-04:00", "2026-11-02T00:00:00-05:00"),
+        ]
+        for current, expected in cases:
+            with self.subTest(current=current):
+                self.now = dt.datetime.fromisoformat(current).astimezone(ZoneInfo("America/New_York"))
+                self.assertEqual(MODULE.next_midnight(), expected)
+                self.assertEqual(MODULE.next_midnight(self.now), expected)
+
+    @mock.patch.object(MODULE, "live_page_check")
+    def test_minimal_request_applies_defaults_and_requires_nine_unique_assets(self, page_check):
+        page_check.return_value = self.page_fixture()
+        result = MODULE.simulate(self.make_args())
+        self.assertEqual(result["request"]["required_unique_assets"], 9)
+        self.assertEqual(result["defaults_applied"]["structure"], "3 campaigns x 1 ad set x 3 ads")
+        self.assertFalse(result["defaults_applied"]["creative_reuse_across_campaigns"])
+        self.assertEqual(result["defaults_applied"]["start_time"], "2026-11-15T00:00:00-05:00")
+        self.assertEqual(result["status"], "NEEDS_INPUT")
+        self.assertEqual(
+            result["missing_user_inputs"],
+            ["daily_budget_usd_per_campaign"],
+        )
+        self.assertEqual(result["provided_inputs"]["automatic_ad_name_template"], "AD NN - {canonical_stem}")
+        self.assertEqual(result["meta_writes"], 0)
+        self.assertEqual(result["reservations_written"], 0)
+
+    @mock.patch.object(MODULE, "live_page_check")
+    def test_minimal_request_keeps_summer_offset(self, page_check):
+        page_check.return_value = self.page_fixture()
+        self.now = dt.datetime(2026, 8, 29, 20, 0, tzinfo=ZoneInfo("America/New_York"))
+        result = MODULE.simulate(self.make_args())
+        self.assertEqual(result["defaults_applied"]["start_time"], "2026-08-30T00:00:00-04:00")
+        self.assertEqual(result["defaults_applied"]["timezone"], "America/New_York")
+        self.assertEqual(result["request"]["required_unique_assets"], 9)
+        self.assertEqual(result["meta_writes"], 0)
+        self.assertEqual(result["reservations_written"], 0)
+
+    @mock.patch.object(MODULE, "live_page_check")
+    def test_complete_user_inputs_are_ready_for_scoped_prestage(self, page_check):
+        page_check.return_value = self.page_fixture()
+        result = MODULE.simulate(
+            self.make_args(
+                daily_budget_usd=50.0,
+                creation_reference="approved-fixture-reference",
+            )
+        )
+        self.assertEqual(result["missing_user_inputs"], [])
+        self.assertEqual(result["status"], "READY_FOR_SCOPED_RECONCILIATION_AND_PRESTAGE")
+        self.assertEqual(result["readiness_blockers"], [])
+        self.assertIn("prestage to act_1034081997659047/advideos", result["automatic_request_steps_pending"])
+        self.assertEqual(result["meta_writes"], 0)
+        self.assertEqual(result["reservations_written"], 0)
+
+    def test_inventory_is_ready_but_not_globally_released(self):
+        result = MODULE.inventory_summary(9)
+        self.assertGreaterEqual(result["technically_ready_clean"], 9)
+        self.assertEqual(result["ares_eligible_now"], 0)
+        self.assertFalse(result["sufficient_eligible_now"])
+        self.assertTrue(result["request_can_trigger_scoped_release_review"])
+
+
+if __name__ == "__main__":
+    unittest.main()

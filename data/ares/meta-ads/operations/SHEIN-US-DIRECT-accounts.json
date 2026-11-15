@@ -867,6 +867,8 @@
       "relationship": "owned",
       "engine_registered": true,
       "registered_modes": [
+        "pure_clone",
+        "clone_prestaged",
         "from_zero_prestaged"
       ],
       "single_clone_runtime_enabled": true,

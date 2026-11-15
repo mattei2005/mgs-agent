@@ -294,7 +294,16 @@ def execute(path,confirm=False,approved_digest=None,approval_message_id=None,che
         target=home/'source-current-before-execute.json'
         if target.exists():target=home/('source-current-before-resume-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'.json')
         save(target,current)
-    if source_comparison(current)!=source_comparison(original):raise ValueError('source snapshot changed; reconcile before write')
+    if source_comparison(current)!=source_comparison(original):
+        from ares_campaign_v3.native_thumbnail_equivalence import compare,digest
+        try:proof=compare(original,current,context={'request_id':q['request_id'],'approved_digest':approved_digest,'account_id':ACCOUNT,'source_campaign_id':q['source_campaign_id_candidate']},normalize=source_comparison)
+        except ValueError:raise ValueError('source snapshot changed; native thumbnail proof rejected before write') from None
+        if not check_only:
+            receipt=home/('source-thumbnail-proof-'+digest(proof)+'.json')
+            if receipt.exists():
+                if load(receipt)!=proof:raise ValueError('native thumbnail receipt collision')
+            else:
+                with receipt.open('x') as stream:stream.write(json.dumps(proof,ensure_ascii=False,indent=2)+'\n')
     page=resolve_page(meta,sb,token,ACCOUNT,q['target_page_token'])
     if page['instagram_user_id']!=load(home/'target-page-live.json')['instagram_user_id']:raise ValueError('target Page/PBIA changed')
     naming.verify_live_reservation(q['request_id'],naming.collect_history(meta,token))
