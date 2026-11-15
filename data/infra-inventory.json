@@ -65705,6 +65705,52 @@
       "reservations_and_uploads_reused_not_replayed": true,
       "legacy_qa_followup": "t_19e512e1",
       "source_comparison_and_slots_unchanged": true
+    },
+    {
+      "id": "ares-eggbev-legacy-feature-t_e6a20db6",
+      "agent": "zeus",
+      "type": "target_source_legacy_feature_normalization",
+      "status": "installed_verified_no_live_prepare",
+      "updated_at": "2026-11-15T03:01:47.955843+00:00",
+      "source_task": "t_e6a20db6",
+      "delivery_owner": "ares",
+      "delivery_task": "t_99deb773",
+      "request_id": "eggbev-pg23189-1571342489162489937",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_e6a20db6/install-receipt.json",
+      "changed_files": {
+        "/root/mgs-agent/scripts/ares-eggbev-target-clone.py": "4e2721e14f6fdb1eb36e9d8c3221dadacf59cc94841f6d68123902d4274b099c",
+        "/root/mgs-agent/tests/test_eggbev_legacy_features.py": "30d90a0082b42963e2a967d64897c758c2e887744126a64576f9e91dadd4db2a",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/exact-source-cta-preflight.md": "196dd81be05113b0da19d2800a9581be805c670a7fd940c36e0c0bd0ab42071d",
+        "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/exact-source-cta-preflight.md": "196dd81be05113b0da19d2800a9581be805c670a7fd940c36e0c0bd0ab42071d"
+      },
+      "tests_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_e6a20db6/installed-tests.json",
+      "tests_passed": 186,
+      "tests_modules": 12,
+      "new_feature_tests": 16,
+      "offline_plan_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_e6a20db6/installed-plan.json",
+      "meta_writes": 0,
+      "drive_writes": 0,
+      "live_prepare": false,
+      "new_uploads": 0,
+      "new_reservations": 0,
+      "source_comparison_and_slots_unchanged": true,
+      "schema_prohibition_unchanged": true,
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1571359539574607876",
+        "content_empty": true,
+        "mentions": [],
+        "embeds": 1,
+        "readback_verified": true,
+        "retries": [
+          {
+            "http": 429,
+            "retry_after": 0.868
+          }
+        ],
+        "report_resent": false,
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1571359539574607876"
+      }
     }
   ],
   "profile_skill_references": [
@@ -68337,9 +68383,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-target-clone.py",
-      "size_bytes": 34031,
-      "modified_at": "2026-11-14T21:40:34.680823-05:00",
-      "sha256": "8fa8c28709044338239414ccf255d6958ff6f227537ddb4c97fb616ae072c8aa"
+      "size_bytes": 34789,
+      "modified_at": "2026-11-14T22:00:39.394287-05:00",
+      "sha256": "4e2721e14f6fdb1eb36e9d8c3221dadacf59cc94841f6d68123902d4274b099c"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-eggbev-thread-reconcile.py",

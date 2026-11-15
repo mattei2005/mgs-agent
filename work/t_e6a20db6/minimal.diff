@@ -1,0 +1,18 @@
+--- before/ares-eggbev-target-clone.py
++++ after/ares-eggbev-target-clone.py
+@@ -184,7 +184,15 @@
+     result=[]
+     for original in source['ads']:
+         creative=original.get('creative');cta=source_cta(creative)
++        degrees=creative.get('degrees_of_freedom_spec',{})
++        if not isinstance(degrees,dict) or not isinstance(degrees.get('creative_features_spec',{}),dict):raise ValueError('source creative features shape malformed')
++        features=degrees.get('creative_features_spec',{})
++        if 'standard_enhancements' in features:
++            legacy=features['standard_enhancements']
++            if not isinstance(legacy,dict) or legacy.get('enroll_status') not in {'OPT_IN','OPT_OUT'}:raise ValueError('source legacy enhancement enrollment malformed')
+         resolved=effective(creative)
++        # Graph v26 no longer accepts this aggregate; preserve individual enrollments.
++        resolved.get('degrees_of_freedom_spec',{}).get('creative_features_spec',{}).pop('standard_enhancements',None)
+         tags=resolved.get('url_tags') or ''
+         if not isinstance(tags,str) or len(re.findall(r'(?:^|&)utm_campaign=pg_[0-9]+(?=&|$)',tags))!=1:raise ValueError('source Page tracking missing or ambiguous')
+         result.append((cta,resolved))
