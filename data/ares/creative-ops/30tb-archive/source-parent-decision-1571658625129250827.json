@@ -1,0 +1,35 @@
+{
+  "schema": "mgs.archive.source_parent_human_decision.v1",
+  "authority": {
+    "discord_user_id": "344196393512075265",
+    "message_id": "1571658625129250827",
+    "thread_id": "1562078493498540042",
+    "literal": "Pode deixar do jeito que está....."
+  },
+  "decision": "preserve_current_placement_as_is",
+  "destination_name": "JOE - Exclusivos",
+  "destination_parent_id": "1sY_Aa5eUmpzIJZxbmNA3LGxT4A6UBc4Q",
+  "scope": [
+    {
+      "name": "SHEIN_US_EN_IMG_FREE_MOUSEPAD_WITH_LED_NV_003.jpg",
+      "source_id": "1BK4W_bixQy5peUicytjJQhIcTMiIPK9N",
+      "job_id": "1e448f59453749796abcb981477a7c2c",
+      "sha256": "8816794142dc521a6a84f1f989bdb8b3abd6538164d34c4e713ef12b8e0145a0"
+    },
+    {
+      "name": "SHEIN_US_EN_IMG_FREE_MOUSEPAD_WITH_LED_NV_006.jpg",
+      "source_id": "1uOGragDAVHgEDXve2soJNXE7L28sGW06",
+      "job_id": "fa64aebc6a898a805e246374745c5294",
+      "sha256": "bab279602b506d3da56831d2792c573096bc9c38dd9b464a2bc6177adbc82faa"
+    }
+  ],
+  "bounds": {
+    "move_copy_rename_delete": false,
+    "reservation_or_eligibility_changes": false,
+    "credentials_permissions_or_schedule_changes": false,
+    "rewrite_immutable_requests_receipts_or_acks": false,
+    "automatic_validator_bypass_or_alert_suppression": false
+  },
+  "interpretation": "Rodolfo instructed preservation of the two discussed files as they are. Record that placement decision without inferring who moved them, campaign use, approval for other files, or implementation of metadata reconciliation. Runtime reconciliation remains separate and must not be reported recovered from this decision record alone.",
+  "verification_source": "Current-turn canonical-SA full-stream verification matched both original request source IDs, size, MD5 and SHA-256; current parents confirmed in the same conversation."
+}

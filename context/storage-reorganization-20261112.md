@@ -313,6 +313,10 @@ O intervalo imediato registrou 25.137.152 bytes (~23,97 MiB) de aumento no espa�
 
 O pedido global permanece aberto nos checkpoints de sistema e reorganização: classificar o restante de manutenção/configurações históricas e dados/trabalhos, depois caches e Git/recorrência (pontos 5–8). Nenhum outro descarte, política de retenção ou automação nova foi autorizado por esta confirmação.
 
+### Sincronização Git reconciliada — 1571658259599986740
+
+Rodolfo autorizou versionar separadamente somente os registros deste lote em `1571658259599986740`, após a pergunta `1571656161391018179`. Antes de qualquer commit manual, o novo readback mostrou que a sincronização automática já se recuperara: 33 artefatos/contexto conferiram byte a byte no remoto, junto ao registro de inventário e resultado selado `c23e49249641f38a5412ceb225bd44a7d9d1b013b77bf6499038f082e2a4f845`. A observação anterior de bloqueio foi preservada como histórica e supersedida por `data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-git-resolution.json`. Não foi necessário commit manual, alterar a barreira de segurança, incluir arquivos de outra operação nem repetir exclusão. Checkpoint do lote encerrado e REPORT-INFRA original atualizado com readback; revisão global dos pontos 5–8 permanece separada e aberta.
+
 
 
 

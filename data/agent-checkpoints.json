@@ -6568,12 +6568,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-BACKUP-REMAINDER-1571327506374598789",
-      "next_step": "Nao reexecutar delete nem pedir confirmacao destrutiva.2alvos ausentes915files188dirs;recovery948+instalador/55protegidos/8recovery/3configs3smokesPASS;REPORT1571655662998655153GET. Gitaguardaguard globalt_e524bad0/staged;naoalterarprotecaonemwriteralheio. Zeusrecomendaautorizacaodeversionamentomanualsomentedosregistrosdestelote. Parent5-8aberto.",
-      "objective": "Lote2alvos concluido/validado; sincronizacao dos registros separadamente bloqueada pelo guard global de outra integracao.",
-      "source": "data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-git-sync.json",
-      "state": "completed_validated_git_sync_blocked",
+      "next_step": "Nenhuma pendencia/confirmacao/retry deste lote. Gitautomaticorecuperouantesdomanualliberado1571658259599986740;33artefatos/hashc23e4924 verificadosnoorigin/main5af7cff38cd7c2ca0e6e52b9d0e8ec3b5f1bf4e0. Semcommitmanual/delete/restart/guardchange. Parent5-8permaneceaberto na revisao read-only.",
+      "objective": "Lote2alvos e registros Git concluidos/validados; bloqueio transitorio anterior supersedido por entrega remota real.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-result.json;data/storage-backup-remainder-1571327506374598789/revalidated-1571653126639849513/cleanup-git-resolution.json",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T22:40:09+00:00"
+      "updated_at": "2026-11-15T22:50:43+00:00"
     },
     {
       "agent": "zeus",
@@ -6904,6 +6904,16 @@
       "state": "concluído: b013 live e agendado, b012 fail-closed, canal/cron/state/sheet/skill/inventário/audit/registry validados. estado final 35 alvos: 1 conectado, 33 desconectados confirmados e 1 inconclusivo.",
       "thread_id": "1535016020354273370",
       "updated_at": "2026-08-06T23:10:29+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "archive-source-parent-nv003-nv006",
+      "next_step": "Consultar decisão canônica antes de nova investigação destas duas peças; não mover, copiar, excluir nem alterar guardas com base neste registro",
+      "objective": "Preservar as duas peças na localização atual conforme decisão de Rodolfo",
+      "source": "data/ares/creative-ops/30tb-archive/source-parent-decision-1571658625129250827.json",
+      "state": "placement_decided_preserve_as_is; decisão1571658625129250827; arquivos e reservas intocados; não declarar reconciliação técnica recuperada",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-15T22:51:37+00:00"
     },
     {
       "agent": "zeus",
@@ -10807,5 +10817,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T22:40:09+00:00"
+  "updated_at": "2026-11-15T22:51:37+00:00"
 }
