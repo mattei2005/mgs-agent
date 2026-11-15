@@ -199,6 +199,10 @@ For Search Console API enablement, Service Usage IAM, property access and read-o
 4. Do not rerun `--apply`, write a sentinel or change a healthy schedule merely to answer a status question. If the existing receipt and live column agree, return a verified no-op; if they disagree, reconcile later edits or writes before classifying a failure or replaying the sync.
 5. Answer briefly with the verdict, last successful update in the operational timezone, configured cadence, covered dates and material mismatch or caveat. Include a total only when useful, and state whether this check performed any writes.
 
+### Rolling revenue window changes
+
+When a column header already advertises a shorter period, verify the writer's actual dates and aggregation before declaring it compliant. Change the revenue calculation and persistent writer together, not just the label. If a shared native report also feeds investment monitors, retain its fetch contract and select revenue rows by exact `DATE` for the authorized window; preserve investment semantics. Convert request instants to the operational calendar, require every selected date, and validate the entire written column against independently summed source rows. State explicitly whether today is included and partial. Preserve the daily schedule, backup, exact-cent readback and non-target columns.
+
 ### Source-to-Sheet financial reconciliation
 
 - For two-decimal monetary subtotals and grand totals, publish `ROUND(SUM(...),2)` and validate computed Sheets values against independently calculated Decimal totals. Raw `SUM` can return binary floating artifacts even when the displayed cents look correct. If values already landed before this gate fails, read back the exact formula cells and correct only those formulas; preserve the original snapshot, account rows, notes, links and formatting instead of replaying the dataset.
