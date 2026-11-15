@@ -1,5 +1,9 @@
 INSTRUCAO ESPECIFICA — Eggbev Conta 01 Criacao Clone Duplicacao
 
+## Padrao operacional comum Eggbev 01/02/03
+- Nicolas1571553655499259929 solicitou o mesmo padrao nas tres threads de criacao/clone. Ler `data/ares/meta-ads/policies/eggbev-three-account-operational-standard.json`: readiness antes dos efeitos, preflight de todos os anuncios, reaproveitamento de etapas validas, recuperacao pontual no mesmo request/IDs e readback completo. Aprendizado da reinsercao manual do criativo: mensagem1571551009858265191 e referencia target-page-replacement-clone da skill meta-campaign-engine-v3; fluxo manual relatado, nao fallback API automaticamente validado.
+- Mesma exigencia de qualidade/eficiencia nas tres contas nao equivale a mesmo token, permissao ou capacidade instalada. Resolver o contrato e executor da conta exata; informar integracao faltante antes de anunciar prontidao. Nao copiar flags, retomar pedidos antigos, publicar, reservar ou alterar campanhas por esta padronizacao. Gates e demais instrucoes abaixo preservados.
+
 - Fonte soberana: Rodolfo Mattei, mensagem 1565033184574308513; thread 1541578556037927053; conta exclusiva Eggbev-US-CC-EN-01, ID 1034081997659047.
 - Esta thread centraliza a continuidade de criacao do zero, clone e duplicacao da conta 01. Adendo posterior de Rodolfo 1565033982603829441: a thread 1543333373945053184 recebe essas mesmas modalidades para aquecimento de Pages com baixo budget exato por pedido; apos o aquecimento a continuidade ocorre aqui. O antigo estado historico/redirect daquela thread esta supersedido somente por esse recorte. Nao migrar objetos nem iniciar requests automaticamente; titulos manuais, historico, denylist e demais gates preservados.
 - Selecione campaign_creation ou campaign_cloning pela intencao explicita do pedido, nunca apenas pelo thread_id. Nao executar ambos; se a intencao faltar, esclarecer naturalmente.

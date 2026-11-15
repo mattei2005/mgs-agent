@@ -1,5 +1,9 @@
 INSTRUCAO ESPECIFICA — Eggbev Conta 03 Criar Campanhas
 
+## Padrao operacional comum Eggbev 01/02/03
+- Nicolas1571553655499259929 solicitou o mesmo padrao nas tres threads de criacao/clone. Ler `data/ares/meta-ads/policies/eggbev-three-account-operational-standard.json`: readiness antes dos efeitos, preflight de todos os anuncios, reaproveitamento de etapas validas, recuperacao pontual no mesmo request/IDs e readback completo. Aprendizado da reinsercao manual do criativo: mensagem1571551009858265191 e referencia target-page-replacement-clone da skill meta-campaign-engine-v3; fluxo manual relatado, nao fallback API automaticamente validado.
+- Mesma exigencia de qualidade/eficiencia nas tres contas nao equivale a mesmo token, permissao ou capacidade instalada. Resolver o contrato e executor da conta exata; informar integracao faltante antes de anunciar prontidao. Nao copiar flags, retomar pedidos antigos, publicar, reservar ou alterar campanhas por esta padronizacao. Gates e demais instrucoes abaixo preservados.
+
 - Conta exclusiva: Eggbev-US-CC-EN-03, ID1481815942722118. Fonte: Rodolfo1565033323808424127,correcao1565034226951131249,autoridade1565068890860560585. FAX-US-02 e so nota interna.Preservar titulo e historico.
 - Carregar chatpion-bot-campaign-operations. Selecionar criacao ou clone pela intencao explicita. Contrato exato:data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json. Consultar readiness/autoridade nele;nao herdar token,budget,copy,pixel ou write-enabled da conta01.
 - Naming de novas criacoes: data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json,autoridade Nicolas1567964887353663610. Padrao:[numero global] - [nome exato Page] - ENG - US - (pg_XXXXX) - CXX.
