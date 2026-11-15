@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="12" skipped="0" tests="179" time="3.082" timestamp="2026-11-15T00:50:47.305814-05:00" hostname="srv1767265"><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_duplicate_idempotency_key" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_active_campaign_without_future_start" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_tracking_aware_pure_clone_requires_source_adset_and_lineage_ads" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestaged_manifest_requires_three_ready_media_assets" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestaged_manifest_requires_nonzero_source_ad_lineage" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_messenger_doc_external_placeholder" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_from_zero_manifest_requires_explicit_create_payloads_and_allows_ad_only_lineage" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_registered_accounts_fail_closed_without_explicit_supported_modes" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_registered_accounts_fail_closed_without_explicit_serving_route" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_production_config_allows_from_zero_with_ad_lineage_for_both_cpv_accounts" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_production_cpv_policy_rejects_legacy_deep_pure_clone_without_tracking_payload" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_production_account_policy_requires_cpv_from_zero_ad_lineage_and_allows_clone" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_legacy_standard_enhancements_anywhere" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_video_customization_label_missing_from_replacement_videos" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_title_customization_label_missing_from_titles" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_clone_adset_updates_are_explicit_and_engine_owned_fields_are_blocked" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_planner_bundles_two_campaigns_per_account_without_cross_account_mix" time="0.001"><failure message="ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation">def test_planner_bundles_two_campaigns_per_account_without_cross_account_mix():
+        m = manifest([
+            pure_campaign(1, '100'), pure_campaign(2, '100'), pure_campaign(3, '100'),
+            pure_campaign(4, '200'), pure_campaign(5, '200'),
+        ])
+&gt;       plan = Planner(bundle_size=2, max_ads_per_batch=10).build(m)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:459: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/ares_campaign_v3/planning.py:279: in build
+    campaign = resolve_campaign(campaign)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+campaign = CampaignSpec(idempotency_key='req-100-1', app_key='mgs-main-app', account_id='100', mode='pure_clone', source_campaign...e={}, ads=(), creative_materialization_route='inline_copy', start_intent='SCHEDULED', bid_override=False, reference={})
+
+    def resolve_campaign(campaign):
+        if campaign.mode not in CLONE_MODES:return campaign
+        if not campaign.ads:
+&gt;           raise ValueError('copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation')
+E           ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation
+
+scripts/ares_campaign_v3/creative_copy_policy.py:30: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns" time="0.001"><failure message="ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation">def test_planner_builds_one_consolidated_readback_outer_call_for_two_campaigns():
+        m = manifest([pure_campaign(1), pure_campaign(2)])
+&gt;       plan = Planner(bundle_size=2, max_ads_per_batch=10).build(m)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:467: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/ares_campaign_v3/planning.py:279: in build
+    campaign = resolve_campaign(campaign)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+campaign = CampaignSpec(idempotency_key='req-100-1', app_key='mgs-main-app', account_id='100', mode='pure_clone', source_campaign...e={}, ads=(), creative_materialization_route='inline_copy', start_intent='SCHEDULED', bid_override=False, reference={})
+
+    def resolve_campaign(campaign):
+        if campaign.mode not in CLONE_MODES:return campaign
+        if not campaign.ads:
+&gt;           raise ValueError('copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation')
+E           ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation
+
+scripts/ares_campaign_v3/creative_copy_policy.py:30: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_planner_caps_ad_copy_batch_at_ten_ads_and_preserves_lineage" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_planner_from_zero_uses_direct_create_endpoints_and_never_copies" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_quota_store_accepts_two_prestaged_campaigns_and_blocks_third" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_quota_is_independent_per_app_and_ad_account" time="0.004" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_quota_store_persists_live_meta_tier_and_usage_headers" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_full_access_lane_releases_completed_bundle_but_development_keeps_window" time="0.008" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_media_registry_roundtrip_and_fail_closed" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cli_media_register_requires_explicit_readback_confirmation" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestage_registers_only_after_both_videos_are_ready" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestage_does_not_register_partial_processing" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestage_rejects_ready_page_videos_without_ad_account_association" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_manifest_rejects_page_video_media_even_when_ready" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_ad_account_video_uploader_posts_to_advideos_with_user_token" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_ad_account_video_upload_retries_one_5xx_after_empty_title_readback" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_ad_account_video_upload_accepts_ambiguous_5xx_readback_without_repost" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_ad_account_video_association_readback_retries_bounded_eventual_consistency" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_builds_two_campaigns_from_six_ready_assets" time="0.004" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_manifest_accepts_explicit_account05_profile_without_account13_drift" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_preserves_distinct_car_and_moto_roi_sources" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_builds_from_zero_without_clone_lineage" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_accepts_explicit_future_start_for_authorized_canary" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_fails_closed_without_valid_canonical_filename" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cpv_adapter_builds_arbitrary_campaign_count_and_planner_chunks_pairs" time="0.008" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_engine_refuses_execute_while_disabled" time="0.002"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_refuses_execute_wh0')
+
+    def test_engine_refuses_execute_while_disabled(tmp_path):
+        engine = CampaignEngine(config(tmp_path), transport_factory=lambda account: FakeBatchTransport(account))
+        with pytest.raises(EngineDisabled):
+&gt;           engine.execute(manifest([pure_campaign(1)]))
+
+tests/test_ares_campaign_engine_v3.py:1056: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_refuses_execute_wh0/state'
+account = '100', request = 'order-1'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prevalidation_hash_allows_exact_manifest_and_blocks_tamper" time="0.075" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_cli_disabled_execute_returns_safe_json_without_trace" time="0.004"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_cli_disabled_execute_retu0')
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x709e98b96ea0&gt;
+
+    def test_cli_disabled_execute_returns_safe_json_without_trace(tmp_path, capsys):
+        cfg_path = tmp_path / 'config.json'
+        cfg_path.write_text(json.dumps(config(tmp_path)))
+        manifest_path = tmp_path / 'manifest.json'
+        manifest_path.write_text(json.dumps(manifest([pure_campaign(1)]).raw))
+&gt;       rc = cli_main([
+            '--config', str(cfg_path), 'execute', '--manifest', str(manifest_path),
+            '--confirm-execute', '--offline-fake',
+        ])
+
+tests/test_ares_campaign_engine_v3.py:1087: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/ares_campaign_v3/cli.py:302: in main
+    return _main(argv)
+           ^^^^^^^^^^^
+scripts/ares_campaign_v3/cli.py:295: in _main
+    result = CampaignEngine(config, transport_factory=factory).execute(manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_cli_disabled_execute_retu0/state'
+account = '100', request = 'order-1'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_engine_dry_run_never_calls_transport" time="0.001"><failure message="ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_dry_run_never_call0')
+
+    def test_engine_dry_run_never_calls_transport(tmp_path):
+        transport = FakeBatchTransport('100')
+        engine = CampaignEngine(config(tmp_path), transport_factory=lambda account: transport)
+&gt;       result = engine.dry_run(manifest([pure_campaign(1), pure_campaign(2)]))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:1102: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/ares_campaign_v3/engine.py:109: in dry_run
+    plan = self.planner.build(manifest)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/planning.py:279: in build
+    campaign = resolve_campaign(campaign)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+campaign = CampaignSpec(idempotency_key='req-100-1', app_key='mgs-main-app', account_id='100', mode='pure_clone', source_campaign...e={}, ads=(), creative_materialization_route='inline_copy', start_intent='SCHEDULED', bid_override=False, reference={})
+
+    def resolve_campaign(campaign):
+        if campaign.mode not in CLONE_MODES:return campaign
+        if not campaign.ads:
+&gt;           raise ValueError('copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation')
+E           ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation
+
+scripts/ares_campaign_v3/creative_copy_policy.py:30: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback" time="0.002"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_execute_uses_one_c0')
+
+    def test_engine_execute_uses_one_copy_batch_and_one_consolidated_readback(tmp_path):
+        transport = FakeBatchTransport('100')
+        cfg = config(tmp_path, enabled=True, write_enabled=True)
+        engine = CampaignEngine(cfg, transport_factory=lambda account: transport)
+&gt;       result = engine.execute(manifest([pure_campaign(1), pure_campaign(2)]))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:1112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_execute_uses_one_c0/state'
+account = '100', request = 'order-1'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_tracking_aware_pure_clone_uses_ad_copy_route_and_rewrites_url_tags" time="0.045" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_existing_post_two_phase_avoids_inline_post_copy_payload" time="0.046" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_existing_post_recovery_reads_then_attaches_without_duplicate_children" time="0.084" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_vertical_only_prestage_uploads_one_variant_and_default_stays_two" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_on_demand_pipeline_requires_exact_account_and_preserves_asset_order" time="0.005" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_on_demand_pipeline_reuses_partial_vertical_and_uploads_only_missing_square" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_on_demand_pipeline_registry_hit_skips_local_preparation" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_title_reconciliation_fails_closed_when_pagination_is_incomplete" time="0.000" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_video_ready_readback_chunks_graph_batches_at_fifty" time="0.001" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch" time="0.052" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_prestaged_execution_uses_ad_copies_with_creative_and_no_direct_ad_create" time="0.068" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_from_zero_execution_creates_campaign_adset_creatives_and_ads_without_copy" time="0.048" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_from_zero_execution_carries_optional_source_ad_lineage_without_copying_shells" time="0.053" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_from_zero_readback_failure_recovers_without_replaying_writes" time="0.092" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_engine_executes_accounts_in_independent_lanes" time="0.002"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_executes_accounts_0')
+
+    def test_engine_executes_accounts_in_independent_lanes(tmp_path):
+        transports: dict[str, FakeBatchTransport] = {}
+        def factory(account: str) -&gt; FakeBatchTransport:
+            transports.setdefault(account, FakeBatchTransport(account))
+            return transports[account]
+        cfg = config(tmp_path, enabled=True, write_enabled=True)
+        rows = [pure_campaign(i, str(100 + (i % 3))) for i in range(1, 7)]
+&gt;       result = CampaignEngine(cfg, transport_factory=factory).execute(manifest(rows, request_id='multi'))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:1629: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_executes_accounts_0/state'
+account = '101', request = 'multi'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_engine_writes_stage_timestamps_to_audit" time="0.001"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_writes_stage_times0')
+
+    def test_engine_writes_stage_timestamps_to_audit(tmp_path):
+        transport = FakeBatchTransport('100')
+        cfg = config(tmp_path, enabled=True, write_enabled=True)
+&gt;       result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:1638: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_engine_writes_stage_times0/state'
+account = '100', request = 'order-1'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_five_prestaged_campaigns_defer_and_resume_without_replaying_completed_bundles" time="0.230" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed" time="0.002"><failure message="ValueError: invalid operator suspension identity">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_failed_request_is_checkpo0')
+
+    def test_failed_request_is_checkpointed_and_cannot_be_blindly_replayed(tmp_path):
+        class FailReadback(FakeBatchTransport):
+            def execute(self, operations, stage):
+                if stage == 'consolidated_readback':
+                    raise RuntimeError('synthetic readback failure')
+                return super().execute(operations, stage)
+        cfg = config(tmp_path, enabled=True, write_enabled=True)
+        engine = CampaignEngine(cfg, transport_factory=lambda account: FailReadback(account))
+        m = manifest([pure_campaign(1)], request_id='partial')
+        with pytest.raises(RuntimeError, match='synthetic readback'):
+&gt;           engine.execute(m)
+
+tests/test_ares_campaign_engine_v3.py:1690: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/request_serialization.py:38: in wrapped
+    return fn(self,manifest,*args,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/engine.py:1714: in execute
+    deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
+scripts/ares_campaign_v3/operator_suspension.py:20: in deny_replay
+    if path(root,account,request).exists():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_failed_request_is_checkpo0/state'
+account = '100', request = 'partial'
+
+    def path(root,account,request):
+        if re.fullmatch(r'[A-Za-z0-9_.-]{8,120}',str(request)) is None or not str(account).isdigit():
+&gt;           raise ValueError('invalid operator suspension identity')
+E           ValueError: invalid operator suspension identity
+
+scripts/ares_campaign_v3/operator_suspension.py:16: ValueError</failure></testcase><testcase classname="tests.test_ares_campaign_engine_v3" name="test_partial_prestaged_ad_batch_recovers_missing_only_without_blind_replay" time="0.096" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_development_bundle_defers_readback_then_resumes_without_any_write_replay" time="0.086" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_readback_cooldown_honors_live_meta_reset_header_with_safety_margin" time="0.052" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_business_usage_header_exposes_marketing_api_access_tier" time="0.003" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_development_tier_caps_original_120_lane_at_60" time="0.004" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_standard_access_skips_development_readback_cooldown" time="0.062" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_transient_code2_retry_uses_remaining_development_lane_capacity[1-5]" time="0.041" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_transient_code2_retry_uses_remaining_development_lane_capacity[2-305]" time="0.047" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60" time="0.002" /><testcase classname="tests.test_ares_campaign_engine_v3" name="test_forty_campaigns_three_accounts_produce_seven_global_waves" time="0.001"><failure message="ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation">def test_forty_campaigns_three_accounts_produce_seven_global_waves():
+        rows = [pure_campaign(i, str(100 + (i % 3))) for i in range(40)]
+&gt;       plan = Planner(bundle_size=2, max_ads_per_batch=10).build(manifest(rows, request_id='forty'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_ares_campaign_engine_v3.py:2026: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/ares_campaign_v3/planning.py:279: in build
+    campaign = resolve_campaign(campaign)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+campaign = CampaignSpec(idempotency_key='req-100-0', app_key='mgs-main-app', account_id='100', mode='pure_clone', source_campaign...e={}, ads=(), creative_materialization_route='inline_copy', start_intent='SCHEDULED', bid_override=False, reference={})
+
+    def resolve_campaign(campaign):
+        if campaign.mode not in CLONE_MODES:return campaign
+        if not campaign.ads:
+&gt;           raise ValueError('copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation')
+E           ValueError: copy background policy requires explicit source creative slots; native deep-copy cannot prove feature preservation
+
+scripts/ares_campaign_v3/creative_copy_policy.py:30: ValueError</failure></testcase><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_canonical_messenger_json_file_is_mandatory_and_checked" time="0.060" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_direct_traffic_parent_family_contains_shein_and_car_without_cross_inheritance" time="0.001" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_dup01_is_the_canonical_creation_model_without_media_reuse" time="0.001" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_manual_placements_are_materialized_and_audience_network_is_forbidden" time="0.001" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_report_does_not_return_global_agent_configuration" time="0.001" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_report_is_scoped_to_campaign_creation" time="0.003" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_route_contract_and_versioned_thread_prompt" time="0.126" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_runtime_truth_is_explicit" time="0.000" /><testcase classname="tests.test_eggbev_creation_config_report.EggbevCreationConfigReportTests" name="test_speed_contract_keeps_bot_pages_user_scoped_and_media_on_demand" time="0.003"><failure message="AssertionError: 'development_access' != 'standard_access'&#10;- development_access&#10;+ standard_access">self = &lt;test_eggbev_creation_config_report.EggbevCreationConfigReportTests testMethod=test_speed_contract_keeps_bot_pages_user_scoped_and_media_on_demand&gt;
+
+    def test_speed_contract_keeps_bot_pages_user_scoped_and_media_on_demand(self):
+        operation = json.loads(OP.read_text())
+        operation_v3 = json.loads(OP_V3.read_text())
+        family = json.loads(BOT_FAMILY.read_text())
+        engine = json.loads(ENGINE_CONFIG.read_text())
+        speed = operation["campaign_creation_speed_policy_20260914"]
+        self.assertIn("require importing/assigning", speed["page_model"])
+        self.assertIn("approximately 3000 Pages", speed["page_model"])
+        self.assertIn("exact ad account", speed["media_model"])
+        self.assertIn("no global", speed["media_model"])
+        self.assertEqual(operation_v3["hot_path_optimization"]["media_variants"], ["vertical", "square"])
+        self.assertIn("no Business Manager Page import", operation_v3["hot_path_optimization"]["page_model"])
+        self.assertIn("individual User Access Token", operation_v3["credential_model"])
+        self.assertIn("System User fallback is forbidden", operation_v3["credential_model"])
+        self.assertIn("never scan me/accounts", operation_v3["hot_path_optimization"]["page_scale"])
+        self.assertIn("must not require importing", family["scale_invariants"]["page_assignment"])
+        self.assertIn("one advertiser-profile-scoped User Access Token", family["scale_invariants"]["credential_model"])
+&gt;       self.assertEqual(engine["accounts"]["1034081997659047"]["marketing_api_access_tier"], "standard_access")
+E       AssertionError: 'development_access' != 'standard_access'
+E       - development_access
+E       + standard_access
+
+tests/test_eggbev_creation_config_report.py:148: AssertionError</failure></testcase><testcase classname="tests.test_shein_elapsed_continuation" name="test_bound_exact_and_native_no_mutations" time="0.008" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change0]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change1]" time="0.003" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change2]" time="0.005" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change3]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change4]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_wrong_identity_or_day[change5]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[state-execution_started_at-2026-11-12T05:49:01+00:00]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[state-prepared_at-2026-11-12T05:50:00+00:00]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[state-phase-COMPLETE_FUTURE_ACTIVE]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[state-phase-COMPLETE_PAUSED]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[state-summary-value4]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[policy-enabled-False]" time="0.003" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[policy-approved_by-other]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[policy-scope-any_day]" time="0.003" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[policy-source_message_id-9999999999999999999]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[profile-timezone-America/Los_Angeles]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[checkpoint-status-IN_PROGRESS]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_immutable_or_live_inputs_drift[original-account_id-999]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_no_receipt_no_grant_no_source_evidence" time="0.006" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_live_authority_failure_no_fallback" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_never_reseal_or_rewrite_request[manifest]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_never_reseal_or_rewrite_request[target_manifest]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_never_reseal_or_rewrite_request[request]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_never_reseal_or_rewrite_request[resolved_request]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_even_consistent_changed_second_outside_copy_window_is_not_authorized[2026-11-12T01:20:25-0500]" time="0.001" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_even_consistent_changed_second_outside_copy_window_is_not_authorized[2026-11-12T01:20:32-0500]" time="0.001" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_even_consistent_changed_second_outside_copy_window_is_not_authorized[2026-11-13T01:20:27-0500]" time="0.001" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_exact_observed_second_no_generic_tolerance" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_historical_manual_replay_fence" time="0.004"><failure message="AttributeError: 'types.SimpleNamespace' object has no attribute 'campaigns'">tmp_path = PosixPath('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_historical_manual_replay_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x709e98851d60&gt;
+
+    def test_historical_manual_replay_fence(tmp_path,monkeypatch):
+        registered(tmp_path,monkeypatch)
+        from ares_campaign_v3 import shein_manual_takeover
+        fence=shein_manual_takeover.path(tmp_path,RID)
+        fence.parent.mkdir(parents=True,exist_ok=True);fence.write_text('{}')
+        assert call(tmp_path) is None
+        from ares_campaign_v3.activation import activate
+        from ares_campaign_v3.engine import CampaignEngine
+        engine=SimpleNamespace(config={'state_root':str(tmp_path/'data/ares/meta-ads/engine-v3/state')})
+        manifest=SimpleNamespace(request_id=RID,operation='SHEIN-US-DIRECT')
+        with pytest.raises(ValueError,match='manual takeover'):
+            activate(engine,manifest,None,None)
+        execute=getattr(CampaignEngine.execute,'__wrapped__',CampaignEngine.execute)
+        with pytest.raises(ValueError,match='manual takeover'):
+&gt;           execute(engine,manifest)
+
+tests/test_shein_elapsed_continuation.py:188: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = namespace(config={'state_root': '/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/pytest-candidate/test_historical_manual_replay_0/data/ares/meta-ads/engine-v3/state'})
+manifest = namespace(request_id='test-explicit-1', operation='SHEIN-US-DIRECT')
+
+    @serialized_engine
+    def execute(self, manifest: Manifest) -&gt; dict[str, Any]:
+        from .operator_suspension import deny_replay
+&gt;       for campaign in manifest.campaigns:
+                        ^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'campaigns'
+
+scripts/ares_campaign_v3/engine.py:1713: AttributeError</failure></testcase><testcase classname="tests.test_shein_elapsed_continuation" name="test_original_clock_cannot_be_shifted_with_reissued_receipt" time="0.001" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[missing_window]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[ad_id]" time="0.003" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[adset_id]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[campaign_id]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[first_second]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_native_evidence_required[missing_first_proof]" time="0.004" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_schema_scope_never_leaks_and_needs_whole_exact_target" time="0.005" /><testcase classname="tests.test_shein_elapsed_continuation" name="test_activation_elapsed_guard_uses_central_proof" time="0.003" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_morning_now_is_today_current_time_not_midnight" time="0.001" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_now_beats_stale_default_midnight_marker_without_timezone_dependency" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_explicit_future_clock_unchanged" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_default_midnight_only_when_no_immediate_intent" time="0.001" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_now_never_inherits_any_source_individual_start[2026-11-09T00:00:00-05:00]" time="0.001" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_now_never_inherits_any_source_individual_start[2026-11-08T00:00:00-05:00]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_now_never_inherits_any_source_individual_start[2026-11-09T17:00:00-05:00]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_future_individual_end_preserved" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_expired_end_rejected_before_any_write[2026-11-08T22:00:00-05:00]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_expired_end_rejected_before_any_write[2026-11-09T08:28:00-05:00]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_no_individual_start_keeps_native_copy" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_other_intents_not_silently_changed[future]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_other_intents_not_silently_changed[not_now]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_other_intents_not_silently_changed[new_media]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_other_intents_not_silently_changed[disabled]" time="0.033" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_other_intents_not_silently_changed[wrong_authority]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_unsafe_plan_rejected[missing_preflight]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_unsafe_plan_rejected[scheduled_manifest]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_unsafe_plan_rejected[active_manifest]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_unsafe_plan_rejected[naive_source]" time="0.000" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_central_engine_batches_direct_ad_without_source_write" time="0.001" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_source_schedule_fields_are_in_canonical_preflight_query" time="0.004" /><testcase classname="tests.test_shein_immediate_start_prevention" name="test_normalization_does_not_accept_feature_omissions" time="0.001" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_correct_date_scope_and_account_prefix" time="0.002" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_duplicates_across_pages_fail_closed" time="0.000" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_matching_display_still_applies_today_and_update" time="0.003" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_wrong_control_date_fails_closed" time="0.003" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_wrong_date_outside_scope_cannot_be_silently_ignored" time="0.000" /><testcase classname="tests.test_shein_rps_date_filter.DateFilterTests" name="test_yesterday_keeps_explicit_preset" time="0.002" /></testsuite></testsuites>

@@ -177,7 +177,10 @@ class TransportTests(unittest.TestCase):
             path=request.full_url.split('/api/v10',1)[1];reads.append(path);body=fixture.get(path)
             if len(reads)>=9 and 'author' in body:body['content']='revoked'
             return response(body)
-        with patch.object(auth.urllib.request,'urlopen',side_effect=live),patch.object(Path,'read_text',return_value='DISCORD_BOT_TOKEN=synthetic-offline-only'):
+        original_read=Path.read_text
+        def scoped_read(path,*a,**kw):
+            return 'DISCORD_BOT_TOKEN=synthetic-offline-only' if str(path).endswith('/ares/.env') else original_read(path,*a,**kw)
+        with patch.object(auth.urllib.request,'urlopen',side_effect=live),patch.object(Path,'read_text',scoped_read):
             for _ in range(2):rev.live_authority({'grant':fixture.grant},meta=fixture.meta(),token='synthetic')
             with self.assertRaisesRegex(ValueError,'changed or unavailable'):rev.live_authority({'grant':fixture.grant},meta=fixture.meta(),token='synthetic')
         self.assertGreater(len(reads),8)
