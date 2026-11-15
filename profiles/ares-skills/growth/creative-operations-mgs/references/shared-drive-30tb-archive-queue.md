@@ -43,6 +43,13 @@ Se o comando preservar `treated_waiting_archive`, comparar `archive_source_ids`,
 
 Depois de cada batch completo, consultar o monitor e continuar pelo mesmo executor apenas se o manifest pertencer ao mesmo request. Encerrar somente quando o conjunto congelado inteiro estiver em `completed`, o request estiver `complete` e a auditoria final confirmar os destinos reais. Um bloqueio por linhagem histórica externa não autoriza desfazer um nome humano, reparar outro acervo ou repetir ciclos globais até o erro deixar de aparecer: preservar o diagnóstico e usar a recuperação delimitada do lote, sem contornar guards nem declarar sucesso por um tick saudável isolado.
 
+### Retomada de provas e encerramento da autoridade de write
+
+1. Revalidar a mensagem humana nativa na abertura ou retomada material, fixar autor/origem/corpo por digest e vinculá-la ao plano publicado pela SA. Nas passagens mecânicas privadas do mesmo plano imutável, validar essa prova e o conjunto exato de IDs, sem consultar as mesmas mensagens Discord a cada pequeno bloco; a repetição desnecessária de leituras pode consumir a quota e interromper o transporte. Reconsultar a origem se a autoridade, o conteúdo ou o escopo mudar.
+2. Após timeout de publicação, procurar primeiro o recibo local e o objeto nativo pela chave persistida. Se já existir uma prova válida, conferir digest, publisher, membership e estado nativo atual e reutilizar o mesmo corpo e os primeiros horários. Não regenerar `verified_at` sob a mesma chave imutável: isso cria conflito de conteúdo e não representa uma nova execução legítima.
+3. Quando faltar somente o marcador local de conclusão ou a ativação do catálogo, reconstruir apenas essa camada a partir das provas verificadas; não repetir cópia, movimento ou concessão de acesso já confirmados. Preservar falhas e intents anteriores e registrar seu desfecho real; uma operação não aplicável e sem efeito não recebe um ID de sucesso inventado.
+4. Ao concluir o pedido, tornar o replay de transporte e permissões estritamente read-only. Uma autorização pontual para preservar acesso não é um reparador permanente: revogação ou mudança posterior deve aparecer como divergência, não disparar novas concessões automáticas. Limpar somente o erro operacional correspondente ao batch recuperado, com prova de conclusão e histórico do erro preservado; não apagar bloqueios de outro pedido.
+
 ### Fechamento de pedido manual explícito
 
 Um lote manual também precisa de uma conclusão real no controle canônico. Marcar somente o `state.json` da execução como `complete` deixa a limpeza parada em `RETIREMENT_INTAKE_NOT_RELEASED`, mesmo com todos os arquivos nos 30 TB.
