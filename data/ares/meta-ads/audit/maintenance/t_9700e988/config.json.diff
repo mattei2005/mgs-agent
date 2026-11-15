@@ -1,0 +1,16 @@
+--- 
++++ 
+@@ -350,7 +350,12 @@
+         "account_id": "1034081997659047",
+         "policy_source": "data/ares/meta-ads/policies/eggbev01-target-page-replacement-authority.json",
+         "runner": "scripts/ares-eggbev-target-clone.py",
+-        "continuations": {},
++        "continuations": {
++          "eggbev-pg23189-1571342489162489937": {
++            "receipt_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/target-continuations/eggbev-pg23189-1571342489162489937-1034081997659047.json",
++            "sha256": "4ef505f9075c772c5929bff1f0fb8e1bfcc9f83d19d22bad8f6f572a6bc5f921"
++          }
++        },
+         "legacy_copied_adset_page_switch_enabled": false,
+         "live_campaign_acceptance_verified": false,
+         "suspended_continuations": {

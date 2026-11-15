@@ -1,0 +1,134 @@
+--- 
++++ 
+@@ -84,6 +84,37 @@
+         raise ValueError('continuation shell lists differ from confirmed IDs')
+     return ids
+ 
++def _asap_revision(path, payload, config, receipt):
++    """Version 2 admits an already committed ASAP mapping, never creates one.
++
++    Reuse the original grant's current authority, CAS chain and exact approval
++    representation. Legacy NOW receipts keep their separate contract below.
++    """
++    from . import target_start_revision as revision
++    if receipt.get('kind') != 'committed_asap_partial':
++        raise ValueError('continuation unknown v2 admission kind')
++    context = revision.validate_local(path, config, receipt['original_approved_digest'], receipt['approval_message_id'])
++    grant = context['grant']
++    if context['pending'] or not context['last']:
++        raise ValueError('continuation requires a committed existing ASAP revision')
++    folder, tx = context['last']
++    binding = config['accounts'][receipt['account_id']]['target_page_replacement']['start_revisions'][receipt['request_id']]
++    required = {'request.json', 'manifest.json', 'plan.json', 'summary.json', 'final-approval.json'}
++    if (receipt.get('start_grant_binding') != binding
++            or receipt.get('temporal_revision_digest') != revision.digest(tx)
++            or receipt.get('revision_index') != tx['index']
++            or receipt.get('start_time') != tx['start_time']
++            or receipt.get('instruction_message_id') != grant['instruction_message_id']
++            or receipt.get('authorized_by') != grant['authorized_by']
++            or receipt.get('meta_actor_id') != grant['meta_actor_id']
++            or receipt.get('messages') != grant['messages']
++            or not required <= set(receipt.get('files', {}))
++            or payload != tx['after']['manifest.json']
++            or load(path.parent / 'final-approval.json') != revision.approval_payload(grant, tx)):
++        raise ValueError('continuation ASAP mapping/grant/final approval mismatch')
++    return context
++
++
+ def validate_local(path, payload, config):
+     from .prevalidation import verify_prevalidation
+     path = Path(path).resolve()
+@@ -115,24 +146,30 @@
+             or len(payload.get('campaigns', [])) != 1):
+         raise ValueError('continuation identity, authority, allowlist or sealed digest mismatch')
+     c = payload['campaigns'][0]
++    version = receipt.get('schema_version', 1)
++    if version not in (1, 2):
++        raise ValueError('continuation unknown receipt version')
++    temporal = _asap_revision(path, payload, config, receipt) if version == 2 else None
+     if (c.get('mode') != MODE or c.get('account_id') != aid or c.get('status') != 'ACTIVE'
+             or c.get('app_key') != account.get('app_key') or c.get('start_time') != q.get('start_time')
+-            or receipt.get('account_identity') != {k: account.get(k) for k in ['app_key','meta_app_id','token_item','token_identity']}
+-            or q.get('final_publication_approval', {}).get('immediate_requested') is not True
++            or receipt.get('account_identity') != {k: account.get(k) for k in ['app_key','meta_app_id','token_item','token_identity']}):
++        raise ValueError('continuation existing target identity changed')
++    if not temporal and (q.get('final_publication_approval', {}).get('immediate_requested') is not True
+             or q.get('final_publication_approval', {}).get('technical_seeds_preserved') is not True):
+         raise ValueError('continuation is not the approved existing NOW target intent')
+     for name, expected in receipt.get('files', {}).items():
+         if Path(name).name != name or file_digest(path.parent / name) != expected:
+             raise ValueError('continuation original execution receipt changed')
+-    approval = load(path.parent / 'final-approval.json')
+-    if approval != {'message_id': receipt['approval_message_id'], 'approved_digest': payload['prevalidation']['content_digest']}:
+-        raise ValueError('continuation final digest approval mismatch')
+-    intent=q['final_publication_approval']
+-    if (receipt['approval_message_id']!=intent.get('message_id')
+-            or receipt.get('now_message_id')!=intent.get('schedule_change_message_id')
+-            or {m['id'] for m in receipt.get('messages',[])}!={receipt['approval_message_id'],receipt['now_message_id'],receipt['prompt_message_id']}
+-            or len(receipt['messages'])!=3):
+-        raise ValueError('continuation NOW/final/seed explanation coverage mismatch')
++    if not temporal:
++        approval = load(path.parent / 'final-approval.json')
++        if approval != {'message_id': receipt['approval_message_id'], 'approved_digest': payload['prevalidation']['content_digest']}:
++            raise ValueError('continuation final digest approval mismatch')
++        intent=q['final_publication_approval']
++        if (receipt['approval_message_id']!=intent.get('message_id')
++                or receipt.get('now_message_id')!=intent.get('schedule_change_message_id')
++                or {m['id'] for m in receipt.get('messages',[])}!={receipt['approval_message_id'],receipt['now_message_id'],receipt['prompt_message_id']}
++                or len(receipt['messages'])!=3):
++            raise ValueError('continuation NOW/final/seed explanation coverage mismatch')
+     checkpoint = load(root / 'checkpoints' / f'{rid}-{aid}.json')
+     audit = load(Path(config['audit_root']) / f'{rid}.json')
+     records = checkpoint.get('bundles', [])
+@@ -151,7 +188,7 @@
+     if not {'campaign_create_1', 'adset_create_1'} <= set(receipt['confirmed_objects']):
+         raise ValueError('continuation requires both existing confirmed shells')
+     return {'payload': copy.deepcopy(payload), 'receipt': receipt, 'record': record, 'config': config,
+-            'request': q, 'verified_at': time.monotonic()}
++            'request': q, 'temporal': temporal, 'verified_at': time.monotonic()}
+ 
+ @contextmanager
+ def admission(path, payload, config, *, meta, token, get_message=None):
+@@ -160,22 +197,26 @@
+     if get_message is None:
+         from .shein_channel_authority import _get
+         get_message = _get
+-    for evidence in receipt['messages']:
+-        message = get_message('/channels/' + q['source_thread_id'] + '/messages/' + evidence['id'])
+-        if (message.get('id') != evidence['id'] or message.get('channel_id') != q['source_thread_id']
+-                or message.get('author', {}).get('id') != evidence['author_id']
+-                or bool(message.get('author', {}).get('bot')) != evidence['bot']
+-                or evidence['author_id'] != ('1508864261504630925' if evidence['id']==receipt['prompt_message_id'] else receipt['authorized_by'])
+-                or evidence['bot'] != (evidence['id']==receipt['prompt_message_id'])
+-                or digest(message.get('content')) != evidence['content_digest']):
+-            raise ValueError('continuation live NOW/final approval changed or unavailable')
+-    code, identity, _ = meta.graph_get_credential_metadata(q['account_id'], token)
+-    issuer_code, issuer, _ = meta.graph_get_credential_metadata(q['account_id'], token, inspect_token=True)
+-    issuer = issuer.get('data') or {}
+-    if (code != 200 or identity.get('id') != receipt['meta_actor_id'] or issuer_code != 200
+-            or issuer.get('is_valid') is not True or str(issuer.get('user_id')) != receipt['meta_actor_id']
+-            or str(issuer.get('app_id')) != context['config']['accounts'][q['account_id']]['meta_app_id']):
+-        raise ValueError('continuation advertiser identity/app changed or unavailable')
++    if context['temporal']:
++        from .target_start_revision import live_authority
++        live_authority(context['temporal'], meta=meta, token=token, get_message=get_message)
++    else:
++        for evidence in receipt['messages']:
++            message = get_message('/channels/' + q['source_thread_id'] + '/messages/' + evidence['id'])
++            if (message.get('id') != evidence['id'] or message.get('channel_id') != q['source_thread_id']
++                    or message.get('author', {}).get('id') != evidence['author_id']
++                    or bool(message.get('author', {}).get('bot')) != evidence['bot']
++                    or evidence['author_id'] != ('1508864261504630925' if evidence['id']==receipt['prompt_message_id'] else receipt['authorized_by'])
++                    or evidence['bot'] != (evidence['id']==receipt['prompt_message_id'])
++                    or digest(message.get('content')) != evidence['content_digest']):
++                raise ValueError('continuation live NOW/final approval changed or unavailable')
++        code, identity, _ = meta.graph_get_credential_metadata(q['account_id'], token)
++        issuer_code, issuer, _ = meta.graph_get_credential_metadata(q['account_id'], token, inspect_token=True)
++        issuer = issuer.get('data') or {}
++        if (code != 200 or identity.get('id') != receipt['meta_actor_id'] or issuer_code != 200
++                or issuer.get('is_valid') is not True or str(issuer.get('user_id')) != receipt['meta_actor_id']
++                or str(issuer.get('app_id')) != context['config']['accounts'][q['account_id']]['meta_app_id']):
++            raise ValueError('continuation advertiser identity/app changed or unavailable')
+     context['verified_at'] = time.monotonic()
+     marker = CURRENT.set(context)
+     try:
