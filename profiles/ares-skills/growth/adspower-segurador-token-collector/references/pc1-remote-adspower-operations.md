@@ -118,6 +118,32 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 3. Allow a bounded startup wait and re-check the windows and PC1-local listener. A blank **Starting** window alone neither proves readiness nor proves failure. Once the API is available, release the GUI lease before returning to the MCP route so its transaction proxy can acquire its own lease. Re-run the read-only lookup, then reconcile active state before opening the exact profile.
 4. If startup does not recover within the bounded checks, preserve the request and escalate the exact missing prerequisite; do not restart the gateway, alter the transport, or force-close profiles.
 
+## PowerShell por SSH — preservar pipelines no transporte
+
+Quando um diagnóstico autorizado exigir PowerShell remoto pela rota privada existente, enviar o script inteiro por `-EncodedCommand` em UTF-16LE. Argumentos separados de `subprocess` só protegem o shell local; o shell remoto do Windows ainda pode interpretar `|`, aspas ou `$` antes do PowerShell. Não classificar esse erro de parsing como PC1 indisponível.
+
+```python
+import base64
+import json
+import subprocess
+
+# ssh_base deve vir da rota privada aprovada, com usuário/chave/options
+# já reconciliados; não criar outra identidade ou conexão pública.
+def powershell_readonly(ssh_base, script):
+    encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+    command = (
+        "powershell.exe -NoProfile -NonInteractive -EncodedCommand " + encoded
+    )
+    result = subprocess.run(
+        [*ssh_base, command], capture_output=True, text=True, timeout=45
+    )
+    if result.returncode != 0:
+        raise RuntimeError("Remote read-only diagnostic failed; inspect safely")
+    return json.loads(result.stdout.lstrip("\ufeff").strip())
+```
+
+No script PowerShell, configurar UTF-8 sem BOM em `[Console]::OutputEncoding`, suprimir somente o progresso com `$ProgressPreference='SilentlyContinue'` e retornar JSON com os campos seguros necessários. Tratar erros de consulta separadamente de um resultado legitimamente vazio; não converter indiscriminadamente exceções em ausência de processos/listener. Mensagens CLIXML de progresso em stderr não anulam um exit code zero e JSON válido. Nunca imprimir stdout/stderr brutos de consultas que possam conter credenciais. Base64 é enquadramento do comando, não criptografia nem permissão para enviar segredos ou contornar comandos proibidos.
+
 ## Ads Manager campaign screenshot
 
 1. Resolve and open the unique authorized profile/group through the preferred MCP flow. Attach with `connect-browser-with-ws` using the current open response; do not disclose the connection endpoint.
@@ -134,6 +160,7 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 - When current, exact IDs are evidenced by the page, selecting with `/adsmanager/manage/ads?act=<account>&selected_campaign_ids=<campaign>&selected_adset_ids=<adset>&selected_ad_ids=<ad>` is a verified navigation-only fallback. Read back **Ads — 1 selected** and the exact intended ad before opening the toolbar **Edit**.
 - Require the editor breadcrumb and selected ad, visible configuration fields, and a loaded **Ad preview**. Capture and inspect the actual image; thumbnails/players being rendered do not prove complete video playback. Leave all fields untouched and report inspection only.
 - The MCP `scroll-element` implementation uses native `querySelector`, so pass only a CSS selector grounded in current DOM; Playwright `text=...` is invalid there even though `click-element` supports it. Do not fetch the full HTML repeatedly when the tool has already persisted its output, and do not infer missing DOM elements from a truncated HTML response.
+- Em inspeção autorizada, não usar **Editar grupo** como simples expansor de detalhes: esse controle pode iniciar substituição das personalizações de posicionamento. Se aparecer aviso de remoção/substituição, selecionar **Cancelar** e conferir que o modal fechou; não clicar **Continuar**, salvar, publicar ou descartar rascunhos para sair do diagnóstico. Confirmar por novo GET os IDs/status/creative e `updated_time` relevantes antes de afirmar que o objeto publicado permaneceu sem alteração. Um alerta secundário de posicionamento não comprova a causa de outro erro de veiculação; registrar as observações separadamente.
 
 ## Read a current ad field without editing
 
