@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Eggbev target-Page/media/copy replacement intake; writes only via Engine v3.
+"""Eggbev target-Page/media/copy replacement intake.
 
 Prepare is explicitly gated and may reserve/prestage but never publish. Execute
 requires the sealed digest and a fresh explicit final approval after its summary.
+Recover-media independently reconciles the same complete children, with only a
+status-only existing-parent activation; never replays Engine creation.
 """
 from __future__ import annotations
 import argparse,copy,fcntl,hashlib,importlib.util,json,os,re,subprocess,sys
@@ -84,16 +86,21 @@ def source_seed_proof(q):
     if len(records)!=1:raise ValueError('source checkpoint ambiguous or missing')
     record=records[0];ids=record.get('target_clone_ids')
     if not ids:return None  # Ordinary sources retain the exact cardinality gate.
-    if checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('status')!='COMPLETE' or record.get('status')!='COMPLETE':raise ValueError('source target clone checkpoint incomplete')
+    independent_path=None
+    if checkpoint.get('independent_media_finalization'):
+        from ares_campaign_v3.target_media_recovery import independent_completion
+        independent_path=independent_completion(checkpoint,record,request_id,ACCOUNT,ids)
+        if checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('campaign_ids') not in [[],[sid]]:raise ValueError('independent source checkpoint identity')
+    elif checkpoint.get('account_id')!=ACCOUNT or checkpoint.get('status')!='COMPLETE' or record.get('status')!='COMPLETE':raise ValueError('source target clone checkpoint incomplete')
     n=len(q['media_filenames']);pairs=[[ids.get(f'copied_ad_id_1_{i}'),ids.get(f'seed_ad_id_1_{i}')] for i in range(1,n+1)]
     expected={'campaign_id_1','adset_id_1'}|{f'{key}_1_{i}' for i in range(1,n+1) for key in ['copied_ad_id','seed_ad_id','creative_id']}
     if set(ids)!=expected or any(not isinstance(v,str) or not v.isdigit() or int(v)==0 for v in ids.values()):raise ValueError('source checkpoint slots missing or extra')
     finals=[a for a,_ in pairs];seeds=[a for _,a in pairs]
-    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or checkpoint.get('campaign_ids')!=[sid] or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or len(record.get('ad_ids',[]))!=n or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
+    if len(set(finals+seeds))!=2*n or ids['campaign_id_1']!=sid or (not independent_path and checkpoint.get('campaign_ids')!=[sid]) or record.get('campaign_ids')!=[sid] or record.get('adset_ids')!=[ids['adset_id_1']] or len(record.get('ad_ids',[]))!=n or set(record.get('ad_ids',[]))!=set(finals):raise ValueError('source checkpoint IDs inconsistent')
     evidence={'request_id':request_id,'checkpoint_path':str(checkpoint_path),'checkpoint_sha256':hashlib.sha256(checkpoint_path.read_bytes()).hexdigest(),'adset_id':ids['adset_id_1'],'pairs':pairs}
     # Independent recovery is terminal only with its exact COMPLETE receipt.
-    if checkpoint.get('recovery_result'):
-        final_path=Path(checkpoint['recovery_result']).resolve()
+    if checkpoint.get('recovery_result') or independent_path:
+        final_path=independent_path or Path(checkpoint['recovery_result']).resolve()
         if not final_path.is_relative_to((R/'data/ares/meta-ads/audit/eggbev').resolve()) or final_path.name!='final.json':raise ValueError('source completion receipt outside canonical audit')
         final=load(final_path);assignments=final.get('assignments',[])
         if final.get('phase')!='COMPLETE' or final.get('request_id')!=request_id or final.get('campaign_ids')!=[sid] or final.get('final_ads')!=n or final.get('technical_paused_seeds')!=n or len(assignments)!=n or {a.get('ad_id') for a in assignments}!=set(finals) or any(a.get('campaign_id')!=sid or a.get('adset_id')!=ids['adset_id_1'] for a in assignments):raise ValueError('source completion receipt mismatch')
@@ -386,7 +393,10 @@ def _execute(path,confirm=False,approved_digest=None,approval_message_id=None,ch
     return result
 
 
-def finalize(path):
+def finalize(path,approved_digest=None,approval_message_id=None):
+    if (Path(path).parent/'media-recovery'/'verified.json').exists():
+        from ares_campaign_v3 import target_media_recovery as recovery
+        return recovery.finalize(path,sys.modules[__name__],approved_digest,approval_message_id)
     q=load(path);home=Path(path).parent;cfg=load(CONFIG)
     result=load(home/'engine-result.json')
     if result.get('status') not in {'COMPLETE_FUTURE_ACTIVE','COMPLETE_PAUSED'}:raise ValueError('Engine not complete; no stock finalization')
@@ -421,7 +431,12 @@ def finalize(path):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize','check-continuation']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['prepare','execute','finalize','check-continuation','recover-media']);p.add_argument('--input',required=True,type=Path);p.add_argument('--confirm-prepare',action='store_true');p.add_argument('--confirm-execute',action='store_true');p.add_argument('--approved-digest');p.add_argument('--approval-message-id');a=p.parse_args()
+    if a.command=='recover-media' or (a.command=='finalize' and (a.input.parent/'media-recovery'/'verified.json').exists()):
+        from ares_campaign_v3 import target_media_recovery as recovery
+        runner=sys.modules[__name__]
+        value=(recovery.recover if a.command=='recover-media' else recovery.finalize)(a.input,runner,a.approved_digest,a.approval_message_id)
+        print(json.dumps(value,ensure_ascii=False,indent=2));return
     # One foreground/request owner across preparation and engine invocation.
     q=load(a.input);lock=Path(a.input).parent/'target-clone.lock'
     if a.command in {'execute','check-continuation'}:

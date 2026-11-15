@@ -36,6 +36,8 @@ Active Meta-copy exception approved permanently by Rodolfo `1568722979569930414`
 9. **Keep temporary benchmark exceptions narrow.** When Rodolfo explicitly classifies a campaign batch as a temporary test, he may waive `ares_eligible`, manager-reservation or legacy-reconciliation status as blockers for that named benchmark. Do not generalize the waiver to production. Still prove exact Drive identity/checksum, uniqueness within the batch, no forbidden lifecycle/folder movement, no collision with production use and the exact no-auto-delete contract.
 10. **Cancellation is not cleanup.** A stop request must terminate future work promptly and reconcile side effects; it does not prove that already-created campaigns, ads or media were removed. Persist a pre-upload request/asset checkpoint and per-media state before the first upload, use cooperative cancellation between assets, and report `stopped` separately from `cleaned`. Never promise reversibility for temporary media unless a working cleanup route for the same object type/account/identity is already proven or the owner explicitly accepts residue risk.
 
+See references/target-derived-media-reconciliation.md.
+
 ### Page-access workflow and Rodolfo's onboarding preference
 
 - Handle Page onboarding on demand by explicitly supplied IDs; Rodolfo prefers this to a recurring permission-grant cron. Do not create a scheduler or grant access to future assets unless he explicitly reopens automation.

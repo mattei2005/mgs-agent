@@ -1,0 +1,507 @@
+"""Independent, request-pinned media reconciliation; never execute an Engine.
+
+Only remote mutation: ACTIVE on the previously confirmed parent. Original
+Engine errors/seals/GET responses are immutable. A paused pre-QA expectation is
+an in-memory CampaignSpec, not a normalized API response. Receipts are generated
+from fresh reads/downloads, not supplied as caller booleans. See CLI handoff.
+"""
+from __future__ import annotations
+import copy,fcntl,hashlib,json,os,re,ssl,subprocess,tempfile,time
+from contextlib import contextmanager
+from dataclasses import replace
+from datetime import datetime,timezone
+from pathlib import Path
+from types import SimpleNamespace
+from urllib.parse import urlsplit
+from . import target_continuation as continuation
+from . import target_start_revision as revision
+from .target_page_clone import verify
+
+GRANT_PATH=Path('/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_53c187db/media-grant.json')
+GRANT_SHA256='d81812abe663306c32b037bc9a2b5cceb3ff95a373e8b6b48b40d23a4c70905c'
+MAX_ATTESTATION_AGE=86400
+MAX_FRESH_SECONDS=600
+MAX_VIDEO_BYTES=100*1024*1024
+SCHEMA='mgs.target.media.recovery.v1'
+
+def require(ok,message):
+    if not ok:raise ValueError('target media recovery: '+message)
+def sha(raw):return hashlib.sha256(raw).hexdigest()
+def file_sha(p):return sha(Path(p).read_bytes())
+def digest(v):return sha(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode())
+def load(p):return json.loads(Path(p).read_text())
+def utc():return datetime.now(timezone.utc).isoformat()
+def atomic(p,v):revision.atomic_json(Path(p),v)
+def missing(p,v):
+    p=Path(p)
+    if p.exists():require(load(p)==v,'immutable receipt collision');return
+    # Caller owns request lock; atomic replace is crash safe, never overwrites a
+    # different immutable receipt (checked again before installation).
+    atomic(p,v)
+def cas_link(p,key,value,backup):
+    p=Path(p);raw=p.read_bytes();v=json.loads(raw)
+    if key in v:require(v[key]==value,'existing recovery link differs');return
+    b=Path(backup);b.parent.mkdir(parents=True,exist_ok=True)
+    if not b.exists():revision.atomic_bytes(b,raw)
+    require(p.read_bytes()==raw,'CAS link drift');v[key]=value;atomic(p,v)
+def fresh(at,now=None,limit=MAX_FRESH_SECONDS):
+    at=datetime.fromisoformat(at);now=now or datetime.now(timezone.utc)
+    require(at.tzinfo is not None and 0 <= (now-at).total_seconds() <= limit,'stale/future clock')
+
+@contextmanager
+def request_lock(path):
+    with (Path(path).parent/'target-clone.lock').open('a+') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);yield
+
+def grant_load(path,approved_digest,approval_message_id):
+    require(file_sha(GRANT_PATH)==GRANT_SHA256,'installed grant hash')
+    g=load(GRANT_PATH);path=Path(path).resolve()
+    require(g.get('schema')=='mgs.target.media.grant.v1' and g['request_path']==str(path)
+            and approved_digest==g['original_approved_digest'] and approval_message_id==g['approval_message_id'],'original request/approval')
+    fresh(g['attested_at'],limit=MAX_ATTESTATION_AGE)
+    mutable={g['checkpoint_path'],g['audit_path'],str(path.parent/'engine-result.json')}
+    for p,s in g['pins'].items():
+        if p in mutable:
+            v=load(p);v.pop('independent_media_recovery',None);v.pop('independent_media_finalization',None)
+            # Linking is missing-only and preserves every original field.
+            original=path.parent/'media-recovery'/'original'/Path(p).name
+            require(file_sha(original if original.exists() else p)==s,'original Engine receipt changed')
+            if original.exists():require(v==load(original),'Engine fields changed outside recovery link')
+        else:require(file_sha(p)==s,'attested proof changed')
+    return g
+
+def local(path,runner,approved_digest,approval_message_id):
+    g=grant_load(path,approved_digest,approval_message_id);cfg=runner.load(runner.CONFIG);q=runner.load(path);payload=runner.load(Path(path).parent/'manifest.json')
+    require(cfg.get('enabled') is True and cfg.get('write_enabled') is True,'runtime write gates')
+    temporal=revision.validate_local(path,cfg,approved_digest,approval_message_id)
+    require(temporal['last'] and not temporal['pending'],'committed original ASAP mapping')
+    require(runner.request_load(path,temporal=temporal)==q,'fresh request/domain/account scope')
+    ctx=continuation.validate_local(path,payload,cfg)
+    # validate_record needs the exact elapsed admission; no schema bypass.
+    marker=continuation.CURRENT.set(ctx)
+    try:
+        ids=continuation.validate_record(payload,ctx['record'])
+        runner.validate_account_policy(runner.Manifest.from_dict(payload),cfg)
+    finally:continuation.CURRENT.reset(marker)
+    require(ids==g['ids'] and ctx['record'].get('target_clone_ids')==ids and len(ids)==11,'all confirmed children/journal')
+    require(ctx['record'].get('ad_ids')==[ids[f'copied_ad_id_1_{i}'] for i in range(1,4)],'final slot list')
+    require(g['request_id']==q['request_id'] and len(payload['campaigns'])==1 and len(payload['campaigns'][0]['ads'])==3,'exact 3-slot request')
+    return g,cfg,q,payload
+
+def pair_expectations(payload,ids,selected,snapshot,pairs):
+    """Validate the attested bijection against the sealed slots AND raw GETs."""
+    c=payload['campaigns'][0];ads=snapshot['ads'];byid={a['id']:a for a in ads}
+    require(len(ads)==6 and len(byid)==6 and len(pairs)==6 and len(selected)==3,'media/child cardinality')
+    wanted_ids={ids[f'{key}_1_{i}'] for i in range(1,4) for key in ['copied_ad_id','seed_ad_id']}
+    require(set(byid)==wanted_ids,'unexpected/missing final/seed ID')
+    result=[];seen=set();expected_seen=set();observed_seen=set()
+    for i,(a,asset) in enumerate(zip(c['ads'],selected),1):
+        final=byid[ids[f'copied_ad_id_1_{i}']];seed=byid[ids[f'seed_ad_id_1_{i}']]
+        require(final.get('adset_id')==ids['adset_id_1'] and seed.get('adset_id')==ids['adset_id_1'],'ad parent')
+        if 'campaign_id' in final:require(final['campaign_id']==ids['campaign_id_1'],'ad campaign')
+        afs=final['creative']['asset_feed_spec'];expected=a['creative_payload']['asset_feed_spec']
+        require(len(afs.get('videos',[]))==2 and len(expected['videos'])==2,'variant cardinality')
+        for v,w in zip(afs['videos'],expected['videos']):
+            labels=[x.get('name') for x in v.get('adlabels',[])];wl=[x.get('name') for x in w.get('adlabels',[])]
+            require(labels==wl and len(labels)==1 and labels[0] not in seen,'missing/extra/reordered labels');seen.update(labels)
+            variant='vertical' if labels[0].endswith('_vertical') else 'square' if labels[0].endswith('_square') else None
+            require(variant and w['video_id']==a['media'][variant+'_video_id'],'variant identity')
+            matches=[p for p in pairs if p.get('slot')==i and p.get('labels')==labels]
+            require(len(matches)==1,'ambiguous pair');p=matches[0]
+            require(p.get('asset_id')==asset['asset_id']==a['media']['asset_id'] and p.get('expected_video_id')==w['video_id']
+                    and p.get('observed_video_id')==v['video_id'] and p.get('final_ad_id')==final['id'] and p.get('final_creative_id')==final['creative']['id'],'attested ID/asset/creative mismatch')
+            require(w['video_id'] not in expected_seen and v['video_id'] not in observed_seen,'non-bijective videos');expected_seen.add(w['video_id']);observed_seen.add(v['video_id'])
+            result.append({**p,'variant':variant,'checksum':a['media']['checksum']})
+    require(len(expected_seen)==len(observed_seen)==6,'incomplete bijection')
+    return result
+
+def semantic_subset(actual,expected,path=''):
+    """Read-only semantic projection: Graph adds numeric label IDs and returns
+    adlabels as an unordered membership set. Preserve rule/asset list order,
+    reject extra/missing/duplicate memberships; never mutate either input.
+    """
+    if path.endswith('adlabels'):
+        require(isinstance(actual,list) and isinstance(expected,list),'label list shape')
+        a=[x.get('name') for x in actual];b=[x.get('name') for x in expected]
+        require(len(a)==len(set(a))==len(b)==len(set(b)) and set(a)==set(b),'label membership drift');return
+    if isinstance(expected,dict):
+        require(isinstance(actual,dict),'semantic object missing: '+path)
+        for k,v in expected.items():require(k in actual,'semantic field missing: '+path+'.'+k);semantic_subset(actual[k],v,path+'.'+k)
+    elif isinstance(expected,list):
+        require(isinstance(actual,list) and len(actual)==len(expected),'semantic cardinality: '+path)
+        for a,b in zip(actual,expected):semantic_subset(a,b,path+'[]')
+    else:require(actual==expected,'semantic value drift: '+path)
+
+def semantic(payload,ids,selected,snapshot,pairs,parent_status):
+    """Only expectations change; raw response hashes must remain unchanged."""
+    # All callers enter the existing continuation context before schema parsing.
+    from .eggbev_create import messenger_welcome_message
+    before=digest(snapshot);ps=pair_expectations(payload,ids,selected,snapshot,pairs)
+    require(snapshot['campaign'].get('id')==ids['campaign_id_1'] and snapshot['campaign'].get('status')==parent_status,'parent status/id')
+    c=copy.deepcopy(payload['campaigns'][0]);c['status']=parent_status
+    for i,a in enumerate(c['ads'],1):
+        for v in a['creative_payload']['asset_feed_spec']['videos']:
+            p=next(p for p in ps if p['slot']==i and p['labels']==[l['name'] for l in v['adlabels']]);v['video_id']=p['observed_video_id']
+    # Elapsed admission is already active in production. Pre-QA PAUSED affects
+    # only campaign expectation; finals remain the approved ACTIVE.
+    campaigns=SimpleNamespace(**c)
+    campaigns.ads=tuple(SimpleNamespace(**a) for a in c['ads'])
+    record={'target_clone_ids':ids,'readback_results':[
+        {'name':'readback_campaign_1','body':snapshot['campaign']},
+        {'name':'readback_adsets_1','body':{'data':snapshot['adsets']}},
+        {'name':'readback_ads_1','body':{'data':snapshot['ads']}}]}
+    # verify couples parent/final status. Two independent expectations permit
+    # PAUSED parent preflight without ever changing the responses: delegate
+    # campaign check to an exact PAUSED expectation, and final hierarchy to an
+    # ACTIVE expectation by verifying each approved branch separately below.
+    if parent_status=='PAUSED':
+        # Original verifier sees PAUSED expectation and real PAUSED parent, but
+        # requires final ACTIVE. A read-only str subtype matches both approved
+        # states would be a bypass, so do not invoke it for this phase. Instead
+        # validate all hierarchy fields with strict checks below; post-ACTIVE
+        # always invokes original verify unchanged.
+        live=snapshot['campaign']
+        require(all(str(live.get(k))==str(c.get('campaign_create',{}).get(k)) for k in ['daily_budget','bid_strategy'])
+                and live.get('name')==c['name'] and live.get('account_id')==c['account_id'],'paused parent commercial fields')
+    else:verify(SimpleNamespace(campaigns=(campaigns,)),record)
+    # Strict additional checks cover gaps not checked by the original verifier,
+    # including identical copy labels/rules, Page PBIA, features, JSON and event.
+    from .prevalidation import _require_subset
+    sets=snapshot['adsets'];require(len(sets)==1 and sets[0]['id']==ids['adset_id_1'],'adset cardinality')
+    st=sets[0];require(st.get('status')=='ACTIVE' and st.get('name')==c['adset_name'],'adset status/name')
+    require(datetime.fromisoformat(st['start_time'])==datetime.fromisoformat(c['start_time']),'start_time drift')
+    for k,v in c['adset_create'].items():_require_subset(st.get(k),v,'adset.'+k)
+    for key,value in c['campaign_create'].items():
+        semantic_subset(snapshot['campaign'].get(key),value,'campaign.'+key)
+    byid={a['id']:a for a in snapshot['ads']}
+    for i,a in enumerate(c['ads'],1):
+        final=byid[ids[f'copied_ad_id_1_{i}']];seed=byid[ids[f'seed_ad_id_1_{i}']]
+        require(seed.get('creative',{}).get('id')==ids[f'creative_id_1_{i}'] and seed.get('source_ad_id') in {None,'0'},'seed creative/journal lineage mismatch')
+        require(final.get('status')=='ACTIVE' and seed.get('status')=='PAUSED' and final.get('source_ad_id')==seed['id'] and final.get('name')==a['name'],'final/seed status/lineage')
+        actual=final['creative'];expected=a['creative_payload']
+        for k in ['object_story_spec','instagram_user_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads']:
+            if k in expected:_require_subset(actual.get(k),expected[k],k)
+        from .shein_reference import verify_degrees
+        verify_degrees(actual.get('degrees_of_freedom_spec'),expected.get('degrees_of_freedom_spec'))
+        afs=actual['asset_feed_spec'];ex=expected['asset_feed_spec']
+        for k in ex:
+            if k in {'additional_data','videos'}:continue
+            # Graph exposes the approved CTA as call_to_action_types, omitting
+            # write-only call_to_actions. Destination is separately proven by
+            # the fresh adset.destination_type=MESSENGER, never defaulted.
+            if k=='call_to_actions' and k not in afs:
+                require(afs.get('call_to_action_types')==ex['call_to_action_types'] and st.get('destination_type')=='MESSENGER','CTA/destination projection');continue
+            semantic_subset(afs.get(k),ex[k],'asset_feed_spec.'+k)
+        for v,w in zip(afs['videos'],ex['videos']):semantic_subset(v,w,'video')
+        raw=afs.get('additional_data',{}).get('page_welcome_message');parsed=json.loads(raw) if isinstance(raw,str) else raw
+        require(parsed==json.loads(messenger_welcome_message()),'JSON-AGT/envelope/flags mismatch')
+    require(digest(snapshot)==before,'raw GET mutation forbidden')
+    return ps
+
+def rendered(g,ids,ps):
+    v=load(g['rendered_proof_path']);require(v.get('verified') is True and len(v.get('rendered_media',[]))==3,'rendered coverage')
+    require(v.get('ad_ids')==[ids[f'copied_ad_id_1_{i}'] for i in range(1,4)] and v.get('creative_ids')==[next(p['final_creative_id'] for p in ps if p['slot']==i) for i in range(1,4)],'rendered ID mismatch')
+    for row in v['rendered_media']:
+        require(row.get('videos') and all(x.get('readyState')==4 and x.get('error') is None and x.get('width',0)>0 and x.get('height',0)>0 for x in row['videos']),'rendered video incomplete')
+
+def validate_video(meta,p,proof):
+    require(meta.get('id') in {p['expected_video_id'],p['observed_video_id']},'video GET ID')
+    expected=next(d for d in proof['downloads'] if d['video_id']==meta['id'])
+    title=f"V3 {p['variant'].upper()} {p['asset_id']} {p['checksum'][:12]}"
+    require(meta.get('title')==title==expected['title'] and meta.get('length')==expected['length'],'video title/length')
+    status=meta.get('status',{});require(status.get('video_status')=='ready' and all(status.get(k,{}).get('status')=='complete' for k in ['uploading_phase','processing_phase','publishing_phase']),'video not ready/complete')
+    return expected
+
+def fetch_video(url):
+    """Bounded, IP-pinned HTTPS FB CDN fetch, no redirect/proxy/credential."""
+    from .native_thumbnail_equivalence import _PinnedHTTPS
+    require(isinstance(url,str) and len(url)<=16384 and re.fullmatch(r'[\x21-\x7e]+',url),'video URL shape')
+    p=urlsplit(url);require(p.scheme=='https' and re.fullmatch(r'scontent-[a-z0-9-]+\.xx\.fbcdn\.net',p.netloc) and p.path.endswith('.mp4') and not p.fragment,'video CDN endpoint')
+    conn=_PinnedHTTPS(p.netloc,timeout=30,context=ssl.create_default_context())
+    try:
+        conn.request('GET',p.path+'?'+p.query,headers={'Accept':'video/mp4','Connection':'close'});r=conn.getresponse()
+        require(r.status==200 and not r.getheader('Location') and r.getheader('Content-Encoding','identity')=='identity','video HTTP/redirect')
+        length=r.getheader('Content-Length');require(length is not None and length.isdigit() and 0<int(length)<=MAX_VIDEO_BYTES,'video size')
+        raw=r.read(MAX_VIDEO_BYTES+1);require(len(raw)==int(length) and raw[4:8]==b'ftyp','video bytes/signature');return raw
+    except Exception:raise ValueError('target media recovery: safe video download failed') from None
+    finally:conn.close()
+
+def inspect_bytes(raw,expected):
+    require(len(raw)==expected['bytes'] and sha(raw)==expected['sha256'],'media bytes mismatch')
+    root=Path(os.environ.get('TMPDIR','/root/.hermes/profiles/zeus/cache/scratch'));root.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='target-media-',dir=root) as d:
+        p=Path(d)/'video.mp4';p.write_bytes(raw)
+        out=subprocess.run(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height','-show_entries','format=duration','-of','json',str(p)],check=True,capture_output=True,timeout=30)
+        probe=json.loads(out.stdout);s=probe['streams'][0]
+        require([s['width'],s['height']]==[expected['width'],expected['height']] and probe['format']['duration']==expected['duration'],'dimensions/duration')
+        require([f['timestamp'] for f in expected['frames']]==[3,8,12],'decoded frame coverage')
+        for f in expected['frames']:
+            frame=Path(d)/'frame.png'
+            subprocess.run(['ffmpeg','-nostdin','-v','error','-y','-ss',str(f['timestamp']),'-i',str(p),'-frames:v','1',str(frame)],capture_output=True,check=True,timeout=30)
+            require(file_sha(frame)==f['sha256'],'decoded frame mismatch')
+    return {'video_id':expected['video_id'],'sha256':sha(raw),'bytes':len(raw),'frames':[f['sha256'] for f in expected['frames']],'dimensions':[expected['width'],expected['height']]}
+
+class Runtime:
+    def __init__(self,runner,path,cfg,q,payload):
+        from .quota import LaneQuotaStore
+        from .transport import GraphBatchTransport
+        self.runner=runner;self.path=Path(path);self.cfg=cfg;self.q=q;self.payload=payload
+        self.common,self.meta,self.sb,self.token=runner.runtime()
+        self.quota=LaneQuotaStore(cfg['state_root'],soft_score=cfg['soft_score'],hard_score=cfg['hard_score'],window_seconds=cfg['score_window_seconds'],development_score_max=cfg['development_access_score_max'],standard_score_max=cfg['standard_access_score_max'])
+        self.lane=(payload['campaigns'][0]['app_key'],q['account_id']);self.n=0;self.run=utc()
+        app_secret=os.environ.get('ARES_META_APP_SECRET')
+        require(cfg.get('require_appsecret_proof') is not True or bool(app_secret),'required appsecret proof unavailable')
+        self.transport=GraphBatchTransport(q['account_id'],payload['graph_version'],self.token,app_secret=app_secret)
+    def reserve(self,points):
+        self.n+=1;return self.quota.reserve(self.lane,points,request_id=self.q['request_id']+':media:'+self.run+':'+str(self.n))
+    def authority(self):
+        self.reserve(2);revision.live_authority(revision.validate_local(self.path,self.cfg, self.g['original_approved_digest'],self.g['approval_message_id']),meta=self.meta,token=self.token)
+    def source_page(self):
+        r=self.runner;self.reserve(5);current=r.source_read(self.q,self.common,self.meta,self.token);old=r.load(self.path.parent/'source-live.json')
+        if r.source_comparison(current)!=r.source_comparison(old):
+            from .native_thumbnail_equivalence import compare
+            compare(old,current,context={'request_id':self.q['request_id'],'approved_digest':self.g['original_approved_digest'],'account_id':self.q['account_id'],'source_campaign_id':self.q['source_campaign_id_candidate']},normalize=r.source_comparison)
+        page=r.resolve_page(self.meta,self.sb,self.token,self.q['account_id'],self.q['target_page_token'])
+        require(all(page.get(k)==r.load(self.path.parent/'target-page-live.json').get(k) for k in ['id','name','instagram_user_id','page_token']),'Page/PBIA changed')
+        self.page=page
+        rows=[json.loads(x) for x in r.INVENTORY.read_text().splitlines() if x.strip()]
+        for wanted in load(self.path.parent/'selected-assets.json'):
+            hits=[x for x in rows if x.get('asset_id')==wanted['asset_id']]
+            require(len(hits)==1 and hits[0].get('reservation_request_id')==self.q['request_id'] and hits[0].get('clean_checksum')==wanted['clean_checksum'],'reservation/checksum')
+        alloc=r.naming.allocation(self.q['request_id']);require(alloc and alloc.get('account_id')==self.q['account_id'] and alloc.get('names')==[self.payload['campaigns'][0]['name']] and alloc.get('status') in {'RESERVED','IN_FLIGHT','COMMITTED'},'naming allocation')
+    def read(self):
+        from .engine import CampaignEngine
+        self.reserve(3);ops=CampaignEngine._readback_ops([self.g['ids']['campaign_id_1']])
+        extra_parent=','.join(k for k in self.payload['campaigns'][0]['campaign_create'] if k not in ops[0].relative_url.split('?fields=')[1].split(','))
+        if extra_parent:ops[0]=replace(ops[0],relative_url=ops[0].relative_url+','+extra_parent)
+        extra=','.join(k for k in self.payload['campaigns'][0]['adset_create'] if k not in ops[1].relative_url.split('?fields=')[1].split('&')[0].split(','))
+        if extra:ops[1]=replace(ops[1],relative_url=ops[1].relative_url.replace('&limit=',','+extra+'&limit='))
+        try:rows=self.transport.execute(ops,'independent_media_readback')
+        finally:self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
+        require(len(rows)==3 and all(x.code==200 for x in rows),'fresh hierarchy GET failed')
+        b={x.name:x.body for x in rows};sets=b['readback_adsets_1'];ads=b['readback_ads_1']
+        require(not sets.get('paging',{}).get('next') and not ads.get('paging',{}).get('next'),'unread pagination')
+        return {'campaign':b['readback_campaign_1'],'adsets':sets['data'],'ads':ads['data']}
+    def video(self,vid):
+        self.reserve(1);code,v,_=self.meta.graph_get(vid,self.token,{'fields':'id,title,length,status,source'})
+        if code==200 and v.get('source'):return v
+        # Only the already validated own Page, same advertiser; ephemeral token
+        # never written to logs or returned. Page runtime scope enforces lineage.
+        self.reserve(2);code,page,_=self.meta.graph_get(self.page['id'],self.token,{'fields':'id,access_token'})
+        require(code==200 and page.get('id')==self.page['id'] and page.get('access_token'),'own Page read token unavailable')
+        code,v,_=self.meta.graph_get(vid,page['access_token'],{'fields':'id,title,length,status,source'})
+        require(code==200 and v.get('source'),'fresh video source unavailable');return v
+    def activate(self):
+        from .transport import BatchOperation
+        self.reserve(3)
+        op=BatchOperation('independent_media_parent_activate','POST',self.g['ids']['campaign_id_1'],{'status':'ACTIVE'},kind='campaign_finalize')
+        try:rows=self.transport.execute([op],'independent_media_parent_activate')
+        finally:self.quota.observe_headers(self.lane,self.transport.last_outer_headers)
+        require(len(rows)==1 and rows[0].code==200 and rows[0].body.get('success') is True,'parent status outcome uncertain; GET before retry')
+
+def receipt_value(g,payload,path,ps,snapshot,downloads):
+    return {'schema':SCHEMA,'request_id':g['request_id'],'request_sha256':file_sha(path),'manifest_digest':digest(payload),'original_approved_digest':g['original_approved_digest'],'approval_message_id':g['approval_message_id'],'grant_sha256':GRANT_SHA256,'ids':g['ids'],'pairs':ps,'fresh_at':utc(),'fresh_readback_digest':digest(snapshot),'downloads':downloads,'phase':'RECOVERY_VERIFIED_INDEPENDENT','original_engine_success':False}
+
+def recover(path,runner,approved_digest,approval_message_id,*,runtime_factory=Runtime):
+    from .coordination import AccountWriterLeaseStore
+    with request_lock(path):
+        g,cfg,q,payload=local(path,runner,approved_digest,approval_message_id)
+        if (Path(path).parent/'final.json').exists():
+            return terminal_readback(path,runner,g,cfg,q,payload,runtime_factory)
+        leases=AccountWriterLeaseStore(cfg['state_root']);leases.claim(q['account_id'],q['request_id'],status='RECOVERY_PENDING')
+        runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;home=Path(path).parent/'media-recovery';home.mkdir(exist_ok=True)
+        runtime.authority();runtime.source_page()
+        with continuation.admission(path,payload,cfg,meta=runtime.meta,token=runtime.token):
+            selected=load(Path(path).parent/'selected-assets.json');snapshot=runtime.read();state=snapshot['campaign'].get('status')
+            intent=home/'activation-intent.json';binding={'grant_sha256':GRANT_SHA256,'request_id':g['request_id'],'ids':g['ids'],'manifest_digest':digest(payload)}
+            require(state=='PAUSED' or (state=='ACTIVE' and intent.exists() and load(intent)==binding),'ACTIVE without own durable intent or unsupported state')
+            ps=semantic(payload,g['ids'],selected,snapshot,g['pairs'],state);rendered(g,g['ids'],ps)
+            proof=load(g['proof_path']);downloads=[];started=utc()
+            for p in ps:
+                for vid in [p['expected_video_id'],p['observed_video_id']]:
+                    meta=runtime.video(vid);require(meta.get('id')==vid,'video GET returned a different requested ID')
+                    expected=validate_video(meta,p,proof);downloads.append(inspect_bytes(fetch_video(meta['source']),expected))
+            validate_media_coverage({'pairs':ps,'downloads':downloads},g,payload)
+            fresh(started);runtime.authority();runtime.source_page()
+            # Re-read after long downloads. No stale hierarchy can activate.
+            snapshot=runtime.read();semantic(payload,g['ids'],selected,snapshot,g['pairs'],state)
+            for p in [Path(path),Path(path).parent/'manifest.json']:require(file_sha(p)==g['pins'][str(p)],'prewrite CAS')
+            if state=='PAUSED':
+                missing(intent,binding);runtime.activate()
+            post=runtime.read();semantic(payload,g['ids'],selected,post,g['pairs'],'ACTIVE')
+            receipt=receipt_value(g,payload,path,ps,post,downloads);rp=home/('receipt-'+digest(receipt)+'.json');missing(rp,receipt)
+            link={'path':str(rp),'sha256':file_sha(rp),'phase':receipt['phase']}
+            # Each run may generate fresher evidence; preserve the first terminal
+            # receipt and check it before repairing partial links.
+            terminal=home/'verified.json'
+            if terminal.exists():link=load(terminal);validate_receipt(link,g,payload,path,allow_stale=True)
+            else:missing(terminal,link)
+            for p in [g['checkpoint_path'],g['audit_path'],str(Path(path).parent/'engine-result.json')]:cas_link(p,'independent_media_recovery',link,home/'original'/Path(p).name)
+            return {'phase':'POSTPROCESS_PENDING','request_id':g['request_id'],'recovery_receipt':link,'campaign_ids':[g['ids']['campaign_id_1']],'engine_replayed':False,'next_step':'finalize with same original digest/approval; real IDs and Usados receipts required'}
+
+def validate_receipt(link,g,payload,path,allow_stale=False):
+    p=Path(link['path']);root=Path(path).parent/'media-recovery'
+    require(p.resolve().parent==root.resolve() and p.name.startswith('receipt-') and file_sha(p)==link['sha256'],'receipt path/hash')
+    v=load(p);require(p.name=='receipt-'+digest(v)+'.json' and v.get('schema')==SCHEMA and v.get('phase')=='RECOVERY_VERIFIED_INDEPENDENT'
+        and v.get('request_id')==g['request_id'] and v.get('grant_sha256')==GRANT_SHA256 and v.get('ids')==g['ids']
+        and v.get('request_sha256')==file_sha(path) and v.get('manifest_digest')==digest(payload) and v.get('approval_message_id')==g['approval_message_id']
+        and v.get('original_approved_digest')==g['original_approved_digest'] and len(v.get('pairs',[]))==6 and len(v.get('downloads',[]))==12,'receipt binding/coverage')
+    validate_media_coverage(v,g,payload)
+    if not allow_stale:fresh(v['fresh_at'])
+    return v
+
+def validate_media_coverage(v,g,payload):
+    """Before ACTIVE, require all 12 distinct requested IDs/bytes/frames."""
+    expected_downloads=[]
+    proof=load(g['proof_path'])
+    expected_pairs=[]
+    for pair in g['pairs']:
+        variant='vertical' if pair['labels'][0].endswith('_vertical') else 'square'
+        slot=payload['campaigns'][0]['ads'][pair['slot']-1]
+        expected_pairs.append({**pair,'variant':variant,'checksum':slot['media']['checksum']})
+        for vid in [pair['expected_video_id'],pair['observed_video_id']]:
+            d=next(d for d in proof['downloads'] if d['video_id']==vid)
+            expected_downloads.append({'video_id':vid,'sha256':d['sha256'],'bytes':d['bytes'],'frames':[f['sha256'] for f in d['frames']],'dimensions':[d['width'],d['height']]})
+    require(v['pairs']==expected_pairs and v['downloads']==expected_downloads,'receipt proof contents differ from pinned bytes/frames/slots')
+
+def assignments_for(ps,snapshot,selected,ids):
+    byid={a['id']:a for a in snapshot['ads']};out=[]
+    for i,asset in enumerate(selected,1):
+        final=byid[ids[f'copied_ad_id_1_{i}']];pairs=[p for p in ps if p['slot']==i];vertical=next(p for p in pairs if p['variant']=='vertical')
+        out.append({'asset_id':asset['asset_id'],'campaign_id':ids['campaign_id_1'],'adset_id':ids['adset_id_1'],'ad_id':final['id'],'creative_id':final['creative']['id'],'video_id':vertical['observed_video_id'],'effective_object_story_id':final['creative'].get('effective_object_story_id'),'media_lineage':[{k:p[k] for k in ['labels','expected_video_id','observed_video_id','variant']} for p in pairs]})
+    return out
+
+def write_assignments(runner,home,q,assignments):
+    p=runner.INVENTORY
+    with p.with_suffix(p.suffix+'.lock').open('a+') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX);raw=p.read_bytes();rows=[json.loads(s) for s in raw.decode().splitlines() if s.strip()]
+        for a in assignments:
+            hits=[r for r in rows if r.get('asset_id')==a['asset_id']];require(len(hits)==1,'unique inventory asset');row=hits[0]
+            require(row.get('reservation_request_id')==q['request_id'],'inventory reservation')
+            fields={'used_by':a['campaign_id'],'ad_account_id':q['account_id'],'meta_adset_id':a['adset_id'],'meta_ad_id':a['ad_id'],'meta_creative_id':a['creative_id'],'meta_video_id':a['video_id'],'effective_object_story_id':a['effective_object_story_id'],'meta_video_lineage':a['media_lineage'],'campaign_owner':q['requested_by'],'status':'02_TESTING','reservation_status':'EM_USO','ares_eligible':False,'strategy':'BOT_MESSENGER'}
+            if row.get('used_by') not in {None,'','ARES_IN_FLIGHT'}:
+                require(all(row.get(k)==v for k,v in fields.items()),'existing final assignment differs')
+            row.update(fields)
+        b=home/'inventory-before-finalize.jsonl'
+        if not b.exists():revision.atomic_bytes(b,raw)
+        require(p.read_bytes()==raw,'inventory CAS');revision.atomic_bytes(p,(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows)).encode())
+
+def repair_partial_stock(standard,asset,assignment,q):
+    """Only complete a controller intent whose same stock ID already moved.
+
+    No retry of PATCH. Reuse mark_used's readback branch with the ORIGINAL
+    source folder, under the same controller queue->inventory locks.
+    """
+    import ares_archive_storage as storage
+    p=standard.b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
+    key=sha(standard.b.canonical([q['request_id'],asset['asset_drive_id']]))
+    receipt=standard.HOME/('use-'+key+'.json')
+    if not receipt.exists():return
+    old=load(receipt)
+    with standard.b.queue_lock():
+        with p.with_suffix(p.suffix+'.lock').open('a+') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX);rows=[json.loads(s) for s in p.read_text().splitlines() if s.strip()]
+            hits=[r for r in rows if r.get('asset_id')==asset['asset_id']];require(len(hits)==1,'stock asset ambiguity');row=hits[0]
+            if row.get('manager_storage_state')=='used':return
+            d=standard.b.Drive(True);record=storage.resolve_media(asset['asset_drive_id'],d.token);require(record is not None,'stock lineage missing')
+            slot,state=standard.find_slot(asset['manager_media_folder_id'])
+            if record['parents']==[asset['manager_media_folder_id']]:return
+            require(record['parents']==[slot['used_id']] and record['stock_file_id']==old.get('stock_file_id') and record['sha256Checksum']==asset['clean_checksum'] and old.get('assignment')=={k:assignment[k] for k in ['campaign_id','adset_id','ad_id','creative_id']} and old.get('request_id')==q['request_id'],'partial stock move differs from intent')
+            result=standard.mark_used(d,row,{'asset_drive_id':asset['asset_drive_id'],'ready_parent_id':asset['manager_media_folder_id'],'drive_md5':record['md5Checksum']},old['assignment'],q['request_id'])
+            standard.apply_use_result(row,result);revision.atomic_bytes(p,(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows)).encode())
+
+def stock_receipt(standard,asset,a,q,result):
+    require(result.get('status')=='verified' and result.get('asset_id')==asset['asset_id'] and result.get('same_ids') is True,'stock controller readback incomplete')
+    key=sha(standard.b.canonical([q['request_id'],asset['asset_drive_id']]))
+    p=standard.HOME/('use-'+key+'.json');v=load(p)
+    require(v.get('schema')=='mgs.manager.standard.use.v1' and v.get('status')=='verified' and v.get('request_id')==q['request_id'] and v.get('asset_id')==asset['asset_id'] and v.get('logical_id')==asset['asset_drive_id'] and v.get('sha256')==asset['clean_checksum'] and v.get('stock_file_id') and v.get('folder_id')==result.get('destination') and v.get('assignment')=={k:a[k] for k in ['campaign_id','adset_id','ad_id','creative_id']},'same-stock receipt binding')
+    return {'path':str(p),'sha256':file_sha(p),'stock_file_id':v['stock_file_id'],'asset_id':asset['asset_id'],'destination':v['folder_id']}
+
+def finalize(path,runner,approved_digest,approval_message_id,*,runtime_factory=Runtime):
+    from .coordination import AccountWriterLeaseStore
+    import ares_manager_storage_standard as standard
+    with request_lock(path):
+        g,cfg,q,payload=local(path,runner,approved_digest,approval_message_id);home=Path(path).parent/'media-recovery'
+        require((home/'verified.json').exists(),'independent recovery required; never replay Engine')
+        fp=Path(path).parent/'final.json'
+        if fp.exists():
+            fl={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
+            if all(load(p).get('independent_media_finalization')==fl for p in [g['checkpoint_path'],g['audit_path'],str(Path(path).parent/'engine-result.json')]):
+                return terminal_readback(path,runner,g,cfg,q,payload,runtime_factory)
+        link=load(home/'verified.json');receipt=validate_receipt(link,g,payload,path,allow_stale=True);fresh(receipt['fresh_at'],limit=MAX_ATTESTATION_AGE)
+        leases=AccountWriterLeaseStore(cfg['state_root']);leases.claim(q['account_id'],q['request_id'],status='POSTPROCESS_PENDING')
+        runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;runtime.authority();runtime.source_page()
+        with continuation.admission(path,payload,cfg,meta=runtime.meta,token=runtime.token):
+            selected=load(Path(path).parent/'selected-assets.json');snapshot=runtime.read();ps=semantic(payload,g['ids'],selected,snapshot,g['pairs'],'ACTIVE');rendered(g,g['ids'],ps)
+            require(ps==receipt['pairs'],'receipt/live media lineage drift')
+            assignments=assignments_for(ps,snapshot,selected,g['ids']);write_assignments(runner,home,q,assignments)
+            movements=[]
+            for asset,a in zip(selected,assignments):
+                repair_partial_stock(standard,asset,a,q)
+                result=standard.confirm_usage(asset['asset_id'],q['request_id'],apply=True)
+                movements.append(stock_receipt(standard,asset,a,q,result))
+            # Reconfirm all three stock IDs (including earlier partial successes)
+            # and the hierarchy before committing the allocation.
+            for asset,a in zip(selected,assignments):
+                result=standard.confirm_usage(asset['asset_id'],q['request_id'],apply=True)
+                stock_receipt(standard,asset,a,q,result)
+            runtime.authority();runtime.source_page();semantic(payload,g['ids'],selected,runtime.read(),g['pairs'],'ACTIVE')
+            ledger_path=runner.R/runner.naming.load_policy()['ledger_path']
+            with ledger_path.with_suffix(ledger_path.suffix+'.lock').open('a+') as lock:
+                fcntl.flock(lock,fcntl.LOCK_EX);raw=ledger_path.read_bytes();ledger=json.loads(raw);allocation=ledger['allocations'][q['request_id']]
+                require(allocation.get('account_id')==q['account_id'] and allocation.get('names')==[payload['campaigns'][0]['name']] and allocation.get('status') in {'RESERVED','IN_FLIGHT','COMMITTED'},'ledger owner/state')
+                if allocation.get('status')=='COMMITTED':require(allocation.get('campaign_ids')==[g['ids']['campaign_id_1']],'committed ledger IDs')
+                else:
+                    b=home/'ledger-before-finalize.json'
+                    if not b.exists():revision.atomic_bytes(b,raw)
+                    allocation.update(status='COMMITTED',campaign_ids=[g['ids']['campaign_id_1']],completed_at=utc())
+                    require(ledger_path.read_bytes()==raw,'ledger CAS');atomic(ledger_path,ledger)
+            final={'phase':'COMPLETE','request_id':q['request_id'],'campaign_name':payload['campaigns'][0]['name'],'campaign_ids':[g['ids']['campaign_id_1']],'assignments':assignments,'manager_stock_readbacks':movements,'recovery_receipt':link,'original_engine_status':load(Path(path).parent/'engine-result.json')['status'],'independent_recovery':True,'source_unchanged':True,'configured_status':'ACTIVE','scheduled_start':payload['campaigns'][0]['start_time'],'daily_budget_minor':payload['campaigns'][0]['campaign_create']['daily_budget'],'final_ads':3,'technical_paused_seeds':3,'serving_verified':False}
+            fp=Path(path).parent/'final.json';missing(fp,final)
+            fl={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
+            for p in [g['checkpoint_path'],g['audit_path'],str(Path(path).parent/'engine-result.json')]:cas_link(p,'independent_media_finalization',fl,home/'original'/Path(p).name)
+            leases.release(q['account_id'],q['request_id']);return final
+
+def independent_completion(checkpoint,record,request_id,account_id,ids,*,audit_root=None):
+    """Source admission can use independent completion without rewriting FAILED.
+    Hash links and all stock receipts are required; never infer success by status.
+    """
+    link=checkpoint.get('independent_media_finalization')
+    require(isinstance(link,dict) and link.get('phase')=='COMPLETE_INDEPENDENT','independent completion link absent')
+    fp=Path(link['path']).resolve()
+    if audit_root is None:audit_root=Path('/root/mgs-agent/data/ares/meta-ads/audit/eggbev')
+    require(fp.is_relative_to(Path(audit_root).resolve()) and fp.name=='final.json' and file_sha(fp)==link['sha256'],'independent completion path/hash')
+    final=load(fp);n=3;assignments=final.get('assignments',[])
+    require(final.get('phase')=='COMPLETE' and final.get('independent_recovery') is True and final.get('request_id')==request_id and final.get('campaign_ids')==[ids['campaign_id_1']] and final.get('final_ads')==n and final.get('technical_paused_seeds')==n and len(assignments)==n and len(final.get('manager_stock_readbacks',[]))==n,'independent completion identity/cardinality')
+    for i,a in enumerate(assignments,1):
+        require(a.get('ad_id')==ids[f'copied_ad_id_1_{i}'] and a.get('campaign_id')==ids['campaign_id_1'] and a.get('adset_id')==ids['adset_id_1'],'independent completion assignment')
+        stock=final['manager_stock_readbacks'][i-1];require(file_sha(stock['path'])==stock['sha256'],'stock receipt hash')
+        proof=load(stock['path'])
+        require(proof.get('schema')=='mgs.manager.standard.use.v1' and proof.get('status')=='verified' and proof.get('request_id')==request_id and proof.get('asset_id')==a['asset_id'] and proof.get('stock_file_id')==stock['stock_file_id'] and proof.get('assignment')=={k:a[k] for k in ['campaign_id','adset_id','ad_id','creative_id']},'independent stock assignment')
+    receipt=final.get('recovery_receipt',{});require(file_sha(receipt['path'])==receipt['sha256'],'independent media receipt hash');r=load(receipt['path'])
+    require(r.get('schema')==SCHEMA and r.get('request_id')==request_id and r.get('ids')==ids and r.get('phase')=='RECOVERY_VERIFIED_INDEPENDENT' and len(r.get('pairs',[]))==6 and len(r.get('downloads',[]))==12,'independent media receipt coverage')
+    return fp
+
+def terminal_readback(path,runner,g,cfg,q,payload,runtime_factory):
+    import ares_manager_storage_standard as standard
+    checkpoint=load(g['checkpoint_path']);fp=independent_completion(checkpoint,{},q['request_id'],q['account_id'],g['ids'],audit_root=Path(path).parent)
+    final=load(fp);link={'path':str(fp),'sha256':file_sha(fp),'phase':'COMPLETE_INDEPENDENT'}
+    for p in [g['audit_path'],str(Path(path).parent/'engine-result.json')]:require(load(p).get('independent_media_finalization')==link,'terminal completion partial links; resume finalize')
+    runtime=runtime_factory(runner,path,cfg,q,payload);runtime.g=g;runtime.authority();runtime.source_page()
+    with continuation.admission(path,payload,cfg,meta=runtime.meta,token=runtime.token):
+        selected=load(Path(path).parent/'selected-assets.json');semantic(payload,g['ids'],selected,runtime.read(),g['pairs'],'ACTIVE')
+        for asset in selected:
+            result=standard.confirm_usage(asset['asset_id'],q['request_id'],apply=False)
+            require(result.get('status') in {'verified_plan','verified'} and result.get('same_ids') is True and result.get('remote_writes',0)==0,'terminal stock readback')
+    ledger=load(runner.R/runner.naming.load_policy()['ledger_path'])['allocations'][q['request_id']]
+    require(ledger.get('status')=='COMMITTED' and ledger.get('campaign_ids')==[g['ids']['campaign_id_1']],'terminal ledger')
+    # A crash after installing final links but before release must not leave
+    # readers blocked. Never claim a new lease, nor release another request.
+    from .coordination import AccountWriterLeaseStore
+    leases=AccountWriterLeaseStore(cfg['state_root']);lp=leases.path(q['account_id'])
+    if lp.exists():
+        lease=load(lp)
+        if lease.get('blocks_readers'):
+            require(lease.get('request_id')==q['request_id'],'terminal lease belongs to another request')
+            leases.release(q['account_id'],q['request_id'])
+    return final
