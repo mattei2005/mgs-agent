@@ -65793,7 +65793,15 @@
       "watcher_restart": false,
       "campaign_writes": false,
       "cron_changed": false,
-      "state": "correction_tested_awaiting_native_push_and_monitor_readback"
+      "state": "recovery_result_and_delivery_validated",
+      "report_infra_message_id": "1571658226548867173",
+      "report_infra_get_verified": true,
+      "native_commit": "5af7cff38cd7c2ca0e6e52b9d0e8ec3b5f1bf4e0",
+      "native_push_ok_at": "2026-11-15T17:47:30-05:00",
+      "remote_main_equals_head": true,
+      "monitor_failures": 0,
+      "monitor_recovery_message_id": "1571658154775814305",
+      "monitor_recovery_get_verified": true
     },
     {
       "id": "autopush-isolated-maintenance-1571350564825206885",
