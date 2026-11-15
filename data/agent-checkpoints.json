@@ -933,12 +933,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-1571355399272145028",
-      "next_step": "Concluir probe/sanitização e QA individual; registrar os mesmos131IDs em duas parcelas técnicas100+31 pelo pedido original; congelar planos reais; consumir batches4 do executor existente sem concorrência; auditar cada destino/RAW e mapa completo.",
+      "next_step": "Consumir15novos em blocos4 pelo executor canônico, complete/monitor e auditoria; manter116pendentes sem criar linhagem nem mover usados a Exclusivos. Resolver disponibilidade/vínculos antigos por IDs já congelados sem mudar reserva ou permissões.",
       "objective": "Tratar, renomear e entregar os 131 vídeos Nicolas em SHEIN_US_EN/VID/NICOLAS - Exclusivos",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1571355399272145028/sources.json",
-      "state": "131 ids diretos estabilizados em três polls; zero overlap flat; autor humano e pasta permanente validados; preparação local sem write remoto iniciada. registro flat admite até100 fontes por request: preservar conjunto131 e particionar100+31 sem ampliar limites.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1571355399272145028/disposition.json",
+      "state": "qa/probe/sanitização local131 concluídos.15novos distintos registrados ba828b84f0920f7dbc6eb9ccd9409967 com plano congelado;116reenvios de73linhagens antigas preservados na entrada.99fontes têm used_by histórico;17 têm reserva anterior.43linhagens sem mapping e clean lógico indisponível;30com mapping falham resolvedor(9providers disponíveis,21indisponíveis). nenhum write em histórico/acl/meta.",
       "thread_id": "1571355399272145028",
-      "updated_at": "2026-11-15T02:48:16+00:00"
+      "updated_at": "2026-11-15T03:00:04+00:00"
     },
     {
       "agent": "zeus",
@@ -3014,12 +3014,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIEWER-LOAN-1571342489162489937",
-      "next_step": "Executar prepare canonico reutilizando PBIA/reservas/6IDs;verificar selos e resumo e entregar na origem para OK posterior;nao executar campanha",
+      "next_step": "Aguardar handoff/hash instalado da manutencao;retomar MESMO prepare sem replay;revalidar inicio literal e perguntar SO novo horario se vencer;entregar resumo selado e aguardar OK posterior;nao execute",
       "objective": "Preparar clone Viewer Loan e entregar resumo selado sem publicar",
-      "source": "data/ares/meta-ads/audit/maintenance/t_2559be3f/handoff.json",
-      "state": "handoffs instalados conferidos: 19 hashes ana intactos e preparador supersedido pelo hash cta aprovado;146 testes pertinentes verdes;writer livre;inicio futuro;retomada do mesmo prepare sem replay",
+      "source": "data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/prepare-legacy-feature-readback.json",
+      "state": "prepare_pending_legacy_feature_maintenance:cta3slots passou;3registry_hits;6ids epbia verificados;zero uploads/campanhas novos;standard_enhancements legado falha schema;manutencao isolada t_e6a20db6;origem avisada por1571358145392025701 getverificado",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-15T02:51:16+00:00"
+      "updated_at": "2026-11-15T02:56:30+00:00"
     },
     {
       "agent": "ares",
@@ -10727,5 +10727,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T02:51:16+00:00"
+  "updated_at": "2026-11-15T03:00:04+00:00"
 }

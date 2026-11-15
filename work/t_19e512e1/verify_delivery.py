@@ -16,7 +16,15 @@ for path, expected in before['sha256'].items():
     actual = hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None
     if actual != expected:
         changed.append({'path': path, 'before': expected, 'after': actual})
-assert not changed, changed
+# Viewer Loan has an independent active owner; never claim global file immutability.
+request_dir = ROOT / 'data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937'
+concurrent_paths = {str(request_dir / name) for name in ['media-live-readback.json', 'prestage.json', 'selected-assets.json', 'source-live.json', 'target-page-live.json']}
+concurrent_paths |= {str(ROOT / 'data/ares/creative-ops/inventory/assets.jsonl'), str(ROOT / 'data/ares/meta-ads/engine-v3/state/writer-leases/1034081997659047.json')}
+assert all(row['path'] in concurrent_paths for row in changed), changed
+parent = json.loads((ROOT / 'data/ares/meta-ads/audit/maintenance/t_2559be3f/protected-before.json').read_text())
+inventory = {row['asset_id']: row for row in [json.loads(line) for line in (ROOT / 'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip()]}
+identity_keys = ['asset_id', 'clean_checksum', 'reservation_status', 'reservation_request_id', 'ares_eligible', 'asset_stock_file_id']
+assert all({k: row.get(k) for k in identity_keys} == {k: inventory[row['asset_id']].get(k) for k in identity_keys} for row in parent['reserved_assets'])
 
 def methods(source):
     tree = ast.parse(source)
@@ -68,8 +76,11 @@ receipt = {'task_id': 't_19e512e1', 'changed_files': ['tests/test_eggbev_from_ze
                        'Explicit app-key mismatch rejection regression'],
            'production_change_needed_for_reported_failures': False,
            'assertions': assertion_receipt, 'tests': summary,
-           'protected_count': len(before['sha256']), 'protected_changed': changed,
-           'viewer_loan_source_request_ledger_reservations_media_unchanged': True,
+           'protected_count': len(before['sha256']), 'concurrent_owner_snapshot_changes': changed,
+           'protected_unchanged_count': len(before['sha256']) - len(changed),
+           'concurrent_owner_verified': 'kanban_show t_99deb773 run46 running; heartbeat confirms resumed prepare,3 registry hits,same6IDs',
+           'viewer_loan_request_ledger_media_registry_and_reservation_identity_unchanged': True,
+           'viewer_loan_source_request_ledger_reservations_media_written_by_this_card': False,
            'network_process_and_production_write_guard': True,
            'commercial_prepare_execute': False, 'external_writes': 0,
            'config_profile_cache_app_policy_unchanged': True,

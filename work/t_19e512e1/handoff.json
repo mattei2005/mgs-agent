@@ -1,0 +1,139 @@
+{
+  "task_id": "t_19e512e1",
+  "changed_files": [
+    "tests/test_eggbev_from_zero_v3.py",
+    "tests/test_eggbev_creation_intake.py"
+  ],
+  "cause": [
+    "Fixture omitted explicit app_key while validator uses installed Ana account binding; live from-zero runner already passes runtime_app_key()",
+    "Intake used wall clock but asserted summer -04:00 during winter -05:00"
+  ],
+  "changes": [
+    "Fixture app_key from same CONFIG/accounts/ACCOUNT_ID used by policy validation",
+    "Pure dry-run state/audit roots isolated in fixture temporary directory",
+    "Intake clock fixed module-locally with winter/summer and both DST transition coverage",
+    "Explicit app-key mismatch rejection regression"
+  ],
+  "production_change_needed_for_reported_failures": false,
+  "assertions": {
+    "test_eggbev_from_zero_v3.py": {
+      "original_test_methods": 17,
+      "new_test_methods": [
+        "test_policy_rejects_app_key_mismatch"
+      ],
+      "business_assertions_preserved": true
+    },
+    "test_eggbev_creation_intake.py": {
+      "original_test_methods": 4,
+      "new_test_methods": [
+        "setUp",
+        "test_minimal_request_keeps_summer_offset",
+        "test_next_midnight_obeys_dst_at_the_target_calendar_day"
+      ],
+      "business_assertions_preserved": true
+    }
+  },
+  "tests": {
+    "baseline-clean": {
+      "tests_run": 21,
+      "failures": 6,
+      "errors": 3,
+      "skipped": 0,
+      "successful": false,
+      "blocked_transports": [],
+      "write_denials": [],
+      "protected_unchanged_during_tests": true
+    },
+    "targeted-final": {
+      "tests_run": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "successful": true,
+      "blocked_transports": [],
+      "write_denials": [],
+      "protected_unchanged_during_tests": true
+    },
+    "broad-verified": {
+      "tests_run": 170,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "successful": true,
+      "blocked_transports": [],
+      "write_denials": [],
+      "protected_unchanged_during_tests": true
+    },
+    "guard-verified": {
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "successful": true,
+      "blocked_transports": [],
+      "write_denials": [],
+      "protected_unchanged_during_tests": true
+    }
+  },
+  "protected_count": 198,
+  "concurrent_owner_snapshot_changes": [
+    {
+      "path": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+      "before": "db5c8d290227a6d3af67275ec2bf85f355f86c18478d8233e979e56fc82bb43a",
+      "after": "27e229bda61120674bc545bcf46a3746d87ab84dc2b1b206d6501aba1a55a848"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/media-live-readback.json",
+      "before": "d56209c2a4764913fe3e3e4fb9532f22a0ea4d0bc666d6f8026802de46cda312",
+      "after": "398322936d93acafb6d449dac3da319c0e6a3ca4460c9edf22d4881d35ff7b88"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/prestage.json",
+      "before": "e14d08b597cd3d088942e76fea684130907af86aac831153e26815f3d471facc",
+      "after": "5209da0988114a8bd27abb76763fd994c5d11be120b3c118a43ee48f7ef98f21"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/selected-assets.json",
+      "before": "de550396af39f43136eb02db52578613e3956a3eef947deabd0e91748ce6023a",
+      "after": "5283cd3a293aa55655683f50aa1a3570989597cd474d4871d7f5dd9f02417219"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/source-live.json",
+      "before": "5e4eb24ddf36c4d105119a0835977b9c45432ab41791f476e6e6f97440fca046",
+      "after": "2ed9310b65fc38e6411a664531ce81425f04a2963a03f8e53d0267ff6bd43ac1"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/target-clone/eggbev-pg23189-1571342489162489937/target-page-live.json",
+      "before": "0ad14fc97d41586cfeb403e856d8dba37741fe3c5a7bc2660552c1ef6f4f6a69",
+      "after": "79a49a1bdff51af5f2cdccf3d264f8670483c02916774aede8d348ed3ed6efbe"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/writer-leases/1034081997659047.json",
+      "before": "ecc4913efbefa433b50f976e59f07d638646d013ce1f1af5a09e6a9fd868c81a",
+      "after": "880deca7df81f40b9f3c17a424d74b6bd495de9b70995d7c8044dd34cb846870"
+    }
+  ],
+  "protected_unchanged_count": 191,
+  "concurrent_owner_verified": "kanban_show t_99deb773 run46 running; heartbeat confirms resumed prepare,3 registry hits,same6IDs",
+  "viewer_loan_request_ledger_media_registry_and_reservation_identity_unchanged": true,
+  "viewer_loan_source_request_ledger_reservations_media_written_by_this_card": false,
+  "network_process_and_production_write_guard": true,
+  "commercial_prepare_execute": false,
+  "external_writes": 0,
+  "config_profile_cache_app_policy_unchanged": true,
+  "memory_skill_changes": false,
+  "test_hashes_before": {
+    "test_eggbev_from_zero_v3.py": "f45d4398071509e3c76b56f6370e0c2d8775bfc83362f5c5685a2758d641d3ef",
+    "test_eggbev_creation_intake.py": "614acea4cb82abbcf5bb06517981dd4618960acbc5e1eae7fc03d2f0ccc9376a"
+  },
+  "test_hashes_after": {
+    "test_eggbev_from_zero_v3.py": "df1c56ee598bee4dd7b384d4099ed5fa70fae9221af60d46b9ac31b93c27db9c",
+    "test_eggbev_creation_intake.py": "52885fe6283804a9046cac8b2631e47ff623aa1f7b42152f475a32b9a1f72b5c"
+  },
+  "sha256": {
+    "fixture-only.diff": "710dd183035fe453f8312051d8c14632a122bd23dc06692982ac613eaad0c50d",
+    "run_offline_tests.py": "f58b93524de708b249ab8ed537ce2598895bc67cdfb060616bb88780b7567fd2",
+    "broad-verified.json": "782a4c8b95846a5a103318402853f70e91a1f215b64e6398f32a3cc584198c9c",
+    "guard-verified.json": "01672821fd5318ed8c98a37ca6a9a827419e96d5a8136e711ece4b67bf78b95f"
+  }
+}
