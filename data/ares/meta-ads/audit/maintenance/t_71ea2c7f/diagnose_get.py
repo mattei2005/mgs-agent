@@ -5,7 +5,9 @@ from pathlib import Path
 from datetime import datetime,timezone
 sys.path.insert(0,'/root/mgs-agent/scripts')
 ROOT=Path(__file__).resolve().parent
-spec=importlib.util.spec_from_file_location('image_diagnostic_runner','/root/mgs-agent/scripts/ares-eggbev-target-clone.py');r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
+spec=importlib.util.spec_from_file_location('image_diagnostic_runner','/root/mgs-agent/scripts/ares-eggbev-target-clone.py')
+assert spec is not None and spec.loader is not None
+r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
 common,meta,sb,token=r.runtime()
 # Prevent accidental mutation through this diagnostic runtime.
 def forbidden(*a,**k):raise RuntimeError('GET-only maintenance forbids writes')
