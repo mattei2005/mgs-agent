@@ -1,7 +1,9 @@
 """Supplement retained gate logs and inspect candidate evidence linkage, without executing application code."""
 from typing import Any
 import pathlib,json,gzip,os,collections,stat
-OUT=pathlib.Path(__file__).parent;OLD=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE=OLD/'batched';REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system'
+OUT=pathlib.Path(__file__).parent
+if globals().get('__name__')=='__main__'and(OUT/'review-final.sha256').exists():raise SystemExit('SEALED_REFERENCE_AUDIT: read receipts instead of rerunning collectors')
+OLD=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE=OLD/'batched';REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system'
 source=(OUT/'batched-references.py').read_text();ns: dict[str, Any] = {'__file__':str(OUT/'batched-references.py')};exec(compile(source[:source.index('# Validate directory boundary')],'reference-engine-only','exec'),ns)
 rows=json.load(open(OUT/'reference-matrix-collected.json'));targets=[r['path']for r in rows];lookup={r['path']:r for r in rows};proposed=[r['path']for r in rows if not r['protected']and not r['sources']];assert len(proposed)==3
 logs=[];errors=[];hits=[]

@@ -276,6 +276,8 @@ def run(engine,bundle,transport,record):
     same_immediate=all(allows_new_shells(engine,c) for c in bundle.campaigns)
     if recovering or elapsed:
         reconcile_existing(engine,bundle,transport,record,require_shells=elapsed and bundle.campaigns[0].mode!='clone_cross_account_prestaged' and not same_immediate)
+    from .post_actor_recovery import repair
+    repair(engine,bundle,transport,record)
     for stage in stages(bundle.campaigns):
         operations=[]
         for template in stage.operations:

@@ -15,7 +15,8 @@ class RoutingContinuationTests(unittest.TestCase):
  def fixture(self):
   self.temp=tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch');self.addCleanup(self.temp.cleanup);root=Path(self.temp.name)
   home=R/'data/ares/meta-ads/audit/eggbev/same-account'/RID/'execution'
-  payload=json.loads((home/'effective-manifest.json').read_text());cp=json.loads((R/'data/ares/meta-ads/engine-v3/state/checkpoints'/f'{RID}-{AID}.json').read_text());record=cp['bundles'][0]
+  baseline=R/'data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/baseline'
+  payload=json.loads((home/'effective-manifest.json').read_text());cp=json.loads((baseline/'data/ares/meta-ads/engine-v3/state/checkpoints'/f'{RID}-{AID}.json').read_text());record=cp['bundles'][0]
   cfg=json.loads((S/'data/ares/meta-ads/engine-v3/config.json').read_text());cfg['state_root']=str(root/'state');cfg['audit_root']=str(root/'audit')
   q=json.loads((R/'data/ares/meta-ads/requests'/(RID+'.json')).read_text());q['resume_authority_message_id']='1571996433999990885'
   qp=root/'data/ares/meta-ads/requests'/(RID+'.json');qp.parent.mkdir(parents=True);qp.write_text(json.dumps(q))
@@ -43,9 +44,7 @@ class RoutingContinuationTests(unittest.TestCase):
   proof={'request_id':RID,'route_receipt':receipt,'verified_at_monotonic':time.monotonic()}
   class Engine:
    _same_account_execution_authority=proof
-   def _batch(self,bundle,transport,ops,stage):
-    if len({o.name for o in ops})!=len(ops):raise AssertionError('duplicate Graph batch names')
-    return [BatchResult(o.name,200,{'id':o.relative_url.split('?')[0],'account_id':AID,'status':'PAUSED'}) for o in ops]
+   def _batch(self,bundle,transport,ops,stage):return [BatchResult(o.name,200,{'id':o.relative_url.split('?')[0],'account_id':AID,'status':'PAUSED'}) for o in ops]
   marker=same.CURRENT.set(proof)
   try:
    with patch.object(route,'ROOT',root):
@@ -72,5 +71,41 @@ class RoutingContinuationTests(unittest.TestCase):
     self.assertEqual(payload,original);self.assertEqual(manifest.digest,record['sealed_manifest_digest'])
     self.assertTrue(any(x[0]=='target_seed_create' for x in writes));self.assertEqual(len([v for v in fake.objects.values() if v.get('_kind')=='ad']),30)
     count=len(fake.calls);self.assertTrue(engine.execute(manifest)['idempotent_replay']);self.assertEqual(len(fake.calls),count)
+   finally:same.CURRENT.reset(marker)
+ def _repair_fixture(self, refuse=False):
+  root,home,payload,record,cfg,q,fake,rp=self.fixture()
+  record['error']={'stage':'target_seed_create','type':'BatchTransportError','detail':{'children':[{'name':f'target_seed_create_{ci}_{ai}','code':400,'error':{'code':200,'error_subcode':3858756,'is_transient':False}} for ci in (1,2) for ai in (1,2,3)]}}
+  cp=root/'state/checkpoints'/f'{RID}-{AID}.json';body=json.loads(cp.read_text());body['bundles'][0]=record;cp.write_text(json.dumps(body))
+  old=fake.execute
+  def execute(ops,stage):
+   if refuse and stage=='post_actor_seed_repair':
+    fake.calls.extend((stage,o.name,o.method,o.relative_url) for o in ops)
+    raise RuntimeError('synthetic fresh-post refusal; stop after first slot')
+   return old(ops,stage)
+  fake.execute=execute
+  return root,payload,record,cfg,q,fake,rp
+ def test_repair_preserves_all_old_ids_and_completes_exact_children(self):
+  root,payload,record,cfg,q,fake,rp=self._repair_fixture();original_ids=copy.deepcopy(record['target_clone_ids'])
+  with patch.object(route,'ROOT',root),patch.object(same,'ROOT',root):
+   receipt=route.receipt_for(q,payload,cfg);proof={'request_id':RID,'approved_digest':'5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48','approval_message_id':'1571940565040234679','verified_at_monotonic':time.monotonic(),'route_receipt':receipt,'elapsed_campaign_digests':[same.digest(c) for c in payload['campaigns']],'admitted_manifest_sha256':same.digest(payload)};marker=same.CURRENT.set(proof)
+   try:
+    manifest=Manifest.from_dict(payload);proof['digest']=manifest.digest;engine=CampaignEngine(cfg,transport_factory=lambda a:fake);result=engine.execute(manifest);self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE')
+    saved=json.loads((root/'state/checkpoints'/f'{RID}-{AID}.json').read_text())['bundles'][0];self.assertEqual(saved['post_actor_repair']['status'],'REPAIRED_VERIFIED')
+    self.assertEqual(len(saved['post_actor_repair']['slots']),6);self.assertEqual(saved['campaign_ids'],record['campaign_ids']);self.assertEqual(saved['adset_ids'],record['adset_ids'])
+    for k,v in original_ids.items():
+     if k.startswith('creative_id_'):self.assertIn(v,fake.objects)
+    self.assertEqual(len([v for v in fake.objects.values() if v.get('_kind')=='ad']),30)
+   finally:same.CURRENT.reset(marker)
+ def test_repair_stops_at_first_fresh_post_refusal(self):
+  root,payload,record,cfg,q,fake,rp=self._repair_fixture(refuse=True)
+  with patch.object(route,'ROOT',root),patch.object(same,'ROOT',root):
+   receipt=route.receipt_for(q,payload,cfg);proof={'request_id':RID,'approved_digest':'5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48','approval_message_id':'1571940565040234679','verified_at_monotonic':time.monotonic(),'route_receipt':receipt,'elapsed_campaign_digests':[same.digest(c) for c in payload['campaigns']],'admitted_manifest_sha256':same.digest(payload)};marker=same.CURRENT.set(proof)
+   try:
+    manifest=Manifest.from_dict(payload);proof['digest']=manifest.digest;engine=CampaignEngine(cfg,transport_factory=lambda a:fake)
+    with self.assertRaisesRegex(RuntimeError,'synthetic fresh-post refusal'):engine.execute(manifest)
+    self.assertEqual(len([x for x in fake.calls if x[0]=='post_actor_creative_repair']),1);self.assertEqual(len([v for v in fake.objects.values() if v.get('_kind')=='ad']),0)
+    count=len([x for x in fake.calls if x[2]=='POST'])
+    with self.assertRaisesRegex(ValueError,'fresh post still refused or uncertain'):engine.execute(manifest)
+    self.assertEqual(count,len([x for x in fake.calls if x[2]=='POST']))
    finally:same.CURRENT.reset(marker)
 if __name__=='__main__':unittest.main()

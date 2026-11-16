@@ -1,7 +1,9 @@
 """Resume-safe bounded reference scan; no database opens and no target mutation."""
 from typing import Any
 import pathlib,os,json,re,time,subprocess,ast,collections,datetime,stat
-OUT=pathlib.Path(__file__).parent;OLD=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE=OLD/'batched';PRIVATE.mkdir(mode=0o700,exist_ok=True);REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system';TARGETS=[r['path']for r in json.load(open(REPO/'data/storage-reaudit-1571983565292441731/postgres-clusters.json'))]
+OUT=pathlib.Path(__file__).parent
+if globals().get('__name__')=='__main__'and(OUT/'review-final.sha256').exists():raise SystemExit('SEALED_REFERENCE_AUDIT: read receipts instead of rerunning collectors')
+OLD=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE=OLD/'batched';PRIVATE.mkdir(mode=0o700,exist_ok=True);REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system';TARGETS=[r['path']for r in json.load(open(REPO/'data/storage-reaudit-1571983565292441731/postgres-clusters.json'))]
 def dump(p,x):
  t=p.with_suffix(p.suffix+'.new');t.write_text(json.dumps(x,indent=2)+'\n');os.replace(t,p)
 if not(PRIVATE/'reference-source-index.json').exists():

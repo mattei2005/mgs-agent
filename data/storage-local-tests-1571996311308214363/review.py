@@ -1,6 +1,8 @@
 """Infrastructure-only review of local state directories. No DB startup, SQL, mutation or payload copies."""
 import pathlib,os,json,gzip,stat,subprocess,datetime,re,collections,time
-OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE.mkdir(mode=0o700,exist_ok=False);REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system';prior=json.load(open(REPO/'data/storage-reaudit-1571983565292441731/postgres-clusters.json'));TARGETS=[r['path']for r in prior];assert len(set(TARGETS))==34
+OUT=pathlib.Path(__file__).parent
+if globals().get('__name__')=='__main__'and(OUT/'review-final.sha256').exists():raise SystemExit('SEALED_REFERENCE_AUDIT: read receipts instead of rerunning collectors')
+PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');PRIVATE.mkdir(mode=0o700,exist_ok=False);REPO=pathlib.Path('/root/mgs-agent');APP=REPO/'apps/finance-system';prior=json.load(open(REPO/'data/storage-reaudit-1571983565292441731/postgres-clusters.json'));TARGETS=[r['path']for r in prior];assert len(set(TARGETS))==34
 protected=json.load(open(REPO/'data/storage-reorganization-1570447435074109502/generated-tests-1570473727043436596/manifest.json'))['protected_prior_roots'];START=time.time()
 def dump(p,x):p.write_text(json.dumps(x,indent=2,ensure_ascii=False)+'\n')
 def under(p,r):return p==r or p.startswith(r+'/')
