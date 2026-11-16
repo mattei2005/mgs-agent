@@ -167,6 +167,11 @@ Treat an official hosting-provider Connector/MCP as a **control-plane** route, n
 
 For MGS, expose only the provider's VPS product group or VPS-scoped MCP server when that is the requested scope; do not enable a unified connector that also exposes billing, domains, DNS, ecommerce, or unrelated hosting actions merely for disk maintenance. Prefer read-only inventory first and prove the connector is bound to the exact VPS. OAuth or an API token is a separate credential/configuration change, so do not install, connect, or generate credentials just because documentation was supplied. Store approved secrets through the governed credential route, validate one real non-mutating call, and inventory/report the integration. Provider restart, firewall/SSH mutation, backup restore, billing, and purchase tools retain their own Critical gates; a whole-VPS restore overwrites guest data and is never an incidental cleanup step.
 
+### 4.2 Live backup high-water marks are not abandoned residue
+
+- Correlate a large temporary backup/encryption workspace with its actual scheduler, wrapper, producer lifecycle and exact success receipt before calling it waste. A full scan can observe profile ZIPs, plaintext bundle and encrypted upload together; a pre-existing `TemporaryDirectory` producer may legitimately remove that workspace before delivery. Preserve the scan ledger, record the exact departed subtree and native lifecycle separately, then capture fresh `df`; never count that automatic removal as savings caused by the audit or offer the already-absent subtree as a new deletion lot.
+- Partition application trees and agent profiles by role before assigning necessity: separate source/dependencies, exports/archives, generated database state, historical snapshots, working/test copies, media/evidence, live conversation state and installed tools. A repository `backups/` or `tmp/` directory is not institutional source code; a profile `work/` or `workspace/` is not automatically conversation memory. Recompute one inode-aware category partition and keep detailed child views non-additive to the parent totals.
+
 ## 5. Evidence tiers for "unused"
 
 A filesystem scan cannot prove semantic non-use. Classify findings as:
