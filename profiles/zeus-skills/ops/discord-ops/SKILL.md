@@ -57,6 +57,13 @@ Quando Rodolfo pedir para ensinar ou explicar ao agente como corrigir, executar 
 
 Não transformar envio de instrução em implantação autorizada, nem afirmar que o método funciona ponta a ponta apenas porque o acesso administrativo passou. Distinguir instrução entregue, execução observada e resultado aceito.
 
+## Comparar alternativas para uma operação que falhou
+
+1. Tratar exemplos condicionais de Rodolfo como hipóteses, não como novos pedidos de produção. Resolver nas fontes a conta e a identidade da fonte; nomes repetidos exigem desambiguação antes de qualquer execução.
+2. Comparar os deltas reais: mesma conta versus transferência entre contas, mesma Página versus troca de Página e mídia preservada versus substituída. Separar obstáculos eliminados, etapas compartilhadas e dependências novas; uma redação diferente só muda o diagnóstico quando muda a operação.
+3. Reconhecer modalidades já executadas como operações conhecidas. Não apresentar troca de Página/criativos como novidade ou impedimento rotineiro só porque há várias etapas internas; distinguir suporte histórico da modalidade, integração da conta atual e aceite produtivo do pedido exato.
+4. Localizar a etapa comum ao erro antes de estimar sucesso da alternativa. Um erro genérico do provedor não prova causa externa, e mudar a fonte não comprova recuperação. Dizer objetivamente o que a alternativa simplifica e o que somente um teste autorizado pode confirmar, sem culpar a formulação de um pedido claro.
+
 ## Acompanhar execução de outro agente
 
 Quando Rodolfo pedir para acompanhar, observar a execução até a entrega ou um bloqueio decisório concreto, sem assumir o writer nem enviar cobranças repetidas ao agente:
@@ -64,7 +71,7 @@ Quando Rodolfo pedir para acompanhar, observar a execução até a entrega ou um
 1. Ler mensagens posteriores ao último checkpoint e conferir os artefatos que sustentam o avanço; ACK, indicador de atividade e resumo do próprio agente não comprovam aceite.
 2. Identificar o pacote e o recibo finais. Não somar testes de candidatos substituídos nem promover fixtures, lint ou revisão local a recuperação certificada em produção.
 3. Se a revisão mudar a finalidade do pacote, explicitar a diferença antes de recomendar autorização: inspeção/exportação não é reparo, e sua aprovação não libera escrita posterior.
-4. Para acompanhamento curto, manter observação limitada em foreground. Só prometer continuidade após encerrar o turno quando existir um mecanismo durável configurado e verificado; não criar cron apenas para responder uma consulta pontual.
+4. Para acompanhamento curto, manter observação limitada em foreground. Só prometer continuidade após encerrar o turno quando existir um mecanismo durável configurado e verificado; não criar cron apenas para responder uma consulta pontual. Quando Rodolfo disser que ainda enviará um novo pedido, iniciar em espera pelo comando humano na origem e correlacionar seu ID ao novo request, sem executar a hipótese nem retomar o lote anterior pausado. Usar estado/cursor próprios do observador, preservando o checkpoint e o writer do executor. Distinguir agendamento confirmado de primeira observação executada; a promessa de acompanhar até o fim exige também continuidade verificável após o limite de ciclos, não apenas uma instrução de renovação no prompt.
 5. Encerrar com o resultado ou com fato, causa comprovada/lacuna, recomendação e decisão exata pendente. Não pedir novamente uma confirmação igual sem mudança material, nem apresentar monitoramento concluído como reparo concluído.
 
 ## Execução ponta a ponta sem vai e vem
