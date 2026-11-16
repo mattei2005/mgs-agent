@@ -5125,12 +5125,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar reconciliacao de arquivos originais e IDs de midia pelo Ares;distinguir acesso/ausencia/preparacao sem inferir exclusao. Preservar erro anterior de promocao ainda nao resolvido,objetos e parametros;exigir missing-only e readback final5campanhas/15anuncios. Nao alterar credenciais/permissoes nem executar campanhas.",
+      "next_step": "Observar integracao da recuperacao de midia pelo Ares e execucao missing-only no mesmo pedido. Validation_only nao e criacao;exigir readback final das5campanhas/15anuncios e preservar objetos,parametros,writer,permissoes e credenciais.",
       "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;retomada humana1571996433999990885.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "nova evidencia ares: reconciliacao completa8paginas/711videos nao encontrou nenhum dos30ids preparados;2gets diretos falharam meta100/subcode33. nao prova exclusao:ausencia ou acesso seguem ambiguos. engine22:32:20z falhou post_actor_creative_repair com batchtransporterror. ares reconcilia originais/preparacao;sem conclusao5campanhas/15anuncios,writer unico preservado.",
+      "state": "recibos correlacionados:15ativos/30ids novamente preparados e associados a conta03;bytes originais preservados segundo recibo. meta validation_only do primeiro criativo http200/success alterando somente2ids de video,sem objeto criado. nao comprova criacao de anuncios nem recuperacao integral. ares integra recuperacao;5campanhas/15anuncios ainda sem readback final.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T22:38:30+00:00"
+      "updated_at": "2026-11-16T22:53:48+00:00"
     },
     {
       "agent": "zeus",
@@ -10338,12 +10338,12 @@
     {
       "agent": "ares",
       "id": "shein-1572017837202079819",
-      "next_step": "Dry-run e retomada central do mesmo request para QA semântico/renderizado e activate_verified; verificar todos os IDs/budgets/início/tracking e entregar conclusão + bloco Iris.",
+      "next_step": "Entregar conclusão nativa e bloco Iris/AdOps com os mesmos key values verificados. Nenhum write Meta adicional; anúncios pendentes dependem da análise Meta, não há serving comprovado.",
       "objective": "Duplicar C020 3 vezes na Mavroa-US-SHEIN-ES-03-G003, USD100/dia por campanha, início 2026-11-17 00:00 America/New_York.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1572017837202079819/reviewed-feature-omissions.json",
-      "state": "review_accepted_validated: isliago aprovou omissões creative_stickers e video_filtering pela mensagem 1572020009713147970 em resposta ao diagnóstico 1572019347663364117. receipt novo validado verified=true e autoridade live; mesmos 3 campaigns, 3 adsets e 6 ads do request original. prior grants preservados; sem alteração meta nesta etapa.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572017837202079819/completion-receipt.json",
+      "state": "complete_future_active: c033/c034/c035 na conta 1543098427832443; 3 campanhas, 3 conjuntos e 6 anúncios configurados active; usd100/dia cada, usd300/dia no lote; início 2026-11-17 00:00 america/new_york; cost_cap usd1.15. qa semântico e mídia renderizada completos; ids originais preservados, sem replay. aceite de isliago 1572020009713147970 registrado/validado para creative_stickers/video_filtering ausentes. posts novos. get terminal fresco: 3 anúncios pending_review, issues_info null em todos. utms literais conferidas no receipt; domínio adops mavroa.com validado.",
       "thread_id": "1558127210966032385",
-      "updated_at": "2026-11-16T22:47:39+00:00"
+      "updated_at": "2026-11-16T22:51:39+00:00"
     },
     {
       "agent": "ares",
@@ -11147,5 +11147,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T22:47:39+00:00"
+  "updated_at": "2026-11-16T22:53:48+00:00"
 }
