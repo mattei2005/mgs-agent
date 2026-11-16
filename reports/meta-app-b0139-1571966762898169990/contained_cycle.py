@@ -16,7 +16,7 @@ ns['STATE_PATH'] = Path('/root/mgs-agent/data/b013-dtr-link-monitor-state.json')
 config = ns['load_config']()
 assert config['app_name'] == 'B013-9' and config['app_id'] == '2030252157625027'
 rows = ns['sheet_rows'](config)
-assert rows and all(str(r.get('pages') or '').isdigit() and len(str(r.get('pages') or '')) <= 5 for r in rows)
+assert rows and all(not str(r.get('pages') or '').strip() or (str(r.get('pages') or '').isdigit() and len(str(r.get('pages') or '')) <= 5) for r in rows)
 posts = []
 def contain(config, content='', embed=None, **kwargs):
     posts.append({'channel_id': config['alert_channel_id'], 'embed_title': (embed or {}).get('title'), 'content_present': bool(content)})

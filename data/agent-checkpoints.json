@@ -6868,12 +6868,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-UV-1571959754081837281",
-      "next_step": "Gatea878f47d/exec87d66ae3:193targets/235046files26594dirs415links;188orphan83envs/703.12MiBphysicalmax;63046retainedpayloads/15negativosPASS;0delete/prune. AguardaSimcriticoaposentadoriaestadohistorico,naorestoreexato. Manter529archives/cacheHermes0.13.5eAt ena/perfis/browsermodelos/Gitbases.",
-      "objective": "Revisao UV executada em leitura; lote nativo exato preparado para aposentadoria explicita de estado de cache; nenhuma exclusao executada.",
-      "source": "data/storage-uv-1571959754081837281/review-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571959754081837281",
-      "state": "awaiting_critical_confirmation_uv_cache_state_retirement",
+      "next_step": "Sim1571969258986938601 validado; frozenmanifest/exec originais. Executar1x native prune offline/semforce/ci. Se falha ler native-result e target-readback; nunca repetir comando cegamente.",
+      "objective": "Executar uma vez o lote nativo UV193alvos confirmado1571969258986938601; preservar instalados/cachePM e verificar resultado real.",
+      "source": "data/storage-uv-1571959754081837281/retirement-final.json;discord:1569928464033783862/1571969258986938601",
+      "state": "approved_native_uv_execution_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T19:17:29+00:00"
+      "updated_at": "2026-11-16T19:29:06+00:00"
     },
     {
       "agent": "zeus",
@@ -8218,12 +8218,12 @@
     {
       "agent": "zeus",
       "id": "b0138-to-b0139-1571961868418027543",
-      "next_step": "Autorização 1571966762898169990: alinhar mesmas atribuições NO APP, canário DTR completo, baseline/clean repeat, retomar jobs existentes e validar ciclo agendado.",
+      "next_step": "Canário completo aprovado:107 perfis,8 vinculados,99 não vinculados,0 inconclusivos;capacidade saudável. Registry/runner migrados para B013-9 e estado novo. Processo único proc_aeb2bd75f64a faz baseline1+paridade+baseline2+paridade. Consumir resultado; só então retomar os jobs existentes e validar ciclo agendado.",
       "objective": "Concluir B013-8→B013-9 e religar os mesmos dois agendamentos após validação.",
       "source": "discord:1571959312111374447:1571966762898169990",
-      "state": "executing",
+      "state": "baseline_validation",
       "thread_id": "1571959312111374447",
-      "updated_at": "2026-11-16T19:15:17+00:00"
+      "updated_at": "2026-11-16T19:28:24+00:00"
     },
     {
       "agent": "zeus",
@@ -11027,5 +11027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:18:17+00:00"
+  "updated_at": "2026-11-16T19:29:06+00:00"
 }
