@@ -43,11 +43,13 @@
           "thread_id": "1565032671669919827",
           "engine_account_registered": true,
           "supported_modes": [
-            "clone_cross_account_prestaged"
+            "clone_cross_account_prestaged",
+            "clone_target_prestaged"
           ],
           "write_enabled": true,
           "runner": "scripts/ares-eggbev-target-clone.py",
-          "capability_authority": "1571652369467445359"
+          "capability_authority": "1571652369467445359",
+          "same_account_replacement_authority": "1571911721063546892"
         }
       },
       "onboarding_evidence": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585",

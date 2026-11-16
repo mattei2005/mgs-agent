@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "active",
+  "implementation_verified": true,
+  "mode": "clone_target_prestaged",
+  "authorized_by_discord_id": "344196393512075265",
+  "authority_message_id": "1571911721063546892",
+  "authority_content_sha256": "507a9a8be3d145a86daa9644b28bf42a8dc0720d8baeabdf0406c393692bf082",
+  "source_thread_id": "1565032671669919827",
+  "account_ids": [
+    "1481815942722118"
+  ],
+  "request_only": true,
+  "future_requests_authorized": false,
+  "exclusions": [
+    "other accounts",
+    "source changes",
+    "credential changes",
+    "billing",
+    "automation changes",
+    "old request recovery"
+  ],
+  "requests": {
+    "eggbev03-c212-replacement-1571894746719330377": {
+      "spec_sha256": "0cebbe768cb45813ef90f64e874a16fdaa2f28c132cd5e15fe401d90b53f4583",
+      "source_campaign_id": "120250364730440507",
+      "template_ad_ids": [
+        "120250364730460507",
+        "120250364730470507",
+        "120250364730460507"
+      ],
+      "source_snapshot_cardinality": 4,
+      "output_ads_per_campaign": 3,
+      "mapping_note": "Preserve all four source objects in snapshot. Explicit output mapping reuses source AFS templates with directly observed empty primary text and literal CTA/features; each output replaces media/copy as requested. No source ad is deleted or mislabeled as a seed.",
+      "target_page_id": "1272524399287905",
+      "target_page_token": "pg_23187",
+      "start_intent": "IMMEDIATE_EXPLICIT_NEW_REQUEST",
+      "commercial_execution_message_id": "1571904284692316444",
+      "final_summary_ok_required": true,
+      "technical_paused_seeds_preserved": true
+    }
+  }
+}

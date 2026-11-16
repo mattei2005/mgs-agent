@@ -52,7 +52,9 @@
   "approval_inherited_from_other_requests": false,
   "support_case_dependency": false,
   "media_reconciliation_policy": "Normal account-scoped checksum/registry/reservation reconciliation for this independent request. No blind duplicate upload, reservation release or inherited campaign approval.",
-  "phase": "EXECUTION_AUTHORIZED_TECHNICAL_GATE_PENDING",
+  "phase": "TECHNICAL_INTEGRATION_INSTALLED_PENDING_PREPARATION",
+  "technical_authorization": {"message_id":"1571911721063546892","authorized_by_discord_id":"344196393512075265","live_verified":true,"scope":"Code/config central adjustment only for this independent account03 request; preserve standards, other accounts, credentials, billing and automations","approval_required_again":false},
+  "technical_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
   "commercial_execution_instruction": {
     "message_id": "1571904284692316444",
     "author_discord_id": "344196393512075265",
@@ -60,7 +62,7 @@
     "live_verified": true,
     "scope": "Execute Rodolfo's NEW independent same-account03 source212 request; never resume the cancelled request.",
     "sealed_manifest_approval_inferred": false,
-    "scoped_code_config_authorization_unresolved": true
+    "scoped_code_config_authorization_unresolved": false
   },
   "latest_admission_readback": {
     "account_scope_allowed": true,
@@ -79,9 +81,9 @@
     {"id": "120250364730440507", "status": "ACTIVE"}
   ],
   "source_selection_ambiguous": false,
-  "remaining_gate": "Scoped technical authorization for isolated central same-account03 replacement integration; no further source selection needed.",
+  "remaining_gate": "Complete fresh preparation and sealed summary; subsequent final summary approval required before campaign creation. Technical authorization and source selection are resolved.",
   "required_technical_change": "Independent same-account03 Page/media/copy replacement is not admitted by the currently installed central route. Any required scoped technical integration belongs only to this new request and is not continuation of another campaign request. Credential/billing/other operations unchanged.",
-  "next_step": "Handle exclusively as new independent Rodolfo request on account03, source212 chosen under1571896700027539457. Keep requested five campaigns, three requested media/final ads per campaign, Page/copy/budget and existing standards. No source-account01 dependency, campaign object adoption, old approval or support dependency. Installed route-readiness limitation remains documented separately; a scoped structural change requires its own authorization, not inferred from cancellation. No campaign write until applicable technical and publication gates pass.",
+  "next_step": "Run canonical ares-eggbev-target-clone.py prepare --input this independent request --confirm-prepare through new same-account dispatch after installed regression. Reconcile exact Page/media/reservations and keep source4 objects in snapshot with explicit requested3-slot mapping. Use standard global naming, then seal/plan and present full own summary including15PAUSED seeds and JSON-AGT for final OK. Do not resume cancelled request or ask again for technical authorization, source choice, budget or standards.",
   "execution_mode": "foreground",
   "campaign_writes": 0,
   "manifest_sealed": false,

@@ -1711,6 +1711,8 @@ class CampaignEngine:
     @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         if self.read_only:raise EngineDisabled('read-only planner cannot execute')
+        from .eggbev_same_account_replacement import require_execution as require_same_execution
+        require_same_execution(manifest,self.config)
         from .eggbev_cross_account import require_execution as require_cross_execution
         self._cross_account_execution_authority = require_cross_execution(manifest,self.config)
         from .operator_suspension import deny_replay

@@ -86,5 +86,15 @@
       "eggbev03-cross-account-1571623835822858352"
     ],
     "scope": "Exact request only, same global/page sequence and ledger; supersedes no existing mode; no DUP suffix; source unchanged."
+  },
+  "same_account_replacement_extension": {
+    "status": "active",
+    "account_id": "1481815942722118",
+    "mode": "clone_target_prestaged",
+    "allowed_request_ids": [
+      "eggbev03-c212-replacement-1571894746719330377"
+    ],
+    "authority_message_id": "1571911721063546892",
+    "scope": "this independent request only; preserve shared global naming and existing three-account history rules"
   }
 }

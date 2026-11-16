@@ -48,8 +48,9 @@ def completion_proof(q,payload,checkpoint,records,selected):
         raise ValueError('duplicate or missing completion identities')
     return {'campaign_ids':campaign_ids,'assignments':assignments,'technical_seed_ids':seed_ids,'actual_start_times':actual_start_times}
 
-def finalize(path,runner,approved_digest,approval_message_id):
+def finalize(path,runner,approved_digest,approval_message_id,*,adapter=None):
     from . import eggbev_cross_account as cross
+    if adapter is not None:cross=adapter
     from request_serialization import request_lock
     from .coordination import AccountWriterLeaseStore
     from .engine import CampaignEngine

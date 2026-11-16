@@ -261,7 +261,8 @@ class CampaignSpec:
             from .target_continuation import allows_elapsed_campaign as allows_target_elapsed
             from .shein_elapsed_schema import allows_campaign as allows_explicit_elapsed
             from .cross_clone_immediate import allows_campaign as allows_cross_immediate
-            if not allows_elapsed_campaign(value) and not allows_target_elapsed(value) and not allows_explicit_elapsed(value) and not allows_cross_immediate(value):
+            from .eggbev_same_account_replacement import allows_elapsed_campaign as allows_same_elapsed
+            if not allows_elapsed_campaign(value) and not allows_target_elapsed(value) and not allows_explicit_elapsed(value) and not allows_cross_immediate(value) and not allows_same_elapsed(value):
                 raise ManifestError("ACTIVE requires future start_time")
         tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(

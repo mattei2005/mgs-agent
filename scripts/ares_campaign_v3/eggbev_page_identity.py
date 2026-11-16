@@ -18,7 +18,10 @@ def dependency(node):
     binding=CURRENT.get()
     if binding and str(node)==binding['page_id']:
         row={'source':'live_sb_page_dependency','kind':'page','account_ids':[binding['account_id']],'pbia_initialization_authorized':binding.get('ensure_pbia') is True}
-        if binding.get('account_id')=='1481815942722118':
+        if binding.get('independent_same_account'):
+            from .eggbev_same_account_replacement import admit,load
+            admit(load(binding['request_path']))
+        elif binding.get('account_id')=='1481815942722118':
             from .eggbev_cross_account import policy,SOURCE
             policy(binding.get('request_id'))
             if binding.get('page_token')!='pg_23187':return None
@@ -29,7 +32,14 @@ def dependency(node):
 
 def resolve(meta,sb,user_token,account_id,page_token,*,authority_path=AUTHORITY_PATH,ensure_pbia=False,request_path=None):
     policy=json.loads(Path(authority_path).read_text())
-    if str(account_id)=='1481815942722118':
+    independent=str(account_id)=='1481815942722118' and policy.get('mode')=='clone_target_prestaged'
+    if independent:
+        from .eggbev_same_account_replacement import admit,load
+        if not request_path:raise ValueError('same-account Page requires persisted independent request')
+        q=load(request_path);admit(q,policy_path=authority_path)
+        if page_token!=q['target_page_token'] or ensure_pbia:
+            raise ValueError('independent Page read is exact and cannot initialize PBIA')
+    elif str(account_id)=='1481815942722118':
         from .eggbev_cross_account import policy as cross_policy,request_load
         if not request_path:raise ValueError('cross-account Page requires exact persisted request')
         q=request_load(request_path);cross_policy(q['request_id'],path=authority_path)
@@ -55,7 +65,7 @@ def resolve(meta,sb,user_token,account_id,page_token,*,authority_path=AUTHORITY_
         request=json.loads(Path(request_path).read_text())
         if request.get('account_id')!=str(account_id) or request.get('target_page_token')!=page_token or re.fullmatch(r'[0-9]{17,20}',str(request.get('commercial_ok_message_id') or '')) is None:
             raise ValueError('PBIA initialization request identity/approval mismatch')
-    marker=CURRENT.set({'account_id':str(account_id),'page_id':page_id,'ensure_pbia':ensure_pbia,'page_token':page_token,'request_id':q['request_id'] if str(account_id)=='1481815942722118' else None})
+    marker=CURRENT.set({'account_id':str(account_id),'page_id':page_id,'ensure_pbia':ensure_pbia,'page_token':page_token,'request_id':q['request_id'] if str(account_id)=='1481815942722118' else None,'independent_same_account':independent,'request_path':str(request_path) if independent else None})
     try:
         code,page,_=meta.graph_get(page_id,user_token,{'fields':'id,name,access_token'})
         if code!=200 or not isinstance(page,dict):raise ValueError(f'target Page metadata unavailable HTTP{code}')

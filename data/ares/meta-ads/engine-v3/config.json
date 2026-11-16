@@ -143,7 +143,8 @@
       "timezone": "America/New_York",
       "currency": "USD",
       "supported_modes": [
-        "clone_cross_account_prestaged"
+        "clone_cross_account_prestaged",
+        "clone_target_prestaged"
       ],
       "ad_serving_route": "lineage_required_for_new_media",
       "write_enabled": true,
@@ -183,9 +184,25 @@
         ],
         "creative_materialization_route": "inline_copy",
         "immediate_start_request_ids": [
-          "eggbev03-cross-account-1571623835822858352"
+          "eggbev03-cross-account-1571623835822858352",
+          "eggbev03-c212-replacement-1571894746719330377"
         ],
         "immediate_start_requires_final_ok": true
+      },
+      "target_page_replacement": {
+        "enabled": true,
+        "account_id": "1481815942722118",
+        "authorized_by": "344196393512075265",
+        "authority_message_id": "1571911721063546892",
+        "policy_source": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
+        "runner": "scripts/ares-eggbev-target-clone.py",
+        "allowed_request_ids": [
+          "eggbev03-c212-replacement-1571894746719330377"
+        ],
+        "mode": "clone_target_prestaged",
+        "live_campaign_acceptance_verified": false,
+        "serving_verified": false,
+        "legacy_copied_adset_page_switch_enabled": false
       }
     },
     "7840111366055613": {

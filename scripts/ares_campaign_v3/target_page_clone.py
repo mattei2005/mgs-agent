@@ -42,6 +42,18 @@ def validate_shape(c):
 
 def validate_capability(c, account, operation):
     cap=account.get('target_page_replacement') or {}
+    if c.account_id=='1481815942722118' and operation=='Eggbev-US-CC-EN-BOT':
+        from .eggbev_same_account_replacement import validate_campaign_capability
+        try:validate_campaign_capability(c,account)
+        except (ValueError,KeyError,OSError) as exc:raise ManifestError(str(exc)) from exc
+        from .eggbev_create import messenger_welcome_message
+        wanted=json.loads(messenger_welcome_message())
+        for ad in c.ads:
+            value=ad.creative_payload.get('asset_feed_spec',{}).get('additional_data',{}).get('page_welcome_message')
+            try:value=json.loads(value) if isinstance(value,str) else value
+            except ValueError:value=None
+            if value!=wanted:raise ManifestError('same-account canonical JSON-AGT template mismatch')
+        return
     if (operation != 'Eggbev-US-CC-EN-BOT' or cap.get('enabled') is not True
             or cap.get('authorized_by') != '344196393512075265'
             or cap.get('authority_message_id') != '1569927267633602693'
@@ -287,7 +299,7 @@ def run(engine,bundle,transport,record):
     record['creative_ids']=[ids[f'creative_id_{ci}_{ai}'] for ci,c in enumerate(bundle.campaigns,1) for ai in range(1,len(c.ads)+1)]
     record['created_children']=len(record['ad_ids']);record['stage']='children_created_readback_pending';_save()
     ops=engine._readback_ops(campaign_ids)
-    if bundle.campaigns[0].mode=='clone_cross_account_prestaged':
+    if bundle.campaigns[0].mode=='clone_cross_account_prestaged' or (bundle.campaigns[0].mode=='clone_target_prestaged' and bundle.campaigns[0].account_id=='1481815942722118'):
         from .eggbev_cross_account import readback_ops
         ops=readback_ops(ops)
     results=engine._batch(bundle,transport,ops,'consolidated_readback')
@@ -341,6 +353,6 @@ def verify(bundle,record):
             installed=actual.get('additional_data',{}).get('page_welcome_message')
             if (json.loads(installed) if isinstance(installed,str) else installed) != json.loads(messenger_welcome_message()):
                 raise ValueError('target installed JSON-AGT differs from canonical file')
-    if bundle.campaigns[0].mode=='clone_cross_account_prestaged':
+    if bundle.campaigns[0].mode=='clone_cross_account_prestaged' or (bundle.campaigns[0].mode=='clone_target_prestaged' and bundle.campaigns[0].account_id=='1481815942722118'):
         from .eggbev_cross_account import verify_bundle
         verify_bundle(bundle,record)

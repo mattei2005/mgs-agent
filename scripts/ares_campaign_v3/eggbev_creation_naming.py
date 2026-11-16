@@ -101,7 +101,8 @@ def validate_manifest(manifest,policy=None):
  p=policy or load_policy()
  extension=p.get('duplication_with_replacements_extension') or {}
  cross=p.get('cross_account_replacement_extension') or {}
- relevant=[c for c in manifest.campaigns if applies(manifest.created_at,c.account_id,p) and (c.mode==p['mode'] or (c.mode=='clone_target_prestaged' and extension.get('status')=='active' and c.account_id in extension.get('account_ids',[])) or (c.mode=='clone_cross_account_prestaged' and cross.get('status')=='active' and c.account_id==cross.get('target_account_id') and manifest.request_id in cross.get('allowed_request_ids',[])))]
+ same=p.get('same_account_replacement_extension') or {}
+ relevant=[c for c in manifest.campaigns if applies(manifest.created_at,c.account_id,p) and (c.mode==p['mode'] or (c.mode=='clone_target_prestaged' and extension.get('status')=='active' and c.account_id in extension.get('account_ids',[])) or (c.mode=='clone_target_prestaged' and same.get('status')=='active' and c.account_id==same.get('account_id') and manifest.request_id in same.get('allowed_request_ids',[])) or (c.mode=='clone_cross_account_prestaged' and cross.get('status')=='active' and c.account_id==cross.get('target_account_id') and manifest.request_id in cross.get('allowed_request_ids',[])))]
  if not relevant:return
  row=allocation(manifest.request_id,p)
  if not row or len(relevant)!=row['count']:raise NamingError('real request atomic naming reservation required')

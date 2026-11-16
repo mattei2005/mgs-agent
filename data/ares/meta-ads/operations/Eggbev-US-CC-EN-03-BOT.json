@@ -61,7 +61,8 @@
   },
   "engine_contract": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json",
   "supported_modes": [
-    "clone_cross_account_prestaged"
+    "clone_cross_account_prestaged",
+    "clone_target_prestaged"
   ],
   "cross_account_clone_implementation_authority": {
     "policy_source": "data/ares/meta-ads/policies/eggbev01-to03-clone-authority.json",
@@ -139,5 +140,22 @@
   ],
   "next_step": "Same central prepare --input preserved request --confirm-prepare. No campaign writes; gate may defer source reader or report exact requested Page access. Delivery owner posts sealed full summary including15 preserved PAUSED seeds and awaits subsequent explicit OK.",
   "meta_app_id": "953171080682697",
-  "write_scope_note": "Exact request-specific capability only; fresh Page/advertiser/source/media gates and subsequent final summary OK required. Installation is not Page access, publication or serving proof."
+  "write_scope_note": "Exact request-specific capability only; fresh Page/advertiser/source/media gates and subsequent final summary OK required. Installation is not Page access, publication or serving proof.",
+  "target_page_replacement": {
+    "enabled": true,
+    "account_id": "1481815942722118",
+    "authorized_by": "344196393512075265",
+    "authority_message_id": "1571911721063546892",
+    "policy_source": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
+    "runner": "scripts/ares-eggbev-target-clone.py",
+    "allowed_request_ids": [
+      "eggbev03-c212-replacement-1571894746719330377"
+    ],
+    "mode": "clone_target_prestaged",
+    "live_campaign_acceptance_verified": false,
+    "serving_verified": false,
+    "legacy_copied_adset_page_switch_enabled": false
+  },
+  "same_account_request_only_authority": "1571911721063546892",
+  "same_account_replacement_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json"
 }
