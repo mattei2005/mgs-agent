@@ -5015,12 +5015,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Continuar pelo mesmo cursor1571914557683671125 incluindo edicoes; nao repetir escritas nem acionar Ares para ACK. Conferir preparacao/manifesto e depois IDs/readback e entrega do mesmo request pelo Ares. Supervisor/verificador reconciliam ciclo natural; preservar pedido antigo cancelado e agenda.",
+      "next_step": "Observar apos1571920898267807878 pelo OK final e execucao/readback do mesmo pedido/digest por Ares. Nao cobrar ACK, nao escrever campanhas nem alterar checkpoints Ares. Manter job existente ativo11:29EST7/96; nao repetir aviso FINAL_PLAN_OK sem mudanca material. Nao encerrar por gate temporario; aguardar entrega ou decisao terminal explicita.",
       "objective": "Acompanhar pedido1571894746719330377 de Rodolfo; Ares unico writer de cinco duplicacoes da212 na conta03",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "observacao retomada apos http400 codex posterior a gravacao do estado/checkpoint. autoridade/contrato validados; integracao instalada com16hashes conferidos e recibo/log209testes ok, sem rerun do observador. ares ativo na sessao20261116_084124_9facfa2b; preparacao e criacao/entrega nao comprovadas. job7aac7f6e2d6b inalterado7/96; proximo11:14est; fechamento independente da recuperacao189266711a7c435e559ffcbb pendente.",
+      "state": "preparacao conferida: manifest5campanhas/15anuncios, pagina/headlines/json-agt15/15, qa30videos200ready; summary/qa mesmo digest. resumo ares1571920898267807878 publicado e aguardando ok humano final posterior. zero campanhas escritas neste request; nenhuma entrega meta comprovada. monitor retomou leituras/persistencia neste ciclo; fechamento independente http400 continua com supervisor. nenhum post externo; decisao nova relatada somente pela resposta final conforme instrucao vigente.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T16:01:59+00:00"
+      "updated_at": "2026-11-16T16:17:23+00:00"
     },
     {
       "agent": "zeus",
@@ -10967,5 +10967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T16:11:32+00:00"
+  "updated_at": "2026-11-16T16:17:23+00:00"
 }
