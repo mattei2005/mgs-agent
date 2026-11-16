@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "exact_capture_literal_hits_in_scheduled_and_executable_sources": [],
+  "sources_checked": 3025,
+  "source_scan_errors": [],
+  "small_historical_manifest_hits": [
+    "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-candidate-1545874044757344417.json"
+  ],
+  "checked_roots": [
+    "/root/mgs-agent/scripts",
+    "/etc/systemd/system",
+    "/etc/cron.d",
+    "/root/.hermes/profiles/zeus/cron",
+    "/root/.hermes/profiles/ares/cron",
+    "/root/.hermes/profiles/atena/cron"
+  ],
+  "no_active_source_rewrite": true,
+  "dynamic_final_audit_importer_source_is_distinct": true,
+  "deletions": 0
+}

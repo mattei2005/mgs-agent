@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "fixture_root": "/root/.hermes/profiles/zeus/cache/scratch/capture-recovery-fixture-zgqcqh3w",
+  "synthetic_ram": {
+    "status": "PASS",
+    "files_verified": 5,
+    "logical_bytes_verified": 13500,
+    "ram_materializations": 5,
+    "disk_materializations": 0,
+    "original_source_payload_reads": 0,
+    "metadata_verified": true,
+    "original_ctime_recorded_not_recreatable": true
+  },
+  "synthetic_filesystem": {
+    "status": "PASS",
+    "files_verified": 5,
+    "logical_bytes_verified": 13500,
+    "ram_materializations": 0,
+    "disk_materializations": 5,
+    "original_source_payload_reads": 0,
+    "metadata_verified": true,
+    "original_ctime_recorded_not_recreatable": true
+  },
+  "negative_cases_blocked": [
+    "overwrite",
+    "original_destination",
+    "reduced_scope",
+    "corruption"
+  ],
+  "fixture_is_not_real_source_restore": true,
+  "original_files_unchanged": true,
+  "deletions": 0
+}

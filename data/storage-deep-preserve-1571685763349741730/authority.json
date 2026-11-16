@@ -1,0 +1,16 @@
+{
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "authority_message_id": "1571685763349741730",
+  "proposal_message_id": "1571665793320755282",
+  "native_readback_verified": true,
+  "authorized_actions": [
+    "Deeper read-only review of the two legacy maintenance/site-backup roots previously measured at approximately 106 MiB",
+    "Create a private lossless recovery set for exactly the five historical captures in preservation-proposal.json and validate retained-only recovery while retaining every original"
+  ],
+  "not_authorized": [
+    "Delete originals, archives, test artifacts or directories",
+    "Change financial application, database, Sheets, package versions, production configuration, credentials or retention",
+    "Resume or modify another operation"
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "status": "deep_content_review_complete_originals_preserved",
+  "authority_message_id": "1571685763349741730",
+  "regular_files_hashed": 131,
+  "source_metadata_and_bytes_unchanged": true,
+  "retained_archives": [
+    {
+      "path": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264/maintenance-history.tar.xz",
+      "regular_members_verified": 2675,
+      "sha256": "077f322590054310042d0edac93ed328047fb29b01c360358e39902ca0b7e721"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/storage-backup-remainder-1571327506374598789/site-backup-history.tar.xz",
+      "regular_members_verified": 948,
+      "sha256": "3133c44a7904c602d516060d4deb39cb06813a542162986fdbe56f1f6d221636"
+    }
+  ],
+  "by_root": [
+    {
+      "root": "/root/zeus-vps-maintenance-1565730926233657347",
+      "files": 97,
+      "logical_bytes": 108903408,
+      "allocated_regular_bytes": 109158400,
+      "covered_files": 20,
+      "uncovered_files": 77
+    },
+    {
+      "root": "/root/mgs-agent-backups",
+      "files": 34,
+      "logical_bytes": 1213614,
+      "allocated_regular_bytes": 1286144,
+      "covered_files": 34,
+      "uncovered_files": 0
+    }
+  ],
+  "exact_payload_covered_files": 54,
+  "exact_payload_uncovered_files": 77,
+  "covered_logical_bytes": 1220891,
+  "uncovered_logical_bytes": 108896131,
+  "package_archives_checked": 11,
+  "packages": [
+    {
+      "package": "libglib2.0-data",
+      "historical_version": "2.80.0-6ubuntu3.9",
+      "installed_version": "2.80.0-6ubuntu3.10",
+      "same_version": false,
+      "archive_identity": [
+        "Package: libglib2.0-data",
+        "Version: 2.80.0-6ubuntu3.9"
+      ],
+      "regular_payloads_streamed": 2,
+      "logical_payload_bytes": 86794,
+      "live_equal_regular_files": 1,
+      "live_different_regular_files": 1,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "libglib2.0-bin",
+      "historical_version": "2.80.0-6ubuntu3.9",
+      "installed_version": "2.80.0-6ubuntu3.10",
+      "same_version": false,
+      "archive_identity": [
+        "Package: libglib2.0-bin",
+        "Version: 2.80.0-6ubuntu3.9"
+      ],
+      "regular_payloads_streamed": 19,
+      "logical_payload_bytes": 313567,
+      "live_equal_regular_files": 14,
+      "live_different_regular_files": 5,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "gir1.2-glib-2.0",
+      "historical_version": "2.80.0-6ubuntu3.9",
+      "installed_version": "2.80.0-6ubuntu3.10",
+      "same_version": false,
+      "archive_identity": [
+        "Package: gir1.2-glib-2.0",
+        "Version: 2.80.0-6ubuntu3.9"
+      ],
+      "regular_payloads_streamed": 7,
+      "logical_payload_bytes": 737993,
+      "live_equal_regular_files": 7,
+      "live_different_regular_files": 0,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "libglib2.0-0t64",
+      "historical_version": "2.80.0-6ubuntu3.9",
+      "installed_version": "2.80.0-6ubuntu3.10",
+      "same_version": false,
+      "archive_identity": [
+        "Package: libglib2.0-0t64",
+        "Version: 2.80.0-6ubuntu3.9"
+      ],
+      "regular_payloads_streamed": 14,
+      "logical_payload_bytes": 4086133,
+      "live_equal_regular_files": 5,
+      "live_different_regular_files": 9,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "ubuntu-pro-client-l10n",
+      "historical_version": "37.2ubuntu~24.04.1",
+      "installed_version": "38ubuntu0~24.04",
+      "same_version": false,
+      "archive_identity": [
+        "Package: ubuntu-pro-client-l10n",
+        "Version: 37.2ubuntu~24.04.1"
+      ],
+      "regular_payloads_streamed": 2,
+      "logical_payload_bytes": 64969,
+      "live_equal_regular_files": 2,
+      "live_different_regular_files": 0,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "ubuntu-pro-client",
+      "historical_version": "37.2ubuntu~24.04.1",
+      "installed_version": "38ubuntu0~24.04",
+      "same_version": false,
+      "archive_identity": [
+        "Package: ubuntu-pro-client",
+        "Version: 37.2ubuntu~24.04.1"
+      ],
+      "regular_payloads_streamed": 219,
+      "logical_payload_bytes": 1202378,
+      "live_equal_regular_files": 182,
+      "live_different_regular_files": 37,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "monarx-agent",
+      "historical_version": "4.3.82-master",
+      "installed_version": "4.3.85-master",
+      "same_version": false,
+      "archive_identity": [
+        "Package: monarx-agent",
+        "Version: 4.3.82-master"
+      ],
+      "regular_payloads_streamed": 6,
+      "logical_payload_bytes": 20528804,
+      "live_equal_regular_files": 4,
+      "live_different_regular_files": 2,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "tmux",
+      "historical_version": "3.4-1ubuntu0.1",
+      "installed_version": "3.4-1ubuntu0.2",
+      "same_version": false,
+      "archive_identity": [
+        "Package: tmux",
+        "Version: 3.4-1ubuntu0.1"
+      ],
+      "regular_payloads_streamed": 9,
+      "logical_payload_bytes": 1168173,
+      "live_equal_regular_files": 7,
+      "live_different_regular_files": 2,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "1password-cli",
+      "historical_version": "2.41.0-1",
+      "installed_version": "2.41.1-1",
+      "same_version": false,
+      "archive_identity": [
+        "Package: 1password-cli",
+        "Version: 2.41.0-1"
+      ],
+      "regular_payloads_streamed": 1,
+      "logical_payload_bytes": 47161506,
+      "live_equal_regular_files": 0,
+      "live_different_regular_files": 1,
+      "live_missing_or_symlink": 0
+    },
+    {
+      "package": "cloud-init",
+      "historical_version": "26.1-0ubuntu1~24.04.1",
+      "installed_version": "26.2-0ubuntu1~24.04.2",
+      "same_version": false,
+      "archive_identity": [
+        "Package: cloud-init",
+        "Version: 26.1-0ubuntu1~24.04.1"
+      ],
+      "regular_payloads_streamed": 420,
+      "logical_payload_bytes": 2943102,
+      "live_equal_regular_files": 365,
+      "live_different_regular_files": 50,
+      "live_missing_or_symlink": 5
+    },
+    {
+      "package": "tailscale",
+      "historical_version": "1.104.2",
+      "installed_version": "1.104.6",
+      "same_version": false,
+      "archive_identity": [
+        "Package: tailscale",
+        "Version: 1.104.2"
+      ],
+      "regular_payloads_streamed": 6,
+      "logical_payload_bytes": 77823461,
+      "live_equal_regular_files": 4,
+      "live_different_regular_files": 2,
+      "live_missing_or_symlink": 0
+    }
+  ],
+  "configuration_archive_regular_members": 994,
+  "payload_coverage_not_path_independence": true,
+  "missing_coverage_is_scoped_not_global_uniqueness": true,
+  "private_evidence": "/root/.hermes/secure-backups/storage-deep-review-1571685763349741730/full-file-coverage.json.gz",
+  "deletions": 0,
+  "package_installs_or_changes": 0,
+  "configs_applied": 0,
+  "at": "2026-11-16T00:46:32.417724+00:00"
+}
