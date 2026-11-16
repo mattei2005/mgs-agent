@@ -1662,6 +1662,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1571945539564732617",
+      "next_step": "Concluido;nao reenviar.AtrasoSB52-53min nas contas com atividade;Boostingecon sem entrega,receita/ROI/atraso n/d.Nova atualizacao exige novo pedido e novas fontes.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1571945539564732617/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;63campanhas_no_recorte_financeiro;28partes_integrais+7resumos;35mensagens_unicas_relidas_get;ordem_integral_resumo_confirmada;corte16/11/2026_12:52est;usd;zero_writes_meta;arquivo_sanitizado_bytes_hashes_validados;65regressoes+4fronteiras_resumo_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-16T17:57:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -5015,12 +5025,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar execucao do request/digest aprovado por Nicolas e recibos/readback Meta; Ares permanece unico writer. Nao cobrar ACK nem repetir aprovacao. Preservar monitor ate entrega final ou bloqueio decisorio novo.",
+      "next_step": "Observar recuperacao ativa Ares da estimativa de quota com mesmo request/aprovacao; exigir engine IDs e readback final. Nao acionar, nao executar campanhas. Manter job ate terminal; renovar mesmo job se ultimo ciclo.",
       "objective": "Acompanhar pedido1571894746719330377 de Rodolfo; Ares unico writer de cinco duplicacoes da212 na conta03",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "approval_receipt_verified_not_execution; nicolas1571940565040234679 autorizado na03, recibo aprovado e resumo entregue persistidos pelo executor; request ares ainda awaiting_final_approval; nenhum id/recibo engine novo comprovado; zero mensagens novas e zero envios externos",
+      "state": "aprovacao validada; engine exercitado, partial_deferred_quota antes de efeitos;120requested/current0/tetoefetivo60; campanha_ids vazio; ares em recuperacao ativa na mesma sessao, sem entrega final. zero envios externos.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T17:39:10+00:00"
+      "updated_at": "2026-11-16T17:53:51+00:00"
     },
     {
       "agent": "zeus",
@@ -10967,5 +10977,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T17:39:10+00:00"
+  "updated_at": "2026-11-16T17:57:36+00:00"
 }
