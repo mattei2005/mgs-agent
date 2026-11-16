@@ -157,12 +157,16 @@ def live_request(q,common):
 
 def source_read(q,runner,common,meta,token,config):
     with reader(SOURCE,config):
-        rows=common.fetch_all_meta(meta,token,'act_'+SOURCE+'/campaigns',{'fields':'id,name,status','limit':200})
-        matches=[r for r in rows if r.get('name')==q['source_campaign_name'] and r.get('status') not in {'DELETED','ARCHIVED'}]
-        if len(matches)!=1:raise ValueError('exact source campaign missing/ambiguous')
-        cid=str(matches[0]['id'])
-        if q.get('source_campaign_id') and q['source_campaign_id']!=cid:raise ValueError('persisted source campaign ID changed')
+        if q.get('source_campaign_id'):
+            cid=str(q['source_campaign_id'])
+            if re.fullmatch('[1-9][0-9]+',cid) is None:raise ValueError('persisted source campaign ID malformed')
+        else:
+            rows=common.fetch_all_meta(meta,token,'act_'+SOURCE+'/campaigns',{'fields':'id,name,status','limit':200})
+            matches=[r for r in rows if r.get('name')==q['source_campaign_name'] and r.get('status') not in {'DELETED','ARCHIVED'}]
+            if len(matches)!=1:raise ValueError('exact source campaign missing/ambiguous')
+            cid=str(matches[0]['id'])
         code,c,_=meta.graph_get(cid,token,{'fields':'id,account_id,name,status,objective,buying_type,bid_strategy,daily_budget,lifetime_budget,special_ad_categories,special_ad_category_country'})
+        if c.get('status') in {'DELETED','ARCHIVED'}:raise ValueError('source campaign no longer eligible')
         if code!=200 or c.get('account_id')!=SOURCE or c.get('name')!=q['source_campaign_name'] or c.get('id')!=cid or c.get('lifetime_budget') not in {None,'0',0} or not c.get('daily_budget'):raise ValueError('source identity/budget semantics mismatch')
         sets=common.fetch_all_meta(meta,token,cid+'/adsets',{'fields':'id,name,status,billing_event,optimization_goal,destination_type,targeting,promoted_object,attribution_spec,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities,bid_amount,bid_constraints,optimization_sub_event','limit':100})
         ads=common.fetch_all_meta(meta,token,cid+'/ads',{'fields':'id,name,status,adset_id,source_ad_id,creative{id,object_story_spec,asset_feed_spec,url_tags,degrees_of_freedom_spec,contextual_multi_ads}','limit':100})
@@ -270,6 +274,32 @@ def prepare(path,runner,confirm=False):
         finally:leases.release(TARGET,q['request_id'])
 
 
+MEDIA_RECONCILIATION_FIELDS='id,name,status,creative{id,asset_feed_spec{videos{video_id}},object_story_spec{video_data{video_id}}}'
+
+
+def target_media_reconciliation(q,home,selected,common,meta,token):
+    """Reuse a fresh complete scoped readback, never a fabricated live response."""
+    path=home/'target-media-use-reconciliation.json'
+    identity=digest([{k:a.get(k) for k in ['asset_id','canonical_filename','clean_checksum','clean_md5','manager_media_folder_id']} for a in selected])
+    if path.exists():
+        evidence=load(path)
+        if (evidence.get('request_id')!=q['request_id'] or evidence.get('account_id')!=TARGET or evidence.get('fields')!=MEDIA_RECONCILIATION_FIELDS):
+            raise ValueError('target reconciliation scope changed')
+        if evidence.get('complete') is True:
+            rows=evidence.get('data')
+            if (not isinstance(rows,list) or evidence.get('after') is not None or evidence.get('data_sha256')!=digest(rows)
+                or evidence.get('selected_identity_sha256')!=identity or len({r['id'] for r in rows})!=len(rows)):
+                raise ValueError('target reconciliation proof changed')
+            age=(datetime.now(timezone.utc)-datetime.fromisoformat(evidence['completed_at'])).total_seconds()
+            if 0<=age<=600:return rows
+    # Only media identities needed by reconciliation, not copy/JSON/thumbnails.
+    rows=common.fetch_all_meta(meta,token,'act_'+TARGET+'/ads',{'fields':MEDIA_RECONCILIATION_FIELDS,'limit':100})
+    if len({r['id'] for r in rows})!=len(rows):raise ValueError('target reconciliation duplicate ad IDs')
+    evidence={'account_id':TARGET,'request_id':q['request_id'],'fields':MEDIA_RECONCILIATION_FIELDS,'complete':True,'after':None,'data':rows,'data_sha256':digest(rows),'selected_identity_sha256':identity,'completed_at':datetime.now(timezone.utc).isoformat()}
+    temp=path.with_suffix('.proof.tmp');temp.write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n');os.replace(temp,path)
+    return rows
+
+
 def select_media(q,runner,common,meta,token,home):
     import ares_manager_storage_standard as standard
     import ares_archive_storage as storage
@@ -286,7 +316,7 @@ def select_media(q,runner,common,meta,token,home):
             or live.get('trashed') or live.get('md5Checksum')!=row.get('clean_md5') or '"reference_only": true' in json.dumps(live).lower()
             or (row.get('used_by') and not (row.get('used_by')=='ARES_IN_FLIGHT' and row.get('reservation_request_id')==q['request_id']))):raise ValueError('requested media identity/reservation/bytes mismatch')
         selected.append(row);livefiles[row['asset_id']]=live
-    liveads=common.fetch_all_meta(meta,token,'act_'+TARGET+'/ads',{'fields':'id,name,status,creative{id,asset_feed_spec,object_story_spec}','limit':200})
+    liveads=target_media_reconciliation(q,home,selected,common,meta,token)
     stems={Path(x['canonical_filename']).stem for x in selected}
     if any(any(s in a.get('name','') for s in stems) for a in liveads):raise ValueError('requested asset named Meta use requires reconciliation')
     # Reconcile actual media IDs against every account-scoped response, not names alone.
@@ -297,7 +327,7 @@ def select_media(q,runner,common,meta,token,home):
         except Exception:continue
         vids={record['vertical_video_id'],record.get('square_video_id')}
         for ad in liveads:
-            cr=ad.get('creative') or {};observed={v.get('video_id') for v in cr.get('asset_feed_spec',{}).get('videos',[])}|{cr.get('object_story_spec',{}).get('video_data',{}).get('video_id')}
+            cr=ad.get('creative') or {};observed={v.get('video_id') for v in (cr.get('asset_feed_spec') or {}).get('videos',[])}|{((cr.get('object_story_spec') or {}).get('video_data') or {}).get('video_id')}
             if (vids-{None})&observed:raise ValueError('requested media has prior account association use')
     return selected,livefiles,drive_token,runner.module('cross_creation_helpers',ROOT/'scripts/ares-eggbev-creation.py')
 

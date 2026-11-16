@@ -1,10 +1,13 @@
 {
-  "status": "PENDING_NATIVE_CRITICAL_CONFIRMATION",
+  "status": "EXECUTED_VALIDATED",
   "manifest_sha256": "eb533b8a6e8149fcba08bf8d18f2cef24aae21e4ca5c1cfb91e4952c666bd796",
   "executor_sha256": "b3e0d953fe048bd4ab78e747e03b552fec65290674b1e13283c6f131c1327300",
-  "approval_received": false,
-  "question_message_id": null,
+  "approval_received": true,
+  "question_message_id": "1571709942182842422",
   "files": 12,
   "directories": 0,
-  "source_message_id": "1571695234532778046"
+  "source_message_id": "1571695234532778046",
+  "confirmation_message_id": "1571710652420980918",
+  "active_result": "retirement-final.json",
+  "no_retry_pending": true
 }

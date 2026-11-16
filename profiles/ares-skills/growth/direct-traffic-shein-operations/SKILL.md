@@ -15,7 +15,7 @@ metadata:
 
 SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos e URL; renumere UTMs. Separe manual/lote/emenda. Conte ads por grupo. Usados≠referência entre contas: não invente `source_account`.
 
-Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. PAUSED não comprova ativação agendada.
+Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. “Todas essas” = lista; PAUSED ≠ agenda.
 
 Destinos e diagnóstico: `references/inherited-destination-data.md`.
 

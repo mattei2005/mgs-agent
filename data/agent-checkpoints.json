@@ -4543,22 +4543,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1571708413791174697",
-      "next_step": "Validar hierarquia congelada, preparar one-shot, auditar e confirmar agenda.",
-      "objective": "Pausar 19 campanhas nominais Mavroa06 e reativar 16 novembro 2026 00h Nova York status-only",
+      "next_step": "Aguardar one-shot ja habilitado. Revalidar autoridade/invariantes; status ACTIVE apenas nos19IDs; GET integral e aviso nativo na origem.",
+      "objective": "Pausar 19 campanhas nominais Mavroa06G006 e reativar16novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1571708413791174697/activation.json",
-      "state": "paused_verified:19/19 por get integral; ativacao em preparacao",
+      "state": "scheduled:19/19 paused por get integral;19 aptas agendadas16novembro2026 00h america/new_york;207 testespass;dry-run livepass;agenda pre/post sem colisao operacional",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-16T02:13:00+00:00"
+      "updated_at": "2026-11-16T02:20:58+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1571708992755998772",
-      "next_step": "Validar hierarquias status-only, preparar agenda única determinística, testar e auditar pré/pós; preservar budgets e filhos",
-      "objective": "Pausar todas Yolokfx08 G006 e reativar somente dez campanhas nominais à próxima meia-noite no fuso Meta",
+      "next_step": "Executar uma unica vez o job deterministico; validar ACTIVE dos dez IDs e publicar na origem por intent/GET. Preservar budgets,lances,filhos e tracking.",
+      "objective": "Pausar todas Yolokfx08 G006; reativar somente dez campanhas nominais em16novembro2026 00hEST,status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1571708992755998772/activation.json",
-      "state": "paused_activation_pending:14 campanhas pausadas por get integral; zero configuradas active; dez ids de reativacao congelados para 16/11/2026 00h america/new_york",
+      "state": "scheduled:14 pausadas e zero active por get/listagem integral;10 aptas agendadas16nov2026 00hest;109 testes e auditoria pre/pos sem conflito operacional",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-16T02:14:37+00:00"
+      "updated_at": "2026-11-16T02:23:41+00:00"
     },
     {
       "agent": "zeus",
@@ -6718,12 +6718,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lote5capturasencerrado. Nova revisão208grupos494files:gate12copiasJSONantigas43.2MiBpendingconfirmation,0delete/12restoresx2PASS. CheckpointZEUS-STORAGE-WORK-DUPLICATES-1571695234532778046. Restanteswork6pendentesdeprova/caches7/Git8abertos;106MiBpreservado. Naocancelarrevisaoglobalporfaltadeurgencia.",
-      "objective": "Revisar redundancia remanescente de trabalho e preparar somente lote comprovado, sem excluir antes de confirmacao critica.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-work-duplicates-1571695234532778046/review-final.json;discord:1569928464033783862/1571695234532778046",
+      "next_step": "Lote12duplicados43.2MiBestimativaexecutadoevalidado1571710652420980918:39.77MiBdeltaobservado;0dirs;12contrapartes+manifestoseguros. Lote5anteriorfechado. Proximarevisaoreadonly6stages/test-code/dependenciaspreservando rollback/estado/midia;7caches8Gitrecorrenciaabertos. Naoencerrarglobal.",
+      "objective": "Lote exato12duplicados confirmado/executado/validado; manter recuperacao e separar fechamento da revisao global.",
+      "source": "data/storage-work-duplicates-1571695234532778046/retirement-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571710652420980918",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T01:58:53+00:00"
+      "updated_at": "2026-11-16T02:22:34+00:00"
     },
     {
       "agent": "zeus",
@@ -6828,12 +6828,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-WORK-DUPLICATES-1571695234532778046",
-      "next_step": "208grupos494filesrehashed/sem drift;12duplicados45,293,568bytes/43.2MiBcertificados/0delete.12RAMrestores+privado12/8negativos+auditshapePASS. Confirmacaonativapendente destes12somente/manifesteb533b8a6e8149fcba08bf8d18f2cef24aae21e4ca5c1cfb91e4952c666bd796/execb3e0d953fe048bd4ab78e747e03b552fec65290674b1e13283c6f131c1327300;nao usarContinue como delete. Basesprincipais12+finalmanifestprotegidos;semcopiasprogramas/retencao. Depoiscontinuarrestante6/7/8.",
-      "objective": "Revisar redundancia remanescente de trabalho e preparar somente lote comprovado, sem excluir antes de confirmacao critica.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-work-duplicates-1571695234532778046/review-final.json;discord:1569928464033783862/1571695234532778046",
-      "state": "awaiting_critical_confirmation_exact_twelve_files",
+      "next_step": "Confirmacao1571710652420980918executada;12originaisausentes/journal12exato/0dirs;12fontesprimarias+manifestopreservados.12RAMrestorespos+privado12/9protegidos/3configs3smokesPASS/PIDsbootiguais.39.77MiBdeltaimediatoglobal. Semgateretrypendente;naoreexecutar. Proxima6stagescopiascodigo/dependencias;rollbackestadoepayloadspreservados;7/8abertos.",
+      "objective": "Lote exato12duplicados confirmado/executado/validado; manter recuperacao e separar fechamento da revisao global.",
+      "source": "data/storage-work-duplicates-1571695234532778046/retirement-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571710652420980918",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T01:58:52+00:00"
+      "updated_at": "2026-11-16T02:22:34+00:00"
     },
     {
       "agent": "zeus",
@@ -10927,5 +10927,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T02:14:37+00:00"
+  "updated_at": "2026-11-16T02:23:41+00:00"
 }

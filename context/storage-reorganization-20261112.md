@@ -363,6 +363,14 @@ O leitor reconstruiu os 12 arquivos reais, um por vez em RAM, com hashes/modos/U
 
 Manifesto congelado SHA-256 `eb533b8a6e8149fcba08bf8d18f2cef24aae21e4ca5c1cfb91e4952c666bd796`; executor `b3e0d953fe048bd4ab78e747e03b552fec65290674b1e13283c6f131c1327300`. Evidências em `data/storage-work-duplicates-1571695234532778046/`, leitor/mapa privado em `/root/.hermes/secure-backups/storage-work-duplicates-1571695234532778046/`. Zero arquivos de origem removidos e zero economia observada neste lote. Próximo gate é somente a confirmação explícita dos 12 caminhos; as demais duplicatas continuam preservadas pendentes de prova, e os pontos 5–8 da revisão global seguem abertos. Nenhuma retenção/automação nova foi autorizada.
 
+### Lote de 12 duplicatas executado — confirmação 1571710652420980918
+
+Rodolfo confirmou `Sim` em `1571710652420980918`, após a pergunta `1571709942182842422`. Aprovação nativa vinculada ao mesmo manifesto `eb533b8a6e8149fcba08bf8d18f2cef24aae21e4ca5c1cfb91e4952c666bd796` e executor `b3e0d953fe048bd4ab78e747e03b552fec65290674b1e13283c6f131c1327300`, sem alteração de escopo ou terceira confirmação. Preflight novamente PASS, execução rc=0 e mesmo verificador pós-exclusão PASS.
+
+**12 arquivos ausentes, journal com os 12 caminhos exatos, zero diretórios retirados.** A pasta `final/` e seu manifesto distinto continuam; as 12 contrapartes primárias e nove hashes protegidos permaneceram idênticos. Os 12 arquivos foram reconstruídos novamente em RAM após a ausência dos alvos, inclusive por leitor privado independente, com conteúdo/metadados conferidos e zero leitura dos originais removidos. Três configs e três smokes explícitos passaram; PIDs/boot/launcher preservados, zero evento crítico novo, nenhum restart, instalação ou escrita financeira. Isso não é restore da aplicação.
+
+A medição imediata registrou **41.697.280 bytes (~39,77 MiB) a mais disponíveis** no filesystem, delta global sujeito a atividade concorrente; a estimativa alocada do lote era ~43,20 MiB. Resultado ativo: `data/storage-work-duplicates-1571695234532778046/retirement-final.json`. Este lote está encerrado, sem confirmação ou retry pendente; revisão global permanece aberta. Próximo ponto é a revisão read-only de cópias de staging/código de testes e suas dependências, preservando rollback, estado e mídia até prova própria; caches e Git/recorrência continuam como categorias posteriores.
+
 
 
 
