@@ -5015,12 +5015,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar apos1571920898267807878 pelo OK final e execucao/readback do mesmo pedido/digest por Ares. Nao cobrar ACK, nao escrever campanhas nem alterar checkpoints Ares. Manter job existente ativo11:29EST7/96; nao repetir aviso FINAL_PLAN_OK sem mudanca material. Nao encerrar por gate temporario; aguardar entrega ou decisao terminal explicita.",
+      "next_step": "Observar apos1571920898267807878 pelo OK humano final e execucao/readback do mesmo request/digest por Ares. Sem novidade neste ciclo; nao repetir gate ja relatado. Job existente ativo8/96 proximo11:36EST. Preservar Ares unico writer e nao alterar checkpoint Ares. Supervisor mantem fechamento independente do HTTP400.",
       "objective": "Acompanhar pedido1571894746719330377 de Rodolfo; Ares unico writer de cinco duplicacoes da212 na conta03",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "preparacao conferida: manifest5campanhas/15anuncios, pagina/headlines/json-agt15/15, qa30videos200ready; summary/qa mesmo digest. resumo ares1571920898267807878 publicado e aguardando ok humano final posterior. zero campanhas escritas neste request; nenhuma entrega meta comprovada. monitor retomou leituras/persistencia neste ciclo; fechamento independente http400 continua com supervisor. nenhum post externo; decisao nova relatada somente pela resposta final conforme instrucao vigente.",
+      "state": "preparation_verified_awaiting_human_final_plan_approval; leitura discord paginada sem mensagens novas apos1571920898267807878; request original mesmo digest/campaign_writes0; gate ja informado; zero envios externos; monitor leitura/persistencia ok",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T16:17:23+00:00"
+      "updated_at": "2026-11-16T16:31:34+00:00"
     },
     {
       "agent": "zeus",
@@ -10967,5 +10967,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T16:17:23+00:00"
+  "updated_at": "2026-11-16T16:31:34+00:00"
 }
