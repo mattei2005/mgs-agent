@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "post": false,
+  "whole_cache_metadata_nodes": 333224,
+  "target_node_counts": {
+    "directory": 26594,
+    "file": 235046,
+    "link": 415
+  },
+  "retained_unique_payloads_hashed": 63046,
+  "consumers": {
+    "processes_inspected": 205,
+    "code_files_scanned": 7741,
+    "metadata_directories_scanned": 77947,
+    "metadata_files_scanned": 900791
+  },
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "model_is_not_native_dry_run": true,
+  "exact_old_environment_restore_proven": false
+}

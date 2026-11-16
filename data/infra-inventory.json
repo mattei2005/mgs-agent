@@ -67658,6 +67658,68 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "storage-uv-1571959754081837281",
+      "agent": "zeus",
+      "type": "readonly_uv_cache_review_and_native_cache_state_retirement_gate",
+      "status": "awaiting_critical_confirmation_uv_cache_state_retirement",
+      "created_at": "2026-11-16T14:17:29.277853-05:00",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1571959754081837281",
+      "path": "/root/mgs-agent/data/storage-uv-1571959754081837281",
+      "evidence": "data/storage-uv-1571959754081837281/review-final.json",
+      "cache_root": "/root/.cache/uv",
+      "manifest_sha256": "a878f47d10bd25d28eff9dcc4673dbf58172ccaefbb19163c2c8a67e4b8143ed",
+      "executor_sha256": "87d66ae35db2bf091003c9df93c8ad8ab352ac1ad0915a636a8611b03a157804",
+      "native_argv": [
+        "/root/.local/bin/uv",
+        "cache",
+        "prune",
+        "--cache-dir",
+        "/root/.cache/uv",
+        "--no-config",
+        "--offline",
+        "--no-progress"
+      ],
+      "proposed_top_targets": 193,
+      "proposed_regular_files": 235046,
+      "proposed_directories": 26594,
+      "proposed_symlinks": 415,
+      "physical_reclaim_upper_bytes": 737275904,
+      "source_files_deleted": 0,
+      "actual_native_prune_calls": 0,
+      "historical_cache_retirement_not_lossless_restore": true,
+      "protected_managed_cache": "/root/.hermes/cache/uv",
+      "protected_referenced_archives": 529,
+      "retained_payload_hash_index": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/retained-payloads.json.gz",
+      "retained_payload_hash_index_sha256": "c0d659cc7a5ffabc0e8d4ef077617ebccc2f567b0a29dc5931fb8fe82aaf174b",
+      "private_metadata_index": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/metadata-second.jsonl.gz",
+      "private_metadata_index_sha256": "8cefbc4c3d6d9fad9fd6ff59c0bef8d2ebd1889f064d307985cfaaaf598945af",
+      "validation": {
+        "preflight": "PASS",
+        "negative_tests": 15,
+        "retained_payloads": 63046,
+        "consumers_detected": 0,
+        "exact_old_environment_restore": false,
+        "owner_deletion_confirmation": false
+      },
+      "learning": {
+        "subsystem": "vps-maintenance-and-backup-governance",
+        "target": "references/rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md",
+        "summary": "Resolve native Hermes UV/cache independently; model exact native prune, distinguish state retirement from recovery, preserve native locks and validate survivor hardlink nlink/ctime effects.",
+        "live_mirror_equal": true,
+        "sha256": "52cc4beab87a68efb09e1e4d090b44027487a66d91b6121ee1d205ef9309b34a"
+      },
+      "report_infra": {
+        "message_id": "1571967469021823150",
+        "channel_id": "1498132022634483894",
+        "exact_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true
+      },
+      "result_sha256": "0a4bbadb11c271996911a8ae1cf6e6a35ce65deb0296322dbd1691ba833669f1"
     }
   ],
   "profile_skill_references": [

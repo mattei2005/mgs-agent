@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "negative_tests": 15,
+  "tests": [
+    {
+      "name": "reduced_scope",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "target_count_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "whole_cache_as_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "claim_exact_historical_restore",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "remove_retirement_disclosure",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "reduced_path_list",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "profile_root_outside_cache",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "force_flag_forbidden",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "ci_scope_expansion_forbidden",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "descendant_file_count_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "native_binary_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "missing_native_confirmation",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "audit_reserved_field_conflict",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "missing_approval_file_execute",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "postcondition_rejects_present_cache_targets",
+      "status": "PASS",
+      "expected_block": true
+    }
+  ],
+  "audit_schema_start_completion_positive": true,
+  "cache_fingerprint_unchanged": true,
+  "actual_native_prune_calls": 0,
+  "source_files_deleted": 0
+}
