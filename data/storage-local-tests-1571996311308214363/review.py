@@ -107,11 +107,17 @@ with open(PRIVATE/'reference-hits.jsonl','a')as ledger:
      totalbytes+=len(chunk);data=tail+chunk
      for root,needles in strong.items():
       if root in exact:continue
-      offsets=[(data.find(n),n)for n in needles];positive=[pos for pos,n in offsets if pos>=0]
+      positive=[]
+      for needle in needles:
+       pos=data.find(needle)
+       while pos>=0:
+        end=pos+len(needle)
+        if end==len(data)or data[end]not in b'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.-':positive.append(pos);break
+        pos=data.find(needle,pos+1)
       if positive:exact.add(root);locations[root]=linebase+data[:min(positive)].count(b'\n')
      for root,(run,leaf)in composite.items():
       if run in data:a.add(root)
-      if leaf in data:b.add(root)
+      if re.search(re.escape(leaf)+rb'(?![a-zA-Z0-9_.-])',data):b.add(root)
      for fam in families:
       if fam.encode()in data:foundfam.add(fam)
      linebase+=chunk.count(b'\n');tail=data[-1024:]
