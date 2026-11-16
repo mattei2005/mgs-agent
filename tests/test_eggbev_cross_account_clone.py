@@ -235,8 +235,14 @@ class CrossTests(unittest.TestCase):
   self.assertFalse(rt.called)
  def test_37_final_summary_OK_missing_delivery_receipt(self):
   with patch.object(self.c,'home_for',return_value=self.root),self.assertRaises(FileNotFoundError):self.c.final_approval(self.q,{},Mock(),'999999999999999999','a'*64)
- def test_38_installed_account03_only_new_mode(self):
-  a=self.cfg['accounts'][self.c.TARGET];self.assertEqual(a['supported_modes'],[self.c.MODE]);self.assertTrue(a['cross_account_clone']['enabled']);self.assertEqual(a['meta_app_id'],self.c.APP)
+ def test_38_installed_account03_modes_have_separate_scoped_authorities(self):
+  a=self.cfg['accounts'][self.c.TARGET];self.assertIn(self.c.MODE,a['supported_modes']);self.assertTrue(a['cross_account_clone']['enabled']);self.assertEqual(a['meta_app_id'],self.c.APP)
+  extras=set(a['supported_modes'])-{self.c.MODE}
+  self.assertLessEqual(extras,{'clone_target_prestaged'})
+  if extras:
+   cap=a['target_page_replacement'];self.assertTrue(cap['enabled']);self.assertEqual(cap['account_id'],self.c.TARGET);self.assertEqual(cap['authorized_by'],self.c.CEO)
+   policy=json.loads((R/cap['policy_source']).read_text());self.assertTrue(policy['request_only']);self.assertFalse(policy['future_requests_authorized'])
+   self.assertEqual(set(cap['allowed_request_ids']),set(policy['requests']));self.assertEqual(cap['authority_message_id'],policy['authority_message_id'])
  def test_39_validate_capability_rejects_missing_or_changed_JSON(self):
   from ares_campaign_v3.schema import Manifest
   from ares_campaign_v3.prevalidation import validate_account_policy

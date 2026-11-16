@@ -3611,6 +3611,24 @@
       "updated_at": "2026-10-28T18:30:24+00:00"
     },
     {
+      "canonical_key": "ares.eggbev03.same-account-replacement",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
+      "consumers": [
+        "ares-eggbev-target-clone.py",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-16T16:00:45+00:00",
+      "id": "ARES-EGGBEV03-SAME-ACCOUNT-1571911721063546892",
+      "kind": "capability",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conta03 duplicacao interna com substituicoes:capability somente pedido independente aprovado",
+      "updated_at": "2026-11-16T16:00:45+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032888347664495.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -17501,5 +17519,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-15T22:51:37+00:00"
+  "updated_at": "2026-11-16T16:00:45+00:00"
 }
