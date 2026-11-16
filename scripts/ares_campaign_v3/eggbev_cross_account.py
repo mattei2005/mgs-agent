@@ -5,7 +5,7 @@ source-derived target shells and PAUSED local seeds, then copies locally. Nothin
 in this module grants credentials, Page access or publication from maintenance.
 """
 from __future__ import annotations
-import copy,fcntl,hashlib,json,re,os
+import copy,fcntl,hashlib,json,re,os,time
 from pathlib import Path
 from datetime import datetime,timezone
 from decimal import Decimal
@@ -351,7 +351,7 @@ def prepare_media(q,selected,livefiles,drive_token,creation,runner,meta,token,ho
     runner.save(home/'prestage.json',result)
 
 
-def final_approval(q,summary,common,message_id,approved_digest):
+def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=False):
     """A fresh, later human reply to the exact posted summary, never the intake OK."""
     from .prevalidation import verify_prevalidation
     home=home_for(q);payload=load(home/'manifest.json');receipt=load(home/'summary-delivery.json')
@@ -368,10 +368,18 @@ def final_approval(q,summary,common,message_id,approved_digest):
         or sent.get('author',{}).get('id')!='1508864261504630925' or not sent['author'].get('bot')
         or ok.get('author',{}).get('id') not in {ACTOR,CEO} or ok['author'].get('bot')
         or ok.get('content','').strip().casefold() not in {'ok','sim','pode executar','pode publicar','aprovado'}
-        or ok.get('message_reference',{}).get('message_id')!=sent['id']
         or datetime.fromisoformat(ok['timestamp'])<=datetime.fromisoformat(sent['timestamp'])
         or message_id in {q['source_message_id'],AUTH}):raise ValueError('subsequent explicit final summary OK missing')
-    return payload
+    reference=(ok.get('message_reference') or {}).get('message_id')
+    if reference and reference!=sent['id']:raise ValueError('final OK references another message')
+    if not reference:
+        try:code,prior=common.discord_request('GET',f"/channels/{q['source_thread_id']}/messages?before={message_id}&limit=1")
+        except Exception:raise ValueError('unreferenced final OK lacks unambiguous live context') from None
+        if (code!=200 or not isinstance(prior,list) or len(prior)!=1 or prior[0].get('id')!=sent['id']
+            or hashlib.sha256(prior[0].get('content','').encode()).hexdigest()!=receipt['content_sha256']):
+            raise ValueError('unreferenced final OK is not directly after the exact final summary')
+    proof={'request_id':q['request_id'],'approved_digest':approved_digest,'approval_message_id':message_id,'summary_message_id':sent['id'],'author_id':ok['author']['id'],'verified_at_monotonic':time.monotonic(),'context':'direct_reply' if reference else 'directly_after_exact_summary'}
+    return (payload,proof) if return_proof else payload
 
 
 def readback_ops(ops):
@@ -416,6 +424,7 @@ def require_execution(manifest,config):
     if not proof or proof.get('request_id')!=manifest.request_id or proof.get('digest')!=manifest.digest:raise ValueError('cross-account Engine requires fresh final approval context')
     if config['accounts'][TARGET].get('write_enabled') is not True:raise ValueError('target campaign writes disabled')
     with reader(SOURCE,config):pass
+    return copy.deepcopy(proof)
 
 
 def validate_compiled(payload,q,source,page,selected,registry,allocation,runner):
@@ -462,13 +471,20 @@ def dispatch(args,runner):
             registry=MediaRegistry(cfg['media_registry'])
             for a in load(home/'selected-assets.json'):
                 if rows[a['asset_id']].get('reservation_request_id')!=q['request_id']:raise ValueError('asset reservation lost')
-            # Revalidate every account03 registry/media association gate before Engine.
-            check=prevalidate_payload(payload,registry)
-            if check['prevalidation']['content_digest']!=args.approved_digest:raise ValueError('registry/manifest changed')
-            manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
-            marker=CURRENT.set({'request_id':q['request_id'],'digest':manifest.digest})
-            try:result=CampaignEngine(cfg,transport_factory=real_transport_factory(cfg,manifest)).execute(manifest)
-            finally:CURRENT.reset(marker)
+            prior_checkpoint=Path(cfg['state_root'])/'checkpoints'/f"{q['request_id']}-{TARGET}.json"
+            if not prior_checkpoint.exists():
+                current_selected,_,_,_=select_media(q,runner,common,meta,token,home)
+                if [a['asset_id'] for a in current_selected]!=[a['asset_id'] for a in load(home/'selected-assets.json')]:raise ValueError('selected assets changed before execute')
+            # Fresh human approval is revalidated after all potentially long reads.
+            payload,approval_proof=final_approval(q,summary,common,args.approval_message_id,args.approved_digest,return_proof=True)
+            from .cross_clone_immediate import admission
+            with admission(q,payload,cfg,approval_proof):
+                check=prevalidate_payload(payload,registry)
+                if check['prevalidation']['content_digest']!=args.approved_digest:raise ValueError('registry/manifest changed')
+                manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
+                marker=CURRENT.set({**approval_proof,'request_id':q['request_id'],'digest':manifest.digest})
+                try:result=CampaignEngine(cfg,transport_factory=real_transport_factory(cfg,manifest)).execute(manifest)
+                finally:CURRENT.reset(marker)
             runner.save(home/'engine-result.json',result)
             return {'phase':'POSTPROCESS_PENDING' if result['status'].startswith('COMPLETE') else result['status'],'engine_result':result,'technical_paused_seeds':15,'source_unchanged':True,'serving_verified':False}
         finally:

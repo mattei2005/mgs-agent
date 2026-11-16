@@ -371,6 +371,18 @@ Rodolfo confirmou `Sim` em `1571710652420980918`, após a pergunta `157170994218
 
 A medição imediata registrou **41.697.280 bytes (~39,77 MiB) a mais disponíveis** no filesystem, delta global sujeito a atividade concorrente; a estimativa alocada do lote era ~43,20 MiB. Resultado ativo: `data/storage-work-duplicates-1571695234532778046/retirement-final.json`. Este lote está encerrado, sem confirmação ou retry pendente; revisão global permanece aberta. Próximo ponto é a revisão read-only de cópias de staging/código de testes e suas dependências, preservando rollback, estado e mídia até prova própria; caches e Git/recorrência continuam como categorias posteriores.
 
+### Staging/código de testes — revisão 1571713397446418446
+
+Pedido nativo de Rodolfo `1571713397446418446` (`Continue`), autor `344196393512075265`, autoriza continuação da revisão, não exclusão. As dez tarefas consultadas estão `done`; seis árvores explícitas de stage/candidate/baseline contêm 2.045 arquivos de código e 26 não-código. Nenhum programa de produção, pasta de rollback, estado de negócio ou mídia foi incluído como alvo. Dois lotes anteriores permanecem encerrados.
+
+Cobertura revalidada: **1.239 cópias de código**, sendo 1.017 `.py` e 222 `.pyc`, com ~19,55 MiB alocados. Recuperação existente: 555 caminhos usam 160 provedores de arquivo retidos fora das árvores candidatas; 684 usam blobs de código de sete commits Git fixados, legíveis e alcançáveis a partir de `origin/main`. Todos esses provedores/objetos Git são dependências obrigatórias até existir um sucessor validado; não aposentar o histórico/base por inferência no ponto 8. Não foi criado outro grande arquivo de payload. Mapas, leitores e provas desta análise ocupavam ~1,45 MiB na observação, deixando estimativa líquida direta de ~18,10 MiB antes dos custos compartilhados de Git/bookkeeping. Economia observada: zero, pois nenhum alvo foi apagado.
+
+Os 1.239 arquivos reais foram reconstruídos individualmente em RAM, com bytes/modos/UID/GID/mtime verificados e zero leitura dos alvos, e o leitor privado independente repetiu os 1.239. É recuperação de código/arquivos, não execução/restauração do ambiente histórico nem da aplicação. Preflight real PASS; 12 testes negativos e o formatter positivo de audit start/completion passaram. Zero processo/import selector/link de entrada identificado como consumidor; 18 hits literais foram classificados, não ignorados: quatro arquivos com fixtures de paths para testar `git check-ignore` e 14 snapshots históricos cujos hits estão nos campos de correção dos guardrails, não em seletores de execução. O verificador fixa AST das funções pertinentes e predicados de campo; hits novos/desconhecidos bloqueiam.
+
+Preservados pendentes de prova no conjunto comparado: um `.py` e 805 `.pyc`, além dos 26 não-código e todos os rollback/estado/mídia. Isso não prova unicidade global nem necessidade operacional; somente não houve reconstrução exata demonstrada para incluí-los neste lote. A revisão global permanece aberta.
+
+Manifesto congelado `7cd63295cd37cec57dffab01cacf5a7bdc4c822987028b47d42f2d63235181de`; executor `938385d63c4206d88f22d97655e8b0b420980b8945f42640ee1f7f295b90da32`. Evidências públicas em `data/storage-stages-1571713397446418446/`; mapa exato privado e provas completas em `/root/.hermes/secure-backups/storage-stages-1571713397446418446/`. Nenhum approval/start/journal destrutivo existe. Próximo gate é somente confirmação nativa da exclusão desses 1.239 arquivos, zero diretórios; nenhuma retenção/automação nova está autorizada. Procedimento de classificação de referências salvo na skill de manutenção, com espelho igual e marcador único conferidos.
+
 
 
 

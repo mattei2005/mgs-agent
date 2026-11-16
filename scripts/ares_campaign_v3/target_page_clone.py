@@ -173,7 +173,8 @@ def reconcile_existing(engine,bundle,transport,record,require_shells=False):
             if len(sets)!=1:raise ValueError('target recovery adset cardinality mismatch')
             adset=sets[0]
             from datetime import datetime
-            if str(adset.get('id'))!=sid or str(adset.get('campaign_id'))!=cid or adset.get('name')!=c.adset_name or adset.get('status')!='ACTIVE' or datetime.fromisoformat(adset['start_time'])!=datetime.fromisoformat(c.start_time):raise ValueError('target recovery adset hierarchy/schedule mismatch')
+            from .cross_clone_immediate import expected_start
+            if str(adset.get('id'))!=sid or str(adset.get('campaign_id'))!=cid or adset.get('name')!=c.adset_name or adset.get('status')!='ACTIVE' or datetime.fromisoformat(adset['start_time'])!=datetime.fromisoformat(expected_start(c,record,ci)):raise ValueError('target recovery adset hierarchy/schedule mismatch')
             _require_subset(adset,c.adset_create,'existing target adset')
         ads=_inventory(engine,bundle,transport,cid+'/ads','id,name,adset_id,status,source_ad_id,creative{id,object_story_spec,url_tags}','resume_ads')
         known={v for k,v in ids.items() if k.startswith((f'seed_ad_id_{ci}_',f'copied_ad_id_{ci}_'))}
@@ -256,13 +257,17 @@ def run(engine,bundle,transport,record):
     from datetime import datetime,timezone
     elapsed=any(c.status=='ACTIVE' and datetime.fromisoformat(c.start_time)<=datetime.now(timezone.utc) for c in bundle.campaigns)
     if recovering or elapsed:
-        reconcile_existing(engine,bundle,transport,record,require_shells=elapsed)
+        reconcile_existing(engine,bundle,transport,record,require_shells=elapsed and bundle.campaigns[0].mode!='clone_cross_account_prestaged')
     for stage in stages(bundle.campaigns):
         operations=[]
         for template in stage.operations:
             if template.name in mapping and mapping[template.name] in ids:continue
             if template.name in completed:continue
             op=replace(template,relative_url=_resolve(template.relative_url,ids),body=_resolve(template.body,ids))
+            if stage.name=='adset_create' and bundle.campaigns[0].mode=='clone_cross_account_prestaged':
+                from .cross_clone_immediate import new_adset_start
+                slot=int(template.name.rsplit('_',1)[1]);start=new_adset_start(engine,bundle.campaigns[slot-1],record,slot)
+                op=replace(op,body={**op.body,'start_time':start});_save()
             if '{campaign_id_' in op.relative_url or '{seed_ad_id_' in op.relative_url:raise ValueError('unresolved target clone dependency')
             if _uncertain(record,op.name) and op.name in mapping:
                 ids[mapping[op.name]]=_adopt_uncertain(engine,bundle,transport,op,record);_save();continue
@@ -314,7 +319,8 @@ def verify(bundle,record):
         for key in ['promoted_object','targeting','attribution_spec','billing_event','optimization_goal','is_dynamic_creative']:
             _require_subset(adset.get(key),c.adset_create.get(key),key)
         from datetime import datetime
-        if datetime.fromisoformat(adset['start_time'])!=datetime.fromisoformat(c.start_time):raise ValueError('target schedule mismatch')
+        from .cross_clone_immediate import expected_start
+        if datetime.fromisoformat(adset['start_time'])!=datetime.fromisoformat(expected_start(c,record,ci)):raise ValueError('target schedule mismatch')
         if ads.get('paging',{}).get('next') or len(ads.get('data',[]))!=2*len(c.ads):raise ValueError('target final/seed cardinality mismatch')
         byid={str(x['id']):x for x in ads['data']}
         for ai,a in enumerate(c.ads,1):

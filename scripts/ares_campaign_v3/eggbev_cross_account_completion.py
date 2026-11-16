@@ -23,7 +23,7 @@ def completion_proof(q,payload,checkpoint,records,selected):
     if [a['canonical_filename'] for a in selected]!=expected_assets:raise ValueError('completion asset order changed')
     if checkpoint.get('account_id')!=cross.TARGET or checkpoint.get('status') not in {'COMPLETE','COMPLETE_FUTURE_ACTIVE'}:
         raise ValueError('target checkpoint not terminal')
-    assignments=[];campaign_ids=[];seed_ids=[];offset=0
+    assignments=[];campaign_ids=[];seed_ids=[];actual_start_times={};offset=0
     for record in records:
         n=len(record['campaign_ids']);raw=campaigns[offset:offset+n];offset+=n
         if record.get('status')!='COMPLETE' or any(r.get('code')!=200 for r in record.get('readback_results',[])):
@@ -33,6 +33,7 @@ def completion_proof(q,payload,checkpoint,records,selected):
         rows={r['name']:r['body'] for r in record['readback_results']};ids=record['target_clone_ids']
         for ci,c in enumerate(raw,1):
             cid=ids[f'campaign_id_{ci}'];campaign_ids.append(cid)
+            actual_start_times[cid]=rows[f'readback_adsets_{ci}']['data'][0]['start_time']
             if cid!=record['campaign_ids'][ci-1]:raise ValueError('campaign journal order mismatch')
             ads={str(a['id']):a for a in rows[f'readback_ads_{ci}']['data']}
             if any(a.get('issues_info') or a.get('failed_delivery_checks') or a.get('effective_status') in {'WITH_ISSUES','DISAPPROVED'} for a in ads.values()):
@@ -45,7 +46,7 @@ def completion_proof(q,payload,checkpoint,records,selected):
     if (len(assignments)!=15 or len(set(campaign_ids))!=5 or len(set(seed_ids))!=15
             or len({a['ad_id'] for a in assignments})!=15 or set(seed_ids)&{a['ad_id'] for a in assignments}):
         raise ValueError('duplicate or missing completion identities')
-    return {'campaign_ids':campaign_ids,'assignments':assignments,'technical_seed_ids':seed_ids}
+    return {'campaign_ids':campaign_ids,'assignments':assignments,'technical_seed_ids':seed_ids,'actual_start_times':actual_start_times}
 
 def finalize(path,runner,approved_digest,approval_message_id):
     from . import eggbev_cross_account as cross
@@ -98,5 +99,5 @@ def finalize(path,runner,approved_digest,approval_message_id):
             fcntl.flock(lock,fcntl.LOCK_EX);ledger=cross.load(ledger_path);allocation=ledger['allocations'][q['request_id']]
             if allocation['account_id']!=cross.TARGET or allocation['names']!=summary['names']:raise ValueError('completion naming allocation changed')
             allocation.update(status='COMMITTED',campaign_ids=proof['campaign_ids'],completed_at=datetime.now(timezone.utc).isoformat());runner.save(ledger_path,ledger)
-        final={'phase':'COMPLETE','request_id':q['request_id'],**proof,'final_campaigns':5,'final_ads':15,'technical_paused_seeds':15,'manager_stock_readbacks':movements,'configured_status':'ACTIVE','scheduled_start':summary['start_time'],'daily_budget_minor':'3500','total_daily_budget_minor':'17500','source_unchanged':True,'serving_verified':False}
+        final={'phase':'COMPLETE','request_id':q['request_id'],**proof,'final_campaigns':5,'final_ads':15,'technical_paused_seeds':15,'manager_stock_readbacks':movements,'configured_status':'ACTIVE','approved_plan_start':summary['start_time'],'daily_budget_minor':'3500','total_daily_budget_minor':'17500','source_unchanged':True,'serving_verified':False}
         runner.save(home/'final.json',final);leases.release(cross.TARGET,q['request_id']);return final

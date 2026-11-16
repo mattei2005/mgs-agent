@@ -1712,7 +1712,7 @@ class CampaignEngine:
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         if self.read_only:raise EngineDisabled('read-only planner cannot execute')
         from .eggbev_cross_account import require_execution as require_cross_execution
-        require_cross_execution(manifest,self.config)
+        self._cross_account_execution_authority = require_cross_execution(manifest,self.config)
         from .operator_suspension import deny_replay
         for campaign in manifest.campaigns:
             deny_replay(self.config['state_root'], campaign.account_id, manifest.request_id)
