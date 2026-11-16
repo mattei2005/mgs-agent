@@ -15,6 +15,25 @@ class FinalApproverTests(unittest.TestCase):
   self.ctx=patch.object(self.m,'ROOT',self.root);self.ctx.start();self.addCleanup(self.ctx.stop)
  def save_authority(self):
   p=self.root/'data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps({'authority':self.authority}))
+ def test_get429_retries_only_idempotent_reads(self):
+  from types import SimpleNamespace
+  calls=[];replies=iter([(429,{'retry_after':0.2}),(200,{'id':'message'})])
+  def request(method,path):calls.append((method,path));return next(replies)
+  with patch.object(self.m.time,'sleep') as sleep:
+   result=self.m.discord_get(SimpleNamespace(discord_request=request),'/channels/1565032671669919827/messages/123')
+  self.assertEqual(result,(200,{'id':'message'}));self.assertEqual([x[0] for x in calls],['GET','GET']);sleep.assert_called_once_with(0.2)
+ def test_get404_not_retried(self):
+  from types import SimpleNamespace
+  from unittest.mock import Mock
+  request=Mock(return_value=(404,None))
+  self.assertEqual(self.m.discord_get(SimpleNamespace(discord_request=request),'/channels/1565032671669919827/messages/123'),(404,None));request.assert_called_once()
+ def test_get429_old_sdk_missing_body_has_bounded_backoff(self):
+  from types import SimpleNamespace
+  from unittest.mock import Mock
+  request=Mock(side_effect=[(429,None),(200,{'id':'message'})])
+  with patch.object(self.m.time,'sleep') as sleep:
+   self.m.discord_get(SimpleNamespace(discord_request=request),'/channels/1565032671669919827/messages/123')
+  sleep.assert_called_once_with(2.0)
  def test_existing_manager_may_approve_and_unknown_cannot(self):
   self.assertTrue(self.m.authorized_final_approver(self.q,'1055570806945620030'))
   self.assertTrue(self.m.authorized_final_approver(self.q,self.m.CEO))

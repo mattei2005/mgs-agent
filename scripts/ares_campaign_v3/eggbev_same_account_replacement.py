@@ -99,10 +99,25 @@ def runtime(runner, config):
     return common,meta,sb,token
 
 
+def discord_get(common,path):
+    """Bounded retry of idempotent authority reads; never replay a mutation."""
+    for attempt in range(4):
+        code,body=common.discord_request('GET',path)
+        if code not in {429,500,502,503,504} or attempt==3:return code,body
+        delay=float(2**(attempt+1))
+        if isinstance(body,dict) and 'retry_after' in body:
+            try:delay=float(body['retry_after'])
+            except (ValueError,TypeError):return code,body
+            if not 0<=delay<=30:return code,body
+            delay=max(0.05,delay)
+        time.sleep(delay)
+    raise AssertionError('unreachable GET retry state')
+
+
 def live_request(q, common):
     from .eggbev_cross_account import verify_advertiser  # target03 credential check only
     p,g = admit(q)
-    code,thread = common.discord_request('GET','/channels/'+q['source_thread_id'])
+    code,thread = discord_get(common,'/channels/'+q['source_thread_id'])
     if code!=200 or thread.get('parent_id')!=q['source_channel_id']:
         raise ValueError('independent request origin mismatch')
     observed={}
@@ -110,7 +125,7 @@ def live_request(q, common):
           q['request_independence_authority_message_id'],q['standards_confirmation_message_id'],
           q['source_selection_authority_message_id'],p['authority_message_id']]
     for mid in mids:
-        code,m=common.discord_request('GET',f"/channels/{q['source_thread_id']}/messages/{mid}")
+        code,m=discord_get(common,f"/channels/{q['source_thread_id']}/messages/{mid}")
         if (code!=200 or m.get('id')!=mid or m.get('author',{}).get('id')!=CEO
             or m['author'].get('bot') or m.get('edited_timestamp')):
             raise ValueError('fresh request/technical authority unavailable')
@@ -385,7 +400,7 @@ def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=Fa
         or approved_digest!=payload['prevalidation']['content_digest'] or delivery.get('digest')!=approved_digest
         or summary.get('spec_sha256')!=digest(spec(q))):raise ValueError('final summary seal mismatch')
     def get(mid):
-        code,m=common.discord_request('GET',f"/channels/{q['source_thread_id']}/messages/{mid}")
+        code,m=discord_get(common,f"/channels/{q['source_thread_id']}/messages/{mid}")
         if code!=200 or m.get('id')!=mid or m.get('edited_timestamp'):raise ValueError('final summary/approval unavailable')
         return m
     sent=get(delivery['message_id']);ok=get(message_id)
@@ -398,7 +413,7 @@ def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=Fa
         raise ValueError('subsequent final summary approval required')
     ref=(ok.get('message_reference') or {}).get('message_id')
     if ref!=sent['id']:
-        code,prior=common.discord_request('GET',f"/channels/{q['source_thread_id']}/messages?before={message_id}&limit=1")
+        code,prior=discord_get(common,f"/channels/{q['source_thread_id']}/messages?before={message_id}&limit=1")
         if ref or code!=200 or len(prior)!=1 or prior[0].get('id')!=sent['id']:
             raise ValueError('approval is not linked to exact summary')
     proof={'request_id':q['request_id'],'digest':approved_digest,'approval_message_id':message_id,

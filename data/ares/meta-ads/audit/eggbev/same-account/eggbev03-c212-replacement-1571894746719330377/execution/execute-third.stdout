@@ -1,0 +1,18 @@
+{
+  "status": "PARTIAL_DEFERRED_QUOTA",
+  "request_id": "eggbev03-c212-replacement-1571894746719330377",
+  "campaign_ids": [],
+  "metrics": {
+    "lane_count": 1,
+    "campaign_count": 0,
+    "global_wave_count": 3,
+    "intermediate_get_calls": 0,
+    "outer_readback_calls": 0
+  },
+  "audit_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/eggbev03-c212-replacement-1571894746719330377.json",
+  "idempotent_replay": false,
+  "deferred_accounts": [
+    "1481815942722118"
+  ],
+  "retry_after_seconds": 300
+}
