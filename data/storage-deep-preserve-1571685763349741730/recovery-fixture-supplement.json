@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "supplementary_negative_cases": [
+    "duplicate_member",
+    "unsafe_member",
+    "metadata_mismatch",
+    "payload_mismatch"
+  ],
+  "original_fixture_negative_cases": [
+    "overwrite",
+    "original_destination",
+    "reduced_scope",
+    "corruption"
+  ],
+  "all_negative_case_count": 8,
+  "positive_fixture_modes": [
+    "materialized_RAM",
+    "materialized_synthetic_filesystem"
+  ],
+  "no_real_original_reads": true,
+  "deletions": 0
+}

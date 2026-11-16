@@ -6618,12 +6618,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-DEEP-PRESERVE-1571685763349741730",
-      "next_step": "Ponto1:todos hashes,retainedarchive coverage,consumidores,estado pacotes/configs e evidencias. Ponto2:validar5fontes,headroom,tar privado lossless,leitorstream independente+restore isolado,hash/metadados originais. Sem financeiro/write,delete/restart/retencao.",
-      "objective": "Aprofundar remaining106MiB legados e preservar exatamente5capturas1.44GiB em compacto privado com recuperacao comprovada; zero exclusoes.",
-      "source": "discord:1569928464033783862/1571685763349741730;data/storage-remainder-review-1571661469475672075/preservation-proposal.json;context/storage-reorganization-20261112.md",
-      "state": "in_progress_two_authorized_branches",
+      "next_step": "Dois pedidos concluidos:131files ponto1verificados/54payloadcovers/77naocobertosnos2archives;11versoesdiferentes.5capturas preservadas em5.71MiB,5RAMrestoresreais,originaisiguais;0delete. Gate manifesto4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534:5files,0dirs,1.43GiBnet estimado,5negativos+preflightPASS. Confirmacao NOVA;autoridade1571685763349741730foi preservacaosomente.",
+      "objective": "Preservacao autorizada concluida, aprofundamento real registrado, nenhuma exclusao; proximo gate separado e exato.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/final-result.json;data/storage-deep-preserve-1571685763349741730/capture-retirement-manifest.json",
+      "state": "validated_waiting_new_critical_five_file_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T00:38:59+00:00"
+      "updated_at": "2026-11-16T00:58:25+00:00"
     },
     {
       "agent": "zeus",
@@ -6658,22 +6658,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REMAINDER-1571661469475672075",
-      "next_step": "0delete/0eligivel. Proposta5capturas1.44GiBcompactoprivadoevalidacaobyte/metadadossemoriginaisdeleteaguardadecisao. 407grupos475.27MiBpotencialnaocertificado;importer/checksumpreservados. Gitconsumer mgs-autocommit active,retry nativo bloqueadoporevidenciat_e524bad0;naomodificaroutraoperacao/guard/commitmanual. Reconciliar remoto antes de proximaexecucao. Parent5-8aberto.",
-      "objective": "Revisao read-only local concluida; proposta5capturas pendente de decisao e Git dos novos registros bloqueado por guard externo, sem contorno.",
-      "source": "data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json;data/storage-remainder-review-1571661469475672075/git-sync-status.json",
-      "state": "review_completed_preservation_decision_git_pending",
+      "next_step": "Preservacao5capturas autorizada1571685763349741730executadaevalida;Git anterior10artefatos confirmado. SeguirZEUS-STORAGE-DEEP-PRESERVE-1571685763349741730 para gate novo5files;naopedirnovapreservacao,nemexecutardeleteantesconfirmacao.",
+      "objective": "Preservacao autorizada concluida, aprofundamento real registrado, nenhuma exclusao; proximo gate separado e exato.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/final-result.json;data/storage-deep-preserve-1571685763349741730/capture-retirement-manifest.json",
+      "state": "superseded_by_validated_deep_preservation_cycle",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T23:18:16+00:00"
+      "updated_at": "2026-11-16T00:58:25+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Nova revisao read-only1571661469475672075 concluida no recorte:50.34GiBmetadados/227work2.88GiB/maintenance105.61MiB;475.27MiBduplicatasnaoprontas. Gate:autorizarpreservacaocompacta5capturas1.44GiBsemdelete;semcancelarretiradaglobal.7caches/8Gitrecorrenciaabertos;naorepetirlotesencerrados.",
-      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
-      "state": "awaiting_preservation_decision_remaining_categories_5_to_8",
+      "next_step": "Gate5originais arquivo,somente aposnova confirmacao manifesto4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534;bundle5.71MiB/5RAMrestores revalidados/1.43GiB netprojetado/0delete. Deep131 arquivos106MiBpreservados:77semcobertura nos2archives.7caches/8Git/recorrenciaabertos;naorepetirlotesencerrados.",
+      "objective": "Preservacao autorizada concluida, aprofundamento real registrado, nenhuma exclusao; proximo gate separado e exato.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/final-result.json;data/storage-deep-preserve-1571685763349741730/capture-retirement-manifest.json",
+      "state": "awaiting_five_capture_retirement_confirmation_remaining_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T23:13:23+00:00"
+      "updated_at": "2026-11-16T00:58:25+00:00"
     },
     {
       "agent": "zeus",
@@ -6728,12 +6728,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
-      "next_step": "Restantes legacymanutenção105.61MiBpreservadosporrollback/configsemcoberturaintegralcertificada. Trabalho6:proposta5capturas1.44GiBpreservarcompacto;aguardadecisao1571661469475672075.0delete/0loteready;5-8globaisabertos. Fonte nova review-result.",
-      "objective": "Classificar ocupacao remanescente sem tocar em producao, historia ou dependencias; preservacao proposta separada de qualquer exclusao.",
-      "source": "context/storage-reorganization-20261112.md;data/storage-remainder-review-1571661469475672075/review-result.json;data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
-      "state": "reviewed_preservation_proposal_pending",
+      "next_step": "131files/11pacotes/994configmembersponto1profundados.54payloads1.26MiBcobertos;77~104MiBnaocobertosnos2archives.0instalacao/config/deletions;naodeclararnecessidadeglobal.5capturasoutroraempropostapreservadas;gatecriticonovo em ZEUS-STORAGE-DEEP-PRESERVE-1571685763349741730.",
+      "objective": "Preservacao autorizada concluida, aprofundamento real registrado, nenhuma exclusao; proximo gate separado e exato.",
+      "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/final-result.json;data/storage-deep-preserve-1571685763349741730/capture-retirement-manifest.json",
+      "state": "deep_review_complete_originals_preserved",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-15T23:13:23+00:00"
+      "updated_at": "2026-11-16T00:58:26+00:00"
     },
     {
       "agent": "zeus",
@@ -10048,12 +10048,12 @@
     {
       "agent": "ares",
       "id": "shein-1571687571162005505",
-      "next_step": "Dry-run e execução central; QA integral e readback dos cinco alvos",
+      "next_step": "Obter aceite específico de Kelly para as oito omissões não confirmadas; vincular receipt do mesmo request e IDs, continuar QA restante e ativação central sem recriar",
       "objective": "Duplicar cinco vezes C269 em Yolokfx Conta03 G005; USD100 por campanha; COCAP USD0.65",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571687571162005505/request.json",
-      "state": "intake autenticado; escopo positivo; preflight pendente; sem execução confirmada",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1571687571162005505/pending-readback.json",
+      "state": "postprocess_pending: c271 c272 c273 c274 c275 existentes paused, 10 ads; budget usd100/dia por alvo e cap usd0.65 confirmados; api omite oito recursos individuais em todos os creatives; sem grant para omissões deste pedido; qa mídia cobre c271 c272; nenhuma ativação confirmada",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-16T00:46:15+00:00"
+      "updated_at": "2026-11-16T00:54:43+00:00"
     },
     {
       "agent": "ares",
@@ -10857,5 +10857,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:46:15+00:00"
+  "updated_at": "2026-11-16T00:58:26+00:00"
 }

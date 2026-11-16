@@ -1,0 +1,174 @@
+{
+  "status": "prepared_not_authorized_for_deletion",
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "preservation_authority_message_id": "1571685763349741730",
+  "targets": [
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-full-post-1545874044757344417.json",
+      "action": "delete_file"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-user-layout-pre-1545874044757344417.json",
+      "action": "delete_file"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-feasibility-1545869802898194432.json",
+      "action": "delete_file"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-postwrite.json",
+      "action": "delete_file"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-prewrite.json",
+      "action": "delete_file"
+    }
+  ],
+  "file_count": 5,
+  "directory_count": 0,
+  "logical_bytes": 1547130141,
+  "allocated_bytes": 1547153408,
+  "source_metadata": [
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-full-post-1545874044757344417.json",
+      "mode": 33188,
+      "size": 310428807,
+      "allocated_bytes": 310435840,
+      "uid": 0,
+      "gid": 0,
+      "mtime_ns": 1788635716315347581,
+      "ctime_ns": 1788635716315347581,
+      "dev": 2049,
+      "ino": 2391673,
+      "nlink": 1
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-user-layout-pre-1545874044757344417.json",
+      "mode": 33188,
+      "size": 310423568,
+      "allocated_bytes": 310431744,
+      "uid": 0,
+      "gid": 0,
+      "mtime_ns": 1788635549514187990,
+      "ctime_ns": 1788635549514187990,
+      "dev": 2049,
+      "ino": 2391151,
+      "nlink": 1
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-feasibility-1545869802898194432.json",
+      "mode": 33188,
+      "size": 308759074,
+      "allocated_bytes": 308764672,
+      "uid": 0,
+      "gid": 0,
+      "mtime_ns": 1788634561696271955,
+      "ctime_ns": 1788634561696271955,
+      "dev": 2049,
+      "ino": 2391231,
+      "nlink": 1
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-postwrite.json",
+      "mode": 33188,
+      "size": 308759819,
+      "allocated_bytes": 308760576,
+      "uid": 0,
+      "gid": 0,
+      "mtime_ns": 1788631000724484482,
+      "ctime_ns": 1788631000724484482,
+      "dev": 2049,
+      "ino": 2382466,
+      "nlink": 1
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-prewrite.json",
+      "mode": 33188,
+      "size": 308758873,
+      "allocated_bytes": 308760576,
+      "uid": 0,
+      "gid": 0,
+      "mtime_ns": 1788630887645244075,
+      "ctime_ns": 1788630887645244075,
+      "dev": 2049,
+      "ino": 2382448,
+      "nlink": 1
+    }
+  ],
+  "metadata_fingerprint": "71ab8c7dd1e8de55ab592a6d24501f19c67b948a9309478271a1920add6666b7",
+  "original_hashes": [
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-full-post-1545874044757344417.json",
+      "sha256": "a0539fdc41a854f72e4c653e0cd18b28c6caf3946021fe36b6e3466c196d541d"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-user-layout-pre-1545874044757344417.json",
+      "sha256": "07783a57fd2e44fb57d918c60def1fb3aa497912e61d65239e9aa31bc2bb780a"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-feasibility-1545869802898194432.json",
+      "sha256": "346815259ea47d6cb81312f69a510609d2b8a9b56243eb9ea9749b36c12931c3"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-postwrite.json",
+      "sha256": "5de25663bbc64e6328e3faf06fc3e36dec86a5e87fe92ffda846c48237dad369"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-full-prewrite.json",
+      "sha256": "6fb3c4c28e5a5f84d5c6d68ffc069d04457699ad020689540f54fe9074df19e4"
+    }
+  ],
+  "executor_sha256": "69932098c1f051bb44bb011de3bfcf91aac42e8dc4b9b00c7101c2f4c58ac80f",
+  "retained_hashes": [
+    {
+      "path": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/captures.tar.xz",
+      "sha256": "1e74764a7f5bb190bffd934b1169e4170369d0a282979acd9ee1f2c644cbd283"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/source-manifest.json",
+      "sha256": "3824fbece4ee15cf4103c9b385b1e1e908b4b6d48c576baea88cc38b2079f3e2"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/recover.py",
+      "sha256": "86378801076877ca1b6d19d6ae2df23318ab2413ede1b8e7d4f068af6b5767b6"
+    },
+    {
+      "path": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/SHA256SUMS",
+      "sha256": "0676dd19855297e1fcbe8eaeda928de4eabdc59080d9d5470e1e9b5d0e9ae982"
+    }
+  ],
+  "protected_hashes": [
+    {
+      "path": "/root/mgs-agent/data/storage-remainder-review-1571661469475672075/preservation-proposal.json",
+      "sha256": "75179924a1831ec9855a372603181084f9b396ec3a49c8f198ac9c3dec1b4d65"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/principal.json",
+      "sha256": "867d6f2bc403e17faacca36d25777fd5b84df0baa8a0d80c57291f0f48f12699"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-candidate-1545874044757344417.json",
+      "sha256": "1bc82021b77106aee4f41055fa2817afdfec213d098b0d0e08e8e68994f7adb1"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557/principal.json",
+      "sha256": "f721ab91bfc1e67174f4ea8a7ab4dc5ed62e1016ed2c503554da48d9c6e92b2e"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/import_snapshot.py",
+      "sha256": "8a52ef2aa48c5d59c9f881b3445662b0f2196d10d12f242023ddf5bc7367e874"
+    }
+  ],
+  "recovery_reader": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/recover.py",
+  "originals_are_not_current_financial_database": true,
+  "lossless_bytes_and_metadata_recovery_validated": true,
+  "immutable_historical_candidate_kept": true,
+  "historical_rerun_requires_explicit_reconstruction_if_retired": true,
+  "consumers_readback": "capture-consumers.json PASS3025sources0exacthits; importer distinct final-audit source retained",
+  "inbound_links_readback": "capture-inbound-links.json PASS",
+  "source_archive_current_allocated_bytes": 5988352,
+  "initial_net_estimate_bytes": 1541165056,
+  "deletions": 0,
+  "created_at": "2026-11-16T00:52:16.228315+00:00"
+}

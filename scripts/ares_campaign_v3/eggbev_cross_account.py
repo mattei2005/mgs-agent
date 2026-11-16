@@ -202,6 +202,22 @@ def build(q,source,page,selected,registry,allocation,runner,start_time):
 def home_for(q):return ROOT/'data/ares/meta-ads/audit/eggbev/cross-account'/q['request_id']
 
 
+def require_source_consistency(q,original,current,runner,home,approved_digest=None):
+    """Only pinned, fresh strict thumbnail-byte equivalence can explain drift."""
+    if runner.source_comparison(original)==runner.source_comparison(current):return
+    from . import native_thumbnail_equivalence as native
+    context={'request_id':q['request_id'],'account_id':SOURCE,'source_campaign_id':original['campaign']['id']}
+    if approved_digest:
+        context['approved_digest']=approved_digest
+        proof=native.compare(original,current,context=context,normalize=runner.source_comparison)
+    else:
+        context['preparation_snapshot_sha256']=native.digest(original)
+        proof=native.compare_preparation(original,current,context=context,normalize=runner.source_comparison)
+    # Content-addressed proof preserves the first source snapshot and real GETs.
+    runner.save(home/('source-current-'+native.digest(current)+'.json'),current)
+    runner.save(home/('thumbnail-equivalence-'+digest(proof)+'.json'),proof)
+
+
 def prepare(path,runner,confirm=False):
     if not confirm:raise ValueError('prepare requires --confirm-prepare; never publishes campaign')
     q=request_load(path);cfg=load(runner.CONFIG)
@@ -215,6 +231,11 @@ def prepare(path,runner,confirm=False):
         try:
             common,meta,sb,token=runtime(runner,cfg);binding=verify_advertiser(meta,token);human=live_request(q,common)
             source=source_read(q,runner,common,meta,token,cfg);page=page_read(q,source,meta,sb,token,path)
+            if (home/'source-live.json').exists():
+                original=load(home/'source-live.json')
+                prior=load(home/'summary.json') if (home/'summary.json').exists() else {}
+                require_source_consistency(q,original,source,runner,home,prior.get('digest'))
+                source=original
             if (home/'summary.json').exists():
                 from .prevalidation import verify_prevalidation
                 sealed=load(home/'manifest.json');summary=load(home/'summary.json')
@@ -397,7 +418,7 @@ def dispatch(args,runner):
             if human!=load(home/'request-live.json'):raise ValueError('request changed since preparation')
             summary=load(home/'summary.json');payload=final_approval(q,summary,common,args.approval_message_id,args.approved_digest)
             current=source_read(q,runner,common,meta,token,cfg)
-            if runner.source_comparison(current)!=runner.source_comparison(load(home/'source-live.json')):raise ValueError('source changed since summary; no campaign write')
+            require_source_consistency(q,load(home/'source-live.json'),current,runner,home,args.approved_digest)
             page=page_read(q,current,meta,sb,token,args.input)
             if page!=load(home/'target-page-live.json'):raise ValueError('Page identity changed since summary')
             from . import eggbev_creation_naming as naming

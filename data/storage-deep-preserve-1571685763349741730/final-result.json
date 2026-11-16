@@ -1,0 +1,121 @@
+{
+  "status": "both_authorized_branches_validated_waiting_new_deletion_confirmation",
+  "authority_message_id": "1571685763349741730",
+  "thread_id": "1569928464033783862",
+  "maintenance_deeper_review": {
+    "files_hashed": 131,
+    "all_sources_metadata_and_hashes_unchanged": true,
+    "retained_archive_members_checked": 3623,
+    "exact_payload_covered_files": 54,
+    "exact_payload_uncovered_files": 77,
+    "covered_allocated_regular_bytes": 1323008,
+    "uncovered_allocated_regular_bytes": 109121536,
+    "coverage_scope": "Two previously retained and hash-bound local archives; nonmatch is not global uniqueness proof.",
+    "native_package_archives_checked": 11,
+    "old_package_payload_files_streamed": 705,
+    "old_packages_same_version_as_installed": 0,
+    "configuration_regular_members_hashed": 994,
+    "whole_set_disposal_certified": false,
+    "deletions": 0
+  },
+  "preservation": {
+    "status": "preserved_validated_originals_retained",
+    "authority_message_id": "1571685763349741730",
+    "bundle": "/root/.hermes/secure-backups/storage-captures-1571685763349741730",
+    "source_files": 5,
+    "source_logical_bytes": 1547130141,
+    "source_allocated_bytes": 1547153408,
+    "bundle_allocated_bytes": 5988352,
+    "bundle_MiB": 5.71,
+    "archive_sha256": "1e74764a7f5bb190bffd934b1169e4170369d0a282979acd9ee1f2c644cbd283",
+    "archive_size": 5968296,
+    "retained_only_reader": {
+      "status": "PASS",
+      "files_verified": 5,
+      "logical_bytes_verified": 1547130141,
+      "ram_materializations": 5,
+      "disk_materializations": 0,
+      "original_source_payload_reads": 0,
+      "metadata_verified": true,
+      "original_ctime_recorded_not_recreatable": true
+    },
+    "all_original_hashes_and_metadata_unchanged": true,
+    "originals_present": 5,
+    "deletions": 0,
+    "actual_reclaimed_bytes": 0,
+    "potential_net_bytes_if_separately_authorized_original_retirement": 1541165056,
+    "potential_net_GiB_if_separately_authorized_original_retirement": 1.44,
+    "permanent_real_disk_restore_copy_created": false,
+    "real_files_restored_one_at_a_time_to_anonymous_RAM": true,
+    "full_application_restore_executed": false,
+    "financial_operations": 0,
+    "source_proposal_sha256": "75179924a1831ec9855a372603181084f9b396ec3a49c8f198ac9c3dec1b4d65",
+    "at": "2026-11-16T00:46:18.398609+00:00"
+  },
+  "reader_fixture_acceptance": {
+    "status": "PASS",
+    "supplementary_negative_cases": [
+      "duplicate_member",
+      "unsafe_member",
+      "metadata_mismatch",
+      "payload_mismatch"
+    ],
+    "original_fixture_negative_cases": [
+      "overwrite",
+      "original_destination",
+      "reduced_scope",
+      "corruption"
+    ],
+    "all_negative_case_count": 8,
+    "positive_fixture_modes": [
+      "materialized_RAM",
+      "materialized_synthetic_filesystem"
+    ],
+    "no_real_original_reads": true,
+    "deletions": 0
+  },
+  "native_tar_compare": "PASS5files",
+  "retirement_preparation": {
+    "manifest_sha256": "4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534",
+    "executor_sha256": "69932098c1f051bb44bb011de3bfcf91aac42e8dc4b9b00c7101c2f4c58ac80f",
+    "file_targets": 5,
+    "directory_targets": 0,
+    "original_allocated_bytes": 1547153408,
+    "retained_private_bundle_bytes": 5988352,
+    "total_analysis_created_bytes_at_freeze": 6377472,
+    "potential_net_bytes_if_originals_deleted": 1540775936,
+    "potential_net_GiB_if_originals_deleted": 1.43,
+    "not_actual_reclaimed_bytes": true,
+    "preflight": "PASS",
+    "negative_tests_blocked": 5,
+    "deletion_authorized": false,
+    "execution_started": false,
+    "originals_present": 5
+  },
+  "previous_git_pending_resolved": {
+    "all_10_prior_artifacts_readback_verified": true,
+    "containing_remote_commit": "a18570df5014996af5dd5e95ee8a9752ae5f8a6d",
+    "manual_commit": false
+  },
+  "learning": {
+    "subsystem": "vps-maintenance-and-backup-governance",
+    "target": "references/backup-retention-scope-and-redundancy.md",
+    "summary": "Materialized retained-only recovery of one large regular file at a time in anonymous RAM, private lossless bundle, fixtures and honest net savings.",
+    "marker_readback": true,
+    "live_mirror_equal": true,
+    "sha256": "ed58e183ba19972f7713baf7f1fd3597ae755a77425454a97f6930ccfc7d8f1a"
+  },
+  "all_originals_preserved": true,
+  "financial_operations": 0,
+  "package_installs": 0,
+  "config_writes": 0,
+  "gateway_restarts": 0,
+  "retention_changes": 0,
+  "source_deletions": 0,
+  "whole_disk_review_complete": false,
+  "at": "2026-11-16T00:56:15.940720+00:00",
+  "report_infra_message_id": "1571690881516314744",
+  "report_exact_readback_verified": true,
+  "report_content_empty": true,
+  "report_mentions_empty": true
+}

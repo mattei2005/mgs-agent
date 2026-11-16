@@ -5,7 +5,7 @@ ROOT=pathlib.Path('/root/mgs-agent')
 PARENT=ROOT/'work/finance-reaudit-20260905'
 NAMES=['F16-BR-full-post-1545874044757344417.json','F16-user-layout-pre-1545874044757344417.json','F16-feasibility-1545869802898194432.json','batch567-full-postwrite.json','batch567-full-prewrite.json']
 def sha(p):return subprocess.check_output(['sha256sum','--',str(p)],text=True).split()[0]
-def metadata(p):
+def metadata(p) -> dict:
     s=os.lstat(p);return dict(path=str(p),mode=s.st_mode,size=s.st_size,allocated_bytes=s.st_blocks*512,uid=s.st_uid,gid=s.st_gid,mtime_ns=s.st_mtime_ns,ctime_ns=s.st_ctime_ns,dev=s.st_dev,ino=s.st_ino,nlink=s.st_nlink)
 def fingerprint(rows):
     return hashlib.sha256(json.dumps(rows,sort_keys=True,separators=(',',':')).encode()).hexdigest()

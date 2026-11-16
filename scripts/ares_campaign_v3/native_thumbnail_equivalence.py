@@ -163,6 +163,25 @@ def _binding(original, current, context, normalize):
                               'original_snapshot_sha256': digest(original), 'current_snapshot_sha256': digest(current), 'entries': entries}
 
 
+def compare_preparation(original, current, *, context, normalize, fetcher=None):
+    """Unsealed preparation proof; never represents final manifest approval.
+
+    Reuse the strict byte/identity comparator with a fingerprint of the actual
+    first snapshot. The compatibility context is internal; the emitted receipt
+    explicitly identifies preparation, not an approved campaign digest.
+    """
+    required={'request_id','preparation_snapshot_sha256','account_id','source_campaign_id'}
+    if set(context)!=required or context['preparation_snapshot_sha256']!=digest(original):
+        raise ValueError('preparation thumbnail requires the pinned original snapshot')
+    legacy={k:v for k,v in context.items() if k!='preparation_snapshot_sha256'}
+    legacy['approved_digest']=context['preparation_snapshot_sha256']
+    proof=compare(original,current,context=legacy,normalize=normalize,fetcher=fetcher)
+    proof['mechanism']='native-thumbnail-preparation-bytes-v1'
+    proof['context']=copy.deepcopy(context)
+    proof['manifest_approval']=False
+    return proof
+
+
 def compare(original, current, *, context, normalize, fetcher=None):
     """Prove all native deltas, with no other delta. Inputs are never modified."""
     a, b, paths, receipt = _binding(original, current, context, normalize)

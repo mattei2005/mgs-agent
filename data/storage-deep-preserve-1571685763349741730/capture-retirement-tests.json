@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "preflight": {
+    "status": "PASS",
+    "mode": "preflight",
+    "file_targets": 5,
+    "directories_removed": 0,
+    "original_payload_reads_by_recovery": 0,
+    "recovery": {
+      "status": "PASS",
+      "files_verified": 5,
+      "logical_bytes_verified": 1547130141,
+      "ram_materializations": 5,
+      "disk_materializations": 0,
+      "original_source_payload_reads": 0,
+      "metadata_verified": true,
+      "original_ctime_recorded_not_recreatable": true
+    },
+    "runtime": {
+      "pids": {
+        "zeus": 2241212,
+        "ares": 2233587,
+        "atena": 2237072
+      },
+      "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+      "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+    },
+    "deletions_by_verifier": 0
+  },
+  "negative_tests_blocked": [
+    "scope_reduction",
+    "file_count",
+    "metadata_fingerprint",
+    "post_rejects_present_originals",
+    "missing_new_critical_confirmation"
+  ],
+  "manifest_sha256": "4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534",
+  "executor_sha256": "69932098c1f051bb44bb011de3bfcf91aac42e8dc4b9b00c7101c2f4c58ac80f",
+  "originals_present": 5,
+  "deletions": 0,
+  "inbound_symlinks_checked": 24113,
+  "annotation_only_edit_before_final_freeze": true
+}
