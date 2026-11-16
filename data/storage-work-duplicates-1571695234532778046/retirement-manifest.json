@@ -363,7 +363,9 @@
     "/root/mgs-agent/work/finance-reaudit-20260905/audit.py": "c7bdd134ec4556d82f365ebeb195a2bb24254e74fa047cc606bb36da3b440f3a",
     "/root/mgs-agent/work/finance-reaudit-20260905/finalize_report.py": "f7c6a349600598de5736f47ca28692c9802f52bc8e439c0e38a9fd09390810d6",
     "/root/mgs-agent/apps/finance-system/import_snapshot.py": "8a52ef2aa48c5d59c9f881b3445662b0f2196d10d12f242023ddf5bc7367e874",
-    "/root/mgs-agent/apps/finance-system/verify_live.py": "e61670d5c3a4c18ea95165ac34aac40de3bb46289d4a6f7fec5f1c2d7847ce1a"
+    "/root/mgs-agent/apps/finance-system/verify_live.py": "e61670d5c3a4c18ea95165ac34aac40de3bb46289d4a6f7fec5f1c2d7847ce1a",
+    "/root/mgs-agent/data/storage-work-duplicates-1571695234532778046/review.py": "d855c2c0775ade4360b3db8a704c64751ad92a2ec9b3aebe2a653731e10a10cf",
+    "/root/mgs-agent/data/storage-work-duplicates-1571695234532778046/recover.py": "ff9443a03ef331b1320f24406a7080bac0026fa63d06390a47a97d5a00d53245"
   },
   "recovery_uses": "Existing twelve primary byte-identical files outside deletion targets; these become mandatory recovery dependencies. No new archive or financial operation.",
   "deletion_authorized": false,
@@ -380,6 +382,8 @@
       "fd",
       "maps"
     ],
+    "processes_seen": 214,
+    "inaccessible_process_surfaces": 0,
     "scan_errors": [],
     "scope_roots": [
       "/root/mgs-agent/scripts",
