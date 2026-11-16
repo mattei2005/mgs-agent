@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "deletion_authorized": false,
+  "authority_message_id": "1571894881096310825",
+  "thread_id": "1569928464033783862",
+  "target": "/root/.npm/_npx/0d710a328f2801a9",
+  "retained_root": "/root/.npm/_npx/f4a9a6fe740fa973",
+  "nodes": 11170,
+  "files": 10628,
+  "directories_including_root": 535,
+  "symlinks": 7,
+  "allocated_reclaim_bytes": 593293312,
+  "logical_file_bytes": 558299929,
+  "private_ledger": "/root/.hermes/secure-backups/storage-followup-1571894881096310825/npx-retirement-nodes.json.gz",
+  "private_ledger_sha256": "441a5f1e87ab05d23ad5715b574dd2466803442ad4a9919c439ad6d03fc72198",
+  "protected_helpers": {
+    "/root/.hermes/profiles/zeus/codex-pilots/security_sandbox.py": "facbf140552700ff78f1cb2e0ad27799d6637cc4573671d0398d3e50c1128372",
+    "/root/.hermes/secure-backups/storage-followup-1571894881096310825/npx-recover.py": "80c472f2d4be05f96c49bf4b2883f7bb3742b0051237f97bf312de8553da43a7"
+  },
+  "identical_retained_regular_providers": 10625,
+  "private_metadata_overrides": 3,
+  "consumer_scan": {
+    "status": "PASS",
+    "code_files_scanned": 41789,
+    "processes_inspected": 216,
+    "literal_hits": [],
+    "inbound_links": [],
+    "process_matches": [],
+    "errors": [],
+    "scope": "Local inspected code/config/schedulers and process cmdline/cwd/exe/maps/fd; future manual npx calls can recreate the retired cache"
+  },
+  "coherent_two_pass_freeze": true,
+  "originals_unchanged": true,
+  "current_security_wrapper_uses_retained_tree": true,
+  "recovery_contract": "All original regular bytes and file metadata can be reconstructed using surviving NPX tree plus three preserved JSON metadata files; directories/symlink layout kept in manifest. Current tool path stays. Future explicit-version npx may download again or require offline reconstruction first. Not credential, authentication or Security scan recovery.",
+  "at": "2026-11-16T09:40:47.809659-05:00"
+}

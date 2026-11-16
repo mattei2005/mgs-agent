@@ -79,11 +79,14 @@
     "source_reader_gate_released": true,
     "meta_quota_state": "data/ares/meta-ads/audit/eggbev/cross-account/eggbev03-cross-account-1571623835822858352/foreground-state.json"
   },
-  "phase": "SUPERSEDED_BY_OPERATOR",
+  "phase": "CANCELLED_BY_OPERATOR",
+  "cancellation_authority_message_id": "1571899160242823330",
+  "cancellation_scope": "Cancel campaign request and all automatic continuation; preserve history and remote objects; no DELETE, campaign activation or support-case closure authorized.",
   "superseded_by_request_id": "eggbev03-c212-replacement-1571894746719330377",
   "supersession_authority_message_id": "1571894746719330377",
   "automatic_recovery_required": false,
   "resume_requires_explicit_instruction": true,
+  "request_cancelled": true,
   "execution_mode": "foreground",
   "foreground_authority_message_id": "1571658531411595376",
   "implementation_task_id": "t_e524bad0",
@@ -116,5 +119,5 @@
     "new_notifier_or_cron": false
   },
   "final_publication_approval": null,
-  "next_step": "Remain in foreground. Rodolfo1571685800507219999 suspension is applied and verified: old Viewer Loan automatic replay fenced, cards parked, lease released, remote before/after identical, checkpoint/audit unchanged. Exact source303 found live;15 requested assets reserved and30 target03 videos uploaded once, fully reconciled unique titles and fresh ready/association/length/local checksums, registry committed. All local variants and real thumbnail byte-equivalence proof preserved; no campaign object created and no manifest sealed. Meta returned rate-limit80004/2446079; follow retry_after_epoch in the canonical foreground-state.json and do not retry before it. After quota clears, resume the SAME central prepare command with current input and registry hits, no uploads/PBIA/new naming/reservation replay; finish final reconciliation, seal summary and obtain the mandatory subsequent publication OK, then guarded execute/finalize. Do not ask again about suspension, structure, budget or immediate-start intent. No background worker, new cron or notifier."
+  "next_step": "CANCELLED by Rodolfo1571899160242823330. No preparation, execute, recovery, finalize or automatic resumption. Preserve history, frozen engine checkpoint/audit, objects and reservations; cancellation is not campaign completion or DELETE authorization. Any future independent request must use its own source, account scope, inputs and approval."
 }

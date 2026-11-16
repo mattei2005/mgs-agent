@@ -1,0 +1,72 @@
+{
+  "status": "PROTECTED_RESIDENT_CHECKSUM_DEPENDENCY",
+  "duplicate_files": 12,
+  "all_identical": true,
+  "all_coupled_to_import_checksum": true,
+  "importer_verifies_every_member": true,
+  "automatic_deletion_eligible": false,
+  "source_files_removed": 0,
+  "details": [
+    {
+      "relative": "final/george-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/george.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/isliago-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/isliago.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/joe-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/joe.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/kelly-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/kelly.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/nicolas-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/nicolas.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/principal-metadata.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    },
+    {
+      "relative": "final/principal.json",
+      "byte_identical": true,
+      "resident_member_in_import_checksum": true
+    }
+  ],
+  "blocker": "Deleting final/ duplicates breaks the unchanged importer checksum walk even though root copies match; preserve until a separately scoped compatible reconstruction/consumer migration is validated."
+}

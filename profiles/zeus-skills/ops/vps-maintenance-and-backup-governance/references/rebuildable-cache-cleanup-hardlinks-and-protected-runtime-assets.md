@@ -71,6 +71,13 @@ A user message such as “apaga” before the target hash is shown authorizes pr
 - Identify Hugging Face model families from cache metadata and active transcription configuration before classifying them.
 - Check systemd, cron, scripts, process cwd/exe/cmdline, and open file descriptors for target references.
 
+## Duplicate NPX environments
+
+- Resolve the actual CLI/consumer path before treating an NPX directory as disposable. A command absent from PATH can still be installed only inside a cached environment; inspect wrapper constants, scoped configuration, schedulers and live process surfaces, then run only a version-only probe of the retained tree with an isolated home. Do not launch a scan, login or model request to prove cache preservation.
+- Compare every relative pathname, type, payload and link target between same-version NPX trees. Equal package versions or file sizes do not establish byte identity: `package.json`, `package-lock.json` and the nested package lock can differ between an explicit-version invocation and a bare package invocation. Preserve differing metadata privately, bind it and the surviving tree to a full recovery map, and exercise retained-only recovery before proposing the exact obsolete tree.
+- Classify package-lock keys structurally. Dependency names such as password prompts, auth-token modules and tokenizer packages are public package identifiers, not credential values merely because their keys contain `password` or `token`. Continue rejecting actual credential fields and authenticated registry URLs; never print values while resolving a false positive.
+- Keep the retained environment and compact overrides inventoried as mandatory recovery dependencies. Disclose that a later native NPX invocation can download the retired environment again or require offline path reconstruction; a version-only canary is not an authenticated security scan or a materialized whole-layout restore.
+
 ## Native kernel retirement and installed-SDK download caches
 
 - Treat kernel retirement as a separately confirmed system-package change, not ordinary cache removal. Freeze exact package/version pairs and a native APT simulation with no extra installs/removals; preserve the running kernel, the validated previous fallback, and an already-installed pending kernel independently. Never accept `autoremove` suggestions as authority or delete package-owned trees with raw recursive removal.

@@ -67458,6 +67458,46 @@
       "updated_at": "2026-11-16T14:23:30.956251+00:00",
       "report_infra_message_id": "1571893487144534107",
       "report_infra_readback": "verified"
+    },
+    {
+      "id": "storage-followup-1571894881096310825",
+      "agent": "zeus",
+      "type": "work_cache_git_readonly_review_and_frozen_npx_retirement_gate",
+      "status": "awaiting_exact_NPX_tree_confirmation",
+      "created_at": "2026-11-16T09:50:10.183674-05:00",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1571894881096310825",
+      "path": "/root/mgs-agent/data/storage-followup-1571894881096310825",
+      "evidence": "data/storage-followup-1571894881096310825/review-final.json",
+      "source_files_deleted": 0,
+      "manifest_sha256": "7ca6a44275d589695f391d4431c454386558ce318a216486d64270b4a9ecfe1d",
+      "executor_sha256": "370734de22329e63aca8d4b85f6ff93bee4de145b7ef1bbbdcf11cd3847c1816",
+      "proposed_target": "/root/.npm/_npx/0d710a328f2801a9",
+      "proposed_files": 10628,
+      "proposed_directories": 535,
+      "proposed_symlinks": 7,
+      "retained_NPX_root": "/root/.npm/_npx/f4a9a6fe740fa973",
+      "retained_file_provider_count": 10625,
+      "retained_private_override_count": 3,
+      "retained_private_mapping": "/root/.hermes/secure-backups/storage-followup-1571894881096310825/npx-retirement-nodes.json.gz",
+      "private_mapping_sha256": "441a5f1e87ab05d23ad5715b574dd2466803442ad4a9919c439ad6d03fc72198",
+      "portable_reader": "/root/.hermes/secure-backups/storage-followup-1571894881096310825/npx-recover.py",
+      "portable_reader_sha256": "80c472f2d4be05f96c49bf4b2883f7bb3742b0051237f97bf312de8553da43a7",
+      "mandatory_recovery_dependencies": "Retained f4a9 NPX tree plus three private original metadata files and path/metadata ledger; never retire last providers without validated successor.",
+      "learning": {
+        "subsystem": "vps-maintenance-and-backup-governance",
+        "target": "rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md",
+        "live_mirror_equal": true,
+        "sha256": "132b2232674d52003e4258a1409ab740efab270f3f48995793a52a67a619fdb8",
+        "summary": "Map actual cached CLI consumers; preserve differing NPX metadata; classify public dependency names structurally, not by credential substrings."
+      },
+      "validation": {
+        "RAM_retained": 10628,
+        "RAM_independent": 10628,
+        "negative_tests": 14,
+        "source_reads": 0,
+        "exact_target_approval": false
+      }
     }
   ],
   "profile_skill_references": [

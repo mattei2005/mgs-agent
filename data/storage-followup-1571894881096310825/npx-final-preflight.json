@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "post": false,
+  "consumers": {
+    "status": "PASS",
+    "code_files_scanned": 45256,
+    "processes_inspected": 219,
+    "literal_hits": [],
+    "inbound_links": [],
+    "process_matches": [],
+    "errors": [],
+    "scope": "Local inspected code/config/schedulers and process cmdline/cwd/exe/maps/fd; future manual npx calls can recreate the retired cache"
+  },
+  "recovery": {
+    "status": "PASS",
+    "regular_files_materialized_in_RAM": 10628,
+    "symlink_targets_validated": 7,
+    "logical_bytes": 558299929,
+    "original_payload_reads": 0,
+    "full_directory_layout_materialized": false,
+    "Security_scan_or_authentication_executed": false
+  },
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  }
+}

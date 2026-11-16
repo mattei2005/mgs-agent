@@ -1,21 +1,22 @@
 {
   "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-  "status": "OBSERVING_NEW_REQUEST",
+  "status": "AWAITING_SCOPED_TECHNICAL_AUTHORIZATION",
   "authorization_message_id": "1571892517669175461",
   "owner": "zeus",
   "campaign_writer": "ares",
   "source_thread_id": "1565032671669919827",
   "report_thread_id": "1571888100236464159",
-  "cursor": "1571895190225158197",
+  "cursor": "1571897422295343246",
   "job_id": "7aac7f6e2d6b",
-  "seen_notifications": [],
+  "seen_notifications": ["LOCAL_ACCOUNT03_ROUTER_BLOCK_REQUEST1571894746719330377"],
+  "notification_transport": "Final response delegated to cron delivery; no direct Discord post. Exact delivery receipt not available in this run.",
   "old_request": "eggbev03-cross-account-1571623835822858352",
   "old_request_state": "HUMAN_PAUSED_DO_NOT_RESUME",
-  "updated_at": "2026-11-16T14:32:04Z",
+  "updated_at": "2026-11-16T14:41:07Z",
   "new_command_message_id": "1571894746719330377",
   "new_parameters_message_id": "1571893411739599029",
   "new_standards_message_id": "1571895183228928182",
-  "new_request_id": null,
+  "new_request_id": "eggbev03-c212-replacement-1571894746719330377",
   "account_id": "1481815942722118",
   "observed_parameters": {
     "copies": 5,
@@ -26,28 +27,35 @@
     "video_filename_pattern": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_{number}.mp4",
     "headlines": ["APPLY NOW ✅", "✔️ APPLY TODAY", "CARD NOW✅"],
     "description": "⭐️⭐️⭐️⭐️⭐️",
-    "standards": "Preservar padrões e nomenclatura já definidos no executor conforme 1571895183228928182; Zeus não redefine budget/start nem resolve herança por suposição."
+    "standards": "Preservar padrões e nomenclatura já definidos no executor conforme 1571895183228928182; Zeus não redefine budget/start nem resolve herança por suposição.",
+    "source_selection_authority_message_id": "1571896700027539457",
+    "source_campaign_id_selected_by_ares": "120250364730440507"
   },
   "last_observation": {
-    "new_messages": 8,
+    "new_messages_at_final_read": 4,
     "source_parent_verified": "1539422731727147079",
     "report_parent_verified": "1496267442899521627",
     "authorization_author_verified": "344196393512075265",
     "executor_ack_message_id": "1571894866227494977",
     "executor_activity_message_id": "1571894874649923605",
-    "stage": "Pedido humano novo autenticado; Ares em investigação/preparação. Nenhum artefato canônico novo correlacionado localizado neste corte; IDs/readback/entrega não comprovados.",
-    "old_artifacts_excluded": "Artefato foreground-state e checkpoint Ares do pedido antigo foram identificados e não contam como avanço do pedido novo; permanecem intactos.",
-    "diagnostic": null,
+    "executor_block_message_id": "1571897422295343246",
+    "stage": "Novo request e checkpoint Ares correlacionados. Fonte selecionada por Ares após decisão humana. Preparador central recusou a operação localmente antes de criar campanhas. Ajuste delimitado aguarda autorização na origem; nenhuma instalação, execução produtiva ou entrega final comprovada.",
+    "old_artifacts_excluded": "Pedido antigo e seus efeitos permanecem fora da evidência de avanço novo. Zeus não escreveu no pedido/checkpoint Ares nem em campanhas.",
+    "diagnostic": "Dispatch em scripts/ares-eggbev-target-clone.py:440-442 envia todo target03 para eggbev_cross_account. local-route-result.json registra ValueError: exact cross-account authority/capability unavailable antes de reserva/upload/criação. Não é retorno de erro Meta deste novo lote.",
+    "canonical_request": "data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json",
+    "canonical_evidence": "data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/local-route-result.json",
+    "executor_checkpoint": "ARES-EGGBEV03-C212-1571894746719330377",
     "terminal": false,
     "external_messages_sent": 0,
-    "monitor_failures": 0
+    "monitor_failures": 0,
+    "monitor_recovery": "Import cron.jobs no interpreter genérico falhou por yaml ausente. Leitura recuperada diretamente do jobs.json canônico Zeus; job enabled, repetição1/96 e próxima execução09:51EST confirmados. Nenhuma alteração no runtime."
   },
   "continuity": {
     "job_enabled": true,
     "repeat_times": 96,
-    "repeat_completed_at_read": 0,
-    "next_run_at": "2026-11-16T09:36:00-05:00",
+    "repeat_completed_at_read": 1,
+    "next_run_at": "2026-11-16T09:51:00-05:00",
     "final_cycle_action": "Renovar mesmo job para 96 antes de expirar se ainda não terminal; não duplicar.",
-    "next_step": "Ler mensagens posteriores ao cursor e correlacionar o request/checkpoint canônico novo assim que existir. Observar até entrega real ou bloqueio relevante inédito; Ares permanece único writer."
+    "next_step": "Observar mensagens posteriores ao cursor para decisão humana e execução Ares. Não repetir diagnóstico sem mudança material. Manter Ares único writer; não assumir produção nem interpretar este bloqueio como entrega/cancelamento terminal."
   }
 }

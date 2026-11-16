@@ -29,7 +29,7 @@ def runtime():
     return dict(pids=pids,boot_id=pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),launcher=os.path.realpath('/root/.local/bin/hermes'))
 def consumers():
     needles=[TARGET,'_npx/'+pathlib.Path(TARGET).name];hits=[];links=[];errors=[];seen=0
-    roots=[ROOT/'scripts',ROOT/'apps',ROOT/'config',pathlib.Path('/etc/systemd/system'),pathlib.Path('/root/.local/bin')]
+    roots=[ROOT/'scripts',ROOT/'apps',ROOT/'config',pathlib.Path('/etc/systemd/system'),pathlib.Path('/root/.local/bin'),pathlib.Path('/root/.codex/config.toml')]
     roots += [pathlib.Path('/root/.hermes/profiles')/p/n for p in ['zeus','ares','atena']for n in ['config.yaml','cron','scripts','skills']]
     roots += [WRAPPER.parent]
     exclude={'.git','node_modules','__pycache__','.venv','venv','state','snapshots','source','sandbox','candidates','results','artifacts','sdk-marketplace','private','cache','browser-profiles','media'}
@@ -47,11 +47,18 @@ def consumers():
                 ds[:]=[x for x in ds if x not in exclude and not(pathlib.Path(d)/x).is_symlink()];files.extend(pathlib.Path(d)/x for x in fs)
         for p in files:
             try:
-                if p.is_symlink()or p.suffix not in {'.py','.sh','.json','.yaml','.yml','.md','.service','.timer','.js','.ts','.toml','.pth','.egg-link'}or p.stat().st_size>4*1024**2:continue
+                if p.is_symlink()or p.suffix not in {'.py','.sh','.json','.yaml','.yml','.md','.service','.timer','.js','.mjs','.cjs','.ts','.conf','.toml','.pth','.egg-link'}or p.stat().st_size>4*1024**2:continue
                 seen+=1;text=p.read_text(errors='replace')
                 if any(x in text for x in needles):hits.append(str(p))
             except FileNotFoundError:pass
             except OSError as e:errors.append(dict(path=str(p),error=type(e).__name__))
+    cron=subprocess.run(['crontab','-l'],capture_output=True,text=True)
+    assert cron.returncode in (0,1)
+    if any(x in cron.stdout for x in needles):hits.append('root_crontab')
+    for p in [pathlib.Path('/etc/crontab'),*pathlib.Path('/etc/cron.d').glob('*')]:
+        if p.is_file() and not p.is_symlink():
+            seen+=1
+            if any(x in p.read_text(errors='replace')for x in needles):hits.append(str(p))
     processes=[];unreadable=[];pcount=0
     for p in pathlib.Path('/proc').iterdir():
         if not p.name.isdigit():continue
@@ -69,6 +76,9 @@ def consumers():
 def scope(m,rows):
     assert m['target']==TARGET and m['retained_root']==KEEP and m['directories_including_root']>0
     assert len(rows)==m['nodes'] and sum(x['source']['kind']=='file'for x in rows)==m['files']
+    assert sum(x['source']['kind']=='directory'for x in rows)==m['directories_including_root']
+    assert sum(x['source']['kind']=='link'for x in rows)==m['symlinks']
+    assert sum(x['source']['allocated']for x in rows)==m['allocated_reclaim_bytes']
     rels=[x['relative']for x in rows];assert len(rels)==len(set(rels)) and '.' in rels
     for x in rows:
         rel=pathlib.PurePosixPath(x['relative']);assert not rel.is_absolute()and '..'not in rel.parts
@@ -118,9 +128,11 @@ def approval(a):
     assert a['owner_id']==OWNER and a['thread_id']==THREAD and a['native_readback_verified']is True and a['scope_expansion_authorized']is False
     assert a['manifest_sha256']==sha(OUT/'npx-retirement-manifest.json')and a['executor_sha256']==sha(__file__)
     assert a['confirmation_content'].strip().lower()=='sim'and a['confirmation_message_id'].isdigit()and a['question_message_id'].isdigit()
-def audit(action,data):
+def envelope(action,data):
     assert data.get('owner_id',OWNER)==OWNER and data.get('thread_id',THREAD)==THREAD
-    row={**data,'agent':'zeus','owner_id':OWNER,'thread_id':THREAD,'action':action,'at':datetime.datetime.now().astimezone().isoformat()}
+    return {**data,'agent':'zeus','owner_id':OWNER,'thread_id':THREAD,'action':action,'at':datetime.datetime.now().astimezone().isoformat()}
+def audit(action,data):
+    row=envelope(action,data)
     with open(ROOT/'logs/events-audit.jsonl','a')as f:f.write(json.dumps(row)+'\n');f.flush();os.fsync(f.fileno())
 def disk():
     s=os.statvfs('/');return dict(total=s.f_blocks*s.f_frsize,used=(s.f_blocks-s.f_bfree)*s.f_frsize,available=s.f_bavail*s.f_frsize)

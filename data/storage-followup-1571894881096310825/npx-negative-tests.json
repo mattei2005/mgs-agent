@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "negative_tests": 14,
+  "tests": [
+    {
+      "name": "retained_root_as_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "count_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "link_count_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "directory_count_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "reclaim_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "relative_path_escape",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "original_is_recovery_provider",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "target_fingerprint_changed",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "Security_wrapper_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "unverified_approval",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "audit_reserved_field_conflict",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_provider_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_payload_corrupt",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "missing_approval_file_execute",
+      "status": "PASS",
+      "expected_block": true
+    }
+  ],
+  "original_tree_unchanged": true,
+  "source_files_removed": 0,
+  "real_approval_or_execution_markers_created": false
+}
