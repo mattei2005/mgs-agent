@@ -14,7 +14,24 @@ for root in TARGETS:
  if re.search(r'[0-9a-f]{8}-[0-9a-f]{4}-',leaf):strong[leaf.encode()]=root
  for x in re.findall(r'\d{17,20}',root):run_to_roots[x.encode()].add(root)
  leaf_to_roots[leaf.encode()].add(root)
-words=set(strong)|set(run_to_roots)|set(leaf_to_roots)|{x.encode()for x in families};pattern=re.compile(rb'(?:'+b'|'.join(re.escape(x)for x in sorted(words,key=len,reverse=True))+rb')(?![a-zA-Z0-9_.-])')
+words=set(strong)|set(run_to_roots)|set(leaf_to_roots)|{x.encode()for x in families}
+def trie_regex(parts):
+ if len(parts)==1:return re.escape(next(iter(parts)))
+ prefix=os.path.commonprefix(sorted(parts))
+ if prefix:return re.escape(prefix)+trie_regex({p[len(prefix):]for p in parts})
+ groups=collections.defaultdict(set);empty=False
+ for p in parts:
+  if not p:empty=True
+  else:groups[p[:1]].add(p[1:])
+ alternatives=[re.escape(first)+trie_regex(rest)for first,rest in sorted(groups.items())]
+ if empty:alternatives.append(b'')
+ return b'(?:'+b'|'.join(alternatives)+b')'
+pattern=re.compile(trie_regex(words)+rb'(?![a-zA-Z0-9_.-])')
+old_pattern=re.compile(rb'(?:'+b'|'.join(re.escape(x)for x in sorted(words,key=len,reverse=True))+rb')(?![a-zA-Z0-9_.-])')
+for token in words:
+ for suffix in [b'',b'/',b'"',b'-v7',b'.old',b'xyz',b' ']:
+  text=b' '+token+suffix;assert [m.group()for m in pattern.finditer(text)]==[m.group()for m in old_pattern.finditer(text)]
+
 def scan(p) -> dict[str, Any]:
  exact=set();runs=set();leaves=set();fams=set();total=0;tail=b'';before=os.stat(p)
  for run,rs in run_to_roots.items():
