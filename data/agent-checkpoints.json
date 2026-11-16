@@ -6767,6 +6767,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-FULL-REAUDIT-1571983565292441731",
+      "next_step": "Persistir metadata por filesystem / /boot /boot/efi, reconciliar hardlinks com df, mapear servicos/processos/apps/agendamentos e rootsdeDB/recovery. Cache somente tamanho para reconciliacao, sem proposta de descarte. Depois apresentar quadro residual novo e primeiro passo, sem exclusoes/install/restart/config/credenciais.",
+      "objective": "Nova auditoria read-only de toda a VPS e sistemas locais atuais. Recomeçar ledger de residuos nao-cache, sem repetir exclusoes antigas; classificar ate fechamento por lotes exatos.",
+      "source": "discord:1569928464033783862/1571983565292441731;context/storage-reorganization-20261112.md;context/storage-reaudit-20261116.md",
+      "state": "in_progress_full_filesystem_and_current_systems_inventory",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-16T20:23:29+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-GENERATED-TESTS-1570473727043436596",
       "next_step": "Nenhuma pendencia no lote confirmado1570486008917655623:81/81alvos/61283arquivos ausentes;15.94GiB efetivos;6tabelasfinanceiras/12arquivoscontroleperfis/3fontes/4raizesretidas iguais;3configs/3smokes/PIDs passaram;REPORT1570487273534005391readback. Retencao futura e outras categorias fora deste lote.",
       "objective": "Aposentar o lote exato de testes isolados confirmado sem tocar operacao financeira, memoria ou perfis.",
@@ -11077,5 +11087,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:19:59+00:00"
+  "updated_at": "2026-11-16T20:23:29+00:00"
 }
