@@ -6868,12 +6868,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-UV-1571959754081837281",
-      "next_step": "Sim1571969258986938601 validado; frozenmanifest/exec originais. Executar1x native prune offline/semforce/ci. Se falha ler native-result e target-readback; nunca repetir comando cegamente.",
-      "objective": "Executar uma vez o lote nativo UV193alvos confirmado1571969258986938601; preservar instalados/cachePM e verificar resultado real.",
-      "source": "data/storage-uv-1571959754081837281/retirement-final.json;discord:1569928464033783862/1571969258986938601",
-      "state": "approved_native_uv_execution_pending",
+      "next_step": "193aprovadosausentes;native removeu tambem45nos(30files12dirs3links) de3revisoes editaveis/cache fora do modelo.27/30payloads tem providers exatos; localizar3whls retidos e restaurar somente excedentes antes de fechar. Gate original preservado; nunca reprune.",
+      "objective": "Recuperar desvio observado apos nativeUV0; nao repetir prune; validar caches/programas e relatar efeito exato.",
+      "source": "data/storage-uv-1571959754081837281/retirement-incident.json;data/storage-uv-1571959754081837281/postcheck-path-difference.json;discord:1569928464033783862/1571969258986938601",
+      "state": "native_prune_complete_scope_deviation_recovery_in_progress",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T19:29:06+00:00"
+      "updated_at": "2026-11-16T19:35:14+00:00"
     },
     {
       "agent": "zeus",
@@ -11027,5 +11027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:31:45+00:00"
+  "updated_at": "2026-11-16T19:35:14+00:00"
 }
