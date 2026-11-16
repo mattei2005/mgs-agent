@@ -1,0 +1,220 @@
+{
+  "status": "role_ledger_verified",
+  "all_values_occupied_not_disposable_bytes": true,
+  "snapshot_allocation_total_bytes": 146430088704,
+  "snapshot_categories": [
+    {
+      "category": "mgs_apps",
+      "unique_allocated_bytes": 27643826176,
+      "GiB": 25.745,
+      "nodes": 80900
+    },
+    {
+      "category": "agent_working_and_test_material_pending_proof",
+      "unique_allocated_bytes": 11600310272,
+      "GiB": 10.804,
+      "nodes": 187294
+    },
+    {
+      "category": "cache_paused_owner_choice",
+      "unique_allocated_bytes": 10920951808,
+      "GiB": 10.171,
+      "nodes": 175215
+    },
+    {
+      "category": "operational_recovery",
+      "unique_allocated_bytes": 10914676736,
+      "GiB": 10.165,
+      "nodes": 46776
+    },
+    {
+      "category": "institutional_git",
+      "unique_allocated_bytes": 8882987008,
+      "GiB": 8.273,
+      "nodes": 3119
+    },
+    {
+      "category": "agent_evidence_and_media_pending_lineage",
+      "unique_allocated_bytes": 8534503424,
+      "GiB": 7.948,
+      "nodes": 19953
+    },
+    {
+      "category": "hermes_code_or_environment",
+      "unique_allocated_bytes": 7813996544,
+      "GiB": 7.277,
+      "nodes": 137895
+    },
+    {
+      "category": "postgres_clusters_pending_role",
+      "unique_allocated_bytes": 7181508608,
+      "GiB": 6.688,
+      "nodes": 35547
+    },
+    {
+      "category": "agent_live_history_sessions_and_checkpoints",
+      "unique_allocated_bytes": 6584037376,
+      "GiB": 6.132,
+      "nodes": 1875
+    },
+    {
+      "category": "mgs_data",
+      "unique_allocated_bytes": 6174375936,
+      "GiB": 5.75,
+      "nodes": 167458
+    },
+    {
+      "category": "observed_native_backup_transient_now_completed",
+      "unique_allocated_bytes": 5847822336,
+      "GiB": 5.446,
+      "nodes": 13
+    },
+    {
+      "category": "application_and_infrastructure_backup_copies_pending_proof",
+      "unique_allocated_bytes": 4812349440,
+      "GiB": 4.482,
+      "nodes": 77187
+    },
+    {
+      "category": "mgs_reports",
+      "unique_allocated_bytes": 4614496256,
+      "GiB": 4.298,
+      "nodes": 14570
+    },
+    {
+      "category": "other_filesystem_data",
+      "unique_allocated_bytes": 4300492800,
+      "GiB": 4.005,
+      "nodes": 108
+    },
+    {
+      "category": "operating_system_or_installed_tools",
+      "unique_allocated_bytes": 3932737536,
+      "GiB": 3.663,
+      "nodes": 197748
+    },
+    {
+      "category": "shared_hardlinks_between_classes",
+      "unique_allocated_bytes": 2289242112,
+      "GiB": 2.132,
+      "nodes": 0
+    },
+    {
+      "category": "other_local_data_pending_role",
+      "unique_allocated_bytes": 1840496640,
+      "GiB": 1.714,
+      "nodes": 52327
+    },
+    {
+      "category": "persistent_browser_state",
+      "unique_allocated_bytes": 1740775424,
+      "GiB": 1.621,
+      "nodes": 16344
+    },
+    {
+      "category": "installed_agent_tools_and_binaries",
+      "unique_allocated_bytes": 1735081984,
+      "GiB": 1.616,
+      "nodes": 59074
+    },
+    {
+      "category": "hermes_managed_installation",
+      "unique_allocated_bytes": 1568993280,
+      "GiB": 1.461,
+      "nodes": 175643
+    },
+    {
+      "category": "agent_historical_state_snapshots_pending_recovery_proof",
+      "unique_allocated_bytes": 1506873344,
+      "GiB": 1.403,
+      "nodes": 69
+    },
+    {
+      "category": "mgs_work",
+      "unique_allocated_bytes": 1483677696,
+      "GiB": 1.382,
+      "nodes": 11261
+    },
+    {
+      "category": "agent_profile_state",
+      "unique_allocated_bytes": 1352790016,
+      "GiB": 1.26,
+      "nodes": 27995
+    },
+    {
+      "category": "other_hermes_state",
+      "unique_allocated_bytes": 1048760320,
+      "GiB": 0.977,
+      "nodes": 7980
+    },
+    {
+      "category": "system_service_state",
+      "unique_allocated_bytes": 555548672,
+      "GiB": 0.517,
+      "nodes": 6502
+    },
+    {
+      "category": "institutional_code_or_configuration",
+      "unique_allocated_bytes": 405897216,
+      "GiB": 0.378,
+      "nodes": 9411
+    },
+    {
+      "category": "mgs_logs",
+      "unique_allocated_bytes": 387452928,
+      "GiB": 0.361,
+      "nodes": 993
+    },
+    {
+      "category": "system_logs",
+      "unique_allocated_bytes": 360927232,
+      "GiB": 0.336,
+      "nodes": 161
+    },
+    {
+      "category": "boot_system",
+      "unique_allocated_bytes": 184296960,
+      "GiB": 0.172,
+      "nodes": 610
+    },
+    {
+      "category": "agent_logs",
+      "unique_allocated_bytes": 120061952,
+      "GiB": 0.112,
+      "nodes": 360
+    },
+    {
+      "category": "local_execution_temporaries_pending_proof",
+      "unique_allocated_bytes": 68431872,
+      "GiB": 0.064,
+      "nodes": 607
+    },
+    {
+      "category": "temporary_noncache_pending_role",
+      "unique_allocated_bytes": 14057472,
+      "GiB": 0.013,
+      "nodes": 2130
+    },
+    {
+      "category": "system_configuration",
+      "unique_allocated_bytes": 7651328,
+      "GiB": 0.007,
+      "nodes": 1997
+    }
+  ],
+  "confirmed_native_transient_departed": {
+    "path": "/root/mgs-agent/tmp/mgs-dr-backup-uipjbqf9",
+    "counts": {
+      "directory": 3,
+      "file": 10
+    },
+    "allocated_bytes": 5847822336,
+    "producer_proof": "transient-backup-reconciliation.json",
+    "removed_by_this_audit": false
+  },
+  "scan_allocation_minus_confirmed_departed_bytes": 140582266368,
+  "known_current_variation_still_possible": true,
+  "caches_cleanup_paused": true,
+  "eligible_new_delete_targets": 0,
+  "source_metadata_preserved": true
+}

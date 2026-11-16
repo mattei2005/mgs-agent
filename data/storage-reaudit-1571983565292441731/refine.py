@@ -18,7 +18,7 @@ for line in gzip.open(PRIVATE/'metadata-root.jsonl.gz','rt'):
   elif x[1]!=group:x[1]=area+'/[shared_between_subgroups]'
 for b,g,area in inodes.values():
  row=groups.setdefault(g,dict(path=g,area=area,file=0,directory=0,link=0,other=0,logical_bytes=0,allocated_bytes_unique=0));row['allocated_bytes_unique']+=b
-result=dict(note='Detailed partitions of selected areas, already included in the full ledger. Do not add to parent/category totals. Cross-area and cross-subgroup hardlinks credited once in explicit shared buckets.',groups=sorted(groups.values(),key=lambda x:x['allocated_bytes_unique'],reverse=True))
+result: dict[str, Any] = dict(note='Detailed partitions of selected areas, already included in the full ledger. Do not add to parent/category totals. Cross-area and cross-subgroup hardlinks credited once in explicit shared buckets.',groups=sorted(groups.values(),key=lambda x:x['allocated_bytes_unique'],reverse=True))
 (OUT/'detailed-areas.json').write_text(json.dumps(result,indent=2)+'\n')
 for area in AREAS:
  print('AREA',area)
