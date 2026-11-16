@@ -14,6 +14,8 @@ RID='eggbev03-c212-replacement-1571894746719330377';AID='1481815942722118'
 class RoutingContinuationTests(unittest.TestCase):
  def fixture(self):
   self.temp=tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch');self.addCleanup(self.temp.cleanup);root=Path(self.temp.name)
+  from ares_campaign_v3 import media_materialization
+  media_root=patch.object(media_materialization,'ROOT',root);media_root.start();self.addCleanup(media_root.stop)
   home=R/'data/ares/meta-ads/audit/eggbev/same-account'/RID/'execution'
   baseline=R/'data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/baseline'
   payload=json.loads((home/'effective-manifest.json').read_text());cp=json.loads((baseline/'data/ares/meta-ads/engine-v3/state/checkpoints'/f'{RID}-{AID}.json').read_text());record=cp['bundles'][0]
@@ -95,6 +97,21 @@ class RoutingContinuationTests(unittest.TestCase):
     for k,v in original_ids.items():
      if k.startswith('creative_id_'):self.assertIn(v,fake.objects)
     self.assertEqual(len([v for v in fake.objects.values() if v.get('_kind')=='ad']),30)
+   finally:same.CURRENT.reset(marker)
+ def test_media_receipt_changes_only_physical_ids_and_preserves_sealed_original(self):
+  root,payload,record,cfg,q,fake,rp=self._repair_fixture()
+  rel=Path('data/ares/meta-ads/audit/eggbev/same-account')/RID/'execution/media-visibility-repair/materialization-receipt.json';p=root/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes((R/rel).read_bytes());before=copy.deepcopy(payload)
+  with patch.object(route,'ROOT',root),patch.object(same,'ROOT',root):
+   receipt=route.receipt_for(q,payload,cfg);proof={'request_id':RID,'approved_digest':'5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48','approval_message_id':'1571940565040234679','verified_at_monotonic':time.monotonic(),'route_receipt':receipt,'elapsed_campaign_digests':[same.digest(c) for c in payload['campaigns']],'admitted_manifest_sha256':same.digest(payload)};marker=same.CURRENT.set(proof)
+   try:
+    proof['media_materialization_authorized']=str(rel)
+    manifest=Manifest.from_dict(payload);proof['digest']=manifest.digest;engine=CampaignEngine(cfg,transport_factory=lambda a:fake);result=engine.execute(manifest);self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE');self.assertEqual(payload,before)
+    data=json.loads(p.read_text());saved=json.loads((root/'state/checkpoints'/f'{RID}-{AID}.json').read_text())['bundles'][0];self.assertEqual(saved['sealed_manifest_digest'],manifest.digest)
+    for slot in saved['post_actor_repair']['slots'].values():
+     actual=fake.objects[slot['new_creative_id']]['asset_feed_spec']['videos'];self.assertTrue(all(v['video_id'] in data['mapping'].values() for v in actual))
+    from ares_campaign_v3.media_materialization import materialize
+    bad=copy.deepcopy(saved);bad['media_materialization_receipt']['sha256']='wrong'
+    with self.assertRaisesRegex(ValueError,'receipt drift'):materialize(type('B',(),{'campaigns':manifest.campaigns})(),bad)
    finally:same.CURRENT.reset(marker)
  def test_repair_stops_at_first_fresh_post_refusal(self):
   root,payload,record,cfg,q,fake,rp=self._repair_fixture(refuse=True)

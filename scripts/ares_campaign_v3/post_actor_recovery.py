@@ -27,6 +27,12 @@ def repair(engine,bundle,transport,record):
    key=f'{ci}_{ai}';slot=state['slots'].get(key)
    if slot and slot.get('seed_id'):continue
    original_seed=f'target_seed_create_{key}';crname=f'post_actor_creative_{key}';seedname=f'post_actor_seed_{key}'
+   if record.get('media_materialization_receipt'):
+    # New operation only after the unavailable-media layer has a byte-bound fix.
+    failed=[x for e in record.get('write_journal',[]) for x in e.get('failed_children',[]) if x.get('name')==crname]
+    if failed and any(x.get('code')!=400 or x.get('error',{}).get('code')!=200 or x.get('error',{}).get('error_subcode')!=1487194 for x in failed):
+     raise ValueError('previous creative outcome not a definitive invalid-media rejection')
+    crname+='_m'+record['media_materialization_receipt']['sha256'][:8]
    rows=_inventory(engine,bundle,transport,adset+'/ads','id,name,status,creative{id}','post_actor_inventory')
    recovered=(confirmed.get(seedname) or {}).get('id') if slot else None
    known={v for k,v in ids.items() if k.startswith(('seed_ad_id_','copied_ad_id_'))}
@@ -45,7 +51,7 @@ def repair(engine,bundle,transport,record):
     new=_result_id(result[0].body)
    slot['new_creative_id']=str(new);slot['state']='NEW_CREATIVE_CONFIRMED';_save()
    # The approved commercial payload is identical; only its unusable post/ID is regenerated.
-   old_digest=hashlib.sha256(json.dumps(ad.creative_payload,sort_keys=True).encode()).hexdigest();slot['approved_creative_payload_digest']=old_digest
+   old_digest=hashlib.sha256(json.dumps(ad.creative_payload,sort_keys=True).encode()).hexdigest();slot['physical_creative_payload_digest']=old_digest
    seed_ops=[o for st in __import__(__package__+'.target_page_clone',fromlist=['stages']).stages(bundle.campaigns) for o in st.operations if o.name==original_seed]
    if len(seed_ops)!=1:raise ValueError('exact original seed operation absent')
    body={'name':seed_ops[0].body['name'],'adset_id':adset,'creative':{'creative_id':str(new)},'status':'PAUSED'}

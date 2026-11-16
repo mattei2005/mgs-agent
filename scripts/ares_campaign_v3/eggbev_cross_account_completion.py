@@ -42,7 +42,8 @@ def completion_proof(q,payload,checkpoint,records,selected):
                 ad_id=ids[f'copied_ad_id_{ci}_{ai}'];seed_id=ids[f'seed_ad_id_{ci}_{ai}'];seed_ids.append(seed_id)
                 ad=ads[ad_id];asset=selected[len(assignments)];cr=ad['creative']
                 if wanted['media']['asset_id']!=asset['asset_id']:raise ValueError('assignment slot identity mismatch')
-                assignments.append({'asset_id':asset['asset_id'],'campaign_id':cid,'adset_id':ids[f'adset_id_{ci}'],'ad_id':ad_id,'source_ad_id':seed_id,'creative_id':cr['id'],'video_id':wanted['media']['vertical_video_id'],'effective_object_story_id':cr.get('effective_object_story_id')})
+                from .media_materialization import media_id
+                assignments.append({'asset_id':asset['asset_id'],'campaign_id':cid,'adset_id':ids[f'adset_id_{ci}'],'ad_id':ad_id,'source_ad_id':seed_id,'creative_id':cr['id'],'video_id':media_id(record,wanted['media']['vertical_video_id']),'effective_object_story_id':cr.get('effective_object_story_id')})
     if (len(assignments)!=15 or len(set(campaign_ids))!=5 or len(set(seed_ids))!=15
             or len({a['ad_id'] for a in assignments})!=15 or set(seed_ids)&{a['ad_id'] for a in assignments}):
         raise ValueError('duplicate or missing completion identities')

@@ -578,6 +578,7 @@ def dispatch(args,runner):
         proof['elapsed_campaign_digests']=[digest(c) for c in payload['campaigns']]
         proof['admitted_manifest_sha256']=digest(payload)
         if route:proof['route_receipt']=routing.receipt_for(q,payload,cfg)
+        if q.get('runtime_media_materialization_receipt'):proof['media_materialization_authorized']=q['runtime_media_materialization_receipt']
         marker=CURRENT.set(proof)
         try:
             manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
