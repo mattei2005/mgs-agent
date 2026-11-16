@@ -1,12 +1,17 @@
 {
-  "manifest_path": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/revalidated-code-baseline-1/manifest.json",
-  "manifest_sha256": "0d201fea271739ee0e534f17306a63b660c49beb866156905980038d30aaba3a",
-  "gate_path": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/revalidated-code-baseline-1/gate.py",
-  "gate_sha256": "2ff2819b90ca0be30a2348a77d3a570a39ef9ea7c86b18168333051b7dcf23ab",
+  "manifest_path": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/manifest.json",
+  "manifest_sha256": "e8c3b11124414ec881a3b4e23592a86d6d1dd99e1f1cefe56bfb3f7175e5394d",
+  "gate_path": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/gate.py",
+  "gate_sha256": "5b7b9f9203226a13a5be4a4a76366c042980bc0b638f12b414203c59736b3e00",
   "status": "awaiting_exact_critical_owner_confirmation",
   "scope_unchanged": true,
-  "original_gate_and_manifest_preserved": true,
-  "original_preparation_superseded": "588641e9824ab904d00bb1c9f356e7956b2488a9e69dceceeb83c71f9a94a620",
-  "original_proposal_never_confirmed_or_executed": true,
-  "quiet_observations": 3
+  "prior_immutable_preparations_preserved": [
+    "588641e9824ab904d00bb1c9f356e7956b2488a9e69dceceeb83c71f9a94a620",
+    "0d201fea271739ee0e534f17306a63b660c49beb866156905980038d30aaba3a"
+  ],
+  "no_prior_owner_confirmation_or_execution": true,
+  "code_census_policy": "target-consumer-v2",
+  "whole_code_surfaces_still_scanned": true,
+  "relevant_code_or_jobs_frozen": 14689,
+  "recurrence_fix": "Unrelated Meta helper edits no longer invalidate a local finance test-state gate; any new target literal/possible DB reader or relevant source change remains blocking."
 }

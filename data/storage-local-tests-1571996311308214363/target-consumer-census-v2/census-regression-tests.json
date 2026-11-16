@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "tests": 9,
+  "passed": [
+    "unrelated_code_edit_does_not_drift",
+    "unrelated_code_addition_does_not_drift",
+    "finance_application_source_change_blocks",
+    "new_possible_DB_consumer_blocks",
+    "exact_target_reference_even_in_unrelated_code_blocks",
+    "unrelated_job_definition_and_execution_counters_do_not_drift",
+    "relevant_job_definition_change_blocks",
+    "new_job_with_exact_target_reference_blocks",
+    "unknown_census_policy_blocks"
+  ],
+  "all_source_bodies_in_memory": true,
+  "real_source_data_deleted": 0,
+  "application_code_executed": false
+}
