@@ -1,0 +1,23 @@
+"""Stage only the current account03 routing integration; no credentials or HTTP writes."""
+from pathlib import Path
+import json,copy,hashlib
+R=Path('/root/mgs-agent');S=Path('/root/.hermes/profiles/ares/cache/scratch/eggbev03-route-cutover-1571996433999990885');H=R/'data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885'
+rid='eggbev03-c212-replacement-1571894746719330377';aid='1481815942722118';eh=R/'data/ares/meta-ads/audit/eggbev/same-account'/rid/'execution';profile=json.loads((R/'data/ares/meta-ads/policies/eggbev-advertiser-profile.json').read_text());ref=profile['new_app_profile_token_reference'];assert ref['app_id']=='1299247318762949' and ref['type']=='USER'
+uid=ref['app_scoped_user_id'];key='mgs-meta-app-1299247318762949';cache='/root/.cache/mgs/ares-meta-token-eggbev03-ana-minibot.json'
+for rel in ['data/ares/meta-ads/engine-v3/config.json','data/ares/meta-ads/accounts/1481815942722118.json','data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json','data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json']:
+ d=json.loads((H/'baseline'/rel).read_text())
+ if rel.endswith('config.json'):
+  a=d['accounts'][aid];a.update(app_key=key,meta_app_id=ref['app_id'],token_user_id=uid,token_cache_path=cache,marketing_api_access_tier='standard_access',token_identity='Ana Cunha',token_type='user_access_token')
+ elif rel.endswith('accounts/1481815942722118.json'):
+  a=d['accounts'][0];a['token_cache_path']=cache;a['meta_app'].update(app_key=key,meta_app_id=ref['app_id'],app_id=ref['app_id'],app_name='minibot',token_user_id=uid,token_cache_path=cache,marketing_api_access_tier='standard_access')
+  a['credential_metadata']['selected_app_validation_evidence']='data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/read-only-token-test-1571975883286257726.json'
+ else:
+  d.update(meta_app_id=ref['app_id'],app_key=key,token_user_id=uid,token_cache_path=cache,marketing_api_access_tier='standard_access',advertiser_identity='Ana Cunha')
+  d['runtime_app_migration_authority']='1571996433999990885'
+ p=S/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+raw=json.loads((eh/'effective-manifest.json').read_text());full=hashlib.sha256(json.dumps(raw,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest();cp=json.loads((R/'data/ares/meta-ads/engine-v3/state/checkpoints'/f'{rid}-{aid}.json').read_text());b=cp['bundles'][0];assert b['sealed_manifest_digest']==full
+receipt={'schema':'mgs.campaign.app-route-migration.v1','request_id':rid,'account_id':aid,'authority_message_id':'1571996433999990885','app_selection_message_id':'1571968822276259974','profile_token_validation_message_id':'1571975883286257726','source_app_key':raw['campaigns'][0]['app_key'],'source_manifest_full_digest':full,'original_approved_digest':'5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48','original_approval_message_id':'1571940565040234679','target_app_key':key,'target_app_id':ref['app_id'],'target_user_id':uid,'target_profile':'Ana Cunha','target_credential_type':'USER','target_token_reference':ref['item_id'],'target_cache_path':cache,'commercial_payload_changed':False,'original_manifest_rewritten':False,'idempotency_keys':[c['idempotency_key'] for c in raw['campaigns']],'existing_campaign_ids':b['campaign_ids'],'existing_adset_ids':b['adset_ids'],'existing_creative_ids':[v for k,v in b['target_clone_ids'].items() if k.startswith('creative_id_')]}
+p=S/'data/ares/meta-ads/audit/eggbev/same-account'/rid/'execution/app-route-migration/receipt.json';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(receipt,indent=2)+'\n')
+rel='data/ares/meta-ads/policies/eggbev03-same-account-replacement.json';d=json.loads((H/'baseline'/rel).read_text());ev=eh/'seed-creation-activity-readback.json';proof=json.loads(ev.read_text());assert proof['complete'] and proof['observed_activity_count']==len(proof['matching_events'])
+d.setdefault('current_absence_reconciliation',{})[rid]={'authority_message_id':'1571996433999990885','technical_seeds_only':True,'activity_evidence_path':str(ev),'activity_evidence_sha256':hashlib.sha256(ev.read_bytes()).hexdigest(),'scope':'Only6original body-digest-bound paused seed operations after fresh complete empty healthy account child inventory + complete original-window activity;one additional attempt;no original result rewritten;no parent/creative replay'}
+(S/rel).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'staged_account':aid,'target_app':ref['app_id'],'source_manifest_digest_preserved':full,'routing_only':True,'original_objects_preserved':True}))
