@@ -1,0 +1,103 @@
+{
+  "status": "awaiting_critical_confirmation_exact_twelve_files",
+  "source_message_id": "1571695234532778046",
+  "native_author_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "scope": "Twelve pre-existing historical JSON exports/metadata only; no directories. All primary counterparts and the distinct final manifest stay.",
+  "groups_rehashed": 208,
+  "indexed_unique_files_rehashed": 494,
+  "index_logical_potential_upper_bound_bytes": 148806235,
+  "source_files_deleted": 0,
+  "observed_savings_bytes": 0,
+  "proposed_reclaim_allocated_upper_bound_bytes": 45293568,
+  "proposed_reclaim_MiB": 43.2,
+  "files_proposed": 12,
+  "directories_proposed": 0,
+  "real_retained_only_RAM_restores": 12,
+  "independent_private_RAM_restores": 12,
+  "original_source_payload_reads_during_recovery": 0,
+  "application_restore": false,
+  "protected_hashes": 9,
+  "negative_tests": 8,
+  "audit_start_completion_overlap_positive": "PASS",
+  "approval_and_execution_markers_absent": true,
+  "manifest_sha256": "eb533b8a6e8149fcba08bf8d18f2cef24aae21e4ca5c1cfb91e4952c666bd796",
+  "executor_sha256": "b3e0d953fe048bd4ab78e747e03b552fec65290674b1e13283c6f131c1327300",
+  "retained_dependencies": [
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/george-metadata.json",
+      "sha256": "177c41b929765b8f1b3b4023928457d25645c949cc2f3820abb2bc4ee0672c64"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/george.json",
+      "sha256": "a1f2e3f952fac072573f8e90ec2da462416caf2688ff887d719d7cf68918f69f"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/isliago-metadata.json",
+      "sha256": "711a7607b311af2cac66b95d141d6e40b033187db6521ca2162477b354e94854"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/isliago.json",
+      "sha256": "3606934bc9f5cf2ab9740f7c28be96fbf88bfca6d76b38b0b311790878a43a70"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/joe-metadata.json",
+      "sha256": "5e06c7a7ba411576774ac4fe20e68c403d4a8ceda76e992acb958ffdef9f6b15"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/joe.json",
+      "sha256": "e430a452c50bbb2b3d4f0fef9d816267a7f74e2d37fa5f2d8a6a0e53918b8de9"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/kelly-metadata.json",
+      "sha256": "4c2c238c516f22e3c0c9163ef6bc7d79fc0b940487807a74681fc1bd0de68d21"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/kelly.json",
+      "sha256": "38c05a27b8fdd43f51e5bbcc25a92a326553f10b57b3990fdd11b70e1d29e410"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/nicolas-metadata.json",
+      "sha256": "8316049fc8aa74043401306f7caff8e3e507fe1c40036dbeceffee1d9a7ac548"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/nicolas.json",
+      "sha256": "eeb6951550c94312d7c990365dca7d460c6f4c3488a1250dfd1b76416cafaf84"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/principal-metadata.json",
+      "sha256": "c961da17e85f45ba1dc018ddcde0cc8f65cb86b325a61e2db669614aafa071c3"
+    },
+    {
+      "path": "/root/mgs-agent/work/finance-reaudit-20260905/principal.json",
+      "sha256": "867d6f2bc403e17faacca36d25777fd5b84df0baa8a0d80c57291f0f48f12699"
+    }
+  ],
+  "protected_final_manifest": "/root/mgs-agent/work/finance-reaudit-20260905/final/manifest.json",
+  "no_financial_operation_or_production_change": true,
+  "all_other_duplicate_groups_not_certified_for_deletion": true,
+  "all_ten_kanban_tasks_done": true,
+  "staging_rollback_and_media_preserved": true,
+  "whole_disk_review_complete": false,
+  "analysis_artifacts_origin": "New small code/metadata only; not credited as pre-existing reclaim. No additional large source payloads copied to disk.",
+  "recurrence_policy_unchanged": true,
+  "learning": {
+    "subsystem": "vps-maintenance-and-backup-governance",
+    "target": "references/backup-retention-scope-and-redundancy.md",
+    "summary": "Preserve distinct sidecar manifests; inventory every retained counterpart as a mandatory recovery dependency.",
+    "live_mirror_equal": true,
+    "marker_count": 1,
+    "sha256": "efcb5f93601afe517a2041a9c8b0aeae97f5c2487394bfe8ef6b62fe9ec4f16c"
+  },
+  "at": "2026-11-16T01:58:52.814190+00:00",
+  "report_infra": {
+    "status": "PASS",
+    "message_id": "1571706305352179813",
+    "channel_id": "1498132022634483894",
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true,
+    "manifest_and_source_message_in_embed": true
+  },
+  "gate_ready_for_owner_confirmation": true
+}

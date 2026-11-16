@@ -483,6 +483,31 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def duplicate_reader_receipt(self):
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        path = self.repo / "data/storage-work-duplicates-1571695234532778046/private-reader-recovery.json"
+        path.parent.mkdir(parents=True)
+        path.write_text('{"synthetic_fixture":true}\n')
+        return path
+
+    def test_duplicate_reader_receipt_preserved_while_normal_file_commits(self):
+        path = self.duplicate_reader_receipt()
+        before = path.read_bytes()
+        (self.repo / "normal.txt").write_text("valid")
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()),
+                         {".gitignore", "normal.txt"})
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(self.git("ls-files", "--", str(path)), "")
+
+    def test_duplicate_reader_exclusion_keeps_sibling_credentials_blocked(self):
+        path = self.duplicate_reader_receipt()
+        (path.parent / "credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_private_runbook_exception_does_not_allow_sibling_credentials(self):
         base = self.repo / "profiles/zeus-skills/ops/google-drive-agent-automation/references"
         base.mkdir(parents=True)

@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "negative_tests": 8,
+  "audit_start_completion_shape": "PASS",
+  "sources_intact": true,
+  "execution_not_invoked": true,
+  "tests": [
+    {
+      "name": "outside_exact_target_set",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "duplicate_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_input_equals_deleted_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "protected_dependency_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_identity_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "original_identity_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "audit_conflicting_thread",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "no_native_approval",
+      "status": "PASS",
+      "expected_block": true
+    }
+  ]
+}

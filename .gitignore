@@ -183,3 +183,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Keep local bytes and sibling evidence; never relax the sensitive-name guard.
 /data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-before-install/
 
+# Local independent reader validation from the authorized work-duplicate review.
+# Preserve this exact receipt without publishing it; sibling evidence stays visible.
+/data/storage-work-duplicates-1571695234532778046/private-reader-recovery.json
+

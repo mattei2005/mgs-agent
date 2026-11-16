@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "post": false,
+  "targets": 12,
+  "protected": 9,
+  "restore": {
+    "status": "PASS",
+    "files_materialized": 12,
+    "logical_bytes": 45263689,
+    "max_concurrent_payload_bytes": 39672618,
+    "original_source_payload_reads": 0,
+    "retained_input_reads": 12,
+    "restored_files": [
+      {
+        "name": "george-metadata.json",
+        "sha256": "177c41b929765b8f1b3b4023928457d25645c949cc2f3820abb2bc4ee0672c64",
+        "metadata_equal": true,
+        "size": 4506
+      },
+      {
+        "name": "george.json",
+        "sha256": "a1f2e3f952fac072573f8e90ec2da462416caf2688ff887d719d7cf68918f69f",
+        "metadata_equal": true,
+        "size": 1315855
+      },
+      {
+        "name": "isliago-metadata.json",
+        "sha256": "711a7607b311af2cac66b95d141d6e40b033187db6521ca2162477b354e94854",
+        "metadata_equal": true,
+        "size": 11302
+      },
+      {
+        "name": "isliago.json",
+        "sha256": "3606934bc9f5cf2ab9740f7c28be96fbf88bfca6d76b38b0b311790878a43a70",
+        "metadata_equal": true,
+        "size": 1266367
+      },
+      {
+        "name": "joe-metadata.json",
+        "sha256": "5e06c7a7ba411576774ac4fe20e68c403d4a8ceda76e992acb958ffdef9f6b15",
+        "metadata_equal": true,
+        "size": 8545
+      },
+      {
+        "name": "joe.json",
+        "sha256": "e430a452c50bbb2b3d4f0fef9d816267a7f74e2d37fa5f2d8a6a0e53918b8de9",
+        "metadata_equal": true,
+        "size": 725618
+      },
+      {
+        "name": "kelly-metadata.json",
+        "sha256": "4c2c238c516f22e3c0c9163ef6bc7d79fc0b940487807a74681fc1bd0de68d21",
+        "metadata_equal": true,
+        "size": 7548
+      },
+      {
+        "name": "kelly.json",
+        "sha256": "38c05a27b8fdd43f51e5bbcc25a92a326553f10b57b3990fdd11b70e1d29e410",
+        "metadata_equal": true,
+        "size": 928593
+      },
+      {
+        "name": "nicolas-metadata.json",
+        "sha256": "8316049fc8aa74043401306f7caff8e3e507fe1c40036dbeceffee1d9a7ac548",
+        "metadata_equal": true,
+        "size": 8428
+      },
+      {
+        "name": "nicolas.json",
+        "sha256": "eeb6951550c94312d7c990365dca7d460c6f4c3488a1250dfd1b76416cafaf84",
+        "metadata_equal": true,
+        "size": 1308193
+      },
+      {
+        "name": "principal-metadata.json",
+        "sha256": "c961da17e85f45ba1dc018ddcde0cc8f65cb86b325a61e2db669614aafa071c3",
+        "metadata_equal": true,
+        "size": 6116
+      },
+      {
+        "name": "principal.json",
+        "sha256": "867d6f2bc403e17faacca36d25777fd5b84df0baa8a0d80c57291f0f48f12699",
+        "metadata_equal": true,
+        "size": 39672618
+      }
+    ],
+    "full_application_restore": false
+  },
+  "consumer_code_files": 123667,
+  "processes_seen": 205,
+  "runtime": {
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "pids": {
+      "zeus-gateway.service": 2241212,
+      "atena-gateway.service": 2237072,
+      "ares-gateway.service": 2233587
+    },
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  }
+}

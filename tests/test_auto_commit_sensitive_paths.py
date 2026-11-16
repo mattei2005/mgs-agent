@@ -474,6 +474,20 @@ fi
                     result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_local_duplicate_reader_receipt_exclusion(self):
+        target = "data/storage-work-duplicates-1571695234532778046/private-reader-recovery.json"
+        included = [target + ".other", "work/" + target,
+                    target.replace("1571695234532778046", "other"),
+                    target.replace("private-reader-recovery.json", "credentials.json"),
+                    target.replace("private-reader-recovery.json", "review-final.json")]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+            for path in [target] + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
+                    self.assertEqual(result.returncode, 0 if path == target else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

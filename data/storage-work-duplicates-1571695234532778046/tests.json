@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "name": "outside_exact_twelve_target_set",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "duplicate_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_copy_is_deleted_source",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "protected_dependency_hash_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_identity_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "source_identity_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "audit_actual_approval_schema_overlap_start_completion",
+      "status": "PASS",
+      "synthetic_fixture": true
+    },
+    {
+      "name": "audit_reserved_thread_conflict",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "approval_without_native_verification",
+      "status": "PASS",
+      "expected_block": true
+    }
+  ],
+  "negative_count": 8,
+  "real_preflight": "PASS",
+  "real_materialized_retained_only_files": 12,
+  "original_source_payload_reads": 0,
+  "source_files_deleted": 0,
+  "approval_and_start_journal_result_absent": true
+}
