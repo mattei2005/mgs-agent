@@ -66703,15 +66703,15 @@
       "id": "storage-stages-1571713397446418446",
       "agent": "zeus",
       "type": "readonly_stage_code_review_and_inactive_retirement_gate",
-      "status": "awaiting_critical_confirmation_code_copies",
+      "status": "completed_validated",
       "created_at": "2026-11-16T03:13:08.823681+00:00",
       "thread_id": "1569928464033783862",
       "source_message_id": "1571713397446418446",
       "path": "/root/mgs-agent/data/storage-stages-1571713397446418446",
-      "evidence": "data/storage-stages-1571713397446418446/review-final.json",
+      "evidence": "data/storage-stages-1571713397446418446/retirement-final.json",
       "manifest_sha256": "7cd63295cd37cec57dffab01cacf5a7bdc4c822987028b47d42f2d63235181de",
       "executor_sha256": "938385d63c4206d88f22d97655e8b0b420980b8945f42640ee1f7f295b90da32",
-      "source_files_deleted": 0,
+      "source_files_deleted": 1239,
       "proposed_files": 1239,
       "proposed_directories": 0,
       "retained_file_dependencies": [
@@ -67375,7 +67375,14 @@
         "negative_tests": 12,
         "reference_hits_classified": 18,
         "active_refs_detected": 0,
-        "native_deletion_approval": false
+        "native_deletion_approval": true,
+        "retained_only_real_RAM_files_post": 1239,
+        "independent_private_RAM_files_post": 1239,
+        "retained_stage_files_unchanged": 832,
+        "retained_stage_directories": 37,
+        "profile_configs_passed": 3,
+        "profile_smokes_passed": 3,
+        "runtime_unchanged": true
       },
       "learning": {
         "subsystem": "vps-maintenance-and-backup-governance",
@@ -67386,14 +67393,19 @@
         "sha256": "1ebd24a100ba05ad0882ddf0ad1ec49d999058f3a0772e7d52fd3b70252c4ec0"
       },
       "report_infra": {
-        "message_id": "1571725333546401845",
+        "message_id": "1571889440564191396",
         "channel_id": "1498132022634483894",
         "exact_readback_verified": true,
         "content_empty": true,
         "embed_count": 1,
         "mentions_empty": true
       },
-      "result_sha256": "b1d7ae1b0ee1665518a60d7e8726e9495640c03a2025a39ad48cb52a8d69ede4"
+      "result_sha256": "633af91abf83800abb8648fbd42e0ea53bfcaacbbcb37b4cca57d8c8dd263c44",
+      "updated_at": "2026-11-16T09:07:52.932718-05:00",
+      "source_directories_deleted": 0,
+      "confirmation_message_id": "1571887665589133363",
+      "observed_available_delta_bytes": 13078528,
+      "next_step": "Lote encerrado; nao repetir. Revisao geral6restante/7caches/8Gitaberta;demaisalvossemexclusaoautorizada."
     },
     {
       "id": "meta-manual-payments-refresh-cron-20261116T0802",

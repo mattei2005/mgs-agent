@@ -1413,12 +1413,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV03-CROSS-1571623835822858352",
-      "next_step": "Ler resposta do caso confidencial https://developers.facebook.com/support/bugs/1177679564727574/; Meta deve resolver 6POSTs incertos comIDsouconfirmacaodefinitivanaocriacao e orientacaovalidada. Naoabriroutrocaso nem repetirsubmit/comentario/POSTads; preservar IDs/aprovacao/starts. Retomarcamadafaltanteviacentralaposdiagnostico. Semcron/worker/background criado. ConsentimentonaoexigenovoOK.",
+      "next_step": "Aguardar retorno explicito de Rodolfo nesta thread antes de qualquer nova investigacao, tentativa, write ou retomada. Preservar mesmo pedido, objetos, midias, aprovacao e chamado aberto; nao cancelar chamado nem atribuir causa definitiva a Meta ou ao executor.",
       "objective": "Concluir5campanhasMoorcroft305-309Eggbev03 aprovadas mantendo efeitosparciaissemduplicacao",
-      "source": "data/ares/meta-ads/audit/eggbev/cross-account/eggbev03-cross-account-1571623835822858352/support-consent-1571882880244916235.json;https://developers.facebook.com/support/bugs/1177679564727574/",
-      "state": "recovery_pending_provider_response. rodolfo1571882880244916235 autorizou aceitebeta/ia/privacidadeana; aceiteexecutado. businesssupportconta03ofereceusoartigos. rotadevelopersengineeringmarketingapiadobjects abriu relatoconfidencial1177679564727574,urlcanonical/statusopen/appm6953171080682697/autorana lidosaposenvio. diagnosticoadicionalcom6creatives/2parents/2adsets/tracepublicadoconfirmado. semrespostametaainda;semwritecampanha/replay/ativacao/credencial/billing. mantidos305/306paused,307-309pendentes,mesmoapproval/15reservas/30videos.",
+      "source": "data/ares/meta-ads/audit/eggbev/cross-account/eggbev03-cross-account-1571623835822858352/support-consent-1571882880244916235.json;https://developers.facebook.com/support/bugs/1177679564727574/;discord:message:1571889377150238871",
+      "state": "paused_by_operator_1571889377150238871. rodolfo vai investigar e voltar a orientar. hipotese informada pelo operador: falha na rota/executor de referencia eggbev01 para03; causa raiz ainda nao comprovada. nenhuma nova tentativa ou alteracao enquanto aguarda. estado tecnico preservado: recovery_pending_provider_response. rodolfo1571882880244916235 autorizou aceitebeta/ia/privacidadeana; aceiteexecutado. businesssupportconta03ofereceusoartigos. rotadevelopersengineeringmarketingapiadobjects abriu relatoconfidencial1177679564727574,urlcanonical/statusopen/appm6953171080682697/autorana lidosaposenvio. diagnosticoadicionalcom6creatives/2parents/2adsets/tracepublicadoconfirmado. semrespostametaainda;semwritecampanha/replay/ativacao/credencial/billing. mantidos305/306paused,307-309pendentes,mesmoapproval/15reservas/30videos.",
       "thread_id": "1565032671669919827",
-      "updated_at": "2026-11-16T13:56:39+00:00"
+      "updated_at": "2026-11-16T14:07:34+00:00"
     },
     {
       "agent": "ares",
@@ -6718,12 +6718,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lotes5capturas e12JSONencerrados. Etapastages10tasks/6roots:gate1239codecopies/19.55MiBgrosspendingconfirmation/0delete,1239RAMx2PASS. Naoapagarrollback/estado/midia nem806codesemprova. Etapa6restante/7caches/8Gitrecorrenciaabertas. ConsultarZEUS-STORAGE-STAGES-1571713397446418446;naorepetirlotesanteriores.",
-      "objective": "Revisar staging/test-code com recuperacao retida independente e preparar somente lote comprovado, sem exclusao antes da confirmacao.",
-      "source": "data/storage-stages-1571713397446418446/review-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571713397446418446",
+      "next_step": "Lote1239codecopiesconcluido1571887665589133363;fonteretirement-final.json. Preservar806code26noncode/rollbackestadomidia e160providers7commits. Proximo: restantework6read-only/dependencias, depois7caches8Gitrecorrencia;nenhumoutrodeleteautorizado.",
+      "objective": "Retirada do lote exato1239 confirmada e validada; revisao global permanece aberta.",
+      "source": "data/storage-stages-1571713397446418446/retirement-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571887665589133363",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T03:13:09+00:00"
+      "updated_at": "2026-11-16T14:07:26+00:00"
     },
     {
       "agent": "zeus",
@@ -6778,12 +6778,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-STAGES-1571713397446418446",
-      "next_step": "1239 ausentes/journal exato; RAM recovery pos/independente OK; validar disponibilidade3perfis e concluir inventario/REPORT/Git. Nao repetir exclusao.",
-      "objective": "Retirar somente 1239 copias de codigo confirmadas por Rodolfo; preservar fontes e diretorios.",
-      "source": "data/storage-stages-1571713397446418446/retirement-final.json;discord:1569928464033783862/1571887665589133363",
-      "state": "filesystem_retired_validated_governance_pending",
+      "next_step": "1239ausentes/journal1239exato;0dirs;RAM1239x2posPASS;832files37dirs6controlsiguais;3configs3smokesPASS;PIDsbootiguais. Sim1571887665589133363executado1x. Semconfirmacao/retrypendente. Manter160providers7commits;naoreexecutar. Proximo6restante/7caches/8Gitread-only.",
+      "objective": "Retirada do lote exato1239 confirmada e validada; revisao global permanece aberta.",
+      "source": "data/storage-stages-1571713397446418446/retirement-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571887665589133363",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T14:05:58+00:00"
+      "updated_at": "2026-11-16T14:07:26+00:00"
     },
     {
       "agent": "zeus",
@@ -10937,5 +10937,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T14:05:58+00:00"
+  "updated_at": "2026-11-16T14:07:34+00:00"
 }
