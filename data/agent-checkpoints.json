@@ -1413,12 +1413,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV03-C212-1571894746719330377",
-      "next_step": "Enviar resumo nativo preparado de310-314 com15PAUSEDseeds eJSONAGT eaguardar OK posterior proprio. No proximo turno ler mensagem nativa exata egravar execution/summary-delivery.json{request_id,digest,message_id,content_digest=same.digest(content)}. Com novoOK usar execute--inputmesmo --confirm-execute --approved-digest5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48 --approval-message-idnovoOK. Coreadmite revisaostartonlyantesdeefeitos,semrelogioadsetexistente. Nao refazerprepare/reserva/upload nem pedir novo escopotecnico. Finalize/readbackestoque depoisEngine;servingnaoprovadoporACTIVE.",
-      "objective": "Publicar apos OK do plano novo03:310-314,Moorcroft,5duplicacoes212,USD35cada,15adsfinais+15tecnicosPAUSED",
-      "source": "data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json;data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/{summary,preparation-qa,preparation-final-readback}.json",
-      "state": "awaiting_final_approval. correcao central instalada209pass;prepareliveconcluiu e selou5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48. nomes310-314c07-c11. pagesb/meta/pbiaexistenteconferidos;stockdrive15md5/clean/lineage;reconciliacao03completa;15reservasreadbacknovorid;15registryhits/0uploadnovo;30getvideosready200;jsonagt/headlines/descricao/utms15de15. fonte212preservada,primaryvazio/ctaapplynow,lancecostcappreservados. zerocampaignwrites. pedidonicolascancelledfenced,semdependency. nohumansummarydeliveredproofyet;proposedtextsaved.",
+      "next_step": "Pedir decisao critica de Rodolfo sobre remediacao do app/credencial aprovado; nao trocar token/app/permissao ou perfil por autoridade de campanha de Nicolas. MesmoOKpermanecevalido. Aposidentidade/appcanonicosrestabelecidosevalidos,fazerGETpaginadomesmospais/ads,adotar somente seedsunicos seaparecerem e retomarcamadasfaltantescentralmente. SecontinuarsemIDs,solucionarresultadoincerto antesdePOST. Nao renovarstartAdGs existentes/recriarpais/reupload/refazerprepare/retomarpedidocancelado. Pausar novas escritas enquanto190 e incerteza persistirem.",
+      "objective": "Concluir mesmo lote aprovado310-314 da conta03, preservando310/311 e resolvendo credencial/efeitos incertos sem replay",
+      "source": "data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json;data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/{foreground-state,first-partial-live-readback,credential-after-seed-diagnostic,approval-after-runtime-diagnostic}.json;data/ares/meta-ads/engine-v3/state/checkpoints/eggbev03-c212-replacement-1571894746719330377-1481815942722118.json",
+      "state": "recovery_pending_credential_application_error. oknicolas1571940565040234679 validado ao resumo1571920898267807878 sobdelegacao03. correcoesisoladasaprovador/get429 e quota por15mutacoes+3reads/adgnovo boundary instaladas219regressoespass;limite60/outrosaccounts preservados. executereal criou310cid120251066783590507 e311cid120251066783560507,adgs120251066786050507/120251066786210507,6creativesjsonagt/page/utmconfirmados. ultimaapivalidaambosparentspausedusd3500e0ads.6seedposts retornaramtransportesucessosemid;efeitosincertos,naorepetidos.312-314naocriadas. followupretornou190 applicationhasbeendeleted;selfidentitytambem400/190 ecanonicoana/minibotm6953171080682697 inalterado,semfallback. uiadspoweranaconta03/2cids2adgs/hoje16nov mostrou0ads e nenhumwrite;linkdiretoappnaoabriupainel,naoinferirstatusui. appcredentialblockposteriornaoprovaraizdossucessossemid. todosids/horarios15reservas30videossealo/approvalpreservados. fonte212intacta;sembilling/credwrite/cron/background.",
       "thread_id": "1565032671669919827",
-      "updated_at": "2026-11-16T16:11:32+00:00"
+      "updated_at": "2026-11-16T18:35:50+00:00"
     },
     {
       "agent": "ares",
@@ -4411,6 +4411,16 @@
       "updated_at": "2026-11-05T00:33:39+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-PAUSE-1571949265540874433",
+      "next_step": "Nenhuma reativação solicitada; não criar agenda nem repetir writes.",
+      "objective": "Pausar exclusivamente 188,059,180,105,171,186,178,176,193,192,183 na Mavroa06",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1571949265540874433/pause.json",
+      "state": "complete_paused: 11/11 por get final; 10 alterações de status e 1 noop; budget, lance, programação e demais campos não alvo preservados.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-16T18:39:31+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SHEIN-QUEUE-t_8e65299d",
       "next_step": "Ares t_8f7a90a8 assume hold via central --take-foreground ORIGINAL_INPUT; prepare-media/request-ready/dry-run/confirm-execute no mesmo request e relógio; histórico006/007 intacto",
@@ -5035,12 +5045,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar investigacao e recuperacao Ares da etapa target_seed_create sem replay cego. Preservar campanhas310/311,conjuntos/criativos existentes; exigir anuncios IDs/readback e lote310-314 final antes de fechar. Zeus nao escreve campanhas nem aciona por status; manter mesmo job ate terminal.",
+      "next_step": "Manter observacao do mesmo pedido e escritor Ares. Aguardar decisao especifica de credencial/recuperacao do app; nao trocar token/app, nao repetir criacao incerta, nao pedir novo OK de campanha. Exigir15anunciosfinais/5campanhas e readback antes de concluir.",
       "objective": "Acompanhar pedido1571894746719330377 de Rodolfo; Ares unico writer de cinco duplicacoes da212 na conta03",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "Engine ultrapassou admissao:310/311 criadas PAUSED,2conjuntos ACTIVE,6criativos; recibo live18:13UTC confirma zero anuncios com paginacao completa.312-314 nao criadas. Engine FAILED target_seed_create: resposta sem ID exato; causa-raiz ainda em investigacao Ares, sem prova de rejeicao Meta. Sessao Ares ativa; nao e entrega final.",
+      "state": "aprovacao final ja recebida e executada parcialmente. ultimo readback valido:310/311 paused,2conjuntos,6criativos,zero anuncios;312-314 ausentes. erro190 application has been deleted comprovado na propria identidade as18:21utc impede novas leituras/api; nao atribuir falha seed anterior a credencial sem prova. sem novidade na origem neste ciclo; bloqueio ja comunicado.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T18:17:04+00:00"
+      "updated_at": "2026-11-16T18:38:36+00:00"
     },
     {
       "agent": "zeus",
@@ -10997,5 +11007,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T18:28:42+00:00"
+  "updated_at": "2026-11-16T18:39:31+00:00"
 }
