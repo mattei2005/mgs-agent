@@ -52,7 +52,26 @@
   "approval_inherited_from_other_requests": false,
   "support_case_dependency": false,
   "media_reconciliation_policy": "Normal account-scoped checksum/registry/reservation reconciliation for this independent request. No blind duplicate upload, reservation release or inherited campaign approval.",
-  "phase": "INDEPENDENT_REQUEST_READINESS_PENDING",
+  "phase": "EXECUTION_AUTHORIZED_TECHNICAL_GATE_PENDING",
+  "commercial_execution_instruction": {
+    "message_id": "1571904284692316444",
+    "author_discord_id": "344196393512075265",
+    "content": "pode executar meu pedido entao.",
+    "live_verified": true,
+    "scope": "Execute Rodolfo's NEW independent same-account03 source212 request; never resume the cancelled request.",
+    "sealed_manifest_approval_inferred": false,
+    "scoped_code_config_authorization_unresolved": true
+  },
+  "latest_admission_readback": {
+    "account_scope_allowed": true,
+    "account_free": true,
+    "required_mode": "clone_target_prestaged",
+    "required_mode_registered": false,
+    "target_page_replacement_capability_present": false,
+    "old_request_replay_fenced": true,
+    "code_config_changes": 0,
+    "campaign_writes": 0
+  },
   "local_route_result": "data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/local-route-result.json",
   "source_candidates": [
     {"id": "120250416485500507", "status": "PAUSED"},
