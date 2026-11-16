@@ -1,0 +1,29 @@
+import json,sys,os,tempfile,subprocess,sqlite3,time
+from pathlib import Path
+BASE=Path('/root/mgs-agent');RUN=Path(__file__).resolve().parent
+load=lambda p:json.loads(Path(p).read_text())
+def save(p,data):
+ fd,n=tempfile.mkstemp(prefix=p.name+'.',dir=p.parent)
+ try:
+  with os.fdopen(fd,'w') as f:f.write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+  os.chmod(n,0o600);os.replace(n,p)
+ finally:
+  if os.path.exists(n):os.unlink(n)
+r=load(RUN/'closure-current.json');assert r['business_refresh_complete'] and r['accounts']==55 and r['fresh_h_count']==40 and not r['pending_ui']
+p=BASE/'data/meta-manual-payments/digital-trust-workbook-contract.json';c=load(p);assert c['account_ids']==load(RUN/'contract-before.json')['account_ids'] and c['h_source']=='accounts_list_outstanding_balance'
+assert not(RUN/'qualification-before.json').exists();save(RUN/'qualification-before.json',c['latest_refresh_qualification']);c['previous_refresh_qualification']=c['latest_refresh_qualification'];c['latest_refresh_qualification']={**r,'evidence':str(RUN/'closure-current.json'),'run_dir':str(RUN)}
+c['latest_recovery_attempt']={'status':'completed_validated','source_message_id':r['source_message_id'],'verified_at':r['verified_at'],'fresh_metrics_count':55,'fresh_h_count':40,'pending_ui':[],'evidence':str(RUN/'closure-current.json'),'prior_historical_incident_not_closed_by_this_later_retry':True}
+c['pending_card_history']={'status':'no_recent_events_pending_historical_gaps_qualified','account_ids':[],'pending_ui':[],'historical_blank_count':r['historical_blank_d_count'],'evidence':str(RUN/'closure-current.json')};c['next_run_at']=r['next_run_at'];save(p,c)
+id='meta-manual-payments-explicit-retry-20261116T1525';entry={'id':id,'agent':'zeus','type':'financial_refresh_existing_job_retry','status':'completed_validated','updated_at':r['verified_at'],'source_message_id':r['source_message_id'],'source_thread_id':c['thread_id'],'evidence':str(RUN/'closure-current.json'),'verification':{'accounts':55,'fresh_metrics':55,'fresh_h':40,'renewed_d':8,'pending_d_events':0,'historical_blank_d':r['historical_blank_d_count'],'source_parity_cgij_ef_h_d':True,'other_sheet_data_unchanged':True,'lease_free':True,'payments':0,'billing_changes':0,'meta_writes':0,'cron_changes':0},'report_infra_status':r['report_infra_status']}
+p=BASE/'data/infra-inventory.json';inv=load(p);matches=[i for i,x in enumerate(inv['runtime_artifacts'])if x.get('id')==id];assert not matches;inv['runtime_artifacts'].append(entry);save(p,inv)
+args=[sys.executable,str(BASE/'scripts/mgs-knowledge-control.py'),'checkpoint-upsert','--id','meta-manual-payments-digital-trust','--agent','zeus','--thread-id',c['thread_id'],'--objective','Atualização integral do mesmo job após autenticação informada; fonte1571982992975597571;55IDs,H40Outstanding balance.','--state','Concluído e validado: API55 em '+r['api_collected_at']+';H40 lidos hoje15:31–15:58Eastern;8provasD renovadas e pending_ui vazio apósAPI final;39D vazios históricos qualificados;invoices outubro30 USD417864.11;C/G/I/J,E/F,H eD conciliados porID;outraaba intacta;lease livre;nenhum pagamento/billing/cron. Entrega automática final pendente;REPORT-INFRA pendente pela restrição de envio direto deste cron.','--next-step','Entregar resumo curto automaticamente nesta execução;próximo tick normal21:02Eastern do mesmo job. Não reabrirH ouD recentes sem evento novo. Preservar hold do incidente histórico fora desta ocorrência, sem segundo writer.','--source',str(RUN/'closure-current.json')]
+q=subprocess.run(args,capture_output=True,text=True,check=True);(RUN/'checkpoint-result.json').write_text(q.stdout)
+with (BASE/'logs/events-audit.jsonl').open('a') as f:f.write(json.dumps({'at':r['verified_at'],'agent':'zeus','event':'meta_manual_payments_explicit_retry_completed_validated','job_id':c['cron_job_id'],'source_message_id':r['source_message_id'],'receipt':str(RUN/'closure-current.json'),'accounts':55,'fresh_h':40,'renewed_d':8,'pending_d_events':0,'historical_blank_d':39,'report_infra_status':r['report_infra_status'],'payments':0,'billing_changes':0,'cron_changes':0},ensure_ascii=False)+'\n')
+db=sqlite3.connect('/root/.hermes/shared/automation-continuity/queue.sqlite3',timeout=15,isolation_level=None);db.row_factory=sqlite3.Row;db.execute('BEGIN IMMEDIATE')
+try:
+ old=db.execute('SELECT * FROM requests WHERE key=?',('e67b9e22a17027e23728d532',)).fetchone();assert old and old['state']=='blocked_decision' and old['owner'] is None
+ db.execute('INSERT INTO events(at,request_key,kind,detail) VALUES(?,?,?,?)',(time.time(),old['key'],'later_explicit_retry_financially_validated',json.dumps({'source_message_id':r['source_message_id'],'receipt':str(RUN/'closure-current.json'),'fresh_metrics':55,'fresh_h':40,'pending_ui':[],'historical_gate_preserved':True,'delivery_automatic_final_pending':True})));db.execute('COMMIT')
+except BaseException:db.execute('ROLLBACK');raise
+assert load(BASE/'data/meta-manual-payments/digital-trust-workbook-contract.json')['latest_refresh_qualification']['evidence']==str(RUN/'closure-current.json');assert sum(x.get('id')==id for x in load(BASE/'data/infra-inventory.json')['runtime_artifacts'])==1
+ck=next(x for x in load(BASE/'data/agent-checkpoints.json')['checkpoints']if x['id']=='meta-manual-payments-digital-trust');assert ck['source']==str(RUN/'closure-current.json') and 'concluído e validado' in ck['state'].casefold()
+save(RUN/'state-readback.json',{'contract_current_validated':True,'inventory_unique':True,'checkpoint_current':True,'historical_queue_hold_preserved':True,'no_scheduler_changes':True,'no_direct_delivery':True,'report_infra_pending':True});print(json.dumps({'status':'state_recorded_readback','contract_current':True,'checkpoint_current':True,'inventory_unique':True,'report_infra_pending':True}))

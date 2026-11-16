@@ -5085,12 +5085,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar integracao produtiva do novo app e retorno explicito de retomada; Ares unico writer. Nao trocar credencial/vinculos,nao sondar Meta,nem repetir seeds incertos. Aceite final5campanhas/15anuncios com readback. Nao repetir diagnostico do teste ja reportado.",
-      "objective": "Acompanhar novo pedido1571894746719330377; Ares unico writer; separar teste novo app de cutover e entrega produtiva.",
+      "next_step": "Observar cutover e execucao do mesmo pedido apos retomada humana1571996433999990885, sem cobrar ACK nem assumir writer. Exigir recibo migracao/readbacks e aceite final5campanhas/15anuncios; preservar pais/starts/sealos e reconciliacao de6seeds incertos. Nao repetir mensagens intermediarias.",
+      "objective": "Acompanhar novo pedido1571894746719330377; Ares unico writer; validar cutover e entrega apos retomada humana1571996433999990885.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "sem mensagens novas na origem nem na thread privada; ultima mensagem ares1571986756218134551 inalterada. request e foreground waiting_runtime_app_cutover,app_migration_applied=false; sem retomada e sem entrega final. job ativo26/96,ultimo status ok. nenhuma mensagem externa nem mutacao de campanhas/credenciais.",
+      "state": "retomada humana1571996433999990885 por rodolfo confirmada; ares ack1571996511573770372 e progresso de leitura1571996516359340095. ainda sem recibo de cutover/retomada produtiva: request/foreground waiting_runtime_app_cutover,app_migration_applied=false. entrega final nao comprovada. job ativo27/96,status anterior ok. sem mensagens externas nem escrita zeus em campanhas/credenciais.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T20:53:33+00:00"
+      "updated_at": "2026-11-16T21:16:40+00:00"
     },
     {
       "agent": "zeus",
@@ -6784,6 +6784,16 @@
       "state": "completed_validated",
       "thread_id": "1569928464033783862",
       "updated_at": "2026-11-12T17:16:25+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-LOCAL-TESTS-1571996311308214363",
+      "next_step": "Revalidar34roots; resolver quatro retidos expressos e fontes de horizonte; coletar refs exatas/familias fora dos binariosPG, processos/maps/FD, scripts/crons/evidencias/owners. Separar requerido/pendente/lote comprovado; nenhumdelete/backupnovo/bancoaberto/cache/restart.",
+      "objective": "Passo1 da revisao de armazenamento: classificar34diretorios locais de estado/testes por referencias/processos/produtor/evidencias/retencao, sem executar aplicacao ou avaliar semantica financeira.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/postgres-clusters.json;discord:1569928464033783862/1571996311308214363",
+      "state": "in_progress_readonly_local_test_state_consumer_and_lineage_review",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-16T21:14:54+00:00"
     },
     {
       "agent": "zeus",
@@ -9448,12 +9458,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Disparar o job2ee720363d7d uma única vez com autoridade1571982992975597571; revalidar PC1, coletar contrato inteiro e entregar nesta thread; gate auth confirmado exige somente frase curta; sem writer paralelo/billing. Preservar hold anterior.",
-      "objective": "Repetir atualização integral do mesmo job após autenticação informada; mensagens curtas por Rodolfo1571982992975597571.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/retry-1571982992975597571/communication-change.json",
-      "state": "formato curto persistido no prompt e skill com readback e mirror; cadência/escopo preservados; auditoria global antes/depois sem colisão operacional. retry do mesmo job pendente de disparo nativo; autenticação ainda não revalidada.",
+      "next_step": "Próximo tick normal21:02Eastern do mesmo job. Não reabrirH/D recentes sem evento novo;preservar hold do incidente histórico fora desta ocorrência e executor único.",
+      "objective": "Atualização integral do mesmo job após autenticação informada; fonte1571982992975597571;55IDs,H40Outstanding balance.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/retry-20261116T1525/parent-delivery-closure.json",
+      "state": "concluído e validado por receipt:api55,h40 recentes,8drenovados,pending_ui vazio,39históricos vazios qualificados;paridade fonte/sheets e outraaba intacta;lease livre;zero pagamentos/billing. resultado entregue1571997297376759868 com readback;report-infra encerrado por zeus e embed verificado em parent-delivery-closure.json. sem segunda mensagem de resultado.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-16T20:24:30+00:00"
+      "updated_at": "2026-11-16T21:17:15+00:00"
     },
     {
       "agent": "zeus",
@@ -11087,5 +11097,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:58:48+00:00"
+  "updated_at": "2026-11-16T21:17:15+00:00"
 }
