@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "files": 3,
+  "results": [
+    {
+      "target": "/root/.cache/uv/sdists-v9/editable/089e980f32384b19/bnK7p4AWMBIkvWVO/hermes_agent-0.21.3-0.editable-py3-none-any.whl",
+      "provider": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/incident-wheel-reconstruction/0.whl",
+      "sha256": "be2d6d629d5c012999936f7fbae13544d94c8b42b27a50e20f13808f7857a336",
+      "template": "/root/.cache/uv/sdists-v9/editable/089e980f32384b19/YpftmYcMjlOAvMIl/hermes_agent-0.21.3-0.editable-py3-none-any.whl",
+      "strategy": "shift_real_template_times",
+      "members_verified": 8,
+      "exact_original_digest_matched": true
+    },
+    {
+      "target": "/root/.cache/uv/sdists-v9/editable/6921d5208a1e3597/kNKmi0UkeGnEEC33/hermes_agent-0.21.3-0.editable-py3-none-any.whl",
+      "provider": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/incident-wheel-reconstruction/1.whl",
+      "sha256": "4d5b2187984f6f33d9e89995716a578327d3899b3459e5c52116d4e5112f9b16",
+      "template": "/root/.cache/uv/sdists-v9/editable/6921d5208a1e3597/jr2TaJMvRzICxcUo/hermes_agent-0.21.3-0.editable-py3-none-any.whl",
+      "strategy": "shift_real_template_times",
+      "members_verified": 8,
+      "exact_original_digest_matched": true
+    },
+    {
+      "target": "/root/.cache/uv/sdists-v9/editable/8e5ed8f82e8766b0/9T2EsNT_UU7LxoA_/hermes_agent-0.0.0-0.editable-py3-none-any.whl",
+      "provider": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/incident-wheel-reconstruction/2.whl",
+      "sha256": "724ab68650b2c313a8985e517ae291d785b9156cade28ba2f58c6387ecc46e33",
+      "template": "/root/.cache/uv/sdists-v9/editable/8e5ed8f82e8766b0/twqfBmP8nyz5Gct1/hermes_agent-0.0.0-0.editable-py3-none-any.whl",
+      "strategy": "uniform_frozen_wheel_mtime",
+      "members_verified": 8,
+      "exact_original_digest_matched": true
+    }
+  ],
+  "no_cache_files_written": true
+}

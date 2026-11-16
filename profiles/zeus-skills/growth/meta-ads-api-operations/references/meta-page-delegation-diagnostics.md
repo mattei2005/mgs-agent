@@ -22,6 +22,20 @@ Keep OAuth scopes, account tasks, Page ownership and Page assignment distinct. G
 
 For an original ad error with code 10/subcode 3858749 and `required_permission=Ads`, identify the Page-advertising boundary rather than blaming expiry or quota.
 
+### Changing the issuer app while preserving a human advertiser
+
+Use this branch only when the chosen architecture remains a User Access Token; selecting the same app as another operation does not select that operation's System User. Answer the immediate setup question first, then state the remaining verification.
+
+1. Resolve the exact target app, current advertiser and authorized account/Page scope from the active contract. Inspect app mode and login configuration before prescribing a role: app membership may be relevant for development or restricted testing, but app Administrator is not a universal prerequisite for production OAuth. If a role is required, use the minimum suitable role and have the person accept the invitation; do not recommend full app control just to obtain a token. Manage roles through the app's Business portfolio when required by its ownership setup.
+2. Have the intended advertiser authorize the target app through its supported login/token flow. Confirm the selected app explicitly; a token issued by the previous app does not become a target-app token when the person receives a new role. Keep credentials out of chat and store the resulting token in 1Password.
+3. Validate `/me`, matching-app `/debug_token`, paginated `/me/permissions`, the exact destination account and campaign edge, and the requested Page's actual tasks/access. App membership, OAuth permission names and existing human asset assignments are separate checks. Verify pixel association where the campaign depends on it.
+4. Do not import or transfer Pages to a BM merely to change the issuer app for a human advertiser. If the architecture instead changes to a BISU/System User, separately resolve Business visibility by ownership or sharing and the actor's Page/account assignments; human app-admin access does not confer those assignments, and sharing need not transfer ownership.
+5. Report credential validation separately from deployment and campaign completion. Apply only the authorized credential cutover, preserve the single campaign writer and existing object IDs, and require downstream readback before claiming recovery. This is a prerequisite recipe, not proof that an unexercised migration or campaign write has succeeded.
+
+When explaining why another app was used, recover the original token/profile change and explicit approval exchange. Distinguish an approved configuration choice from a demonstrated technical necessity; a different app or its later restriction does not by itself explain earlier campaign-write errors.
+
+Official references: [Meta access tokens](https://developers.facebook.com/docs/facebook-login/access-tokens), [app roles](https://developers.facebook.com/docs/development/build-and-test/app-roles/), and [Page advertising task requirements](https://developers.facebook.com/docs/graph-api/reference/page/ads_posts/). Recheck current documentation when app configuration or permission requirements differ.
+
 ## 3. Inventory ownership and administrative prerequisites
 
 Paginate every edge to exhaustion and suppress token-bearing paging URLs/cursors in output.
