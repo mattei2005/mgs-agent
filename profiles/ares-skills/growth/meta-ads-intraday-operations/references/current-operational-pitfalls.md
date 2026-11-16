@@ -8,6 +8,7 @@
 
 ## Estado e escrita
 
+- Ao fechar um relatório, releia o checkpoint pelo ID exato e confira sua fonte contra o recibo estruturado de reconciliação. Compare o campo descritivo `state` com normalização de caixa quando o controlador canônico o normalizar (`str(state).casefold()`); preserve comparação literal de IDs, paths e estados estruturados dos intents/recibos. Um controlador pode salvar a descrição em minúsculas: rejeitar apenas essa diferença gera falso negativo de conclusão, não uma falha de publicação. Se a checagem local falhar, projete primeiro os campos divergentes e retome somente a validação; não republique relatórios GET-verificados para corrigir o assert.
 - `status=ACTIVE` em campanha não garante entrega se adset/ad estiver pausado; preservar status hierárquico no audit.
 - UI e API podem representar deleted/archived de forma diferente; declarar o mapeamento específico da operação.
 - Timeout de POST não é autorização para repetir. Reconciliar campanha, adset, creative e ad antes de retry.

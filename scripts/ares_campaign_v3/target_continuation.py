@@ -234,6 +234,8 @@ def require_execution(manifest):
     if manifest.operation != OPERATION or not expired(manifest.raw):
         return
     if any(c.mode == MODE for c in manifest.campaigns):
+        from .eggbev_same_account_replacement import allows_elapsed_manifest
+        if allows_elapsed_manifest(manifest.raw):return
         context = CURRENT.get()
         if not context or not all(allows_elapsed_campaign(c) for c in manifest.raw['campaigns']) or digest(manifest.raw) != context['receipt']['manifest_digest']:
             raise ValueError('elapsed target execute requires fresh exact verified continuation admission')

@@ -268,8 +268,10 @@ def run(engine,bundle,transport,record):
     # identity/account/parent/Page/settings/children remotely; never move start.
     from datetime import datetime,timezone
     elapsed=any(c.status=='ACTIVE' and datetime.fromisoformat(c.start_time)<=datetime.now(timezone.utc) for c in bundle.campaigns)
+    from .eggbev_same_account_replacement import allows_new_shells
+    same_immediate=all(allows_new_shells(engine,c) for c in bundle.campaigns)
     if recovering or elapsed:
-        reconcile_existing(engine,bundle,transport,record,require_shells=elapsed and bundle.campaigns[0].mode!='clone_cross_account_prestaged')
+        reconcile_existing(engine,bundle,transport,record,require_shells=elapsed and bundle.campaigns[0].mode!='clone_cross_account_prestaged' and not same_immediate)
     for stage in stages(bundle.campaigns):
         operations=[]
         for template in stage.operations:
@@ -279,6 +281,10 @@ def run(engine,bundle,transport,record):
             if stage.name=='adset_create' and bundle.campaigns[0].mode=='clone_cross_account_prestaged':
                 from .cross_clone_immediate import new_adset_start
                 slot=int(template.name.rsplit('_',1)[1]);start=new_adset_start(engine,bundle.campaigns[slot-1],record,slot)
+                op=replace(op,body={**op.body,'start_time':start});_save()
+            if stage.name=='adset_create' and same_immediate:
+                from .eggbev_same_account_replacement import new_adset_start as same_start
+                slot=int(template.name.rsplit('_',1)[1]);start=same_start(engine,bundle.campaigns[slot-1],record,slot)
                 op=replace(op,body={**op.body,'start_time':start});_save()
             if '{campaign_id_' in op.relative_url or '{seed_ad_id_' in op.relative_url:raise ValueError('unresolved target clone dependency')
             if _uncertain(record,op.name) and op.name in mapping:

@@ -125,7 +125,19 @@ class CampaignEngine:
 
     def _points(self, bundle: BundlePlan) -> int:
         points_by_mode = self.config.get("points_per_mode") or {}
-        points = sum(int(points_by_mode.get(campaign.mode, 45)) for campaign in bundle.campaigns)
+        points = 0
+        account = (self.config.get('accounts') or {}).get(bundle.account_id) or {}
+        cap = account.get('target_page_replacement') or {}
+        for campaign in bundle.campaigns:
+            unit = int(points_by_mode.get(campaign.mode, 45))
+            if campaign.mode=='clone_target_prestaged' and cap.get('quota_basis')=='planned_writes_x2_with_readback_margin':
+                from .target_page_clone import stages
+                operations=[op for stage in stages((campaign,)) for op in stage.operations]
+                declared=int(cap.get('quota_points_per_campaign') or 0)
+                if cap.get('enabled') is not True or cap.get('account_id')!=campaign.account_id or any(op.method!='POST' for op in operations) or declared<max(2*len(operations),len(operations)+3):
+                    raise ExecutionFailed('replacement quota estimate understates planned writes')
+                unit=declared
+            points += unit
         from .image_sourcing import legacy_count
         if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT':
             points += 3 * sum(bool(legacy_count(c)) for c in bundle.campaigns)
@@ -1712,7 +1724,7 @@ class CampaignEngine:
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         if self.read_only:raise EngineDisabled('read-only planner cannot execute')
         from .eggbev_same_account_replacement import require_execution as require_same_execution
-        require_same_execution(manifest,self.config)
+        self._same_account_execution_authority = require_same_execution(manifest,self.config)
         from .eggbev_cross_account import require_execution as require_cross_execution
         self._cross_account_execution_authority = require_cross_execution(manifest,self.config)
         from .operator_suspension import deny_replay

@@ -50,6 +50,9 @@ def require_manifest(raw):
     if not current or content_digest(raw)!=current['digest']:raise ValueError('elapsed cross-account manifest differs from exact approved admission')
 
 def expected_start(c,record,ci):
+    if record.get('same_immediate_starts',{}).get(str(ci)):
+        from .eggbev_same_account_replacement import expected_start as same_start
+        return same_start(c,record,ci)
     entry=record.get('cross_immediate_starts',{}).get(str(ci))
     if not entry:return c.start_time
     pure={k:v for k,v in entry.items() if k!='entry_sha256'}

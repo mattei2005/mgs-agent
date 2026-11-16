@@ -480,7 +480,8 @@ class Manifest:
         if any(c.mode == 'clone_target_prestaged' and c.status == 'ACTIVE' and _iso(c.start_time, 'start_time') <= datetime.now(timezone.utc) for c in campaigns):
             from .target_continuation import CURRENT, digest
             continuation = CURRENT.get()
-            if not continuation or digest(value) != continuation['receipt']['manifest_digest']:
+            from .eggbev_same_account_replacement import allows_elapsed_manifest
+            if (not continuation or digest(value) != continuation['receipt']['manifest_digest']) and not allows_elapsed_manifest(value):
                 raise ManifestError('elapsed target manifest is not the exact admitted request')
         from .cross_clone_immediate import require_manifest as require_cross_manifest
         require_cross_manifest(value)

@@ -71,7 +71,10 @@
     "mode": "clone_target_prestaged",
     "live_campaign_acceptance_verified": false,
     "serving_verified": false,
-    "legacy_copied_adset_page_switch_enabled": false
+    "legacy_copied_adset_page_switch_enabled": false,
+    "quota_basis": "planned_writes_x2_with_readback_margin",
+    "quota_points_per_campaign": 30,
+    "quota_evidence": "15 planned mutations plus3 readback operations per campaign;30 local points retains12-operation safety margin;global tier/ceiling/window unchanged"
   },
   "same_account_request_only_authority": "1571911721063546892",
   "same_account_replacement_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json"

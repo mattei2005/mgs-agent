@@ -416,7 +416,7 @@ def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=Fa
         code,prior=discord_get(common,f"/channels/{q['source_thread_id']}/messages?before={message_id}&limit=1")
         if ref or code!=200 or len(prior)!=1 or prior[0].get('id')!=sent['id']:
             raise ValueError('approval is not linked to exact summary')
-    proof={'request_id':q['request_id'],'digest':approved_digest,'approval_message_id':message_id,
+    proof={'request_id':q['request_id'],'digest':approved_digest,'approved_digest':approved_digest,'approval_message_id':message_id,'author_id':ok['author']['id'],'summary_message_id':sent['id'],
            'verified_at_monotonic':time.monotonic()}
     effective=home/'effective-manifest.json'
     if effective.exists():
@@ -443,6 +443,13 @@ def allows_elapsed_campaign(value):
                 and digest(value) in proof.get('elapsed_campaign_digests',[]))
 
 
+def allows_elapsed_manifest(raw):
+    proof=CURRENT.get();campaigns=raw.get('campaigns') or []
+    return bool(proof and raw.get('request_id')==proof.get('request_id') and campaigns
+                and digest(raw)==proof.get('admitted_manifest_sha256')
+                and all(c.get('account_id')==TARGET and c.get('mode')==MODE and allows_elapsed_campaign(c) for c in campaigns))
+
+
 def require_execution(manifest,config):
     relevant=[c for c in manifest.campaigns if c.account_id==TARGET and c.mode==MODE]
     if not relevant:return
@@ -451,6 +458,57 @@ def require_execution(manifest,config):
     if not proof or proof.get('request_id')!=manifest.request_id or proof.get('digest')!=manifest.digest:
         raise ValueError('same-account Engine requires fresh exact final-approval context')
     if time.monotonic()-proof['verified_at_monotonic']>120:raise ValueError('final approval context expired')
+    return copy.deepcopy(proof)
+
+
+def allows_new_shells(engine,c):
+    proof=getattr(engine,'_same_account_execution_authority',None)
+    rid=c.idempotency_key.rsplit('-',1)[0]
+    if (c.account_id!=TARGET or c.mode!=MODE or not proof or proof.get('request_id')!=rid
+        or not 0<=time.monotonic()-proof.get('verified_at_monotonic',float('-inf'))<=120
+        or re.fullmatch('[a-f0-9]{64}',str(proof.get('approved_digest',''))) is None
+        or re.fullmatch('[0-9]{17,20}',str(proof.get('approval_message_id',''))) is None
+        or rid not in engine.config['accounts'][TARGET].get('campaign_policy',{}).get('immediate_start_request_ids',[])):
+        return False
+    q=load(ROOT/'data/ares/meta-ads/requests'/(rid+'.json'));admit(q,engine.config)
+    return True
+
+
+def expected_start(c,record,ci):
+    entry=record.get('same_immediate_starts',{}).get(str(ci))
+    if not entry:return c.start_time
+    pure={k:v for k,v in entry.items() if k!='entry_sha256'}
+    if (entry.get('entry_sha256')!=digest(pure) or c.mode!=MODE or c.account_id!=TARGET
+        or entry.get('account_id')!=TARGET or entry.get('idempotency_key')!=c.idempotency_key
+        or entry.get('request_id')!=c.idempotency_key.rsplit('-',1)[0]
+        or entry.get('approved_start_time')!=c.start_time
+        or re.fullmatch('[a-f0-9]{64}',str(entry.get('approved_digest',''))) is None
+        or re.fullmatch('[0-9]{17,20}',str(entry.get('approval_message_id',''))) is None):
+        raise ValueError('same-account journaled immediate start identity/tamper mismatch')
+    start=datetime.fromisoformat(entry['effective_start_time']);at=datetime.fromisoformat(entry['recorded_at'])
+    if start.tzinfo is None or at.tzinfo is None or not 240<=(start-at).total_seconds()<=360:
+        raise ValueError('same-account immediate start buffer invalid')
+    return entry['effective_start_time']
+
+
+def new_adset_start(engine,c,record,ci):
+    if record.get('same_immediate_starts',{}).get(str(ci)):return expected_start(c,record,ci)
+    now=datetime.now(timezone.utc)
+    if datetime.fromisoformat(c.start_time)>now:return c.start_time
+    if not allows_new_shells(engine,c):raise ValueError('new adset lacks fresh exact immediate authority')
+    if record.get('target_clone_ids',{}).get(f'adset_id_{ci}') or f'adset_create_{ci}' in record.get('confirmed_objects',{}):
+        raise ValueError('existing adset cannot receive a new start')
+    from .target_page_clone import _uncertain
+    if _uncertain(record,f'adset_create_{ci}'):return c.start_time
+    from datetime import timedelta
+    from zoneinfo import ZoneInfo
+    start=(now.astimezone(ZoneInfo('America/New_York'))+timedelta(minutes=5)).replace(microsecond=0).isoformat()
+    proof=engine._same_account_execution_authority
+    entry={'account_id':TARGET,'request_id':proof['request_id'],'idempotency_key':c.idempotency_key,
+           'approved_start_time':c.start_time,'effective_start_time':start,'recorded_at':now.isoformat(),
+           'approved_digest':proof['approved_digest'],'approval_message_id':proof['approval_message_id'],'manifest_unchanged':True}
+    entry['entry_sha256']=digest(entry);record.setdefault('same_immediate_starts',{})[str(ci)]=entry
+    return start
 
 
 def dispatch(args,runner):
@@ -500,6 +558,7 @@ def dispatch(args,runner):
             if previous.exists():runner.save(home/('start-revision-'+digest(load(previous))+'.json'),load(previous))
             runner.save(previous,new_payload);payload=new_payload
         proof['elapsed_campaign_digests']=[digest(c) for c in payload['campaigns']]
+        proof['admitted_manifest_sha256']=digest(payload)
         marker=CURRENT.set(proof)
         try:
             manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
