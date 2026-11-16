@@ -52,7 +52,13 @@
   "approval_inherited_from_other_requests": false,
   "support_case_dependency": false,
   "media_reconciliation_policy": "Normal account-scoped checksum/registry/reservation reconciliation for this independent request. No blind duplicate upload, reservation release or inherited campaign approval.",
-  "phase": "TECHNICAL_INTEGRATION_INSTALLED_PENDING_PREPARATION",
+  "phase": "AWAITING_FINAL_APPROVAL",
+  "prepared_summary": "data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/summary.json",
+  "preparation_qa": "data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/preparation-qa.json",
+  "prepared_digest": "5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48",
+  "media_uploads_this_request": 0,
+  "verified_media_assets": 15,
+  "verified_target_video_ids": 30,
   "technical_authorization": {"message_id":"1571911721063546892","authorized_by_discord_id":"344196393512075265","live_verified":true,"scope":"Code/config central adjustment only for this independent account03 request; preserve standards, other accounts, credentials, billing and automations","approval_required_again":false},
   "technical_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
   "commercial_execution_instruction": {
@@ -68,10 +74,10 @@
     "account_scope_allowed": true,
     "account_free": true,
     "required_mode": "clone_target_prestaged",
-    "required_mode_registered": false,
-    "target_page_replacement_capability_present": false,
+    "required_mode_registered": true,
+    "target_page_replacement_capability_present": true,
     "old_request_replay_fenced": true,
-    "code_config_changes": 0,
+    "maintenance_installation_receipt": "data/ares/meta-ads/audit/maintenance/eggbev03-same-account-1571911721063546892/installation.json",
     "campaign_writes": 0
   },
   "local_route_result": "data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/local-route-result.json",
@@ -81,12 +87,13 @@
     {"id": "120250364730440507", "status": "ACTIVE"}
   ],
   "source_selection_ambiguous": false,
-  "remaining_gate": "Complete fresh preparation and sealed summary; subsequent final summary approval required before campaign creation. Technical authorization and source selection are resolved.",
-  "required_technical_change": "Independent same-account03 Page/media/copy replacement is not admitted by the currently installed central route. Any required scoped technical integration belongs only to this new request and is not continuation of another campaign request. Credential/billing/other operations unchanged.",
-  "next_step": "Run canonical ares-eggbev-target-clone.py prepare --input this independent request --confirm-prepare through new same-account dispatch after installed regression. Reconcile exact Page/media/reservations and keep source4 objects in snapshot with explicit requested3-slot mapping. Use standard global naming, then seal/plan and present full own summary including15PAUSED seeds and JSON-AGT for final OK. Do not resume cancelled request or ask again for technical authorization, source choice, budget or standards.",
+  "remaining_gate": "Only subsequent explicit final OK to the new sealed summary; preparation, technical authorization and source selection are resolved.",
+  "technical_gate_status": "RESOLVED_INSTALLED_TESTED209; independent same-account03 route admitted only for this request; fresh preparation and Meta video readback completed",
+  "next_step": "Deliver own sealed summary for310-314 and await its subsequent explicit final OK. On next reply read exact native summary, persist summary-delivery.json under execution with request_id, approved digest, message_id and same.digest(content), then execute through same-account central dispatch with ORIGINAL prepared digest and this new final approval ID. Never reuse an earlier request or technical approval as final OK. Keep immediate intent via start-only revision before any Engine effects; preserve existing starts after effects. Media assets15/registryhits15/videos30ready, zero new uploads; do not prepare/reupload/reserve again.",
   "execution_mode": "foreground",
   "campaign_writes": 0,
-  "manifest_sealed": false,
+  "manifest_sealed": true,
   "required_mode_candidate": "clone_target_prestaged",
-  "runtime_readiness_verified": false
+  "runtime_readiness_verified": true,
+  "provider_campaign_acceptance_verified": false
 }
