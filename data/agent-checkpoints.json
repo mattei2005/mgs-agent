@@ -1413,12 +1413,12 @@
     {
       "agent": "ares",
       "id": "ARES-EGGBEV03-C212-1571894746719330377",
-      "next_step": "Pedir decisao critica de Rodolfo sobre remediacao do app/credencial aprovado; nao trocar token/app/permissao ou perfil por autoridade de campanha de Nicolas. MesmoOKpermanecevalido. Aposidentidade/appcanonicosrestabelecidosevalidos,fazerGETpaginadomesmospais/ads,adotar somente seedsunicos seaparecerem e retomarcamadasfaltantescentralmente. SecontinuarsemIDs,solucionarresultadoincerto antesdePOST. Nao renovarstartAdGs existentes/recriarpais/reupload/refazerprepare/retomarpedidocancelado. Pausar novas escritas enquanto190 e incerteza persistirem.",
-      "objective": "Concluir mesmo lote aprovado310-314 da conta03, preservando310/311 e resolvendo credencial/efeitos incertos sem replay",
-      "source": "data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json;data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/{foreground-state,first-partial-live-readback,credential-after-seed-diagnostic,approval-after-runtime-diagnostic}.json;data/ares/meta-ads/engine-v3/state/checkpoints/eggbev03-c212-replacement-1571894746719330377-1481815942722118.json",
-      "state": "recovery_pending_credential_application_error. oknicolas1571940565040234679 validado ao resumo1571920898267807878 sobdelegacao03. correcoesisoladasaprovador/get429 e quota por15mutacoes+3reads/adgnovo boundary instaladas219regressoespass;limite60/outrosaccounts preservados. executereal criou310cid120251066783590507 e311cid120251066783560507,adgs120251066786050507/120251066786210507,6creativesjsonagt/page/utmconfirmados. ultimaapivalidaambosparentspausedusd3500e0ads.6seedposts retornaramtransportesucessosemid;efeitosincertos,naorepetidos.312-314naocriadas. followupretornou190 applicationhasbeendeleted;selfidentitytambem400/190 ecanonicoana/minibotm6953171080682697 inalterado,semfallback. uiadspoweranaconta03/2cids2adgs/hoje16nov mostrou0ads e nenhumwrite;linkdiretoappnaoabriupainel,naoinferirstatusui. appcredentialblockposteriornaoprovaraizdossucessossemid. todosids/horarios15reservas30videossealo/approvalpreservados. fonte212intacta;sembilling/credwrite/cron/background.",
+      "next_step": "Aguardar retorno explicito de Rodolfo liberando a retomada;nao pedir outra decisao enquantoele resolve,nem sondar APIemloop. Nao atribuir trabalho de app/token/permissao a Ares. Aposliberacao validar identidade/appcanonicos,GETs dosmesmosobjetos/paginacao/adocao unicadeeventuaisseeds econtinuarapenasfaltante. Nao recriarpais/reupload/refazerprepare/renovarstartAdGexistente. Aprovacaocomercialpreservada,semnovoOKorcamento para mesmo plano.",
+      "objective": "Aguardar Rodolfo resolver restricao do app; preservar lote310-314 para retomada segura dos mesmos objetos",
+      "source": "discord:message:1571958601461792829;data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json;data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/foreground-state.json",
+      "state": "waiting_owner_app_recovery1571958601461792829. rodolfo confirmou que app entrouemrestricao e vairesolver;mensagemautenticadaceonaorigem. pausa operacional explicita,semnovasconsultasmeta/posts/codigo/credencial/automacao. registrocomorestrictedrelatopeloowner,naoexclusaofisicaconfirmada;api190originalpreservadocomoevidenciaanterior. mantidos310/311parents/adgs/6creatives,lastapiparentpaused/0ads/ui0ads,6postseedincertosnaorepetidos;312-314pendentes. samenicolasok/sealos15reservas30videos/startsids intactos. naoatribuirrestricaocomoraizseedsemidsemaevidencia.",
       "thread_id": "1565032671669919827",
-      "updated_at": "2026-11-16T18:35:50+00:00"
+      "updated_at": "2026-11-16T18:47:42+00:00"
     },
     {
       "agent": "ares",
@@ -6867,6 +6867,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-UV-1571959754081837281",
+      "next_step": "Resolver cache/UV reais, inventariar inode-aware e mapear indices/ambientes ativos. So preparar lote exato se origem/consumidores/recuperacao estiverem comprovados; preservar browser/modelos/perfis/NPXretido/Gitbases.",
+      "objective": "Revisar UV/cache em leitura: ocupacao inode-aware, hardlinks/consumidores, recuperacao e retencao; sem exclusao ou mudanca de politica.",
+      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571959754081837281",
+      "state": "in_progress_readonly_uv_review",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-16T18:48:22+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-VPS-LEGACY-1571144515673260184",
       "next_step": "Seguircleanup-result.jsoneZEUS-STORAGE-VPS-RETIRE-1571196199548092428;naorepedirpreservacaoouexclusaodesselote.",
       "objective": "Revisaolegacyconcluida;preservacaoeaposentadoriaoriginaisexecutadascomconfirmacao1571196199548092428.",
@@ -11007,5 +11017,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T18:39:31+00:00"
+  "updated_at": "2026-11-16T18:48:22+00:00"
 }
