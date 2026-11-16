@@ -59,7 +59,9 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 raise ManifestError(f"account {campaign.account_id} is not registered in engine v3")
             continue
         if str(account.get("app_key") or "") != campaign.app_key:
-            raise ManifestError(f"account {campaign.account_id} app_key mismatch")
+            from .credential_routing import allows_campaign
+            if not allows_campaign(manifest,campaign,account):
+                raise ManifestError(f"account {campaign.account_id} app_key mismatch")
 
         supported_modes = set(account.get("supported_modes") or [])
         if config.get("require_explicit_account_modes") is True and not supported_modes:

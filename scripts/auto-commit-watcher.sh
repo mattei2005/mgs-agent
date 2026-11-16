@@ -95,6 +95,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_ares_credent
 # fixture-only authorization. Exact source path; runtime tokens stay blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_sb_token_monitor_auth_readiness\.py$"
 
+# Reviewed installed route-validation source (REPORT-INFRA 1572004580349321267).
+# No embedded credentials; only this exact source, never rollback copies or siblings.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/ares_campaign_v3/credential_routing\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

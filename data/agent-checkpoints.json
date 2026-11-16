@@ -5085,12 +5085,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar validacao/instalacao do cutover que Ares prepara e retomada missing-only do mesmo pedido autorizado1571996433999990885. Exigir recibos e leitura final5campanhas/15anuncios, preservando IDs/starts/sealos e reconciliacao dos6seeds. Nao cobrar status nem assumir writer.",
-      "objective": "Acompanhar pedido1571894746719330377 ate entrega; Ares unico writer; retomada humana1571996433999990885.",
+      "next_step": "Observar revalidacao e retomada missing-only apos integracao produtiva do novo app. Exigir recibos de escrita e readback final5campanhas/15anuncios,IDs/starts/sealos preservados e reconciliacao dos6seeds. Ares unico writer;sem cobranca ou nova aprovacao rotineira.",
+      "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;retomada humana1571996433999990885.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "leitura discord paginada sem mensagens novas na origem/privada; autoridade e pais confirmados. workspace ares contem recibo local app-route-migration e novos arquivos de teste, nao instalacao produtiva. request ainda app_migration_applied=false; ultimos readbacks310/311paused e0ads. job ativo29/96,ultimo ciclo ok. sem novo bloqueio decisorio ou entrega,sem mensagens externas e sem escrita zeus em campanhas/credenciais.",
+      "state": "ares informou integracao da conta03 ao minibot; request produtivo app_migration_applied=true e recibo app-route-migration conferidos contra config instalada app/user/cache,com hooks no executor. novos recibos source-current/thumbnail-equivalence mostram verificacao em curso; nao comprovam retomada de post nem entrega. ultima leitura de objetos continua310/311paused e0ads. nenhum novo bloqueio decisorio;writer ares preservado.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T21:39:05+00:00"
+      "updated_at": "2026-11-16T21:53:58+00:00"
     },
     {
       "agent": "zeus",
@@ -11097,5 +11097,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T21:39:05+00:00"
+  "updated_at": "2026-11-16T21:53:58+00:00"
 }

@@ -37,6 +37,9 @@ class WindowAdmissionTests(unittest.TestCase):
   R=Path('/root/mgs-agent');rid='eggbev03-c212-replacement-1571894746719330377';home=R/'data/ares/meta-ads/audit/eggbev/same-account'/rid/'execution'
   payload=json.loads((home/'effective-manifest.json').read_text());cfg=json.loads((R/'data/ares/meta-ads/engine-v3/config.json').read_text())
   cfg['state_root']=str(self.root/'state');cfg['audit_root']=str(self.root/'audit')
+  # This regression exercises the original clock/quota route, not a credential cutover.
+  cfg['accounts'][lane.TARGET]['app_key']=payload['campaigns'][0]['app_key']
+  cfg['accounts'][lane.TARGET]['marketing_api_access_tier']='development_access'
   cap=cfg['accounts'][lane.TARGET]['target_page_replacement'];cap.update(quota_basis='planned_writes_x2_with_readback_margin',quota_points_per_campaign=30)
   class Fake(TargetFakeMeta):
    def new(self,value):

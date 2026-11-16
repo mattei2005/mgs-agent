@@ -39,5 +39,14 @@
       "final_summary_ok_required": true,
       "technical_paused_seeds_preserved": true
     }
+  },
+  "current_absence_reconciliation": {
+    "eggbev03-c212-replacement-1571894746719330377": {
+      "authority_message_id": "1571996433999990885",
+      "technical_seeds_only": true,
+      "activity_evidence_path": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/same-account/eggbev03-c212-replacement-1571894746719330377/execution/seed-creation-activity-readback.json",
+      "activity_evidence_sha256": "0ab7dd025c6cdc48c5ea082708ff53b6962c3cf34e001aa513f5eea3b0c62996",
+      "scope": "Only6original body-digest-bound paused seed operations after fresh complete empty healthy account child inventory + complete original-window activity;one additional attempt;no original result rewritten;no parent/creative replay"
+    }
   }
 }

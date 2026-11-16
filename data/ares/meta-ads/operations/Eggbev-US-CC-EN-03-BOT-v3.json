@@ -8,8 +8,8 @@
   "status": "installed_guarded_request_scoped",
   "account_id": "1481815942722118",
   "account_alias": "Eggbev-US-CC-EN-03",
-  "app_key": "mgs-meta-app-953171080682697",
-  "meta_app_id": "953171080682697",
+  "app_key": "mgs-meta-app-1299247318762949",
+  "meta_app_id": "1299247318762949",
   "token_item": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
   "credential_model": "advertiser-profile individual User Access Token, exact source Page access required before binding",
   "timezone": "America/New_York",
@@ -39,9 +39,9 @@
   "blocked_reason": "Not a blanket write release: exact source reader, requested Page/PBIA, media, sealed summary and subsequent explicit OK remain mandatory.",
   "read_only_evidence": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585",
   "token_identity": "Ana Cunha",
-  "token_user_id": "122147293515218951",
-  "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev01-ana-m6.json",
-  "marketing_api_access_tier": "development_access",
+  "token_user_id": "122147508339218951",
+  "token_cache_path": "/root/.cache/mgs/ares-meta-token-eggbev03-ana-minibot.json",
+  "marketing_api_access_tier": "standard_access",
   "media_upload_enabled": true,
   "runner": "scripts/ares-eggbev-target-clone.py",
   "cross_account_clone": {
@@ -77,5 +77,7 @@
     "quota_evidence": "15 planned mutations plus3 readback operations per campaign;30 local points retains12-operation safety margin;global tier/ceiling/window unchanged"
   },
   "same_account_request_only_authority": "1571911721063546892",
-  "same_account_replacement_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json"
+  "same_account_replacement_policy": "data/ares/meta-ads/policies/eggbev03-same-account-replacement.json",
+  "advertiser_identity": "Ana Cunha",
+  "runtime_app_migration_authority": "1571996433999990885"
 }

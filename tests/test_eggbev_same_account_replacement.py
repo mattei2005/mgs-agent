@@ -97,7 +97,7 @@ class SameAccountTests(unittest.TestCase):
             root=Path(tmp);policy=self.policy_file(tmp)
             qp=root/'data/ares/meta-ads/requests'/(self.q['request_id']+'.json');qp.parent.mkdir(parents=True);qp.write_text(json.dumps(self.q))
             cfg=copy.deepcopy(self.config);a=cfg['accounts'][same.TARGET]
-            a.update(app_key='mgs-meta-app-953171080682697',operation=same.OP,ad_serving_route='lineage_required_for_new_media')
+            a.update(app_key=built['campaigns'][0]['app_key'],operation=same.OP,ad_serving_route='lineage_required_for_new_media')
             cfg.update(enabled=True,write_enabled=True,state_root=str(root/'state'),audit_root=str(root/'audit'),soft_score=10000,hard_score=10000,require_account_registration=True)
             class SameAccountFake(TargetFakeMeta):
                 def new(self,value):

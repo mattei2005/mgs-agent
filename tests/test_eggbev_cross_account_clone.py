@@ -27,6 +27,9 @@ class CrossTests(unittest.TestCase):
   from ares_campaign_v3 import eggbev_cross_account as cross
   self.c=cross;self.m=runner();self.q,self.source,self.page=fixture();self.temp=tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/ares/cache/scratch');self.addCleanup(self.temp.cleanup);self.root=Path(self.temp.name)
   self.cfg=json.loads((R/'data/ares/meta-ads/engine-v3/config.json').read_text());self.cfg['state_root']=str(self.root/'state');self.cfg['audit_root']=str(self.root/'audit');self.cfg['require_prevalidated_manifest']=True
+  # Historical cancelled cross-account mode retains its historical issuer fixture.
+  self.cfg['accounts'][self.c.TARGET].update(app_key='mgs-meta-app-'+self.c.APP,meta_app_id=self.c.APP,token_user_id=self.c.USER,marketing_api_access_tier='development_access')
+  self.m.CONFIG=self.root/'frozen-legacy-config.json';self.m.CONFIG.write_text(json.dumps(self.cfg))
   self.assets=[]
   from ares_campaign_v3.media_registry import MediaRegistry
   self.reg=MediaRegistry(self.root/'registry.json')
@@ -170,7 +173,8 @@ class CrossTests(unittest.TestCase):
  def test_21_real_scope_metadata_grant_self_only(self):
   guard=self.m.module('offline_guard',R/'scripts/mgs-ares-asset-scope.py')
   guard.enforce_credential_metadata('me',{'fields':'id,name'},'GET',self.c.TARGET,'synthetic')
-  guard.observe_credential_metadata('debug_token',{'input_token':'synthetic'},{'data':{'is_valid':True,'app_id':self.c.APP,'user_id':self.c.USER}},self.c.TARGET,'synthetic')
+  grant=guard._credential_identity_policy(self.c.TARGET)['technical_identity_validation']
+  guard.observe_credential_metadata('debug_token',{'input_token':'synthetic'},{'data':{'is_valid':True,'app_id':grant.get('expected_app_id',self.c.APP),'user_id':self.c.USER,'type':grant.get('expected_token_type','USER')}},self.c.TARGET,'synthetic')
   for path,params,method in [('me/accounts',{'fields':'id'},'GET'),('debug_token',{'input_token':'other'},'GET'),('me',{'fields':'id,name'},'POST')]:
    with self.assertRaises(ValueError):guard.enforce_credential_metadata(path,params,method,self.c.TARGET,'synthetic')
  def test_22_Page_exact_SB_Meta_and_ephemeral_context(self):self.page_case()

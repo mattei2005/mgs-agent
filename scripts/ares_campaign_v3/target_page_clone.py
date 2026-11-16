@@ -234,7 +234,11 @@ def _adopt_uncertain(engine,bundle,transport,op,record):
     elif op.kind=='ad_create':path=op.body['adset_id']+'/ads';fields='id,name,adset_id,creative{id}';pred=lambda x:x.get('name')==op.body['name'] and str(x.get('creative',{}).get('id'))==op.body['creative']['creative_id']
     elif op.kind=='ad_copy_with_creative':path=op.body['adset_id']+'/ads';fields='id,source_ad_id,adset_id';pred=lambda x:str(x.get('source_ad_id'))==op.relative_url.split('/')[0]
     else:return None
-    matches=[x for x in _inventory(engine,bundle,transport,path,fields,'target_uncertain_reconciliation') if pred(x)]
+    inventory=_inventory(engine,bundle,transport,path,fields,'target_uncertain_reconciliation')
+    matches=[x for x in inventory if pred(x)]
+    if not matches and op.kind=='ad_create':
+        from .credential_routing import allow_missing_paused_seed
+        if allow_missing_paused_seed(engine,bundle,transport,op,record,inventory):return None
     if len(matches)!=1:
         raise ValueError('uncertain target mutation unresolved; no POST replay; retain request for convergence/reconciliation')
     return str(matches[0]['id'])
@@ -288,7 +292,12 @@ def run(engine,bundle,transport,record):
                 op=replace(op,body={**op.body,'start_time':start});_save()
             if '{campaign_id_' in op.relative_url or '{seed_ad_id_' in op.relative_url:raise ValueError('unresolved target clone dependency')
             if _uncertain(record,op.name) and op.name in mapping:
-                ids[mapping[op.name]]=_adopt_uncertain(engine,bundle,transport,op,record);_save();continue
+                adopted=_adopt_uncertain(engine,bundle,transport,op,record)
+                if adopted:
+                    ids[mapping[op.name]]=adopted;_save();continue
+                if op.kind!='ad_create' or op.name not in record.get('current_absence_reconciliations',{}):
+                    raise ValueError('uncertain mutation has no verified current-absence receipt')
+                _save()
             operations.append(op)
         # Newly adopted IDs might be needed by following operations only, never siblings.
         if operations:

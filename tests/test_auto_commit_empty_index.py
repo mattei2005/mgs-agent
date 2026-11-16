@@ -112,6 +112,29 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), "normal file.txt")
         self.assertTrue((self.repo / "large.json").exists())
 
+    def test_reviewed_route_source_commits_and_rollback_stays_local(self):
+        source = "scripts/ares_campaign_v3/credential_routing.py"
+        rollback = "data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/credential-routing-before-parent-name-fix.py"
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        for relative in (source, rollback):
+            path = self.repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("# synthetic source fixture only\n")
+        self.run_until("Commit OK:")
+        tracked = self.git("ls-files").splitlines()
+        self.assertIn(source, tracked)
+        self.assertNotIn(rollback, tracked)
+        self.assertEqual((self.repo / rollback).read_text(), "# synthetic source fixture only\n")
+
+    def test_route_sibling_remains_blocked_and_unstaged(self):
+        path = self.repo / "scripts/ares_campaign_v3/credential_routing_other.py"
+        path.parent.mkdir(parents=True)
+        path.write_text("# synthetic sibling fixture only\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+        self.assertTrue(path.exists())
+
     def test_sensitive_file_still_blocks(self):
         (self.repo / "token.json").write_text("synthetic fixture only")
         text = self.run_until("BLOQUEADO: arquivo sensível detectado")

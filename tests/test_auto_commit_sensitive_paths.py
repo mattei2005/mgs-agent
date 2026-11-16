@@ -23,6 +23,11 @@ else
 fi
 '''
         cases = {
+            "scripts/ares_campaign_v3/credential_routing.py": 0,
+            "work/scripts/ares_campaign_v3/credential_routing.py": 1,
+            "scripts/ares_campaign_v3/credential_routing.py.bak": 1,
+            "scripts/ares_campaign_v3/credential_routing_other.py": 1,
+            "scripts/ares_campaign_v3/credentials.json": 1,
             "skills/content-publish-wordpress/scripts/resolve-credentials.sh": 0,
             "work/skills/content-publish-wordpress/scripts/resolve-credentials.sh": 1,
             "skills/content-publish-wordpress/scripts/resolve-credentials.sh.bak": 1,
@@ -495,6 +500,20 @@ fi
                     target.replace("test_ares_credential_metadata.py", "credentials.txt"),
                     target.replace("baseline/tests", "baseline-other/tests"),
                     "tests/test_ares_credential_metadata.py"]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+            for path in [target] + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
+                    self.assertEqual(result.returncode, 0 if path == target else 1)
+
+    def test_exact_route_rollback_exclusion(self):
+        target = "data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/credential-routing-before-parent-name-fix.py"
+        included = [target + ".other", "work/" + target,
+                    target.replace("1571996433999990885", "other"),
+                    target.replace("credential-routing-before-parent-name-fix.py", "credentials.txt"),
+                    "scripts/ares_campaign_v3/credential_routing.py"]
         with tempfile.TemporaryDirectory() as directory:
             subprocess.run(["git", "init", "-q", directory], check=True)
             (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())

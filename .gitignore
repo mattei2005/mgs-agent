@@ -191,3 +191,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Preserve this exact offline rollback copy; siblings and live source stay visible.
 /data/ares/meta-ads/audit/maintenance/bot-self-metadata-1571975883286257726/baseline/tests/test_ares_credential_metadata.py
 
+# Reconciled local rollback source (REPORT-INFRA 1572006331790008390).
+# Preserve bytes locally; the installed source remains versioned and guarded.
+/data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/credential-routing-before-parent-name-fix.py
+

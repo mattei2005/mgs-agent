@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/ares_campaign_v3/transport.py", line 110, in execute
+    with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 493, in open
+    response = meth(req, response)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 602, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 531, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/urllib/request.py", line 611, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/ares-eggbev-target-clone.py", line 471, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/root/mgs-agent/scripts/ares-eggbev-target-clone.py", line 448, in main
+    print(json.dumps(dispatch(a,sys.modules[__name__]),ensure_ascii=False,indent=2));return
+                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_same_account_replacement.py", line 586, in dispatch
+    result=engine.execute(manifest);runner.save(home/'engine-result.json',result)
+  File "/root/mgs-agent/scripts/request_serialization.py", line 38, in wrapped
+    return fn(self,manifest,*args,**kw)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/engine.py", line 1787, in execute
+    lane_results[account] = future.result()
+                            ~~~~~~~~~~~~~^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/engine.py", line 1555, in _run_lane
+    return self._run_lane_inner(account, bundles, request_id, manifest_digest)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/engine.py", line 1637, in _run_lane_inner
+    ids = run_target_clone(self, bundle, transport, record)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/target_page_clone.py", line 295, in run
+    adopted=_adopt_uncertain(engine,bundle,transport,op,record)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/target_page_clone.py", line 241, in _adopt_uncertain
+    if allow_missing_paused_seed(engine,bundle,transport,op,record,inventory):return None
+       ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/credential_routing.py", line 98, in allow_missing_paused_seed
+    parents=engine._batch(bundle,transport,[BatchOperation('seed_absence_parent_'+op.name,'GET',cid+'?fields=id,account_id,status',kind='readback') for cid in r['existing_campaign_ids']],'seed_absence_parent_readback')
+  File "/root/mgs-agent/scripts/ares_campaign_v3/engine.py", line 240, in _batch
+    results = transport.execute(operations, stage)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/transport.py", line 122, in execute
+    raise BatchTransportError(stage, {"http": exc.code, "payload": payload}) from exc
+ares_campaign_v3.transport.BatchTransportError: seed_absence_parent_readback: batch request failed

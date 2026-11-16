@@ -99,6 +99,20 @@ def runtime(runner, config):
     return common,meta,sb,token
 
 
+def verify_advertiser(meta,token):
+    account=load(ROOT/'data/ares/meta-ads/engine-v3/config.json')['accounts'][TARGET]
+    code,identity,_=meta.graph_get_credential_metadata(TARGET,token)
+    dc,body,_=meta.graph_get_credential_metadata(TARGET,token,inspect_token=True);d=body.get('data') or {}
+    if (code!=200 or dc!=200 or identity.get('name')!=account.get('token_identity')
+        or identity.get('id')!=account.get('token_user_id') or d.get('user_id')!=identity.get('id')
+        or d.get('app_id')!=account.get('meta_app_id') or d.get('type')!='USER' or d.get('is_valid') is not True):
+        raise ValueError('configured advertiser profile/issuer is not verified')
+    c,a,_=meta.graph_get('act_'+TARGET,token,{'fields':'id,name,account_status,currency,timezone_name,business,user_tasks'})
+    if c!=200 or a.get('business',{}).get('id')!='155263197283282' or not {'ADVERTISE','ANALYZE'}<=set(a.get('user_tasks') or []):
+        raise ValueError('target account access unavailable')
+    return {'identity':identity,'app_id':d['app_id'],'account':a}
+
+
 def discord_get(common,path):
     """Bounded retry of idempotent authority reads; never replay a mutation."""
     for attempt in range(4):
@@ -124,6 +138,8 @@ def live_request(q, common):
     mids=[q['source_message_id'],q['specification_message_id'],
           q['request_independence_authority_message_id'],q['standards_confirmation_message_id'],
           q['source_selection_authority_message_id'],p['authority_message_id']]
+    if q.get('resume_authority_message_id'):mids.append(q['resume_authority_message_id'])
+    if q.get('pending_app_selection_authority_message_id'):mids.append(q['pending_app_selection_authority_message_id'])
     for mid in mids:
         code,m=discord_get(common,f"/channels/{q['source_thread_id']}/messages/{mid}")
         if (code!=200 or m.get('id')!=mid or m.get('author',{}).get('id')!=CEO
@@ -336,7 +352,7 @@ def prepare(path,runner,confirm):
     q=request_load(path);cfg=load(runner.CONFIG);home=home_for(q);home.mkdir(parents=True,exist_ok=True)
     from request_serialization import request_lock
     from .coordination import AccountWriterLeaseStore
-    from .eggbev_cross_account import verify_advertiser,prepare_media
+    from .eggbev_cross_account import prepare_media
     from . import eggbev_creation_naming as naming
     from .media_registry import MediaRegistry
     from .prevalidation import prevalidate_payload,validate_account_policy,verify_prevalidation
@@ -521,7 +537,6 @@ def dispatch(args,runner):
     cfg=load(runner.CONFIG);home=home_for(q)
     from request_serialization import request_lock
     from .coordination import AccountWriterLeaseStore
-    from .eggbev_cross_account import verify_advertiser
     from .schema import Manifest
     from .prevalidation import validate_account_policy
     from .engine import CampaignEngine
@@ -529,6 +544,8 @@ def dispatch(args,runner):
         leases=AccountWriterLeaseStore(cfg['state_root']);leases.claim(TARGET,q['request_id'],status='PREFLIGHT_ACTIVE')
         common,meta,sb,token=runtime(runner,cfg);verify_advertiser(meta,token);live_request(q,common)
         summary=load(home/'summary.json');payload,proof=final_approval(q,summary,common,args.approval_message_id,args.approved_digest,return_proof=True)
+        from . import credential_routing as routing
+        route=routing.receipt_for(q,payload,cfg) if q.get('runtime_route_migration_receipt') else None
         current=source_read(q,runner,common,meta,token,cfg);original=load(home/'source-live.json')
         require_source_consistency(q,original,current,runner,home,args.approved_digest)
         page=page_read(q,current,meta,sb,token,args.input)
@@ -539,7 +556,8 @@ def dispatch(args,runner):
         starts={c['start_time'] for c in payload['campaigns']}
         if len(starts)!=1:raise ValueError('batch start mismatch')
         rebuilt=build(q,original,page,selected,MediaRegistry(cfg['media_registry']),allocation,runner,next(iter(starts)))
-        if rebuilt['campaigns']!=payload['campaigns']:raise ValueError('compiled payload differs from approved source')
+        if rebuilt['campaigns']!=payload['campaigns'] and not (route and routing.compiled_equivalent(payload,rebuilt,q,cfg,route)):
+            raise ValueError('compiled payload differs from approved source')
         naming.verify_live_reservation(q['request_id'],naming_history(meta,token,cfg,q))
         # Revalidate approval after reads. New starts are permitted only before any Engine state;
         # partial continuation keeps existing starts and receives an exact, ephemeral parse proof.
@@ -559,6 +577,7 @@ def dispatch(args,runner):
             runner.save(previous,new_payload);payload=new_payload
         proof['elapsed_campaign_digests']=[digest(c) for c in payload['campaigns']]
         proof['admitted_manifest_sha256']=digest(payload)
+        if route:proof['route_receipt']=routing.receipt_for(q,payload,cfg)
         marker=CURRENT.set(proof)
         try:
             manifest=Manifest.from_dict(payload);validate_account_policy(manifest,cfg)
@@ -572,4 +591,4 @@ def dispatch(args,runner):
 
 
 # Shared readback primitives operate on target03 objects only, not source01.
-from .eggbev_cross_account import readback_ops, verify_bundle, verify_advertiser
+from .eggbev_cross_account import readback_ops, verify_bundle

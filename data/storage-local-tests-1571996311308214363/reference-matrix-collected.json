@@ -1,0 +1,2131 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "allocated_bytes": 192765952,
+    "protected": true,
+    "categories": {
+      "evidence_or_documentation": 10
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/final-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/retained-primary.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-manifest-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/analysis.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/revalidation-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+    "allocated_bytes": 220200960,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 7,
+      "historical_or_candidate_executable_code": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/producer-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+    "allocated_bytes": 192397312,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+    "allocated_bytes": 200654848,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/pgdata",
+    "allocated_bytes": 193163264,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 4,
+      "primary_application_code_or_tests": 1,
+      "historical_or_candidate_executable_code": 38
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/storage.mjs",
+        "category": "primary_application_code_or_tests",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore-v2/mgs-agent/apps/finance-system/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore/mgs-agent/apps/finance-system/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/rollback-rehearsal/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/candidate/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-confirmed-1556377652078710834/native-four-micro/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/native-four-micro/storage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+    "allocated_bytes": 230027264,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 7,
+      "historical_or_candidate_executable_code": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/producer-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "allocated_bytes": 220463104,
+    "protected": true,
+    "categories": {
+      "evidence_or_documentation": 9
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/retained-primary.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-manifest-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/analysis.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/revalidation-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+    "allocated_bytes": 187580416,
+    "protected": false,
+    "categories": {
+      "historical_or_candidate_executable_code": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "allocated_bytes": 231112704,
+    "protected": true,
+    "categories": {
+      "evidence_or_documentation": 10
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/ui-periods-1546184035921829938/periods-api-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/retained-primary.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-manifest-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/analysis.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/revalidation-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+    "allocated_bytes": 188645376,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 4
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+    "allocated_bytes": 197103616,
+    "protected": false,
+    "categories": {
+      "historical_or_candidate_executable_code": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/deploy/source_stage.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+    "allocated_bytes": 220184576,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-catalog-1546169687346249728/catalog-api-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+    "allocated_bytes": 263520256,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-redesign-1546005809845243944/api-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7",
+    "allocated_bytes": 233660416,
+    "protected": false,
+    "categories": {},
+    "sources": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+    "allocated_bytes": 192909312,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/integration-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a",
+    "allocated_bytes": 192909312,
+    "protected": false,
+    "categories": {},
+    "sources": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11",
+    "allocated_bytes": 220192768,
+    "protected": false,
+    "categories": {},
+    "sources": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+    "allocated_bytes": 188477440,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 4
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+    "allocated_bytes": 199135232,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 7,
+      "historical_or_candidate_executable_code": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/cross-view.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/producer-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+    "allocated_bytes": 227995648,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+    "allocated_bytes": 227995648,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 7,
+      "historical_or_candidate_executable_code": 1
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/producer-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+    "allocated_bytes": 193568768,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+    "allocated_bytes": 222482432,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+    "allocated_bytes": 222482432,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+    "allocated_bytes": 193544192,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 6
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+    "allocated_bytes": 190783488,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 7
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/producer-evidence.json",
+        "category": "evidence_or_documentation",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/security-round-1556332890743115850/finance/preservation-manifest.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+    "allocated_bytes": 189874176,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+    "allocated_bytes": 198467584,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+    "allocated_bytes": 198471680,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+    "allocated_bytes": 198467584,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+    "allocated_bytes": 198467584,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+    "allocated_bytes": 189878272,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 2
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "allocated_bytes": 290676736,
+    "protected": true,
+    "categories": {
+      "evidence_or_documentation": 10
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/reports/zeus/vps-cleanup-review-1569014414605295618.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/payroll-1546380179654451281/local-integration.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/retained-primary.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/top-level.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/deletion-manifest-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/analysis.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/finance-cleanup-audit-1552356639850373301/revalidation-1552361649480933457.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+    "allocated_bytes": 273248256,
+    "protected": false,
+    "categories": {
+      "evidence_or_documentation": 61,
+      "primary_application_code_or_tests": 3,
+      "historical_or_candidate_executable_code": 105
+    },
+    "sources": [
+      {
+        "source": "/root/mgs-agent/data/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/zeus/meta-campaign-rename/1555626535980114000/inventory-before-runtime-entry.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/before/infra-inventory-before-record.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_6dd59a8e/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_71ea2c7f/before/infra-inventory-before-record.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_9700e988/before/infra-inventory-before-record.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/before/infra-inventory-before-record.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/attempt2/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_ee2d9949/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_2559be3f/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_57bde091/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_53c187db/before/infra-inventory-before-record.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_32bc2e19/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/maintenance/t_80979129/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/consumer-recovery-t_1b4f5263/infra-inventory-before-installation.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/data/adspower-warming-20261008/delivery-amendment-1559206352956432395/inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-networks-1546579646227943506.md",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T210330615237/infra-inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T140330774347/infra-inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646/inventory-pre-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T130528612926/pre-closure-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715/inventory-pre-qualification.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T080337154111/inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T140338969259/inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T080346187792/inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261031T080309607040/inventory-before-closure.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/zeus/deep-storage-1569034405069070377/filesystem-classes.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186/inventory-pre-update.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/deploy/record-network-inventory.py",
+        "category": "primary_application_code_or_tests",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/tests/network-browser.mjs",
+        "category": "primary_application_code_or_tests",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/tests/network-integration.mjs",
+        "category": "primary_application_code_or_tests",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/mavroa-permanent-1549069898674606352-20260914T145426Z/before/data/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore-v2/mgs-agent/data/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore-v2/mgs-agent/apps/finance-system/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore-v2/mgs-agent/apps/finance-system/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore-v2/mgs-agent/apps/finance-system/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore/mgs-agent/data/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore/mgs-agent/apps/finance-system/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore/mgs-agent/apps/finance-system/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/mgs-canary-restore/mgs-agent/apps/finance-system/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339/filesystem.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556806857664897025/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/manual-quotes-1546975305216827412/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/candidate/deploy/record-network-inventory.py",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/candidate/tests/network-browser.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/candidate/tests/network-integration.mjs",
+        "category": "historical_or_candidate_executable_code",
+        "match": "owning_run_context_and_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/local-integration.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/local-migration.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_9bf5723f/rollback/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_fc58be96/backup/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_7ab9e9ba/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_8e65299d/rollback/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_8364ae25/backup/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/work/t_8426333c/backup/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/mgs-offer-quiz-20260921T115959-0400-v1.3/infra-inventory.before-v1.3.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta-digital-trust-pc1-resume-20261009T111304/infra-inventory-before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta40-1557475850310393879/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/mgs-offer-quiz-20260921T113622-0400-v1.1/infra-inventory.before-v1.1.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/b0137-pause-1570701181922320515/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta-digital-trust-progress-every5-20260907T190205-0400/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/sb-messenger-revenue-sheet-coverage-gate-20260916T082557-0400/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta-digital-trust-success-popup-resume-20260907T181956-0400/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta-digital-trust-continuous-until-complete-20260907T202258-0400/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/mgs-offer-quiz-20260921T111124-0400/infra-inventory.before.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/mgs-offer-quiz-20260921T143832-0400-v1.4.1/infra-inventory.before-v1.4.1.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/meta-digital-trust-totp-reauth-20260908T090206-0400/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/shein-intraday-20261028-1565157065234710681/infra-inventory.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      },
+      {
+        "source": "/root/mgs-agent/backups/mgs-offer-quiz-20260921T122415-0400-v1.4/infra-inventory.before-v1.4.json",
+        "category": "evidence_or_documentation",
+        "match": "exact_or_unique_leaf"
+      }
+    ]
+  }
+]

@@ -108,6 +108,8 @@ class CampaignEngine:
     def dry_run(self, manifest: Manifest) -> dict[str, Any]:
         validate_account_policy(manifest, self.config)
         plan = self.planner.build(manifest)
+        from .credential_routing import plan_routes
+        plan = plan_routes(plan,manifest,self.config)
         summary = plan.summary()
         from .image_sourcing import RECIPE, legacy_count
         legacy_images = sum(legacy_count(c) for c in manifest.campaigns) if manifest.operation == 'SHEIN-US-DIRECT' else 0
@@ -1744,6 +1746,8 @@ class CampaignEngine:
         if manifest.operation == "SHEIN-US-DIRECT" and (self.config.get("shein_media_qa") or {}).get("enabled") is True and any(c.status != "PAUSED" for c in manifest.campaigns):
             raise ExecutionFailed("SHEIN creation must remain PAUSED until verified media QA activation")
         plan = self.planner.build(manifest)
+        from .credential_routing import plan_routes
+        plan = plan_routes(plan,manifest,self.config)
         audit_path = self.audit_root / f"{_safe_name(manifest.request_id)}.json"
         if audit_path.exists():
             previous = json.loads(audit_path.read_text())
@@ -1769,6 +1773,8 @@ class CampaignEngine:
             "plan": plan.summary(),
             "lanes": {},
         }
+        route=(self._same_account_execution_authority or {}).get('route_receipt')
+        if route:audit['runtime_app_route_migration']=route
         _atomic_json(audit_path, audit)
         lane_results: dict[str, Any] = {}
         try:

@@ -893,6 +893,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-recovery-fdcf1cbf6eda2eb356d1c506",
+      "agent": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "status": "correction_tested_awaiting_native_convergence",
+      "report_infra_message_id": "1572009209107583097",
+      "report_infra_get_verified": true,
+      "authority_message_id": "1569193434189668453",
+      "business_authority_message_id": "1571996433999990885",
+      "source_alert_id": "1572007388666667110",
+      "origin_report_message_ids": ["1572004580349321267", "1572006331790008390"],
+      "paths": ["scripts/auto-commit-watcher.sh", ".gitignore", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py", "profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md"],
+      "receipt_path": "/root/mgs-agent/reports/autopush-recovery-fdcf1cbf6eda2eb356d1c506.json",
+      "tests_passed": 63,
+      "native_watcher_pid_before": 2640095,
+      "native_watcher_pid_after": 4024398,
+      "business_writes": 0,
+      "gateway_restart": false,
+      "manual_commit_or_push": false
+    },
+    {
       "id": "autopush-recovery-ebcc3b80b87e61d3dc672507",
       "agent": "zeus",
       "type": "autocommit_guardrail_recovery",
@@ -71457,8 +71477,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 17349,
-      "modified_at": "2026-11-09T11:36:33-05:00"
+      "size_bytes": 17624,
+      "modified_at": "2026-11-16T17:00:39-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
