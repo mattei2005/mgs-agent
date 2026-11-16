@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "profile": "zeus",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 11.53,
+      "status": "PASS"
+    },
+    {
+      "profile": "ares",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 13.42,
+      "status": "PASS"
+    },
+    {
+      "profile": "atena",
+      "config_returncode": 0,
+      "smoke_returncode": 0,
+      "toolsets_disabled": true,
+      "exact_final_line_matches_marker": true,
+      "elapsed_seconds": 16.99,
+      "status": "PASS"
+    }
+  ],
+  "configs_passed": 3,
+  "smokes_passed": 3,
+  "explicit_profiles": true,
+  "proves": "Current profile/provider text availability only; not historical environment or full production restore"
+}

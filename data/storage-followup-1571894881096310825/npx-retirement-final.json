@@ -1,0 +1,85 @@
+{
+  "status": "completed_validated",
+  "confirmation_message_id": "1571951994090946631",
+  "question_message_id": "1571903106302873692",
+  "manifest_sha256": "7ca6a44275d589695f391d4431c454386558ce318a216486d64270b4a9ecfe1d",
+  "executor_sha256": "370734de22329e63aca8d4b85f6ff93bee4de145b7ef1bbbdcf11cd3847c1816",
+  "target": "/root/.npm/_npx/0d710a328f2801a9",
+  "files_deleted": 10628,
+  "directories_deleted_including_root": 535,
+  "symlinks_deleted": 7,
+  "journal_entries": 11170,
+  "retained_environment_unchanged": true,
+  "protected_profile_controls_unchanged": 6,
+  "post_retained_RAM_files": 10628,
+  "post_independent_RAM_files": 10628,
+  "original_source_payload_reads_by_recovery": 0,
+  "symlink_targets_verified": 7,
+  "full_layout_materialized": false,
+  "Security_scan_or_authentication_executed": false,
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "runtime_unchanged": true,
+  "observed_available_delta_bytes": 591433728,
+  "delta_is_global_filesystem_observation": true,
+  "whole_disk_review_complete": false,
+  "at": "2026-11-16T13:21:23.614718-05:00",
+  "availability": {
+    "status": "PASS",
+    "results": [
+      {
+        "profile": "zeus",
+        "config_returncode": 0,
+        "smoke_returncode": 0,
+        "toolsets_disabled": true,
+        "exact_final_line_matches_marker": true,
+        "elapsed_seconds": 11.53,
+        "status": "PASS"
+      },
+      {
+        "profile": "ares",
+        "config_returncode": 0,
+        "smoke_returncode": 0,
+        "toolsets_disabled": true,
+        "exact_final_line_matches_marker": true,
+        "elapsed_seconds": 13.42,
+        "status": "PASS"
+      },
+      {
+        "profile": "atena",
+        "config_returncode": 0,
+        "smoke_returncode": 0,
+        "toolsets_disabled": true,
+        "exact_final_line_matches_marker": true,
+        "elapsed_seconds": 16.99,
+        "status": "PASS"
+      }
+    ],
+    "configs_passed": 3,
+    "smokes_passed": 3,
+    "explicit_profiles": true,
+    "proves": "Current profile/provider text availability only; not historical environment or full production restore"
+  },
+  "kept_CLI_version_after": "0.1.31",
+  "failed_units_after": 0,
+  "runtime_unchanged_after_smokes": true,
+  "retained_environment_unchanged_after_smokes": true,
+  "protected_profile_controls_unchanged_after_smokes": true,
+  "scope_expansion": false,
+  "next_step": "Lote encerrado; nao repetir exclusao. Proxima revisao read-only: UV/cache e retencao, hardlinks e consumidores; demais categorias seguem separadas. Nenhum outro descarte autorizado.",
+  "report_infra": {
+    "message_id": "1571953846614368257",
+    "channel_id": "1498132022634483894",
+    "exact_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  }
+}
