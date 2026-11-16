@@ -1,7 +1,9 @@
 """Bounded retained-only recovery for stage code (files + reachable Git blobs)."""
 import pathlib,json,gzip,os,stat,subprocess,re,ast,importlib.util,sys
+from functools import lru_cache
 sys.dont_write_bytecode=True
 OUT=pathlib.Path(__file__).parent;ROOT=pathlib.Path('/root/mgs-agent')
+EXPECTED_ROOTS=[str(ROOT/'work'/n/p)for n,p in [('t_629315b4','baseline-scripts'),('t_7ab9e9ba','candidate'),('t_8364ae25','stage'),('t_8426333c','stage'),('t_9bf5723f','stage'),('t_fc58be96','stage')]]
 def sha(p):return subprocess.check_output(['sha256sum','--',str(p)],text=True).split()[0]
 def digest(b):return subprocess.check_output(['sha256sum'],input=b).split()[0].decode()
 def metadata(p):
@@ -9,6 +11,7 @@ def metadata(p):
  return dict(path=str(p),kind='file',dev=s.st_dev,ino=s.st_ino,size=s.st_size,allocated=s.st_blocks*512,nlink=s.st_nlink,mode=stat.S_IMODE(s.st_mode),uid=s.st_uid,gid=s.st_gid,mtime_ns=s.st_mtime_ns,ctime_ns=s.st_ctime_ns)
 def scope(m,rows):
  assert len(rows)==m['files'] and m['directories']==0
+ assert sorted(m['allowed_roots'])==sorted(EXPECTED_ROOTS),'allowed-root drift'
  paths=[x['source']['path']for x in rows];assert len(set(paths))==len(paths)
  roots=[pathlib.Path(x)for x in m['allowed_roots']]
  for x in rows:
@@ -28,7 +31,15 @@ def scope(m,rows):
 def load():
  m=json.load(open(OUT/'retirement-manifest.json'));path=pathlib.Path(m['targets_index']);assert sha(path)==m['targets_index_gzip_sha256'];raw=gzip.open(path,'rb').read();assert digest(raw)==m['targets_index_plain_sha256'];rows=json.loads(raw);scope(m,rows);return m,rows
 
-def provider_bytes(q,expected):
+@lru_cache(maxsize=4096)
+def git_binding(repository,commit,member,expected_oid):
+ oid=subprocess.check_output(['git','-C',repository,'rev-parse',commit+':'+member],text=True).strip();assert oid==expected_oid,'Git member binding changed'
+ return oid
+@lru_cache(maxsize=256)
+def reachable(repository,commit,tip):
+ assert subprocess.run(['git','-C',repository,'merge-base','--is-ancestor',commit,tip],capture_output=True).returncode==0,'Git recovery ref unreachable'
+ return True
+def provider_bytes(q,expected,tip):
  if q['kind']=='file':
   assert metadata(q['path'])==q['metadata'];fd=os.open(q['path'],os.O_RDONLY|os.O_NOFOLLOW)
   try:
@@ -40,21 +51,21 @@ def provider_bytes(q,expected):
   finally:os.close(fd)
   assert metadata(q['path'])==q['metadata']
  else:
-  spec=q['commit']+':'+q['member'];oid=subprocess.check_output(['git','-C',q['repository'],'rev-parse',spec],text=True).strip();assert oid==q['git_blob_oid'],'Git member binding changed'
-  assert subprocess.run(['git','-C',q['repository'],'merge-base','--is-ancestor',q['commit'],'origin/main'],capture_output=True).returncode==0,'Git recovery ref unreachable'
+  oid=git_binding(q['repository'],q['commit'],q['member'],q['git_blob_oid']);assert reachable(q['repository'],q['commit'],tip)
   b=subprocess.check_output(['git','-C',q['repository'],'cat-file','blob',oid])
  assert digest(b)==expected,'retained payload hash'
  return b
 
 def recover(m,rows):
  scope(m,rows);largest=max(x['source']['size']for x in rows);mem={}
+ tip=subprocess.check_output(['git','-C',str(ROOT),'rev-parse','origin/main'],text=True).strip()
  for line in open('/proc/meminfo'):
   key,value=line.split(':',1)
   if key=='MemAvailable':mem[key]=int(value.strip().split()[0])*1024
  assert mem['MemAvailable']>largest*4+256*1024**2
  result=[];reads=[]
  for x in rows:
-  q=x['retained'];b=provider_bytes(q,x['sha256']);assert len(b)==x['source']['size'];reads.append(q.get('path','git:'+q.get('git_blob_oid','')));fd=os.memfd_create('stage-code',flags=0)
+  q=x['retained'];b=provider_bytes(q,x['sha256'],tip);assert len(b)==x['source']['size'];reads.append(q.get('path','git:'+q.get('git_blob_oid','')));fd=os.memfd_create('stage-code',flags=0)
   try:
    view=memoryview(b)
    while view:n=os.write(fd,view);assert n>0;view=view[n:]

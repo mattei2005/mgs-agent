@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "deletion_authorized": false,
+  "source_message_id": "1571713397446418446",
+  "thread_id": "1569928464033783862",
+  "allowed_roots": [
+    "/root/mgs-agent/work/t_629315b4/baseline-scripts",
+    "/root/mgs-agent/work/t_7ab9e9ba/candidate",
+    "/root/mgs-agent/work/t_8364ae25/stage",
+    "/root/mgs-agent/work/t_8426333c/stage",
+    "/root/mgs-agent/work/t_9bf5723f/stage",
+    "/root/mgs-agent/work/t_fc58be96/stage"
+  ],
+  "files": 1239,
+  "directories": 0,
+  "allocated_reclaim_upper_bound_bytes": 20496384,
+  "logical_bytes": 17799384,
+  "targets_index": "/root/.hermes/secure-backups/storage-stages-1571713397446418446/retirement-targets.json.gz",
+  "targets_index_gzip_sha256": "6763fa43cc1b3dcb94ba20e6ec20e8089007c9b7f3c96cdafc7873ce6eec2e3e",
+  "targets_index_plain_sha256": "8d6ab44c2cc2231afdfad90b4983534b8121103a53d3a863e353811e74d09786",
+  "semantic_target_sha256": "4188059fa6446f6df71069ecb1b7dba0a35fa10379164c05ceb9ebd2d4206596",
+  "source_type_counts": {
+    ".py": 1017,
+    ".pyc": 222
+  },
+  "provider_counts": {
+    "file": 555,
+    "git": 684
+  },
+  "allowed_reference_evidence": {
+    "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py": {
+      "kind": "fixture_ast",
+      "ast_sha256": "43f9cba3dc929b0e2fc161d2c87b7079b70f095fc44b2d21338e577ff796f2cd"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_84f0dd13/before/infra-inventory-before-record.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_6dd59a8e/infra-inventory.before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_247b861d/isolated/tests/test_auto_commit_sensitive_paths.py": {
+      "kind": "fixture_ast",
+      "ast_sha256": "43f9cba3dc929b0e2fc161d2c87b7079b70f095fc44b2d21338e577ff796f2cd"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_71ea2c7f/before/infra-inventory-before-record.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_9700e988/before/infra-inventory-before-record.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_3950b5d9/before/infra-inventory-before-record.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/infra-inventory-before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_27706e88/attempt2/infra-inventory-before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_ee2d9949/infra-inventory-before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_ee2d9949/staging/tests/test_auto_commit_sensitive_paths.py": {
+      "kind": "fixture_ast",
+      "ast_sha256": "43f9cba3dc929b0e2fc161d2c87b7079b70f095fc44b2d21338e577ff796f2cd"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_2559be3f/infra-inventory.before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_e524bad0/staged/tests/test_auto_commit_sensitive_paths.py": {
+      "kind": "fixture_ast",
+      "ast_sha256": "43f9cba3dc929b0e2fc161d2c87b7079b70f095fc44b2d21338e577ff796f2cd"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_57bde091/infra-inventory.before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_53c187db/before/infra-inventory-before-record.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/maintenance/t_32bc2e19/infra-inventory-before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/meta-ads/audit/shein/maintenance/t_80979129/infra-inventory-before.json": {
+      "kind": "historical_guardrail_provenance"
+    },
+    "/root/mgs-agent/data/ares/creative-ops/30tb-archive/consumer-recovery-t_1b4f5263/infra-inventory-before-installation.json": {
+      "kind": "historical_guardrail_provenance"
+    }
+  },
+  "protected_hashes": {
+    "/root/mgs-agent/data/storage-stages-1571713397446418446/recover.py": "a24a75192f82f005a1955d112ac61f71443bc43df160e0372c125eea95a9445c",
+    "/root/mgs-agent/data/storage-stages-1571713397446418446/consumers.py": "3623f7626142ffc9b0cb413a3ee0bcb4e00b1078eba7e571787aeef1e39ba6c5"
+  },
+  "retained_git_commits": [
+    "1ca5db6214868d6d58dfda379d4328d8d88ae068",
+    "2f171dda5a357a7ec6bd3e1ab8a79293d5a3872c",
+    "326a3647732d0b95d0fae8bfcacedc811d1638c5",
+    "63e7308ac9d80b1e1e76c36333c9d61ab7cfa600",
+    "cb92e489178419d356005a8771611d97557eefc8",
+    "cbea90833bfbc705b2792f754c7470f43244d816",
+    "f35df01e96413ed4c1605b0fcca9c42bba3278b6"
+  ],
+  "preserved_unmatched_code_files": 806,
+  "preserved_noncode_files": 26,
+  "no_staged_program_execution": true,
+  "protection": "No directories, installed code, rollback, business state or media targets. All survivors and pinned Git code objects are mandatory recovery dependencies. Historical QA paths may need reconstruction before rerun.",
+  "observed_at": "2026-11-16T03:00:19.426628+00:00"
+}
