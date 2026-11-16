@@ -79,12 +79,12 @@
   },
   "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
   "prior_profile_retirement_authority_message_id": "1571250965313486889",
-  "implementation_status": "EGGBEV01_AND03_BINDINGS_INSTALLED_03_REQUESTED_PAGE_GATE_REQUIRED",
+  "implementation_status": "APP_SELECTION_APPROVED_PENDING_PROFILE_TOKEN_AND_STAGED_CUTOVER",
   "page_model": {
     "authority_message_id": "1571266743157002423",
     "authority_live_verified": true,
     "authorized_profile": "Ana Cunha",
-    "authorized_app_id": "953171080682697",
+    "authorized_app_id": "1299247318762949",
     "scope": "All current and future Pages actually linked to Ana Cunha for Eggbev campaign requests in authorized existing/future Eggbev accounts; future accounts still require positive account scope and individual onboarding.",
     "current_page_count_reported_by_operator": 1,
     "current_page_count_live_verified": false,
@@ -102,16 +102,18 @@
       "per-request campaign approval and budget",
       "remote permission changes require their own authorization"
     ],
-    "supersedes": "Using denial on legacy account Pages as a global blocker for Ana Cunha, or requiring those historical Pages to be selected/linked or imported into the BM. Historical denied reads remain evidence only for those exact objects."
+    "supersedes": "Using denial on legacy account Pages as a global blocker for Ana Cunha, or requiring those historical Pages to be selected/linked or imported into the BM. Historical denied reads remain evidence only for those exact objects.",
+    "previous_authorized_app_id": "953171080682697",
+    "app_selection_supersession_message_id": "1571968822276259974"
   },
   "current_runtime_app_id": "1299247318762949",
   "current_runtime_app_name": "minibot",
   "app_migration_authorized": true,
-  "app_migration_authority_message_id": "1571263998102343752",
-  "app_migration_question_message_id": "1571263188513595533",
+  "app_migration_authority_message_id": "1571968822276259974",
+  "app_migration_question_message_id": null,
   "app_migration_authority_live_verified": true,
-  "approved_app_id": "953171080682697",
-  "approved_app_name": "minibot m6",
+  "approved_app_id": "1299247318762949",
+  "approved_app_name": "minibot",
   "runtime_bindings_changed": true,
   "pages_pixels_validated": false,
   "operational_pixel_validation": {
@@ -165,7 +167,7 @@
     "page_identity_required_in_director_thread_now": false,
     "no_campaign_created_by_this_handoff": true
   },
-  "next_step": "Eggbev03 exact cross-account capability installed; fresh requested Page/source/media readiness and final summary OK remain. Eggbev02 unchanged; no new credential or permissions.",
+  "next_step": "Use approved target minibot1299247318762949 for BOT selection, preserving Ana User-token/Page model. No new-app profile credential has been validated and current runtime bindings remain unchanged. Obtain only required token issuance/storage authorization, validate issuer/profile/assets/tier and stage/test complete consumer cutover. Preserve campaign holds/partial IDs; no direct System User or retired-profile fallback; do not ask app choice again.",
   "excluded": [
     "remote permission changes",
     "new app allowlist or guard bypass without explicit authorization",
@@ -204,5 +206,25 @@
     "pixel_id": "935354115143283",
     "pbia_initialized": false,
     "evidence": "data/ares/meta-ads/audit/maintenance/t_247b861d/post-cutover-readback.json"
-  }
+  },
+  "app_selection_history": [
+    {
+      "superseded_at": "2026-11-16T19:39:13.398308+00:00",
+      "superseded_by_message_id": "1571968822276259974",
+      "scope": "App selection only; profile/Page grants and historical runtime preserved",
+      "approved_app_id": "953171080682697",
+      "approved_app_name": "minibot m6",
+      "app_migration_authority_message_id": "1571263998102343752",
+      "app_migration_question_message_id": "1571263188513595533",
+      "implementation_status": "EGGBEV01_AND03_BINDINGS_INSTALLED_03_REQUESTED_PAGE_GATE_REQUIRED"
+    }
+  ],
+  "app_selection_source": "data/ares/meta-ads/policies/bot-meta-app-selection.json",
+  "app_migration_authority_mode": "direct_CEO_instruction",
+  "current_decision_runtime_binding_changes_applied": false,
+  "current_app_migration_complete": false,
+  "new_app_profile_token_reference": null,
+  "onepassword_item_reference_scope": "Current previous-app runtime reference only; not validated for new chosen issuer",
+  "token_metadata_observed_scope": "Historical previous-issuer metadata; not fresh proof for new target app",
+  "repeat_app_selection_approval_required": false
 }

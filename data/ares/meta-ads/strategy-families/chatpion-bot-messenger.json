@@ -38,13 +38,17 @@
     "parameter_resolution": "explicit authorized request -> active operation override -> family mechanism; missing operation value fails closed",
     "global_budget_limit_policy": "data/ares/meta-ads/policies/global-budget-limit-policy.json; internal account caps, floors, envelopes, pools and campaign ceilings are inactive for every consumer until explicit Rodolfo reactivation; exact budget authority, pre-read/readback, billing and account_spend_limit gates remain",
     "serving_proof": "ACTIVE is insufficient; delivery claims require impression, spend or equivalent live insight",
-    "cron": "trigger only; operation-scoped schedule, global collision inventory and shared-resource locks required"
+    "cron": "trigger only; operation-scoped schedule, global collision inventory and shared-resource locks required",
+    "app_selection": "Resolve target app and pending migration readiness from app_selection_policy_source; preserve each operation advertiser User-token identity. App selection does not authorize System User substitution, credential issuance, remote permissions or campaign resume."
   },
   "scale_invariants": {
     "credential_model": "one advertiser-profile-scoped User Access Token per BOT advertiser; that profile owns the linked Page visibility. System User, shared token and another advertiser token are forbidden fallbacks",
     "page_assignment": "BOT must not require importing or assigning the approximately 3000 advertiser Pages into a Business Manager; resolve only the requested page_token through the advertiser User Access Token, obtain the Page Access Token by direct Page GET, keep it ephemeral, then validate PBIA",
     "media_upload": "never upload media before the request identifies the exact ad account; never upload to all possible accounts",
-    "media_variants": ["vertical", "square"],
+    "media_variants": [
+      "vertical",
+      "square"
+    ],
     "pipeline": "bounded parallel preparation and account-scoped upload after Page/account resolution",
     "postprocess": "creative JSON readback uses Graph Batch chunks; Drive moves use bounded parallel workers"
   },
@@ -83,5 +87,6 @@
     "controlled_write_before_automation": true,
     "serving_proof_before_go_live": true
   },
-  "updated_at": "2026-09-02T16:00:00-04:00"
+  "updated_at": "2026-11-16T19:39:13.398308+00:00",
+  "app_selection_policy_source": "data/ares/meta-ads/policies/bot-meta-app-selection.json"
 }

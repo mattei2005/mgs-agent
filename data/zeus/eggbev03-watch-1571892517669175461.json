@@ -6,7 +6,7 @@
   "campaign_writer": "ares",
   "source_thread_id": "1565032671669919827",
   "report_thread_id": "1571888100236464159",
-  "cursor": "1571969777956823131",
+  "cursor": "1571971346785636433",
   "job_id": "7aac7f6e2d6b",
   "seen_notifications": [
     "LOCAL_ACCOUNT03_ROUTER_BLOCK_REQUEST1571894746719330377"
@@ -14,7 +14,7 @@
   "notification_transport": "Current run prohibits direct sending. Report emitted only in final response for automatic delivery; no external message receipt asserted.",
   "old_request": "eggbev03-cross-account-1571623835822858352",
   "old_request_state": "HUMAN_CANCELLED_BY_1571899160242823330_NO_RESUME_NO_DELETE",
-  "updated_at": "2026-11-16T14:31:45-05:00",
+  "updated_at": "2026-11-16T14:38:36-05:00",
   "scoped_technical_authorization_message_id": "1571911721063546892",
   "new_command_message_id": "1571894746719330377",
   "new_parameters_message_id": "1571893411739599029",
@@ -65,7 +65,7 @@
     "source_campaign_id_selected_by_ares": "120250364730440507"
   },
   "last_observation": {
-    "new_messages_at_final_read": 4,
+    "new_messages_at_final_read": 1,
     "source_parent_verified": "1539422731727147079",
     "report_parent_verified": "1496267442899521627",
     "authorization_author_verified": "344196393512075265",
@@ -84,7 +84,7 @@
     "monitor_recovery": "Recuperacao189266711a7c435e559ffcbb: falha do turno LLM HTTP400 apos estado/checkpoint ja gravados, nao falha de campanhas Meta. Reconciliados efeitos e sessao anterior encerrada; leitura Discord retomada com helper canonico, sem reenviar entrega ou executar campanhas. Job/hash/cadencia preservados. A causa interna do HTTP400 e prevencao permanente nao comprovadas; aguardar ciclo natural e verificador independente.",
     "request_independence_authority_message_id": "1571899160242823330",
     "executor_last_message_id": "1571969775947751556",
-    "notification_decision": "Nova orientacao do CEO para app minibot no BOT; Ares verificando compatibilidade da credencial e manteve lote em espera. Sem entrega ou novo bloqueio comprovado. Nao publicar status intermediario nem acionar executor.",
+    "notification_decision": "Somente aviso automatico de atividade1571971346785636433; nenhum resultado, bloqueio novo ou alteracao comprovada. Silencio; sem acionar Ares.",
     "commercial_execution_authority_message_id": "1571904284692316444",
     "evidence_file_count": 4,
     "executor_intermediate_message_id": "1571914508291805255",
@@ -104,12 +104,12 @@
     "final_summary_message_id": "1571920898267807878",
     "prepared_digest": "5ff905263c0d0218f78bf22974191ca95bc5e6865a9229f35cf83acd3ad44e48",
     "final_approval_seen": true,
-    "latest_source_read_at": "2026-11-16T14:31:45-05:00",
+    "latest_source_read_at": "2026-11-16T14:38:36-05:00",
     "monitor_read_operation_recovered": true,
     "monitor_recovery_limit": "Este ciclo recuperou consultas e persistencia. O scheduler so registrara o resultado LLM apos finalizar; nao declarar fechamento independente nem prevencao permanente do HTTP400.",
     "final_response_decision_key": "OWNER_APP_RESTRICTION_HOLD_1571958601461792829",
     "external_notification_readback_verified": false,
-    "previous_cycle_scheduler_result": "last_status=ok;failure_streak=0;repeat.completed=20;nao ultimo ciclo.",
+    "previous_cycle_scheduler_result": "last_status=ok;failure_streak=0;repeat.completed=21;nao ultimo ciclo.",
     "pagination_pages_this_cycle": 1,
     "summary_edited_timestamp": null,
     "human_ok_message_id": "1571940565040234679",
@@ -156,13 +156,14 @@
     "app_selection_authority_message_id": "1571968822276259974",
     "app_selection_ack_message_id": "1571969775947751556",
     "new_selected_app_id": "1299247318762949",
-    "app_selection_applied_verified": false
+    "app_selection_applied_verified": false,
+    "observer_discord_transport": "discord.fetch_messages ausente no catalogo deste turno; GET paginado com identidade/headers do helper canonico Zeus, somente leitura; pais conferidos."
   },
   "continuity": {
     "job_enabled": true,
     "repeat_times": 96,
-    "repeat_completed_at_read": 20,
-    "next_run_at": "2026-11-16T14:36:00-05:00",
+    "repeat_completed_at_read": 21,
+    "next_run_at": "2026-11-16T14:51:00-05:00",
     "final_cycle_action": "Renovar mesmo job para 96 antes de expirar se ainda não terminal; não duplicar.",
     "next_step": "Observar desfecho da verificacao do app minibot pelo Ares e retorno explicito do owner; selecao de app nao e prova de credencial funcional nem liberacao do lote. Zeus nao altera credencial/app nem sonda Meta. Ares unico writer; aceite exige5campanhas/15anuncios com readback; silencio entre resultado final ou novo bloqueio relevante.",
     "recovery_operation_key": "189266711a7c435e559ffcbb",

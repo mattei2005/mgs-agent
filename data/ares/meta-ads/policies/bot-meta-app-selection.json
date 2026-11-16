@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "canonical_key": "ares.bot.meta-app-selection",
+  "status": "APP_SELECTION_APPROVED_CUTOVER_PENDING",
+  "authorized_by": "Rodolfo Mattei",
+  "authorized_by_discord_id": "344196393512075265",
+  "authority_message_id": "1571968822276259974",
+  "source_thread_id": "1565032671669919827",
+  "authority_live_verified": true,
+  "recorded_at": "2026-11-16T19:39:13.398308+00:00",
+  "target_app_id": "1299247318762949",
+  "target_app_name": "minibot",
+  "scope": "All existing/future BOT Meta Campaign Ops in Ares positive Digital Trust account/site scope; normal per-account onboarding remains",
+  "credential_model": "Operation-specific advertiser-profile individual User Access Token; no shared direct-traffic System User fallback",
+  "eggbev_profile_preserved": "Ana Cunha",
+  "runtime_binding_changes_applied": false,
+  "direct_traffic_changed": false,
+  "cutover_complete": false,
+  "new_app_profile_token_validated": false,
+  "credential_issuance_authorized_by_this_decision": false,
+  "remote_permission_changes_authorized": false,
+  "campaign_resume_authorized": false,
+  "repeat_app_selection_approval_required": false,
+  "discovery_evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/vault-metadata-readback.json",
+  "discovery_limit": "Ana Meta reference exists, but no issuer1299247318762949 confirmed; no Meta token probe or credential write performed",
+  "preserved": [
+    "current campaign holds and partial objects/seals/approvals",
+    "advertiser profiles and User-token Page model without BM import",
+    "direct-traffic credentials/configuration",
+    "scope, budget, billing and Critical Subset"
+  ],
+  "readiness_requirements": [
+    "profile User token issued by selected app",
+    "fresh own identity/issuer/scopes and account/Page/pixel validation",
+    "fresh tier by account",
+    "complete consumer/cache inventory, scoped staged integration and tests",
+    "no campaign resumption from app choice alone"
+  ],
+  "risk_note": "One shared app concentrates API availability/restriction dependency across BOT and direct even with separate credentials",
+  "next_step": "Obtain only specific authorization to issue/validate and securely store Ana User token for minibot if needed; app choice is resolved. Do not reuse direct System User or retired advertiser. Keep existing campaign hold; no live cutover claim until validated."
+}

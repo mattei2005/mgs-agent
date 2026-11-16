@@ -5046,11 +5046,11 @@
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
       "next_step": "Observar desfecho da verificacao do app minibot pelo Ares e retorno explicito do owner; selecao de app nao e prova de credencial funcional nem liberacao do lote. Zeus nao altera credencial/app nem sonda Meta. Ares unico writer; aceite exige5campanhas/15anuncios com readback; silencio entre resultado final ou novo bloqueio relevante.",
-      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer, lote aguardando owner e verificacao de compatibilidade do app BOT.",
+      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer; aguardar verificacao app BOT/owner.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "rodolfo orientou usar app minibot1299247318762949 tambem no bot1571968822276259974. ares1571969775947751556 reconheceu, preservou token do perfil anunciante e esta verificando credencial compativel, com lote explicitamente em espera. troca efetiva/retomada nao comprovadas; request, foreground-state e checkpoint ares ainda waiting_owner_app_recovery. mantido ultimo readback valido310/311 pausadas,2adgs,6criativos,0ads;312-314 pendentes.",
+      "state": "rodolfo orientou usar app minibot1299247318762949 tambem no bot1571968822276259974. ares1571969775947751556 reconheceu, preservou token do perfil anunciante e esta verificando credencial compativel, com lote explicitamente em espera. troca efetiva/retomada nao comprovadas; request, foreground-state e checkpoint ares ainda waiting_owner_app_recovery. mantido ultimo readback valido310/311 pausadas,2adgs,6criativos,0ads;312-314 pendentes. ultimo ciclo: apenas aviso automatico de atividade, sem nova entrega/bloqueio.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T19:31:45+00:00"
+      "updated_at": "2026-11-16T19:38:36+00:00"
     },
     {
       "agent": "zeus",
@@ -8218,12 +8218,12 @@
     {
       "agent": "zeus",
       "id": "b0138-to-b0139-1571961868418027543",
-      "next_step": "Canário completo aprovado:107 perfis,8 vinculados,99 não vinculados,0 inconclusivos;capacidade saudável. Registry/runner migrados para B013-9 e estado novo. Processo único proc_aeb2bd75f64a faz baseline1+paridade+baseline2+paridade. Consumir resultado; só então retomar os jobs existentes e validar ciclo agendado.",
+      "next_step": "Processo anterior terminou antes de scan/writes por guard temporário PG vazio; corrigido somente wrapper de validação para aceitar ausência como n/d. Novo executor único proc_437e79ff0d0a faz baseline1+paridade+baseline2+paridade. Consumir resultado; retomar jobs após clean repeat e validar ciclo agendado.",
       "objective": "Concluir B013-8→B013-9 e religar os mesmos dois agendamentos após validação.",
       "source": "discord:1571959312111374447:1571966762898169990",
       "state": "baseline_validation",
       "thread_id": "1571959312111374447",
-      "updated_at": "2026-11-16T19:28:24+00:00"
+      "updated_at": "2026-11-16T19:39:53+00:00"
     },
     {
       "agent": "zeus",
@@ -11027,5 +11027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:35:14+00:00"
+  "updated_at": "2026-11-16T19:39:53+00:00"
 }
