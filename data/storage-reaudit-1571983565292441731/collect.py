@@ -1,6 +1,7 @@
 """Whole-host metadata inventory. No cleanup, imports of apps, DB access or service changes."""
 import os,stat,pathlib,json,gzip,subprocess,datetime,collections,heapq,time
 OUT=pathlib.Path(__file__).parent
+if (OUT/'audit-final.sha256').exists():raise SystemExit('SEALED_AUDIT: use a new observation directory')
 PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
 PRIVATE.mkdir(mode=0o700,exist_ok=False)
 START=time.time();OWN=[str(OUT),str(PRIVATE)];ERRORS=[];MOUNTS=[];CLUSTERS=[];VENV=[];GIT=[];LARGE=[]

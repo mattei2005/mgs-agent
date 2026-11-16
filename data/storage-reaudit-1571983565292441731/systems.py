@@ -1,7 +1,9 @@
 """Read-only local system/consumer map, without credential or command payload publication."""
 from typing import Any
 import pathlib,os,json,subprocess,re,datetime,stat,collections
-OUT=pathlib.Path(__file__).parent;ROOT=pathlib.Path('/root/mgs-agent');PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
+OUT=pathlib.Path(__file__).parent
+if (OUT/'audit-final.sha256').exists():raise SystemExit('SEALED_AUDIT: use a new observation directory')
+ROOT=pathlib.Path('/root/mgs-agent');PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
 def run(args):return subprocess.check_output(args,text=True,timeout=45)
 def dump(name,x):(OUT/name).write_text(json.dumps(x,indent=2,ensure_ascii=False)+'\n')
 def paths(text):

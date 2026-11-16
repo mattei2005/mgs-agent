@@ -1,6 +1,8 @@
 """Canonical role ledger, still a live observation and not a deletion approval."""
 import pathlib,json,gzip,collections,os
-OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731');DEPARTED='/root/mgs-agent/tmp/mgs-dr-backup-uipjbqf9';assert not os.path.exists(DEPARTED)
+OUT=pathlib.Path(__file__).parent
+if (OUT/'audit-final.sha256').exists():raise SystemExit('SEALED_AUDIT: use a new observation directory')
+PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731');DEPARTED='/root/mgs-agent/tmp/mgs-dr-backup-uipjbqf9';assert not os.path.exists(DEPARTED)
 def under(p,r):return p==r or p.startswith(r+'/')
 def role(r):
  p=r['p'];base=r['c']

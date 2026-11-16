@@ -1,11 +1,13 @@
 """First non-cache content pass: exactly the financial archive/SQL candidate class."""
 import pathlib,os,json,gzip,stat,subprocess,collections,datetime
-OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731');PREFIX='/root/mgs-agent/apps/finance-system';rows=[]
+OUT=pathlib.Path(__file__).parent
+if (OUT/'audit-final.sha256').exists():raise SystemExit('SEALED_AUDIT: use a new observation directory')
+PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731');PREFIX='/root/mgs-agent/apps/finance-system';rows=[]
 for line in gzip.open(PRIVATE/'metadata-root.jsonl.gz','rt'):
  r=json.loads(line)
  if r['k']=='file'and r['p'].startswith(PREFIX+'/')and r['c']!='postgres_clusters_pending_role'and '/node_modules/'not in r['p']and r['p'].endswith(('.tar','.tar.gz','.tgz','.tar.xz','.zip','.dump','.sql')):rows.append(r)
 assert len(rows)==326
-ledger=PRIVATE/'finance-archive-hashes.jsonl';assert not ledger.exists();deferred=[];success=[]
+ledger=PRIVATE/'finance-archive-hashes.jsonl';assert not ledger.exists();deferred=[];success=[];independent=[];dup=[];upper=0
 def stable(row):
  try:s=os.lstat(row['p']);return stat.S_ISREG(s.st_mode)and(s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns)==(row['d'],row['i'],row['s'],row['t'])
  except OSError:return False

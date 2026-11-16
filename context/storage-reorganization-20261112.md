@@ -8,7 +8,11 @@
 - Estado: **primeiro lote de 28 dumps locais redundantes excluído e validado em 2026-11-12**, por confirmação nativa de Rodolfo `1570460898970181713`, vinculada ao manifesto `c999586429f3227b665da1b17c4141dcb008e03b779f8efb18bb1b0a8c5fb489`. Nove representantes locais e nove cópias remotas foram preservados. Nenhuma nova retenção automática foi ativada; as outras categorias não foram autorizadas para exclusão por essa confirmação.
 - As confirmações críticas do AGENT.md permanecem obrigatórias. Este pedido não é confirmação de um manifesto ainda não apresentado.
 
-## Direção vigente — caches pausados por decisão de Rodolfo
+## Ciclo vigente — reauditoria global 1571983565292441731
+
+Rodolfo autorizou refazer a auditoria de toda a VPS e dos sistemas locais atuais, com sequência nova passo a passo até o encerramento. Fonte ativa: `context/storage-reaudit-20261116.md` e `data/storage-reaudit-1571983565292441731/audit-final.json`. Os levantamentos e lotes abaixo são históricos: não repetir exclusões nem reaplicar confirmações. Caches continuam pausados, medidos somente para reconciliação da ocupação. O levantamento global novo e o primeiro passe de hashes de archives financeiros estão concluídos; elegibilidade de descarte e revisão por famílias permanecem abertas. Próximo recorte: estado local de testes e execuções do financeiro, preservando produção, fontes acopladas, recuperação e demais sistemas. Nenhuma nova exclusão, retenção, instalação ou restart foi autorizada por este pedido de auditoria.
+
+## Direção preservada — caches pausados por decisão de Rodolfo
 
 Fonte humana: `discord:1569928464033783862/1571982102264549498`; pergunta de próximo passo `1571982354057142387`. Rodolfo determinou pular caches por agora e focar nos arquivos efetivamente sem uso que continuam ocupando a VPS. Esta decisão supersede somente a inclusão de caches/retencão de caches na continuidade anterior: caches regeneráveis ficam `intentionally_retained_owner_choice`, sem nova análise de descarte, cron ou limpeza recorrente até Rodolfo reabrir esse recorte. Os lotes NPX/UV já executados permanecem encerrados; não refazer limpeza nem restaurar lotes aposentados por inferência dessa pausa.
 

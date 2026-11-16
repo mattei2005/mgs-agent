@@ -1,7 +1,9 @@
 """Refine the saved inventory only; no second filesystem crawl."""
 from typing import Any
 import pathlib,json,gzip,collections
-OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
+OUT=pathlib.Path(__file__).parent
+if (OUT/'audit-final.sha256').exists():raise SystemExit('SEALED_AUDIT: use a new observation directory')
+PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
 AREAS=['/root/mgs-agent/apps/finance-system','/root/mgs-agent/data','/root/mgs-agent/backups','/root/mgs-agent/tmp','/root/mgs-agent/reports','/root/.hermes/profiles/zeus','/root/.hermes/profiles/ares','/root/.hermes/profiles/atena','/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209']
 inodes={};groups={};cluster_data=json.load(open(OUT/'postgres-clusters.json'));cluster_roots={r['path']for r in cluster_data};backup_controls=[]
 for line in gzip.open(PRIVATE/'metadata-root.jsonl.gz','rt'):
