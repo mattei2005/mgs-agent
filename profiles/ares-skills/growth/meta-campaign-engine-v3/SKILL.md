@@ -50,6 +50,7 @@ State/lanes      /root/mgs-agent/data/ares/meta-ads/engine-v3/state/
 4. Pesquisa da Meta → `references/official-meta-sources.md`.
 5. Recuperar post existente com vídeos/variantes AFS → `references/existing-post-afs-recovery.md`.
 6. Eggbev entre contas com nova mídia → `references/eggbev-cross-account-clone.md`; capability e request exatos, sem tratar fonte externa como lineage local.
+7. Suporte técnico para efeitos incertos → `references/meta-technical-support.md`; consentimento específico, relatório confidencial e protocolo por readback, sem replay.
 
 Carregue somente a referência do branch atual.
 
