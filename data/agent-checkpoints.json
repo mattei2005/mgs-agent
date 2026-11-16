@@ -8228,12 +8228,12 @@
     {
       "agent": "zeus",
       "id": "b0138-to-b0139-1571961868418027543",
-      "next_step": "Processo anterior terminou antes de scan/writes por guard temporário PG vazio; corrigido somente wrapper de validação para aceitar ausência como n/d. Novo executor único proc_437e79ff0d0a faz baseline1+paridade+baseline2+paridade. Consumir resultado; retomar jobs após clean repeat e validar ciclo agendado.",
-      "objective": "Concluir B013-8→B013-9 e religar os mesmos dois agendamentos após validação.",
+      "next_step": "Dois crons reativados e readback OK;canário saudável;2 baselines completos;paridade sem divergência;clean repeat0writes. Aguardar ciclo nativo completo posterior à reativação e nova paridade SA. Novas atribuições após cutoff são onboarding separado,sem expandir coorte original.",
+      "objective": "Validar conclusão B013-9 no scheduler real.",
       "source": "discord:1571959312111374447:1571966762898169990",
-      "state": "baseline_validation",
+      "state": "awaiting_scheduled_readback",
       "thread_id": "1571959312111374447",
-      "updated_at": "2026-11-16T19:39:53+00:00"
+      "updated_at": "2026-11-16T19:51:17+00:00"
     },
     {
       "agent": "zeus",
@@ -11037,5 +11037,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:46:55+00:00"
+  "updated_at": "2026-11-16T19:51:17+00:00"
 }

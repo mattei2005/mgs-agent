@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
   "canonical_key": "ares.bot.meta-app-selection",
-  "status": "APP_SELECTION_APPROVED_CUTOVER_PENDING",
+  "status": "WAITING_OWNER_TOKEN_CREATION",
+  "app_selection_remains_approved": true,
+  "profile_confirmed_by_owner": "Ana Cunha",
+  "profile_confirmation_message_id": "1571974994030755941",
+  "owner_token_preparation_message_id": "1571975266182635716",
+  "credential_preparation_owner": "Rodolfo Mattei",
+  "agent_actions_on_hold": true,
+  "resume_requires_explicit_instruction": true,
   "authorized_by": "Rodolfo Mattei",
   "authorized_by_discord_id": "344196393512075265",
   "authority_message_id": "1571968822276259974",
@@ -37,5 +44,5 @@
     "no campaign resumption from app choice alone"
   ],
   "risk_note": "One shared app concentrates API availability/restriction dependency across BOT and direct even with separate credentials",
-  "next_step": "Obtain only specific authorization to issue/validate and securely store Ana User token for minibot if needed; app choice is resolved. Do not reuse direct System User or retired advertiser. Keep existing campaign hold; no live cutover claim until validated."
+  "next_step": "WAIT: Rodolfo corrected the profile to Ana Cunha and is creating the token himself; he explicitly instructed Ares to do nothing yet. No app UI, Meta probe, token generation/read/write, permission/code/runtime change or campaign execution until his return. App choice1299247318762949 remains approved, User-token model unchanged and all campaign holds preserved. After release use only the securely stored reference and validate exact identity/issuer/assets before staged cutover; never receive token/code in chat."
 }
