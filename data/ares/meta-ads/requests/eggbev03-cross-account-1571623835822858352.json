@@ -79,7 +79,11 @@
     "source_reader_gate_released": true,
     "meta_quota_state": "data/ares/meta-ads/audit/eggbev/cross-account/eggbev03-cross-account-1571623835822858352/foreground-state.json"
   },
-  "phase": "PREPARATION_DEFERRED_META_QUOTA",
+  "phase": "SUPERSEDED_BY_OPERATOR",
+  "superseded_by_request_id": "eggbev03-c212-replacement-1571894746719330377",
+  "supersession_authority_message_id": "1571894746719330377",
+  "automatic_recovery_required": false,
+  "resume_requires_explicit_instruction": true,
   "execution_mode": "foreground",
   "foreground_authority_message_id": "1571658531411595376",
   "implementation_task_id": "t_e524bad0",

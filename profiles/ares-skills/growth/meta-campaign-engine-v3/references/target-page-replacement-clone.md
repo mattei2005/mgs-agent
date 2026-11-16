@@ -5,6 +5,7 @@
 - Resolver a capability e sua autoridade no contrato exato da operação e no config da conta. `clone_target_prestaged` é um modo próprio; nunca habilitar o legado copied-adset Page switch, converter silenciosamente para from-zero, mudar outra conta ou supor que uma regra de naming habilita o executor.
 - Manter manutenção estrutural separada da transação de campanha, com integrador único, backup/inventário, testes isolados e REPORT-INFRA. Uma aprovação para esta modalidade e futuros equivalentes não publica automaticamente pedidos futuros nem libera credenciais, ACL, billing, estratégias ou exclusões.
 - Conservar fonte e OK comercial; cada pedido traz Page/mídia/copy/budget/início exatos, sua reserva atômica, manifest selado e resumo final. A modalidade preserva sementes técnicas PAUSED: informar explicitamente sua quantidade, separada dos anúncios finais ativos, antes do OK do manifest.
+- Confronte também o dispatch real do runner, não somente o nome do comando: um branch selecionado apenas pela conta destino pode encaminhar um pedido interno à rota entre contas, presa a outra fonte/request. Rejeição local de authority/capability antes do runtime não é erro da Meta. Preserve a rejeição sanitizada, não substitua IDs/autor/aprovação para caber no branch antigo e conduza eventual integração como manutenção isolada autorizada. Fonte com nome literal repetido exige link/ID exato; status ACTIVE ou antiguidade não desempata por inferência.
 
 ## Arquitetura executável
 

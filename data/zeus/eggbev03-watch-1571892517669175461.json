@@ -1,15 +1,53 @@
 {
   "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-  "status": "WAITING_NEW_REQUEST",
+  "status": "OBSERVING_NEW_REQUEST",
   "authorization_message_id": "1571892517669175461",
   "owner": "zeus",
   "campaign_writer": "ares",
   "source_thread_id": "1565032671669919827",
   "report_thread_id": "1571888100236464159",
-  "cursor": "1571889500848783552",
+  "cursor": "1571895190225158197",
   "job_id": "7aac7f6e2d6b",
   "seen_notifications": [],
   "old_request": "eggbev03-cross-account-1571623835822858352",
   "old_request_state": "HUMAN_PAUSED_DO_NOT_RESUME",
-  "updated_at": "2026-11-16T14:23:30.956251+00:00"
+  "updated_at": "2026-11-16T14:32:04Z",
+  "new_command_message_id": "1571894746719330377",
+  "new_parameters_message_id": "1571893411739599029",
+  "new_standards_message_id": "1571895183228928182",
+  "new_request_id": null,
+  "account_id": "1481815942722118",
+  "observed_parameters": {
+    "copies": 5,
+    "source_campaign_name": "212 - Values Loan - ENG - US - (pg_23128) 01",
+    "source_and_target_account": "03",
+    "target_page": "Moorcroft Finances - pg_23187",
+    "video_groups": [[172, 173, 174], [175, 176, 177], [178, 179, 180], [181, 182, 183], [184, 185, 186]],
+    "video_filename_pattern": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_{number}.mp4",
+    "headlines": ["APPLY NOW ✅", "✔️ APPLY TODAY", "CARD NOW✅"],
+    "description": "⭐️⭐️⭐️⭐️⭐️",
+    "standards": "Preservar padrões e nomenclatura já definidos no executor conforme 1571895183228928182; Zeus não redefine budget/start nem resolve herança por suposição."
+  },
+  "last_observation": {
+    "new_messages": 8,
+    "source_parent_verified": "1539422731727147079",
+    "report_parent_verified": "1496267442899521627",
+    "authorization_author_verified": "344196393512075265",
+    "executor_ack_message_id": "1571894866227494977",
+    "executor_activity_message_id": "1571894874649923605",
+    "stage": "Pedido humano novo autenticado; Ares em investigação/preparação. Nenhum artefato canônico novo correlacionado localizado neste corte; IDs/readback/entrega não comprovados.",
+    "old_artifacts_excluded": "Artefato foreground-state e checkpoint Ares do pedido antigo foram identificados e não contam como avanço do pedido novo; permanecem intactos.",
+    "diagnostic": null,
+    "terminal": false,
+    "external_messages_sent": 0,
+    "monitor_failures": 0
+  },
+  "continuity": {
+    "job_enabled": true,
+    "repeat_times": 96,
+    "repeat_completed_at_read": 0,
+    "next_run_at": "2026-11-16T09:36:00-05:00",
+    "final_cycle_action": "Renovar mesmo job para 96 antes de expirar se ainda não terminal; não duplicar.",
+    "next_step": "Ler mensagens posteriores ao cursor e correlacionar o request/checkpoint canônico novo assim que existir. Observar até entrega real ou bloqueio relevante inédito; Ares permanece único writer."
+  }
 }
