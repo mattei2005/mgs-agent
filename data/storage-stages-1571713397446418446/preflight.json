@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "post": false,
+  "source_files": 1239,
+  "source_directories": 0,
+  "consumers": {
+    "reference_hits_classified": 18,
+    "active_references": 0
+  },
+  "consumer_code_files": 133845,
+  "RAM_recovery": {
+    "status": "PASS",
+    "files_materialized": 1239,
+    "logical_bytes": 17799384,
+    "original_source_payload_reads": 0,
+    "max_concurrent_payload_bytes": 195412,
+    "full_application_or_environment_restore": false
+  },
+  "runtime": {
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "pids": {
+      "zeus": 2241212,
+      "atena": 2237072,
+      "ares": 2233587
+    },
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "full_proof_private": "/root/.hermes/secure-backups/storage-stages-1571713397446418446/preflight-full.json"
+}

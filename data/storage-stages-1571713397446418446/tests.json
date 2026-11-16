@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "negative_tests": 12,
+  "audit_schema_start_completion_positive": "PASS",
+  "source_files_removed": 0,
+  "synthetic_fixture_not_authorization": true,
+  "tests": [
+    {
+      "name": "reduced_or_increased_count",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "allowed_roots_replaced",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "installed_program_outside_scope",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "duplicate_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_source_is_target",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "source_fingerprint_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "retained_payload_digest_mismatch",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "Git_member_binding_drift",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "unclassified_consumer",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "fixture_changed_semantics",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "audit_thread_conflict",
+      "status": "PASS",
+      "expected_block": true
+    },
+    {
+      "name": "missing_verified_approval",
+      "status": "PASS",
+      "expected_block": true
+    }
+  ]
+}
