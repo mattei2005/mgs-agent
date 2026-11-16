@@ -1,0 +1,72 @@
+{
+  "status": "PAYLOAD_COVERAGE_ONLY_NOT_DELETION_APPROVAL",
+  "tasks_done": 10,
+  "stage_roots": 6,
+  "stages": [
+    {
+      "path": "/root/mgs-agent/work/t_629315b4/baseline-scripts",
+      "regular_files": 117,
+      "code_files": 115,
+      "noncode_files": 2,
+      "allocated_bytes": 2281472,
+      "code_allocated_bytes": 2281472,
+      "nonregular_nodes": 0
+    },
+    {
+      "path": "/root/mgs-agent/work/t_7ab9e9ba/candidate",
+      "regular_files": 665,
+      "code_files": 661,
+      "noncode_files": 4,
+      "allocated_bytes": 12181504,
+      "code_allocated_bytes": 11771904,
+      "nonregular_nodes": 0
+    },
+    {
+      "path": "/root/mgs-agent/work/t_8364ae25/stage",
+      "regular_files": 145,
+      "code_files": 145,
+      "noncode_files": 0,
+      "allocated_bytes": 3223552,
+      "code_allocated_bytes": 3223552,
+      "nonregular_nodes": 0
+    },
+    {
+      "path": "/root/mgs-agent/work/t_8426333c/stage",
+      "regular_files": 104,
+      "code_files": 104,
+      "noncode_files": 0,
+      "allocated_bytes": 2334720,
+      "code_allocated_bytes": 2334720,
+      "nonregular_nodes": 0
+    },
+    {
+      "path": "/root/mgs-agent/work/t_9bf5723f/stage",
+      "regular_files": 897,
+      "code_files": 877,
+      "noncode_files": 20,
+      "allocated_bytes": 18657280,
+      "code_allocated_bytes": 18477056,
+      "nonregular_nodes": 0
+    },
+    {
+      "path": "/root/mgs-agent/work/t_fc58be96/stage",
+      "regular_files": 143,
+      "code_files": 143,
+      "noncode_files": 0,
+      "allocated_bytes": 3203072,
+      "code_allocated_bytes": 3203072,
+      "nonregular_nodes": 0
+    }
+  ],
+  "target_code_files": 2045,
+  "retained_code_files": 515,
+  "retained_archives": 0,
+  "retained_archive_code_members": 0,
+  "covered_files": 478,
+  "covered_allocated_bytes": 8765440,
+  "preserved_pending_proof": 1567,
+  "private_ledger": "/root/.hermes/secure-backups/storage-stages-1571713397446418446/stage-code-ledger.json.gz",
+  "source_files_removed": 0,
+  "consumer_and_recovery_validation_pending": true,
+  "at": "2026-11-16T02:39:47.757609+00:00"
+}
