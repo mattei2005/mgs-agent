@@ -1,0 +1,117 @@
+{
+  "status": "global_inventory_and_initial_content_audit_completed",
+  "authority_message_id": "1571983565292441731",
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "host": "srv1767265",
+  "whole_vps_persistent_mount_inventory": true,
+  "persistent_filesystems": [
+    "/",
+    "/boot",
+    "/boot/efi"
+  ],
+  "metadata_counts": {
+    "directory": 165147,
+    "link": 23690,
+    "file": 1329991,
+    "other": 294
+  },
+  "metadata_node_count": 1519122,
+  "metadata_errors": 0,
+  "inventory_live_not_atomic": true,
+  "loaded_services": 179,
+  "installed_service_units": 251,
+  "profile_jobs": 85,
+  "system_cron_entries": 72,
+  "periodic_scripts": 11,
+  "systemd_timers": 18,
+  "installed_packages": 1404,
+  "postgres_cluster_roots": 34,
+  "virtualenv_markers": 42,
+  "git_markers": 64,
+  "running_service_count": 29,
+  "failed_units": 0,
+  "tracked_service_pids_unchanged": {
+    "ares-gateway.service": "2233587",
+    "ares-shein-request-queue.service": "2640072",
+    "atena-gateway.service": "2237072",
+    "mgs-router.service": "2640096",
+    "zeus-gateway.service": "2241212"
+  },
+  "application_business_flow_tests_run": false,
+  "remote_production_audit": false,
+  "finance_archive_files_hashed": 326,
+  "finance_archive_payload_groups_byte_identical": 5,
+  "finance_archive_duplicate_upper_bytes": 708608,
+  "finance_archive_duplicate_potential_not_eligibility": true,
+  "postgres_databases_opened_or_started": 0,
+  "source_files_deleted": 0,
+  "new_delete_targets_certified": 0,
+  "no_install_restart_credentials_or_schedule_changes": true,
+  "caches_held_by_owner": true,
+  "transient_backup": {
+    "status": "PASS",
+    "created_at_utc": "2026-11-16T20:30:36.184946+00:00",
+    "duration_seconds": 408.024,
+    "remote_name": "mgs-dr-hourly-20261116T202348Z.zip.gpg",
+    "remote_size_bytes": 1949398626,
+    "archive_sha256_stream_verified": true,
+    "temporary_root_absent": true,
+    "producer": "scripts/mgs-offsite-backup.py:948-1024",
+    "automatic_temporary_directory_lifecycle_confirmed": true,
+    "preexisting_native_job": "3ff8bd8ca40d"
+  },
+  "transient_backup_departure_not_own_cleanup": true,
+  "current_disk": {
+    "/": {
+      "total_GiB": 192.69,
+      "used_GiB": 130.99,
+      "available_GiB": 61.68,
+      "used_percent": 67.99,
+      "available_bytes": 66229850112
+    },
+    "/boot": {
+      "total_GiB": 0.86,
+      "used_GiB": 0.17,
+      "available_GiB": 0.63,
+      "used_percent": 20.72,
+      "available_bytes": 680607744
+    },
+    "/boot/efi": {
+      "total_GiB": 0.1,
+      "used_GiB": 0.01,
+      "available_GiB": 0.1,
+      "used_percent": 5.85,
+      "available_bytes": 102995968
+    }
+  },
+  "analysis_created_allocated_bytes_at_close": 43999232,
+  "raw_payload_copies_created": false,
+  "large_preservation_bundles_created": false,
+  "classification_regression_cases": 6,
+  "learning": {
+    "subsystem": "vps-maintenance-and-backup-governance",
+    "target": "references/full-vps-cleanup-inventory.md",
+    "live_mirror_equal": true,
+    "summary": "Classify tmp/backups/profile working copies by role; reconcile native backup high-water-mark before unused/savings claims."
+  },
+  "audit_phase_complete": true,
+  "whole_storage_cleanup_complete": false,
+  "next_step": "Step1: classify use, evidence, family retention and recovery of remaining local financial test state; no new generic analysis approval needed, no destructive lot approved.",
+  "at": "2026-11-16T15:57:16.637658-05:00",
+  "report_infra": {
+    "message_id": "1571992965163778211",
+    "channel_id": "1498132022634483894",
+    "exact_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  },
+  "private_metadata_sha256": {
+    "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-root.jsonl.gz": "478c47940ecf300fb77b16efd2182f17251ec81f7f30c752a04c2698a06b2e44",
+    "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot.jsonl.gz": "87d93cc13504bcc0669ddf2b680cfcd4de4b6c7bb64aa57a288b50e613c6f623",
+    "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot-efi.jsonl.gz": "ca367846985747cf3af610ae6b7fe8b8352e8dd05526b19cb15f086db3804b94"
+  },
+  "governance_local_readback": "PASS",
+  "closure_at": "2026-11-16T15:59:48.555568-05:00"
+}

@@ -6768,12 +6768,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-FULL-REAUDIT-1571983565292441731",
-      "next_step": "Persistir metadata por filesystem / /boot /boot/efi, reconciliar hardlinks com df, mapear servicos/processos/apps/agendamentos e rootsdeDB/recovery. Cache somente tamanho para reconciliacao, sem proposta de descarte. Depois apresentar quadro residual novo e primeiro passo, sem exclusoes/install/restart/config/credenciais.",
-      "objective": "Nova auditoria read-only de toda a VPS e sistemas locais atuais. Recomeçar ledger de residuos nao-cache, sem repetir exclusoes antigas; classificar ate fechamento por lotes exatos.",
-      "source": "discord:1569928464033783862/1571983565292441731;context/storage-reorganization-20261112.md;context/storage-reaudit-20261116.md",
-      "state": "in_progress_full_filesystem_and_current_systems_inventory",
+      "next_step": "Ciclo novo:1financeiro local(classificar34rootsDB, fontes/evidencias/exports;326SHA mostra5grupos<1MiB,naoprovauso);2works/testesagentes;3dadosrelatoriosmidias;4backups/snapshots;5runtimes/Git;6restosistema. Caches fora. Semdelete/install/restart/cron autorizado; nao pedir outroOKgenerico para analise ja pedida; gates novos exatos para descarte. Nao repetir lotes encerrados.",
+      "objective": "Nova varredura3FS1519122nos/0erros e mapa sistemas locais concluidos;326archives SHA sem drift;nenhumaexclusao.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/audit-final.json;data/storage-reaudit-1571983565292441731/priority-ledger.json;discord:1569928464033783862/1571983565292441731",
+      "state": "global_inventory_complete_disposal_semantics_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T20:23:29+00:00"
+      "updated_at": "2026-11-16T20:58:48+00:00"
     },
     {
       "agent": "zeus",
@@ -6828,12 +6828,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Revisao read-only de diretorios locais de bancos/testes e copias de execucao restantes, comecando na aplicacao financeira: reconciliar inventariohistorico34raizes sem supor atualidade/descarte; provar produtor, tarefa concluida, consumidores e recuperacao. Preservar producao/dashboard/checksum/backupsvalidos/perfis/Gitbases. Caches intentionally_retained_owner_choice, sem reten cao/cron/review/cachedelete por agora. Sem novo lote/exclusao autorizado.",
-      "objective": "Focar arquivos remanescentes sem uso da VPS; caches pausados por ordem1571982102264549498. Preservar operacao e gates exatos.",
-      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571982102264549498;discord:1569928464033783862/1571982354057142387;data/storage-remainder-review-1571661469475672075/review-result.json",
-      "state": "in_progress_noncache_unused_files_review",
+      "next_step": "Ciclo novo:1financeiro local(classificar34rootsDB, fontes/evidencias/exports;326SHA mostra5grupos<1MiB,naoprovauso);2works/testesagentes;3dadosrelatoriosmidias;4backups/snapshots;5runtimes/Git;6restosistema. Caches fora. Semdelete/install/restart/cron autorizado; nao pedir outroOKgenerico para analise ja pedida; gates novos exatos para descarte. Nao repetir lotes encerrados.",
+      "objective": "Recomecar por baseline nova1571983565292441731, caches pausados; classificar sobras sem uso passo a passo ate fechamento.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/audit-final.json;data/storage-reaudit-1571983565292441731/priority-ledger.json;discord:1569928464033783862/1571983565292441731",
+      "state": "in_progress_fresh_noncached_six_family_review",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T20:19:59+00:00"
+      "updated_at": "2026-11-16T20:58:48+00:00"
     },
     {
       "agent": "zeus",
@@ -11087,5 +11087,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:53:33+00:00"
+  "updated_at": "2026-11-16T20:58:48+00:00"
 }

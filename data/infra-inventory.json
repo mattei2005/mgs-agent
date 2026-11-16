@@ -68032,6 +68032,65 @@
         "global_eight_day_schedule_conflicts": 0
       },
       "updated_at": "2026-11-16T20:24:30.272334+00:00"
+    },
+    {
+      "id": "storage-full-reaudit-1571983565292441731",
+      "agent": "zeus",
+      "type": "read_only_whole_vps_systems_and_storage_audit",
+      "status": "global_inventory_and_initial_content_audit_completed",
+      "authority_message_id": "1571983565292441731",
+      "owner_id": "344196393512075265",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-16T15:57:16.637658-05:00",
+      "canonical_source": "context/storage-reaudit-20261116.md",
+      "evidence": "data/storage-reaudit-1571983565292441731/audit-final.json",
+      "metadata_node_count": 1519122,
+      "metadata_errors": 0,
+      "persistent_filesystems": [
+        "/",
+        "/boot",
+        "/boot/efi"
+      ],
+      "installed_service_units": 251,
+      "loaded_services": 179,
+      "system_cron_entries": 72,
+      "profile_jobs": 85,
+      "systemd_timers": 18,
+      "periodic_scripts": 11,
+      "installed_packages": 1404,
+      "source_files_deleted": 0,
+      "caches_paused": true,
+      "production_changes": false,
+      "private_metadata_root": "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731",
+      "analysis_created_allocated_bytes": 43999232,
+      "scope_limits": {
+        "live_not_atomic": true,
+        "external_platforms_not_audited": true,
+        "all_disposal_semantics_not_complete": true,
+        "backup_working_set_removed_by_native_producer_not_audit": true
+      },
+      "learning": {
+        "subsystem": "vps-maintenance-and-backup-governance",
+        "target": "references/full-vps-cleanup-inventory.md",
+        "live_mirror_equal": true,
+        "summary": "Classify tmp/backups/profile working copies by role; reconcile native backup high-water-mark before unused/savings claims."
+      },
+      "next_step": "Step1: classify use, evidence, family retention and recovery of remaining local financial test state; no new generic analysis approval needed, no destructive lot approved.",
+      "result_sha256": "6278e2158cc895b6515bae6b1f032460de618d494262b980477a52fd88520b01",
+      "report_infra": {
+        "message_id": "1571992965163778211",
+        "channel_id": "1498132022634483894",
+        "exact_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true
+      },
+      "collector_replay_guards_passed": 5,
+      "metadata_private_sha256": {
+        "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-root.jsonl.gz": "478c47940ecf300fb77b16efd2182f17251ec81f7f30c752a04c2698a06b2e44",
+        "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot.jsonl.gz": "87d93cc13504bcc0669ddf2b680cfcd4de4b6c7bb64aa57a288b50e613c6f623",
+        "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot-efi.jsonl.gz": "ca367846985747cf3af610ae6b7fe8b8352e8dd05526b19cb15f086db3804b94"
+      }
     }
   ],
   "profile_skill_references": [

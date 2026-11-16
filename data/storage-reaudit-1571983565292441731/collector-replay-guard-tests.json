@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "script": "collect.py",
+      "refused": true,
+      "result_hash_unchanged": true
+    },
+    {
+      "script": "systems.py",
+      "refused": true,
+      "result_hash_unchanged": true
+    },
+    {
+      "script": "refine.py",
+      "refused": true,
+      "result_hash_unchanged": true
+    },
+    {
+      "script": "role-ledger.py",
+      "refused": true,
+      "result_hash_unchanged": true
+    },
+    {
+      "script": "finance-archive-content.py",
+      "refused": true,
+      "result_hash_unchanged": true
+    }
+  ],
+  "repeat_filesystem_scan_or_archive_hash_pass": false
+}

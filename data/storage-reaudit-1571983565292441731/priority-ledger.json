@@ -1,0 +1,54 @@
+{
+  "families": [
+    {
+      "step": 1,
+      "family": "finance_local_sources_test_state_and_exports",
+      "occupied_bytes": 34824822784,
+      "status": "inventory_and_archive_byte_identity_pass_complete_use_recovery_pending",
+      "next_gate": "Prove task/evidence/family consumers for 34 local cluster roots and structured content of retained exports. Production remote excluded; no DB opened.",
+      "occupied_GiB": 32.43
+    },
+    {
+      "step": 2,
+      "family": "agent_and_repository_working_material",
+      "occupied_bytes": 13083987968,
+      "status": "per_task_and_consumer_review_required",
+      "next_gate": "Resolve completion, script paths, active tooling and unique state before selecting any folder.",
+      "occupied_GiB": 12.19
+    },
+    {
+      "step": 3,
+      "family": "operational_data_reports_and_agent_media",
+      "occupied_bytes": 19323375616,
+      "status": "lineage_and_current_consumer_review_required",
+      "next_gate": "Retain sources/control ledgers and unfinished work; verify approved archive resolver for media without permission or campaign writes.",
+      "occupied_GiB": 18.0
+    },
+    {
+      "step": 4,
+      "family": "local_recovery_and_historical_snapshots",
+      "occupied_bytes": 17233899520,
+      "status": "recovery_class_and_exact_coverage_review_required",
+      "next_gate": "Resolve newest validated sets plus compact/base dependencies; no historical-state subsumption assumed.",
+      "occupied_GiB": 16.05
+    },
+    {
+      "step": 5,
+      "family": "runtimes_code_tooling_and_institutional_git",
+      "occupied_bytes": 20001058816,
+      "status": "active_runtime_rollback_and_git_dependency_exclusions_apply",
+      "next_gate": "Map worktrees, alternates and active consumers before proposing residual code or a separate local history-depth migration.",
+      "occupied_GiB": 18.63
+    },
+    {
+      "step": 6,
+      "family": "other_system_files_logs_and_noncache_temporary_residue",
+      "occupied_bytes": null,
+      "status": "residual_classification_required",
+      "next_gate": "Retain swap, OS and service state; no package removal, log truncation or retention mutation by inference."
+    }
+  ],
+  "all_amounts_occupied_not_eligible": true,
+  "caches_out_of_scope": true,
+  "no_old_lots_reopened": true
+}

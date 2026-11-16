@@ -14680,10 +14680,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ZEUS-STORAGE-REAUDIT-1571983565292441731",
+      "title": "Revisao exaustiva nao-cache; caches pausados por Rodolfo; foco em sobras de tarefas sem uso",
+      "updated_at": "2026-11-16T20:58:48+00:00"
+    },
+    {
+      "canonical_key": "storage.exhaustive-review.1571271327648587799",
+      "canonical_source": "context/storage-reaudit-20261116.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-16T20:58:48+00:00",
+      "id": "ZEUS-STORAGE-REAUDIT-1571983565292441731",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Revisao exaustiva nao-cache; caches pausados por Rodolfo; foco em sobras de tarefas sem uso",
-      "updated_at": "2026-11-16T20:19:59+00:00"
+      "title": "Nova auditoria global da VPS e sistemas locais; sequencia por familias nao-cache ate encerramento",
+      "updated_at": "2026-11-16T20:58:48+00:00"
     },
     {
       "canonical_key": "zeus.web.auto_recovery_threshold",
@@ -17623,5 +17640,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:19:59+00:00"
+  "updated_at": "2026-11-16T20:58:48+00:00"
 }
