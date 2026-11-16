@@ -1,0 +1,50 @@
+{
+  "status": "PASS_RECOVERED_SCOPE_DEVIATION",
+  "original_frozen_gate_postcheck_did_not_pass": true,
+  "original_gate_or_manifest_modified": false,
+  "native_prune_calls": 1,
+  "native_exit_code": 0,
+  "approved_targets_absent": 193,
+  "approved_removed_node_counts": {
+    "directory": 26594,
+    "file": 235046,
+    "link": 415
+  },
+  "unplanned_removed_node_counts": {
+    "file": 30,
+    "directory": 12,
+    "link": 3
+  },
+  "unplanned_nodes_restored": 45,
+  "unplanned_regular_files_SHA256_restored": 30,
+  "three_wheels_reconstructed_to_original_SHA256": true,
+  "restored_original_inode_numbers_not_claimed": true,
+  "restored_nodes_with_different_inode": 45,
+  "remaining_cache_nodes": 71169,
+  "retained_cache_payloads_verified": 63046,
+  "managed_cache_payloads_verified": 18617,
+  "managed_cache_metadata_unchanged": true,
+  "profile_controls_unchanged": 6,
+  "profile_configs_passed": 3,
+  "profile_smokes_passed": 3,
+  "failed_units": 0,
+  "runtime_unchanged": true,
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "native_interval_global_delta_bytes": 739934208,
+  "post_recovery_global_delta_from_native_before_bytes": 725860352,
+  "disk_used_percent": 67.85,
+  "available_GiB": 61.94,
+  "native_logical_counter_not_physical_savings": true,
+  "exact_old_approved_environments_not_restored_by_design": true,
+  "new_cron_or_retention": false,
+  "whole_disk_review_complete": false,
+  "at": "2026-11-16T14:49:08.427745-05:00"
+}
