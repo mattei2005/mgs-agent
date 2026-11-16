@@ -1,0 +1,1286 @@
+{
+  "installed_service_units": [
+    {
+      "unit": "apparmor.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "apport-autoreport.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "apport-coredump-hook@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "apport-forward@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "apport.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "apt-daily-upgrade.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "apt-daily.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "apt-news.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "ares-gateway.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "ares-landing-followup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "ares-landing-intake.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "ares-shein-request-queue.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "atena-gateway.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "autovt@.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "blk-availability.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "bolt.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "cloud-config.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "cloud-final.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "cloud-init-hotplugd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "cloud-init-local.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "cloud-init.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "console-getty.service",
+      "state": "disabled",
+      "preset": "disabled"
+    },
+    {
+      "unit": "console-setup.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "container-getty@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "cron.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "cryptdisks-early.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "cryptdisks.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "dbus-org.freedesktop.hostname1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.locale1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.login1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.ModemManager1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.resolve1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.timedate1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus-org.freedesktop.timesync1.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "dbus.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "debug-shell.service",
+      "state": "disabled",
+      "preset": "disabled"
+    },
+    {
+      "unit": "dm-event.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "dmesg.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "dpkg-db-backup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "e2scrub@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "e2scrub_all.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "e2scrub_fail@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "e2scrub_reap.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "emergency.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "esm-cache.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "finalrd.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "friendly-recovery.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "fstrim.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "fwupd-refresh.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "fwupd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "getty-static.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "getty@.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "grub-common.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "grub-initrd-fallback.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "hwclock.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "initrd-cleanup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "initrd-parse-etc.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "initrd-switch-root.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "initrd-udevadm-cleanup-db.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "iscsi.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "iscsid.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "keyboard-setup.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "kmod-static-nodes.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "kmod.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "ldconfig.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "logrotate.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "lvm2-lvmpolld.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "lvm2-monitor.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "lxd-agent.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "lxd-installer@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "man-db.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdadm-grow-continue@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdadm-last-resort@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdcheck_continue.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdcheck_start.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdmon@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdmonitor-oneshot.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mdmonitor.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "mgs-autocommit.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "mgs-finance-meta-lookup.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "mgs-router.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "mgs-vps-maintenance-1555704911805808712.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "mgs-vps-maintenance-1559192694096404537.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "mgs-vps-maintenance-1562331354568589393.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "ModemManager.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "modprobe@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "monarx-agent.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "motd-news.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "multipath-tools-boot.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "multipath-tools.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "multipathd.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "netplan-ovs-cleanup.service",
+      "state": "enabled-runtime",
+      "preset": "enabled"
+    },
+    {
+      "unit": "networkd-dispatcher.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "nftables.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "open-iscsi.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "open-vm-tools.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "packagekit-offline-update.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "packagekit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "pam_namespace.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "phpsessionclean.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-halt.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-kexec.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-log.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-poweroff.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-quit-wait.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-quit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-read-write.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-reboot.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-start.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-switch-root-initramfs.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth-switch-root.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "plymouth.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "polkit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "pollinate.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "procps.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "qemu-guest-agent.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "quotaon.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "rc-local.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "rescue.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "rsync.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "rsyslog.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "screen-cleanup.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "secureboot-db.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "serial-getty@.service",
+      "state": "indirect",
+      "preset": "enabled"
+    },
+    {
+      "unit": "setvtrgb.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snap.canonical-livepatch.canonical-livepatchd.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.apparmor.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.autoimport.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.core-fixup.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.failure.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "snapd.recovery-chooser-trigger.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.seeded.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "snapd.snap-repair.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "snapd.system-shutdown.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "ssh.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "sudo.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "syslog.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "sysstat-collect.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "sysstat-summary.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "sysstat.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "system-update-cleanup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-ask-password-console.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-ask-password-plymouth.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-ask-password-wall.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-backlight@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-battery-check.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-binfmt.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-boot-check-no-failures.service",
+      "state": "disabled",
+      "preset": "disabled"
+    },
+    {
+      "unit": "systemd-bsod.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-confext.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-exit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-firstboot.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-fsck-root.service",
+      "state": "enabled-runtime",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-fsck@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-fsckd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-growfs-root.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-growfs@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-halt.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-hibernate-resume.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-hibernate.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-hostnamed.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-hwdb-update.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-hybrid-sleep.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-initctl.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-journal-catalog-update.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-journal-flush.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-journald.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-journald@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-kexec.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-localed.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-logind.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-machine-id-commit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-modules-load.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-network-generator.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-networkd-wait-online.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-networkd-wait-online@.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-networkd.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrextend@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrfs-root.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrfs@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrlock-file-system.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-firmware-code.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-firmware-config.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-machine-id.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-make-policy.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-secureboot-authority.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrlock-secureboot-policy.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-pcrmachine.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrphase-initrd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrphase-sysinit.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pcrphase.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-poweroff.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-pstore.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-quotacheck.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-random-seed.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-reboot.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-remount-fs.service",
+      "state": "enabled-runtime",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-repart.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-resolved.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-rfkill.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-soft-reboot.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-storagetm.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-suspend-then-hibernate.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-suspend.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-sysctl.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-sysext.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-sysext@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-sysupdate-reboot.service",
+      "state": "indirect",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-sysupdate.service",
+      "state": "indirect",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-sysusers.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-time-wait-sync.service",
+      "state": "disabled",
+      "preset": "disabled"
+    },
+    {
+      "unit": "systemd-timedated.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-timesyncd.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "systemd-tmpfiles-clean.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-tmpfiles-setup-dev-early.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-tmpfiles-setup-dev.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-tmpfiles-setup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-tpm2-setup-early.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-tpm2-setup.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-udev-settle.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-udev-trigger.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-udevd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-update-done.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-update-utmp-runlevel.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-update-utmp.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-user-sessions.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "systemd-volatile-root.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "tailscale-wait-online.service",
+      "state": "disabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "tailscaled.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "tpm-udev.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "ua-reboot-cmds.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "ua-timer.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "ubuntu-advantage.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "udev.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "udisks2.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "ufw.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "unattended-upgrades.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "update-notifier-download.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "update-notifier-motd.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "usb_modeswitch@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "user-runtime-dir@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "user@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "uuidd.service",
+      "state": "indirect",
+      "preset": "enabled"
+    },
+    {
+      "unit": "vgauth.service",
+      "state": "enabled",
+      "preset": "enabled"
+    },
+    {
+      "unit": "vmtoolsd.service",
+      "state": "alias",
+      "preset": "-"
+    },
+    {
+      "unit": "x11-common.service",
+      "state": "masked",
+      "preset": "enabled"
+    },
+    {
+      "unit": "xfs_scrub@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "xfs_scrub_all.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "xfs_scrub_fail@.service",
+      "state": "static",
+      "preset": "-"
+    },
+    {
+      "unit": "zeus-gateway.service",
+      "state": "enabled",
+      "preset": "enabled"
+    }
+  ],
+  "installed_service_unit_count": 251,
+  "user_crontab_owners": [
+    "root"
+  ],
+  "periodic_script_directories": {
+    "/etc/cron.hourly": [
+      ".placeholder"
+    ],
+    "/etc/cron.daily": [
+      "apport",
+      "dpkg",
+      "apt-compat",
+      "logrotate",
+      "man-db",
+      ".placeholder",
+      "sysstat"
+    ],
+    "/etc/cron.weekly": [
+      "man-db",
+      ".placeholder"
+    ],
+    "/etc/cron.monthly": [
+      ".placeholder"
+    ]
+  },
+  "periodic_script_count": 11,
+  "audit_only": true
+}
