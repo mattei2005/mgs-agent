@@ -312,6 +312,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1571976550709072033",
+      "next_step": "Validar coleta e render; entregar inicial; auditar agenda global; habilitar somente slots finitos ate17nov00hEST",
+      "objective": "CPR e ROI cada30min das campanhas criadas16nov nesta conta, incluindo futuras, ate fim dia",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1571976550709072033/manifest.json",
+      "state": "preparing_read_only;identity_and_authorization_live_validated",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-16T19:56:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -5055,12 +5065,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar desfecho da verificacao do app minibot pelo Ares e retorno explicito do owner; selecao de app nao e prova de credencial funcional nem liberacao do lote. Zeus nao altera credencial/app nem sonda Meta. Ares unico writer; aceite exige5campanhas/15anuncios com readback; silencio entre resultado final ou novo bloqueio relevante.",
-      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer; aguardar verificacao app BOT/owner.",
+      "next_step": "Observar resultado do teste de credencial autorizado por1571975883286257726 e eventual liberacao explicita de retomada; teste de acesso nao aprova campanha. Ares unico writer. Zeus nao altera app/token nem sonda Meta. Sem novo bloqueio ou entrega final, silencio; aceite5campanhas/15anuncios com readback.",
+      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer; verificar resultado do teste de acesso autorizado pelo owner.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "rodolfo orientou usar app minibot1299247318762949 tambem no bot1571968822276259974. ares1571969775947751556 reconheceu, preservou token do perfil anunciante e esta verificando credencial compativel, com lote explicitamente em espera. troca efetiva/retomada nao comprovadas; request, foreground-state e checkpoint ares ainda waiting_owner_app_recovery. mantido ultimo readback valido310/311 pausadas,2adgs,6criativos,0ads;312-314 pendentes. ultimo ciclo: apenas aviso automatico de atividade, sem nova entrega/bloqueio.",
+      "state": "rodolfo corrigiu perfil para ana cunha1571974994030755941 e confirmou token criado, liberando somente teste1571975883286257726. ares1571976317224751105 confirmou verificacao em leitura do app1299247318762949 sem retomar campanhas. resultado do teste/migracao/retomada ainda nao comprovado; request e foreground-state permanecem waiting_owner_app_recovery. mantidos ultimos ids e readback parcial, sem nova entrega.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T19:38:36+00:00"
+      "updated_at": "2026-11-16T19:53:34+00:00"
     },
     {
       "agent": "zeus",
@@ -7184,6 +7194,16 @@
       "state": "active_finite_schedule_verified",
       "thread_id": "1558147152528674957",
       "updated_at": "2026-11-14T19:47:38+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-cpr-roi-1571976517091594294",
+      "next_step": "Testar wrapper, revisar dryrun, publicar inicial, auditar agenda finita e readback",
+      "objective": "CPR Meta e ROI real SB a cada30min somente campanhas criadas hoje16nov Mavroa04 G004 inclusive futuras",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1571976517091594294/manifest.json",
+      "state": "preparing_finite_read_only_schedule",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-16T19:56:04+00:00"
     },
     {
       "agent": "ares",
@@ -11037,5 +11057,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:51:17+00:00"
+  "updated_at": "2026-11-16T19:56:09+00:00"
 }

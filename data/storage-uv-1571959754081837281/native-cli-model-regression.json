@@ -1,0 +1,23 @@
+{
+  "status": "PASS_RETROSPECTIVE_REGRESSION",
+  "old_model_would_be_rejected": true,
+  "old_model_targets": 193,
+  "complete_CLI_shadow_targets": 199,
+  "source_revision_roots_missed": 3,
+  "newly_orphaned_archives_missed": 3,
+  "unplanned_root_set_matches_native_observation": true,
+  "pointers_verified_unchanged": 18,
+  "uninterpreted_pointer_count": 0,
+  "extra_roots": [
+    "/root/.cache/uv/archive-v0/fn1-Nqp-nFUFFp5l",
+    "/root/.cache/uv/archive-v0/fycaHuV2P3EzksUg",
+    "/root/.cache/uv/archive-v0/oBe1AVNobDSnR48z",
+    "/root/.cache/uv/sdists-v9/editable/089e980f32384b19/bnK7p4AWMBIkvWVO",
+    "/root/.cache/uv/sdists-v9/editable/6921d5208a1e3597/kNKmi0UkeGnEEC33",
+    "/root/.cache/uv/sdists-v9/editable/8e5ed8f82e8766b0/9T2EsNT_UU7LxoA_"
+  ],
+  "native_calls_in_this_test": 0,
+  "future_native_execution_authorized": false,
+  "original_executor_modified": false,
+  "limitations": "Read-only replay of frozen original metadata and still-identical revision pointers; not another native dry-run or a new destructive approval. Old model remains quarantined."
+}

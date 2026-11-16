@@ -1,13 +1,16 @@
 {
   "schema_version": 1,
   "canonical_key": "ares.bot.meta-app-selection",
-  "status": "WAITING_OWNER_TOKEN_CREATION",
+  "status": "READ_ONLY_PROFILE_TOKEN_TEST_AUTHORIZED",
+  "token_reported_created_message_id": "1571975883286257726",
+  "read_only_test_authority_message_id": "1571975883286257726",
+  "allowed_agent_action": "Read-only validation of the owner-created Ana Cunha token for app1299247318762949; no issuance, runtime cutover or campaign resume",
   "app_selection_remains_approved": true,
   "profile_confirmed_by_owner": "Ana Cunha",
   "profile_confirmation_message_id": "1571974994030755941",
   "owner_token_preparation_message_id": "1571975266182635716",
   "credential_preparation_owner": "Rodolfo Mattei",
-  "agent_actions_on_hold": true,
+  "agent_actions_on_hold": false,
   "resume_requires_explicit_instruction": true,
   "authorized_by": "Rodolfo Mattei",
   "authorized_by_discord_id": "344196393512075265",
@@ -44,5 +47,5 @@
     "no campaign resumption from app choice alone"
   ],
   "risk_note": "One shared app concentrates API availability/restriction dependency across BOT and direct even with separate credentials",
-  "next_step": "WAIT: Rodolfo corrected the profile to Ana Cunha and is creating the token himself; he explicitly instructed Ares to do nothing yet. No app UI, Meta probe, token generation/read/write, permission/code/runtime change or campaign execution until his return. App choice1299247318762949 remains approved, User-token model unchanged and all campaign holds preserved. After release use only the securely stored reference and validate exact identity/issuer/assets before staged cutover; never receive token/code in chat."
+  "next_step": "Rodolfo returned1571975883286257726 reporting token created and authorizing read-only test. Profile corrected to Ana Cunha by1571974994030755941. Read the secure vault reference without replacing production cache/bindings; validate own identity/type/issuer and exact account/Page access under target app. Do not issue another token, change permissions, use direct System User, cut over runtime or resume campaigns from this test alone. Preserve campaign holds and partial IDs; never receive token/code in chat."
 }
