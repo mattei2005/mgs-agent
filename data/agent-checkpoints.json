@@ -4303,12 +4303,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1572011664000155749",
-      "next_step": "Concluir5bundles eQA10campanhas; retomar os mesmosIDs se houver posprocessamento pendente; entregar tracking real e confirmar inicio exato17nov00h05EST.",
-      "objective": "Duplicar10vezes186 a USD65/dia,17novembro2026 00h05EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572011664000155749/request.json",
-      "state": "in_progress: dry-run valido,conta e autoridade live conferidas;observacao comercial scoped reconhece predecessor manual sem escrever nele. runner central em execucao com request original; nascimento paused e qa integral antes de ativar.",
+      "next_step": "Pedir consentimento especifico na origem para abrir diagnostico confidencial no suporte Meta do AD01C216;manter mesmos IDs/manifests/budget/inicio e retomar somenteQA/ativacao apos resolucao comprovada. Nao repetir POST para sondar erro.",
+      "objective": "Duplicar10vezes186 aUSD65/dia para17nov2026 00h05EST; pedido ainda aberto",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572011664000155749/partial-receipt.json",
+      "state": "blocked_external_meta_error:212-221 criadas,10campanhas/20ads paused,usd650/dia configurados. midia renderizada10/10;semantica9/10. ad01c216 retornou hard_error1487083 invalid usage of forcerunstatus em get fresco;causa raiz nao comprovada. nenhuma ativacao do lote. ids iguais checkpoint;nao recriar nem forcar status.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-16T22:28:14+00:00"
+      "updated_at": "2026-11-16T22:37:21+00:00"
     },
     {
       "agent": "ares",
@@ -5130,7 +5130,7 @@
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
       "state": "retomada produtiva pelo app novo comprovada no engine em21:53:44z;target_seed_create rejeitou6/6 filhos por meta200/subcode3858756,sem filhos bem-sucedidos. pagina moorcroft publicada mascan_post=false;promote_pages completo vazio. causa especifica do acesso ainda em investigacao ares;nao prova defeito do executor nem necessidade de importarpagina/bm. sem entrega final;ares unico writer.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T22:17:34+00:00"
+      "updated_at": "2026-11-16T22:31:34+00:00"
     },
     {
       "agent": "zeus",
@@ -6828,12 +6828,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-LOCAL-TESTS-1571996311308214363",
-      "next_step": "Revalidar34roots; resolver quatro retidos expressos e fontes de horizonte; coletar refs exatas/familias fora dos binariosPG, processos/maps/FD, scripts/crons/evidencias/owners. Separar requerido/pendente/lote comprovado; nenhumdelete/backupnovo/bancoaberto/cache/restart.",
-      "objective": "Passo1 da revisao de armazenamento: classificar34diretorios locais de estado/testes por referencias/processos/produtor/evidencias/retencao, sem executar aplicacao ou avaliar semantica financeira.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/postgres-clusters.json;discord:1569928464033783862/1571996311308214363",
-      "state": "in_progress_readonly_local_test_state_consumer_and_lineage_review",
+      "next_step": "Confirmacao critica somente active-lot.json manifesto0d201fea2717/gate2ff2819b in revalidated-code-baseline-1;3roots3064files81dirs616.8MiBbrutos/netdireto~455MiB. Todos34presentes;31ficam/31565SHA;25ainda nao provados inuteis. Sem byte-restore historico dos3. Nao usarfreeze588641supersedido,nao executarsemnovoSimnativo;depoisclassificarrestante e compactarresiduo proprio160+MiB comgateseparado. Caches fora.",
+      "objective": "Passo1:34roots classificados6dependencia25pendentes3candidatos; lote3teststates com gate real e16testes, zero exclusao.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-local-tests-1571996311308214363/review-final.json;data/storage-local-tests-1571996311308214363/active-lot.json;discord:1569928464033783862/1571996311308214363",
+      "state": "awaiting_exact_three_root_critical_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T21:14:54+00:00"
+      "updated_at": "2026-11-16T22:31:54+00:00"
     },
     {
       "agent": "zeus",
@@ -6878,12 +6878,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Ciclo novo:1financeiro local(classificar34rootsDB, fontes/evidencias/exports;326SHA mostra5grupos<1MiB,naoprovauso);2works/testesagentes;3dadosrelatoriosmidias;4backups/snapshots;5runtimes/Git;6restosistema. Caches fora. Semdelete/install/restart/cron autorizado; nao pedir outroOKgenerico para analise ja pedida; gates novos exatos para descarte. Nao repetir lotes encerrados.",
-      "objective": "Recomecar por baseline nova1571983565292441731, caches pausados; classificar sobras sem uso passo a passo ate fechamento.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/audit-final.json;data/storage-reaudit-1571983565292441731/priority-ledger.json;discord:1569928464033783862/1571983565292441731",
-      "state": "in_progress_fresh_noncached_six_family_review",
+      "next_step": "Confirmacao critica somente active-lot.json manifesto0d201fea2717/gate2ff2819b in revalidated-code-baseline-1;3roots3064files81dirs616.8MiBbrutos/netdireto~455MiB. Todos34presentes;31ficam/31565SHA;25ainda nao provados inuteis. Sem byte-restore historico dos3. Nao usarfreeze588641supersedido,nao executarsemnovoSimnativo;depoisclassificarrestante e compactarresiduo proprio160+MiB comgateseparado. Caches fora.",
+      "objective": "Passo1:34roots classificados6dependencia25pendentes3candidatos; lote3teststates com gate real e16testes, zero exclusao.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-local-tests-1571996311308214363/review-final.json;data/storage-local-tests-1571996311308214363/active-lot.json;discord:1569928464033783862/1571996311308214363",
+      "state": "in_progress_step1_three_root_gate_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T20:58:48+00:00"
+      "updated_at": "2026-11-16T22:31:54+00:00"
     },
     {
       "agent": "zeus",
@@ -11137,5 +11137,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T22:28:14+00:00"
+  "updated_at": "2026-11-16T22:37:21+00:00"
 }
