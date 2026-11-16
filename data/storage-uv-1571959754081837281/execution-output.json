@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/root/mgs-agent/data/storage-uv-1571959754081837281/prune-gate.py\", line 97, in <module>\n    if args.execute:assert not args.post;execute(m,rows)\n                                         ~~~~~~~^^^^^^^^\n  File \"/root/mgs-agent/data/storage-uv-1571959754081837281/prune-gate.py\", line 94, in execute\n    after=verify(m,rows,post=True);assert after['runtime']==before['runtime'];save('prune-post.json',after);audit('UV_native_prune_completed',a);print(json.dumps(after))\n  File \"/root/mgs-agent/data/storage-uv-1571959754081837281/prune-gate.py\", line 57, in verify\n    kept={r:x for r,x in original.items()if not selected(r,targets)};assert set(actual)==set(kept),'unexpected remaining/new cache path'\n                                                                            ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: unexpected remaining/new cache path\n"
+}

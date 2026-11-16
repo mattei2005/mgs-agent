@@ -1,0 +1,13 @@
+{
+  "status": "native_operation_succeeded_postcheck_blocked_unplanned_cache_paths",
+  "native_exit_code": 0,
+  "approved_targets_absent": 193,
+  "unplanned_missing_nodes": 45,
+  "unplanned_missing_node_types": {
+    "directory": 12,
+    "file": 30,
+    "link": 3
+  },
+  "source": "postcheck-path-difference.json",
+  "next_step": "No prune retry. Reconcile exact source behavior and retained copies; restore missing cache entries if exact providers exist; validate current programs and report scope deviation honestly."
+}

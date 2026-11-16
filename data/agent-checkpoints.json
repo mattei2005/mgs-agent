@@ -5045,12 +5045,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Aguardar retorno humano explicito na origem; nao sondar Meta, trocar credencial, cobrar Ares ou repetir POST. Apos liberacao, observar Ares validar identidade canonica e reconciliar os mesmos objetos antes de completar faltantes; aceite exige5campanhas/15anuncios finais com readback. Monitor permanece aberto e silencioso entre novidades.",
-      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer das cinco duplicacoes212 na conta03, agora em espera explicita pelo owner do app",
+      "next_step": "Observar desfecho da verificacao do app minibot pelo Ares e retorno explicito do owner; selecao de app nao e prova de credencial funcional nem liberacao do lote. Zeus nao altera credencial/app nem sonda Meta. Ares unico writer; aceite exige5campanhas/15anuncios com readback; silencio entre resultado final ou novo bloqueio relevante.",
+      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer, lote aguardando owner e verificacao de compatibilidade do app BOT.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "rodolfo confirmou restricao do app na origem1571958601461792829 e assumiu a correcao. ares confirmou espera sem novas tentativas1571960091912175780. pedido canonico e checkpoint ares reconciliados: waiting_owner_app_recovery. ultimo readback valido preservado:310/311 pausadas,2conjuntos,6criativos,zero anuncios;312-314 nao criadas. erro190 e resposta historica; exclusao fisica do app nao comprovada, nem causa-raiz da falha anterior de seeds.",
+      "state": "rodolfo orientou usar app minibot1299247318762949 tambem no bot1571968822276259974. ares1571969775947751556 reconheceu, preservou token do perfil anunciante e esta verificando credencial compativel, com lote explicitamente em espera. troca efetiva/retomada nao comprovadas; request, foreground-state e checkpoint ares ainda waiting_owner_app_recovery. mantido ultimo readback valido310/311 pausadas,2adgs,6criativos,0ads;312-314 pendentes.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T19:16:48+00:00"
+      "updated_at": "2026-11-16T19:31:45+00:00"
     },
     {
       "agent": "zeus",
@@ -11027,5 +11027,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:29:06+00:00"
+  "updated_at": "2026-11-16T19:31:45+00:00"
 }
