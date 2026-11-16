@@ -32,6 +32,7 @@ Não use para tráfego direto, quiz/SMS ou configuração do ChatPion/DigitalTrC
 ## Fontes canônicas
 
 - Família: `data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json`
+- Escolha corporativa do app BOT e readiness de migração: `data/ares/meta-ads/policies/bot-meta-app-selection.json`; decisão de app não comprova cutover nem troca o modelo de token.
 - Consumidores: `data/ares/meta-ads/strategy-families/chatpion-bot-messenger-consumers.json`
 - Operação: caminho `operation_contract` resolvido no registro de consumidores
 - Conta: caminho declarado pelo contrato da operação
@@ -52,6 +53,13 @@ Nunca inferir identidade, conta, Page, UTM, budget, threshold, horários, autori
 4. Carregar somente a rota pedida: `rules`, `campaign_creation`, `campaign_cloning`, `roas_cycle`, `daily_reporting` ou `page_guardrails`.
 5. Consultar conta, runner, state e audit declarados pela operação somente quando a rota exigir. Em JSONs grandes, projetar primeiro os campos da rota e a conta exata; para checkpoints/registry, filtrar cada registro por request, thread ou chave canônica antes de imprimir. Não selecionar um contêiner inteiro porque sua representação contém o termo buscado: isso despeja registros não relacionados e pode truncar justamente a evidência necessária.
 6. Falhar fechado quando houver binding ausente, ambíguo ou divergente.
+
+### Mesmo app, credenciais por estratégia
+
+- Ao receber uma decisão de padronizar o app de tráfego direto e BOT, preservar a distinção entre app emissor e identidade/tipo do token. Compartilhar o App ID não autoriza reutilizar o System User corporativo em BOT nem substituir o User Access Token do perfil anunciante aprovado.
+- Tratar tokens como vinculados ao app emissor: não converter uma credencial alterando somente `app_key`/App ID. Descobrir ou obter o User token do mesmo perfil emitido pelo novo app, validar identidade/issuer/scopes e ativos reais e só então conduzir cutover staged com cache próprio, inventário completo e testes.
+- Registrar separadamente escolha de app aprovada, credencial alvo ainda não validada, bindings efetivamente instalados e campanha autorizada/em hold. Uma escolha de app não emite/revoga tokens, amplia permissões, libera outro perfil ou retoma campanha pausada. Solicitar somente o gate novo indispensável, sem pedir de novo a escolha de app.
+- Informar que usar o mesmo app concentra a dependência de disponibilidade/restrição da API entre estratégias, mesmo mantendo tokens separados; não prometer proteção contra restrições ou interromper tráfego direto para testar a migração BOT.
 
 ### Correção do perfil anunciante
 
