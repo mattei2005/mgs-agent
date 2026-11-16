@@ -1,0 +1,27 @@
+{
+  "infrastructure_source_inspection_only": true,
+  "application_code_executed": false,
+  "generators": [
+    {
+      "generator": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/workspace.test.mjs",
+      "creates_new_UUID_directory": true,
+      "old_exact_path_not_reopened": true
+    },
+    {
+      "generator": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/api.test.mjs",
+      "creates_new_UUID_directory": true,
+      "old_exact_path_not_reopened": true
+    },
+    {
+      "generator": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/catalog.test.mjs",
+      "creates_new_UUID_directory": true,
+      "old_exact_path_not_reopened": true
+    }
+  ],
+  "retained_counterparts": {
+    "ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7": "ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+    "test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a": "test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+    "catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11": "catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568"
+  },
+  "same_historical_state_restore_not_claimed": true
+}

@@ -1693,12 +1693,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1572009859052740659",
-      "next_step": "Coletar fontes Meta/SB e RPS UI novas; renderizar validar revisar entregar e reconciliar os sete integrais e resumos.",
+      "next_step": "Concluido; nao reenviar. Atraso SB 68-69min nas contas com atividade. Mavroa C196 sem investimento/receita SB: consolidado n/d. Boostingecon sem entrega e sem base financeira. Nova atualizacao exige novas fontes e novo pedido.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1572009859052740659/request.json",
-      "state": "preflight_complete;author_origin_seven_pairs_scope_and_live_identities_verified;zero_meta_writes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1572009859052740659/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;79campanhas_no_recorte_financeiro;31partes_integrais+7resumos;38mensagens_unicas_relidas_get;ordem_integral_resumo_confirmada;corte16/11/2026_17:08est;usd;zero_writes_meta;arquivo_sanitizado_bytes_hashes_validados;65regressoes+4fronteiras_resumo_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-16T22:08:11+00:00"
+      "updated_at": "2026-11-16T22:14:19+00:00"
     },
     {
       "agent": "ares",
@@ -5095,12 +5095,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar revalidacao e retomada missing-only apos integracao produtiva do novo app. Exigir recibos de escrita e readback final5campanhas/15anuncios,IDs/starts/sealos preservados e reconciliacao dos6seeds. Ares unico writer;sem cobranca ou nova aprovacao rotineira.",
+      "next_step": "Acompanhar investigacao Ares do acesso de promocao aos posts da Moorcroft;nao conceder permissao/importarPagina/nem recriar estrutura. Exigir recuperacao missing-only e readback final5campanhas/15anuncios;escalar somente gate critico comprovado.",
       "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;retomada humana1571996433999990885.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "ares informou integracao da conta03 ao minibot; request produtivo app_migration_applied=true e recibo app-route-migration conferidos contra config instalada app/user/cache,com hooks no executor. novos recibos source-current/thumbnail-equivalence mostram verificacao em curso; nao comprovam retomada de post nem entrega. ultima leitura de objetos continua310/311paused e0ads. nenhum novo bloqueio decisorio;writer ares preservado.",
+      "state": "retomada produtiva pelo app novo comprovada no engine em21:53:44z;target_seed_create rejeitou6/6 filhos por meta200/subcode3858756,sem filhos bem-sucedidos. pagina moorcroft publicada mascan_post=false;promote_pages completo vazio. causa especifica do acesso ainda em investigacao ares;nao prova defeito do executor nem necessidade de importarpagina/bm. sem entrega final;ares unico writer.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T21:53:58+00:00"
+      "updated_at": "2026-11-16T22:17:34+00:00"
     },
     {
       "agent": "zeus",
@@ -11107,5 +11107,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T22:08:11+00:00"
+  "updated_at": "2026-11-16T22:17:34+00:00"
 }

@@ -88,6 +88,10 @@ def _enforce_dependency(clean,params,method,row,data):
  kind=row.get('kind');edge=parts[1] if len(parts)==2 else ''
  fields=set(str(params.get('fields','')).split(','))
  allowed={'page':{'id','name','access_token','instagram_business_account'},'video':{'id','title','length','status','picture','source'},'pixel':{'id','name'},'instagram':{'id','name','username'}}.get(kind,set())
+ # Read-only diagnostics for the exact independent03 Page resolved freshly in SB.
+ # No cached/global Page grant, discovery, permission write or other account.
+ if kind=='page' and row.get('source')=='live_sb_page_dependency' and row.get('account_ids')==['1481815942722118']:
+  allowed=allowed|{'tasks','is_published','can_post'}
  if edge=='page_backed_instagram_accounts' and kind=='page' and row.get('source')=='live_sb_page_dependency':
   if fields!={'id','username'} or not set(params)<={'fields','limit'} or int(params.get('limit',10))!=10:raise ScopeError(DENY)
  elif edge=='assigned_users' and kind=='page':

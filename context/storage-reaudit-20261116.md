@@ -47,7 +47,29 @@ Fontes: `finance-footprint-classes.json`, `finance-archive-content-review.json`;
 
 Cada família terá ledger residual próprio: necessário comprovado; preservado pendente de prova; candidato com gate; concluído; ou mantido por decisão do dono. Ao encontrar um lote realmente validado, apresentar somente esse lote e pedir a confirmação crítica exata. Não pedir novamente autorização genérica para continuar a análise já solicitada. Sem novo manifesto/confirmacão, nenhuma exclusão está liberada.
 
-## Estado de encerramento desta fase
+## Passo 1 — diretórios locais de testes, continuação 1571996311308214363
+
+Esta continuação supersede somente a afirmação anterior de que ainda não havia lote novo preparado. Os 34 diretórios foram classificados: seis com dependência identificada ou preservação explícita anterior; 25 preservados pendentes de esclarecer evidência/consumidor histórico (não declarados indispensáveis); três candidatos exatos à aposentadoria de estado de testes. Fonte ativa: `data/storage-local-tests-1571996311308214363/`.
+
+A busca percorreu 286.507 fontes indexadas: 286.500 foram lidas; sete arquivos históricos de `cron/output` desapareceram antes da leitura e continuavam ausentes na conferência. A origem individual dessas sete remoções concorrentes não foi atribuída, e elas não foram chamadas de anomalia nem de leituras bem-sucedidas. Nenhum arquivo existente teve erro de leitura. Houve complemento de 6.381 logs textuais; binários dos clusters e conteúdo de archives foram excluídos da busca de referências. O coletor inicial excedeu o transporte de 420s; confirmou-se sua ausência, preservaram-se os parciais e a coleta integral foi refeita com matcher de prefixos e batches de 160s, cobertura final contígua por índice e validação de positivos reais/limites de diretórios. Não houve duplicação de executor ou mutação dos alvos.
+
+As três raízes candidatas ficam exclusivamente em `apps/finance-system/private/charge-date-1571201800063680562/candidate/private/`:
+
+- `ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7`;
+- `test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a`;
+- `catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11`.
+
+Não foram encontradas referências a esses três UUIDs nas fontes/logs declarados nem uso por processo, FD, cwd, exe ou maps. A tarefa charge-date consta publicada/validada no relatório canônico; os geradores criam UUID novo, não reabrem esses três caminhos. Cada família mantém sua contraparte com vínculo explícito à evidência; essas três contrapartes estão incluídas nos 31 diretórios preservados. A raiz padrão `private/pgdata` e `networks-1546579646227943506/isolated-pglite` são dependências reais de código/helpers e estão fora do lote. Os quatro diretórios expressamente preservados no lote de testes anterior também ficam.
+
+Lote congelado `588641e9824ab904d00bb1c9f356e7956b2488a9e69dceceeb83c71f9a94a620`; gate `2ff2819b90ca0be30a2348a77d3a570a39ef9ea7c86b18168333051b7dcf23ab`. Três raízes/3.064 arquivos regulares/81 diretórios incluindo raízes/zero links; 646.762.496 bytes alocados potencialmente liberáveis (~616,80 MiB), com todos os payloads regulares single-link. Duas passagens de metadados coerentes, alvos não versionados, preflight real PASS, 16 testes de bloqueio/ordem PASS (aplicação simulada com todas as chamadas destrutivas mockadas; nenhuma exclusão real). Os 31 diretórios retidos tiveram 31.565 payloads hasheados e revalidados; 21.757 fontes de código/config/agendamentos estão presas por census/hash, com definições de cron separadas dos contadores de execução. A checagem focada desse census também não encontrou os três UUIDs.
+
+**Efeito irreversível:** aposentadoria do estado persistido dessas três execuções antigas de QA, não deduplicação lossless nem promessa de reconstrução byte a byte dos três bancos. Ficam fontes, geradores, relatórios, uma contraparte de cada família (incluídas nos 31 diretórios retidos), recuperação, programas e produção remota. Nenhum banco foi aberto/iniciado, lógica/valores financeiros foram avaliados ou alterados, nem houve deploy, restart, novo backup de payload, cache cleanup, cron ou retenção nova.
+
+**Custo da análise:** os novos índices/ledgers/provas desta etapa, inclusive intermediários do passe interrompido, ocupavam 160,79 MiB na medição de proposta. A estimativa líquida direta é ~456,01 MiB, sem custos compartilhados futuros do Git. Nada foi liberado ainda. Esses intermediários são criação desta auditoria, não novo lixo preexistente encontrado na VPS; sua consolidação lossless e eventual retirada dos raw devem continuar no ledger próprio após o fechamento, com gate exato, sem limpeza implícita.
+
+Aguardando somente confirmação crítica deste lote: o `Continue` autorizou análise/preparação, não exclusão. Não repetir fases já executadas nem iniciar outro lote por implicação. Os 25 preservados por falta de prova e as famílias 2–6 continuam abertos. Checkpoint: `ZEUS-STORAGE-LOCAL-TESTS-1571996311308214363`.
+
+## Estado de encerramento da fase global — histórico
 
 Levantamento global de armazenamento e sistemas locais concluído; primeiro passe de conteúdo financeiro concluído. A revisão semântica de descarte **permanece aberta**: a varredura não prova que todo o restante é necessário nem que qualquer categoria inteira é inútil. Nenhum arquivo original foi removido por Zeus, nenhum programa atualizado, serviço reiniciado, credencial alterada ou cron/retenção criado. Etapas antigas encerradas continuam históricas.
 

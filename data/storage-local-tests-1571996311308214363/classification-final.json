@@ -1,0 +1,320 @@
+{
+  "roots": [
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+      "allocated_bytes": 192765952,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 10
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+      "allocated_bytes": 220200960,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 7,
+        "historical_or_candidate_executable_code": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+      "allocated_bytes": 192397312,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+      "allocated_bytes": 200654848,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/pgdata",
+      "allocated_bytes": 193163264,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 4,
+        "primary_application_code_or_tests": 1,
+        "historical_or_candidate_executable_code": 38
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+      "allocated_bytes": 230027264,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 7,
+        "historical_or_candidate_executable_code": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+      "allocated_bytes": 220463104,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 9
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+      "allocated_bytes": 187580416,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "historical_or_candidate_executable_code": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+      "allocated_bytes": 231112704,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 10
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+      "allocated_bytes": 188645376,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 4
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+      "allocated_bytes": 197103616,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "historical_or_candidate_executable_code": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+      "allocated_bytes": 220184576,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+      "allocated_bytes": 263520256,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7",
+      "allocated_bytes": 233660416,
+      "classification": "exact_retirement_candidate",
+      "reference_categories": {},
+      "reason": "unreferenced generated UUID state; closed charge-date task; same-family evidence-backed counterpart remains"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+      "allocated_bytes": 192909312,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a",
+      "allocated_bytes": 192909312,
+      "classification": "exact_retirement_candidate",
+      "reference_categories": {},
+      "reason": "unreferenced generated UUID state; closed charge-date task; same-family evidence-backed counterpart remains"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11",
+      "allocated_bytes": 220192768,
+      "classification": "exact_retirement_candidate",
+      "reference_categories": {},
+      "reason": "unreferenced generated UUID state; closed charge-date task; same-family evidence-backed counterpart remains"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+      "allocated_bytes": 188477440,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 4
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+      "allocated_bytes": 199135232,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 7,
+        "historical_or_candidate_executable_code": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+      "allocated_bytes": 227995648,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+      "allocated_bytes": 227995648,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 7,
+        "historical_or_candidate_executable_code": 1
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+      "allocated_bytes": 193568768,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+      "allocated_bytes": 222482432,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+      "allocated_bytes": 222482432,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+      "allocated_bytes": 193544192,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 6
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+      "allocated_bytes": 190783488,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 7
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+      "allocated_bytes": 189874176,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+      "allocated_bytes": 198467584,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+      "allocated_bytes": 198471680,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+      "allocated_bytes": 198467584,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+      "allocated_bytes": 198467584,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+      "allocated_bytes": 189878272,
+      "classification": "preserved_pending_evidence_or_historical_consumer_disposition",
+      "reference_categories": {
+        "evidence_or_documentation": 2
+      },
+      "reason": "evidence or historical/candidate executable links need their own acceptance/recovery disposition; not declared indispensable or deletable"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+      "allocated_bytes": 290676736,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 10
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+      "allocated_bytes": 273248256,
+      "classification": "required_dependency_or_prior_explicit_preservation",
+      "reference_categories": {
+        "evidence_or_documentation": 61,
+        "primary_application_code_or_tests": 3,
+        "historical_or_candidate_executable_code": 105
+      },
+      "reason": "explicit prior retained set or default backend/reopening tests still select this directory"
+    }
+  ],
+  "counts": {
+    "required_dependency_or_prior_explicit_preservation": 6,
+    "preserved_pending_evidence_or_historical_consumer_disposition": 25,
+    "exact_retirement_candidate": 3
+  },
+  "total_roots": 34,
+  "databases_opened": 0,
+  "source_files_deleted": 0
+}

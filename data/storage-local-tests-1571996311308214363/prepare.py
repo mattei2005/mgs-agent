@@ -1,7 +1,7 @@
 """Freeze the exact three unreferenced generated-state roots. Never delete or start any database."""
 import pathlib,json,gzip,subprocess,importlib.util,collections,os,time,datetime
 OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-local-tests-1571996311308214363');ROOT=pathlib.Path('/root/mgs-agent')
-spec=importlib.util.spec_from_file_location('local_test_retirement_gate',OUT/'gate.py');g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
+spec=importlib.util.spec_from_file_location('local_test_retirement_gate',OUT/'gate.py');assert spec and spec.loader;g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
 need=g.need;need(not(OUT/'manifest.json').exists(),'MANIFEST_ALREADY_FROZEN');matrix=json.load(open(OUT/'reference-matrix-collected.json'));targets=[r['path']for r in matrix if not r['protected']and not r['sources']];need(len(targets)==3 and {pathlib.Path(p).name for p in targets}==g.LEAVES,'EXACT_CLASSIFICATION');supp=json.load(open(OUT/'supplement-log-review.json'));need(not supp['errors']and not supp['references_to_three_proposed'],'SUPPLEMENT_LINK')
 need(not g.runtime_refs(targets),'LIVE_TARGET_CONSUMER');need(not any((OUT/n).exists()for n in ['critical-approval.json','execution-start.json','deletion-journal.jsonl','native-retirement-result.json']),'DESTRUCTIVE_MARKER_PRESENT')
 # Git probes precede both frozen metadata passes.
