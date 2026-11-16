@@ -5125,12 +5125,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observar integracao da recuperacao de midia pelo Ares e execucao missing-only no mesmo pedido. Validation_only nao e criacao;exigir readback final das5campanhas/15anuncios e preservar objetos,parametros,writer,permissoes e credenciais.",
-      "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;retomada humana1571996433999990885.",
+      "next_step": "Aguardar retorno humano explicito na origem sobre revisao da restricao Ana Cunha;observar em leitura,sem retry Meta/bypass/cobranca ao Ares. Apos liberacao observar revalidacao e retomada missing-only pelo Ares. Monitor existente ativo;nao e conclusao do pedido.",
+      "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;preservar bloqueio humano e objetos.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "recibos correlacionados:15ativos/30ids novamente preparados e associados a conta03;bytes originais preservados segundo recibo. meta validation_only do primeiro criativo http200/success alterando somente2ids de video,sem objeto criado. nao comprova criacao de anuncios nem recuperacao integral. ares integra recuperacao;5campanhas/15anuncios ainda sem readback final.",
+      "state": "waiting_owner_facebook_profile_restriction: api368/1404163 e registro ui do executor confirmam ana cunha restrita;conta03 ativa.310/311 paused,0anuncios,312-314 pendentes. novo criativo1803556820866177 nao e anuncio;qa de midia derivada e registry pendentes. fonte1572025575340515361 e restriction-final-readback.json. sem escrita meta pelo zeus.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T22:53:48+00:00"
+      "updated_at": "2026-11-16T23:17:20+00:00"
     },
     {
       "agent": "zeus",
@@ -11147,5 +11147,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T23:06:42+00:00"
+  "updated_at": "2026-11-16T23:17:20+00:00"
 }
