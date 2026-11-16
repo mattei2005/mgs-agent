@@ -14663,10 +14663,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ZEUS-STORAGE-NONCACHE-1571982102264549498",
+      "title": "Concluir revisao exaustiva do disco independente de folga ou urgencia",
+      "updated_at": "2026-11-16T20:19:59+00:00"
+    },
+    {
+      "canonical_key": "storage.exhaustive-review.1571271327648587799",
+      "canonical_source": "context/storage-reorganization-20261112.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-16T20:19:59+00:00",
+      "id": "ZEUS-STORAGE-NONCACHE-1571982102264549498",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Concluir revisao exaustiva do disco independente de folga ou urgencia",
-      "updated_at": "2026-11-14T22:02:15+00:00"
+      "title": "Revisao exaustiva nao-cache; caches pausados por Rodolfo; foco em sobras de tarefas sem uso",
+      "updated_at": "2026-11-16T20:19:59+00:00"
     },
     {
       "canonical_key": "zeus.web.auto_recovery_threshold",
@@ -17606,5 +17623,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:10:49+00:00"
+  "updated_at": "2026-11-16T20:19:59+00:00"
 }

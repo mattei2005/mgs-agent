@@ -4924,6 +4924,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-AUTOPUSH-EBCC3B80B87E61D3DC672507",
+      "next_step": "Supervisor3872241 deve verificar independentemente e fechar mesma operacaoebcc3b80b87e61d3dc672507. Nenhum retry de negocio ou push manual necessario.",
+      "objective": "Recuperar o mesmo auto-push bloqueado pelo baseline local de teste, sem tocar CampaignOps",
+      "source": "/root/.hermes/shared/automation-continuity/runs/ebcc3b80b87e61d3dc672507/recovery-evidence.json",
+      "state": "resultado e entregas validados: watcher original2640095;commit255940d9ff1a2ae13c363c1605cff05b154d4a20=github;60 testes watcher/path+17monitor pass;monitor0falhas;recuperacao1571982580276924489 e report-infra1571982950176661585 get200;baseline preservado;inventario/audit/skill canonica e mirror registrados.",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-16T20:19:49+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-B013-ALERT-PROFILES-20260905",
       "next_step": "Operação normal; próximos ciclos devem manter generic marked=32 updated=false e B013 updates_needed=0 updated=false.",
       "objective": "Adicionar Perfil e Perfil backup aos cards B013 e manter a coluna operacional de removidos compatível com o cabeçalho atual Rem Acum.",
@@ -5076,11 +5086,11 @@
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
       "next_step": "Observar resultado do teste de credencial autorizado por1571975883286257726 e eventual liberacao explicita de retomada; teste de acesso nao aprova campanha. Ares unico writer. Zeus nao altera app/token nem sonda Meta. Sem novo bloqueio ou entrega final, silencio; aceite5campanhas/15anuncios com readback.",
-      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer; verificar resultado do teste de acesso autorizado pelo owner.",
+      "objective": "Acompanhar pedido1571894746719330377; Ares unico writer; verificar resultado final do teste de acesso autorizado pelo owner.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "rodolfo corrigiu perfil para ana cunha1571974994030755941 e confirmou token criado, liberando somente teste1571975883286257726. ares1571976317224751105 confirmou verificacao em leitura do app1299247318762949 sem retomar campanhas. resultado do teste/migracao/retomada ainda nao comprovado; request e foreground-state permanecem waiting_owner_app_recovery. mantidos ultimos ids e readback parcial, sem nova entrega.",
+      "state": "ares1571978960026341508 informou que o novo token identificou ana cunha e que a expectativa local de emissor ainda aponta ao app anterior; ajuste limitado a validacao de leitura em curso, sem trocar vinculos de producao. mensagem de progresso1571978963813929033, sem resultado final do teste. identidade relatada pelo executor, nao revalidada pelo observador. request e foreground-state continuam waiting_owner_app_recovery; sem migracao ou retomada comprovada, mesmos objetos parciais preservados.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-16T19:53:34+00:00"
+      "updated_at": "2026-11-16T20:17:33+00:00"
     },
     {
       "agent": "zeus",
@@ -6808,12 +6818,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "LoteUV1571969258986938601encerrado:193aprovadosausentes/desvio45extrasintegralmenterestaurados,instalados/cachePMvalidados. Fonte retirement-final.json. Proximo7outroscaches(video_triage) e8Git/retencao read-only;nenhumoutrodelete/cronautorizado. PreservarPMcache/perfis/browsermodelos/NPXretido/financechecksum/Gitbases/recoveryprivate.",
-      "objective": "Lote UV executado uma vez; desvio nativo recuperado e validado sem novo prune. Revisao geral continua aberta.",
-      "source": "data/storage-uv-1571959754081837281/retirement-final.json;data/storage-uv-1571959754081837281/recovery-post-validation.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571969258986938601",
-      "state": "in_progress_remaining_categories_5_to_8",
+      "next_step": "Revisao read-only de diretorios locais de bancos/testes e copias de execucao restantes, comecando na aplicacao financeira: reconciliar inventariohistorico34raizes sem supor atualidade/descarte; provar produtor, tarefa concluida, consumidores e recuperacao. Preservar producao/dashboard/checksum/backupsvalidos/perfis/Gitbases. Caches intentionally_retained_owner_choice, sem reten cao/cron/review/cachedelete por agora. Sem novo lote/exclusao autorizado.",
+      "objective": "Focar arquivos remanescentes sem uso da VPS; caches pausados por ordem1571982102264549498. Preservar operacao e gates exatos.",
+      "source": "context/storage-reorganization-20261112.md;discord:1569928464033783862/1571982102264549498;discord:1569928464033783862/1571982354057142387;data/storage-remainder-review-1571661469475672075/review-result.json",
+      "state": "in_progress_noncache_unused_files_review",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T20:00:09+00:00"
+      "updated_at": "2026-11-16T20:19:59+00:00"
     },
     {
       "agent": "zeus",
@@ -11067,5 +11077,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:10:50+00:00"
+  "updated_at": "2026-11-16T20:19:59+00:00"
 }
