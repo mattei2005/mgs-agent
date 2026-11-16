@@ -14,7 +14,7 @@
   "notification_transport": "Final response delegated to cron delivery; no direct Discord post. Exact delivery receipt not available in this run.",
   "old_request": "eggbev03-cross-account-1571623835822858352",
   "old_request_state": "HUMAN_CANCELLED_BY_1571899160242823330_NO_RESUME_NO_DELETE",
-  "updated_at": "2026-11-16T15:16:51.524622+00:00",
+  "updated_at": "2026-11-16T15:30:47.097869+00:00",
   "new_command_message_id": "1571894746719330377",
   "new_parameters_message_id": "1571893411739599029",
   "new_standards_message_id": "1571895183228928182",
@@ -64,14 +64,14 @@
     "source_campaign_id_selected_by_ares": "120250364730440507"
   },
   "last_observation": {
-    "new_messages_at_final_read": 3,
+    "new_messages_at_final_read": 0,
     "source_parent_verified": "1539422731727147079",
     "report_parent_verified": "1496267442899521627",
     "authorization_author_verified": "344196393512075265",
     "executor_ack_message_id": "1571894866227494977",
     "executor_activity_message_id": "1571894874649923605",
     "executor_block_message_id": "1571904726289743943",
-    "stage": "Rodolfo autorizou executar o novo pedido em1571904284692316444; Ares voltou a solicitar escopo tecnico em1571904726289743943. Mesmo bloqueio local ja informado; nao ha aprovacao tecnica nova nem criacao/readback. Nenhuma novidade executiva material.",
+    "stage": "Sem mensagens novas na origem nem na thread Zeus. Request e checkpoint Ares permanecem no mesmo gate tecnico local ja informado; nenhuma criacao ou readback produtivo novo.",
     "old_artifacts_excluded": "Pedido Nicolas cancelado expressamente; objetos e historico preservados. Fora do novo pedido.",
     "diagnostic": "Dispatch em scripts/ares-eggbev-target-clone.py:440-442 envia todo target03 para eggbev_cross_account. local-route-result.json registra ValueError: exact cross-account authority/capability unavailable antes de reserva/upload/criação. Não é retorno de erro Meta deste novo lote.",
     "canonical_request": "data/ares/meta-ads/requests/eggbev03-c212-replacement-1571894746719330377.json",
@@ -80,18 +80,18 @@
     "terminal": false,
     "external_messages_sent": 0,
     "monitor_failures": 0,
-    "monitor_recovery": "Discord fetch_messages indisponivel: leitura paginada via importador canonico Zeus, pais/autoridade verificados. Atualizacao de estado recuperada apos KeyError no envelope read_file, sem escrita parcial.",
+    "monitor_recovery": "Fetch Discord nao exposto; fallback read-only via importador canonico Zeus concluido:89 mensagens na origem e13 na thread privada; pais e autor da autorizacao conferidos. Read_file deduplicado retorna status=unchanged sem content; atualizacao recuperada por patch direcionado, sem escrita parcial.",
     "request_independence_authority_message_id": "1571899160242823330",
     "executor_last_message_id": "1571905207116374147",
-    "notification_decision": "SILENT: mesmo bloqueio ja informado; nao repetir nem cobrar Ares.",
+    "notification_decision": "SILENT: ausencia de novidade; nenhum envio externo.",
     "commercial_execution_authority_message_id": "1571904284692316444",
     "evidence_file_count": 4
   },
   "continuity": {
     "job_enabled": true,
     "repeat_times": 96,
-    "repeat_completed_at_read": 3,
-    "next_run_at": "2026-11-16T10:29:00-05:00",
+    "repeat_completed_at_read": 4,
+    "next_run_at": "2026-11-16T10:36:00-05:00",
     "final_cycle_action": "Renovar mesmo job para 96 antes de expirar se ainda não terminal; não duplicar.",
     "next_step": "Observar apos1571905207116374147; aguardar decisao tecnica explicita/execucao nova. Autorizacao comercial1571904284692316444 nao comprova reparo nem entrega. Ares unico writer; preservar pedido antigo cancelado. Renovar mesmo job no ultimo ciclo se nao terminal."
   }
