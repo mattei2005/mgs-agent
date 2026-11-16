@@ -1,0 +1,69 @@
+{
+  "status": "READONLY_REVIEW_COMPLETED_PENDING_RECOVERY_TESTS",
+  "groups_rehashed": 208,
+  "unique_files_rehashed": 494,
+  "changed_since_index": 0,
+  "categories": {
+    "browser_or_cache": {
+      "groups": 7,
+      "file_occurrences": 20,
+      "logical_potential_upper_bound_bytes": 2131328
+    },
+    "financial_historical_sources": {
+      "groups": 23,
+      "file_occurrences": 55,
+      "logical_potential_upper_bound_bytes": 110750456
+    },
+    "kanban_stages": {
+      "groups": 27,
+      "file_occurrences": 91,
+      "logical_potential_upper_bound_bytes": 5448119
+    },
+    "nonfinancial_work": {
+      "groups": 149,
+      "file_occurrences": 324,
+      "logical_potential_upper_bound_bytes": 22788917
+    },
+    "retired_creative_agent": {
+      "groups": 2,
+      "file_occurrences": 4,
+      "logical_potential_upper_bound_bytes": 7687415
+    }
+  },
+  "logical_potential_upper_bound_bytes": 148806235,
+  "old_final_duplicate_files": 12,
+  "old_final_unique_manifest_preserved": true,
+  "proposed_allocated_bytes": 45293568,
+  "all_other_groups_not_certified_for_deletion": true,
+  "kanban_tasks_done": 10,
+  "kanban_stage_and_rollback_payloads_preserved": true,
+  "dependency_scan": {
+    "scanned_configuration_code_files": 123663,
+    "literal_target_prefix_hits": [],
+    "process_cwd_or_command_matches": [],
+    "process_surfaces_inspected": [
+      "cmdline",
+      "cwd",
+      "fd",
+      "maps"
+    ],
+    "scan_errors": [],
+    "scope_roots": [
+      "/root/mgs-agent/scripts",
+      "/root/mgs-agent/apps",
+      "/root/mgs-agent/config",
+      "/root/mgs-agent/data/ares",
+      "/etc/systemd/system",
+      "/root/.hermes/profiles/zeus/cron",
+      "/root/.hermes/profiles/zeus/config.yaml",
+      "/root/.hermes/profiles/atena/cron",
+      "/root/.hermes/profiles/atena/config.yaml",
+      "/root/.hermes/profiles/ares/cron",
+      "/root/.hermes/profiles/ares/config.yaml"
+    ],
+    "limits": "Local configured consumers only; this is not proof against arbitrary future manual scripts. Historical reruns of final/ require reconstruction first. No credentials/commands/environment values stored."
+  },
+  "private_ledger": "/root/.hermes/secure-backups/storage-work-duplicates-1571695234532778046/fresh-work-duplicate-ledger.json.gz",
+  "source_files_removed": 0,
+  "at": "2026-11-16T01:33:44.325645+00:00"
+}

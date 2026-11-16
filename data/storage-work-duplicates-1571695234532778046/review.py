@@ -39,9 +39,10 @@ def dependency_scan():
     for prefix in prefixes:
      if prefix in text:hits.append(dict(file=str(p),matched_prefix=prefix))
    except (PermissionError,FileNotFoundError,OSError)as e:errors.append(dict(file=str(p),error=type(e).__name__))
- processes=[]
+ processes=[];inaccessible=set();processes_seen=0
  for p in Path('/proc').iterdir():
   if not p.name.isdigit():continue
+  processes_seen+=1
   try:
    cmd=(p/'cmdline').read_bytes().replace(b'\0',b' ').decode(errors='replace');cwd=os.readlink(p/'cwd')
    matches=any(x in cmd or cwd.startswith(x)for x in prefixes)
@@ -50,13 +51,16 @@ def dependency_scan():
      try:
       resolved=os.readlink(fd)
       if any(resolved.startswith(x)for x in prefixes):matches=True
-     except (FileNotFoundError,PermissionError,ProcessLookupError):pass
+     except PermissionError:inaccessible.add(int(p.name))
+     except (FileNotFoundError,ProcessLookupError):pass
     maps=(p/'maps').read_text(errors='replace')
     if any(x in maps for x in prefixes):matches=True
-   except (FileNotFoundError,PermissionError,ProcessLookupError):pass
+   except PermissionError:inaccessible.add(int(p.name))
+   except (FileNotFoundError,ProcessLookupError):pass
    if matches:processes.append(dict(pid=int(p.name),target_prefix_match=True))
-  except (FileNotFoundError,PermissionError,ProcessLookupError):pass
- return dict(scanned_configuration_code_files=scanned,literal_target_prefix_hits=hits,process_cwd_or_command_matches=processes,process_surfaces_inspected=['cmdline','cwd','fd','maps'],scan_errors=errors,scope_roots=[str(x)for x in roots],limits='Local configured consumers only; this is not proof against arbitrary future manual scripts. Historical reruns of final/ require reconstruction first. No credentials/commands/environment values stored.')
+  except PermissionError:inaccessible.add(int(p.name))
+  except (FileNotFoundError,ProcessLookupError):pass
+ return dict(scanned_configuration_code_files=scanned,literal_target_prefix_hits=hits,process_cwd_or_command_matches=processes,process_surfaces_inspected=['cmdline','cwd','fd','maps'],processes_seen=processes_seen,inaccessible_process_surfaces=len(inaccessible),scan_errors=errors,scope_roots=[str(x)for x in roots],limits='Local configured consumers only; this is not proof against arbitrary future manual scripts. Historical reruns of final/ require reconstruction first. No credentials/commands/environment values stored.')
 def main():
  assert not PRIVATE.exists();PRIVATE.mkdir(mode=0o700)
  s=json.load(open(ROOT/'data/storage-remainder-review-1571661469475672075/duplicate-and-reference-review.json'))
