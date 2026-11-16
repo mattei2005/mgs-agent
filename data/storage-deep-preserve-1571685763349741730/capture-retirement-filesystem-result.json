@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "mode": "post",
+  "file_targets": 5,
+  "directories_removed": 0,
+  "original_payload_reads_by_recovery": 0,
+  "recovery": {
+    "status": "PASS",
+    "files_verified": 5,
+    "logical_bytes_verified": 1547130141,
+    "ram_materializations": 5,
+    "disk_materializations": 0,
+    "original_source_payload_reads": 0,
+    "metadata_verified": true,
+    "original_ctime_recorded_not_recreatable": true
+  },
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "deletions_by_verifier": 0
+}

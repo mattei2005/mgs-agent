@@ -343,6 +343,16 @@ A preservação não liberou espaço: zero exclusões. Incluindo bundle, evidên
 
 A pendência Git da análise anterior foi reconsultada e está resolvida: seus dez artefatos conferiram byte a byte no remoto. Não houve commit manual nem contorno do guard. Fonte ativa deste ciclo: `data/storage-deep-preserve-1571685763349741730/final-result.json`. A revisão global dos pontos 5–8 permanece aberta; o ponto 1 não integra o novo lote de cinco arquivos.
 
+### Cinco capturas originais retiradas — confirmação 1571691667516424224
+
+Rodolfo confirmou somente os cinco arquivos do manifesto `4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534` em `1571691667516424224`, após a pergunta `1571691461605593199`. Aprovação nativa vinculada em `capture-retirement-approval.json`. **Os cinco arquivos estão ausentes, zero diretórios retirados, journal de cinco caminhos exatamente iguais ao manifesto.** O arquivo compacto privado de ~5,71 MiB, fontes principais/finais do importador, manifesto histórico pequeno, pais, perfis, programas, bancos e os dois roots de manutenção permanecem preservados.
+
+A primeira tentativa falhou no formato do audit log, antes do loop de exclusão: o approval já continha `thread_id`, duplicado no construtor do envelope. O marcador foi gravado, mas não havia journal/resultado nem qualquer alvo ausente. Esse diagnóstico foi confirmado antes de retomar. Manifesto e verificador congelados mantiveram seus hashes originais; uma retomada limitada, com o mesmo approval, preflight original, reserva própria O_EXCL e envelope validado, removeu somente os cinco caminhos aprovados. Não houve relaxamento de predicado, novo alvo, reexecução cega, exclusão do marcador anterior ou terceira confirmação. Código exato executado preservado em `retirement-resume-executed.py`, SHA-256 `998bb565d243ae6b42aafd6793c47d5396b933907988526c8c87e49e454f438d`; a versão atual difere somente por anotação de retorno, com AST conferido.
+
+Depois da ausência real dos originais, o mesmo verificador e uma checagem independente reconstruíram novamente os cinco arquivos reais (1.547.130.141 bytes) em RAM somente pelo compacto, com hashes/metadados conferidos e zero leitura das fontes antigas. Os cinco protegidos e quatro insumos de recuperação mantiveram hashes; três configs e três smokes explícitos sem ferramentas passaram. PIDs/boot/launcher permaneceram, zero eventos críticos novos e nenhum restart, instalação, configuração ou escrita financeira. Não foi feito restore da aplicação.
+
+O intervalo imediato da retomada registrou 1.542.467.584 bytes (~1,44 GiB) a mais disponíveis no filesystem, delta global sujeito a atividade concorrente, distinto da estimativa estrutural líquida anterior de ~1,43 GiB. A medição pós-validação registrou 69,34% de uso e 59,07 GiB disponíveis. Resultado ativo: `data/storage-deep-preserve-1571685763349741730/retirement-result.json`; checkpoint `ZEUS-STORAGE-CAPTURE-RETIRE-1571691667516424224`. Este lote não tem confirmação/retry pendente. A falha de serialização e o teste real do envelope foram persistidos na skill de manutenção com mirror/readback. A revisão global permanece aberta; próximo foco é validar consumidores/recuperação das duplicatas restantes nas pastas de trabalho, com caches e Git/recorrência ainda separados.
+
 
 
 

@@ -66442,12 +66442,12 @@
       "id": "storage-deep-preserve-1571685763349741730",
       "agent": "zeus",
       "type": "historical_file_lossless_preservation_and_readonly_deep_review",
-      "status": "both_authorized_branches_validated_waiting_new_deletion_confirmation",
-      "updated_at": "2026-11-16T00:58:25.612744+00:00",
+      "status": "preservation_and_confirmed_retirement_completed_validated",
+      "updated_at": "2026-11-16T01:12:26.388169+00:00",
       "authority_message_id": "1571685763349741730",
       "source_thread_id": "1569928464033783862",
       "canonical_source": "context/storage-reorganization-20261112.md",
-      "evidence": "data/storage-deep-preserve-1571685763349741730/final-result.json",
+      "evidence": "data/storage-deep-preserve-1571685763349741730/retirement-result.json",
       "recovery_dependencies": [
         {
           "path": "/root/.hermes/secure-backups/storage-captures-1571685763349741730/captures.tar.xz",
@@ -66480,26 +66480,48 @@
         "fixture_negatives": 8,
         "deletion_verifier_negatives": 5,
         "preflight": "PASS",
-        "sources_deleted": 0,
-        "all_originals_retained": true
+        "sources_deleted": 5,
+        "all_originals_retained": false,
+        "retained_bundle_preserved": true,
+        "pos_delete_real_RAM_restores": 5,
+        "protected_hashes_unchanged": 5,
+        "retained_hashes_unchanged": 4,
+        "configs_passed": 3,
+        "smokes_passed": 3,
+        "no_restart": true,
+        "immediate_observed_available_delta_bytes": 1542467584
       },
       "pending_critical_manifest": "data/storage-deep-preserve-1571685763349741730/capture-retirement-manifest.json",
       "pending_critical_manifest_sha256": "4ae58340cef7628339f7a9d005b9f5901cc115035d99832854a72e120407f534",
-      "pending_manifest_is_not_approved": true,
+      "pending_manifest_is_not_approved": false,
       "previous_git_blocker_resolved": true,
       "learning": {
         "subsystem": "vps-maintenance-and-backup-governance",
         "target": "references/backup-retention-scope-and-redundancy.md",
-        "summary": "Materialized retained-only recovery of one large regular file at a time in anonymous RAM, private lossless bundle, fixtures and honest net savings.",
-        "marker_readback": true,
+        "summary": "Preflight audit start/failure/completion envelopes using the actual approval schema, reject conflicting reserved fields, and attribute markers/journals before resumption.",
         "live_mirror_equal": true,
-        "sha256": "ed58e183ba19972f7713baf7f1fd3597ae755a77425454a97f6930ccfc7d8f1a"
+        "marker_readback": true,
+        "sha256": "48acc76b95f67900a24505fe46a096bb9210f91bc936337444344185eef119b2"
       },
-      "result_sha256": "52f01050c64c47908972a367a3922fe43f55a6ea0e9807989ff924107e3aad3b",
+      "result_sha256": "c4a280360581c95cfa0bca01b8a5410a840d97c088dbfc137acc57cfd5027ef0",
       "report_infra": {
-        "message_id": "1571690881516314744",
+        "message_id": "1571694407537786883",
         "channel_id": "1498132022634483894",
         "readback_verified": true
+      },
+      "confirmation_message_id": "1571691667516424224",
+      "retirement_manifest_status": "executed_validated",
+      "retirement_scope": {
+        "regular_files": 5,
+        "directories": 0,
+        "journal_entries": 5
+      },
+      "retirement_recovery": {
+        "first_failure": "audit duplicate thread_id before unlink",
+        "first_attempt_source_deletions": 0,
+        "frozen_manifest_and_validator_unchanged": true,
+        "recovery_adapter_executed_sha256": "998bb565d243ae6b42aafd6793c47d5396b933907988526c8c87e49e454f438d",
+        "executed_copy": "data/storage-deep-preserve-1571685763349741730/retirement-resume-executed.py"
       }
     }
   ],
