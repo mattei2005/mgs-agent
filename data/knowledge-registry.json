@@ -14119,6 +14119,23 @@
       "updated_at": "2026-08-21T20:37:56+00:00"
     },
     {
+      "canonical_key": "growth.segurador.advertising-restriction-audit",
+      "canonical_source": "data/segurador-advertising-restriction-audit.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-11-16T20:00:53+00:00",
+      "id": "SEGURADOR-RESTRICTION-AUDIT-1571977953968136222",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Checagem de restrição: pular deslogados e reportar na aba indicada",
+      "updated_at": "2026-11-16T20:00:53+00:00"
+    },
+    {
       "canonical_key": "discord.shein.account_threads.visibility",
       "canonical_source": "data/discord-shein-account-thread-visibility.json",
       "consumers": [
@@ -17572,5 +17589,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:46:55+00:00"
+  "updated_at": "2026-11-16T20:00:53+00:00"
 }

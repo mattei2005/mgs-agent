@@ -1,0 +1,123 @@
+{
+  "status": "completed_with_recovered_scope_deviation",
+  "confirmation_message_id": "1571969258986938601",
+  "question_message_id": "1571968776956809328",
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "manifest_sha256": "a878f47d10bd25d28eff9dcc4673dbf58172ccaefbb19163c2c8a67e4b8143ed",
+  "executor_sha256": "87d66ae35db2bf091003c9df93c8ad8ab352ac1ad0915a636a8611b03a157804",
+  "original_frozen_gate_modified": false,
+  "original_preflight_passed": true,
+  "original_postcheck_passed": false,
+  "native_exit_code": 0,
+  "native_prune_calls": 1,
+  "native_argv": [
+    "/root/.local/bin/uv",
+    "cache",
+    "prune",
+    "--cache-dir",
+    "/root/.cache/uv",
+    "--no-config",
+    "--offline",
+    "--no-progress"
+  ],
+  "native_gross_removed_node_counts": {
+    "directory": 26606,
+    "file": 235076,
+    "link": 418
+  },
+  "net_approved_removed_node_counts": {
+    "directory": 26594,
+    "file": 235046,
+    "link": 415
+  },
+  "approved_targets_absent": 193,
+  "native_total_top_roots_observed": 199,
+  "scope_deviation": {
+    "extra_top_roots": 6,
+    "extra_nodes": 45,
+    "extra_regular_files": 30,
+    "extra_directories": 12,
+    "extra_links": 3,
+    "all_restored": true,
+    "all_original_regular_SHA256_matched": true,
+    "new_inodes_and_ctimes_disclosed": true,
+    "root_cause": "Zeus modeled uv_cache::Cache::prune only; actual CLI first runs uv_distribution::prune using revision pointers, removing three source revisions and making three more archives orphaned.",
+    "source_cli_sha256": "471b39577985360ccf0909b87518c43a05c3ee7c9f9496f55fc9aa133fa7fec9",
+    "source_distribution_sha256": "5e7138837a67f9fb6387386167e43357cf2ba866c5d740baecd17ab8edabf3c3",
+    "lost_wheels_reconstructed_to_original_SHA256": 3,
+    "no_native_prune_retry": true
+  },
+  "final_cache_layout_matches_original_minus_approved": true,
+  "remaining_cache_nodes": 71169,
+  "retained_cache_payloads_verified": 63046,
+  "managed_cache_payloads_verified": 18617,
+  "managed_cache_metadata_unchanged": true,
+  "profile_controls_unchanged": 6,
+  "profile_configs_passed": 3,
+  "profile_smokes_passed": 3,
+  "failed_units": 0,
+  "runtime": {
+    "pids": {
+      "zeus": 2241212,
+      "ares": 2233587,
+      "atena": 2237072
+    },
+    "boot_id": "b371ea79-2c76-4cf6-9169-78c370088660",
+    "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes"
+  },
+  "runtime_unchanged": true,
+  "native_interval_global_delta_bytes": 739934208,
+  "post_recovery_global_delta_bytes": 725860352,
+  "observed_delta_is_not_exclusive_attribution": true,
+  "native_logical_counter_not_physical_savings": true,
+  "historical_83_cache_environments_retired_as_approved": true,
+  "exact_old_approved_environment_restore_proven": false,
+  "new_retention_or_cron": false,
+  "frozen_scope_model_quarantined": true,
+  "old_executor_closed_against_replay": true,
+  "future_native_cleanup_authorized": false,
+  "regression": {
+    "status": "PASS_RETROSPECTIVE_REGRESSION",
+    "old_model_would_be_rejected": true,
+    "old_model_targets": 193,
+    "complete_CLI_shadow_targets": 199,
+    "source_revision_roots_missed": 3,
+    "newly_orphaned_archives_missed": 3,
+    "unplanned_root_set_matches_native_observation": true,
+    "pointers_verified_unchanged": 18,
+    "uninterpreted_pointer_count": 0,
+    "extra_roots": [
+      "/root/.cache/uv/archive-v0/fn1-Nqp-nFUFFp5l",
+      "/root/.cache/uv/archive-v0/fycaHuV2P3EzksUg",
+      "/root/.cache/uv/archive-v0/oBe1AVNobDSnR48z",
+      "/root/.cache/uv/sdists-v9/editable/089e980f32384b19/bnK7p4AWMBIkvWVO",
+      "/root/.cache/uv/sdists-v9/editable/6921d5208a1e3597/kNKmi0UkeGnEEC33",
+      "/root/.cache/uv/sdists-v9/editable/8e5ed8f82e8766b0/9T2EsNT_UU7LxoA_"
+    ],
+    "native_calls_in_this_test": 0,
+    "future_native_execution_authorized": false,
+    "original_executor_modified": false,
+    "limitations": "Read-only replay of frozen original metadata and still-identical revision pointers; not another native dry-run or a new destructive approval. Old model remains quarantined."
+  },
+  "learning": {
+    "subsystem": "vps-maintenance-and-backup-governance",
+    "target": "references/rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md",
+    "summary": "Supersede cache-helper-only model: trace CLI uv_distribution source revision pruning before archive GC. Preserve failed gate; restore unintended entries by exact SHA under lock; validate complete net scope. ZIP timestamp reconstruction accepted only by original full SHA.",
+    "live_mirror_equal": true,
+    "sha256": "5dc9b66cf45f6a2c58c8ca5afb148f26393f7d85d3745f0b554e12f3c1c834ca"
+  },
+  "private_recovery_provider_index": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/unplanned-restoration-provider-index.json",
+  "private_recovery_provider_index_sha256": "5249dbc5067814c389dbf174c90de558433598b8a0bb8e8df953551ef93ada08",
+  "whole_disk_review_complete": false,
+  "next_step": "Lote UV encerrado com desvio recuperado e declarado; nunca repetir prune ou reutilizar modelo incompleto. Proximo: outros caches/Git/retencao somente em leitura; nenhuma nova exclusao autorizada.",
+  "at": "2026-11-16T15:00:08.935810-05:00",
+  "report_infra": {
+    "message_id": "1571978206150533192",
+    "channel_id": "1498132022634483894",
+    "exact_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  }
+}

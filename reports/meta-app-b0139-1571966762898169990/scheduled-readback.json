@@ -1,0 +1,62 @@
+{
+  "verified_at": "2026-11-16T20:02:33.665552+00:00",
+  "reactivation_cutoff": "2026-11-16T14:50:58.462083-05:00",
+  "state_updated_at": "2026-11-16T15:02:12-05:00",
+  "earliest_account_checked_at": "2026-11-16T14:51:58-05:00",
+  "latest_account_checked_at": "2026-11-16T15:02:10-05:00",
+  "accounts": 107,
+  "job_last_run_at": "2026-11-16T15:02:21.739503-05:00",
+  "job_last_status": "ok",
+  "summary": {
+    "targets": 107,
+    "linked": 9,
+    "unlinked_confirmed": 98,
+    "unknown": 0,
+    "not_linked_or_error": 98,
+    "total_dtr_pages_visible": 114,
+    "total_graph_pages": 113,
+    "total_connected_pages": 112,
+    "linked_debug_valid": 9,
+    "linked_accounts_status_200": 9,
+    "linked_dtr_pages_zero_graph": 0,
+    "planned_scope_removals": 1,
+    "app_capability": {
+      "status": "healthy",
+      "linked_accounts": 9,
+      "debug_valid": 9,
+      "accounts_status_200": 9,
+      "dtr_pages_visible": 114,
+      "graph_pages_visible": 113,
+      "dtr_pages_zero_graph_accounts": 0,
+      "checked_at": "2026-11-16T15:02:11-05:00"
+    },
+    "sheet_sync": {
+      "enabled": true,
+      "checked_rows": 106,
+      "marked": 98,
+      "unknown_preserved": 0,
+      "updates_needed": 0,
+      "updated": false,
+      "checked_at": "2026-11-16T15:02:12-05:00"
+    },
+    "alert_profiles": {
+      "profile": "Eduarda Oliveira",
+      "backup_profile": "Emgai Datquang"
+    },
+    "possible_restriction_gate": {
+      "status": "no_candidate",
+      "persistent_debug_failures": 0,
+      "capability_status": "healthy"
+    },
+    "invest_3d": {
+      "status": "INVEST_3D_OK",
+      "current_date": "2026-11-16",
+      "current_day_partial": true,
+      "period_start": "2026-11-13",
+      "period_end": "2026-11-15",
+      "days": 3,
+      "error": null
+    },
+    "alerts_sent": 1
+  }
+}

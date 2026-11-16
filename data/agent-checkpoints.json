@@ -313,12 +313,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1571976550709072033",
-      "next_step": "Validar coleta e render; entregar inicial; auditar agenda global; habilitar somente slots finitos ate17nov00hEST",
-      "objective": "CPR e ROI cada30min das campanhas criadas16nov nesta conta, incluindo futuras, ate fim dia",
+      "next_step": "Executar somente slots finitos na origem; descobrir campanhas criadas16nov nesta conta, manter pausadas e anteriores admitidas; retomar mesmo slot/outbox em falha; expirar antesAPI em17nov00hEST. Envios futuros ainda nao executados.",
+      "objective": "CPR e ROI cada30min campanhas criadas16nov Yolokfx04 G004 incluindo futuras ate fim dia",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1571976550709072033/manifest.json",
-      "state": "preparing_read_only;identity_and_authorization_live_validated",
+      "state": "scheduled_initial_get_verified;2campanhas298299;18slots15h22a23h52est;expira17nov00hest;22testespass;auditoriaglobalprepossemconflitooperacional;reportinfragetverificado;zerometasbwrite",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-16T19:56:09+00:00"
+      "updated_at": "2026-11-16T19:59:04+00:00"
     },
     {
       "agent": "ares",
@@ -4242,6 +4242,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SEGURADOR-RESTRICTION-AUDIT-1571976927898767451",
+      "next_step": "Cabeçalhos publicados e validados. Confirmar grupo/lista AdsPower e frequência/horário; depois implementar canário e agendamento. Deslogados serão registrados e pulados sem login. Nenhum perfil inspecionado; nenhum cron criado.",
+      "objective": "Conferir restrição de publicidade dos seguradores em lotes de até 5 e reportar na aba checagem restricao",
+      "source": "data/segurador-advertising-restriction-audit.json",
+      "state": "awaiting_scope_and_schedule",
+      "thread_id": "1571976927898767451",
+      "updated_at": "2026-11-16T20:00:53+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SEGURADORES-TOKEN-FB-CONNECTION-AUDIT-20260903",
       "next_step": "Aguardar decisão de Rodolfo sobre cadastrar somente as duas páginas efetivamente ausentes; qualquer escrita deve ter canário, payload completo e readback por ambos IDs.",
       "objective": "Reauditar 21 seguradores ao vivo em DTR e SB, com escopo Smart Bidding explicitamente composto por digital-trust + digital-trust-2 e match global por PAGE_ID pequeno OU FB_PAGE_ID grande.",
@@ -6798,12 +6808,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "NPXencerrado. UVreview1571959754081837281preflightPASS/0delete;novo193targets/703.12MiBmaxaguardaSimcriticoaposentadoria cachehistorico83envs,nao recuperacaolossless. PreservarHermesPMcache/profiles/browsermodelos/NPXretido/financechecksum/Git7bases. Globalretencao/outroscaches/Gitaberto.",
-      "objective": "Revisao UV executada em leitura; lote nativo exato preparado para aposentadoria explicita de estado de cache; nenhuma exclusao executada.",
-      "source": "data/storage-uv-1571959754081837281/review-final.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571959754081837281",
+      "next_step": "LoteUV1571969258986938601encerrado:193aprovadosausentes/desvio45extrasintegralmenterestaurados,instalados/cachePMvalidados. Fonte retirement-final.json. Proximo7outroscaches(video_triage) e8Git/retencao read-only;nenhumoutrodelete/cronautorizado. PreservarPMcache/perfis/browsermodelos/NPXretido/financechecksum/Gitbases/recoveryprivate.",
+      "objective": "Lote UV executado uma vez; desvio nativo recuperado e validado sem novo prune. Revisao geral continua aberta.",
+      "source": "data/storage-uv-1571959754081837281/retirement-final.json;data/storage-uv-1571959754081837281/recovery-post-validation.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571969258986938601",
       "state": "in_progress_remaining_categories_5_to_8",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T19:17:29+00:00"
+      "updated_at": "2026-11-16T20:00:09+00:00"
     },
     {
       "agent": "zeus",
@@ -6888,12 +6898,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-UV-1571959754081837281",
-      "next_step": "193aprovadosausentes;native removeu tambem45nos(30files12dirs3links) de3revisoes editaveis/cache fora do modelo.27/30payloads tem providers exatos; localizar3whls retidos e restaurar somente excedentes antes de fechar. Gate original preservado; nunca reprune.",
-      "objective": "Recuperar desvio observado apos nativeUV0; nao repetir prune; validar caches/programas e relatar efeito exato.",
-      "source": "data/storage-uv-1571959754081837281/retirement-incident.json;data/storage-uv-1571959754081837281/postcheck-path-difference.json;discord:1569928464033783862/1571969258986938601",
-      "state": "native_prune_complete_scope_deviation_recovery_in_progress",
+      "next_step": "Native1x/exit0/193aprovadosausentes. CLIstageomitido removeu45extras;45restaurados/30SHAiguais/3whlsreconstruidosSHAoriginal. Layoutnetexato;63046+18617payloads/6controls/3configs3smokes/PIDsbootPASS;0failed. Modeloantigoquarentena;naoreprune. Semconfirmacao/retrypendente;globalaberto.",
+      "objective": "Lote UV executado uma vez; desvio nativo recuperado e validado sem novo prune. Revisao geral continua aberta.",
+      "source": "data/storage-uv-1571959754081837281/retirement-final.json;data/storage-uv-1571959754081837281/recovery-post-validation.json;context/storage-reorganization-20261112.md;discord:1569928464033783862/1571969258986938601",
+      "state": "completed_with_recovered_scope_deviation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T19:35:14+00:00"
+      "updated_at": "2026-11-16T20:00:09+00:00"
     },
     {
       "agent": "zeus",
@@ -7198,12 +7208,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-roi-1571976517091594294",
-      "next_step": "Testar wrapper, revisar dryrun, publicar inicial, auditar agenda finita e readback",
+      "next_step": "Executar slots congelados com descoberta somente criadas16nov conta exata; expirar17nov00:00EST antesAPI; recuperar somente camada faltante no mesmo request",
       "objective": "CPR Meta e ROI real SB a cada30min somente campanhas criadas hoje16nov Mavroa04 G004 inclusive futuras",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1571976517091594294/manifest.json",
-      "state": "preparing_finite_read_only_schedule",
+      "state": "active_finite_schedule_verified;inicial14:56est,c062,c063,uma parte get;20checks pass;18slots15:13-23:43est;post_audit sem conflito;zero writesmetasb",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-16T19:56:04+00:00"
+      "updated_at": "2026-11-16T20:00:14+00:00"
     },
     {
       "agent": "ares",
@@ -11057,5 +11067,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:56:09+00:00"
+  "updated_at": "2026-11-16T20:00:53+00:00"
 }
