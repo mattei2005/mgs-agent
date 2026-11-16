@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/ares-eggbev-target-clone.py", line 471, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/root/mgs-agent/scripts/ares-eggbev-target-clone.py", line 448, in main
+    print(json.dumps(dispatch(a,sys.modules[__name__]),ensure_ascii=False,indent=2));return
+                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_same_account_replacement.py", line 458, in dispatch
+    summary=load(home/'summary.json');payload,proof=final_approval(q,summary,common,args.approval_message_id,args.approved_digest,return_proof=True)
+                                                    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_same_account_replacement.py", line 391, in final_approval
+    sent=get(delivery['message_id']);ok=get(message_id)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_same_account_replacement.py", line 389, in get
+    if code!=200 or m.get('id')!=mid or m.get('edited_timestamp'):raise ValueError('final summary/approval unavailable')
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: final summary/approval unavailable
