@@ -196,6 +196,12 @@ print(parser.values[0])
 4. Preserve the extracted string without URL normalization or query reordering. HTML entity decoding restores the field value; do not additionally URL-decode it. Keep **Website URL** separate from **Tracking → URL parameters** and do not silently combine them when the operator asked for one field.
 5. Return the field/ad label plus the complete value in a text code block. State direct field verification only when the input was actually read, and leave the editor unchanged. Use GUI fallback only if the DOM route cannot resolve the field; a browser-chrome-only accessibility tree is not evidence that the field is empty.
 
+## Facebook settings in legacy iframes — read-only inspection
+
+- When visible-text output shows only the settings sidebar but the screenshot renders the main panel, inspect the current HTML once for the iframe host/path; do not conclude that the panel failed to load. Do not print iframe query values, which can carry session material.
+- For Business Integrations, open the observed app's **View and edit** only to inspect; never toggle, Save or Remove without the credential/permission gate. Close with Cancel and verify the dialog closed.
+- If the inner permission list is clipped, use the current iframe selector and a DOM-confirmed permission input's visible parent with the allowlisted hover tool. Playwright hover scrolls the parent into view without toggling the hidden checkbox. A tested selector shape is `iframe[src^="https://www.facebook.com/settings"] >> internal:control=enter-frame >> input[value="pages_manage_ads"] >> xpath=..`; re-discover host/path/input value before reuse. Hover + screenshot verifies the visible switch; do not click its label or press Space/Enter as a scrolling workaround. The switch being enabled proves consent configuration, not successful ad creation or advertiser eligibility.
+
 ## Computer Use fallback — find and open one profile
 
 1. Capture the current AdsPower window by its fresh PID and window ID.
