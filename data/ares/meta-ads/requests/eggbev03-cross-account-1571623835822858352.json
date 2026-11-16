@@ -10,7 +10,7 @@
   "source_account_id": "1034081997659047",
   "target_account_id": "1481815942722118",
   "source_campaign_name": "303 - Moorcroft Finances - ENG - US - (pg_23187) - C01",
-  "source_campaign_id": null,
+  "source_campaign_id": "120251175890330629",
   "source_page_token_requested": "pg_23187",
   "same_page_required": true,
   "duplicate_count": 5,
@@ -70,18 +70,24 @@
     "page_probe_initial": "LOCAL_SCOPE_GUARD_DENIED_BEFORE_HTTP; preserved historical first evidence",
     "page_probe": "INSTALLED_RUNTIME_LIVE_READBACK_VERIFIED: Ana Cunha/minibot m6, exact Moorcroft Finances pg_23187 and existing PBIA; zero Page writes",
     "page_live_readback": "data/ares/meta-ads/audit/maintenance/t_e524bad0/foreground-live-target-readback.json",
-    "source_campaign_live_verified": false,
-    "media_live_verified": false
+    "source_campaign_live_verified": true,
+    "media_live_verified": true,
+    "confirmed_media_assets": 15,
+    "confirmed_target_video_ids": 30,
+    "source_recovery_suspension_authority_message_id": "1571685800507219999",
+    "source_recovery_suspension_receipt": "data/ares/meta-ads/audit/eggbev/coordination/suspend-1571685800507219999/verification.json",
+    "source_reader_gate_released": true,
+    "meta_quota_state": "data/ares/meta-ads/audit/eggbev/cross-account/eggbev03-cross-account-1571623835822858352/foreground-state.json"
   },
-  "phase": "FOREGROUND_BLOCKED_SOURCE_COORDINATION",
+  "phase": "PREPARATION_DEFERRED_META_QUOTA",
   "execution_mode": "foreground",
   "foreground_authority_message_id": "1571658531411595376",
   "implementation_task_id": "t_e524bad0",
   "preparation_task_id": "t_26342647",
   "technical_authority_message_id": "1571652369467445359",
   "campaign_writes_this_request": 0,
-  "media_uploads_this_request": 0,
-  "asset_reservations_this_request": 0,
+  "media_uploads_this_request": 30,
+  "asset_reservations_this_request": 15,
   "manifest_sealed": false,
   "execution_instruction": {
     "message_id": "1571655254162800732",
@@ -106,5 +112,5 @@
     "new_notifier_or_cron": false
   },
   "final_publication_approval": null,
-  "next_step": "Foreground takeover complete per Rodolfo1571658531411595376; background maintenance and preparation cards are parked, no concurrent worker. Route and account03 binding are installed with accepted offline and installed receipts, and exact target account/Page/PBIA access was reread live. Real central prepare stopped at source-account reader exclusion BEFORE any reservation/upload/campaign write. Diagnose disposition of older Viewer Loan request eggbev-pg23189-1571342489162489937, for which Nicolas1571551009858265191 reported manual repair; no canonical suspension/completion or reader release exists. Obtain explicit disposition to suspend that old automatic recovery without altering its remote objects, then reconcile/release only through canonical coordination and continue this SAME request in foreground. Do not clear the lease by age, restart the old request, weaken guards or claim campaigns complete. Preserve five groups, literal copy, budget and immediate-start instruction. After source readiness, verify all requested media and prepare the sealed final summary/mandatory approval before guarded execute and finalize; no background handoff or notifier."
+  "next_step": "Remain in foreground. Rodolfo1571685800507219999 suspension is applied and verified: old Viewer Loan automatic replay fenced, cards parked, lease released, remote before/after identical, checkpoint/audit unchanged. Exact source303 found live;15 requested assets reserved and30 target03 videos uploaded once, fully reconciled unique titles and fresh ready/association/length/local checksums, registry committed. All local variants and real thumbnail byte-equivalence proof preserved; no campaign object created and no manifest sealed. Meta returned rate-limit80004/2446079; follow retry_after_epoch in the canonical foreground-state.json and do not retry before it. After quota clears, resume the SAME central prepare command with current input and registry hits, no uploads/PBIA/new naming/reservation replay; finish final reconciliation, seal summary and obtain the mandatory subsequent publication OK, then guarded execute/finalize. Do not ask again about suspension, structure, budget or immediate-start intent. No background worker, new cron or notifier."
 }
