@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-16T13:58:37-05:00",
+    "updated_at": "2026-11-16T19:07:09.519473+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -67549,8 +67549,8 @@
       "id": "b013-monitor-pause-1571961868418027543",
       "agent": "zeus",
       "type": "cron-pause",
-      "status": "paused-awaiting-owner-credential-onboarding",
-      "updated_at": "2026-11-16T18:56:06.088503+00:00",
+      "status": "paused-blocked-sheet-assignments",
+      "updated_at": "2026-11-16T19:07:09.519473+00:00",
       "authority_message_id": "1571961868418027543",
       "thread_id": "1571959312111374447",
       "job_ids": [
@@ -67595,7 +67595,69 @@
         "registry_changed": false,
         "resume_gate": "Aguardar Rodolfo confirmar cadastro do B013-9 no 1Password; validar substituição antes de reativar."
       },
-      "next_step": "Aguardar Rodolfo confirmar cadastro do B013-9 no 1Password; validar substituição antes de reativar."
+      "next_step": "Rodolfo confirmar migração das atribuições; então canário DTR, baseline limpo, paridade e reativação.",
+      "credential_gate": "passed",
+      "latest_authority_message_id": "1571964204422926407",
+      "latest_evidence": "/root/mgs-agent/reports/meta-app-b0139-1571964204422926407/blocked-receipt.json"
+    },
+    {
+      "id": "b0139-preflight-1571964204422926407",
+      "agent": "zeus",
+      "type": "replacement-preflight",
+      "status": "blocked-sheet-assignments",
+      "updated_at": "2026-11-16T19:07:09.519473+00:00",
+      "authority_message_id": "1571964204422926407",
+      "thread_id": "1571959312111374447",
+      "backup": "/root/mgs-agent/backups/meta-app-b0138-to-b0139-1571964204422926407",
+      "evidence": "/root/mgs-agent/reports/meta-app-b0139-1571964204422926407/blocked-receipt.json",
+      "validation": {
+        "checked_at": "2026-11-16T19:07:09.519473+00:00",
+        "credential_gate": true,
+        "new_app": "B013-9",
+        "meta_name": "minibot m3",
+        "app_id": "2030252157625027",
+        "predecessor_app_id": "953171080682697",
+        "sheet_new_assignments": 0,
+        "sheet_predecessor_assignments": 107,
+        "monitor_jobs_paused": [
+          "498fb0d95e10",
+          "f42618f5ced7"
+        ],
+        "registry_changed": false,
+        "production_runner_changed": false,
+        "production_state_changed": false,
+        "sheet_changed": false,
+        "credential_values_changed": false,
+        "blocker": "NO APP ainda contém B013-8; sucessor B013-9 sem população atribuída. Não promover nem reativar monitor vazio.",
+        "next_step": "Rodolfo confirmar migração das atribuições; então canário DTR, baseline limpo, paridade e reativação."
+      },
+      "next_step": "Rodolfo confirmar migração das atribuições; então canário DTR, baseline limpo, paridade e reativação."
+    },
+    {
+      "id": "meta-manual-payments-refresh-cron-20261116T1402",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "updated_at": "2026-11-16T14:08:06.094195-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/closure-current.json",
+      "source_thread_id": "1563926766286803004",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "preserved_h": 40,
+        "pending_d": 8,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef": true,
+        "historical_h_d_ledger_parity": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [

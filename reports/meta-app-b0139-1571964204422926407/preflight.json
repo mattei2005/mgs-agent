@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-11-16T19:05:05.262465+00:00",
+  "current_registry": {
+    "app": "B013-8",
+    "channel_id": "1522830283240505385",
+    "channel_name": "b013-2-app-status",
+    "admin": "Eduarda Oliveira",
+    "backup_profile": "Emgai Datquang",
+    "onepassword_item_id": "s2dnq2ipplrfmetbj66taasmde",
+    "onepassword_item_title": "BOT B013-8 Token -  Eduarda Oliveira, backup: Emgai Datquang"
+  },
+  "predecessor_app_id": "953171080682697",
+  "item_title": "BOT B013-9 Token -  Eduarda Oliveira, backup: Emgai Datquang",
+  "app_name": "B013-9",
+  "app_id": "2030252157625027",
+  "new_meta_app_id": true,
+  "app_metadata": {
+    "http": 200,
+    "data": {
+      "id": "2030252157625027",
+      "name": "minibot m3"
+    }
+  },
+  "me": {
+    "http": 200,
+    "data": {
+      "id": "122148974499214980",
+      "name": "Eduarda Oliveira"
+    }
+  },
+  "debug_token": {
+    "http": 200,
+    "data": {
+      "app_id": "2030252157625027",
+      "application": "minibot m3",
+      "is_valid": true,
+      "expires_at": 1800039754
+    }
+  },
+  "roles": {
+    "http": 200,
+    "count": 2,
+    "roles": [
+      {
+        "app_id": "2030252157625027",
+        "user": "122148974499214980",
+        "role": "administrators"
+      },
+      {
+        "app_id": "2030252157625027",
+        "user": "122131760595370208",
+        "role": "administrators"
+      }
+    ]
+  },
+  "credential_gate": true
+}

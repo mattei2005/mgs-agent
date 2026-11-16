@@ -1,0 +1,24 @@
+"""Freeze native prune as cache-state retirement, not lossless historical restore."""
+import pathlib,json,gzip,os,subprocess,importlib.util,collections,datetime
+OUT=pathlib.Path(__file__).parent;PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-uv-1571959754081837281')
+spec=importlib.util.spec_from_file_location('prune_prepare_gate',OUT/'prune-gate.py');assert spec and spec.loader;g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
+assert not(OUT/'prune-manifest.json').exists()
+inventory=json.load(open(OUT/'inventory.json'));classification=json.load(gzip.open(PRIVATE/'classification.json.gz','rt'));rows=[json.loads(x)for x in gzip.open(inventory['metadata_second']['path'],'rt')]
+current,live=g.c.snapshot(None);assert live['normalized_plain_sha256']==inventory['metadata_second']['normalized_plain_sha256']
+targets=classification['native_prune_targets'];assert targets==g.model_targets();rels=[os.path.relpath(t,g.CACHE)for t in targets];chosen=[x for x in rows if g.selected(x['relative'],rels)]
+# Protect the bytes of every surviving regular inode, including shared package payloads.
+kept=[];seen=set()
+for row in rows:
+    key=(row['dev'],row['ino'])
+    if row['kind']=='file'and not g.selected(row['relative'],rels)and key not in seen:kept.append(str(g.CACHE/row['relative']));seen.add(key)
+hashes=g.payload_hashes(kept);index=PRIVATE/'retained-payloads.json.gz'
+with gzip.open(index,'wt')as f:json.dump(hashes,f,separators=(',',':'))
+root=str(pathlib.Path('/root/mgs-agent'));controls={str(pathlib.Path('/root/.hermes/profiles')/p/n):g.sha(pathlib.Path('/root/.hermes/profiles')/p/n)for p in ['zeus','ares','atena']for n in ['SOUL.md','config.yaml']}
+(OUT/'profile-controls-before.json').write_text(json.dumps(controls,indent=2)+'\n')
+m=dict(version=1,status='PROPOSED_NOT_AUTHORIZED',authority_message_id='1571959754081837281',owner_id=g.OWNER,thread_id=g.THREAD,cache_root=str(g.CACHE),native_uv_version=subprocess.check_output([g.UV,'--version'],text=True).strip(),native_argv=[g.UV,'cache','prune','--cache-dir',str(g.CACHE),'--no-config','--offline','--no-progress'],targets=targets,top_level_targets=len(targets),target_node_counts=dict(collections.Counter(x['kind']for x in chosen)),target_logical_file_bytes=sum(x['size']for x in chosen if x['kind']=='file'),whole_cache_node_count=len(rows),cache_normalized_sha256=inventory['metadata_second']['normalized_plain_sha256'],metadata_index=inventory['metadata_second']['path'],metadata_index_sha256=inventory['metadata_second']['compressed_sha256'],retained_payload_index=str(index),retained_payload_index_sha256=g.sha(index),retained_unique_payloads=len(hashes),protected_helpers={str(OUT/'collect.py'):g.sha(OUT/'collect.py'),str(OUT/'consumers.py'):g.sha(OUT/'consumers.py'),g.UV:g.sha(g.UV),str(PRIVATE/'uv-cache-0.12.1-lib.rs'):g.sha(PRIVATE/'uv-cache-0.12.1-lib.rs')},expected_orphan_archives=188,expected_cached_environments=83,outdated_index_bucket='simple-v21',retained_wheel_sdist_archives=529,physical_reclaim_upper_bound_bytes=inventory['native_prune_physical_upper_bound_bytes'],historical_cached_state_retirement=True,exact_old_environment_restore_proven=False,irreversible_effect='Retires these historical ephemeral environment/bytecode and resolver-cache states. They are not promised byte-for-byte recoverable. Installed programs, checked external references, current managed Hermes UV cache, source code, browser/model assets and remaining cache payloads are outside native targets. Future use can require network downloads/rebuilds; no new retention schedule.',native_exclusive_lock_required=True,force_and_ci_forbidden=True,scope_model_is_not_native_dry_run=True,deletion_authorized=False,coherent_two_pass_metadata=True,profile_controls=controls,at=datetime.datetime.now().astimezone().isoformat())
+g.scope(m,rows);(OUT/'prune-manifest.json').write_text(json.dumps(m,indent=2)+'\n')
+(OUT/'prune-manifest.sha256').write_text(g.sha(OUT/'prune-manifest.json')+'  prune-manifest.json\n');(OUT/'prune-gate.sha256').write_text(g.sha(OUT/'prune-gate.py')+'  prune-gate.py\n')
+pre=g.verify(m,rows);(OUT/'preflight.json').write_text(json.dumps(pre,indent=2)+'\n')
+help_command=[g.UV,'cache','prune','--cache-dir',str(g.CACHE),'--no-config','--offline','--no-progress','--help'];r=subprocess.run(help_command,capture_output=True,text=True,timeout=30);assert r.returncode==0
+(OUT/'native-help-only.json').write_text(json.dumps(dict(status='PASS',exit_code=r.returncode,destructive_command_not_executed=True,argv_flags_validated_with_help=True),indent=2)+'\n')
+assert g.c.snapshot(None)[1]['normalized_plain_sha256']==m['cache_normalized_sha256'];print(json.dumps(dict(manifest_sha256=g.sha(OUT/'prune-manifest.json'),executor_sha256=g.sha(OUT/'prune-gate.py'),preflight=pre,physical_upper_bound_MiB=round(m['physical_reclaim_upper_bound_bytes']/1024**2,2),retired_old_environment_restore_not_claimed=True,source_files_removed=0)))

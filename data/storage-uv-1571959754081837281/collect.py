@@ -22,12 +22,15 @@ def snapshot(name):
                 with os.scandir(p)as entries:stack.extend(x.path for x in entries)
         except OSError as e:errors.append(dict(path=p,error=type(e).__name__))
     assert not errors,errors[:3];rows.sort(key=lambda x:x['relative'])
-    file=PRIVATE/(name+'.jsonl.gz');h=subprocess.Popen(['sha256sum'],stdin=subprocess.PIPE,stdout=subprocess.PIPE);assert h.stdin and h.stdout
-    with gzip.open(file,'wb')as f:
-        for row in rows:
-            line=(json.dumps(row,sort_keys=True,separators=(',',':'))+'\n').encode();f.write(line);h.stdin.write(line)
+    file=PRIVATE/(name+'.jsonl.gz') if name is not None else None;h=subprocess.Popen(['sha256sum'],stdin=subprocess.PIPE,stdout=subprocess.PIPE);assert h.stdin and h.stdout
+    if file is not None:
+        with gzip.open(file,'wb')as f:
+            for row in rows:
+                line=(json.dumps(row,sort_keys=True,separators=(',',':'))+'\n').encode();f.write(line);h.stdin.write(line)
+    else:
+        for row in rows:h.stdin.write((json.dumps(row,sort_keys=True,separators=(',',':'))+'\n').encode())
     h.stdin.close();digest=h.stdout.read().decode().split()[0];assert h.wait()==0
-    return rows,dict(path=str(file),compressed_sha256=sha(file),normalized_plain_sha256=digest,node_count=len(rows))
+    return rows,dict(path=str(file) if file is not None else None,compressed_sha256=sha(file) if file is not None else None,normalized_plain_sha256=digest,node_count=len(rows))
 def references():
     refs=collections.defaultdict(list);env=[];errors=[]
     for bucket in ['sdists-v9','wheels-v6','environments-v2']:

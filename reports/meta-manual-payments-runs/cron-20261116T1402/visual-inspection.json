@@ -1,0 +1,11 @@
+{
+  "gate": "facebook_passkey_reauthentication_required",
+  "images_inspected_with_vision": true,
+  "initial_image": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/initial.png",
+  "initial_surface": "Accounts rendered at business_id155263197283282; no gate visible before navigation; Rodolfo profile confirmed separately in full AX. Rendered page does not establish refreshed authentication.",
+  "blocked_image": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T140558270835/blocked.png",
+  "actual_navigation_result": "Meta security/twofactor/reauth: Confirm it's you with your passkey; no readable financial data",
+  "fresh_h_verified_account_ids": [],
+  "fresh_d_verified_account_ids": [],
+  "no_further_ui_input_after_gate": true
+}

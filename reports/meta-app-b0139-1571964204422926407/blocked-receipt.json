@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-11-16T19:07:09.519473+00:00",
+  "credential_gate": true,
+  "new_app": "B013-9",
+  "meta_name": "minibot m3",
+  "app_id": "2030252157625027",
+  "predecessor_app_id": "953171080682697",
+  "sheet_new_assignments": 0,
+  "sheet_predecessor_assignments": 107,
+  "monitor_jobs_paused": [
+    "498fb0d95e10",
+    "f42618f5ced7"
+  ],
+  "registry_changed": false,
+  "production_runner_changed": false,
+  "production_state_changed": false,
+  "sheet_changed": false,
+  "credential_values_changed": false,
+  "blocker": "NO APP ainda contém B013-8; sucessor B013-9 sem população atribuída. Não promover nem reativar monitor vazio.",
+  "next_step": "Rodolfo confirmar migração das atribuições; então canário DTR, baseline limpo, paridade e reativação."
+}

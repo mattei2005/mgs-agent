@@ -94,25 +94,25 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_validated_waiting_human_meta_passkey",
-    "scheduled_at": "2026-11-16T08:02:00-05:00",
+    "scheduled_at": "2026-11-16T14:02:00-05:00",
     "job_id": "2ee720363d7d",
-    "verified_at": "2026-11-16T08:08:37.659525-05:00",
+    "verified_at": "2026-11-16T14:08:06.094195-05:00",
     "accounts": 55,
     "groups": {
       "Cartão de crédito": 15,
       "Linha de crédito": 40
     },
     "fresh_metrics_count": 55,
-    "api_collected_at": "2026-11-16T08:06:57.178885-05:00",
+    "api_collected_at": "2026-11-16T14:05:50.823064-05:00",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
     "h_read_at_min": "2026-11-13T10:01:53.761038-05:00",
     "h_read_at_max": "2026-11-13T10:24:24.731026-05:00",
     "h_source": "accounts_list_outstanding_balance",
     "h_header": "Saldo pendente — Outstanding balance",
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T080712849241",
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261116T080710587155",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261116T080626160551",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T140558270835",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261116T140556188461",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261116T140510598665",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_historical_ledger_and_notes_exact": true,
@@ -174,16 +174,16 @@
       "pending": 30,
       "due_usd": "417864.11",
       "outside": [],
-      "collected_at": "2026-11-16T08:06:26.160780-05:00"
+      "collected_at": "2026-11-16T14:05:10.598869-05:00"
     },
     "totals_usd": {
-      "average_daily": "23562.21",
-      "balance": "646478.92",
-      "month_spend": "318764.11"
+      "average_daily": "23575.54",
+      "balance": "651145.54",
+      "month_spend": "326223.63"
     },
     "lease_free": true,
     "auth_gate": "Meta Confirm it's you with your passkey; business.facebook.com/security/twofactor/reauth/; current run blocked.png inspected",
-    "next_run_at": "2026-11-16T14:02:00-05:00",
+    "next_run_at": "2026-11-16T21:02:00-05:00",
     "schedule_unchanged": true,
     "payments_executed": 0,
     "billing_changes": 0,
@@ -192,19 +192,19 @@
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "business_refresh_complete": false,
     "structural_validation_pass": true,
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402",
     "historical_d_values_revalidated_at_provider": false,
     "h_values_revalidated_at_provider": false,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/closure-current.json"
   },
   "latest_recovery_attempt": {
-    "scheduled_at": "2026-11-16T08:02:00-05:00",
+    "scheduled_at": "2026-11-16T14:02:00-05:00",
     "status": "partial_validated_waiting_human_meta_passkey",
     "fresh_metrics_count": 55,
     "fresh_h_count": 0,
     "h_previous_values_and_times_preserved": true,
-    "api_collected_at": "2026-11-16T08:06:57.178885-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/closure-current.json",
+    "api_collected_at": "2026-11-16T14:05:50.823064-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/closure-current.json",
     "prior_1402_incident_remains_open": true
   },
   "pending_card_history": {
@@ -262,7 +262,7 @@
       }
     ],
     "historical_blank_count": 39,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -290,7 +290,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-16T14:02:00-05:00",
+  "next_run_at": "2026-11-16T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
@@ -365,7 +365,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261116T080621947561",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261116T140504853703",
   "pay_now_rule_authority_message": "1570815017794674749",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",
@@ -500,25 +500,25 @@
   "h_source": "accounts_list_outstanding_balance",
   "previous_refresh_qualification": {
     "status": "partial_validated_waiting_human_meta_passkey",
-    "scheduled_at": "2026-11-15T21:02:00-05:00",
+    "scheduled_at": "2026-11-16T08:02:00-05:00",
     "job_id": "2ee720363d7d",
-    "verified_at": "2026-11-15T21:08:35.333681-05:00",
+    "verified_at": "2026-11-16T08:08:37.659525-05:00",
     "accounts": 55,
     "groups": {
       "Cartão de crédito": 15,
       "Linha de crédito": 40
     },
     "fresh_metrics_count": 55,
-    "api_collected_at": "2026-11-15T21:06:13.236627-05:00",
+    "api_collected_at": "2026-11-16T08:06:57.178885-05:00",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
     "h_read_at_min": "2026-11-13T10:01:53.761038-05:00",
     "h_read_at_max": "2026-11-13T10:24:24.731026-05:00",
     "h_source": "accounts_list_outstanding_balance",
     "h_header": "Saldo pendente — Outstanding balance",
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261115T210629450766",
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261115T210627315650",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261115T210546270378",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T080712849241",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261116T080710587155",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261116T080626160551",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "h_historical_ledger_and_notes_exact": true,
@@ -527,11 +527,9 @@
     "other_sheet_data_unchanged": true,
     "workbook_sheets": 2,
     "average_periods": [
-      "{\"since\": \"2026-11-12\", \"until\": \"2026-11-14\"}",
       "{\"since\": \"2026-11-13\", \"until\": \"2026-11-15\"}"
     ],
     "month_periods": [
-      "{\"since\": \"2026-11-01\", \"until\": \"2026-11-15\"}",
       "{\"since\": \"2026-11-01\", \"until\": \"2026-11-16\"}"
     ],
     "pending_ui": [
@@ -582,16 +580,16 @@
       "pending": 30,
       "due_usd": "417864.11",
       "outside": [],
-      "collected_at": "2026-11-15T21:05:46.270597-05:00"
+      "collected_at": "2026-11-16T08:06:26.160780-05:00"
     },
     "totals_usd": {
-      "average_daily": "21636.66",
-      "balance": "642714.21",
-      "month_spend": "310637.44"
+      "average_daily": "23562.21",
+      "balance": "646478.92",
+      "month_spend": "318764.11"
     },
     "lease_free": true,
     "auth_gate": "Meta Confirm it's you with your passkey; business.facebook.com/security/twofactor/reauth/; current run blocked.png inspected",
-    "next_run_at": "2026-11-16T08:02:00-05:00",
+    "next_run_at": "2026-11-16T14:02:00-05:00",
     "schedule_unchanged": true,
     "payments_executed": 0,
     "billing_changes": 0,
@@ -600,9 +598,9 @@
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "business_refresh_complete": false,
     "structural_validation_pass": true,
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261115T2102",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802",
     "historical_d_values_revalidated_at_provider": false,
     "h_values_revalidated_at_provider": false,
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261115T2102/closure-current.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/closure-current.json"
   }
 }
