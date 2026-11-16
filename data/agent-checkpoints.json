@@ -4243,12 +4243,12 @@
     {
       "agent": "zeus",
       "id": "SEGURADOR-RESTRICTION-AUDIT-1571976927898767451",
-      "next_step": "Cabeçalhos publicados e validados. Confirmar grupo/lista AdsPower e frequência/horário; depois implementar canário e agendamento. Deslogados serão registrados e pulados sem login. Nenhum perfil inspecionado; nenhum cron criado.",
-      "objective": "Conferir restrição de publicidade dos seguradores em lotes de até 5 e reportar na aba checagem restricao",
+      "next_step": "Planilha corrigida e validada com app afetado, ID e confirmação de identidade. Auditoria: nenhum cron ativo de abertura AdsPower encontrado; financeiro usa Chrome PC1 às 08:02/14:02/21:02 ET e recovery pode disputar a lease fora desses horários. Aquecimento expirou em 20/10; criação49 pausada. Confirmar grupos/frequência/horário, preflight global e canário antes de ativar. Não houve varredura de perfis nem criação de cron.",
+      "objective": "Conferir restrição de mensagens automatizadas por app no Business Support Home > View Details, em lotes de até 5, e reportar na aba checagem restricao",
       "source": "data/segurador-advertising-restriction-audit.json",
       "state": "awaiting_scope_and_schedule",
       "thread_id": "1571976927898767451",
-      "updated_at": "2026-11-16T20:00:53+00:00"
+      "updated_at": "2026-11-16T20:10:50+00:00"
     },
     {
       "agent": "zeus",
@@ -8258,12 +8258,12 @@
     {
       "agent": "zeus",
       "id": "b0138-to-b0139-1571961868418027543",
-      "next_step": "Dois crons reativados e readback OK;canário saudável;2 baselines completos;paridade sem divergência;clean repeat0writes. Aguardar ciclo nativo completo posterior à reativação e nova paridade SA. Novas atribuições após cutoff são onboarding separado,sem expandir coorte original.",
-      "objective": "Validar conclusão B013-9 no scheduler real.",
+      "next_step": "Dois agendamentos originais ativos; ciclo nativo validado107consultados/9vinculados/98sem vínculo,capacidade saudável,paridade SA sem divergências. Novas atribuições após captura entram no próximo ciclo. Evidência:reports/meta-app-b0139-1571966762898169990/closure.json.",
+      "objective": "B013-8→B013-9: monitor reativado com validação integral.",
       "source": "discord:1571959312111374447:1571966762898169990",
-      "state": "awaiting_scheduled_readback",
+      "state": "completed",
       "thread_id": "1571959312111374447",
-      "updated_at": "2026-11-16T19:51:17+00:00"
+      "updated_at": "2026-11-16T20:05:51+00:00"
     },
     {
       "agent": "zeus",
@@ -11067,5 +11067,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:00:53+00:00"
+  "updated_at": "2026-11-16T20:10:50+00:00"
 }

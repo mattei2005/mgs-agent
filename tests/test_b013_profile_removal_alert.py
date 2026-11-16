@@ -49,6 +49,19 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         }
         return row
 
+    def test_pending_table_preserves_every_row_over_thirty(self):
+        failures = [
+            {'user': f'bot{i}@example.com', 'segurador': f'Profile {i}', 'profile_id': str(100000 + i), 'pages': '1'}
+            for i in range(98)
+        ]
+        text = self.mod.fmt_pending_rows(failures)
+        rows = [line for line in text.splitlines() if line.count('|') == 5 and 'BOT EMAIL' not in line]
+        self.assertEqual(len(rows), 98)
+        blocks = self.mod.code_blocks(text)
+        self.assertTrue(all(len(block) <= 2000 for block in blocks))
+        self.assertEqual(sum(line.count('|') == 5 and 'BOT EMAIL' not in line for block in blocks for line in block.splitlines()), 98)
+        self.assertIn('Profile 97', '\n'.join(blocks))
+
     def test_current_generation_matches_canonical_registry(self):
         import json
         registry = json.loads(Path('/root/mgs-agent/data/meta-app-registry.json').read_text())

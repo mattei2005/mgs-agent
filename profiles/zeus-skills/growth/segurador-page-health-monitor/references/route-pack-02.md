@@ -46,6 +46,14 @@ A production quarantine automation is incomplete unless its communication and co
 
 Discord is the human control surface, **not** the source of truth. Durable incident state, page snapshots, action attempts, readbacks, overrides, Discord message/thread IDs, and rollback data must live in the runtime incident store and audit log. A human reply such as “recuperado” may trigger immediate validation, but must never restore `Broadcast` without live DTR/Meta/page validation and SB readback. Human replies from unauthorized IDs are informational only and cannot change incident or production state.
 
+### Facebook account restriction on automated messaging from connected apps
+
+- To audit the segurador itself, open `https://business.facebook.com/business-support-home/`, identify the authenticated **Facebook user/account**, click its observed **View Details** action, and inspect the next screen. The overview's **Some issues** or last-30-days summary alone cannot identify the restriction.
+- An explicit **“We restricted automated messaging from apps you connected because our system detected unusual activity”** plus **“You can’t send messages”** is direct UI evidence of an automated-messaging restriction for the listed connected app. Capture the exact app name/ID, reason, check timestamp and whether **Confirm Identity** is required. This is not merely an advertising-access restriction.
+- A working app connection, valid token, successful `/me` or page listing, or a managed Page labeled **No issues** does not clear that separate messaging restriction. Conversely, do not generalize a listed-app restriction to every app, Page, manual message or API endpoint without matching evidence. Correlate the affected app ID with the segurador's assigned operational app before declaring the BOT/Messenger route affected.
+- Keep login state, messaging restriction, app scope, identity-confirmation requirement and Page suspension separate in reports. If the details cannot be read or the app scope is ambiguous, report **Não verificado**, never unrestricted. Do not automate identity confirmation or change app/token/Page/SB state merely to perform this read-only audit.
+- For Rodolfo's batch audit in thread `1571976927898767451`, immediately record and skip unauthenticated profiles and CAPTCHA/2FA/checkpoint gates, without attempting login or recovery; Rodolfo resolves these later. The exact destination and inactive-until-scope/schedule contract are in `/root/mgs-agent/data/segurador-advertising-restriction-audit.json`. Human evidence: Rodolfo message `1571980047391268914`; runtime classification still requires each profile's own live detail read.
+
 ### Critical: page fell or lost access
 
 Trigger if a previously known page:

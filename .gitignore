@@ -187,3 +187,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Preserve this exact receipt without publishing it; sibling evidence stays visible.
 /data/storage-work-duplicates-1571695234532778046/private-reader-recovery.json
 
+# Reconciled own-metadata test baseline (REPORT-INFRA 1571981139990806655).
+# Preserve this exact offline rollback copy; siblings and live source stay visible.
+/data/ares/meta-ads/audit/maintenance/bot-self-metadata-1571975883286257726/baseline/tests/test_ares_credential_metadata.py
+

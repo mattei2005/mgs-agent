@@ -36,7 +36,7 @@ Apply the main skill's replacement authorization and acceptance gates. Start wit
 
 1. Resume only the existing day/night jobs on their unchanged schedules and preserve unrelated pauses. Read both jobs back after the writes; successful resume responses alone are not closure.
 2. Require a complete native cycle with target observation timestamps after reactivation, healthy capability, no Sheet sync error and fresh identity/marker parity. A lock-skip may return scheduler status `ok` without scanning, so require the target-specific state evidence as well.
-3. Verify any genuine automatic alert by exact message readback; do not force an extra notice merely to demonstrate activation. Close with the current app, preserved channel, scheduled health and latest linked/assigned counts, distinguishing remaining account-link gaps from app health.
+3. Verify any genuine automatic alert by exact message readback; do not force an extra notice merely to demonstrate activation. Validate tables larger than 30 rows across every continuation: `fmt_pending_rows` must not silently slice `failures[:30]`. Let the existing `code_blocks` splitter preserve every confirmed row and test row totals plus Discord message-size limits against a realistic high-cardinality state. A renderer repair affects subsequent alerts only; do not claim an older truncated card was retroactively corrected. Close with the current app, preserved channel, scheduled health and latest linked/assigned counts, distinguishing remaining account-link gaps from app health.
 
 ## Long-cycle execution
 

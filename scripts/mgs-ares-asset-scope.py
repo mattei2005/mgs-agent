@@ -97,9 +97,19 @@ def _enforce_dependency(clean,params,method,row,data):
  elif edge or not fields or not fields<=allowed or not set(params)<={'fields'}:raise ScopeError(DENY)
 
 CREDENTIAL_IDENTITY_POLICY=Path('/root/mgs-agent/data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json')
+CREDENTIAL_ADVERTISER_PROFILE_POLICY=Path('/root/mgs-agent/data/ares/meta-ads/policies/eggbev-advertiser-profile.json')
+CREDENTIAL_APP_SELECTION_POLICY=Path('/root/mgs-agent/data/ares/meta-ads/policies/bot-meta-app-selection.json')
 
 def _credential_identity_policy(account_id):
  if str(account_id)=='1481815942722118':
+  if CREDENTIAL_ADVERTISER_PROFILE_POLICY.exists():
+   profile=json.loads(CREDENTIAL_ADVERTISER_PROFILE_POLICY.read_text())
+   grant=profile.get('technical_identity_validation_by_account',{}).get(str(account_id))
+   if grant is not None:
+    selection=json.loads(CREDENTIAL_APP_SELECTION_POLICY.read_text())
+    if (selection.get('agent_actions_on_hold') is True or selection.get('target_app_id')!=grant.get('expected_app_id') or profile.get('approved_app_id')!=grant.get('expected_app_id') or selection.get('read_only_test_authority_message_id')!=grant.get('authority_message_id')):
+     raise ValueError('current own-profile metadata authority/issuer mismatch')
+    return {**profile,'account_id':str(account_id),'technical_identity_validation':grant}
   from ares_campaign_v3.eggbev_cross_account import policy,TARGET
   p=policy('eggbev03-cross-account-1571623835822858352')
   return {**p,'account_id':TARGET}
@@ -127,11 +137,15 @@ def observe_credential_metadata(path,params,payload,account_id,authentication_to
  if not isinstance(payload,dict):raise ScopeError(DENY)
  identity=payload if clean=='me' else payload.get('data',{})
  if clean=='me' and (not re.fullmatch(r'[0-9]{5,30}',str(identity.get('id',''))) or not isinstance(identity.get('name'),str)):raise ScopeError(DENY)
+ try:own_grant=_credential_identity_policy(account_id).get('technical_identity_validation',{})
+ except (OSError,ValueError):raise ScopeError(DENY) from None
+ if clean=='me' and own_grant.get('expected_profile_name') and identity.get('name')!=own_grant['expected_profile_name']:raise ScopeError(DENY)
  if clean=='debug_token':
   try:grant=_credential_identity_policy(account_id).get('technical_identity_validation',{})
   except (OSError,ValueError):raise ScopeError(DENY) from None
   expected_app=str(grant.get('expected_app_id',APP_ID))
   if not re.fullmatch(r'[0-9]{5,30}',expected_app) or not isinstance(identity,dict) or identity.get('is_valid') is not True or str(identity.get('app_id',''))!=expected_app or not re.fullmatch(r'[0-9]{5,30}',str(identity.get('user_id',''))):raise ScopeError(DENY)
+  if grant.get('expected_token_type') and identity.get('type')!=grant['expected_token_type']:raise ScopeError(DENY)
 
 def enforce_meta_path(path,params=None,method='GET'):
  if not is_ares_context():return

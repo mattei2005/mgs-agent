@@ -488,6 +488,21 @@ fi
                     result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
                     self.assertEqual(result.returncode, 0 if path == target else 1)
 
+    def test_exact_own_metadata_baseline_exclusion(self):
+        target = "data/ares/meta-ads/audit/maintenance/bot-self-metadata-1571975883286257726/baseline/tests/test_ares_credential_metadata.py"
+        included = [target + ".other", "work/" + target,
+                    target.replace("1571975883286257726", "other"),
+                    target.replace("test_ares_credential_metadata.py", "credentials.txt"),
+                    target.replace("baseline/tests", "baseline-other/tests"),
+                    "tests/test_ares_credential_metadata.py"]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+            for path in [target] + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
+                    self.assertEqual(result.returncode, 0 if path == target else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

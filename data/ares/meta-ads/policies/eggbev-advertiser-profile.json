@@ -227,5 +227,30 @@
   "onepassword_item_reference_scope": "Current previous-app runtime reference only; not validated for new chosen issuer",
   "token_metadata_observed_scope": "Historical previous-issuer metadata; not fresh proof for new target app",
   "repeat_app_selection_approval_required": false,
-  "owner_token_preparation": {"owner":"Rodolfo Mattei","stop_message_id":"1571975266182635716","profile_correction_message_id":"1571974994030755941","profile":"Ana Cunha","token_created_and_test_authorized_message_id":"1571975883286257726","agent_allowed_action":"read-only test of owner-created target-app credential","runtime_cutover_or_campaign_resume_authorized_by_test":false}
+  "owner_token_preparation": {
+    "owner": "Rodolfo Mattei",
+    "stop_message_id": "1571975266182635716",
+    "profile_correction_message_id": "1571974994030755941",
+    "profile": "Ana Cunha",
+    "token_created_and_test_authorized_message_id": "1571975883286257726",
+    "agent_allowed_action": "read-only test of owner-created target-app credential",
+    "runtime_cutover_or_campaign_resume_authorized_by_test": false
+  },
+  "technical_identity_validation_by_account": {
+    "1481815942722118": {
+      "status": "active",
+      "account_id": "1481815942722118",
+      "authorized_by_discord_id": "344196393512075265",
+      "authority_message_id": "1571975883286257726",
+      "app_selection_authority_message_id": "1571968822276259974",
+      "expected_app_id": "1299247318762949",
+      "expected_profile_name": "Ana Cunha",
+      "expected_token_type": "USER",
+      "allowed_reads": [
+        "me:id,name",
+        "debug_token:self_only"
+      ],
+      "purpose": "Read-only own candidate token validation; no asset enrollment, discovery, write or runtime cutover"
+    }
+  }
 }

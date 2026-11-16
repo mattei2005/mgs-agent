@@ -19,6 +19,7 @@ This skill is for collecting and validating **Meta user tokens for seguradores**
 Use it when Rodolfo asks to:
 
 - open seguradores in AdsPower;
+- check Facebook-profile advertising restrictions through Business Support Home, including batch audits and Sheet reporting;
 - generate Meta user tokens;
 - extend/debug tokens;
 - validate token permissions/pages;
@@ -37,6 +38,15 @@ references/pc1-remote-adspower-operations.md
 The same private PC1 transport is used by Zeus and Ares. Select this route only when the task requires an AdsPower-managed identity, profile or proxy; a Meta campaign audit on PC1 does not by itself require AdsPower. If Rodolfo identifies an already-authenticated ordinary Chrome session, inspect that session through `secure-remote-windows-automation` first rather than creating another login dependency. Within the AdsPower route, deterministic profile and browser-page operations use the official Local API/MCP first; Computer Use remains the fallback for native GUI, CAPTCHA, 2FA, checkpoints, or visual recovery. Both routes share the same cross-agent lease, because they can conflict on the same AdsPower profile and interactive browser state. Zeus owns technical governance; Ares owns routine Growth/Media Buying execution within the requesting user's current authority.
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
+
+## Advertising-restriction audit rules
+
+- For Rodolfo's batch restriction checks, record and immediately skip profiles that are logged out or require login, checkpoint, CAPTCHA or 2FA. Leave authentication to Rodolfo; do not pause the whole list, attempt credentials or repeatedly reopen the same blocked profile during that sweep.
+- Keep `Sessão Facebook` separate from `Restrição para anunciar`. Publish an inaccessible profile as `Não verificado` with its access reason, never as unrestricted or restricted. App connection, token validity and Page access do not establish the personal profile's advertising status.
+- Use the user-designated Google Sheet tab as the review surface, with one stable profile identity per row and separate columns for status, reason and check time. Follow `google-drive-agent-automation` for access and publication; never replace the shared surface with unsolicited exports.
+- Resolve the authorized group/list and schedule before activating recurrence. Preparing headers is not a completed sweep or an active cron; report these stages separately and do not invent result rows.
+
+For the ordered browser-to-Sheet procedure, use **Advertising-restriction sweep and Sheet publication** in `references/pc1-remote-adspower-operations.md`.
 
 ## Required URLs
 

@@ -22,7 +22,7 @@ class CredentialMetadataTests(unittest.TestCase):
   # Account03 now has its own separately authorized grant. This fixture tests
   # absence of that grant, not the superseded assumption it can never exist.
   from ares_campaign_v3 import eggbev_cross_account as cross
-  with patch.object(cross,'POLICY',Path(self.tmp.name)/'absent-cross-grant.json'):
+  with patch.object(cross,'POLICY',Path(self.tmp.name)/'absent-cross-grant.json'),patch.object(scope,'CREDENTIAL_ADVERTISER_PROFILE_POLICY',Path(self.tmp.name)/'absent-profile-grant.json'):
    with self.assertRaises(scope.ScopeError):self.enforce(account='1481815942722118')
  def test_missing_grant_denied(self):
   self.policy.write_text('{}')

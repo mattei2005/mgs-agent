@@ -508,6 +508,31 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def own_metadata_baseline(self):
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        path = self.repo / "data/ares/meta-ads/audit/maintenance/bot-self-metadata-1571975883286257726/baseline/tests/test_ares_credential_metadata.py"
+        path.parent.mkdir(parents=True)
+        path.write_text("# Synthetic offline baseline fixture only.\n")
+        return path
+
+    def test_own_metadata_baseline_preserved_while_normal_file_commits(self):
+        path = self.own_metadata_baseline()
+        before = path.read_bytes()
+        (self.repo / "normal.txt").write_text("valid")
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()),
+                         {".gitignore", "normal.txt"})
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(self.git("ls-files", "--", str(path)), "")
+
+    def test_own_metadata_baseline_keeps_sibling_credentials_blocked(self):
+        path = self.own_metadata_baseline()
+        (path.parent / "credentials.txt").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_private_runbook_exception_does_not_allow_sibling_credentials(self):
         base = self.repo / "profiles/zeus-skills/ops/google-drive-agent-automation/references"
         base.mkdir(parents=True)
