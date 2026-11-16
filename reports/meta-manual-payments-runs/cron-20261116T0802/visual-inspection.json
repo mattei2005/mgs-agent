@@ -1,0 +1,12 @@
+{
+  "gate": "facebook_passkey_reauthentication_required",
+  "images_inspected_with_vision": true,
+  "initial_image": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/initial.png",
+  "blocked_image": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T080712849241/blocked.png",
+  "initial_surface": "Existing Chrome binding live; Rodolfo confirmed in AX; exact business_id155263197283282 visible in Accounts URL pixels. Accounts initially rendered but did not establish authorization for subsequent navigation.",
+  "diagnosis": "Fresh navigation in same approved Chrome reached business.facebook.com/security/twofactor/reauth/ and explicitly required passkey. No bypass, alternate profile, repeated navigation or payment attempted.",
+  "fresh_h_count": 0,
+  "history_ui_attempts_after_gate": 0,
+  "payments_executed": 0,
+  "meta_writes": 0
+}

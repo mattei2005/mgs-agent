@@ -67394,6 +67394,32 @@
         "mentions_empty": true
       },
       "result_sha256": "b1d7ae1b0ee1665518a60d7e8726e9495640c03a2025a39ad48cb52a8d69ede4"
+    },
+    {
+      "id": "meta-manual-payments-refresh-cron-20261116T0802",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "updated_at": "2026-11-16T08:08:37.659525-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T0802/closure-current.json",
+      "source_thread_id": "1563926766286803004",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "preserved_h": 40,
+        "pending_d": 8,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef": true,
+        "historical_h_d_ledger_parity": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [
