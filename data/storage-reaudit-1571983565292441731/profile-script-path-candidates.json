@@ -1,0 +1,397 @@
+{
+  "meta-app-roles-watch.sh": [
+    "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+  ],
+  "sb-utility-gray-alerts.sh": [
+    "/root/.hermes/profiles/zeus/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/sb-utility-gray-alerts.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/sb-utility-gray-alerts.sh"
+  ],
+  "hermes-mgs-patch-watchdog.sh": [
+    "/root/.hermes/profiles/zeus/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/hermes-mgs-patch-watchdog.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/hermes-mgs-patch-watchdog.sh"
+  ],
+  "meta-digital-trust-hourly40.sh": [
+    "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-hourly40.sh"
+  ],
+  "meta-digital-trust-40-20261007.sh": [
+    "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-40-20261007.sh"
+  ],
+  "utility-canary-approval-loop.sh": [
+    "/root/.hermes/profiles/zeus/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/utility-canary-approval-loop.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/utility-canary-approval-loop.sh"
+  ],
+  "mgs-offsite-restore-test.sh": [
+    "/root/.hermes/profiles/zeus/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/mgs-offsite-restore-test.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/mgs-offsite-restore-test.sh"
+  ],
+  "meta-digital-trust-49-20261013.sh": [
+    "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-49-20261013.sh"
+  ],
+  "ares-archive-notification-gate.py": [
+    "/root/.hermes/profiles/zeus/scripts/ares-archive-notification-gate.py"
+  ],
+  "mgs-offsite-backup-full.sh": [
+    "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/mgs-offsite-backup-full.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/mgs-offsite-backup-full.sh"
+  ],
+  "b013-dtr-link-watch.sh": [
+    "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh"
+  ],
+  "mgs-finance-quotes.py": [
+    "/root/.hermes/profiles/zeus/scripts/mgs-finance-quotes.py"
+  ],
+  "sb-utility-rollout-cron.sh": [
+    "/root/.hermes/profiles/zeus/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/sb-utility-rollout-cron.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/sb-utility-rollout-cron.sh"
+  ],
+  "mgs-offsite-backup-monitor.sh": [
+    "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/mgs-offsite-backup-monitor.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/mgs-offsite-backup-monitor.sh"
+  ],
+  "mgs-offsite-backup-quick.sh": [
+    "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/security-continuation-1555997081678782629/concurrency-component/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/regression-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/native-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-regression-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/red-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/patch-replay-native-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/regression-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/native-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/component-red-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/baseline/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/patch-replay/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/red-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/green-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/regression-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/native-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/candidate/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/regression-tree/scripts/mgs-offsite-backup-quick.sh",
+    "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/native-tree/scripts/mgs-offsite-backup-quick.sh"
+  ],
+  "shein-status-1571708413791174697.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1571708413791174697.py"
+  ],
+  "shein-g004-growpowerhub-cpr-updates-20261111.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-growpowerhub-cpr-updates-20261111.sh"
+  ],
+  "eggbev-page-lead-guardrail.sh": [
+    "/root/.hermes/profiles/ares/scripts/eggbev-page-lead-guardrail.sh"
+  ],
+  "creditoparaveiculo-one-time-c29-c31-20260827.py": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-one-time-c29-c31-20260827.py"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261111.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261111.sh"
+  ],
+  "shein-g004-vizioid-cpr-updates-20261111.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-vizioid-cpr-updates-20261111.sh"
+  ],
+  "shein-status-1571702676012539935.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1571702676012539935.py"
+  ],
+  "shein-g004-cpr-updates-20261106.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261106.sh"
+  ],
+  "shein-g004-mavroa-cpr-watch-20261102.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-watch-20261102.sh"
+  ],
+  "shein-status-1570293175086485526.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1570293175086485526.py"
+  ],
+  "creditoparaveiculo-v3-daily-create.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-v3-daily-create.sh"
+  ],
+  "shein-g004-cpr-watch-20261102.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-watch-20261102.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261113.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261113.sh"
+  ],
+  "creditoparaveiculo-account05-first-delivery.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261106.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261106.sh"
+  ],
+  "shein-g004-growpowerhub-cpr-updates-20261107.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-growpowerhub-cpr-updates-20261107.sh"
+  ],
+  "shein-g004-escalatepower-cpr-updates-20261107.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-escalatepower-cpr-updates-20261107.sh"
+  ],
+  "creditoparaveiculo-first-delivery-guardrail.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.sh"
+  ],
+  "shein-g004-cpr-updates-20261113.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261113.sh"
+  ],
+  "shein-status-1570185868096835655.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1570185868096835655.py"
+  ],
+  "shein-status-1570563534834769961.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1570563534834769961.py"
+  ],
+  "eggbev-roas-cycle-controlled.sh": [
+    "/root/.hermes/profiles/ares/scripts/eggbev-roas-cycle-controlled.sh"
+  ],
+  "shein-status-1569451285260935239.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1569451285260935239.py"
+  ],
+  "creditoparaveiculo-account05-intraday.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-intraday.sh"
+  ],
+  "shein-g004-mavroa-cpr-roi-20261114.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-roi-20261114.sh"
+  ],
+  "shein-g004-mavroa-cpr-roi-20261116.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-roi-20261116.sh"
+  ],
+  "shein-g004-cpr-roi-20261116.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-roi-20261116.sh"
+  ],
+  "shein-g004-roi-watch-20261029.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-roi-watch-20261029.sh"
+  ],
+  "shein-g004-cpr-updates-20261111.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261111.sh"
+  ],
+  "shein-g004-cpr-watch-20261031.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-watch-20261031.sh"
+  ],
+  "shein-g004-cpr-updates-20261105.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261105.sh"
+  ],
+  "shein-g004-cpr-watch-20261104.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-watch-20261104.sh"
+  ],
+  "shein-status-1571708992755998772.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1571708992755998772.py"
+  ],
+  "shein-status-1568749368176148481.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1568749368176148481.py"
+  ],
+  "creditoparaveiculo-account05-creative-cut24h.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.sh"
+  ],
+  "shein-g004-cpr-updates-20261109.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261109.sh"
+  ],
+  "shein-g004-cpr-roi-20261114.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-roi-20261114.sh"
+  ],
+  "shein-status-1569451003739246615.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1569451003739246615.py"
+  ],
+  "creditoparaveiculo-snapshot.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-snapshot.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261105.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261105.sh"
+  ],
+  "shein-g004-escalatepower-cpr-updates-20261111.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-escalatepower-cpr-updates-20261111.sh"
+  ],
+  "creditoparaveiculo-daily-activate.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily-activate.sh"
+  ],
+  "creditoparaveiculo-general-daily.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-general-daily.sh"
+  ],
+  "cpv13-c42-c43-activate-20261021.py": [
+    "/root/.hermes/profiles/ares/scripts/cpv13-c42-c43-activate-20261021.py"
+  ],
+  "creditoparaveiculo-account05-activity-monitor.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-activity-monitor.sh"
+  ],
+  "shein-g004-vizioid-cpr-updates-20261107.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-vizioid-cpr-updates-20261107.sh"
+  ],
+  "creditoparaveiculo-guardrail-reactivate.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261109.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261109.sh"
+  ],
+  "shein-status-1569866790589436018.py": [
+    "/root/.hermes/profiles/ares/scripts/shein-status-1569866790589436018.py"
+  ],
+  "shein-g004-mavroa-cpr-watch-20261101.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-watch-20261101.sh"
+  ],
+  "creditoparaveiculo-intraday.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh"
+  ],
+  "creditoparaveiculo-daily.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh"
+  ],
+  "shein-g004-mavroa-cpr-watch-20261103.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-watch-20261103.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261107.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261107.sh"
+  ],
+  "creditoparaveiculo-account05-daily.sh": [
+    "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-daily.sh"
+  ],
+  "shein-g004-cpr-watch-20261103.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-watch-20261103.sh"
+  ],
+  "shein-g004-mavroa-cpr-updates-20261104.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261104.sh"
+  ],
+  "shein-g004-cpr-updates-20261107.sh": [
+    "/root/.hermes/profiles/ares/scripts/shein-g004-cpr-updates-20261107.sh"
+  ]
+}

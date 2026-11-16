@@ -39,6 +39,10 @@ The same private PC1 transport is used by Zeus and Ares. Select this route only 
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
 
+For a simple open-and-scroll request, verify the exact profile, identify the intended tab, and report opening and scrolling as separate outcomes. An AdsPower `Active` status does not prove an authenticated Facebook feed or completed scrolling. Preserve the open browser at a login gate and state the missing action briefly; do not turn navigation into token collection or a restriction audit.
+
+Reduce inventory, startup and attachment responses before any tool stdout: allowlist safe identity/status fields and emit only a boolean for successful attachment. Even a successful `connect-browser-with-ws` text response can echo the private WebSocket endpoint; truncating raw success text does not sanitize it.
+
 ## Restriction sweeps and scheduled PC1 work
 
 - Resolve the exact restriction being audited before naming columns or interpreting status. For automated messaging, open the Facebook account's **View Details** in Business Support Home and inspect the affected app; **You can’t send messages** is not merely an advertising-access warning. A connected app, valid token or Page labeled **No issues** does not clear this separate restriction. Keep app scope, identity-confirmation requirement, Page suspension and advertising access distinct.

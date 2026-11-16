@@ -66,7 +66,9 @@ python3 "$LOCK" release --agent zeus --session-id '<current Hermes session id>'
 
 Ares substitutes `--agent ares`. Use the real current session/thread identifiers. Do not invent identifiers. The lease is idempotent for the same agent/session, expires automatically, and fails closed when another live session owns PC1. Never bypass a live lease. If the work exceeds the TTL, renew it before expiry. Release it in the cleanup path even after a blocked or failed operation.
 
-## Preflight
+## Computer Use fallback preflight
+
+Use this preflight when native/visual interaction is required. For deterministic MCP operations, start with **Preferred MCP flow** instead; its proxy acquires its own lease identity. Do not hold a separate manual Computer Use lease while invoking that proxy, because the two owners will contend with each other. When switching routes, release only the lease owned by the current operation, then let the destination route acquire normally; never transfer or bypass another owner's lease.
 
 1. Acquire the lease.
 2. Confirm the profile has the remote driver configured:
@@ -85,7 +87,7 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 2. Call `get-browser-list` with the exact profile-name filter and require one safe identity match.
 3. Call `get-browser-active`; if the profile is already active, do not open or later close user-owned state unless the current request explicitly authorizes it.
 4. Call `open-browser` for the unique profile and require a successful response with browser connection data. Do not print the WebSocket/CDP value.
-5. Call `connect-browser-with-ws`, then use the allowlisted page tools for the authorized action.
+5. Call `connect-browser-with-ws`, keeping both its arguments and raw success text private; emit only attachment success/failure. Then identify the intended page before using the allowlisted tools. Restored tabs can attach on an unrelated email login rather than Facebook: inspect a sanitized title or fresh tab strip, and select the existing intended tab where available. Do not overwrite an unrelated restored tab or infer Facebook logout from its login form. If the Facebook page itself shows the remembered-profile login gate, preserve it and report the requested feed action as blocked, not completed.
 6. Call `close-browser` only when closure is authorized. Poll `get-browser-active` until `Inactive`/`Closed`; close propagation is asynchronous and may briefly remain `Active`.
 7. Release the lease in every exit path.
 

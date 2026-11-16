@@ -1,0 +1,55 @@
+{
+  "path": "/root/mgs-agent/apps/finance-system",
+  "classification_is_not_disposal_eligibility": true,
+  "classes": [
+    {
+      "category": "source_inputs_evidence_and_documents",
+      "unique_allocated_bytes": 15427899392,
+      "GiB": 14.368,
+      "nodes": 48886
+    },
+    {
+      "category": "archives_and_database_exports_pending_lineage",
+      "unique_allocated_bytes": 11454214144,
+      "GiB": 10.668,
+      "nodes": 326
+    },
+    {
+      "category": "local_postgres_state_pending_use_proof",
+      "unique_allocated_bytes": 7181508608,
+      "GiB": 6.688,
+      "nodes": 35547
+    },
+    {
+      "category": "code_other_files_and_directories",
+      "unique_allocated_bytes": 312242176,
+      "GiB": 0.291,
+      "nodes": 23249
+    },
+    {
+      "category": "media_and_rendered_evidence",
+      "unique_allocated_bytes": 206135296,
+      "GiB": 0.192,
+      "nodes": 771
+    },
+    {
+      "category": "node_dependencies",
+      "unique_allocated_bytes": 164073472,
+      "GiB": 0.153,
+      "nodes": 5511
+    },
+    {
+      "category": "other_local_state_pending_use_proof",
+      "unique_allocated_bytes": 47570944,
+      "GiB": 0.044,
+      "nodes": 10
+    },
+    {
+      "category": "bytecode_cache_paused",
+      "unique_allocated_bytes": 31178752,
+      "GiB": 0.029,
+      "nodes": 2078
+    }
+  ],
+  "unique_allocated_bytes": 34824822784
+}
