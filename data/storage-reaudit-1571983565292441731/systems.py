@@ -1,4 +1,5 @@
 """Read-only local system/consumer map, without credential or command payload publication."""
+from typing import Any
 import pathlib,os,json,subprocess,re,datetime,stat,collections
 OUT=pathlib.Path(__file__).parent;ROOT=pathlib.Path('/root/mgs-agent');PRIVATE=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731')
 def run(args):return subprocess.check_output(args,text=True,timeout=45)
@@ -13,7 +14,7 @@ services=[]
 for block in show.strip().split('\n\n'):
  obj=dict(line.split('=',1)for line in block.splitlines()if'='in line);sid=obj.get('Id');
  if not sid:continue
- row={k:obj.get(k)for k in ['Id','ActiveState','SubState','MainPID','UnitFileState','FragmentPath','WorkingDirectory','User']};row['existing_path_selectors']=paths(obj.get('ExecStart','')+' '+obj.get('EnvironmentFiles',''))
+ row: dict[str, Any] = {k:obj.get(k)for k in ['Id','ActiveState','SubState','MainPID','UnitFileState','FragmentPath','WorkingDirectory','User']};row['existing_path_selectors']=paths(obj.get('ExecStart','')+' '+obj.get('EnvironmentFiles',''))
  if obj.get('MainPID','0')!='0':
   p=pathlib.Path('/proc')/obj['MainPID']
   try:row.update(process_executable=os.readlink(p/'exe'),process_cwd=os.readlink(p/'cwd'))
