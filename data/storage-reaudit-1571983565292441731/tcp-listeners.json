@@ -1,0 +1,109 @@
+[
+  {
+    "address": "127.0.0.1:55257",
+    "processes": [
+      [
+        "hermes",
+        "2237072"
+      ]
+    ]
+  },
+  {
+    "address": "127.0.0.1:37041",
+    "processes": [
+      [
+        "hermes",
+        "2233587"
+      ]
+    ]
+  },
+  {
+    "address": "127.0.0.1:65529",
+    "processes": [
+      [
+        "monarx-agent",
+        "86640"
+      ]
+    ]
+  },
+  {
+    "address": "100.88.187.55%tailscale0:62566",
+    "processes": [
+      [
+        "tailscaled",
+        "1023357"
+      ]
+    ]
+  },
+  {
+    "address": "127.0.0.1:41059",
+    "processes": [
+      [
+        "hermes",
+        "2241212"
+      ]
+    ]
+  },
+  {
+    "address": "0.0.0.0:22",
+    "processes": [
+      [
+        "sshd",
+        "2640094"
+      ],
+      [
+        "systemd",
+        "1"
+      ]
+    ]
+  },
+  {
+    "address": "127.0.0.54:53",
+    "processes": [
+      [
+        "systemd-resolve",
+        "2640134"
+      ]
+    ]
+  },
+  {
+    "address": "127.0.0.53%lo:53",
+    "processes": [
+      [
+        "systemd-resolve",
+        "2640134"
+      ]
+    ]
+  },
+  {
+    "address": "[::]:22",
+    "processes": [
+      [
+        "sshd",
+        "2640094"
+      ],
+      [
+        "systemd",
+        "1"
+      ]
+    ]
+  },
+  {
+    "address": "*:443",
+    "processes": [
+      [
+        "mgs-router",
+        "2640096"
+      ]
+    ]
+  },
+  {
+    "address": "[fd7a:115c:a1e0::ac32:bb38]%tailscale0:42753",
+    "processes": [
+      [
+        "tailscaled",
+        "1023357"
+      ]
+    ]
+  }
+]

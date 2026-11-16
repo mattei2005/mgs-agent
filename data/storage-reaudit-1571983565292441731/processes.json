@@ -1,0 +1,1402 @@
+{
+  "processes": [
+    {
+      "pid": 1,
+      "comm": "systemd",
+      "exe": "/usr/lib/systemd/systemd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd"
+      ],
+      "open_fd_count": 154
+    },
+    {
+      "pid": 755,
+      "comm": "dbus-daemon",
+      "exe": "/usr/bin/dbus-daemon",
+      "cwd": "/",
+      "existing_path_selectors": [],
+      "open_fd_count": 26
+    },
+    {
+      "pid": 770,
+      "comm": "canonical-livep",
+      "exe": "/snap/canonical-livepatch/418/canonical-livepatchd",
+      "cwd": "/var/snap/canonical-livepatch/418",
+      "existing_path_selectors": [],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 781,
+      "comm": "systemd-logind",
+      "exe": "/usr/lib/systemd/systemd-logind",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-logind"
+      ],
+      "open_fd_count": 23
+    },
+    {
+      "pid": 818,
+      "comm": "agetty",
+      "exe": "/usr/sbin/agetty",
+      "cwd": "/",
+      "existing_path_selectors": [],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 842,
+      "comm": "agetty",
+      "exe": "/usr/sbin/agetty",
+      "cwd": "/",
+      "existing_path_selectors": [],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 871,
+      "comm": "systemd",
+      "exe": "/usr/lib/systemd/systemd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd"
+      ],
+      "open_fd_count": 35
+    },
+    {
+      "pid": 877,
+      "comm": "(sd-pam)",
+      "exe": "/usr/lib/systemd/systemd-executor",
+      "cwd": "/",
+      "existing_path_selectors": [],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 989,
+      "comm": "dbus-daemon",
+      "exe": "/usr/bin/dbus-daemon",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/dbus-daemon"
+      ],
+      "open_fd_count": 15
+    },
+    {
+      "pid": 13278,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 37382,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 37826,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 58783,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 60472,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 81435,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 86066,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 86640,
+      "comm": "monarx-agent",
+      "exe": "/usr/bin/monarx-agent",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/bin/monarx-agent"
+      ],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 88070,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 95055,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 104457,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 105443,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 181415,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 497316,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 623340,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 1023357,
+      "comm": "tailscaled",
+      "exe": "/usr/sbin/tailscaled",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/sbin/tailscaled",
+        "/var/lib/tailscale/tailscaled.state"
+      ],
+      "open_fd_count": 25
+    },
+    {
+      "pid": 1163713,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1169354,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1170358,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1172357,
+      "comm": "snapd",
+      "exe": "/snap/snapd/28332/usr/lib/snapd/snapd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/snapd/snapd"
+      ],
+      "open_fd_count": 15
+    },
+    {
+      "pid": 1181402,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1326269,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 1348106,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 1440586,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1482387,
+      "comm": "python3",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/mgs-pc1-adspower-mcp-proxy.py",
+        "/usr/bin/python3"
+      ],
+      "open_fd_count": 6
+    },
+    {
+      "pid": 1482389,
+      "comm": "ssh",
+      "exe": "/usr/bin/ssh",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.ssh/mgs-pc1-zeus_ed25519"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1482850,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 1482854,
+      "comm": "ssh",
+      "exe": "/usr/bin/ssh",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.ssh/mgs-pc1-zeus_ed25519",
+        "/usr/bin/ssh"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 1806839,
+      "comm": "op",
+      "exe": "/usr/bin/op",
+      "cwd": "/tmp/com.agilebits.op.0",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 2233587,
+      "comm": "hermes",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 86
+    },
+    {
+      "pid": 2233778,
+      "comm": "sh",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/hermes_cli/process_supervisor.sh"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 2237072,
+      "comm": "hermes",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 56
+    },
+    {
+      "pid": 2241212,
+      "comm": "hermes",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 124
+    },
+    {
+      "pid": 2241284,
+      "comm": "python3",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/mgs-pc1-adspower-mcp-proxy.py",
+        "/usr/bin/python3"
+      ],
+      "open_fd_count": 6
+    },
+    {
+      "pid": 2241286,
+      "comm": "node",
+      "exe": "/usr/bin/node",
+      "cwd": "/root/.hermes/profiles/zeus/mcp/hostinger-vps",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/hostinger-vps-mcp-readonly.mjs",
+        "/usr/bin/node"
+      ],
+      "open_fd_count": 21
+    },
+    {
+      "pid": 2241287,
+      "comm": "sh",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/hermes_cli/process_supervisor.sh"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 2640068,
+      "comm": "cron",
+      "exe": "/usr/sbin/cron",
+      "cwd": "/var/spool/cron",
+      "existing_path_selectors": [
+        "/usr/sbin/cron"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 2640072,
+      "comm": "python3",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/usr/bin/python3"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 2640078,
+      "comm": "qemu-ga",
+      "exe": "/usr/sbin/qemu-ga",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/sbin/qemu-ga"
+      ],
+      "open_fd_count": 6
+    },
+    {
+      "pid": 2640083,
+      "comm": "systemd-journal",
+      "exe": "/usr/lib/systemd/systemd-journald",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-journald"
+      ],
+      "open_fd_count": 45
+    },
+    {
+      "pid": 2640094,
+      "comm": "sshd",
+      "exe": "/usr/sbin/sshd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/sbin/sshd"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 2640095,
+      "comm": "auto-commit-wat",
+      "exe": "/usr/bin/bash",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/auto-commit-watcher.sh"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 2640096,
+      "comm": "mgs-router",
+      "exe": "/opt/mgs-router/mgs-router",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/opt/mgs-router/cloudflare-edges.txt",
+        "/opt/mgs-router/mgs-router",
+        "/var/lib/mgs-router"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 2640099,
+      "comm": "systemd-timesyn",
+      "exe": "/usr/lib/systemd/systemd-timesyncd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-timesyncd"
+      ],
+      "open_fd_count": 17
+    },
+    {
+      "pid": 2640102,
+      "comm": "inotifywait",
+      "exe": "/usr/bin/inotifywait",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/mgs-agent"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 2640118,
+      "comm": "udisksd",
+      "exe": "/usr/libexec/udisks2/udisksd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/libexec/udisks2/udisksd"
+      ],
+      "open_fd_count": 18
+    },
+    {
+      "pid": 2640132,
+      "comm": "fwupd",
+      "exe": "/usr/libexec/fwupd/fwupd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/libexec/fwupd/fwupd"
+      ],
+      "open_fd_count": 14
+    },
+    {
+      "pid": 2640133,
+      "comm": "polkitd",
+      "exe": "/usr/lib/polkit-1/polkitd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/polkit-1/polkitd"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 2640134,
+      "comm": "systemd-resolve",
+      "exe": "/usr/lib/systemd/systemd-resolved",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-resolved"
+      ],
+      "open_fd_count": 21
+    },
+    {
+      "pid": 2640142,
+      "comm": "rsyslogd",
+      "exe": "/usr/sbin/rsyslogd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/sbin/rsyslogd"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 2640144,
+      "comm": "systemd-udevd",
+      "exe": "/usr/bin/udevadm",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-udevd"
+      ],
+      "open_fd_count": 15
+    },
+    {
+      "pid": 2640162,
+      "comm": "ModemManager",
+      "exe": "/usr/sbin/ModemManager",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/sbin/ModemManager"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 2640175,
+      "comm": "systemd-network",
+      "exe": "/usr/lib/systemd/systemd-networkd",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/lib/systemd/systemd-networkd"
+      ],
+      "open_fd_count": 22
+    },
+    {
+      "pid": 2747122,
+      "comm": "unattended-upgr",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/",
+      "existing_path_selectors": [
+        "/usr/bin/python3",
+        "/usr/share/unattended-upgrades/unattended-upgrade-shutdown"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 2791505,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 2870333,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 2881625,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3038813,
+      "comm": "op",
+      "exe": "/usr/bin/op",
+      "cwd": "/root/.hermes/profiles/atena/cache/scratch/com.agilebits.op.0",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3038883,
+      "comm": "op",
+      "exe": "/usr/bin/op",
+      "cwd": "/root/.hermes/profiles/ares/cache/scratch/com.agilebits.op.0",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3067137,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3082671,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3120473,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3144061,
+      "comm": "op",
+      "exe": "/usr/bin/op",
+      "cwd": "/root/.hermes/profiles/zeus/cache/scratch/com.agilebits.op.0",
+      "existing_path_selectors": [],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 3217864,
+      "comm": "op",
+      "exe": "/usr/bin/op",
+      "cwd": "/root/.hermes/profiles/zeus/cache/scratch/com.agilebits.op.0",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3896693,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 12
+    },
+    {
+      "pid": 3896881,
+      "comm": "sh",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/hermes_cli/process_supervisor.sh"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 3901174,
+      "comm": "node-MainThread",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/node-26.12.1-linux-x64/bin/node",
+      "cwd": "/root/.hermes/profiles/zeus/lsp/node_modules/pyright/dist",
+      "existing_path_selectors": [
+        "/root/.hermes/profiles/zeus/lsp/bin/pyright-langserver"
+      ],
+      "open_fd_count": 21
+    },
+    {
+      "pid": 3901621,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3",
+        "/root/.hermes/profiles/ares/cache/scratch/hermes_kernel_r514rx9l/hermes_kernel_runner.py"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 3904184,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3910272,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3914882,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 3914987,
+      "comm": "python",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/bin/python"
+      ],
+      "open_fd_count": 10
+    },
+    {
+      "pid": 3915018,
+      "comm": "node",
+      "exe": "/usr/bin/node",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/package/cli.js",
+        "/usr/bin/node"
+      ],
+      "open_fd_count": 26
+    },
+    {
+      "pid": 3915031,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+        "/root/.hermes/profiles/zeus/cache/scratch/playwright_chromiumdev_profile-dG7DCi"
+      ],
+      "open_fd_count": 67
+    },
+    {
+      "pid": 3915033,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 3915034,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 3915046,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 23
+    },
+    {
+      "pid": 3915050,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 27
+    },
+    {
+      "pid": 3915149,
+      "comm": "cron",
+      "exe": "/usr/sbin/cron",
+      "cwd": "/var/spool/cron",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3915193,
+      "comm": "sh",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+        "/var/lock/dtr_sb_page_health_sync.lock"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3915196,
+      "comm": "flock",
+      "exe": "/usr/bin/flock",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+        "/var/lock/dtr_sb_page_health_sync.lock"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 3915200,
+      "comm": "bash",
+      "exe": "/usr/bin/bash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3915218,
+      "comm": "xvfb-run",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/bin/python",
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
+        "/usr/bin/xvfb-run"
+      ],
+      "open_fd_count": 6
+    },
+    {
+      "pid": 3915219,
+      "comm": "tee",
+      "exe": "/usr/bin/tee",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/logs/dtr-sb-page-health-sync.log"
+      ],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3915243,
+      "comm": "Xvfb",
+      "exe": "/usr/bin/Xvfb",
+      "cwd": "/root",
+      "existing_path_selectors": [],
+      "open_fd_count": 16
+    },
+    {
+      "pid": 3915287,
+      "comm": "python",
+      "exe": "/usr/bin/python3.12",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/bin/python",
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py"
+      ],
+      "open_fd_count": 14
+    },
+    {
+      "pid": 3915745,
+      "comm": "node",
+      "exe": "/usr/bin/node",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/package/cli.js",
+        "/usr/bin/node"
+      ],
+      "open_fd_count": 26
+    },
+    {
+      "pid": 3915951,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 153
+    },
+    {
+      "pid": 3915953,
+      "comm": "chrome_crashpad",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome_crashpad_handler",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome_crashpad_handler"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3915955,
+      "comm": "chrome_crashpad",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome_crashpad_handler",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome_crashpad_handler"
+      ],
+      "open_fd_count": 6
+    },
+    {
+      "pid": 3915958,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 13
+    },
+    {
+      "pid": 3915959,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 13
+    },
+    {
+      "pid": 3915982,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 42
+    },
+    {
+      "pid": 3915997,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 26
+    },
+    {
+      "pid": 3916030,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 42
+    },
+    {
+      "pid": 3916035,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 34
+    },
+    {
+      "pid": 3916085,
+      "comm": "chrome",
+      "exe": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
+      "open_fd_count": 27
+    },
+    {
+      "pid": 3916358,
+      "comm": "bash",
+      "exe": "/usr/bin/bash",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.hermes/profiles/zeus/cache/scratch/hermes-snap-765f37511eca.sh",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py",
+        "/root/mgs-agent",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/launch.py",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T152858800342",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/retry-20261116T1525",
+        "/usr/bin/bash"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3916360,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [],
+      "open_fd_count": 5
+    },
+    {
+      "pid": 3916380,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T1402/launch.py",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T152858800342"
+      ],
+      "open_fd_count": 19
+    },
+    {
+      "pid": 3916484,
+      "comm": "sleep",
+      "exe": "/usr/bin/sleep",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/usr/bin/sleep"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3916485,
+      "comm": "sh",
+      "exe": "/usr/bin/dash",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/hermes_cli/process_supervisor.sh"
+      ],
+      "open_fd_count": 4
+    },
+    {
+      "pid": 3916495,
+      "comm": "ssh",
+      "exe": "/usr/bin/ssh",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.ssh/mgs-pc1-zeus_ed25519",
+        "/usr/bin/ssh"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3918785,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root/mgs-agent",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 32
+    },
+    {
+      "pid": 3918809,
+      "comm": "node",
+      "exe": "/usr/bin/node",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/package/cli.js",
+        "/usr/bin/node"
+      ],
+      "open_fd_count": 25
+    },
+    {
+      "pid": 3918821,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 65
+    },
+    {
+      "pid": 3918823,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 3918824,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 11
+    },
+    {
+      "pid": 3918840,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 24
+    },
+    {
+      "pid": 3918842,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 27
+    },
+    {
+      "pid": 3918850,
+      "comm": "chrome-headless",
+      "exe": "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell"
+      ],
+      "open_fd_count": 30
+    },
+    {
+      "pid": 3918884,
+      "comm": "bash",
+      "exe": "/usr/bin/bash",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/profiles/zeus/cache/scratch/hermes-snap-33333fe62152.sh",
+        "/root/mgs-agent/data/storage-reaudit-1571983565292441731/systems.py",
+        "/usr/bin/bash"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3918886,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/mgs-agent/data/storage-reaudit-1571983565292441731/systems.py"
+      ],
+      "open_fd_count": 3
+    },
+    {
+      "pid": 3926651,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3928521,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3932460,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3932511,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3941382,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3973889,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3978138,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 3982507,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4003425,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4037286,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4051028,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4057355,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4064931,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4079748,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4086647,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4102555,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    },
+    {
+      "pid": 4139846,
+      "comm": "python3",
+      "exe": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+      "cwd": "/root",
+      "existing_path_selectors": [
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3"
+      ],
+      "open_fd_count": 7
+    }
+  ],
+  "errors": []
+}

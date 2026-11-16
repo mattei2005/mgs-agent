@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "canonical_key": "ares.bot.meta-app-selection",
-  "status": "READ_ONLY_PROFILE_TOKEN_TEST_AUTHORIZED",
+  "status": "PROFILE_TOKEN_VALIDATED_CUTOVER_PENDING",
   "token_reported_created_message_id": "1571975883286257726",
   "read_only_test_authority_message_id": "1571975883286257726",
   "allowed_agent_action": "Read-only validation of the owner-created Ana Cunha token for app1299247318762949; no issuance, runtime cutover or campaign resume",
@@ -26,7 +26,7 @@
   "runtime_binding_changes_applied": false,
   "direct_traffic_changed": false,
   "cutover_complete": false,
-  "new_app_profile_token_validated": false,
+  "new_app_profile_token_validated": true,
   "credential_issuance_authorized_by_this_decision": false,
   "remote_permission_changes_authorized": false,
   "campaign_resume_authorized": false,
@@ -47,5 +47,20 @@
     "no campaign resumption from app choice alone"
   ],
   "risk_note": "One shared app concentrates API availability/restriction dependency across BOT and direct even with separate credentials",
-  "next_step": "Rodolfo returned1571975883286257726 reporting token created and authorizing read-only test. Profile corrected to Ana Cunha by1571974994030755941. Read the secure vault reference without replacing production cache/bindings; validate own identity/type/issuer and exact account/Page access under target app. Do not issue another token, change permissions, use direct System User, cut over runtime or resume campaigns from this test alone. Preserve campaign holds and partial IDs; never receive token/code in chat."
+  "next_step": "Read-only test passed: Ana/User/issuer1299247318762949, all3Eggbev accounts, requested Moorcroft Page/PBIA and pixel. Runtime consumer/cache cutover is still pending; no campaign creation or resume from this test. Inventory/prepare scoped integration with dedicated app/profile cache, live tier and tests while preserving original objects/seals/approvals and campaign holds. Do not ask app choice or token issuance again; owner already supplied the validated credential.",
+  "read_only_test_complete": true,
+  "validated_profile_token_reference": {
+    "item_id": "xxgqyiuijcu4rfrcmfmme6iduq",
+    "item_title": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+    "field": "credential",
+    "app_id": "1299247318762949",
+    "type": "USER",
+    "profile": "Ana Cunha",
+    "app_scoped_user_id": "122147508339218951",
+    "verified_at": "2026-11-16T20:11:50.921276+00:00",
+    "credential_value_included": false
+  },
+  "read_only_test_evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/read-only-token-test-1571975883286257726.json",
+  "asset_readback_evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/new-app-asset-readback-1571975883286257726.json",
+  "credential_created_by_owner": true
 }

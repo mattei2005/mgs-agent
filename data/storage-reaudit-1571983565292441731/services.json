@@ -1,0 +1,2277 @@
+[
+  {
+    "Id": "apparmor.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/apparmor.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "apport-autoreport.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/apport-autoreport.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/share/apport/whoopsie-upload-all"
+    ]
+  },
+  {
+    "Id": "apport.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/apport.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/share/apport/apport"
+    ]
+  },
+  {
+    "Id": "apt-daily-upgrade.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/apt-daily-upgrade.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/apt/apt.systemd.daily"
+    ]
+  },
+  {
+    "Id": "apt-daily.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/apt-daily.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/apt/apt.systemd.daily"
+    ]
+  },
+  {
+    "Id": "ares-gateway.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2233587",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/ares-gateway.service",
+    "WorkingDirectory": "/root",
+    "User": "root",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/.env",
+      "/root/.local/bin/hermes"
+    ],
+    "process_executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+    "process_cwd": "/root"
+  },
+  {
+    "Id": "ares-shein-request-queue.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640072",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/ares-shein-request-queue.service",
+    "WorkingDirectory": "/root/mgs-agent",
+    "User": "root",
+    "existing_path_selectors": [
+      "/usr/bin/python3"
+    ],
+    "process_executable": "/usr/bin/python3.12",
+    "process_cwd": "/root/mgs-agent"
+  },
+  {
+    "Id": "atena-gateway.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2237072",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/atena-gateway.service",
+    "WorkingDirectory": "/root",
+    "User": "root",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/atena/.env",
+      "/root/.local/bin/hermes"
+    ],
+    "process_executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+    "process_cwd": "/root"
+  },
+  {
+    "Id": "auditd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "blk-availability.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/blk-availability.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "cloud-config.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/cloud-config.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/cloud-init"
+    ]
+  },
+  {
+    "Id": "cloud-final.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/cloud-final.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/cloud-init"
+    ]
+  },
+  {
+    "Id": "cloud-init-hotplugd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/cloud-init-hotplugd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/cloud-init"
+    ]
+  },
+  {
+    "Id": "cloud-init-local.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/cloud-init-local.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/cloud-init"
+    ]
+  },
+  {
+    "Id": "cloud-init.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/cloud-init.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/cloud-init"
+    ]
+  },
+  {
+    "Id": "connman.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "console-screen.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "console-setup.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/console-setup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "cron.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640068",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/cron.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/default/cron",
+      "/usr/sbin/cron"
+    ],
+    "process_executable": "/usr/sbin/cron",
+    "process_cwd": "/var/spool/cron"
+  },
+  {
+    "Id": "dbus.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "755",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/dbus.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/dbus-daemon"
+    ],
+    "process_executable": "/usr/bin/dbus-daemon",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "display-manager.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "dm-event.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/dm-event.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/dmeventd"
+    ]
+  },
+  {
+    "Id": "dmesg.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/dmesg.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "dpkg-db-backup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/dpkg-db-backup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/libexec/dpkg/dpkg-db-backup"
+    ]
+  },
+  {
+    "Id": "e2scrub_all.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/e2scrub_all.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "e2scrub_reap.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/e2scrub_reap.service",
+    "WorkingDirectory": "/",
+    "User": "root",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "emergency.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/emergency.service",
+    "WorkingDirectory": "!/root",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sulogin-shell"
+    ]
+  },
+  {
+    "Id": "fcoe.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "finalrd.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/finalrd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "fstrim.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/fstrim.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "fwupd-refresh.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/fwupd-refresh.service",
+    "WorkingDirectory": "",
+    "User": "fwupd-refresh",
+    "existing_path_selectors": [
+      "/usr/bin/fwupdmgr"
+    ]
+  },
+  {
+    "Id": "fwupd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640132",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/fwupd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/libexec/fwupd/fwupd"
+    ],
+    "process_executable": "/usr/libexec/fwupd/fwupd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "getty-static.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/getty-static.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "getty@tty1.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "842",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/getty@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [],
+    "process_executable": "/usr/sbin/agetty",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "grub-common.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/grub-common.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "grub-initrd-fallback.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/grub-initrd-fallback.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/grub-editenv"
+    ]
+  },
+  {
+    "Id": "hv_kvp_daemon.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "initrd-cleanup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/initrd-cleanup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "initrd-parse-etc.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/initrd-parse-etc.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "initrd-switch-root.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/initrd-switch-root.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "initrd-udevadm-cleanup-db.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/initrd-udevadm-cleanup-db.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "iscsi-shutdown.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "iscsid.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "disabled",
+    "FragmentPath": "/usr/lib/systemd/system/iscsid.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/iscsid"
+    ]
+  },
+  {
+    "Id": "kbd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "keyboard-setup.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/keyboard-setup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "kmod-static-nodes.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/kmod-static-nodes.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/kmod"
+    ]
+  },
+  {
+    "Id": "ldconfig.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/ldconfig.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "logrotate.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/logrotate.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/logrotate.conf",
+      "/usr/sbin/logrotate"
+    ]
+  },
+  {
+    "Id": "lvm2-lvmpolld.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/lvm2-lvmpolld.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/lvmpolld"
+    ]
+  },
+  {
+    "Id": "lvm2-monitor.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/lvm2-monitor.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/lvm"
+    ]
+  },
+  {
+    "Id": "man-db.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/man-db.service",
+    "WorkingDirectory": "",
+    "User": "man",
+    "existing_path_selectors": [
+      "/usr/bin/mandb"
+    ]
+  },
+  {
+    "Id": "mgs-autocommit.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640095",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/mgs-autocommit.service",
+    "WorkingDirectory": "/root/mgs-agent",
+    "User": "root",
+    "existing_path_selectors": [
+      "/root/mgs-agent/.env",
+      "/root/mgs-agent/scripts/auto-commit-watcher.sh"
+    ],
+    "process_executable": "/usr/bin/bash",
+    "process_cwd": "/root/mgs-agent"
+  },
+  {
+    "Id": "mgs-finance-meta-lookup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/mgs-finance-meta-lookup.service",
+    "WorkingDirectory": "/root/mgs-agent/apps/finance-system",
+    "User": "root",
+    "existing_path_selectors": [
+      "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
+      "/usr/bin/python3"
+    ]
+  },
+  {
+    "Id": "mgs-router.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640096",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/mgs-router.service",
+    "WorkingDirectory": "",
+    "User": "mgs-router",
+    "existing_path_selectors": [
+      "/opt/mgs-router/cloudflare-edges.txt",
+      "/opt/mgs-router/mgs-router",
+      "/var/lib/mgs-router"
+    ],
+    "process_executable": "/opt/mgs-router/mgs-router",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "ModemManager.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640162",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/ModemManager.service",
+    "WorkingDirectory": "",
+    "User": "root",
+    "existing_path_selectors": [
+      "/usr/sbin/ModemManager"
+    ],
+    "process_executable": "/usr/sbin/ModemManager",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "modprobe@configfs.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@dm_mod.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@drm.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@efi_pstore.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@fuse.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@loop.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "modprobe@sd_mod.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/modprobe@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "monarx-agent.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "86640",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/monarx-agent.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/monarx-agent"
+    ],
+    "process_executable": "/usr/bin/monarx-agent",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "motd-news.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/motd-news.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/update-motd.d/50-motd-news"
+    ]
+  },
+  {
+    "Id": "multipathd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "masked",
+    "FragmentPath": "/etc/systemd/system/multipathd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "netplan-ovs-cleanup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled-runtime",
+    "FragmentPath": "/run/systemd/system/netplan-ovs-cleanup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/netplan"
+    ]
+  },
+  {
+    "Id": "networkd-dispatcher.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/networkd-dispatcher.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/default/networkd-dispatcher",
+      "/usr/bin/networkd-dispatcher"
+    ]
+  },
+  {
+    "Id": "networking.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "NetworkManager.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "open-iscsi.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/open-iscsi.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/open-iscsi/activate-storage.sh"
+    ]
+  },
+  {
+    "Id": "open-vm-tools.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/open-vm-tools.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/vmtoolsd"
+    ]
+  },
+  {
+    "Id": "ovsdb-server.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "phpsessionclean.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/phpsessionclean.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/php/sessionclean"
+    ]
+  },
+  {
+    "Id": "plymouth-quit-wait.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/plymouth-quit-wait.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/plymouth"
+    ]
+  },
+  {
+    "Id": "plymouth-quit.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/plymouth-quit.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/plymouth"
+    ]
+  },
+  {
+    "Id": "plymouth-read-write.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/plymouth-read-write.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/plymouth"
+    ]
+  },
+  {
+    "Id": "plymouth-start.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/plymouth-start.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/plymouthd"
+    ]
+  },
+  {
+    "Id": "plymouth-switch-root.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/plymouth-switch-root.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/plymouth"
+    ]
+  },
+  {
+    "Id": "polkit.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640133",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/polkit.service",
+    "WorkingDirectory": "",
+    "User": "polkitd",
+    "existing_path_selectors": [
+      "/usr/lib/polkit-1/polkitd"
+    ],
+    "process_executable": "/usr/lib/polkit-1/polkitd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "pollinate.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/pollinate.service",
+    "WorkingDirectory": "",
+    "User": "pollinate",
+    "existing_path_selectors": [
+      "/usr/bin/pollinate"
+    ]
+  },
+  {
+    "Id": "qemu-guest-agent.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640078",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/qemu-guest-agent.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/qemu-ga"
+    ],
+    "process_executable": "/usr/sbin/qemu-ga",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "rbdmap.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "rc-local.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/rc-local.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "rescue.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/rescue.service",
+    "WorkingDirectory": "!/root",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sulogin-shell"
+    ]
+  },
+  {
+    "Id": "rsyslog.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640142",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/rsyslog.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/sbin/rsyslogd"
+    ],
+    "process_executable": "/usr/sbin/rsyslogd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "secureboot-db.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/secureboot-db.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/sbkeysync",
+      "/usr/share/secureboot/updates"
+    ]
+  },
+  {
+    "Id": "serial-getty@ttyS0.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "818",
+    "UnitFileState": "enabled-runtime",
+    "FragmentPath": "/usr/lib/systemd/system/serial-getty@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [],
+    "process_executable": "/usr/sbin/agetty",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "setvtrgb.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/setvtrgb.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/vtrgb"
+    ]
+  },
+  {
+    "Id": "snap.canonical-livepatch.canonical-livepatchd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "770",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/snap.canonical-livepatch.canonical-livepatchd.service",
+    "WorkingDirectory": "/var/snap/canonical-livepatch/418",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/environment",
+      "/usr/bin/snap"
+    ],
+    "process_executable": "/snap/canonical-livepatch/418/canonical-livepatchd",
+    "process_cwd": "/var/snap/canonical-livepatch/418"
+  },
+  {
+    "Id": "snapd.apparmor.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.apparmor.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snapd-apparmor"
+    ]
+  },
+  {
+    "Id": "snapd.autoimport.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.autoimport.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/snap"
+    ]
+  },
+  {
+    "Id": "snapd.core-fixup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.core-fixup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snapd.core-fixup.sh"
+    ]
+  },
+  {
+    "Id": "snapd.failure.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.failure.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snap-failure"
+    ]
+  },
+  {
+    "Id": "snapd.recovery-chooser-trigger.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.recovery-chooser-trigger.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snap-bootstrap"
+    ]
+  },
+  {
+    "Id": "snapd.seeded.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.seeded.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/snap"
+    ]
+  },
+  {
+    "Id": "snapd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "1172357",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snapd"
+    ],
+    "process_executable": "/snap/snapd/28332/usr/lib/snapd/snapd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "snapd.snap-repair.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.snap-repair.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/snap-repair"
+    ]
+  },
+  {
+    "Id": "snapd.system-shutdown.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/snapd.system-shutdown.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/snapd/system-shutdown"
+    ]
+  },
+  {
+    "Id": "ssh.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640094",
+    "UnitFileState": "disabled",
+    "FragmentPath": "/usr/lib/systemd/system/ssh.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/default/ssh",
+      "/usr/sbin/sshd"
+    ],
+    "process_executable": "/usr/sbin/sshd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "sshd-keygen.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "sshd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "sysstat-collect.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/sysstat-collect.service",
+    "WorkingDirectory": "",
+    "User": "root",
+    "existing_path_selectors": [
+      "/usr/lib/sysstat/sa1"
+    ]
+  },
+  {
+    "Id": "sysstat-summary.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/sysstat-summary.service",
+    "WorkingDirectory": "",
+    "User": "root",
+    "existing_path_selectors": [
+      "/usr/lib/sysstat/sa2"
+    ]
+  },
+  {
+    "Id": "sysstat.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/sysstat.service",
+    "WorkingDirectory": "",
+    "User": "root",
+    "existing_path_selectors": [
+      "/usr/lib/sysstat/sa1"
+    ]
+  },
+  {
+    "Id": "systemd-ask-password-console.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-ask-password-console.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-ask-password-plymouth.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-ask-password-plymouth.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/systemd-tty-ask-password-agent"
+    ]
+  },
+  {
+    "Id": "systemd-ask-password-wall.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-ask-password-wall.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-battery-check.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-battery-check.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-battery-check"
+    ]
+  },
+  {
+    "Id": "systemd-binfmt.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-binfmt.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-binfmt"
+    ]
+  },
+  {
+    "Id": "systemd-bsod.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-bsod.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-bsod"
+    ]
+  },
+  {
+    "Id": "systemd-firstboot.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-firstboot.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-fsck-root.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled-runtime",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-fsck-root.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-fsck"
+    ]
+  },
+  {
+    "Id": "systemd-fsck@dev-disk-by\\x2dlabel-BOOT.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-fsck@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-fsck"
+    ]
+  },
+  {
+    "Id": "systemd-fsck@dev-disk-by\\x2dlabel-UEFI.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-fsck@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-fsck"
+    ]
+  },
+  {
+    "Id": "systemd-fsckd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-fsckd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-fsckd"
+    ]
+  },
+  {
+    "Id": "systemd-hibernate-resume.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-hibernate-resume.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-hibernate-resume"
+    ]
+  },
+  {
+    "Id": "systemd-hibernate.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-hibernate.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sleep"
+    ]
+  },
+  {
+    "Id": "systemd-hwdb-update.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-hwdb-update.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-hybrid-sleep.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-hybrid-sleep.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sleep"
+    ]
+  },
+  {
+    "Id": "systemd-initctl.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-initctl.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-initctl"
+    ]
+  },
+  {
+    "Id": "systemd-journal-catalog-update.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-journal-catalog-update.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-journal-flush.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-journal-flush.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-journald.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640083",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-journald.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-journald"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd-journald",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-logind.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "781",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-logind.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-logind"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd-logind",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-machine-id-commit.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-machine-id-commit.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-modules-load.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-modules-load.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-modules-load"
+    ]
+  },
+  {
+    "Id": "systemd-networkd-wait-online.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-networkd-wait-online.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-networkd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640175",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-networkd.service",
+    "WorkingDirectory": "",
+    "User": "systemd-network",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-networkd"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd-networkd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-oomd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-pcrmachine.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-pcrmachine.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-pcrextend"
+    ]
+  },
+  {
+    "Id": "systemd-pcrphase-initrd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-pcrphase-initrd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-pcrextend"
+    ]
+  },
+  {
+    "Id": "systemd-pcrphase-sysinit.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-pcrphase-sysinit.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-pcrextend"
+    ]
+  },
+  {
+    "Id": "systemd-pcrphase.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-pcrphase.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-pcrextend"
+    ]
+  },
+  {
+    "Id": "systemd-pstore.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-pstore.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-pstore"
+    ]
+  },
+  {
+    "Id": "systemd-quotacheck.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-quotacheck.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-quotacheck"
+    ]
+  },
+  {
+    "Id": "systemd-random-seed.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-random-seed.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-random-seed"
+    ]
+  },
+  {
+    "Id": "systemd-remount-fs.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled-runtime",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-remount-fs.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-remount-fs"
+    ]
+  },
+  {
+    "Id": "systemd-repart.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-repart.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/systemd-repart"
+    ]
+  },
+  {
+    "Id": "systemd-resolved.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640134",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-resolved.service",
+    "WorkingDirectory": "",
+    "User": "systemd-resolve",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-resolved"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd-resolved",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-rfkill.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-rfkill.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-rfkill"
+    ]
+  },
+  {
+    "Id": "systemd-soft-reboot.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-soft-reboot.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-suspend-then-hibernate.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-suspend-then-hibernate.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sleep"
+    ]
+  },
+  {
+    "Id": "systemd-suspend.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-suspend.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sleep"
+    ]
+  },
+  {
+    "Id": "systemd-sysctl.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-sysctl.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-sysctl"
+    ]
+  },
+  {
+    "Id": "systemd-sysext.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "disabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-sysext.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-sysusers.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-sysusers.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-timesyncd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640099",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-timesyncd.service",
+    "WorkingDirectory": "",
+    "User": "systemd-timesync",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-timesyncd"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd-timesyncd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-tmpfiles-clean.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tmpfiles-clean.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-tmpfiles-setup-dev-early.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tmpfiles-setup-dev-early.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-tmpfiles-setup-dev.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tmpfiles-setup-dev.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-tmpfiles-setup.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tmpfiles-setup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-tpm2-setup-early.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tpm2-setup-early.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-tpm2-setup"
+    ]
+  },
+  {
+    "Id": "systemd-tpm2-setup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-tpm2-setup.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-tpm2-setup"
+    ]
+  },
+  {
+    "Id": "systemd-udev-settle.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-udev-settle.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-udev-trigger.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-udev-trigger.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "systemd-udevd.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640144",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-udevd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-udevd"
+    ],
+    "process_executable": "/usr/bin/udevadm",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "systemd-update-done.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-update-done.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-update-done"
+    ]
+  },
+  {
+    "Id": "systemd-update-utmp-runlevel.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-update-utmp-runlevel.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-update-utmp"
+    ]
+  },
+  {
+    "Id": "systemd-update-utmp.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-update-utmp.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-update-utmp"
+    ]
+  },
+  {
+    "Id": "systemd-user-sessions.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/systemd-user-sessions.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-user-sessions"
+    ]
+  },
+  {
+    "Id": "systemd-vconsole-setup.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "tailscaled.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "1023357",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/tailscaled.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/etc/default/tailscaled",
+      "/usr/sbin/tailscaled",
+      "/var/lib/tailscale/tailscaled.state"
+    ],
+    "process_executable": "/usr/sbin/tailscaled",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "tpm-udev.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/tpm-udev.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "ua-auto-attach.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "ua-reboot-cmds.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/ua-reboot-cmds.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/python3",
+      "/usr/lib/ubuntu-advantage/reboot_cmds.py"
+    ]
+  },
+  {
+    "Id": "ua-timer.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/ua-timer.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/python3",
+      "/usr/lib/ubuntu-advantage/timer.py"
+    ]
+  },
+  {
+    "Id": "ubuntu-advantage-cloud-id-shim.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  },
+  {
+    "Id": "ubuntu-advantage.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/ubuntu-advantage.service",
+    "WorkingDirectory": "/var/lib/ubuntu-advantage",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/python3",
+      "/usr/lib/ubuntu-advantage/daemon.py"
+    ]
+  },
+  {
+    "Id": "udisks2.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2640118",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/udisks2.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/libexec/udisks2/udisksd"
+    ],
+    "process_executable": "/usr/libexec/udisks2/udisksd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "ufw.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/ufw.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/ufw/ufw-init"
+    ]
+  },
+  {
+    "Id": "unattended-upgrades.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2747122",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/unattended-upgrades.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/share/unattended-upgrades/unattended-upgrade-shutdown"
+    ],
+    "process_executable": "/usr/bin/python3.12",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "update-notifier-download.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/update-notifier-download.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/update-notifier/package-data-downloader"
+    ]
+  },
+  {
+    "Id": "update-notifier-motd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/update-notifier-motd.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/ubuntu-release-upgrader/release-upgrade-motd"
+    ]
+  },
+  {
+    "Id": "user-runtime-dir@0.service",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "MainPID": "0",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/user-runtime-dir@.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd-user-runtime-dir"
+    ]
+  },
+  {
+    "Id": "user@0.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "871",
+    "UnitFileState": "static",
+    "FragmentPath": "/usr/lib/systemd/system/user@.service",
+    "WorkingDirectory": "",
+    "User": "0",
+    "existing_path_selectors": [
+      "/usr/lib/systemd/systemd"
+    ],
+    "process_executable": "/usr/lib/systemd/systemd",
+    "process_cwd": "/"
+  },
+  {
+    "Id": "uuidd.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "indirect",
+    "FragmentPath": "/usr/lib/systemd/system/uuidd.service",
+    "WorkingDirectory": "",
+    "User": "uuidd",
+    "existing_path_selectors": [
+      "/usr/sbin/uuidd"
+    ]
+  },
+  {
+    "Id": "vgauth.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/usr/lib/systemd/system/vgauth.service",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": [
+      "/usr/bin/VGAuthService"
+    ]
+  },
+  {
+    "Id": "zeus-gateway.service",
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "2241212",
+    "UnitFileState": "enabled",
+    "FragmentPath": "/etc/systemd/system/zeus-gateway.service",
+    "WorkingDirectory": "/root",
+    "User": "root",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/zeus/.env",
+      "/root/.local/bin/hermes"
+    ],
+    "process_executable": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/bin/python3.14",
+    "process_cwd": "/root"
+  },
+  {
+    "Id": "zfs-mount.service",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "UnitFileState": "",
+    "FragmentPath": "",
+    "WorkingDirectory": "",
+    "User": "",
+    "existing_path_selectors": []
+  }
+]

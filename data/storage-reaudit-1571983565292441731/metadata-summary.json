@@ -1,0 +1,174 @@
+{
+  "status": "metadata_scan_complete",
+  "authority_message_id": "1571983565292441731",
+  "host": "srv1767265",
+  "started_at": "2026-11-16T15:27:35.103895-05:00",
+  "finished_at": "2026-11-16T15:29:09.721689-05:00",
+  "elapsed_seconds": 94.62,
+  "filesystems": [
+    {
+      "root": "/",
+      "source": "/dev/sda1",
+      "fstype": "ext4",
+      "counts": {
+        "directory": 165136,
+        "link": 23686,
+        "file": 1329396,
+        "other": 294
+      },
+      "before": {
+        "total": 206900281344,
+        "used": 143975022592,
+        "available": 62908481536,
+        "reserved_free": 16777216,
+        "used_percent": 69.59
+      },
+      "after": {
+        "total": 206900281344,
+        "used": 146307461120,
+        "available": 60576043008,
+        "reserved_free": 16777216,
+        "used_percent": 70.72
+      },
+      "excluded": [
+        "/run",
+        "/dev",
+        "/proc",
+        "/sys",
+        "/boot",
+        "/snap/core22/2955",
+        "/snap/core22/2987",
+        "/snap/snapd/28332",
+        "/snap/snapd/28254",
+        "/snap/canonical-livepatch/414",
+        "/snap/canonical-livepatch/418",
+        "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731",
+        "/root/mgs-agent/data/storage-reaudit-1571983565292441731"
+      ],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-root.jsonl.gz",
+      "unique_allocated_bytes": 146245791744,
+      "inodes_with_links_outside_scanned_persistent_names_bytes": 0,
+      "df_used_minus_named_allocated_bytes": 61669376
+    },
+    {
+      "root": "/boot",
+      "source": "/dev/sda16",
+      "fstype": "ext4",
+      "counts": {
+        "directory": 7,
+        "file": 587,
+        "link": 4
+      },
+      "before": {
+        "total": 923156480,
+        "used": 177905664,
+        "available": 680607744,
+        "reserved_free": 64643072,
+        "used_percent": 20.72
+      },
+      "after": {
+        "total": 923156480,
+        "used": 177905664,
+        "available": 680607744,
+        "reserved_free": 64643072,
+        "used_percent": 20.72
+      },
+      "excluded": [
+        "/boot/efi"
+      ],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot.jsonl.gz",
+      "unique_allocated_bytes": 177897472,
+      "inodes_with_links_outside_scanned_persistent_names_bytes": 0,
+      "df_used_minus_named_allocated_bytes": 8192
+    },
+    {
+      "root": "/boot/efi",
+      "source": "/dev/sda15",
+      "fstype": "vfat",
+      "counts": {
+        "directory": 4,
+        "file": 8
+      },
+      "before": {
+        "total": 109395456,
+        "used": 6399488,
+        "available": 102995968,
+        "reserved_free": 0,
+        "used_percent": 5.85
+      },
+      "after": {
+        "total": 109395456,
+        "used": 6399488,
+        "available": 102995968,
+        "reserved_free": 0,
+        "used_percent": 5.85
+      },
+      "excluded": [],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-boot-efi.jsonl.gz",
+      "unique_allocated_bytes": 6399488,
+      "inodes_with_links_outside_scanned_persistent_names_bytes": 0,
+      "df_used_minus_named_allocated_bytes": 0
+    }
+  ],
+  "category_unique_allocated_bytes": {
+    "mgs_apps": 27643826176,
+    "agent_profile_state": 21637763072,
+    "institutional_code_or_configuration": 11134500864,
+    "cache_paused_owner_choice": 10920951808,
+    "operational_recovery": 10914676736,
+    "institutional_git": 8882987008,
+    "hermes_code_or_environment": 7813996544,
+    "agent_artifacts": 7537602560,
+    "postgres_clusters_pending_role": 7181508608,
+    "mgs_data": 6174375936,
+    "mgs_reports": 4614496256,
+    "other_filesystem_data": 4300492800,
+    "operating_system_or_installed_tools": 3932737536,
+    "shared_hardlinks_between_classes": 2289242112,
+    "agent_checkpoints": 1931767808,
+    "other_local_data_pending_role": 1840496640,
+    "persistent_browser_state": 1740775424,
+    "hermes_managed_installation": 1568993280,
+    "mgs_work": 1483677696,
+    "other_hermes_state": 1048760320,
+    "system_service_state": 555548672,
+    "mgs_logs": 387452928,
+    "system_logs": 360927232,
+    "agent_sessions": 206462976,
+    "boot_system": 184296960,
+    "agent_logs": 120061952,
+    "temporary_noncache_pending_role": 14057472,
+    "system_configuration": 7651328
+  },
+  "shared_between_units_bytes": 2427445248,
+  "unique_inode_count": 1432931,
+  "metadata_counts": {
+    "directory": 165147,
+    "link": 23690,
+    "file": 1329991,
+    "other": 294
+  },
+  "operational_units": 4023,
+  "postgres_cluster_roots": 34,
+  "virtualenv_roots": 42,
+  "git_roots": 64,
+  "errors": [],
+  "scan_is_live_not_atomic": true,
+  "source_file_contents_read": false,
+  "postgres_version_markers_only": true,
+  "deleted_files": 0,
+  "application_or_service_changes": false,
+  "caches_measured_not_cleanup_candidates": true,
+  "own_analysis_excluded": [
+    "/root/mgs-agent/data/storage-reaudit-1571983565292441731",
+    "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731"
+  ],
+  "read_only_mounts_excluded": [
+    "/snap/canonical-livepatch/414",
+    "/snap/canonical-livepatch/418",
+    "/snap/core22/2955",
+    "/snap/snapd/28332",
+    "/snap/snapd/28254",
+    "/snap/core22/2987"
+  ]
+}

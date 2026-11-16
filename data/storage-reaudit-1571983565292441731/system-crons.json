@@ -1,0 +1,736 @@
+[
+  {
+    "source": "/etc/crontab",
+    "line": 19,
+    "schedule": "17 * * * *",
+    "existing_path_selectors": [
+      "/etc/cron.hourly"
+    ]
+  },
+  {
+    "source": "/etc/crontab",
+    "line": 20,
+    "schedule": "25 6 * * *",
+    "existing_path_selectors": [
+      "/etc/cron.daily"
+    ]
+  },
+  {
+    "source": "/etc/crontab",
+    "line": 21,
+    "schedule": "47 6 * * 7",
+    "existing_path_selectors": [
+      "/etc/cron.weekly"
+    ]
+  },
+  {
+    "source": "/etc/crontab",
+    "line": 22,
+    "schedule": "52 6 1 * *",
+    "existing_path_selectors": [
+      "/etc/cron.monthly"
+    ]
+  },
+  {
+    "source": "/etc/cron.d/php",
+    "line": 14,
+    "schedule": "09,39 * * * *",
+    "existing_path_selectors": [
+      "/usr/lib/php/sessionclean"
+    ]
+  },
+  {
+    "source": "/etc/cron.d/e2scrub_all",
+    "line": 1,
+    "schedule": "30 3 * * 0",
+    "existing_path_selectors": [
+      "/usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron"
+    ]
+  },
+  {
+    "source": "/etc/cron.d/e2scrub_all",
+    "line": 2,
+    "schedule": "10 3 * * *",
+    "existing_path_selectors": []
+  },
+  {
+    "source": "/etc/cron.d/monarx-update",
+    "line": 1,
+    "schedule": "20 4 * * 2",
+    "existing_path_selectors": []
+  },
+  {
+    "source": "/etc/cron.d/sysstat",
+    "line": 6,
+    "schedule": "5-55/10 * * * *",
+    "existing_path_selectors": []
+  },
+  {
+    "source": "/etc/cron.d/sysstat",
+    "line": 9,
+    "schedule": "59 23 * * *",
+    "existing_path_selectors": []
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 1,
+    "schedule": "*/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sync-souls.log",
+      "/root/mgs-agent/scripts/sync-souls.sh",
+      "/var/lock/sync_souls.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 2,
+    "schedule": "11,26,41,56 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-auto-push.log",
+      "/root/mgs-agent/scripts/monitor-auto-push.sh",
+      "/var/lock/monitor_auto_push.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 3,
+    "schedule": "23 10 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-yoast-health-eggbev.log",
+      "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
+      "/var/lock/monitor_yoast_health_eggbev.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 4,
+    "schedule": "7,22,37,52 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/check-pending-reports.log",
+      "/root/mgs-agent/scripts/check-pending-reports.sh",
+      "/var/lock/check_pending_reports.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 5,
+    "schedule": "1-56/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-service-restarts.log",
+      "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+      "/var/lock/monitor_service_restarts.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 8,
+    "schedule": "54 11 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-gpt55-oauth-cost.log",
+      "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+      "/var/lock/monitor_gpt55_oauth_cost.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 11,
+    "schedule": "3-58/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-tool-loops.log",
+      "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+      "/var/lock/monitor_tool_loops.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 14,
+    "schedule": "0 5 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/infra-discovery.log",
+      "/root/mgs-agent/scripts/infra-discovery.sh",
+      "/var/lock/infra_discovery.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 15,
+    "schedule": "37 8,14,20 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-hermes-updates.log",
+      "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "/var/lock/monitor_hermes_updates.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 16,
+    "schedule": "*/15 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/track-article-cost-cron.log",
+      "/root/mgs-agent/scripts/track-article-cost.sh",
+      "/var/lock/track_article_cost.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 17,
+    "schedule": "0 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/cleanup-zombie-sessions.log",
+      "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
+      "/var/lock/cleanup_zombie_sessions.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 18,
+    "schedule": "44 20 * * 2,5",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/housekeeping-cron.log",
+      "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
+      "/var/lock/housekeeping_bak_cleanup.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 19,
+    "schedule": "0 8 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/pendencia-render.log",
+      "/root/mgs-agent/scripts/pendencia-render-md.sh",
+      "/var/lock/pendencia_render_md.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 20,
+    "schedule": "0 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/chat-log-rebuild.log",
+      "/root/mgs-agent/scripts/chat-log.sh",
+      "/var/lock/chat_log_rebuild.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 25,
+    "schedule": "32 8 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/cron-control-plane.log",
+      "/root/mgs-agent/scripts/cron-control-plane.py",
+      "/var/lock/cron_control_plane.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 28,
+    "schedule": "*/15 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-cron-stale-logs.log",
+      "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+      "/var/lock/monitor_cron_stale_logs.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 31,
+    "schedule": "*/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/hermes-news-explainer.log",
+      "/root/mgs-agent/scripts/hermes-news-explainer.py",
+      "/var/lock/hermes_news_explainer.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 34,
+    "schedule": "7 8,14,20 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-webshare-status.log",
+      "/root/mgs-agent/scripts/monitor-webshare-status.sh",
+      "/var/lock/monitor_webshare_status.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 37,
+    "schedule": "41 3 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/mgs-safety-backup-cron.log",
+      "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+      "/var/lock/mgs_safety_backup.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 40,
+    "schedule": "* * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-honcho-billing-watch.log",
+      "/root/mgs-agent/scripts/monitor_honcho_billing_watch.py",
+      "/var/lock/monitor_honcho_billing_watch.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 42,
+    "schedule": "54 2,8,14,20 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-honcho-health.log",
+      "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+      "/var/lock/monitor_honcho_health.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 45,
+    "schedule": "16 9 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log",
+      "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+      "/var/lock/monitor_discord_thread_archive_warnings.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 46,
+    "schedule": "*/15 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/discord-archive-stale-agent-threads.log",
+      "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 51,
+    "schedule": "*/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-vps-health.log",
+      "/root/mgs-agent/scripts/monitor-vps-health.py",
+      "/var/lock/monitor_vps_health.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 58,
+    "schedule": "30 7,15 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+      "/var/lock/dtr_sb_page_health_sync.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 59,
+    "schedule": "2-57/5 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log",
+      "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+      "/var/lock/alerts_infra_failed_alert_resolver.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 62,
+    "schedule": "20 6 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log",
+      "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
+      "/var/lock/dtr_sb_daily_match_audit.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 65,
+    "schedule": "39 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-op-rate-limit.log",
+      "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
+      "/var/lock/monitor_op_rate_limit.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 66,
+    "schedule": "19,49 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-drive-auth-unified.log",
+      "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
+      "/var/lock/monitor_drive_auth_unified.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 69,
+    "schedule": "0 8 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sync-sb-sms-revenue-daily.log",
+      "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh",
+      "/var/lock/sync_sb_sms_revenue_daily.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 72,
+    "schedule": "8 9 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sync-smsfunnel-cost-daily.log",
+      "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh",
+      "/usr/bin/flock",
+      "/var/lock/sync-smsfunnel-cost-daily.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 75,
+    "schedule": "* * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-hermes-pending-writes.log",
+      "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
+      "/var/lock/monitor_hermes_pending_writes.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 76,
+    "schedule": "* * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/hermes-structural-write-finalizer.log",
+      "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+      "/var/lock/finalize-hermes-structural-write.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 79,
+    "schedule": "5 8 * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/dtr-sb-restricted-summary.log",
+      "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py",
+      "/var/lock/dtr_sb_restricted_summary.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 82,
+    "schedule": "14,29,44,59 * * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/sb-restricted-transition-monitor.log",
+      "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+      "/var/lock/sb_restricted_transition_monitor.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 84,
+    "schedule": "0 8,14,20 * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/refresh-sb-restricted-history-sheet.log",
+      "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py",
+      "/var/lock/sb_restricted_history_sheet.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 85,
+    "schedule": "24 0,1,7-23 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-sms-funnel-balance.log",
+      "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
+      "/var/lock/monitor_sms_funnel_balance.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 86,
+    "schedule": "3-58/5 13,14 * * 5",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-sms-funnel-balance.log",
+      "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
+      "/var/lock/monitor_sms_funnel_balance_friday.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 89,
+    "schedule": "4,14,24,34,44,54 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-hermes-memory-capacity.log",
+      "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 92,
+    "schedule": "* * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/hermes-news-explainer-watchdog.log",
+      "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+      "/var/lock/hermes_news_explainer_watchdog.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 95,
+    "schedule": "47 4 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/hermes-context-cost-audit.log",
+      "/root/mgs-agent/scripts/hermes-context-cost-audit.py",
+      "/var/lock/hermes_context_cost_audit.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 99,
+    "schedule": "0 8 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 100,
+    "schedule": "*/15 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 101,
+    "schedule": "21 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 106,
+    "schedule": "17 8 * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
+      "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
+      "/var/lock/sync_sb_messenger_revenue_sheet.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 109,
+    "schedule": "12,27,42,57 * * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log",
+      "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
+      "/var/lock/monitor_sb_messenger_token_invalid.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 111,
+    "schedule": "5 0 * * *",
+    "existing_path_selectors": [
+      "/root/.local/share/mgs/sb-venv/bin/python",
+      "/root/mgs-agent/logs/cleanup-sb-messenger-token-messages.log",
+      "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
+      "/var/lock/cleanup_sb_messenger_token_messages.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 123,
+    "schedule": "3 9 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+      "/root/mgs-agent/logs/finance-media-spend.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/mgs-finance-media-spend.cron.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 126,
+    "schedule": "3,8,18,28 8 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+      "/root/mgs-agent/logs/finance-gam-revenue.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/mgs-finance-gam-revenue.cron.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 128,
+    "schedule": "22,31,41 9 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+      "/root/mgs-agent/logs/finance-gam-revenue.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/mgs-finance-gam-revenue.cron.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 132,
+    "schedule": "4 23 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/finance-month-rollover.log",
+      "/root/mgs-agent/scripts/finance-month-rollover.py",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/mgs-finance-month-rollover.cron.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 136,
+    "schedule": "34 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/finance-readonly-health.log",
+      "/root/mgs-agent/scripts/finance-readonly-health.py",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/mgs-finance-readonly-health.cron.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 140,
+    "schedule": "4 0-23/2 * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-runcloud.log",
+      "/root/mgs-agent/scripts/monitor-runcloud.py",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/monitor-runcloud.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 144,
+    "schedule": "47 7 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-daily-cron.py",
+      "/root/mgs-agent/logs/ares-shein-daily-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-daily-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 148,
+    "schedule": "32 9 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "/root/mgs-agent/logs/ares-shein-intraday-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-intraday-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 149,
+    "schedule": "11 14 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "/root/mgs-agent/logs/ares-shein-intraday-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-intraday-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 150,
+    "schedule": "2 16 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "/root/mgs-agent/logs/ares-shein-intraday-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-intraday-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 151,
+    "schedule": "2 20 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "/root/mgs-agent/logs/ares-shein-intraday-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-intraday-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 152,
+    "schedule": "31 23 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "/root/mgs-agent/logs/ares-shein-intraday-report.log",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/ares-shein-intraday-scheduler.lock"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 157,
+    "schedule": "8 18 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/shein-campaign-creation-cron.py",
+      "/root/mgs-agent/logs/ares-shein-campaign-creation-daily.log",
+      "/usr/bin/python3",
+      "/usr/bin/timeout"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 162,
+    "schedule": "13 0 * * *",
+    "existing_path_selectors": [
+      "/root/.hermes/profiles/ares/scripts/campaign-creation-sheet-cron.py",
+      "/root/mgs-agent/logs/ares-campaign-creation-sheet.log",
+      "/usr/bin/python3",
+      "/usr/bin/timeout"
+    ]
+  },
+  {
+    "source": "root-user-crontab",
+    "line": 167,
+    "schedule": "46 * * * *",
+    "existing_path_selectors": [
+      "/root/mgs-agent/logs/monitor-vagaaqui-country.log",
+      "/root/mgs-agent/scripts/monitor-vagaaqui-country.py",
+      "/usr/bin/flock",
+      "/usr/bin/python3",
+      "/usr/bin/timeout",
+      "/var/lock/monitor-vagaaqui-country.lock"
+    ]
+  }
+]

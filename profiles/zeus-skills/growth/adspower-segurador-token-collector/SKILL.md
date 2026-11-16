@@ -19,7 +19,7 @@ This skill is for collecting and validating **Meta user tokens for seguradores**
 Use it when Rodolfo asks to:
 
 - open seguradores in AdsPower;
-- check Facebook-profile advertising restrictions through Business Support Home, including batch audits and Sheet reporting;
+- check Facebook-account restrictions through Business Support Home, distinguishing advertising access from automated messaging by connected apps, including batch audits and Sheet reporting;
 - generate Meta user tokens;
 - extend/debug tokens;
 - validate token permissions/pages;
@@ -39,14 +39,17 @@ The same private PC1 transport is used by Zeus and Ares. Select this route only 
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
 
-## Advertising-restriction audit rules
+## Restriction sweeps and scheduled PC1 work
 
-- For Rodolfo's batch restriction checks, record and immediately skip profiles that are logged out or require login, checkpoint, CAPTCHA or 2FA. Leave authentication to Rodolfo; do not pause the whole list, attempt credentials or repeatedly reopen the same blocked profile during that sweep.
-- Keep `Sessão Facebook` separate from `Restrição para anunciar`. Publish an inaccessible profile as `Não verificado` with its access reason, never as unrestricted or restricted. App connection, token validity and Page access do not establish the personal profile's advertising status.
-- Use the user-designated Google Sheet tab as the review surface, with one stable profile identity per row and separate columns for status, reason and check time. Follow `google-drive-agent-automation` for access and publication; never replace the shared surface with unsolicited exports.
+- Resolve the exact restriction being audited before naming columns or interpreting status. For automated messaging, open the Facebook account's **View Details** in Business Support Home and inspect the affected app; **You can’t send messages** is not merely an advertising-access warning. A connected app, valid token or Page labeled **No issues** does not clear this separate restriction. Keep app scope, identity-confirmation requirement, Page suspension and advertising access distinct.
+- For Rodolfo's batch restriction checks, record and immediately skip profiles that are logged out or require login, checkpoint, CAPTCHA or 2FA. Leave authentication to Rodolfo; do not pause the whole list, attempt credentials or repeatedly reopen the same blocked profile during that sweep. An authenticated restriction-detail page offering **Confirm Identity** is readable evidence of a restriction, not a reason to discard the finding as an unreadable login gate.
+- Keep `Sessão Facebook` separate from the restriction status. Publish an inaccessible or incompletely inspected profile as `Não verificado`, never as unrestricted. For messaging audits include the affected app name/ID and whether identity confirmation is required; correlate that app with the operational assignment before claiming BOT/Messenger impact.
+- Use the user-designated Google Sheet tab as the review surface, with one immutable AdsPower profile identity per row and separate columns for status, reason and check time. Follow `google-drive-agent-automation` for access and publication; never replace the shared surface with unsolicited exports.
 - Resolve the authorized group/list and schedule before activating recurrence. Preparing headers is not a completed sweep or an active cron; report these stages separately and do not invent result rows.
+- Audit contention by **PC1 resource**, not just by AdsPower keywords: ordinary Chrome tasks, recovery workers and on-demand agent activity can conflict with profile automation. Separate start times and enforce the same shared lease; a quiet cron minute does not prove an idle desktop or a bounded sweep duration. Recommend a fresh verified slot rather than treating a previous recommendation as permanently reserved or already approved.
+- When explaining why a finite routine stopped, read the original human request, proposed calendar, confirmation, later amendments and last execution evidence. Distinguish a user-specified end date from an agent-proposed date approved with the calendar; expiry is not a separate cancellation order, and elapsed dates alone do not prove successful completion. A question about resumption or a promise to handle it in another thread is not authorization to reactivate it here.
 
-For the ordered browser-to-Sheet procedure, use **Advertising-restriction sweep and Sheet publication** in `references/pc1-remote-adspower-operations.md`.
+For the ordered browser-to-Sheet procedure and resource audit, use **Restriction sweep and Sheet publication** and **Shared-PC1 scheduling audit** in `references/pc1-remote-adspower-operations.md`. The domain interpretation of automated-messaging warnings belongs to `segurador-page-health-monitor`; load that skill and follow its Facebook-account automated-messaging restriction procedure.
 
 ## Required URLs
 

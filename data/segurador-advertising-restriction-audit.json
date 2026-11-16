@@ -2,7 +2,7 @@
   "id": "segurador-advertising-restriction-audit-1571976927898767451",
   "owner": "zeus",
   "subject": "segurador automated messaging restriction by connected app",
-  "state": "awaiting_scope_and_schedule",
+  "state": "awaiting_scope_and_timing_test",
   "enabled": false,
   "thread_id": "1571976927898767451",
   "authority_message_ids": ["1571977518549049406", "1571977953968136222", "1571979316886245598", "1571980047391268914"],
@@ -14,7 +14,9 @@
   "headers": ["Segurador", "ID perfil AdsPower", "Grupo AdsPower", "Sessão Facebook", "Restrição de mensagens", "Motivo / pendência", "Última checagem", "App afetado", "ID do app", "Confirmação de identidade"],
   "scope": null,
   "schedule": null,
-  "proposed_cadence_not_approved": "daily",
+  "cadence": {"frequency": "daily", "authority_message_id": "1571985053087694909"},
+  "proposed_start": {"time": "02:03", "timezone": "America/New_York", "activated": false},
+  "timing_canary": {"profile_count": 5, "status": "awaiting_profile_scope", "measure": ["open_attach", "support_home_and_view_details", "logged_out_skip", "sheet_write_and_readback", "close_and_inactive_readback", "batch_wall_time"], "note": "Measure live complete browser-to-Sheet-to-closure time before promising total duration; a mostly logged-out batch does not estimate authenticated-detail reads."},
   "maximum_concurrent_profiles": 5,
   "preserve_preexisting_profiles": true,
   "close_only_audit_opened_profiles": true,
@@ -59,5 +61,5 @@
     "limitations": ["AdsPower internal RPA/task scheduler was not inspected; do not claim it absent.", "On-demand Zeus/Ares and human use can occupy PC1 outside fixed times.", "This audit did not run browser operations, change schedules, or certify each workflow's business completion."]
   },
   "sheet_setup": {"headers_published_and_read_back": true, "frozen_header_verified": true, "data_rows": 0, "profiles_inspected": 0},
-  "next_step": "Obtain exact AdsPower group/profile scope and frequency/timezone/slot, then perform a fresh global collision preflight and implement/test a canary before activating recurrence. Do not create a cron or inspect unspecified profiles yet."
+  "next_step": "Daily frequency confirmed by Rodolfo 1571985053087694909; proposed start remains 02:03 America/New_York, not activated. Ask only for the exact AdsPower group/profile scope, missing from the live destination tab. Then execute a timed 5-profile canary through detail read, Sheet readback and verified closure; use its measured coverage and duration to prepare recurrence with shared PC1 lease/queue and fresh scheduling preflight. Do not open unspecified profiles or activate untested recurrence."
 }

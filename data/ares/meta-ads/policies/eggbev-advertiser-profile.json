@@ -18,19 +18,29 @@
   "onepassword_item_title": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
   "identity_live": {
     "http": 200,
-    "id": "122147293515218951",
-    "name": "Ana Cunha"
+    "id": "122147508339218951",
+    "name": "Ana Cunha",
+    "app_id": "1299247318762949",
+    "observed_at": "2026-11-16T20:11:50.921276+00:00",
+    "scope": "Selected-app candidate validation; not runtime cutover proof"
   },
   "token_metadata_observed": {
-    "app_id": "953171080682697",
-    "application": "minibot m6",
+    "app_id": "1299247318762949",
+    "application": "minibot",
     "type": "USER",
     "is_valid": true,
-    "user_id": "122147293515218951",
-    "expires_at": 1799872399,
-    "expires_at_et": "2027-01-13T15:33:19-05:00",
-    "data_access_expires_at": 1802464399,
-    "observation_note": "Introspeccao self-only repetida com HTTP200 apos confirmacao explicita de Rodolfo 1571263998102343752 e ajuste restrito do emissor esperado no grant tecnico da conta01. Identidade, USER, validade e app conferidos sem bypass."
+    "user_id": "122147508339218951",
+    "expires_at": 0,
+    "data_access_expires_at": 1802634607,
+    "scopes": [
+      "pages_show_list",
+      "ads_management",
+      "ads_read",
+      "business_management",
+      "pages_read_engagement",
+      "pages_manage_ads",
+      "public_profile"
+    ]
   },
   "account_readbacks": {
     "1034081997659047": {
@@ -79,7 +89,7 @@
   },
   "supersedes": "Escolha anterior de Mhd Aldy ou Carla Nunes como perfil anunciante Eggbev; nao apaga audits nem afirma cutover tecnico.",
   "prior_profile_retirement_authority_message_id": "1571250965313486889",
-  "implementation_status": "APP_SELECTION_APPROVED_PENDING_PROFILE_TOKEN_AND_STAGED_CUTOVER",
+  "implementation_status": "TARGET_APP_USER_TOKEN_VALIDATED_RUNTIME_CUTOVER_PENDING",
   "page_model": {
     "authority_message_id": "1571266743157002423",
     "authority_live_verified": true,
@@ -167,7 +177,7 @@
     "page_identity_required_in_director_thread_now": false,
     "no_campaign_created_by_this_handoff": true
   },
-  "next_step": "Use approved target minibot1299247318762949 for BOT selection, preserving Ana User-token/Page model. No new-app profile credential has been validated and current runtime bindings remain unchanged. Obtain only required token issuance/storage authorization, validate issuer/profile/assets/tier and stage/test complete consumer cutover. Preserve campaign holds/partial IDs; no direct System User or retired-profile fallback; do not ask app choice again.",
+  "next_step": "Read-only test passed: Ana/User/issuer1299247318762949, all3Eggbev accounts, requested Moorcroft Page/PBIA and pixel. Runtime consumer/cache cutover is still pending; no campaign creation or resume from this test. Inventory/prepare scoped integration with dedicated app/profile cache, live tier and tests while preserving original objects/seals/approvals and campaign holds. Do not ask app choice or token issuance again; owner already supplied the validated credential.",
   "excluded": [
     "remote permission changes",
     "new app allowlist or guard bypass without explicit authorization",
@@ -223,9 +233,19 @@
   "app_migration_authority_mode": "direct_CEO_instruction",
   "current_decision_runtime_binding_changes_applied": false,
   "current_app_migration_complete": false,
-  "new_app_profile_token_reference": null,
-  "onepassword_item_reference_scope": "Current previous-app runtime reference only; not validated for new chosen issuer",
-  "token_metadata_observed_scope": "Historical previous-issuer metadata; not fresh proof for new target app",
+  "new_app_profile_token_reference": {
+    "item_id": "xxgqyiuijcu4rfrcmfmme6iduq",
+    "item_title": "Token Meta API - 00 - ANUNCIANTE - Ana Cunha - eggbev- G006",
+    "field": "credential",
+    "app_id": "1299247318762949",
+    "type": "USER",
+    "profile": "Ana Cunha",
+    "app_scoped_user_id": "122147508339218951",
+    "verified_at": "2026-11-16T20:11:50.921276+00:00",
+    "credential_value_included": false
+  },
+  "onepassword_item_reference_scope": "Owner updated the existing item; candidate issuer/profile is validated but installed runtime/cache migration is pending",
+  "token_metadata_observed_scope": "Fresh read-only selected-app Ana credential validation; runtime bindings/caches not migrated",
   "repeat_app_selection_approval_required": false,
   "owner_token_preparation": {
     "owner": "Rodolfo Mattei",
@@ -251,6 +271,37 @@
         "debug_token:self_only"
       ],
       "purpose": "Read-only own candidate token validation; no asset enrollment, discovery, write or runtime cutover"
+    }
+  },
+  "identity_observation_history": [
+    {
+      "scope": "Previous installed app observation; preserved before selected-app candidate validation",
+      "identity": {
+        "http": 200,
+        "id": "122147293515218951",
+        "name": "Ana Cunha"
+      },
+      "token_metadata": {
+        "app_id": "953171080682697",
+        "application": "minibot m6",
+        "type": "USER",
+        "is_valid": true,
+        "user_id": "122147293515218951",
+        "expires_at": 1799872399,
+        "expires_at_et": "2027-01-13T15:33:19-05:00",
+        "data_access_expires_at": 1802464399,
+        "observation_note": "Introspeccao self-only repetida com HTTP200 apos confirmacao explicita de Rodolfo 1571263998102343752 e ajuste restrito do emissor esperado no grant tecnico da conta01. Identidade, USER, validade e app conferidos sem bypass."
+      }
+    }
+  ],
+  "new_app_validation_evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/read-only-token-test-1571975883286257726.json",
+  "new_app_asset_evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/new-app-asset-readback-1571975883286257726.json",
+  "new_app_live_tier_by_account": {
+    "1481815942722118": {
+      "app_id": "1299247318762949",
+      "tier": "standard_access",
+      "source": "fresh account03 child usage headers",
+      "evidence": "data/ares/meta-ads/audit/auth-cutover/bot-app-selection-1571968822276259974/new-app-asset-readback-1571975883286257726.json"
     }
   }
 }

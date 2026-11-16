@@ -1,0 +1,1298 @@
+[
+  {
+    "home": "/root/.hermes/profiles/ares",
+    "jobs": [
+      {
+        "id": "41712f74f949",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "1 * * * *",
+          "display": "1 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2034
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "69dfca2b9719",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "6 * * * *",
+          "display": "6 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2113
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "f45eed5047b9",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "11 * * * *",
+          "display": "11 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 644
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "2cf8115a4f8b",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "* * * * *",
+          "display": "* * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 65
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "9532b8be5aa2",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 * * * *",
+          "display": "30 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 3
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "5d0974e97ebd",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 * * * *",
+          "display": "30 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 604
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "990b3e644f36",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "4,19,34,49 * * * *",
+          "display": "4,19,34,49 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2325
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "e0344a16b30c",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 * * * *",
+          "display": "0 * * * *"
+        },
+        "repeat": {
+          "times": 24,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "c3d2499d8c33",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16 8,20 * * *",
+          "display": "16 8,20 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 35
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "51ae40b5a6ef",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+          "display": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 220
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "23edda4c310c",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "9,24,39,54 * * * *",
+          "display": "9,24,39,54 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 1526
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "0f857904829b",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2 * * * *",
+          "display": "2 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 382
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "1ce07d70df3c",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "7 * * * *",
+          "display": "7 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 382
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "d8663df2fa30",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "12 * * * *",
+          "display": "12 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 381
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "cc5b8882df89",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/5 * * * *",
+          "display": "*/5 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 4545
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "e855303c883c",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "14,29,44,59 * * * *",
+          "display": "14,29,44,59 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 1518
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "3b091340c964",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-10-20T23:58:30-03:00",
+          "display": "once at 2026-10-20 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "528c5710269d",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "12,27,42,57 * * * *",
+          "display": "12,27,42,57 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2595
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "b948dad7299b",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "28 18-23 29 10 *",
+          "display": "28 18-23 29 10 *"
+        },
+        "repeat": {
+          "times": 6,
+          "completed": 6
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "46898e7d0967",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 13-23 31 10 *",
+          "display": "13,43 13-23 31 10 *"
+        },
+        "repeat": {
+          "times": 22,
+          "completed": 22
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "59f688d6c008",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 11-23 1 11 *",
+          "display": "13,43 11-23 1 11 *"
+        },
+        "repeat": {
+          "times": 26,
+          "completed": 26
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "afa447f6c48a",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 9-23 2 11 *",
+          "display": "13,43 9-23 2 11 *"
+        },
+        "repeat": {
+          "times": 29,
+          "completed": 29
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "040f8988af5d",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 14-23 2 11 *",
+          "display": "16,46 14-23 2 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "96f0eb16279d",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 11-23 3 11 *",
+          "display": "13,43 11-23 3 11 *"
+        },
+        "repeat": {
+          "times": 26,
+          "completed": 26
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "e8ffbbfce6a5",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 13-23 3 11 *",
+          "display": "16,46 13-23 3 11 *"
+        },
+        "repeat": {
+          "times": 22,
+          "completed": 22
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "555024d96760",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 13-23 4 11 *",
+          "display": "13,43 13-23 4 11 *"
+        },
+        "repeat": {
+          "times": 21,
+          "completed": 21
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "04cf37ca76ba",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 15-23 4 11 *",
+          "display": "16,46 15-23 4 11 *"
+        },
+        "repeat": {
+          "times": 18,
+          "completed": 18
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "8fd47435155f",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 11-23 5 11 *",
+          "display": "16,46 11-23 5 11 *"
+        },
+        "repeat": {
+          "times": 26,
+          "completed": 26
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "948a9e1f1364",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 11-23 5 11 *",
+          "display": "13,43 11-23 5 11 *"
+        },
+        "repeat": {
+          "times": 26,
+          "completed": 26
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "86c14e669d75",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 13-23 6 11 *",
+          "display": "16,46 13-23 6 11 *"
+        },
+        "repeat": {
+          "times": 22,
+          "completed": 22
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "9c94bdba9187",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 13-23 6 11 *",
+          "display": "13,43 13-23 6 11 *"
+        },
+        "repeat": {
+          "times": 21,
+          "completed": 21
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "b8bbc9374fb6",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 9-23 7 11 *",
+          "display": "13,43 9-23 7 11 *"
+        },
+        "repeat": {
+          "times": 30,
+          "completed": 30
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "a76405ee27ba",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "28,58 9-23 7 11 *",
+          "display": "28,58 9-23 7 11 *"
+        },
+        "repeat": {
+          "times": 30,
+          "completed": 30
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "866561006fd5",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 9-23 7 11 *",
+          "display": "16,46 9-23 7 11 *"
+        },
+        "repeat": {
+          "times": 29,
+          "completed": 29
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "c70c18d00bff",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "18,48 15-23 7 11 *",
+          "display": "18,48 15-23 7 11 *"
+        },
+        "repeat": {
+          "times": 18,
+          "completed": 18
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "ef50cd215b09",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "3,33 15-23 7 11 *",
+          "display": "3,33 15-23 7 11 *"
+        },
+        "repeat": {
+          "times": 18,
+          "completed": 18
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "d45d119947bd",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-07T23:58:00-05:00",
+          "display": "once at 2026-11-07 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "64b05097869b",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 14-23 9 11 *",
+          "display": "13,43 14-23 9 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "967b5e9936d2",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16,46 14-23 9 11 *",
+          "display": "16,46 14-23 9 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "9f15ef4bf116",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-09T23:58:15-05:00",
+          "display": "once at 2026-11-09 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "bdc98a66f863",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-09T23:53:15-05:00",
+          "display": "once at 2026-11-09 23:53"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "79ce195eac20",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-10T23:58:15-05:00",
+          "display": "once at 2026-11-10 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "53050f786b3a",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 14-23 11 11 *",
+          "display": "13,43 14-23 11 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "91558e3f4696",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "28,58 14-23 11 11 *",
+          "display": "28,58 14-23 11 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "2d3384b7db0f",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "18,48 15-23 11 11 *",
+          "display": "18,48 15-23 11 11 *"
+        },
+        "repeat": {
+          "times": 17,
+          "completed": 17
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "e42f3e7406be",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "3,33 16-23 11 11 *",
+          "display": "3,33 16-23 11 11 *"
+        },
+        "repeat": {
+          "times": 15,
+          "completed": 15
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "0498f6b00f32",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "14,44 16-23 11 11 *",
+          "display": "14,44 16-23 11 11 *"
+        },
+        "repeat": {
+          "times": 16,
+          "completed": 16
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "8f8a24142a28",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-12T00:03:15-05:00",
+          "display": "once at 2026-11-12 00:03"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "685ad104c19d",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-12T00:02:15-05:00",
+          "display": "once at 2026-11-12 00:02"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "f5af93c8d5f5",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-12T23:58:15-05:00",
+          "display": "once at 2026-11-12 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "c46077091914",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "17,47 12-23 13 11 *",
+          "display": "17,47 12-23 13 11 *"
+        },
+        "repeat": {
+          "times": 23,
+          "completed": 23
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "b149f67058c0",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "20,50 14-23 13 11 *",
+          "display": "20,50 14-23 13 11 *"
+        },
+        "repeat": {
+          "times": 20,
+          "completed": 20
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "49e9d41be420",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 * 14 11 *",
+          "display": "13,43 * 14 11 *"
+        },
+        "repeat": {
+          "times": 19,
+          "completed": 19
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "66d9bf48ab4c",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "28,58 14-23 14 11 *",
+          "display": "28,58 14-23 14 11 *"
+        },
+        "repeat": {
+          "times": 19,
+          "completed": 19
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "7103604d91f9",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-15T23:58:15-05:00",
+          "display": "once at 2026-11-15 23:58"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "1184a5c56741",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-15T23:53:15-05:00",
+          "display": "once at 2026-11-15 23:53"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "33f6c617ab3d",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-11-15T23:54:30-05:00",
+          "display": "once at 2026-11-15 23:54"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "0dc11f1acecc",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "13,43 15-23 16 11 *",
+          "display": "13,43 15-23 16 11 *"
+        },
+        "repeat": {
+          "times": 18,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "9bad7424b30c",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "22,52 * 16 11 *",
+          "display": "22,52 * 16 11 *"
+        },
+        "repeat": {
+          "times": 18,
+          "completed": 1
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      }
+    ],
+    "count": 59,
+    "enabled_by_explicit_flag": 5
+  },
+  {
+    "home": "/root/.hermes/profiles/atena",
+    "jobs": [
+      {
+        "id": "8e765001573d",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 10 * * *",
+          "display": "0 10 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      }
+    ],
+    "count": 1,
+    "enabled_by_explicit_flag": 0
+  },
+  {
+    "home": "/root/.hermes/profiles/zeus",
+    "jobs": [
+      {
+        "id": "44671121f3cc",
+        "enabled": true,
+        "schedule": {
+          "kind": "interval",
+          "minutes": 360,
+          "display": "every 360m"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 674
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "0cc7ed1e587e",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/3 0,8-23 * * *",
+          "display": "*/3 0,8-23 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 41644
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "69d8eaa11ff4",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 1-18 * * *",
+          "display": "0 1-18 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 41
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "500f8f1cff5e",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 9 * * *",
+          "display": "0 9 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 33
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "498fb0d95e10",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2-59/9 0,8-23 * * *",
+          "display": "2-59/9 0,8-23 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 11042
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "5f4c56c2fc1f",
+        "enabled": false,
+        "schedule": {
+          "kind": "interval",
+          "minutes": 5,
+          "display": "every 5m"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "3ff8bd8ca40d",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "23 * * * *",
+          "display": "23 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2967
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "f0222c3bfcf0",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "15 4 * * *",
+          "display": "15 4 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 124
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "940e9827b1ac",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "45 5 * * 0",
+          "display": "45 5 * * 0"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 19
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "453bfdd275b0",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/30 * * * *",
+          "display": "*/30 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 5932
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "62dfebef142b",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 6 * * *",
+          "display": "30 6 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 102
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "7ccf090ebf1f",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "3,8,13,18,28,33,38,43,48,53,58 * * * *",
+          "display": "3,8,13,18,28,33,38,43,48,53,58 * * * *"
+        },
+        "repeat": {
+          "times": 72,
+          "completed": 11
+        },
+        "last_status": "error",
+        "existing_script_paths": []
+      },
+      {
+        "id": "685397627b29",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "26,56 * * * *",
+          "display": "26,56 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 3438
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "96176dcf5bf8",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "8,38 * * * *",
+          "display": "8,38 * * * *"
+        },
+        "repeat": {
+          "times": 46,
+          "completed": 46
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "c17a8cc8a373",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "8,38 * * * *",
+          "display": "8,38 * * * *"
+        },
+        "repeat": {
+          "times": 100,
+          "completed": 100
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "fb40054022fa",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/10 1-7 * * *",
+          "display": "*/10 1-7 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2940
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "f42618f5ced7",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2-59/10 1-7 * * *",
+          "display": "2-59/10 1-7 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2575
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "ad67a766690d",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "3,33 * * * *",
+          "display": "3,33 * * * *"
+        },
+        "repeat": {
+          "times": 126,
+          "completed": 126
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "9631194b51ac",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "27,57 * * * *",
+          "display": "27,57 * * * *"
+        },
+        "repeat": {
+          "times": 22,
+          "completed": 22
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "a0d8fedbd7c3",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "27,57 * * * *",
+          "display": "27,57 * * * *"
+        },
+        "repeat": {
+          "times": 80,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "83b148017b4d",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "10,25,40,55 * * * *",
+          "display": "10,25,40,55 * * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 2596
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "2ee720363d7d",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2 8,14,21 * * *",
+          "display": "2 8,14,21 * * *"
+        },
+        "repeat": {
+          "times": null,
+          "completed": 66
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      },
+      {
+        "id": "e62aff868def",
+        "enabled": false,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-10-26T17:13:10.025281-04:00",
+          "display": "once at 2026-10-26 17:13"
+        },
+        "repeat": {
+          "times": 1,
+          "completed": 0
+        },
+        "last_status": null,
+        "existing_script_paths": []
+      },
+      {
+        "id": "15adf1a82660",
+        "enabled": false,
+        "schedule": {
+          "kind": "cron",
+          "expr": "8,18,28,38,48,58 20-23 * * *",
+          "display": "8,18,28,38,48,58 20-23 * * *"
+        },
+        "repeat": {
+          "times": 24,
+          "completed": 2
+        },
+        "last_status": "error",
+        "existing_script_paths": []
+      },
+      {
+        "id": "7aac7f6e2d6b",
+        "enabled": true,
+        "schedule": {
+          "kind": "cron",
+          "expr": "14,29,36,51 * * * *",
+          "display": "14,29,36,51 * * * *"
+        },
+        "repeat": {
+          "times": 96,
+          "completed": 25
+        },
+        "last_status": "ok",
+        "existing_script_paths": []
+      }
+    ],
+    "count": 25,
+    "enabled_by_explicit_flag": 14
+  }
+]
