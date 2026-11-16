@@ -2,6 +2,15 @@
 
 Apply the main skill's replacement authorization and acceptance gates. Start with this compact dedicated-route sequence; consult the specific replacement sections of route-pack-05 only for additional branches, not its historical cutover narratives.
 
+## 0. Pause while the replacement is not ready
+
+1. Separate the current app from the proposed successor. A future label plus a statement that credentials are not yet stored establishes a pending replacement only; do not rename the active registry, rewrite the runner or initialize successor state.
+2. Resolve the current dedicated runner and its vault from the deployed configuration. When a minimal health check needs the exact immutable item, use `/root/mgs-agent/scripts/mgs-op-with-service-account.sh item get <item-id> --vault <resolved-vault> --format json` inside a capturing process. Keep the raw item, token and secret only in memory; print only allowlisted identity and diagnostic fields. Supply the vault explicitly for Service Account item reads so item discovery does not become an avoidable failure.
+3. On an explicit pause request, list jobs and select every existing day/night job using the dedicated runner. Call `cronjob_manage(action='pause', job_id=<resolved-id>)` for each; preserve their schedules and all unrelated jobs. Read back the exact jobs and require `enabled=false` and `state=paused` for the complete selected set.
+4. Inspect the canonical runner lock separately, without starting another scan. A free lock supports 'no native scan in progress'; if held, identify and reconcile that writer before claiming execution has stopped. Do not equate scheduler pause with cancellation or kill an existing writer implicitly.
+5. Record a credential-free receipt, audit, inventory and checkpoint with the pause authority, actual thread, selected job IDs, proposed successor and explicit wait-for-owner gate. Query heterogeneous inventory/checkpoint records with `record.get('id')`, not `record['id']`, because legacy entries may omit that key. Publish and read back the required canonical REPORT-INFRA without duplicating it in the operational thread.
+6. Confirm the verified pause briefly. On the owner's later credential-ready notice, resume this same checkpoint at the normal replacement preflight below; do not create duplicate jobs or unpause merely because a successor name is known.
+
 ## 1. Resolve identity and preserve rollback
 
 1. Read the active registry entry, its immutable vault item, the dedicated runner, predecessor state, both day/night jobs and unrelated pause sets. Resolve the runner path from live inventory or the job's script resolution rather than assuming it lives in the repository scripts directory.

@@ -1,0 +1,135 @@
+{
+  "status": "READONLY_UV_INVENTORY_AND_NATIVE_SOURCE_MODEL",
+  "authority_message_id": "1571959754081837281",
+  "thread_id": "1569928464033783862",
+  "uv_binary": "/root/.local/bin/uv",
+  "uv_version": "uv 0.12.1 (x86_64-unknown-linux-gnu)",
+  "uv_binary_sha256": "92face6b1f0462ad911857957bd168cd4ae45515e2a2cb3fcc3ecbda3d4d82b1",
+  "source_url": "https://raw.githubusercontent.com/astral-sh/uv/0.12.1/crates/uv-cache/src/lib.rs",
+  "source_sha256": "ff286d34722245f6c48c03bcee4b7c2391dd9c9514a9b1fe716eb06c8473717b",
+  "metadata_first": {
+    "path": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/metadata-first.jsonl.gz",
+    "compressed_sha256": "e1bf622af4e5b3ced825aff54fc2d5883b33ce7711274569595a41f7f2bb9aef",
+    "normalized_plain_sha256": "3752b44da59276b26ef0305aca783518333a81465f4b8535c83bc503a3d75a2d",
+    "node_count": 333224
+  },
+  "metadata_second": {
+    "path": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/metadata-second.jsonl.gz",
+    "compressed_sha256": "8cefbc4c3d6d9fad9fd6ff59c0bef8d2ebd1889f064d307985cfaaaf598945af",
+    "normalized_plain_sha256": "3752b44da59276b26ef0305aca783518333a81465f4b8535c83bc503a3d75a2d",
+    "node_count": 333224
+  },
+  "coherent_two_pass_freeze": true,
+  "node_counts": {
+    "directory": 34188,
+    "file": 298092,
+    "link": 944
+  },
+  "unique_allocated_cache_bytes": 6418243584,
+  "cache_inode_blocks_with_external_hardlinks_bytes": 1814474752,
+  "whole_cache_deletion_physical_upper_bound_bytes": 4603768832,
+  "whole_cache_deletion_not_proposed": true,
+  "buckets": {
+    ".": {
+      "files": 0,
+      "directories": 1,
+      "links": 0,
+      "logical_file_bytes": 0,
+      "unique_allocated_bytes": 4096
+    },
+    ".gitignore": {
+      "files": 1,
+      "directories": 0,
+      "links": 0,
+      "logical_file_bytes": 1,
+      "unique_allocated_bytes": 4096
+    },
+    ".lock": {
+      "files": 1,
+      "directories": 0,
+      "links": 0,
+      "logical_file_bytes": 0,
+      "unique_allocated_bytes": 0
+    },
+    "CACHEDIR.TAG": {
+      "files": 1,
+      "directories": 0,
+      "links": 0,
+      "logical_file_bytes": 43,
+      "unique_allocated_bytes": 4096
+    },
+    "archive-v0": {
+      "files": 296587,
+      "directories": 33790,
+      "links": 332,
+      "logical_file_bytes": 17522550835,
+      "unique_allocated_bytes": 6315859968
+    },
+    "builds-v0": {
+      "files": 0,
+      "directories": 1,
+      "links": 0,
+      "logical_file_bytes": 0,
+      "unique_allocated_bytes": 4096
+    },
+    "environments-v2": {
+      "files": 0,
+      "directories": 5,
+      "links": 83,
+      "logical_file_bytes": 0,
+      "unique_allocated_bytes": 20480
+    },
+    "interpreter-v4": {
+      "files": 152,
+      "directories": 6,
+      "links": 0,
+      "logical_file_bytes": 245912,
+      "unique_allocated_bytes": 647168
+    },
+    "sdists-v9": {
+      "files": 160,
+      "directories": 87,
+      "links": 21,
+      "logical_file_bytes": 493826,
+      "unique_allocated_bytes": 1282048
+    },
+    "simple-v21": {
+      "files": 118,
+      "directories": 2,
+      "links": 0,
+      "logical_file_bytes": 55851616,
+      "unique_allocated_bytes": 56107008
+    },
+    "simple-v24": {
+      "files": 193,
+      "directories": 2,
+      "links": 0,
+      "logical_file_bytes": 39071616,
+      "unique_allocated_bytes": 39473152
+    },
+    "wheels-v6": {
+      "files": 879,
+      "directories": 294,
+      "links": 508,
+      "logical_file_bytes": 666744,
+      "unique_allocated_bytes": 4837376
+    }
+  },
+  "archive_count": 717,
+  "native_wheel_sdist_referenced_archives": 529,
+  "native_orphan_archives": 188,
+  "environment_link_count": 83,
+  "outdated_bucket_count": 1,
+  "outdated_buckets": [
+    "/root/.cache/uv/simple-v21"
+  ],
+  "native_prune_predicted_top_targets": 193,
+  "native_prune_physical_upper_bound_bytes": 737275904,
+  "native_prune_not_executed": true,
+  "projection_is_not_native_dry_run": true,
+  "consumer_and_recovery_classification_pending": true,
+  "private_classification": "/root/.hermes/secure-backups/storage-uv-1571959754081837281/classification.json.gz",
+  "source_files_deleted": 0,
+  "observed_savings_bytes": 0,
+  "at": "2026-11-16T13:52:32.309977-05:00"
+}

@@ -1,0 +1,31 @@
+{
+  "status": "READONLY_CONSUMER_MAPPING",
+  "processes_inspected": 197,
+  "uv_processes": [],
+  "process_target_matches": [],
+  "inaccessible_processes": [],
+  "metadata_directories_scanned": 77925,
+  "metadata_files_scanned": 900645,
+  "external_target_symlinks": [],
+  "executable_import_selectors": [],
+  "code_files_scanned": 7741,
+  "code_target_hits": [],
+  "institutional_target_hits": [],
+  "cleanup_definitions": [],
+  "root_cron_has_uv_cleanup": false,
+  "scan_errors": [],
+  "technical_exclusions": [
+    "/root/.cache/uv",
+    "/root/.hermes/secure-backups"
+  ],
+  "excluded_directory_names": [
+    ".git",
+    "browser-profiles",
+    "browser_profiles",
+    "checkpoints",
+    "node_modules"
+  ],
+  "limits": "Bounded local consumers only; no payload or credential scan; private backup history and Git/checkpoint/browser/Node trees not traversed for links. No claim of future arbitrary manual access.",
+  "source_files_removed": 0,
+  "at": "2026-11-16T13:56:08.846759-05:00"
+}

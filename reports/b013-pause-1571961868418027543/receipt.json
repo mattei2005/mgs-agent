@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-16T18:56:06.088503+00:00",
+  "app": "B013-8",
+  "requested_replacement": "B013-9",
+  "authority_message_id": "1571961868418027543",
+  "thread_id": "1571959312111374447",
+  "jobs": [
+    {
+      "id": "498fb0d95e10",
+      "enabled": false,
+      "state": "paused",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/9 0,8-23 * * *",
+        "display": "2-59/9 0,8-23 * * *"
+      },
+      "paused_at": "2026-11-16T13:55:39.007721-05:00"
+    },
+    {
+      "id": "f42618f5ced7",
+      "enabled": false,
+      "state": "paused",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/10 1-7 * * *",
+        "display": "2-59/10 1-7 * * *"
+      },
+      "paused_at": "2026-11-16T13:55:39.037194-05:00"
+    }
+  ],
+  "native_lock_held": false,
+  "credentials_changed": false,
+  "registry_changed": false,
+  "resume_gate": "Aguardar Rodolfo confirmar cadastro do B013-9 no 1Password; validar substituição antes de reativar."
+}
