@@ -363,6 +363,21 @@ def prepare(path,runner,confirm):
         finally:leases.release(TARGET,q['request_id'])
 
 
+def authorized_final_approver(q, user_id):
+    if user_id==CEO:return True
+    op=load(ROOT/'data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json')
+    authority=op.get('authority') or {}
+    users=load(ROOT/'data/authorized-users.json').get('agents',{}).get('ares',{})
+    return bool(q.get('account_id')==TARGET and authority.get('status')=='active'
+                and authority.get('account_id')==TARGET
+                and authority.get('source_thread_id')==q.get('source_thread_id')
+                and authority.get('authorized_by_discord_id')==CEO
+                and user_id==authority.get('authorized_manager_discord_id')
+                and user_id in users.get('authorized_user_discord_ids',[])
+                and {'campaign creation, clone and duplication requests',
+                     'per-request campaign activation including explicit immediate start'}<=set(authority.get('scope',[])))
+
+
 def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=False):
     from .prevalidation import verify_prevalidation
     home=home_for(q);payload=load(home/'manifest.json');delivery=load(home/'summary-delivery.json')
@@ -377,7 +392,7 @@ def final_approval(q,summary,common,message_id,approved_digest,*,return_proof=Fa
     if (not sent.get('author',{}).get('bot') or sent['author'].get('id')!='1508864261504630925'
         or digest(sent.get('content',''))!=delivery.get('content_digest')
         or any(v not in sent.get('content','') for v in [*summary['names'],'JSON-AGT','PAUSED','15','35','175'])
-        or ok.get('author',{}).get('id')!=CEO or ok['author'].get('bot')
+        or not authorized_final_approver(q,ok.get('author',{}).get('id')) or ok['author'].get('bot')
         or ok.get('content','').strip().casefold() not in {'sim','ok','aprovado','pode executar','pode publicar'}
         or datetime.fromisoformat(ok['timestamp'])<=datetime.fromisoformat(sent['timestamp'])):
         raise ValueError('subsequent final summary approval required')
