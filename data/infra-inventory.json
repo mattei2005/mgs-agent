@@ -68163,12 +68163,12 @@
       "status": "prepared_awaiting_exact_three_root_critical_confirmation",
       "authority_message_id": "1571996311308214363",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T17:31:53.992823-05:00",
-      "evidence": "data/storage-local-tests-1571996311308214363/review-final.json",
+      "updated_at": "2026-11-16T17:58:43.946666-05:00",
+      "evidence": "data/storage-local-tests-1571996311308214363/active-review-final.json",
       "canonical_source": "context/storage-reaudit-20261116.md",
-      "active_manifest": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/revalidated-code-baseline-1/manifest.json",
-      "active_manifest_sha256": "0d201fea271739ee0e534f17306a63b660c49beb866156905980038d30aaba3a",
-      "gate_sha256": "2ff2819b90ca0be30a2348a77d3a570a39ef9ea7c86b18168333051b7dcf23ab",
+      "active_manifest": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/manifest.json",
+      "active_manifest_sha256": "e8c3b11124414ec881a3b4e23592a86d6d1dd99e1f1cefe56bfb3f7175e5394d",
+      "gate_sha256": "5b7b9f9203226a13a5be4a4a76366c042980bc0b638f12b414203c59736b3e00",
       "classification_counts": {
         "required_or_prior_hold": 6,
         "pending_proof": 25,
@@ -68183,10 +68183,11 @@
       "budget": {
         "gross_reclaim_upper_bytes": 646762496,
         "gross_MiB": 616.8,
-        "analysis_created_bytes": 171008000,
-        "analysis_created_MiB": 163.09,
-        "net_direct_estimate_bytes": 475754496,
-        "net_direct_estimate_MiB": 453.71,
+        "analysis_created_bytes": 171900928,
+        "analysis_created_MiB": 163.94,
+        "net_direct_estimate_bytes": 474861568,
+        "net_direct_estimate_MiB": 452.86,
+        "net_rounded_MiB": 453,
         "shared_Git_growth_not_estimated": true,
         "actual_savings_bytes": 0
       },
@@ -68199,10 +68200,11 @@
         "subsystem": "vps-maintenance-and-backup-governance",
         "target": "references/full-vps-cleanup-inventory.md",
         "live_mirror_equal": true,
-        "summary": "Bounded complete reference census, directory boundaries, exact vs weak selectors, factory vs reopening consumer, log supplement, raw-audit cost and expiry disclosure."
+        "summary": "Bounded complete reference census, directory boundaries, exact vs weak selectors, factory vs reopening consumer, log supplement, raw-audit cost and expiry disclosure.",
+        "second_lesson": "Freeze relevant consumers/jobs, not unrelated dynamic Meta helpers; preserve old immutable gates; test both nonblocking unrelated and blocking relevant changes."
       },
       "remaining_own_residue_action": "Own failed/working corpus indexes are counted new analysis residue, not old waste. After this gate closes, lossless compaction plus exact disposal approval is an explicit remaining item; no implicit unlink.",
-      "result_sha256": "928f378e46e8238c1b6ca2790d0c3cfcb590cc9bf03f9e2799d0ad9444b054fe",
+      "result_sha256": "24b231596f080f99f4daea898d86e7f0cb86f7b7a29948e7d085ea19b8767aa6",
       "report_infra": {
         "message_id": "1572016394667696290",
         "channel_id": "1498132022634483894",
@@ -68210,9 +68212,13 @@
         "content_empty": true,
         "embed_count": 1,
         "mentions_empty": true,
-        "same_message_corrected_budget": true
+        "same_report_updated_not_duplicated": true
       },
-      "collector_seal_guards": 3
+      "collector_seal_guards": 3,
+      "previous_preparation_result_sha256": "928f378e46e8238c1b6ca2790d0c3cfcb590cc9bf03f9e2799d0ad9444b054fe",
+      "code_census_policy": "target-consumer-v2",
+      "relevant_readers_match_original_review": true,
+      "validation_tests": 25
     }
   ],
   "profile_skill_references": [
