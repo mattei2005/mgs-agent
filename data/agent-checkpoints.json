@@ -6837,6 +6837,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-PENDING10-1572246750020894733",
+      "next_step": "Conferir metadados e hashes dos10, leitores exatos/dinamicos, evidencias das3familias e historico disponivel; fechar classificacao completa, preservar provas insuficientes e nao reabrir lotes executados.",
+      "objective": "Revisar somente10diretorios QA remanescentes por produtor, consumidores e recuperacao, preservando demais25atuais e caches; sem executar DB/SQL/deploy/delete.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-pending25-1572091759247368262/retirement-final.json;discord:1569928464033783862/1572246750020894733",
+      "state": "in_progress_readonly_ten_root_provenance_review",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-17T13:49:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-PENDING25-1572091759247368262",
       "next_step": "Lote04efa1a46f2d concluido umavez,confirmacao1572111648741793904/pergunta1572099777863098449:6130files162dirsretirados;v7 e25roots25435SHAintactos;deltaimediato1.164GiB. Nao reexecutargate nemlotesanteriores. Proxima revisao:10diretoriossemproveniencia/recriacaocertificada;9verificacaoe6anterioresprotegidosficam. Familiasrestantes+consolidacaoindicespropriosabertas,nenhumdeleteimplicito;cachepausado. Nao ha confirmacaopendentedestelote.",
       "objective": "Retirar somente seis estados QA confirmados e preservar v7/outros25; manter auditoria geral aberta.",
@@ -11167,5 +11177,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T13:38:31+00:00"
+  "updated_at": "2026-11-17T13:49:54+00:00"
 }
