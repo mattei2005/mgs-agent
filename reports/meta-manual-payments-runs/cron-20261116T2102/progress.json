@@ -1,0 +1,22 @@
+{
+  "status": "running",
+  "scheduled_at": "2026-11-16T21:02:00-05:00",
+  "completed": {
+    "funding": {
+      "stdout": "{\"status\": \"regroup_validated\", \"accounts\": 55, \"groups\": {\"Cartão de crédito\": 15, \"Linha de crédito\": 40}, \"changes\": [], \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261116T210513599291\", \"meta_writes\": 0, \"payments_executed\": 0}\n",
+      "returncode": 0
+    },
+    "invoices": {
+      "stdout": "{\"status\": \"september_invoices_updated_validated\", \"accounts\": 55, \"new_columns\": \"E Invoice; F Outubro — saldo em aberto\", \"invoice_period\": \"2026-10-01\", \"visible_invoice_numbers\": 30, \"unpaid_in_tab\": 30, \"tab_due_usd\": \"417864.11\", \"unpaid_bm\": 30, \"bm_due_usd\": \"417864.11\", \"outside_accounts\": [], \"full_grid_readback\": true, \"prior_cells_preserved\": true, \"payments_executed\": 0, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/september-20261116T210517093700\"}\n",
+      "returncode": 0
+    },
+    "api": {
+      "stdout": "{\"status\": \"updated_metrics_pending_card_history\", \"accounts\": 55, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/20261116T210549617452\", \"meta_writes\": 0, \"payments_executed\": 0, \"snapshot_at\": \"2026-11-16T21:05:44.813447-05:00\", \"pending_ui\": [{\"account_id\": \"1150399088163771\", \"name\": \"Creditoparaveiculo-BR-CAR-BR-14-G001\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1414197490675732\", \"name\": \"Mavroa-US-SHEIN-ES-02-G002\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1543098427832443\", \"name\": \"Mavroa-US-SHEIN-ES-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"2852476828464907\", \"name\": \"Mavroa-US-SHEIN-ES-04-G004\", \"reason\": \"new_generic_payment_since_pc1_proof\"}]}\n",
+      "returncode": 0
+    },
+    "h_prepare": {
+      "stdout": "{\"status\": \"prepared\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T210551617153\", \"credit_line_accounts\": 40, \"sheet_writes\": 0}\n",
+      "returncode": 0
+    }
+  }
+}
