@@ -1,0 +1,495 @@
+{
+  "strong": [],
+  "direct": [
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/release-support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/finance-before.dump",
+      "source_sha256": "0088fc69cde41b99b10f51485cca7fe43c95134ea77cda206f3e3ed3bb2bf0a5",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 11,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 16,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 26,
+          "text": " (C/'private/composition-stage-proof.json').write_text(json.dumps(proof,indent=2))"
+        },
+        {
+          "line": 27,
+          "text": " manifest={'schema':1,'release_id':'composition-'+AUTH,'authority':AUTH,'files':files,'gates':'private/composition-gates-final','stage_proof':'private/composition-stage-proof.json','catalog_required':[],'remote_health':True,'restart_app':True,'restart_worker':False};(E/'manifest.json').write_text(json.dumps(manifest,indent=2));(E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dump"
+        },
+        {
+          "line": 33,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 36,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/sb-tech-cad-1547697182948458611/release.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/sb-tech-cad-1547697182948458611/mgs_finance-before.dump",
+      "source_sha256": "077b2a42e87a3d1d8aecd10360e55438af2a029efb90ab6802b53bc6761d739b",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 28,
+          "text": "    p.write_text(json.dumps(data, ensure_ascii=False, indent=2))"
+        },
+        {
+          "line": 60,
+          "text": "        backup = json.loads((STATE / 'backup.json').read_text());remote_hash = ssh('sha256sum ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump')).split()[0]"
+        },
+        {
+          "line": 61,
+          "text": "        assert remote_hash == backup['sha256'] == hashlib.sha256((STATE / 'mgs_finance-before.dump').read_bytes()).hexdigest()"
+        },
+        {
+          "line": 70,
+          "text": "            ' && ' + PG + 'pg_dump -h /run/mgs-postgresql18 -U mgs_pg -Fc mgs_finance > ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump') +"
+        },
+        {
+          "line": 71,
+          "text": "            ' && chmod 600 ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump'), timeout=300)"
+        },
+        {
+          "line": 72,
+          "text": "        remote_hash = ssh('sha256sum ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump')).split()[0]"
+        },
+        {
+          "line": 73,
+          "text": "        encoded = ssh('base64 -w0 ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump'), timeout=300)"
+        },
+        {
+          "line": 76,
+          "text": "        local_dump = STATE / 'mgs_finance-before.dump'"
+        },
+        {
+          "line": 80,
+          "text": "        save('backup.json', {'pass': True, 'remote': REMOTE_BACKUP + '/mgs_finance-before.dump', 'local': str(local_dump), 'sha256': remote_hash, 'base64_reverse_hash': roundtrip, 'bytes': len(dump)})"
+        },
+        {
+          "line": 82,
+          "text": "            ' && ' + PG + 'pg_restore -h /run/mgs-postgresql18 -U mgs_pg --exit-on-error -d ' + STAGE_DB + ' < ' + shlex.quote(REMOTE_BACKUP + '/mgs_finance-before.dump'), timeout=300)"
+        },
+        {
+          "line": 100,
+          "text": "    print(json.dumps({'pass': True, 'changed_active_months': len(production_apply['changed_periods']), 'active_months_cad': len(production_verify['active']), 'history_documents': len(production_verify['history']), 'history_cell_deltas': sum(x['changed'] for x in production_verify['history'].values()), 'july': production_verify['july'], 'audit_events_added': production_apply['audit_added'], 'services': services}, ensure_ascii=False))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/restore.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/mgs_finance-before.dump",
+      "source_sha256": "d1f5f58af0eea679aa9e4b4fa85ebc7da166c7f67b63b35afa44b18e571de044",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 7,
+          "text": "m.ssh(m.PG+'pg_restore -h '+m.SOCKET+' -U mgs_pg --exit-on-error -d '+q(name)+' < '+q(b['remote_root']+'/mgs_finance-before.dump'),timeout=400)"
+        },
+        {
+          "line": 10,
+          "text": "result={'pass':True,'database':name,'backup_sha256':b['files']['local_copy']['sha256'],'readback':r};(W/'restore.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/operate.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/mgs_finance-before.dump",
+      "source_sha256": "c3614b409b1bf0bef9db2114821aef1bd9d19ae6b8647b002accdf8380d0dfe8",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 6,
+          "text": "def save(name,obj):p=W/name;p.write_text(json.dumps(obj,indent=2,default=str));p.chmod(0o600)"
+        },
+        {
+          "line": 8,
+          "text": " code='import pathlib,hashlib,json;p=pathlib.Path('+repr(where)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() if (p/f).is_file() else None for f in '+repr(files)+'}))'"
+        },
+        {
+          "line": 25,
+          "text": " m.ssh(m.PG+'createdb -h '+m.SOCKET+' -U mgs_pg '+DB);m.ssh(m.PG+'pg_restore -h '+m.SOCKET+' -U mgs_pg -d '+DB+' --exit-on-error < '+b['remote_root']+'/mgs_finance-before.dump',timeout=400)"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/before/finance_gam_revenue_sync.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/mgs_finance-before.dump",
+      "source_sha256": "1084984b42f61e66e64d9b9a2609b88914414e71f26aa53254a8357b0c09f402",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 78,
+          "text": "    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + \"\\n\")"
+        },
+        {
+          "line": 84,
+          "text": "    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(\",\", \":\")).encode()).hexdigest()"
+        },
+        {
+          "line": 255,
+          "text": "    result = subprocess.run([\"python3\", str(REPO / \"scripts/discord-bot-post.py\"), \"--channel-id\", thread], input=json.dumps(payload), text=True, capture_output=True, timeout=60, env=child_env)"
+        },
+        {
+          "line": 279,
+          "text": "    return json.loads(ssh(command, json.dumps(plan, ensure_ascii=False).encode(), timeout=480))"
+        },
+        {
+          "line": 288,
+          "text": "    dump = remote + \"/mgs_finance-before.dump\""
+        },
+        {
+          "line": 302,
+          "text": "    local = run_dir / \"mgs_finance-before.dump\""
+        },
+        {
+          "line": 442,
+          "text": "                    print(json.dumps(waiting, ensure_ascii=False))"
+        },
+        {
+          "line": 461,
+          "text": "                print(json.dumps(result, ensure_ascii=False))"
+        },
+        {
+          "line": 466,
+          "text": "                print(json.dumps(result, ensure_ascii=False))"
+        },
+        {
+          "line": 485,
+          "text": "                    print(json.dumps(result, ensure_ascii=False))"
+        },
+        {
+          "line": 521,
+          "text": "            print(json.dumps({\"pass\": True, \"status\": result[\"status\"], \"date\": plan[\"date\"], \"source_rows\": plan[\"source_rows\"], \"source_totals\": plan[\"source_totals\"], \"mapped_totals\": plan[\"mapped_totals\"], \"blocked_totals\": plan[\"blocked_totals\"], \"groups\": len(plan[\"entries\"]), \"cutoff\": expected_cutoff, \"evidence\": str(run_dir)}, ensure_ascii=False))"
+        },
+        {
+          "line": 527,
+          "text": "                print(json.dumps(failure, ensure_ascii=False))"
+        },
+        {
+          "line": 541,
+          "text": "            print(json.dumps(failure, ensure_ascii=False))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/restore.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/mgs_finance-before.dump",
+      "source_sha256": "64b334ed92f3686f644e83e4522b1999f61ca1f15ea55630e7ba509a7532e674",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 6,
+          "text": "m.ssh(m.PG+'pg_restore -h '+m.SOCKET+' -U mgs_pg --exit-on-error -d '+db+' < '+q(b['remote_root']+'/mgs_finance-before.dump'),timeout=400)"
+        },
+        {
+          "line": 10,
+          "text": "out={'pass':True,'database':db,'exact_restored_rows':verified,'backup_sha256':b['files']['local_copy']['sha256']};(W/'restore.json').write_text(json.dumps(out,indent=2));print(json.dumps(out))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/finance-before.dump",
+      "source_sha256": "dee1e47a8dc7e0714dc0c6d24ceb506a438d6d468391806de52ae86af27756a6",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 12,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 17,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 18,
+          "text": " (E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dumps({'pass':True,'backup_hash_verified':True}))"
+        },
+        {
+          "line": 24,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 27,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/finance-before.dump",
+      "source_sha256": "587054199efe6e02958ec803f42cf65856bd7a83b9a35ed60b454220f9c3f2c8",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 12,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 17,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 18,
+          "text": " (E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dumps({'pass':True,'backup_hash_verified':True}))"
+        },
+        {
+          "line": 24,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 27,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/expenses.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/mgs_finance-before.dump",
+      "source_sha256": "f8f74649a23d0c23a6364b960a727fe6fda77b4820083e04054ebcecda0e506f",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 8,
+          "text": "  plan=json.loads((W/'plan.json').read_text());plan['mapping_rules_sha256']=hashlib.sha256((W/'expenses.mjs').read_bytes()).hexdigest();B=W/'expenses-backup';B.mkdir(mode=0o700,exist_ok=True);b=m.backup_before(plan,B);(B/'backup.json').write_text(json.dumps(b,indent=2));assert b['verified']"
+        },
+        {
+          "line": 10,
+          "text": "  m.ssh(m.PG+'createdb -h '+m.SOCKET+' -U mgs_pg '+DB+' && '+m.PG+'pg_restore --exit-on-error -h '+m.SOCKET+' -U mgs_pg -d '+DB+' < '+shlex.quote(b['remote_root']+'/mgs_finance-before.dump'),timeout=400)"
+        },
+        {
+          "line": 11,
+          "text": "  v=m.ssh(m.PG+'psql -h '+m.SOCKET+' -U mgs_pg -d '+DB+' -At -c '+shlex.quote(\"SELECT count(*) FROM scenarios WHERE id LIKE 'workspace-%'\"));assert int(v.strip())==17;(B/'restore.json').write_text(json.dumps({'pass':True,'database':DB,'workspaces':17}));print(json.dumps({'pass':True,'backup_verified':True,'restored':DB}));sys.exit(0)"
+        },
+        {
+          "line": 19,
+          "text": " out=m.ssh(command+' '+' '.join(map(shlex.quote,months)),timeout=450);d=json.loads(out);p=W/('expenses-'+mode+'-'+phase+'-'+months[0]+'.json');p.write_text(json.dumps(d,indent=2));p.chmod(0o600);print(json.dumps(d))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/expenses.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/expenses-backup/mgs_finance-before.dump",
+      "source_sha256": "f8f74649a23d0c23a6364b960a727fe6fda77b4820083e04054ebcecda0e506f",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 8,
+          "text": "  plan=json.loads((W/'plan.json').read_text());plan['mapping_rules_sha256']=hashlib.sha256((W/'expenses.mjs').read_bytes()).hexdigest();B=W/'expenses-backup';B.mkdir(mode=0o700,exist_ok=True);b=m.backup_before(plan,B);(B/'backup.json').write_text(json.dumps(b,indent=2));assert b['verified']"
+        },
+        {
+          "line": 10,
+          "text": "  m.ssh(m.PG+'createdb -h '+m.SOCKET+' -U mgs_pg '+DB+' && '+m.PG+'pg_restore --exit-on-error -h '+m.SOCKET+' -U mgs_pg -d '+DB+' < '+shlex.quote(b['remote_root']+'/mgs_finance-before.dump'),timeout=400)"
+        },
+        {
+          "line": 11,
+          "text": "  v=m.ssh(m.PG+'psql -h '+m.SOCKET+' -U mgs_pg -d '+DB+' -At -c '+shlex.quote(\"SELECT count(*) FROM scenarios WHERE id LIKE 'workspace-%'\"));assert int(v.strip())==17;(B/'restore.json').write_text(json.dumps({'pass':True,'database':DB,'workspaces':17}));print(json.dumps({'pass':True,'backup_verified':True,'restored':DB}));sys.exit(0)"
+        },
+        {
+          "line": 19,
+          "text": " out=m.ssh(command+' '+' '.join(map(shlex.quote,months)),timeout=450);d=json.loads(out);p=W/('expenses-'+mode+'-'+phase+'-'+months[0]+'.json');p.write_text(json.dumps(d,indent=2));p.chmod(0o600);print(json.dumps(d))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/release-support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/finance-before.dump",
+      "source_sha256": "f682a24d40e1ebc537945bcca53ea3f817f93a5fcce9f8e0cfd15f890f1ada21",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 11,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 16,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 26,
+          "text": " (C/'private/annual-stage-proof.json').write_text(json.dumps(proof,indent=2))"
+        },
+        {
+          "line": 27,
+          "text": " manifest={'schema':1,'release_id':'annual-'+AUTH,'authority':AUTH,'files':files,'gates':'private/annual-gates-final-v2','stage_proof':'private/annual-stage-proof.json','catalog_required':[],'remote_health':True,'restart_app':True,'restart_worker':False};(E/'manifest.json').write_text(json.dumps(manifest,indent=2));(E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dumps({'pass':Tr"
+        },
+        {
+          "line": 33,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 36,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/release-support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/finance-before.dump",
+      "source_sha256": "2f52d4ef2d4761cb9d58362788935225bec5dced94945f71d6f85e81eedd06e5",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 11,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 16,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 26,
+          "text": " (C/'private/composition-style-stage-proof.json').write_text(json.dumps(proof,indent=2))"
+        },
+        {
+          "line": 27,
+          "text": " manifest={'schema':1,'release_id':'composition-style-'+AUTH,'authority':AUTH,'files':files,'gates':'private/style-gates-final','stage_proof':'private/composition-style-stage-proof.json','catalog_required':[],'remote_health':True,'restart_app':True,'restart_worker':False};(E/'manifest.json').write_text(json.dumps(manifest,indent=2));(E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(jso"
+        },
+        {
+          "line": 33,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 36,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/release-support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/finance-before.dump",
+      "source_sha256": "f543004b0a38a1948dd63015af7f365b16376a7698847870aa19b5ac24f8f090",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 11,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 16,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 25,
+          "text": " (C/'private/columns-stage-proof.json').write_text(json.dumps(proof,indent=2))"
+        },
+        {
+          "line": 26,
+          "text": " manifest={'schema':1,'release_id':'columns-'+AUTH,'authority':AUTH,'files':files,'gates':'private/columns-gates','stage_proof':'private/columns-stage-proof.json','catalog_required':[],'remote_health':True,'restart_app':True,'restart_worker':False};(E/'manifest.json').write_text(json.dumps(manifest,indent=2));(E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dumps({'pass':True,'ba"
+        },
+        {
+          "line": 32,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 35,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/evidence_ops.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/finance-before.dump",
+      "source_sha256": "9d0cba78f4b51be3a22e4c0ffa3ba8422e464b63aa8088ae2cd31a50f3d6ad8b",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 20,
+          "text": " remote_dir='/home/zeus/mgs-finance-backups/month-prune-1556898264878419969';dump=remote_dir+'/finance-before.dump'"
+        },
+        {
+          "line": 28,
+          "text": "print(json.dumps({'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size,'catalog_entries':len(r.stdout.splitlines())}))"
+        },
+        {
+          "line": 34,
+          "text": "  assert hashlib.sha256(raw).hexdigest()==meta['sha256'];p=OUT/'finance-before.dump';p.write_bytes(raw);p.chmod(0o600)"
+        },
+        {
+          "line": 36,
+          "text": "  print(json.dumps(meta))"
+        },
+        {
+          "line": 44,
+          "text": "print(json.dumps({'materialized_restore':True,'database':%r,'production_db_untouched':True}))"
+        },
+        {
+          "line": 46,
+          "text": " r=json.loads(ssh('sudo -n python3 -c '+shlex.quote(code),timeout=300));save('restore.json',r);f=fingerprint(STAGEDB);save('restore-fingerprint.json',f);print(json.dumps(r))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/operate.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/backup/mgs_finance-before.dump",
+      "source_sha256": "68ae64e3d23532a5944fe0f2d36fc7caedd9d0066a940899093a0d9c0f221b3c",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 9,
+          "text": "  B=W/'backup';B.mkdir(mode=0o700,exist_ok=True);plan={'date':datetime.date.today().isoformat(),'scenario_id':'workspace-2026-09','source_bundle_sha256':hashlib.sha256(AUTH.encode()).hexdigest(),'mapping_rules_sha256':hashlib.sha256((W/'archive.mjs').read_bytes()).hexdigest()};b=m.backup_before(plan,B);(B/'backup.json').write_text(json.dumps(b,indent=2));assert b['verified']"
+        },
+        {
+          "line": 11,
+          "text": "  m.ssh(m.PG+'createdb -h '+m.SOCKET+' -U mgs_pg '+DB+' && '+m.PG+'pg_restore --exit-on-error -h '+m.SOCKET+' -U mgs_pg -d '+DB+' < '+shlex.quote(b['remote_root']+'/mgs_finance-before.dump'),timeout=420)"
+        },
+        {
+          "line": 20,
+          "text": "print(json.dumps({'pass':True,'stage':str(dst)}))"
+        },
+        {
+          "line": 22,
+          "text": "  d=json.loads(m.ssh('sudo -n python3 -c '+shlex.quote(code),timeout=180));assert d['pass'];(B/'restore.json').write_text(json.dumps({'pass':True,'database':DB,'stage':d}));print(json.dumps({'pass':True,'backup_verified':True,'restore_verified':True}));sys.exit(0)"
+        },
+        {
+          "line": 30,
+          "text": " d=json.loads(m.ssh(command+' '+' '.join(map(shlex.quote,months)),timeout=450));p=W/('archive-'+mode+'-'+phase+'-'+months[0]+'.json');p.write_text(json.dumps(d,indent=2));p.chmod(0o600);print(json.dumps(d))"
+        }
+      ]
+    },
+    {
+      "source": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/release-support.py",
+      "target": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/finance-before.dump",
+      "source_sha256": "5c257ea23f587395867b7402a0b8f14625f6c6632b6f64cf9dd408ab90a43eab",
+      "match": "exact_or_owner_module_context",
+      "storage_snippets": [
+        {
+          "line": 11,
+          "text": " cmd='sudo -n install -d -o mgs_pg -g mgs_pg -m 700 '+backup+' && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -d mgs_finance -Fc -f '+backup+'/finance-before.dump && sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list '+backup+'/finance-before.dump >/dev/null && sudo -"
+        },
+        {
+          "line": 16,
+          "text": " assert p.returncode==0,'backup copy';(E/'finance-before.dump').chmod(0o600);assert hashlib.sha256((E/'finance-before.dump').read_bytes()).hexdigest()==h"
+        },
+        {
+          "line": 25,
+          "text": " (C/'private/columns-stage-proof.json').write_text(json.dumps(proof,indent=2))"
+        },
+        {
+          "line": 26,
+          "text": " manifest={'schema':1,'release_id':'columns-'+AUTH,'authority':AUTH,'files':files,'gates':'private/columns-gates','stage_proof':'private/columns-stage-proof.json','catalog_required':[],'remote_health':True,'restart_app':True,'restart_worker':False};(E/'manifest.json').write_text(json.dumps(manifest,indent=2));(E/'backup.json').write_text(json.dumps({'remote':backup+'/finance-before.dump','local':str(E/'finance-before.dump'),'sha256':h,'catalog_validated':True}));print(json.dumps({'pass':True,'ba"
+        },
+        {
+          "line": 32,
+          "text": " manifest=json.loads((E/'manifest.json').read_text());remote_files=[f['path'] for f in manifest['files'] if f['host']=='remote'];rh=json.loads(ssh('sudo -n python3 -c '+shlex.quote('import pathlib,hashlib,json;p=pathlib.Path('+repr(T)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(remote_files)+'}))')))"
+        },
+        {
+          "line": 35,
+          "text": " out={'pass':same,'financial_unchanged':same,'services':services,'files':{f['host']+':'+f['path']:f['after'] for f in manifest['files']}};(E/'runtime-readback.json').write_text(json.dumps(out,indent=2));print(json.dumps(out));assert same,'financial revision drift: reconcile audit before conclusion'"
+        }
+      ]
+    }
+  ],
+  "nested_context_count": 246,
+  "note": "Outer run ownership alone is not module root for copied candidate/deploy scripts. Literal .dump substring also matches json.dumps; refined snippets use exact filename boundary. No candidate declared free by ignoring all clones."
+}

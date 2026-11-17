@@ -1843,12 +1843,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572255222175244299",
-      "next_step": "Acompanhar o complete ativo, conferir resultado e chamar monitor; continuar somente próximos batches do request 0e5a7d1a65f22ab57f7a40878f24aff0. Fechar com auditoria permanente integral e mapa local; cron silencioso, sem envio externo.",
-      "objective": "Concluir tratamento e organização das 34 fontes VID SHEIN US ES da Kelly, common, pelo request congelado.",
+      "next_step": "Zeus acompanha bloqueio local: responsável autorizado deve resolver incompatibilidade do relatório público com manutenção e plano imutável, sem ACL/config/guard bypass pelo cron. Retomar pelo monitor e mesmo request 0e5a7d1a65f22ab57f7a40878f24aff0; não repetir os 20 concluídos. Após saldo, auditoria integral e mapa local; sem mensagem externa pelo cron.",
+      "objective": "Concluir tratamento e organização de 34 vídeos SHEIN US ES da Kelly, common.",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
-      "state": "retomada canônica pelo batch 435a99a73ea619cc10ad9eef0ba4236a: fontes 17–20 com tratamento, integridade, reserva e estabilidade verificados. mesmo complete em execução no processo rastreado; arquivo/ack/estoque desse batch ainda não declarado concluído. reutilizado plano original e qa válidos, sem nova variante.",
+      "state": "20/34 fontes concluídas e auditadas: raw nativo same-id, providers raw/clean, atalhos, bytes, sanitização e reservas verificados; 14 pendentes. batch 435a99a73ea619cc10ad9eef0ba4236a complete e flat_delivery complete. monitor seguinte bloqueado por unknown_or_public_principal ao arquivar relatório corporativo com anyonewithlink reader; relatório não sofreu movimento nem acl. geração criativa deste batch preservada/consolidada e comprovada. diagnóstico em intake-last-error.json e blocker-435a99.json; mídia/evidências e plano original preservados.",
       "thread_id": "1572255222175244299",
-      "updated_at": "2026-11-17T15:24:52+00:00"
+      "updated_at": "2026-11-17T15:33:36+00:00"
     },
     {
       "agent": "ares",
@@ -6558,12 +6558,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SB-TIMELINE-1572265135207223408",
-      "next_step": "Entregar link e limites visuais; preservar fotografia sem sincronização automática",
-      "objective": "Exportar Messenger Timeline SB 01/09–17/11/2026, 43 sites, SEGURADOR+DOMAIN, receita e estética para Google Sheets",
-      "source": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408/verification.json",
-      "state": "published_verified: sheet 11cmdxeil2voumjbc3pmyqygipsqpxga3wolazezqt2o; 272 linhas, 78 dias, 82 colunas, 21216 valores/cores conferidos; total brl 3900153.94; fórmulas pt_br corrigidas e validadas",
+      "next_step": "Nenhuma ação técnica pendente; análise com sócio pelo mesmo link",
+      "objective": "Exportar SB Messenger Timeline e fixar Total junto das dimensões, conforme aprovação 1572271474171977811",
+      "source": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408/total-freeze-1572271474171977811/verification.json",
+      "state": "completed_verified: mesma sheet 11cmdxeil2voumjbc3pmyqygipsqpxga3wolazezqt2o; total movido de cd para c; a:c congeladas; 22468 células/formatos e 273 fórmulas conferidos; total brl 3900153.94 preservado",
       "thread_id": "1572264313727615087",
-      "updated_at": "2026-11-17T15:19:47+00:00"
+      "updated_at": "2026-11-17T15:28:17+00:00"
     },
     {
       "agent": "zeus",
@@ -11257,5 +11257,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T15:25:21+00:00"
+  "updated_at": "2026-11-17T15:33:36+00:00"
 }
