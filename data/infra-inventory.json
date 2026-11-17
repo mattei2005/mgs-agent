@@ -903,7 +903,11 @@
       "paths": [
         "/root/mgs-agent/scripts/auto-commit-watcher.sh",
         "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
-        "/root/mgs-agent/tests/test_auto_commit_empty_index.py"
+        "/root/mgs-agent/tests/test_auto_commit_empty_index.py",
+        "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_autopush_continuity.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
       ],
       "reviewed_exact_paths": [
         "scripts/mgs_sb_token_monitor_continuity.py",
@@ -912,8 +916,12 @@
       "provenance": "Recovery 24c94f890699dee6148cf511 independently completed_validated; original audit and REPORT-INFRA 1572366572826394845 GET verified.",
       "evidence": "/root/.hermes/shared/automation-continuity/runs/056ec882525a87def44d9359/recovery-evidence.json",
       "rollback": "/root/.hermes/shared/automation-continuity/runs/056ec882525a87def44d9359/rollback",
-      "validation": "100 tests PASS including actual isolated-watcher commit and negative credential guard; reviewed source secret-pattern hits=0; bash syntax and diff checks pass. Active watcher PID 1206220 ready with batch_target=10/max_wait=600/quiet=10. Native Git commit/push and recovery delivery not yet validated.",
-      "status": "validated_waiting_native_batch",
+      "validation": "110 tests PASS including real isolated-watcher commit, negative credential guard and exact-alert closure/owner tests. Native watcher pushed b71fcb4a8b47fd369c823482693b005fadb48562; remote main=HEAD and eight artifact hashes match. Active watcher PID 1206220 with unchanged batching. Canonical monitor dry-run zero failures; apply zero consecutive failures. Recovery message 1572372599881859255 and REPORT-INFRA 1572372654743224342 GET verified. Exact-alert live observer OK; original supervisor alone owns queue closure/diagnostic. Cron hash unchanged; skill canonical/mirror SHA256 equal.",
+      "status": "recovered_waiting_supervisor_validation",
+      "report_infra_message_id": "1572372654743224342",
+      "report_infra_get_verified": true,
+      "recovery_message_id": "1572372599881859255",
+      "recovery_message_get_verified": true,
       "cron_changes": 0,
       "gateway_restarts": 0,
       "manual_commit_or_push": false
