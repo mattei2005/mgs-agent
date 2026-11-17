@@ -1,0 +1,106 @@
+{
+  "1551358728870035530": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-publish-1551358728870035530.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-PUBLISH-1551358728870035530",
+        "state": "homologacao concluida: 263 testes, api/ui, fontes e backup privado validados; publicacao pendente",
+        "objective": "Publicar fechamento agosto e editor permanente CAD/USD; preservar planilha e gastos",
+        "next_step": "Instalar 11 arquivos, aplicar agosto com CAS e validar producao, fontes e gestores",
+        "source": "reports/finance-publish-1551358728870035530.md"
+      }
+    ]
+  },
+  "1552071425156845749": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-save-performance-1552071425156845749.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-SAVE-PERF-1552071425156845749",
+        "state": "conclu\u00eddo: release coordenado publicado; confirma\u00e7\u00e3o mesmo valor/modo sem rec\u00e1lculo ~2s em stage; c\u00e1lculo30\u201332%mais r\u00e1pido no benchmark remoto,produ\u00e7\u00e3o9.7s/8.8s;353testes,paridade integral4casos,34viewports;zero escrita financeira produtiva;skill0.1.70.",
+        "objective": "Acelerar salvamento preservando regras e confirma\u00e7\u00e3o real",
+        "next_step": "Nenhuma pend\u00eancia desta otimiza\u00e7\u00e3o. Mudan\u00e7as num\u00e9ricas continuam aguardando rec\u00e1lculo/commit/readback real; n\u00e3o prometer lat\u00eancia fixa.",
+        "source": "reports/finance-save-performance-1552071425156845749.md"
+      }
+    ]
+  },
+  "1552079131628281897": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-rate-propagation-1552079131628281897.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-RATE-PROPAGATION-1552079131628281897",
+        "state": "publicado e validado:356 testes,24 meses,48 viewports de pagamentos+34 gerais; status/valores consistentes, sem altera\u00e7\u00e3o financeira. delta r$0,68 explicado por fincgriffin0,10% na sheet vs0,12% na dash mais receitas/folha/centavos; sem edi\u00e7\u00e3o de regras.",
+        "objective": "Corrigir confirma\u00e7\u00e3o em Pagamentos e verificar propaga\u00e7\u00e3o mensal; explicar diferen\u00e7a de saldo de agosto",
+        "next_step": "Entregar resultado. Eventual alinhamento financeiro da planilha/rede depende de autoriza\u00e7\u00e3o pr\u00f3pria; n\u00e3o for\u00e7ar saldo.",
+        "source": "reports/finance-rate-propagation-1552079131628281897.md"
+      }
+    ]
+  },
+  "1552090743085076510": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-EXPENSE-SAVE-1552090743085076510",
+        "state": "conclu\u00eddo: sheet zq175 ajuste gerencial autorizado/readback saldo74376.81 igual \u00e0 dash. fast path publicado;357 testes,34 viewports de despesas+34 gerais; metadata17.67s\u21921.974/2.215s em stage, alteracao valor/moeda recalcula; fingerprints preservados; skill0.1.72 validada.",
+        "objective": "Otimizar despesas gerais e conciliar saldo de agosto no G002 Fincgriffin",
+        "next_step": "Entregar os dois resultados; n\u00e3o reaplicar ajuste nem importar como receita GAM",
+        "source": "reports/finance-expense-save-1552090743085076510.md"
+      }
+    ]
+  },
+  "1552101423754514465": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-NETWORK-MONTH-1552101423754514465",
+        "state": "publicado e validado:360 testes, cinco redes em stage, 34 viewports/17 meses e sete hist\u00f3ricos em produ\u00e7\u00e3o. zero muta\u00e7\u00e3o financeira; agosto5.08/saldo74376.81. skill0.1.73, registry por supersess\u00e3o, invent\u00e1rio e audit confirmados; report-infra1552117541906808863 enviado.",
+        "objective": "V\u00ednculo mensal de sites \u00e0s cinco redes de inv\u00e1lidos com incluir/retirar/transferir e rec\u00e1lculo integrado",
+        "next_step": "Nenhuma pend\u00eancia de implementa\u00e7\u00e3o; operador escolhe m\u00eas e usa Incluir/Transferir/Retirar. Pend\u00eancias sem rede ficam expl\u00edcitas e n\u00e3o zeram inv\u00e1lidos.",
+        "source": "discord:1545426987756298340:1552101423754514465"
+      }
+    ]
+  },
+  "1552317922892849192": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-m2-share-1552317922892849192.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-M2-SHARE-1552317922892849192",
+        "state": "controle publicado e conciliacao separadamente autorizada1552327479627087913 concluida;dash e sheet4284.08",
+        "objective": "RevShare M2 separado5% e conciliacao agosto",
+        "next_step": "Nenhuma pendencia deste pedido",
+        "source": "reports/finance-m2-settlement-1552327479627087913.md"
+      }
+    ]
+  },
+  "1569167402279764110": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-october-manager-notice-1569167402279764110.md"
+    ],
+    "checkpoints": []
+  },
+  "1571201800063680562": {
+    "reports": [
+      "/root/mgs-agent/reports/finance-charge-date-1571201800063680562.md"
+    ],
+    "checkpoints": [
+      {
+        "id": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
+        "state": "completed",
+        "objective": "Exibir Data da cobran\u00e7a em Despesas Gerais sem muta\u00e7\u00e3o financeira",
+        "next_step": "Pai verificar independentemente executor-summary.json, assets produtivos, hashes e relat\u00f3rio; comunicar Rodolfo na origem. Sem pend\u00eancia t\u00e9cnica ou autoa\u00e7\u00e3o agendada.",
+        "source": "reports/finance-charge-date-1571201800063680562.md"
+      }
+    ]
+  }
+}

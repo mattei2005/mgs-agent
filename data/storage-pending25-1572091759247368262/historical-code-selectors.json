@@ -1,0 +1,133 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/deploy/source_stage.py",
+    "bytes": 4967,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 24,
+        "excerpts": []
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage.mjs",
+    "bytes": 5521,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 2,
+        "excerpts": [
+          "import {openDatabase,initialize} from './candidate/storage.mjs';import {cre"
+        ]
+      },
+      {
+        "line": 3,
+        "excerpts": [
+          "File(new URL('workspaces.json',W))),db=await openDatabase(new URL('stage-db',W).pathname);await initialize(db);a"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage.mjs",
+    "bytes": 9142,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 1,
+        "excerpts": [
+          ";import {chromium} from 'playwright';import {openDatabase,initialize,calculate} from './candidate/storage.mjs';i"
+        ]
+      },
+      {
+        "line": 2,
+        "excerpts": [
+          "nst w=new URL('./',import.meta.url),db=await openDatabase(new URL('./stage-db-v7',w).pathname);await initialize("
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage.mjs",
+    "bytes": 8674,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 2,
+        "excerpts": [
+          "import {openDatabase,initialize} from './candidate/storage.mjs';import {cre"
+        ]
+      },
+      {
+        "line": 5,
+        "excerpts": [
+          "let db=await openDatabase(W+'/stage-db'),server,browser;const errors=[],network=[],views=[],c"
+        ]
+      },
+      {
+        "line": 35,
+        "excerpts": [
+          "=>server.close(r));await db.close();db=await openDatabase(W+'/stage-db');await start();const ctx=await context()"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/cross-view.mjs",
+    "bytes": 2432,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 1,
+        "excerpts": [
+          ";import {chromium} from 'playwright';import {openDatabase} from './candidate/storage.mjs';import {createApp} fro"
+        ]
+      },
+      {
+        "line": 2,
+        "excerpts": [
+          "nst w=new URL('./',import.meta.url),db=await openDatabase(new URL('./stage-db',w).pathname),app=await createApp("
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage.mjs",
+    "bytes": 5415,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 1,
+        "excerpts": [
+          ";import {chromium} from 'playwright';import {openDatabase,initialize} from './candidate/storage.mjs';import {cre"
+        ]
+      },
+      {
+        "line": 2,
+        "excerpts": [
+          "nst w=new URL('./',import.meta.url),db=await openDatabase(new URL('./stage-db',w).pathname);await initialize(db)"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage.mjs",
+    "bytes": 4240,
+    "contains_seed_terms": false,
+    "selection_lines": [
+      {
+        "line": 2,
+        "excerpts": [
+          "import {openDatabase,initialize} from './candidate/storage.mjs';import {cre"
+        ]
+      },
+      {
+        "line": 3,
+        "excerpts": [
+          "nst w=new URL('./',import.meta.url),db=await openDatabase(new URL('./stage-db',w).pathname);await initialize(db)"
+        ]
+      }
+    ]
+  }
+]

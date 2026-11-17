@@ -1,0 +1,258 @@
+[
+  {
+    "source": "/root/mgs-agent/reports/finance-publish-1551358728870035530.md",
+    "lines": [
+      {
+        "line": 15,
+        "text": "- Backup principal: `/home/mgsfinance/backups/publish-1551358728870035530-complete`. Código exato e PostgreSQL custom dump com tamanho/SHA-256/catálogo validado. Backup preliminar também preservado em `/home/mgsfinance/backups/publish-1551358728870035530`."
+      },
+      {
+        "line": 19,
+        "text": "## Publicação e conferência concluídas"
+      },
+      {
+        "line": 29,
+        "text": "- Fontes relidas **depois** da publicação: oito abas/24 representações intactas, zero escritas na planilha."
+      },
+      {
+        "line": 37,
+        "text": "- Ensaio isolado de retorno: o código exato do backup e o snapshot405 reproduziram **caixa e fatos exatamente**. Nenhum restore foi feito em produção. O dump PostgreSQL foi validado por catálogo; este ensaio não é uma restauração integral desse dump."
+      },
+      {
+        "line": 43,
+        "text": "Evidências finais: `production-financial-validation.json`, `final-reconciliation.json`, `public-after-verification.json`, `source-after-validation.json`, `application-result.json`, `publication-result.json` e `rollback-rehearsal.json`, no workspace privado abaixo."
+      },
+      {
+        "line": 45,
+        "text": "## Evidência técnica"
+      },
+      {
+        "line": 48,
+        "text": "- `python-group-a.log`, `python-group-b.log`, `dependency-audit.json`."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-save-performance-1552071425156845749.md",
+    "lines": [
+      {
+        "line": 15,
+        "text": "## Evidência"
+      },
+      {
+        "line": 22,
+        "text": "- `stage-result.json`: interface real em stage com snapshots reais; confirmação completa1937ms desktop e2096ms mobile. Resultado/overrides preservados, revisão incrementada. Alteração numérica do imposto executou cálculo real. Requisição deliberadamente retida manteve botão desabilitado/modal aberto; concorrência da mesma revisão retornou200/409. Zero erro JS."
+      },
+      {
+        "line": 24,
+        "text": "- `published.json`: controlador coordenado committed, backups/hash/readback válidos, reinícios somente app financeira remota e worker financeiro local. Todos os hashes de cenários/revisões/inputs/resultados iguais na janela da publicação. Zero mutação financeira."
+      },
+      {
+        "line": 28,
+        "text": "Confirmação (~2s) foi medida em stage isolado, não por mudança artificial de status em produção. O tempo9s é de cálculo produtivo, não promessa do clique inteiro: mudanças numéricas ainda aguardam commit/reload. Ganho observado não é SLA."
+      },
+      {
+        "line": 30,
+        "text": "## Preservação e rollback"
+      },
+      {
+        "line": 32,
+        "text": "Backup PG completo com catálogo/sha256 e cópia local em `backup.json`/`before.dump`. Remoto: `/home/zeus/mgs-finance-backups/save-perf-1552071425156845749/before.dump`. Arquivos originais em `before/` e journal exato `private/releases/save-performance-1552071425156845749/`. Candidato, banco isolado de stage e provas ficam preservados para auditoria; sem limpeza destrutiva."
+      },
+      {
+        "line": 34,
+        "text": "A publicação não alterou valores financeiros, taxa5,08 de agosto, fórmulas-fonte, histórico, agenda ou credenciais. Os testes de status/imposto usaram somente banco isolado. Rollback é dos arquivos listados no manifesto, seguido de reinício financeiro/readback; nunca restaurar banco produtivo para desfazer uma otimização de código."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-rate-propagation-1552079131628281897.md",
+    "lines": [
+      {
+        "line": 20,
+        "text": "- Publicação: hashes locais/remotos conferidos, health/serviço/socket validados, fingerprints de todos os cenários idênticos antes/depois; zero escrita financeira pelo release. Nenhuma escrita em Google Sheets."
+      },
+      {
+        "line": 46,
+        "text": "A primeira stage carecia da tabela/fixture imutável finance_history de julho. Foi materializada a fonte real, sem enfraquecer as asserções. O gate Python inicial passou156 casos, mas corretamente bloqueou porque o código de testes mudou durante o gate; os dois gates foram repetidos contra o candidato final. As verificações adicionais corrigiram o import de managerView, enumeraram managerKeys (icaro público, george interno), usaram os nomes reais das páginas e a rota histórica `/api/history`. Tentativa histórica pela rota live retornou400 e foi substituída pela rota canônica, sem alteração de p"
+      },
+      {
+        "line": 48,
+        "text": "## Evidência, rollback e aprendizado"
+      },
+      {
+        "line": 50,
+        "text": "- Evidência privada: `apps/finance-system/private/rate-propagation-1552079131628281897/`."
+      },
+      {
+        "line": 51,
+        "text": "- `stage-result.json`, `cross-view-result.json`, `published.json`, `browser-production.json`, `browser-production-general.json`, `production-ledger.json`."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md",
+    "lines": [
+      {
+        "line": 5,
+        "text": "## 1. Conciliação autorizada na planilha — concluída"
+      },
+      {
+        "line": 21,
+        "text": "Evidência: `sheet-adjust-backup.json`, `sheet-adjust-plan.json`, `sheet-adjust-after.json`, `sheet-adjust-result.json`. A rotina fail-closed recusa replay quando o backup original já existe; antes de qualquer recuperação, ler alvo/nota/recibo, sem reaplicar o delta."
+      },
+      {
+        "line": 43,
+        "text": "Gates completos do candidato: **357 testes**, sem falhas. Publicação pelo controlador coordenado com backup completo PostgreSQL remoto/local, hashes validados, backups exatos de código e journal de rollback. Fingerprints de todos os cenários idênticos antes/depois; zero escrita financeira de produção pela implantação."
+      },
+      {
+        "line": 47,
+        "text": "Medições de stage são amostras, não SLA de latência pública. Valor ou moeda alterados ainda exigem cálculo; não foi escondido processamento nem declarada gravação antes do commit."
+      },
+      {
+        "line": 51,
+        "text": "- Evidências: `apps/finance-system/private/expense-save-1552090743085076510/`."
+      },
+      {
+        "line": 52,
+        "text": "- `red-expense.log`, `stage-baseline-result.json`, `stage-candidate-result.json`, `backup.json`, `published.json`, `browser-production.json`, `browser-general.json`, `production-ledger.json`."
+      },
+      {
+        "line": 54,
+        "text": "- Rollback de código: `private/releases/expense-save-1552090743085076510/`, sem restauração integral por cima de atividade concorrente."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md",
+    "lines": [
+      {
+        "line": 13,
+        "text": "O endpoint existente `/api/scenarios/:id/sites` valida `binding_action:assign|remove`, competência, revisão e preservação do status. Registra `SITE_NETWORK_ASSIGNED`/`SITE_NETWORK_REMOVED` com ator, cenário e antes/depois. A alteração só conclui depois do recálculo, commit e readback existentes. Catálogos JS/Python retêm `network_binding_explicit` e `network_pending`; fatos nativos com vínculo explícito mostram a mesma rede usada no cálculo, mantendo os lançamentos de origem intactos."
+      },
+      {
+        "line": 18,
+        "text": "- Stage com snapshots reais de agosto/setembro/outubro e fechamento real de julho, em banco isolado."
+      },
+      {
+        "line": 21,
+        "text": "- Retorno à Rede2 restaurou o caixa original. Retirada manteve o caixa com aviso explícito, sem taxa zero. Re-inclusão mobile eliminou a pendência e o aviso em Pagamentos do mês seguinte."
+      },
+      {
+        "line": 29,
+        "text": "## Publicação e preservação"
+      },
+      {
+        "line": 33,
+        "text": "Dump PostgreSQL completo com lista pg_restore e SHA256 local/remoto coincidentes, snapshots e backups exatos de código mantidos. Fingerprints de todos os cenários idênticos antes/depois; zero escrita financeira na publicação ou nos testes públicos. Os vínculos existentes foram apresentados, não reatribuídos automaticamente. Nenhuma exclusão/limpeza destrutiva."
+      },
+      {
+        "line": 37,
+        "text": "- Evidências: `apps/finance-system/private/network-month-1552101423754514465/`."
+      },
+      {
+        "line": 38,
+        "text": "- `stage-result.json`, `backup.json`, `published.json`, `browser-production.json`, `browser-general.json`, `production-ledger.json`, `financial-before.json`, `financial-after.json`."
+      },
+      {
+        "line": 40,
+        "text": "- Backup/rollback exato: `apps/finance-system/private/releases/network-month-1552101423754514465/`."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-m2-share-1552317922892849192.md",
+    "lines": [
+      {
+        "line": 21,
+        "text": "- Stage de banco real isolado com snapshots dos17meses:34combinações competência/tela; editor mostra5; alteração via botão para6% recalcula195factsM2 e preserva3551facts das demais redes, gross/spend/invalid e catálogo; retorno a5% restaura exatamente o caixa. Revisão antiga409 e mês seguinte byte-idêntico. FonteFX isolada foi fixada exclusivamente no estágio para não confundir variação de cotação com alteração de share."
+      },
+      {
+        "line": 23,
+        "text": "- Pré-publicação parou uma vez com `KeyError:financial_posts`: o runner foi derivado de prova read-only, mas o estágio de edição isolada usa `financial_writes:0`. Corrigido para validar a chave real e também `isolated_mutations` e `cash_roundtrip`; antes de qualquer publicação/escrita remota. Retry integral passou; nenhuma falha de serviço nem mutação financeira."
+      },
+      {
+        "line": 25,
+        "text": "## Evidência / reversão"
+      },
+      {
+        "line": 27,
+        "text": "`apps/finance-system/private/m2-share-1552317922892849192/`: workspaces.json;sheet-readonly.json;reconciliation-math.json;browser-stage.json;stage.log;browser-production.json;candidate/private/gates;manifest.json;published.json;financial-before/after.json."
+      },
+      {
+        "line": 29,
+        "text": "Backups/journal exatos: `apps/finance-system/private/releases/m2-share-1552317922892849192/`. Código alterado: workspace.mjs e dois testes locais. Preservados gateways, worker, credenciais, permissões, Site IDs, rede/estado, fontesGoogle, valores/revisões e histórico."
+      },
+      {
+        "line": 31,
+        "text": "Fonte institucional: docs/finance-system-product-direction.md. Skill atualizada: mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md; leitura/validação pelo auditor. Fechamento do pagamento aguarda decisão; exposição do controle está concluída."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-october-manager-notice-1569167402279764110.md",
+    "lines": [
+      {
+        "line": 17,
+        "text": "## Preparação, testes e publicação"
+      },
+      {
+        "line": 22,
+        "text": "2. RegressãoRED confirmou endpoint ausente; GREEN do teste novo passou. Gates integrais:285Node/285pass,253Python/pass, zero falhas/skips/cancelados. Auditoria npm de dependências produtivas:zero vulnerabilidades. Pythoncompatível3.12 e dependências preflight; processos longos silenciosos consumidos antes da entrega."
+      },
+      {
+        "line": 25,
+        "text": "5. Manifesto de7destinos:3arquivoslocal/remoto + teste local. Controladorcanônico `finance_release.py check/publish`, journal `private/releases/manager-notice-1569167402279764110/journal.json`, estado **committed**, backupsexatos, hashesreadback, locks/fence e rollbackpreservados. Reinício somente serviçoappfinanceiro; não reiniciar gateway/PG/worker."
+      },
+      {
+        "line": 26,
+        "text": "6. Baselines imediatamenteantes/depois da publicação:outubro1525; igualdade exata emworkspace, hashesdetodoscenários, pagamentos,história, usuários eciências. RecálculoFX1524→1525 aconteceu antes da publicação durante testes; não atribuído ao popup."
+      },
+      {
+        "line": 33,
+        "text": "## Preservação e rollback"
+      },
+      {
+        "line": 37,
+        "text": "Rollback de código usa backupsexatos dojournal após conferir hashes e concorrência, preservando recibos jágerados. Não apagar ciência nemmodificar conteúdo sobmesmoID. Uma novaversão deaviso exige autoridade eIDnovo."
+      },
+      {
+        "line": 46,
+        "text": "- Evidências:manifest.json,stage-proof.json,production-proof.json,preservation.json,baseline/before-publish/after-publish.json,dependency-audit.json,candidate/private/notice-gates/{node,python}-result.json, imagens deQA e journal derelease. REPORT-INFRA enviado pelo helper canônico após validação."
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/reports/finance-charge-date-1571201800063680562.md",
+    "lines": [
+      {
+        "line": 10,
+        "text": "- Evidência privada: `apps/finance-system/private/charge-date-1571201800063680562/`."
+      },
+      {
+        "line": 38,
+        "text": "Falhas recuperadas antes de publicação: o primeiro stage mostrou overflow desktop, corrigido com CSS somente da lista; uma repetição inicial reutilizou o banco local do candidato e colidiu nos IDs de fixture, corrigida usando `memory://` sem excluir o banco anterior; uma prova móvel mais forte detectou que a descrição fixa ocultava 6 px de Ações, corrigido com larguras móveis delimitadas. O primeiro par de gates ainda em execução foi encerrado e descartado ao refinar o CSS; os dois gates completos foram reiniciados para o candidato final. Não há aceite baseado nos gates interrompidos."
+      },
+      {
+        "line": 40,
+        "text": "## Publicação e resultado"
+      },
+      {
+        "line": 45,
+        "text": "Release ID confirmado: `charge-date-1571201800063680562`. Journal/backups exatos: `apps/finance-system/private/releases/charge-date-1571201800063680562/`."
+      },
+      {
+        "line": 47,
+        "text": "Alterações efetivas: três assets existentes (`public/app.js`, `public/app.css`, `public/history-dashboard.js`) em local + RunCloud, e regressões em `tests/expense-sort.test.mjs` somente locais. Sete destinos; nenhum arquivo novo no runtime produtivo. Publicação exclusivamente por `finance_release.py check/publish`, com backups exatos, journal, fences e readback. Somente `mgs-finance-dash.service` foi reiniciado pelo controlador; serviço, socket e PostgreSQL produtivos confirmados `active` após a publicação."
+      },
+      {
+        "line": 69,
+        "text": "Não houve cron, exclusão, alteração de configuração global, gateway, credencial ou MFA. Bancos/artefatos de teste e backups exatos foram preservados; retenção permanece fora do escopo. Os processos dos gates foram consumidos antes do encerramento."
+      },
+      {
+        "line": 73,
+        "text": "Próximo passo: pai verificar independentemente os assets/relatório/recibo e comunicar Rodolfo na origem. Não há bloqueio técnico nem tarefa agendada pós-entrega."
+      }
+    ]
+  }
+]
