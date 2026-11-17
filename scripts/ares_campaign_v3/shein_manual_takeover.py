@@ -40,6 +40,9 @@ def present(base, rid):
 
 
 def deny_replay(base, rid):
+    from . import shein_external_block_coordination as external
+    if external.present(base, rid):
+        raise ValueError('external block coordination hold forbids predecessor replay; QA not certified')
     # Invalid or incomplete receipts must also fence replay; never fall back to QA.
     if present(base, rid):
         raise ValueError('manual takeover forbids automatic request replay; coordination only, QA not certified')

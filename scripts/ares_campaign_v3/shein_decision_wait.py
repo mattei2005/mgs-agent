@@ -100,6 +100,9 @@ def evidence(base, value, *, resume_request=None):
         rec = manual.validate(base, rid)
         manual.assert_available(base, account, resume_request)
         return rec
+    from . import shein_external_block_coordination as external
+    if external.present(base, rid):
+        return external.validate(base, value, resume_request=resume_request)
     rec = _read(record_path(base, rid))
     state_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid / 'state.json'
     engine_root = _engine_root(base)
@@ -182,6 +185,9 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(),
         if not _unlocked(_engine_root(base) / 'writer-leases' / (account + '.lock')):
             return False
         historical = materialized_media(value)
+        from . import shein_external_block_coordination as external
+        if external.present(base, owner):
+            historical.update(external.verify_live(base, value, resume_request=request))
         inventory = base / 'data/ares/creative-ops/inventory/assets.jsonl'
         campaign_ids = set(value['engine_result']['campaign_ids'])
         rows = [json.loads(line) for line in inventory.read_text().splitlines() if line.strip()]
@@ -209,6 +215,9 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(),
 def pending(base, rid):
     """A pinned review must not be automatically retried as campaign execution."""
     from .shein_manual_takeover import present
+    from . import shein_external_block_coordination as external
+    if external.present(base, rid):
+        return True
     if present(base, rid):
         return True
     path = record_path(base, rid)

@@ -89,6 +89,7 @@ def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
     pinned_owners = set()
     pinned_paths = list((root(base) / 'queue/decision-waits').glob('*.json'))
     pinned_paths += list((root(base) / 'queue/manual-takeovers').glob('*.json'))
+    pinned_paths += list((root(base) / 'queue/external-block-holds').glob('*.json'))
     for path in pinned_paths:
         record = json.loads(path.read_text())
         owner = path.stem
