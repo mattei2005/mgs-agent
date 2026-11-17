@@ -4653,22 +4653,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572012324708024445",
-      "next_step": "One-shot aguarda janela; revalidar autoridade e invariantes, ativar somente os mesmos9IDs e confirmar lote integral antes do aviso nativo. Duplicacao186 pertence a outro request.",
-      "objective": "Mavroa06: ativar188/192agora e pausar9nominais para reativar17novembro2026 00hEST",
+      "next_step": "Concluido; nao repetir writes.",
+      "objective": "Mavroa06:9pausas e reativacao17novembro2026 00hEST;188/192 ativadas separadamente na origem",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572012324708024445/activation.json",
-      "state": "scheduled:188/192 active por get;9/9pausas confirmadas e9/9aptas para reativacao unica00h17novest. scheduler script-only local com readback,405s de espera sem credencial/api/lane,78testes offline e auditoria globalpre/post sem conflito operacional.",
+      "state": "complete_activated:9 active por get integral; status-only; nenhuma recorrencia",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-16T22:28:14+00:00"
+      "updated_at": "2026-11-17T05:01:40+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572012520397611123",
-      "next_step": "Runner deterministico aguarda00hEST, valida autoridade/invariantes, ativa somente IDs congelados e faz GET final; nenhuma recorrencia.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 10 campanhas nominais Yolokfx02 G006 e reativar17novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572012520397611123/activation.json",
-      "state": "scheduled:10/10 paused por get; reativacao pontual17novembro2026 00hest habilitada e agenda relida",
+      "state": "10/10 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-16T22:25:25+00:00"
+      "updated_at": "2026-11-17T05:01:52+00:00"
     },
     {
       "agent": "zeus",
@@ -11167,5 +11167,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T04:55:55+00:00"
+  "updated_at": "2026-11-17T05:01:52+00:00"
 }

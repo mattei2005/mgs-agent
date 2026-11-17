@@ -51,10 +51,11 @@ Before gating REPORT-INFRA on an own-profile skill's versioned mirror, compare t
 
 Before declaring success, verify:
 
-- every confirmed target is absent;
+- every confirmed target and descendant is absent; independently compare the deletion journal with the immutable node index by exact normalized path and node type, require equal sets and counts, and reject duplicate entries—an exit-zero executor plus absent top-level folders does not prove that only approved nodes were removed;
+- explicitly retained state still matches its frozen metadata and payload hashes; keep this independent preservation check separate from service health and do not start a database merely to hash its files;
 - active runtime/launcher and upstream relation are unchanged;
 - target services are active and use the expected runtime path;
-- config checks and real agent smokes pass;
+- config checks pass and any required availability smoke stays within the owner's validation scope; use section 3.4 to distinguish configuration/process integrity from a permitted model request;
 - failed systemd units remain zero;
 - rollback launcher/runtime still work;
 - retained recovery paths are resolved from the fresh manifest/inventory, confirmed to exist, and then pass integrity listing/readback; never reconstruct a backup path from a historical label, approximate size, or remembered directory name;
@@ -83,10 +84,10 @@ Resolve Git ownership before running a tracked-file gate: walk the target's ance
 
 After filesystem acceptance, verify the governance artifacts independently of the deletion targets:
 
-1. Read the watcher's live batch-size and maximum-wait settings rather than guessing that a quiet period flushes it.
+1. Resolve the real writer and its log before starting a waiter. Check `systemctl show mgs-autocommit.service -p ActiveState -p SubState -p UnitFileState`, then inspect `scripts/auto-commit-watcher.sh` for `LOG_FILE`, `BATCH_TARGET`, `BATCH_QUIET_SECONDS` and `BATCH_MAX_WAIT_SECONDS`, including service-environment overrides. Read the resolved log's latest batch count/start/flush; do not guess a similarly named unit or log. A batch counter can represent coalesced observation windows rather than individual file writes, so many new files do not necessarily trigger an immediate commit.
 2. Classify the delivery set before fetching or starting a wait loop. Run `git check-ignore -v -- <path>` for each scoped artifact, inspect the native writer's negative pathspecs without sourcing its executable, and resolve eligible paths with `git ls-files --cached --others --exclude-standard -z -- <scope> <native-negative-pathspecs...>`. Partition expected-public files, intentionally local/private evidence and unexplained omissions; an untracked file can be writer-excluded even when `check-ignore` finds nothing. Record each exclusion's policy and purpose, validate its local receipt, and leave unexplained omissions blocking. Keep private logs, recovery evidence and runtime locks local; never rename private evidence, force-add it or weaken a guard just to make remote comparison pass. A nonprivate immutable delivery accidentally named like an excluded heartbeat may receive an eligible canonical projection only when the native policy permits that content; preserve the intermediate. Fetch the remote and checksum only the expected-public set against `git show origin/main:<path>`, including the frozen manifest, executor, approval receipt, final result/checksum and public validation evidence. Compare shared inventory/checkpoint rows separately from whole-file equality because unrelated writers may legitimately change sibling records.
 3. Parse the remote inventory and checkpoint blobs and require this operation's final status and result checksum. `HEAD == origin/main` alone does not prove closure: both refs can still point to the previous planning commit while completed local records await batching.
-4. If the watcher is active and the only gap is normal batching, read its last batch-start time and maximum wait, then wait only the remaining window in bounded foreground chunks shorter than the observed tool transport limit. Persist the scoped mismatch list and synchronization receipt outside the sealed result. If a wait call times out, check whether its process survived and whether a PASS receipt was already written before starting another waiter; never replay deletion to recover a Git-closure timeout. Fetch and repeat the scoped checks after the batch flushes. Do not manufacture events, shorten batching or manually commit merely to accelerate a healthy writer.
+4. If the watcher is active and the only gap is normal batching, derive the deadline from its actual batch-start time plus configured maximum wait, not an arbitrary retry count. Wait only the remaining window in bounded foreground chunks shorter than the tool transport limit. Return/persist `native_batch_pending` when a chunk ends before that deadline instead of asserting delivery failure; resume only the missing Git checks. Persist the scoped mismatch list and synchronization receipt outside the sealed result. If a wait call times out, check whether its process survived and whether a PASS receipt was already written before starting another waiter; never replay deletion to recover a Git-closure timeout. After a native flush, fetch and repeat exact blob and owned-record checks. Diagnose a writer fault only when logs/service evidence show a guardrail/error or the native deadline expires without progress. Do not manufacture events, shorten batching or manually commit merely to accelerate a healthy writer.
 5. Keep the synchronization receipt outside the already-sealed result so recording verification cannot invalidate the checksum just checked. Freeze the delivery set, verify its remote blobs and exact inventory/checkpoint rows, and write one receipt naming their containing commit. If that receipt is also versioned, expect one additional native batch and verify its exact remote blob separately; do not rewrite the receipt or sealed result on every poll, because each write creates another convergence target. Distinguish operational acceptance, remote delivery of the original evidence and pending delivery of the final receipt; a newly created receipt awaiting a healthy batch is not a failed cleanup or failed push.
 
 ### 3.2 Upstream advancement discovered during cleanup
@@ -120,7 +121,9 @@ Render confirmation/question message IDs and the manifest identifier in closure 
 
 ### 3.4 No-tool profile availability smoke
 
-For filesystem-only cleanup, use a bounded, tool-disabled one-shot through the launcher reconciled with live gateway PIDs. Check the current CLI help before reusing flags, then run once for each named production profile:
+First resolve the validation scope. When the owner excludes model requests, database startup or application execution, do not turn a filesystem check into one of those operations. Validate configuration, gateway PIDs/launcher and retained-file hashes; record the excluded provider/application layer as not tested rather than calling it healthy. If that layer is an explicit acceptance requirement, surface the scope conflict instead of silently running or waiving it.
+
+When a model availability probe is permitted and required, use a bounded, tool-disabled one-shot through the launcher reconciled with live gateway PIDs. Check the current CLI help before reusing flags, then run once for each named production profile:
 
 ```bash
 /root/.local/bin/hermes -p <profile> config check
