@@ -87,7 +87,7 @@ def transfer_report(sa,owner,m,journal):
  else:f.require(sa.hashes(fid)==state['before'],'MAINTENANCE_REPORT_BYTES_CHANGED')
  state.update(status='verified',same_id=True,metadata_after=f.meta(sa,fid),permissions_after=f.permissions(sa,fid),verified_at=b.now_iso(),delete_writes=0);b.atomic_json(folder/'state.json',state);return state
 
-def run(apply=False,canary=False):
+def run(apply=False,canary=False,creative_only=False):
  f.authority();active=flat.policy()
  if not active and not canary:return {'status':'disabled','remote_writes':0}
  if canary:f.require(b.read_json(b.CONFIG,{}).get('control_cutover_in_progress') is True and b.read_json(HOME/'maintenance-canary-state.json',{}).get('media_id'),'MAINTENANCE_CANARY_SCOPE')
@@ -121,7 +121,11 @@ def run(apply=False,canary=False):
     files=[nodes[i] for i in subtree if nodes[i]['mimeType']!=b.FOLDER]
     if files and all(eligible_file(x,index,released,canary) for x in files):roots.append(m['id'])
    reports=[x for x in nodes.values() if x.get('parents')==[b.SOURCE_DRIVE] and x['mimeType'] in REPORT_MIMES]
-   out={'status':'ok','completed_generations':[],'reports_archived':[],'pending_input_files':sum(x.get('parents')==[f.UPLOAD] and str(x.get('mimeType','')).startswith(('image/','video/')) for x in nodes.values()),'eligible_generations':len(roots),'eligible_reports':len(reports),'delete_writes':0,'apply':apply}
+   # Keep report plans, ACLs and guards intact. The creative caller only owns
+   # media maintenance; reports retain their independent full-maintenance lane.
+   deferred_reports=sorted(x['id'] for x in reports) if creative_only else []
+   if creative_only:reports=[]
+   out={'status':'ok','completed_generations':[],'reports_archived':[],'reports_deferred':deferred_reports,'maintenance_scope':'creative' if creative_only else 'all','pending_input_files':sum(x.get('parents')==[f.UPLOAD] and str(x.get('mimeType','')).startswith(('image/','video/')) for x in nodes.values()),'eligible_generations':len(roots),'eligible_reports':len(reports),'delete_writes':0,'apply':apply}
    if apply and (roots or reports):
     owner=t.OwnerDrive();journal=t.Journal(HOME/'maintenance-journal.json')
     for root in roots[:1]:out['completed_generations'].append({'root_id':root,'receipt':transfer_tree(sa,owner,root,nodes,journal)['receipt_file_id']})
@@ -129,10 +133,10 @@ def run(apply=False,canary=False):
    b.atomic_json(HOME/'maintenance-last-tick.json',{'at':b.now_iso(),**out});return out
 
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--canary',action='store_true');p.add_argument('--recovery-id');a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--canary',action='store_true');p.add_argument('--creative-only',action='store_true',help='Maintain creative sources only; leave unrelated report files and access unchanged');p.add_argument('--recovery-id');a=p.parse_args()
  if a.recovery_id:
   import ares_reupload_recovery as recovery
   recovery.require(a.recovery_id==recovery.APPROVAL and a.apply and not a.canary,'RECOVERY_PRIVATE_EXACT_INVOCATION')
   result=recovery.private_tick(max_files=4)
- else:result=run(a.apply,a.canary)
+ else:result=run(a.apply,a.canary,a.creative_only)
  print(json.dumps(result,ensure_ascii=False))

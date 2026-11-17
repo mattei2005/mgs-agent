@@ -202,7 +202,8 @@ def monitor(polls=3,interval=20):
         # Existing scheduler, private bounded subprocess; never owner auth in the
         # agent process, no campaign or deletion action, no extra recurring job.
         import subprocess
-        housekeeping=subprocess.run([sys.executable,str(bridge.BASE/'scripts/mgs_flat_maintenance.py'),'--apply'],capture_output=True,text=True,timeout=540)
+        # Creative intake must not mutate or wait on unrelated corporate reports.
+        housekeeping=subprocess.run([sys.executable,str(bridge.BASE/'scripts/mgs_flat_maintenance.py'),'--apply','--creative-only'],capture_output=True,text=True,timeout=540)
         if housekeeping.returncode:raise IntakeError('FLAT_MAINTENANCE_FAILED:'+housekeeping.stderr[-180:])
     manifest=bridge.read_json(DATA/'upload-context-layout.json');assert isinstance(manifest,dict)
     import ares_archive_locations as locations
