@@ -1,5 +1,15 @@
 # Revisão consolidada de armazenamento — 17/11/2026
 
+## Estado vigente — correção de qualificação antes da confirmação
+
+**Único pacote ativo: 339 cópias JSON, zero diretórios, aproximadamente 2,917 GiB líquidos diretos estimados.** Fonte: `data/storage-consolidated-review-1572313312987979957/finance-final/consolidated-result.json`; manifesto `2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537`, gate `6017bcf6a34c40cf56a77578513eb05ffce558c2b44267ce489595aab0c23f91`. Os 15 primários permanecem e as 339 cópias foram recuperadas em RAM; 24 tarefas encerradas/25 checkpoints vinculados, preflight real e 32 testes passaram. Nenhum arquivo foi apagado.
+
+A revisão final de qualificação retirou o rascunho `9f8ed9ae3408` de 643 arquivos **antes de qualquer pergunta/OK destrutivo**. As 304 mídias possuem prova de bytes/arquivo remoto, mas não prova individual suficiente de encerramento local: observações de sucesso, dry-run ou objetos de campanha ativos não equivalem a conclusão da tarefa. Portanto **todas ficam preservadas**, inclusive em `retained_files` do manifesto ativo. A insuficiência é do descarte, não da recuperação remota; não chamar o rascunho anterior de aprovado ou executável.
+
+O preflight ativo confere 613 retidos globais, além do complemento anterior de 22.987 arquivos/links e 1.503 diretórios (listas com sobreposição). O ledger ativo é `finance-final/consolidated-disposition-ledger.json`. Custo total desta passagem ao novo seal: 69.046.272 bytes; crescimento compartilhado futuro do Git não projetado. Cache, banco, mídia, fonte primária, diretório, credencial, serviço, objeto remoto e retenção ficam fora. Todo texto abaixo referente ao pacote 643/4,808 GiB é **histórico supersedido**, não o próximo gate.
+
+Próximo gate vigente: nova confirmação crítica somente dos 339 caminhos do lote `2bd02d697289`, seguida de preflight local, execução única, recuperação retained-only pós-ausência, validação independente/journal/complemento e espaço real. Não há etapa remota destrutiva. Não reutilizar o `continue` ou OKs antigos. A auditoria global permanece aberta neste gate; os casos preservados sem prova não são declarados indispensáveis.
+
 ## Autoridade e situação
 
 Rodolfo Mattei confirmou a condução consolidada em `1572283279120277689` e pediu continuidade em `1572313312987979957`, na thread `1569928464033783862`. A leitura nativa confirmou autor `344196393512075265` e conteúdo `continue`; isso não autoriza uma nova exclusão. Dono: Zeus.

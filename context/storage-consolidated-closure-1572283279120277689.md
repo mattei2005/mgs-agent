@@ -19,7 +19,11 @@ Decisão de Rodolfo: mensagem `1572283279120277689`, thread `1569928464033783862
 7. **Índices e intermediários desta própria auditoria:** consolidar as evidências sem perda, contabilizar custo criado por Zeus e identificar cópias substituídas. Qualquer retirada requer alvo exato; não misturar esse custo com lixo preexistente.
 8. **Decisão final e encerramento:** reunir os alvos que realmente passarem em um único pacote exato, com subtotais, volume líquido, recuperação e exceções; manter o que não passou com motivo objetivo. Pedir a confirmação destrutiva conjunta somente após validar esse pacote. Depois executar uma vez, conferir preservação/recuperação, espaço real, inventário e fechar a revisão geral. Reportar à parte os geradores que podem voltar a acumular; mudar retenção ou cron continua sendo decisão separada.
 
-## Atualização — passagem consolidada de 17/11
+## Atualização vigente — qualificação final
+
+O rascunho 643/`9f8ed9ae3408` descrito abaixo foi retirado antes de confirmação: bytes remotos não demonstram encerramento local das 304 mídias, que ficam integralmente preservadas. **O único pacote ativo tem 339 cópias JSON de 24 tarefas encerradas, cobertas por 15 primários, zero diretórios, 2,917 GiB líquidos diretos estimados e 32 testes aprovados.** Manifesto `2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537`, gate `6017bcf6a34c40cf56a77578513eb05ffce558c2b44267ce489595aab0c23f91`; fonte `context/storage-consolidated-pass-20261117.md` e `data/storage-consolidated-review-1572313312987979957/finance-final/`. Nada apagado. A próxima decisão é somente essa confirmação exata conjunta, sem nova sequência de continue por família; preservar tudo que não passou continua obrigatório.
+
+## Atualização anterior — rascunho 643 retirado
 
 As sete frentes foram reunidas na passagem `1572313312987979957`, com cobertura/limites e destinos registrados em `context/storage-consolidated-pass-20261117.md` e `data/storage-consolidated-review-1572313312987979957/consolidated-result.json`. O resultado para decisão é **um único pacote de 643 cópias locais**: 339 JSON com 15 primários preservados e 304 mídias com 248 IDs nativos de arquivo verificados. Potencial líquido direto estimado 4,808 GiB; zero excluídos nesta passagem. Manifesto ativo `9f8ed9ae3408e31d4796587a85b92cddc0fc9d3501a3e1c50ec93c15b2a977f9`; gate `e1021fc7af0cf21a73bd28c20b0750d3c8467b7c1824274b70b1eb0d5c196f78`. Preflight real e 34 testes passaram.
 
