@@ -1,0 +1,97 @@
+{
+  "status": "completed_validated",
+  "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
+  "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+  "confirmation_message_id": "1572111648741793904",
+  "question_message_id": "1572099777863098449",
+  "thread_id": "1569928464033783862",
+  "author_id": "344196393512075265",
+  "targets": [
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6"
+  ],
+  "removed_counts": {
+    "file": 6130,
+    "directory": 162
+  },
+  "removed_total_nodes": 6292,
+  "independent_validation": {
+    "status": "PASS",
+    "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
+    "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+    "confirmation_message_id": "1572111648741793904",
+    "question_message_id": "1572099777863098449",
+    "removed_counts": {
+      "file": 6130,
+      "directory": 162
+    },
+    "deleted_total_nodes": 6292,
+    "unexpected_or_duplicate_journal_entries": 0,
+    "all_target_nodes_absent": true,
+    "retained_roots": 25,
+    "retained_payloads_verified": 25435,
+    "final_v7_present_and_unchanged": true,
+    "retained_metadata_unchanged": true,
+    "retained_inputs_and_generators_unchanged": true,
+    "relevant_code_or_scheduler_census_unchanged": true,
+    "gateway_PIDs_unchanged": true,
+    "launcher_unchanged": true,
+    "failed_systemd_units": 0,
+    "new_DB_started_or_SQL_executed": false,
+    "model_requests_executed": 0,
+    "cache_cleanup": false,
+    "production_changes_by_this_lot": false,
+    "observed_available_delta_bytes": 1249845248,
+    "observed_available_delta_GiB": 1.164,
+    "current_available_GiB": 63.67,
+    "current_used_percent": 66.96,
+    "at": "2026-11-16T23:53:24.980818-05:00"
+  },
+  "config_validation": {
+    "status": "PASS",
+    "profiles": [
+      {
+        "profile": "zeus",
+        "exit_code": 0,
+        "pass_config": true
+      },
+      {
+        "profile": "atena",
+        "exit_code": 0,
+        "pass_config": true
+      },
+      {
+        "profile": "ares",
+        "exit_code": 0,
+        "pass_config": true
+      }
+    ],
+    "no_model_requests": true,
+    "provider_or_application_UI_not_tested": true,
+    "at": "2026-11-16T23:53:30.679532-05:00"
+  },
+  "final_stage_preserved": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+  "retained_roots": 25,
+  "retained_payloads": 25435,
+  "observed_delta_label": "Immediate before/after available-space delta; distinguish from earlier net projection and concurrent activity.",
+  "whole_storage_review_complete": false,
+  "remaining_this_review": {
+    "verification_bound": 9,
+    "provenance_or_reconstruction_pending": 10
+  },
+  "next_review": "Resolve10remaining provenance/reconstruction gaps; nine verification roots and prior six protected remain preserved. Broader families and own audit corpus consolidation remain open, caches paused. No new destructive scope implied.",
+  "at": "2026-11-16T23:55:54.419347-05:00",
+  "report_infra": {
+    "message_id": "1572113029624242368",
+    "channel_id": "1498132022634483894",
+    "exact_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  },
+  "sealed_at": "2026-11-16T23:55:54.950119-05:00"
+}

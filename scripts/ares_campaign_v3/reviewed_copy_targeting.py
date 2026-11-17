@@ -140,10 +140,11 @@ def validate_review(descriptor, state, checkpoint, *, get_message):
 
 
 def preserved_sourcing(actual, expected):
-    """Compare an unchanged legacy static GenAI package in a sealed review slot.
+    """Compare the exact review-bound GenAI package, including textual AFS.
 
-    This is identity verification, not acceptance of a media difference. The
-    ordinary/new-media recipe stays strict outside this validated context.
+    Only sourcing-variant response order may differ; complete entries and
+    multiplicity, primary story, feed, tracking and immutable slot stay exact.
+    Ordinary/new-media validation remains strict outside the reviewed context.
     """
     from .shein_reviewed_targeting import active_context
     context = active_context()
@@ -158,11 +159,19 @@ def preserved_sourcing(actual, expected):
     story = expected.get('object_story_spec') or {}
     primary = (story.get('link_data') or {}).get('image_hash')
     spec = expected.get('media_sourcing_spec')
+    feed = expected.get('asset_feed_spec')
     if (not primary or story.get('video_data') or expected.get('object_story_id')
-            or actual.get('object_story_id') or expected.get('asset_feed_spec')
-            or actual.get('asset_feed_spec') or not isinstance(spec, dict)
+            or actual.get('object_story_id') or not isinstance(spec, dict)
             or set(spec) - {'images', 'titles', 'bodies', 'descriptions'}):
         return None
+    if feed:
+        if (not isinstance(feed, dict)
+                or set(feed) - {'titles', 'bodies', 'descriptions', 'optimization_type'}
+                or feed.get('optimization_type') != 'DEGREES_OF_FREEDOM'
+                or not feed.get('titles') or not feed.get('bodies')):
+            return None
+    elif actual.get('asset_feed_spec'):
+        return False
     images = spec.get('images')
     if (not isinstance(images, list) or not images
             or any(not isinstance(row, dict)
@@ -176,7 +185,23 @@ def preserved_sourcing(actual, expected):
     observed = copy.deepcopy(actual.get('object_story_spec') or {})
     if story.get('instagram_user_id') and not observed.get('instagram_user_id'):
         observed['instagram_user_id'] = actual.get('instagram_user_id')
-    return (actual.get('media_sourcing_spec') == spec
+    observed_spec = copy.deepcopy(actual.get('media_sourcing_spec'))
+    wanted_spec = copy.deepcopy(spec)
+    if not isinstance(observed_spec, dict) or set(observed_spec) != set(wanted_spec):
+        return False
+    observed_images = observed_spec.get('images')
+    if not isinstance(observed_images, list):
+        return False
+    # Sourcing variants have no slot/placement identity: preserve the complete
+    # entries and multiplicity, permitting only response-order normalization.
+    def image_entries(rows):
+        return sorted(json.dumps(row, sort_keys=True, separators=(',', ':')) for row in rows)
+    if image_entries(observed_images) != image_entries(images):
+        return False
+    observed_spec.pop('images')
+    wanted_spec.pop('images')
+    return (observed_spec == wanted_spec
+            and stable(actual.get('asset_feed_spec')) == stable(feed)
             and stable(observed) == stable(story)
             and str(actual.get('url_tags') or '') == str(expected.get('url_tags') or ''))
 

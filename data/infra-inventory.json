@@ -68296,12 +68296,12 @@
     {
       "id": "storage-pending25-1572091759247368262",
       "agent": "zeus",
-      "type": "bounded_read_only_state_disposition_and_unapproved_exact_gate",
-      "status": "review_complete_exact_six_root_lot_awaiting_critical_confirmation",
-      "authority_message_id": "1572091759247368262",
+      "type": "exact_authorized_network_intermediate_QA_state_retirement",
+      "status": "completed_validated",
+      "authority_message_id": "1572111648741793904",
       "thread_id": "1569928464033783862",
-      "evidence": "data/storage-pending25-1572091759247368262/review-final.json",
-      "result_sha256": "f6fabc1aa2666fe908dbf9d53741a7de4295ea9e3dad9d5dee89f7daf297ebcd",
+      "evidence": "data/storage-pending25-1572091759247368262/retirement-final.json",
+      "result_sha256": "60313481ad2dea3eaf6d1fee24fe09f412ccbca19cdd0d17d92963652d56e136",
       "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
       "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
       "classified": {
@@ -68311,7 +68311,7 @@
       },
       "retained_roots": 25,
       "retained_payloads": 25435,
-      "source_files_deleted": 0,
+      "source_files_deleted": 6130,
       "budget": {
         "gross_bytes": 1250856960,
         "gross_GiB": 1.165,
@@ -68323,7 +68323,7 @@
         "observed_savings_bytes": 0
       },
       "report_infra": {
-        "message_id": "1572098610185895987",
+        "message_id": "1572113029624242368",
         "channel_id": "1498132022634483894",
         "exact_readback_verified": true,
         "content_empty": true,
@@ -68336,7 +68336,39 @@
         "summary": "Resolve module-local URL/path selectors, not just global run-ID strings; inventories are not readers.",
         "live_mirror_equal": true
       },
-      "updated_at": "2026-11-16T22:58:37.112296-05:00"
+      "updated_at": "2026-11-16T23:55:54.950119-05:00",
+      "historical_preparation": {
+        "result_sha256": "f6fabc1aa2666fe908dbf9d53741a7de4295ea9e3dad9d5dee89f7daf297ebcd",
+        "evidence": "data/storage-pending25-1572091759247368262/review-final.json",
+        "report_infra": {
+          "message_id": "1572098610185895987",
+          "channel_id": "1498132022634483894",
+          "exact_readback_verified": true,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions_empty": true
+        },
+        "classified": {
+          "preserve_verification_consumer": 9,
+          "preserve_pending_provenance_or_reconstruction": 10,
+          "prepared_exact_retirement_lot": 6
+        }
+      },
+      "question_message_id": "1572099777863098449",
+      "removed_counts": {
+        "file": 6130,
+        "directory": 162
+      },
+      "removed_total_nodes": 6292,
+      "final_v7_preserved": true,
+      "observed_available_delta_bytes": 1249845248,
+      "whole_storage_review_complete": false,
+      "next_step": "Resolve10remaining provenance/reconstruction gaps; nine verification roots and prior six protected remain preserved. Broader families and own audit corpus consolidation remain open, caches paused. No new destructive scope implied.",
+      "classification_current": {
+        "retired": 6,
+        "verification_preserved": 9,
+        "pending_provenance_or_reconstruction": 10
+      }
     }
   ],
   "profile_skill_references": [
