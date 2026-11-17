@@ -1,0 +1,167 @@
+[
+  {
+    "target": "/",
+    "source": "/dev/sda1",
+    "fstype": "ext4"
+  },
+  {
+    "target": "/sys",
+    "source": "sysfs",
+    "fstype": "sysfs"
+  },
+  {
+    "target": "/sys/kernel/security",
+    "source": "securityfs",
+    "fstype": "securityfs"
+  },
+  {
+    "target": "/sys/fs/cgroup",
+    "source": "cgroup2",
+    "fstype": "cgroup2"
+  },
+  {
+    "target": "/sys/fs/pstore",
+    "source": "pstore",
+    "fstype": "pstore"
+  },
+  {
+    "target": "/sys/fs/bpf",
+    "source": "bpf",
+    "fstype": "bpf"
+  },
+  {
+    "target": "/sys/kernel/debug",
+    "source": "debugfs",
+    "fstype": "debugfs"
+  },
+  {
+    "target": "/sys/kernel/debug/tracing",
+    "source": "tracefs",
+    "fstype": "tracefs"
+  },
+  {
+    "target": "/sys/kernel/tracing",
+    "source": "tracefs",
+    "fstype": "tracefs"
+  },
+  {
+    "target": "/sys/fs/fuse/connections",
+    "source": "fusectl",
+    "fstype": "fusectl"
+  },
+  {
+    "target": "/sys/kernel/config",
+    "source": "configfs",
+    "fstype": "configfs"
+  },
+  {
+    "target": "/proc",
+    "source": "proc",
+    "fstype": "proc"
+  },
+  {
+    "target": "/proc/sys/fs/binfmt_misc",
+    "source": "systemd-1",
+    "fstype": "autofs"
+  },
+  {
+    "target": "/proc/sys/fs/binfmt_misc",
+    "source": "binfmt_misc",
+    "fstype": "binfmt_misc"
+  },
+  {
+    "target": "/dev",
+    "source": "udev",
+    "fstype": "devtmpfs"
+  },
+  {
+    "target": "/dev/pts",
+    "source": "devpts",
+    "fstype": "devpts"
+  },
+  {
+    "target": "/dev/shm",
+    "source": "tmpfs",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/dev/hugepages",
+    "source": "hugetlbfs",
+    "fstype": "hugetlbfs"
+  },
+  {
+    "target": "/dev/mqueue",
+    "source": "mqueue",
+    "fstype": "mqueue"
+  },
+  {
+    "target": "/run",
+    "source": "tmpfs",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/run/lock",
+    "source": "tmpfs",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/run/credentials/mgs-router.service",
+    "source": "tmpfs",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/run/user/0",
+    "source": "tmpfs",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/run/snapd/ns",
+    "source": "tmpfs[/snapd/ns]",
+    "fstype": "tmpfs"
+  },
+  {
+    "target": "/run/snapd/ns/canonical-livepatch.mnt",
+    "source": "nsfs[mnt:[4026532332]]",
+    "fstype": "nsfs"
+  },
+  {
+    "target": "/snap/canonical-livepatch/414",
+    "source": "/dev/loop0",
+    "fstype": "squashfs"
+  },
+  {
+    "target": "/snap/canonical-livepatch/418",
+    "source": "/dev/loop3",
+    "fstype": "squashfs"
+  },
+  {
+    "target": "/snap/core22/2955",
+    "source": "/dev/loop2",
+    "fstype": "squashfs"
+  },
+  {
+    "target": "/boot",
+    "source": "/dev/sda16",
+    "fstype": "ext4"
+  },
+  {
+    "target": "/boot/efi",
+    "source": "/dev/sda15",
+    "fstype": "vfat"
+  },
+  {
+    "target": "/snap/snapd/28332",
+    "source": "/dev/loop1",
+    "fstype": "squashfs"
+  },
+  {
+    "target": "/snap/snapd/28254",
+    "source": "/dev/loop5",
+    "fstype": "squashfs"
+  },
+  {
+    "target": "/snap/core22/2987",
+    "source": "/dev/loop6",
+    "fstype": "squashfs"
+  }
+]

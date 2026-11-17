@@ -1,0 +1,100 @@
+{
+  "completed_filesystems": [
+    {
+      "root": "/",
+      "source": "/dev/sda1",
+      "fstype": "ext4",
+      "counts": {
+        "directory": 164257,
+        "link": 23596,
+        "file": 1298132,
+        "other": 302
+      },
+      "before": {
+        "total": 206900281344,
+        "used": 133661433856,
+        "available": 73222070272,
+        "reserved_free": 16777216,
+        "used_percent": 64.61
+      },
+      "after": {
+        "total": 206900281344,
+        "used": 133700997120,
+        "available": 73182507008,
+        "reserved_free": 16777216,
+        "used_percent": 64.63
+      },
+      "excluded": [
+        "/run",
+        "/dev",
+        "/proc",
+        "/sys",
+        "/boot",
+        "/snap/core22/2955",
+        "/snap/core22/2987",
+        "/snap/snapd/28332",
+        "/snap/snapd/28254",
+        "/snap/canonical-livepatch/414",
+        "/snap/canonical-livepatch/418",
+        "/root/.hermes/secure-backups/storage-reaudit-1572313312987979957",
+        "/root/mgs-agent/data/storage-consolidated-review-1572313312987979957"
+      ],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1572313312987979957/metadata-root.jsonl.gz"
+    },
+    {
+      "root": "/boot",
+      "source": "/dev/sda16",
+      "fstype": "ext4",
+      "counts": {
+        "directory": 7,
+        "file": 587,
+        "link": 4
+      },
+      "before": {
+        "total": 923156480,
+        "used": 177905664,
+        "available": 680607744,
+        "reserved_free": 64643072,
+        "used_percent": 20.72
+      },
+      "after": {
+        "total": 923156480,
+        "used": 177905664,
+        "available": 680607744,
+        "reserved_free": 64643072,
+        "used_percent": 20.72
+      },
+      "excluded": [
+        "/boot/efi"
+      ],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1572313312987979957/metadata-boot.jsonl.gz"
+    },
+    {
+      "root": "/boot/efi",
+      "source": "/dev/sda15",
+      "fstype": "vfat",
+      "counts": {
+        "directory": 4,
+        "file": 8
+      },
+      "before": {
+        "total": 109395456,
+        "used": 6399488,
+        "available": 102995968,
+        "reserved_free": 0,
+        "used_percent": 5.85
+      },
+      "after": {
+        "total": 109395456,
+        "used": 6399488,
+        "available": 102995968,
+        "reserved_free": 0,
+        "used_percent": 5.85
+      },
+      "excluded": [],
+      "ledger": "/root/.hermes/secure-backups/storage-reaudit-1572313312987979957/metadata-boot-efi.jsonl.gz"
+    }
+  ],
+  "errors": [],
+  "at": "2026-11-17T13:16:15.129837-05:00"
+}
