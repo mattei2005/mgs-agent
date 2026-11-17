@@ -1,0 +1,30 @@
+{
+  "operation_key": "24c94f890699dee6148cf511",
+  "alert_id": "1572362593874608159",
+  "authority_message_ids": [
+    "1569193434189668453",
+    "1545180305961386055"
+  ],
+  "status": "business_recovered_waiting_supervisor_closure",
+  "original_owner": "supervisor:1175901",
+  "worker_pid": 1175951,
+  "worker_start_ticks": "236093108",
+  "initial_pending": null,
+  "initial_cursor": 755062,
+  "preserved_cursor": 755062,
+  "apply_exit": 0,
+  "apply_mode": "noop",
+  "business_posts": 0,
+  "dry_run_exit": 0,
+  "canonical_script_sha256": "629046abfa30fbac154aad29051f9335d791412c1489638006522e4a2bff5cfe",
+  "natural_tick_not_before": 1794951720.0,
+  "probe_evidence": "/root/.hermes/shared/automation-continuity/runs/24c94f890699dee6148cf511/probe-evidence.json",
+  "login_evidence": "/root/.hermes/shared/automation-continuity/runs/24c94f890699dee6148cf511/login-evidence.json",
+  "diagnosis": "Persisted browser state reached Auth0 with no authenticated request. One approved login restored /company HTTP200 and both MGS companies; underlying expiry mechanism not proved. Fresh exact consumer dry-run and apply no-op succeeded.",
+  "natural_tick_verified": "2026-11-17T16:42:09-05:00",
+  "independent_observation": "/root/mgs-agent/reports/automation-recovery/24c94f890699dee6148cf511/independent-observation.json",
+  "tests_passed": 64,
+  "deployed_collect_exact_source_verified": true,
+  "report_infra_get_verified": "1572366572826394845",
+  "next": "Original supervisor consumes the scoped independent observation at its existing natural tick, preserves owner checks, closes the exact queue request and delivers the diagnostic. No business replay or additional login required."
+}

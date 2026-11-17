@@ -389,6 +389,25 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
 
+    def test_reviewed_sb_continuity_sources_commit(self):
+        names = ["scripts/mgs_sb_token_monitor_continuity.py",
+                 "tests/test_sb_token_monitor_continuity.py"]
+        for name in names:
+            path = self.repo / name
+            path.parent.mkdir(exist_ok=True)
+            path.write_text("# Reviewed offline verifier fixture; no credentials.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD").splitlines(), names)
+
+    def test_sb_continuity_exception_blocks_sibling_credentials(self):
+        base = self.repo / "scripts"
+        base.mkdir()
+        (base / "mgs_sb_token_monitor_continuity.py").write_text("# Synthetic fixture.\n")
+        (base / "sb_token_monitor_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_sb_monitor_readiness_exception_blocks_sibling_credentials(self):
         base = self.repo / "tests"
         base.mkdir()

@@ -23,6 +23,17 @@ else
 fi
 '''
         cases = {
+            "scripts/mgs_sb_token_monitor_continuity.py": 0,
+            "tests/test_sb_token_monitor_continuity.py": 0,
+            "work/scripts/mgs_sb_token_monitor_continuity.py": 1,
+            "work/tests/test_sb_token_monitor_continuity.py": 1,
+            "scripts/mgs_sb_token_monitor_continuity.py.bak": 1,
+            "tests/test_sb_token_monitor_continuity.py.bak": 1,
+            "scripts/mgs_sb_token_monitor_continuity_other.py": 1,
+            "tests/test_sb_token_monitor_continuity_other.py": 1,
+            "scripts/mgs_sb_token_monitor_continuity.json": 1,
+            "tests/test_sb_token_monitor_continuity.json": 1,
+            "scripts/sb_token_monitor_credentials.json": 1,
             "scripts/ares_campaign_v3/credential_routing.py": 0,
             "work/scripts/ares_campaign_v3/credential_routing.py": 1,
             "scripts/ares_campaign_v3/credential_routing.py.bak": 1,

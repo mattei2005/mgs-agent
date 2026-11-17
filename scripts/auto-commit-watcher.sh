@@ -99,6 +99,11 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_sb_token_mon
 # No embedded credentials; only this exact source, never rollback copies or siblings.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/ares_campaign_v3/credential_routing\.py$"
 
+# Reviewed read-only occurrence verifier and offline tests from recovery
+# 24c94f890699dee6148cf511 (REPORT-INFRA 1572366572826394845). No secrets;
+# exact source paths only, never runtime tokens, siblings or rollback copies.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_sb_token_monitor_continuity\.py$|^tests/test_sb_token_monitor_continuity\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

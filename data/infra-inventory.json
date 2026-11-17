@@ -893,6 +893,57 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-recovery-056ec882525a87def44d9359",
+      "type": "autocommit_guardrail_recovery",
+      "agent": "zeus",
+      "authorization_message_id": "1569193434189668453",
+      "source_alert_id": "1572369782659874817",
+      "cause": "Reviewed read-only occurrence verifier and offline tests contain token in filename; nominal guard stopped commit/push before either began.",
+      "correction": "Only two anchored reviewed source-path exceptions; credential siblings, copies and backups remain blocked. Reload already-active watcher; original batching retained.",
+      "paths": [
+        "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+        "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
+        "/root/mgs-agent/tests/test_auto_commit_empty_index.py"
+      ],
+      "reviewed_exact_paths": [
+        "scripts/mgs_sb_token_monitor_continuity.py",
+        "tests/test_sb_token_monitor_continuity.py"
+      ],
+      "provenance": "Recovery 24c94f890699dee6148cf511 independently completed_validated; original audit and REPORT-INFRA 1572366572826394845 GET verified.",
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/056ec882525a87def44d9359/recovery-evidence.json",
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/056ec882525a87def44d9359/rollback",
+      "validation": "100 tests PASS including actual isolated-watcher commit and negative credential guard; reviewed source secret-pattern hits=0; bash syntax and diff checks pass. Active watcher PID 1206220 ready with batch_target=10/max_wait=600/quiet=10. Native Git commit/push and recovery delivery not yet validated.",
+      "status": "validated_waiting_native_batch",
+      "cron_changes": 0,
+      "gateway_restarts": 0,
+      "manual_commit_or_push": false
+    },
+    {
+      "id": "sb-token-monitor-recovery-24c94f890699dee6148cf511",
+      "agent": "zeus",
+      "type": "scoped_monitor_recovery",
+      "report_infra_message_id": "1572366572826394845",
+      "report_infra_get_verified": true,
+      "authority_message_id": "1569193434189668453",
+      "business_authority_message_id": "1545180305961386055",
+      "source_alert_id": "1572362593874608159",
+      "owner": "Zeus/Automation continuity; original supervisor retained",
+      "paths": [
+        "/root/mgs-agent/scripts/mgs_sb_token_monitor_continuity.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_sb_token_monitor_continuity.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+      ],
+      "receipt": "/root/mgs-agent/reports/automation-recovery/24c94f890699dee6148cf511/checkpoint.json",
+      "description": "One existing canonical login restored the SB browser session after a confirmed Auth0 wall. Exact dry-run and apply returned noop; cursor 755062 preserved, zero new business posts. Scoped read-only observer binds this standalone alert to a subsequent natural healthy tick and canonical locked dry-run, without replay or credential rotation.",
+      "validation": "15 adapter/integration tests, 28 monitor tests, 1 auth-readiness test and 20 supervisor tests PASS; compile and diff check PASS. Natural 16:42:09 ET tick returned noop, zero failures, cursor 755062; independently executed scoped live observer returned OK/verified=true for the exact alert. Canonical session mode 0600; both MGS companies HTTP200.",
+      "status": "target_and_natural_tick_verified_original_supervisor_closure_pending",
+      "rollback": "Remove only the new scoped observation import/call from supervisor; preserve queue, checkpoint, active session and business cursor. No rollback performed.",
+      "credentials_changed": false,
+      "cadence_changed": false,
+      "gateway_restart": false
+    },
+    {
       "agent": "zeus",
       "authority_message_id": "1569193434189668453",
       "business_authority_message_id": "1571996433999990885",
