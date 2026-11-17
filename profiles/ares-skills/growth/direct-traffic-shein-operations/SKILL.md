@@ -17,7 +17,7 @@ SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos e URL; renumere UTM
 
 Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. “Todas essas” = lista; PAUSED ≠ agenda.
 
-Diagnóstico: projete antes de serializar; truncar JSON não sanitiza. Features: só diffs por slot.
+Diagnóstico: projete antes de imprimir. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
 Separe autorizações, coortes e recibos de pausa e criação intercaladas. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
