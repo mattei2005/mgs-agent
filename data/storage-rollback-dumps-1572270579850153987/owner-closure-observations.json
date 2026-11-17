@@ -1,0 +1,996 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-COMPOSITION-1555934054132486275",
+        "state": "completed_validated; release committed; 249 node/193 python; 34 stage/34 prod; fingerprints unchanged"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-1555934054132486275.md",
+        "line": 24,
+        "text": "- Fronteiras futuras até2035, mês encerrado, valores negativos e despesas fixas cobertas pelos testes. Fonte original e cálculos financeiros não alterados."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-1555934054132486275.md",
+        "line": 32,
+        "text": "## Evidência, backup e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-1555934054132486275.md",
+        "line": 34,
+        "text": "`apps/finance-system/private/composition-1555934054132486275/`: manifest, baseline-hashes, stage/live-browser, gates finais, runtime-readback, comparação financeira, dependency-audit e backup.json. Dump remoto `/home/zeus/mgs-finance-backups/composition-1555934054132486275/finance-before.dump`, catálogo validado e cópia local por hash. Não houve no"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-1555934054132486275.md",
+        "line": 36,
+        "text": "Decisão registrada no registry, checkpoint atualizado, skill financeira com rota do contrato e prevenção do gate em interpretador sem dependências. Inventário/audit/REPORT-INFRA compõem o fechamento. Nenhum processo de teste ficou pendente."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-SMS-RESIDUAL-1557401256098664584",
+        "state": "completed"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-sms-residual-1557401256098664584.md",
+        "line": 24,
+        "text": "## Evidências e rollback"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SAVE-PERF-1552071425156845749",
+        "state": "concluído: release coordenado publicado; confirmação mesmo valor/modo sem recálculo ~2s em stage; cálculo30–32%mais rápido no benchmark remoto,produção9.7s/8.8s;353testes,paridade integral4casos,34viewports;zero escrita financeira produtiva;skill0.1.70."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-save-performance-1552071425156845749.md",
+        "line": 26,
+        "text": "- `browser-production.json`:34 combinações competência/viewport, zero erro JS, zero POST financeiro; replay de rateio parcial, cinco APIs de gestores, conferência e redirecionamento anônimo preservados. Sessão de validação encerrada."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-save-performance-1552071425156845749.md",
+        "line": 30,
+        "text": "## Preservação e rollback"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-EXPENSE-SAVE-1552090743085076510",
+        "state": "concluído: sheet zq175 ajuste gerencial autorizado/readback saldo74376.81 igual à dash. fast path publicado;357 testes,34 viewports de despesas+34 gerais; metadata17.67s→1.974/2.215s em stage, alteracao valor/moeda recalcula; fingerprints preservados; skill0.1.72 validada."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md",
+        "line": 5,
+        "text": "## 1. Conciliação autorizada na planilha — concluída"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md",
+        "line": 43,
+        "text": "Gates completos do candidato: **357 testes**, sem falhas. Publicação pelo controlador coordenado com backup completo PostgreSQL remoto/local, hashes validados, backups exatos de código e journal de rollback. Fingerprints de todos os cenários idênticos antes/depois; zero escrita financeira de produção pela implantação."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md",
+        "line": 54,
+        "text": "- Rollback de código: `private/releases/expense-save-1552090743085076510/`, sem restauração integral por cima de atividade concorrente."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sb-tech-cad-1547697182948458611/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SB-TECH-CAD-1547697182948458611",
+        "state": "concluido: julho fechado supersedido em 6 documentos/4086 celulas; 14 workspaces corrigidos; 17 ativos em cad; backup/restore/audit/browser validados"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-sb-tech-cad-1547697182948458611.md",
+        "line": 18,
+        "text": "- Julho fechado ganhou seis versões novas — principal, Nicolas, Joe, Isliago, Kelly e George/Ícaro — com 4.086 células dependentes recalculadas. Os seis documentos anteriores e as 40 linhas imutáveis de `finance_history` foram preservados."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-sb-tech-cad-1547697182948458611.md",
+        "line": 21,
+        "text": "## Backup, rollback e validação"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-sb-tech-cad-1547697182948458611.md",
+        "line": 41,
+        "text": "Esta correção não conclui a migração integral do sistema financeiro e não altera a fonte Google Sheets."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/catalog-backup/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-BR-CAR-1564993480487342243",
+        "state": "concluido:523testes;catalogomgs;2290linhas78grupos;2complementos;76grupos preservados;rev1119/audit5356;cutoff27/10;replay idempotente;api e6checks desktop/mobile;regra padrao runtime/docs/skill/registry;inventario/audit/report-infra1565000672972378183 com readback;notificacao diaria1565000014466650170 conferida"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-br-car-1564993480487342243.md",
+        "line": 22,
+        "text": "- Gate completo executado silenciosamente em background e consumido antes do encerramento, sem notificações brutas. Node405.732369s; Python700.309727s. Nenhum processo de gate pendente."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-br-car-1564993480487342243.md",
+        "line": 26,
+        "text": "Rollback de código: apps/finance-system/private/releases/br-car-1564993480487342243/. Recoveries financeiros bloqueados preservados; nenhuma exclusão, credencial, campanha, budget, mudança de cron ou competência fechada alterada."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/published-tests.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      },
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-GROWPOWERHUB-1554828914424156170",
+        "state": "aplicado e validado: growpowerhub.com de/de-cc-de g002; repetição de automática e outros sufixos fail-closed. fonte3079linhas64grupos,rev855,audit2565,29/09completo;400testes,api16meses,desktop/mobile,replayidempotente"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-growpowerhub-1554828914424156170.md",
+        "line": 35,
+        "text": "Rollback de código `private/releases/growpowerhub-1554828914424156170/`; recuperação financeira congelada pelo importador."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/finc-review-1551931759061631058/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-finc-review-1551931759061631058.md",
+        "line": 25,
+        "text": "## Evidência e rollback"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/prevention-release-1551755722700624003/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-PREVENTION-1551755722700624003",
+        "state": "publicado e validado; evidência histórica no relatório do primeiro pacote"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-prevention-release-1551755722700624003.md",
+        "line": 52,
+        "text": "## Backups, rollback e resíduos preservados"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-prevention-release-1551755722700624003.md",
+        "line": 56,
+        "text": "- Stage: `/var/tmp/mgs-finance-prevention-1551755722700624003`; banco restaurado acima. Permanecem parados/inertes, sem servidor de testes persistente; preservados para rollback/evidência. Não houve DROP ou limpeza destrutiva."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-prevention-release-1551755722700624003.md",
+        "line": 57,
+        "text": "- Rollback é limitado aos arquivos desta entrega; restaurar o conjunto remoto pelo helper privado e o runner/contrato local correspondente, validar hashes e reiniciar somente o serviço financeiro. Nunca restaurar um dump sobre produção para reverter apenas interface/código. Novos arquivos sem referência podem permanecer inertes, sem deletar por inf"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/august-adjust-1551644766125428847/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-AUGUST-ADJUST-1551644766125428847",
+        "state": "aplicado/validado rev442 audit1677:38fatosyolomgs;smsp121formula;cpv31formulas corrigidas;7creditosgeizian positivos preservados;backup restaurado;107+5testespass. pendentepropostatc21usd762.62 e redistribuicaoopenzedusd1.76sheet;nenhuma escrita nesses dois pontos."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-august-adjust-1551644766125428847.md",
+        "line": 17,
+        "text": "- Produção revisão441→442, audit1677 `AUGUST_YOLOKFX_ALL_MGS`, recovery bloqueado `recovery-yolo-1551644766125428847`. Segundo apply retornou no-op. Cotações441 reconciliadas como atualização automática, não anomalia."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/simple-review-1551798771661275147/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SIMPLE-1551798771661275147",
+        "state": "correção d5 green; simulação setembro/outubro passa e restaura; gates node/python passam. não publicado: apis atuais dos cinco gestores500 por rateio21/09 no row12 versus corte20/09 na tela, recálculo automático reconciliado na auditoria1798"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-blocked-1551798771661275147.md",
+        "line": 1,
+        "text": "# Conferência simples — candidato preparado; publicação bloqueada"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-blocked-1551798771661275147.md",
+        "line": 11,
+        "text": "## Verificações concluídas"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-blocked-1551798771661275147.md",
+        "line": 39,
+        "text": "Sem essa autorização, o candidato permanece em stage, a versão produtiva anterior é preservada e não se declara concluída a validação de virada do mês."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/openzed-icaro-1551714950781866035/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-OPENZED-ICARO-1551714950781866035",
+        "state": "concluido:rev452/audit1739;4parcelasrestauradasg001;apiowner+5gestorespass;totaisdossites,outrosmeses,ledger/sheets preservados;replayno-op;backup/rollbackvalidado;isliagoremuneracao-0.54brl,geizianhalf+0.27brl."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-openzed-icaro-1551714950781866035.md",
+        "line": 13,
+        "text": "- Ensaio transacional com update/audit reais revertidos por rollback explícito; readbackcenáriopreservado."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-openzed-icaro-1551714950781866035.md",
+        "line": 17,
+        "text": "- Comparador independente por site:totaisnuméricospreservados;2720camposvaziospreservadoscomoestavam,nãotransformadosemzero."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-openzed-icaro-1551714950781866035.md",
+        "line": 20,
+        "text": "## Artefatos / rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-openzed-icaro-1551714950781866035.md",
+        "line": 23,
+        "text": "- Rollback financeiro exige validar revisão corrente e usar somente os campos do recoverylocked correspondente, com novo audit; não restaurar todo banco vivo."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953/backup/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SPEND-1553386505639165953",
+        "state": "concluido: codigo publicado,375 testes, gastos/gam ate25/09, revisao703/audit2308, replay idempotente, api/browser desktop/mobile e states ok."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-spend-repair-1553386505639165953.md",
+        "line": 38,
+        "text": "- Rollback de código: `apps/finance-system/private/releases/spend-repair-1553386505639165953/`."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-spend-repair-1553386505639165953.md",
+        "line": 40,
+        "text": "- Falhas auxiliares resolvidas: diagnóstico inicialmente sombreou módulo inspect (executado com `-P`); primeira montagem de testes não incluiu todas as fixtures/diretórios (corrigida e suites integrais repetidas); chamada foreground excedeu limite da ferramenta (nenhum processo órfão; gate completo reexecutado com acompanhamento silencioso); backup"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/published.json",
+        "pointer": "/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md",
+        "line": 9,
+        "text": "- Conferência de89 registros conta/dia,28 registros positivos reconciliados com fonte. Zero exceções de gasto e zero erros de consulta na coleta válida. Contas Google anteriormente encerradas seguem indisponíveis, nunca convertidas em zero."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md",
+        "line": 23,
+        "text": "- Release oct01-1555562222023999501 pelo controlador canônico: código local/remoto lido de volta, rollback/journal, restart apenas do serviço financeiro, serviços e login saudáveis, zero mudança financeira durante publicação de código."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md",
+        "line": 29,
+        "text": "Comprovante conjunto de conclusão lido de volta: mensagem1555573363487805593 nesta thread. Atualizou o recibo somente depois de renovar a evidência de gasto via replay; nenhuma reimportação para notificar."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md",
+        "line": 31,
+        "text": "## Evidências e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md",
+        "line": 36,
+        "text": "Supersede o diagnóstico pendente em reports/finance-oct01-verification-1555559500260573236.md. Preenchimento de01/10 concluído e conferido; nenhuma dúvida de classificação pendente para esse dia. Decisões e lições salvas na fonte de ownership e reference account-manager-bindings da skill mgs-finance-dashboard."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-PROXY-ADDR-1556897466652037131",
+        "state": "completed_validated; journal committed;255node/204python;12 controles segurança;26stage/22produção;proxy2.0.8 local/remoto;audit0;fingerprints financeiros intactos"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 12,
+        "text": "## Publicação e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 14,
+        "text": "O controlador regular corretamente bloqueia `node_modules`. Foi usado bootstrap de dependência restrito à lista exata acima, sem modificar/desabilitar a política permanente: motor canônico de publish, locks compartilhados/exclusivos e legados, backup, journal, fence remoto, limite temporal, readback e rollback. Preflight exige gates atuais, selo de"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 16,
+        "text": "O ensaio em arquivos reais isolados injetou falha parcial e confirmou rollback byte a byte dos15 alvos; outro ensaio confirmou commit/readback integral. Sem restart de serviços reais nesses ensaios. Na produção, somente `mgs-finance-dash.service` foi recarregado; gateway, PostgreSQL, socket, unidades, firewall, credenciais e sessões humanas preserv"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 24,
+        "text": "-Readback local e remoto: versão2.0.8, spoof bloqueado, controle legítimo aprovado, trust proxy continuafalse. Hashes dos15 destinos correspondem ao manifesto."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 32,
+        "text": "Dump remoto `/home/zeus/mgs-finance-backups/proxy-addr-1556897466652037131/finance-before.dump`, catálogo validado e segunda cópia local com SHA-256 idêntico. Não foi feito restore materializado deste dump nem restauração sobre produção. Rollback de pacote/locks deve reutilizar o journal, não voltar o banco financeiro."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-proxy-addr-1556897466652037131.md",
+        "line": 38,
+        "text": "Checkpoint `ZEUS-FINANCE-PROXY-ADDR-1556897466652037131`; procedimento salvo em `mgs-finance-dashboard/references/dependency-patch-release.md`, audit da skill41 arquivos Markdown/zero issues. Inventário, audit log e REPORT-INFRA com readback registram o fechamento. Artefatos de teste/rollback preservados; nenhuma exclusão automática."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SMS-DASHBOARD-1557763144762269717",
+        "state": "concluido e reafirmado por audio1557781145632907354. dia07 completo, fonte dashboard, sem pendencia operacional ou de auditoria por1sms. proveniencia tecnica preservada nao equivale a caso aberto. gam/spend ok, intervention_required false, zero blockers."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-sms-dashboard-1557763144762269717.md",
+        "line": 4,
+        "text": "Rodolfo1557758039962951733 definiu a dashboard SMS Funnel como fonte final. Rodolfo1557763144762269717 exigiu a aplicação no processamento pendente. Thread1545426987756298340, modelo da sessão openai-codex/gpt-6-astra-900k."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-sms-dashboard-1557763144762269717.md",
+        "line": 14,
+        "text": "Frontend público do fornecedor `main.228da2bbf3e72139.js` confirmou `DashboardComponent.dailySents → /daily-sents`. A fonte real da dashboard retornou26.401para07/10. O endpoint retorna oito posições a partir de startDate, inclusive futuras, não uma série encerrada hoje. O coletor valida a sequência dos rótulos e lê a primeira posição da data fecha"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-sms-dashboard-1557763144762269717.md",
+        "line": 36,
+        "text": "- Rollback de código: apps/finance-system/private/releases/sms-dashboard-1557763144762269717/; backup financeiro remoto/local no recibo financial-backup.json."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/vigency-release-1551783001678024736/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-VIGENCY-1551783001678024736",
+        "state": "escopo esclarecido: gross cad rede1; gross usd rede2/av/m2; gastos fb/google. despesas rodolfo confere sozinho; gestores derivados. definição salva; interface ainda não simplificada"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-vigency-release-1551783001678024736.md",
+        "line": 19,
+        "text": "Os fingerprints imediatamente anteriores à publicação, posteriores ao restart e finais após toda a aceitação são iguais: **170 cenários**, revisões, resultados, overrides, additions, ledger e contagem da auditoria financeira preservados. Sessões de teste/autenticação seguem sua auditoria normal e foram encerradas. Zero escrita financeira ou em plan"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-vigency-release-1551783001678024736.md",
+        "line": 53,
+        "text": "Rollback delimitado: restaurar os três entrypoints/arquivos preexistentes do tar, validar seus hashes e reiniciar somente a aplicação/socket. Não restaurar o banco ativo nem apagar os dois novos arquivos por inferência; após restaurar os entrypoints ficam sem rota/uso. MFA, firewall, unidades systemd e credenciais não fazem parte da alteração."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/spyflix-credit-1553049180434604103/backup/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-SPYFLIX-CREDIT-1553049180434604103",
+        "state": "completed: release spyflix-credit publicado; company|122 credit brl2522 na revisão548; audit2277; api e browser validados"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-spyflix-credit-1553049180434604103.md",
+        "line": 21,
+        "text": "- Finance release control validou manifest, hashes base e stage proof; publicação concluiu com `financial_writes=0` antes da alteração financeira separada."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-spyflix-credit-1553049180434604103.md",
+        "line": 30,
+        "text": "- Rollback, se necessário, deve ser limitado a `workspace-2026-08`/`company|122` com revisão e audit, usando `before.json`; nunca restaurar o dump completo sobre alterações concorrentes."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064/before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-CORRECT-1551324490271695064",
+        "state": "cpv16 e visao gestores ja corrigidos na etapa anterior;prototipo isolado:22 testes+dom em3periodos aprovados;8abas relidas intactas;0writes sheet/producao;av restante1518linhas205dominio-codigos17dominios usd3655.01 sem pais/vertical comprovado;nao publicado/nao preenchido;escopo integral aberto"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-corrections-native-comparison-1551324490271695064.md",
+        "line": 36,
+        "text": "- Recovery financeiro bloqueado: recovery-cpv16-1551324490271695064. Código anterior: /home/mgsfinance/backups/correct-1551324490271695064/code-before/. Nenhuma exclusão/limpeza destrutiva autorizada ou executada."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-corrections-native-comparison-1551324490271695064.md",
+        "line": 51,
+        "text": "Próximo passo: devolver a comparação exata solicitada, esclarecer a regra para atribuições ainda não comprovadas e concluir o ponto2 somente com o gate dimensional aprovado e readback financeiro. Não declarar o fechamento integral concluído."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493/before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-quote-source-1552011536011108493.md",
+        "line": 1,
+        "text": "# Cotações provisórias independentes do fechamento — 1552011536011108493"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-quote-source-1552011536011108493.md",
+        "line": 28,
+        "text": "- `browser-production.json`: **34 combinações competência/viewport**, replay parcial, zero erro JS e zero POST financeiro. Login/logout de teste encerrados corretamente."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-quote-source-1552011536011108493.md",
+        "line": 32,
+        "text": "## Backup, rollback e incidentes corrigidos"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-quote-source-1552011536011108493.md",
+        "line": 34,
+        "text": "Dump completo anterior: `/home/zeus/mgs-finance-backups/quote-fix-1552011536011108493/before.dump`, cópia local `before.dump`, SHA-256 e catálogo pg_restore em `backup.json`. Arquivos anteriores em `before/`; controller mantém journal/backup exatos em `private/releases/quote-source-independent-1552011536011108493/`. Não restaurar o banco para desfa"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/payments-edit-1551700964975714437/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-payments-edit-delete-1551700964975714437.md",
+        "line": 25,
+        "text": "- Chamada agregada Node+Python excedeu420s; Python foi rerodado separadamente e concluiu112casos em361s. Não houve replay de mutação."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-payments-edit-delete-1551700964975714437.md",
+        "line": 29,
+        "text": "## Backup, rollback e resíduos inventariados"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-payments-edit-delete-1551700964975714437.md",
+        "line": 33,
+        "text": "- Rollback: parar socket+serviço, restaurar somente três arquivos antigos do code-before.tar.gz; reiniciar ambos e validar health/UI/fingerprints. Módulo novo pode ficar inerte; não restaurar banco vivo nem remover auditoria."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-RECOVERY-1566802212548517990",
+        "state": "completed_verified:recovery-v2/recovery-tests/meta-binding committed;529testes;24stage/14ui/20health;01/11spendgamok,replayssemduplicacao;vinculorooseveltidfixo;inventario/audit/registry/skillpass;report-infra1566823685308944657readback"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-recovery-1566802212548517990.md",
+        "line": 47,
+        "text": "## Continuação final — vínculo aprovado e recuperação concluída"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-recovery-1566802212548517990.md",
+        "line": 62,
+        "text": "As evidências `pre-import-*` guardam a interface com cutoffnull anterior ao preenchimento; `live-browser.json` e `readonly-health-final.log` são as evidências posteriores. Nenhuma troca de credencial continua pendente. Fechamento definitivo de outubro permanece o processo separado com o relatório posterior de Rodolfo, não uma pendência deste reparo"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-recovery-1566802212548517990.md",
+        "line": 70,
+        "text": "Checkpoint: `ZEUS-FINANCE-RECOVERY-1566802212548517990`. Achado anterior de dependências: `ZEUS-FINANCE-DEPENDENCY-FINDINGS-1566204324680302656`, resolvido por esta publicação. Aprendizado persistido na skill mgs-finance-dashboard/referências de spend e dependency-patch-release; auditoria41Markdowns sem issues. Inventário/auditoria/REPORT-INFRA são"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-RATE-PROPAGATION-1552079131628281897",
+        "state": "publicado e validado:356 testes,24 meses,48 viewports de pagamentos+34 gerais; status/valores consistentes, sem alteração financeira. delta r$0,68 explicado por fincgriffin0,10% na sheet vs0,12% na dash mais receitas/folha/centavos; sem edição de regras."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-rate-propagation-1552079131628281897.md",
+        "line": 46,
+        "text": "A primeira stage carecia da tabela/fixture imutável finance_history de julho. Foi materializada a fonte real, sem enfraquecer as asserções. O gate Python inicial passou156 casos, mas corretamente bloqueou porque o código de testes mudou durante o gate; os dois gates foram repetidos contra o candidato final. As verificações adicionais corrigiram o i"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-rate-propagation-1552079131628281897.md",
+        "line": 48,
+        "text": "## Evidência, rollback e aprendizado"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-WAVESBEE-1553019425706217652",
+        "state": "concluído: gam24/09 completo,58grupos/audit2192, replay idempotente; despesas17meses audit2196-2212;34views/zerojs;backuprestore verificado"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-wavesbee-expenses-1553019425706217652.md",
+        "line": 34,
+        "text": "Release/rollback de código: `apps/finance-system/private/releases/wavesbee-1553019425706217652/`."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/expenses-backup/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-WAVESBEE-1553019425706217652",
+        "state": "concluído: gam24/09 completo,58grupos/audit2192, replay idempotente; despesas17meses audit2196-2212;34views/zerojs;backuprestore verificado"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-wavesbee-expenses-1553019425706217652.md",
+        "line": 34,
+        "text": "Release/rollback de código: `apps/finance-system/private/releases/wavesbee-1553019425706217652/`."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-NETWORK-MONTH-1552101423754514465",
+        "state": "publicado e validado:360 testes, cinco redes em stage, 34 viewports/17 meses e sete históricos em produção. zero mutação financeira; agosto5.08/saldo74376.81. skill0.1.73, registry por supersessão, inventário e audit confirmados; report-infra1552117541906808863 enviado."
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md",
+        "line": 13,
+        "text": "O endpoint existente `/api/scenarios/:id/sites` valida `binding_action:assign|remove`, competência, revisão e preservação do status. Registra `SITE_NETWORK_ASSIGNED`/`SITE_NETWORK_REMOVED` com ator, cenário e antes/depois. A alteração só conclui depois do recálculo, commit e readback existentes. Catálogos JS/Python retêm `network_binding_explicit` "
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md",
+        "line": 40,
+        "text": "- Backup/rollback exato: `apps/finance-system/private/releases/network-month-1552101423754514465/`."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/cutoff-1551913189355028501/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-release-1551913189355028501.md",
+        "line": 22,
+        "text": "- Login owner real via1Password+MFA; sessão de teste encerrada e revogação401 validada."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-release-1551913189355028501.md",
+        "line": 34,
+        "text": "Backup fresco de código e dump PostgreSQL, catálogo pg_restore e transferência porSHA256 validados. Paths exatos em `private/cutoff-1551913189355028501/backup.json` e `code-backup.json`; rollback mantém arquivos anteriores e cenário bruto. Não excluir banco restaurado ou evidências sem autorização crítica específica. Em commit incerto, consultar au"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-simple-review-release-1551913189355028501.md",
+        "line": 46,
+        "text": "Este relatório supersede somente os estados de publicação bloqueada dos relatórios1551798771661275147 e1551811440418095186. Não encerra as evoluções institucionais ainda abertas do sistema financeiro."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/login-redirect-1551937825073790986/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-login-redirect-1551937825073790986.md",
+        "line": 19,
+        "text": "- Backup completo e tar anterior preservados, com hashes e rollback exato."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-ANNUAL-1556874856446951425",
+        "state": "publicado e validado;50 sites na união anual;dados da própria dash;manutenção separada1556897466652037131 resolveu proxy-addr sem alterar tela/valores"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-annual-1556874856446951425.md",
+        "line": 53,
+        "text": "## Evidência, backup e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-annual-1556874856446951425.md",
+        "line": 57,
+        "text": "Rollback apenas dos arquivos desta release sob controle de publicação, nunca restaurar banco sobre atividade posterior. Evidências, fixtures e saídas dos gates ocupam2,9GiB medidos por `du -sh`; journal328KiB. Preservados e inventariados; não houve exclusão nem retenção automática não autorizada. Gates e navegadores encerrados antes do fechamento."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/pushalert-1553059046360350835/backup/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-pushalert-1553059046360350835.md",
+        "line": 12,
+        "text": "Evidência privada: `apps/finance-system/private/pushalert-1553059046360350835/` — before.json, adjust.mjs, operate.py, backup/{backup,restore}.json, adjust-{stage,production}-apply-*.json e readback.json. Backup remoto/hash no manifesto backup.json. Retidos base `mgs_finance_pushalert_1553059046360350835` e runtime `/home/zeus/mgs-finance-stage-pus"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-COMPOSITION-STYLE-1556369322782232598",
+        "state": "completed_validated; release committed; 249 node +193 python; 34 stage +34 live; financial_unchanged"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-style-1556369322782232598.md",
+        "line": 26,
+        "text": "## Evidência e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-composition-style-1556369322782232598.md",
+        "line": 30,
+        "text": "Backups exatos e journal em `apps/finance-system/private/releases/composition-style-1556369322782232598/`; rollback somente do CSS sob controle de publicação, nunca restauração do banco sobre atividade posterior. Sem exclusões e sem processos de teste pendentes."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-shein-us-six-1557024816031342732.md",
+        "line": 12,
+        "text": "- Revisão final221; audit financeiro de reclassificação3215; recuperação transacional bloqueada e backup PostgreSQL com catálogo e cópia local/remota de mesmo hash. Replay de reclassificação e replay pelo sincronizador canônico retornaram idempotentes, sem nova revisão/importação."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-shein-us-six-1557024816031342732.md",
+        "line": 34,
+        "text": "- Journals/rollback: `apps/finance-system/private/releases/growpowerhub-us-1557017566923325465/` e `apps/finance-system/private/releases/shein-sites-1557024816031342732/`."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-COLUMNS-1555702482557075539",
+        "state": "concluído: produção/readback financeiro e visual pass; inventário, audit e conhecimento registrados; report-infra1555711986526855221 lido no canal correto"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-columns-1555702482557075539.md",
+        "line": 33,
+        "text": "- Python foi executado em background silencioso e consumido integralmente antes da publicação; nenhum processo de gate permaneceu pendente no encerramento."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-columns-1555702482557075539.md",
+        "line": 35,
+        "text": "## Publicação e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-columns-1555702482557075539.md",
+        "line": 47,
+        "text": "Rollback da apresentação deve restaurar somente os assets exatos sob admissão de publicação; não restaurar banco sobre atividade posterior. Dump preservado para recuperação isolada, sem alegar novo drill materializado nesta entrega."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/session-rateio-dicas-1551947602562392085/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-session-rateio-dicas-1551947602562392085.md",
+        "line": 31,
+        "text": "- `before/`, `before-local-hashes.json`, `backup.json`, `code-backup.json`: cópias locais, dump validado e tar remoto anteriores, com hashes/rollback preservados."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/conference-access-1551924862854107256/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/release-published.json",
+        "pointer": "/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-month-prune-1556898264878419969.md",
+        "line": 7,
+        "text": "Concluído e validado em produção MatteiInc01:"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-month-prune-1556898264878419969.md",
+        "line": 10,
+        "text": "- Exclusão de140recovery snapshots exclusivos,10famílias×14meses, e210audit_events exclusivos. Zero entity_versions/acceptance_runs dependentes."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-month-prune-1556898264878419969.md",
+        "line": 15,
+        "text": "IDs e contagens fechados estão em `deletion-manifest.json` e `production-prune-receipt.json`, no diretório de evidências abaixo. O SQL usou WHERE IDs explícitos e asserts sob lock; filhos exclusivos foram removidos antes dos pais. Origem de todas as10famílias reconciliada com relatórios/audit institucional. Buscas independentes não encontraram refe"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-month-prune-1556898264878419969.md",
+        "line": 30,
+        "text": "- PostgreSQL real restaurado `mgs_finance_monthprune_1556898264878419969`: prune com rollback e igualdade integral; prune stage com preservação;8cenários de criação ausente outubro→novembro, falha antes da auditoria com rollback completo, retry, replay, concorrência por duas conexões, dezembro→janeiro, preservação da fonte e conflito de destino."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/gam-close-1551587001629937686/mgs_finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-GAM-20260920-1551587001629937686",
+        "state": "completed"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-gam-close-1551587001629937686.md",
+        "line": 30,
+        "text": "- Recovery do complemento: `recovery-gam-email-2026-09-20-f485e0fee995`, bloqueado, revisão 466."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176/publication.json",
+        "pointer": "/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-noindex-1555943137128751176.md",
+        "line": 28,
+        "text": "## Evidências e rollback"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-noindex-1555943137128751176.md",
+        "line": 30,
+        "text": "`apps/finance-system/private/noindex-1555943137128751176/`: manifest, stage-result, publication, runtime-readback, live-browser, fingerprints, backup.json e gates em candidate/private/noindex-gates. Dump remoto `/home/zeus/mgs-finance-backups/noindex-1555943137128751176/finance-before.dump`; segunda cópia local e catálogo conferidos.13backups de có"
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/backup/mgs_finance-before.dump",
+    "committed_flags": [
+      {
+        "source": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/published.json",
+        "pointer": "/journal/state",
+        "value": "committed"
+      }
+    ],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-CHARGES-1553040522287784077",
+        "state": "autorizado; candidato isolado preparado, produção ainda preservada"
+      },
+      {
+        "id": "ZEUS-FINANCE-EXPENSE-CHARGES-1553040522287784077",
+        "state": "completed_verified: publicação370testes, api17meses, desktop/mobile, backup/restore e preservation209cenários; ferramenta ver artigos removida só de setembro em diante"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-charges-1553040522287784077.md",
+        "line": 10,
+        "text": "- Desde setembro2026, cobranças com data/valor, +, remoção e total único por despesa. Servidor soma decimais exatamente e rejeita datas impossíveis/fora do mês, componentes inválidos, conflito de revisão e tentativa de uso em agosto. Moeda única por despesa, conversão preexistente. Legacy conserva valor sem inventar data. Conferência é independente"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-charges-1553040522287784077.md",
+        "line": 14,
+        "text": "- Todas17competências existentes agosto2026–dezembro2027 alteradas em transações/revisões independentes, recovery bloqueado, audit e readback. Futuro onboarding deve respeitar a vigência documentada; não há competências registradas além de dezembro2027 nesta execução."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-charges-1553040522287784077.md",
+        "line": 29,
+        "text": "## Evidência, rollback e retenção"
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-expense-charges-1553040522287784077.md",
+        "line": 35,
+        "text": "- Código de rollback do controller em private/releases/expense-charges-1553040522287784077. Recuperação financeira deve usar cenário recovery-archive-1553040522287784077-AAAA-MM e revisão/ID, jamais sobrescrever todo o banco por cima de edições novas."
+      }
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/finance-before.dump",
+    "committed_flags": [],
+    "owner_checkpoint_states": [
+      {
+        "id": "ZEUS-FINANCE-COLUMNS-DEFAULT-1555736746409459743",
+        "state": "concluído: produção160 telas/2914 grupos; gates245node193python; financeiro idêntico; inventário/audit/registry supersession e report-infra1555743404862738564 validados"
+      }
+    ],
+    "report_closure_excerpts": [
+      {
+        "source": "/root/mgs-agent/reports/finance-columns-default-1555736746409459743.md",
+        "line": 30,
+        "text": "- Nenhum processo de gate ficou pendente: execução silenciosa concluída e resultados consumidos antes do cutover."
+      },
+      {
+        "source": "/root/mgs-agent/reports/finance-columns-default-1555736746409459743.md",
+        "line": 36,
+        "text": "Dump remoto `/home/zeus/mgs-finance-backups/columns-1555736746409459743/finance-before.dump`, catálogo validado e cópia local com SHA256 idêntico. Backups exatos de código em `apps/finance-system/private/releases/columns-1555736746409459743/`. Não foi executado novo restore materializado nesta mudança de apresentação. Rollback é somente de código s"
+      }
+    ]
+  }
+]

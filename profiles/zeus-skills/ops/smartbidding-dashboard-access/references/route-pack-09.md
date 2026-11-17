@@ -29,6 +29,8 @@ Implementation notes:
 
 Support files:
 
+- `references/messenger-timeline-sheet-export.md` — complete Messenger Timeline extraction and styled Sheets publication: exact publisher/date scope, native snapshot, all paginator pages, row-grain/color semantics, locale-safe formulas and full values/effective-colors readback.
+
 - `scripts/sb_table_export.py` — reusable starter for exporting an SB table through the headed/Xvfb route, applying a company filter, paginating rows, writing a BOM CSV, and optionally updating a Sheet.
 - `references/broadcast-template-import-replacement-2026-06-29.md` — controlled replacement workflow for Messenger Broadcast Templates: backup, Import tab, Erase all, Upload, Update, required parent-modal Save, API validation, exact `LINK_1` sequence preservation, and approval status fields.
 - `references/broadcast-template-api-and-utility-approval-2026-06-29.md` — session notes on the authenticated `/broadcast/Messenger` API, backend `LEADS/PAGES/MESSAGES` fields, visible company scope, and Rodolfo's Utility canary→production replacement workflow.

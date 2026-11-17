@@ -1702,6 +1702,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1572269269603852329",
+      "next_step": "Concluido; nao reenviar. Atraso SB 79min nas contas com atividade; Boostingecon sem entrega nem atividade financeira e receita/ROI n/d. Nova atualizacao requer fontes novas e novo request; agendas preservadas.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1572269269603852329/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;91campanhas_no_recorte_financeiro;33partes_integrais+7resumos;40mensagens_unicas_relidas_get;ordem_integral_resumo_confirmada;corte17/11/2026_10:18-10:19est;usd;zero_writes_meta;arquivo_sanitizado_bytes_hashes_validados;65regressoes+5fixtures_resumo_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-17T15:25:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -1833,12 +1843,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572255222175244299",
-      "next_step": "Continuar batches do request pelo monitor e complete, sem writer paralelo; auditoria RAW same-ID + provider + atalho + reservas e mapa final obrigatório.",
-      "objective": "Concluir tratamento e organização de 34 vídeos SHEIN US ES da Kelly, common.",
+      "next_step": "Acompanhar o complete ativo, conferir resultado e chamar monitor; continuar somente próximos batches do request 0e5a7d1a65f22ab57f7a40878f24aff0. Fechar com auditoria permanente integral e mapa local; cron silencioso, sem envio externo.",
+      "objective": "Concluir tratamento e organização das 34 fontes VID SHEIN US ES da Kelly, common, pelo request congelado.",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
-      "state": "12/34 fontes com complete e arquivo confirmados, 22 restantes no mesmo request. qa local e plano completos. terceiro batch retomado após falha transitória em leitura drive, sem mídia duplicada; mesmos ids e variantes preservados. próximo batch em execução foreground.",
+      "state": "retomada canônica pelo batch 435a99a73ea619cc10ad9eef0ba4236a: fontes 17–20 com tratamento, integridade, reserva e estabilidade verificados. mesmo complete em execução no processo rastreado; arquivo/ack/estoque desse batch ainda não declarado concluído. reutilizado plano original e qa válidos, sem nova variante.",
       "thread_id": "1572255222175244299",
-      "updated_at": "2026-11-17T15:03:41+00:00"
+      "updated_at": "2026-11-17T15:24:52+00:00"
     },
     {
       "agent": "ares",
@@ -6548,12 +6558,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SB-TIMELINE-1572265135207223408",
-      "next_step": "Validar filtros, extrair todas as linhas, reproduzir visual e publicar planilha com readback",
+      "next_step": "Entregar link e limites visuais; preservar fotografia sem sincronização automática",
       "objective": "Exportar Messenger Timeline SB 01/09–17/11/2026, 43 sites, SEGURADOR+DOMAIN, receita e estética para Google Sheets",
-      "source": "discord:1572264313727615087/1572265135207223408",
-      "state": "in_progress: autoridade nativa validada; coleta read-only iniciada; sem alteração sb",
+      "source": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408/verification.json",
+      "state": "published_verified: sheet 11cmdxeil2voumjbc3pmyqygipsqpxga3wolazezqt2o; 272 linhas, 78 dias, 82 colunas, 21216 valores/cores conferidos; total brl 3900153.94; fórmulas pt_br corrigidas e validadas",
       "thread_id": "1572264313727615087",
-      "updated_at": "2026-11-17T15:03:48+00:00"
+      "updated_at": "2026-11-17T15:19:47+00:00"
     },
     {
       "agent": "zeus",
@@ -6964,6 +6974,16 @@
       "state": "completed_validated",
       "thread_id": "1569928464033783862",
       "updated_at": "2026-11-13T14:36:02+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-ROLLBACK-DUMPS-1572270579850153987",
+      "next_step": "Revalidar90doledger;extrairsomenteprovasmetadadosbackupsemvaloresfinanceiros;separarcopiasremotasexatasdeestadosemprova. Preservar17Nov+3Oct/retidos,cache/SQL/DB/restart/deletefora. Prepararloteapenasaposprova/gate,semnovoOKgenerico.",
+      "objective": "Revisao readonly90dumpshistoricosremanescentes:origem,encerramento,copiaremotaexata,consumidores,recuperacao;naorepetirlotesretirados.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/retirement-final.json;discord:1569928464033783862/1572270579850153987",
+      "state": "in_progress_readonly_ninety_historical_rollback_dumps",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-17T15:22:32+00:00"
     },
     {
       "agent": "zeus",
@@ -11237,5 +11257,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T15:13:28+00:00"
+  "updated_at": "2026-11-17T15:25:21+00:00"
 }
