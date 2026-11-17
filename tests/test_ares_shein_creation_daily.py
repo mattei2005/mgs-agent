@@ -12,9 +12,8 @@ policy = m.load(m.POLICY)
 
 def snapshot():
     s = {'start': '2026-10-29T00:00:00-04:00', 'cutoff': '2026-10-29T18:08:00-04:00', 'accounts': []}
-    for index, code in enumerate(policy['manager_codes']):
-        for brand in policy['brands']:
-            s['accounts'].append({'account_id': str(10000 + len(s['accounts'])), 'manager_code': code, 'manager': ['Icaro','Geizian','Isliago','Joe','Kelly','Nicolas'][index], 'brand': brand, 'complete': True, 'campaigns': []})
+    for a in m.load(m.BASE / policy['catalog'])['accounts']:
+        s['accounts'].append({'account_id': a['account_id'], 'name': a['name'], 'manager_code': a['manager_code'], 'manager': a['manager_name'], 'brand': a['name'].split('-')[0], 'complete': True, 'campaigns': []})
     return s
 
 
@@ -35,15 +34,15 @@ class CountsTests(unittest.TestCase):
         a = {'account_id':'12345','campaigns':[],'seen_ids':[],'pages':0,'used_cursors':['repeated']}
         with self.assertRaises(AssertionError):m.add_page(a,{'data':[],'paging':{'next':'not-followed','cursors':{'after':'repeated'}}},m.now(),m.now())
     def test_partial_is_never_zero(self):
-        s=snapshot();s['accounts'][0]['complete']=False
+        s=snapshot();next(a for a in s['accounts'] if a['manager_code']=='G001' and a['brand']=='Boostingecon')['complete']=False
         a=m.aggregate(s,policy)
         self.assertIsNone(a['rows'][0]['cells']['Boostingecon']);self.assertIsNone(a['rows'][0]['total']);self.assertFalse(a['complete'])
         text=m.render(s,policy);self.assertIn('Parcial',text);self.assertIn('n/d',text)
-    def test_all36_reconciles(self):
+    def test_all_approved_accounts_reconcile(self):
         s=snapshot()
         for a in s['accounts']:a['campaigns']=[{'id':a['account_id']}]
         c=m.aggregate(s,policy)
-        self.assertEqual(c['observed_total'],36);self.assertEqual(sum(r['total'] for r in c['rows']),36);self.assertEqual(sum(c['site_totals'].values()),36)
+        self.assertEqual(c['observed_total'],policy['expected_account_count']);self.assertEqual(sum(r['total'] for r in c['rows']),policy['expected_account_count']);self.assertEqual(sum(c['site_totals'].values()),policy['expected_account_count'])
         self.assertLessEqual(len(m.render(s,policy)),1900)
     def test_dst_fixed_local_cutoff(self):
         for stamp in ['2026-10-31T19:00:00-04:00','2026-11-01T19:00:00-05:00']:

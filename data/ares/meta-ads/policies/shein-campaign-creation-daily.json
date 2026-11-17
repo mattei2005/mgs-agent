@@ -18,13 +18,33 @@
   "destination_guild_id": "1185714635991679006",
   "operational_business_id": "155263197283282",
   "catalog": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
-  "expected_account_count": 36,
-  "brands": ["Boostingecon", "Escalatepower", "Growpowerhub", "Mavroa", "Vizioid", "Yolokfx"],
-  "manager_codes": ["G001", "G002", "G003", "G004", "G005", "G006"],
+  "expected_account_count": 38,
+  "brands": [
+    "Boostingecon",
+    "Escalatepower",
+    "Growpowerhub",
+    "Mavroa",
+    "Vizioid",
+    "Yolokfx"
+  ],
+  "manager_codes": [
+    "G001",
+    "G002",
+    "G003",
+    "G004",
+    "G005",
+    "G006"
+  ],
   "period": "current Eastern civil day 00:00 inclusive through fixed 18:08 inclusive; not a closed full-day report",
   "date_source": "Meta created_time, never date tokens in campaign name or launch/start_time",
   "counting": "unique campaign ID; includes new-from-zero, clones and duplications; independent of current accepted status",
-  "accepted_edge_statuses": ["ACTIVE", "PAUSED", "ARCHIVED", "IN_PROCESS", "WITH_ISSUES"],
+  "accepted_edge_statuses": [
+    "ACTIVE",
+    "PAUSED",
+    "ARCHIVED",
+    "IN_PROCESS",
+    "WITH_ISSUES"
+  ],
   "excluded_api_literal": "DELETED is rejected by the list edge; ARCHIVED includes terminal objects exposed by Meta. Objects not exposed by the API cannot be guaranteed.",
   "grouping": "manager responsible for account from canonical catalog; not verified human creator identity",
   "layout": "six manager totals plus aligned manager-by-site matrix with row and column totals",
@@ -35,7 +55,17 @@
   "meta_writes": false,
   "credentials": "existing SHEIN-US-DIRECT credential_architecture.shared_car_shein_bisu.token_item; no rotation, alternative identity or global discovery",
   "recovery": "resume saved account cursors in same fixed snapshot; retry only unavailable accounts; durable per-day outbox with nonce and exact GET; ambiguous POST never blindly repeated",
-  "scope_change": "fail closed if canonical 6x6 catalog or authority drifts; scope check each host and account before API",
+  "scope_change": "Fail closed on any difference from the exact 38-account approved selection, including identity or manager drift; six sites by six managers, with two Yolokfx accounts for G002 and G006.",
   "runner": "/root/.hermes/profiles/ares/scripts/shein-campaign-creation-daily.py",
-  "wrapper": "/root/.hermes/profiles/ares/scripts/shein-campaign-creation-cron.py"
+  "wrapper": "/root/.hermes/profiles/ares/scripts/shein-campaign-creation-cron.py",
+  "approved_selection": "data/ares/meta-ads/policies/shein-campaign-creation-approved-1572259669525659649.json",
+  "scope_expansion_authorization_message_id": "1572259669525659649",
+  "scope_expansion_source_thread_id": "1572258612338761729",
+  "scope_expansion_preserves": [
+    "18:08 America/New_York",
+    "same destination thread",
+    "read-only Meta",
+    "no credential or permission change",
+    "no implicit historical catch-up or independent Sheet expansion"
+  ]
 }
