@@ -67513,6 +67513,21 @@
       "agent": "zeus",
       "type": "temporary_campaign_observer",
       "status": "active_observer_recovered_reads_pending_independent_validation",
+      "recovery_b1c46c9341b7e9a46b94af47": {
+        "observed_at": "2026-11-16T21:19:56.428785-05:00",
+        "receipt": "reports/automation-recovery-b1c46c9341b7e9a46b94af47.json",
+        "report_infra_message_id": "1572074252528521219",
+        "report_infra_readback": "Exact GET verified embed fields, empty content and zero mentions",
+        "cause": "LLM openai-codex HTTP400 after successful Discord GET; internal rejection cause unproven",
+        "scope": "same observer and contract; no campaign execution or scheduler edits",
+        "completed": "previous process/session/effects reconciled; authority GET and paginated source/private reads; unchanged canonical artifact hashes; observer checkpoint resumed",
+        "pending": "natural producer cycle and independent scheduler validation; separate owner profile restriction gate remains Ares-owned",
+        "source_cursor": "1572025575340515361",
+        "next_run_at": "2026-11-16T21:29:00-05:00",
+        "repeat_completed_at_read": 48,
+        "cron_config_changed": false,
+        "campaign_writes_by_recovery": 0
+      },
       "recovery_189266711a7c435e559ffcbb": {
         "observed_at": "2026-11-16T11:00:45-05:00",
         "report_infra_message_id": "1571918270116929676",

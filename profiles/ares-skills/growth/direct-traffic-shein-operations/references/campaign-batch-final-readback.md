@@ -104,6 +104,11 @@ Para confirmar ausência de drift depois da ativação, compare cada creative vi
 
 ## 4. Persistir e comunicar a conclusão
 
+### Pure clone estático com variantes GenAI herdadas
+
+Com review de targeting válido, diagnostique `flexible media/copy/tracking readback mismatch` por todos os slots antes de atribuí-lo à mídia. Se hash primário, story/Page/Instagram/copy/CTA/link, tracking, feed e sourcing inteiro conferirem, mas o sourcing legado contiver variantes `source=gen_ai`, use o reconhecimento instalado `reviewed_copy_targeting.preserved_sourcing` → `image_sourcing.valid_observed`. Ele exige contexto tipado validado, creative ID/digest efetivo vinculados ao receipt e pacote estático sem AFS/post fixo, integralmente igual; não aceita diferenças nem relaxa mídia nova ou pedidos fora do contexto. Não reupload, rematerialize ou edite manifests para satisfazer a receita de mídia nova. Teste positivo e negativos de hash, variante/enrollment, copy, link, Page, creative ID, mídia extra, tags e digest. Após validar o descriptor real read-only, retome somente o mesmo recovery central, preserve provas renderizadas válidas e exija QA integral, ACTIVE e igualdade dos IDs. Progresso parcial de renderer autoriza continuação controlada, não conclusão ou renderização duplicada.
+
+
 ### Conferências pós-ativação e do acervo
 
 - Releia o estado dos anúncios após a ativação: o snapshot histórico ACTIVE não exclui rejeição posterior. `issues_info` com `2490468` comprova análise rejeitada, não a razão editorial específica. Preserve IDs, mídia/copy e parâmetros; não force ativação nem recrie conteúdo como sondagem. Registre a cobertura atual e peça somente a decisão nova de revisão ou conteúdo corrigido. Se o aviso final já foi entregue, corrija a mesma mensagem com journal e GET, sem segundo POST, e mantenha o pedido aberto até satisfazer o aceite integral.
