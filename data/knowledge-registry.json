@@ -14726,6 +14726,23 @@
       "updated_at": "2026-10-01T17:29:12+00:00"
     },
     {
+      "canonical_key": "storage.exhaustive-review.delivery-mode",
+      "canonical_source": "context/storage-consolidated-closure-1572283279120277689.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-17T16:28:17+00:00",
+      "id": "ZEUS-STORAGE-CONSOLIDATE-1572283279120277689",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Consolidar todas pendencias restantes sem propostas e continues por pequena familia",
+      "updated_at": "2026-11-17T16:28:17+00:00"
+    },
+    {
       "canonical_key": "infrastructure.storage.reorganization.20261112",
       "canonical_source": "context/storage-reorganization-20261112.md",
       "consumers": [
@@ -17731,5 +17748,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T16:07:56+00:00"
+  "updated_at": "2026-11-17T16:28:17+00:00"
 }

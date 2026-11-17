@@ -1,0 +1,75 @@
+{
+  "post_removal_real_remote_only_RAM_file_recoveries": 29,
+  "source_payload_reads_during_recovery": 0,
+  "persistent_payload_copies_created": 0,
+  "replay_block_verified": true,
+  "status": "completed_validated",
+  "manifest_sha256": "f4fa14fa1105ccfb05d0e4f83a027f36dc60ae981d5e26cc4ba71cd3a2064330",
+  "gate_sha256": "3290092bd4d33d65a7e915d9adb93d6a65098791d68b637804fb92b43a421d6c",
+  "question_message_id": "1572281786593972426",
+  "confirmation_message_id": "1572283279120277689",
+  "deleted_regular_files": 29,
+  "deleted_directories": 0,
+  "journal_exact_unique_29": true,
+  "all_targets_absent": true,
+  "parent_directories_preserved": true,
+  "retained_original_files": 293,
+  "retained_local_dump_count": 4,
+  "retained_unique_payloads_verified": 294,
+  "retained_metadata_and_payloads_unchanged": true,
+  "retained_receipt_hashes_unchanged": true,
+  "remote_counterparts_verified_again": 30,
+  "remote_catalogue_not_materialized_restore": true,
+  "gateway_PIDs_unchanged": true,
+  "launcher_unchanged": true,
+  "failed_systemd_units": 0,
+  "config_checks": [
+    {
+      "profile": "zeus",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "atena",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "ares",
+      "exit_code": 0,
+      "config_check_pass": true
+    }
+  ],
+  "no_model_requests": true,
+  "no_SQL_or_DB_started": true,
+  "no_cache_cleanup": true,
+  "no_production_or_retention_changes": true,
+  "observed_immediate_global_delta_bytes": 4778590208,
+  "observed_immediate_global_delta_MiB": 4557.22,
+  "disk_observation": {
+    "available_GiB": 65.54,
+    "used_percent": 65.98
+  },
+  "at": "2026-11-17T11:25:17.370108-05:00",
+  "source_files_deleted": 29,
+  "report_infra": {
+    "message_id": "1572287319497637990",
+    "channel_id": "1498132022634483894",
+    "exact_GET_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  },
+  "new_critical_confirmation_pending": false,
+  "replay_forbidden": true,
+  "overall_audit_completed": false,
+  "plan": "context/storage-consolidated-closure-1572283279120277689.md",
+  "next_step": "Concluir revisao consolidada das frentes restantes; nenhuma nova exclusao aprovada; nao pedir continue por familia.",
+  "learning": {
+    "target": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+    "sha256": "1f944b5de9f9226f702d9e963707b38a761b2659e3226eff6d90c445a3a4c4ea",
+    "live_mirror_equal": true,
+    "summary": "Consolidated remaining-family review and final joint destructive decision instead of serial small-lot prompts."
+  },
+  "closed_at": "2026-11-17T11:29:19.862603-05:00"
+}

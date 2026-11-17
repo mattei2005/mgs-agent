@@ -1843,12 +1843,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572255222175244299",
-      "next_step": "Reconciliar escritor atual e concluir os mesmos batches pendentes com claim/complete/finalize e monitor creative-only. Ares único escritor criativo; Zeus somente infraestrutura/acompanhamento. Auditar todos os 34, publicar apenas mapa dos 14 não publicados anteriormente e conclusão com VID/01_READY; relatório alheio não é gate deste pedido.",
+      "next_step": "Nenhum saldo criativo. Publicar resposta final 34/34 com VID/01_READY e link do mapa do saldo nesta thread; Zeus verifica a publicação. Não repetir tratamento, arquivo, nomes ou campanhas. Manter evidências e pedidos independentes fora desta operação.",
       "objective": "Concluir os mesmos 34 vídeos SHEIN US ES da Kelly, common, preservando RAW/IDs/reservas.",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
-      "state": "retomada autorizada por rodolfo em 1572278764346540115 e handoff zeus 1572280160722485490 autenticados por get. dependência de decisão sobre relatório supersedida: monitor usa manutenção creative-only, sem alterar relatório/acl ou guards de mídia. runtime já tem 24/34 complete, 10 pendentes; batch 56bdbaef47a3a994259912a5dedf505f assumido pela rotina canônica ares, ownership em reconciliação. reusar o plano e qa, não repetir os 24.",
+      "state": "concluido tecnico e mapas entregues: request complete, 34/34 fontes e 34 linhagens únicas, 0 duplicatas, 0 pendentes, 9 claims complete e 9 finalizações. auditoria integral ares final-audit.json aprovada; aceite independente zeus confirmou 68 providers por stream/hash, 34 originais same-id, 34 request/receipt/ack, clean=true e reservas. primeiros 20 mapas preservados; saldo de 14 publicado e relido por get nas mensagens 1572287287834710141, 1572287290468737106 e 1572287293262266391; união 34 ids exatos. plano sha e horários iniciais preservados. dependência da planilha explicitamente supersedida, relatório/acl inalterados. fechamento em delivery-closure.json; confirmação resumida de conclusão será a resposta final desta origem.",
       "thread_id": "1572255222175244299",
-      "updated_at": "2026-11-17T16:01:13+00:00"
+      "updated_at": "2026-11-17T16:29:58+00:00"
     },
     {
       "agent": "ares",
@@ -6969,12 +6969,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Proximo gate:29copiaslocais f4fa14fa1105/0dirs,~4.448GiBliquidosdiretos,90revisados61preservados;29RAM+30catalogos remotos+294retidos+29testsPASS;0apagados. Confirmacao antiga nao vale. Revisoes e lotes anteriores encerrados,naoreexecutar. Familias2-6/consolidacaoindices continuam abertas;cache pausado;retencao nao alterada.",
-      "objective": "Reauditoria global aberta;lotef4fa14fa1105 aguarda nova confirmacao de29copiaslocais;anteriores encerrados.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-rollback-dumps-1572270579850153987/review-result.json;data/storage-rollback-dumps-1572270579850153987/active-lot.json",
-      "state": "in_progress_exact29_local_dump_copy_confirmation_pending",
+      "next_step": "Plano completo8blocos em context/storage-consolidated-closure-1572283279120277689.md:61dumps+232outros/financeiro;work/testes;midias/relatorios;backups/snapshots;codigo/Git;temporariosnaocache;indicesproprios;pacoteevalidacaofinal. Nao pedir continue por familia nem propor pequenos lotes. Analisejaautorizada;um pacote destrutivo exato aposprovas,ou bloqueioCriticalindependente. Nenhuma nova exclusao aprovada,caches pausados,retencao inalterada.",
+      "objective": "Reauditoria global aberta em modo consolidado por decisao1572283279120277689;29copias f4fa14fa1105 encerradas.",
+      "source": "context/storage-consolidated-closure-1572283279120277689.md;context/storage-reaudit-20261116.md;data/storage-rollback-dumps-1572270579850153987/retirement-final.json",
+      "state": "in_progress_consolidated_remaining_review_no_new_destructive_gate",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T16:00:13+00:00"
+      "updated_at": "2026-11-17T16:28:17+00:00"
     },
     {
       "agent": "zeus",
@@ -6989,12 +6989,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-ROLLBACK-DUMPS-1572270579850153987",
-      "next_step": "Preflight congelado,execucao1x,validacaoindependente+RAMpost29;naorepetirunlink. Mostrar pendencias completas juntas,sem preparar outro lote destrutivo nem pedir continue por etapa.",
-      "objective": "Executar somente29copiaslocais f4fa14fa1105 confirmadas porRodolfo1572283279120277689; depois consolidar todos passos restantes.",
-      "source": "data/storage-rollback-dumps-1572270579850153987/critical-approval.json;context/storage-reaudit-20261116.md",
-      "state": "owner_confirmed_exact29_execution_preflight",
+      "next_step": "Nenhum deste lote;29files/0dirs ausentes,294retidos/29pais intactos,30remotos+RAMpost29+3configsPASS/PIDsiguais;replaybloqueado. NAOreexecutar. Prosseguir plano consolidado1572283279120277689 sem pequenos lotes ou continues por familia.",
+      "objective": "Lote29 f4fa14fa1105 executado1x sob confirmacao1572283279120277689;validacaoindependente+RAMpost29PASS.",
+      "source": "data/storage-rollback-dumps-1572270579850153987/retirement-final.json;data/storage-rollback-dumps-1572270579850153987/independent-post-validation.json;context/storage-consolidated-closure-1572283279120277689.md",
+      "state": "completed_validated",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T16:13:30+00:00"
+      "updated_at": "2026-11-17T16:28:17+00:00"
     },
     {
       "agent": "zeus",
@@ -11268,5 +11268,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T16:13:31+00:00"
+  "updated_at": "2026-11-17T16:29:58+00:00"
 }

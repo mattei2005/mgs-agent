@@ -1,0 +1,24 @@
+# Encerramento consolidado — auditoria de armazenamento
+
+Decisão de Rodolfo: mensagem `1572283279120277689`, thread `1569928464033783862`. Dono da execução: Zeus.
+
+## Situação confirmada
+
+- Lote `f4fa14fa1105`: 29 cópias locais removidas, zero diretórios; originais remotos e 294 payloads retidos conferidos. Recuperação remota dos 29 arquivos repetida com sucesso depois da exclusão, sem SQL ou banco iniciado.
+- As frentes abaixo vêm da sequência canônica de `context/storage-reaudit-20261116.md`; não são novos lotes liberados para apagar.
+- Esta decisão substitui, nesta iniciativa, o modelo de trazer um pequeno lote e pedir `continue` para cada família. A auditoria não está concluída e nenhuma nova exclusão está aprovada.
+
+## Todos os blocos pendentes
+
+1. **Financeiro local remanescente:** esclarecer os 61 dumps preservados e os 232 outros arquivos da coorte original (181 SQL e 51 archives/distribuições/testes). Fechar as lacunas dos estados de teste já preservados sem reexecutar exclusões anteriores nem tratar esquemas, dados únicos ou dependências como lixo. Separar provas suficientes de preservação pendente; nenhum banco antigo precisa ser iniciado para inventariar.
+2. **Trabalhos e testes dos agentes:** revisar workspace/work/codex-pilots por tarefa e consumidor; preservar ferramentas, sessões e trabalho aberto; identificar somente sobras de execuções encerradas com recuperação comprovada.
+3. **Mídias, artefatos e relatórios:** separar material entregue, evidência necessária e cópias recuperáveis; provar a cópia remota pelo backend aprovado antes de propor retirada local. Não tocar produção editorial/criativa em andamento.
+4. **Backups e snapshots locais:** fixar o conjunto atual de recuperação por classe, preservar histórico único e bases/checksums acoplados; não presumir que o backup mais novo substitui qualquer estado antigo.
+5. **Código, runtimes e Git:** manter runtime ativo, rollback imediato, fontes, worktrees e alternates necessários; avaliar apenas resíduos e história local opcional, sem apagar `.git` ou alterar histórico remoto implicitamente.
+6. **Arquivos de sistema e temporários não-cache:** concluir resíduos/temporários/logs sem desinstalar programas, truncar logs ou alterar retenção por implicação. Caches continuam fora.
+7. **Índices e intermediários desta própria auditoria:** consolidar as evidências sem perda, contabilizar custo criado por Zeus e identificar cópias substituídas. Qualquer retirada requer alvo exato; não misturar esse custo com lixo preexistente.
+8. **Decisão final e encerramento:** reunir os alvos que realmente passarem em um único pacote exato, com subtotais, volume líquido, recuperação e exceções; manter o que não passou com motivo objetivo. Pedir a confirmação destrutiva conjunta somente após validar esse pacote. Depois executar uma vez, conferir preservação/recuperação, espaço real, inventário e fechar a revisão geral. Reportar à parte os geradores que podem voltar a acumular; mudar retenção ou cron continua sendo decisão separada.
+
+## Forma de condução
+
+A leitura/classificação já autorizada não exige novo `continue` por item. Não abrir novo ciclo de aprovação a cada pequeno achado. Interromper apenas por bloqueio decisório real ou Critical Subset independente; não transformar este plano em autorização para exclusões desconhecidas. A existência destes blocos pendentes não significa que todos tenham espaço descartável certificado. Não há nova quantia global liberável demonstrada neste plano.

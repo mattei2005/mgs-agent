@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-17T11:08:03-05:00",
+    "updated_at": "2026-11-17T11:29:19.862603-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -68668,13 +68668,13 @@
       "id": "storage-rollback-dumps-1572270579850153987",
       "agent": "zeus",
       "type": "readonly_historical_dump_review_and_exact29_remote_mirrored_local_file_proposal",
-      "status": "awaiting_new_exact_critical_confirmation",
+      "status": "completed_validated",
       "thread_id": "1569928464033783862",
-      "authority_message_id": "1572270579850153987",
+      "authority_message_id": "1572283279120277689",
       "reviewed_count": 90,
-      "candidate_files": 29,
+      "candidate_files": 0,
       "preserved_pending_proof": 61,
-      "source_files_deleted": 0,
+      "source_files_deleted": 29,
       "directories_to_delete": 0,
       "manifest_sha256": "f4fa14fa1105ccfb05d0e4f83a027f36dc60ae981d5e26cc4ba71cd3a2064330",
       "gate_sha256": "3290092bd4d33d65a7e915d9adb93d6a65098791d68b637804fb92b43a421d6c",
@@ -68689,13 +68689,12 @@
       "gate_tests": 29,
       "gate_preflight": "PASS",
       "learning": {
-        "subsystem": "skills",
         "target": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
-        "summary": "Secret-safe transport versus file-access diagnosis; original privileged read route only; exact filename/module-root consumer classification; real remote-only RAM recovery.",
-        "sha256": "60f7dd0881cda3bc6c5fcaa4c89e84c90336881f6ffbbd04cd0a42395774e68a",
-        "live_mirror_equal": true
+        "sha256": "1f944b5de9f9226f702d9e963707b38a761b2659e3226eff6d90c445a3a4c4ea",
+        "live_mirror_equal": true,
+        "summary": "Consolidated remaining-family review and final joint destructive decision instead of serial small-lot prompts."
       },
-      "evidence": "data/storage-rollback-dumps-1572270579850153987/review-result.json",
+      "evidence": "data/storage-rollback-dumps-1572270579850153987/retirement-final.json",
       "source_census_path": "/root/.hermes/secure-backups/storage-rollback-dumps-1572270579850153987/source-census-frozen-v2.json.gz",
       "private_recovery_ledger": "/root/.hermes/secure-backups/storage-rollback-dumps-1572270579850153987/selected-lineage.json.gz",
       "mandatory_retained_recovery_dependencies": [
@@ -68731,19 +68730,44 @@
         "/home/zeus/mgs-finance-backups/gam-email/2026-11-16-e0e4650266be-complete-e44c2159f68b/mgs_finance-before.dump"
       ],
       "report_infra": {
-        "message_id": "1572280295456112751",
+        "message_id": "1572287319497637990",
         "channel_id": "1498132022634483894",
         "exact_GET_readback_verified": true,
         "content_empty": true,
         "embed_count": 1,
-        "mentions_empty": true,
-        "manifest_identifier_verified": true,
-        "at": "2026-11-17T11:01:36.530843-05:00"
+        "mentions_empty": true
       },
-      "new_critical_confirmation_pending": true,
+      "new_critical_confirmation_pending": false,
       "existing_approvals_applicable": false,
-      "next_step": "Ask Rodolfo to confirm only manifest f4fa14fa1105; preserve all other scopes. No existing approval authorizes this lot.",
-      "updated_at": "2026-11-17T11:01:36.652633-05:00"
+      "next_step": "Concluir revisao consolidada das frentes restantes; nenhuma nova exclusao aprovada; nao pedir continue por familia.",
+      "updated_at": "2026-11-17T11:29:19.862603-05:00",
+      "historical_preparation": {
+        "status": "awaiting_new_exact_critical_confirmation",
+        "candidate_files": 29,
+        "evidence": "data/storage-rollback-dumps-1572270579850153987/review-result.json",
+        "report_infra": {
+          "message_id": "1572280295456112751",
+          "channel_id": "1498132022634483894",
+          "exact_GET_readback_verified": true,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions_empty": true,
+          "manifest_identifier_verified": true,
+          "at": "2026-11-17T11:01:36.530843-05:00"
+        }
+      },
+      "question_message_id": "1572281786593972426",
+      "confirmation_message_id": "1572283279120277689",
+      "removed_counts": {
+        "file": 29,
+        "directory": 0
+      },
+      "replay_forbidden": true,
+      "journal_exact_unique_29": true,
+      "remote_counterparts_verified_after_deletion": 30,
+      "post_removal_real_RAM_recoveries": 29,
+      "observed_available_delta_bytes": 4778590208,
+      "result_sha256": "9375debf37777256f1d6742d8fca5f910af260c51955c34322b9fbeab30cb28c"
     },
     {
       "id": "kelly-intake-isolation-1572278764346540115",
@@ -68768,6 +68792,29 @@
       "report_metadata_and_acl_unchanged": true,
       "handoff_message_id": "1572280160722485490",
       "updated_at": "2026-11-17T16:01:10.586846+00:00"
+    },
+    {
+      "id": "storage-consolidated-closure-1572283279120277689",
+      "agent": "zeus",
+      "type": "consolidated_remaining_storage_review_plan",
+      "status": "plan_ready_remaining_review_open",
+      "authority_message_id": "1572283279120277689",
+      "thread_id": "1569928464033783862",
+      "path": "context/storage-consolidated-closure-1572283279120277689.md",
+      "source_files_deleted_by_plan": 0,
+      "new_destructive_approval": false,
+      "review_without_per_family_continue": true,
+      "final_joint_exact_confirmation_required": true,
+      "blocks": 8,
+      "report_infra": {
+        "message_id": "1572287319497637990",
+        "channel_id": "1498132022634483894",
+        "exact_GET_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true
+      },
+      "updated_at": "2026-11-17T11:29:19.862603-05:00"
     }
   ],
   "profile_skill_references": [

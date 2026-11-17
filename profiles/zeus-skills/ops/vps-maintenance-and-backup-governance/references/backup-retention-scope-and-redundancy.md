@@ -400,6 +400,10 @@ For disk-life estimates:
 
 ## 8. Reporting format
 
+### Owner-requested consolidated closure
+
+When Rodolfo asks to stop the serial small-lot back-and-forth, finish and validate the already-confirmed unchanged lot first, then present every remaining in-scope review family together from the current canonical ledger. Supersede the prior one-family-at-a-time interaction mode for this initiative: continue authorized read-only classification without asking for `continue` per family and prepare one consolidated decision with exact eligible targets, per-family subtotals, preserved reasons, recovery dependencies, net reclaim and explicit exceptions. Do not conflate this planning request with approval to delete undisclosed targets or alter recurring retention. Keep caches or other owner-paused classes excluded. Ask again only for the final frozen destructive set or an actual independent Critical/decision blocker; a pending review is not a validated deletion candidate. Record the consolidated plan and its owner/checkpoint so a later resumption does not revive the serial proposal loop.
+
 Select the report by the current question, not by the breadth of the investigation:
 
 - **What can be deleted now:** name only the validated lot, file class/count, approximate reclaim, retained recovery and exact pending confirmation. If other categories are unproven, say that once without presenting their occupied totals as removable space.
