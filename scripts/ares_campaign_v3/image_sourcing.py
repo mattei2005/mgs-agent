@@ -35,6 +35,9 @@ def valid_observed(actual, expected):
     from .reviewed_copy_omissions import preserved_sourcing as reviewed_source
     reviewed = reviewed_source(actual, expected)
     if reviewed is not None:return reviewed
+    from .reviewed_copy_targeting import preserved_sourcing as reviewed_target_source
+    reviewed_target = reviewed_target_source(actual, expected)
+    if reviewed_target is not None:return reviewed_target
     spec = actual.get('media_sourcing_spec')
     if spec is None:
         return expected.get('media_sourcing_spec') is None

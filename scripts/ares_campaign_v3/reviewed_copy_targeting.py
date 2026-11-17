@@ -139,6 +139,48 @@ def validate_review(descriptor, state, checkpoint, *, get_message):
             'meta_writes': 0, 'manifest_mutations': 0}
 
 
+def preserved_sourcing(actual, expected):
+    """Compare an unchanged legacy static GenAI package in a sealed review slot.
+
+    This is identity verification, not acceptance of a media difference. The
+    ordinary/new-media recipe stays strict outside this validated context.
+    """
+    from .shein_reviewed_targeting import active_context
+    context = active_context()
+    if context is None or context['descriptor'].get('reviewed_targeting_kind') != KIND:
+        return None
+    bound = context['descriptor']['reviewed_targeting']['media']
+    slots = [s for s in bound['slots']
+             if s['creative_id'] == actual.get('id')
+             and s['effective_payload_digest'] == content_digest(expected)]
+    if len(slots) != 1:
+        return False
+    story = expected.get('object_story_spec') or {}
+    primary = (story.get('link_data') or {}).get('image_hash')
+    spec = expected.get('media_sourcing_spec')
+    if (not primary or story.get('video_data') or expected.get('object_story_id')
+            or actual.get('object_story_id') or expected.get('asset_feed_spec')
+            or actual.get('asset_feed_spec') or not isinstance(spec, dict)
+            or set(spec) - {'images', 'titles', 'bodies', 'descriptions'}):
+        return None
+    images = spec.get('images')
+    if (not isinstance(images, list) or not images
+            or any(not isinstance(row, dict)
+                   or set(row) != {'hash', 'source', 'opt_in_status'}
+                   or not isinstance(row.get('hash'), str) or not row['hash']
+                   or row.get('source') != 'gen_ai'
+                   or row.get('opt_in_status') not in {'opt_in', 'opt_out'}
+                   for row in images)):
+        return None
+    from .creative_media import stable
+    observed = copy.deepcopy(actual.get('object_story_spec') or {})
+    if story.get('instagram_user_id') and not observed.get('instagram_user_id'):
+        observed['instagram_user_id'] = actual.get('instagram_user_id')
+    return (actual.get('media_sourcing_spec') == spec
+            and stable(observed) == stable(story)
+            and str(actual.get('url_tags') or '') == str(expected.get('url_tags') or ''))
+
+
 def validate_fields(context, tree, slot):
     receipt = context['descriptor']['targeting_review_receipt']
     bound = receipt['binding']
