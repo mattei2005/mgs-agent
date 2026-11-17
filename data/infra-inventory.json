@@ -68173,13 +68173,13 @@
     },
     {
       "id": "storage-local-tests-1571996311308214363",
-      "type": "read_only_classification_and_exact_retirement_proposal",
+      "type": "exact_authorized_local_test_state_retirement",
       "agent": "zeus",
-      "status": "prepared_awaiting_exact_three_root_critical_confirmation",
-      "authority_message_id": "1571996311308214363",
+      "status": "completed_validated",
+      "authority_message_id": "1572075298164580365",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-16T17:58:43.946666-05:00",
-      "evidence": "data/storage-local-tests-1571996311308214363/active-review-final.json",
+      "updated_at": "2026-11-16T21:35:58.622480-05:00",
+      "evidence": "data/storage-local-tests-1571996311308214363/target-consumer-census-v2/retirement-final.json",
       "canonical_source": "context/storage-reaudit-20261116.md",
       "active_manifest": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/manifest.json",
       "active_manifest_sha256": "e8c3b11124414ec881a3b4e23592a86d6d1dd99e1f1cefe56bfb3f7175e5394d",
@@ -68206,7 +68206,7 @@
         "shared_Git_growth_not_estimated": true,
         "actual_savings_bytes": 0
       },
-      "source_files_deleted": 0,
+      "source_files_deleted": 3064,
       "payload_backups_created": false,
       "old_frozen_preparation_preserved": true,
       "new_retention_or_cron": false,
@@ -68219,21 +68219,53 @@
         "second_lesson": "Freeze relevant consumers/jobs, not unrelated dynamic Meta helpers; preserve old immutable gates; test both nonblocking unrelated and blocking relevant changes."
       },
       "remaining_own_residue_action": "Own failed/working corpus indexes are counted new analysis residue, not old waste. After this gate closes, lossless compaction plus exact disposal approval is an explicit remaining item; no implicit unlink.",
-      "result_sha256": "24b231596f080f99f4daea898d86e7f0cb86f7b7a29948e7d085ea19b8767aa6",
+      "result_sha256": "3690477b687905a4159760bedd230c7957cdfce1a77120a4f2c3f0efe9ede989",
       "report_infra": {
-        "message_id": "1572016394667696290",
+        "message_id": "1572077812020551715",
         "channel_id": "1498132022634483894",
         "exact_readback_verified": true,
         "content_empty": true,
         "embed_count": 1,
-        "mentions_empty": true,
-        "same_report_updated_not_duplicated": true
+        "mentions_empty": true
       },
       "collector_seal_guards": 3,
       "previous_preparation_result_sha256": "928f378e46e8238c1b6ca2790d0c3cfcb590cc9bf03f9e2799d0ad9444b054fe",
       "code_census_policy": "target-consumer-v2",
       "relevant_readers_match_original_review": true,
-      "validation_tests": 25
+      "validation_tests": 25,
+      "historical_preparation": {
+        "result_sha256": "24b231596f080f99f4daea898d86e7f0cb86f7b7a29948e7d085ea19b8767aa6",
+        "evidence": "data/storage-local-tests-1571996311308214363/active-review-final.json",
+        "report_infra": {
+          "message_id": "1572016394667696290",
+          "channel_id": "1498132022634483894",
+          "exact_readback_verified": true,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions_empty": true,
+          "same_report_updated_not_duplicated": true
+        },
+        "classification_counts": {
+          "required_or_prior_hold": 6,
+          "pending_proof": 25,
+          "candidate": 3
+        }
+      },
+      "question_message_id": "1572024090628325479",
+      "removed_counts": {
+        "file": 3064,
+        "directory": 81
+      },
+      "removed_directories": 81,
+      "observed_free_delta_bytes": 646230016,
+      "observed_free_delta_MiB": 616.29,
+      "whole_storage_review_complete": false,
+      "next_step": "25other local states pending evidence; remaining families2-6; own audit raw metadata lossless consolidation and separately gated disposal. No implicit deletion; caches remain paused.",
+      "classification_counts_current": {
+        "prior_hold_or_dependency": 6,
+        "pending_proof": 25,
+        "retired": 3
+      }
     }
   ],
   "profile_skill_references": [

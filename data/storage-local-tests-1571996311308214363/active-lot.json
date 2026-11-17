@@ -3,15 +3,19 @@
   "manifest_sha256": "e8c3b11124414ec881a3b4e23592a86d6d1dd99e1f1cefe56bfb3f7175e5394d",
   "gate_path": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/gate.py",
   "gate_sha256": "5b7b9f9203226a13a5be4a4a76366c042980bc0b638f12b414203c59736b3e00",
-  "status": "awaiting_exact_critical_owner_confirmation",
+  "status": "completed_validated",
   "scope_unchanged": true,
   "prior_immutable_preparations_preserved": [
     "588641e9824ab904d00bb1c9f356e7956b2488a9e69dceceeb83c71f9a94a620",
     "0d201fea271739ee0e534f17306a63b660c49beb866156905980038d30aaba3a"
   ],
-  "no_prior_owner_confirmation_or_execution": true,
+  "no_prior_owner_confirmation_or_execution": false,
   "code_census_policy": "target-consumer-v2",
   "whole_code_surfaces_still_scanned": true,
   "relevant_code_or_jobs_frozen": 14689,
-  "recurrence_fix": "Unrelated Meta helper edits no longer invalidate a local finance test-state gate; any new target literal/possible DB reader or relevant source change remains blocking."
+  "recurrence_fix": "Unrelated Meta helper edits no longer invalidate a local finance test-state gate; any new target literal/possible DB reader or relevant source change remains blocking.",
+  "confirmation_message_id": "1572075298164580365",
+  "question_message_id": "1572024090628325479",
+  "execution_result": "/root/mgs-agent/data/storage-local-tests-1571996311308214363/target-consumer-census-v2/retirement-final.json",
+  "execution_result_sha256": "3690477b687905a4159760bedd230c7957cdfce1a77120a4f2c3f0efe9ede989"
 }
