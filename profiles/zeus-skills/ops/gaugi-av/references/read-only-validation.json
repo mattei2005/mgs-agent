@@ -1,0 +1,154 @@
+[
+  {
+    "domain": "monteralis.com",
+    "item_id": "tsdpzpljypmchmqkte5mpmw7a4",
+    "checks": [
+      {
+        "scope": "read:sites",
+        "path": "/v1/sites",
+        "http": 200,
+        "sites": [
+          {
+            "id": "site_7978d172-b7e7-4803-a6f8-02c80cf028a6",
+            "domain": "monteralis.com",
+            "multilingual": false,
+            "locales": [
+              "en"
+            ],
+            "default_locale": "en",
+            "tagline": "Gaming & Esports"
+          }
+        ],
+        "unlisted_site_count": 0
+      },
+      {
+        "scope": "read:authors",
+        "path": "/v1/authors?limit=1",
+        "http": 200,
+        "sample_count": 1,
+        "has_more": false
+      },
+      {
+        "scope": "read:assets",
+        "path": "/v1/assets",
+        "http": 200,
+        "count_returned": 99
+      },
+      {
+        "scope": "read:blocks",
+        "path": "/v1/blocks/catalog",
+        "http": 200,
+        "block_keys": [
+          "paragraph",
+          "heading",
+          "options",
+          "accordion",
+          "related-content",
+          "landing-page",
+          "offer",
+          "custom-html",
+          "image",
+          "image-button",
+          "button",
+          "list",
+          "spotlight",
+          "table",
+          "title-anchor",
+          "video",
+          "coupon",
+          "deal-grid",
+          "price-tag"
+        ]
+      },
+      {
+        "scope": "read:llm",
+        "path": "/llm.txt",
+        "http": 200,
+        "chars": 13547
+      },
+      {
+        "scope": "read:articles",
+        "http": 200,
+        "site_id": "site_7978d172-b7e7-4803-a6f8-02c80cf028a6",
+        "sample_count": 1,
+        "has_more": true
+      }
+    ]
+  },
+  {
+    "domain": "belverica.com",
+    "item_id": "ac3wyr7to2wwdsanogftrl6bry",
+    "checks": [
+      {
+        "scope": "read:sites",
+        "path": "/v1/sites",
+        "http": 200,
+        "sites": [
+          {
+            "id": "site_316408ba-a45e-4b9b-9b78-a0994b04bbd7",
+            "domain": "belverica.com",
+            "multilingual": false,
+            "locales": [
+              "en"
+            ],
+            "default_locale": "en",
+            "tagline": "Mobile Apps & Software"
+          }
+        ],
+        "unlisted_site_count": 0
+      },
+      {
+        "scope": "read:authors",
+        "path": "/v1/authors?limit=1",
+        "http": 200,
+        "sample_count": 1,
+        "has_more": false
+      },
+      {
+        "scope": "read:assets",
+        "path": "/v1/assets",
+        "http": 200,
+        "count_returned": 94
+      },
+      {
+        "scope": "read:blocks",
+        "path": "/v1/blocks/catalog",
+        "http": 200,
+        "block_keys": [
+          "paragraph",
+          "heading",
+          "options",
+          "accordion",
+          "related-content",
+          "landing-page",
+          "offer",
+          "custom-html",
+          "image",
+          "image-button",
+          "button",
+          "list",
+          "spotlight",
+          "table",
+          "title-anchor",
+          "video",
+          "coupon",
+          "deal-grid",
+          "price-tag"
+        ]
+      },
+      {
+        "scope": "read:llm",
+        "path": "/llm.txt",
+        "http": 200,
+        "chars": 13547
+      },
+      {
+        "scope": "read:articles",
+        "http": 200,
+        "site_id": "site_316408ba-a45e-4b9b-9b78-a0994b04bbd7",
+        "sample_count": 1,
+        "has_more": true
+      }
+    ]
+  }
+]

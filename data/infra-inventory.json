@@ -75152,6 +75152,14 @@
     ],
     "zeus": [
       {
+        "name": "gaugi-av",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/gaugi-av/SKILL.md",
+        "purpose": "Gaudi Active View: API de conteúdo, documentação completa e screenshots, catálogo live, isolamento por tenant e validação somente leitura de monteralis.com e belverica.com; escrita não testada",
+        "reference_implementation": "references/api-reference.md; references/blocks-catalog.json; references/read-only-validation.json",
+        "authorization_source": "discord:1572259906902425653/1572316418110787586"
+      },
+      {
         "name": "apple-notes",
         "category": "apple",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/apple-notes/SKILL.md"
