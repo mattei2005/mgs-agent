@@ -15,7 +15,9 @@ def bootstrap():
  changed=0
  for item in ast.walk(node):
   if isinstance(item,ast.If)and isinstance(item.test,ast.Attribute)and item.test.attr=='returncode':item.body=ast.parse("raise RuntimeError('READONLY_BINARY_SSH_TRANSPORT_FAILED')").body;changed+=1
- need(isinstance(node.body[-1],ast.Return),'SSH_RETURN_SHAPE');node.body[-1].value=ast.parse('result.stdout',mode='eval').body;changed+=1;need(changed==2,'EXACT_BINARY_ADAPTER_DELTA');node.returns=None
+ last=node.body[-1]
+ if not isinstance(last,ast.Return):raise RuntimeError('SSH_RETURN_SHAPE')
+ last.value=ast.parse('result.stdout',mode='eval').body;changed+=1;need(changed==2,'EXACT_BINARY_ADAPTER_DELTA');node.returns=None
  ns:dict[str,Any]={'os':os,'subprocess':subprocess,'runcloud_secret':h['secret'],'_RUN_CLOUD_PASSWORD':None};exec(compile(ast.fix_missing_locations(ast.Module(body=[node],type_ignores=[])),str(source)+'::readonly_binary','exec'),ns)
  return ns['ssh'],hashes
 
