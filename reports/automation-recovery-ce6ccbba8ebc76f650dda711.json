@@ -105,5 +105,17 @@
     "ares_checkpoint_changes": 0
   },
   "notification_decision": "No new business fact; no origin/private POST. Supervisor owns diagnosis delivery; canonical silent REPORT-INFRA for observer state/checkpoint reconciliation only.",
+  "infra_delivery": {
+    "message_id": "1572231557467471883",
+    "channel_id": "1498132022634483894",
+    "canonical_helper": "scripts/send-report-infra-embed.sh",
+    "exact_get_verified": true,
+    "empty_content": true,
+    "mentions": 0,
+    "expected_embed_fields_verified": true,
+    "observer_checkpoint_readback_verified": true,
+    "native_contract_unchanged_after_writes": true,
+    "queue_owner_preserved": "supervisor:589217"
+  },
   "result": "observer_reads_recovered_pending_independent_scheduler_validation"
 }
