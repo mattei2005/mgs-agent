@@ -67513,6 +67513,16 @@
       "agent": "zeus",
       "type": "temporary_campaign_observer",
       "status": "active_observer_recovered_reads_pending_independent_validation",
+      "recovery_ce6ccbba8ebc76f650dda711": {
+        "observed_at": "2026-11-17T07:45:06.291047-05:00",
+        "receipt": "reports/automation-recovery-ce6ccbba8ebc76f650dda711.json",
+        "scope": "Same observer; Ares sole campaign writer; no cron or credential changes",
+        "cause": "Codex HTTP400 after observer state writes; exact internal rejection unproven",
+        "completed": "Original PID/session ended; five authority messages and latest Ares message GET verified; paginated source/private reads recovered; three canonical hashes unchanged",
+        "pending": "Independent scheduler verification and natural cycle; separate Ana Cunha owner gate unchanged",
+        "next_run_at": "2026-11-17T07:51:00-05:00",
+        "report_infra_readback": "pending"
+      },
       "recovery_b1c46c9341b7e9a46b94af47": {
         "observed_at": "2026-11-16T21:19:56.428785-05:00",
         "receipt": "reports/automation-recovery-b1c46c9341b7e9a46b94af47.json",

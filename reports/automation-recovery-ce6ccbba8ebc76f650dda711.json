@@ -1,0 +1,109 @@
+{
+  "operation_key": "ce6ccbba8ebc76f650dda711",
+  "mode": "resume_safe",
+  "job_id": "7aac7f6e2d6b",
+  "contract_hash": "c3ebf89ee65fd66db9d6df0246cd0ef21ddd49cf4d614fab76d5490b01a6e4de",
+  "observed_at": "2026-11-17T07:45:06.291047-05:00",
+  "scope": "Zeus observer only; Ares remains sole CampaignOps writer",
+  "authority": {
+    "implementation_message": "1569193434189668453",
+    "observer_message": "1571892517669175461",
+    "campaign_command": "1571894746719330377",
+    "old_request_cancellation": "1571899160242823330",
+    "campaign_resume": "1571996433999990885",
+    "exact_messages_get_verified": true,
+    "author_id": "344196393512075265",
+    "current_authorization_registry_checked": true
+  },
+  "reconciliation": {
+    "failed_execution_id": "cd39aa588e804c8da235b53949dc1822",
+    "failed_session_id": "local-11ff3e60b8775be31dc3b3f4eca85a41158fb4e3517c5239e5a3ff0725d2c20d",
+    "failed_original_pid": 581610,
+    "original_pid_absent": true,
+    "failed_session_ended": true,
+    "supervisor_owner": "supervisor:589217",
+    "worker_pid": 589504,
+    "campaign_session": "20261116_084124_9facfa2b",
+    "campaign_session_ended": true,
+    "previous_observer_writes_landed": true,
+    "previous_observer_checkpoint_older_than_state": true,
+    "queue_transition_left_to_supervisor": true
+  },
+  "failure": {
+    "layer": "LLM openai-codex continuation after successful observer state patches",
+    "observed_error": "BadRequestError HTTP 400: {\"detail\":\"Bad Request\"}",
+    "observed_at": "2026-11-17T07:38:12-05:00",
+    "provider_endpoint": "https://chatgpt.com/backend-api/codex",
+    "not_meta_campaign_failure": true,
+    "internal_rejection_cause_proven": false,
+    "permanent_prevention_proven": false,
+    "evidence": [
+      "/root/.hermes/profiles/zeus/logs/errors.log:6655",
+      "/root/.hermes/profiles/zeus/cron/output/7aac7f6e2d6b/2026-11-17_07-38-13.md",
+      "/root/.hermes/profiles/zeus/state.db:messages session local-11ff3e60b8775be31dc3b3f4eca85a41158fb4e3517c5239e5a3ff0725d2c20d"
+    ]
+  },
+  "recovered_reads": {
+    "stagger_seconds": 25,
+    "transport": "Discord GET with canonical discord-bot-post.py identity and headers",
+    "source_parent": "1539422731727147079",
+    "observer_parent": "1496267442899521627",
+    "source_cursor": "1572025575340515361",
+    "private_cursor": "1572076887033782364",
+    "source_pages": 1,
+    "source_new_messages": 0,
+    "private_pages": 1,
+    "private_new_messages": 0,
+    "pagination_complete": true,
+    "latest_executor_message_get_verified": "1572025575340515361",
+    "canonical_request_unchanged_sha256": "a92f2d0e7e4485016dfb8e1d0b62513762e6d08dda753dbf3c070c64220eee04",
+    "restriction_receipt_unchanged_sha256": "54f7d8aa51c7d7a63ed988254b6ce022f2e45017d40778a533dcbefe52503be2",
+    "engine_result_unchanged_sha256": "39bba5a151f2f55756be788179ca2e201ed931915893cda458fd5f2a8ff18414"
+  },
+  "business_state": {
+    "request_id": "eggbev03-c212-replacement-1571894746719330377",
+    "state": "WAITING_OWNER_FACEBOOK_PROFILE_RESTRICTION",
+    "restricted_entity": "Facebook user Ana Cunha",
+    "api_code_in_existing_receipt": 368,
+    "api_subcode_in_existing_receipt": 1404163,
+    "no_new_provider_probe_by_observer": true,
+    "campaign_ids_preserved": ["120251066783590507", "120251066783560507"],
+    "adset_ids_preserved": ["120251066786050507", "120251066786210507"],
+    "creative_id_preserved": "1803556820866177",
+    "final_ads_confirmed_in_existing_receipt": 0,
+    "missing_campaign_labels": ["312", "313", "314"],
+    "missing_stages": [
+      "Owner profile restriction resolution and explicit return",
+      "Ares eligibility readback and parent/child reconciliation",
+      "Derived-video equivalence QA and canonical registry reconciliation",
+      "Missing-only authorized children and campaigns",
+      "Final business delivery with GET"
+    ],
+    "business_delivery_verified": false
+  },
+  "continuity": {
+    "job_enabled": true,
+    "job_state": "scheduled",
+    "repeat_completed_at_read": 90,
+    "repeat_times": 96,
+    "next_run_at": "2026-11-17T07:51:00-05:00",
+    "queue_state_at_read": "running",
+    "queue_transition_owner": "supervisor:589217",
+    "independent_validation_pending": true,
+    "next_step": "Natural observer cycle and independent verifier validate scheduler recovery. Supervisor owns queue transition and diagnosis delivery. Keep Ares business human gate; no Meta retry by Zeus. Finite observer has six scheduled cycles remaining; supervisor must preserve continuity without this worker altering cron."
+  },
+  "side_effects": {
+    "campaign_writes": 0,
+    "meta_requests": 0,
+    "pc1_access": 0,
+    "source_thread_posts": 0,
+    "private_thread_posts": 0,
+    "cron_config_changes": 0,
+    "credential_changes": 0,
+    "permission_changes": 0,
+    "gateway_restarts": 0,
+    "ares_checkpoint_changes": 0
+  },
+  "notification_decision": "No new business fact; no origin/private POST. Supervisor owns diagnosis delivery; canonical silent REPORT-INFRA for observer state/checkpoint reconciliation only.",
+  "result": "observer_reads_recovered_pending_independent_scheduler_validation"
+}
