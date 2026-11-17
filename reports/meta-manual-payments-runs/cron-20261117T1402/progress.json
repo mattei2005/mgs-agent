@@ -1,5 +1,5 @@
 {
-  "status": "running",
+  "status": "completed_validated",
   "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T1402",
   "completed": {
     "baseline": {
@@ -22,5 +22,8 @@
       "exit_code": 0,
       "stdout": "{\"status\": \"prepared\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T140549118850\", \"credit_line_accounts\": 40, \"sheet_writes\": 0}\n"
     }
-  }
+  },
+  "closure": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T1402/closure-current.json",
+  "business_refresh_complete": true,
+  "delivery": "automatic_final_pending"
 }

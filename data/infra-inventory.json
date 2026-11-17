@@ -68827,6 +68827,32 @@
         "mentions_empty": true
       },
       "updated_at": "2026-11-17T11:29:19.862603-05:00"
+    },
+    {
+      "id": "meta-manual-payments-scheduled-20261117T1402",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "completed_validated",
+      "updated_at": "2026-11-17T14:49:05.568029-05:00",
+      "scheduled_at": "2026-11-17T14:02:00-05:00",
+      "source_thread_id": "1563926766286803004",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T1402/closure-current.json",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 40,
+        "renewed_d": 7,
+        "pending_d_events": 0,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [
