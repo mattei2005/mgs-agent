@@ -1,0 +1,34 @@
+{
+  "reviewed_files": 326,
+  "hashes_match_prior_326": true,
+  "allocated_bytes": 11454214144,
+  "roles": {
+    "schema_migration_or_historical_SQL_preserve_for_consumer_review": {
+      "files": 181,
+      "allocated_bytes": 819200
+    },
+    "historical_code_or_release_archive_preserve_pending_review": {
+      "files": 43,
+      "allocated_bytes": 4972544
+    },
+    "database_rollback_dump_preserve_pending_individual_recovery": {
+      "files": 94,
+      "allocated_bytes": 10944684032
+    },
+    "generated_API_restore_test_archive_preserve_pending_review": {
+      "files": 2,
+      "allocated_bytes": 386580480
+    },
+    "historical_distribution_archive_preserve_pending_review": {
+      "files": 2,
+      "allocated_bytes": 31145984
+    },
+    "disaster_recovery_canary_archive_preserve_pending_review": {
+      "files": 4,
+      "allocated_bytes": 86011904
+    }
+  },
+  "classification_is_not_disposal": true,
+  "private_ledger": "/root/.hermes/secure-backups/storage-finance-archives-1572257170626580601/reviewed326.json.gz",
+  "private_ledger_sha256": "413be0c456e65d312266b9537f1720b82c053d88b66ab80044f48f694ce7bb68"
+}

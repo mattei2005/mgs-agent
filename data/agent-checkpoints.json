@@ -1832,6 +1832,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1572255222175244299",
+      "next_step": "Concluir os mesmos batches de até 4 fontes com complete e monitor, manter writer único; validar RAW same-ID, arquivo/ACK e destinos; publicar mapa e links após auditoria.",
+      "objective": "Tratar e organizar 34 vídeos SHEIN US ES enviados por Kelly, destino common.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
+      "state": "34/34 raw baixados e confrontados com hashes nativos; sanitização e qa visual clean 5 frames aprovadas; frames decodificados e áudio preservados. plano real congelado. cron confirmou deferência ao foreground sem write paralelo. primeiro batch em tratamento/complete; nenhuma conclusão integral declarada.",
+      "thread_id": "1572255222175244299",
+      "updated_at": "2026-11-17T14:31:14+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -6807,6 +6817,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-FINANCE-ARCHIVES-1572257170626580601",
+      "next_step": "Revalidar326caminhos/hashes;separarschemas/codigo,rollbackhistorico,arquivosQAecopiasdedumpremoto;conferirprovasretidasemvezdeinferirduplicacaopelagrafia;prepararsololoteexatosegurosevalidado,cachespausados.",
+      "objective": "Revisao infraestrutura326arquivos SQL/archives/exports financeiros,porfuncao,origem,consumidorerecovery;semexecucaofinanceiraoudestructiva.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/finance-archive-content-review.json;discord:1569928464033783862/1572257170626580601",
+      "state": "in_progress_readonly_326_archive_role_and_lineage_review",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-17T14:29:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-FULL-REAUDIT-1571983565292441731",
       "next_step": "Ciclo novo:1financeiro local(classificar34rootsDB, fontes/evidencias/exports;326SHA mostra5grupos<1MiB,naoprovauso);2works/testesagentes;3dadosrelatoriosmidias;4backups/snapshots;5runtimes/Git;6restosistema. Caches fora. Semdelete/install/restart/cron autorizado; nao pedir outroOKgenerico para analise ja pedida; gates novos exatos para descarte. Nao repetir lotes encerrados.",
       "objective": "Nova varredura3FS1519122nos/0erros e mapa sistemas locais concluidos;326archives SHA sem drift;nenhumaexclusao.",
@@ -11177,5 +11197,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T14:17:19+00:00"
+  "updated_at": "2026-11-17T14:31:14+00:00"
 }
