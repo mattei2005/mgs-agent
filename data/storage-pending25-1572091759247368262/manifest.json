@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "status": "awaiting_exact_critical_test_state_retirement",
+  "request_message_id": "1572091759247368262",
+  "owner_id": "344196393512075265",
+  "thread_id": "1569928464033783862",
+  "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+  "targets": [
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 190783488,
+        "fingerprint_sha256": "6ff23a00b6393df629cb8692bfc258725f4bce3df80a8874da71c3963fc647a2"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 193544192,
+        "fingerprint_sha256": "ab7f00141e7292d3174f9ef8d6b877125b3e5c1d0544983ce8ea2dff343ab02b"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+        "counts": {
+          "file": 1022,
+          "directory": 27
+        },
+        "allocated_bytes": 193568768,
+        "fingerprint_sha256": "624bb2c9a8e8ab56878eabc4ba6452ffc841845ccd0735c5d96cd38dd5f9bf84"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+        "counts": {
+          "file": 1024,
+          "directory": 27
+        },
+        "allocated_bytes": 222482432,
+        "fingerprint_sha256": "cb1428344f0217faf7b742e65f9e27fc12bb18badb33f32bd6c1019bf89b970d"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+        "counts": {
+          "file": 1024,
+          "directory": 27
+        },
+        "allocated_bytes": 222482432,
+        "fingerprint_sha256": "da3e8396e782e9aab511047898fc913df95083cd59cfde86c182433ee8ae185b"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+        "counts": {
+          "file": 1024,
+          "directory": 27
+        },
+        "allocated_bytes": 227995648,
+        "fingerprint_sha256": "f41671fdaa2b8961f3f9d8721f3d7a84baf435af868985f92fbad56de0fdb156"
+      }
+    }
+  ],
+  "retained_roots": [
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+        "counts": {
+          "file": 1005,
+          "directory": 27
+        },
+        "allocated_bytes": 192765952,
+        "fingerprint_sha256": "99575a60c380966e0cfac5348d20ab44b6f69dedb078bd7ad26736d40e120dcf"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+        "counts": {
+          "file": 1019,
+          "directory": 27
+        },
+        "allocated_bytes": 220200960,
+        "fingerprint_sha256": "9b83b5e49a1a6f80e831874bd11298c0da7f7a85d3c9615244035d530040f59e"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 192397312,
+        "fingerprint_sha256": "96e9e10636e769d98d1873238cc051649e91621c24af2d0348db3980cf80e4ff"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 200654848,
+        "fingerprint_sha256": "f030aeaede1a5c458ddf8e3a013fb7de3ecc1ee9db5110d65bbc35f4cfd16a61"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/pgdata",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/pgdata",
+        "counts": {
+          "file": 1004,
+          "directory": 27
+        },
+        "allocated_bytes": 193163264,
+        "fingerprint_sha256": "f5cbccbeca2d9a098bb404c06a57b27bc700172003ea1a302387a4ca0563debf"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+        "counts": {
+          "file": 1025,
+          "directory": 27
+        },
+        "allocated_bytes": 230027264,
+        "fingerprint_sha256": "fec8bcfe56056db4cc342549344b39f305aba750f37f7e1e816ce6394e9d7bbf"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+        "counts": {
+          "file": 1019,
+          "directory": 27
+        },
+        "allocated_bytes": 220463104,
+        "fingerprint_sha256": "041e2be4a937d345417cc6e51e8cbebd18d4a6d0e1ee6a1015e4e06f70516538"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+        "counts": {
+          "file": 1035,
+          "directory": 27
+        },
+        "allocated_bytes": 187580416,
+        "fingerprint_sha256": "b44d8a7e526cc67936ad8cee72d8b9ecd30272f7013007140ccaa202b496b4a0"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+        "counts": {
+          "file": 1008,
+          "directory": 27
+        },
+        "allocated_bytes": 231112704,
+        "fingerprint_sha256": "96a866a6756854dec931703c1577e4aea70dd11e30fb7793b6c955277a910dae"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+        "counts": {
+          "file": 1005,
+          "directory": 27
+        },
+        "allocated_bytes": 188645376,
+        "fingerprint_sha256": "d39e3ae4438b0eb118389a962ff59c5bee6b71784accb0bcefafd407ab74dea5"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+        "counts": {
+          "file": 1035,
+          "directory": 27
+        },
+        "allocated_bytes": 197103616,
+        "fingerprint_sha256": "1ceed7fc7b2cc450a8bff12b5d2fa64385000391496d196890ba565ad813af1f"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+        "counts": {
+          "file": 1020,
+          "directory": 27
+        },
+        "allocated_bytes": 220184576,
+        "fingerprint_sha256": "0036b80d745d7813955003287c74a3f995314868746eab18f9d43de92ab0f5e3"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+        "counts": {
+          "file": 1027,
+          "directory": 27
+        },
+        "allocated_bytes": 263520256,
+        "fingerprint_sha256": "f4fa30417d1c2c6d2fd7584b8dd4f4713d0c16d361585b3e9eb45fdfc0cc0871"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 192909312,
+        "fingerprint_sha256": "bac75e67da7e3763be11c8a552a057952a875487f4d502920dfe11f19348db76"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+        "counts": {
+          "file": 1005,
+          "directory": 27
+        },
+        "allocated_bytes": 188477440,
+        "fingerprint_sha256": "f92a23e1bbdc772123718a61be8527b1f57925fbb3c4601101a16d5865c59919"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+        "counts": {
+          "file": 1023,
+          "directory": 27
+        },
+        "allocated_bytes": 199135232,
+        "fingerprint_sha256": "7993a5be8b6c5dfd5b2d33234a0e2c606364db4e96699d30081208e75c9cdf7c"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+        "counts": {
+          "file": 1024,
+          "directory": 27
+        },
+        "allocated_bytes": 227995648,
+        "fingerprint_sha256": "1e9679aa94cabd9ee075c1e89d476a03c38ef5983e23e9f295bdd95810a8987c"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 189874176,
+        "fingerprint_sha256": "5111f23a45c9ac1ec1b721fc106c01e484abba6724b21c4dcc74ce651dbcd3be"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 198467584,
+        "fingerprint_sha256": "10d7478c496de0d126a42d3edec10c12fe4f65ab6ec5e84a165ad91981d36836"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 198471680,
+        "fingerprint_sha256": "06c073e787f121f8f96f9738a50a4690e84d41d35cd32ee0251e940c1ed4f98d"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 198467584,
+        "fingerprint_sha256": "a744d59c47d0ccd526fd91422e8e25e384ead1810fbb412fc058f31633df6fa4"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 198467584,
+        "fingerprint_sha256": "c03e37a26313707a2a654b792686b37fc34b265842ee69c99fb7d3cd477e7bd7"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+        "counts": {
+          "file": 1018,
+          "directory": 27
+        },
+        "allocated_bytes": 189878272,
+        "fingerprint_sha256": "1154d0baf763fa50cd904a86e540330d8b10e4fb8a12a301daa9c383d7109d20"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+        "counts": {
+          "file": 1011,
+          "directory": 27
+        },
+        "allocated_bytes": 290676736,
+        "fingerprint_sha256": "83c583ca9a54fc6cd9ec416822eff224003ab0a3ff8f863b29c5edea7d7fccc8"
+      }
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+      "metadata": {
+        "path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+        "counts": {
+          "file": 1008,
+          "directory": 27
+        },
+        "allocated_bytes": 273248256,
+        "fingerprint_sha256": "30eaa36d041445691aa00cf189fa252a27389e8fa1e39f78e9286e224c65cdb4"
+      }
+    }
+  ],
+  "counts": {
+    "file": 6130,
+    "directory": 162
+  },
+  "physical_reclaim_upper_bytes": 1250856960,
+  "all_target_regular_files_single_link": true,
+  "target_node_index": "/root/.hermes/secure-backups/storage-pending25-1572091759247368262/target-nodes.json.gz",
+  "target_node_index_sha256": "58d571a4fd30a4b330dc8154eb9f2c929c101c44c9496fe23bb0af652803d00d",
+  "payload_index": "/root/.hermes/secure-backups/storage-pending25-1572091759247368262/retained-payloads.json.gz",
+  "payload_index_sha256": "c63b707720b651502e92ed0cf1d6a681cba3932d5f4e1e8d8ea3902c75684077",
+  "source_index": "/root/.hermes/secure-backups/storage-pending25-1572091759247368262/code-census.json.gz",
+  "source_index_sha256": "06b7fe011655eede8fd653810eb43473a2ce53fd63ba419a5db6a0a156f58938",
+  "retained_inputs": {
+    "/root/mgs-agent/apps/finance-system/storage.mjs": "59f675750497df131932f75814041d507a1ac36cf2bd457624f37add01f5bb00",
+    "/root/mgs-agent/apps/finance-system/schema.sql": "8c94a9a931054e590f1ee782776d0d94d806b535a0de6b2433e9640ac65c1ed1",
+    "/root/mgs-agent/apps/finance-system/package.json": "20239d91f49167c64e46027b4e5071ca3aae6e5c3773264bf668106812dd4f28",
+    "/root/mgs-agent/apps/finance-system/package-lock.json": "37e81211e9d8bdbd404dbdff20d418fd6f6f40c7493065fc74027463304e86a9",
+    "/root/mgs-agent/apps/finance-system/tests/api.test.mjs": "ad993ff8e9020648e319e55b75d1d525b6da2f66d001e30475d343a9dccab11f",
+    "/root/mgs-agent/apps/finance-system/tests/catalog.test.mjs": "a120f12b6efcd37cd39382f7de9dd1632b803488b9119b97e82ca312293523a0",
+    "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs": "ff2bf7d1e6659c588ddaa2f152baec8db501ac6f34a5f0d555b9abf8e84ce400",
+    "/root/mgs-agent/apps/finance-system/private/source.json": "6507bdaf8d993c21949430cbb97a86756281df4544f4c691db807ce7a9d4792c",
+    "/root/mgs-agent/apps/finance-system/private/ui-model.json": "c62286753742ec2c4fdc14a064a5f3386122fbeaa963a5807cf17acda207c7ec",
+    "/root/mgs-agent/apps/finance-system/private/history-import-1546884731436671056/payloads/principal-2026-07.json": "7f90c2e8db447321b942a5e210038c6e427e49de7123fe4a97c2bc72fdcecc93",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/storage.mjs": "59f675750497df131932f75814041d507a1ac36cf2bd457624f37add01f5bb00",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/schema.sql": "8c94a9a931054e590f1ee782776d0d94d806b535a0de6b2433e9640ac65c1ed1",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/package.json": "20239d91f49167c64e46027b4e5071ca3aae6e5c3773264bf668106812dd4f28",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/package-lock.json": "37e81211e9d8bdbd404dbdff20d418fd6f6f40c7493065fc74027463304e86a9",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/api.test.mjs": "ad993ff8e9020648e319e55b75d1d525b6da2f66d001e30475d343a9dccab11f",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/catalog.test.mjs": "a120f12b6efcd37cd39382f7de9dd1632b803488b9119b97e82ca312293523a0",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/tests/workspace.test.mjs": "ff2bf7d1e6659c588ddaa2f152baec8db501ac6f34a5f0d555b9abf8e84ce400",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/source.json": "6507bdaf8d993c21949430cbb97a86756281df4544f4c691db807ce7a9d4792c",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-model.json": "c62286753742ec2c4fdc14a064a5f3386122fbeaa963a5807cf17acda207c7ec",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/history-import-1546884731436671056/payloads/principal-2026-07.json": "7f90c2e8db447321b942a5e210038c6e427e49de7123fe4a97c2bc72fdcecc93",
+    "/root/mgs-agent/data/storage-local-tests-1571996311308214363/reference-matrix-collected.json": "dad033af6c4b365ba925452631b327ccb3042fd0ad4eb077f406ed1771abd3dd",
+    "/root/mgs-agent/data/storage-local-tests-1571996311308214363/supplement-log-review.json": "de2bcef9515f4bc4e7cabe76ec8d87e339a7be93738627b23e751ce7077073d8",
+    "/root/mgs-agent/data/storage-local-tests-1571996311308214363/runtime-reference-review.json": "886274225df3a6e2e94bf8812cc4393750e79e71c019e2cc2c2026a418ef383a",
+    "/root/mgs-agent/reports/finance-charge-date-1571201800063680562.md": "420d775aba3d648fcbfabcc19167d1eee64a00d80ce01d9d8fe4243987c4a157",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/workspace-2026-09.json": "cca874531b77af78068a9c3cbc103915e3c692d063f29c1db80bf2d73df6512d",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/browser.mjs": "ebb44f4c2b1edb573777388988ad3bb4e85c249f03554e44446d69c7f840cd64",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/backup.json": "2244aaebe3f1e9e36d3cc7e0ab5ece2cc23a288fec5903bba738394c40b70b5a",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/july-principal.json": "89914402a5e7e2c6745562331f99d495ff62d76ae3fc22a16d163ff916303d03",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/production-ledger.json": "1e634b9e8b57fe308a8dddc9eb709c500c6bdd1b3e2ea5ae74fb6156ff4256d1",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/workspace-2026-10.json": "f71deb297a9233d13d1b53276fb0b91eb24828cfa5771b7fa12b7de9aa0e29f1",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/workspace-2026-08.json": "54ba49ce5be6f810f51962bf957efff5ef7a28a2e40f02955874a79b42a9bb26",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-result.json": "ca51a82da77b1cb400e65eb3bf245b3d87e9b13ce80757b31ffa5745d10fdf33",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/financial-before.json": "35205bba77dd83d8eca49edbecef89b291648cedf56c0d08e4d187c93dcb1ab8",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/manifest.json": "186e6b81d47e98aa921c66c3544654980d6101bf64030136bd27088f612c5c45",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/published.json": "dc3ebddd9c59f1355615718560987e2c3be6e24144f2068630197055d4da0389",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/record.py": "055e8ac35d52a7659fd5dddd1b06282ad55ab255d0a5c15c4993d1499c1970ab",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/financial-after.json": "35205bba77dd83d8eca49edbecef89b291648cedf56c0d08e4d187c93dcb1ab8",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage.mjs": "702d7dd34af60672fd3347bcbe5fdcc0d04623b63b8c1b44a9f4db285f1549d0",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/deploy.py": "703c447be813c7c304cc2397eb63e82f294e30db876c0ac07f4e3df47b6e811d",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/browser-production.json": "68f0cf3d7973f56bd086e20565c0bda9da8b810ffe984b58783864af035c158b",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/production-health.json": "24bd94a9a91ab207c33c0c79edaca93e205b37191dfd3e86b2a18dce43d884d2",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/browser.py": "43148b5f56b9783ff7d9a54bcfad04501c10b028923bbda7813a6e1298958e53",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/browser-general.json": "e8141bee7cabf1a3494e123341267d42cfbf48491fdc409ef30061155d09d69d",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/baseline-hashes.json": "1a82f0a527dfc2bc36d631efc50587791a72a3db7730d9aa71e5c6c68d86bf34",
+    "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md": "7adbc38f052c095710f976696b664df3dbdf076e00ff267820d83d423cc40bc9"
+  },
+  "runtime": {
+    "zeus-gateway": "MainPID=2241212\nActiveState=active",
+    "atena-gateway": "MainPID=2237072\nActiveState=active",
+    "ares-gateway": "MainPID=2233587\nActiveState=active"
+  },
+  "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "tracked_target_files": 0,
+  "new_policy_or_cron": false,
+  "deletion_effect": "Irreversible retirement of six historical intermediate QA database states(initial andv2-v6), NOT byte-identical duplication or byte-restorable recovery. Finalv7, its evidence/inputs, all remaining25roots, production/backups/source remain. No database started or SQL executed.",
+  "family_counterparts": {
+    "ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7": "ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+    "test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a": "test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+    "catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11": "catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568"
+  },
+  "frozen_at": "2026-11-16T22:51:10.746313-05:00",
+  "code_census_policy": "network-intermediates-v1",
+  "owning_run": "1552101423754514465",
+  "final_stage_preserved": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7"
+}

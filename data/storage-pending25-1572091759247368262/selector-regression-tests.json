@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "tests": 18,
+  "passed": [
+    "absolute_target",
+    "relative_APP_target",
+    "owner_module_relative",
+    "owner_id_composite",
+    "retained_v7_is_not_initial",
+    "retained_v7_absolute_not_prefix",
+    "other_owner_same_leaf",
+    "unrelated_suffix",
+    "unrelated_prefix",
+    "target_descendant",
+    "unrelated_code_change_and_addition_nonblocking",
+    "relevant_app_change_blocks",
+    "new_possible_reader_blocks",
+    "new_explicit_target_consumer_blocks",
+    "irrelevant_job_and_execution_counter_nonblocking",
+    "relevant_job_change_blocks",
+    "explicit_target_job_blocks",
+    "wrong_code_policy_blocks"
+  ],
+  "all_fixtures_in_memory": true,
+  "real_source_deletions": 0,
+  "application_code_executed": false
+}

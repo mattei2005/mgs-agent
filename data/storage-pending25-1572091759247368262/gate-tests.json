@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "tests": 16,
+  "passed": [
+    "wrong_request",
+    "wrong_status",
+    "scope_reduction",
+    "scope_expansion",
+    "wrong_parent",
+    "count_tamper",
+    "retained_set_reduction",
+    "retained_duplicate",
+    "gate_hash_tamper",
+    "runtime_drift",
+    "launcher_drift",
+    "target_metadata_drift",
+    "retained_metadata_drift",
+    "protected_index_hash_drift",
+    "native_apply_denied_without_new_owner_confirmation",
+    "fully_mocked_exact_nodes_and_order_no_actual_delete"
+  ],
+  "real_source_files_deleted": 0,
+  "real_execution_markers_created": 0,
+  "synthetic_apply_only_all_destructive_OS_calls_mocked": true
+}

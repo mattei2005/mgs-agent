@@ -1,0 +1,176 @@
+{
+  "roots": [
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+      "allocated_bytes": 220200960,
+      "classification": "preserve_verification_consumer",
+      "reason": "Specific preserved stage/helper reopens this root; no retained-input reconstruction/replay has been certified. Closed release is not alone proof this test state is disposable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+      "allocated_bytes": 192397312,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Paired baseline/candidate latency states from a completed release. Results/snapshots retained, but regeneration or subsumption of these exact comparison states has not been exercised. Not declared operationally indispensable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+      "allocated_bytes": 200654848,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Paired baseline/candidate latency states from a completed release. Results/snapshots retained, but regeneration or subsumption of these exact comparison states has not been exercised. Not declared operationally indispensable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+      "allocated_bytes": 230027264,
+      "classification": "preserve_verification_consumer",
+      "reason": "Specific preserved stage/helper reopens this root; no retained-input reconstruction/replay has been certified. Closed release is not alone proof this test state is disposable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+      "allocated_bytes": 187580416,
+      "classification": "preserve_verification_consumer",
+      "reason": "Specific preserved stage/helper reopens this root; no retained-input reconstruction/replay has been certified. Closed release is not alone proof this test state is disposable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+      "allocated_bytes": 188645376,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Current family factory creates fresh UUIDs and does not reopen these two. Exact successful owning run and acceptance/recovery disposition of these old UUID states remain unproven; inventory/mtime alone insufficient."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+      "allocated_bytes": 197103616,
+      "classification": "preserve_verification_consumer",
+      "reason": "Copied source_stage.py selects this candidate pgdata; keep the source-stage replay dependency."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+      "allocated_bytes": 220184576,
+      "classification": "preserve_verification_consumer",
+      "reason": "Exact named JSON QA provider and compatible family counterpart explicitly retained for current verification in the prior approved lot; acceptance horizon not superseded."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+      "allocated_bytes": 263520256,
+      "classification": "preserve_verification_consumer",
+      "reason": "Exact named JSON QA provider and compatible family counterpart explicitly retained for current verification in the prior approved lot; acceptance horizon not superseded."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+      "allocated_bytes": 192909312,
+      "classification": "preserve_verification_consumer",
+      "reason": "Exact named JSON QA provider and compatible family counterpart explicitly retained for current verification in the prior approved lot; acceptance horizon not superseded."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+      "allocated_bytes": 188477440,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Current family factory creates fresh UUIDs and does not reopen these two. Exact successful owning run and acceptance/recovery disposition of these old UUID states remain unproven; inventory/mtime alone insufficient."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+      "allocated_bytes": 199135232,
+      "classification": "preserve_verification_consumer",
+      "reason": "Specific preserved stage/helper reopens this root; no retained-input reconstruction/replay has been certified. Closed release is not alone proof this test state is disposable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+      "allocated_bytes": 227995648,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+      "allocated_bytes": 227995648,
+      "classification": "preserve_verification_consumer",
+      "reason": "Specific preserved stage/helper reopens this root; no retained-input reconstruction/replay has been certified. Closed release is not alone proof this test state is disposable."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+      "allocated_bytes": 193568768,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+      "allocated_bytes": 222482432,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+      "allocated_bytes": 222482432,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+      "allocated_bytes": 193544192,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+      "allocated_bytes": 190783488,
+      "classification": "prepared_exact_retirement_lot",
+      "reason": "Intermediate network QA state; final stage script selects retainedv7; pass/committed evidence retained; only storage inventories refer to this exact old state; historical QA loss explicit."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+      "allocated_bytes": 189874176,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+      "allocated_bytes": 198467584,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+      "allocated_bytes": 198471680,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+      "allocated_bytes": 198467584,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+      "allocated_bytes": 198467584,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+      "allocated_bytes": 189878272,
+      "classification": "preserve_pending_provenance_or_reconstruction",
+      "reason": "Owner publication confirmed by final canonical report despite stale pending checkpoint. Exact original API fixture producer/seed of these six local states is not certified; no current reader found. No automatic disposal inferred from owner closure."
+    }
+  ],
+  "counts": {
+    "preserve_verification_consumer": 9,
+    "preserve_pending_provenance_or_reconstruction": 10,
+    "prepared_exact_retirement_lot": 6
+  },
+  "total": 25,
+  "prior_six_excluded": [
+    "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "/root/mgs-agent/apps/finance-system/private/pgdata",
+    "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite"
+  ],
+  "previous_removed_three_not_repeated": [
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11"
+  ],
+  "source_scope": "current code/config/schedulers plus inherited full uncompressed reference corpus, owner-local5129files, canonical closure reports; DB binaries/archives not read as references; no new DB/SQL/model call",
+  "all_25_metadata_unchanged": true,
+  "current_process_reference_hits": 0
+}
