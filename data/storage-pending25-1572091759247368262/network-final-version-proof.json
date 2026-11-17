@@ -1,0 +1,84 @@
+[
+  {
+    "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-result.json",
+    "top_level_keys": [
+      "pass",
+      "checks",
+      "roundtrip_financial_parity",
+      "remove_without_zero",
+      "reinclude_mobile",
+      "revision_guard",
+      "history_guard",
+      "audit_events",
+      "other_months_unchanged",
+      "errors",
+      "financial_writes",
+      "isolated_mutations"
+    ],
+    "flags": [
+      {
+        "key": "/pass",
+        "value": true
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/published.json",
+    "top_level_keys": [
+      "pass",
+      "journal",
+      "tests",
+      "financial_unchanged",
+      "financial_writes"
+    ],
+    "flags": [
+      {
+        "key": "/pass",
+        "value": true
+      },
+      {
+        "key": "/journal/state",
+        "value": "committed"
+      }
+    ]
+  },
+  {
+    "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/production-ledger.json",
+    "top_level_keys": [
+      "network_pending",
+      "period",
+      "counterparty",
+      "party",
+      "currency",
+      "provisional",
+      "opening",
+      "opening_source",
+      "periods",
+      "entries",
+      "indicators",
+      "previous",
+      "due",
+      "movement",
+      "balance",
+      "status",
+      "parties"
+    ],
+    "flags": []
+  },
+  {
+    "source": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/manifest.json",
+    "top_level_keys": [
+      "schema",
+      "release_id",
+      "authority",
+      "files",
+      "gates",
+      "stage_proof",
+      "catalog_required",
+      "remote_health",
+      "restart_app",
+      "restart_worker"
+    ],
+    "flags": []
+  }
+]

@@ -445,6 +445,99 @@
       "collected_at": "2026-11-16T03:46:09Z",
       "dataset": "httpRequestsAdaptiveGroups",
       "estimated": true
+    },
+    "daily:2026-11-16T00:00:00Z": {
+      "start": "2026-11-16T00:00:00Z",
+      "end": "2026-11-17T00:00:00Z",
+      "total": 322829,
+      "countries": {
+        "ZA": 295864,
+        "US": 11097,
+        "FR": 5067,
+        "SG": 2430,
+        "DE": 2170,
+        "BE": 2096,
+        "NL": 1148,
+        "JP": 1025,
+        "IN": 477,
+        "GB": 175,
+        "FI": 119,
+        "EG": 115,
+        "ID": 106,
+        "BR": 86,
+        "ES": 85,
+        "CA": 82,
+        "TW": 74,
+        "VN": 71,
+        "SZ": 64,
+        "TR": 55,
+        "RU": 31,
+        "IT": 24,
+        "AU": 23,
+        "UA": 22,
+        "HK": 21,
+        "IE": 20,
+        "SO": 18,
+        "MX": 17,
+        "EE": 13,
+        "SE": 13,
+        "NZ": 12,
+        "BD": 12,
+        "CH": 11,
+        "CN": 11,
+        "TH": 11,
+        "DK": 11,
+        "NG": 9,
+        "RO": 9,
+        "PL": 9,
+        "PY": 8,
+        "AR": 7,
+        "RS": 7,
+        "PT": 6,
+        "PH": 6,
+        "CO": 6,
+        "KR": 5,
+        "MY": 5,
+        "AE": 5,
+        "AZ": 4,
+        "IQ": 4,
+        "MA": 4,
+        "GE": 4,
+        "LT": 4,
+        "BG": 3,
+        "VE": 3,
+        "DZ": 3,
+        "BO": 3,
+        "SA": 3,
+        "MQ": 3,
+        "CZ": 3,
+        "KH": 3,
+        "BY": 2,
+        "PA": 2,
+        "EC": 2,
+        "SI": 2,
+        "IR": 2,
+        "TN": 2,
+        "AO": 1,
+        "KZ": 1,
+        "MD": 1,
+        "T1": 1,
+        "UY": 1,
+        "OM": 1,
+        "KW": 1,
+        "AL": 1,
+        "MK": 1,
+        "LU": 1,
+        "NO": 1,
+        "CL": 1,
+        "DO": 1,
+        "AT": 1,
+        "AG": 1
+      },
+      "max_sample_interval": 3.25,
+      "collected_at": "2026-11-17T03:46:09Z",
+      "dataset": "httpRequestsAdaptiveGroups",
+      "estimated": true
     }
   },
   "outbox": {
@@ -747,8 +840,58 @@
       "message_id": "1571733089288331297",
       "verified": true,
       "verified_at": "2026-11-16T03:46:10Z"
+    },
+    "daily:2026-11-16T00:00:00Z": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Vagaaqui — tráfego diário por país",
+            "color": 3447003,
+            "fields": [
+              {
+                "name": "Período / cobertura",
+                "value": "2026-11-16T00:00:00Z a 2026-11-17T00:00:00Z (UTC; início/fim do mês podem ser parciais).\nAcumulado dos 6 intervalos coletados: 1.536.199 requisições estimadas.",
+                "inline": false
+              },
+              {
+                "name": "Requisições estimadas",
+                "value": "322.829",
+                "inline": true
+              },
+              {
+                "name": "Países / categorias",
+                "value": "82",
+                "inline": true
+              },
+              {
+                "name": "Distribuição por país",
+                "value": "```\nPaís                   Requisições      %\nÁfrica do Sul (ZA)         295.864  91.65\nEstados Unidos (US)         11.097   3.44\nFrança (FR)                  5.067   1.57\nSingapura (SG)               2.430   0.75\nAlemanha (DE)                2.170   0.67\nBélgica (BE)                 2.096   0.65\nPaíses Baixos (NL)           1.148   0.36\nJapão (JP)                   1.025   0.32\nÍndia (IN)                     477   0.15\nReino Unido (GB)               175   0.05\nOutros (72)                  1.280   0.40\n```",
+                "inline": false
+              },
+              {
+                "name": "Leitura correta",
+                "value": "País estimado pelo IP, não localização física garantida. Requisições incluem recursos, bots e acessos que podem ser bloqueados; não são pessoas ou visitas. Analytics com amostragem adaptativa. Maior intervalo de amostragem: 3.250.",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-VAGAAQUI:daily:2026-11-16T00:00:00Z"
+            }
+          }
+        ],
+        "nonce": "454368456339706528",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-17T03:46:09Z",
+      "message_id": "1572095476579438665",
+      "verified": true,
+      "verified_at": "2026-11-17T03:46:10Z"
     }
   },
   "failure_streak": 0,
-  "last_check": "2026-11-17T02:46:08Z"
+  "last_check": "2026-11-17T03:46:08Z"
 }
