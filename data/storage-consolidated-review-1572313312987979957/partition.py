@@ -1,5 +1,6 @@
 """Partition the complete fresh metadata observation into non-additive operational review units."""
 import pathlib,json,gzip,collections,re,os
+from typing import Any
 R=pathlib.Path('/root/mgs-agent');O=pathlib.Path(__file__).parent;P=pathlib.Path('/root/.hermes/secure-backups/storage-consolidated-review-1572313312987979957');assert not(O/'review-units.json').exists()
 cp=json.loads((R/'data/agent-checkpoints.json').read_text())['checkpoints'];roots=[]
 def add(root,family,depth=1):roots.append((str(root),family,depth))
@@ -10,7 +11,7 @@ for profile in pathlib.Path('/root/.hermes/profiles').iterdir():
   for name in ['artifacts','reports']:add(profile/name,'media_evidence',1)
   add(profile/'state-snapshots','snapshots',1)
 add(R/'work','agent_work',1);add(R/'backups','backups',1);add(pathlib.Path('/root/.hermes/secure-backups'),'backups',2);add(R/'reports','reports',1);add(R/'data','operational_data',1);add(R/'tmp','temporary',1);add(pathlib.Path('/tmp'),'temporary',1);add(pathlib.Path('/var/tmp'),'temporary',1)
-roots.sort(key=lambda x:-len(x[0]));inodes={};units={};total=0;counts=collections.Counter()
+roots.sort(key=lambda x:-len(x[0]));inodes:dict[tuple[int,int],list[Any]]={};units:dict[str,dict[str,Any]]={};total=0;counts=collections.Counter()
 def classify(row):
  p=row['p']
  if row['c']=='cache_paused_owner_choice':return(row['unit'],'cache_paused')

@@ -1,0 +1,3380 @@
+[
+  {
+    "unit": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209",
+    "family": "backups",
+    "file": 411,
+    "directory": 190,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 7904777163,
+    "unique_allocated_bytes": 7906385920,
+    "newest_mtime_ns": 1794592919143829299,
+    "oldest_mtime_ns": 1782835908856635638,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-HERMES-ACTIVATE-1567354570823172209",
+        "state": "activated_validated",
+        "next_step": "Nenhum no corte autorizado;commits posteriores são outro lote. Preservar backups e rollback;sem limpeza autorizada.",
+        "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/retry-1/execution-state.json;authority:1567390752403755019;report:1567406158103183461"
+      },
+      {
+        "id": "ZEUS-HERMES-PHASE4-1567354570823172209",
+        "state": "completed_phase4_waiting_activation_critical_skills_confirmation",
+        "next_step": "Rodolfo confirmar fase5: alvo29a61cb7/portafbd6248 e manifesto c7b679f6ce17e65afdbd036d0a1812b6f3412507755ca8e17a44d5be046969f4:196escritas103replace93create emZeus65/Atena65/Ares66. Construir instalação permanente e compatibilidadePM, retestar antes de selecionarlauncher;finalizer Ares→Atena→Zeus. Sem exclusões/credencial/sistema;backup18DB válido e report1567388604458729489 verificado.",
+        "source": "/root/mgs-agent/reports/hermes-updates/20261103-phase4-1567354570823172209/activation-plan.json;report-infra:1567388604458729489;authority:1567384076569026631"
+      },
+      {
+        "id": "ZEUS-HERMES-PREP-1567354570823172209",
+        "state": "completed_preparation_validated_waiting_phase4_authorization",
+        "next_step": "Rodolfo autorizar fase4: backup e preparação do plano exato de ativação; alvo29a61cb7/portafbd6248 permanece inativo.5commits posteriores fora do corte; nenhuma ativação,restart ou sincronização de skills de outros agentes autorizada",
+        "source": "/root/mgs-agent/reports/hermes-updates/20261103-preparation-1567354570823172209/final-report.json;report-infra:1567376931337277533;authority:1567355643902558321"
+      }
+    ],
+    "GiB": 7.3634
+  },
+  {
+    "unit": "/root/mgs-agent/data/ares",
+    "family": "operational_data",
+    "file": 159829,
+    "directory": 11228,
+    "link": 266,
+    "other": 0,
+    "logical_bytes": 5534023898,
+    "unique_allocated_bytes": 6065250304,
+    "newest_mtime_ns": 1794939309041369868,
+    "oldest_mtime_ns": 1777062023807221791,
+    "checkpoint_matches": [],
+    "GiB": 5.6487
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/artifacts/meta-library",
+    "family": "media_evidence",
+    "file": 12576,
+    "directory": 488,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 5710939591,
+    "unique_allocated_bytes": 5738876928,
+    "newest_mtime_ns": 1794582727063566711,
+    "oldest_mtime_ns": 1784562170630799284,
+    "checkpoint_matches": [],
+    "GiB": 5.3447
+  },
+  {
+    "unit": "/root/mgs-agent/reports/meta-manual-payments-runs",
+    "family": "reports",
+    "file": 7810,
+    "directory": 661,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 3986053703,
+    "unique_allocated_bytes": 4008407040,
+    "newest_mtime_ns": 1794920932377780100,
+    "oldest_mtime_ns": 1792949157907788948,
+    "checkpoint_matches": [],
+    "GiB": 3.7331
+  },
+  {
+    "unit": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+    "family": "runtime_code",
+    "file": 36127,
+    "directory": 3231,
+    "link": 1061,
+    "other": 0,
+    "logical_bytes": 2802690473,
+    "unique_allocated_bytes": 2902462464,
+    "newest_mtime_ns": 1794934943288591064,
+    "oldest_mtime_ns": 1704067200000000000,
+    "checkpoint_matches": [],
+    "GiB": 2.7031
+  },
+  {
+    "unit": "/root/mgs-agent/backups/safety",
+    "family": "backups",
+    "file": 2,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 2092877577,
+    "unique_allocated_bytes": 2092888064,
+    "newest_mtime_ns": 1794645864610868898,
+    "oldest_mtime_ns": 1794645814709763998,
+    "checkpoint_matches": [],
+    "GiB": 1.9492
+  },
+  {
+    "unit": "/root/.hermes/hermes-agent",
+    "family": "runtime_code",
+    "file": 18760,
+    "directory": 1897,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1858947513,
+    "unique_allocated_bytes": 1913053184,
+    "newest_mtime_ns": 1794839452811078187,
+    "oldest_mtime_ns": 1776828072397773236,
+    "checkpoint_matches": [],
+    "GiB": 1.7817
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928",
+    "family": "agent_work",
+    "file": 21250,
+    "directory": 1653,
+    "link": 8,
+    "other": 0,
+    "logical_bytes": 1774134998,
+    "unique_allocated_bytes": 1829175296,
+    "newest_mtime_ns": 1794333843539577388,
+    "oldest_mtime_ns": 1793041372060552586,
+    "checkpoint_matches": [],
+    "GiB": 1.7036
+  },
+  {
+    "unit": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+    "family": "runtime_code",
+    "file": 43637,
+    "directory": 3085,
+    "link": 4,
+    "other": 0,
+    "logical_bytes": 1654719071,
+    "unique_allocated_bytes": 1766268928,
+    "newest_mtime_ns": 1794578698570475694,
+    "oldest_mtime_ns": 1788362134566920660,
+    "checkpoint_matches": [],
+    "GiB": 1.645
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829",
+    "family": "finance",
+    "file": 347,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1764917986,
+    "unique_allocated_bytes": 1765748736,
+    "newest_mtime_ns": 1792678259547670037,
+    "oldest_mtime_ns": 1792614933379285724,
+    "checkpoint_matches": [],
+    "GiB": 1.6445
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562",
+    "family": "finance",
+    "file": 4652,
+    "directory": 131,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 1576397204,
+    "unique_allocated_bytes": 1578377216,
+    "newest_mtime_ns": 1794882562644540997,
+    "oldest_mtime_ns": 1794674675000000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-CHARGE-DATE-1571201800063680562",
+        "state": "completed",
+        "next_step": "Pai verificar independentemente executor-summary.json, assets produtivos, hashes e relatório; comunicar Rodolfo na origem. Sem pendência técnica ou autoação agendada.",
+        "source": "reports/finance-charge-date-1571201800063680562.md"
+      }
+    ],
+    "GiB": 1.47
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/september-visual-1555301641287114806",
+    "family": "finance",
+    "file": 173,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1471001588,
+    "unique_allocated_bytes": 1471516672,
+    "newest_mtime_ns": 1790888745737535419,
+    "oldest_mtime_ns": 1790883479987005842,
+    "checkpoint_matches": [],
+    "GiB": 1.3705
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530",
+    "family": "finance",
+    "file": 6342,
+    "directory": 171,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 1435377506,
+    "unique_allocated_bytes": 1436925952,
+    "newest_mtime_ns": 1790949832276945379,
+    "oldest_mtime_ns": 1789945098999000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-PUBLISH-1551358728870035530",
+        "state": "homologacao concluida: 263 testes, api/ui, fontes e backup privado validados; publicacao pendente",
+        "next_step": "Instalar 11 arquivos, aplicar agosto com CAS e validar producao, fontes e gestores",
+        "source": "reports/finance-publish-1551358728870035530.md"
+      }
+    ],
+    "GiB": 1.3382
+  },
+  {
+    "unit": "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "family": "runtime_code",
+    "file": 27546,
+    "directory": 2551,
+    "link": 4,
+    "other": 0,
+    "logical_bytes": 1537108341,
+    "unique_allocated_bytes": 1238065152,
+    "newest_mtime_ns": 1794689460922534713,
+    "oldest_mtime_ns": 1788362134566920660,
+    "checkpoint_matches": [],
+    "GiB": 1.153
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/gam-email-runs",
+    "family": "finance",
+    "file": 2275,
+    "directory": 3522,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1151802977,
+    "unique_allocated_bytes": 1171922944,
+    "newest_mtime_ns": 1794927844378516453,
+    "oldest_mtime_ns": 1789138438186795423,
+    "checkpoint_matches": [],
+    "GiB": 1.0914
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/state-snapshots/20261012-162355-pre-hermes-7cc3fb8c-1559238059541659689",
+    "family": "snapshots",
+    "file": 21,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1099374068,
+    "unique_allocated_bytes": 1099407360,
+    "newest_mtime_ns": 1791823183011221677,
+    "oldest_mtime_ns": 1784301992482059659,
+    "checkpoint_matches": [],
+    "GiB": 1.0239
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937",
+    "family": "media_evidence",
+    "file": 449,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 1089974696,
+    "unique_allocated_bytes": 1090965504,
+    "newest_mtime_ns": 1792632232457979102,
+    "oldest_mtime_ns": 1792629742254702068,
+    "checkpoint_matches": [
+      {
+        "id": "sites-post-php-render-1562626826709241937",
+        "state": "completed",
+        "next_step": "Nenhum reparo pendente: Rodolfo1562643226492543009 pediu deixar como esta. Quatro achados preservados por escolha do dono; nao reabrir proposta sem nova instrucao ou mudanca material. PHP e reboots permanecem concluidos.",
+        "source": "reports/php-security-20261021/site-render-audit-1562626826709241937.json"
+      }
+    ],
+    "GiB": 1.016
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701",
+    "family": "media_evidence",
+    "file": 22,
+    "directory": 11,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 984847411,
+    "unique_allocated_bytes": 984936448,
+    "newest_mtime_ns": 1794907247940390954,
+    "oldest_mtime_ns": 1787613305292368742,
+    "checkpoint_matches": [],
+    "GiB": 0.9173
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/maintenance-history/20261114-1571190519713759264",
+    "family": "backups",
+    "file": 5,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 913526087,
+    "unique_allocated_bytes": 913547264,
+    "newest_mtime_ns": 1794672350747532490,
+    "oldest_mtime_ns": 1794671685391875747,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-VPS-PRESERVE-1571190519713759264",
+        "state": "originals_retired_follow_cleanup_receipt",
+        "next_step": "SeguirZEUS-STORAGE-VPS-RETIRE-1571196199548092428;confirmacaonovaresolvida;naohaoutrolotedestrutivoaberto.",
+        "source": "context/storage-reorganization-20261112.md;data/storage-vps-preservation-1571190519713759264/cleanup-result.json"
+      }
+    ],
+    "GiB": 0.8508
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/creditoparaveiculo-v3-daily",
+    "family": "agent_work",
+    "file": 165,
+    "directory": 29,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 832886911,
+    "unique_allocated_bytes": 833355776,
+    "newest_mtime_ns": 1787888851441455154,
+    "oldest_mtime_ns": 1787343348355767448,
+    "checkpoint_matches": [],
+    "GiB": 0.7761
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451",
+    "family": "finance",
+    "file": 37311,
+    "directory": 1568,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 708555407,
+    "unique_allocated_bytes": 825659392,
+    "newest_mtime_ns": 1789361847717550631,
+    "oldest_mtime_ns": 1789336258260600767,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-FULL-AUDIT-1548812376290234451",
+        "state": "completed_validated_mfa_submit_recovered_human_enrollment_pending",
+        "next_step": "Acompanhar PEND-099: seis usuários devem concluir QR individual. Bug de submit 1548936711084572714 corrigido; Rodolfo já pode entrar com código do 1Password e opcionalmente trust 30d.",
+        "source": "reports/finance-full-audit-remediation-1548835136693600328.md"
+      }
+    ],
+    "GiB": 0.769
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506",
+    "family": "finance",
+    "file": 1060,
+    "directory": 28,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 804739825,
+    "unique_allocated_bytes": 805072896,
+    "newest_mtime_ns": 1788809754240031721,
+    "oldest_mtime_ns": 1788804749000000,
+    "checkpoint_matches": [],
+    "GiB": 0.7498
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-20260922",
+    "family": "agent_work",
+    "file": 331,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 782783347,
+    "unique_allocated_bytes": 783585280,
+    "newest_mtime_ns": 1790079407648669216,
+    "oldest_mtime_ns": 1790077545185731837,
+    "checkpoint_matches": [],
+    "GiB": 0.7298
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/carcreditad-audit",
+    "family": "agent_work",
+    "file": 57,
+    "directory": 10,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 770354176,
+    "unique_allocated_bytes": 770535424,
+    "newest_mtime_ns": 1790562081293840851,
+    "oldest_mtime_ns": 1790041056581149514,
+    "checkpoint_matches": [],
+    "GiB": 0.7176
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565",
+    "family": "agent_work",
+    "file": 13002,
+    "directory": 1577,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 717135129,
+    "unique_allocated_bytes": 752914432,
+    "newest_mtime_ns": 1794333818442545885,
+    "oldest_mtime_ns": 1788615367051395896,
+    "checkpoint_matches": [
+      {
+        "id": "atena-seo100-feedback-1567897844302741565",
+        "state": "100yoastverificados;91ok+6schema+3fincsitemap.3fincsavesnativos eparentreadbacks,categoriaspresentes,wp2faactive;sheet22célulasreadbackglobal. metadata2/2componente1.0.2retirado,segurancarestaurada. candidato1.0.3zip2e5b783b9d873175b68076997191d36bc9ec4346479a945dd325377b825c37e5,parent1579testes18lintspass;somenteelocal.nenhumwriterremoto/backgroundativo.",
+        "next_step": "Solicitar decisaoespecifica substituicao/ciclo1.0.3 conformecritical-substitution-v1.0.3.md; naoimplantarbytesnovossobhashanterior. Finc5sitemapsinvalidos:rotaWordPressnaocertificarecuperacaoseletiva;aguardaravisomigracaoseindispensavel. Naorepetirsaves/scores/publicacoes.",
+        "source": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/continue-1569768545649434697/final-result.json"
+      }
+    ],
+    "GiB": 0.7012
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526",
+    "family": "finance",
+    "file": 115,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 732883063,
+    "unique_allocated_bytes": 733163520,
+    "newest_mtime_ns": 1790949835692949545,
+    "oldest_mtime_ns": 1790825233109519728,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SHEET-SYNC-MAR-AUG-1555094707556585526",
+        "state": "completed_with_disclosed_native_precision_residue:30docs/303091cellsmarchjuly=fonte;agosto lucro/remuneração pagoscentidem,2resultadosgestoresvariam0.01usdporprecisãoexplicitada;42remuneraçõesrevisadas,156viewspúblicaspass;julho3217.61/agosto3775.09;25ledger/janfeb/augnativepreservados. falhajulhocadjáexistente recuperada+fixpublicado,406testes,canárioreadychangedfalse,workerok0pending.",
+        "next_step": "Operação normal;nenhuma falha/recibo pendente.Não forçar paridade bit-a-bit de agosto com ajustes artificiais;preservar ressalva de precisão intermediária no relatório.",
+        "source": "reports/finance-sheet-sync-mar-aug-1555098371448905801.md"
+      }
+    ],
+    "GiB": 0.6828
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv-40-performance-fresh-20260905-r1",
+    "family": "agent_work",
+    "file": 80,
+    "directory": 29,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 667885139,
+    "unique_allocated_bytes": 668176384,
+    "newest_mtime_ns": 1788645367934536389,
+    "oldest_mtime_ns": 1788643783221200606,
+    "checkpoint_matches": [],
+    "GiB": 0.6223
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-smart-routing-256-20261002T010214-0400",
+    "family": "backups",
+    "file": 2018,
+    "directory": 258,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 578914161,
+    "unique_allocated_bytes": 584568832,
+    "newest_mtime_ns": 1790934074166875950,
+    "oldest_mtime_ns": 1790917334468353552,
+    "checkpoint_matches": [],
+    "GiB": 0.5444
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/manager-annual-1558613089752977409",
+    "family": "finance",
+    "file": 602,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 484370275,
+    "unique_allocated_bytes": 485892096,
+    "newest_mtime_ns": 1792107458767556430,
+    "oldest_mtime_ns": 1791672803295619189,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409",
+        "state": "published_verified;274node+220python;36stage+12production;quote_refresh_reconciled;report1558623806703140895_readback",
+        "next_step": "Operação normal; nenhuma decisão ou ação técnica pendente; preservar indisponibilidade histórica janeiro/fevereiro sem inventar consolidado",
+        "source": "reports/finance-manager-annual-1558613089752977409.md"
+      }
+    ],
+    "GiB": 0.4525
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032",
+    "family": "backups",
+    "file": 2071,
+    "directory": 248,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 447588603,
+    "unique_allocated_bytes": 453799936,
+    "newest_mtime_ns": 1790975813128121426,
+    "oldest_mtime_ns": 1790961075381555504,
+    "checkpoint_matches": [],
+    "GiB": 0.4226
+  },
+  {
+    "unit": "/root/mgs-agent/reports::direct",
+    "family": "reports",
+    "file": 1085,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 441649723,
+    "unique_allocated_bytes": 443973632,
+    "newest_mtime_ns": 1794928122947165243,
+    "oldest_mtime_ns": 1782600550178076388,
+    "checkpoint_matches": [],
+    "GiB": 0.4135
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/history-import-1546884731436671056",
+    "family": "finance",
+    "file": 144,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 436733828,
+    "unique_allocated_bytes": 437067776,
+    "newest_mtime_ns": 1788878242124660924,
+    "oldest_mtime_ns": 1788876529657052410,
+    "checkpoint_matches": [],
+    "GiB": 0.4071
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931",
+    "family": "finance",
+    "file": 566,
+    "directory": 33,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 432829584,
+    "unique_allocated_bytes": 434233344,
+    "newest_mtime_ns": 1792107459750557318,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [],
+    "GiB": 0.4044
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/portfolio-cleanup-full-20260922",
+    "family": "agent_work",
+    "file": 705,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 421750352,
+    "unique_allocated_bytes": 423784448,
+    "newest_mtime_ns": 1790089239679737144,
+    "oldest_mtime_ns": 1790087016111846162,
+    "checkpoint_matches": [],
+    "GiB": 0.3947
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510",
+    "family": "finance",
+    "file": 2065,
+    "directory": 55,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 420590869,
+    "unique_allocated_bytes": 421003264,
+    "newest_mtime_ns": 1794932095065139560,
+    "oldest_mtime_ns": 1790118371000000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-EXPENSE-SAVE-1552090743085076510",
+        "state": "concluído: sheet zq175 ajuste gerencial autorizado/readback saldo74376.81 igual à dash. fast path publicado;357 testes,34 viewports de despesas+34 gerais; metadata17.67s→1.974/2.215s em stage, alteracao valor/moeda recalcula; fingerprints preservados; skill0.1.72 validada.",
+        "next_step": "Entregar os dois resultados; não reaplicar ajuste nem importar como receita GAM",
+        "source": "reports/finance-expense-save-1552090743085076510.md"
+      }
+    ],
+    "GiB": 0.3921
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811",
+    "family": "finance",
+    "file": 538,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 411205532,
+    "unique_allocated_bytes": 412504064,
+    "newest_mtime_ns": 1792107461514558913,
+    "oldest_mtime_ns": 1791169171999774902,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-REMEDIATION-1556500454291148811",
+        "state": "completed_verified;reparo/cache/monitor/restore validados;confirmacao1556518319719190553 executada:1diretorio teste ausente,192913408bytes,1018arquivos;dump/novamostra/fontes/codigo preservados;85/85checks antes/depois;zeroescrita financeira nesta limpeza",
+        "next_step": "Operacao normal; nenhuma pendencia deste lote. Outros arquivos/bancos permanecem preservados e exigem novo escopo para descarte",
+        "source": "reports/finance-remediation-1556500454291148811.md"
+      }
+    ],
+    "GiB": 0.3842
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/runtime-retirement/1571249324464148642",
+    "family": "backups",
+    "file": 50,
+    "directory": 11,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 410601893,
+    "unique_allocated_bytes": 410783744,
+    "newest_mtime_ns": 1794690368451623319,
+    "oldest_mtime_ns": 1794685632716212273,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-RUNTIME-LOT-1571249324464148642",
+        "state": "completed_validated",
+        "next_step": "Lote encerrado;nao repetir exclusao nem pedir confirmacao. Fonte cleanup-result.json SHA f58667e6cb975213f4a00aa9b593dff6ff88cc859e4529309fbddff8bb34011a. Concluir/verificar entrega Git separada sem alterar recibo selado. Quatro raizes remanescentes protegidas;nenhuma exclusao adicional autorizada.",
+        "source": "context/storage-reorganization-20261112.md;data/storage-runtime-retirement-prep-1571249324464148642/cleanup-result.json"
+      }
+    ],
+    "GiB": 0.3826
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/creditoparaveiculo-daily-create",
+    "family": "agent_work",
+    "file": 60,
+    "directory": 22,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 400157243,
+    "unique_allocated_bytes": 400359424,
+    "newest_mtime_ns": 1787279545736959018,
+    "oldest_mtime_ns": 1787260047452203800,
+    "checkpoint_matches": [],
+    "GiB": 0.3729
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192",
+    "family": "finance",
+    "file": 1049,
+    "directory": 28,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 395094198,
+    "unique_allocated_bytes": 395358208,
+    "newest_mtime_ns": 1790949828196940404,
+    "oldest_mtime_ns": 1790173138999000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-M2-SHARE-1552317922892849192",
+        "state": "controle publicado e conciliacao separadamente autorizada1552327479627087913 concluida;dash e sheet4284.08",
+        "next_step": "Nenhuma pendencia deste pedido",
+        "source": "reports/finance-m2-settlement-1552327479627087913.md"
+      }
+    ],
+    "GiB": 0.3682
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/hermes-history/20261113-1570876981178929333",
+    "family": "backups",
+    "file": 5,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 393593934,
+    "unique_allocated_bytes": 393613312,
+    "newest_mtime_ns": 1794597557567351431,
+    "oldest_mtime_ns": 1794597414974955642,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-COMPACT-1570876981178929333",
+        "state": "expanded_snapshot_lot_completed_validated",
+        "next_step": "Loteconcluidosempendenciadeconfirmacao/retry. Gitcf590c4ed07bea28c77b5a81cb6aa4189fc2a1fdcontem15artefatos/2registros/resultado344847a7fdf6754952e990482b3fb158c0a09517477afb31e5a75d9d6b23a26c;recibocleanup-git-sync.json. Proximoponto:revisaoread-onlyVPSmaintenance;preservarcompacto375MiB+7bases/latest/safety/offsite;nenhumaoutraexclusaoautorizada.",
+        "source": "data/storage-compact-history-1570876981178929333/cleanup-result.json;data/storage-compact-history-1570876981178929333/cleanup-git-sync.json"
+      }
+    ],
+    "GiB": 0.3666
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/artifacts/google-library",
+    "family": "media_evidence",
+    "file": 4199,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 376343895,
+    "unique_allocated_bytes": 388755456,
+    "newest_mtime_ns": 1793304630195683329,
+    "oldest_mtime_ns": 1793303012488171414,
+    "checkpoint_matches": [],
+    "GiB": 0.3621
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/state-snapshots/20261012-162359-pre-hermes-7cc3fb8c-1559238059541659689",
+    "family": "snapshots",
+    "file": 17,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 374537972,
+    "unique_allocated_bytes": 374571008,
+    "newest_mtime_ns": 1792513997739835822,
+    "oldest_mtime_ns": 1791353765055686342,
+    "checkpoint_matches": [],
+    "GiB": 0.3488
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110",
+    "family": "finance",
+    "file": 1547,
+    "directory": 49,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 372689557,
+    "unique_allocated_bytes": 374157312,
+    "newest_mtime_ns": 1794503593613957031,
+    "oldest_mtime_ns": 1794189404000000,
+    "checkpoint_matches": [],
+    "GiB": 0.3485
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo-review-1562828122762649781",
+    "family": "agent_work",
+    "file": 3209,
+    "directory": 271,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 354964051,
+    "unique_allocated_bytes": 363757568,
+    "newest_mtime_ns": 1792687686885637011,
+    "oldest_mtime_ns": 1792677810814782311,
+    "checkpoint_matches": [],
+    "GiB": 0.3388
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/history-feasibility-1546757745078968381",
+    "family": "finance",
+    "file": 98,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 341156338,
+    "unique_allocated_bytes": 341385216,
+    "newest_mtime_ns": 1788847211534610545,
+    "oldest_mtime_ns": 1788846335778320939,
+    "checkpoint_matches": [],
+    "GiB": 0.3179
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774",
+    "family": "finance",
+    "file": 543,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 329263786,
+    "unique_allocated_bytes": 330600448,
+    "newest_mtime_ns": 1792107462177559513,
+    "oldest_mtime_ns": 1791387292017183559,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SMS-CARD-1557413116793331774",
+        "state": "completed",
+        "next_step": "Concluído e verificado; mensagem1557424359193321524 e REPORT-INFRA1557424065881579521 com readback exato. Sem pendência; valores continuam dinâmicos conforme Dash.",
+        "source": "reports/finance-sms-personal-card-1557413116793331774.md"
+      }
+    ],
+    "GiB": 0.3079
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/preview-1558474267975229541",
+    "family": "finance",
+    "file": 550,
+    "directory": 25,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 301649487,
+    "unique_allocated_bytes": 302977024,
+    "newest_mtime_ns": 1792107460342557853,
+    "oldest_mtime_ns": 1791639720435611898,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-PREVIEW-1558474267975229541",
+        "state": "completed_published_verified_report1558487297241124965",
+        "next_step": "Rodolfo acessa Usuários > Visualizar como este usuário; nenhum passo técnico pendente",
+        "source": "reports/finance-preview-1558474267975229541.md"
+      }
+    ],
+    "GiB": 0.2822
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/manager-menu-1558488813536288789",
+    "family": "finance",
+    "file": 543,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 301468272,
+    "unique_allocated_bytes": 302813184,
+    "newest_mtime_ns": 1792107458889556540,
+    "oldest_mtime_ns": 1791643141181834233,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-MENU-1558488813536288789",
+        "state": "label_published_verified;annual_alignment_superseded_and_feature_published_under1558613089752977409",
+        "next_step": "Consultar ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409; nenhuma proposta anual aguardando confirmação",
+        "source": "docs/finance-manager-annual-result.md"
+      }
+    ],
+    "GiB": 0.282
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248",
+    "family": "finance",
+    "file": 584,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 294110822,
+    "unique_allocated_bytes": 295526400,
+    "newest_mtime_ns": 1792107461984559338,
+    "oldest_mtime_ns": 1791390264810139498,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SMS-CARD-SIZE-1557426794137653248",
+        "state": "completed",
+        "next_step": "Concluído: tamanhos efetivamente ampliados e medidos em produção; banco/APIs preservados. Conclusão e REPORT-INFRA com readback exato em communication-readback.json; sem pendências deste escopo.",
+        "source": "reports/finance-sms-card-size-1557426794137653248.md"
+      }
+    ],
+    "GiB": 0.2752
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/september-export-1555274844109803522",
+    "family": "finance",
+    "file": 123,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 416792055,
+    "unique_allocated_bytes": 292237312,
+    "newest_mtime_ns": 1790883485524013075,
+    "oldest_mtime_ns": 1790877054605594708,
+    "checkpoint_matches": [],
+    "GiB": 0.2722
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "family": "finance",
+    "file": 1011,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 290504744,
+    "unique_allocated_bytes": 290676736,
+    "newest_mtime_ns": 1788758730924741567,
+    "oldest_mtime_ns": 1788758125999000,
+    "checkpoint_matches": [],
+    "GiB": 0.2707
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
+    "family": "backups",
+    "file": 7368,
+    "directory": 33573,
+    "link": 2518,
+    "other": 0,
+    "logical_bytes": 121046087,
+    "unique_allocated_bytes": 290258944,
+    "newest_mtime_ns": 1794599616058943402,
+    "oldest_mtime_ns": 1700000000000000000,
+    "checkpoint_matches": [],
+    "GiB": 0.2703
+  },
+  {
+    "unit": "/root/mgs-agent/backups/security-round-1556332890743115850",
+    "family": "backups",
+    "file": 62700,
+    "directory": 517,
+    "link": 6,
+    "other": 0,
+    "logical_bytes": 40487393,
+    "unique_allocated_bytes": 289087488,
+    "newest_mtime_ns": 1791139302626897533,
+    "oldest_mtime_ns": 1785511560000000000,
+    "checkpoint_matches": [],
+    "GiB": 0.2692
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/september-video-layout-1555338586327613623",
+    "family": "finance",
+    "file": 70,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 274798208,
+    "unique_allocated_bytes": 275013632,
+    "newest_mtime_ns": 1790900491086709565,
+    "oldest_mtime_ns": 1790892141172628685,
+    "checkpoint_matches": [],
+    "GiB": 0.2561
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465",
+    "family": "finance",
+    "file": 1048,
+    "directory": 28,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 274570190,
+    "unique_allocated_bytes": 274841600,
+    "newest_mtime_ns": 1794932095425140360,
+    "oldest_mtime_ns": 1790123208000000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-NETWORK-MONTH-1552101423754514465",
+        "state": "publicado e validado:360 testes, cinco redes em stage, 34 viewports/17 meses e sete históricos em produção. zero mutação financeira; agosto5.08/saldo74376.81. skill0.1.73, registry por supersessão, inventário e audit confirmados; report-infra1552117541906808863 enviado.",
+        "next_step": "Nenhuma pendência de implementação; operador escolhe mês e usa Incluir/Transferir/Retirar. Pendências sem rede ficam explícitas e não zeram inválidos.",
+        "source": "discord:1545426987756298340:1552101423754514465"
+      }
+    ],
+    "GiB": 0.256
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/security-host",
+    "family": "agent_work",
+    "file": 406,
+    "directory": 183,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 272392379,
+    "unique_allocated_bytes": 274112512,
+    "newest_mtime_ns": 1790969204483286338,
+    "oldest_mtime_ns": 1790957036333060480,
+    "checkpoint_matches": [],
+    "GiB": 0.2553
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/runcloud-security-20260922",
+    "family": "agent_work",
+    "file": 842,
+    "directory": 6,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 270707615,
+    "unique_allocated_bytes": 273014784,
+    "newest_mtime_ns": 1790562081292840849,
+    "oldest_mtime_ns": 1790048356865433348,
+    "checkpoint_matches": [],
+    "GiB": 0.2543
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-cliquet-six-sites-20261002T030546-0400",
+    "family": "backups",
+    "file": 1439,
+    "directory": 227,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 260983144,
+    "unique_allocated_bytes": 266072064,
+    "newest_mtime_ns": 1790940305400123572,
+    "oldest_mtime_ns": 1790924746123302224,
+    "checkpoint_matches": [],
+    "GiB": 0.2478
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425",
+    "family": "finance",
+    "file": 546,
+    "directory": 24,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 263882352,
+    "unique_allocated_bytes": 265191424,
+    "newest_mtime_ns": 1794932095451140418,
+    "oldest_mtime_ns": 1791258397522553597,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ANNUAL-1556874856446951425",
+        "state": "publicado e validado;50 sites na união anual;dados da própria dash;manutenção separada1556897466652037131 resolveu proxy-addr sem alterar tela/valores",
+        "next_step": "Operação normal; diferenças históricas de origem continuam preservadas, sem autorização para ajustes financeiros por inferência",
+        "source": "reports/finance-annual-1556874856446951425.md"
+      }
+    ],
+    "GiB": 0.247
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/zuout-g006-1569051595935850601",
+    "family": "finance",
+    "file": 520,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 257547469,
+    "unique_allocated_bytes": 258797568,
+    "newest_mtime_ns": 1794503596329962765,
+    "oldest_mtime_ns": 1794161641503542472,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ZUOUT-1569051595935850601",
+        "state": "completed_verified:releasecommitted537testes;cad26/out1511/nov292;2563controles20vistas9258celulas;google45;replay0;health20/20;receitas/rateio/pagamentos/anteriorespreservados;oomensaio recuperado;reportinfra1569065681444675776relido",
+        "next_step": "Nenhuma pendencia;rotina diaria normal;nao reaplicar nem modificar receitas/mesesanteriores;procedimento canonico atualizado",
+        "source": "reports/finance-zuout-g006-1569051595935850601.md;apps/finance-system/private/zuout-g006-1569051595935850601/report-infra-receipt.json"
+      }
+    ],
+    "GiB": 0.241
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv05-c11-c14-mixed-20260903",
+    "family": "agent_work",
+    "file": 179,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 258305348,
+    "unique_allocated_bytes": 258732032,
+    "newest_mtime_ns": 1788407763988061194,
+    "oldest_mtime_ns": 1788401299607627210,
+    "checkpoint_matches": [],
+    "GiB": 0.241
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport",
+    "family": "backups",
+    "file": 98,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 256875510,
+    "unique_allocated_bytes": 257146880,
+    "newest_mtime_ns": 1794681813267695123,
+    "oldest_mtime_ns": 1791819363616591743,
+    "checkpoint_matches": [
+      {
+        "id": "VPS-HERMES-20261012-1559192694096404537",
+        "state": "completed_validated",
+        "next_step": "Nenhuma ação pendente neste escopo. Hermes v0.21.7, corte main7cc3fb8c/port e6ad5053 já ativo e validado; Monarx 4.3.82-master com24/24 checks, APT zero e gateway PIDs preservados. Snapshots/runtime rollback e deb4.3.81 retidos; nenhuma exclusão. Commits upstream após o corte continuam outro ciclo. Protect5.2.70 preexistia desde cron15/09; inventário corrigido, não atualizado nesta transação.",
+        "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005/post-validation.json"
+      }
+    ],
+    "GiB": 0.2395
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-legacy-keitaro-smart-routing-20260903T230557-0400",
+    "family": "backups",
+    "file": 698,
+    "directory": 118,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 249738016,
+    "unique_allocated_bytes": 251871232,
+    "newest_mtime_ns": 1788500591938975618,
+    "oldest_mtime_ns": 1788491157358134277,
+    "checkpoint_matches": [],
+    "GiB": 0.2346
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749",
+    "family": "finance",
+    "file": 1050,
+    "directory": 31,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 246701993,
+    "unique_allocated_bytes": 246960128,
+    "newest_mtime_ns": 1794932095044139513,
+    "oldest_mtime_ns": 1790113928000000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SAVE-PERF-1552071425156845749",
+        "state": "concluído: release coordenado publicado; confirmação mesmo valor/modo sem recálculo ~2s em stage; cálculo30–32%mais rápido no benchmark remoto,produção9.7s/8.8s;353testes,paridade integral4casos,34viewports;zero escrita financeira produtiva;skill0.1.70.",
+        "next_step": "Nenhuma pendência desta otimização. Mudanças numéricas continuam aguardando recálculo/commit/readback real; não prometer latência fixa.",
+        "source": "reports/finance-save-performance-1552071425156845749.md"
+      }
+    ],
+    "GiB": 0.23
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151",
+    "family": "finance",
+    "file": 728,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 243688987,
+    "unique_allocated_bytes": 245592064,
+    "newest_mtime_ns": 1792107460007557550,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [],
+    "GiB": 0.2287
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897",
+    "family": "finance",
+    "file": 1060,
+    "directory": 31,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 244642844,
+    "unique_allocated_bytes": 244920320,
+    "newest_mtime_ns": 1794932095372140242,
+    "oldest_mtime_ns": 1790115435999000,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-RATE-PROPAGATION-1552079131628281897",
+        "state": "publicado e validado:356 testes,24 meses,48 viewports de pagamentos+34 gerais; status/valores consistentes, sem alteração financeira. delta r$0,68 explicado por fincgriffin0,10% na sheet vs0,12% na dash mais receitas/folha/centavos; sem edição de regras.",
+        "next_step": "Entregar resultado. Eventual alinhamento financeiro da planilha/rede depende de autorização própria; não forçar saldo.",
+        "source": "reports/finance-rate-propagation-1552079131628281897.md"
+      }
+    ],
+    "GiB": 0.2281
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610",
+    "family": "agent_work",
+    "file": 3740,
+    "directory": 348,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 231678542,
+    "unique_allocated_bytes": 242585600,
+    "newest_mtime_ns": 1792555468256586556,
+    "oldest_mtime_ns": 1792545451292023899,
+    "checkpoint_matches": [],
+    "GiB": 0.2259
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/yolo-close-1562816076503449702",
+    "family": "finance",
+    "file": 40,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 239127140,
+    "unique_allocated_bytes": 239230976,
+    "newest_mtime_ns": 1792677947237040800,
+    "oldest_mtime_ns": 1792674887471831184,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-YOLO-1562816076503449702",
+        "state": "completed_validated_revision1683_daily_dom_cad_sums_exact",
+        "next_step": "Nenhuma reaplicacao:30dias/180controles e300linhasDOM conferidos; pagamentos intactos. Regra vale somente setembro; preservar demais pontos e meses",
+        "source": "reports/finance-yolo-daily-close-1562816076503449702.md;apps/finance-system/private/yolo-close-1562816076503449702/report-infra-readback.json"
+      }
+    ],
+    "GiB": 0.2228
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064",
+    "family": "finance",
+    "file": 99,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 238397150,
+    "unique_allocated_bytes": 238645248,
+    "newest_mtime_ns": 1790949823400934555,
+    "oldest_mtime_ns": 1789078926158124271,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-CORRECT-1551324490271695064",
+        "state": "cpv16 e visao gestores ja corrigidos na etapa anterior;prototipo isolado:22 testes+dom em3periodos aprovados;8abas relidas intactas;0writes sheet/producao;av restante1518linhas205dominio-codigos17dominios usd3655.01 sem pais/vertical comprovado;nao publicado/nao preenchido;escopo integral aberto",
+        "next_step": "Obter decisao para os demais codigos nao mapeados sem estender fallback sozinho;completar dimensoes/linhagem/agrupamento/importadores e API autenticada;canario/rollback e implantacao;preencher1-31agosto e validar moedas/gastos/gestores;preservar setembro e futuros.",
+        "source": "/root/mgs-agent/reports/finance-dual-gross-1551344574859845795.md"
+      }
+    ],
+    "GiB": 0.2223
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747",
+    "family": "agent_work",
+    "file": 29400,
+    "directory": 3728,
+    "link": 12,
+    "other": 0,
+    "logical_bytes": 162012536,
+    "unique_allocated_bytes": 237867008,
+    "newest_mtime_ns": 1790989838427219148,
+    "oldest_mtime_ns": 1789356081715753080,
+    "checkpoint_matches": [],
+    "GiB": 0.2215
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "family": "finance",
+    "file": 1008,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 230948904,
+    "unique_allocated_bytes": 231112704,
+    "newest_mtime_ns": 1788713459161850496,
+    "oldest_mtime_ns": 1788712719999000,
+    "checkpoint_matches": [],
+    "GiB": 0.2152
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/recovery-1566802212548517990",
+    "family": "finance",
+    "file": 2286,
+    "directory": 342,
+    "link": 3,
+    "other": 0,
+    "logical_bytes": 218435067,
+    "unique_allocated_bytes": 225828864,
+    "newest_mtime_ns": 1794932095341140173,
+    "oldest_mtime_ns": 1793625245235139494,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-RECOVERY-1566802212548517990",
+        "state": "completed_verified:recovery-v2/recovery-tests/meta-binding committed;529testes;24stage/14ui/20health;01/11spendgamok,replayssemduplicacao;vinculorooseveltidfixo;inventario/audit/registry/skillpass;report-infra1566823685308944657readback",
+        "next_step": "Nenhuma pendencia deste reparo. Operacao diaria normal;proximo tick natural do novo vinculo ainda futuro. Fechamento definitivo mensal permanece separado do preenchimento provisório.",
+        "source": "reports/finance-recovery-1566802212548517990.md;docs/finance-meta-read-credential.md;discord:1566802212548517990;discord:1566815743050260602"
+      }
+    ],
+    "GiB": 0.2103
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sms-usage-prepaid-1555464947394285580",
+    "family": "finance",
+    "file": 14,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 220588885,
+    "unique_allocated_bytes": 220631040,
+    "newest_mtime_ns": 1790946545557864933,
+    "oldest_mtime_ns": 1790926128372946965,
+    "checkpoint_matches": [],
+    "GiB": 0.2055
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "family": "finance",
+    "file": 1019,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 220299304,
+    "unique_allocated_bytes": 220463104,
+    "newest_mtime_ns": 1789142068963178159,
+    "oldest_mtime_ns": 1788713459999000,
+    "checkpoint_matches": [],
+    "GiB": 0.2053
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sms-direct-1555422806940983327",
+    "family": "finance",
+    "file": 24,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 217820589,
+    "unique_allocated_bytes": 217894912,
+    "newest_mtime_ns": 1790917787728969953,
+    "oldest_mtime_ns": 1790913576235144659,
+    "checkpoint_matches": [],
+    "GiB": 0.2029
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/payments-1546642267291394199",
+    "family": "finance",
+    "file": 35,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 206781534,
+    "unique_allocated_bytes": 206864384,
+    "newest_mtime_ns": 1788827601819925077,
+    "oldest_mtime_ns": 1788814490645861032,
+    "checkpoint_matches": [],
+    "GiB": 0.1927
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-zuout-smart-routing-es-links",
+    "family": "backups",
+    "file": 634,
+    "directory": 94,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 203787682,
+    "unique_allocated_bytes": 205516800,
+    "newest_mtime_ns": 1789716273965049212,
+    "oldest_mtime_ns": 1789706161770668164,
+    "checkpoint_matches": [],
+    "GiB": 0.1914
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/rede2-gross-1554177164872519692",
+    "family": "finance",
+    "file": 47,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 202043129,
+    "unique_allocated_bytes": 202166272,
+    "newest_mtime_ns": 1790949833618947016,
+    "oldest_mtime_ns": 1790615210916496878,
+    "checkpoint_matches": [
+      {
+        "id": "finance-rede2-gross-1554177164872519692",
+        "state": "concluido: targets conferidos em producao; revisao549; audit2390;395testes;readback idempotente;17competencias34viewports;taxas/despesas/gestores preservados",
+        "next_step": "Nenhum ajuste financeiro pendente neste escopo; USD451.60 adiado pelo dono, sem lançamento futuro automático; conciliação restante aguarda nova instrução",
+        "source": "/root/mgs-agent/reports/finance-rede2-gross-1554177164872519692.md"
+      }
+    ],
+    "GiB": 0.1883
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20261001",
+    "family": "agent_work",
+    "file": 15282,
+    "directory": 1535,
+    "link": 10,
+    "other": 0,
+    "logical_bytes": 549542219,
+    "unique_allocated_bytes": 201506816,
+    "newest_mtime_ns": 1791167340248099869,
+    "oldest_mtime_ns": 1788362134564920659,
+    "checkpoint_matches": [],
+    "GiB": 0.1877
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/media-spend-runs",
+    "family": "finance",
+    "file": 4334,
+    "directory": 276,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 187475880,
+    "unique_allocated_bytes": 198684672,
+    "newest_mtime_ns": 1794924206648960070,
+    "oldest_mtime_ns": 1788904153588839602,
+    "checkpoint_matches": [],
+    "GiB": 0.185
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-reaudit-20260905",
+    "family": "agent_work",
+    "file": 128,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 197118933,
+    "unique_allocated_bytes": 197513216,
+    "newest_mtime_ns": 1794795538849638561,
+    "oldest_mtime_ns": 1788625677259309755,
+    "checkpoint_matches": [],
+    "GiB": 0.1839
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/proxy-addr-1556897466652037131",
+    "family": "finance",
+    "file": 2127,
+    "directory": 307,
+    "link": 3,
+    "other": 0,
+    "logical_bytes": 190227393,
+    "unique_allocated_bytes": 197144576,
+    "newest_mtime_ns": 1794932095244139958,
+    "oldest_mtime_ns": 1791263762205296051,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-PROXY-ADDR-1556897466652037131",
+        "state": "completed_validated; journal committed;255node/204python;12 controles segurança;26stage/22produção;proxy2.0.8 local/remoto;audit0;fingerprints financeiros intactos",
+        "next_step": "Operação normal; pendência proxy-addr anterior resolvida. Nenhuma nova atualização de dependência autorizada por inferência",
+        "source": "reports/finance-proxy-addr-1556897466652037131.md"
+      }
+    ],
+    "GiB": 0.1836
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/portfolio-final-closure-20260922",
+    "family": "agent_work",
+    "file": 141,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 194679352,
+    "unique_allocated_bytes": 195129344,
+    "newest_mtime_ns": 1790112813127613237,
+    "oldest_mtime_ns": 1790103345148117337,
+    "checkpoint_matches": [],
+    "GiB": 0.1817
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis",
+    "family": "agent_work",
+    "file": 113,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 192949283,
+    "unique_allocated_bytes": 193310720,
+    "newest_mtime_ns": 1788640535129647251,
+    "oldest_mtime_ns": 1788102044507388426,
+    "checkpoint_matches": [],
+    "GiB": 0.18
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/august-adjust-1551644766125428847",
+    "family": "finance",
+    "file": 84,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 192976258,
+    "unique_allocated_bytes": 193187840,
+    "newest_mtime_ns": 1790012523402436164,
+    "oldest_mtime_ns": 1789935244924721410,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-AUGUST-ADJUST-1551644766125428847",
+        "state": "aplicado/validado rev442 audit1677:38fatosyolomgs;smsp121formula;cpv31formulas corrigidas;7creditosgeizian positivos preservados;backup restaurado;107+5testespass. pendentepropostatc21usd762.62 e redistribuicaoopenzedusd1.76sheet;nenhuma escrita nesses dois pontos.",
+        "next_step": "Explicar Icaro e perdaUSD128.51 na correcaoOpenzedFin;aguardar autorizacao para esses ajustes de planilha. Ledger ja correto.",
+        "source": "/root/mgs-agent/reports/finance-august-adjust-1551644766125428847.md"
+      }
+    ],
+    "GiB": 0.1799
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/pgdata",
+    "family": "finance",
+    "file": 1004,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 192987176,
+    "unique_allocated_bytes": 193163264,
+    "newest_mtime_ns": 1789067456468078107,
+    "oldest_mtime_ns": 1788643249000000,
+    "checkpoint_matches": [],
+    "GiB": 0.1799
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "family": "finance",
+    "file": 1005,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 192602152,
+    "unique_allocated_bytes": 192765952,
+    "newest_mtime_ns": 1788644279421586399,
+    "oldest_mtime_ns": 1788644212999000,
+    "checkpoint_matches": [],
+    "GiB": 0.1795
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/history-refresh-requests",
+    "family": "finance",
+    "file": 78,
+    "directory": 15,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 189583622,
+    "unique_allocated_bytes": 189837312,
+    "newest_mtime_ns": 1790914945691763859,
+    "oldest_mtime_ns": 1789089764207162300,
+    "checkpoint_matches": [],
+    "GiB": 0.1768
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+    "family": "finance",
+    "file": 1005,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 188481576,
+    "unique_allocated_bytes": 188645376,
+    "newest_mtime_ns": 1788715266567666993,
+    "oldest_mtime_ns": 1788715227999000,
+    "checkpoint_matches": [],
+    "GiB": 0.1757
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+    "family": "finance",
+    "file": 1005,
+    "directory": 27,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 188309544,
+    "unique_allocated_bytes": 188477440,
+    "newest_mtime_ns": 1788703668845882760,
+    "oldest_mtime_ns": 1788703634000000,
+    "checkpoint_matches": [],
+    "GiB": 0.1755
+  },
+  {
+    "unit": "/root/mgs-agent/work/ares-shein-onboarding-20260911",
+    "family": "agent_work",
+    "file": 1046,
+    "directory": 8,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 186237178,
+    "unique_allocated_bytes": 188452864,
+    "newest_mtime_ns": 1789184988006577171,
+    "oldest_mtime_ns": 1789178934245328073,
+    "checkpoint_matches": [],
+    "GiB": 0.1755
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/cephyric-us-1566204324680302656",
+    "family": "finance",
+    "file": 524,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 186605391,
+    "unique_allocated_bytes": 187858944,
+    "newest_mtime_ns": 1794503593082955910,
+    "oldest_mtime_ns": 1793454084797216858,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-CEPHYRIC-US-1566204324680302656",
+        "state": "concluido:525testes;2411linhas80grupos;1complemento cad0.3389770709610955;79grupos preservados;revisao1249/audit5526;cutoff30/10;replay idempotente;api4checks desktop/mobile;regra/docs/skill/registry persistidos;inventario/audit/report1566210519629701182 readback;recibo diario1566210032742305914. dependencias separadas no checkpoint zeus-finance-dependency-findings-1566204324680302656",
+        "next_step": "Fluxo financeiro diario normal;reutilizar classificacao Cephyric US sem nova pergunta;nenhuma pendencia de preenchimento ate30/10",
+        "source": "reports/finance-cephyric-us-1566204324680302656.md"
+      },
+      {
+        "id": "ZEUS-FINANCE-DEPENDENCY-FINDINGS-1566204324680302656",
+        "state": "completed:body-parser2.4.0/qs6.16.1 publicados recovery-v2-1566802212548517990;hashes remotos,api/mfa/ui e npm audit0avisos;529testes finais;financeiro preservado durante publicacao",
+        "next_step": "Nenhuma pendencia destes dois advisories;manter monitoramento normal sem garantia universal de seguranca",
+        "source": "reports/finance-recovery-1566802212548517990.md;discord:1566802212548517990"
+      }
+    ],
+    "GiB": 0.175
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243",
+    "family": "finance",
+    "file": 527,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 184726474,
+    "unique_allocated_bytes": 185974784,
+    "newest_mtime_ns": 1794932095095139627,
+    "oldest_mtime_ns": 1793193745083946171,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-BR-CAR-1564993480487342243",
+        "state": "concluido:523testes;catalogomgs;2290linhas78grupos;2complementos;76grupos preservados;rev1119/audit5356;cutoff27/10;replay idempotente;api e6checks desktop/mobile;regra padrao runtime/docs/skill/registry;inventario/audit/report-infra1565000672972378183 com readback;notificacao diaria1565000014466650170 conferida",
+        "next_step": "Operacao diaria normal; nenhuma pendencia ate27/10. Reutilizar classificacoes no mesmo dominio/pais sem perguntar permanencia.",
+        "source": "reports/finance-br-car-1564993480487342243.md"
+      }
+    ],
+    "GiB": 0.1732
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732",
+    "family": "finance",
+    "file": 520,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 183209012,
+    "unique_allocated_bytes": 184487936,
+    "newest_mtime_ns": 1794932095520140571,
+    "oldest_mtime_ns": 1791294311218039247,
+    "checkpoint_matches": [],
+    "GiB": 0.1718
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv-c32-c35-moto-20260827",
+    "family": "agent_work",
+    "file": 70,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 183462709,
+    "unique_allocated_bytes": 183627776,
+    "newest_mtime_ns": 1787885053454333295,
+    "oldest_mtime_ns": 1787880210723570763,
+    "checkpoint_matches": [],
+    "GiB": 0.171
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174",
+    "family": "agent_work",
+    "file": 8280,
+    "directory": 1087,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 159160613,
+    "unique_allocated_bytes": 182296576,
+    "newest_mtime_ns": 1791012158368538285,
+    "oldest_mtime_ns": 1704067200000000000,
+    "checkpoint_matches": [],
+    "GiB": 0.1698
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/autocreditadx-1561373355704320192",
+    "family": "finance",
+    "file": 526,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 179140571,
+    "unique_allocated_bytes": 180387840,
+    "newest_mtime_ns": 1794503591794953190,
+    "oldest_mtime_ns": 1792330285065318407,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-AUTOCREDITADX-1561373355704320192",
+        "state": "concluido: publicado507testes;catalogomgs;16/10complementado74grupos preservados rev692/audit4587;17/10 completo rev693/audit4593;replays idempotentes;api/browser desktop/mobile;skill/registry/inventario/audit/report-infra com readback",
+        "next_step": "Operacao diaria normal. Nenhuma pendencia financeira ate17/10. KR-014 global stale Ares3.6.1 vs3.6.8 fora deste escopo, registrado no report.",
+        "source": "reports/finance-autocreditadx-1561373355704320192.md"
+      }
+    ],
+    "GiB": 0.168
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/wavesbee-1546607083468623912",
+    "family": "finance",
+    "file": 36,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 179533316,
+    "unique_allocated_bytes": 179634176,
+    "newest_mtime_ns": 1788812735593141234,
+    "oldest_mtime_ns": 1788810683319625058,
+    "checkpoint_matches": [],
+    "GiB": 0.1673
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484",
+    "family": "finance",
+    "file": 521,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 177653290,
+    "unique_allocated_bytes": 178933760,
+    "newest_mtime_ns": 1792107462453559763,
+    "oldest_mtime_ns": 1791985285609054511,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ZYTIVA-ES-1559930340628242484",
+        "state": "concluído e validado: regra local/remota;496testes; complemento cad0.16972628450920058,63 grupos prévios preservados;3091linhas/64grupos,zero pendências;cutoff13/10,rev556,audit4279;replay idempotente;api e desktop/mobile relatório diário/isliago pass;backup/recovery e inventário/audit verificados",
+        "next_step": "Nenhuma pendência financeira. Usar classificação confirmada para o mesmo placement futuro; outros sufixos desconhecidos continuam fail-closed.",
+        "source": "reports/finance-zytiva-es-1559930340628242484.md"
+      }
+    ],
+    "GiB": 0.1666
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo-close-1564263729707614330",
+    "family": "agent_work",
+    "file": 3257,
+    "directory": 397,
+    "link": 5,
+    "other": 0,
+    "logical_bytes": 170348824,
+    "unique_allocated_bytes": 178577408,
+    "newest_mtime_ns": 1793023107642183599,
+    "oldest_mtime_ns": 1792680155235685290,
+    "checkpoint_matches": [],
+    "GiB": 0.1663
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/pushalert-1553059046360350835",
+    "family": "finance",
+    "file": 20,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 177710802,
+    "unique_allocated_bytes": 177774592,
+    "newest_mtime_ns": 1790349598986728938,
+    "oldest_mtime_ns": 1790168827110722008,
+    "checkpoint_matches": [],
+    "GiB": 0.1656
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv05-c04-c07-20260831",
+    "family": "agent_work",
+    "file": 112,
+    "directory": 9,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 172511162,
+    "unique_allocated_bytes": 172765184,
+    "newest_mtime_ns": 1788154273578847127,
+    "oldest_mtime_ns": 1788148732278939238,
+    "checkpoint_matches": [],
+    "GiB": 0.1609
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled",
+    "family": "backups",
+    "file": 54,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 167797646,
+    "unique_allocated_bytes": 167948288,
+    "newest_mtime_ns": 1792107455824553775,
+    "oldest_mtime_ns": 1790631167648251843,
+    "checkpoint_matches": [],
+    "GiB": 0.1564
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743",
+    "family": "finance",
+    "file": 591,
+    "directory": 25,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 165689293,
+    "unique_allocated_bytes": 167157760,
+    "newest_mtime_ns": 1794932095712140998,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-COLUMNS-DEFAULT-1555736746409459743",
+        "state": "concluído: produção160 telas/2914 grupos; gates245node193python; financeiro idêntico; inventário/audit/registry supersession e report-infra1555743404862738564 validados",
+        "next_step": "Nenhuma pendência; novos meses cadastrados herdam a vigência sem edição mensal do layout",
+        "source": "reports/finance-columns-default-1555736746409459743.md"
+      }
+    ],
+    "GiB": 0.1557
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717",
+    "family": "finance",
+    "file": 525,
+    "directory": 24,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 164169470,
+    "unique_allocated_bytes": 165470208,
+    "newest_mtime_ns": 1794932095275140027,
+    "oldest_mtime_ns": 1791470144852028331,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SMS-DASHBOARD-1557763144762269717",
+        "state": "concluido e reafirmado por audio1557781145632907354. dia07 completo, fonte dashboard, sem pendencia operacional ou de auditoria por1sms. proveniencia tecnica preservada nao equivale a caso aberto. gam/spend ok, intervention_required false, zero blockers.",
+        "next_step": "Operacao normal. Nao reabrir ou repetir a divergencia residual como ressalva; nenhuma acao de auditoria pendente por ela.",
+        "source": "docs/finance-sms-dashboard-source-policy.md"
+      }
+    ],
+    "GiB": 0.1541
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143",
+    "family": "agent_work",
+    "file": 20554,
+    "directory": 2574,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 108553227,
+    "unique_allocated_bytes": 165437440,
+    "newest_mtime_ns": 1790981891125454531,
+    "oldest_mtime_ns": 1790961462203014963,
+    "checkpoint_matches": [],
+    "GiB": 0.1541
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929",
+    "family": "agent_work",
+    "file": 6700,
+    "directory": 706,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 144063938,
+    "unique_allocated_bytes": 164917248,
+    "newest_mtime_ns": 1790736774575352973,
+    "oldest_mtime_ns": 1696956669000000000,
+    "checkpoint_matches": [],
+    "GiB": 0.1536
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539",
+    "family": "finance",
+    "file": 538,
+    "directory": 27,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 161433530,
+    "unique_allocated_bytes": 162729984,
+    "newest_mtime_ns": 1794932095547140631,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-COLUMNS-1555702482557075539",
+        "state": "concluído: produção/readback financeiro e visual pass; inventário, audit e conhecimento registrados; report-infra1555711986526855221 lido no canal correto",
+        "next_step": "Nenhuma pendência deste escopo; avaliar feedback visual sem ampliar meses automaticamente",
+        "source": "reports/finance-columns-1555702482557075539.md"
+      }
+    ],
+    "GiB": 0.1516
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/composition-1555934054132486275",
+    "family": "finance",
+    "file": 585,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 160058487,
+    "unique_allocated_bytes": 161443840,
+    "newest_mtime_ns": 1794932094992139398,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-COMPOSITION-1555934054132486275",
+        "state": "completed_validated; release committed; 249 node/193 python; 34 stage/34 prod; fingerprints unchanged",
+        "next_step": "Operação normal; padrão automático desde outubro sem teto de ano, sem pendências",
+        "source": "reports/finance-composition-1555934054132486275.md"
+      }
+    ],
+    "GiB": 0.1504
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969",
+    "family": "finance",
+    "file": 613,
+    "directory": 25,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 159235934,
+    "unique_allocated_bytes": 160727040,
+    "newest_mtime_ns": 1794932095591140729,
+    "oldest_mtime_ns": 1791264080186843008,
+    "checkpoint_matches": [],
+    "GiB": 0.1497
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/noindex-1555943137128751176",
+    "family": "finance",
+    "file": 523,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 158428660,
+    "unique_allocated_bytes": 159686656,
+    "newest_mtime_ns": 1794932095647140854,
+    "oldest_mtime_ns": 1788642326850861063,
+    "checkpoint_matches": [],
+    "GiB": 0.1487
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv-account05-first3",
+    "family": "agent_work",
+    "file": 103,
+    "directory": 19,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 159220440,
+    "unique_allocated_bytes": 159518720,
+    "newest_mtime_ns": 1787979278526651934,
+    "oldest_mtime_ns": 1787967195881240857,
+    "checkpoint_matches": [],
+    "GiB": 0.1486
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/portfolio-containment-20260922",
+    "family": "agent_work",
+    "file": 44,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 157579920,
+    "unique_allocated_bytes": 157712384,
+    "newest_mtime_ns": 1790094248303896472,
+    "oldest_mtime_ns": 1790092574721176770,
+    "checkpoint_matches": [],
+    "GiB": 0.1469
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/simple-review-1551798771661275147",
+    "family": "finance",
+    "file": 41,
+    "directory": 5,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 157549573,
+    "unique_allocated_bytes": 157671424,
+    "newest_mtime_ns": 1790077587130773907,
+    "oldest_mtime_ns": 1790038990300551761,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SIMPLE-1551798771661275147",
+        "state": "correção d5 green; simulação setembro/outubro passa e restaura; gates node/python passam. não publicado: apis atuais dos cinco gestores500 por rateio21/09 no row12 versus corte20/09 na tela, recálculo automático reconciliado na auditoria1798",
+        "next_step": "Aguardar decisão sobre ampliar escopo para alinhar cutoff de gestores; preservar candidatos/backups/banco isolado e não alterar regra financeira por inferência",
+        "source": "reports/finance-simple-review-cutoff-blocked-1551811440418095186.md"
+      }
+    ],
+    "GiB": 0.1468
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465",
+    "family": "finance",
+    "file": 505,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 153690326,
+    "unique_allocated_bytes": 154894336,
+    "newest_mtime_ns": 1792107458624556301,
+    "oldest_mtime_ns": 1791289706177473823,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465",
+        "state": "completed_validated:6/6regras locais/remotas; en yolokfx vizioid escalatepower growpowerhub, es mavroa boostingecon.468testes sem skips;33regressões finais;3373linhas62grupos05/10completo;rev221/audit3215;growpowerhub cad0.014351240487899069 incorporado;2metadados escalatepower corrigidos sem delta caixa;histórico/de/gestores/rateio preservados;replays idempotentes;api desktop/mobile/health/logout ok;registry/skill/inventory/audit;report1557034165453459528 vazio1embed0mentions validado;nenhuma pendência",
+        "next_step": "Operação diária normal: reutilizar as seis regras; novas combinações não confirmadas seguem fail-closed; não reescrever histórico anterior",
+        "source": "reports/finance-shein-us-six-1557024816031342732.md;apps/finance-system/private/shein-sites-1557024816031342732/report-infra-readback.json"
+      }
+    ],
+    "GiB": 0.1443
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/kernel-rollback",
+    "family": "backups",
+    "file": 16,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 154650530,
+    "unique_allocated_bytes": 154701824,
+    "newest_mtime_ns": 1794692022243681315,
+    "oldest_mtime_ns": 1794692003540594662,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
+        "state": "deep_review_complete_preserved_global_followup",
+        "next_step": "Deep131files/11pkg106MiBpreservados;capture5loteindependenteexecutado1571691667516424224efinalvalidado. Nenhumdeleteadicionalautorizado. Proxima6duplicataswork/read-only;7-8globaisabertos.",
+        "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/retirement-result.json;data/storage-deep-preserve-1571685763349741730/retirement-recovery-result.json"
+      }
+    ],
+    "GiB": 0.1441
+  },
+  {
+    "unit": "/root/mgs-agent/reports/hermes-updates",
+    "family": "reports",
+    "file": 2149,
+    "directory": 207,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 147990360,
+    "unique_allocated_bytes": 154640384,
+    "newest_mtime_ns": 1793770504900326047,
+    "oldest_mtime_ns": 1780786607999909786,
+    "checkpoint_matches": [],
+    "GiB": 0.144
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/receipt-review-1554155424285069372",
+    "family": "finance",
+    "file": 30,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 153950098,
+    "unique_allocated_bytes": 154034176,
+    "newest_mtime_ns": 1790949833415946768,
+    "oldest_mtime_ns": 1790610105578383582,
+    "checkpoint_matches": [
+      {
+        "id": "finance-receipt-review-1554155424285069372",
+        "state": "ui publicada391testespass;17meses34viewsproduçãopass;hashes/backups/fingerprints preservados;m2encerrada por rodolfo. diferençaaugustusd256.19 explicada aritmeticamente;julyusd853.29 separado conforme1554161235849650239;nenhum lançamento alterado.",
+        "next_step": "Aguardar memóriaSB de grossUSD461.46 e inválidosUSD395.22, confirmaçãoresidualUSD15 e naturezaInfraCAD638.40. Validar políticaAV0.187% versus efetivo0.1% antes de eventual proposta financeira. Nenhuma correção automática autorizada.",
+        "source": "reports/finance-receipt-review-1554155424285069372.md"
+      }
+    ],
+    "GiB": 0.1435
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482",
+    "family": "finance",
+    "file": 505,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 150090642,
+    "unique_allocated_bytes": 151326720,
+    "newest_mtime_ns": 1792107456434554325,
+    "oldest_mtime_ns": 1791461750550131606,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ALERT-1557727865750159482",
+        "state": "concluido: alertas corrigidos anteriormente; pendenciasms e fechamento07/10 agora resolvidos pela execucao1557763144762269717. sms26401/r$2112,08 seguindo dashboard, diferenca registrada sem gestor; gam e gastos verificados, cutoff07/10. ver report de fechamento.",
+        "next_step": "Fluxo normal; nao repetir pendencia superada nem pedir fonte ja decidida",
+        "source": "reports/finance-sms-dashboard-1557763144762269717.md"
+      }
+    ],
+    "GiB": 0.1409
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578",
+    "family": "finance",
+    "file": 157,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 146854588,
+    "unique_allocated_bytes": 147275776,
+    "newest_mtime_ns": 1788906712789636873,
+    "oldest_mtime_ns": 1788902012619097973,
+    "checkpoint_matches": [],
+    "GiB": 0.1372
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/eggbev-modelo-1567803920217022545",
+    "family": "agent_work",
+    "file": 215,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 145560671,
+    "unique_allocated_bytes": 146018304,
+    "newest_mtime_ns": 1793899656122562118,
+    "oldest_mtime_ns": 1793892891601642324,
+    "checkpoint_matches": [
+      {
+        "id": "eggbev-modelo-1567803920217022545",
+        "state": "complete;mesmo campaign_id120251058312020629 agora300-georgina whitford-eng-us-(pg_23156)-c01,rename autorizado1567976031216869619. nome originalmodel(pg_23156)dup01 preservado em historico/manifests. active,usd30/dia,adgroup01,tresads epage/utm/horario preservados por comparacao completa get antes/depois.",
+        "next_step": "Nenhuma acao pendente. Nao reexecutar manifests antigos para obter o novo nome;usarreadback corrente e recibo de rename. Monitoramento normal existente.",
+        "source": "data/ares/meta-ads/audit/eggbev/rename-1567976031216869619/readback.json"
+      }
+    ],
+    "GiB": 0.136
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/carcreditad-remediation-1556493106868649996",
+    "family": "agent_work",
+    "file": 257,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 143592836,
+    "unique_allocated_bytes": 144224256,
+    "newest_mtime_ns": 1791176269244590181,
+    "oldest_mtime_ns": 1791167370195142589,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-CARCREDITAD-REMEDIATION-1556493106868649996",
+        "state": "concluído escopo solicitado e governança:6plugins/20checksums;321retry imagify,487mídias e3500arquivos válidos;docs2restritos semexclusão;kernel194/bootnovo/17apps34probes/9serviços;214urls487imagens200;browser33 semdefeitos;sheets13readback;inventário/registry/skill1.3.11 validados. report-infra1556530628244017173 embedexato verificado. host journal continua não limpo:3erros usb/áudio semimpactowebobservado, não ocultados.",
+        "next_step": "Nenhuma pendência neste pedido; preservar backup/restore/exclusões. Riscos estruturais host/SEO e investigação dos registros kernel ficam separados; mutação de driver/config sistêmica exige nova confirmação Critical.",
+        "source": "discord:1551768281688580096#1556512653747425291; reports/carcreditad-phase2-1556512653747425291.md; report:1556530628244017173"
+      }
+    ],
+    "GiB": 0.1343
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/payment-note-1562583923022766212",
+    "family": "finance",
+    "file": 504,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 141000125,
+    "unique_allocated_bytes": 142188544,
+    "newest_mtime_ns": 1794503593754957328,
+    "oldest_mtime_ns": 1792620228283522431,
+    "checkpoint_matches": [],
+    "GiB": 0.1324
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/meta-binding-1566815743050260602",
+    "family": "finance",
+    "file": 575,
+    "directory": 41,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 140559562,
+    "unique_allocated_bytes": 142094336,
+    "newest_mtime_ns": 1794503593367956511,
+    "oldest_mtime_ns": 1793628566322413072,
+    "checkpoint_matches": [],
+    "GiB": 0.1323
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598",
+    "family": "finance",
+    "file": 502,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 140358250,
+    "unique_allocated_bytes": 141574144,
+    "newest_mtime_ns": 1794932095485140493,
+    "oldest_mtime_ns": 1791137909894827833,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-COMPOSITION-STYLE-1556369322782232598",
+        "state": "completed_validated; release committed; 249 node +193 python; 34 stage +34 live; financial_unchanged",
+        "next_step": "Operação normal; ajuste visual concluído sem pendências",
+        "source": "reports/finance-composition-style-1556369322782232598.md"
+      }
+    ],
+    "GiB": 0.1319
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/quotes-location-1562630806940418121",
+    "family": "finance",
+    "file": 488,
+    "directory": 22,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 140237993,
+    "unique_allocated_bytes": 141406208,
+    "newest_mtime_ns": 1794503593877957588,
+    "oldest_mtime_ns": 1792630814148354131,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-QUOTES-1562630806940418121",
+        "state": "completed",
+        "next_step": "Release quotes-location-1562630806940418121 committed. 279 Node/242 Python passaram; fonte real e wrapper validados, ok=true zero falhas/open=false. Taxas fixas, nominal, ledger e history iguais no retry; worker auxiliar ciclo saudavel pending=0. Sem cron/credencial/ACL/exclusao. Evidencia e rollback referenciados no relatorio; aguardar somente execucao rotineira existente.",
+        "source": "reports/finance-quotes-location-1562630806940418121.md"
+      }
+    ],
+    "GiB": 0.1317
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351",
+    "family": "finance",
+    "file": 506,
+    "directory": 23,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 139829374,
+    "unique_allocated_bytes": 141070336,
+    "newest_mtime_ns": 1792107461747559124,
+    "oldest_mtime_ns": 1792072195391937240,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-RETRY-1560288130085560351",
+        "state": "concluido publicado e validado:300s, uma rodada scan+detalhe;505testes;espera real300.001s+get meta;hashes ativos e financeiro preservado;regra/skill/registry/inventario/audit;report-infra1560296721949655061 lido de volta",
+        "next_step": "Operacao normal; nenhuma decisao pendente. Preservar limites e verificar fechamento real apos recuperacoes futuras",
+        "source": "/root/mgs-agent/reports/finance-retry-five-min-1560288130085560351.md"
+      }
+    ],
+    "GiB": 0.1314
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/queue-four-1556332890743115850",
+    "family": "finance",
+    "file": 478,
+    "directory": 28,
+    "link": 2,
+    "other": 0,
+    "logical_bytes": 139564273,
+    "unique_allocated_bytes": 140718080,
+    "newest_mtime_ns": 1792107461419558827,
+    "oldest_mtime_ns": 1788643856362242919,
+    "checkpoint_matches": [],
+    "GiB": 0.1311
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sept-invalid-1562911529102475286",
+    "family": "finance",
+    "file": 34,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 138864534,
+    "unique_allocated_bytes": 138964992,
+    "newest_mtime_ns": 1792698185457658921,
+    "oldest_mtime_ns": 1792697601638042541,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SEPT-INVALID-1562911529102475286",
+        "state": "completed",
+        "next_step": "Nenhuma reaplicacao:1693 audits5048/5049, descontos conferidos na API/PostgreSQL/browser; preservar outros meses e pagamentos",
+        "source": "reports/finance-sept-invalid-1562911529102475286.md"
+      }
+    ],
+    "GiB": 0.1294
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/invalid-close-1554187234725462097",
+    "family": "finance",
+    "file": 36,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 138511010,
+    "unique_allocated_bytes": 138604544,
+    "newest_mtime_ns": 1790618398971556867,
+    "oldest_mtime_ns": 1790617638129797630,
+    "checkpoint_matches": [
+      {
+        "id": "finance-invalid-close-1554187234725462097",
+        "state": "concluido: revisão551; audits2397/2398; banco359610.79 conciliado ao centavo com recebimento informado; cad9.12 incorporado em inválidosrede1; ui desktop/mobile e recálculo integral verificados",
+        "next_step": "Não lançar USD451.60 agora: fornecedor descontará do gross Rede2 do próximo fechamento; conferir relatório futuro sem dupla dedução. Nenhuma aplicação restante neste escopo.",
+        "source": "/root/mgs-agent/reports/finance-invalid-close-1554187234725462097.md"
+      }
+    ],
+    "GiB": 0.1291
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/november-open-1565748653027754065",
+    "family": "finance",
+    "file": 38,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 132544305,
+    "unique_allocated_bytes": 132653056,
+    "newest_mtime_ns": 1793498955026639823,
+    "oldest_mtime_ns": 1793498500872979158,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-NOVEMBER-1565748653027754065",
+        "state": "completed",
+        "next_step": "Nenhuma escrita financeira pendente. Novembro criado/validado por runner e readback remoto; outubro1249 integralmente preservado; dezembro ausente; API/seletor autenticados não verificados por ausência de sessão técnica existente. Fallback mensal23:04:25 permanece idempotente e inalterado.",
+        "source": "reports/finance-november-open-1565748653027754065.md; apps/finance-system/private/november-open-1565748653027754065/parent-verification.json; apps/finance-system/private/month-rollover-runs/20261031T220347193807-0400/result.json; Discord1565748653027754065"
+      }
+    ],
+    "GiB": 0.1235
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/cutoff-1551913189355028501",
+    "family": "finance",
+    "file": 26,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 131831132,
+    "unique_allocated_bytes": 131911680,
+    "newest_mtime_ns": 1790077623141810184,
+    "oldest_mtime_ns": 1790076225127346858,
+    "checkpoint_matches": [],
+    "GiB": 0.1229
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/session-rateio-dicas-1551947602562392085",
+    "family": "finance",
+    "file": 48,
+    "directory": 8,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 124025634,
+    "unique_allocated_bytes": 124182528,
+    "newest_mtime_ns": 1790085513903382775,
+    "oldest_mtime_ns": 1790083648458194650,
+    "checkpoint_matches": [],
+    "GiB": 0.1157
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557",
+    "family": "agent_work",
+    "file": 72,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 123963391,
+    "unique_allocated_bytes": 124149760,
+    "newest_mtime_ns": 1788638100303287405,
+    "oldest_mtime_ns": 1788636336246658195,
+    "checkpoint_matches": [],
+    "GiB": 0.1156
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/storage-local-tests-1571996311308214363/batched",
+    "family": "backups",
+    "file": 5,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 124116432,
+    "unique_allocated_bytes": 124137472,
+    "newest_mtime_ns": 1794865635738533385,
+    "oldest_mtime_ns": 1794864836860855370,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-LOCAL-TESTS-1571996311308214363",
+        "state": "completed_validated_exact_three_root_retirement",
+        "next_step": "Lotee8c3b1112441 concluido uma vez,confirmacao1572075298164580365:3064files81dirs removidos;31roots31565SHA intactos;deltaimediato616.29MiB. Nao rerodar gate ou lotesNPX/UV. Proxima revisao:25roots preservados pendentes+familias2-6;indices proprios da auditoria devemser consolidados lossless/gateseparadosemdeleteimplicito. Caches pausados. Nenhuma exclusao aguardando confirmacao deste lote.",
+        "source": "context/storage-reaudit-20261116.md;data/storage-local-tests-1571996311308214363/target-consumer-census-v2/retirement-final.json;discord:1569928464033783862/1572075298164580365"
+      }
+    ],
+    "GiB": 0.1156
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/vigency-release-1551783001678024736",
+    "family": "finance",
+    "file": 52,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 122390985,
+    "unique_allocated_bytes": 122556416,
+    "newest_mtime_ns": 1790047033843948309,
+    "oldest_mtime_ns": 1790038823819691891,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-VIGENCY-1551783001678024736",
+        "state": "escopo esclarecido: gross cad rede1; gross usd rede2/av/m2; gastos fb/google. despesas rodolfo confere sozinho; gestores derivados. definição salva; interface ainda não simplificada",
+        "next_step": "Usar esse escopo na simplificação da apresentação; preservar cálculos e dados. Não acrescentar conferência independente de despesas/gestores nem auditoria antecipada de outubro",
+        "source": "docs/finance-system-product-direction.md"
+      }
+    ],
+    "GiB": 0.1141
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/finc-review-1551931759061631058",
+    "family": "finance",
+    "file": 29,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 121063811,
+    "unique_allocated_bytes": 121155584,
+    "newest_mtime_ns": 1790080536546745700,
+    "oldest_mtime_ns": 1790080191520401941,
+    "checkpoint_matches": [],
+    "GiB": 0.1128
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/review-deductions-1553399478248017973",
+    "family": "finance",
+    "file": 23,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 120923487,
+    "unique_allocated_bytes": 120991744,
+    "newest_mtime_ns": 1790949834696948331,
+    "oldest_mtime_ns": 1790168827110722008,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-REVIEW-DEDUCTIONS-1553399478248017973",
+        "state": "concluído: quatro redes com descontos por site/total; m2 agosto usd4284.08; 381 testes; 17 competências/34 visualizações produtivas; zero escritas financeiras; rollback/inventário/audit/registry/skill/report-infra com readback.",
+        "next_step": "Nenhuma pendência desta entrega.",
+        "source": "reports/finance-review-deductions-1553399478248017973.md"
+      }
+    ],
+    "GiB": 0.1127
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/login-redirect-1551937825073790986",
+    "family": "finance",
+    "file": 25,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 120443399,
+    "unique_allocated_bytes": 120524800,
+    "newest_mtime_ns": 1790082568654981261,
+    "oldest_mtime_ns": 1790081653160936559,
+    "checkpoint_matches": [],
+    "GiB": 0.1122
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/conference-access-1551924862854107256",
+    "family": "finance",
+    "file": 26,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 119329764,
+    "unique_allocated_bytes": 119414784,
+    "newest_mtime_ns": 1790079058951305230,
+    "oldest_mtime_ns": 1790078312013520336,
+    "checkpoint_matches": [],
+    "GiB": 0.1112
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/payments-edit-1551700964975714437",
+    "family": "finance",
+    "file": 29,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 117823489,
+    "unique_allocated_bytes": 117923840,
+    "newest_mtime_ns": 1790027414454809018,
+    "oldest_mtime_ns": 1789171545646715695,
+    "checkpoint_matches": [],
+    "GiB": 0.1098
+  },
+  {
+    "unit": "/root/mgs-agent/backups/ares-creative-ops",
+    "family": "backups",
+    "file": 74,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 117054442,
+    "unique_allocated_bytes": 117215232,
+    "newest_mtime_ns": 1792097763598890634,
+    "oldest_mtime_ns": 1785426433997727088,
+    "checkpoint_matches": [],
+    "GiB": 0.1092
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547",
+    "family": "agent_work",
+    "file": 1109,
+    "directory": 14,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 110470268,
+    "unique_allocated_bytes": 112996352,
+    "newest_mtime_ns": 1793117949628783775,
+    "oldest_mtime_ns": 1793090372770331778,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-SEO100-PUBLIC-QA-1564558610263187547",
+        "state": "approved_exact27_cache_completed_validated_other_QA_pending",
+        "next_step": "Rodolfo confirmou1564677701640658947;27arquivos exatos limpos com backups/hash,54GETs pós-write+27finais;24sitemaps com membros e3bios/schemaEN/ES em canonical/origem,6checksdesktop/mobile;prodconteúdo/perfil/settingspreservados. Resultado em /root/.hermes/profiles/zeus/work/seo100-cache-execute-1564677701640658947/final-result.json.20categorias e demais diagnósticos fora desse manifesto ainda abertos; regrasAtena/recorrência propostas nãoimplantadas. Registros locais26collection-v3-error são supersedidos por import-collision-reconciliation.json, não falhas atuais de saúde. ES6outrocheckpoint semmodificar.",
+        "source": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738"
+      }
+    ],
+    "GiB": 0.1052
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467",
+    "family": "agent_work",
+    "file": 2137,
+    "directory": 268,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 101551417,
+    "unique_allocated_bytes": 106647552,
+    "newest_mtime_ns": 1793139844163729993,
+    "oldest_mtime_ns": 1793120222289832233,
+    "checkpoint_matches": [],
+    "GiB": 0.0993
+  },
+  {
+    "unit": "/root/mgs-agent/work/hera",
+    "family": "agent_work",
+    "file": 47,
+    "directory": 13,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 104237769,
+    "unique_allocated_bytes": 104382464,
+    "newest_mtime_ns": 1783732390042441102,
+    "oldest_mtime_ns": 1781880349204925921,
+    "checkpoint_matches": [],
+    "GiB": 0.0972
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo-mass-1560295338257023118",
+    "family": "agent_work",
+    "file": 2295,
+    "directory": 214,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 97083299,
+    "unique_allocated_bytes": 104087552,
+    "newest_mtime_ns": 1793120291456935793,
+    "oldest_mtime_ns": 1792076275149400105,
+    "checkpoint_matches": [
+      {
+        "id": "atena-seo-mass-1560295338257023118",
+        "state": "completed_verified:raquel1564764967419519027solicitoucompletarrotaginação2domesmoautorid6jápúblicoporrodolfo.165offlinepass;deployatômicomesmomu/estágio;getheadorigem/público2rotas200;22+7httpúnicos/negativospreservados;4dom390/1280eunion17/17semduplicatas;linksreaisida/voltacomprovados;17posts/meta/termos/perfil/options/vendorinalterados;4cachescandidatosausentes;rollbackpréviabasepreparadonãousado.58artigos/sitemaps/og/schema/locale11concluídos,0pendênciasnesse lote.",
+        "next_step": "Encerradoeste lote58. Não repetirpublishes/imagens/cache23/locale11/MU. Próximoslotesemthreads/fontespróprias. Nova mudança do fornecedor invalida revisão e exige readback, sem promessa genérica de imutabilidade futura.",
+        "source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/final-public-resolution-1564764967419519027.json"
+      }
+    ],
+    "GiB": 0.0969
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-utm-medium-onhold-migration",
+    "family": "backups",
+    "file": 155,
+    "directory": 79,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 102003824,
+    "unique_allocated_bytes": 102772736,
+    "newest_mtime_ns": 1789532674086976678,
+    "oldest_mtime_ns": 1789527232453859073,
+    "checkpoint_matches": [],
+    "GiB": 0.0957
+  },
+  {
+    "unit": "/root/mgs-agent/work/ares-c07-c11-replacement-20260821",
+    "family": "agent_work",
+    "file": 115,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 102200050,
+    "unique_allocated_bytes": 102490112,
+    "newest_mtime_ns": 1787336014032904674,
+    "oldest_mtime_ns": 1787334309955132790,
+    "checkpoint_matches": [],
+    "GiB": 0.0955
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/vps-cleanup/20260901T230938-0400-hermes-post-update",
+    "family": "backups",
+    "file": 35,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 99838035,
+    "unique_allocated_bytes": 99934208,
+    "newest_mtime_ns": 1788319740021109058,
+    "oldest_mtime_ns": 1788318705312319541,
+    "checkpoint_matches": [],
+    "GiB": 0.0931
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822",
+    "family": "agent_work",
+    "file": 12364,
+    "directory": 1566,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 64703769,
+    "unique_allocated_bytes": 98971648,
+    "newest_mtime_ns": 1790998028532975015,
+    "oldest_mtime_ns": 1789356081715753080,
+    "checkpoint_matches": [],
+    "GiB": 0.0922
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230",
+    "family": "agent_work",
+    "file": 12378,
+    "directory": 1580,
+    "link": 1,
+    "other": 0,
+    "logical_bytes": 64393322,
+    "unique_allocated_bytes": 98795520,
+    "newest_mtime_ns": 1791013012027584700,
+    "oldest_mtime_ns": 1778966920549876868,
+    "checkpoint_matches": [],
+    "GiB": 0.092
+  },
+  {
+    "unit": "/root/mgs-agent/data/content-reference-map",
+    "family": "operational_data",
+    "file": 83,
+    "directory": 24,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 96504412,
+    "unique_allocated_bytes": 96784384,
+    "newest_mtime_ns": 1783732390040441099,
+    "oldest_mtime_ns": 1782691267320392369,
+    "checkpoint_matches": [],
+    "GiB": 0.0901
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/adops-1551275920671776839",
+    "family": "finance",
+    "file": 1,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 95579575,
+    "unique_allocated_bytes": 95584256,
+    "newest_mtime_ns": 1789924603095306106,
+    "oldest_mtime_ns": 1789924295637884308,
+    "checkpoint_matches": [],
+    "GiB": 0.089
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv05-c04-c06-legacy-reuse-20260831",
+    "family": "agent_work",
+    "file": 79,
+    "directory": 5,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 89914617,
+    "unique_allocated_bytes": 90083328,
+    "newest_mtime_ns": 1788156693168691831,
+    "oldest_mtime_ns": 1788151703781336730,
+    "checkpoint_matches": [],
+    "GiB": 0.0839
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408",
+    "family": "media_evidence",
+    "file": 20,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 87167766,
+    "unique_allocated_bytes": 87224320,
+    "newest_mtime_ns": 1794929297188866957,
+    "oldest_mtime_ns": 1794927926922714003,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-SB-TIMELINE-1572265135207223408",
+        "state": "completed_verified: mesma sheet 11cmdxeil2voumjbc3pmyqygipsqpxga3wolazezqt2o; total movido de cd para c; a:c congeladas; 22468 células/formatos e 273 fórmulas conferidos; total brl 3900153.94 preservado",
+        "next_step": "Nenhuma ação técnica pendente; análise com sócio pelo mesmo link",
+        "source": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408/total-freeze-1572271474171977811/verification.json"
+      }
+    ],
+    "GiB": 0.0812
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private::direct",
+    "family": "finance",
+    "file": 29,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 80653062,
+    "unique_allocated_bytes": 80748544,
+    "newest_mtime_ns": 1794938262699164752,
+    "oldest_mtime_ns": 1788642335870834761,
+    "checkpoint_matches": [],
+    "GiB": 0.0752
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/artifacts/landing-followup",
+    "family": "media_evidence",
+    "file": 108,
+    "directory": 507,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 77799195,
+    "unique_allocated_bytes": 80117760,
+    "newest_mtime_ns": 1792774605801986509,
+    "oldest_mtime_ns": 1792015341331163133,
+    "checkpoint_matches": [],
+    "GiB": 0.0746
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/reaudit-1551300167230029965",
+    "family": "finance",
+    "file": 140,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 75857118,
+    "unique_allocated_bytes": 76173312,
+    "newest_mtime_ns": 1789929984803015928,
+    "oldest_mtime_ns": 1789929227259989138,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ADOPS-REAUDIT-1551300167230029965",
+        "state": "audit_completed_read_only:8 abas e24 releituras estaveis;50 contas sem delta diario;21 sites sb completos exatos;22 sites mistos/m2 divergentes, gross dash411172.11 vs fonte407419.77;3 subtotais auxiliares sb incorretos;149 datas corrigidas concorrentemente na fonte e reauditadas;0 datas perdidas restantes;aplicacao av/m2 continua pendente",
+        "next_step": "Alinhar formulas auxiliares, normalizacao locale dos3novos blocos e representacao fechamento AV/paises; nao reimportar SB/gastos ja exatos",
+        "source": "reports/finance-adops-reaudit-1551300167230029965.md"
+      }
+    ],
+    "GiB": 0.0709
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/m2-settlement-1552327479627087913",
+    "family": "finance",
+    "file": 26,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 74894850,
+    "unique_allocated_bytes": 74993664,
+    "newest_mtime_ns": 1790174573071405832,
+    "oldest_mtime_ns": 1790168827110722008,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-M2-SETTLEMENT-1552327479627087913",
+        "state": "concluido:dashrev508;sheetunicaen82;ambasnet4284.08;195m2facts3551outrospreservados;outroscenariosinalterados;api+browservalidados",
+        "next_step": "Nenhuma pendencia deste ajuste; outros pagamentos dependem de suas proprias instrucoes",
+        "source": "reports/finance-m2-settlement-1552327479627087913.md"
+      }
+    ],
+    "GiB": 0.0698
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/full-review-1551317339968901264",
+    "family": "finance",
+    "file": 85,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 73516660,
+    "unique_allocated_bytes": 73703424,
+    "newest_mtime_ns": 1789934616146336051,
+    "oldest_mtime_ns": 1789923515832713199,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-FULL-REVIEW-1551317339968901264",
+        "state": "auditoria read-only concluida/validada:46cadastros,43receitapositiva,6gestores,50contas,1550controlesconta-dia,24releiturasestaveis,revision393/accounts7. grossfonte407528.029438,dash411281.763939,22divergentes. gastosvalores/diasbatem;cpv16usd74.57 em mgs em vez g006. agosto managerview omite usd66532.027828 de fatosnativos no detalhe,ja inclusos no consolidado. zeroescritasfinanceiras/sheet.",
+        "next_step": "Usar o relatorio por dominio/gestor para concluir correcao previamente autorizada:AV/M2,gestorCPV16 e exibicao nativaagosto. Nao duplicar receita;setembroG006/G002preservados;PEND092aberta.",
+        "source": "reports/finance-full-review-1551317339968901264.md"
+      }
+    ],
+    "GiB": 0.0686
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-dashboard-august-20260904",
+    "family": "agent_work",
+    "file": 55,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 72858733,
+    "unique_allocated_bytes": 72986624,
+    "newest_mtime_ns": 1788561080355005047,
+    "oldest_mtime_ns": 1788529379536964526,
+    "checkpoint_matches": [],
+    "GiB": 0.068
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/portalbrasilnews-resolution-20260922",
+    "family": "agent_work",
+    "file": 112,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 71623873,
+    "unique_allocated_bytes": 71942144,
+    "newest_mtime_ns": 1790131271640021569,
+    "oldest_mtime_ns": 1790121208910204676,
+    "checkpoint_matches": [],
+    "GiB": 0.067
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-adops-1551275920671776839",
+    "family": "agent_work",
+    "file": 76,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 69085804,
+    "unique_allocated_bytes": 69251072,
+    "newest_mtime_ns": 1789924906711694436,
+    "oldest_mtime_ns": 1789923515832713199,
+    "checkpoint_matches": [],
+    "GiB": 0.0645
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/manager-access-1546858367635685396",
+    "family": "finance",
+    "file": 40,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 64567371,
+    "unique_allocated_bytes": 64688128,
+    "newest_mtime_ns": 1789147114566686064,
+    "oldest_mtime_ns": 1788839847229023578,
+    "checkpoint_matches": [],
+    "GiB": 0.0602
+  },
+  {
+    "unit": "/root/mgs-agent/reports/manual10-background-1569376234008354837",
+    "family": "reports",
+    "file": 197,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 63572259,
+    "unique_allocated_bytes": 64036864,
+    "newest_mtime_ns": 1794244324587095745,
+    "oldest_mtime_ns": 1794238893738144677,
+    "checkpoint_matches": [],
+    "GiB": 0.0596
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/usability-1546729477319696405",
+    "family": "finance",
+    "file": 135,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 63373486,
+    "unique_allocated_bytes": 63700992,
+    "newest_mtime_ns": 1788843340608083879,
+    "oldest_mtime_ns": 1788839771960938777,
+    "checkpoint_matches": [],
+    "GiB": 0.0593
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-zuout-smart-routing-links",
+    "family": "backups",
+    "file": 199,
+    "directory": 31,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 62794955,
+    "unique_allocated_bytes": 63324160,
+    "newest_mtime_ns": 1789704876041929450,
+    "oldest_mtime_ns": 1789700328901145094,
+    "checkpoint_matches": [],
+    "GiB": 0.059
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/tooling/uv-20260802-2318",
+    "family": "backups",
+    "file": 2,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 60783515,
+    "unique_allocated_bytes": 60796928,
+    "newest_mtime_ns": 1785727057604857586,
+    "oldest_mtime_ns": 1781200402000000000,
+    "checkpoint_matches": [],
+    "GiB": 0.0566
+  },
+  {
+    "unit": "/root/mgs-agent/backups/dtr-utm-medium-migration",
+    "family": "backups",
+    "file": 90,
+    "directory": 47,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 60180887,
+    "unique_allocated_bytes": 60616704,
+    "newest_mtime_ns": 1789525922817952886,
+    "oldest_mtime_ns": 1789522698952208606,
+    "checkpoint_matches": [],
+    "GiB": 0.0565
+  },
+  {
+    "unit": "/root/mgs-agent/backups/sb-session-refresh",
+    "family": "backups",
+    "file": 14,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 57808792,
+    "unique_allocated_bytes": 57847808,
+    "newest_mtime_ns": 1790213045331466740,
+    "oldest_mtime_ns": 1787829610110676429,
+    "checkpoint_matches": [],
+    "GiB": 0.0539
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/artifacts/drive-legacy-consolidation-1566510979838255326",
+    "family": "media_evidence",
+    "file": 60,
+    "directory": 9,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 57022435,
+    "unique_allocated_bytes": 57245696,
+    "newest_mtime_ns": 1793560341632276078,
+    "oldest_mtime_ns": 1793556008017371001,
+    "checkpoint_matches": [
+      {
+        "id": "DRIVE-LEGACY-CONSOLIDATION-1566510979838255326",
+        "state": "completed_validated",
+        "next_step": "Conciliação técnica e uso histórico encerrados: ver seção final da fonte. Rodolfo confirmou uso dos172; movimentos e bytes/consumidores validados. Nenhuma reserva liberada ou campanha criada. Primeiro uso novo é gate independente, acompanhado internamente.",
+        "source": "context/creative-archive-legacy-reconciliation.md"
+      }
+    ],
+    "GiB": 0.0533
+  },
+  {
+    "unit": "/root/mgs-agent/data::direct",
+    "family": "operational_data",
+    "file": 579,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 54851821,
+    "unique_allocated_bytes": 56004608,
+    "newest_mtime_ns": 1794939318803390386,
+    "oldest_mtime_ns": 1776740919674543351,
+    "checkpoint_matches": [],
+    "GiB": 0.0522
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/node_modules",
+    "family": "finance_sources",
+    "file": 1534,
+    "directory": 257,
+    "link": 3,
+    "other": 0,
+    "logical_bytes": 48489656,
+    "unique_allocated_bytes": 53874688,
+    "newest_mtime_ns": 1793627952281634383,
+    "oldest_mtime_ns": 1788642323864869900,
+    "checkpoint_matches": [],
+    "GiB": 0.0502
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/gamezone-geizian-1548133712795795506",
+    "family": "finance",
+    "file": 14,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 53506783,
+    "unique_allocated_bytes": 53542912,
+    "newest_mtime_ns": 1789175625489927527,
+    "oldest_mtime_ns": 1789174430019518318,
+    "checkpoint_matches": [],
+    "GiB": 0.0499
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/gam-sequential-1548113083774541935",
+    "family": "finance",
+    "file": 34,
+    "directory": 17,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 52682388,
+    "unique_allocated_bytes": 52830208,
+    "newest_mtime_ns": 1789176414962593485,
+    "oldest_mtime_ns": 1789169696171341016,
+    "checkpoint_matches": [],
+    "GiB": 0.0492
+  },
+  {
+    "unit": "/root/mgs-agent/work/meta-utility",
+    "family": "agent_work",
+    "file": 341,
+    "directory": 44,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 50076348,
+    "unique_allocated_bytes": 50995200,
+    "newest_mtime_ns": 1784300153002186063,
+    "oldest_mtime_ns": 1782705724350081292,
+    "checkpoint_matches": [],
+    "GiB": 0.0475
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/storage-system-review-1571271327648587799/root.jsonl.gz",
+    "family": "backups",
+    "file": 1,
+    "directory": 0,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 50529923,
+    "unique_allocated_bytes": 50536448,
+    "newest_mtime_ns": 1794691044583103022,
+    "oldest_mtime_ns": 1794691044583103022,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-SYSTEM-1571271327648587799",
+        "state": "deep_review_complete_preserved_global_followup",
+        "next_step": "Deep131files/11pkg106MiBpreservados;capture5loteindependenteexecutado1571691667516424224efinalvalidado. Nenhumdeleteadicionalautorizado. Proxima6duplicataswork/read-only;7-8globaisabertos.",
+        "source": "context/storage-reorganization-20261112.md;data/storage-deep-preserve-1571685763349741730/retirement-result.json;data/storage-deep-preserve-1571685763349741730/retirement-recovery-result.json"
+      }
+    ],
+    "GiB": 0.0471
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/creditoparaveiculo-daily-20260820",
+    "family": "agent_work",
+    "file": 25,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 49542797,
+    "unique_allocated_bytes": 49602560,
+    "newest_mtime_ns": 1787259375052432733,
+    "oldest_mtime_ns": 1787259331102483550,
+    "checkpoint_matches": [],
+    "GiB": 0.0462
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/full-reaudit-1551718259718365296",
+    "family": "finance",
+    "file": 103,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 49185800,
+    "unique_allocated_bytes": 49446912,
+    "newest_mtime_ns": 1790030736697012292,
+    "oldest_mtime_ns": 1790000590084333707,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FULL-REAUDIT-1551718259718365296",
+        "state": "concluida com ressalvas de arredondamento:rev453;184checks originais46sitesok;240componentesconvertidos semdelta bruto>=usd0.01;44despesas12linhaspessoal individualmenteok;29.058celulasimportadasidenticas;13ledgersok. folhatotalsheet43975.97 vsdash43975.96;geiziansheet75501.00 vsdash75500.99 no mesmofx;metricasgestores/sites comdiferencasvisuaisusd0.01. zeroedicaonominalfinanceira.",
+        "next_step": "Entregarachados a Rodolfo;padronizacaoprecisao/arredondamento ou fixacaocambial naoautorizadas nesta auditoria;aguardardecisao se desejada igualdade literal.",
+        "source": "/root/mgs-agent/reports/finance-full-reaudit-1551718259718365296.md"
+      }
+    ],
+    "GiB": 0.0461
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-september-source-audit-1562562282838429729",
+    "family": "agent_work",
+    "file": 32,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 49199365,
+    "unique_allocated_bytes": 49270784,
+    "newest_mtime_ns": 1792614619690054700,
+    "oldest_mtime_ns": 1792614371155786636,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
+        "state": "completed_validated_points1_6_av_no_revenue_owner_confirmed",
+        "next_step": "Nenhuma pendencia nesta conferencia. Nao reexecutar ajustes; cambio definitivo, recebimentos e pagamentos sao etapas separadas sem nova autorizacao neste fechamento",
+        "source": "reports/finance-september-close-av-zero-1562829014609961071.md;reports/finance-yolo-daily-close-1562816076503449702.md"
+      }
+    ],
+    "GiB": 0.0459
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/account-managers-1547052028663169105",
+    "family": "finance",
+    "file": 22,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 47619694,
+    "unique_allocated_bytes": 47673344,
+    "newest_mtime_ns": 1788917860379083361,
+    "oldest_mtime_ns": 1788916423458613306,
+    "checkpoint_matches": [],
+    "GiB": 0.0444
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/cpv05-c07-legacy-reuse-20260831",
+    "family": "agent_work",
+    "file": 154,
+    "directory": 8,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 47217461,
+    "unique_allocated_bytes": 47616000,
+    "newest_mtime_ns": 1788160388656276039,
+    "oldest_mtime_ns": 1788156996465032319,
+    "checkpoint_matches": [],
+    "GiB": 0.0443
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-current-policy-1547732274936553532",
+    "family": "agent_work",
+    "file": 43,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 47108095,
+    "unique_allocated_bytes": 47230976,
+    "newest_mtime_ns": 1789099183856597197,
+    "oldest_mtime_ns": 1789080488846038948,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-CURRENT-POLICY-1547732274936553532",
+        "state": "published_verified: 24 competências; cards superiores realizado/estimativa em 100%; setembro cutoff 09/09; 3 sites mgs inativos; julho own-tab preservando sb tech cad; 113 node + 74 python + browser owner/manager pass.",
+        "next_step": "Aguardar decisão explícita de Rodolfo somente se quiser substituir a correção canônica CAD de julho pelo valor da fórmula live GBP.",
+        "source": "/root/mgs-agent/reports/finance-current-policy-1547732274936553532.md"
+      }
+    ],
+    "GiB": 0.044
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/audit-1556488447152099339",
+    "family": "finance",
+    "file": 40,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 45743408,
+    "unique_allocated_bytes": 45858816,
+    "newest_mtime_ns": 1791168274948035037,
+    "oldest_mtime_ns": 1791166297006537521,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-AUDIT-1556488447152099339",
+        "state": "auditoria concluida com achados:452testespass;84/85gestorespass;nicolasoutubro500 por gastoseggbevusd288.12;42/44browser;zerodmlfinanceiro/exclusoes/restarts;fxconcorrente reconciliado;artefatos próprios retidos",
+        "next_step": "Aguardar escopo especifico para corrigir propagacao financeira Eggbev/Nicolas; propor cache metadados/lazy payload e retencao manual; nenhuma exclusao aprovada",
+        "source": "reports/finance-technical-audit-1556488447152099339.md"
+      }
+    ],
+    "GiB": 0.0427
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/artifacts/US-EMP-STATIC-30-20260817",
+    "family": "media_evidence",
+    "file": 101,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 45127873,
+    "unique_allocated_bytes": 45346816,
+    "newest_mtime_ns": 1786987051066501749,
+    "oldest_mtime_ns": 1786986480676767463,
+    "checkpoint_matches": [],
+    "GiB": 0.0422
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-month-rollover-audit",
+    "family": "agent_work",
+    "file": 48,
+    "directory": 7,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 44115728,
+    "unique_allocated_bytes": 44240896,
+    "newest_mtime_ns": 1784300153003186064,
+    "oldest_mtime_ns": 1783111283350704118,
+    "checkpoint_matches": [],
+    "GiB": 0.0412
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/spend-placement-1547012165150711858",
+    "family": "finance",
+    "file": 70,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 41922189,
+    "unique_allocated_bytes": 42131456,
+    "newest_mtime_ns": 1788913529898695602,
+    "oldest_mtime_ns": 1788907309699338204,
+    "checkpoint_matches": [],
+    "GiB": 0.0392
+  },
+  {
+    "unit": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
+    "family": "reports",
+    "file": 229,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 41347865,
+    "unique_allocated_bytes": 41828352,
+    "newest_mtime_ns": 1792955721588214552,
+    "oldest_mtime_ns": 1792943970385807489,
+    "checkpoint_matches": [],
+    "GiB": 0.039
+  },
+  {
+    "unit": "/root/mgs-agent/work/finance-adops-reconciliation-1551042463060197386",
+    "family": "agent_work",
+    "file": 24,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 41648831,
+    "unique_allocated_bytes": 41709568,
+    "newest_mtime_ns": 1789868530259426771,
+    "oldest_mtime_ns": 1789867787803136925,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-ADOPS-1551042463060197386",
+        "state": "blocked critical subset: dump completo publicamente auto-pushed commit a73a267d0; repo github publico confirmado. 6password hashes/7mfaencrypted/308sessoes/9trusteddevices. autocommit stopped inactive/dead; localdump movido para app/private ignorado. dash aplicada392/cadastro7/audit1513-1514:50contas gastos,21sites receitasb;av/m2 restantes nao aplicados.",
+        "next_step": "Obter confirmacao adicional de Rodolfo para purga Git corrente/historico+force-with-lease e rotacao6senhas/revogacao sessoes. Nao reiniciar autocommit. Depois retomar ajustes mensais AV/M2 e detalhados Cliquet; TopFeed detalhe ja recebido6937.68 vs6937.50.",
+        "source": "reports/finance-adops-application-1551275920671776839.md"
+      }
+    ],
+    "GiB": 0.0388
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/storage-local-tests-1571996311308214363/reference-source-index.json",
+    "family": "backups",
+    "file": 1,
+    "directory": 0,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 41245527,
+    "unique_allocated_bytes": 41246720,
+    "newest_mtime_ns": 1794864085277475878,
+    "oldest_mtime_ns": 1794864085277475878,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-LOCAL-TESTS-1571996311308214363",
+        "state": "completed_validated_exact_three_root_retirement",
+        "next_step": "Lotee8c3b1112441 concluido uma vez,confirmacao1572075298164580365:3064files81dirs removidos;31roots31565SHA intactos;deltaimediato616.29MiB. Nao rerodar gate ou lotesNPX/UV. Proxima revisao:25roots preservados pendentes+familias2-6;indices proprios da auditoria devemser consolidados lossless/gateseparadosemdeleteimplicito. Caches pausados. Nenhuma exclusao aguardando confirmacao deste lote.",
+        "source": "context/storage-reaudit-20261116.md;data/storage-local-tests-1571996311308214363/target-consumer-census-v2/retirement-final.json;discord:1569928464033783862/1572075298164580365"
+      }
+    ],
+    "GiB": 0.0384
+  },
+  {
+    "unit": "/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/metadata-root.jsonl.gz",
+    "family": "backups",
+    "file": 1,
+    "directory": 0,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 40836279,
+    "unique_allocated_bytes": 40841216,
+    "newest_mtime_ns": 1794860948657539346,
+    "oldest_mtime_ns": 1794860948657539346,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-STORAGE-FULL-REAUDIT-1571983565292441731",
+        "state": "global_inventory_complete_disposal_semantics_pending",
+        "next_step": "Ciclo novo:1financeiro local(classificar34rootsDB, fontes/evidencias/exports;326SHA mostra5grupos<1MiB,naoprovauso);2works/testesagentes;3dadosrelatoriosmidias;4backups/snapshots;5runtimes/Git;6restosistema. Caches fora. Semdelete/install/restart/cron autorizado; nao pedir outroOKgenerico para analise ja pedida; gates novos exatos para descarte. Nao repetir lotes encerrados.",
+        "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/audit-final.json;data/storage-reaudit-1571983565292441731/priority-ledger.json;discord:1569928464033783862/1571983565292441731"
+      }
+    ],
+    "GiB": 0.038
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/personnel-review-1554276069299716107",
+    "family": "finance",
+    "file": 8,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 40472366,
+    "unique_allocated_bytes": 40497152,
+    "newest_mtime_ns": 1790639025115991412,
+    "oldest_mtime_ns": 1790638805910779732,
+    "checkpoint_matches": [],
+    "GiB": 0.0377
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b",
+    "family": "agent_work",
+    "file": 364,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 39074425,
+    "unique_allocated_bytes": 39915520,
+    "newest_mtime_ns": 1790643434693887077,
+    "oldest_mtime_ns": 1790543968585470451,
+    "checkpoint_matches": [],
+    "GiB": 0.0372
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/sheet-recheck-1551620693446234142",
+    "family": "finance",
+    "file": 36,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 39812969,
+    "unique_allocated_bytes": 39890944,
+    "newest_mtime_ns": 1790006130824797410,
+    "oldest_mtime_ns": 1790000590084333707,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-SHEET-RECHECK-1551620693446234142",
+        "state": "completed",
+        "next_step": "Reportar Yolokfx USD0.07 restante, Contecta moeda e quatro deltas de um centavo; nenhuma outra edicao autorizada",
+        "source": "reports/finance-sheet-recheck-1551620693446234142.md"
+      }
+    ],
+    "GiB": 0.0372
+  },
+  {
+    "unit": "/root/.hermes/profiles/ares/work/creditoparaveiculo-c20-advideos-canary",
+    "family": "agent_work",
+    "file": 9,
+    "directory": 4,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 39333147,
+    "unique_allocated_bytes": 39370752,
+    "newest_mtime_ns": 1787466298079134997,
+    "oldest_mtime_ns": 1787463813546584239,
+    "checkpoint_matches": [],
+    "GiB": 0.0367
+  },
+  {
+    "unit": "/root/mgs-agent/work/cpv-c31-from-zero-20260827",
+    "family": "agent_work",
+    "file": 38,
+    "directory": 5,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 37772496,
+    "unique_allocated_bytes": 37875712,
+    "newest_mtime_ns": 1787853748017605801,
+    "oldest_mtime_ns": 1787850698753829113,
+    "checkpoint_matches": [],
+    "GiB": 0.0353
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953",
+    "family": "finance",
+    "file": 27,
+    "directory": 3,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 37649093,
+    "unique_allocated_bytes": 37732352,
+    "newest_mtime_ns": 1794932095178139811,
+    "oldest_mtime_ns": 1790168827110722008,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SPEND-1553386505639165953",
+        "state": "concluido: codigo publicado,375 testes, gastos/gam ate25/09, revisao703/audit2308, replay idempotente, api/browser desktop/mobile e states ok.",
+        "next_step": "Operacao diaria normal; nenhuma pendencia deste reparo",
+        "source": "reports/finance-spend-repair-1553386505639165953.md"
+      }
+    ],
+    "GiB": 0.0351
+  },
+  {
+    "unit": "/root/mgs-agent/data/f011-apply-1556720208696316077",
+    "family": "operational_data",
+    "file": 31,
+    "directory": 1,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 37546461,
+    "unique_allocated_bytes": 37634048,
+    "newest_mtime_ns": 1793855208559906808,
+    "oldest_mtime_ns": 1791222793518783722,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-F011-APPLY-1556720208696316077",
+        "state": "authorized_subset_completed_validated:7/8e2restoresausentes;15apps/sql/https pass;5/6isoladas;1–4intactas/4globaisprotegidas;2dumpsretidos;cronbe0c6fd23c82one-shot/no-agent05/11/2026 00:05:47eastern;11fixtures/livedrypass;10células+cores/readback;registry1ativosupersessão/audit/inventory/skill/report1556740435873894431readbackpass",
+        "next_step": "Aguardarretenção;croncondicional devepararporhold/instruçãoambígua/fingerprintdrift;nenhuma ação adicional nas4globais;fila sómediante novo pedido",
+        "source": "discord:1551768281688580096#1556731764217618587;data/f011-retirement-confirmed-1556731764217618587.json;reports/f011-remaining-retirement-completed-1556731764217618587.md;REPORT-INFRA:1556740435873894431"
+      }
+    ],
+    "GiB": 0.035
+  },
+  {
+    "unit": "/root/mgs-agent/apps/finance-system/private/september-export-preflight-1555267485928788099",
+    "family": "finance",
+    "file": 17,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 35506763,
+    "unique_allocated_bytes": 35561472,
+    "newest_mtime_ns": 1790875818199541710,
+    "oldest_mtime_ns": 1790875165873843298,
+    "checkpoint_matches": [
+      {
+        "id": "ZEUS-FINANCE-SEPTEMBER-EXPORT-1555267485928788099",
+        "state": "concluídos vídeo1555338586327613623 +1555350526672113764 +1555351286113902643:11países e geral asy:awq;rede c→d;39contas agrupadas;75quadros repetidos removidos;6750fórmulas principal e6660gestores ligadas ao topo;usd/brl eusd/cadlive;gbp fixo conforme dash.5978entradas e2666resultados pass,5folhas/fx pass,zero erros.",
+        "next_step": "Sem pendência destes pedidos. Preservar parâmetros globais e câmbio automático provisório até liquidação confirmada; conferência geral na semana do dia20, sem alteração da dash por este fluxo.",
+        "source": "reports/finance-september-video-layout-1555338586327613623.md"
+      }
+    ],
+    "GiB": 0.0331
+  },
+  {
+    "unit": "/root/.hermes/profiles/zeus/codex-pilots/scans",
+    "family": "agent_work",
+    "file": 4156,
+    "directory": 549,
+    "link": 0,
+    "other": 8,
+    "logical_bytes": 23617616,
+    "unique_allocated_bytes": 35241984,
+    "newest_mtime_ns": 1790975988109306070,
+    "oldest_mtime_ns": 1790961201718707489,
+    "checkpoint_matches": [],
+    "GiB": 0.0328
+  },
+  {
+    "unit": "/root/mgs-agent/reports/php83-post-migration-20261014",
+    "family": "reports",
+    "file": 32,
+    "directory": 2,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 34768727,
+    "unique_allocated_bytes": 34856960,
+    "newest_mtime_ns": 1791957207078927120,
+    "oldest_mtime_ns": 1791952542274372932,
+    "checkpoint_matches": [],
+    "GiB": 0.0325
+  },
+  {
+    "unit": "/root/.hermes/profiles/atena/work/seo-mass-1559930384852979796",
+    "family": "agent_work",
+    "file": 686,
+    "directory": 25,
+    "link": 0,
+    "other": 0,
+    "logical_bytes": 32996165,
+    "unique_allocated_bytes": 34799616,
+    "newest_mtime_ns": 1792678268920689518,
+    "oldest_mtime_ns": 1791988211954234816,
+    "checkpoint_matches": [
+      {
+        "id": "atena-seo-massa-1559930384852979796",
+        "state": "correção explícita de raquel1560284833924518091 aplicada:30/30 posts receberam de volta tags temáticas/seo pertinentes e atena_agent, mantendo par canônico lang_*+país e sem restaurar identificadores alternativos de idioma/país. writes somente no campo tags; status publish,corpo,título,slug,categoria,mídia,meta e demais campos editoriais preservados.30/30 readbacks autenticados e públicos http200 confirmaram as tags. regra para qualquer tipo de artigo persistida na skill e na fonte canônica editorial-taxonomy-policy.json. pendência anterior de sitemap permanece registrada separadamente,sem diagnóstico/correção técnica nesta tarefa.",
+        "next_step": "Raquel continuar a revisão dos demais pontos. Zeus/Tech mantém o encaminhamento anterior do sitemap. Não repetir correção de tags já validada nem limitar o conjunto ao par de idioma/país.",
+        "source": "data/atena/seo-mass-1559930384852979796/tag-correction-1560284833924518091.json"
+      }
+    ],
+    "GiB": 0.0324
+  },
+  {
+    "unit": "/root/mgs-agent/work/landing-shein-vizioid",
+    "family": "agent_work",
+    "file": 1466,
+    "directory": 245,
+    "link": 7,
+    "other": 0,
+    "logical_bytes": 31295240,
+    "unique_allocated_bytes": 34734080,
+    "newest_mtime_ns": 1787839607506852703,
+    "oldest_mtime_ns": 1787838934988191036,
+    "checkpoint_matches": [],
+    "GiB": 0.0323
+  }
+]
