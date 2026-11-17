@@ -1,5 +1,5 @@
 {
-  "status": "running",
+  "status": "completed_validated",
   "scheduled_at": "2026-11-16T21:02:00-05:00",
   "completed": {
     "funding": {
@@ -18,5 +18,8 @@
       "stdout": "{\"status\": \"prepared\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261116T210551617153\", \"credit_line_accounts\": 40, \"sheet_writes\": 0}\n",
       "returncode": 0
     }
-  }
+  },
+  "closure": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261116T2102/closure-current.json",
+  "business_refresh_complete": true,
+  "delivery": "automatic_final_pending"
 }
