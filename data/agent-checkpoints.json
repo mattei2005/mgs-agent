@@ -4384,12 +4384,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-CAMPAIGN-1572392475690008668",
-      "next_step": "Preparar midia da pasta Nicolas Exclusivos e executar runner central com QA e readback",
-      "objective": "Duplicar186 Mavroa06 em15 campanhas com30 videos ES;USD35 COCAP0.90 inicio18nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572392475690008668/request.json",
-      "state": "intake_validated;fonte186 corrigida por1572392587191517195;writer lease livre",
+      "next_step": "Obter aprovacao estrutural de Rodolfo para reconciliacao exclusivamente da coordenacao antiga sem COMPLETE de QA,sem Meta/Drive write e sem replay do predecessor;preservar pausa/one-shot autorizados. Instalar/testar transicao central limitada e retomar mesmo request por prepare-media,campaign dry-run e execute",
+      "objective": "Duplicar186 Mavroa06 em15 campanhas e30 videosES;USD35/dia COCAP0.90 inicio18nov2026 00h15EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572392475690008668/coordination-diagnostic.json",
+      "state": "blocked_coordination_review: fonte186/account live validos;30linhagens unicas sem reserva e sem overlap com anterior;zero uploads/novas campanhas. dependencia1572011664000155749 postprocess_pending com anuncio216 rejeitado2490468;writer lease livre;fila waiting persistida e consumidor ativo",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-17T23:27:54+00:00"
+      "updated_at": "2026-11-17T23:31:47+00:00"
     },
     {
       "agent": "zeus",
@@ -11398,5 +11398,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T23:27:54+00:00"
+  "updated_at": "2026-11-17T23:31:47+00:00"
 }
