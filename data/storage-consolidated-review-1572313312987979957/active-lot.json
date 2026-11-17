@@ -1,5 +1,5 @@
 {
-  "status": "awaiting_new_exact_critical_confirmation",
+  "status": "withdrawn_before_confirmation_missing_media_closure",
   "manifest": "manifest.json",
   "manifest_sha256": "9f8ed9ae3408e31d4796587a85b92cddc0fc9d3501a3e1c50ec93c15b2a977f9",
   "gate": "gate.py",
@@ -9,5 +9,8 @@
   "source_files_deleted": 0,
   "previous_approvals_applicable": false,
   "result": "consolidated-result.json",
-  "next_step": "One NEW exact native Rodolfo confirmation for manifest 9f8ed9ae3408. No earlier yes or continue authorizes these643 files. Preserve all unsupported cases and pause no gateways."
+  "next_step": "One NEW exact native Rodolfo confirmation for manifest 9f8ed9ae3408. No earlier yes or continue authorizes these643 files. Preserve all unsupported cases and pause no gateways.",
+  "gate_must_not_execute": true,
+  "successor_directory": "/root/mgs-agent/data/storage-consolidated-review-1572313312987979957/finance-final",
+  "qualification_correction": "qualification-correction.json"
 }
