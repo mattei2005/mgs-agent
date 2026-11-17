@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-17T15:25:20.512893-05:00",
+  "records": [
+    {
+      "subsystem": "skills",
+      "live": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+      "sha256": "204951e5a77f28be24fad579c72a9aec202e90f24deb9287cfceae97d1721f54",
+      "readback_and_mirror_equal": true
+    },
+    {
+      "subsystem": "skills",
+      "live": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/SKILL.md",
+      "sha256": "b277fd7b40f6b45a7c279178ad8128972c32fbd74933448ecaec9f702fb26577",
+      "readback_and_mirror_equal": true
+    }
+  ],
+  "recovered_validator_issues": [
+    "Canonical report helper returned plain-text message_id, not JSON id; exact native GET recovered receipt without resending.",
+    "Registry key canonical_source verified; idempotent upsert corrected and validate passed."
+  ],
+  "production_or_target_payloads_affected": false
+}
