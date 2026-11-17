@@ -1,0 +1,7 @@
+{
+  "key": "5b2cabd13995080ceb32c8a3",
+  "state": "blocked_decision",
+  "owner": null,
+  "source": "{\"alert_channel\": \"1498132022634483894\", \"alert_id\": \"1570940096495226881\", \"alert_url\": \"https://discord.com/channels/1185714635991679006/1498132022634483894/1570940096495226881\", \"kind\": \"producer\", \"scope_expansion_decision\": {\"accounts\": 38, \"authorization_message_id\": \"1572259669525659649\", \"historical_slot_preserved\": \"2026-11-13 00:00–18:08 America/New_York; not delivered by this current-day validation\", \"policy\": \"data/ares/meta-ads/policies/shein-campaign-creation-daily.json\", \"producer_live_validation\": \"reports/shein-creation-scope38-1572259669525659649/validation.json\", \"thread_id\": \"1572258612338761729\"}, \"script\": \"ares/shein-campaign-creation-cron.py\"}",
+  "observation": "Bloqueado para fechamento histórico: Rodolfo aprovou explicitamente38contas pela mensagem1572259669525659649. Seleção exata36originais+Yolo07/G002+08/G006 aplicada ao produtor;23testes e consulta live38/38 passaram,sem POST antecipado nem escrita Sheets. O bloqueio de cardinalidade do produtor foi corrigido. Este pedido continua sendo o slot histórico13/11 00:00–18:08, não foi entregue e não é certificado por uma leitura de17/11. Preservados estado,owner vazio,tentativas e destino. Próxima entrega regular mantém18:08. Planilha mensal é produto separado,escopo36 não ampliado por esta decisão."
+}

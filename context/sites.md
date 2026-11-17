@@ -159,6 +159,7 @@ dicasfinancas.info                Quiz/oferta MGS em context/acquisition.md.
 es.seuprimeiroempregoam.com       Subdomínio do domínio MGS seuprimeiroempregoam.com.
 escalatepower.com                 Rodolfo: site MGS/G002, decisão 1547707970731638945.
 growpowerhub.com                  Rodolfo: inclusão pontual Ares/Atena, confirmação 1560385234242109461; operação US-SHEIN-EN em context/acquisition.md.
+jobscana.com                      Rodolfo: site MGS no escopo institucional geral/Atena, decisão 1572261576982007810.
 mavroa.com                        Rodolfo: site MGS/G002; operação US-SHEIN-ES.
 spaziokitchensandbaths.com        Rodolfo: domínio institucional MGS, decisão 1554865878225387561.
 topfeed.fun                       Família MGS Topfeed, decisão 1548113083774541935.
@@ -169,6 +170,17 @@ zyclor.com                        Site inativo MGS/SB, decisão 1550483550027911
 Toda entrada de `data/mgs-domain-scope.json` deve aparecer literalmente neste arquivo. Inventário RunCloud, acesso WordPress, receita, rede de monetização ou conta de parceiro não são prova isolada de ownership.
 
 ---
+
+## Classificação de portfólio vigente
+
+Decisão de Rodolfo `1572261576982007810`, thread `1572259906902425653`, em 17/11/2026. Supersede a classificação da lista de conversa anterior, sem excluir instalações, arquivos ou histórico:
+
+- **Sites MGS no escopo institucional geral:** registro positivo `data/mgs-domain-scope.json#/domains`; inclui `jobscana.com`. A inclusão no escopo não configura automaticamente publicação editorial em `data/sites.json`.
+- **Sites de parceiros presentes na dashboard corporativa SB:** `fcp-team.com`, `fincben.com`, `fincfrog.com`, `finchettin.com`, `fincpro.com`, `jupalu.com`, `naboojobs.com` e `sapogamer.com`. Permanecem no escopo específico do Ares conforme `context/ares-asset-scope.md`; não pertencem por essa classificação ao portfólio próprio MGS nem ao escopo geral da Atena.
+- **Site institucional da empresa:** `matteiservicesinc.com`. Categoria separada dos sites de operação; esta classificação não amplia a allowlist de Ares/Atena.
+- **Outros projetos e exclusões do escopo geral:** cadastro reservado a Zeus–Rodolfo em `/root/.hermes/profiles/zeus/data/site-portfolio-private.json`. Não reproduzir nomes ou contagens desses grupos em inventários/reports compartilhados. Exclusão de escopo não equivale a exclusão de site, backup ou infraestrutura.
+
+O cadastro reservado consolida a lista completa para Zeus; as allowlists por agente continuam sendo os gates executáveis. Ownership, acesso técnico e presença na SB são dimensões distintas; a inclusão de parceiros no catálogo corporativo SB não afirma propriedade MGS.
 
 ## Hospedagem vigente
 
@@ -282,6 +294,8 @@ Modelo legacy / subdomínio        Subdomínio por idioma/mercado.
 Não existe padrão rígido universal. Cada site deve ser tratado conforme sua configuração real.
 
 ### allautolan.matteiservicesinc.com — arquivo de backup
+
+**Fora do escopo geral vigente**, por decisão de Rodolfo `1572261576982007810`. A descrição abaixo permanece como histórico e orientação de preservação; não é uma inclusão no portfólio ativo.
 
 Por decisão explícita de Rodolfo na thread `1556664785427496991`, `allautolan.matteiservicesinc.com` existe exclusivamente como backup dos artigos de loan-car. Não é destino de publicação pública nem de indexação: os artigos devem permanecer em rascunho e o host deve manter o bloqueio de indexação. Essa decisão se aplica somente a esse host, não ao domínio pai `matteiservicesinc.com` nem aos sites de origem.
 

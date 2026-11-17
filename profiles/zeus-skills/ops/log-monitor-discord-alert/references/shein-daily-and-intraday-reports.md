@@ -36,6 +36,14 @@
 - Quando a coluna Nº estourar a largura fixa, diagnosticar os componentes antes de ampliar ou truncar. Um `n/d` causado por host de entrada não reconhecido pode ocupar mais espaço que o quiz confirmado. Corrigir a evidência, preservando IDs, COPY, largura aprovada e valores financeiros; host desconhecido ou evidência ambígua continua `n/d`/`misto`, nunca inferido do nome da campanha.
 - Validar a correção com materialização offline das mesmas24 fontes e comparação dos campos financeiros; só depois retomar o runner canônico, no mesmo journal/data, sem tocar em intents já congeladas. Semântica de host não autoriza catch-up expirado nem mudança de layout.
 
+## Produto independente: campanhas novas às 18h08
+
+- Não confundir a contagem de criações (`shein-campaign-creation-daily.json`) com os relatórios financeiros D-1/Intraday ou a planilha mensal de criações. Cada produto tem seleção e autorização próprias; exclusões do financeiro não excluem automaticamente sites da contagem.
+- Para uma expansão aprovada, congele as identidades exatas (ID, nome, gestor e responsável), prove que as contas anteriores foram preservadas e aceite somente o delta autorizado. Valide o catálogo contra esse manifesto, não apenas contra a nova cardinalidade: 38 linhas não comprovam as 38 contas certas.
+- Some múltiplas contas da mesma célula gestor/site, preservando os seis gestores e seis sites. Se qualquer conta da célula estiver incompleta, mantenha `n/d` na célula e seus totais; teste duplicação de IDs, troca de identidade com mesma contagem, conta extra, denominador e soma horizontal/vertical.
+- Exercite o wrapper real em `--validate-live` com zero publicação antecipada e zero hook de planilha. O modo de validação não pode chamar `update_creation_sheet`; confirme também a ausência de outbox, delivery e sheet-refresh no run real. Uma consulta das 38 contas valida seleção/coleta/renderização, não a entrega agendada nem a recuperação de um slot histórico.
+- Preserve horário, destino, nonce e outbox existentes; não amplie a planilha independente nem faça catch-up de datas antigas pela simples aprovação de novas contas. Registre separadamente a correção do produtor e o saldo histórico da fila, sem fechar o incidente antigo por um teste atual.
+
 ## Validação e colisões
 
 - Aplicar `context/cron-scheduling-policy.md`: oito datas civis, todos os profiles, root/system cron, timers e contratos de aplicação; considerar DST e o timezone real observado do daemon.

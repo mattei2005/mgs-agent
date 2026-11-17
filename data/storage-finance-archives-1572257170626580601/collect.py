@@ -1,6 +1,8 @@
 """Storage-only review of the frozen326 files; no finance execution or DB startup."""
 import ast,collections,datetime,gzip,json,os,pathlib,re,shlex,stat,subprocess,time
 from typing import Any
+if (pathlib.Path(__file__).parent/'review-final.json').exists():
+ raise SystemExit('SEALED_PROPOSAL_READONLY: use active-lot gate; do not rerun collection')
 R=pathlib.Path('/root/mgs-agent');A=R/'apps/finance-system';O=pathlib.Path(__file__).parent;P=pathlib.Path('/root/.hermes/secure-backups/storage-finance-archives-1572257170626580601');P.mkdir(mode=0o700,exist_ok=True)
 OLD=pathlib.Path('/root/.hermes/secure-backups/storage-reaudit-1571983565292441731/finance-archive-hashes.jsonl')
 def save(path,obj):

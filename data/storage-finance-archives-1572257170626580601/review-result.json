@@ -1,0 +1,102 @@
+{
+  "status": "review_roles_326_complete_exact_four_copy_lot_ready_for_critical_confirmation",
+  "authority_message_id": "1572257170626580601",
+  "thread_id": "1569928464033783862",
+  "reviewed_count": 326,
+  "role_counts": {
+    "schema_migration_or_historical_SQL_preserve_for_consumer_review": {
+      "files": 181,
+      "allocated_bytes": 819200
+    },
+    "historical_code_or_release_archive_preserve_pending_review": {
+      "files": 43,
+      "allocated_bytes": 4972544
+    },
+    "database_rollback_dump_preserve_pending_individual_recovery": {
+      "files": 94,
+      "allocated_bytes": 10944684032
+    },
+    "generated_API_restore_test_archive_preserve_pending_review": {
+      "files": 2,
+      "allocated_bytes": 386580480
+    },
+    "historical_distribution_archive_preserve_pending_review": {
+      "files": 2,
+      "allocated_bytes": 31145984
+    },
+    "disaster_recovery_canary_archive_preserve_pending_review": {
+      "files": 4,
+      "allocated_bytes": 86011904
+    }
+  },
+  "all326_SHA256_match_prior": true,
+  "remaining322_semantic_disposal_not_certified": true,
+  "candidates": 4,
+  "manifest_sha256": "8ea364228428e40347aa276d64c5ed3ea28aa9136140d1e895ff4ea71517fe42",
+  "gate_sha256": "46f77b164decb428a6056410328ada68dab42b790c5b50039c621b040ff8921c",
+  "retained_reviewed_count": 322,
+  "additional_newest_fallback_preserved": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261117T080318-0500/mgs_finance-before.dump",
+  "local_dump_files_retained_after_proposed_action": 4,
+  "remote_exact_counterparts_and_catalogues_verified": 5,
+  "remote_catalogue_not_materialized_restore": true,
+  "preflight": {
+    "status": "PASS",
+    "post": false,
+    "targets": 4,
+    "retained_reviewed": 322,
+    "retained_local": 4,
+    "remote_counterparts": 5,
+    "source_files_deleted": 0,
+    "SQL": false,
+    "DB_started": false
+  },
+  "gate_tests": {
+    "status": "PASS",
+    "tests_run": 18,
+    "failures": 0,
+    "errors": 0,
+    "all_destructive_OS_calls_in_simulation_mocked": true,
+    "native_apply_without_new_approval_blocked": true,
+    "all_four_real_files_metadata_unchanged": true,
+    "real_source_files_deleted": 0
+  },
+  "budget": {
+    "gross_reclaim_bytes": 835645440,
+    "gross_reclaim_MiB": 796.93,
+    "analysis_created_bytes_before_closure": 1097728,
+    "direct_net_estimate_MiB": 795.89,
+    "shared_future_Git_growth_not_estimated": true,
+    "observed_cleanup_savings_bytes": 0
+  },
+  "disk_observation": {
+    "available_GiB": 63.05,
+    "current_used_percent": 67.28,
+    "projected_used_percent_if_only_four_unlinked": 66.87
+  },
+  "source_files_deleted": 0,
+  "cache_cleanup": false,
+  "SQL_or_DB_start": false,
+  "restart_or_production_changes": false,
+  "new_payload_backup_copies": false,
+  "initial_transport_adapter_failure_recovered": {
+    "status": "recovered_and_remote_phase_validated",
+    "initial_failure": "1Password item read failed before SSH; canonical OP_SERVICE_ACCOUNT_TOKEN environment was not loaded by the extracted helper adapter.",
+    "failure_stage": "remote credential resolution, before any remote command",
+    "credential_or_permission_changes": false,
+    "canonical_environment_bootstrap_restored": true,
+    "collector_sha256": "6ad388a2697437cdc1d568dcf0e5b8d37784f84e1d71275e0f1ee4b4b9e1c05c",
+    "original_partial_artifacts_preserved": true,
+    "full326_hash_pass_not_repeated_or_fabricated": true,
+    "all326_metadata_revalidated": true,
+    "remote_phase_completed": true,
+    "source_files_deleted": 0
+  },
+  "learning": {
+    "subsystem": "skills",
+    "target": "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+    "summary": "Preserve canonical environment bootstrap before extracted read-only SSH helpers; resume only missing read phase.",
+    "live_mirror_equal": true
+  },
+  "next_step": "Request only exact four-local-copy confirmation8ea364228428. Preserve17Nov newest,three partial-receipt dumps,all322other original files,source inputs/receipts/remote backups. Other archives/SQL/rollback/test families remain semantic-review pending; no broad disposal or new retention/cron.",
+  "at": "2026-11-17T09:44:17.041460-05:00"
+}

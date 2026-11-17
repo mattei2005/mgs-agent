@@ -6618,12 +6618,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SHEIN-CREATION-38-1572259669525659649",
-      "next_step": "Congelar36originais+2IDs autorizados; backup; corrigir selecao/agregacao/denominadores; testes isolados e leitura live sem publicacao antecipada/Sheet; inventario/audit/REPORT",
-      "objective": "Aplicar inclusao autorizada de Yolo07/G002 e Yolo08/G006 na contagem diaria SHEIN, 36 para38 contas, preservando horario e demais produtos",
-      "source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
-      "state": "validating_candidate",
+      "next_step": "Inclusao concluida;23testesPASS e wrapperreal38/38validado;REPORT1572261924664770660GETOK,registry1active38/old36superseded/inventariounico. Proximaentrega cron18:08Eastern ainda futura;13/11 permaneceaberto semcatchup;planilhamensal separada36fora destaaprovacao. Semnovoagendamento/MetaWrite/Sheetswrite/credencial/permissao.",
+      "objective": "Incluir Yolo07/G002 e Yolo08/G006 na contagem diaria SHEIN18:08:38contas",
+      "source": "reports/shein-creation-scope38-1572259669525659649/validation.json",
+      "state": "scope38_deployed_live_validated",
       "thread_id": "1572258612338761729",
-      "updated_at": "2026-11-17T14:39:57+00:00"
+      "updated_at": "2026-11-17T14:48:04+00:00"
     },
     {
       "agent": "zeus",
@@ -6828,12 +6828,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-FINANCE-ARCHIVES-1572257170626580601",
-      "next_step": "Revalidar326caminhos/hashes;separarschemas/codigo,rollbackhistorico,arquivosQAecopiasdedumpremoto;conferirprovasretidasemvezdeinferirduplicacaopelagrafia;prepararsololoteexatosegurosevalidado,cachespausados.",
-      "objective": "Revisao infraestrutura326arquivos SQL/archives/exports financeiros,porfuncao,origem,consumidorerecovery;semexecucaofinanceiraoudestructiva.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-reaudit-1571983565292441731/finance-archive-content-review.json;discord:1569928464033783862/1572257170626580601",
-      "state": "in_progress_readonly_326_archive_role_and_lineage_review",
+      "next_step": "Aguardar somenteconfirmacaoexata4copiaslocais8ea364228428/gate46f77b164dec. Preserve17Novnovo+3partialOct+322outrosarquivos+remotos/fontes/recibos. Depois confirmarviaDiscord,rerodargatefrozen/remote/readback eexecutar1x;semrepetirlotesanteriores. Outrosarchives/SQL/rollbacksemanticaaberta;cachepausado;retencaofuturaapartada.",
+      "objective": "326roles/hashesrevalidados;4copiaslocaiscandidatas comoriginaisremotos exatos;18testes/gaterealPASS;zeroexclusao.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/review-result.json;data/storage-finance-archives-1572257170626580601/active-lot.json;discord:1569928464033783862/1572257170626580601",
+      "state": "awaiting_exact_four_local_dump_copy_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T14:29:54+00:00"
+      "updated_at": "2026-11-17T14:46:09+00:00"
     },
     {
       "agent": "zeus",
@@ -6928,12 +6928,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Revisao10concluida:2dependenciasdinamicas+8semrecuperacaoexatacertificada,todospreservados;zeroexclusao/confirmacaopendente. Nao repetir lotes nemperguntarOKgenerico. Proximo:classefinanceira326archives/exportacoes/SQL ja inventariados,read-only;familias2-6+consolidacaoindicesabertas,cachespausados.",
-      "objective": "Reauditoria global aberta;dois lotesretirados e revisao10encerradapreservada;demaisclassespendentes.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-pending10-1572246750020894733/review-result.json;data/storage-pending10-1572246750020894733/validation-summary.json;discord:1569928464033783862/1572246750020894733",
-      "state": "in_progress_two_lots_completed_ten_review_closed",
+      "next_step": "Aguardar somenteconfirmacaoexata4copiaslocais8ea364228428/gate46f77b164dec. Preserve17Novnovo+3partialOct+322outrosarquivos+remotos/fontes/recibos. Depois confirmarviaDiscord,rerodargatefrozen/remote/readback eexecutar1x;semrepetirlotesanteriores. Outrosarchives/SQL/rollbacksemanticaaberta;cachepausado;retencaofuturaapartada.",
+      "objective": "Reauditoriaglobalaberta;10QAencerradospreservados;326rolesrevisados e4copiasprontasparagatecritico,semdelete.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/review-result.json;data/storage-finance-archives-1572257170626580601/active-lot.json;discord:1569928464033783862/1572257170626580601",
+      "state": "in_progress_awaiting_four_archive_copy_confirmation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T13:54:58+00:00"
+      "updated_at": "2026-11-17T14:46:09+00:00"
     },
     {
       "agent": "zeus",
@@ -11007,6 +11007,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-site-portfolio-1572261576982007810",
+      "next_step": "Nenhum. Fontes e cadastro reservado persistidos; gates validados; REPORT-INFRA 1572262363439169699 lido e conferido. Entregar lista atualizada na origem.",
+      "objective": "Atualizar classificação do portfólio conforme decisão 1572261576982007810; preservar sigilo e histórico sem excluir sites.",
+      "source": "context/sites.md",
+      "state": "completed",
+      "thread_id": "1572259906902425653",
+      "updated_at": "2026-11-17T14:49:40+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-smart-routing-lyzmo-gb-cc-en-20260821",
       "next_step": "Nenhuma ação pendente; usar o procedimento canônico por slot em futuras correções equivalentes.",
       "objective": "Corrigir Smart Routing GB-CC-EN de Lyzmo e Zytiva em pools 001-006, preservando a sequência exata de cinco URLs por slot.",
@@ -11207,5 +11217,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T14:39:57+00:00"
+  "updated_at": "2026-11-17T14:49:40+00:00"
 }

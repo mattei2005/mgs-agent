@@ -4686,10 +4686,29 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-DAILY-CREATION-38-1572259669525659649",
+      "title": "SHEIN: contagem diaria de campanhas novas por gestor e site, 18h08 Eastern na Diretoria",
+      "updated_at": "2026-11-17T14:47:33+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reporting.daily_creation_counts",
+      "canonical_source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
+      "consumers": [
+        "ares",
+        "shein-campaign-creation-daily.py",
+        "zeus"
+      ],
+      "domain": "growth.reporting",
+      "effective_at": "2026-11-17T14:47:33+00:00",
+      "id": "ARES-SHEIN-DAILY-CREATION-38-1572259669525659649",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "SHEIN: contagem diaria de campanhas novas por gestor e site, 18h08 Eastern na Diretoria",
-      "updated_at": "2026-10-29T18:25:23+00:00"
+      "title": "Contagem diaria SHEIN 18h08:38contas,36originais+Yolo07/G002+08/G006",
+      "updated_at": "2026-11-17T14:47:33+00:00"
     },
     {
       "canonical_key": "ares.shein.reporting.daily-d1-schedule",
@@ -13675,6 +13694,25 @@
       "updated_at": "2026-10-22T13:18:38+00:00"
     },
     {
+      "canonical_key": "sites.portfolio.classification",
+      "canonical_source": "context/sites.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "sites",
+      "effective_at": "2026-11-17T14:48:09+00:00",
+      "id": "MGS-SITE-PORTFOLIO-CLASSIFICATION-20261117",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Classificação de sites próprios, parceiros SB e institucional",
+      "updated_at": "2026-11-17T14:48:09+00:00"
+    },
+    {
       "canonical_key": "ares.creative.30tb.autonomous-requirements",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
       "consumers": [
@@ -14615,6 +14653,23 @@
       "superseded_by": null,
       "title": "Confirmacao helpers Atena e transporte financeiro sem alterar dados campanhas CTAs",
       "updated_at": "2026-10-04T18:50:54+00:00"
+    },
+    {
+      "canonical_key": "sites.portfolio.zeus-private",
+      "canonical_source": "/root/.hermes/profiles/zeus/data/site-portfolio-private.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "sites",
+      "effective_at": "2026-11-17T14:48:09+00:00",
+      "id": "ZEUS-SITE-PORTFOLIO-PRIVATE-20261117",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cadastro reservado de classificação do portfólio executivo",
+      "updated_at": "2026-11-17T14:48:09+00:00"
     },
     {
       "canonical_key": "sites.spaziokitchensandbaths.indexation-policy",
@@ -17640,5 +17695,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-16T20:58:48+00:00"
+  "updated_at": "2026-11-17T14:48:09+00:00"
 }

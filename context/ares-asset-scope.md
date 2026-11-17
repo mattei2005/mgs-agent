@@ -4,6 +4,10 @@ Status: canônico ativo. Autoridade: Rodolfo Mattei, mensagem `15621274271513397
 
 ## Limite e precedência
 
+### Classificação de propriedade versus escopo SB
+
+Decisão posterior de Rodolfo `1572261576982007810`, thread `1572259906902425653`: `fcp-team.com`, `fincben.com`, `fincfrog.com`, `finchettin.com`, `fincpro.com`, `jupalu.com`, `naboojobs.com` e `sapogamer.com` são **sites de parceiros** cadastrados na dashboard SB, não sites próprios MGS. Permanecem autorizados ao Ares pelo catálogo corporativo SB; a expressão “hosts corporativos” neste documento descreve o escopo do catálogo, não a propriedade desses parceiros. `jobscana.com` é **site MGS do escopo institucional geral**, conforme `context/sites.md`, e não integra o grupo de parceiros. Esta decisão corrige a classificação, preserva o escopo operacional existente do Ares e não concede à Atena acesso aos parceiros.
+
 A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts comprovadamente cadastrados no catálogo corporativo Smart Bidding. A autorização vigente de Rodolfo `1564748349431881972` abrange qualquer site SB, não apenas companies ou lotes já espelhados localmente; o snapshot continua sendo o conjunto positivo executável até cada reconciliação exata por Zeus. O catálogo inclui publishers cadastrados, ativos ou inativos; acesso de usuário mais estreito não redefine o catálogo corporativo. Esta regra supersede para Ares o escopo geral baseado apenas no cadastro institucional de sites; Atena não muda.
 
 O app `minibot` (`1299247318762949`) permanece autorizado como dependência técnica, inclusive quando seu proprietário é outro portfólio. Ownership, aprovação, credencial ou capacidade técnica desse app não autorizam leitura/operação de contas, sites ou inventários do portfólio proprietário. Não revogar app, tokens ou permissões Meta neste cutover.
