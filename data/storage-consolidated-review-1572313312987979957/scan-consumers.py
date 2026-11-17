@@ -5,7 +5,17 @@ for p in targets:
  if p.startswith(str(R/'apps/finance-system')+'/'):aliases[p[len(str(R/'apps/finance-system'))+1:]]=p
 roots=sorted({'/'.join(p.split('/')[:8])for p in targets if p.startswith('/root/.hermes/profiles/ares/work/')}|{'/root/.hermes/profiles/ares/artifacts/meta-library'});kind={k:'target'for k in aliases}
 for p in roots:aliases[p]=p;kind[p]='media_root_selector'
-pattern=re.compile(b'|'.join(re.escape(p.encode())for p in sorted(aliases,key=lambda s:-len(s))));progress=O/'consumer-scan-progress.json';state=json.loads(progress.read_text())if progress.exists()else{'covered_until':0,'total_sources':len(sources),'positives':0,'unavailable':0,'native_changed_since_index':0};assert state['total_sources']==len(sources);ap=argparse.ArgumentParser();ap.add_argument('--limit',type=int,default=70000);args=ap.parse_args();start=time.monotonic();begin=state['covered_until'];end=min(len(sources),begin+args.limit);positive=[];errors=[]
+trie={}
+for token in aliases:
+ node=trie
+ for char in token.encode():node=node.setdefault(char,{})
+ node[None]={}
+def factored(node):
+ branches=[re.escape(bytes([char]))+factored(child)for char,child in node.items()if char is not None]
+ if None in node:branches.append(b'')
+ return branches[0]if len(branches)==1 else b'(?:'+b'|'.join(branches)+b')'
+pattern=re.compile(factored(trie));assert all(pattern.fullmatch(token.encode())for token in aliases)
+progress=O/'consumer-scan-progress.json';state=json.loads(progress.read_text())if progress.exists()else{'covered_until':0,'total_sources':len(sources),'positives':0,'unavailable':0,'native_changed_since_index':0};assert state['total_sources']==len(sources);ap=argparse.ArgumentParser();ap.add_argument('--limit',type=int,default=70000);args=ap.parse_args();start=time.monotonic();begin=state['covered_until'];end=min(len(sources),begin+args.limit);positive=[];errors=[]
 for i in range(begin,end):
  if i>begin and i%500==0 and time.monotonic()-start>100:break
  row=sources[i];p=row['path']
