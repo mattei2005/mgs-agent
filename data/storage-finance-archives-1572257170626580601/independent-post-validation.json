@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "manifest_sha256": "8ea364228428e40347aa276d64c5ed3ea28aa9136140d1e895ff4ea71517fe42",
+  "gate_sha256": "46f77b164decb428a6056410328ada68dab42b790c5b50039c621b040ff8921c",
+  "question_message_id": "1572263708707524770",
+  "confirmation_message_id": "1572265707821989981",
+  "deleted_regular_files": 4,
+  "deleted_directories": 0,
+  "journal_exact_unique_four": true,
+  "all_targets_absent": true,
+  "parent_directories_preserved": true,
+  "retained_original_files": 322,
+  "retained_local_dump_count": 4,
+  "retained_unique_payloads_verified": 323,
+  "retained_metadata_and_payloads_unchanged": true,
+  "retained_receipt_hashes_unchanged": true,
+  "remote_counterparts_verified_again": 5,
+  "remote_catalogue_not_materialized_restore": true,
+  "gateway_PIDs_unchanged": true,
+  "launcher_unchanged": true,
+  "failed_systemd_units": 0,
+  "config_checks": [
+    {
+      "profile": "zeus",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "atena",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "ares",
+      "exit_code": 0,
+      "config_check_pass": true
+    }
+  ],
+  "no_model_requests": true,
+  "no_SQL_or_DB_started": true,
+  "no_cache_cleanup": true,
+  "no_production_or_retention_changes": true,
+  "observed_immediate_global_delta_bytes": 844029952,
+  "observed_immediate_global_delta_MiB": 804.93,
+  "disk_observation": {
+    "available_GiB": 63.99,
+    "used_percent": 66.79
+  },
+  "at": "2026-11-17T10:06:14.181834-05:00"
+}

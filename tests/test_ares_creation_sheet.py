@@ -7,7 +7,11 @@ class CreationSheetTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.p=m.config();cls.accounts=[a for a in m.load(m.BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json')['accounts'] if a['name'].split('-')[0] in cls.p['brands']]
-  cls.snapshot=m.load(m.STATE/'runs/manual-20261110T091441/snapshot.json')
+  cls.snapshot=copy.deepcopy(m.load(m.STATE/'runs/manual-20261110T091441/snapshot.json'))
+  # Synthetic empty extensions preserve the immutable 36-account fixture.
+  ids={a['account_id'] for a in cls.snapshot['accounts']}
+  for a in cls.accounts:
+   if a['account_id'] not in ids:cls.snapshot['accounts'].append({'account_id':a['account_id'],'name':a['name'],'manager_code':a['manager_code'],'manager':a['manager_name'],'brand':a['name'].split('-')[0],'identity_verified':True,'complete':True,'campaigns':[]})
  def fixture(self):
   with patch.object(m,'now',return_value=datetime.fromisoformat(self.snapshot['cutoff'])):
    d=m.snapshot_to_days(self.snapshot,self.p,self.accounts)

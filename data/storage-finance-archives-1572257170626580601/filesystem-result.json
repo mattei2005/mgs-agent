@@ -1,0 +1,23 @@
+{
+  "status": "four_paths_removed_and_retained_recovery_validated",
+  "manifest_sha256": "8ea364228428e40347aa276d64c5ed3ea28aa9136140d1e895ff4ea71517fe42",
+  "deleted": [
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261113T080319-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261114T080318-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261115T080318-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261116T080318-0500/mgs_finance-before.dump"
+  ],
+  "observed_available_delta_bytes": 844029952,
+  "post_validation": {
+    "status": "PASS",
+    "post": true,
+    "targets": 4,
+    "retained_reviewed": 322,
+    "retained_local": 4,
+    "remote_counterparts": 5,
+    "source_files_deleted": 4,
+    "SQL": false,
+    "DB_started": false
+  },
+  "governance_closure_pending": true
+}

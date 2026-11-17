@@ -1833,12 +1833,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572255222175244299",
-      "next_step": "Concluir os mesmos batches de até 4 fontes com complete e monitor, manter writer único; validar RAW same-ID, arquivo/ACK e destinos; publicar mapa e links após auditoria.",
-      "objective": "Tratar e organizar 34 vídeos SHEIN US ES enviados por Kelly, destino common.",
+      "next_step": "Continuar batches do request pelo monitor e complete, sem writer paralelo; auditoria RAW same-ID + provider + atalho + reservas e mapa final obrigatório.",
+      "objective": "Concluir tratamento e organização de 34 vídeos SHEIN US ES da Kelly, common.",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
-      "state": "34/34 raw baixados e confrontados com hashes nativos; sanitização e qa visual clean 5 frames aprovadas; frames decodificados e áudio preservados. plano real congelado. cron confirmou deferência ao foreground sem write paralelo. primeiro batch em tratamento/complete; nenhuma conclusão integral declarada.",
+      "state": "12/34 fontes com complete e arquivo confirmados, 22 restantes no mesmo request. qa local e plano completos. terceiro batch retomado após falha transitória em leitura drive, sem mídia duplicada; mesmos ids e variantes preservados. próximo batch em execução foreground.",
       "thread_id": "1572255222175244299",
-      "updated_at": "2026-11-17T14:31:14+00:00"
+      "updated_at": "2026-11-17T15:03:41+00:00"
     },
     {
       "agent": "ares",
@@ -6547,6 +6547,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SB-TIMELINE-1572265135207223408",
+      "next_step": "Validar filtros, extrair todas as linhas, reproduzir visual e publicar planilha com readback",
+      "objective": "Exportar Messenger Timeline SB 01/09–17/11/2026, 43 sites, SEGURADOR+DOMAIN, receita e estética para Google Sheets",
+      "source": "discord:1572264313727615087/1572265135207223408",
+      "state": "in_progress: autoridade nativa validada; coleta read-only iniciada; sem alteração sb",
+      "thread_id": "1572264313727615087",
+      "updated_at": "2026-11-17T15:03:48+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SECURITY-CONTINUATION-1555997081678782629",
       "next_step": "Confirmar crítico editorial:1 post+1 imagem próprios Eggbev publicação breve/noindex/readback/remoção e helpers editoriais Atena; completar prova compatível manual/standing e políticas sem bloquear crons; retenção exige manifesto/rollback e confirmação exata; observação24h existente às19:04 mantida; não declarar tudo completo",
       "objective": "Concluir todas as frentes não críticas das três threads conforme áudio de Rodolfo; responder somente no fechamento ou bloqueio",
@@ -6664,6 +6674,16 @@
       "state": "concluido:2wrappers usam resolverpm;coletor recuperaconfiguracaoarquivadaexata;196testespass. d107/11 entregue24threads114partes377campanhas11:22et egetindependente114/114. intradaylive24contas402campanhas validado0postextra. inventario/audit/skillreadback ereport-infra1569026545404878851getverificados.",
       "thread_id": "1569013882259902467",
       "updated_at": "2026-11-08T16:31:35+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-SHEIN-SHEET-38-1572266034529046600",
+      "next_step": "Backup+selecao38exata;corrigir soma multicontas e particao baseline;authSAhelper;tests;coleta completa;canario+write14abas+readback;inventario/audit/REPORT.",
+      "objective": "Incluir Yolo07/G002 e08/G006 na mesma planilha mensal de campanhas SHEIN,38contas,recuperar atualizacao e preservar historico",
+      "source": "data/ares/meta-ads/policies/campaign-creation-sheet.json",
+      "state": "preparing_candidate",
+      "thread_id": "1572258612338761729",
+      "updated_at": "2026-11-17T15:04:31+00:00"
     },
     {
       "agent": "zeus",
@@ -6828,12 +6848,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-FINANCE-ARCHIVES-1572257170626580601",
-      "next_step": "Aguardar somenteconfirmacaoexata4copiaslocais8ea364228428/gate46f77b164dec. Preserve17Novnovo+3partialOct+322outrosarquivos+remotos/fontes/recibos. Depois confirmarviaDiscord,rerodargatefrozen/remote/readback eexecutar1x;semrepetirlotesanteriores. Outrosarchives/SQL/rollbacksemanticaaberta;cachepausado;retencaofuturaapartada.",
-      "objective": "326roles/hashesrevalidados;4copiaslocaiscandidatas comoriginaisremotos exatos;18testes/gaterealPASS;zeroexclusao.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/review-result.json;data/storage-finance-archives-1572257170626580601/active-lot.json;discord:1569928464033783862/1572257170626580601",
-      "state": "awaiting_exact_four_local_dump_copy_confirmation",
+      "next_step": "Gate--apply deve revalidar4targets/322retidos/4fallbacks/5remotos/census. Emfalha,lerjournal/marker/ausenciaantesretry;naoalterarverificador nemampliarlote. Depoisvalidacaoindependenteeclosure,semnovaconfirmacao seescopointacto.",
+      "objective": "Confirmacao1572265707821989981 recebida para4copiaslocais8ea364228428;executar1xgatecongeladoevalidarpreservacao.",
+      "source": "data/storage-finance-archives-1572257170626580601/active-lot.json;data/storage-finance-archives-1572257170626580601/critical-approval.json;discord:1569928464033783862/1572265707821989981",
+      "state": "owner_confirmed_execution_preflight",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T14:46:09+00:00"
+      "updated_at": "2026-11-17T15:03:30+00:00"
     },
     {
       "agent": "zeus",
@@ -11217,5 +11237,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T14:49:40+00:00"
+  "updated_at": "2026-11-17T15:04:31+00:00"
 }
