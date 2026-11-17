@@ -5125,12 +5125,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Observacao 2026-11-17 08:53 EST: GET paginado origem/privada sem mensagens novas;autoridade Rodolfo e ultima resposta Ares verificadas por ID;3 hashes canonicos inalterados. Aguardar retorno humano sobre restricao Ana Cunha;sem retry Meta,bypass ou cobranca. Scheduler ativo94/96,proximo09:14EST;nenhuma edicao de cron neste run. Ciclo anterior terminou ok,failure_streak0:recuperacao do monitor validada,nao das campanhas nem causa/preventiva permanente do HTTP400. Sem POST externo;SILENT.",
+      "next_step": "Observacao 2026-11-17 09:16 EST: GET paginado origem/privada sem novidades;autoridade e ultima resposta Ares por ID confirmadas;3 hashes canonicos inalterados. Restricao Ana Cunha permanece pendente de revisao humana. Novo bloqueio de continuidade:95/96 ciclos concluidos antes deste run;atual atinge limite;instrucao atual proibe renovar/alterar cron,que permaneceu intacto. Nao garantir execucao futura pelo next_run_at cadastrado. Requer liberar renovacao do mesmo job,sem duplicata. Pedido aberto,Ares unico writer,sem retry Meta/POST Discord. Reportar so bloqueio novo via final automatico.",
       "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;preservar bloqueio humano e objetos.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
       "state": "waiting_owner_facebook_profile_restriction",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-17T13:53:26+00:00"
+      "updated_at": "2026-11-17T14:17:19+00:00"
     },
     {
       "agent": "zeus",
@@ -11177,5 +11177,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T13:54:58+00:00"
+  "updated_at": "2026-11-17T14:17:19+00:00"
 }
