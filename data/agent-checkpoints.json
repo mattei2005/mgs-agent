@@ -1843,12 +1843,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572255222175244299",
-      "next_step": "Decisão crítica deve ser solicitada na thread original: Rodolfo precisa definir preservação do compartilhamento público do relatório versus restrição; não remover acesso, relaxar guard, alterar configuração nem construir batch para contornar manutenção. Após correção autorizada e reconciliada do relatório/plano, retomar monitor do mesmo request 0e5a7d1a65f22ab57f7a40878f24aff0, reusar QA/plano dos 14, sem repetir os 20. Auditoria integral e mapa do saldo antes de concluir.",
-      "objective": "Concluir tratamento e organização de 34 vídeos SHEIN US ES da Kelly, destino common.",
+      "next_step": "Reconciliar escritor atual e concluir os mesmos batches pendentes com claim/complete/finalize e monitor creative-only. Ares único escritor criativo; Zeus somente infraestrutura/acompanhamento. Auditar todos os 34, publicar apenas mapa dos 14 não publicados anteriormente e conclusão com VID/01_READY; relatório alheio não é gate deste pedido.",
+      "objective": "Concluir os mesmos 34 vídeos SHEIN US ES da Kelly, common, preservando RAW/IDs/reservas.",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1572255222175244299",
-      "state": "parcial verificado: 20/34 concluídos e auditados com raw nativo same-id, providers raw/clean, atalhos, bytes, clean=true e reservas preservadas; 14 originais pendentes relidos por id/parent/hash na entrada, sem tratamento remoto. mapa dos 20 publicado em 4 mensagens com get exato, primeira 1572274212184268932. saldo bloqueado no monitor por unknown_or_public_principal: relatório 11cmdxeil2voumjbc3pmyqygipsqpxga3wolazezqt2o possui anyonewithlink reader, confirmado por get, sem writes de acl/config. report-infra 1572274052083490858 relido, embed vazio em content e sem mentions. pedido não concluído.",
+      "state": "retomada autorizada por rodolfo em 1572278764346540115 e handoff zeus 1572280160722485490 autenticados por get. dependência de decisão sobre relatório supersedida: monitor usa manutenção creative-only, sem alterar relatório/acl ou guards de mídia. runtime já tem 24/34 complete, 10 pendentes; batch 56bdbaef47a3a994259912a5dedf505f assumido pela rotina canônica ares, ownership em reconciliação. reusar o plano e qa, não repetir os 24.",
       "thread_id": "1572255222175244299",
-      "updated_at": "2026-11-17T15:37:29+00:00"
+      "updated_at": "2026-11-17T16:01:13+00:00"
     },
     {
       "agent": "ares",
@@ -3805,6 +3805,17 @@
       "state": "awaiting_specific_name_reconciliation_decision",
       "thread_id": "1562078493498540042",
       "updated_at": "2026-11-03T04:54:22+00:00"
+    },
+    {
+      "agent": "zeus",
+      "authority_message_id": "1572278764346540115",
+      "id": "KELLY-INTAKE-ISOLATION-1572278764346540115",
+      "next_step": "Acompanhar artefatos e entrega dos 34; auditar provider/stock/source e mensagens finais sem executar um segundo tratamento",
+      "objective": "Isolar manutenção de relatórios do intake criativo e acompanhar Ares até entrega dos 34 vídeos da Kelly",
+      "source": "/root/.hermes/profiles/zeus/artifacts/kelly-isolation-1572278764346540115",
+      "state": "Isolamento criativo publicado e monitor real pending no mesmo request; 84 regressões e 6 testes de isolamento live PASS. Relatório/ACL idênticos. Ares recebeu handoff 1572280160722485490 e está ativo na origem.",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-17T16:01:10.586846+00:00"
     },
     {
       "agent": "ares",
@@ -6958,12 +6969,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-REORGANIZATION-1570447435074109502",
-      "next_step": "Lote8ea364228428 encerrado1x sobsim1572265707821989981:4files/0dirs ausentes,journal4exato;322originais+fallback17Nov/323SHAintactos;5remotospos+3configPASS/PIDsiguais;+804.93MiBdeltaimediatoglobal. Semconfirmacao/retry,nareexecutargate. Proximo:revisaoread-onlydemaisbackups/dumpshistoricosderollback;demaisfamilias/consolidacaoindicesabertas,cachespausados.",
-      "objective": "Reauditoriaglobalaberta;lotedecopiaslocais4encerrado;demaisbackups/roles/familiascontinuamemrevisao.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/retirement-final.json;data/storage-finance-archives-1572257170626580601/independent-post-validation.json;discord:1569928464033783862/1572265707821989981",
-      "state": "in_progress_four_copy_lot_completed_remaining_review_open",
+      "next_step": "Proximo gate:29copiaslocais f4fa14fa1105/0dirs,~4.448GiBliquidosdiretos,90revisados61preservados;29RAM+30catalogos remotos+294retidos+29testsPASS;0apagados. Confirmacao antiga nao vale. Revisoes e lotes anteriores encerrados,naoreexecutar. Familias2-6/consolidacaoindices continuam abertas;cache pausado;retencao nao alterada.",
+      "objective": "Reauditoria global aberta;lotef4fa14fa1105 aguarda nova confirmacao de29copiaslocais;anteriores encerrados.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-rollback-dumps-1572270579850153987/review-result.json;data/storage-rollback-dumps-1572270579850153987/active-lot.json",
+      "state": "in_progress_exact29_local_dump_copy_confirmation_pending",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T15:08:33+00:00"
+      "updated_at": "2026-11-17T16:00:13+00:00"
     },
     {
       "agent": "zeus",
@@ -6978,12 +6989,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-ROLLBACK-DUMPS-1572270579850153987",
-      "next_step": "Revalidar90doledger;extrairsomenteprovasmetadadosbackupsemvaloresfinanceiros;separarcopiasremotasexatasdeestadosemprova. Preservar17Nov+3Oct/retidos,cache/SQL/DB/restart/deletefora. Prepararloteapenasaposprova/gate,semnovoOKgenerico.",
-      "objective": "Revisao readonly90dumpshistoricosremanescentes:origem,encerramento,copiaremotaexata,consumidores,recuperacao;naorepetirlotesretirados.",
-      "source": "context/storage-reaudit-20261116.md;data/storage-finance-archives-1572257170626580601/retirement-final.json;discord:1569928464033783862/1572270579850153987",
-      "state": "in_progress_readonly_ninety_historical_rollback_dumps",
+      "next_step": "Confirmar somente manifesto f4fa14fa1105ccfb05d0e4f83a027f36dc60ae981d5e26cc4ba71cd3a2064330/gate3290092bd4d3:29files/0dirs,~4.448GiBliquidosdiretos;29RAMrecovery/30remotos/294payloadsretidos/gate29testsPASS. SemdeleteateOKnativonovo. AposOK:preflight,execucao1x,validacaoindependente+RAMpost29;naorepetirlotesantigos. Caches/SQL/DB/restart/retencao fora.",
+      "objective": "Revisao90dumps concluida:29copiaslocais/remotosexatos elegiveis,61preservadas;nenhuma exclusao autorizada.",
+      "source": "context/storage-reaudit-20261116.md;data/storage-rollback-dumps-1572270579850153987/review-result.json;data/storage-rollback-dumps-1572270579850153987/active-lot.json",
+      "state": "awaiting_new_exact_critical_confirmation_29_local_copies",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T15:22:32+00:00"
+      "updated_at": "2026-11-17T16:00:13+00:00"
     },
     {
       "agent": "zeus",
@@ -11254,19 +11265,8 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
-    },
-    {
-      "id": "KELLY-INTAKE-ISOLATION-1572278764346540115",
-      "agent": "zeus",
-      "thread_id": "1562078493498540042",
-      "objective": "Isolar manutenção de relatórios do intake criativo e acompanhar Ares até entrega dos 34 vídeos da Kelly",
-      "state": "Investigação confirmou chamada geral de manutenção antes do intake; 20/34 entregues, 14 pendentes. Report e ACL preservados. Preparando recorte criativo com rollback/testes.",
-      "next_step": "Publicar isolamento sob intake→queue locks, exercitar monitor, encaminhar mesma solicitação ao Ares como único writer e verificar entrega final",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/kelly-isolation-1572278764346540115",
-      "authority_message_id": "1572278764346540115",
-      "updated_at": "2026-11-17T15:56:13.538023+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T15:37:29+00:00"
+  "updated_at": "2026-11-17T16:01:13+00:00"
 }

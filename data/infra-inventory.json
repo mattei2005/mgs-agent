@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-17T10:39:34-05:00",
+    "updated_at": "2026-11-17T11:01:36.652633-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -68663,6 +68663,111 @@
       "layout": "SEGURADOR | DOMAIN | Total | Metric | dates",
       "frozen_columns": 3,
       "layout_evidence": "/root/.hermes/profiles/zeus/artifacts/sb-timeline-1572265135207223408/total-freeze-1572271474171977811/verification.json"
+    },
+    {
+      "id": "storage-rollback-dumps-1572270579850153987",
+      "agent": "zeus",
+      "type": "readonly_historical_dump_review_and_exact29_remote_mirrored_local_file_proposal",
+      "status": "awaiting_new_exact_critical_confirmation",
+      "thread_id": "1569928464033783862",
+      "authority_message_id": "1572270579850153987",
+      "reviewed_count": 90,
+      "candidate_files": 29,
+      "preserved_pending_proof": 61,
+      "source_files_deleted": 0,
+      "directories_to_delete": 0,
+      "manifest_sha256": "f4fa14fa1105ccfb05d0e4f83a027f36dc60ae981d5e26cc4ba71cd3a2064330",
+      "gate_sha256": "3290092bd4d33d65a7e915d9adb93d6a65098791d68b637804fb92b43a421d6c",
+      "gross_reclaim_bytes": 4778594304,
+      "net_direct_reclaim_estimate_bytes": 4775837696,
+      "retained_unique_payloads": 294,
+      "retained_original_cohort": 293,
+      "retained_parent_directories": 29,
+      "remote_originals_verified": 29,
+      "additional_fallback_remote_verified": true,
+      "real_retained_only_RAM_file_recoveries": 29,
+      "gate_tests": 29,
+      "gate_preflight": "PASS",
+      "learning": {
+        "subsystem": "skills",
+        "target": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+        "summary": "Secret-safe transport versus file-access diagnosis; original privileged read route only; exact filename/module-root consumer classification; real remote-only RAM recovery.",
+        "sha256": "60f7dd0881cda3bc6c5fcaa4c89e84c90336881f6ffbbd04cd0a42395774e68a",
+        "live_mirror_equal": true
+      },
+      "evidence": "data/storage-rollback-dumps-1572270579850153987/review-result.json",
+      "source_census_path": "/root/.hermes/secure-backups/storage-rollback-dumps-1572270579850153987/source-census-frozen-v2.json.gz",
+      "private_recovery_ledger": "/root/.hermes/secure-backups/storage-rollback-dumps-1572270579850153987/selected-lineage.json.gz",
+      "mandatory_retained_recovery_dependencies": [
+        "/home/zeus/mgs-finance-backups/composition-1555934054132486275/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-06-ae9187827e35-complete-730aa98e55e3/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/save-perf-1552071425156845749/before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-22-1fe1d6882edf-complete-f98b4dcf775d/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/1547697182948458611/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-27-a23866a8871e-complete-84cc7e1ffeda/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-29-e3cd4662a57a-complete-ca62f3267ab6/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-21-8c0c51435b89-complete-2247a0804902/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-08-31-03dec3fb3efe-complete-ca96c53089fd/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-25-ec6bf3e4977c-complete-ddb64031b4f2/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-01-c16badba734e-complete-ca62f3267ab6/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/proxy-addr-1556897466652037131/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-07-a39edae6884f-complete-673905638a0a/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-25-5b9813fc2edf-complete-0849f6c3813c/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/quote-fix-1552011536011108493/before.dump",
+        "/home/zeus/mgs-finance-backups/recovery-1566802212548517990/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/rate-propagation-1552079131628281897/before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-24-2d7da5f5ae4d-complete-ddb64031b4f2/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-24-2d7da5f5ae4d-complete-abdc7145191b/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-22-1a82f0a527df-complete-d4c225ae6bdd/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/annual-1556874856446951425/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/composition-style-1556369322782232598/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-05-544e69737ae0-complete-7f63c5c47d45/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/columns-1555702482557075539/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/month-prune-1556898264878419969/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-20-f485e0fee995-complete-a8b560da8afd/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/noindex-1555943137128751176/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-09-25-6b619922b26c-complete-3a8ac5623154/mgs_finance-before.dump",
+        "/home/zeus/mgs-finance-backups/columns-1555736746409459743/finance-before.dump",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-11-16-e0e4650266be-complete-e44c2159f68b/mgs_finance-before.dump"
+      ],
+      "report_infra": {
+        "message_id": "1572280295456112751",
+        "channel_id": "1498132022634483894",
+        "exact_GET_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true,
+        "manifest_identifier_verified": true,
+        "at": "2026-11-17T11:01:36.530843-05:00"
+      },
+      "new_critical_confirmation_pending": true,
+      "existing_approvals_applicable": false,
+      "next_step": "Ask Rodolfo to confirm only manifest f4fa14fa1105; preserve all other scopes. No existing approval authorizes this lot.",
+      "updated_at": "2026-11-17T11:01:36.652633-05:00"
+    },
+    {
+      "id": "kelly-intake-isolation-1572278764346540115",
+      "agent": "zeus",
+      "type": "creative_corporate_maintenance_isolation",
+      "status": "repair_live_verified_ares_delivery_in_progress",
+      "authority_message_id": "1572278764346540115",
+      "thread_id": "1562078493498540042",
+      "origin_thread_id": "1572255222175244299",
+      "files": {
+        "scripts/ares_autonomous_intake.py": "648b584fb125e3e974c7d9a4951914e80c28430cbb33d1c3c972b29c2a16843c",
+        "scripts/mgs_flat_maintenance.py": "7dc8f534a7b11285050addd9ab71f70fd18e81f3974aad6b8e0606eab48c8304",
+        "tests/test_flat_report_isolation.py": "96c955e245fa2b3f68cddd6074a7bb239f7d79c7238918b8c75fad81ae7089d5"
+      },
+      "evidence": "/root/.hermes/profiles/zeus/artifacts/kelly-isolation-1572278764346540115",
+      "rollback": "/root/.hermes/profiles/zeus/artifacts/kelly-isolation-1572278764346540115/rollback",
+      "tests": {
+        "staged": 14,
+        "live_isolation": 6,
+        "flat_regressions": 84
+      },
+      "report_metadata_and_acl_unchanged": true,
+      "handoff_message_id": "1572280160722485490",
+      "updated_at": "2026-11-17T16:01:10.586846+00:00"
     }
   ],
   "profile_skill_references": [
@@ -71490,8 +71595,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_autonomous_intake.py",
-      "size_bytes": 25903,
-      "modified_at": "2026-11-14T23:19:47-05:00"
+      "size_bytes": 26003,
+      "modified_at": "2026-11-17T16:01:10.586846+00:00",
+      "sha256": "648b584fb125e3e974c7d9a4951914e80c28430cbb33d1c3c972b29c2a16843c"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/__init__.py",
@@ -72765,8 +72871,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_flat_maintenance.py",
-      "size_bytes": 11236,
-      "modified_at": "2026-11-14T23:19:47-05:00"
+      "size_bytes": 11777,
+      "modified_at": "2026-11-17T16:01:10.586846+00:00",
+      "sha256": "7dc8f534a7b11285050addd9ab71f70fd18e81f3974aad6b8e0606eab48c8304"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_flat_source_compat.py",

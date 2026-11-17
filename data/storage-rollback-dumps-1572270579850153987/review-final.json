@@ -1,0 +1,35 @@
+{
+  "status": "readonly_review_validated_awaiting_exact29_critical_confirmation",
+  "at": "2026-11-17T11:04:16.816924-05:00",
+  "request_message_id": "1572270579850153987",
+  "manifest_sha256": "f4fa14fa1105ccfb05d0e4f83a027f36dc60ae981d5e26cc4ba71cd3a2064330",
+  "gate_sha256": "3290092bd4d33d65a7e915d9adb93d6a65098791d68b637804fb92b43a421d6c",
+  "all90_source_hashes_metadata_unchanged_at_closure": true,
+  "three_gateway_PIDs_unchanged": true,
+  "review_result_path": "review-result.json",
+  "review_result_sha256": "aabc9d4d5b93833424306548407c21cdab757d4e53fd080ccf58842acca1d659",
+  "tests_path": "gate-tests.json",
+  "tests_sha256": "a2934d057394bcfb5cea7588e88cd4724aaeb642dd3b6f7c4b15c8602b25bddc",
+  "report_infra": {
+    "message_id": "1572280295456112751",
+    "channel_id": "1498132022634483894",
+    "exact_GET_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true,
+    "manifest_identifier_verified": true,
+    "at": "2026-11-17T11:01:36.530843-05:00"
+  },
+  "inventory_exact_row_readback_verified": true,
+  "both_checkpoint_states": {
+    "ZEUS-STORAGE-REORGANIZATION-1570447435074109502": "in_progress_exact29_local_dump_copy_confirmation_pending",
+    "ZEUS-STORAGE-ROLLBACK-DUMPS-1572270579850153987": "awaiting_new_exact_critical_confirmation_29_local_copies"
+  },
+  "canonical_knowledge_validation": "ok",
+  "git_final_acceptance_receipt": "/root/.hermes/secure-backups/storage-rollback-dumps-1572270579850153987/delivery-git-validation.json",
+  "git_sync_not_inferred_from_equal_HEAD_alone": true,
+  "source_files_deleted": 0,
+  "new_critical_confirmation_required": true,
+  "existing_approvals_applicable": false,
+  "global_audit_still_open": true
+}
