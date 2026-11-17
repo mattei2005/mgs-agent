@@ -5125,12 +5125,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-EGGBEV03-WATCH-1571892517669175461",
-      "next_step": "Aguardar retorno humano explicito na origem sobre revisao da restricao Ana Cunha; observar em leitura sem retry Meta/bypass/cobranca ao Ares. Apos liberacao observar revalidacao e retomada missing-only pelo Ares. Monitor existente ativo,39/96 ciclos registrados;proximo19:29 EST;pedido nao concluido.",
+      "next_step": "Aguardar retorno humano explicito na origem sobre revisao da restricao Ana Cunha;observar em leitura sem retry Meta,bypass ou cobranca ao Ares. Apos liberacao observar revalidacao e retomada missing-only pelo Ares. Monitor existente ativo,40/96 ciclos registrados;proximo19:36EST;pedido nao concluido.",
       "objective": "Acompanhar pedido1571894746719330377 ate entrega;Ares unico writer;preservar bloqueio humano e objetos.",
       "source": "/root/mgs-agent/data/zeus/eggbev03-watch-1571892517669175461.json",
-      "state": "waiting_owner_facebook_profile_restriction: ciclo19:14 sem mensagens novas na origem ou thread zeus;mensagem1572025575340515361 sem edicao;hashes request,restriction-final-readback e engine-result inalterados. ana cunha restrita api368/1404163 no ultimo recibo;310/311 pausadas,0anuncios,312-314 pendentes. sem nova verificacao meta,sem escrita campanhas,sem notificacao repetida.",
+      "state": "waiting_owner_facebook_profile_restriction: ciclo19:29;leitura19:30est sem mensagens novas nas duas threads,pais e autoridade confirmados. mensagem1572025575340515361 sem edicao;hashes request,restriction-final-readback,engine-result inalterados. ultimo recibo:ana cunha restrita368/1404163;310/311 pausadas,0anuncios,312-314 pendentes. sem nova verificacao meta,sem escrita campanhas,sem notificacao repetida.",
       "thread_id": "1571888100236464159",
-      "updated_at": "2026-11-17T00:16:38+00:00"
+      "updated_at": "2026-11-17T00:31:23+00:00"
     },
     {
       "agent": "zeus",
@@ -11147,5 +11147,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T00:16:38+00:00"
+  "updated_at": "2026-11-17T00:31:23+00:00"
 }
