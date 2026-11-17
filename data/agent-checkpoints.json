@@ -322,6 +322,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1572311030560985089",
+      "next_step": "Executar slots finitos somente na origem; novas campanhas criadas17nov nesta conta entram em cada corte. Preservar pausadas e IDs admitidos; retomar mesmo slot/outbox em falha; expirar18nov00hEST antesAPI. Envios futuros ainda nao executados.",
+      "objective": "CPR e ROI cada30min campanhas criadas17nov Yolokfx04 G004 incluindo futuras ate fim dia",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1572311030560985089/manifest.json",
+      "state": "scheduled_initial_get_verified;2campanhas300301;22slots13h28a23h58est;expira18nov00hest;29testespass;auditoriaglobalprepossemconflito;semwritesmetasb",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-17T18:07:37+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -7398,6 +7408,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-roi-1572310965079253216",
+      "next_step": "Executar slots congelados com descoberta somente criadas17nov conta exata; expirar18nov00:00EST antesAPI; recuperar somente camada faltante no mesmo request",
+      "objective": "CPR Meta e ROI real SB a cada30min somente campanhas criadas17nov Mavroa04 G004 inclusive futuras",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1572310965079253216/manifest.json",
+      "state": "active_finite_schedule_verified;inicial13:05est,c064,c065,uma_parte_get;20checks_pass;22slots13:13-23:43est;post_audit_sem_conflito;zero_writes_meta_sb",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-17T18:07:04+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -11298,5 +11318,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T17:54:56+00:00"
+  "updated_at": "2026-11-17T18:07:37+00:00"
 }
