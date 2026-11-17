@@ -16,8 +16,8 @@ class CreationSheetTests(unittest.TestCase):
   with patch.object(m,'now',return_value=datetime.fromisoformat(self.snapshot['cutoff'])):
    d=m.snapshot_to_days(self.snapshot,self.p,self.accounts)
   return m.preserve_history(self.snapshot,d,self.accounts,{})
- def test_scope_exact_six_sites_thirty_six_accounts(self):
-  self.assertEqual(len(self.accounts),36);self.assertEqual({a['name'].split('-')[0] for a in self.accounts},set(self.p['brands']))
+ def test_scope_exact_six_sites_thirty_eight_accounts(self):
+  self.assertEqual(len(self.accounts),38);self.assertEqual({a['name'].split('-')[0] for a in self.accounts},set(self.p['brands']))
   self.assertEqual(len({(a['name'].split('-')[0],a['manager_code']) for a in self.accounts}),36)
  def test_exact_baseline_partition_preserves_existing_history(self):
   days,ledger=self.fixture();baseline=m.load(m.BASE/self.p['historical_baseline'])
@@ -72,7 +72,7 @@ class CreationSheetTests(unittest.TestCase):
   d,_=self.fixture();model=m.models(d,self.p,self.accounts)
   before=m.load(m.STATE/'runs/closed-2026-11-09/readback.json')['book']
   g=Mock();g.book.return_value=before;g.fid=self.p['spreadsheet_id'];g.p=self.p;g.batch.side_effect=RuntimeError('STOP_BEFORE_REMOTE_WRITE')
-  with TemporaryDirectory() as tmp:
+  with TemporaryDirectory(dir='/root/.hermes/profiles/zeus/cache/scratch') as tmp:
    with self.assertRaisesRegex(RuntimeError,'STOP_BEFORE_REMOTE_WRITE'):m.sync(g,model,Path(tmp))
    mapping=m.load(Path(tmp)/'write-intent.json')['mapping']
   self.assertEqual(len(set(mapping.values())),14)

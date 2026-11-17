@@ -1,0 +1,91 @@
+{
+  "status": "completed_validated",
+  "manifest_sha256": "8ea364228428e40347aa276d64c5ed3ea28aa9136140d1e895ff4ea71517fe42",
+  "gate_sha256": "46f77b164decb428a6056410328ada68dab42b790c5b50039c621b040ff8921c",
+  "question_message_id": "1572263708707524770",
+  "confirmation_message_id": "1572265707821989981",
+  "thread_id": "1569928464033783862",
+  "author_id": "344196393512075265",
+  "targets": [
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261113T080319-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261114T080318-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261115T080318-0500/mgs_finance-before.dump",
+    "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261116T080318-0500/mgs_finance-before.dump"
+  ],
+  "removed_counts": {
+    "file": 4,
+    "directory": 0
+  },
+  "independent_validation": {
+    "status": "PASS",
+    "manifest_sha256": "8ea364228428e40347aa276d64c5ed3ea28aa9136140d1e895ff4ea71517fe42",
+    "gate_sha256": "46f77b164decb428a6056410328ada68dab42b790c5b50039c621b040ff8921c",
+    "question_message_id": "1572263708707524770",
+    "confirmation_message_id": "1572265707821989981",
+    "deleted_regular_files": 4,
+    "deleted_directories": 0,
+    "journal_exact_unique_four": true,
+    "all_targets_absent": true,
+    "parent_directories_preserved": true,
+    "retained_original_files": 322,
+    "retained_local_dump_count": 4,
+    "retained_unique_payloads_verified": 323,
+    "retained_metadata_and_payloads_unchanged": true,
+    "retained_receipt_hashes_unchanged": true,
+    "remote_counterparts_verified_again": 5,
+    "remote_catalogue_not_materialized_restore": true,
+    "gateway_PIDs_unchanged": true,
+    "launcher_unchanged": true,
+    "failed_systemd_units": 0,
+    "config_checks": [
+      {
+        "profile": "zeus",
+        "exit_code": 0,
+        "config_check_pass": true
+      },
+      {
+        "profile": "atena",
+        "exit_code": 0,
+        "config_check_pass": true
+      },
+      {
+        "profile": "ares",
+        "exit_code": 0,
+        "config_check_pass": true
+      }
+    ],
+    "no_model_requests": true,
+    "no_SQL_or_DB_started": true,
+    "no_cache_cleanup": true,
+    "no_production_or_retention_changes": true,
+    "observed_immediate_global_delta_bytes": 844029952,
+    "observed_immediate_global_delta_MiB": 804.93,
+    "disk_observation": {
+      "available_GiB": 63.99,
+      "used_percent": 66.79
+    },
+    "at": "2026-11-17T10:06:14.181834-05:00"
+  },
+  "replay_guard": {
+    "status": "PASS",
+    "already_executed_apply_refused_before_validation_or_unlink": true,
+    "filesystem_result_journal_manifest_gate_unchanged": true,
+    "further_deleted_files": 0
+  },
+  "prior_preparation_preserved": "review-final.json; no rewriting of frozen preparation/manifest/gate",
+  "whole_storage_review_complete": false,
+  "next_step": "Lote4encerrado,naoreexecutar nemreconfirmar. Proximarevisaoread-only:demais backups/dumps historicosderollback e suas dependencias/recovery.322arquivosanteriores+fallback17Nov/remotos/fontes/recibospreservados;outrosarchives/SQL/familias2-6abertos,cachespausados,semdeleteimplicito/retencaonova.",
+  "at": "2026-11-17T10:07:29.209612-05:00",
+  "report_infra": {
+    "message_id": "1572267207759503452",
+    "channel_id": "1498132022634483894",
+    "exact_GET_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true,
+    "exact_manifest_targets_in_path_field": true,
+    "same_message_path_refinement_no_duplicate_post": true
+  },
+  "governance_errors": [],
+  "sealed_at": "2026-11-17T10:09:25.272240-05:00"
+}

@@ -44,6 +44,14 @@
 - Exercite o wrapper real em `--validate-live` com zero publicação antecipada e zero hook de planilha. O modo de validação não pode chamar `update_creation_sheet`; confirme também a ausência de outbox, delivery e sheet-refresh no run real. Uma consulta das 38 contas valida seleção/coleta/renderização, não a entrega agendada nem a recuperação de um slot histórico.
 - Preserve horário, destino, nonce e outbox existentes; não amplie a planilha independente nem faça catch-up de datas antigas pela simples aprovação de novas contas. Registre separadamente a correção do produtor e o saldo histórico da fila, sem fechar o incidente antigo por um teste atual.
 
+## Expansão da planilha mensal de criações
+
+- Após aprovação específica da planilha, mantenha o mesmo spreadsheet ID,14abas,36células gestor/site e o gate00h15; 38contas não significam38células. Congele IDs/nomes/gestores da seleção e mantenha as36contas da baseline histórica separadas das duas inclusões.
+- Em `snapshot_to_days`, some as campanhas das contas que caem na mesma célula; atribuir o contador de cada conta sobrescreve o anterior. Bloqueie escrita se qualquer conta faltar, repetir, mudar identidade ou estiver incompleta.
+- Preserve a baseline original por contagem apenas para as contas que ela cobria; una IDs históricos sem duplicação, acrescente as campanhas posteriores ao corte dessas contas e todas as campanhas verificadas das inclusões. Campanhas de uma conta incluída que antecedam a baseline não pertencem automaticamente à contagem antiga. Teste a partição e a idempotência, preservando o histórico conhecido contra redução antes de qualquer write.
+- Use exclusivamente `mgs_google_workspace_auth.py` e a SA canônica. Antes do lote, preserve metadados,valores e fórmulas das14abas, prove Drive/Sheets e faça canário reversível em célula vazia validada. Confira detalhes,resumos,totais,tabs/IDs e ACL depois do write, sem criar planilha nova ou alterar permissões.
+- Uma recuperação manual do consumidor e readback das14abas comprova a atualização atual; mantenha o fechamentoD-1 e o hook após a contagem diária sem alegar que uma execução agendada futura já ocorreu.
+
 ## Validação e colisões
 
 - Aplicar `context/cron-scheduling-policy.md`: oito datas civis, todos os profiles, root/system cron, timers e contratos de aplicação; considerar DST e o timezone real observado do daemon.
