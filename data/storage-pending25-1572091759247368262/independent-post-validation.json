@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
+  "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+  "confirmation_message_id": "1572111648741793904",
+  "question_message_id": "1572099777863098449",
+  "removed_counts": {
+    "file": 6130,
+    "directory": 162
+  },
+  "deleted_total_nodes": 6292,
+  "unexpected_or_duplicate_journal_entries": 0,
+  "all_target_nodes_absent": true,
+  "retained_roots": 25,
+  "retained_payloads_verified": 25435,
+  "final_v7_present_and_unchanged": true,
+  "retained_metadata_unchanged": true,
+  "retained_inputs_and_generators_unchanged": true,
+  "relevant_code_or_scheduler_census_unchanged": true,
+  "gateway_PIDs_unchanged": true,
+  "launcher_unchanged": true,
+  "failed_systemd_units": 0,
+  "new_DB_started_or_SQL_executed": false,
+  "model_requests_executed": 0,
+  "cache_cleanup": false,
+  "production_changes_by_this_lot": false,
+  "observed_available_delta_bytes": 1249845248,
+  "observed_available_delta_GiB": 1.164,
+  "current_available_GiB": 63.67,
+  "current_used_percent": 66.96,
+  "at": "2026-11-16T23:53:24.980818-05:00"
+}
