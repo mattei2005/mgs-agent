@@ -10647,6 +10647,16 @@
       "updated_at": "2026-11-13T16:54:10+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-status-1572312626346856491",
+      "next_step": "Confirmar somente horario de reativacao em 18 de novembro de 2026, fuso America/New_York; depois avaliar readiness integral e agendar uma unica reativacao status-only dos mesmos IDs.",
+      "objective": "Pausar 294,297,289,279 na Yolokfx04 G004 e reativar em 18/11/2026; hora ainda nao informada",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572312626346856491/activation.json",
+      "state": "paused_waiting_activation_hour: 4/4 paused confirmadas por get individual e batch integral; quatro writes exclusivos status; budget,lance,nomes e programacao preservados. nenhuma agenda criada.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-17T18:11:12+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-yolokfx-pages-lazyblocks-migration",
       "next_step": "Nenhum; operação encerrada. Backups preservados para rollback nos paths registrados no audit.",
@@ -11318,5 +11328,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T18:07:37+00:00"
+  "updated_at": "2026-11-17T18:11:12+00:00"
 }
