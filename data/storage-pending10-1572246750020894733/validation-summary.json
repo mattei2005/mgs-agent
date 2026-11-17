@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "checks": {
+    "exact_ten_targets": true,
+    "two_dynamic_dependencies": true,
+    "zero_literal_leafs_not_misclassified": true,
+    "family_pass_not_promoted_to_exact_recovery": true,
+    "all_ten_still_exist": true,
+    "zero_eligible_reclaim": true,
+    "accounting_reconciled": true,
+    "no_destructive_gate_prepared": true,
+    "live_skill_mirror_equal": true,
+    "typed_source_compiles": true
+  },
+  "check_count": 10,
+  "static_selector_resolution": [
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate"
+  ],
+  "actual_full_readonly_execution_elapsed_seconds": 58.55,
+  "classification_observation": "review-result.json",
+  "analysis_created_allocated_bytes_before_closure": 45056,
+  "at": "2026-11-17T08:54:16.988039-05:00"
+}

@@ -68421,6 +68421,45 @@
         "billing_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "storage-pending10-1572246750020894733",
+      "agent": "zeus",
+      "type": "readonly_ten_root_QA_provenance_and_consumer_review",
+      "status": "completed_readonly_all_ten_preserved",
+      "authority_message_id": "1572246750020894733",
+      "thread_id": "1569928464033783862",
+      "evidence": "data/storage-pending10-1572246750020894733/review-result.json",
+      "result_sha256": "f3d4c8ed1572dbbe2a816fb802f3e4e51c9c64cc41936040f4cf73ee4e255295",
+      "targets_reviewed": 10,
+      "classification_current": {
+        "preserve_verification_consumer": 2,
+        "preserve_unproven_exact_run_and_state_recovery": 8
+      },
+      "allocated_bytes_not_reclaim": 1943801856,
+      "eligible_reclaim_bytes": 0,
+      "source_files_deleted": 0,
+      "retained_roots": 25,
+      "retained_payloads_verified": 25435,
+      "validation_checks": 10,
+      "deletion_confirmation_pending": false,
+      "next_step": "Revisao10concluida:2dependenciasdinamicas+8semrecuperacaoexatacertificada,todospreservados;zeroexclusao/confirmacaopendente. Nao repetir lotes nemperguntarOKgenerico. Proximo:classefinanceira326archives/exportacoes/SQL ja inventariados,read-only;familias2-6+consolidacaoindicesabertas,cachespausados.",
+      "learning": {
+        "target": "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+        "summary": "Finite phase-composed selectors consume exact roots even with zero literal leaf hits; family PASS does not identify an old UUID/timestamp run.",
+        "live_mirror_equal": true
+      },
+      "report_infra": {
+        "message_id": "1572248690490609738",
+        "channel_id": "1498132022634483894",
+        "exact_GET_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true
+      },
+      "updated_at": "2026-11-17T08:55:33.964574-05:00",
+      "closure_evidence": "data/storage-pending10-1572246750020894733/review-final.json",
+      "closure_sha256": "e29dc71811d54c722ce548e6283c4c1470862d851de1dca33f2bc93129b724e1"
     }
   ],
   "profile_skill_references": [

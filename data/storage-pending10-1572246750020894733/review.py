@@ -1,5 +1,6 @@
 """Read-only classification of ten exact historical QA roots. No DB imports, SQL or deletion."""
 import ast, collections, datetime, gzip, json, os, pathlib, re, stat, subprocess, time
+from typing import Any
 ROOT=pathlib.Path('/root/mgs-agent'); OUT=pathlib.Path(__file__).parent
 PRIOR=ROOT/'data/storage-pending25-1572091759247368262'
 APP=ROOT/'apps/finance-system'; started=time.monotonic()
@@ -9,8 +10,8 @@ def save(name,value):
 # Load only individually inspected read-only helper definitions; never load the executor.
 gate=ROOT/'data/storage-local-tests-1571996311308214363/target-consumer-census-v2/gate.py'
 tree=ast.parse(gate.read_text()); names={'need','canon','sha','health','snapshot','runtime_refs','full_code_inventory'}
-nodes=[n for n in tree.body if isinstance(n,(ast.Import,ast.ImportFrom)) or isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id in {'BASE','SERVICES','CODE'} for t in n.targets)]
-ns={'ROOT':ROOT};exec(compile(ast.fix_missing_locations(ast.Module(body=nodes,type_ignores=[])),str(gate),'exec'),ns)
+nodes: list[ast.stmt]=[n for n in tree.body if isinstance(n,(ast.Import,ast.ImportFrom)) or isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id in {'BASE','SERVICES','CODE'} for t in n.targets)]
+ns: dict[str, Any]={'ROOT':ROOT};exec(compile(ast.fix_missing_locations(ast.Module(body=nodes,type_ignores=[])),str(gate),'exec'),ns)
 classification=json.loads((PRIOR/'classification-final.json').read_text());targets=sorted(r['path']for r in classification['roots']if r['classification']=='preserve_pending_provenance_or_reconstruction');assert len(targets)==len(set(targets))==10
 manifest=json.loads((PRIOR/'manifest.json').read_text());retained={r['path']:r['metadata']for r in manifest['retained_roots']};assert len(retained)==25 and set(targets)<=set(retained)
 health_before=ns['health'](); before={p:ns['snapshot'](p)[0]for p in retained};assert before==retained,'Retained metadata drift: preserve and investigate'

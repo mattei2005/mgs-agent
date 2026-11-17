@@ -1,0 +1,58 @@
+{
+  "status": "completed_readonly_review_all_ten_preserved",
+  "authority_message_id": "1572246750020894733",
+  "thread_id": "1569928464033783862",
+  "result": {
+    "status": "bounded_review_complete_all_ten_preserved",
+    "authority_message_id": "1572246750020894733",
+    "author_id": "344196393512075265",
+    "thread_id": "1569928464033783862",
+    "targets_reviewed": 10,
+    "classifications": {
+      "preserve_verification_consumer": 2,
+      "preserve_unproven_exact_run_and_state_recovery": 8
+    },
+    "allocated_bytes": 1943801856,
+    "allocated_GiB": 1.81,
+    "occupied_not_reclaim": true,
+    "eligible_reclaim_bytes": 0,
+    "observed_cleanup_savings_bytes": 0,
+    "deletion_confirmation_pending": false,
+    "original_files_deleted": 0,
+    "all_25_retained_metadata_unchanged": true,
+    "all_25_retained_payloads_verified": 25435,
+    "ten_root_payloads_verified": 10154,
+    "current_process_references": [],
+    "current_code_sources_read": 21788,
+    "databases_opened_or_started": 0,
+    "SQL_or_application_execution": false,
+    "production_changes": false,
+    "cache_cleanup": false,
+    "service_restarts": false,
+    "new_payload_backups": false,
+    "history_lookup": "Bounded session_search current profile; available results are later inventories/reviews, not original per-run creator receipts. Not exhaustive archive history.",
+    "new_finding": "Two expense stage roots have a dynamic phase-based historical verification consumer and are reclassified to verified dependency; eight roots preserve exact-run/state-recovery uncertainty. Family-level pass is not exact instance recovery.",
+    "next_step": "This ten-root review closed as preservation; do not loop or imply pending deletion. Broader finance source/export class and families2-6 remain open under parent reauditoria. Index consolidation is a separate lossless/gated operation.",
+    "at": "2026-11-17T08:52:06.754443-05:00",
+    "elapsed_seconds": 58.55
+  },
+  "validation_checks": 10,
+  "report_infra": {
+    "message_id": "1572248690490609738",
+    "channel_id": "1498132022634483894",
+    "exact_GET_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  },
+  "learning": {
+    "subsystem": "skills",
+    "target": "vps-maintenance-and-backup-governance/references/backup-retention-scope-and-redundancy.md",
+    "summary": "Resolve stage- plus allowed phase before concluding no consumer; family PASS does not bind old instance.",
+    "live_mirror_equal": true
+  },
+  "whole_storage_review_complete": false,
+  "new_critical_confirmation_pending": false,
+  "audit_and_checkpoint_local_readback_verified": true,
+  "sealed_at": "2026-11-17T08:55:33.964574-05:00"
+}

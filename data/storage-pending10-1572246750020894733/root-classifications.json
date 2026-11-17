@@ -1,0 +1,192 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+    "classification": "preserve_verification_consumer",
+    "reason": "Dynamic phase selector in retained stage.mjs reopens this exact baseline/candidate path. Existing result passes and source inputs remain; no retained-only full historical database reconstruction certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage.mjs",
+    "missing_predicate": "Exact historical comparison DB recovery not certified; stage helper remains an existing reader.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 192397312,
+      "fingerprint_sha256": "96e9e10636e769d98d1873238cc051649e91621c24af2d0348db3980cf80e4ff"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+    "classification": "preserve_verification_consumer",
+    "reason": "Dynamic phase selector in retained stage.mjs reopens this exact baseline/candidate path. Existing result passes and source inputs remain; no retained-only full historical database reconstruction certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage.mjs",
+    "missing_predicate": "Exact historical comparison DB recovery not certified; stage helper remains an existing reader.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 200654848,
+      "fingerprint_sha256": "f030aeaede1a5c458ddf8e3a013fb7de3ecc1ee9db5110d65bbc35f4cfd16a61"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 189878272,
+      "fingerprint_sha256": "1154d0baf763fa50cd904a86e540330d8b10e4fb8a12a301daa9c383d7109d20"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 189874176,
+      "fingerprint_sha256": "5111f23a45c9ac1ec1b721fc106c01e484abba6724b21c4dcc74ce651dbcd3be"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 198471680,
+      "fingerprint_sha256": "06c073e787f121f8f96f9738a50a4690e84d41d35cd32ee0251e940c1ed4f98d"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 198467584,
+      "fingerprint_sha256": "a744d59c47d0ccd526fd91422e8e25e384ead1810fbb412fc058f31633df6fa4"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 198467584,
+      "fingerprint_sha256": "10d7478c496de0d126a42d3edec10c12fe4f65ab6ec5e84a165ad91981d36836"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Timestamped family producer and successful publication/API evidence found, but exact acceptance attempt/seed/final DB state not independently bound for each historical root (including unsuffixed base). No exact state subsumption or restore certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/local_acceptance.mjs",
+    "missing_predicate": "Five timestamped names are compatible with retained factory, not authenticated per-run receipts; unsuffixed root original creator remains unresolved.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+      "counts": {
+        "file": 1018,
+        "directory": 27
+      },
+      "allocated_bytes": 198467584,
+      "fingerprint_sha256": "c03e37a26313707a2a654b792686b37fc34b265842ee69c99fb7d3cd477e7bd7"
+    },
+    "payload_count": 1018,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Current sync test creates fresh UUID state and a passing family receipt survives, but receipt lacks each UUID path; no attribution to exact successful attempt or exact state recovery certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/tests/sync-browser.mjs",
+    "missing_predicate": "Passing family evidence lacks UUID binding for the two old directories.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+      "counts": {
+        "file": 1005,
+        "directory": 27
+      },
+      "allocated_bytes": 188645376,
+      "fingerprint_sha256": "d39e3ae4438b0eb118389a962ff59c5bee6b71784accb0bcefafd407ab74dea5"
+    },
+    "payload_count": 1005,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+    "classification": "preserve_unproven_exact_run_and_state_recovery",
+    "reason": "Current sync test creates fresh UUID state and a passing family receipt survives, but receipt lacks each UUID path; no attribution to exact successful attempt or exact state recovery certified.",
+    "producer_or_family_source": "/root/mgs-agent/apps/finance-system/tests/sync-browser.mjs",
+    "missing_predicate": "Passing family evidence lacks UUID binding for the two old directories.",
+    "metadata": {
+      "path": "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+      "counts": {
+        "file": 1005,
+        "directory": 27
+      },
+      "allocated_bytes": 188477440,
+      "fingerprint_sha256": "f92a23e1bbdc772123718a61be8527b1f57925fbb3c4601101a16d5865c59919"
+    },
+    "payload_count": 1005,
+    "eligible_reclaim_bytes": 0,
+    "decision": "preserve_no_deletion_gate"
+  }
+]
