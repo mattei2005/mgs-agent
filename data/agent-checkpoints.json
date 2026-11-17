@@ -6879,12 +6879,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-STORAGE-CONSOLIDATED-1572313312987979957",
-      "next_step": "Revalidar fronteiras atuais;classificar cada conjunto por produtor/consumidor/encerramento/recuperacao;registrar pendentes sem chamalos indispensaveis;congelar somente pacote conjunto comprovado. Cache/retencao/restart/SQL fora. Nao pedir continue nem reabrir lotes encerrados.",
-      "objective": "Concluir revisao consolidada das7familias restantes e preparar uma unica decisao final;sem exclusoes.",
-      "source": "context/storage-consolidated-closure-1572283279120277689.md;context/storage-reaudit-20261116.md;discord:1569928464033783862/1572313312987979957",
-      "state": "in_progress_consolidated_readonly_review",
+      "next_step": "384468fontes cobertas(18historicas transientes indisponiveis,0codigoindisponivel);3121hashesPASS/603grupos9.477GiBapenaspotencial.339JSONcopiados24tarefasencerradas=2.981GiB/todos15primariosiguais.107midias correspondem44IDs arquivo/nativeresolver+streams44PASS;fecharlineagem/consumidoresantesdeincluir. Provar mapaRAM,baselinejobsnormalizado,roleresidual7familias e gateconjunto. Nao abrir pequenoslotes nem reexecutaranteriores;cacheSQLrestartretencao fora.",
+      "objective": "Revisao consolidada7familias:metadata atual3FS;3155unidades/203materiais;provasdeconteudo econsumidores em andamento;semdelete.",
+      "source": "context/storage-consolidated-closure-1572283279120277689.md;data/storage-consolidated-review-1572313312987979957/metadata-summary.json;data/storage-consolidated-review-1572313312987979957/review-units.json;data/storage-consolidated-review-1572313312987979957/consumer-scan-progress.json",
+      "state": "in_progress_consolidated_content_and_recovery_validation",
       "thread_id": "1569928464033783862",
-      "updated_at": "2026-11-17T18:13:07+00:00"
+      "updated_at": "2026-11-17T18:56:08+00:00"
     },
     {
       "agent": "zeus",
@@ -11348,5 +11348,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T18:33:58+00:00"
+  "updated_at": "2026-11-17T18:56:08+00:00"
 }
