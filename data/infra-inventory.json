@@ -68380,6 +68380,27 @@
         "verification_preserved": 9,
         "pending_provenance_or_reconstruction": 10
       }
+    },
+    {
+      "id": "meta-manual-payments-scheduled-20261117T0802",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "blocked_meta_authentication",
+      "updated_at": "2026-11-17T08:08:51.839731-05:00",
+      "source_thread_id": "1563926766286803004",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T0802/blocked-receipt.json",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "preserved_h": 40,
+        "pending_d_events": 7,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [
