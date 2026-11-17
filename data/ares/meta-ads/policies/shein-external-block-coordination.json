@@ -1,8 +1,40 @@
 {
   "schema_version": 1,
   "policy_id": "ARES-SHEIN-G006-EXTERNAL-BLOCK-COORDINATION",
-  "authority": {"approved_by": "344196393512075265", "message_id": "1572397598784880681", "thread_id": "1558134703565967394", "effective_at": "2026-11-17T23:46:41.285000+00:00", "literal": "Pode fazer e Nicolas está autorizado a autorizar pedidos assim e futuros"},
-  "scope": {"parent_channel_id": "1548150155184701440", "account_ids": ["937846586033361"], "approver_ids": ["344196393512075265", "1055570806945620030"], "operation": "SHEIN-US-DIRECT", "action": "external_block_coordination_only", "delegation": "Nicolas pode autorizar recuperacoes equivalentes de coordenacao nesta particao/conta para pedidos presentes e futuros; exigir mensagem humana exata e permissao live a cada novo recibo."},
-  "invariants": ["Nao alterar estado/manifests/IDs/provas/reservas do predecessor", "Nao certificar QA anterior", "Bloquear replay antigo em fila,runner e Engine", "Admitir somente sucessor imutavel com midia comprovadamente disjunta e nao reservada", "Readback vivo da hierarquia e midia historica antes da admissao", "Locks/lease/conta/particao/orcamento/lance/horario/QA da nova campanha permanecem", "Nenhuma permissao,billing,credencial,app,pixel,exclusao permanente,alteracao de conteudo ou ampliacao de conta/dominio autorizada"],
-  "receipts": {}
+  "authority": {
+    "approved_by": "344196393512075265",
+    "message_id": "1572397598784880681",
+    "thread_id": "1558134703565967394",
+    "effective_at": "2026-11-17T23:46:41.285000+00:00",
+    "literal": "Pode fazer e Nicolas está autorizado a autorizar pedidos assim e futuros"
+  },
+  "scope": {
+    "parent_channel_id": "1548150155184701440",
+    "account_ids": [
+      "937846586033361"
+    ],
+    "approver_ids": [
+      "344196393512075265",
+      "1055570806945620030"
+    ],
+    "operation": "SHEIN-US-DIRECT",
+    "action": "external_block_coordination_only",
+    "delegation": "Nicolas pode autorizar recuperacoes equivalentes de coordenacao nesta particao/conta para pedidos presentes e futuros; exigir mensagem humana exata e permissao live a cada novo recibo."
+  },
+  "invariants": [
+    "Nao alterar estado/manifests/IDs/provas/reservas do predecessor",
+    "Nao certificar QA anterior",
+    "Bloquear replay antigo em fila,runner e Engine",
+    "Admitir somente sucessor imutavel com midia comprovadamente disjunta e nao reservada",
+    "Readback vivo da hierarquia e midia historica antes da admissao",
+    "Locks/lease/conta/particao/orcamento/lance/horario/QA da nova campanha permanecem",
+    "Nenhuma permissao,billing,credencial,app,pixel,exclusao permanente,alteracao de conteudo ou ampliacao de conta/dominio autorizada"
+  ],
+  "receipts": {
+    "shein-1572011664000155749": {
+      "receipt_sha256": "37552d3687c3803c1227f01d4261835fe541256903d183437d235b107eba0b71",
+      "approval_message_id": "1572397598784880681",
+      "approval_content_sha256": "ceb0b1bf55cd66caf39deba8d0089642d2545714f650118686af0ee991e90804"
+    }
+  }
 }

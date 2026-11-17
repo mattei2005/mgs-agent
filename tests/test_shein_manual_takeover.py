@@ -199,7 +199,7 @@ class ManualTakeoverTests(unittest.TestCase):
         self.assertEqual(m.read(self.spath)['phase'],'ACTIVATION_PENDING')
 
     def test_all_campaign_entrypoints_and_lease_reject_retired_request(self):
-        self.close();manifest=SimpleNamespace(request_id=self.rid)
+        self.close();manifest=SimpleNamespace(request_id=self.rid,operation='SHEIN-US-DIRECT',campaigns=[],raw={})
         with patch.object(driver,'BASE',self.base),patch.object(q,'BASE',self.base):
             for call in [lambda:driver._run_request_scoped(self.request,confirm_execute=True),
                          lambda:driver._run_bound_request(self.request,confirm_execute=True),
@@ -207,7 +207,7 @@ class ManualTakeoverTests(unittest.TestCase):
                          lambda:q.notify({'request_id':self.rid},self.state),
                          lambda:self.store.claim(self.account,self.rid),lambda:self.store.mark(self.account,self.rid,'IN_PROGRESS'),
                          lambda:self.store.release(self.account,self.rid),
-                         lambda:CampaignEngine.execute.__wrapped__(SimpleNamespace(config={'state_root':str(self.eroot)}),manifest),
+                         lambda:CampaignEngine.execute.__wrapped__(SimpleNamespace(config={'state_root':str(self.eroot)},read_only=False),manifest),
                          lambda:activate(SimpleNamespace(config={'state_root':str(self.eroot)}),manifest,None,None)]:
                 with self.subTest(call=call):
                     with self.assertRaisesRegex(ValueError,'manual takeover'):call()

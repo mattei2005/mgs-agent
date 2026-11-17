@@ -5279,6 +5279,23 @@
       "updated_at": "2026-10-16T17:22:06+00:00"
     },
     {
+      "canonical_key": "ares.shein.g006.external-block-coordination-authority",
+      "canonical_source": "data/ares/meta-ads/policies/shein-external-block-coordination.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-17T23:46:41.285000+00:00",
+      "id": "ARES-SHEIN-G006-COORDINATION-1572397598784880681",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nicolas: recuperacao limitada de coordenacao SHEIN G006",
+      "updated_at": "2026-11-17T23:55:15+00:00"
+    },
+    {
       "canonical_key": "ares.shein.g006.reporting.intraday_geral",
       "canonical_source": "context/routes.md",
       "consumers": [
@@ -17782,5 +17799,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T20:18:58+00:00"
+  "updated_at": "2026-11-17T23:55:15+00:00"
 }
