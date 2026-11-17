@@ -1,0 +1,53 @@
+{
+  "author_id": "344196393512075265",
+  "message_id": "1572091759247368262",
+  "thread_id": "1569928464033783862",
+  "mode": "read_only_review_only",
+  "targets": [
+    "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-baseline",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/stage-candidate",
+    "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/notice-1569167402279764110/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/sync-browser-317963d4-de1e-4a93-8b06-024523ada401",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/pgdata",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-b0e0d254-69b9-4920-b47b-34b8c4e36568",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-24e515b2-4814-4c6a-8ef6-907660d53ffa",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-5e82b4bf-9e73-4bc1-b01e-240dd0b82408",
+    "/root/mgs-agent/apps/finance-system/private/sync-browser-94be6ef6-ceaa-433c-a537-614913788ddd",
+    "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v7",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945183578",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946609765",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789945845116",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789946229560",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db-1789951870238",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/api-test-db"
+  ],
+  "excluded_six": [
+    "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "/root/mgs-agent/apps/finance-system/private/pgdata",
+    "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite"
+  ],
+  "deleted_prior_three_excluded": [
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/ui-test-5a826fc1-d673-4f4c-aab8-023cd3ec4da7",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/test-pg-4a583d60-d608-4277-b755-a3f0d1f3628a",
+    "/root/mgs-agent/apps/finance-system/private/charge-date-1571201800063680562/candidate/private/catalog-test-dd6d8f6e-d31a-45f4-8517-9037f3f30e11"
+  ],
+  "constraints": [
+    "No DB startup/SQL/application/model requests",
+    "No deletion/install/restart/cron/retention",
+    "Six prior protected roots out of this scope",
+    "Read source and evidence only; no financial logic audit"
+  ],
+  "at": "2026-11-16T22:32:18.990353-05:00"
+}

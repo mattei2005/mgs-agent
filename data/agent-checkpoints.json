@@ -6837,6 +6837,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-STORAGE-PENDING25-1572091759247368262",
+      "next_step": "Ler fontes especificas das25raizes, reconciliar encerramento e uso doshelpers/familias; retornar classificacao completa e so preparar lote se todos gates de descarte estiverem provados; exclusao exige nova confirmacao.",
+      "objective": "Aprofundar25diretorios locais pendentes por consumidores/familia/evidencia/horizonte; somenteleitura semSQL ou banco. Seisprotegidos fora;3anteriores jaapagados nao repetir.",
+      "source": "data/storage-pending25-1572091759247368262/scope.json;context/storage-reaudit-20261116.md;discord:1569928464033783862/1572091759247368262",
+      "state": "in_progress_reference_and_owner_disposition",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-17T03:32:19+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-STORAGE-POINT5-FOLLOWUP-1571310958830166148",
       "next_step": "Lote encerrado sem novas confirmacoes ou reexecucao. Informar resultado e proximo passo ao dono: revisao somente leitura do restante de manutencao/backups locais. Nao iniciar outra exclusao por implicacao do sim.",
       "objective": "Executar e validar o lote4 linux-tools antigos e11 intermediarios duplicados confirmado por Rodolfo.",
@@ -11157,5 +11167,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T03:31:15+00:00"
+  "updated_at": "2026-11-17T03:32:19+00:00"
 }
