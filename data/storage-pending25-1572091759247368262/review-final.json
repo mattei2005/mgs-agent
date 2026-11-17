@@ -1,0 +1,80 @@
+{
+  "status": "review_complete_exact_six_root_lot_awaiting_critical_confirmation",
+  "authority_message_id": "1572091759247368262",
+  "thread_id": "1569928464033783862",
+  "scope_reviewed": 25,
+  "classifications": {
+    "preserve_verification_consumer": 9,
+    "preserve_pending_provenance_or_reconstruction": 10,
+    "prepared_exact_retirement_lot": 6
+  },
+  "out_of_scope_six_preserved": true,
+  "previous_three_deleted_not_repeated": true,
+  "metadata_25_unchanged": true,
+  "current_runtime_hits": 0,
+  "relevant_code_and_scheduler_census_unchanged": true,
+  "owner_local_sources_read": 5129,
+  "inherited_full_reference_corpus_not_recreated": true,
+  "owning_run_closed_by_canonical_report": true,
+  "final_v7_selected_by_preserved_helper": true,
+  "final_v7_pass_and_publication_committed": true,
+  "publication_checkpoint_stale_but_final_report_closed": "1551358728870035530; diagnostic only, no financial checkpoint edited",
+  "history_lookup_scope": "Limited query for original API/sync producer returned inventory/listing evidence, not a creating action. No exhaustive-history claim.",
+  "manifest": "/root/mgs-agent/data/storage-pending25-1572091759247368262/manifest.json",
+  "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
+  "gate": "/root/mgs-agent/data/storage-pending25-1572091759247368262/gate.py",
+  "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+  "targets": [
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v2",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v3",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v4",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v5",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/stage-db-v6"
+  ],
+  "counts": {
+    "file": 6130,
+    "directory": 162
+  },
+  "retained_roots": 25,
+  "retained_payloads": 25435,
+  "source_census_entries": 14689,
+  "preflight": "PASS",
+  "tests": 34,
+  "tests_base": 16,
+  "tests_selector": 18,
+  "destructive_OS_calls_in_unit_test_mocked": true,
+  "source_files_deleted": 0,
+  "new_DB_or_SQL_or_model_request": false,
+  "production_or_credential_or_scheduler_changes": false,
+  "backup_payload_copies_created": false,
+  "deletion_effect": "Irreversible retirement of six historical intermediate QA database states(initial andv2-v6), NOT byte-identical duplication or byte-restorable recovery. Finalv7, its evidence/inputs, all remaining25roots, production/backups/source remain. No database started or SQL executed.",
+  "budget": {
+    "gross_bytes": 1250856960,
+    "gross_GiB": 1.165,
+    "new_analysis_bytes": 2093056,
+    "new_analysis_MiB": 2.0,
+    "net_direct_estimate_GiB": 1.163,
+    "prior_analysis_cost_not_subtracted_again": true,
+    "shared_Git_growth_unestimated": true,
+    "observed_savings_bytes": 0
+  },
+  "whole_storage_review_complete": false,
+  "next_step": "Owner critical confirmation of only six network intermediates 04efa1a46f2d/gate9f38d1b94289. Keep finalv7 and all25retained; never use prior3root approval. Remaining19 reviewed roots stay preserved9verification+10provenance/reconstruction; broader families and own earlier corpus remain open.",
+  "learning": {
+    "subsystem": "skills",
+    "target": "vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+    "summary": "Resolve module-local URL/path selectors, not just global run-ID strings; inventories are not readers.",
+    "live_mirror_equal": true
+  },
+  "at": "2026-11-16T22:58:36.508098-05:00",
+  "report_infra": {
+    "message_id": "1572098610185895987",
+    "channel_id": "1498132022634483894",
+    "exact_readback_verified": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions_empty": true
+  },
+  "sealed_at": "2026-11-16T22:58:37.112296-05:00"
+}

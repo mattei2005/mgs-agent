@@ -68292,6 +68292,51 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "storage-pending25-1572091759247368262",
+      "agent": "zeus",
+      "type": "bounded_read_only_state_disposition_and_unapproved_exact_gate",
+      "status": "review_complete_exact_six_root_lot_awaiting_critical_confirmation",
+      "authority_message_id": "1572091759247368262",
+      "thread_id": "1569928464033783862",
+      "evidence": "data/storage-pending25-1572091759247368262/review-final.json",
+      "result_sha256": "f6fabc1aa2666fe908dbf9d53741a7de4295ea9e3dad9d5dee89f7daf297ebcd",
+      "manifest_sha256": "04efa1a46f2dd64bb8ceaebc4d9ab7d4246c301b734dc14919e586699bb5dbc5",
+      "gate_sha256": "9f38d1b9428925d877c23acee23b11ca58c24862f25f5c1c4487f2b225ab4a37",
+      "classified": {
+        "preserve_verification_consumer": 9,
+        "preserve_pending_provenance_or_reconstruction": 10,
+        "prepared_exact_retirement_lot": 6
+      },
+      "retained_roots": 25,
+      "retained_payloads": 25435,
+      "source_files_deleted": 0,
+      "budget": {
+        "gross_bytes": 1250856960,
+        "gross_GiB": 1.165,
+        "new_analysis_bytes": 2093056,
+        "new_analysis_MiB": 2.0,
+        "net_direct_estimate_GiB": 1.163,
+        "prior_analysis_cost_not_subtracted_again": true,
+        "shared_Git_growth_unestimated": true,
+        "observed_savings_bytes": 0
+      },
+      "report_infra": {
+        "message_id": "1572098610185895987",
+        "channel_id": "1498132022634483894",
+        "exact_readback_verified": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_empty": true
+      },
+      "learning": {
+        "subsystem": "skills",
+        "target": "vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md",
+        "summary": "Resolve module-local URL/path selectors, not just global run-ID strings; inventories are not readers.",
+        "live_mirror_equal": true
+      },
+      "updated_at": "2026-11-16T22:58:37.112296-05:00"
     }
   ],
   "profile_skill_references": [
