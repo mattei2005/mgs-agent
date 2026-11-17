@@ -4732,6 +4732,26 @@
       "updated_at": "2026-11-17T05:01:52+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1572387948974968903",
+      "next_step": "Executar o mesmo one-shot na janela congelada; status=ACTIVE somente apos pre-read/invariantes e GET integral; publicar conclusao na origem.",
+      "objective": "Pausar 11 campanhas nominais Yolokfx02 G006 e reativar18novembro2026 00hEST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572387948974968903/activation.json",
+      "state": "scheduled:11/11 paused por get integral final;11ids aptos para18novembro2026 00hest;110testes offline e dry-run live;agenda unica enabled verificada",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-17T23:15:26+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1572388562752770230",
+      "next_step": "Confirmar pausa e preparar ativacao dos mesmos IDs",
+      "objective": "Mavroa06: pausa nominal e reativacao unica 00h no fuso da conta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572388562752770230/activation.json",
+      "state": "pause_pending",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-17T23:12:37+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
       "next_step": "Nenhum:2987 ativa;2955 retida para rollback; Livepatch saudável; PIDs dos agentes iguais; sem reboot; Snap sem candidatos. Observadores d476a2649595 e f17da87f7d57 concluídos/desabilitados sem próximo disparo; histórico automático supersedido pela execução manual.",
@@ -11368,5 +11388,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T23:06:12+00:00"
+  "updated_at": "2026-11-17T23:15:26+00:00"
 }
