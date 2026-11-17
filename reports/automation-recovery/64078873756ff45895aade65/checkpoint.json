@@ -85,5 +85,11 @@
     "error": "TimeoutError: "
   },
   "completed_at_et": "2026-11-17T08:25:58-05:00",
-  "pending": "Supervisor independent closure and diagnostic delivery; no business stage remains"
+  "pending": "Supervisor independent closure and diagnostic delivery; no business stage remains",
+  "independent_observer": "/root/mgs-agent/scripts/mgs_sb_revenue_continuity.py",
+  "supervisor_collect_verified": true,
+  "focused_tests_passed": 80,
+  "report_infra_message_id": "1572242909728612507",
+  "report_infra_get_verified": true,
+  "next_step": "Original supervisor consumes fresh read-only observation for alert:1572239665250181151, closes this same operation and delivers diagnosis. Never rerun business sync for this receipt."
 }
