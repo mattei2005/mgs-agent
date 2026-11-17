@@ -1,0 +1,89 @@
+{
+  "operation_id": "64078873756ff45895aade65",
+  "alert_id": "1572239665250181151",
+  "authority_message_id": "1571311723217035436",
+  "recovery_authority_message_id": "1569193434189668453",
+  "target": {
+    "sheet_id": "1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY",
+    "tab": "Migracao 22/06",
+    "gid": 542936436,
+    "column": "C"
+  },
+  "started_at_et": "2026-11-17T08:25:47-05:00",
+  "status": "business_validated",
+  "original_failure": {
+    "error": "TimeoutError",
+    "started_at_et": "2026-11-17T08:17:02-05:00",
+    "completed_at_et": "2026-11-17T08:19:06-05:00"
+  },
+  "reconciliation": {
+    "same_supervisor_owner": "supervisor:615535",
+    "no_original_writer_active": true,
+    "no_today_prewrite_backup": true,
+    "read_only_exact_consumer": "DRY_RUN_OK",
+    "original_author_verified_by_discord_get": "344196393512075265"
+  },
+  "canonical_exit": 0,
+  "canonical_state": {
+    "status": "SYNC_OK",
+    "started_at_et": "2026-11-17T08:25:49-05:00",
+    "completed_at_et": "2026-11-17T08:25:55-05:00",
+    "period_start": "2026-11-15",
+    "period_end": "2026-11-17",
+    "days": 3,
+    "includes_current_day": true,
+    "current_day_partial": true,
+    "timezone": "America/New_York",
+    "source_period_start": "2026-11-11",
+    "source_period_end": "2026-11-17",
+    "source_rows": 3452,
+    "publishers": 51,
+    "api_rows": 8096,
+    "named_profiles": 154,
+    "dashboard_groups": 155,
+    "blank_profile_revenue": "49.04",
+    "dashboard_total": "70055.52",
+    "sheet_named_rows": 215,
+    "matched_rows": 151,
+    "matched_source_profiles": 151,
+    "source_match_ratio": "0.9805",
+    "sheet_match_ratio": "0.7023",
+    "unmatched_sheet_rows": 64,
+    "sb_named_not_in_sheet": [
+      "Beatriz Souza",
+      "Rosana Oliveira",
+      "Trương Gia Vinh"
+    ],
+    "unassigned_revenue": "71.03",
+    "auth": "mgs-core-prod Service Account",
+    "written_rows": 151,
+    "positive_rows": 54,
+    "zero_rows": 97,
+    "written_total": "69984.49",
+    "canary": "write_readback_restore_ok",
+    "readback": "exact_cents_ok",
+    "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261117T082557-0500.json"
+  },
+  "independent_readback": {
+    "written_rows": 151,
+    "positive_rows": 54,
+    "zero_rows": 97,
+    "written_total": "69984.49"
+  },
+  "non_c_columns_unchanged": [
+    "A",
+    "B",
+    "D",
+    "E",
+    "F"
+  ],
+  "independent_full_column_exact": true,
+  "original_failure_state": {
+    "status": "SYNC_FAILED",
+    "started_at_et": "2026-11-17T08:17:02-05:00",
+    "completed_at_et": "2026-11-17T08:19:06-05:00",
+    "error": "TimeoutError: "
+  },
+  "completed_at_et": "2026-11-17T08:25:58-05:00",
+  "pending": "Supervisor independent closure and diagnostic delivery; no business stage remains"
+}

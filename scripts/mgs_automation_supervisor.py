@@ -97,6 +97,10 @@ def collect(base=BASE,profiles=PROFILES):
     result=subprocess.run([str(base/'scripts/monitor-cron-stale-logs.sh'),'--dry-run'],capture_output=True,text=True,timeout=90)
     observations=monitor_observations(result.stdout if result.returncode==0 else '',now)
     observations['producer:dtr-sb-daily-match-audit.sh']=dtr_observation(base=base,now=now)
+    # Verify this exact alert's delivered Sheet effect, without replaying sync.
+    from mgs_sb_revenue_continuity import observation as revenue_observation
+    recovered=revenue_observation(base=base,now=now)
+    if recovered is not None:observations[recovered['target']]=recovered
     inventory=[]
     cron=subprocess.run(['crontab','-l'],capture_output=True,text=True,timeout=15)
     if cron.returncode:raise RuntimeError('root cron inventory unavailable')

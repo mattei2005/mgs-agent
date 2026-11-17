@@ -18594,6 +18594,25 @@
         "exact-cent readback with automatic value rollback"
       ],
       "id": "zeus-sb-messenger-revenue-sheet-daily-sync-20260808",
+      "recovery_64078873756ff45895aade65": {
+        "authorization_message_id": "1571311723217035436",
+        "recovery_authorization_message_id": "1569193434189668453",
+        "alert_id": "1572239665250181151",
+        "status": "business_validated_supervisor_closure_pending",
+        "cause": "Native Messenger report wait exceeded 120 seconds; exact transient provider/browser mechanism unproven. Same consumer dry-run and apply recovered without login or configuration changes.",
+        "period_start": "2026-11-15",
+        "period_end": "2026-11-17",
+        "written_rows": 151,
+        "written_total_brl": "69984.49",
+        "readback": "Canonical exact-cent full column and independent corporate-SA GET passed; A/B/D/E/F unchanged.",
+        "receipt": "/root/mgs-agent/reports/automation-recovery/64078873756ff45895aade65/checkpoint.json",
+        "adapter": "/root/mgs-agent/scripts/mgs_sb_revenue_continuity.py",
+        "adapter_sha256": "abc961fb494f88685fba260c925ec68bd956e831bb75ffd6b753749017bbfcec",
+        "supervisor_sha256": "0e1c9e3d96bd764117fabf682402b02e4bcf02c8bee0ddcfa7397a06a248268e",
+        "tests": "80 focused tests PASS; deployed collect() observes original alert key as OK with fresh Sheets GET. Production queue transition remains owned by original supervisor.",
+        "schedule_unchanged": "17 8 * * * America/New_York",
+        "report_infra": "pending"
+      },
       "window_change_1571311723217035436": {
         "authorization_message_id": "1571311723217035436",
         "thread_id": "1571311723217035436",
@@ -72443,8 +72462,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 33251,
-      "modified_at": "2026-11-15T05:54:22-05:00"
+      "size_bytes": 33534,
+      "modified_at": "2026-11-17T08:27:34-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_sb_revenue_continuity.py",
+      "size_bytes": 6011,
+      "modified_at": "2026-11-17T08:28:59-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",
