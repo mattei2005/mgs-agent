@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1572307187810701393",
-      "next_step": "Preflight Meta live; coletar novas fontes Meta/SB e RPS DOM; renderizar, revisar principal/historico/ressalvas, publicar e reconciliar",
+      "next_step": "Concluido; nao reenviar. Atraso SB: Escalatepower/Vizioid49min, Growpowerhub/Mavroa109min, Yolokfx02/08105min. Boostingecon sem entrega nem atividade financeira e receita/ROI n/d. Nova atualizacao requer novas fontes e novo request; agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1572307187810701393/request.json",
-      "state": "intake_autenticado;7pares_canonicos;zero_writes_meta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1572307187810701393/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;91campanhas_no_recorte_financeiro;33partes_integrais+7resumos;40mensagens_unicas_relidas_get;ordem_integral_resumo_confirmada;corte17/11/2026_12:48-12:49est;usd;zero_writes_meta;arquivo_sanitizado_bytes_hashes_validados;gate_65regressoes+5fixtures_resumo_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-17T17:48:33+00:00"
+      "updated_at": "2026-11-17T17:54:56+00:00"
     },
     {
       "agent": "ares",
@@ -11298,5 +11298,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T17:51:04+00:00"
+  "updated_at": "2026-11-17T17:54:56+00:00"
 }
