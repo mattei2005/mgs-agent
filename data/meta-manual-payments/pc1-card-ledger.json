@@ -41,10 +41,16 @@
       "account_id": "1150399088163771",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-16T21:31:06.600828-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T213010564769/verified-1150399088163771.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T213010564769/1150399088163771-receipt.json",
+      "read_at": "2026-11-17T14:37:29.249977-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143618864009/verified-1150399088163771.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143618864009/1150399088163771-receipt.json",
       "rows": [
+        {
+          "date": "Nov 17, 2026",
+          "method": "American Express ···· 4802",
+          "amount": "36.25",
+          "status": "Paid"
+        },
         {
           "date": "Nov 16, 2026",
           "method": "American Express ···· 4802",
@@ -56,18 +62,12 @@
           "method": "American Express ···· 4802",
           "amount": "900.00",
           "status": "Paid"
-        },
-        {
-          "date": "Nov 14, 2026",
-          "method": "American Express ···· 4802",
-          "amount": "900.00",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Nov 16, 2026",
+        "date": "Nov 17, 2026",
         "method": "American Express ···· 4802",
-        "amount": "900.00",
+        "amount": "36.25",
         "status": "Paid"
       },
       "status": "verified_card",
@@ -77,9 +77,9 @@
       "account_id": "1481815942722118",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-16T16:02:40.723419-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T160146917497/verified-1481815942722118.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T160146917497/1481815942722118-receipt.json",
+      "read_at": "2026-11-17T14:39:19.642475-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143820914501/verified-1481815942722118.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143820914501/1481815942722118-receipt.json",
       "rows": [
         {
           "date": "Nov 16, 2026",
@@ -88,13 +88,13 @@
           "status": "Paid"
         },
         {
-          "date": "Nov 15, 2026",
+          "date": "Nov 16, 2026",
           "method": "American Express ···· 8013",
           "amount": "2000.00",
           "status": "Paid"
         },
         {
-          "date": "Nov 14, 2026",
+          "date": "Nov 15, 2026",
           "method": "American Express ···· 8013",
           "amount": "2000.00",
           "status": "Paid"
@@ -305,31 +305,31 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-16T16:03:58.765797-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T160250780323/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261116T160250780323/1062446663435585-receipt.json",
+      "read_at": "2026-11-17T14:40:33.953171-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143930043532/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261117T143930043532/1062446663435585-receipt.json",
       "rows": [
+        {
+          "date": "Nov 17, 2026",
+          "method": "Discover ···· 8397",
+          "amount": "57.00",
+          "status": "Paid"
+        },
+        {
+          "date": "Nov 17, 2026",
+          "method": "Discover ···· 8397",
+          "amount": "57.00",
+          "status": "Paid"
+        },
         {
           "date": "Nov 16, 2026",
           "method": "Discover ···· 8397",
           "amount": "57.00",
           "status": "Paid"
-        },
-        {
-          "date": "Nov 14, 2026",
-          "method": "Discover ···· 8397",
-          "amount": "57.00",
-          "status": "Paid"
-        },
-        {
-          "date": "Nov 14, 2026",
-          "method": "Discover ···· 8397",
-          "amount": "9.44",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Nov 16, 2026",
+        "date": "Nov 17, 2026",
         "method": "Discover ···· 8397",
         "amount": "57.00",
         "status": "Paid"
