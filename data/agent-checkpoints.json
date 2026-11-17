@@ -1712,6 +1712,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1572307187810701393",
+      "next_step": "Preflight Meta live; coletar novas fontes Meta/SB e RPS DOM; renderizar, revisar principal/historico/ressalvas, publicar e reconciliar",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1572307187810701393/request.json",
+      "state": "intake_autenticado;7pares_canonicos;zero_writes_meta",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-17T17:48:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -10458,6 +10468,26 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1572305550027399289",
+      "next_step": "Concluido. Entregar resposta nativa com key values conferidos; nenhuma nova mutacao Meta ou automacao.",
+      "objective": "Duplicar C295 duas vezes na Yolokfx 04 G004, USD100/dia por campanha, Cost per result goal USD0.90, inicio imediato",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572305550027399289/verified-receipt.json",
+      "state": "complete: c300 e c301 active por readback, dois conjuntos e seis anuncios active; usd100/dia cada, delta usd200/dia, cost_cap usd0.90; qa semantico e renderizado integral, ids iguais ao checkpoint, posts novos; budget ativo conta usd3217.88/dia.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-17T17:46:08+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-1572306960211255451",
+      "next_step": "Entregar conclusao nativa com bloco Iris. Nao repetir criacao; entrega e gasto nao comprovados somente por ACTIVE.",
+      "objective": "Duplicar C054 duas vezes na Mavroa-US-SHEIN-ES-04-G004; USD150 diarios por campanha; Cost per result goal USD0.90; inicio imediato.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572306960211255451/completion-receipt.json",
+      "state": "complete: c064 e c065 active; 2 campanhas, 2 conjuntos, 4 anuncios; usd150/dia cada, delta usd300/dia; cost_cap usd0.90; qa renderizado integral e ids iguais ao checkpoint; recuperacao somente pos-processamento sem replay; posts novos; sem ressalvas.",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-17T17:51:04+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -11268,5 +11298,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T16:29:58+00:00"
+  "updated_at": "2026-11-17T17:51:04+00:00"
 }
