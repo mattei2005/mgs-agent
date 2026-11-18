@@ -1,0 +1,87 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T054939.json",
+  "verified_at": "2026-11-18T06:00:12.082706-05:00",
+  "authority": {
+    "current_registry_authorized": true,
+    "live_GET_reconfirmed_message_ids": ["1569193434189668453", "1563960055504838767", "1563960345826037821", "1570799435502588027", "1570815017794674749", "1570814427081736268", "1571982992975597571"],
+    "authors_channels_contents_reply_references_unchanged_from_previous_checkpoint": true,
+    "native_contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "workbook_contract_file_sha256": "4750229ab41538431d2b51f74e5ec28988c040b0689733b654c6d6fcfc6d050f",
+    "job_enabled": true,
+    "job_state": "scheduled",
+    "fire_claim": null,
+    "next_run_at": "2026-11-18T08:02:00-05:00",
+    "schedule_unchanged": true
+  },
+  "ownership": {
+    "owner": "supervisor:1848563",
+    "owner_process": {"pid": 1848563, "ppid": 1848555, "start_ticks": "240921912", "alive": true},
+    "worker_process": {"pid": 1848767, "ppid": 1848563, "start_ticks": "240922844", "alive": true},
+    "queue_state": "running",
+    "attempts": 53,
+    "failures": 0,
+    "lease_until": 1795000630.5084152,
+    "delivery_id": null,
+    "writer_lock": "free",
+    "pc1_lease_files": [],
+    "financial_workers": [],
+    "original_session": {"id": "local-1c484423dbc70238065c11cdf81f756b9ab3d35f62a5753fe67f4f40be3ccfd3", "ended_at": 1794967771.3813305, "end_reason": "cron_complete"}
+  },
+  "pc1": {
+    "reads": [
+      {"at": "2026-11-18T05:57:45.856440-05:00", "Online": false, "LastSeen": "2026-11-17T23:10:00.1Z", "Active": false},
+      {"at": "2026-11-18T06:00:12.082706-05:00", "Online": false, "LastSeen": "2026-11-17T23:10:00.1Z", "Active": false}
+    ],
+    "local_tailscale": {"BackendState": "Running", "Online": true, "Health": []},
+    "authentication_observed": false,
+    "occupancy_proven": false,
+    "ssh_attempts_this_round": 0,
+    "gui_attempts_this_round": 0,
+    "diagnosis": "Remote PC1 remains offline with unchanged LastSeen; local overlay is healthy. Remote power, sleep, connectivity and remote service state cannot be distinguished. No proven safe remote repair. No blind SSH or GUI retry."
+  },
+  "completed_layers": ["funding", "invoices", "metrics", "source_to_sheet_readback"],
+  "completed_layer_evidence": {
+    "scope": "Saved receipts and snapshots reconciled; no new live Sheets readback this round.",
+    "unchanged_sha256": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566",
+    "h_files": ["pc1-surface.json", "targets.json", "prepare-snapshot.json"],
+    "delivery_files": []
+  },
+  "scope_counts": {"accounts": 55, "H": 40, "D_pending_events": 5},
+  "pending_account_ids_H": ["1419148446852410", "1753257812779707", "1107653168698121", "2633813727134360", "2039876850230678", "1851640026221079", "1001115192056600", "1018267074603840", "1062887799996139", "2031917360813819", "897046653487466", "1498990138663094", "814915838330687", "3188620887977617", "3752157451670648", "4511685129081248", "1829406761389732", "937846586033361", "336562339356179", "1744611463000838", "1245683183659911", "311204101516831", "1526280818302320", "536294549227786", "1085117577390237", "1736068407518263", "1877104513669062", "869857549542755", "7840111366055613", "1583000095650153", "2429758060563333", "781612907182683", "787796726891306", "1600310064116258", "908704754163659", "26632890069640784", "1754588462350629", "1542257646409395", "1034081997659047", "1492168699397108"],
+  "pending_account_ids_D": ["1062446663435585", "2323706575049143", "1414197490675732", "1543098427832443", "2852476828464907"],
+  "pending_ids_parity": {"H_equals_contract": true, "D_subset_authorized": true, "D_unchanged_from_receipt": true},
+  "pending_layers": ["H40_Accounts_outstanding_balance", "D5_new_generic_events_instrument", "final_API_reconciliation_and_validation", "canonical_idempotent_business_delivery_and_GET"],
+  "canonical_delivery_precondition": {
+    "occurrence_registered_in_RECOVERIES": false,
+    "adapter_account_gates": 47,
+    "adapter_h_gates": 36,
+    "adaptation_performed": false,
+    "diagnosis": "Canonical adapter remains frozen to older occurrences and 47/36 gates. Scoped 55/40 support and tests are still required before delivery; no historical result may be reused."
+  },
+  "diagnostic_transients_this_round": [
+    {"tool": "Discord GET via mgs_alert_transport", "target_message_id": "1571982992975597571", "failure": "HTTP 429 after six successful message GETs", "retry_after": "not exposed by canonical helper", "recovery": "One exact-target GET after conservative 60-second backoff returned HTTP 200 with matching author, channel and content; no message write"}
+  ],
+  "continuity": {
+    "consumer_alive": true,
+    "service_enabled": true,
+    "service_heartbeat": {"at": 1794999430.5023737, "phase": "dispatching", "pid": 1848563},
+    "worker_failure_streak": 0,
+    "previous_retry_consumed": {"deferred_event_id": 12778, "claimed_event_id": 12793},
+    "queue_transition_by_worker": false,
+    "retry_at": null,
+    "retry_condition": "Owning supervisor must persist the next backoff after consuming this response; this worker did not register a future retry or modify queue state.",
+    "next_authorized_step": "After connectivity returns, reconcile owner/native claim/global lease and same Chrome identity; collect only missing H/D evidence with canonical workers, persisting each small batch. Do not repeat funding/invoices. Final API reconciliation, whole 55-account source-to-sheet validation and scoped canonical delivery adapter/tests/GET remain required. Older source_scope_changed incident remains separate and held."
+  },
+  "no_mutation": {"checkpoint_only": true, "google_writes": 0, "meta_writes": 0, "gui_inputs": 0, "business_messages_sent": 0, "payments": 0, "billing_changes": 0, "cron_changes": 0, "infrastructure_changes": 0, "gateway_restarts": 0}
+}
