@@ -191,6 +191,7 @@ For a supplied all-network/all-account closing workbook, load `references/adops-
 
 ## Canonical sources
 
+- Historical closing/conference Sheets for August and September 2026: `/root/mgs-agent/docs/finance-monthly-closing-reference-sheets.md` (exact owner-confirmed links, periods, initial tabs and reconciliation evidence; documentation request `1572623601235009748`). These are read-only closing references, distinct from the principal workbook; consult this index when retrieving them for future checks.
 - Principal workbook: `16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak`.
 - Production identity: `mgsagent@mgs-core-prod.iam.gserviceaccount.com` through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`.
 - Current initiative checkpoint: `ZEUS-FINANCE-DASH-AUGUST-20260904` in `/root/mgs-agent/data/agent-checkpoints.json`.

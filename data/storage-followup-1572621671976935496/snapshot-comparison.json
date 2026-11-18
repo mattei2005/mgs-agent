@@ -1,0 +1,44 @@
+[
+  {
+    "profile": "zeus",
+    "candidate": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/zeus/state.db",
+    "comparison": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/zeus/state.db",
+    "candidate_bytes": 1620361216,
+    "comparison_bytes": 1620361216,
+    "byte_identical": false,
+    "hashes": [
+      "5cadffabc44a62b238b1528d7d71ac918558aba07f2343077613ed5d2fb106da",
+      "79bee2a527c78aa875fff806ecffb9ceedd14c16392fe785a32d83065dfea044"
+    ],
+    "source_metadata_unchanged": true,
+    "sqlite_opened": false
+  },
+  {
+    "profile": "atena",
+    "candidate": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/atena/state.db",
+    "comparison": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/atena/state.db",
+    "candidate_bytes": 559104000,
+    "comparison_bytes": 559104000,
+    "byte_identical": false,
+    "hashes": [
+      "11cce994f96c2c2ea2a3847bb26850d2e064a9b4150c61b180b9dcbae1003975",
+      "6f956b376cfc7710c66f134e76b97d4d58b8656141640d20a55a37bf94dd20f0"
+    ],
+    "source_metadata_unchanged": true,
+    "sqlite_opened": false
+  },
+  {
+    "profile": "ares",
+    "candidate": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/cutover-checkpoints/ares/state.db",
+    "comparison": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/retry-1/cutover-checkpoints/ares/state.db",
+    "candidate_bytes": 1013051392,
+    "comparison_bytes": 1013268480,
+    "byte_identical": false,
+    "hashes": [
+      "a29c25434201edc8f9f3082b755950b8f3fecca6cee7b715288f3691c0bd5a55",
+      "0f36fecb51761b4a5706a143ab2dad763b7d82db842f0f27bcd7c031b7b26d77"
+    ],
+    "source_metadata_unchanged": true,
+    "sqlite_opened": false
+  }
+]

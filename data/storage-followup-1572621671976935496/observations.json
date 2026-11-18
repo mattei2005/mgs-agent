@@ -1,0 +1,306 @@
+{
+  "at": "2026-11-18T14:39:28.889088+00:00",
+  "request": "1572621671976935496",
+  "thread_id": "1569928464033783862",
+  "scope": "bounded producer/retention analysis; roots are non-additive; not whole-VPS recertification",
+  "measurements": [
+    {
+      "root": "/root/mgs-agent/apps/finance-system/private",
+      "files": 96488,
+      "directories": 7972,
+      "symlinks": 39,
+      "unique_allocated_bytes": 24491319296,
+      "errors": [],
+      "newest_file_mtime": "2026-11-18T14:27:38.726149+00:00",
+      "GiB": 22.809
+    },
+    {
+      "root": "/root/mgs-agent/reports/meta-manual-payments-runs",
+      "files": 8316,
+      "directories": 684,
+      "symlinks": 0,
+      "unique_allocated_bytes": 4209340416,
+      "errors": [],
+      "newest_file_mtime": "2026-11-18T14:39:13.022989+00:00",
+      "GiB": 3.92
+    },
+    {
+      "root": "/root/.hermes/profiles/ares/artifacts/meta-library",
+      "files": 12576,
+      "directories": 488,
+      "symlinks": 0,
+      "unique_allocated_bytes": 5738876928,
+      "errors": [],
+      "newest_file_mtime": "2026-10-28T20:22:16.879616+00:00",
+      "GiB": 5.345
+    },
+    {
+      "root": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209",
+      "files": 411,
+      "directories": 190,
+      "symlinks": 0,
+      "unique_allocated_bytes": 7906385920,
+      "errors": [],
+      "newest_file_mtime": "2026-11-04T05:34:06.889256+00:00",
+      "GiB": 7.363
+    },
+    {
+      "root": "/root/mgs-agent/backups/safety",
+      "files": 2,
+      "directories": 1,
+      "symlinks": 0,
+      "unique_allocated_bytes": 2247196672,
+      "errors": [],
+      "newest_file_mtime": "2026-11-18T08:44:26.794571+00:00",
+      "GiB": 2.093
+    },
+    {
+      "root": "/root/mgs-agent/.git",
+      "files": 5642,
+      "directories": 282,
+      "symlinks": 0,
+      "unique_allocated_bytes": 9114296320,
+      "errors": [],
+      "newest_file_mtime": "2026-11-18T14:30:35.236998+00:00",
+      "GiB": 8.488
+    },
+    {
+      "root": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928",
+      "files": 21250,
+      "directories": 1653,
+      "symlinks": 8,
+      "unique_allocated_bytes": 1829175296,
+      "errors": [],
+      "newest_file_mtime": "2026-11-10T18:04:03.538577+00:00",
+      "GiB": 1.704
+    }
+  ],
+  "gam_dumps": {
+    "count": 5,
+    "logical_bytes": 910398343,
+    "allocated_bytes": 910430208,
+    "status_counts": {
+      "partial_applied": 3,
+      "applied": 2
+    },
+    "rows": [
+      {
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261017T080318-0400/mgs_finance-before.dump",
+        "bytes": 131028380,
+        "allocated_bytes": 131035136,
+        "mtime_ns": 1792239099102783814,
+        "run": "20261017T080318-0400",
+        "status": "partial_applied",
+        "passed": true,
+        "business_date": "2026-10-16",
+        "backup_verified_receipt": true,
+        "receipt_local_path_matches": true,
+        "receipt_local_size_matches": true,
+        "remote_provider_recorded": true,
+        "recorded_local_sha256": "ac73508e5489498ee4d32fd099f003064e122364f7815864cfac79de676d0ec1"
+      },
+      {
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261028T080318-0400/mgs_finance-before.dump",
+        "bytes": 169277338,
+        "allocated_bytes": 169283584,
+        "mtime_ns": 1793189878373007727,
+        "run": "20261028T080318-0400",
+        "status": "partial_applied",
+        "passed": true,
+        "business_date": "2026-10-27",
+        "backup_verified_receipt": true,
+        "receipt_local_path_matches": true,
+        "receipt_local_size_matches": true,
+        "remote_provider_recorded": true,
+        "recorded_local_sha256": "a2920b3787df7537e304f90fa482f08d5ba890f6e3db2acd337b1f628e2e509d"
+      },
+      {
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261031T080318-0400/mgs_finance-before.dump",
+        "bytes": 179716562,
+        "allocated_bytes": 179724288,
+        "mtime_ns": 1793449052248481007,
+        "run": "20261031T080318-0400",
+        "status": "partial_applied",
+        "passed": true,
+        "business_date": "2026-10-30",
+        "backup_verified_receipt": true,
+        "receipt_local_path_matches": true,
+        "receipt_local_size_matches": true,
+        "remote_provider_recorded": true,
+        "recorded_local_sha256": "58cad98e87bf95ebcb088fdf242ee7c7406e0498afa878e27fcd2e90a1cfb0ce"
+      },
+      {
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261117T080318-0500/mgs_finance-before.dump",
+        "bytes": 214108086,
+        "allocated_bytes": 214114304,
+        "mtime_ns": 1794921156865140314,
+        "run": "20261117T080318-0500",
+        "status": "applied",
+        "passed": true,
+        "business_date": "2026-11-16",
+        "backup_verified_receipt": true,
+        "receipt_local_path_matches": true,
+        "receipt_local_size_matches": true,
+        "remote_provider_recorded": true,
+        "recorded_local_sha256": "9d875091c029f9356476d2eecf9ff645bebae9e450b846d55844ad8c8ad42271"
+      },
+      {
+        "path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20261118T080318-0500/mgs_finance-before.dump",
+        "bytes": 216267977,
+        "allocated_bytes": 216272896,
+        "mtime_ns": 1795007856108257420,
+        "run": "20261118T080318-0500",
+        "status": "applied",
+        "passed": true,
+        "business_date": "2026-11-17",
+        "backup_verified_receipt": true,
+        "receipt_local_path_matches": true,
+        "receipt_local_size_matches": true,
+        "remote_provider_recorded": true,
+        "recorded_local_sha256": "44c3c965a23a7756b3a7f760ac66d718501d8fd079deffe1922036fdb9334d22"
+      }
+    ],
+    "errors": [],
+    "remote_revalidation_executed": false,
+    "payload_hashes_recomputed": false,
+    "deletion_eligibility_certified": false
+  },
+  "disk": {
+    "used_bytes": 131691606016,
+    "available_bytes": 75191898112,
+    "available_GiB": 70.03,
+    "occupancy_percent": 63.65,
+    "net_used_growth_since_prior_close_bytes": 727261184,
+    "baseline_at": "2026-11-17T19:53:45.591373-05:00",
+    "growth_is_global_not_attributed": true
+  },
+  "git_count_objects": {
+    "count": 5497,
+    "size": 239716,
+    "in-pack": 255677,
+    "packs": 33,
+    "size-pack": 8638756,
+    "prune-packable": 0,
+    "garbage": 0,
+    "size-garbage": 0
+  },
+  "services": {
+    "zeus-gateway.service": {
+      "MainPID": "2241212",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "atena-gateway.service": {
+      "MainPID": "2237072",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "ares-gateway.service": {
+      "MainPID": "2233587",
+      "ActiveState": "active",
+      "SubState": "running"
+    }
+  },
+  "producer_evidence": {
+    "finance_gam_revenue_sync.py": {
+      "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+      "sha256": "458f13ab29bf4561d5766caf3672b663ac044e126a7a5be2102a001dcedd8309",
+      "snippets": [
+        {
+          "start": 360,
+          "end": 384,
+          "text": "def backup_before(plan: dict, run_dir: pathlib.Path) -> dict:\n    stage = \"partial\" if plan.get(\"partial\") else \"complete\"\n    remote = f\"/home/zeus/mgs-finance-backups/gam-email/{plan['date']}-{plan['source_bundle_sha256'][:12]}-{stage}-{plan['mapping_rules_sha256'][:12]}\"\n    parent = \"/home/zeus/mgs-finance-backups/gam-email\"\n    ssh(\"sudo -n install -d -o zeus -g zeus -m 700 \" + shlex.quote(parent) + \" && mkdir -p \" + shlex.quote(remote) + \" && chmod 700 \" + shlex.quote(remote))\n    scenario = remote + \"/workspace-before.json\"\n    dump = remote + \"/mgs_finance-before.dump\"\n    query = \"SELECT row_to_json(s)::text FROM scenarios s WHERE id=\" + \"'\" + plan[\"scenario_id\"].replace(\"'\", \"''\") + \"'\"\n    if not ssh(\"if test -f \" + shlex.quote(scenario) + \" && test -f \" + shlex.quote(dump) + \"; then echo yes; fi\").strip():\n        ssh(PG + \"psql -h \" + SOCKET + \" -U mgs_pg -d mgs_finance -At -c \" + shlex.quote(query) + \" > \" + shlex.quote(scenario) + \" && chmod 600 \" + shlex.quote(scenario))\n        ssh(PG + \"pg_dump -h \" + SOCKET + \" -U mgs_pg -Fc mgs_finance > \" + shlex.quote(dump) + \" && chmod 600 \" + shlex.quote(dump), timeout=420)\n    ssh(PG_ENV + PG_BIN + \"/pg_restore --list \" + shlex.quote(dump) + \" >/dev/null\")\n    info = {}\n    for path in (scenario, dump):\n        output = ssh(\"sha256sum \" + shlex.quote(path) + \" && stat -c %s \" + shlex.quote(path)).splitlines()\n        info[path] = {\"sha256\": output[0].split()[0], \"bytes\": int(output[1])}\n    encoded = ssh(\"base64 -w0 \" + shlex.quote(dump), timeout=420)\n    raw = base64.b64decode(encoded, validate=True)\n    if hashlib.sha256(raw).hexdigest() != info[dump][\"sha256\"]:\n        raise RuntimeError(\"backup transfer hash mismatch\")\n    local = run_dir / \"mgs_finance-before.dump\"\n    local.write_bytes(raw)\n    local.chmod(0o600)\n    info[\"local_copy\"] = {\"path\": str(local), \"sha256\": hashlib.sha256(raw).hexdigest(), \"bytes\": len(raw)}\n    return {\"verified\": True, \"remote_root\": remote, \"files\": info}"
+        },
+        {
+          "start": 650,
+          "end": 670,
+          "text": "            step = \"remote_preflight\"\n            with QUOTE_LOCK.open(\"a\") as quote_lock:\n                fcntl.flock(quote_lock, fcntl.LOCK_EX)\n                hashes = retry_read(remote_runner_check, \"remote_preflight\", journal)\n                rehearsal = retry_read(lambda: remote_phase(\"rehearse\", plan), \"rehearsal\", journal)\n                if not rehearsal.get(\"pass\"):\n                    raise RuntimeError(\"remote rehearsal failed\")\n                backup = backup_before(plan, run_dir)\n                step = \"production_apply\"\n                outcome = guarded_import(remote_phase, plan, journal)\n                applied, verified = outcome[\"apply\"], outcome[\"verify\"]\n                step = \"production_verify\"\n            expected_cutoff = (dt.date.fromisoformat(plan[\"date\"]) - dt.timedelta(days=1)).isoformat() if partial else plan[\"date\"]\n            if not applied.get(\"pass\") or not verified.get(\"pass\") or verified.get(\"cutoff\") != expected_cutoff:\n                raise RuntimeError(\"production readback failed\")\n            if partial:\n                status = \"partial_already_applied\" if applied.get(\"already_applied\") else \"partial_applied\"\n            else:\n                status = \"already_applied\" if applied.get(\"already_applied\") else \"applied\"\n            result = {\"pass\": True, \"status\": status, \"date\": plan[\"date\"], \"source_rows\": plan[\"source_rows\"], \"source_totals\": plan[\"source_totals\"], \"mapped_totals\": plan[\"mapped_totals\"], \"blocked_totals\": plan[\"blocked_totals\"], \"blockers\": plan[\"blockers\"], \"groups\": len(plan[\"entries\"]), \"source_bundle_sha256\": plan[\"source_bundle_sha256\"], \"cutoff\": expected_cutoff, \"rehearsal\": rehearsal, \"apply\": applied, \"verify\": verified, \"backup\": backup, \"runner_hashes\": hashes, \"evidence\": str(run_dir)}\n            atomic_json(run_dir / \"result.json\", result)"
+        }
+      ]
+    },
+    "api.test.mjs": {
+      "path": "/root/mgs-agent/apps/finance-system/tests/api.test.mjs",
+      "sha256": "ad993ff8e9020648e319e55b75d1d525b6da2f66d001e30475d343a9dccab11f",
+      "snippets": [
+        {
+          "start": 9,
+          "end": 10,
+          "text": "test('PostgreSQL, API, parity, scenarios, immutable history and origin security', {timeout:240000},async()=>{\n const directory=path.join(root,'private','test-pg-'+randomUUID());let db=await openDatabase(directory);await initialize(db);await initialize(db);"
+        },
+        {
+          "start": 34,
+          "end": 38,
+          "text": "  await new Promise(r=>server.close(r));await db.close();db=await openDatabase(directory);assert.equal((await scenario(db,id)).state,'locked');assert.equal((await scenario(db,'baseline')).result.summary.status,'PARITY_PASS');\n  const blob=await db.dumpDataDir('none');const backupPath=path.join(root,'private','verified-db-backup-'+randomUUID()+'.tar');await fs.writeFile(backupPath,Buffer.from(await blob.arrayBuffer()));\n  const {PGlite}=await import('@electric-sql/pglite');const restore=await PGlite.create({loadDataDir:blob});assert.equal((await restore.query('SELECT count(*)::int AS n FROM source_cells')).rows[0].n,85868);assert.equal((await scenario(restore,id)).state,'locked');await restore.close();\n  await fs.writeFile(path.join(root,'private','integration-evidence.json'),JSON.stringify({pass:true,test_database:directory,restore_backup:backupPath,checks:['full baseline parity','idempotent import','metadata binding','immutable baseline','decimal rate mutation roundtrip','native site/country entry','revision concurrency','lock immutability','origin/host security','source private','persistence reopen','dump restore'],scenario_id:id},null,2));\n }finally{if(server.listening)await new Promise(r=>server.close(r));await db.close();}"
+        }
+      ]
+    },
+    "catalog.test.mjs": {
+      "path": "/root/mgs-agent/apps/finance-system/tests/catalog.test.mjs",
+      "sha256": "a120f12b6efcd37cd39382f7de9dd1632b803488b9119b97e82ca312293523a0",
+      "snippets": [
+        {
+          "start": 5,
+          "end": 5,
+          "text": " const dir=path.join(root,'private/catalog-test-'+randomUUID()),db=await openDatabase(dir);await initialize(db);const server=(await createApp(db)).listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));const base='http://127.0.0.1:'+server.address().port;"
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": "  await fs.writeFile(path.join(root,'private/ui-catalog-1546169687346249728/catalog-api-evidence.json'),JSON.stringify({pass:true,database:dir,sites_before:41,units_before:43,new_site:true,active_inactive_preserves_history:true,allocation_reconciles:true,monthly_rates:true,m2_exception_preserved:true,baseline_preserved:true,production_writes:0}));\n }finally{await new Promise(r=>server.close(r));await db.close();}"
+        }
+      ]
+    },
+    "housekeeping-bak-cleanup.sh": {
+      "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
+      "sha256": "70d3f2117d94f1135650132c469aa7ae25cc310cd47c767e61b235c4631a332f",
+      "snippets": [
+        {
+          "start": 41,
+          "end": 48,
+          "text": "RETENTION_DAYS=\"${RETENTION_DAYS:-15}\"\nHERMES_UPDATE_BACKUP_RETENTION_DAYS=\"${HERMES_UPDATE_BACKUP_RETENTION_DAYS:-2}\"\nHERMES_UPDATE_BACKUP_KEEP_LATEST=\"${HERMES_UPDATE_BACKUP_KEEP_LATEST:-1}\"\nBASE_DIR=/root/mgs-agent\nLOG=\"${MGS_HOUSEKEEPING_LOG:-${BASE_DIR}/logs/housekeeping.log}\"\nSCAN_ROOTS=\"${MGS_HOUSEKEEPING_SCAN_ROOTS:-/root/.hermes:/root/mgs-agent:/root/backups:/tmp}\"\nBACKUPS_ROOT=\"${MGS_HOUSEKEEPING_BACKUPS_ROOT:-/root/backups}\"\nHERMES_UPDATE_ROOT=\"${MGS_HOUSEKEEPING_HERMES_UPDATE_ROOT:-${BASE_DIR}/reports/hermes-updates}\""
+        },
+        {
+          "start": 91,
+          "end": 93,
+          "text": "backup_name_re = re.compile(\n    r'(?i)(?:\\.bak(?:[-_.].*)?|\\.backup(?:[-_.].*)?|\\.old(?:[-_.].*)?|\\.orig(?:[-_.].*)?|~)$'\n)"
+        },
+        {
+          "start": 197,
+          "end": 212,
+          "text": "if root.exists():\n    for p in root.glob('**/hermes-profiles-backup*.tar.gz'):\n        try:\n            st = p.stat()\n        except OSError:\n            continue\n        if p.is_file():\n            records.append((st.st_mtime, st.st_size, str(p)))\nrecords.sort(key=lambda x: (x[0], x[2]), reverse=True)\nkeep = {path for _, _, path in records[:keep_latest]}\nwith out.open('w') as f:\n    for mtime, size, path in records:\n        if path in keep:\n            continue\n        if mtime < cutoff:\n            f.write(f\"{int(mtime)}\\t{size}\\thermes-update-backup\\t{path}\\n\")"
+        }
+      ]
+    },
+    "mgs-safety-backup.sh": {
+      "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+      "sha256": "c4e81cfdc7975f8fc2c3aef94d054981ce7c3bca0c7b5b230e8f236bb6fa0e56",
+      "snippets": [
+        {
+          "start": 20,
+          "end": 23,
+          "text": "BACKUP_DIR=\"${BACKUP_DIR:-/root/mgs-agent/backups/safety}\"\nLOG=\"${LOG:-/root/mgs-agent/logs/mgs-safety-backup.log}\"\nINTERVAL_DAYS=\"${BACKUP_INTERVAL_DAYS:-3}\"\nKEEP_LATEST_BACKUPS=\"${KEEP_LATEST_BACKUPS:-1}\""
+        },
+        {
+          "start": 62,
+          "end": 88,
+          "text": "  if ! [[ \"$KEEP_LATEST_BACKUPS\" =~ ^[1-9][0-9]*$ ]]; then\n    log \"ERROR: KEEP_LATEST_BACKUPS deve ser inteiro >= 1; recebido: $KEEP_LATEST_BACKUPS\"\n    return 2\n  fi\n\n  mapfile -t archives < <(\n    find \"$BACKUP_DIR\" -maxdepth 1 -type f -name 'mgs-safety-*.tar.gz' \\\n      -printf '%T@\\t%p\\n' 2>/dev/null | sort -nr | cut -f2-\n  )\n\n  if (( ${#archives[@]} <= KEEP_LATEST_BACKUPS )); then\n    return 0\n  fi\n\n  for archive in \"${archives[@]:KEEP_LATEST_BACKUPS}\"; do\n    manifest=\"${archive%.tar.gz}.manifest.txt\"\n    if [[ \"$DRY_RUN\" -eq 1 ]]; then\n      log \"DRY-RUN: would rm safety backup beyond latest-${KEEP_LATEST_BACKUPS} $archive\"\n      [[ -f \"$manifest\" ]] && log \"DRY-RUN: would rm safety manifest beyond latest-${KEEP_LATEST_BACKUPS} $manifest\"\n    else\n      rm -f -- \"$archive\"\n      log \"rm safety backup beyond latest-${KEEP_LATEST_BACKUPS} $archive\"\n      if [[ -f \"$manifest\" ]]; then\n        rm -f -- \"$manifest\"\n        log \"rm safety manifest beyond latest-${KEEP_LATEST_BACKUPS} $manifest\"\n      fi\n    fi"
+        }
+      ]
+    }
+  },
+  "historical_media_closure_observations": {
+    "rows": 107,
+    "rows_with_status_evidence": 0,
+    "not_equal_to_full304_certification": true
+  },
+  "guardrails": {
+    "source_files_deleted": 0,
+    "retention_changes": 0,
+    "cron_changes": 0,
+    "DB_started": false,
+    "application_imported": false,
+    "remote_business_writes": 0,
+    "caches_excluded": true,
+    "new_certified_deletion_targets": 0
+  }
+}
