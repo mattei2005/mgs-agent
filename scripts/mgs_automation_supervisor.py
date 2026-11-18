@@ -219,8 +219,26 @@ def original_active(source):
     if source.get('kind')=='producer':
         name=Path(str(source.get('script',''))).name
         names={name,name[:-3]+'.py' if name.endswith('.sh') else name}
+        # A resolver observing itself runs below its own cron flock. That
+        # ancestor is its lock owner, not a second producer. Exempt only
+        # proven flock ancestors when this process executes the same target;
+        # foreign writers and an owned live worker must still block closure.
+        own_pid=os.getpid();own_flock_ancestors=set()
+        try:
+            own_args=(Path('/proc')/str(own_pid)/'cmdline').read_bytes().split(b'\0')
+            if any(Path(a.decode(errors='replace')).name in names for a in own_args if a):
+                pid=own_pid;seen=set()
+                while pid>1 and pid not in seen:
+                    seen.add(pid)
+                    tail=(Path('/proc')/str(pid)/'stat').read_text().rsplit(')',1)[1].split()
+                    pid=int(tail[1])
+                    if pid<=1:break
+                    args=(Path('/proc')/str(pid)/'cmdline').read_bytes().split(b'\0')
+                    if args and Path(args[0].decode(errors='replace')).name=='flock':own_flock_ancestors.add(pid)
+        except (OSError,ValueError,IndexError):
+            own_flock_ancestors.clear()  # Unknown ancestry cannot lift a writer gate.
         for p in Path('/proc').iterdir():
-            if not p.name.isdigit() or int(p.name)==os.getpid():continue
+            if not p.name.isdigit() or int(p.name)==own_pid or int(p.name) in own_flock_ancestors:continue
             try:args=(p/'cmdline').read_bytes().split(b'\0')
             except (OSError,ProcessLookupError):continue
             if any(Path(a.decode(errors='replace')).name in names for a in args if a):return True

@@ -43,6 +43,7 @@ class FakeResolver:
     def fetch_messages(self,*a,**kw):return []
     def discord_api(self,*a,**kw):return 200,self.message
     def is_candidate(self,m):return True
+    def recovered_cron_script(self,m):return None
     def message_url(self,m):return 'https://discord.com/channels/1/2/100'
 
 

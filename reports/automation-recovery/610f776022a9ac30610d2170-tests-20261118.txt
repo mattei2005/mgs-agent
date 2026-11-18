@@ -1,0 +1,95 @@
+test_enabled_consumer_heartbeat_failure_is_not_healthy_zero (test_continuity_integration.HealthTests.test_enabled_consumer_heartbeat_failure_is_not_healthy_zero) ... ok
+test_live_dispatch_is_bounded_and_queue_remains_observable (test_continuity_integration.HealthTests.test_live_dispatch_is_bounded_and_queue_remains_observable) ... ok
+test_not_enabled_does_not_fabricate_installed_coverage (test_continuity_integration.HealthTests.test_not_enabled_does_not_fabricate_installed_coverage) ... ok
+test_repeated_ingress_never_postpones_or_reopens_human_gate (test_continuity_integration.IntegrationTests.test_repeated_ingress_never_postpones_or_reopens_human_gate) ... ok
+test_validated_closed_legacy_source_not_enqueued_again (test_continuity_integration.IntegrationTests.test_validated_closed_legacy_source_not_enqueued_again) ... ok
+test_accepted_notice_retries_get_with_frozen_original_payload (test_continuity_notice_delivery.NoticeTests.test_accepted_notice_retries_get_with_frozen_original_payload) ... ok
+test_legacy_verified_notice_is_edited_not_reposted (test_continuity_notice_delivery.NoticeTests.test_legacy_verified_notice_is_edited_not_reposted) ... ok
+test_long_notice_preserves_exact_question_and_explicit_push (test_continuity_notice_delivery.NoticeTests.test_long_notice_preserves_exact_question_and_explicit_push) ... ok
+test_active_worker_receipt_still_wins (test_continuity_producer_ownership.ProducerOwnershipTests.test_active_worker_receipt_still_wins) ... ok
+test_ancestor_is_not_ignored_for_another_producer (test_continuity_producer_ownership.ProducerOwnershipTests.test_ancestor_is_not_ignored_for_another_producer) ... ok
+test_foreign_flock_is_still_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_foreign_flock_is_still_a_parallel_writer) ... ok
+test_foreign_interpreter_is_still_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_foreign_interpreter_is_still_a_parallel_writer) ... ok
+test_non_flock_ancestor_is_not_ignored (test_continuity_producer_ownership.ProducerOwnershipTests.test_non_flock_ancestor_is_not_ignored) ... ok
+test_own_flock_ancestor_is_not_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_own_flock_ancestor_is_not_a_parallel_writer) ... ok
+test_unreadable_ancestry_keeps_writer_gate (test_continuity_producer_ownership.ProducerOwnershipTests.test_unreadable_ancestry_keeps_writer_gate) ... ok
+test_child_fingerprint_survives_parent_loss_without_pid_reuse (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_child_fingerprint_survives_parent_loss_without_pid_reuse) ... ok
+test_timeout_stops_only_its_owned_worker_process_group (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_timeout_stops_only_its_owned_worker_process_group) ... ok
+test_worker_receives_actual_wall_budget_and_checkpoint_guard (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_worker_receives_actual_wall_budget_and_checkpoint_guard) ... ok
+test_backoff_and_five_failure_diagnostic_keeps_owned_request (test_automation_recovery_queue.QueueTests.test_backoff_and_five_failure_diagnostic_keeps_owned_request) ... ok
+test_busy_waits_without_consuming_attempt (test_automation_recovery_queue.QueueTests.test_busy_waits_without_consuming_attempt) ... ok
+test_classification_never_auto_replays_payments_or_expired_campaigns (test_automation_recovery_queue.QueueTests.test_classification_never_auto_replays_payments_or_expired_campaigns) ... ok
+test_closed_requires_verified_evidence (test_automation_recovery_queue.QueueTests.test_closed_requires_verified_evidence) ... ok
+test_expired_dispatch_requires_reconciliation_not_blind_replay (test_automation_recovery_queue.QueueTests.test_expired_dispatch_requires_reconciliation_not_blind_replay) ... ok
+test_fifo_and_single_claim (test_automation_recovery_queue.QueueTests.test_fifo_and_single_claim) ... ok
+test_human_block_is_open_without_busy_retries (test_automation_recovery_queue.QueueTests.test_human_block_is_open_without_busy_retries) ... ok
+test_multiprocess_enqueue_same_request_is_unique (test_automation_recovery_queue.QueueTests.test_multiprocess_enqueue_same_request_is_unique) ... ERROR
+test_native_contract_change_never_overwrites_approved_scope (test_automation_recovery_queue.QueueTests.test_native_contract_change_never_overwrites_approved_scope) ... ok
+test_pc1_queue_order_prevents_newcomer_jump (test_automation_recovery_queue.QueueTests.test_pc1_queue_order_prevents_newcomer_jump) ... ok
+test_restart_dedup_preserves_first_position_and_attempts (test_automation_recovery_queue.QueueTests.test_restart_dedup_preserves_first_position_and_attempts) ... ok
+test_timeout_requires_effect_reconciliation (test_automation_recovery_queue.QueueTests.test_timeout_requires_effect_reconciliation) ... ok
+test_unknown_must_not_become_healthy (test_automation_recovery_queue.QueueTests.test_unknown_must_not_become_healthy) ... ok
+test_2fa_stays_visible_and_does_not_retry_blind_action (test_automation_recovery_supervisor.SupervisorTests.test_2fa_stays_visible_and_does_not_retry_blind_action) ... ok
+test_active_original_writer_prevents_duplicate (test_automation_recovery_supervisor.SupervisorTests.test_active_original_writer_prevents_duplicate) ... ok
+test_active_owner_prevents_green_from_fresh_progress_log (test_automation_recovery_supervisor.SupervisorTests.test_active_owner_prevents_green_from_fresh_progress_log) ... ok
+test_busy_pc1_keeps_auth_probe_only (test_automation_recovery_supervisor.SupervisorTests.test_busy_pc1_keeps_auth_probe_only) ... ok
+test_busy_pc1_never_demotes_confirmation_gate (test_automation_recovery_supervisor.SupervisorTests.test_busy_pc1_never_demotes_confirmation_gate) ... ok
+test_busy_queues_without_agent_call_and_no_failure_budget (test_automation_recovery_supervisor.SupervisorTests.test_busy_queues_without_agent_call_and_no_failure_budget) ... ok
+test_collector_unavailable_is_explicit_not_empty_healthy (test_automation_recovery_supervisor.SupervisorTests.test_collector_unavailable_is_explicit_not_empty_healthy) ... ok
+test_dtr_no_post_validation_cannot_count_as_delivered_report (test_automation_recovery_supervisor.SupervisorTests.test_dtr_no_post_validation_cannot_count_as_delivered_report) ... ok
+test_failed_blocker_notice_cannot_resume_business_work (test_automation_recovery_supervisor.SupervisorTests.test_failed_blocker_notice_cannot_resume_business_work) ... ok
+test_five_consecutive_dispatch_failures_stop_across_sources (test_automation_recovery_supervisor.SupervisorTests.test_five_consecutive_dispatch_failures_stop_across_sources) ... ok
+test_later_green_cannot_clear_explicit_decision_gate (test_automation_recovery_supervisor.SupervisorTests.test_later_green_cannot_clear_explicit_decision_gate) ... ok
+test_llm_claim_cannot_close_without_real_validator (test_automation_recovery_supervisor.SupervisorTests.test_llm_claim_cannot_close_without_real_validator) ... ok
+test_newly_discovered_pc1_dependency_persists_without_reprobe_loop (test_automation_recovery_supervisor.SupervisorTests.test_newly_discovered_pc1_dependency_persists_without_reprobe_loop) ... ok
+test_old_success_cannot_close_new_incident (test_automation_recovery_supervisor.SupervisorTests.test_old_success_cannot_close_new_incident) ... ok
+test_real_fresh_readback_closes_without_reexecution (test_automation_recovery_supervisor.SupervisorTests.test_real_fresh_readback_closes_without_reexecution) ... ok
+test_release_causes_one_resume (test_automation_recovery_supervisor.SupervisorTests.test_release_causes_one_resume) ... ok
+test_resource_wait_never_shortens_existing_backoff (test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_never_shortens_existing_backoff) ... ok
+test_resource_wait_preserves_verification_phase (test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_preserves_verification_phase) ... ok
+test_terminal_prefix_is_not_used_to_green_unknown (test_automation_recovery_supervisor.SupervisorTests.test_terminal_prefix_is_not_used_to_green_unknown) ... ok
+test_unknown_and_expired_job_only_diagnose (test_automation_recovery_supervisor.SupervisorTests.test_unknown_and_expired_job_only_diagnose) ... ok
+
+======================================================================
+ERROR: test_multiprocess_enqueue_same_request_is_unique (test_automation_recovery_queue.QueueTests.test_multiprocess_enqueue_same_request_is_unique)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_automation_recovery_queue.py", line 120, in test_multiprocess_enqueue_same_request_is_unique
+    for p in ps:p.start()
+                ~~~~~~~^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ~~~~~~~~~~~^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/context.py", line 231, in _Popen
+    return _default_context.get_context().Process._Popen(process_obj)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/context.py", line 316, in _Popen
+    return Popen(process_obj)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/popen_forkserver.py", line 35, in __init__
+    super().__init__(process_obj)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/popen_fork.py", line 20, in __init__
+    self._launch(process_obj)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/popen_forkserver.py", line 51, in _launch
+    self.sentinel, w = forkserver.connect_to_new_process(self._fds)
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/forkserver.py", line 106, in connect_to_new_process
+    connection.answer_challenge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+            wrapped_client, self._forkserver_authkey)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/connection.py", line 995, in answer_challenge
+    message = connection.recv_bytes(256)         # reject large message
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/connection.py", line 226, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/connection.py", line 451, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/connection.py", line 416, in _recv
+    chunk = read(handle, to_read)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+----------------------------------------------------------------------
+Ran 51 tests in 1.665s
+
+FAILED (errors=1)

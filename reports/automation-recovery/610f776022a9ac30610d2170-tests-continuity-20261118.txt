@@ -1,0 +1,27 @@
+test_enabled_consumer_heartbeat_failure_is_not_healthy_zero (test_continuity_integration.HealthTests.test_enabled_consumer_heartbeat_failure_is_not_healthy_zero) ... ok
+test_live_dispatch_is_bounded_and_queue_remains_observable (test_continuity_integration.HealthTests.test_live_dispatch_is_bounded_and_queue_remains_observable) ... ok
+test_not_enabled_does_not_fabricate_installed_coverage (test_continuity_integration.HealthTests.test_not_enabled_does_not_fabricate_installed_coverage) ... ok
+test_repeated_ingress_never_postpones_or_reopens_human_gate (test_continuity_integration.IntegrationTests.test_repeated_ingress_never_postpones_or_reopens_human_gate) ... ok
+test_validated_closed_legacy_source_not_enqueued_again (test_continuity_integration.IntegrationTests.test_validated_closed_legacy_source_not_enqueued_again) ... ok
+test_accepted_notice_retries_get_with_frozen_original_payload (test_continuity_notice_delivery.NoticeTests.test_accepted_notice_retries_get_with_frozen_original_payload) ... ok
+test_legacy_verified_notice_is_edited_not_reposted (test_continuity_notice_delivery.NoticeTests.test_legacy_verified_notice_is_edited_not_reposted) ... ok
+test_long_notice_preserves_exact_question_and_explicit_push (test_continuity_notice_delivery.NoticeTests.test_long_notice_preserves_exact_question_and_explicit_push) ... ok
+test_active_worker_receipt_still_wins (test_continuity_producer_ownership.ProducerOwnershipTests.test_active_worker_receipt_still_wins) ... ok
+test_ancestor_is_not_ignored_for_another_producer (test_continuity_producer_ownership.ProducerOwnershipTests.test_ancestor_is_not_ignored_for_another_producer) ... ok
+test_foreign_flock_is_still_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_foreign_flock_is_still_a_parallel_writer) ... ok
+test_foreign_interpreter_is_still_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_foreign_interpreter_is_still_a_parallel_writer) ... ok
+test_non_flock_ancestor_is_not_ignored (test_continuity_producer_ownership.ProducerOwnershipTests.test_non_flock_ancestor_is_not_ignored) ... ok
+test_own_flock_ancestor_is_not_a_parallel_writer (test_continuity_producer_ownership.ProducerOwnershipTests.test_own_flock_ancestor_is_not_a_parallel_writer) ... ok
+test_unreadable_ancestry_keeps_writer_gate (test_continuity_producer_ownership.ProducerOwnershipTests.test_unreadable_ancestry_keeps_writer_gate) ... ok
+test_child_fingerprint_survives_parent_loss_without_pid_reuse (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_child_fingerprint_survives_parent_loss_without_pid_reuse) ... ok
+test_timeout_stops_only_its_owned_worker_process_group (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_timeout_stops_only_its_owned_worker_process_group) ... ok
+test_worker_receives_actual_wall_budget_and_checkpoint_guard (test_continuity_worker_lifecycle.WorkerLifecycleTests.test_worker_receives_actual_wall_budget_and_checkpoint_guard) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.494s
+
+OK
+{"status": "supervisor_tick_complete", "observed": 1, "inventory_targets": 0, "open": 1}
+{"status": "supervisor_tick_complete", "observed": 1, "inventory_targets": 0, "open": 1}
+{"status": "supervisor_tick_complete", "observed": 1, "inventory_targets": 0, "open": 1}
+{"status": "supervisor_tick_complete", "observed": 1, "inventory_targets": 0, "open": 0}
