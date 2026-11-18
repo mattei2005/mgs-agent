@@ -202,6 +202,38 @@
         "unapproved recurrence"
       ],
       "initial_request_id": "shein-1562827628191416351"
+    },
+    "1402479966284292": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1572689505113215037",
+      "source_thread_id": "1558131550028173345",
+      "source_channel_id": "1548149654926135486",
+      "approval_prompt_message_id": "1572686487340982343",
+      "execution_owner": "ares",
+      "execution_owner_authority_message_id": "1572689505113215037",
+      "account_id": "1419148446852410",
+      "account_name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Durable authorization for current and future authorized requests on this account using exact Page 1402479966284292. Preserve existing tasks and add only ADVERTISE and ANALYZE when absent. No other Page/account/identity authority.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, operational business and existing tasks with authorized administrative identity",
+        "sanitized journal before minimal assignment write; reconcile uncertain effects before retry",
+        "administrative assignment readback and original corporate Page access readback",
+        "separate administrative provisioning executor when Ares Page write guard is GET-only; never bypass guard or change campaign identity",
+        "resume original request and IDs through central Engine v3 with original E2E, QA and activation gates"
+      ],
+      "exclusions": [
+        "ownership transfer",
+        "credential issuance or rotation",
+        "app permission changes",
+        "billing",
+        "other Pages or accounts",
+        "unapproved recurrence"
+      ],
+      "initial_request_id": "shein-1572685240575590452"
     }
   },
   "cross_account_reference_policy": {
