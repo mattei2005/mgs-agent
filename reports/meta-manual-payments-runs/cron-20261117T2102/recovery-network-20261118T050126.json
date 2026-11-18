@@ -1,0 +1,390 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "verified_at": "2026-11-18T05:01:26.246435-05:00",
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T044937.json",
+  "contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "current_registry_authorized": true,
+    "live_GET_messages": [
+      {
+        "id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "author_id": "344196393512075265",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1563960055504838767",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Faz entao",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1563960345826037821",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Eu quero que a planilha seja atualizada 3x por dia\n1x por volta das 8am, \n2x por volta das 2pm\n3x por volta das 9pm",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1570799435502588027",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "entao adiciona as contas na aba da planilha que nao estao la.",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1570815017794674749",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "sei la, resolve ai o que tiver que resolver.",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1571982992975597571",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "pode fazer de novo. ja autentiquei.....\n\nsempre que voce entrar e nao conseguir, me avisa aqui para eu atenticar pra voce, pq as vezes eu nao sei se deu certo ou nao\n\na resposta do cronjob response vem muito grande quando nao da certo\n\nentao assim, se n der certo, soh fala q nao deu certo e eu preciso autenticar,\n\nai quando der certo... ai voce mantem a msg completa dizendo que tudo foi feito.... pode ser mais simples do que esse textao que voce manda ai",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1563960022252392459",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "**Sim. Para confirmar se cada cobrança foi no cartão ou em Advertising credit, o caminho validado agora é abrir o histórico de pagamentos das contas pelo navegador do PC1.**\n\nEssa consulta será **somente leitura**, para identificar valor, data e cartão utilizado e completar a planilha — sem efetuar pagamentos nem alterar configurações.\n\nSaldos, gastos e médias diárias continuam sendo obtidos pela API.",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1570790402829586575",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "**Sim. Encontrei 8 contas com gasto em novembro que não estão nessa aba**, somando **US$ 3.615,82**:\n\n- **Growpowerhub-US-SHEIN-EN-03-G003:** US$ 934,98\n- **Growpowerhub-US-SHEIN-EN-05-G005:** US$ 685,34\n- **Growpowerhub-US-SHEIN-EN-06-G006:** US$ 652,34\n- **Growpowerhub-US-SHEIN-EN-02-G002:** US$ 552,13\n- **Financeadx-US-CC-EN-01:** US$ 269,55\n- **Eggbev-US-CC-EN-01:** US$ 238,62\n- **Yolokfx-US-SHEIN-EN-07-G002:** US$ 200,77\n- **Growpowerhub-US-SHEIN-EN-01-G001:** US$ 82,09\n\n**Conferência:** comparei os IDs das 47 contas da aba com as 351 da BM e consultei o gasto das **304 que estão fora**. As outras **296 não tiveram gasto no período**.\n\nPeríodo: **1º a 13/11, até a consulta das 08h20 Eastern**, incluindo hoje parcial. Os valores das oito contas foram conferidos pelo agregado e pela soma diária da API.\n\n**Não alterei a planilha.** Recomendo incluir essas oito para que o acompanhamento cubra esse gasto também.",
+        "edited_timestamp": null
+      },
+      {
+        "id": "1570814427081736268",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "Os dados por API das **55 contas já foram renovados**. Também recuperei o acesso ao histórico na nova interface e estou conferindo as cobranças pendentes.\n\nHá uma decisão para fechar a coluna **H**: a Meta passou a mostrar **“Outstanding balance”**, no lugar de **“Current balance”**. Ainda não consegui comprovar que são a mesma medida. Recomendo usar o saldo atualmente exibido, identificando a nova fonte nas notas. **Você autoriza essa troca em H?** Até confirmar, preservo os valores anteriores e os quatro novos campos vazios.",
+        "edited_timestamp": null
+      }
+    ],
+    "threads": [
+      {
+        "id": "1563926766286803004",
+        "guild_id": "1185714635991679006",
+        "parent_id": "1496267442899521627",
+        "type": 11
+      },
+      {
+        "id": "1569185140502954077",
+        "guild_id": "1185714635991679006",
+        "parent_id": "1496267442899521627",
+        "type": 11
+      }
+    ],
+    "job": {
+      "id": "2ee720363d7d",
+      "enabled": true,
+      "state": "scheduled",
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-11-17T21:02:00-05:00",
+        "dispatched_at": "2026-11-17T21:02:46.444815-05:00",
+        "lateness_seconds": 46.4,
+        "kind": "on_time"
+      },
+      "next_run_at": "2026-11-18T08:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 8,14,21 * * *",
+        "display": "2 8,14,21 * * *"
+      }
+    }
+  },
+  "ownership": {
+    "queue": {
+      "key": "d32ee972e0e2f228f2105773",
+      "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+      "state": "running",
+      "cause": "waiting_resource",
+      "owner": "supervisor:1797665",
+      "attempts": 47,
+      "failures": 0,
+      "lease_until": 1794997031.9757662,
+      "due": 1794995688.3243823,
+      "delivery_id": null
+    },
+    "owner_process": {
+      "pid": 1797665,
+      "alive": true,
+      "ppid": 1797662,
+      "start_ticks": "240561931"
+    },
+    "worker_receipt": {
+      "pid": 1798241,
+      "start_ticks": "240562991",
+      "started": 1794995831.9807358,
+      "state": "running"
+    },
+    "worker_fingerprint": {
+      "pid": 1798241,
+      "alive": true,
+      "ppid": 1797665,
+      "start_ticks": "240562991"
+    },
+    "worker_parent_and_start_ticks_match": true,
+    "original_session": {
+      "id": "local-1c484423dbc70238065c11cdf81f756b9ab3d35f62a5753fe67f4f40be3ccfd3",
+      "ended_at": 1794967771.3813305,
+      "end_reason": "cron_complete"
+    },
+    "financial_workers": [],
+    "writer_lock": "free",
+    "pc1_lease": null,
+    "queue_transition_by_worker": false
+  },
+  "pc1": {
+    "HostName": "PC1",
+    "Online": false,
+    "LastSeen": "2026-11-17T23:10:00.1Z",
+    "Active": false,
+    "local_network": {
+      "BackendState": "Running",
+      "Online": true,
+      "Health": []
+    },
+    "status_reads_this_round": 2,
+    "first_read_at": "2026-11-18T04:57:32-05:00",
+    "authentication_observed": false,
+    "ssh_attempts": 0,
+    "gui_attempts": 0,
+    "diagnosis": "PC1 remains offline with unchanged LastSeen in two successful current Tailscale reads; local transport is Running/online. Remote power/sleep/connectivity/service cannot be distinguished. No proven authentication or occupancy gate; no safe remote repair demonstrated. Suppressed blind SSH/GUI retries."
+  },
+  "completed_layers": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "completed_layer_evidence": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/partial-receipt.json",
+    "hashes_this_round": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "saved_hashes_unchanged": true,
+    "scope": "Saved completed artifacts reconciled; no new live Sheets readback performed.",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566",
+    "h_targets_sha256": "d468ba73813db4294ab11f0566ebbaa9ca254be7ad37c123476ae4efc3704ad1",
+    "h_directory_files_this_round": [
+      "pc1-surface.json",
+      "prepare-snapshot.json",
+      "targets.json"
+    ],
+    "h_batches_or_visual_manifest_present": false
+  },
+  "pending_account_ids_H": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_ids_parity": {
+    "accounts": 55,
+    "h_targets": 40,
+    "h_unique": 40,
+    "H_equals_contract": true,
+    "D_equals_receipt": true,
+    "D_subset_authorized": true,
+    "h_source": "accounts_list_outstanding_balance"
+  },
+  "pending_layers": [
+    "H40_Accounts_outstanding_balance",
+    "D5_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "canonical_delivery_precondition": {
+    "source_inspected_this_round": true,
+    "occurrence_registered_in_RECOVERIES": false,
+    "adapter_account_gates": 47,
+    "adapter_h_gates": 36,
+    "supervisor_dispatch_covers_this_occurrence": false,
+    "adaptation_performed": false,
+    "completed_financial_validation_receipt_exists": false,
+    "diagnosis": "Canonical delivery adapter still supports only previous 47/36 occurrences; scoped 55/40 adaptation, tests, final validation receipt and exact-target GET required. No old report reused or delivery attempted."
+  },
+  "continuity": {
+    "service": {
+      "heartbeat": "{\"at\": 1794995831.9705682, \"phase\": \"dispatching\", \"pid\": 1797665}",
+      "enabled": "true",
+      "inventory": "{\"at\": 1794995823.9706466, \"targets\": [{\"command_hash\": \"d1774d1f364d51bf3e4ede99cf376278c10dd53dd035c90d6f4269b5359d42c4\", \"id\": \"d1774d1f364d51bf3e4e\", \"kind\": \"root\", \"schedule\": \"*/5 * * * *\"}, {\"command_hash\": \"44887e8bfc4416882ca383fb81a8f2267889a7521a2e3eee9f2a77ee18084fab\", \"id\": \"44887e8bfc4416882ca3\", \"kind\": \"root\", \"schedule\": \"11,26,41,56 * * * *\"}, {\"command_hash\": \"800b40ba66c4f838349aec6f85597ec4497f95337f021378b92a84fa3b4c715d\", \"id\": \"800b40ba66c4f838349a\", \"kind\": \"root\", \"schedule\": \"23 10 * * *\"}, {\"command_hash\": \"5f61b07cb5991267274efafaef39b85f6454f07158b40565356b05fc5a04cdf2\", \"id\": \"5f61b07cb5991267274e\", \"kind\": \"root\", \"schedule\": \"7,22,37,52 * * * *\"}, {\"command_hash\": \"b427e5cee0f73bae3dbda9b6a094a4dce2d1e61b80b63c3d73c6fdd1cea94c2a\", \"id\": \"b427e5cee0f73bae3dbd\", \"kind\": \"root\", \"schedule\": \"1-56/5 * * * *\"}, {\"command_hash\": \"8ad91aeb574098f74d9dea8ffbad9e7fe942a99879b100a12ffe97fac6b779e5\", \"id\": \"8ad91aeb574098f74d9d\", \"kind\": \"root\", \"schedule\": \"54 11 * * *\"}, {\"command_hash\": \"4545893a3c443ca944a2d9102e10241ff62906de14573ea2bea28310eb3a2cca\", \"id\": \"4545893a3c443ca944a2\", \"kind\": \"root\", \"schedule\": \"3-58/5 * * * *\"}, {\"command_hash\": \"3fb441a0314260827814ae6f746847c9fe447cde434968fff01988b99e04748d\", \"id\": \"3fb441a0314260827814\", \"kind\": \"root\", \"schedule\": \"0 5 * * *\"}, {\"command_hash\": \"63cda16aca1142dff4ca7bf681ababbf34c655f43fb4cfd54a368761dbaa7e73\", \"id\": \"63cda16aca1142dff4ca\", \"kind\": \"root\", \"schedule\": \"37 8,14,20 * * *\"}, {\"command_hash\": \"2f872ad2c37755b8110948f9bbe0fdbb9ae85f9797e75f81cb30f49e7292ccfc\", \"id\": \"2f872ad2c37755b81109\", \"kind\": \"root\", \"schedule\": \"*/15 * * * *\"}, {\"command_hash\": \"bc0c5f86353f4093131b39ba6b0f726358f9e8dba19ec42f293bd38d60388de3\", \"id\": \"bc0c5f86353f4093131b\", \"kind\": \"root\", \"schedule\": \"0 * * * *\"}, {\"command_hash\": \"52fec8410adeeb9b5e35644739e2f9bf30be001de2effe53597f0f4b6fd5390a\", \"id\": \"52fec8410adeeb9b5e35\", \"kind\": \"root\", \"schedule\": \"44 20 * * 2,5\"}, {\"command_hash\": \"81415d695a3e2f672a28626d17fe1c60d4a3ee912b2a60c916ec4b2d5bfe3bdd\", \"id\": \"81415d695a3e2f672a28\", \"kind\": \"root\", \"schedule\": \"0 8 * * *\"}, {\"command_hash\": \"f8f78b881a14dfd2c8ede4b99211628cd1028bac9b4f79d165245b18515b5a75\", \"id\": \"f8f78b881a14dfd2c8ed\", \"kind\": \"root\", \"schedule\": \"0 * * * *\"}, {\"command_hash\": \"0991d4309826d901f2a1a1a18bfa3f4213465bb336afff114183463039737088\", \"id\": \"0991d4309826d901f2a1\", \"kind\": \"root\", \"schedule\": \"32 8 * * *\"}, {\"command_hash\": \"48b3156161a82288e98f74bd7beae30f0f9778d950f91293e71b2283bdcd258a\", \"id\": \"48b3156161a82288e98f\", \"kind\": \"root\", \"schedule\": \"*/15 * * * *\"}, {\"command_hash\": \"d0c86fb74a62bea0f66a9e836ea845da15677baa9919b8e36d462f74ee7a348a\", \"id\": \"d0c86fb74a62bea0f66a\", \"kind\": \"root\", \"schedule\": \"*/5 * * * *\"}, {\"command_hash\": \"0759f66ad58a84d6928f4d067767ad87ba266abb092fb897abe1fd163c89cce3\", \"id\": \"0759f66ad58a84d6928f\", \"kind\": \"root\", \"schedule\": \"7 8,14,20 * * *\"}, {\"command_hash\": \"bd0d4d2be56c8969fc30450109cfc253d0a5af13b9cc2d7d3065c53e423710e3\", \"id\": \"bd0d4d2be56c8969fc30\", \"kind\": \"root\", \"schedule\": \"41 3 * * *\"}, {\"command_hash\": \"58753805dff19887978a05bff5da738082180d9570664f7543a497dee6f7a1d9\", \"id\": \"58753805dff19887978a\", \"kind\": \"root\", \"schedule\": \"* * * * *\"}, {\"command_hash\": \"8fc41deb48edeaf0ef9e7088d4072154f02d9bc05eab4991b48610fc141e852f\", \"id\": \"8fc41deb48edeaf0ef9e\", \"kind\": \"root\", \"schedule\": \"54 2,8,14,20 * * *\"}, {\"command_hash\": \"0a1a7b14329e28f389ec9e4754bcb0ea1f8a2642c38dd32ba8afe446548faf68\", \"id\": \"0a1a7b14329e28f389ec\", \"kind\": \"root\", \"schedule\": \"16 9 * * *\"}, {\"command_hash\": \"4d815c5d41e8b7fbf2558a5a74c068378fade92018ba208050dd963f79b971f2\", \"id\": \"4d815c5d41e8b7fbf255\", \"kind\": \"root\", \"schedule\": \"*/15 * * * *\"}, {\"command_hash\": \"d00bc2fdad0ee2bea6b8411a536560f80056ae6095a6d58148c882a062be395f\", \"id\": \"d00bc2fdad0ee2bea6b8\", \"kind\": \"root\", \"schedule\": \"*/5 * * * *\"}, {\"command_hash\": \"fa1335cd46e019baaa83dda235c9dabfa303cbd3b2fba4684c1aed5dfb1a393d\", \"id\": \"fa1335cd46e019baaa83\", \"kind\": \"root\", \"schedule\": \"30 7,15 * * *\"}, {\"command_hash\": \"d5a110536b41194479372434cdd88a65ab2bf22a427315a35d76bd199a3276d5\", \"id\": \"d5a110536b4119447937\", \"kind\": \"root\", \"schedule\": \"2-57/5 * * * *\"}, {\"command_hash\": \"369c34fecf2d7622ce4c62d27e0673b29695ccee2d02eedc2a4878200f662b13\", \"id\": \"369c34fecf2d7622ce4c\", \"kind\": \"root\", \"schedule\": \"20 6 * * *\"}, {\"command_hash\": \"84bcd1c1718efa6d8c4d17f31fa3bea4caf15288a2acc76b173ad509253e9ac5\", \"id\": \"84bcd1c1718efa6d8c4d\", \"kind\": \"root\", \"schedule\": \"39 * * * *\"}, {\"command_hash\": \"80a5ebe95ae3314229f682172b68bd0c60f46bac001568e750b31bb98c06e3ed\", \"id\": \"80a5ebe95ae3314229f6\", \"kind\": \"root\", \"schedule\": \"19,49 * * * *\"}, {\"command_hash\": \"da3f2f65b0f02414776f4548dc4237911d8096348b496f0c3ffbf670c1e16f44\", \"id\": \"da3f2f65b0f02414776f\", \"kind\": \"root\", \"schedule\": \"0 8 * * *\"}, {\"command_hash\": \"b9a8cf942bb0bf360714ff55eb4679965ba808afa69b05b6099c0aa2831a0646\", \"id\": \"b9a8cf942bb0bf360714\", \"kind\": \"root\", \"schedule\": \"8 9 * * *\"}, {\"command_hash\": \"314bc16a05e408ea789a6ce5840cf671c9b1ac3c51fcead4c905525c49b52665\", \"id\": \"314bc16a05e408ea789a\", \"kind\": \"root\", \"schedule\": \"* * * * *\"}, {\"command_hash\": \"18b0e685aecd761641fee7d3c9d0fdf2599a74bda5bf25bfafad91bcf0e028d8\", \"id\": \"18b0e685aecd761641fe\", \"kind\": \"root\", \"schedule\": \"* * * * *\"}, {\"command_hash\": \"1821f977b288187b1edeb9d61ea74e03e807e032b9eb32d66098273d4a90bdc8\", \"id\": \"1821f977b288187b1ede\", \"kind\": \"root\", \"schedule\": \"5 8 * * *\"}, {\"command_hash\": \"ef2aae25849033f964ff397f1e0f3d62cb2af10903127c1ac2cea0250c165ffb\", \"id\": \"ef2aae25849033f964ff\", \"kind\": \"root\", \"schedule\": \"14,29,44,59 * * * *\"}, {\"command_hash\": \"dab46577101ebc5123bfa90065fdeb8c0ebb6686f489c81a079a8991242da351\", \"id\": \"dab46577101ebc5123bf\", \"kind\": \"root\", \"schedule\": \"0 8,14,20 * * *\"}, {\"command_hash\": \"3914420ceed74484b9d6a7da5bc53e9fe2dd5da3219e5eb75aee7c65de06b235\", \"id\": \"3914420ceed74484b9d6\", \"kind\": \"root\", \"schedule\": \"24 0,1,7-23 * * *\"}, {\"command_hash\": \"ea748613ba86da8c8dd0cca9ee57f0f3912d94f057d22df7d77a6977db3c104b\", \"id\": \"ea748613ba86da8c8dd0\", \"kind\": \"root\", \"schedule\": \"3-58/5 13,14 * * 5\"}, {\"command_hash\": \"9863de0249caf742a89f2bdb5a3514202f6fa60efac108d6f3fcd49480654675\", \"id\": \"9863de0249caf742a89f\", \"kind\": \"root\", \"schedule\": \"4,14,24,34,44,54 * * * *\"}, {\"command_hash\": \"c4e8b93ba6fa7007f246329dc7faa094a45c70ecc4078f03b69ae5ac4bf23fea\", \"id\": \"c4e8b93ba6fa7007f246\", \"kind\": \"root\", \"schedule\": \"* * * * *\"}, {\"command_hash\": \"6e40aed02d966acc096505cf8e19b5ba6ac7fb8e4d86ccf3c81e0b0ddd63f502\", \"id\": \"6e40aed02d966acc0965\", \"kind\": \"root\", \"schedule\": \"47 4 * * *\"}, {\"command_hash\": \"fc636cc939181558d0a8089c97dfa5b4b93927e8c8b230bdcda12d633c95ffba\", \"id\": \"fc636cc939181558d0a8\", \"kind\": \"root\", \"schedule\": \"0 8 * * *\"}, {\"command_hash\": \"83be2c4026a1d7b7b3b9dee0b08bbd787a2f90dbc9b45aa6d5e7238eb89e0075\", \"id\": \"83be2c4026a1d7b7b3b9\", \"kind\": \"root\", \"schedule\": \"*/15 * * * *\"}, {\"command_hash\": \"c0de4f65ee5b16f942ab1bf775601b5a31b230ba67b1c288eedce45cd24ea70f\", \"id\": \"c0de4f65ee5b16f942ab\", \"kind\": \"root\", \"schedule\": \"21 * * * *\"}, {\"command_hash\": \"853bdba437c593ca7262ba3cac2d0f1e534a140a2664934013e413dec5f83984\", \"id\": \"853bdba437c593ca7262\", \"kind\": \"root\", \"schedule\": \"17 8 * * *\"}, {\"command_hash\": \"02deef5660418261fa769cdeb6a6b964e1acc173ac1826d2026b712db4cb1118\", \"id\": \"02deef5660418261fa76\", \"kind\": \"root\", \"schedule\": \"12,27,42,57 * * * *\"}, {\"command_hash\": \"441ef37743b3135870ad572c3069bc4eac7e3081135c7c0c4757fb774957de69\", \"id\": \"441ef37743b3135870ad\", \"kind\": \"root\", \"schedule\": \"5 0 * * *\"}, {\"command_hash\": \"398c5736488c78527708a503bede036d219bb1d40ff59e38cecc7cb82d7bfacb\", \"id\": \"398c5736488c78527708\", \"kind\": \"root\", \"schedule\": \"3 9 * * *\"}, {\"command_hash\": \"221f64b46bd499a351d484b95cdbd280fde785dadb6c5bd5b01b1813d7317f99\", \"id\": \"221f64b46bd499a351d4\", \"kind\": \"root\", \"schedule\": \"3,8,18,28 8 * * *\"}, {\"command_hash\": \"b7e965ef4023eda58db36baee40cf0fb158e3dc7b6c6397804c4cb4e55ba3327\", \"id\": \"b7e965ef4023eda58db3\", \"kind\": \"root\", \"schedule\": \"22,31,41 9 * * *\"}, {\"command_hash\": \"d5d3ec6dd4bb8b77e284ea2d4e6e4281cc9fe6b7c71bef034c6cddeb58677e92\", \"id\": \"d5d3ec6dd4bb8b77e284\", \"kind\": \"root\", \"schedule\": \"4 23 * * *\"}, {\"command_hash\": \"ac1911387ecd2ac8ebe03b2eba6db411ef1414e82d706ea45569abee41f377c5\", \"id\": \"ac1911387ecd2ac8ebe0\", \"kind\": \"root\", \"schedule\": \"34 * * * *\"}, {\"command_hash\": \"7bf65e1c2ab589e75df86a9be9c8f6437d8aaa5e490525f97f6fba60e94d09c2\", \"id\": \"7bf65e1c2ab589e75df8\", \"kind\": \"root\", \"schedule\": \"4 0-23/2 * * *\"}, {\"command_hash\": \"576eb8b0698f76dffd1c0a0cc7816062b2fda1be517b7272f92e28ced5a65632\", \"id\": \"576eb8b0698f76dffd1c\", \"kind\": \"root\", \"schedule\": \"47 7 * * *\"}, {\"command_hash\": \"a383076534c916e84fccf8ae74d8396b3333b247d017c1dae2445cf3df51a20a\", \"id\": \"a383076534c916e84fcc\", \"kind\": \"root\", \"schedule\": \"32 9 * * *\"}, {\"command_hash\": \"f00e7b5b91a488eedf801a6870b87f3cdc599b47cdaec00ee9118b72266e68d0\", \"id\": \"f00e7b5b91a488eedf80\", \"kind\": \"root\", \"schedule\": \"11 14 * * *\"}, {\"command_hash\": \"361a988f45db4115479d2304d53e4fc3f055aae338a168f20625ececc73f3d2f\", \"id\": \"361a988f45db4115479d\", \"kind\": \"root\", \"schedule\": \"2 16 * * *\"}, {\"command_hash\": \"d16416fee26b3f40be1010f2fe3f0ad05a52a640021384ca66baabf1f5f4306e\", \"id\": \"d16416fee26b3f40be10\", \"kind\": \"root\", \"schedule\": \"2 20 * * *\"}, {\"command_hash\": \"76d566d0d26d9cccfc3ac1e5240f2e3168b0798082775ac71be839a4aeb0640c\", \"id\": \"76d566d0d26d9cccfc3a\", \"kind\": \"root\", \"schedule\": \"31 23 * * *\"}, {\"command_hash\": \"abf11e4a6c28a2143b7dd53b66bf06e3c128f5ff8d5b43dda37832c460de78cc\", \"id\": \"abf11e4a6c28a2143b7d\", \"kind\": \"root\", \"schedule\": \"8 18 * * *\"}, {\"command_hash\": \"d7df384734997b7c18d650243719d109366af72c65df842d416c4bf226b40764\", \"id\": \"d7df384734997b7c18d6\", \"kind\": \"root\", \"schedule\": \"13 0 * * *\"}, {\"command_hash\": \"320cb1cf33cac188eebb9936fb47570227d543ee3083bd0101799a53f985ef90\", \"id\": \"320cb1cf33cac188eebb\", \"kind\": \"root\", \"schedule\": \"46 * * * *\"}, {\"id\": \"44671121f3cc\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"every 360m\", \"kind\": \"interval\", \"minutes\": 360}}, {\"id\": \"0cc7ed1e587e\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"*/3 0,8-23 * * *\", \"expr\": \"*/3 0,8-23 * * *\", \"kind\": \"cron\"}}, {\"id\": \"498fb0d95e10\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"2-59/9 0,8-23 * * *\", \"expr\": \"2-59/9 0,8-23 * * *\", \"kind\": \"cron\"}}, {\"id\": \"3ff8bd8ca40d\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"23 * * * *\", \"expr\": \"23 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"f0222c3bfcf0\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"15 4 * * *\", \"expr\": \"15 4 * * *\", \"kind\": \"cron\"}}, {\"id\": \"940e9827b1ac\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"45 5 * * 0\", \"expr\": \"45 5 * * 0\", \"kind\": \"cron\"}}, {\"id\": \"453bfdd275b0\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"*/30 * * * *\", \"expr\": \"*/30 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"62dfebef142b\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"30 6 * * *\", \"expr\": \"30 6 * * *\", \"kind\": \"cron\"}}, {\"id\": \"685397627b29\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"26,56 * * * *\", \"expr\": \"26,56 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"fb40054022fa\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"*/10 1-7 * * *\", \"expr\": \"*/10 1-7 * * *\", \"kind\": \"cron\"}}, {\"id\": \"f42618f5ced7\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"2-59/10 1-7 * * *\", \"expr\": \"2-59/10 1-7 * * *\", \"kind\": \"cron\"}}, {\"id\": \"83b148017b4d\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"10,25,40,55 * * * *\", \"expr\": \"10,25,40,55 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"2ee720363d7d\", \"kind\": \"native\", \"profile\": \"zeus\", \"schedule\": {\"display\": \"2 8,14,21 * * *\", \"expr\": \"2 8,14,21 * * *\", \"kind\": \"cron\"}}, {\"id\": \"41712f74f949\", \"kind\": \"native\", \"profile\": \"ares\", \"schedule\": {\"display\": \"1 * * * *\", \"expr\": \"1 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"69dfca2b9719\", \"kind\": \"native\", \"profile\": \"ares\", \"schedule\": {\"display\": \"6 * * * *\", \"expr\": \"6 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"528c5710269d\", \"kind\": \"native\", \"profile\": \"ares\", \"schedule\": {\"display\": \"12,27,42,57 * * * *\", \"expr\": \"12,27,42,57 * * * *\", \"kind\": \"cron\"}}, {\"id\": \"/etc/crontab:d863c50e45f88e75\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/crontab:828489e43a6eebbc\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/crontab:f777d792de7fd8f2\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/crontab:828f504817cef615\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/php:e0de51a5403098a9\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/e2scrub_all:a5b743e90bcc79bc\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/e2scrub_all:c7958183746b4c8f\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/monarx-update:b819fc3b8e49f597\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/sysstat:fa1df2e7f5c95b97\", \"kind\": \"system-cron\"}, {\"id\": \"/etc/cron.d/sysstat:9bc29b7d8f08fda9\", \"kind\": \"system-cron\"}, {\"id\": \"sysstat-collect.timer\", \"kind\": \"timer\", \"service\": \"sysstat-collect.service\"}, {\"id\": \"phpsessionclean.timer\", \"kind\": \"timer\", \"service\": \"phpsessionclean.service\"}, {\"id\": \"ua-timer.timer\", \"kind\": \"timer\", \"service\": \"ua-timer.service\"}, {\"id\": \"fwupd-refresh.timer\", \"kind\": \"timer\", \"service\": \"fwupd-refresh.service\"}, {\"id\": \"apt-daily-upgrade.timer\", \"kind\": \"timer\", \"service\": \"apt-daily-upgrade.service\"}, {\"id\": \"update-notifier-download.timer\", \"kind\": \"timer\", \"service\": \"update-notifier-download.service\"}, {\"id\": \"systemd-tmpfiles-clean.timer\", \"kind\": \"timer\", \"service\": \"systemd-tmpfiles-clean.service\"}, {\"id\": \"apt-daily.timer\", \"kind\": \"timer\", \"service\": \"apt-daily.service\"}, {\"id\": \"motd-news.timer\", \"kind\": \"timer\", \"service\": \"motd-news.service\"}, {\"id\": \"sysstat-summary.timer\", \"kind\": \"timer\", \"service\": \"sysstat-summary.service\"}, {\"id\": \"dpkg-db-backup.timer\", \"kind\": \"timer\", \"service\": \"dpkg-db-backup.service\"}, {\"id\": \"man-db.timer\", \"kind\": \"timer\", \"service\": \"man-db.service\"}, {\"id\": \"logrotate.timer\", \"kind\": \"timer\", \"service\": \"logrotate.service\"}, {\"id\": \"e2scrub_all.timer\", \"kind\": \"timer\", \"service\": \"e2scrub_all.service\"}, {\"id\": \"fstrim.timer\", \"kind\": \"timer\", \"service\": \"fstrim.service\"}, {\"id\": \"update-notifier-motd.timer\", \"kind\": \"timer\", \"service\": \"update-notifier-motd.service\"}, {\"id\": \"apport-autoreport.timer\", \"kind\": \"timer\", \"service\": \"apport-autoreport.service\"}, {\"id\": \"snapd.snap-repair.timer\", \"kind\": \"timer\", \"service\": \"snapd.snap-repair.service\"}]}",
+      "worker_failure_streak": "0",
+      "notice:6354e984ad07c7c7f1f15529:blocked_decision": "{\"message_id\": \"1569218550697033789\", \"needs_patch\": false, \"nonce\": \"6354e984ad07c7cblocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: a preven\\u00e7\\u00e3o foi corrigida e validada, mas a entrega da rodada SHEIN de 08/11 \\u00e0s 23h31 exige autoriza\\u00e7\\u00e3o de execu\\u00e7\\u00e3o tardia; o dia civil j\\u00e1 virou e n\\u00e3o fiz catch-up impl\\u00edcito.\\n\\n1. Problema e causa confirmada\\n   A SB mostrava 08/11 no filtro, mas a consulta inicial usava timestamp UTC de 09/11. O coletor confiava no filtro vis\\u00edvel e ignorava a aplica\\u00e7\\u00e3o do preset, resultando em captura sem linhas das contas autorizadas e erro RPS_UI_COVERAGE_MISSING_1018267074603840.\\n\\n2. Corre\\u00e7\\u00e3o aplicada\\n   O helper can\\u00f4nico agora reaplica Today/Yesterday e Update obrigatoriamente e verifica a data de todas as linhas antes de filtrar conta/dom\\u00ednio. Validei a corre\\u00e7\\u00e3o com leitura real da SB e rel\\u00f3gio JS isolado na fronteira de hor\\u00e1rio. Passaram 6 testes novos e 188 regress\\u00f5es; a su\\u00edte inicialmente incompat\\u00edvel com Python 3.11 passou no runtime correto, Python 3.14.\\n\\n3. Pedido preservado\\n   Journal original: 24 contas, 403 campanhas coletadas, nenhuma publica\\u00e7\\u00e3o iniciada. N\\u00e3o alterei agenda, campanhas, or\\u00e7amento ou credenciais. Uma rodada posterior saud\\u00e1vel n\\u00e3o comprova a entrega desta rodada.\\n\\nInvent\\u00e1rio, auditoria e procedimento registrados. REPORT-INFRA 1569218280185663551 confirmado por GET.\\nEvid\\u00eancia: /root/mgs-agent/reports/automation-recovery-6354e984ad07c7c7f1f15529.json\\n\\nRecomendo entrega hist\\u00f3rica tardia pelo runner can\\u00f4nico, preservando as fontes originais e identificando honestamente qualquer leitura posterior de RPS. Sem essa autoriza\\u00e7\\u00e3o, a rodada permanece pendente.\\n\\nAutoriza a entrega hist\\u00f3rica tardia da rodada de 08/11 \\u00e0s 23h31 nas mesmas 24 threads, indicando os hor\\u00e1rios reais das fontes?\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569214975300337887\"}, \"nonce\": \"6354e984ad07c7cblocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:9f77ed97faf39eb7de4ba1b3:completed_validated": "{\"message_id\": \"1569239405028311040\", \"needs_patch\": false, \"nonce\": \"9f77ed97faf39ebcompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569173452038864958\"}, \"nonce\": \"9f77ed97faf39ebcompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:6a8f887c7ddb0077beeeb05b:waiting_human": "{\"message_id\": \"1569338805624770571\", \"needs_patch\": false, \"nonce\": \"6a8f887c7ddb007waiting_h\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"2FA exigida por Meta na rota Billing do Chrome Rodolfo PC1. Pixels blocked.png: Confirm it\\u2019s you with your authentication app. API47 e E/F validadas;H0/36 novas,36 antigas preservadas;D2 eventos genericos novos sem prova. Nao repetir writes concluidos ou contornar login. Retomar somente apos leitura positiva do mesmo alvo;47IDs/job originais. Recibo: /root/mgs-agent/reports/meta-manual-payments-runs/cron-20261109T0802/closure-current.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"nonce\": \"6a8f887c7ddb007waiting_h\"}, \"render_version\": 2, \"state\": \"waiting_human\", \"verified\": true}",
+      "notice:14aaa221a2b7d554eb64cbfb:blocked_decision": "{\"message_id\": \"1569365227898929165\", \"needs_patch\": false, \"nonce\": \"14aaa221a2b7d55blocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Investigacao concluida:30 campanhas/60anuncios OPT_IN;60/60previews image_background_gen explicitamente ineligible no MOBILE_FEED_STANDARD. UI C013 imagem e C129video sem controle. Print positivo MGS indisponivel; exemplo externo identificado preparado. Nao criar/ativar/alterar catalogo para obter print. Fonte e proximo gate em /root/mgs-agent/reports/background-ui-example-1569358427950555207/findings.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"nonce\": \"14aaa221a2b7d55blocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:6a8f887c7ddb0077beeeb05b:completed_validated": "{\"message_id\": \"1569380345164341358\", \"needs_patch\": false, \"nonce\": \"6a8f887c7ddb007completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"6a8f887c7ddb007completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:87030f8a124bbe188a32f32c:completed_validated": "{\"message_id\": \"1569389146164961341\", \"needs_patch\": false, \"nonce\": \"87030f8a124bbe1completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569384845195346062\"}, \"nonce\": \"87030f8a124bbe1completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:87030f8a124bbe188a32f32c": "true",
+      "notice:a6c411eff3c0bd511cf4dc25:completed_validated": "{\"message_id\": \"1569400421624061993\", \"needs_patch\": false, \"nonce\": \"a6c411eff3c0bd5completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Foreground Zeus remains executor of original request1569376234008354837. Auto-dispatched duplicate worker stopped by verified PID/start ticks/process group before foreground GUI input; same20ad scope preserved. Do not start another UI writer. Checkpoint /root/mgs-agent/reports/manual10-background-1569376234008354837/scope.json; prepared read-only runner /root/.hermes/profiles/zeus/cache/scratch/manual10-background-ui.py. Parent will validate result and reconcile this row.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"a6c411eff3c0bd5completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:c1e8980ca04dd6ff1a1db7d7:completed_validated": "{\"message_id\": \"1569410538059079844\", \"needs_patch\": false, \"nonce\": \"c1e8980ca04dd6fcompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569407492038070403\"}, \"nonce\": \"c1e8980ca04dd6fcompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:c1410a01474a061abbd2d308:waiting_human": "{\"message_id\": \"1569420730209140756\", \"needs_patch\": false, \"nonce\": \"c1410a01474a061waiting_h\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Pendente: opera\\u00e7\\u00e3o c1410a01474a061abbd2d308 recuperou a etapa de neg\\u00f3cio, mas a valida\\u00e7\\u00e3o t\\u00e9cnica posterior voltou a falhar na autentica\\u00e7\\u00e3o SB. N\\u00e3o considero recupera\\u00e7\\u00e3o integral.\\n\\nProblema e causa\\n  O consumidor can\\u00f4nico alcan\\u00e7a intermitentemente a barreira de autentica\\u00e7\\u00e3o. A causa espec\\u00edfica no Auth0 n\\u00e3o foi comprovada; n\\u00e3o h\\u00e1 evid\\u00eancia suficiente para exigir troca de credenciais.\\n\\nResultado validado\\n  - Autoriza\\u00e7\\u00f5es originais confirmadas por GET e cadastro vigente.\\n  - Runner can\\u00f4nico --apply conclu\\u00eddo com sa\\u00edda 0.\\n  - Escopo preservado: 54 publishers e 73 usu\\u00e1rios.\\n  - Sheet e estado: 524 p\\u00e1ginas, com paridade independente de identidade, FB ID, status e data.\\n  - Zero transi\\u00e7\\u00f5es, sa\\u00eddas ou novas publica\\u00e7\\u00f5es.\\n  - Entrega anterior 1569409161073139885 reconfirmada por GET, sem reenvio.\\n  - 16 testes passaram usando unittest; pytest n\\u00e3o est\\u00e1 instalado nesse ambiente.\\n\\nPend\\u00eancia e retomada\\n  O dry-run posterior falhou mesmo ap\\u00f3s a rechecagem limitada existente. Um diagn\\u00f3stico adicional foi barrado pelo guard de execu\\u00e7\\u00e3o; n\\u00e3o contornei a prote\\u00e7\\u00e3o. O supervisor permanece dono da opera\\u00e7\\u00e3o: ap\\u00f3s backoff, deve reconciliar o estado e validar somente o consumidor em leitura, sem repetir as etapas j\\u00e1 conclu\\u00eddas.\\n\\nInvent\\u00e1rio e audit atualizados. REPORT-INFRA 1569420537644449805 confirmado por GET. Scripts, cron/cad\\u00eancia, credenciais e configura\\u00e7\\u00f5es de neg\\u00f3cio inalterados.\\n\\nRecibo dur\\u00e1vel:\\n  /root/.hermes/shared/automation-continuity/runs/c1410a01474a061abbd2d308/recovery-evidence.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569418819372589056\"}, \"nonce\": \"c1410a01474a061waiting_h\"}, \"render_version\": 2, \"state\": \"waiting_human\", \"verified\": true}",
+      "notice:c1410a01474a061abbd2d308:completed_validated": "{\"message_id\": \"1569423116764192929\", \"needs_patch\": false, \"nonce\": \"c1410a01474a061completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569418819372589056\"}, \"nonce\": \"c1410a01474a061completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:c1410a01474a061abbd2d308": "true",
+      "notice:540008b88f209527ec1e7933:completed_validated": "{\"message_id\": \"1569431919190474794\", \"needs_patch\": false, \"nonce\": \"540008b88f20952completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569430147172532377\"}, \"nonce\": \"540008b88f20952completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:6e83943f03ecfe6c00b7ad6b:completed_validated": "{\"message_id\": \"1569438214253449297\", \"needs_patch\": false, \"nonce\": \"6e83943f03ecfe6completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"6e83943f03ecfe6completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:e1ff6b43b4f46817f2c1ad34:blocked_decision": "{\"message_id\": \"1569461896892129281\", \"needs_patch\": false, \"nonce\": \"e1ff6b43b4f4681blocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: autentica\\u00e7\\u00e3o da sess\\u00e3o can\\u00f4nica da Smart Bidding impede concluir a opera\\u00e7\\u00e3o e1ff6b43b4f46817f2c1ad34.\\n\\nProblema: o dry-run can\\u00f4nico passou, cobrindo 54 publishers, 73 usu\\u00e1rios e 524 p\\u00e1ginas monitoradas. Por\\u00e9m, o apply seguinte falhou na autentica\\u00e7\\u00e3o, antes de escrever na planilha, publicar mensagens ou avan\\u00e7ar o estado.\\n\\nCausa confirmada: uma leitura diagn\\u00f3stica da mesma sess\\u00e3o permaneceu na tela de senha por 30 segundos, sem cabe\\u00e7alho de API autenticado. O mecanismo espec\\u00edfico de expira\\u00e7\\u00e3o/rota\\u00e7\\u00e3o n\\u00e3o foi comprovado; n\\u00e3o houve tentativa de login nem altera\\u00e7\\u00e3o de credenciais.\\n\\nPreservado: executor \\u00fanico, cron, escopo e estado anterior. A mensagem j\\u00e1 entregue, 1569409161073139885, foi conferida por GET e n\\u00e3o foi reenviada.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente. Depois, comprovar acesso autenticado e retomar somente o apply faltante pelo runner can\\u00f4nico.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica da Smart Bidding e avisar quando concluir?\\n\\nCheckpoint dur\\u00e1vel:\\n /root/.hermes/shared/automation-continuity/runs/e1ff6b43b4f46817f2c1ad34/recovery-evidence.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569460344022241295\"}, \"nonce\": \"e1ff6b43b4f4681blocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:6ac295006f40fce0d42c5722:waiting_human": "{\"message_id\": \"1569514701266882751\", \"needs_patch\": false, \"nonce\": \"6ac295006f40fcewaiting_h\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: login necess\\u00e1rio na sess\\u00e3o can\\u00f4nica da Smart Bidding para concluir a opera\\u00e7\\u00e3o 6ac295006f40fce0d42c5722.\\n\\nProblema: uma leitura pelo consumidor can\\u00f4nico, com flock e sess\\u00e3o compartilhada protegida, falhou ap\\u00f3s 30 segundos na barreira de autentica\\u00e7\\u00e3o. A causa espec\\u00edfica da falha de restaura\\u00e7\\u00e3o Auth0 n\\u00e3o foi comprovada; isso n\\u00e3o demonstra credencial inv\\u00e1lida.\\n\\nValidado:\\n  Autoridade original e vigente conferida.\\n  Owner, processos, cursor e outbox reconciliados.\\n  Cursor 740804 preservado; nenhuma entrega parcialmente pendente.\\n  Nenhum apply, publica\\u00e7\\u00e3o, tentativa de login ou altera\\u00e7\\u00e3o de credencial executado. Cron e configura\\u00e7\\u00e3o permaneceram inalterados.\\n\\nImpacto: n\\u00e3o foi poss\\u00edvel consultar novas notifica\\u00e7\\u00f5es ao vivo; n\\u00e3o posso afirmar aus\\u00eancia de incidentes posteriores ao cursor.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente. Ap\\u00f3s libera\\u00e7\\u00e3o, validar novamente o mesmo consumidor e retomar somente a etapa faltante, com dedupe e GET das entregas.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica da Smart Bidding e avisar quando concluir?\\n\\nCheckpoint dur\\u00e1vel:\\n  /root/.hermes/shared/automation-continuity/runs/6ac295006f40fce0d42c5722/recovery-evidence.json\\n\\nO supervisor permanece respons\\u00e1vel pela retomada e pela entrega do diagn\\u00f3stico.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1569512565917356033\"}, \"nonce\": \"6ac295006f40fcewaiting_h\"}, \"render_version\": 2, \"state\": \"waiting_human\", \"verified\": true}",
+      "notice:d9c7bcd5959aa91de38c7c6d:completed_validated": "{\"message_id\": \"1570088753211515006\", \"needs_patch\": false, \"nonce\": \"d9c7bcd5959aa91completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1570060565529895024\"}, \"nonce\": \"d9c7bcd5959aa91completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:d9c7bcd5959aa91de38c7c6d": "true",
+      "notice:f3d0b1d8da3c0353e1361184:completed_validated": "{\"message_id\": \"1570154186627096611\", \"needs_patch\": false, \"nonce\": \"f3d0b1d8da3c035completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"f3d0b1d8da3c035completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:fbdfcb983f5ee3ac1d408fb3:completed_validated": "{\"message_id\": \"1570619754937323561\", \"needs_patch\": false, \"nonce\": \"fbdfcb983f5ee3acompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1570615453707927573\"}, \"nonce\": \"fbdfcb983f5ee3acompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:fbdfcb983f5ee3ac1d408fb3": "true",
+      "notice:e67b9e22a17027e23728d532:blocked_decision": "{\"message_id\": \"1570880278845464628\", \"needs_patch\": false, \"nonce\": \"e67b9e22a17027eblocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: a Meta exige confirma\\u00e7\\u00e3o por passkey no Chrome do Rodolfo no PC1. O desafio foi comprovado em pixels e AX; nenhum contorno foi tentado.\\n\\n- Validado: m\\u00e9tricas API das 55 contas atualizadas \\u00e0s 14h10 Eastern; invoices de outubro reconciliadas. C/G/I/J e E/F conferidos com as fontes; outra aba preservada.\\n- Pendente: renovar os 40 saldos H e verificar o novo evento hist\\u00f3rico D de Mavroa-US-SHEIN-ES-02-G002, ID 1414197490675732. H e D anteriores permaneceram intactos, com seus hor\\u00e1rios.\\n- Preven\\u00e7\\u00e3o aplicada: reconhecimento expl\\u00edcito do desafio de passkey nos coletores Accounts e hist\\u00f3rico, evitando classific\\u00e1-lo como timeout de busca. Quinze testes passaram; espelhos conferidos; REPORT-INFRA enviado e validado por GET.\\n- Continuidade: mesma opera\\u00e7\\u00e3o e67b9e22a17027e23728d532, checkpoint persistido e lease PC1 livre. Sem pagamentos, altera\\u00e7\\u00e3o de billing, cad\\u00eancia ou novo job. Entrega de neg\\u00f3cio ainda n\\u00e3o conclu\\u00edda.\\n\\nRodolfo pode concluir a confirma\\u00e7\\u00e3o por passkey da Meta no PC1? Depois disso, \\u00e9 necess\\u00e1rio provar acesso ao mesmo alvo antes de retomar somente as etapas faltantes.\\n\\nEvid\\u00eancia: /root/mgs-agent/reports/meta-manual-payments-runs/cron-20261113T1402/recovery-validation.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"nonce\": \"e67b9e22a17027eblocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:5b2cabd13995080ceb32c8a3:blocked_decision": "{\"message_id\": \"1570941877732245696\", \"needs_patch\": false, \"nonce\": \"5b2cabd13995080blocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: diverg\\u00eancia de escopo no relat\\u00f3rio SHEIN de 13/11, n\\u00e3o falha de autentica\\u00e7\\u00e3o.\\n\\n1. Problema: o runner exige exatamente 36 contas, mas o cat\\u00e1logo passou a ter 38. A falha ocorre antes da coleta e da publica\\u00e7\\u00e3o.\\n2. Causa confirmada: inclus\\u00e3o autorizada de Yolo 07/G002 e 08/G006 nos relat\\u00f3rios financeiros. Essas autoriza\\u00e7\\u00f5es n\\u00e3o alteram explicitamente a regra de 36 contas deste produto independente.\\n3. Reconcilia\\u00e7\\u00e3o: lock do runner livre; nenhum snapshot, outbox ou recibo de entrega de hoje. N\\u00e3o repeti o runner nem alterei campanhas, planilha, credenciais ou cron.\\n\\nRecomendo incluir as duas contas tamb\\u00e9m nesta contagem, evitando omiss\\u00f5es. Manter 36 preserva o escopo antigo, mas exclui as novas contas.\\n\\nRodolfo, autoriza incluir Yolo 07/G002 e Yolo 08/G006 no relat\\u00f3rio de campanhas criadas das 18h08, passando de 36 para 38 contas, ou este relat\\u00f3rio deve preservar as 36 originais?\\n\\nPedido e diagn\\u00f3stico preservados em:\\n /root/.hermes/shared/automation-continuity/runs/5b2cabd13995080ceb32c8a3/recovery-evidence.json\\n\\nO supervisor mant\\u00e9m a responsabilidade pela transi\\u00e7\\u00e3o e entrega; nenhuma recupera\\u00e7\\u00e3o foi declarada conclu\\u00edda.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1570940096495226881\"}, \"nonce\": \"5b2cabd13995080blocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "delivery_pending:5b2cabd13995080ceb32c8a3": "true",
+      "notice:673b5f8f33b370cfd870301d:completed_validated": "{\"message_id\": \"1571136914747301888\", \"needs_patch\": false, \"nonce\": \"673b5f8f33b370ccompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1571128837394399287\"}, \"nonce\": \"673b5f8f33b370ccompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:28380d05a695a1475cd9aef0:completed_validated": "{\"message_id\": \"1571150762602668148\", \"needs_patch\": false, \"nonce\": \"28380d05a695a14completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"28380d05a695a14completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:b0bf8a238e1a068b6c86b7f1:completed_validated": "{\"message_id\": \"1571472878333857805\", \"needs_patch\": false, \"nonce\": \"b0bf8a238e1a068completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1571381759860408423\"}, \"nonce\": \"b0bf8a238e1a068completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:b0bf8a238e1a068b6c86b7f1": "true",
+      "notice:30e890e4a3e5d052791e2ada:completed_validated": "{\"message_id\": \"1571480464290742318\", \"needs_patch\": false, \"nonce\": \"30e890e4a3e5d05completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1571472352850485351\"}, \"nonce\": \"30e890e4a3e5d05completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:26204cf341a3167a0556e304:completed_validated": "{\"message_id\": \"1571487976167571457\", \"needs_patch\": false, \"nonce\": \"26204cf341a3167completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"26204cf341a3167completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:80321ae97ff7e56b5e1dc2a3:completed_validated": "{\"message_id\": \"1571489255245611028\", \"needs_patch\": false, \"nonce\": \"80321ae97ff7e56completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"80321ae97ff7e56completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:189266711a7c435e559ffcbb:completed_validated": "{\"message_id\": \"1571923348970283029\", \"needs_patch\": false, \"nonce\": \"189266711a7c435completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1571917795271381095\"}, \"nonce\": \"189266711a7c435completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:189266711a7c435e559ffcbb": "true",
+      "notice:b1c46c9341b7e9a46b94af47:completed_validated": "{\"message_id\": \"1572076887033782364\", \"needs_patch\": false, \"nonce\": \"b1c46c9341b7e9acompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"nonce\": \"b1c46c9341b7e9acompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:20972e2434ac2ad37672e699:blocked_decision": "{\"message_id\": \"1572225529434742875\", \"needs_patch\": false, \"nonce\": \"20972e2434ac2adblocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: a sess\\u00e3o can\\u00f4nica da Smart Bidding exige autentica\\u00e7\\u00e3o para concluir a opera\\u00e7\\u00e3o 20972e2434ac2ad37672e699.\\n\\nProblema: o dry-run passou, mas o apply seguinte falhou antes de processar notifica\\u00e7\\u00f5es ou publicar mensagens. A recupera\\u00e7\\u00e3o n\\u00e3o est\\u00e1 conclu\\u00edda.\\n\\nCausa confirmada: um navegador separado permaneceu na tela de senha do Auth0, sem cabe\\u00e7alho autenticado ap\\u00f3s 30 segundos. O mecanismo da instabilidade da sess\\u00e3o n\\u00e3o foi comprovado; n\\u00e3o h\\u00e1 evid\\u00eancia de senha inv\\u00e1lida.\\n\\nPreservado: cursor 753342, nenhuma entrega pendente e nenhum alerta reenviado. A mensagem anterior 1572041667949625435 foi conferida por GET. Cron, credenciais e infraestrutura n\\u00e3o foram alterados.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente; depois validar a sess\\u00e3o salva em navegador separado, executar somente o apply faltante pelo runner can\\u00f4nico e conferir o pr\\u00f3ximo ciclo natural. At\\u00e9 l\\u00e1, novas notifica\\u00e7\\u00f5es podem ficar sem processamento.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica da Smart Bidding e avisar quando concluir?\\n\\nCheckpoint validado:\\n /root/.hermes/shared/automation-continuity/runs/20972e2434ac2ad37672e699/recovery-evidence.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572222924872482878\"}, \"nonce\": \"20972e2434ac2adblocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:ce6ccbba8ebc76f650dda711:completed_validated": "{\"message_id\": \"1572234161572417589\", \"needs_patch\": false, \"nonce\": \"ce6ccbba8ebc76fcompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572231098946166805\"}, \"nonce\": \"ce6ccbba8ebc76fcompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:64078873756ff45895aade65:completed_validated": "{\"message_id\": \"1572244233618726913\", \"needs_patch\": false, \"nonce\": \"64078873756ff45completed\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572239665250181151\"}, \"nonce\": \"64078873756ff45completed\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "delivery_pending:64078873756ff45895aade65": "true",
+      "notice:8fe9f371e9fad4978e586f87:blocked_decision": "{\"message_id\": \"1572252104377241815\", \"needs_patch\": false, \"nonce\": \"8fe9f371e9fad49blocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: autentica\\u00e7\\u00e3o da sess\\u00e3o can\\u00f4nica Zeus da Smart Bidding impede concluir a opera\\u00e7\\u00e3o 8fe9f371e9fad4978e586f87.\\n\\nProblema: o dry-run do monitor can\\u00f4nico passou, lendo 575 alertas, sem notifica\\u00e7\\u00f5es novas. Por\\u00e9m, o apply seguinte encontrou a tela de autentica\\u00e7\\u00e3o e falhou antes de qualquer entrega de neg\\u00f3cio.\\n\\nCausa confirmada: o acesso n\\u00e3o se mant\\u00e9m entre execu\\u00e7\\u00f5es. O mecanismo de expira\\u00e7\\u00e3o/restaura\\u00e7\\u00e3o da sess\\u00e3o n\\u00e3o foi comprovado; n\\u00e3o h\\u00e1 evid\\u00eancia suficiente para atribuir a falha \\u00e0 senha.\\n\\nValida\\u00e7\\u00e3o: autoriza\\u00e7\\u00e3o original conferida por GET; executor \\u00fanico, flock e lease preservados. Cursor mantido em 754327, pending=null e nenhuma mensagem de neg\\u00f3cio publicada. O pr\\u00f3prio runner registrou a quarta falha consecutiva. Cron, scripts e credenciais n\\u00e3o foram alterados; nenhum gateway foi reiniciado.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente, sem trocar credenciais ou identidade. Depois, validar uma nova inst\\u00e2ncia do navegador com a sess\\u00e3o salva, retomar somente o apply can\\u00f4nico e conferir a pr\\u00f3xima execu\\u00e7\\u00e3o natural. O dry-run isolado n\\u00e3o comprova recupera\\u00e7\\u00e3o integral.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica Zeus da Smart Bidding e avisar quando concluir?\\n\\nCheckpoint dur\\u00e1vel validado:\\n /root/.hermes/shared/automation-continuity/runs/8fe9f371e9fad4978e586f87/recovery-evidence.json\\n\\nFila e entrega do diagn\\u00f3stico permanecem sob responsabilidade do supervisor; esta execu\\u00e7\\u00e3o n\\u00e3o declarou fechamento.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572249348480434192\"}, \"nonce\": \"8fe9f371e9fad49blocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:bcdcea820aa952b6471a6795:waiting_human": "{\"message_id\": \"1572297910664695949\", \"needs_patch\": false, \"nonce\": \"bcdcea820aa952bwaiting_h\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: a sess\\u00e3o can\\u00f4nica da Smart Bidding apresenta autentica\\u00e7\\u00e3o intermitente e ainda impede concluir o monitor de token Messenger.\\n\\nProblema: reproduzi a falha pelo runner can\\u00f4nico, com o mesmo ambiente, Xvfb e locks. Uma leitura posterior passou e encontrou 573 alertas na fonte, nenhum novo. Por\\u00e9m, o apply seguinte voltou \\u00e0 tela de autentica\\u00e7\\u00e3o. O \\u00faltimo diagn\\u00f3stico tamb\\u00e9m confirmou esse bloqueio.\\n\\nCausa confirmada: a sess\\u00e3o salva n\\u00e3o restaura o acesso de forma consistente. O mecanismo de expira\\u00e7\\u00e3o/renova\\u00e7\\u00e3o n\\u00e3o foi comprovado. Isso n\\u00e3o comprova senha incorreta nem token Facebook inv\\u00e1lido.\\n\\nPreservado: cursor 754327, nenhuma entrega pendente e nenhum alerta reenviado. N\\u00e3o alterei credenciais, sess\\u00e3o salva, cron, permiss\\u00f5es ou campanhas; n\\u00e3o iniciei writer paralelo.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente. Depois, validar o acesso em execu\\u00e7\\u00e3o independente e retomar somente o apply faltante, conferindo o estado e eventuais entregas por GET. O dry-run bem-sucedido n\\u00e3o encerra esta recupera\\u00e7\\u00e3o.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica da Smart Bidding e avisar quando concluir? N\\u00e3o \\u00e9 necess\\u00e1rio trocar senha nem token do Messenger.\\n\\nCheckpoint dur\\u00e1vel:\\n /root/.hermes/shared/automation-continuity/runs/bcdcea820aa952b6471a6795/recovery-evidence.json\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572294647613755473\"}, \"nonce\": \"bcdcea820aa952bwaiting_h\"}, \"render_version\": 2, \"state\": \"waiting_human\", \"verified\": true}",
+      "notice:8ff9e89c1706ca23a46c5ccb:blocked_decision": "{\"message_id\": \"1572350244321103883\", \"needs_patch\": false, \"nonce\": \"8ff9e89c1706ca2blocked_d\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": [\"344196393512075265\"]}, \"content\": \"<@344196393512075265>\", \"embeds\": [{\"color\": 15844367, \"description\": \"Bloqueado: autentica\\u00e7\\u00e3o inst\\u00e1vel da sess\\u00e3o can\\u00f4nica da Smart Bidding impede concluir o monitor de token Messenger.\\n\\n1. Problema: o dry-run do runner can\\u00f4nico passou e encontrou 7 novas notifica\\u00e7\\u00f5es, todas suprimidas corretamente pela deduplica\\u00e7\\u00e3o. Por\\u00e9m, o apply seguinte encontrou a tela de autentica\\u00e7\\u00e3o antes de processar os alertas.\\n\\n2. Causa confirmada: a sess\\u00e3o salva n\\u00e3o manteve acesso entre duas execu\\u00e7\\u00f5es independentes. O mecanismo de expira\\u00e7\\u00e3o/rota\\u00e7\\u00e3o do Auth0 n\\u00e3o foi comprovado; n\\u00e3o h\\u00e1 evid\\u00eancia de senha incorreta. Uma leitura diagn\\u00f3stica adicional foi impedida pela prote\\u00e7\\u00e3o de execu\\u00e7\\u00e3o, sem contorn\\u00e1-la.\\n\\n3. Preservado: cursor 754327, pending=null, executor \\u00fanico e cron original. Nenhum alerta de neg\\u00f3cio foi enviado nesta rodada; nenhuma credencial, campanha ou configura\\u00e7\\u00e3o foi alterada. O runner registrou a quarta falha consecutiva.\\n\\nRecomenda\\u00e7\\u00e3o: restabelecer o login existente e comprovar acesso em uma execu\\u00e7\\u00e3o independente antes de retomar somente o apply faltante. Sem isso, n\\u00e3o \\u00e9 seguro declarar recupera\\u00e7\\u00e3o nem avan\\u00e7ar o cursor.\\n\\nRodolfo, pode restabelecer o login da sess\\u00e3o can\\u00f4nica da Smart Bidding e avisar quando concluir?\\n\\nEvid\\u00eancia dur\\u00e1vel:\\n /root/.hermes/shared/automation-continuity/runs/8ff9e89c1706ca23a46c5ccb/recovery-evidence.json\\n\\nA opera\\u00e7\\u00e3o permanece sob responsabilidade do supervisor, sem fechamento ou writer paralelo.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\ud83d\\udd0e ALERTA INVESTIGADO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572347516547239987\"}, \"nonce\": \"8ff9e89c1706ca2blocked_d\"}, \"render_version\": 2, \"state\": \"blocked_decision\", \"verified\": true}",
+      "notice:24c94f890699dee6148cf511:completed_validated": "{\"message_id\": \"1572367564896473242\", \"needs_patch\": false, \"nonce\": \"24c94f890699deecompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572362593874608159\"}, \"nonce\": \"24c94f890699deecompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}",
+      "notice:056ec882525a87def44d9359:completed_validated": "{\"message_id\": \"1572373827562897510\", \"needs_patch\": false, \"nonce\": \"056ec882525a87dcompleted\", \"payload\": {\"allowed_mentions\": {\"parse\": [], \"replied_user\": false, \"roles\": [], \"users\": []}, \"content\": \"\", \"embeds\": [{\"color\": 3066993, \"description\": \"Resolvido: produtor e resultado verificados por nova leitura.\", \"footer\": {\"text\": \"Zeus \\u00b7 continuidade autom\\u00e1tica\"}, \"title\": \"\\u2705 ALERTA CORRIGIDO\"}], \"enforce_nonce\": true, \"message_reference\": {\"channel_id\": \"1498132022634483894\", \"fail_if_not_exists\": false, \"message_id\": \"1572369782659874817\"}, \"nonce\": \"056ec882525a87dcompleted\"}, \"render_version\": 2, \"state\": \"completed_validated\", \"verified\": true}"
+    },
+    "consumer_alive": true,
+    "existing_consumer_cron": [
+      "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    ],
+    "recent_events": [
+      {
+        "id": 12713,
+        "at": 1794995831.9757662,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1797665\", \"previous_state\": \"waiting_resource\"}"
+      },
+      {
+        "id": 12701,
+        "at": 1794995388.3243823,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"waiting_resource\", \"due\": 1794995688.3243823, \"state\": \"waiting_resource\"}"
+      },
+      {
+        "id": 12700,
+        "at": 1794995232.121112,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1790310\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12688,
+        "at": 1794994783.4134195,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794995083.4134195, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12687,
+        "at": 1794994633.576098,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1782629\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12674,
+        "at": 1794994179.3037283,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794994479.3037283, \"state\": \"retry_scheduled\"}"
+      }
+    ],
+    "prior_retry_consumed": true,
+    "retry_at": null,
+    "retry_condition": "Owning supervisor must persist next backoff after consuming this response. Worker did not change queue, cadence or register a future retry.",
+    "older_separate_incident": {
+      "key": "e67b9e22a17027e23728d532",
+      "state": "blocked_decision",
+      "cause": "source_scope_changed",
+      "owner": null
+    },
+    "next_authorized_step": "After PC1 connectivity returns, revalidate current owner/native claim/global lease and same Chrome identity; resume only missing H40 and D5 with canonical workers and persist each batch. Preserve funding/invoices and pending scope. Final API reconciliation, full 55-account readback, canonical scoped 55/40 delivery adaptation/tests and delivery GET remain necessary."
+  },
+  "no_mutation": {
+    "checkpoint_only": true,
+    "google_writes": 0,
+    "meta_writes": 0,
+    "gui_inputs": 0,
+    "business_messages_sent": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0
+  },
+  "local_artifact_note": "One scratch diagnostic script plus this distinct durable evidence checkpoint only. No business, infra, queue, scheduler or message write.",
+  "diagnostic_transient": {
+    "first_probe": "Discord HTTP 429 before checkpoint/business writes",
+    "recovery": "Conservative 65-second foreground cooldown, then spaced exact GET reads; no business retry or duplicate report.",
+    "retry_after_first_error": "Not exposed by canonical request helper; header-aware diagnostic GET used after cooldown.",
+    "resolved": true
+  }
+}
