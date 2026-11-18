@@ -1903,12 +1903,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572703991270211627",
-      "next_step": "Após monitor canônico e ownership liberados, executar somente saldo 11 do mesmo request e complete por batch4; auditoria audit_task.py e mapa publish_map.py na thread original. Não criar outro request/executor.",
-      "objective": "Concluir os 31 vídeos Kelly US SHEIN EN common, preservando IDs RAW e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1572703991270211627/plan.json",
-      "state": "31 preparados/revisados e nomes congelados; 20 fontes completas no request 96ffe574884ce80bf3370b7f3272a278. rotina canônica em monitor/manutenção com lock ativo; foreground sem writer concorrente. plano executável completo em source; adapter e mídias válidas no scratch kelly-1572703991270211627, intake_task.py e run_one.py. reutilizar por source id, não reclassificar ou renomear.",
+      "next_step": "Nenhum saldo. READY https://drive.google.com/drive/folders/1SsVMXYGHxFimtN8nSaoYOer0Do-zawfH; RAW https://drive.google.com/drive/folders/1smyYJhxxRPpzRgFiBxnZUwvO1mhvFdF5. Não repetir tratamento, nomes ou mapa; novo pedido exige novo contexto.",
+      "objective": "Tratar e organizar 31 vídeos Kelly US SHEIN EN common, preservando originais e reservas",
+      "source": "data/ares/creative-ops/executions/intake-1572703991270211627/final-audit.json",
+      "state": "concluido: request 96ffe574884ce80bf3370b7f3272a278 complete; 31 fontes e 31 linhagens novas, zero duplicatas e zero pendências. auditoria independente dos 31 raw nativos same-id, providers raw/clean, atalhos, bytes sha, metadata limpa e reservas validada. mapa integral publicado em três partes na thread e relido por id/conteúdo. mídia transitória local limpa; nenhuma campanha ou exclusão remota.",
       "thread_id": "1572703991270211627",
-      "updated_at": "2026-11-18T21:01:20+00:00"
+      "updated_at": "2026-11-18T21:34:46+00:00"
     },
     {
       "agent": "ares",
@@ -11518,5 +11518,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T21:15:22+00:00"
+  "updated_at": "2026-11-18T21:34:46+00:00"
 }
