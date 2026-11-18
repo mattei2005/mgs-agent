@@ -4744,22 +4744,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572387948974968903",
-      "next_step": "Executar o mesmo one-shot na janela congelada; status=ACTIVE somente apos pre-read/invariantes e GET integral; publicar conclusao na origem.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 11 campanhas nominais Yolokfx02 G006 e reativar18novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572387948974968903/activation.json",
-      "state": "scheduled:11/11 paused por get integral final;11ids aptos para18novembro2026 00hest;110testes offline e dry-run live;agenda unica enabled verificada",
+      "state": "11/11 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-17T23:15:26+00:00"
+      "updated_at": "2026-11-18T05:02:11+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572388562752770230",
-      "next_step": "Runner deterministico aguarda 18/11/2026 00h00 America/New_York, valida autoridade/invariantes e ativa somente os mesmos29 IDs;GET integral e aviso nativo na origem",
+      "next_step": "Concluido; nao repetir writes.",
       "objective": "Mavroa06:29pausas nominais e reativacao18novembro2026 00hEST",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572388562752770230/activation.json",
-      "state": "scheduled:29/29 paused por get integral;29 aptas;one-shot enabled e auditado;269 testes offline;budgets/lances/hierarquia preservados",
+      "state": "activation_verified:29/29 active por get integral; bloqueadas:[]",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-17T23:24:08+00:00"
+      "updated_at": "2026-11-18T05:05:15+00:00"
     },
     {
       "agent": "zeus",
@@ -11408,5 +11408,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T02:09:19+00:00"
+  "updated_at": "2026-11-18T05:05:15+00:00"
 }
