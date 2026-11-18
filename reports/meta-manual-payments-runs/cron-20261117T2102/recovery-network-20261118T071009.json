@@ -1,0 +1,386 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "verified_at": "2026-11-18T07:10:09.422517-05:00",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T070033.json",
+  "authority": {
+    "current_registry_authorized": true,
+    "live_GET_evidence": [
+      {
+        "id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "author_id": "344196393512075265",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "message_reference": null
+      },
+      {
+        "id": "1563960055504838767",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Faz entao",
+        "message_reference": null
+      },
+      {
+        "id": "1563960345826037821",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Eu quero que a planilha seja atualizada 3x por dia\n1x por volta das 8am, \n2x por volta das 2pm\n3x por volta das 9pm",
+        "message_reference": null
+      },
+      {
+        "id": "1570799435502588027",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "entao adiciona as contas na aba da planilha que nao estao la.",
+        "message_reference": null
+      },
+      {
+        "id": "1570815017794674749",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "sei la, resolve ai o que tiver que resolver.",
+        "message_reference": {
+          "type": 0,
+          "channel_id": "1563926766286803004",
+          "message_id": "1570814427081736268",
+          "guild_id": "1185714635991679006"
+        }
+      },
+      {
+        "id": "1570814427081736268",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "Os dados por API das **55 contas já foram renovados**. Também recuperei o acesso ao histórico na nova interface e estou conferindo as cobranças pendentes.\n\nHá uma decisão para fechar a coluna **H**: a Meta passou a mostrar **“Outstanding balance”**, no lugar de **“Current balance”**. Ainda não consegui comprovar que são a mesma medida. Recomendo usar o saldo atualmente exibido, identificando a nova fonte nas notas. **Você autoriza essa troca em H?** Até confirmar, preservo os valores anteriores e os quatro novos campos vazios.",
+        "message_reference": null
+      },
+      {
+        "id": "1571982992975597571",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "pode fazer de novo. ja autentiquei.....\n\nsempre que voce entrar e nao conseguir, me avisa aqui para eu atenticar pra voce, pq as vezes eu nao sei se deu certo ou nao\n\na resposta do cronjob response vem muito grande quando nao da certo\n\nentao assim, se n der certo, soh fala q nao deu certo e eu preciso autenticar,\n\nai quando der certo... ai voce mantem a msg completa dizendo que tudo foi feito.... pode ser mais simples do que esse textao que voce manda ai",
+        "message_reference": null
+      }
+    ],
+    "native_contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "workbook_contract_file_sha256": "4750229ab41538431d2b51f74e5ec28988c040b0689733b654c6d6fcfc6d050f",
+    "job": {
+      "id": "2ee720363d7d",
+      "enabled": true,
+      "state": "scheduled",
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-11-17T21:02:00-05:00",
+        "dispatched_at": "2026-11-17T21:02:46.444815-05:00",
+        "lateness_seconds": 46.4,
+        "kind": "on_time"
+      },
+      "next_run_at": "2026-11-18T08:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 8,14,21 * * *",
+        "display": "2 8,14,21 * * *"
+      },
+      "last_run_at": "2026-11-17T21:09:32.274234-05:00"
+    },
+    "live_GET_revalidated_this_round": [
+      "1569193434189668453",
+      "1563943171392667679",
+      "1563960055504838767",
+      "1563960345826037821",
+      "1570799435502588027",
+      "1570814427081736268",
+      "1570815017794674749",
+      "1571982992975597571"
+    ],
+    "live_GET_revalidation_result": "All eight exact GETs returned expected IDs, channels and authors; H authority reference matches the proposed source change. No HTTP429 this round; 1.4s spacing."
+  },
+  "ownership": {
+    "owner": "supervisor:1902332",
+    "owner_process": {
+      "pid": 1902332,
+      "alive": true,
+      "ppid": 1902330,
+      "start_ticks": "241341902"
+    },
+    "worker_process": {
+      "pid": 1902924,
+      "alive": true,
+      "ppid": 1902332,
+      "start_ticks": "241342985"
+    },
+    "worker_receipt": {
+      "pid": 1902924,
+      "start_ticks": "241342985",
+      "started": 1795003631.9172316,
+      "state": "running"
+    },
+    "original_session": {
+      "id": "local-1c484423dbc70238065c11cdf81f756b9ab3d35f62a5753fe67f4f40be3ccfd3",
+      "source": "cron",
+      "ended_at": 1794967771.3813305,
+      "end_reason": "cron_complete"
+    },
+    "queue": {
+      "state": "running",
+      "cause": "retry_scheduled",
+      "attempts": 60,
+      "failures": 0,
+      "lease_until": 1795004831.9133635,
+      "due": 1795003550.805932,
+      "delivery_id": null
+    },
+    "writer_lock": "free",
+    "pc1_lease": {
+      "ok": true,
+      "locked": false
+    },
+    "financial_workers": [],
+    "parallel_financial_worker_started": false
+  },
+  "pc1": {
+    "HostName": "PC1",
+    "Online": false,
+    "LastSeen": "2026-11-17T23:10:00.1Z",
+    "Active": true,
+    "read_at": "2026-11-18T07:10:09.422517-05:00",
+    "local_tailscale": {
+      "BackendState": "Running",
+      "Online": true,
+      "Health": []
+    },
+    "authentication_observed": false,
+    "occupancy_proven": false,
+    "ssh_attempts_this_round": 0,
+    "gui_attempts_this_round": 0,
+    "tailscale_ping_this_round": {
+      "count": 1,
+      "timeout_seconds": 5,
+      "result": "ping timed out; no reply"
+    },
+    "tcp_22_this_round": {
+      "count": 1,
+      "timeout_seconds": 5,
+      "result": "TimeoutError: timed out"
+    },
+    "diagnosis": "Peer remains offline, unchanged LastSeen; local overlay healthy. A bounded overlay ping and direct TCP22 probe independently timed out. Remote power/sleep/network cause remains unproven. No safe repair reachable; no blind SSH/UI retries, alternate Chrome, lease takeover or restart."
+  },
+  "completed_layers": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "completed_layer_evidence": {
+    "scope": "Artifact hashes unchanged versus prior checkpoint; no fresh Sheets/API collection and no business write replay.",
+    "unchanged_sha256": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566"
+  },
+  "scope_counts": {
+    "accounts": 55,
+    "H": 40,
+    "D_pending_events": 5
+  },
+  "authorized_account_ids": [
+    "1046241194533786",
+    "1150399088163771",
+    "1481815942722118",
+    "1762774024309795",
+    "648687381127947",
+    "1419148446852410",
+    "1052719314075904",
+    "1290644206529750",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1062446663435585",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "pending_account_ids_H": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_layers": [
+    "H40_Accounts_outstanding_balance",
+    "D5_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "canonical_delivery_precondition": {
+    "occurrence_registered_in_RECOVERIES": false,
+    "current_job_accepted_by_legacy_scope": false,
+    "diagnosis": "Read-only current adapter inspection confirms absent occurrence, legacy47/36 checks, historical render fields and supervisor historical allowlist. Scoped adapter/supervisor update and tests still needed before final delivery; no adapter mutation or business delivery attempted.",
+    "adaptation_performed": false
+  },
+  "continuity": {
+    "consumer_alive": true,
+    "service": {
+      "enabled": true,
+      "heartbeat": {
+        "at": 1795003631.909599,
+        "phase": "dispatching",
+        "pid": 1902332
+      }
+    },
+    "consumer_schedule_lines": [
+      "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    ],
+    "recent_same_request_events": [
+      {
+        "id": 12911,
+        "at": 1795003631.9133635,
+        "request_key": "d32ee972e0e2f228f2105773",
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1902332\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12897,
+        "at": 1795003250.805932,
+        "request_key": "d32ee972e0e2f228f2105773",
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795003550.805932, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12896,
+        "at": 1795003031.6207693,
+        "request_key": "d32ee972e0e2f228f2105773",
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1898312\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12882,
+        "at": 1795002624.3349795,
+        "request_key": "d32ee972e0e2f228f2105773",
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795002924.3349795, \"state\": \"retry_scheduled\"}"
+      }
+    ],
+    "previous_retry_consumed": {
+      "deferred_event_id": 12897,
+      "claimed_event_id": 12911
+    },
+    "queue_transition_by_worker": false,
+    "retry_at": null,
+    "retry_condition": "Owning supervisor persists bounded backoff after consuming this response; this worker neither changes queue nor schedules retry. Resume same occurrence only once PC1 connectivity is restored and owner/lease/native claim/same Chrome are revalidated.",
+    "held_older_scope_incidents": [
+      {
+        "key": "e67b9e22a17027e23728d532",
+        "state": "blocked_decision",
+        "cause": "source_scope_changed"
+      }
+    ],
+    "next_authorized_step": "After PC1 connectivity returns, reconcile owner/native claim/global lease and validate the same Chrome identity before UI input. Collect only missing H/D evidence through canonical workers, persisting each small batch. Do not repeat funding/invoices. Then final API reconciliation, whole 55-account source-to-sheet validation and tested canonical delivery with idempotency/GET."
+  },
+  "technical_diagnostics": [
+    {
+      "network": "One bounded overlay ping and one TCP22 probe timed out; no repeated SSH/CUA calls. Root cause cannot be distinguished remotely while peer offline."
+    }
+  ],
+  "no_mutation": {
+    "checkpoint_only": true,
+    "google_writes": 0,
+    "meta_writes": 0,
+    "gui_inputs": 0,
+    "business_messages_sent": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0,
+    "background_jobs_started": 0
+  }
+}
