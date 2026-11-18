@@ -4384,12 +4384,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-CAMPAIGN-1572392475690008668",
-      "next_step": "Assumir mesmo request foreground,preparar30videos,dry-run,execute central,QA integral e readback",
+      "next_step": "Concluir somente QA/postprocess/ativacao dos mesmos IDs e readback integral,sem copiar novamente",
       "objective": "15clones186 Mavroa06;30videos ES;USD35 COCAP0.90;18nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572392475690008668/coordination-maintenance/change-inventory.json",
-      "state": "coordination_repaired_approved:149testes;receipt vigente com zerometa/drive;deps vazias;predecessor preservado,qa nao certificado. bloqueio anterior supersedido pela manutencao autorizada1572397598784880681",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1572392475690008668/state.json",
+      "state": "created_paused:15campanhas/30ads;nomes222-236;qa5/15;ids anteriores preservados;mesmo request em continuacao central;sem recriar",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-17T23:57:08+00:00"
+      "updated_at": "2026-11-18T00:29:02+00:00"
     },
     {
       "agent": "zeus",
@@ -11398,5 +11398,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-17T23:57:08+00:00"
+  "updated_at": "2026-11-18T00:29:02+00:00"
 }
