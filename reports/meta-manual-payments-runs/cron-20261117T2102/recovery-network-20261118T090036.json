@@ -1,0 +1,370 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "verified_at": "2026-11-18T09:00:36.425502-05:00",
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T084945.json",
+  "previous_checkpoint_sha256": "ecdebc8a59b9d561cd4bab44c01673c05c6e9e4b533f9528551dee771b4484f7",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "current_registry_authorized": true,
+    "live_GET_revalidated_this_round": [
+      {
+        "id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "author_id": "344196393512075265",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1563960055504838767",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Faz entao",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1563960345826037821",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Eu quero que a planilha seja atualizada 3x por dia\n1x por volta das 8am, \n2x por volta das 2pm\n3x por volta das 9pm",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1570799435502588027",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "entao adiciona as contas na aba da planilha que nao estao la.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1570815017794674749",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "sei la, resolve ai o que tiver que resolver.",
+        "edited_timestamp": null,
+        "reply_to": "1570814427081736268"
+      },
+      {
+        "id": "1570814427081736268",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "Os dados por API das **55 contas já foram renovados**. Também recuperei o acesso ao histórico na nova interface e estou conferindo as cobranças pendentes.\n\nHá uma decisão para fechar a coluna **H**: a Meta passou a mostrar **“Outstanding balance”**, no lugar de **“Current balance”**. Ainda não consegui comprovar que são a mesma medida. Recomendo usar o saldo atualmente exibido, identificando a nova fonte nas notas. **Você autoriza essa troca em H?** Até confirmar, preservo os valores anteriores e os quatro novos campos vazios.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1571982992975597571",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "pode fazer de novo. ja autentiquei.....\n\nsempre que voce entrar e nao conseguir, me avisa aqui para eu atenticar pra voce, pq as vezes eu nao sei se deu certo ou nao\n\na resposta do cronjob response vem muito grande quando nao da certo\n\nentao assim, se n der certo, soh fala q nao deu certo e eu preciso autenticar,\n\nai quando der certo... ai voce mantem a msg completa dizendo que tudo foi feito.... pode ser mais simples do que esse textao que voce manda ai",
+        "edited_timestamp": null,
+        "reply_to": null
+      }
+    ],
+    "live_GET_result": "Seven exact messages revalidated in this round: six Rodolfo human authorities and one Zeus H proposal. H authority explicitly replies to the proposal. Initial helper GET returned Discord HTTP429 without exposing Retry-After; a later header-aware diagnostic GET returned200. The six remaining messages passed sequential GETs spaced one second apart. No business mutation or message delivery attempted.",
+    "live_GET_revalidated_at": "2026-11-18T09:00:36.425502-05:00",
+    "native_contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "workbook_contract_file_sha256": "4cb1414d5927da11b4d7f62ee8296fef52241ef0d43cfd5392635770beb1ba64",
+    "job": {
+      "id": "2ee720363d7d",
+      "enabled": true,
+      "state": "scheduled",
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-11-18T08:02:00-05:00",
+        "dispatched_at": "2026-11-18T08:02:46.448278-05:00",
+        "lateness_seconds": 46.4,
+        "kind": "on_time"
+      },
+      "next_run_at": "2026-11-18T14:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 8,14,21 * * *",
+        "display": "2 8,14,21 * * *"
+      },
+      "last_run_at": "2026-11-18T08:09:08.355032-05:00"
+    }
+  },
+  "ownership": {
+    "owner": "supervisor:1987619",
+    "owner_process": {
+      "pid": 1987619,
+      "alive": true,
+      "ppid": 1987617,
+      "start_ticks": "242001991"
+    },
+    "worker_process": {
+      "pid": 1987857,
+      "alive": true,
+      "ppid": 1987619,
+      "start_ticks": "242003494"
+    },
+    "worker_receipt": {
+      "pid": 1987857,
+      "start_ticks": "242003494",
+      "started": 1795010237.008443,
+      "state": "running"
+    },
+    "original_session": {
+      "id": "local-1c484423dbc70238065c11cdf81f756b9ab3d35f62a5753fe67f4f40be3ccfd3",
+      "source": "cron",
+      "ended_at": 1794967771.3813305,
+      "end_reason": "cron_complete"
+    },
+    "active_native_executions": [],
+    "queue": {
+      "state": "running",
+      "cause": "retry_scheduled",
+      "attempts": 70,
+      "failures": 0,
+      "lease_until": 1795011437.0038984,
+      "due": 1795010095.7708435,
+      "delivery_id": null
+    },
+    "writer_lock": "free",
+    "pc1_lease": {
+      "locked": false
+    },
+    "financial_workers": [],
+    "parallel_financial_worker_started": false,
+    "current_session_identity": "Current worker PID/start_ticks and supervisor parent verified exactly; current session ID not queried."
+  },
+  "pc1": {
+    "HostName": "PC1",
+    "Online": false,
+    "LastSeen": "2026-11-17T23:10:00.1Z",
+    "Active": false,
+    "read_at": "2026-11-18T09:00:36.425502-05:00",
+    "local_tailscale": {
+      "BackendState": "Running",
+      "Online": true,
+      "Health": []
+    },
+    "authentication_observed": false,
+    "occupancy_proven": false,
+    "ssh_attempts_this_round": 0,
+    "gui_attempts_this_round": 0,
+    "tailscale_ping_attempts_this_round": 0,
+    "tcp_22_attempts_this_round": 0,
+    "diagnosis": "Fresh overlay status shows PC1 still offline and LastSeen unchanged. Local overlay remains Running/online/healthy. Prior bounded ping/TCP22 failures already establish remote transport unavailability. No further blind failing probes; remote power/sleep/network cause remains undetermined and no safe remote repair is accessible."
+  },
+  "completed_layers": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "completed_layer_evidence": {
+    "scope": "Hashes unchanged; no new live Sheets readback, Meta collection or business write. Previous validation preserved, not re-labelled fresh.",
+    "unchanged_sha256": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566"
+  },
+  "scope_counts": {
+    "accounts": 55,
+    "H": 40,
+    "D_pending_events": 5
+  },
+  "authorized_account_ids": [
+    "1046241194533786",
+    "1150399088163771",
+    "1481815942722118",
+    "1762774024309795",
+    "648687381127947",
+    "1419148446852410",
+    "1052719314075904",
+    "1290644206529750",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1062446663435585",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "pending_account_ids_H": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_layers": [
+    "H40_Accounts_outstanding_balance",
+    "D5_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "canonical_delivery_precondition": {
+    "occurrence_registered_in_RECOVERIES": false,
+    "current_job_accepted_by_legacy_scope": false,
+    "diagnosis": "Occurrence is not registered in delivery adapter or supervisor fast path; adapter retains historical contract hash and47/36 gates/render. Financial validation receipt/outbox absent. No adapter modification or delivery attempted; scoped implementation/tests still required before closure.",
+    "adaptation_performed": false
+  },
+  "continuity": {
+    "consumer_alive": true,
+    "service": {
+      "enabled": true,
+      "heartbeat": {
+        "at": 1795010236.9961252,
+        "phase": "dispatching",
+        "pid": 1987619
+      },
+      "worker_failure_streak": 0
+    },
+    "consumer_schedule_lines": [
+      "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    ],
+    "recent_same_request_events": [
+      {
+        "id": 13093,
+        "at": 1795010237.0038984,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1987619\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13080,
+        "at": 1795009795.7708435,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795010095.7708435, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13079,
+        "at": 1795009634.739556,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1980274\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13066,
+        "at": 1795009177.9047122,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795009477.9047122, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13065,
+        "at": 1795009033.7786927,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1971359\", \"previous_state\": \"retry_scheduled\"}"
+      }
+    ],
+    "previous_retry_consumed": {
+      "deferred_event_id": 13080,
+      "claimed_event_id": 13093
+    },
+    "queue_transition_by_worker": false,
+    "retry_at": null,
+    "retry_condition": "Owning supervisor must persist bounded backoff after consuming this result. Worker does not alter queue/cadence. Resume only missing H/D after transport, same Chrome and ownership/lease are revalidated.08:02 occurrence must reconcile this outstanding occurrence, not close it or replay funding/invoices.",
+    "held_older_scope_incidents": [
+      {
+        "key": "e67b9e22a17027e23728d532",
+        "state": "blocked_decision",
+        "cause": "source_scope_changed"
+      }
+    ]
+  },
+  "no_mutation": {
+    "checkpoint_only": true,
+    "google_writes": 0,
+    "meta_writes": 0,
+    "gui_inputs": 0,
+    "business_messages_sent": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0,
+    "background_jobs_started": 0
+  }
+}
