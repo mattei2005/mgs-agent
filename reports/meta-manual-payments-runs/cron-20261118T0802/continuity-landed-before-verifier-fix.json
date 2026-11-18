@@ -1,0 +1,19 @@
+{
+  "key": "ebaa2482101e0f4757c25454",
+  "source_key": "native:zeus:2ee720363d7d:20261118T0802",
+  "source": "{\"completed_layers\": [\"funding\", \"invoices\", \"metrics\", \"source_to_sheet_readback\"], \"contract_hash\": \"825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921\", \"financial_receipt\": \"/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/partial-receipt.json\", \"job_id\": \"2ee720363d7d\", \"kind\": \"native\", \"pending_account_ids_D\": [\"1062446663435585\", \"2323706575049143\", \"1547524853816263\", \"1867022354284742\", \"1414197490675732\", \"1543098427832443\", \"2852476828464907\"], \"pending_account_ids_H\": [\"1419148446852410\", \"1753257812779707\", \"1107653168698121\", \"2633813727134360\", \"2039876850230678\", \"1851640026221079\", \"1001115192056600\", \"1018267074603840\", \"1062887799996139\", \"2031917360813819\", \"897046653487466\", \"1498990138663094\", \"814915838330687\", \"3188620887977617\", \"3752157451670648\", \"4511685129081248\", \"1829406761389732\", \"937846586033361\", \"336562339356179\", \"1744611463000838\", \"1245683183659911\", \"311204101516831\", \"1526280818302320\", \"536294549227786\", \"1085117577390237\", \"1736068407518263\", \"1877104513669062\", \"869857549542755\", \"7840111366055613\", \"1583000095650153\", \"2429758060563333\", \"781612907182683\", \"787796726891306\", \"1600310064116258\", \"908704754163659\", \"26632890069640784\", \"1754588462350629\", \"1542257646409395\", \"1034081997659047\", \"1492168699397108\"], \"pending_cause\": \"pc1_offline_transport_timeout\", \"pending_layers\": [\"H40_Accounts_outstanding_balance\", \"D7_new_generic_events_instrument\", \"final_API_reconciliation_and_validation\"], \"profile\": \"zeus\", \"resource\": \"pc1\", \"resume_policy\": \"Same scheduled occurrence, same contract/job and Chrome. Reconcile native fire claim, writer and prior continuity owner before writing. Resume only H/D missing layers with canonical workers, then API final and full readback. Never repeat funding/invoices or create cron/writer. PC1 offline confirmed, not authentication. Preserve earlier occurrences separately; later snapshot is not their completion. Current short result is automatic delivery only; REPORT-INFRA pending separately.\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802\", \"scheduled_at\": \"2026-11-18T08:02:00-05:00\", \"session_id\": \"local-ef0cbd3c34244e9044a2c4e78ead30449568eee51a940d53001629169e08f347\", \"thread_id\": \"1563926766286803004\", \"time_sensitive\": false}",
+  "state": "retry_scheduled",
+  "cause": "pc1_offline_transport_timeout",
+  "created": 1795007281.13217,
+  "updated": 1795007281.1646464,
+  "due": 1795007881.1646464,
+  "attempts": 0,
+  "failures": 0,
+  "owner": null,
+  "lease_until": null,
+  "needs_reconciliation": 0,
+  "evidence": null,
+  "observation": "Pendente: PC1 offline na rede privada; SSH22 timeout. API55/E-F verificados; H40 e sete eventosD aguardam mesmo Chrome. N\u00e3o \u00e9 autentica\u00e7\u00e3o comprovada. N\u00e3o repetir etapas j\u00e1 publicadas.",
+  "delivery_id": null,
+  "notified_state": null
+}
