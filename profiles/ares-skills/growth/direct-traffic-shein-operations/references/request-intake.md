@@ -51,6 +51,14 @@ Aceite `campaign_groups[].description` como string não vazia e preserve literal
 2. Preserve base, caminho e campos não alterados; rematerialize somente os tokens dependentes do número-alvo previstos no contrato. Não mova tracking da Website URL para `url_tags`, nem faça o inverso, apenas para facilitar o payload.
 3. Classifique uma rejeição local do destino separadamente da escolha comercial. Se a rota instalada não representar a herança autorizada, mantenha o mesmo request e conduza manutenção separada com os gates canônicos; não invente `source_account`, troque o destino ou amplie allowlist. A instrução de herdar não comprova que a validação já foi corrigida, não autoriza administrar o site e não dispensa aceite técnico/readback.
 
+### Recuperar referência local ausente ou desatualizada
+
+1. Para `account has no approved destination/reference`, ou `invalid literal campaign destination URL` com destino ausente no profile, consultar a conta e a fonte exatas por GET antes de pedir outro link. Distinguir cadastro incompleto de URL explícita malformada; não trocar o destino comercial para satisfazer o validador.
+2. Exigir fonte única pelo prefixo numérico completo e paginar todos os anúncios. Extrair somente destino efetivo, tracking e Page; exigir concordância integral. Em `profiles[account_id]`, conciliar `destination_base` sem query, `tracking_prefix` literal anterior a `c<numero>`, `utm_medium`, `page_id` e `reference_campaign_number`. Não inferir tokens por semelhança nem marcar prontidão por esse reparo.
+3. Se o GET da conta divergir do fuso local, conciliar apenas as projeções da mesma conta efetivamente consumidas: `profile.timezone`, `accounts[account_id].shein_profile.timezone` e `accounts[account_id].timezone` do Engine, além de `timezone_name` do catálogo. Não alterar o fuso na Meta nem copiar configuração de outra conta.
+4. Fazer backup, registrar diff e recibo sanitizado, provar que outras contas/campos permaneceram intactos e cumprir o REPORT-INFRA da manutenção. Repetir `campaign --input <mesmo-request.json> --dry-run`. O avanço a outro gate comprova somente a correção do cadastro, não campanha criada ou acesso à Page.
+5. Se o próximo gate for Page, seguir a seção de delegação em `general-campaign-fast-route.md`. Só classificar grant como ausente após leitura administrativa paginada bem-sucedida; recusa administrativa ou do guard significa atribuição não verificada. Preservar essa distinção no checkpoint e na resposta, sem promover tentativas inconclusivas a procedimento de reparo comprovado.
+
 ### Cadastro técnico equivalente a outra conta
 
 1. Resolva os IDs das duas contas pelos bindings canônicos, valide o escopo e a autoridade do pedido e confira lease/efeitos existentes antes de mudar dados. Uma conta citada como referência de cadastro não se torna fonte de campanha ou mídia.
