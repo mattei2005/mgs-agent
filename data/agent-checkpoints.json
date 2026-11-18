@@ -1753,12 +1753,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1572719158209020107",
-      "next_step": "Preflight live; coleta Meta SB e RPS; render QA e entrega com GET",
+      "next_step": "Concluido; nao reenviar. Atraso SB de63a67 minutos nas seis contas com atividade; Boostingecon sem entrega nem atividade financeira, receitas e ROI n/d. Novo pedido exige fontes novas; agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1572719158209020107/request.json",
-      "state": "intake_autenticado_7pares_canonicos_escopo_validado",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1572719158209020107/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;126campanhas_no_recorte_financeiro;38partes_integrais+7resumos;45mensagens_unicas_relidas_get;ordem_integral_resumo_confirmada;corte18/11/2026_16:07est;usd;zero_writes_meta;arquivo_sanitizado_bytes_hashes_validados;65regressoes+5fixtures_resumo_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-18T21:06:39+00:00"
+      "updated_at": "2026-11-18T21:15:22+00:00"
     },
     {
       "agent": "ares",
@@ -10688,6 +10688,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1572718429469675565",
+      "next_step": "Solicitar na origem somente aceite das sete omissões de API. Com aceite autenticado, registrar receipt request-scoped reviewed_copy_omissions e validar; retomar o mesmo request central sem recriação e com mesmos IDs/selos/relógio. Concluir QA integral, ativação, readback e bloco Iris.",
+      "objective": "Duplicar C281 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD100/dia por campanha, COCAP USD0.75, próximo dia 00:00 da conta.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572718429469675565/feature-diagnostic.json",
+      "state": "postprocess_pending: c285-c289 criadas, cinco conjuntos e dez anúncios paused; get confirma usd100/dia, cost_cap e bid_amount 75, início 2026-11-19t00:00:00-05:00. fonte intacta pelo request. qa semântico interrompido: nos dez anúncios a api omite image_animation,image_brightness_and_contrast,image_templates,image_text_translation,image_touchups,image_uncrop,video_uncrop; fonte fresca opt_in. sem grant para o request. renderer comprovado em duas campanhas; saldo qa pendente.",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-11-18T21:08:44+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -11508,5 +11518,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T21:06:39+00:00"
+  "updated_at": "2026-11-18T21:15:22+00:00"
 }
