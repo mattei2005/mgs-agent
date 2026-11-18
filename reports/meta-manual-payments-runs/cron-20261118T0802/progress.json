@@ -1,0 +1,13 @@
+{
+  "scheduled_at": "2026-11-18T08:02:00-05:00",
+  "completed": {
+    "funding": {
+      "stdout": "{\"status\": \"regroup_validated\", \"accounts\": 55, \"groups\": {\"Cartão de crédito\": 15, \"Linha de crédito\": 40}, \"changes\": [], \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261118T080509043187\", \"meta_writes\": 0, \"payments_executed\": 0}\n",
+      "returncode": 0
+    },
+    "invoices": {
+      "stdout": "{\"status\": \"september_invoices_updated_validated\", \"accounts\": 55, \"new_columns\": \"E Invoice; F Outubro — saldo em aberto\", \"invoice_period\": \"2026-10-01\", \"visible_invoice_numbers\": 30, \"unpaid_in_tab\": 30, \"tab_due_usd\": \"417864.11\", \"unpaid_bm\": 30, \"bm_due_usd\": \"417864.11\", \"outside_accounts\": [], \"full_grid_readback\": true, \"prior_cells_preserved\": true, \"payments_executed\": 0, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/september-20261118T080513133354\"}\n",
+      "returncode": 0
+    }
+  }
+}
