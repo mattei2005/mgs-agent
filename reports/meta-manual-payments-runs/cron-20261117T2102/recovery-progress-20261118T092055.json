@@ -1,0 +1,456 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_remaining_h_collection",
+  "verified_at": "2026-11-18T09:20:55.576565-05:00",
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T090036.json",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "authority": [
+      {
+        "id": "1569193434189668453",
+        "channel_id": "1569185140502954077",
+        "author_id": "344196393512075265",
+        "content": "pode implementar entao as correcoes e prevencoes de tudo.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1563960055504838767",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Faz entao",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1563960345826037821",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "Eu quero que a planilha seja atualizada 3x por dia\n1x por volta das 8am, \n2x por volta das 2pm\n3x por volta das 9pm",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1570799435502588027",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "entao adiciona as contas na aba da planilha que nao estao la.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1570815017794674749",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "sei la, resolve ai o que tiver que resolver.",
+        "edited_timestamp": null,
+        "reply_to": "1570814427081736268"
+      },
+      {
+        "id": "1570814427081736268",
+        "channel_id": "1563926766286803004",
+        "author_id": "1496296175014252634",
+        "content": "Os dados por API das **55 contas já foram renovados**. Também recuperei o acesso ao histórico na nova interface e estou conferindo as cobranças pendentes.\n\nHá uma decisão para fechar a coluna **H**: a Meta passou a mostrar **“Outstanding balance”**, no lugar de **“Current balance”**. Ainda não consegui comprovar que são a mesma medida. Recomendo usar o saldo atualmente exibido, identificando a nova fonte nas notas. **Você autoriza essa troca em H?** Até confirmar, preservo os valores anteriores e os quatro novos campos vazios.",
+        "edited_timestamp": null,
+        "reply_to": null
+      },
+      {
+        "id": "1571982992975597571",
+        "channel_id": "1563926766286803004",
+        "author_id": "344196393512075265",
+        "content": "pode fazer de novo. ja autentiquei.....\n\nsempre que voce entrar e nao conseguir, me avisa aqui para eu atenticar pra voce, pq as vezes eu nao sei se deu certo ou nao\n\na resposta do cronjob response vem muito grande quando nao da certo\n\nentao assim, se n der certo, soh fala q nao deu certo e eu preciso autenticar,\n\nai quando der certo... ai voce mantem a msg completa dizendo que tudo foi feito.... pode ser mais simples do que esse textao que voce manda ai",
+        "edited_timestamp": null,
+        "reply_to": null
+      }
+    ],
+    "job": {
+      "id": "2ee720363d7d",
+      "enabled": true,
+      "state": "scheduled",
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-11-18T08:02:00-05:00",
+        "dispatched_at": "2026-11-18T08:02:46.448278-05:00",
+        "lateness_seconds": 46.4,
+        "kind": "on_time"
+      },
+      "next_run_at": "2026-11-18T14:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 8,14,21 * * *",
+        "display": "2 8,14,21 * * *"
+      }
+    },
+    "contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "owner": "supervisor:1992475",
+    "worker": {
+      "pid": 1993085,
+      "start_ticks": "242063677",
+      "started": 1795010838.8357723,
+      "state": "running"
+    },
+    "saved_hashes": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "checked_at": "2026-11-18T09:09:09.090712-05:00",
+    "pc1_lease_free": true,
+    "financial_workers": []
+  },
+  "ownership": {
+    "owner": "supervisor:1992475",
+    "worker": {
+      "pid": 1993085,
+      "start_ticks": "242063677",
+      "started": 1795010838.8357723,
+      "state": "running"
+    },
+    "worker_start_ticks_verified": true,
+    "original_session_ended_preflight_verified": true,
+    "writer_lock": "free",
+    "pc1_lease": {
+      "locked": false
+    },
+    "native_fire_claim": null,
+    "current_session_id": "local-d62e9d836160c1b0a9262db9f1b7a11ab15f39366442cb10eebdcdc43e4f8f38",
+    "parallel_financial_worker_started": false
+  },
+  "pc1": {
+    "Online": true,
+    "read_at": "2026-11-18T09:20:55.576565-05:00",
+    "transport_recovered": true,
+    "same_chrome_profile": "Rodolfo verified in AX",
+    "approved_business_id": "155263197283282",
+    "live_binding": {
+      "pid": 18704,
+      "window_id": 983880
+    },
+    "initial_surface_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-surface-20261118T0913.png",
+    "authentication_observed": false,
+    "browser_binding_change": "Only this occurrence H run pc1-surface.json updated after fresh AX/pixels verification; global binding unchanged.",
+    "diagnosis": "Overlay and SSH/CUA returned; remote reason for previous outage unproven. No transport configuration change or restart. Two canonical H batches of6 succeeded in owned tabs, closed by worker."
+  },
+  "completed_layers": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "completed_layer_evidence": {
+    "scope": "Hashes unchanged; no new live Sheets readback, Meta collection or business write. Previous validation preserved, not re-labelled fresh.",
+    "unchanged_sha256": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566"
+  },
+  "authorized_account_ids": [
+    "1046241194533786",
+    "1150399088163771",
+    "1481815942722118",
+    "1762774024309795",
+    "648687381127947",
+    "1419148446852410",
+    "1052719314075904",
+    "1290644206529750",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1062446663435585",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108",
+    "1635726541410028"
+  ],
+  "h_progress": {
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566",
+    "targets": 40,
+    "captured_and_visually_verified": 12,
+    "published_this_occurrence": 0,
+    "verified_account_ids": [
+      "336562339356179",
+      "3752157451670648",
+      "2039876850230678",
+      "311204101516831",
+      "26632890069640784",
+      "3188620887977617",
+      "1419148446852410",
+      "1492168699397108",
+      "1034081997659047",
+      "1542257646409395",
+      "1526280818302320",
+      "1062887799996139"
+    ],
+    "pending_collection_account_ids": [
+      "1498990138663094",
+      "814915838330687",
+      "2031917360813819",
+      "1736068407518263",
+      "897046653487466",
+      "1877104513669062",
+      "1754588462350629",
+      "1018267074603840",
+      "536294549227786",
+      "1085117577390237",
+      "869857549542755",
+      "1753257812779707",
+      "908704754163659",
+      "1001115192056600",
+      "4511685129081248",
+      "1744611463000838",
+      "1851640026221079",
+      "1829406761389732",
+      "1245683183659911",
+      "2633813727134360",
+      "937846586033361",
+      "781612907182683",
+      "1107653168698121",
+      "7840111366055613",
+      "787796726891306",
+      "1583000095650153",
+      "2429758060563333",
+      "1600310064116258"
+    ],
+    "pending_publication_account_ids": [
+      "1419148446852410",
+      "1753257812779707",
+      "1107653168698121",
+      "2633813727134360",
+      "2039876850230678",
+      "1851640026221079",
+      "1001115192056600",
+      "1018267074603840",
+      "1062887799996139",
+      "2031917360813819",
+      "897046653487466",
+      "1498990138663094",
+      "814915838330687",
+      "3188620887977617",
+      "3752157451670648",
+      "4511685129081248",
+      "1829406761389732",
+      "937846586033361",
+      "336562339356179",
+      "1744611463000838",
+      "1245683183659911",
+      "311204101516831",
+      "1526280818302320",
+      "536294549227786",
+      "1085117577390237",
+      "1736068407518263",
+      "1877104513669062",
+      "869857549542755",
+      "7840111366055613",
+      "1583000095650153",
+      "2429758060563333",
+      "781612907182683",
+      "787796726891306",
+      "1600310064116258",
+      "908704754163659",
+      "26632890069640784",
+      "1754588462350629",
+      "1542257646409395",
+      "1034081997659047",
+      "1492168699397108"
+    ],
+    "manifest": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566/visual-verification.json",
+    "manifest_sha256": "566f677fb0505317fd57026d18adda45a856e7fa912aa6df2a2a0ca540d147c6",
+    "canonical_verified_entry_pass": true,
+    "read_times": {
+      "336562339356179": "2026-11-18T09:12:14.603845-05:00",
+      "3752157451670648": "2026-11-18T09:12:38.434777-05:00",
+      "2039876850230678": "2026-11-18T09:13:04.539007-05:00",
+      "311204101516831": "2026-11-18T09:13:27.525006-05:00",
+      "26632890069640784": "2026-11-18T09:13:53.903455-05:00",
+      "3188620887977617": "2026-11-18T09:14:20.678454-05:00",
+      "1419148446852410": "2026-11-18T09:16:49.517014-05:00",
+      "1492168699397108": "2026-11-18T09:17:11.467984-05:00",
+      "1034081997659047": "2026-11-18T09:17:35.849253-05:00",
+      "1542257646409395": "2026-11-18T09:17:56.675847-05:00",
+      "1526280818302320": "2026-11-18T09:18:17.182002-05:00",
+      "1062887799996139": "2026-11-18T09:18:40.085146-05:00"
+    },
+    "receipt_sha256": {
+      "336562339356179": "e1dca82e163d99d71d20ce2a3742e5cab62b57f6b4a3a2b7ec3d7eabd1df2991",
+      "3752157451670648": "bf443b8d37c462a0d50831315e2afb21186fe646bbefa95e0498af383585891e",
+      "2039876850230678": "19c73560b8659d4f7eae50eea5206edca4363dff9c6e6f17269bbfd24fbbe53f",
+      "311204101516831": "62312b2ddb3374188554b87ac9346363739212ec708e4fc17530ba4a8f448fe8",
+      "26632890069640784": "662b16174a38473d71d49ed873af6062da664d08641510c30c1227ff5c2b6af0",
+      "3188620887977617": "99c4b2759393e91fd9949622c8798079a990a4d1d89b95aaa0f52df6c1db3ebd",
+      "1419148446852410": "2bdbd90d8ab66155ad32aefbe064f496de5ef43debf021914309ad2afce13cbe",
+      "1492168699397108": "3364c875d959728cc430c49eb7927f000e8eee068591e33ed2ab1fd7230272c8",
+      "1034081997659047": "1d1c8a2ae640ef3aadd5c23b7ab5e4b6f85aaf2a6bac46cbc1befd495cf9bb68",
+      "1542257646409395": "33a07fc5da3bcc92b96707da487ea07ded10e9534d0578c125237df38cfd8212",
+      "1526280818302320": "4dbfa15aa522f42ea2f4ab33dfa87eb3c34742cdc8d1aafa5f9a65d632bd63ba",
+      "1062887799996139": "5707e04d73f18ef99510b4e9af720c69bf2881464f04966e2c50aef8b2f8e731"
+    },
+    "screenshot_sha256": {
+      "336562339356179": "22b6ee09de4c420bfdf19e9cca2e0c3279c9bfe38962425e0015d94a1a5025e7",
+      "3752157451670648": "0a89b7c74c20622792eb41ed942a828cafff6be5f14ffc3aeb2680a16807287e",
+      "2039876850230678": "24890f668b76d27815b3987f5009f35d62e4e5b3eed768e28ef5481c74a4128c",
+      "311204101516831": "56a1ba507e5b4234208d7c6aaccd9a61ecef87786a26bc07f0d7d1c840db9165",
+      "26632890069640784": "b0d77845e13181725e61e4129d23963e631455b9b6bee82d89bd63ec1ed01405",
+      "3188620887977617": "098b748b7a14d07baaf3ad597f1f3519eba79b2bec555bb2871c5aa7fd74833b",
+      "1419148446852410": "9ef0cf165c19c144d98a87dd34a51ae6621e0a2cd459a6c536206b35eacf7014",
+      "1492168699397108": "ef2460fe397d80f67ff60e6e1366955b0dfed3acfd737be66552b34e82c58236",
+      "1034081997659047": "8444b7f491933e7589ab1a8bd0529773cf2fcf239e58c11ee966fd37601b2791",
+      "1542257646409395": "9ec31eae69fe0b9a381c14baf59a064e24737c981f1ba3ae5f6603943e63f621",
+      "1526280818302320": "8da639b77a3b749158d513e99a368cb9546f41ca6b607c7714efdae3248702b2",
+      "1062887799996139": "fb1eb906527bad386c97ea29ecd9509e7bbbbf1887ebebeb4e0aaa39a68b1955"
+    },
+    "ambiguous_ocr_resolved": [
+      "336562339356179 via native crop; no recollection"
+    ],
+    "sheet_values_and_notes_preserved": true
+  },
+  "pending_account_ids_H": [
+    "1498990138663094",
+    "814915838330687",
+    "2031917360813819",
+    "1736068407518263",
+    "897046653487466",
+    "1877104513669062",
+    "1754588462350629",
+    "1018267074603840",
+    "536294549227786",
+    "1085117577390237",
+    "869857549542755",
+    "1753257812779707",
+    "908704754163659",
+    "1001115192056600",
+    "4511685129081248",
+    "1744611463000838",
+    "1851640026221079",
+    "1829406761389732",
+    "1245683183659911",
+    "2633813727134360",
+    "937846586033361",
+    "781612907182683",
+    "1107653168698121",
+    "7840111366055613",
+    "787796726891306",
+    "1583000095650153",
+    "2429758060563333",
+    "1600310064116258"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_layers": [
+    "H28_missing_Accounts_rows",
+    "H40_canonical_publication_with_original_individual_timestamps",
+    "D5_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "canonical_delivery_precondition": {
+    "occurrence_registered_in_RECOVERIES": false,
+    "current_job_accepted_by_legacy_scope": false,
+    "diagnosis": "Occurrence is not registered in delivery adapter or supervisor fast path; adapter retains historical contract hash and47/36 gates/render. Financial validation receipt/outbox absent. No adapter modification or delivery attempted; scoped implementation/tests still required before closure.",
+    "adaptation_performed": false
+  },
+  "newer_occurrence_closes_this_occurrence": false,
+  "continuity": {
+    "consumer_alive": true,
+    "service": {
+      "enabled": true,
+      "heartbeat": {
+        "at": 1795010838.8209808,
+        "phase": "dispatching",
+        "pid": 1992475
+      },
+      "worker_failure_streak": 0
+    },
+    "consumer_schedule_lines": [
+      "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    ],
+    "recent_same_request_events": [
+      {
+        "id": 13106,
+        "at": 1795010838.8285608,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1992475\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13094,
+        "at": 1795010449.7021928,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795010749.7021928, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13093,
+        "at": 1795010237.0038984,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1987619\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 13080,
+        "at": 1795009795.7708435,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1795010095.7708435, \"state\": \"retry_scheduled\"}"
+      }
+    ],
+    "queue_transition_by_worker": false,
+    "retry_at": null,
+    "next_step": "Supervisor persists next bounded retry after consuming this response. Resume same H run; read visual-verification.json and receipts first, collect only28missing IDs. Do NOT overwrite manifest, targets, prior receipts or re-run prepare. Preserve12verified readings and timestamps. After H complete publish through canonical worker, resolve D5, final API and validation. Do not repeat funding/invoices. Delivery adapter still requires scoped55/40 support and tests; no historical report reuse."
+  },
+  "no_mutation": {
+    "local_evidence_and_run_binding_only": true,
+    "google_writes": 0,
+    "meta_writes": 0,
+    "business_messages_sent": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "production_infrastructure_changes": 0,
+    "gateway_restarts": 0
+  }
+}
