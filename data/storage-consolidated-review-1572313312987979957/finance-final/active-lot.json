@@ -1,10 +1,17 @@
 {
-  "status": "awaiting_new_exact_critical_confirmation",
+  "status": "completed_validated",
   "manifest_sha256": "2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537",
   "gate_sha256": "6017bcf6a34c40cf56a77578513eb05ffce558c2b44267ce489595aab0c23f91",
   "file_count": 339,
   "directory_count": 0,
-  "source_files_deleted": 0,
+  "source_files_deleted": 339,
   "all_media_excluded": true,
-  "prior_draft_withdrawn": true
+  "prior_draft_withdrawn": true,
+  "deleted_directories": 0,
+  "confirmation_message_id": "1572412587214372996",
+  "new_critical_confirmation_pending": false,
+  "observed_cleanup_savings_bytes": 3200602112,
+  "next_step": "None for this closed review/lot. Preserve all exclusions; never replay deletion. Retention/producer changes require separate authority.",
+  "final_evidence": "data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json",
+  "updated_at": "2026-11-17T19:55:36.260114-05:00"
 }

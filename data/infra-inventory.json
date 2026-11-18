@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-17T18:33:03-05:00",
+    "updated_at": "2026-11-17T19:55:36.260114-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -68985,8 +68985,8 @@
       "id": "storage-consolidated-review-1572313312987979957",
       "agent": "zeus",
       "owner": "Rodolfo / Zeus",
-      "type": "single_qualified_finance339_copy_retirement_proposal",
-      "status": "awaiting_new_exact_critical_confirmation",
+      "type": "completed_exact_finance339_copy_retirement",
+      "status": "completed_validated",
       "thread_id": "1569928464033783862",
       "authority_message_id": "1572313312987979957",
       "path": "/root/mgs-agent/data/storage-consolidated-review-1572313312987979957/finance-final",
@@ -68997,14 +68997,14 @@
       "gate_sha256": "6017bcf6a34c40cf56a77578513eb05ffce558c2b44267ce489595aab0c23f91",
       "candidate_files": 339,
       "directories_to_delete": 0,
-      "source_files_deleted": 0,
+      "source_files_deleted": 339,
       "proposed_classes": {
         "copied_finance_JSON": 339
       },
       "gross_reclaim_bytes": 3200667648,
       "net_direct_reclaim_estimate_bytes": 3131621376,
       "analysis_created_allocated_bytes": 69046272,
-      "observed_cleanup_savings_bytes": 0,
+      "observed_cleanup_savings_bytes": 3200602112,
       "closed_owner_task_roots": 24,
       "closed_owner_checkpoints": 25,
       "real_JSON_RAM_recoveries": 339,
@@ -69024,7 +69024,7 @@
       "DB_started": false,
       "retention_changed": false,
       "cron_changed": false,
-      "new_critical_confirmation_pending": true,
+      "new_critical_confirmation_pending": false,
       "existing_approvals_applicable": false,
       "report_infra": {
         "message_id": "1572345517088968915",
@@ -69040,9 +69040,18 @@
         "all304_media_preserved": true,
         "at": "2026-11-17T15:48:33.027592-05:00"
       },
-      "report_infra_status": "exact_GET_readback_verified_current339_scope",
-      "updated_at": "2026-11-17T15:48:33.136644-05:00",
-      "next_step": "One NEW exact native Rodolfo confirmation for339 JSON copies, then frozen local preflight/apply/post retained-only RAM recovery and independent journal preservation readback. No media/remote deletion; no previous yes/continue reused."
+      "report_infra_status": "pending_execution_report",
+      "updated_at": "2026-11-17T19:55:36.260114-05:00",
+      "next_step": "None. Consolidated review closed within documented coverage; preserve all exclusions. No implicit deletion/retention/cron changes.",
+      "deleted_directories": 0,
+      "confirmation_message_id": "1572412587214372996",
+      "post_deletion_JSON_RAM_recoveries": 339,
+      "post_validation": "PASS",
+      "independent_post_validation": "PASS",
+      "replay_blocked": true,
+      "failed_systemd_units": 0,
+      "config_checks_pass": 3,
+      "final_evidence": "data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json"
     },
     {
       "id": "gaudi-draft-test-1572412858980110378",

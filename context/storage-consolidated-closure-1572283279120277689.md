@@ -1,5 +1,9 @@
 # Encerramento consolidado — auditoria de armazenamento
 
+## Encerramento vigente — 17/11/2026
+
+Revisão consolidada e lote final concluídos/validados. A confirmação nativa `1572412587214372996` aprovou exatamente o manifesto `2bd02d697289`: 339 cópias JSON removidas uma única vez, zero diretórios; 15 primários preservados, 339 recuperações em RAM após a exclusão, complemento/journal/runtime conferidos. Delta imediato disponível +3.200.602.112 bytes (2,981 GiB). Fonte ativa: `context/storage-consolidated-pass-20261117.md` e `data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json`. Nenhuma confirmação pendente. Sem mudança de cron/retenção; caches e todas as mídias continuam preservados. A preservação por insuficiência de prova não significa necessidade integral comprovada. Esta seção supersede os estados abertos e próximos gates históricos abaixo; não repetir exclusões nem pedir outro continue por família.
+
 Decisão de Rodolfo: mensagem `1572283279120277689`, thread `1569928464033783862`. Dono da execução: Zeus.
 
 ## Situação confirmada

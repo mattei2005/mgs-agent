@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "at": "2026-11-17T19:53:45.591373-05:00",
+  "manifest_sha256": "2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537",
+  "journal_unique_exact_files": 339,
+  "targets_absent": 339,
+  "deleted_directories": 0,
+  "retained_files_verified": 613,
+  "retained_primary_providers_verified": 15,
+  "complement_files_and_links_verified": 22987,
+  "complement_directories_verified": 1503,
+  "retained_counts_non_additive": true,
+  "parent_directories_verified": 144,
+  "post_deletion_RAM_recoveries": 339,
+  "runtime_services": {
+    "zeus-gateway": "MainPID=2241212\nActiveState=active",
+    "atena-gateway": "MainPID=2237072\nActiveState=active",
+    "ares-gateway": "MainPID=2233587\nActiveState=active"
+  },
+  "launcher_unchanged": true,
+  "observed_immediate_available_delta_bytes": 3200602112,
+  "observed_immediate_available_delta_GiB": 2.981,
+  "disk": {
+    "available_bytes": 75919159296,
+    "available_GiB": 70.71,
+    "used_bytes": 130964344832,
+    "used_GiB": 121.97,
+    "df_occupancy_percent": 63.3
+  },
+  "recovered_validator_error": {
+    "initial": "KeyError ctime_ns in independent metadata projection",
+    "cause": "Ancillary validator omitted an existing manifest key; frozen gate already PASS",
+    "fix": "Compare every metadata field directly using its os.stat_result attribute",
+    "deletion_not_replayed": true
+  },
+  "SQL": false,
+  "DB_started": false,
+  "cache_changes": false,
+  "retention_changes": false,
+  "remote_deletions": false
+}

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "at": "2026-11-17T19:54:42.290695-05:00",
+  "replay_blocked": true,
+  "replay_changed_no_journal_or_frozen_artifacts": true,
+  "failed_systemd_units": 0,
+  "config_checks": [
+    {
+      "profile": "zeus",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "atena",
+      "exit_code": 0,
+      "config_check_pass": true
+    },
+    {
+      "profile": "ares",
+      "exit_code": 0,
+      "config_check_pass": true
+    }
+  ]
+}

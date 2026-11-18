@@ -1,5 +1,5 @@
 {
-  "status": "single_qualified_finance339_package_awaiting_new_exact_critical_confirmation",
+  "status": "completed_validated",
   "request_message_id": "1572313312987979957",
   "thread_id": "1569928464033783862",
   "manifest_sha256": "2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537",
@@ -13,8 +13,8 @@
   "all_pass_analysis_allocated_bytes": 69046272,
   "net_direct_reclaim_estimate_bytes": 3131621376,
   "net_direct_reclaim_GiB": 2.917,
-  "source_files_deleted": 0,
-  "observed_cleanup_savings_bytes": 0,
+  "source_files_deleted": 339,
+  "observed_cleanup_savings_bytes": 3200602112,
   "local_JSON_RAM_recoveries": 339,
   "primary_providers_retained": 15,
   "closed_owner_task_roots": 24,
@@ -34,6 +34,11 @@
   "SQL": false,
   "DB_started": false,
   "cache_or_service_or_credential_or_retention_changes": false,
-  "next_step": "One NEW exact native Rodolfo confirmation for339 JSON copies, then frozen local preflight/apply/post retained-only RAM recovery and independent journal preservation readback. No media/remote deletion; no previous yes/continue reused.",
-  "at": "2026-11-17T15:45:26.947827-05:00"
+  "next_step": "None for this closed review/lot. Preserve all exclusions; never replay deletion. Retention/producer changes require separate authority.",
+  "at": "2026-11-17T15:45:26.947827-05:00",
+  "deleted_directories": 0,
+  "confirmation_message_id": "1572412587214372996",
+  "new_critical_confirmation_pending": false,
+  "final_evidence": "data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json",
+  "updated_at": "2026-11-17T19:55:36.260114-05:00"
 }

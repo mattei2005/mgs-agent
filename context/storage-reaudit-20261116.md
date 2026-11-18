@@ -1,5 +1,9 @@
 # Reauditoria global da VPS — ciclo 1571983565292441731
 
+## Estado vigente — revisão consolidada encerrada
+
+A passagem final `1572313312987979957` e o lote aprovado pela confirmação `1572412587214372996` estão concluídos e validados: 339 cópias JSON removidas uma única vez, zero diretórios, 15 primários preservados e 339 recuperações retained-only em RAM após a ausência. Delta imediato observado +3.200.602.112 bytes (2,981 GiB); complemento, journal, runtime e configs passaram. Fonte ativa: `context/storage-consolidated-pass-20261117.md` e `data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json`. Nenhuma confirmação ou continue pendente. Restante preservado nos limites do ledger, sem declarar necessidade integral ou certificação semântica de todos os payloads. Caches/mídias intactos; cron/retenção não mudaram. Este estado supersede as indicações históricas de revisão aberta/gate seguinte abaixo; não repetir lotes anteriores.
+
 ## Autoridade e fronteira
 
 - Dono: Rodolfo Mattei, Discord `344196393512075265`, thread `1569928464033783862`, pedido `1571983565292441731`.

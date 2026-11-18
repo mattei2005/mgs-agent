@@ -1,5 +1,15 @@
 # Revisão consolidada de armazenamento — 17/11/2026
 
+## Estado vigente — execução concluída e validada
+
+Rodolfo confirmou a pergunta `1572354508397224009` com `Sim` em `1572412587214372996`; identidade e thread conferidas pela leitura nativa. O lote `2bd02d697289` foi executado uma única vez: **339 arquivos regulares removidos, zero diretórios**, com manifesto e gate congelados intactos. Preflight e postflight reais passaram; após a ausência dos alvos, as 339 cópias foram novamente recuperadas em RAM usando somente os 15 primários preservados. Journal independente, 613 retidos globais, complemento de 22.987 arquivos/links e 1.503 diretórios e 144 pais passaram (listas não aditivas). Replay bloqueado sem alterar os artefatos. Três agentes ativos com os mesmos PIDs/launcher, três config checks aprovados e zero units falhas.
+
+**Delta imediato observado do espaço disponível: +3.200.602.112 bytes (2,981 GiB).** Disco observado após validação: 70,71 GiB disponíveis, ocupação 63,30%. A estimativa líquida de 2,917 GiB descontava o custo anterior da análise e não é a mesma métrica. Uma projeção de metadados do verificador independente omitiu `ctime_ns`; corrigida e repetida com PASS, sem replay de exclusão nem mudança no gate congelado.
+
+Revisão consolidada encerrada dentro da cobertura e dos limites documentados; nenhuma confirmação destrutiva pendente. Isso não certifica que todo o restante da VPS seja indispensável nem autoriza novo descarte. Todas as mídias, bancos, perfis, caches, pastas e originais permanecem; cron/retenção não mudaram. Fontes finais: `finance-final/critical-approval.json`, `filesystem-result.json`, `post-validation.json`, `independent-post-validation.json`, `runtime-replay-validation.json` e `retirement-final.json`, sob `data/storage-consolidated-review-1572313312987979957/`.
+
+**Supersessão explícita:** os estados de espera/gates seguintes abaixo são históricos; não reabrir a aprovação nem executar o rascunho de 643 arquivos ou repetir lotes encerrados.
+
 ## Estado vigente — correção de qualificação antes da confirmação
 
 **Único pacote ativo: 339 cópias JSON, zero diretórios, aproximadamente 2,917 GiB líquidos diretos estimados.** Fonte: `data/storage-consolidated-review-1572313312987979957/finance-final/consolidated-result.json`; manifesto `2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537`, gate `6017bcf6a34c40cf56a77578513eb05ffce558c2b44267ce489595aab0c23f91`. Os 15 primários permanecem e as 339 cópias foram recuperadas em RAM; 24 tarefas encerradas/25 checkpoints vinculados, preflight real e 32 testes passaram. Nenhum arquivo foi apagado.
