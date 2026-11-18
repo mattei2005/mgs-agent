@@ -63,6 +63,19 @@ def source_key_for_alert(message):
     return 'alert:'+str(message['id'])
 
 
+def recovered_notice_observation(message,observations,resolver):
+    """Reconcile a misqueued healthy notice under its exact original alert key."""
+    script=resolver.recovered_cron_script(message)
+    if not script:return None
+    producer=observations.get('producer:'+script)
+    stamp=epoch(message.get('timestamp'))
+    if not stamp or not verified_observation(producer) or float(producer.get('at',0))<stamp:return None
+    key='alert:'+str(message['id'])
+    return {'status':'OK','verified':True,'target':key,'at':producer['at'],
+            'receipt':{'kind':'canonical_recovery_notice_not_failure','message_id':str(message['id']),
+                       'channel_id':resolver.CHANNEL_ID,'producer':script,'health':producer['receipt']}}
+
+
 def blocking_output(text):
     # Explicit execution blockers only, not historic blanks/business partials.
     if re.search(r'PC1.{0,180}(?:ocupad|lease.{0,50}(?:busy|ocupad))|lease.{0,80}ocupad',text,re.I|re.S):return 'pc1_busy'
@@ -437,6 +450,13 @@ def main(resolver):
             status,data=resolver.discord_api(token,'GET',f'/channels/{resolver.CHANNEL_ID}/messages/{mid}')
             if status==200:indexed[str(mid)]=data
         for mid,message in sorted(indexed.items(),key=lambda x:int(x[0])):
+            prior=legacy.get('processed',{}).get(mid,{})
+            if prior.get('continuity_key'):
+                recovered=recovered_notice_observation(message,observations,resolver)
+                saved=q.get(prior['continuity_key'])
+                if recovered and saved and saved['source_key']==recovered['target']:
+                    observations[recovered['target']]=recovered
+                    q.observe(recovered['target'],'OK',recovered)
             if not resolver.is_candidate(message):continue
             prior=legacy.get('processed',{}).get(mid,{})
             if prior.get('status') in ('done','closed'):continue

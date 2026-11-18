@@ -62,6 +62,12 @@ SHEIN continues to use its canonical per-date/per-slot receipts and nonce rules 
 
 For a failed SHEIN D-1 wrapper followed by canonical delivery recovery, reconcile the observer instead of replaying the report or rewriting `last-cron-result.json`. `mgs_report_scheduler_health.daily_recovery_receipt` resolves the failed wrapper's New York delivery date to its exact D-1 directory and requires a later completion, matching request/account/thread coverage, per-account delivery journals, unique accepted IDs, GET_VERIFIED intents and frozen content hashes. Other periods, newer failures/logs, partial or mismatched journals remain non-green. Validate the deployed monitor and the supervisor's observation parser, preserve the original failure evidence, and leave the actual queue transition to its active supervisor. A green local predicate and live Discord GET proof are separate checks; neither authorizes touching a concurrent intraday writer or its shared lock.
 
+## Healthy cron notifications misclassified as failures
+
+Treat the canonical trusted `Cron recuperado` green embed as a recovery notification, not an error merely because its script filename contains `failed`, `error` or another failure word. Match the full producer contract (author/channel, empty content, single green embed and exact description); red severity, additional embeds, changed descriptions and untrusted senders must not inherit this exemption.
+
+For a notification already admitted under `alert:<id>`, preserve that key. On the natural supervisor tick, GET the original notification and require a newer healthy observation of its exact script before supplying the scoped read-only observation. Do not replay the producer, remap the queue identity or certify any historical business slot. Keep active-owner and explicit decision gates intact; let the original supervisor perform queue closure, legacy-ledger reconciliation and idempotent delivery. Exercise the main entrypoint in an isolated queue, not only the classifier helper. Regression: `tests/test_recovered_cron_notice.py`.
+
 ## Acceptance and operation
 
 1. Run the affected queue/supervisor/PC1 ingress, worker lifecycle, integration, monitor, resolver and DTR tests in isolated temporary state. Use the installed SB venv for tests importing Playwright, with `PYTHONPATH` including scripts and tests. Set a fixture `CRON_STALE_STATE` to avoid contaminating root-log fixtures with live native job failures; never weaken production probes to make tests pass.

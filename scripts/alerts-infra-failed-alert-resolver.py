@@ -171,6 +171,23 @@ def is_resolver_feedback(message: dict[str, Any]) -> bool:
     return False
 
 
+def recovered_cron_script(message: dict[str, Any]) -> str | None:
+    """Recognize only the canonical healthy notice, never generic green prose."""
+    from mgs_security_boundaries import trusted_message
+    if str(message.get('channel_id') or CHANNEL_ID) != CHANNEL_ID or not trusted_message(message):
+        return None
+    if str((message.get('author') or {}).get('id')) != ZEUS_BOT_ID or message.get('content'):
+        return None
+    embeds = message.get('embeds') or []
+    if len(embeds) != 1:
+        return None
+    embed = embeds[0]
+    if embed.get('title') != 'Cron recuperado' or embed.get('color') != RESOLVED_COLOR or embed.get('fields'):
+        return None
+    match = re.fullmatch(r'`([a-zA-Z0-9_./-]{1,180}\.(?:py|sh))` voltou a ter o sinal monitorado saudável \(log/execução/entrega\)\.', str(embed.get('description', '')))
+    return match.group(1) if match else None
+
+
 def is_candidate(message: dict[str, Any]) -> bool:
     from mgs_security_boundaries import trusted_message
     if str(message.get('channel_id') or CHANNEL_ID) != CHANNEL_ID:
@@ -188,6 +205,8 @@ def is_candidate(message: dict[str, Any]) -> bool:
     if not text:
         return False
     if SKIP_RE.search(text):
+        return False
+    if recovered_cron_script(message):
         return False
     red_severity = any(embed.get('color') in FAILURE_COLORS for embed in message.get('embeds') or [])
     if RESOLUTION_RE.search(text) and not FAILURE_RE.search(text) and not red_severity:

@@ -893,6 +893,27 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "recovered-cron-notice-ba6e8b2ae50603792b0ea7db",
+      "agent": "zeus",
+      "type": "automation_recovery_false_positive_prevention",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1572623689839542407",
+      "paths": [
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_recovered_cron_notice.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+      ],
+      "cause": "Canonical green Cron recuperado notice matched failure regex through failed in its script filename.",
+      "correction": "Strict trusted canonical recovery notice exclusion and exact-alert read-only observation from original GET plus fresh same-script health, preserving owner and decision gates.",
+      "validation": "42 tests PASS including isolated supervisor main entrypoint, owner/decision gates and queue closure without replay. Live original message GET and monitor dry-run OK; is_candidate=false; exact-alert observer verified=true. Diff check PASS.",
+      "evidence": "/root/.hermes/shared/automation-continuity/runs/ba6e8b2ae50603792b0ea7db/recovery-evidence.json",
+      "status": "correction_validated_waiting_independent_supervisor",
+      "business_writes": 0,
+      "cron_changes": 0,
+      "gateway_restarts": 0
+    },
+    {
       "id": "finance-closing-sheets-1572623601235009748",
       "agent": "zeus",
       "type": "finance_documentation_source_index",
