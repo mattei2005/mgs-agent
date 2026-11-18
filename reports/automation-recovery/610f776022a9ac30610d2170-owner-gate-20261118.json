@@ -1,0 +1,88 @@
+{
+  "operation_key": "610f776022a9ac30610d2170",
+  "mode": "resume_safe",
+  "source_key": "producer:alerts-infra-failed-alert-resolver.py",
+  "source_alert_id": "1572627488297717840",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "channel_id": "1569185140502954077",
+    "author_id": "344196393512075265",
+    "get_http": 200,
+    "command": "pode implementar entao as correcoes e prevencoes de tudo.",
+    "current_registry": "data/authorized-users.json agents.zeus authorized_user_discord_ids and Super Admin detail confirmed"
+  },
+  "original_silence_root_cause": "Not proven; retain the original stale-log evidence.",
+  "closure_gate_root_cause": {
+    "proven": true,
+    "description": "original_active excluded the current resolver PID but classified its own ancestor flock as another writer, preventing independent healthy-observation closure on later natural ticks.",
+    "owner_at_reconciliation": "supervisor:2151249",
+    "ancestor_flock_pid": 2151248,
+    "worker_pid": 2162539,
+    "worker_start_ticks": "242723661",
+    "worker_fingerprint_and_parent_verified": true,
+    "legacy_function_on_live_proc_without_child_gate": true,
+    "corrected_function_on_live_proc_without_child_gate": false,
+    "corrected_function_on_live_proc_with_exact_active_child_gate": true
+  },
+  "correction": {
+    "script": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+    "scope": "Exempt only proven ancestor flock when the same process executes the exact producer; preserve foreign flocks/interpreters, non-flock ancestors, unknown ancestry and active worker gates.",
+    "backup": "/root/mgs-agent/reports/automation-recovery/610f776022a9ac30610d2170-supervisor-before.py",
+    "rollback": "If regression is confirmed, restore only the supervised script from the exact backup under authorized serialization; preserve the queue, owned workers and existing receipts. No automatic rollback or restart performed.",
+    "skill": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+    "inventory": "/root/mgs-agent/data/infra-inventory.json scripts exact supervisor record"
+  },
+  "validation": {
+    "continuity_unittests": 18,
+    "recovery_unittests": 33,
+    "total_pass": 51,
+    "test_artifacts": [
+      "/root/mgs-agent/reports/automation-recovery/610f776022a9ac30610d2170-tests-continuity-20261118.txt",
+      "/root/mgs-agent/reports/automation-recovery/610f776022a9ac30610d2170-tests-recovery-20261118.txt"
+    ],
+    "initial_expected_regression": "Own ancestor flock was incorrectly active before patch.",
+    "test_fixture_correction": "FakeResolver lacked the existing recovered_cron_script contract; added None return for its non-recovery notification.",
+    "discarded_combined_harness": "Running multiprocessing unittest discovery from stdin failed with missing <stdin>; repeated both suites through python3 -m unittest, all 51 PASS. Original failed harness log preserved.",
+    "monitor_last_read": "OK age=18min threshold=20min; continuity consumer OK phase=dispatching. This is a point-in-time observation, not future completion proof.",
+    "original_alert_get_http": 200,
+    "existing_recovery_message_id": "1572631239339409610",
+    "existing_recovery_message_get_http": 200
+  },
+  "preserved": {
+    "queue_writes_by_worker": false,
+    "parallel_dispatcher": false,
+    "producer_replayed": false,
+    "recovery_notice_reposted": false,
+    "business_mutations": false,
+    "cron_or_cadence_changes": false,
+    "credentials_permissions_billing_changes": false,
+    "gateway_restart": false,
+    "manual_queue_closure": false
+  },
+  "report_infra": {
+    "status": "delivered_get_verified",
+    "channel_id": "1498132022634483894",
+    "message_id": "1572643245954175080",
+    "get_http": 200,
+    "empty_content": true,
+    "mentions": 0
+  },
+  "status": "correction_validated_pending_independent_closure",
+  "latest_readback": {
+    "at": "2026-11-18T11:04:04.928679-05:00",
+    "monitor_exit": 0,
+    "target_status": "STALE",
+    "target_receipt": "log age=24min threshold=20min",
+    "consumer_status": "OK",
+    "consumer_phase": "dispatching",
+    "queue_state": "running",
+    "queue_owner": "supervisor:2151249",
+    "worker_pid": 2162539,
+    "worker_state": "running",
+    "interpretation": "No full recovery claim: target log is stale again while the original dispatcher is awaiting this worker. Finishing this worker allows its existing caller to write the final tick summary. A later independent healthy observation and final receipt remain mandatory.",
+    "audit_action_readback": "automation_recovery_owner_gate_corrected",
+    "inventory_exact_script_record_readback": true,
+    "skill_canonical_and_mirror_sha256": "f71af3caac035f01244de22afc8ff167a7b6f5b1f40b00bbf6bf657ff3e744a0"
+  },
+  "next_step": "The already-active supervisor must consume this worker result. The next natural resolver tick loads the patched module, reconciles a fresh healthy target observation after the worker finishes, then closes the exact operation, reconciles legacy state and GET-verifies any final idempotent notice. Do not manually replay or spawn another dispatcher."
+}

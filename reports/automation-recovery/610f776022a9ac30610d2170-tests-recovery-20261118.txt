@@ -18,4 +18,21 @@ test_busy_pc1_keeps_auth_probe_only (test_automation_recovery_supervisor.Supervi
 test_busy_pc1_never_demotes_confirmation_gate (test_automation_recovery_supervisor.SupervisorTests.test_busy_pc1_never_demotes_confirmation_gate) ... ok
 test_busy_queues_without_agent_call_and_no_failure_budget (test_automation_recovery_supervisor.SupervisorTests.test_busy_queues_without_agent_call_and_no_failure_budget) ... ok
 test_collector_unavailable_is_explicit_not_empty_healthy (test_automation_recovery_supervisor.SupervisorTests.test_collector_unavailable_is_explicit_not_empty_healthy) ... ok
-test_dtr_no_post_validation_cannot_count_as_delivered_report (test_automation_recovery_supervisor.SupervisorTests.test_dtr_no_post_validation_cannot_count_as_delivered_report) ... 
+test_dtr_no_post_validation_cannot_count_as_delivered_report (test_automation_recovery_supervisor.SupervisorTests.test_dtr_no_post_validation_cannot_count_as_delivered_report) ... ok
+test_failed_blocker_notice_cannot_resume_business_work (test_automation_recovery_supervisor.SupervisorTests.test_failed_blocker_notice_cannot_resume_business_work) ... ok
+test_five_consecutive_dispatch_failures_stop_across_sources (test_automation_recovery_supervisor.SupervisorTests.test_five_consecutive_dispatch_failures_stop_across_sources) ... ok
+test_later_green_cannot_clear_explicit_decision_gate (test_automation_recovery_supervisor.SupervisorTests.test_later_green_cannot_clear_explicit_decision_gate) ... ok
+test_llm_claim_cannot_close_without_real_validator (test_automation_recovery_supervisor.SupervisorTests.test_llm_claim_cannot_close_without_real_validator) ... ok
+test_newly_discovered_pc1_dependency_persists_without_reprobe_loop (test_automation_recovery_supervisor.SupervisorTests.test_newly_discovered_pc1_dependency_persists_without_reprobe_loop) ... ok
+test_old_success_cannot_close_new_incident (test_automation_recovery_supervisor.SupervisorTests.test_old_success_cannot_close_new_incident) ... ok
+test_real_fresh_readback_closes_without_reexecution (test_automation_recovery_supervisor.SupervisorTests.test_real_fresh_readback_closes_without_reexecution) ... ok
+test_release_causes_one_resume (test_automation_recovery_supervisor.SupervisorTests.test_release_causes_one_resume) ... ok
+test_resource_wait_never_shortens_existing_backoff (test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_never_shortens_existing_backoff) ... ok
+test_resource_wait_preserves_verification_phase (test_automation_recovery_supervisor.SupervisorTests.test_resource_wait_preserves_verification_phase) ... ok
+test_terminal_prefix_is_not_used_to_green_unknown (test_automation_recovery_supervisor.SupervisorTests.test_terminal_prefix_is_not_used_to_green_unknown) ... ok
+test_unknown_and_expired_job_only_diagnose (test_automation_recovery_supervisor.SupervisorTests.test_unknown_and_expired_job_only_diagnose) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.482s
+
+OK

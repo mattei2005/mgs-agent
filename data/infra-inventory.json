@@ -73309,8 +73309,16 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 35160,
-      "modified_at": "2026-11-18T10:15:16-05:00"
+      "size_bytes": 36363,
+      "modified_at": "2026-11-18T10:59:48-05:00",
+      "recovery_operation_key": "610f776022a9ac30610d2170",
+      "authority_message_id": "1569193434189668453",
+      "recovery_report_infra_message_id": "1572643245954175080",
+      "recovery_report_infra_GET_verified": true,
+      "correction": "Do not classify the same producer's proven ancestor flock as a parallel writer; retain live worker, foreign writer and unknown ancestry gates.",
+      "validation": "51 unittest checks PASS; live proc readback without child gate false, with exact active child gate true; original alert and existing recovery message GET HTTP 200.",
+      "recovery_evidence": "/root/mgs-agent/reports/automation-recovery/610f776022a9ac30610d2170-owner-gate-20261118.json",
+      "recovery_status": "correction_validated_pending_independent_natural_supervisor_tick"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
