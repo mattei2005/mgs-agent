@@ -1,5 +1,30 @@
 {
   "page_delegation_repair_authorizations": {
+    "571515486037700": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1572711329905774673",
+      "source_thread_id": "1558131395451424890",
+      "source_channel_id": "1548149654926135486",
+      "approval_prompt_message_id": "1572707253352538363",
+      "execution_owner": "ares",
+      "account_id": "2031917360813819",
+      "account_name": "Escalatepower-US-SHEIN-EN-04-G004",
+      "page_name": "Offer Hub",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Durable authorization for current and future authorized requests on this account using exact Page 571515486037700. Preserve existing tasks and add only ADVERTISE and ANALYZE when absent. No other Page/account/identity authority.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, operational business and fully paginated existing tasks using authorized administrative identity",
+        "sanitized journal before minimal assignment write; reconcile uncertain effects before retry",
+        "administrative assignment readback and original corporate Page access readback",
+        "separate administrative provisioning executor when Ares Page write guard is GET-only; never bypass guard or change campaign identity",
+        "resume original request and IDs through central Engine v3 with original E2E, QA and activation gates"
+      ],
+      "exclusions": ["ownership transfer", "credential issuance or rotation", "app permission changes", "billing", "other Pages or accounts", "unapproved recurrence"],
+      "initial_request_id": "shein-1572705957413392539"
+    },
     "680516861808576": {
       "enabled": true,
       "approved_by": "344196393512075265",
