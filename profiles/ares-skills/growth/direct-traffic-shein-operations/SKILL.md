@@ -15,7 +15,7 @@ metadata:
 
 SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos e URL; renumere UTMs. Separe manual/lote/emenda. Conte ads por grupo. Usados≠referência entre contas: não invente `source_account`.
 
-Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. “Todas essas” = lista. Pause antes de agendar.
+Intake: `references/request-intake.md`. Pausa: `references/status-only-readiness-and-signatures.md`. “Todas essas” = lista; PAUSED ≠ agenda. Bloqueio externo/QA parcial: `references/external-block-coordination.md`.
 
 Diagnóstico: projete antes de imprimir. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
@@ -27,7 +27,7 @@ Destinos e diagnóstico: `references/inherited-destination-data.md`.
 
 Valide `context/meta-creative-copy-policy.md`, inclusive aceite permanente de omissões: se aplicável, continue sem reconfirmação com receipt próprio. Na cópia, só `image_background_gen` OPT_IN→OPT_OUT; preserve fonte, mídia/copy/CTA, demais recursos e novas UTMs aprovadas. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
 
-Quando várias sessões dependerem da mesma correção, defina um único integrador dos arquivos compartilhados antes de editar. Mantenha writers Meta separados por conta/request, informe patches já aplicados e retome pelo runner normal após validar a integração; locks de contas diferentes não dão exclusividade sobre código compartilhado.
+Use um integrador único para código compartilhado; locks de contas não excluem edições concorrentes. Mantenha writers por conta/request, comunique patches e retome o runner normal após validar a integração.
 
 Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `confident=false`; preserve a fonte e revalide só o modelo.
 
