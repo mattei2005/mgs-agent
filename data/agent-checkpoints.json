@@ -4364,12 +4364,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1572011664000155749",
-      "next_step": "Pedir consentimento especifico na origem para abrir diagnostico confidencial no suporte Meta do AD01C216;manter mesmos IDs/manifests/budget/inicio e retomar somenteQA/ativacao apos resolucao comprovada. Nao repetir POST para sondar erro.",
+      "next_step": "Aguardar decisao especifica sobre revisao ou conteudo corrigido do anuncio216;nao retomar writer antigo.Agenda status-only posterior e estados externos preservados.Coordenacao nova concluiu em receipt separado.",
       "objective": "Duplicar10vezes186 aUSD65/dia para17nov2026 00h05EST; pedido ainda aberto",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572011664000155749/partial-receipt.json",
-      "state": "blocked_external_meta_error:212-221 criadas,10campanhas/20ads paused,usd650/dia configurados. midia renderizada10/10;semantica9/10. ad01c216 retornou hard_error1487083 invalid usage of forcerunstatus em get fresco;causa raiz nao comprovada. nenhuma ativacao do lote. ids iguais checkpoint;nao recriar nem forcar status.",
+      "state": "predecessor_external_block_preserved:212-221 existentes comqaparcial;ad216 rejeitado2490468 noget17nov.regra1572397598784880681 reconciliou somente coordenacao;naoqa completo,nemmeta/drivewrite,nemliberacao de reserva. replay antigo bloqueado;naoimpede sucessor1572392475690008668 com midia disjunta.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-16T22:37:21+00:00"
+      "updated_at": "2026-11-18T00:45:35+00:00"
     },
     {
       "agent": "ares",
@@ -4384,12 +4384,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-CAMPAIGN-1572392475690008668",
-      "next_step": "Concluir somente QA/postprocess/ativacao dos mesmos IDs e readback integral,sem copiar novamente",
+      "next_step": "Concluido;nao repetir writes.Campanhas habilitadas com inicio futuro;nao comprova serving.Autorizacao Nicolas e procedimento institucionalizados;entrega nativa inclui Iris keyvalues lidos.",
       "objective": "15clones186 Mavroa06;30videos ES;USD35 COCAP0.90;18nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1572392475690008668/state.json",
-      "state": "created_paused:15campanhas/30ads;nomes222-236;qa5/15;ids anteriores preservados;mesmo request em continuacao central;sem recriar",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572392475690008668/final-readback-receipt.json",
+      "state": "complete_get_verified:15campanhas222-236,30ads active;usd35/dia ecostcap0.90;inicio18nov2026 00h15est;qa15/15;budgetloteusd525;contaativousd1717;30assetsused ids preservados;coordantiga isolada semqa ficticio",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-18T00:29:02+00:00"
+      "updated_at": "2026-11-18T00:45:35+00:00"
     },
     {
       "agent": "zeus",
@@ -11398,5 +11398,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T00:29:02+00:00"
+  "updated_at": "2026-11-18T00:45:35+00:00"
 }
