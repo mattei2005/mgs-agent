@@ -1,0 +1,37 @@
+{
+  "status": "pending_pc1_offline",
+  "completed": {
+    "baseline": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"prewrite_baseline_saved\", \"sheets\": 2, \"drive_canEdit\": true, \"sheets_http\": 200, \"identity\": \"service_account\"}\n"
+    },
+    "funding": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"regroup_validated\", \"accounts\": 55, \"groups\": {\"Cartão de crédito\": 15, \"Linha de crédito\": 40}, \"changes\": [], \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261117T210513124265\", \"meta_writes\": 0, \"payments_executed\": 0}\n"
+    },
+    "invoices": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"september_invoices_updated_validated\", \"accounts\": 55, \"new_columns\": \"E Invoice; F Outubro — saldo em aberto\", \"invoice_period\": \"2026-10-01\", \"visible_invoice_numbers\": 30, \"unpaid_in_tab\": 30, \"tab_due_usd\": \"417864.11\", \"unpaid_bm\": 30, \"bm_due_usd\": \"417864.11\", \"outside_accounts\": [], \"full_grid_readback\": true, \"prior_cells_preserved\": true, \"payments_executed\": 0, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/september-20261117T210516931774\"}\n"
+    },
+    "api": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"updated_metrics_pending_card_history\", \"accounts\": 55, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/20261117T210559104506\", \"meta_writes\": 0, \"payments_executed\": 0, \"snapshot_at\": \"2026-11-17T21:05:54.552361-05:00\", \"pending_ui\": [{\"account_id\": \"1062446663435585\", \"name\": \"Escalatepower-US-SHEIN-EN-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"2323706575049143\", \"name\": \"Growpowerhub-US-SHEIN-EN-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1414197490675732\", \"name\": \"Mavroa-US-SHEIN-ES-02-G002\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1543098427832443\", \"name\": \"Mavroa-US-SHEIN-ES-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"2852476828464907\", \"name\": \"Mavroa-US-SHEIN-ES-04-G004\", \"reason\": \"new_generic_payment_since_pc1_proof\"}]}\n"
+    },
+    "h_prepare": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"prepared\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566\", \"credit_line_accounts\": 40, \"sheet_writes\": 0}\n"
+    }
+  },
+  "pc1": {
+    "status": "transport_unavailable",
+    "ssh_exit": 255,
+    "tailscale_online": false,
+    "next_stage": "H40_and_pending_D",
+    "no_authentication_gate_observed": true
+  },
+  "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/partial-receipt.json",
+  "business_refresh_complete": false,
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "retry_at": "2026-11-17T21:13:11.415928-05:00",
+  "delivery": "automatic_final_pending"
+}
