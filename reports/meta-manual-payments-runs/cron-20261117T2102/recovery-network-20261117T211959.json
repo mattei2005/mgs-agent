@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-11-17T21:19:59.873921-05:00",
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "queue_owner": "supervisor:1488362",
+  "owner_process_exists": true,
+  "queue_attempts": 1,
+  "queue_failures": 0,
+  "queue_state_at_readback": "running",
+  "source_sha256": "0f2a9537e62714836ca21087554a2c15f8ca750f680565d66c82f7fbf1d3e8e7",
+  "financial_receipt_sha256": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+  "pc1": {
+    "Online": false,
+    "LastSeen": "2026-11-17T23:10:00.1Z",
+    "local_backend": "Running",
+    "local_online": true,
+    "ssh_probe_command": "scripts/mgs-pc1-cua-driver-ssh.sh call list_windows",
+    "ssh_exit": 255,
+    "ssh_error": "ssh: connect to host 100.85.69.58 port 22: Connection timed out",
+    "authentication_observed": false,
+    "root_cause_limit": "PC1 unreachable over existing Tailscale/SSH path; remote host cause not established"
+  },
+  "authority_get_verified": [
+    {"id": "1569193434189668453", "author_id": "344196393512075265", "channel_id": "1569185140502954077"},
+    {"id": "1563960345826037821", "author_id": "344196393512075265", "channel_id": "1563926766286803004"},
+    {"id": "1570799435502588027", "author_id": "344196393512075265", "channel_id": "1563926766286803004"},
+    {"id": "1570815017794674749", "author_id": "344196393512075265", "channel_id": "1563926766286803004"}
+  ],
+  "h_authority_context_get_verified": "1570814427081736268",
+  "contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+  "accounts": 55,
+  "completed_layers": ["funding", "invoices", "metrics", "source_to_sheet_readback"],
+  "completed_layer_claim_source": "original partial receipt and canonical progress artifacts; no new live workbook validation in this network-only recovery",
+  "pending_account_ids_H": [
+    "1419148446852410", "1753257812779707", "1107653168698121", "2633813727134360", "2039876850230678", "1851640026221079", "1001115192056600", "1018267074603840", "1062887799996139", "2031917360813819", "897046653487466", "1498990138663094", "814915838330687", "3188620887977617", "3752157451670648", "4511685129081248", "1829406761389732", "937846586033361", "336562339356179", "1744611463000838", "1245683183659911", "311204101516831", "1526280818302320", "536294549227786", "1085117577390237", "1736068407518263", "1877104513669062", "869857549542755", "7840111366055613", "1583000095650153", "2429758060563333", "781612907182683", "787796726891306", "1600310064116258", "908704754163659", "26632890069640784", "1754588462350629", "1542257646409395", "1034081997659047", "1492168699397108"
+  ],
+  "pending_account_ids_D": ["1062446663435585", "2323706575049143", "1414197490675732", "1543098427832443", "2852476828464907"],
+  "pending_layers": ["H40_Accounts_outstanding_balance", "D5_new_generic_events_instrument", "final_API_reconciliation_and_validation"],
+  "delivery_pending": true,
+  "same_occurrence_source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/partial-receipt.json",
+  "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566",
+  "consumer": {
+    "heartbeat": {"at": 1794968231.9408727, "phase": "dispatching", "pid": 1488362},
+    "enabled": true,
+    "existing_cron": "2-57/5 * * * *",
+    "owner_handles_next_backoff": true,
+    "next_retry_not_yet_assigned_by_active_supervisor": true
+  },
+  "no_mutation": {"google_writes": 0, "meta_writes": 0, "GUI_inputs": 0, "cron_changes": 0, "billing_changes": 0, "payments": 0, "business_messages_sent": 0, "queue_owner_changed": false},
+  "lease_readback": "free",
+  "writer_lock_readback": "free",
+  "next_authorized_step": "After existing transport returns, revalidate the same approved Chrome under the shared lease, resume only missing H/D targets in bounded persisted batches, final canonical API reconciliation and whole workbook validation, then canonical idempotent delivery and independent GET. Preserve completed funding/invoices and older held incident.",
+  "safety": "No blind retry of failed SSH; no alternate profile, network changes, restart or repeated business writes. Active supervisor retains queue ownership and consumes the final diagnostic. No queue transition performed by this child."
+}
