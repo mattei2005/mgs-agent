@@ -34,6 +34,7 @@ Nome solicitado por Rodolfo: `gaugi-av`; produto/documentação: **Gaudi**, da A
 8. `references/article-summary.json`: contagem paginada e campos de um artigo amostrado por domínio, sem copiar os artigos.
 9. `references/source-manifest.json`: origem e integridade dos documentos/imagens.
 10. `assets/source-screenshots/`: todas as imagens fornecidas nesta sequência, preservadas como evidência (não especificação executável).
+11. `references/draft-write-validation.md`: canário autorizado Monteralis, escrita draft comprovada, tratamento de shell sem tradução e limites do teste de path.
 
 ## Pré-requisitos e autoridade
 
@@ -63,7 +64,7 @@ Nome solicitado por Rodolfo: `gaugi-av`; produto/documentação: **Gaudi**, da A
 1. Ler `references/documentation-conflicts.md`. Não executar escrita enquanto contrato de `path`, bloco ou locale estiver ambíguo. Confirmar no fornecedor/contrato atualizado ou em canário explicitamente autorizado; nunca testar em artigo existente por conveniência.
 2. Delimitar IDs, campos, idiomas, publicação e possível fan-out. Guardar antes/depois e plano reversível, sem segredos. Não modificar loaders/monetização protegida por associação com o CMS.
 3. Confirmar scopes de escrita por evidência do painel ou operação real autorizada; `write:*` e `read:*` não são implicitamente equivalentes.
-4. Para novo conteúdo, criar shell com status explícito `draft`, flags explícitas e autor/site/categoria verificados. Persistir o ID retornado; falha posterior não autoriza criar outro shell.
+4. Para novo conteúdo, criar shell com status explícito `draft`, flags explícitas e autor/site/categoria verificados. Persistir o ID retornado; falha posterior não autoriza criar outro shell. No canário Monteralis, GET do shell sem tradução retornou 404 e a listagem o omitiu; a primeira tradução no mesmo ID recuperou ambas as leituras. Reconciliar o recibo POST antes de repetir qualquer criação; ver `references/draft-write-validation.md`.
 5. Enviar a tradução com slug, title, version e blocos validados, mais o contrato de path confirmado. Preservar IDs estáveis dos blocos existentes. Metadata e tradução são camadas distintas; verificar ambas.
 6. Publicar somente se o pedido incluir publicação. Multilíngue: nunca habilitar ou sobrescrever idiomas adicionais sem escopo explícito. Omitir ambos os campos de fan-out mantém single-locale conforme screenshots; se habilitado, enviar os dois juntos e preservar manual com `overwrite_manual_locales: "none"`, salvo autorização contrária.
 7. Tratar warnings de compliance e HTTP 422 sem bypass. `queued` não é tradução pronta; `skipped` não é sucesso integral. Não prometer conclusão de deploy/tradução com base só em resposta 200.
@@ -84,7 +85,8 @@ Nome solicitado por Rodolfo: `gaugi-av`; produto/documentação: **Gaudi**, da A
 - Upload `type=logo/favicon` cria mídia; não prova aplicação como identidade global do site.
 - Bloco `custom-html` não prova execução de JavaScript arbitrário, controle de head/global ou autorização de pixels/anúncios.
 - GET pode expor canonical/noindex/OG/scheduled_at sem oferecer escrita documentada desses campos.
-- Snapshot inicial: todas as leituras testadas funcionaram nas duas chaves; nenhuma escrita foi executada ou comprovada.
+- Snapshot inicial: todas as leituras testadas funcionaram nas duas chaves; nenhuma escrita foi executada nessa análise inicial.
+- Canário posterior autorizado: criação de um shell e criação/edição de tradução draft comprovadas na chave Monteralis, com quatro blocos e readback integral. Publicação, exclusão, outras famílias de escrita e escrita Belverica não foram exercitadas. `path` explícito igual ao slug foi aceito e preservado; omissão/obrigatoriedade não comprovadas. Ver `references/draft-write-validation.md`.
 
 ## Verificação e entrega
 

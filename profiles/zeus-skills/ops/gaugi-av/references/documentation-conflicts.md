@@ -3,7 +3,7 @@
 ## 1. Contrato de path
 - TXT fornecido e /llm.txt live: `path` obrigatório no PUT da tradução; exemplo blog/my-article.
 - Screenshots do PUT: não incluem path no request; response tem 101/my-post.
-- Conclusão: contrato de escrita não reconciliado. GET comprova valor retornado, não comportamento do PUT. Confirmar com fornecedor ou teste de rascunho explicitamente autorizado em alvo delimitado. Não mudar URLs existentes como experimento.
+- Canário posterior autorizado Monteralis: PUT com `path` explícito relativo igual ao slug foi aceito e devolvido sem alteração em dois readbacks (v1/v2); ver `draft-write-validation.md`. Isso reconcilia o formato usado, não obrigatoriedade nem omissão. Para novos rascunhos equivalentes, usar path explícito validado. Não mudar URLs existentes como experimento.
 
 ## 2. Tipos de bloco e schemas
 - Screenshots usam `prose` com data.html. Catálogo live inicial possui 19 tipos e **não** inclui prose. TXT usa paragraph.
@@ -16,7 +16,7 @@
 - Tradução review, meta_title/meta_description, nulabilidade de excerpt.
 - exclude_translation_locales/overwrite_manual_locales e fan-out.
 - Filtros de listagem de artigos mais detalhados.
-- Disponibilidade documentada visualmente, não testada por escrita. Nenhum POST/PUT/DELETE foi executado na análise inicial.
+- Nenhum POST/PUT/DELETE foi executado na análise inicial. Em canário posterior Monteralis, sitemap_exclude/list_exclude=true e hide_header=false persistiram no shell e no readback. Tradução draft com meta_title/meta_description/excerpt também persistiu. Publicação, review e fan-out não foram testados.
 
 ## 4. Scopes e proteção de chaves
 - Leituras 200 comprovam acesso aos recursos consultados, não write:* nem lista exata de scopes concedidos. /llm.txt pode ser público segundo linha duplicada do screenshot, então HTTP 200 autenticado não prova sozinho read:llm efetivo.
