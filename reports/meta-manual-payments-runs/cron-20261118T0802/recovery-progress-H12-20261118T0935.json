@@ -1,0 +1,220 @@
+{
+  "continuity_key": "ebaa2482101e0f4757c25454",
+  "source_key": "native:zeus:2ee720363d7d:20261118T0802",
+  "mode": "resume_safe",
+  "state": "partial_h12_recovered_pending_h28_d7",
+  "verified_at": "2026-11-18T09:34:57.067774-05:00",
+  "scheduled_at": "2026-11-18T08:02:00-05:00",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "registry": "/root/mgs-agent/data/authorized-users.json",
+    "author_id": "344196393512075265",
+    "live_GET_author_channel_message_validated": [
+      "1569193434189668453",
+      "1563960345826037821",
+      "1570799435502588027",
+      "1570815017794674749"
+    ],
+    "preceding_context_GET_validated": [
+      "1570814427081736268",
+      "1570790402829586575"
+    ],
+    "native_contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "native_contract_hash_matches_queue": true,
+    "scope": "Same scheduled occurrence, job, thread, workbook and 55 account IDs. H source and eight-account expansion reconciled against original human approvals and exact preceding proposals. No additional authority inferred."
+  },
+  "authority_revalidated_live_GET_this_round": true,
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1992475",
+    "attempts": 6,
+    "failures": 0,
+    "lease_until": 1795012870.139803,
+    "worker": {
+      "pid": 2005124,
+      "start_ticks": "242146807",
+      "started": 1795011670.1432514,
+      "state": "running"
+    },
+    "native_fire_claim": null,
+    "original_session_ended": true,
+    "parallel_writer_started": false,
+    "pc1_lease_free": true
+  },
+  "pc1": {
+    "online": true,
+    "ssh_list_windows_success": true,
+    "pid": 18704,
+    "window_id": 983880,
+    "profile_Rodolfo_AX": true,
+    "business_id_pixels": "155263197283282",
+    "auth_gate_observed": false,
+    "evidence": "reports/meta-manual-payments-runs/cron-20261118T0802/recovery-surface-0925.png"
+  },
+  "completed_layers_preserved": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/partial-receipt.json",
+    "saved_artifact_sha256": {
+      "partial-receipt.json": "739822295489a6f8a9f731bcaafc11d9ebf11fd6c13c0035e90624c89c0ad5c9",
+      "progress.json": "d6227de44132fec95cdc5cfd40d9a3d3aafe09e4cf6d6d30f2a8d6f989fbccac",
+      "final-workbook.json": "405b2eaef515d7d045c91020862cfe7211e9a1b71167da3f0e01ca5735e790db"
+    },
+    "completed_layers": [
+      "funding",
+      "invoices",
+      "metrics",
+      "source_to_sheet_readback"
+    ],
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261118T080558157932",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261118T080513133354",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261118T080600211382",
+    "h_run_files_observed": [
+      "pc1-surface.json",
+      "targets.json",
+      "prepare-snapshot.json"
+    ],
+    "qualification": "Saved hashes unchanged from previous recovery checkpoint; no additional H collection or publication artifacts. No fresh Meta or live Sheets collection this round. Earlier source-to-sheet readback is historical evidence, not a fresh validation. No completed layer replay."
+  },
+  "H_recovery": {
+    "status": "partial_H12_published_and_independently_readback",
+    "verified_at": "2026-11-18T09:33:09.530770-05:00",
+    "accounts": 55,
+    "fresh_h_count": 12,
+    "remaining_h_count": 28,
+    "verified_h_ids": [
+      "1001115192056600",
+      "1018267074603840",
+      "1062887799996139",
+      "1107653168698121",
+      "1419148446852410",
+      "1498990138663094",
+      "1753257812779707",
+      "1851640026221079",
+      "2031917360813819",
+      "2039876850230678",
+      "2633813727134360",
+      "897046653487466"
+    ],
+    "pending_h_ids": [
+      "814915838330687",
+      "3188620887977617",
+      "3752157451670648",
+      "4511685129081248",
+      "1829406761389732",
+      "937846586033361",
+      "336562339356179",
+      "1744611463000838",
+      "1245683183659911",
+      "311204101516831",
+      "1526280818302320",
+      "536294549227786",
+      "1085117577390237",
+      "1736068407518263",
+      "1877104513669062",
+      "869857549542755",
+      "7840111366055613",
+      "1583000095650153",
+      "2429758060563333",
+      "781612907182683",
+      "787796726891306",
+      "1600310064116258",
+      "908704754163659",
+      "26632890069640784",
+      "1754588462350629",
+      "1542257646409395",
+      "1034081997659047",
+      "1492168699397108"
+    ],
+    "pending_d_ids": [
+      "1062446663435585",
+      "2323706575049143",
+      "1547524853816263",
+      "1867022354284742",
+      "1414197490675732",
+      "1543098427832443",
+      "2852476828464907"
+    ],
+    "other_sheets_authored_unchanged_this_H_write": true,
+    "payments": 0,
+    "billing_changes": 0,
+    "business_messages": 0,
+    "business_refresh_complete": false
+  },
+  "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261118T080600211382",
+  "pending_account_ids_H": [
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_layers": [
+    "H28_Accounts_outstanding_balance",
+    "D7_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "resume_instructions": "Use SAME H run and visual-verification.json. Skip 12 existing receipts already pixel-verified and published. Collect only pending28 in batches<=6, persist/extend checks after each batch. Do not rerun funding/invoices/prepare or replay H12. Then D7 and final API reconciliation; exact55 source parity. Preserve earlier occurrences separately. Current adapter lacks this occurrence and must be safely implemented/tested before final canonical delivery. No agent copy.",
+  "continuity": {
+    "supervisor_alive": true,
+    "queue_transition_by_worker": false,
+    "next_retry_at": null,
+    "required_supervisor_action": "Consume this partial result and persist next bounded backoff on SAME row. Queue source pending_H still40 is historical; this checkpoint and canonical12 receipts supersede pending set. Never replay existing receipts."
+  },
+  "report_infra": {
+    "message_id": "1572621002687643780",
+    "channel_id": "1498132022634483894",
+    "GET_verified": true,
+    "content_empty": true,
+    "mentions_empty": true,
+    "embed_count": 1
+  },
+  "mutations": {
+    "H_verified_published": 12,
+    "H_preserved": 28,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "gateway_restarts": 0,
+    "business_messages_sent": 0,
+    "runtime_inventory_updated": true,
+    "global_browser_binding_changed": false
+  },
+  "diagnostic_recoveries": [
+    "Two initial local schema queries failed; schema introspection corrected read-only query before action.",
+    "Inventory patch ambiguity rejected atomically; exact entry reread and scoped patch applied."
+  ]
+}

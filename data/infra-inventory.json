@@ -69112,16 +69112,16 @@
       "id": "meta-manual-payments-scheduled-20261118T0802",
       "agent": "zeus",
       "type": "scheduled_financial_refresh",
-      "status": "pending_pc1_offline",
-      "updated_at": "2026-11-18T08:07:17.290030-05:00",
+      "status": "partial_h12_recovered_pending_h28_d7",
+      "updated_at": "2026-11-18T09:33:09.530770-05:00",
       "scheduled_at": "2026-11-18T08:02:00-05:00",
       "source_thread_id": "1563926766286803004",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/partial-receipt.json",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/recovery-H12-readback.json",
       "verification": {
         "accounts": 55,
         "fresh_metrics": 55,
-        "fresh_h": 0,
-        "preserved_h": 40,
+        "fresh_h": 12,
+        "preserved_h": 28,
         "pending_d_events": 7,
         "source_parity_cgij_ef": true,
         "h_d_preserved": true,
@@ -69133,8 +69133,10 @@
         "cron_changes": 0
       },
       "continuity_key": "ebaa2482101e0f4757c25454",
-      "retry_at": "2026-11-18T08:18:01.164646-05:00",
-      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+      "retry_at": null,
+      "retry_owner": "supervisor:1992475",
+      "report_infra_status": "GET_verified_1572621002687643780_partial_H12_not_business_completion",
+      "recovery_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/recovery-progress-H12-20261118T0935.json"
     }
   ],
   "profile_skill_references": [
