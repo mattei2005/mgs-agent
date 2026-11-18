@@ -1,0 +1,88 @@
+{
+  "continuity_key": "ebaa2482101e0f4757c25454",
+  "source_key": "native:zeus:2ee720363d7d:20261118T0802",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "verified_at": "2026-11-18T08:51:35.819504-05:00",
+  "scheduled_at": "2026-11-18T08:02:00-05:00",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "current_registry": "/root/mgs-agent/data/authorized-users.json",
+    "author_id": "344196393512075265",
+    "live_GET_author_channel_message_validated": ["1569193434189668453", "1563960345826037821", "1570799435502588027", "1570815017794674749"],
+    "preceding_context_GET_validated": ["1570814427081736268", "1570790402829586575"],
+    "native_contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+    "scope": "Same scheduled occurrence, job, thread, workbook, 55 accounts and 40 H targets. H source change and eight-account inclusion reconciled with real preceding proposals. No extra authority inferred from metadata."
+  },
+  "ownership": {
+    "queue_state": "running",
+    "owner": "supervisor:1980274",
+    "queue_attempts": 4,
+    "queue_failures": 0,
+    "queue_due": 1795009664.0978346,
+    "queue_lease_until": 1795010995.7781305,
+    "queue_delivery_id": null,
+    "supervisor": {"pid": 1980274, "ppid": 1980273, "start_ticks": "241941990", "alive_verified": true},
+    "worker": {"pid": 1981343, "ppid": 1980274, "start_ticks": "241959372", "alive_verified": true},
+    "worker_receipt_state": "running",
+    "original_session": {
+      "id": "local-ef0cbd3c34244e9044a2c4e78ead30449568eee51a940d53001629169e08f347",
+      "source": "cron", "ended_at": 1795007346.9346874, "end_reason": "cron_complete"
+    },
+    "native_fire_claim": null,
+    "native_active_executions": [],
+    "native_enabled": true,
+    "native_state": "scheduled",
+    "native_next_run_at": "2026-11-18T14:02:00-05:00",
+    "native_schedule": "2 8,14,21 * * *",
+    "writer_lock_free": true,
+    "pc1_lease_raw_state_present": false,
+    "financial_worker_processes": [],
+    "parallel_writer_started": false
+  },
+  "pc1": {
+    "HostName": "PC1", "Online": false, "LastSeen": "2026-11-17T23:10:00.1Z",
+    "local_backend": "Running", "local_online": true, "local_health": [],
+    "authentication_observed": false, "occupancy_proven": false,
+    "ssh_attempts_this_round": 0, "gui_attempts_this_round": 0,
+    "diagnosis": "Two real overlay status reads confirm PC1 offline; local overlay Running/online without health warnings. Previous real receipt records SSH22 timeout. Remote power, sleep or connectivity cause remains unproven and no safe reachable remote correction exists. No repeated SSH/GUI timeout, authentication inference, alternate profile, transport change, forced lease or gateway restart."
+  },
+  "completed_layer_evidence": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/partial-receipt.json",
+    "saved_artifact_sha256": {
+      "partial-receipt.json": "739822295489a6f8a9f731bcaafc11d9ebf11fd6c13c0035e90624c89c0ad5c9",
+      "progress.json": "d6227de44132fec95cdc5cfd40d9a3d3aafe09e4cf6d6d30f2a8d6f989fbccac",
+      "final-workbook.json": "405b2eaef515d7d045c91020862cfe7211e9a1b71167da3f0e01ca5735e790db"
+    },
+    "completed_layers": ["funding", "invoices", "metrics", "source_to_sheet_readback"],
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261118T080558157932",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261118T080513133354",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261118T080600211382",
+    "h_run_files_observed": ["pc1-surface.json", "targets.json", "prepare-snapshot.json"],
+    "qualification": "Saved receipts and partial effects reconciled; identical saved hashes to previous recovery checkpoint. No fresh Meta or live Sheets collection this round. Earlier source-to-sheet readback is not represented as fresh. Preserve all H/D timestamps; no completed layer replay."
+  },
+  "scope_counts": {"accounts": 55, "H": 40, "D_pending_events": 7},
+  "pending_account_ids_H": [
+    "1419148446852410", "1753257812779707", "1107653168698121", "2633813727134360", "2039876850230678", "1851640026221079", "1001115192056600", "1018267074603840", "1062887799996139", "2031917360813819", "897046653487466", "1498990138663094", "814915838330687", "3188620887977617", "3752157451670648", "4511685129081248", "1829406761389732", "937846586033361", "336562339356179", "1744611463000838", "1245683183659911", "311204101516831", "1526280818302320", "536294549227786", "1085117577390237", "1736068407518263", "1877104513669062", "869857549542755", "7840111366055613", "1583000095650153", "2429758060563333", "781612907182683", "787796726891306", "1600310064116258", "908704754163659", "26632890069640784", "1754588462350629", "1542257646409395", "1034081997659047", "1492168699397108"
+  ],
+  "pending_account_ids_D": ["1062446663435585", "2323706575049143", "1547524853816263", "1867022354284742", "1414197490675732", "1543098427832443", "2852476828464907"],
+  "pending_layers": ["H40_Accounts_outstanding_balance", "D7_new_generic_events_instrument", "final_API_reconciliation_and_validation", "canonical_idempotent_business_delivery_and_GET"],
+  "canonical_delivery_precondition": {
+    "occurrence_registered_in_RECOVERIES": false,
+    "adaptation_performed": false,
+    "diagnosis": "Canonical finance adapter and supervisor branch currently register only two older occurrences; adapter still freezes 47 accounts/36 H and historical render. Before final delivery, add occurrence-specific independent validation/render under current authorized contract and tests; never reuse historical report or send an agent copy. No business delivery attempted."
+  },
+  "continuity": {
+    "service_enabled": true, "consumer_alive": true,
+    "heartbeat": {"at": 1795009634.7315714, "phase": "dispatching", "pid": 1980274},
+    "worker_failure_streak": 0,
+    "consumer_schedule": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+    "previous_retry_consumed": [{"id": 13081, "at": 1795009795.7781305, "kind": "claimed"}, {"id": 13068, "at": 1795009364.0978346, "kind": "deferred"}],
+    "queue_transition_by_worker": false,
+    "next_retry_at": null,
+    "next_step": "Owning supervisor must consume this result and persist bounded backoff on the SAME row. No worker queue/scheduler mutation. Next due is not yet assertable. On next check, read overlay first. Once PC1 is online, reconcile claims/writer/lease and exact approved Chrome, resume missing H/D canonical workers, final API and independent verification. Preserve older occurrences separately; do not repeat funding/invoices. Register current canonical delivery before closure."
+  },
+  "report_infra_status": "Previous administrative report remains separately pending. This round adds diagnostic evidence only; no infrastructure changes.",
+  "no_mutation": {"checkpoint_only": true, "google_writes": 0, "meta_writes": 0, "gui_inputs": 0, "business_messages_sent": 0, "payments": 0, "billing_changes": 0, "cron_changes": 0, "infrastructure_changes": 0, "gateway_restarts": 0, "background_jobs_started": 0}
+}
