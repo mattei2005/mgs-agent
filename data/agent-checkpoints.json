@@ -1913,12 +1913,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572737738732478655",
-      "next_step": "Esperar mesmo complete; monitor canônico para preservação RAW same-ID final; executar audit.py do pedido, validar oito fontes/mapa e entregar na thread. Não repetir tratamento nem iniciar outro writer.",
+      "next_step": "Nenhum saldo operacional. Entregar resumo final com pasta permanente VID READY e originais LEGACY na origem; não repetir tratamento, arquivo ou mapa.",
       "objective": "Tratar e organizar oito vídeos Kelly US SHEIN ES common preservando originais/IDs/reservas",
-      "source": "data/ares/creative-ops/executions/intake-1572737738732478655/plan.json",
-      "state": "oito tratados e oito uploads/readback/inventário verificados; plano imutável e qa completos. primeiro batch completo com flat_delivery common; manutenção original já rodou na continuação. segundo batch 6120237e2e87efa29d5b363fd449e4cd no complete canônico, processo silencioso proc_399bb8e660c6. sem campaign/acl/delete.",
+      "source": "data/ares/creative-ops/executions/intake-1572737738732478655/final-audit.json",
+      "state": "completed: request 3cdc595c6abd76191ad3cb7584d9110b complete; dois claims complete. oito fontes e oito linhagens novas, zero duplicatas e zero pendências; qa visual e técnica e clean=true. auditoria independente validou oito originais same-id, 16 providers raw/clean por bytes/hash, stock parents/ack e reservas. mapa completo oito fontes publicado e relido na mensagem1572745078915600425. mídia transitória local limpa, evidências duráveis preservadas; nenhum campaign/acl/delete remoto.",
       "thread_id": "1572737738732478655",
-      "updated_at": "2026-11-18T22:41:52+00:00"
+      "updated_at": "2026-11-18T22:47:49+00:00"
     },
     {
       "agent": "ares",
@@ -11528,5 +11528,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T22:41:52+00:00"
+  "updated_at": "2026-11-18T22:47:49+00:00"
 }

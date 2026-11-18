@@ -81,3 +81,4 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Não produzir final sem validar referência/provider essencial.
 - Não mover/deletar/sobrescrever fora do fluxo autorizado.
 - Não declarar upload, limpeza, geração ou campanha sem readback real.
+- Publicar mapas e conclusões programáticos somente com a identidade Ares confirmada por `GET /users/@me`; acesso de leitura por um helper compartilhado não comprova identidade de publicação. Usar o poster do próprio profile e validar autor, canal e conteúdo no readback, conforme `references/mixed-media-drive-intake-ready-legacy.md`.
