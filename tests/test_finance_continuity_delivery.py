@@ -125,5 +125,107 @@ class FinanceDeliveryTests(unittest.TestCase):
         self.assertNotEqual(m.sorted_view(a), m.sorted_view(b))
 
 
+class CurrentFinanceOccurrenceTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.base = Path(self.tmp.name)
+        self.root = self.base / m.RECOVERIES[m.CURRENT_KEY][0]
+        self.root.mkdir(parents=True)
+        self.ids = [str(i) for i in range(55)]
+        self.book = {
+            'sheets': [{'properties': {'sheetId': 271321738}, 'data': [{'rowData': [
+                {'values': [{'note': 'ID da conta: ' + aid}]} for aid in self.ids]}]}]}
+        self.contract = {'thread_id': m.THREAD, 'business_id': '155263197283282',
+                         'spreadsheet_id': '1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU',
+                         'sheet_id': 271321738, 'account_ids': self.ids,
+                         'pay_now_account_ids': self.ids[:40],
+                         'h_source': 'accounts_list_outstanding_balance'}
+        self.receipt = {'continuity_key': m.CURRENT_KEY, 'accounts': 55,
+                        'fresh_metrics_count': 55, 'fresh_h_count': 40, 'pending_ui': [],
+                        'scheduled_at': m.CURRENT_SLOT, 'native_contract_hash': m.CURRENT_HASH,
+                        'source_key': m.SOURCE + ':20261118T0802', 'business_refresh_complete': True,
+                        'groups': {'Cartão de crédito': 15, 'Linha de crédito': 40},
+                        'h_read_times': {aid: '2026-11-18T10:00:00-05:00' for aid in self.ids[:40]},
+                        'validated_metrics_at': '2026-11-18T11:09:16-05:00',
+                        'average_periods': [['2026-11-15', '2026-11-17']],
+                        'month_periods': [['2026-11-01', '2026-11-18']],
+                        'invoices': {'period': '2026-10-01', 'pending': 30, 'due_usd': '417864.11'},
+                        'D_verified_published_ids': self.ids[:8], 'historical_blank_d': []}
+        for name in ('source_to_live_sheet_cgij_exact', 'invoice_source_to_live_sheet_ef_exact',
+                     'h_source_to_live_sheet_and_note_exact', 'd_ledger_to_live_sheet_exact',
+                     'h_original_collection_times_preserved', 'other_sheet_data_unchanged'):
+            self.receipt[name] = True
+        for name in ('payments_executed', 'billing_changes', 'meta_writes', 'cron_changes'):
+            self.receipt[name] = 0
+        cp = self.base / 'data/meta-manual-payments/digital-trust-workbook-contract.json'
+        cp.parent.mkdir(parents=True)
+        cp.write_text(json.dumps(self.contract))
+        (self.root / 'recovery-final-workbook.json').write_text(json.dumps(self.book))
+        self.save_receipt()
+        self.job = {'id': m.JOB, 'enabled': True, 'state': 'scheduled',
+                    'last_dispatch': {'scheduled_at': m.CURRENT_SLOT},
+                    'last_run_at': '2026-11-18T08:09:08-05:00'}
+
+    def save_receipt(self):
+        (self.root / 'recovery-financial-validation.json').write_text(json.dumps(self.receipt))
+
+    def test_actual_validator_accepts_55_and_rejects_missing_proof(self):
+        m.validate(self.base, lambda _: self.book, key=m.CURRENT_KEY)
+        self.receipt['h_read_times'].pop('0')
+        self.save_receipt()
+        with self.assertRaises(ValueError):
+            m.validate(self.base, lambda _: self.book, key=m.CURRENT_KEY)
+
+    def test_no_cross_slot_or_old_contract_authority(self):
+        with patch.object(m, 'native_contract_hash', return_value=m.CURRENT_HASH):
+            self.assertTrue(m.scope(self.job, key=m.CURRENT_KEY))
+            for edit in ({'enabled': False}, {'fire_claim': {'by': 'other'}},
+                         {'last_dispatch': {'scheduled_at': '2026-11-18T14:02:00-05:00'}}):
+                self.assertFalse(m.scope(self.job | edit, key=m.CURRENT_KEY))
+            self.assertFalse(m.scope(self.job, key=m.KEY))
+
+    def test_current_delivery_idempotency_and_occurrence_target(self):
+        calls = []
+        def transport(payload, **kwargs):
+            calls.append(kwargs['prior_id'])
+            self.assertEqual(payload['nonce'], m.CURRENT_KEY)
+            self.assertEqual(payload['content'].count('• '), 6)
+            self.assertIn('55/55', payload['content'])
+            if kwargs['prior_id'] is None:
+                kwargs['on_created']('789')
+            return '789'
+        with patch.object(m, 'native_contract_hash', return_value=m.CURRENT_HASH):
+            result = m.resume(self.job, base=self.base, reader=lambda _: self.book,
+                              transport=transport, key=m.CURRENT_KEY)
+            m.resume(self.job, base=self.base, reader=lambda _: self.book,
+                     transport=transport, key=m.CURRENT_KEY, verify_only=True)
+        self.assertEqual(calls, [None, '789'])
+        self.assertEqual(result['target'], m.SOURCE + ':20261118T0802')
+
+    def test_wrong_period_and_changed_workbook_fail_closed(self):
+        changed = copy.deepcopy(self.book)
+        changed['sheets'][0]['data'][0]['rowData'][0]['values'][0]['note'] += 'changed'
+        with self.assertRaises(ValueError):
+            m.validate(self.base, lambda _: changed, key=m.CURRENT_KEY)
+        self.receipt['month_periods'] = [['2026-11-01', '2026-11-19']]
+        self.save_receipt()
+        with self.assertRaises(ValueError):
+            m.validate(self.base, lambda _: self.book, key=m.CURRENT_KEY)
+
+    def test_supervisor_routes_same_occurrence_to_adapter_without_agent(self):
+        import mgs_automation_supervisor as supervisor
+        jobs = self.base / 'profiles/zeus/cron'
+        jobs.mkdir(parents=True)
+        (jobs / 'jobs.json').write_text(json.dumps({'jobs': [self.job]}))
+        row = {'key': m.CURRENT_KEY, 'source': json.dumps({'job_id': m.JOB})}
+        with patch.object(supervisor, 'PROFILES', self.base / 'profiles'), \
+                patch.object(m, 'resume', return_value={'receipt': 'verified'} ) as resume:
+            result = supervisor.run_worker(row, 'verify_only', base=self.base)
+        self.assertTrue(result.startswith('Resolvido:'))
+        self.assertEqual(resume.call_args.kwargs['key'], m.CURRENT_KEY)
+        self.assertTrue(resume.call_args.kwargs['verify_only'])
+
+
 if __name__ == '__main__':
     unittest.main()

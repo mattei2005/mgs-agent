@@ -26,7 +26,13 @@ RECOVERIES = {
     '6a8f887c7ddb0077beeeb05b': (
         Path('reports/meta-manual-payments-runs/cron-20261109T0802'),
         'recovery-final-workbook-1042.json'),
+    'ebaa2482101e0f4757c25454': (
+        Path('reports/meta-manual-payments-runs/cron-20261118T0802'),
+        'recovery-final-workbook.json'),
 }
+CURRENT_KEY = 'ebaa2482101e0f4757c25454'
+CURRENT_HASH = '825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921'
+CURRENT_SLOT = '2026-11-18T08:02:00-05:00'
 
 
 def load(path):
@@ -37,10 +43,13 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def scope(job):
+def scope(job, *, key=KEY):
+    expected_hash = CURRENT_HASH if key == CURRENT_KEY else HASH
     return (job.get('id') == JOB and job.get('enabled') is True
             and job.get('state') not in ('paused', 'completed')
-            and not job.get('fire_claim') and native_contract_hash(job) == HASH)
+            and not job.get('fire_claim') and native_contract_hash(job) == expected_hash
+            and (key != CURRENT_KEY or
+                 (job.get('last_dispatch') or {}).get('scheduled_at') == CURRENT_SLOT))
 
 
 def authored(sheet):
@@ -119,13 +128,27 @@ def validate(base=BASE, reader=read_workbook, *, key=KEY):
     root = base / run
     receipt = load(root / 'recovery-financial-validation.json')
     contract = load(base / 'data/meta-manual-payments/digital-trust-workbook-contract.json')
-    if (receipt['continuity_key'] != key or receipt['accounts'] != 47
-            or receipt['fresh_metrics_count'] != 47 or receipt['fresh_h_count'] != 36
+    accounts, h_count = (55, 40) if key == CURRENT_KEY else (47, 36)
+    if (receipt['continuity_key'] != key or receipt['accounts'] != accounts
+            or receipt['fresh_metrics_count'] != accounts or receipt['fresh_h_count'] != h_count
             or receipt['pending_ui'] or contract['thread_id'] != THREAD
             or contract['business_id'] != '155263197283282'
             or contract['spreadsheet_id'] != '1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU'
             or contract['sheet_id'] != 271321738):
         raise ValueError('Frozen financial recovery scope incomplete')
+    if key == CURRENT_KEY and (
+            receipt.get('scheduled_at') != CURRENT_SLOT
+            or receipt.get('native_contract_hash') != CURRENT_HASH
+            or receipt.get('source_key') != SOURCE + ':20261118T0802'
+            or receipt.get('business_refresh_complete') is not True
+            or receipt.get('groups') != {'Cartão de crédito': 15, 'Linha de crédito': 40}
+            or set(receipt.get('h_read_times', {})) != set(contract['pay_now_account_ids'])
+            or len(contract['account_ids']) != accounts
+            or receipt.get('average_periods') != [['2026-11-15', '2026-11-17']]
+            or receipt.get('month_periods') != [['2026-11-01', '2026-11-18']]
+            or receipt.get('invoices', {}).get('period') != '2026-10-01'
+            or contract.get('h_source') != 'accounts_list_outstanding_balance'):
+        raise ValueError('Current financial occurrence evidence mismatch')
     for name in ('source_to_live_sheet_cgij_exact', 'invoice_source_to_live_sheet_ef_exact',
                  'h_source_to_live_sheet_and_note_exact', 'd_ledger_to_live_sheet_exact',
                  'h_original_collection_times_preserved', 'other_sheet_data_unchanged'):
@@ -150,7 +173,7 @@ def validate(base=BASE, reader=read_workbook, *, key=KEY):
             if match:
                 ids.append(match[1])
             # Effective calculated monetary values must also match, not just formulas.
-    if len(ids) != 47 or len(set(ids)) != 47 or set(ids) != set(contract['account_ids']):
+    if len(ids) != accounts or len(set(ids)) != accounts or set(ids) != set(contract['account_ids']):
         raise ValueError('Live authorized account set mismatch')
     for old_grid, new_grid in zip(sorted_view(before[contract['sheet_id']])['data'], sorted_view(after[contract['sheet_id']])['data']):
         for old_row, new_row in zip(old_grid.get('rowData', []), new_grid.get('rowData', [])):
@@ -164,6 +187,18 @@ def render(receipt, contract):
     times = sorted(datetime.fromisoformat(t) for t in receipt['h_read_times'].values())
     slot = datetime.fromisoformat(receipt.get('scheduled_at', '2026-11-08T21:02:00-05:00'))
     metrics = datetime.fromisoformat(receipt.get('validated_metrics_at', '2026-11-09T01:14:29-05:00'))
+    if receipt.get('continuity_key') == CURRENT_KEY:
+        invoices = receipt['invoices']
+        return (f"Atualização de {slot:%d/%m às %Hh%M} recuperada e validada.\n"
+                'https://docs.google.com/spreadsheets/d/' + contract['spreadsheet_id']
+                + '/edit#gid=' + str(contract['sheet_id']) + '\n\n'
+                f"• 55/55 contas: 15 no cartão e 40 na linha; métricas de {metrics:%Hh%M} Eastern.\n"
+                f"• H: 40/40 Outstanding balance, leituras de {times[0]:%Hh%M} a {times[-1]:%Hh%M}; horários preservados, sem republicação.\n"
+                "• Média: 15–17/11 completos. Gasto de novembro: 01–18/11, com dia local parcial.\n"
+                f"• Invoices de outubro: {invoices['pending']} pendentes, US$ {invoices['due_usd']}; coleta original preservada.\n"
+                f"• D: {len(receipt['D_verified_published_ids'])} verificações renovadas; nenhuma pendência recente. {len(receipt['historical_blank_d'])} campos históricos vazios: sem prova do instrumento ou cobrança não localizada; vazio não é zero.\n"
+                "• Fontes, links, notas, fórmulas e totais conferidos; outra aba preservada.\n\n"
+                'Nenhum pagamento ou alteração de billing.')
     return (f"Atualização de {slot:%d/%m às %Hh%M} recuperada e validada.\n\n"
             f"47/47 contas: 11 no cartão e 36 na linha. Métricas renovadas em {metrics:%d/%m às %Hh%M} Eastern.\n"
             f"H: 36/36 saldos da lista Accounts, lidos entre {times[0]:%d/%m %Hh%M} e {times[-1]:%d/%m %Hh%M} Eastern; horários preservados, sem republicação. Não são valores de modal.\n"
@@ -176,7 +211,7 @@ def render(receipt, contract):
 
 
 def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=False, key=KEY):
-    if not scope(job):
+    if not scope(job, key=key):
         raise ValueError('Original job changed, paused, active or unavailable; no delivery')
     run, snapshot = RECOVERIES[key]
     root = base / run
@@ -222,17 +257,19 @@ def resume(job, *, base=BASE, reader=read_workbook, transport=None, verify_only=
         mid = transport(state['payload'], channel=THREAD, prior_id=state.get('message_id'), on_created=accepted)
         state.update(message_id=mid, status='GET_VERIFIED', verified_at=time.time())
         atomic(path, state)
-        return {'status': 'OK', 'verified': True, 'target': SOURCE,
+        return {'status': 'OK', 'verified': True,
+                'target': receipt['source_key'] if key == CURRENT_KEY else SOURCE,
                 'receipt': str(path), 'at': state['verified_at'],
                 'message_id': mid, 'source': {'kind': 'native', 'profile': 'zeus',
-                'job_id': JOB, 'thread_id': THREAD, 'contract_hash': HASH}}
+                'job_id': JOB, 'thread_id': THREAD,
+                'contract_hash': CURRENT_HASH if key == CURRENT_KEY else HASH}}
 
 
 def observation(job, *, base=BASE):
     try:
-        if not scope(job):
-            return None
         for key, (run, _) in reversed(list(RECOVERIES.items())):
+            if not scope(job, key=key):
+                continue
             if not (base / run / 'financial-delivery.json').exists():
                 continue
             receipt = load(base / run / 'recovery-financial-validation.json')

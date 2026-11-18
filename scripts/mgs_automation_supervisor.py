@@ -159,7 +159,9 @@ def collect(base=BASE,profiles=PROFILES):
             if profile=='zeus' and j['id']=='2ee720363d7d':
                 from mgs_finance_continuity import observation as finance_observation
                 recovered=finance_observation(j,base=base)
-                if recovered is not None:observations[key]=recovered
+                if recovered is not None:
+                    observations[key]=recovered
+                    observations[recovered['target']]=recovered
             if profile=='zeus' and j['id']=='62dfebef142b':
                 from mgs_sb_reservoir_continuity import observation as reservoir_observation
                 recovered=reservoir_observation(j,base=base)
@@ -354,7 +356,7 @@ Cadastro original para RECONCILIAR ESCOPO, não para replay cego: {original[:180
 
 
 def run_worker(row,mode,base=BASE,timeout=900):
-    if row['key'] in ('9f77ed97faf39eb7de4ba1b3','6a8f887c7ddb0077beeeb05b') and mode in ('resume_safe','reconcile_first','verify_only'):
+    if row['key'] in ('9f77ed97faf39eb7de4ba1b3','6a8f887c7ddb0077beeeb05b','ebaa2482101e0f4757c25454') and mode in ('resume_safe','reconcile_first','verify_only'):
         from mgs_finance_continuity import resume, RECOVERIES
         if (base/RECOVERIES[row['key']][0]/'recovery-financial-validation.json').exists():
             source=json.loads(row['source'])
