@@ -2,9 +2,9 @@
 # pyright: reportMissingImports=false
 """Daily Smart Bidding Messenger Daily -> Google Sheet revenue sync.
 
-Reads the live dashboard's default last-seven-days request, selects only the
-latest three inclusive Eastern dates, aggregates REVENUE by PROFILE_NAME
-(Segurador), and replaces column C (RECEITA 3 DIAS) in the
+Reads the live dashboard's default last-seven-days request, selects the
+latest seven inclusive Eastern dates, aggregates REVENUE by PROFILE_NAME
+(Segurador), and replaces column C (RECEITA 7 DIAS) in the
 canonical migration tab. Missing names stay blank; present names with zero
 revenue are written as numeric zero.
 
@@ -47,7 +47,7 @@ RODOLFO_ID = "344196393512075265"
 NY = ZoneInfo("America/New_York")
 CENT = Decimal("0.01")
 REMOVED_HEADER_ALIASES = {"Rem Acum", "Removidos acumulado"}
-EXPECTED_TRAILING_HEADERS = ["User", "RECEITA 3 DIAS", "Segurador"]
+EXPECTED_TRAILING_HEADERS = ["User", "RECEITA 7 DIAS", "Segurador"]
 SEGURADOR_ALIASES = {
     # The Sheet preserves the operator spelling while Smart Bidding currently
     # exposes this profile with a one-letter correction.
@@ -342,13 +342,14 @@ def aggregate_report(rows: list[dict], request_payload: dict) -> tuple[dict[str,
         raise RuntimeError(f"Smart Bidding source window is not seven inclusive days: {start_date}..{end_date}")
 
     # Keep the native seven-day fetch unchanged for shared investment consumers.
-    # Revenue alone now uses today (partial) and the preceding two civil dates.
-    period_dates = [(end_date - timedelta(days=offset)).isoformat() for offset in (2, 1, 0)]
+    # Rodolfo1572624743071350866 restores revenue to seven inclusive dates.
+    # Today remains partial; investment consumers retain their own window.
+    period_dates = [(end_date - timedelta(days=offset)).isoformat() for offset in range(6, -1, -1)]
     required_dates = set(period_dates)
     observed_dates = {str(row.get("DATE") or "")[:10] for row in rows if isinstance(row, dict)}
     missing_dates = sorted(required_dates - observed_dates)
     if missing_dates:
-        raise RuntimeError(f"Smart Bidding revenue three-day dates missing: {missing_dates}")
+        raise RuntimeError(f"Smart Bidding revenue seven-day dates missing: {missing_dates}")
 
     aggregate: dict[str, Decimal] = defaultdict(Decimal)
     labels: dict[str, str] = {}
@@ -374,7 +375,7 @@ def aggregate_report(rows: list[dict], request_payload: dict) -> tuple[dict[str,
     summary = {
         "period_start": period_dates[0],
         "period_end": period_dates[-1],
-        "days": 3,
+        "days": 7,
         "includes_current_day": True,
         "current_day_partial": True,
         "timezone": "America/New_York",
@@ -541,7 +542,7 @@ def validate_match_coverage(
     """Require broad Sheet coverage of the live Smart Bidding profile scope.
 
     The migration Sheet is append-only operational history, so its denominator
-    grows while the three-day Smart Bidding profile set may legitimately shrink.
+    grows while the rolling Smart Bidding profile set may legitimately shrink.
     Safety therefore follows the bounded live source plus source-to-Sheet
     coverage, while retaining an absolute matched-row floor.
     """
@@ -654,12 +655,12 @@ def send_failure_alert(message: str) -> bool:
             "allowed_mentions": {"users": [RODOLFO_ID]},
             "embeds": [
                 {
-                    "title": "Falha — Receita Messenger 3 dias",
+                    "title": "Falha — Receita Messenger 7 dias",
                     "color": 15158332,
                     "description": "O cron não atualizou a coluna C da planilha.",
                     "fields": [
                         {"name": "Erro", "value": safe, "inline": False},
-                        {"name": "Alvo", "value": f"{TAB_NAME} / RECEITA 3 DIAS", "inline": False},
+                        {"name": "Alvo", "value": f"{TAB_NAME} / RECEITA 7 DIAS", "inline": False},
                         {"name": "Horário", "value": now_et(), "inline": True},
                     ],
                 }
@@ -685,7 +686,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true", help="read and validate without Sheet writes")
-    mode.add_argument("--apply", action="store_true", help="update column C with live last-three-inclusive-dates totals")
+    mode.add_argument("--apply", action="store_true", help="update column C with live last-seven-inclusive-dates totals")
     mode.add_argument(
         "--invest-3d-json",
         action="store_true",

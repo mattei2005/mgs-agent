@@ -4244,12 +4244,22 @@
     {
       "agent": "zeus",
       "id": "REVENUE-MESSENGER-3D-1571311723217035436",
-      "next_step": "Zeus mantém cron diário 08:17 America/New_York; três datas incluindo hoje parcial. Nenhuma ação de Rodolfo. Evidência: backups/sb-messenger-revenue-sheet/change-1571311723217035436/acceptance.json",
-      "objective": "Corrigir coluna C de sete para três dias de receita e manter automação diária.",
+      "next_step": "Não restaurar janela3d. Decisão e aplicação atual: REVENUE-MESSENGER-7D-1572624743071350866; manter histórico da validação anterior.",
+      "objective": "Histórico: alteração de sete para três dias de receita, supersedida pelo retorno a sete dias.",
+      "source": "scripts/sync-sb-messenger-revenue-sheet.py",
+      "state": "superseded",
+      "thread_id": "1571311723217035436",
+      "updated_at": "2026-11-18T14:53:26+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "REVENUE-MESSENGER-7D-1572624743071350866",
+      "next_step": "Zeus mantém agenda diária 08:17 Eastern. Receita hoje parcial mais seis dias anteriores. Aplicação12–18/11:156 valores,59 sem correspondência permanecem vazios; fonte independente e demais colunas validadas. Evidência backups/sb-messenger-revenue-sheet/change-1572624743071350866/acceptance.json.",
+      "objective": "Restaurar coluna C para receita de sete dias e atualizar valores, preservando investimento e agenda.",
       "source": "scripts/sync-sb-messenger-revenue-sheet.py",
       "state": "completed_validated",
-      "thread_id": "1571311723217035436",
-      "updated_at": "2026-11-14T23:57:48+00:00"
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-18T14:53:26+00:00"
     },
     {
       "agent": "zeus",
@@ -4550,6 +4560,16 @@
       "state": "original_pause_complete11/11; readback posterior8paused e105/186/183 active. activities comprovam reativações posteriores13:08-13:12est por perfilven ny viapowereditor; humano operador não inferido. nenhuma reversão automática da edição externa.",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-16T19:18:17+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-PAUSE-1572625829727305849",
+      "next_step": "Concluído; sem reativação agendada ou alteração nas demais campanhas",
+      "objective": "Pausar somente as 25 campanhas nominais solicitadas por Nicolas na conta Mavroa 06 G006",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572625829727305849/pause.json",
+      "state": "complete_paused: 25 writes confirmados; get individual e batch final integral com status/configured_status/effective_status paused e budgets preservados",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-18T14:58:37+00:00"
     },
     {
       "agent": "zeus",
@@ -6995,6 +7015,16 @@
       "state": "completed_validated_exact_three_root_retirement",
       "thread_id": "1569928464033783862",
       "updated_at": "2026-11-17T02:35:58+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-STORAGE-MINIMAL-LOCAL-1572625943313256503",
+      "next_step": "Preparacao consolidada de retencao/testes/backup/midia/cache semanal seletivo/evidencia; modalidade VPS ou Hermes nao escolhida; nenhum cron/backup/delete executado. Apresentar gate exato sem pedir continue por familia.",
+      "objective": "Manter minimo local e prevenir acumulo; responder sete pontos e preparar futura execucao consolidada com gates",
+      "source": "context/storage-minimal-local-direction-20261118.md",
+      "state": "direction_recorded_readonly_explanations_grounded_no_functional_changes",
+      "thread_id": "1569928464033783862",
+      "updated_at": "2026-11-18T14:57:43+00:00"
     },
     {
       "agent": "zeus",
@@ -11428,5 +11458,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T14:42:48+00:00"
+  "updated_at": "2026-11-18T14:58:37+00:00"
 }

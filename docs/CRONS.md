@@ -489,7 +489,7 @@ Frequência               | Script                                     | Owner  
 - **Frequência:** `17 8 * * *`
 - **Owner:** Zeus/Revenue Tech
 - **Risco:** médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback
-- **Função:** Atualiza diariamente a coluna RECEITA 3 DIAS da aba Migracao 22/06 com receita de hoje (parcial) e dos dois dias anteriores, por Segurador, usando a Service Account canônica e readback exato.
+- **Função:** Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com receita de hoje (parcial) e dos seis dias anteriores, por Segurador, usando a Service Account canônica e readback exato.
 - **Comando:** `flock -n /var/lock/sync_sb_messenger_revenue_sheet.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py --apply >> /root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log`
 - **Último log:** 2026-11-18T08:17:11-05:00 (96913 bytes)

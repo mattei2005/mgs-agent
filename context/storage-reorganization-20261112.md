@@ -1,5 +1,9 @@
 # Reorganização de armazenamento da VPS MGS
 
+## Direção atual — 18/11/2026
+
+Rodolfo redefiniu o objetivo em `1572625943313256503`: mínimo local necessário à operação/recuperação atual, retirada de sobras com prevenção nos produtores, proposta de novo backup VPS ou Hermes antes de aposentar os anteriores e reabertura da avaliação de cache semanal seletivo. Fonte vigente: `context/storage-minimal-local-direction-20261118.md`. A pausa de análise de caches descrita abaixo está supersedida somente nesse recorte; nenhum cron ou descarte foi ativado. Permanecem a preservação da operação/histórico vivo e o gate de alvos exatos antes de excluir. Os lotes encerrados abaixo não devem ser reexecutados.
+
 ## Autoridade e estado
 
 - Dono: Rodolfo Mattei, Discord `344196393512075265`.

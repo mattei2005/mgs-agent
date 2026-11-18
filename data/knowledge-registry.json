@@ -14186,10 +14186,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei; Zeus/Revenue Tech",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "REVENUE-MESSENGER-7D-1572624743071350866",
+      "title": "Receita Messenger na coluna C: três dias incluindo hoje parcial; substitui cálculo de sete dias",
+      "updated_at": "2026-11-18T14:53:26+00:00"
+    },
+    {
+      "canonical_key": "revenue.messenger.migration-sheet.column-c.window",
+      "canonical_source": "scripts/sync-sb-messenger-revenue-sheet.py",
+      "consumers": [
+        "sync-sb-messenger-revenue-sheet.py"
+      ],
+      "domain": "revenue",
+      "effective_at": "2026-11-18T14:53:26+00:00",
+      "id": "REVENUE-MESSENGER-7D-1572624743071350866",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei; Zeus/Revenue Tech",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Receita Messenger na coluna C: três dias incluindo hoje parcial; substitui cálculo de sete dias",
-      "updated_at": "2026-11-14T23:56:37+00:00"
+      "title": "Receita Messenger coluna C volta a sete dias incluindo hoje parcial; substitui janela de três dias",
+      "updated_at": "2026-11-18T14:53:26+00:00"
     },
     {
       "canonical_key": "revenue.smart-routing.drip.url-position-order",
@@ -14445,6 +14462,23 @@
     },
     {
       "canonical_key": "storage.reorganization.1570447435074109502.retention-direction",
+      "canonical_source": "context/storage-minimal-local-direction-20261118.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure.storage",
+      "effective_at": "2026-11-18T14:57:43+00:00",
+      "id": "STORAGE-MINIMAL-LOCAL-1572625943313256503",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Minimo local, novo backup e reabertura de cache semanal seletivo; gates destrutivos preservados",
+      "updated_at": "2026-11-18T14:57:43+00:00"
+    },
+    {
+      "canonical_key": "storage.reorganization.1570447435074109502.retention-direction",
       "canonical_source": "context/storage-reorganization-20261112.md",
       "consumers": [
         "zeus"
@@ -14455,10 +14489,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "STORAGE-MINIMAL-LOCAL-1572625943313256503",
       "title": "Direcao de revisao latest-only VPS e Hermes; preservar dash e historico",
-      "updated_at": "2026-11-13T14:18:03+00:00"
+      "updated_at": "2026-11-18T14:57:43+00:00"
     },
     {
       "canonical_key": "team.icaro.identity",
@@ -17817,5 +17851,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T14:45:40+00:00"
+  "updated_at": "2026-11-18T14:57:43+00:00"
 }

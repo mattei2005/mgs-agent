@@ -86,7 +86,7 @@ class MetaAppInvest3DTests(unittest.TestCase):
         self.assertEqual(self.b013.resolve_removed_header(headers), 'Rem Acum')
 
     def test_revenue_sheet_accepts_current_and_legacy_removed_headers(self):
-        trailing = ['User', 'RECEITA 3 DIAS', 'Segurador']
+        trailing = ['User', 'RECEITA 7 DIAS', 'Segurador']
         self.assertTrue(self.helper.headers_are_expected(['Rem Acum', *trailing, 'PG']))
         self.assertTrue(self.helper.headers_are_expected(['Removidos acumulado', *trailing]))
         self.assertFalse(self.helper.headers_are_expected(['zzzaa', *trailing]))
