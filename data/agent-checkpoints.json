@@ -1752,6 +1752,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1572719158209020107",
+      "next_step": "Preflight live; coleta Meta SB e RPS; render QA e entrega com GET",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1572719158209020107/request.json",
+      "state": "intake_autenticado_7pares_canonicos_escopo_validado",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-18T21:06:39+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -1893,12 +1903,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1572703991270211627",
-      "next_step": "Consumir conclusão do complete ativo, monitor canônico e continuar batches do mesmo request; nenhuma repetição de tratamento",
-      "objective": "Tratar e organizar 31 vídeos Kelly US SHEIN EN common, preservando originais e reservas",
+      "next_step": "Após monitor canônico e ownership liberados, executar somente saldo 11 do mesmo request e complete por batch4; auditoria audit_task.py e mapa publish_map.py na thread original. Não criar outro request/executor.",
+      "objective": "Concluir os 31 vídeos Kelly US SHEIN EN common, preservando IDs RAW e reservas",
       "source": "data/ares/creative-ops/executions/intake-1572703991270211627/plan.json",
-      "state": "31 vídeos com qa visual de cinco frames, frames e áudio íntegros raw-clean, plano de nomes congelado. primeiro batch completo; segundo tratado e retomando somente arquivo/ack pelo mesmo complete após limite de observação da ferramenta.",
+      "state": "31 preparados/revisados e nomes congelados; 20 fontes completas no request 96ffe574884ce80bf3370b7f3272a278. rotina canônica em monitor/manutenção com lock ativo; foreground sem writer concorrente. plano executável completo em source; adapter e mídias válidas no scratch kelly-1572703991270211627, intake_task.py e run_one.py. reutilizar por source id, não reclassificar ou renomear.",
       "thread_id": "1572703991270211627",
-      "updated_at": "2026-11-18T20:30:26+00:00"
+      "updated_at": "2026-11-18T21:01:20+00:00"
     },
     {
       "agent": "ares",
@@ -11498,5 +11508,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T20:36:11+00:00"
+  "updated_at": "2026-11-18T21:06:39+00:00"
 }
