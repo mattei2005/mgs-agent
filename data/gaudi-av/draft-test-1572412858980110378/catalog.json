@@ -1,0 +1,1013 @@
+{
+  "blocks": [
+    {
+      "key": "paragraph",
+      "default_data": {
+        "content": "",
+        "align": "left"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "maxLength": 3000
+          },
+          "align": {
+            "default": "left",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "required": [
+          "content",
+          "align"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "heading",
+      "default_data": {
+        "level": 2,
+        "text": "",
+        "align": "left"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 4
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "align": {
+            "default": "left",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "required": [
+          "level",
+          "text",
+          "align"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "options",
+      "default_data": {
+        "options": [
+          {
+            "text": "Saiba mais",
+            "link": "#"
+          }
+        ]
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "options": {
+            "minItems": 1,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120
+                },
+                "cta": {
+                  "type": "string",
+                  "maxLength": 30
+                },
+                "link": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "text",
+                "link"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "options"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "accordion",
+      "default_data": {
+        "mode": "default",
+        "items": [
+          {
+            "title": "",
+            "description": ""
+          }
+        ]
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "mode": {
+            "default": "default",
+            "type": "string",
+            "enum": [
+              "default",
+              "faq"
+            ]
+          },
+          "items": {
+            "minItems": 1,
+            "maxItems": 30,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "title",
+                "description"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "mode",
+          "items"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "related-content",
+      "default_data": {
+        "subject": "",
+        "title": "",
+        "link": ""
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "image_asset_id": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "button_text": {
+            "type": "string"
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "subject",
+          "title",
+          "link"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "landing-page",
+      "default_data": {
+        "intro": "",
+        "headline": "",
+        "image_asset_id": "",
+        "first_paragraph": "",
+        "benefits": [
+          ""
+        ],
+        "second_paragraph": "",
+        "cta": "",
+        "link": "",
+        "show_ad_top": false,
+        "show_ad_first": false,
+        "show_ad_second": false
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "intro": {
+            "type": "string",
+            "minLength": 1
+          },
+          "headline": {
+            "type": "string",
+            "minLength": 1
+          },
+          "image_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "first_paragraph": {
+            "type": "string",
+            "minLength": 1
+          },
+          "benefits": {
+            "minItems": 1,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "second_paragraph": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cta": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "show_ad_top": {
+            "default": false,
+            "type": "boolean"
+          },
+          "show_ad_first": {
+            "default": false,
+            "type": "boolean"
+          },
+          "show_ad_second": {
+            "default": false,
+            "type": "boolean"
+          },
+          "footnote": {
+            "description": "@deprecated:luigi-2024 — removido por aproximação visual de botões. Componente ignora.",
+            "type": "string"
+          },
+          "secondary_link": {
+            "description": "@deprecated:2024-compliance — \"show another recommendation\" removido. Componente ignora.",
+            "type": "string"
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "intro",
+          "headline",
+          "image_asset_id",
+          "first_paragraph",
+          "benefits",
+          "second_paragraph",
+          "cta",
+          "link",
+          "show_ad_top",
+          "show_ad_first",
+          "show_ad_second"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "offer",
+      "default_data": {
+        "product": "",
+        "name": "",
+        "description": "",
+        "image_asset_id": "",
+        "tags": [],
+        "link": "",
+        "button_text": "Saiba mais"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "image_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tags": {
+            "default": [],
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "icon": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "star",
+                        "fire",
+                        "check",
+                        "lightning",
+                        "gift"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "label",
+                "icon"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "button_text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "product",
+          "name",
+          "description",
+          "image_asset_id",
+          "tags",
+          "link",
+          "button_text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "custom-html",
+      "default_data": {
+        "html": "<!-- placeholder -->"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "html": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 65536
+          }
+        },
+        "required": [
+          "html"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "image",
+      "default_data": {
+        "asset_id": "",
+        "size": "large",
+        "alignment": "center"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "alt_override": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "size": {
+            "default": "large",
+            "type": "string",
+            "enum": [
+              "thumb",
+              "medium",
+              "large",
+              "original"
+            ]
+          },
+          "alignment": {
+            "default": "center",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right",
+              "full"
+            ]
+          },
+          "link": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target": {
+                "default": "_self",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ]
+              },
+              "rel": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "href",
+              "target"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "asset_id",
+          "size",
+          "alignment"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "image-button",
+      "default_data": {
+        "asset_id": "",
+        "href": "#",
+        "target": "_self",
+        "alignment": "center"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "href": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target": {
+            "default": "_self",
+            "type": "string",
+            "enum": [
+              "_self",
+              "_blank"
+            ]
+          },
+          "alignment": {
+            "default": "center",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "alt_override": {
+            "type": "string"
+          },
+          "max_width": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "asset_id",
+          "href",
+          "target",
+          "alignment"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "button",
+      "default_data": {
+        "label": "Saiba mais",
+        "href": "#",
+        "variant": "primary",
+        "size": "md",
+        "target": "_self",
+        "alignment": "left",
+        "width": "auto"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "href": {
+            "type": "string",
+            "minLength": 1
+          },
+          "variant": {
+            "default": "primary",
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary",
+              "ghost",
+              "link"
+            ]
+          },
+          "size": {
+            "default": "md",
+            "type": "string",
+            "enum": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "target": {
+            "default": "_self",
+            "type": "string",
+            "enum": [
+              "_self",
+              "_blank"
+            ]
+          },
+          "alignment": {
+            "default": "left",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "width": {
+            "default": "auto",
+            "type": "string",
+            "enum": [
+              "auto",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "label_bold": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "label",
+          "href",
+          "variant",
+          "size",
+          "target",
+          "alignment",
+          "width"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "list",
+      "default_data": {
+        "ordered": false,
+        "marker_style": "default",
+        "items": [
+          {
+            "text": "First item"
+          }
+        ]
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "ordered": {
+            "default": false,
+            "type": "boolean"
+          },
+          "marker_style": {
+            "default": "default",
+            "type": "string",
+            "enum": [
+              "default",
+              "circle"
+            ]
+          },
+          "items": {
+            "minItems": 1,
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "ordered",
+          "marker_style",
+          "items"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "spotlight",
+      "default_data": {
+        "image_asset_id": "",
+        "title": "",
+        "description": "",
+        "cta_label": "Saiba mais",
+        "link": ""
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "image_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cta_label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "link": {
+            "type": "string",
+            "minLength": 1
+          },
+          "button_color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-zA-Z0-9#(),.%/\\s-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "image_asset_id",
+          "title",
+          "description",
+          "cta_label",
+          "link"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "table",
+      "default_data": {
+        "content": "<table><thead><tr><th>Column</th></tr></thead><tbody><tr><td>Cell</td></tr></tbody></table>"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "title-anchor",
+      "default_data": {},
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "video",
+      "default_data": {
+        "provider": "youtube",
+        "videoId": "dQw4w9WgXcQ"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "const": "youtube"
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "provider",
+          "videoId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "coupon",
+      "default_data": {
+        "brand": "",
+        "code": "",
+        "discount": "",
+        "expires_at": "",
+        "url": ""
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "brand": {
+            "type": "string",
+            "minLength": 1
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "discount": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expires_at": {
+            "default": "",
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "brand",
+          "code",
+          "discount",
+          "expires_at",
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "deal-grid",
+      "default_data": {
+        "items": []
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "items": {
+            "default": [],
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "price": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "old_price": {
+                  "default": "",
+                  "type": "string"
+                },
+                "image_asset_id": {
+                  "default": "",
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "title",
+                "price",
+                "old_price",
+                "image_asset_id",
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "key": "price-tag",
+      "default_data": {
+        "price": "",
+        "old_price": "",
+        "currency": "USD"
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string",
+            "minLength": 1
+          },
+          "old_price": {
+            "default": "",
+            "type": "string"
+          },
+          "currency": {
+            "default": "USD",
+            "type": "string"
+          }
+        },
+        "required": [
+          "price",
+          "old_price",
+          "currency"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
