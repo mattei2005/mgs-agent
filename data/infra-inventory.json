@@ -893,6 +893,19 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-recovery-ebaa2482101e0f4757c25454-H40-D2",
+      "agent": "zeus",
+      "type": "financial_recovery_partial_and_publication_runbook",
+      "authority_message_id": "1569193434189668453",
+      "status": "partial_H40_published_D2_verified_D5_pending",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T0802/recovery-progress-H40-D2-20261118T103548.json",
+      "skill": "meta-manual-payments-planning/references/recurring-refresh.md",
+      "correction": "Canonical verified-only delta manifest excludes already-published IDs; cumulative evidence preserved; full H40 independent GET and H12 exact preservation verified.",
+      "payments_executed": 0,
+      "cron_changes": 0,
+      "gateway_restarts": 0
+    },
+    {
       "id": "recovered-cron-notice-ba6e8b2ae50603792b0ea7db",
       "report_infra_message_id": "1572632008440684555",
       "report_infra_GET_verified": true,

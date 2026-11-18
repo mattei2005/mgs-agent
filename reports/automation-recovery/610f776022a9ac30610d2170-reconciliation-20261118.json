@@ -1,0 +1,54 @@
+{
+  "operation_key": "610f776022a9ac30610d2170",
+  "mode": "resume_safe",
+  "source_alert_id": "1572627488297717840",
+  "source_key": "producer:alerts-infra-failed-alert-resolver.py",
+  "authority": {
+    "message_id": "1569193434189668453",
+    "channel_id": "1569185140502954077",
+    "author_id": "344196393512075265",
+    "get_http": 200,
+    "text": "pode implementar entao as correcoes e prevencoes de tudo."
+  },
+  "diagnosis": {
+    "original_alert": "Cron sem log recente / STALE",
+    "original_alert_get_http": 200,
+    "missed_cron_execution_proven": false,
+    "monitor_dry_run_exit": 0,
+    "target_observation": "alerts-infra-failed-alert-resolver.py | OK | age=19min threshold=20min",
+    "consumer_observation": "service:automation-continuity | OK | consumer phase=dispatching; open=38; durable queue readable",
+    "watchdog_last_check": "2026-11-18T15:30:02Z",
+    "target_alert_still_open_in_watchdog": false,
+    "root_cause_of_original_log_silence": "Not proven. Dispatcher runs workers serially and prints its final tick summary only after drive returns; an active process is not itself proof of completed business work."
+  },
+  "existing_recovery_delivery": {
+    "message_id": "1572631239339409610",
+    "channel_id": "1498132022634483894",
+    "author_id": "1496296175014252634",
+    "get_http": 200,
+    "title": "Cron recuperado",
+    "description": "`alerts-infra-failed-alert-resolver.py` voltou a ter o sinal monitorado saudável (log/execução/entrega).",
+    "content": ""
+  },
+  "ownership": {
+    "queue_state_at_readback": "running",
+    "queue_owner": "supervisor:2134650",
+    "worker_pid": 2146024,
+    "worker_start_ticks": "242601608",
+    "worker_fingerprint_valid": true,
+    "worker_parent_matches_queue_owner": true,
+    "open_requests_for_exact_source": 1,
+    "attempts": 1,
+    "failures": 0,
+    "new_writer_started": false
+  },
+  "actions": {
+    "business_mutations": false,
+    "producer_replayed": false,
+    "recovery_notice_reposted": false,
+    "script_cron_config_modified": false,
+    "gateway_restarted": false,
+    "queue_manually_closed": false
+  },
+  "pending": "Original supervisor must consume this worker result and independently reconcile the next fresh producer observation, queue closure and any required final receipt. Do not launch another resolver or replay already-delivered recovery. The original supervisor is active under its existing flock and five-minute cron."
+}
