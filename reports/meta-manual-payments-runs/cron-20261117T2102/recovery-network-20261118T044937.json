@@ -1,0 +1,264 @@
+{
+  "continuity_key": "d32ee972e0e2f228f2105773",
+  "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+  "mode": "resume_safe",
+  "state": "pending_pc1_offline",
+  "verified_at": "2026-11-18T04:49:37.344284-05:00",
+  "previous_checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/recovery-network-20261118T043921.json",
+  "contract_hash": "825a7653aa8782fbbe23c0d2167eac26cfe36f00bad778f0146d9f746bffd921",
+  "business_refresh_complete": false,
+  "delivery_pending": true,
+  "authority": {
+    "current_registry_authorized": true,
+    "human_author_id": "344196393512075265",
+    "get_verified_this_round": true,
+    "get_verified_message_ids": [
+      "1569193434189668453",
+      "1563960055504838767",
+      "1563960345826037821",
+      "1570799435502588027",
+      "1570815017794674749",
+      "1571982992975597571"
+    ],
+    "get_verified_context_message_ids": [
+      "1563960022252392459",
+      "1570790402829586575",
+      "1570814427081736268"
+    ],
+    "get_evidence": "Sequential live GET of six Rodolfo commands, three context messages and both exact guild/parent thread identities succeeded in this round.",
+    "guild_id": "1185714635991679006",
+    "parent_channel_id": "1496267442899521627",
+    "job": {
+      "id": "2ee720363d7d",
+      "enabled": true,
+      "state": "scheduled",
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-11-17T21:02:00-05:00",
+        "dispatched_at": "2026-11-17T21:02:46.444815-05:00",
+        "lateness_seconds": 46.4,
+        "kind": "on_time"
+      },
+      "next_run_at": "2026-11-18T08:02:00-05:00",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 8,14,21 * * *",
+        "display": "2 8,14,21 * * *"
+      }
+    }
+  },
+  "ownership": {
+    "queue": {
+      "key": "d32ee972e0e2f228f2105773",
+      "source_key": "native:zeus:2ee720363d7d:20261117T2102",
+      "state": "running",
+      "cause": "retry_scheduled",
+      "owner": "supervisor:1790310",
+      "attempts": 46,
+      "failures": 0,
+      "lease_until": 1794996432.121112,
+      "due": 1794995083.4134195,
+      "delivery_id": null
+    },
+    "owner_process": {
+      "pid": 1790310,
+      "start_ticks": "240501985",
+      "alive": true
+    },
+    "worker_receipt": {
+      "pid": 1790473,
+      "start_ticks": "240503007",
+      "started": 1794995232.1374567,
+      "state": "running"
+    },
+    "worker_start_ticks_and_parent_match": true,
+    "original_session": {
+      "id": "local-1c484423dbc70238065c11cdf81f756b9ab3d35f62a5753fe67f4f40be3ccfd3",
+      "ended_at": 1794967771.3813305,
+      "end_reason": "cron_complete"
+    },
+    "native_original_active": false,
+    "financial_workers": [],
+    "writer_lock": "free",
+    "pc1_lease": null,
+    "queue_transition_by_worker": false
+  },
+  "pc1": {
+    "HostName": "PC1",
+    "Online": false,
+    "Active": false,
+    "LastSeen": "2026-11-17T23:10:00.1Z",
+    "local_network": {
+      "BackendState": "Running",
+      "Online": true,
+      "Health": []
+    },
+    "status_reads_this_round": 2,
+    "authentication_observed": false,
+    "ssh_attempts": 0,
+    "gui_attempts": 0,
+    "diagnosis": "Two successful current Tailscale status reads show PC1 offline with unchanged LastSeen; local transport healthy. Remote power/sleep/network/service state cannot be distinguished. No demonstrated safe repair here; no blind SSH/GUI retry. Neither Meta challenge nor PC1 occupancy proven."
+  },
+  "completed_layers": [
+    "funding",
+    "invoices",
+    "metrics",
+    "source_to_sheet_readback"
+  ],
+  "completed_layer_evidence": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261117T2102/partial-receipt.json",
+    "hashes_this_round": {
+      "partial-receipt.json": "da5461ed16f0df0349247301f65eaaa19c4604b9d6e17a8403bb0bff7ecb7df3",
+      "progress.json": "58e4d682f089d1bdcb2f345c4b22f02e2b9323dfb304db62887ec552ddf6321b",
+      "final-workbook.json": "fd3c6837574f0051e2e255105b2a737a6b43795c241284f2116b0abefa355ffc"
+    },
+    "saved_hashes_unchanged": true,
+    "scope": "Preserved artifacts reconciled, not a new live Sheets readback.",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261117T210601408566",
+    "h_directory_files_this_round": [
+      "pc1-surface.json",
+      "prepare-snapshot.json",
+      "targets.json"
+    ],
+    "h_targets_sha256": "d468ba73813db4294ab11f0566ebbaa9ca254be7ad37c123476ae4efc3704ad1",
+    "h_batches_or_visual_manifest_present": false
+  },
+  "pending_account_ids_H": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "pending_account_ids_D": [
+    "1062446663435585",
+    "2323706575049143",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907"
+  ],
+  "pending_ids_parity": {
+    "accounts": 55,
+    "h_targets": 40,
+    "h_unique": 40,
+    "H_equals_contract": true,
+    "D_equals_receipt": true,
+    "D_subset_authorized": true,
+    "h_source": "accounts_list_outstanding_balance"
+  },
+  "pending_layers": [
+    "H40_Accounts_outstanding_balance",
+    "D5_new_generic_events_instrument",
+    "final_API_reconciliation_and_validation",
+    "canonical_idempotent_business_delivery_and_GET"
+  ],
+  "canonical_delivery_precondition": {
+    "source_inspected_this_round": true,
+    "occurrence_registered_in_RECOVERIES": false,
+    "adapter_account_gates": 47,
+    "adapter_h_gates": 36,
+    "supervisor_dispatch_covers_this_occurrence": false,
+    "adaptation_performed": false,
+    "completed_financial_validation_receipt_exists": false,
+    "diagnosis": "55/40 occurrence still requires scoped canonical adapter/dispatch adaptation and tests before business delivery; older 47/36 receipts must not be reused."
+  },
+  "continuity": {
+    "service": {
+      "enabled": true,
+      "heartbeat": {
+        "at": 1794995232.1160257,
+        "phase": "dispatching",
+        "pid": 1790310
+      },
+      "worker_failure_streak": 0
+    },
+    "consumer_alive": true,
+    "existing_consumer_cron": [
+      "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    ],
+    "recent_events": [
+      {
+        "id": 12700,
+        "at": 1794995232.121112,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1790310\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12688,
+        "at": 1794994783.4134195,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794995083.4134195, \"state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12687,
+        "at": 1794994633.576098,
+        "kind": "claimed",
+        "detail": "{\"owner\": \"supervisor:1782629\", \"previous_state\": \"retry_scheduled\"}"
+      },
+      {
+        "id": 12674,
+        "at": 1794994179.3037283,
+        "kind": "deferred",
+        "detail": "{\"cause\": \"retry_scheduled\", \"due\": 1794994479.3037283, \"state\": \"retry_scheduled\"}"
+      }
+    ],
+    "prior_retry_consumed": true,
+    "retry_at": null,
+    "retry_condition": "Owning supervisor must persist next backoff after consuming this response. Worker did not change queue or register a future retry.",
+    "older_separate_incident": {
+      "key": "e67b9e22a17027e23728d532",
+      "state": "blocked_decision",
+      "cause": "source_scope_changed",
+      "owner": null
+    },
+    "next_authorized_step": "After positive PC1 connectivity, reconcile owner, native claim, global lease and saved writes. Resume only missing H40/D5 with canonical workers in the same approved Chrome; persist each batch. Do not replay funding/invoices. Then final API reconciliation, whole readback, scoped canonical 55/40 delivery adaptation/tests and accepted-message GET. Preserve the older scope gate and this occurrence; a future slot does not close it."
+  },
+  "no_mutation": {
+    "checkpoint_only": true,
+    "google_writes": 0,
+    "meta_writes": 0,
+    "gui_inputs": 0,
+    "business_messages_sent": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "infrastructure_changes": 0,
+    "gateway_restarts": 0
+  },
+  "local_artifact_note": "Only this isolated scratch probe and one distinct durable evidence checkpoint written. No business writes, infra changes, queue transitions or messages."
+}
