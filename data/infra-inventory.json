@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-17T19:55:36.260114-05:00",
+    "updated_at": "2026-11-17T19:56:26.583911-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -69027,20 +69027,17 @@
       "new_critical_confirmation_pending": false,
       "existing_approvals_applicable": false,
       "report_infra": {
-        "message_id": "1572345517088968915",
+        "message_id": "1572415060339327079",
         "channel_id": "1498132022634483894",
         "exact_GET_readback_verified": true,
         "content_empty": true,
         "embed_count": 1,
         "mentions_empty": true,
-        "same_message_edited_no_second_post": true,
         "manifest_sha256": "2bd02d697289938382699ffe82ca24aee1e692cf0cf0bd799d967e1861c29537",
-        "active_files": 339,
-        "prior643_draft_withdrawn": true,
-        "all304_media_preserved": true,
-        "at": "2026-11-17T15:48:33.027592-05:00"
+        "action": "removida",
+        "at": "2026-11-17T19:56:04.751539-05:00"
       },
-      "report_infra_status": "pending_execution_report",
+      "report_infra_status": "exact_GET_readback_verified_execution339",
       "updated_at": "2026-11-17T19:55:36.260114-05:00",
       "next_step": "None. Consolidated review closed within documented coverage; preserve all exclusions. No implicit deletion/retention/cron changes.",
       "deleted_directories": 0,
@@ -69051,7 +69048,8 @@
       "replay_blocked": true,
       "failed_systemd_units": 0,
       "config_checks_pass": 3,
-      "final_evidence": "data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json"
+      "final_evidence": "data/storage-consolidated-review-1572313312987979957/finance-final/retirement-final.json",
+      "governance_status": "completed_validated"
     },
     {
       "id": "gaudi-draft-test-1572412858980110378",
