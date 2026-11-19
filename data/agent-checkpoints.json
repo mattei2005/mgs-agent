@@ -1802,6 +1802,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1573041058390999141",
+      "next_step": "Concluido; nao reenviar. Atraso SB85min em cinco contas e25min em Vizioid. Yolo08 campanhas059e062 sem investimento/receitas SB, consolidados n/d; valores conhecidos preservados. Boostingecon sem entrega/atividade SB, receita/ROI n/d. Novo pedido exige fontes novas; agendas preservadas.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1573041058390999141/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;125campanhas_no_recorte_financeiro;40partes_integrais+7resumos;47mensagens_unicas_get;ordem_confirmada;corte19/11/2026_13:24a13:25est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-19T18:31:49+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -11718,5 +11728,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T18:09:14+00:00"
+  "updated_at": "2026-11-19T18:31:49+00:00"
 }
