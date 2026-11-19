@@ -18,6 +18,15 @@ def path(base,rid):
  job_path(base,rid)
  return root(base)/'queue/external-block-holds'/(rid+'.json')
 def present(base,rid):return path(base,rid).exists()
+def successor_path(base,rid,successor_id):
+ from .shein_request_queue import job_path
+ job_path(base,successor_id)
+ return path(base,rid).parent/'successors'/rid/(successor_id+'.json')
+def selected_receipt(base,rid,resume_request):
+ if resume_request is not None:
+  extra=successor_path(base,rid,resume_request['request_id'])
+  if extra.exists():return extra
+ return path(base,rid)
 def read(p):
  v=json.loads(Path(p).read_text())
  if not isinstance(v,dict):raise ValueError('coordination object required')
@@ -38,12 +47,22 @@ def pins(base,rid,account):
 def validate(base,value,*,resume_request=None):
  from .shein_request_queue import job_path
  old=value['request'];rid=old['request_id'];account=str(old['account'])
- rec=read(path(base,rid));policy=read(base/POLICY)
- grant=policy.get('receipts',{}).get(rid,{})
+ receipt_path=selected_receipt(base,rid,resume_request)
+ rec=read(receipt_path);policy=read(base/POLICY)
+ if receipt_path!=path(base,rid) and resume_request is not None:
+  parent=read(path(base,rid))
+  parent_grant=policy.get('receipts',{}).get(rid,{})
+  if (parent_grant.get('receipt_sha256')!=sha(path(base,rid))
+      or parent.get('pins')!=pins(base,rid,account)
+      or rec.get('parent_receipt_sha256')!=sha(path(base,rid))
+      or rec.get('previous_successor_request_id')!=parent['successor_request']['request_id']):
+   raise ValueError('external block successor parent receipt mismatch')
+  grant=policy.get('successor_receipts',{}).get(rid,{}).get(resume_request['request_id'],{})
+ else:grant=policy.get('receipts',{}).get(rid,{})
  if (rec.get('classification')!=CLASSIFICATION or rec.get('schema_version')!=1
      or rec.get('request_id')!=rid or rec.get('account_id')!=account
      or rec.get('pins')!=pins(base,rid,account)
-     or grant.get('receipt_sha256')!=sha(path(base,rid))
+     or grant.get('receipt_sha256')!=sha(receipt_path)
      or rec.get('qa_certified') is not False or rec.get('reservation_release') is not False
      or rec.get('campaign_writes')!=0 or rec.get('drive_writes')!=0
      or value.get('phase')!='POSTPROCESS_PENDING'
@@ -136,7 +155,21 @@ def reconcile(base,predecessor,successor,approval_message_id):
   lock=stack.enter_context(lease_lock.open('a+'));fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
   if not lease_idle(_engine_root(base),read(lease_lock.with_suffix('.json'))):raise ValueError('external block writer lease busy')
   if any(read(q.job_path(base,rid)).get('status')=='RUNNING' for rid in [predecessor,successor['request_id']]):raise ValueError('external block dispatch running')
-  if present(base,predecessor):return validate(base,q.state(base,predecessor),resume_request=successor)
+  # Append a separately authorized admission; never replace the original receipt.
+  parent=None;receipt_path=path(base,predecessor)
+  if present(base,predecessor):
+   existing=validate(base,q.state(base,predecessor))
+   extra=successor_path(base,predecessor,successor['request_id'])
+   if contains(existing['successor_request'],successor) or extra.exists():
+    return validate(base,q.state(base,predecessor),resume_request=successor)
+   if approval_message_id==existing['approval']['message_id']:
+    raise ValueError('external block fresh successor approval required')
+   if not q.terminal(q.state(base,existing['successor_request']['request_id'])):
+    raise ValueError('external block previous successor not terminal')
+   parent=existing;receipt_path=extra
+  policy_lock=stack.enter_context((base/POLICY).with_suffix('.lock').open('a+'))
+  fcntl.flock(policy_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  policy=read(base/POLICY)
   old=q.state(base,predecessor);cp=read(_engine_root(base)/'checkpoints'/(predecessor+'-'+account+'.json'))
   if old['phase']!='POSTPROCESS_PENDING' or old['engine_result']['status']!='COMPLETE_PAUSED' or cp['status']!='COMPLETE' or set(cp['campaign_ids'])!=set(old['engine_result']['campaign_ids']):raise ValueError('external block predecessor not eligible')
   rec={'schema_version':1,'classification':CLASSIFICATION,'request_id':predecessor,'account_id':account,'campaign_ids':old['engine_result']['campaign_ids'],'pins':pins(base,predecessor,account),'successor_request':successor,'approval':{'message_id':approval_message_id,'author_id':msg['author']['id'],'channel_id':msg['channel_id'],'content':msg['content']},'qa_certified':False,'reservation_release':False,'campaign_writes':0,'drive_writes':0,'recorded_at':datetime.now(timezone.utc).isoformat()}
@@ -153,7 +186,11 @@ def reconcile(base,predecessor,successor,approval_message_id):
    for ad in campaign['ads']:historical.update(tuple(i) for i in ad['primary_media'])
   historical,_=expand(historical,inventory);selected_media,_=expand(_media(selected),inventory)
   if historical & selected_media or any(v.get('reservation_request_id') not in {None,'',successor['request_id']} for v in selected):raise ValueError('external block shared or reserved media')
-  q.atomic(path(base,predecessor),rec)
-  policy.setdefault('receipts',{})[predecessor]={'receipt_sha256':sha(path(base,predecessor)),'approval_message_id':approval_message_id,'approval_content_sha256':hashlib.sha256(msg['content'].encode()).hexdigest()}
+  if parent:
+   rec.update(parent_receipt_sha256=sha(path(base,predecessor)),previous_successor_request_id=parent['successor_request']['request_id'])
+  q.atomic(receipt_path,rec)
+  grant={'receipt_sha256':sha(receipt_path),'approval_message_id':approval_message_id,'approval_content_sha256':hashlib.sha256(msg['content'].encode()).hexdigest()}
+  if parent:policy.setdefault('successor_receipts',{}).setdefault(predecessor,{})[successor['request_id']]=grant
+  else:policy.setdefault('receipts',{})[predecessor]=grant
   q.atomic(base/POLICY,policy)
   return validate(base,old,resume_request=successor)

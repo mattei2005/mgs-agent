@@ -85,4 +85,47 @@ class ExternalCoordinationTests(unittest.TestCase):
   self.create();job=e.read(q.job_path(self.base,self.oldid))
   with patch.object(q.subprocess,'run',side_effect=AssertionError('writer reached')):q._tick_locked(job,self.base)
 
+ def next_successor(self,terminal=True):
+  self.create()
+  q.atomic(self.root/'single-clone'/self.newid/'state.json',{'request':copy.deepcopy(self.request),'phase':'COMPLETE_FUTURE_ACTIVE' if terminal else 'POSTPROCESS_PENDING','summary':{'campaigns':[{'id':'200'}]} if terminal else {}})
+  request={**copy.deepcopy(self.request),'request_id':'test-next'}
+  q.atomic(q.job_path(self.base,request['request_id']),{'request_id':request['request_id'],'request':request,'status':'FOREGROUND_OWNED','maintenance_hold':True})
+  self.msg.update(id='99999999999999998',author={'id':'1055570806945620030'},content='OK separate request coordination')
+  return request
+ def test_additional_successor_separate_receipt_no_replacement(self):
+  request=self.next_successor();original=e.path(self.base,self.oldid).read_bytes();grant=copy.deepcopy(e.read(self.base/e.POLICY)['receipts']);before=e.pins(self.base,self.oldid,self.account)
+  first=e.reconcile(self.base,self.oldid,request,self.msg['id']);second=e.reconcile(self.base,self.oldid,request,self.msg['id'])
+  self.assertEqual(first,second);self.assertEqual(original,e.path(self.base,self.oldid).read_bytes());self.assertEqual(grant,e.read(self.base/e.POLICY)['receipts']);self.assertEqual(before,e.pins(self.base,self.oldid,self.account));self.assertEqual(q.dependencies(request,self.account,self.base),[])
+  self.assertEqual(e.validate(self.base,self.old)['successor_request'],self.request);self.assertEqual(e.validate(self.base,self.old,resume_request=request)['successor_request'],request)
+  with self.assertRaises(ValueError):manual.deny_replay(self.base,self.oldid)
+ def test_additional_successor_requires_terminal_parent(self):
+  request=self.next_successor(terminal=False)
+  with self.assertRaisesRegex(ValueError,'previous successor not terminal'):e.reconcile(self.base,self.oldid,request,self.msg['id'])
+ def test_additional_successor_cannot_reuse_old_approval(self):
+  request=self.next_successor();self.msg['id']='99999999999999999'
+  with self.assertRaisesRegex(ValueError,'fresh successor approval'):e.reconcile(self.base,self.oldid,request,self.msg['id'])
+ def test_additional_successor_grant_missing_fails_closed(self):
+  request=self.next_successor();e.reconcile(self.base,self.oldid,request,self.msg['id']);policy=e.read(self.base/e.POLICY);policy['successor_receipts']={};q.atomic(self.base/e.POLICY,policy)
+  with self.assertRaises(ValueError):e.validate(self.base,self.old,resume_request=request)
+ def test_additional_successor_digest_and_parent_pins(self):
+  request=self.next_successor();e.reconcile(self.base,self.oldid,request,self.msg['id']);p=e.successor_path(self.base,self.oldid,request['request_id']);saved=p.read_bytes();p.write_text('{}')
+  with self.assertRaises(ValueError):e.validate(self.base,self.old,resume_request=request)
+  p.write_bytes(saved);e.path(self.base,self.oldid).write_text('{}')
+  with self.assertRaises(ValueError):e.validate(self.base,self.old,resume_request=request)
+ def test_additional_successor_material_change_rejected(self):
+  request=self.next_successor();e.reconcile(self.base,self.oldid,request,self.msg['id'])
+  for key in ['budget_usd','quantity','start_time','account','source_channel_id']:
+   changed={**request,key:'changed'}
+   with self.assertRaises(ValueError):e.validate(self.base,self.old,resume_request=changed)
+ def test_additional_successor_shared_or_reserved_media(self):
+  request=self.next_successor();self.selected[0]['video_id']='10'
+  with self.assertRaises(ValueError):e.reconcile(self.base,self.oldid,request,self.msg['id'])
+  self.selected[0].update(video_id='20',reservation_request_id='foreign')
+  with self.assertRaises(ValueError):e.reconcile(self.base,self.oldid,request,self.msg['id'])
+ def test_additional_successor_own_resume_lease(self):
+  request=self.next_successor();e.reconcile(self.base,self.oldid,request,self.msg['id'])
+  q.atomic(self.root/'single-clone'/request['request_id']/'state.json',{'request':request,'phase':'POSTPROCESS_PENDING'})
+  q.atomic(self.engine/'writer-leases'/(self.account+'.json'),{'account_id':self.account,'request_id':request['request_id'],'status':'RECOVERY_PENDING','blocks_readers':True})
+  self.assertTrue(e.validate(self.base,self.old,resume_request=request));self.assertTrue(e.verify_live(self.base,self.old,resume_request=request))
+
 if __name__=='__main__':unittest.main()
