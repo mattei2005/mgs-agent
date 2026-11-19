@@ -1793,12 +1793,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1573009893793865840",
-      "next_step": "Confirmar identidades live e dia civil; coletar fontes novas; validar, publicar e reconciliar integral e resumo nas sete threads.",
+      "next_step": "Concluido; nao reenviar. Atraso SB81min nas seis contas com atividade; Boostingecon sem entrega ou atividade SB e receitas/ROI n/d. Novo pedido exige fontes novas; agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1573009893793865840/request.json",
-      "state": "intake_authenticated_seven_pairs",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1573009893793865840/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;119campanhas_no_recorte_financeiro;38partes_integrais+7resumos;45mensagens_unicas_get;ordem_confirmada;corte19/11/2026_11:20a11:21est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-19T16:20:28+00:00"
+      "updated_at": "2026-11-19T16:27:47+00:00"
     },
     {
       "agent": "ares",
@@ -4500,6 +4500,16 @@
       "state": "complete_verified:051,052,053,054,055,056,057,058;8campanhas16anuncios active;usd55/dia e cocap0.90;19nov2026 00h05est;qa integral,ids,copy,tracking e readback confirmados",
       "thread_id": "1570857869790945455",
       "updated_at": "2026-11-19T01:59:11+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-1573011736452136972",
+      "next_step": "Obtain scoped approval from Nicolas in origin for coordination-only admission of all four immutable lines; do not resume predecessors. Reconcile central receipts then dry-run/execute sequentially with QA and exact final readback.",
+      "objective": "Oito duplicacoes Mavroa06 fontes238,243,246,239 x2 USD45 cada;19nov2026 12:01/12:02 EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573011736452136972/aggregate-progress.json",
+      "state": "waiting_scoped_coordination_approval:0campaignwrites;primeira linha queued com3dependencias historicas;servico ativo;4inputs completos preservados,totalusd360/dia. anteriores relidos porget,semwrite;recibos anteriores nao vinculam sucessor atual.",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-19T16:32:10+00:00"
     },
     {
       "agent": "ares",
@@ -11678,5 +11688,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T16:20:28+00:00"
+  "updated_at": "2026-11-19T16:32:10+00:00"
 }
