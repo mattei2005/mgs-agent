@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime
 P=Path(__file__).parent
 SPEC=importlib.util.spec_from_file_location('updates_amendment',Path('/root/.hermes/profiles/ares/scripts/shein-g004-cpr-roi-20261119.py'))
+assert SPEC is not None and SPEC.loader is not None
 n=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(n)
 
 def extra(e):

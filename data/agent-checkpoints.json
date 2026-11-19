@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1572979659728097413",
-      "next_step": "Resolver hierarquia por IDs, congelar alteradas ate emenda, deduplicar com nominais/novas; QA, dry-run e entrega; preservar agenda e recibos anteriores.",
-      "objective": "CPR e ROI cada30min nominais, futuras e campanhas alteradas hoje Yolokfx04 G004",
+      "next_step": "Executar mesmo job proximo10h13EST e a cada30min ate23h43EST19nov, expirar20nov00hEST antesAPI. Descobrir somente criacoes futuras autorizadas; edicoes congeladas ate emenda, pausadas e IDs admitidos preservados; retomar mesmo slot/outbox em falha.",
+      "objective": "CPR e ROI cada30min nominais, futuras e alteradas hoje Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1572979659728097413/manifest.json",
-      "state": "emenda1572985734569263105 autenticada;116activities coletadas ate09h43m43est. agenda original ativa e preservada; selecionando alteradas reais sem processamento/revisao.",
+      "state": "emenda1572985734569263105 aplicada_get_verified;activities116 completas ate09h43m43est;12antigas alteradas,5adicionais273277295298301;15unicas no corte09h49est;48testespass;agenda original e recibos preservados;reportinfraget;metasbsomenteleitura.",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-19T14:45:08+00:00"
+      "updated_at": "2026-11-19T14:49:52+00:00"
     },
     {
       "agent": "ares",
@@ -1779,6 +1779,16 @@
       "state": "complete_get_verified_and_reconciled;7pares;126campanhas_no_recorte_financeiro;38partes_integrais+7resumos;45mensagens_unicas_get;ordem_confirmada;corte18/11/2026_19:28est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass",
       "thread_id": "1567162580273729629",
       "updated_at": "2026-11-19T00:35:30+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1572986585014603867",
+      "next_step": "Concluido; nao reenviar. Atraso SB49min em cinco contas e109min em Growpowerhub; Boostingecon sem entrega ou atividade SB e receitas/ROI n/d. Novo pedido exige fontes novas; agendas preservadas.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1572986585014603867/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;119campanhas_no_recorte_financeiro;38partes_integrais+7resumos;45mensagens_unicas_get;ordem_confirmada;corte19/11/2026_09:48a09:49est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-19T14:55:34+00:00"
     },
     {
       "agent": "ares",
@@ -11648,5 +11658,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T14:45:08+00:00"
+  "updated_at": "2026-11-19T14:55:34+00:00"
 }
