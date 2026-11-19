@@ -12,6 +12,9 @@ Atualize o agregador antes de passar à próxima fonte: números/IDs novos, anú
 
 ## 2. Resolver a definição sem despejar payloads
 
+O erro legado `new-media creative reused a source post` também pode significar `effective_object_story_id` ausente, não igualdade com um post da fonte. Projete separadamente ausência e igualdade literal antes de diagnosticar reutilização. Confira a cobertura do readback e o TTL real do audit; com snapshot incompleto expirado, retome somente o QA do mesmo request pelo runner central, preservando IDs e provas já válidas. Não recrie anúncios nem remova o gate por esse texto de erro.
+
+
 Inspecione o tipo de `state.target_manifest` antes de tratá-lo como caminho: o runner single-clone pode guardar ali o manifest embutido, com `campaigns`. Indexe as definições por nome canônico exato e confronte cada árvore com sua própria definição. Não imprima o manifest inteiro para descobrir o schema: creative payloads podem conter thumbnails com URLs temporárias assinadas e centenas de campos de features.
 
 Projete na saída somente conta, número/IDs, fase, budget, lance, horário e resultados das comparações. Preserve a definição completa no registro canônico existente e use-a em memória durante a verificação.

@@ -6783,6 +6783,23 @@
       "updated_at": "2026-11-15T04:17:08+00:00"
     },
     {
+      "canonical_key": "ares.shein.1663268201836138.campaign-numbering-exclusions",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json",
+      "consumers": [
+        "ares_campaign_v3.shein_single_clone"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-19T01:40:46+00:00",
+      "id": "ARES-YOLO08-NUMBERING-TEST-888",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Yolokfx08G006 excluir teste888 da sequencia operacional por ID exato",
+      "updated_at": "2026-11-19T01:40:46+00:00"
+    },
+    {
       "canonical_key": "content.wordpress.scoped-author-security-exception-qa",
       "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/scoped-author-security-exception-qa.md",
       "consumers": [
@@ -17885,5 +17902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-18T20:35:06+00:00"
+  "updated_at": "2026-11-19T01:40:46+00:00"
 }
