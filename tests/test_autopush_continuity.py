@@ -92,5 +92,89 @@ class AutopushContinuityTests(unittest.TestCase):
         self.assertNotEqual(q.get(row['key'])['state'], 'completed_validated')
 
 
+class IndexLockContinuityTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.base = Path(self.temp.name)
+        (self.base / 'data').mkdir()
+        self.receipt = {'operation_key': target.INDEX_KEY, 'alert_id': target.INDEX_ALERT,
+                        'authority_message_id': '1569193434189668453',
+                        'status': 'recovered_waiting_supervisor_validation',
+                        'recovery_not_before': 100}
+        self.state = {'last_check': '1970-01-01T00:02:00Z',
+                      'consecutive_failures': 0, 'last_failure_details': []}
+        self.save()
+
+    def save(self):
+        (self.base / 'recovery-evidence.json').write_text(json.dumps(self.receipt))
+        (self.base / 'data/auto-push-monitor.json').write_text(json.dumps(self.state))
+
+    def observe(self, reader=None, db=None):
+        return target.index_lock_observation(self.base, self.base, db,
+                                            reader or (lambda *args: {'live': True}), now=150)
+
+    def test_exact_occurrence(self):
+        self.assertTrue(self.observe()['verified'])
+        self.assertEqual(self.observe()['target'], 'alert:' + target.INDEX_ALERT)
+
+    def test_wrong_alert_not_green(self):
+        self.receipt['alert_id'] = target.ALERT; self.save()
+        self.assertFalse(self.observe()['verified'])
+
+    def test_partial_receipt_not_green(self):
+        self.receipt['status'] = 'waiting_native_retry'; self.save()
+        self.assertFalse(self.observe()['verified'])
+
+    def test_old_monitor_not_green(self):
+        self.receipt['recovery_not_before'] = 130; self.save()
+        self.assertFalse(self.observe()['verified'])
+
+    def test_failure_not_green(self):
+        self.state['consecutive_failures'] = 1; self.save()
+        self.assertFalse(self.observe()['verified'])
+
+    def test_readback_failure_not_green(self):
+        def fail(*args):
+            raise ValueError('GET failed')
+        self.assertFalse(self.observe(fail)['verified'])
+
+    def test_concurrent_mutation_not_green(self):
+        def mutate(*args):
+            self.state['consecutive_failures'] = 1; self.save()
+            return {'live': True}
+        self.assertFalse(self.observe(mutate)['verified'])
+
+    def test_closed_does_not_probe(self):
+        path = self.base / 'queue.db'
+        with sqlite3.connect(path) as db:
+            db.execute('CREATE TABLE requests(key TEXT,source_key TEXT,state TEXT)')
+            db.execute('INSERT INTO requests VALUES(?,?,?)', (target.INDEX_KEY, 'alert:' + target.INDEX_ALERT, 'completed_validated'))
+        self.assertIsNone(self.observe(lambda *args: self.fail('closed probe'), path))
+
+    def test_owner_and_decision_gates_preserved(self):
+        from mgs_automation_continuity import Queue
+        from mgs_automation_supervisor import drive
+        q = Queue(self.base / 'queue.db'); self.addCleanup(q.close)
+        row = q.enqueue('alert:' + target.INDEX_ALERT, {'kind': 'alert'}, 'alert_unresolved', now=90)
+        def drive_once(active=False):
+            drive(q, {row['source_key']: self.observe()}, lambda *args: self.fail('replay'),
+                  lambda: False, lambda source: active, lambda *args: None, now=150, max_jobs=0)
+        drive_once(True)
+        self.assertNotEqual(q.get(row['key'])['state'], 'completed_validated')
+        q.defer(row['key'], 'blocked_decision', 'decision', now=150)
+        drive_once()
+        self.assertEqual(q.get(row['key'])['state'], 'blocked_decision')
+
+    def test_independent_closure_without_replay(self):
+        from mgs_automation_continuity import Queue
+        from mgs_automation_supervisor import drive
+        q = Queue(self.base / 'queue.db'); self.addCleanup(q.close)
+        row = q.enqueue('alert:' + target.INDEX_ALERT, {'kind': 'alert'}, 'alert_unresolved', now=90)
+        drive(q, {row['source_key']: self.observe()}, lambda *args: self.fail('replay'),
+              lambda: False, lambda source: False, lambda *args: None, now=150, max_jobs=0)
+        self.assertEqual(q.get(row['key'])['state'], 'completed_validated')
+
+
 if __name__ == '__main__':
     unittest.main()

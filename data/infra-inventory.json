@@ -893,6 +893,31 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-index-lock-recovery-3e1e5a580dd9f2151ef142e8",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1572894488660017277",
+      "cause": "Transient Git index lock blocked native staging; competing process not identified. Lock absent at reconciliation, not removed by recovery.",
+      "paths": [
+        "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_autopush_continuity.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+      ],
+      "correction": "Preserved native batching retry; added read-only exact-occurrence verification requiring native commit/push, current remote ancestry, fresh healthy monitor and GET of existing recovery notice. No second writer or dispatcher.",
+      "native_retry_commit": "99cb57628ab82a4d46bd9d8f6f069c17b384e4c2",
+      "recovery_notice_id": "1572896078959878189",
+      "recovery_notice_get_verified": true,
+      "validation": "44 adapter/monitor/owner regression tests PASS; 18 initial existing tests PASS (overlap, not additive). Live exact-alert observer OK/verified=true. Native watcher PID 1206220 unchanged. Canonical monitor zero failures. Skill canonical/mirror SHA256 equal.",
+      "receipt": "/root/.hermes/shared/automation-continuity/runs/3e1e5a580dd9f2151ef142e8/recovery-evidence.json",
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/3e1e5a580dd9f2151ef142e8/rollback",
+      "status": "target_and_delivery_validated_original_supervisor_closure_pending",
+      "manual_stage_commit_push": false,
+      "cron_changes": false,
+      "credentials_changed": false,
+      "gateway_restart": false
+    },
+    {
       "agent": "zeus",
       "authority_message_id": "1569193434189668453",
       "business_delivery_message_id": "1572646146399273201",
@@ -73380,13 +73405,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 36475,
-      "modified_at": "2026-11-18T11:12:40-05:00"
+      "size_bytes": 36667,
+      "modified_at": "2026-11-19T08:45:56.476349+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
-      "size_bytes": 4331,
-      "modified_at": "2026-11-17T17:04:54-05:00"
+      "size_bytes": 10089,
+      "modified_at": "2026-11-19T08:46:40.829558+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",

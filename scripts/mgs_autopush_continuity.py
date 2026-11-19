@@ -113,12 +113,23 @@ def index_lock_live_check(base, receipt):
     embed = source['embeds'][0]
     if embed.get('title') != 'Auto-push falhando' or embed.get('color') != 15158332:
         raise ValueError('Source scope changed')
+    source_fields = {f['name']: f['value'] for f in embed.get('fields', [])}
+    if 'auto-commit falhou [commit/push não iniciou; consultar auto-commit-watcher.log]' not in source_fields.get('Último erro', ''):
+        raise ValueError('Source failure changed')
+    source_at = datetime.fromisoformat(source['timestamp'].replace('Z', '+00:00')).timestamp()
+    if receipt['recovery_not_before'] < source_at:
+        raise ValueError('Receipt predates source')
+    push_times = re.findall(r'^\[([^]]+)\] auto-push OK commit=' + commit[:10] + r' branch=main$', push, re.M)
+    if not any(datetime.fromisoformat(stamp).timestamp() >= source_at for stamp in push_times):
+        raise ValueError('Retry predates incident')
     notice = request('GET', collection_url('1498132022634483894') + '/' + receipt['recovery_notice_id'])
     embeds = notice.get('embeds', [])
     if str(notice.get('author', {}).get('id')) != '1496296175014252634' or notice.get('content') != '' or len(embeds) != 1:
         raise ValueError('Untrusted recovery notice')
     if embeds[0].get('title') != 'Auto-push restabelecido' or embeds[0].get('color') != 3066993:
         raise ValueError('Recovery delivery mismatch')
+    if datetime.fromisoformat(notice['timestamp'].replace('Z', '+00:00')).timestamp() < source_at:
+        raise ValueError('Recovery notice predates incident')
     fields = {f['name']: f['value'] for f in embeds[0].get('fields', [])}
     if fields.get('Último commit OK', '').strip('`') != commit[:10]:
         raise ValueError('Recovery notice commit mismatch')
@@ -132,8 +143,12 @@ def index_lock_observation(base=BASE, root=None, queue_path=DB, reader=None, now
     if not path.exists():
         return None
     if queue_path is not None:
-        with sqlite3.connect(f'file:{queue_path}?mode=ro', uri=True) as db:
-            row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (INDEX_KEY,)).fetchone()
+        from contextlib import closing
+        try:
+            with closing(sqlite3.connect(f'file:{queue_path}?mode=ro', uri=True)) as db:
+                row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (INDEX_KEY,)).fetchone()
+        except sqlite3.Error:
+            return None
         if not row or row[0] != 'alert:' + INDEX_ALERT or row[1] in ('completed_validated', 'cancelled_owner'):
             return None
     now = time.time() if now is None else now
