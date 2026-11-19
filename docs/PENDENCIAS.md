@@ -4,8 +4,8 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-09-14T00:59:03-04:00  
-**Total abertas:** 56  
+**Última atualização:** 2026-11-18T23:01:31-05:00  
+**Total abertas:** 57  
 **Total resolvidas:** 43
 
 ---
@@ -14,7 +14,7 @@
 
 | Prioridade | Quantidade |
 |---|---|
-| 🔴 alta | 1 |
+| 🔴 alta | 2 |
 | 🟡 media | 18 |
 | 🟢 baixa | 37 |
 
@@ -22,8 +22,8 @@
 
 - `agente`: 11
 - `infra`: 10
+- `monitor`: 8
 - `skills`: 7
-- `monitor`: 7
 - `conteudo`: 6
 - `externo`: 5
 - `pessoal`: 4
@@ -34,11 +34,12 @@
 
 ---
 
-## 🔴 ALTA (1 itens)
+## 🔴 ALTA (2 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
 | `PEND-099` | Concluir enrollment MFA dos seis usuários | `seguranca` | ação individual | Cada usuário precisa acessar com a própria senh... |
+| `PEND-100` | Arquivo 30 TB: atalho original na lixeira bloqueia monitor | `monitor` | 15min apos decisao | Autoridade da colocacao do atalho na lixeira na... |
 
 ## 🟡 MÉDIA (18 itens)
 
