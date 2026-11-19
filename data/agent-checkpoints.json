@@ -4454,22 +4454,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-1572778184741621803",
-      "next_step": "Preparar midia pela rota central,depois dry-run,Enginev3,QA integral e readback",
-      "objective": "Duplicar C018 dez vezes Yolokfx08G006 USD55 COCAP0.90 para19nov2026 00h05EST com24videos e copy literal",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572778184741621803/request.json",
-      "state": "request_authenticated:10grupos24videos;autoridade live;midia pendente",
+      "next_step": "Concluido;responder nativamente com bloco Iris;nenhum replay",
+      "objective": "DuplicarC018 em10campanhasYolokfx08G006 com midia/copy expressas USD55 COCAP0.90 19nov00h05EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572784399400042680/final-combined-receipt.json",
+      "state": "complete_verified:041,042,043,044,045,046,047,048,049,050;10campanhas24anuncios active;usd55/dia e cocap0.90;19nov2026 00h05est;qa integral,ids,copy,tracking e readback confirmados",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-19T01:05:58+00:00"
+      "updated_at": "2026-11-19T01:59:11+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-1572784399400042680",
-      "next_step": "Preparar midia central,dry-run,Enginev3,QA integral e readback",
-      "objective": "Pedido2 independente:Duplicar C018 oito vezes Yolokfx08G006 USD55 COCAP0.90 para19nov2026 00h05EST com16videos Exclusivos e copy literal",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572784399400042680/request.json",
-      "state": "request_authenticated:8grupos16videos;pedido1concluido;midia pendente",
+      "next_step": "Concluido;responder nativamente com bloco Iris;nenhum replay",
+      "objective": "DuplicarC018 em8campanhasYolokfx08G006 com midia/copy expressas USD55 COCAP0.90 19nov00h05EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572784399400042680/final-combined-receipt.json",
+      "state": "complete_verified:051,052,053,054,055,056,057,058;8campanhas16anuncios active;usd55/dia e cocap0.90;19nov2026 00h05est;qa integral,ids,copy,tracking e readback confirmados",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-19T01:31:41+00:00"
+      "updated_at": "2026-11-19T01:59:11+00:00"
     },
     {
       "agent": "ares",
@@ -4494,12 +4494,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-CREATE-1572779977701724274",
-      "next_step": "Confirmacao delimitada de Nicolas para novo vinculo de coordenacao,sem tocar campanhas/provas/reservas antigas;depois retomar mesmo prepare-media,dry-run e Enginev3",
-      "objective": "Duplicar185 em13campanhas Mavroa06,26videos,USD55,COCAP0.90,19nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572779977701724274/coordination-maintenance/maintenance-validation.json",
-      "state": "needs_coordination_scope_confirmation:recibo existente vinculado somente a lote anterior terminal;13novas nao criadas,0uploads;26linhagens disjuntas sem reservas;143testes verdes;predecessor e provas preservados",
+      "next_step": "Aguardar executor atual terminar QA,pós-processamento e ativacao;GET integral e UTMs para Iris antes de concluir",
+      "objective": "13copias185 Mavroa06,USD55,COCAP0.90,26videosES,inicio19nov2026 00h15EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1572779977701724274/state.json",
+      "state": "recovery_active:confirmacao1572783265549389869;admissao separada validada sem alterar predecessor;13campanhas criadaspaused;retomada qa/readback central com mesmosids",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-19T01:14:08+00:00"
+      "updated_at": "2026-11-19T01:51:41+00:00"
     },
     {
       "agent": "zeus",
@@ -11598,5 +11598,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T01:31:41+00:00"
+  "updated_at": "2026-11-19T01:59:11+00:00"
 }
