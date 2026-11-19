@@ -504,11 +504,47 @@ def seal_creation_pair(draft, config, registry):
     return creation, target, barrier
 
 
+def numbering_inventory(inventory):
+    """Exclude exact operator-designated test IDs only from sequence calculation.
+
+    Full inventory remains intact for identity, collision and write guards.
+    Policies live in the account-bound canonical SHEIN profile, not requests.
+    """
+    profile = CURRENT_PROFILE.get() or {}
+    policy = profile.get('campaign_numbering_exclusions')
+    if policy is None:
+        return inventory
+    if (not isinstance(policy, dict) or policy.get('account_id') != profile.get('account_id')
+            or policy.get('source_channel_id') != profile.get('channel_id')
+            or not all(re.fullmatch(r'[0-9]{17,20}', str(policy.get(key) or ''))
+                       for key in ['authorized_by', 'source_thread_id', 'source_message_id'])
+            or not isinstance(policy.get('campaigns'), list) or not policy['campaigns']):
+        raise RouteBlocked('invalid account-bound numbering exclusion policy')
+    excluded = {}
+    for item in policy['campaigns']:
+        if (not isinstance(item, dict) or not re.fullmatch(r'[0-9]{5,30}', str(item.get('campaign_id') or ''))
+                or not re.fullmatch(r'[1-9][0-9]*', str(item.get('number') or ''))
+                or item['campaign_id'] in excluded):
+            raise RouteBlocked('invalid exact numbering exclusion identity')
+        excluded[item['campaign_id']] = int(item['number'])
+    kept = []
+    for row in inventory:
+        if row.get('id') not in excluded:
+            kept.append(row)
+            continue
+        number = re.match(r'^\s*([0-9]+)\s*-', str(row.get('name') or ''))
+        if (not number or int(number[1]) != excluded[row['id']]
+                or row.get('account_id', profile['account_id']) != profile['account_id']):
+            raise RouteBlocked('numbering exclusion live identity changed')
+    return kept
+
+
 def reconcile_number(request, inventory, common, token):
     if 'target_number' not in request:
-        if request.get('source_account') and not inventory:
+        sequence_rows = numbering_inventory(inventory)
+        if request.get('source_account') and not sequence_rows:
             return 1
-        return next_campaign_numbers(inventory, 1)[0]
+        return next_campaign_numbers(sequence_rows, 1)[0]
     number = int(request['target_number'])
     http, old, _ = common.graph_get(str(request['replaces_campaign_id']), token,
                                   {'fields': 'id,account_id,name,status,configured_status,effective_status'})
