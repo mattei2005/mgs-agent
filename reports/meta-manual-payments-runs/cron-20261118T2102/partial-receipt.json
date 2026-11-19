@@ -1,0 +1,121 @@
+{
+  "status": "partial_validated_waiting_human_meta_passkey",
+  "scheduled_at": "2026-11-18T21:02:00-05:00",
+  "updated_at": "2026-11-18T21:08:45.729447-05:00",
+  "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261118T2102/partial-receipt.json",
+  "business_refresh_complete": false,
+  "accounts": 55,
+  "fresh_metrics_count": 55,
+  "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261118T210539117996",
+  "api_collected_at": "2026-11-18T21:05:35.014135-05:00",
+  "fresh_h_count": 0,
+  "preserved_h_count": 40,
+  "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261118T210541084077",
+  "h_source": "accounts_list_outstanding_balance",
+  "h_values_notes_original_times_preserved": true,
+  "pending_ui": [
+    {
+      "account_id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ],
+  "pending_h_account_ids": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "h_ledger_to_live_sheet_exact": true,
+  "d_values_notes_preserved": true,
+  "source_parity_cgij": true,
+  "invoice_worker_full_grid_readback": true,
+  "invoice_period": "2026-10-01",
+  "invoice_due_usd": "417864.11",
+  "other_sheet_data_unchanged": true,
+  "authentication_observed": true,
+  "authentication_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261118T210541084077/blocked.png",
+  "lease_free": true,
+  "groups": {
+    "Cartão de crédito": 15,
+    "Linha de crédito": 40
+  },
+  "average_periods": [
+    [
+      "2026-11-15",
+      "2026-11-17"
+    ],
+    [
+      "2026-11-16",
+      "2026-11-18"
+    ]
+  ],
+  "month_periods": [
+    [
+      "2026-11-01",
+      "2026-11-18"
+    ],
+    [
+      "2026-11-01",
+      "2026-11-19"
+    ]
+  ],
+  "meta_writes": 0,
+  "payments_executed": 0,
+  "billing_changes": 0,
+  "cron_changes": 0,
+  "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+  "delivery": "automatic_final_only_exact_authentication_notice",
+  "next_step": "Human Meta passkey authentication required in the approved Chrome PC1; then resume missing H40 and current pending D under existing job/contract after reconciling writers."
+}

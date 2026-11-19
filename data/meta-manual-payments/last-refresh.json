@@ -1,7 +1,28 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261118T143403058548",
-  "collected_at": "2026-11-18T14:33:55.991443-05:00",
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261118T210539117996",
+  "collected_at": "2026-11-18T21:05:35.014135-05:00",
   "accounts": 55,
-  "pending_ui": []
+  "pending_ui": [
+    {
+      "account_id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }
