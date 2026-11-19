@@ -69360,6 +69360,15 @@
         "payments": 0,
         "meta_writes": 0
       }
+    },
+    {
+      "id": "meta-manual-payments-cron-20261119T0802",
+      "type": "financial_refresh_receipt",
+      "agent": "zeus",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T0802/partial-receipt.json",
+      "updated_at": "2026-11-19T08:09:45.469681-05:00",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [
