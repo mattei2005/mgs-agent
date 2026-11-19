@@ -895,6 +895,8 @@
     {
       "id": "autopush-index-lock-recovery-3e1e5a580dd9f2151ef142e8",
       "agent": "zeus",
+      "report_infra_message_id": "1572896477301186561",
+      "report_infra_get_verified": true,
       "authority_message_id": "1569193434189668453",
       "source_alert_id": "1572894488660017277",
       "cause": "Transient Git index lock blocked native staging; competing process not identified. Lock absent at reconciliation, not removed by recovery.",
@@ -73410,8 +73412,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
-      "size_bytes": 10089,
-      "modified_at": "2026-11-19T08:46:40.829558+00:00"
+      "size_bytes": 10212,
+      "modified_at": "2026-11-19T08:49:21.330287+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_backup_archive.py",
