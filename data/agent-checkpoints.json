@@ -332,6 +332,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1572979659728097413",
+      "next_step": "Executar slots finitos na origem, incluir criadas apos09h19m35s428 desta conta hoje, manter IDs nominais/pausadas, retomar mesmo slot/outbox em falha e expirar antesAPI. Envios futuros ainda nao executados.",
+      "objective": "CPR e ROI cada30min oito campanhas nominais e futuras publicacoes hoje Yolokfx04 G004",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1572979659728097413/manifest.json",
+      "state": "scheduled_initial_get_verified; oito campanhas; primeira leitura09h22est sem gasto/resultados e roi n/d;29slots09h43a23h43est;expira20nov00hest;29testespass;agenda prepos sem conflito operacional;meta/sb read-only",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-19T14:23:27+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -10808,6 +10818,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1572980851640111335",
+      "next_step": "Entregar conclusao nativa e bloco Iris conferido; nao repetir writer. Entrega depende da revisao Meta.",
+      "objective": "Duplicar296 duas vezes Yolokfx04 G004 para agora; herdar orcamento e configuracao live da fonte",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1572980851640111335/verified-receipt.json",
+      "state": "complete: c302 e c303 active; usd150/dia cada, lote e delta usd300/dia; cost_cap usd0.90; seis anuncios habilitados e em pending_review no get fresco; qa semantico e renderizado2/2 integral; ids iguais ao checkpoint; posts novos; utms extraidas literalmente",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-19T14:29:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -11628,5 +11648,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T14:10:40+00:00"
+  "updated_at": "2026-11-19T14:29:10+00:00"
 }
