@@ -1,0 +1,116 @@
+## SHEIN · Yolokfx-US-SHEIN-EN-02-G006
+**19/11/2026 · até 14:14 EST · USD**
+**⏱️ ATRASO GAM/SB: 1h 12min**
+Financeiro: investimento e receitas da mesma fonte SB, com ajuste de calendário já aplicado; sem novo deslocamento de horas.
+Financeiro: 19/11 14:14 EST. Bid: Meta 19/11 14:14 EST.
+B.U.% operacional: gasto bruto Meta do dia ÷ orçamento diário vigente; não usa o Gasto financeiro SB. Orçamento: 19/11 14:29 EST.
+RPS: coluna da dash SB, consultada em 19/11 14:15 EST.
+Status dos blocos: Meta 19/11 14:29 EST.
+Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
+Gasto **697,42** · Rev **774,59** · Saldo **+77,17** · ROI **11,07%** · ROI E. **17,17%**.
+Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
+Histórico de 7 dias: número da campanha em ordem crescente.
+
+**SHEIN — principal · Campanhas ativas (20) · 1/3**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 30/10  | 311 CC CP299 v2 | Free Console | 625,98  | 0,90 | 39,84  | 66,33%  |  65,91   | +26,07  | 97,38%  |  65,44%  |  77,89%  | 1,67x
+🟢🟢 | 08/11  | 384 CC CP338 v2 | FREE SCOOTER | 631,03  | 0,90 | 37,86  | 45,41%  |  60,76   | +22,90  | 97,27%  |  60,49%  |  65,32%  | 1,52x
+🟢🟢 | 08/11  | 368 CC CP238 v2 | FOUR WHEELER | 658,73  | 0,90 | 41,49  | 75,02%  |  65,21   | +23,72  | 97,89%  |  57,17%  |  59,34%  | 1,22x
+🟢🟢 | 10/11  | 393 CC CP384 v2 | FREE_WATCH   | 534,71  | 0,90 |  6,81  |  9,14%  |   8,18   |  +1,37  | 97,56%  |  20,12%  |  53,60%  | 1,60x
+🟢🟡 | 08/11  | 372 CC CP360 v2 | FREE TOOLBOX | 491,91  | 0,85 | 47,58  | 56,38%  |  60,21   | +12,63  | 96,94%  |  26,54%  |  34,49%  | 1,49x
+🟢🟡 | 05/11  | 357 CC CP310 v2 | FREE TOOLBOX | 428,49  | 0,85 | 51,28  | 48,28%  |  64,02   | +12,74  | 98,45%  |  24,84%  |  31,26%  | 1,62x
+```
+
+**SHEIN — principal · Campanhas ativas (20) · 2/3**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 30/10  | 310 CC CP305 v2 | FREE TOOLBOX | 518,49  | 0,85 | 20,61  | 33,02%  |  24,73   |  +4,12  | 98,90%  |  19,99%  |  30,23%  | 1,23x
+🟢🟡 | 30/10  | 307 CC CP305 v2 | FREE TOOLBOX | 563,76  | 0,85 | 42,70  | 30,18%  |  47,19   |  +4,49  | 98,24%  |  10,52%  |  16,81%  | 0,90x
+🟢🟡 | 03/11  | 340 CC CP300 v2 | FREE SCOOTER | 445,40  | 0,90 | 24,23  | 45,07%  |  25,25   |  +1,02  | 96,36%  |  4,21%   |  13,33%  | 1,46x
+🟢🔴 | 30/10  | 305 CC CP270 v2 | FREE TOOLBOX | 542,34  | 0,85 | 48,50  | 53,37%  |  52,22   |  +3,72  | 95,59%  |  7,67%   |  7,67%   | 1,15x
+🔴🔴 | 10/11  | 391 CC CP384 v2 | FREE_WEARABL | 427,27  | 0,90 | 34,88  | 55,13%  |  33,84   |  -1,04  | 100,00% |  -2,98%  |  2,72%   | 1,19x
+🔴🔴 | 30/10  | 306 CC CP305 v2 | FREE TOOLBOX | 493,07  | 0,85 | 59,60  | 61,99%  |  56,35   |  -3,25  | 95,54%  |  -5,45%  |  2,48%   | 0,98x
+🔴🔴 | 20/10  | 238 CC CP193 v2 | FOUR WHEELER | 622,59  | 0,90 | 16,37  | 51,80%  |  15,13   |  -1,24  | 100,00% |  -7,57%  |  -1,04%  | 0,93x
+🔴🔴 | 10/11  | 400 CC CP384 v2 | FREE_SILICON | 481,81  | 0,90 | 33,42  | 87,17%  |  31,22   |  -2,20  | 98,18%  |  -6,58%  |  -2,06%  | 0,92x
+🔴🔴 | 21/10  | 258 CC CP245 v2 | FREE LOG SPL | 471,71  | 0,90 | 84,19  | 54,28%  |  76,84   |  -7,35  | 95,25%  |  -8,73%  |  -2,11%  | 1,06x
+🔴🔴 | 03/11  | 331 CC CP309 v2 | FREE TOOLBOX | 574,16  | 0,85 | 50,37  | 41,08%  |  45,99   |  -4,38  | 94,89%  |  -8,70%  |  -5,18%  | 0,92x
+🔴🔴 | 08/11  | 371 CC CP360 v2 | FREE TOOLBOX | 494,50  | 0,85 |  9,83  |  2,44%  |   8,90   |  -0,93  | 100,00% |  -9,46%  |  -9,46%  | 2,01x
+🔴🔴 | 21/10  | 254 CC CP200 v2 | JESUS APPARE | 472,05  | 0,90 | 24,19  | 81,08%  |  18,69   |  -5,50  | 96,10%  | -22,74%  | -17,69%  | 1,03x
+```
+
+**SHEIN — principal · Campanhas ativas (20) · 3/3**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🔴🔴 | 05/11  | 358 CC CP310 v2 | FREE TOOLBOX | 427,37  | 0,85 | 12,05  | 45,35%  |   7,31   |  -4,74  | 96,97%  | -39,34%  | -33,61%  | 0,91x
+🔴🔴 | 03/11  | 330 CC CP309 v2 | FREE TOOLBOX | 567,69  | 0,85 | 11,62  | 20,87%  |   6,64   |  -4,98  | 93,33%  | -42,86%  | -42,86%  | 0,67x
+```
+
+**SHEIN — principal · Campanhas pausadas (0) · 1/1**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (20) · 1/2**
+```text
+Início |       Nº        | Dia | 13/11  | 14/11  | 15/11  |  16/11  | 17/11  | 18/11  | 19/11*  |   Média 7d   
+20/10  | 238 CC CP193 v2 | D31 | +34,2% | +15,4% | +24,6% | +47,7%  | +7,7%  | +54,4% | -7,6%*  |    +25,2%*   
+21/10  | 254 CC CP200 v2 | D30 |  n/d   |  n/d   |  n/d   | +91,5%  | -13,8% | +17,0% | -22,7%* | +18,0%* (4/7)
+21/10  | 258 CC CP245 v2 | D30 | +28,2% | +17,9% | -6,4%  | +15,9%  | -4,8%  | +21,2% | -8,7%*  |    +9,0%*    
+30/10  | 305 CC CP270 v2 | D21 | +25,6% | +29,9% | +34,2% | +28,6%  | +4,7%  | +33,2% | +7,7%*  |    +23,4%*   
+30/10  | 306 CC CP305 v2 | D21 | +49,0% | +43,2% | +16,2% |  -6,3%  | -19,1% | +19,6% | -5,5%*  |    +13,9%*   
+30/10  | 307 CC CP305 v2 | D21 | +40,0% | +48,3% | +11,3% | +37,0%  | +19,8% | +21,0% | +10,5%* |    +26,9%*   
+30/10  | 310 CC CP305 v2 | D21 |  n/d   |  n/d   |  n/d   | +140,0% | +16,9% | +17,9% | +20,0%* | +48,7%* (4/7)
+30/10  | 311 CC CP299 v2 | D21 |  n/d   |  n/d   |  n/d   | +71,6%  | +37,6% | +17,5% | +65,4%* | +48,1%* (4/7)
+03/11  | 330 CC CP309 v2 | D17 | +0,1%  | +23,3% | +15,3% |  +9,7%  | -17,0% | +6,8%  | -42,9%* |    -0,7%*    
+03/11  | 331 CC CP309 v2 | D17 | +11,4% | +24,8% | +31,6% |  +1,7%  | +8,7%  | -14,7% | -8,7%*  |    +7,8%*    
+03/11  | 340 CC CP300 v2 | D17 | +45,7% | +45,5% | +64,7% | +36,4%  | +54,7% | +43,5% | +4,2%*  |    +42,1%*   
+05/11  | 357 CC CP310 v2 | D15 | +59,0% | +46,3% | +25,5% | +27,6%  | +26,5% | +12,9% | +24,8%* |    +31,8%*   
+05/11  | 358 CC CP310 v2 | D15 |  n/d   |  n/d   |  n/d   | -16,7%  | +56,9% | +20,8% | -39,3%* | +5,4%* (4/7) 
+08/11  | 368 CC CP238 v2 | D12 | +3,3%  |  n/d   |  n/d   | -100,0% | -0,7%  | +14,6% | +57,2%* | -5,1%* (5/7) 
+08/11  | 371 CC CP360 v2 | D12 |  n/d   |  n/d   |  n/d   | +154,3% | -5,6%  | +16,8% | -9,5%*  | +39,0%* (4/7)
+08/11  | 372 CC CP360 v2 | D12 | +29,6% | +31,3% | +21,5% | +11,0%  | +5,4%  | +11,3% | +26,5%* |    +19,5%*   
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (20) · 2/2**
+```text
+Início |       Nº        | Dia | 13/11  | 14/11  | 15/11  |  16/11  | 17/11  | 18/11  | 19/11*  |   Média 7d   
+08/11  | 384 CC CP338 v2 | D12 | +30,5% | +49,9% | +53,4% | +51,9%  | +68,9% | +66,6% | +60,5%* |    +54,5%*   
+10/11  | 391 CC CP384 v2 | D10 | +18,1% | +30,2% | +13,4% | +12,0%  | -16,0% | +1,3%  | -3,0%*  |    +8,0%*    
+10/11  | 393 CC CP384 v2 | D10 | +57,6% | +35,1% | -11,1% |  +3,6%  | +5,4%  | -27,3% | +20,1%* |    +11,9%*   
+10/11  | 400 CC CP384 v2 | D10 | +41,1% | -7,1%  |  n/d   | +49,1%  | +10,6% | -9,8%  | -6,6%*  | +12,9%* (6/7)
+```
+
+**Histórico ROI real — 7 dias · Campanhas pausadas (0) · 1/1**
+```text
+Início |       Nº        | Dia | 13/11  | 14/11  | 15/11  |  16/11  | 17/11  | 18/11  | 19/11*  |   Média 7d   
+```
+
+**📘 Legenda do Nº e blocos**
+- **Exemplo — 090 CC CP89 v3**: campanha 090 · COCAP · cópia da 89 · quiz v3.
+- **Lance**: CC = COCAP · MV = MAXVOL · BC = BIDCAP · MX = misto.
+- **CP** indica a origem direta da cópia; **v1/v2/v3** identifica o quiz.
+- **Blocos**: o título identifica o status configurado das campanhas na Meta; ativas e pausadas ficam separadas.
+
+**📊 Métricas**
+- **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
+- **B.U.% operacional**: gasto bruto Meta no dia ÷ budget diário atual × 100; fonte distinta do Gasto financeiro SB.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
+- **Rev / Saldo**: receita líquida SB / receita líquida menos investimento SB já ajustado.
+- **ROI / ROI E.**: 100 × (receita ÷ investimento SB já ajustado − 1), usando receita líquida / estimada, respectivamente.
+- **ROAS**: valor de compras Meta ÷ gasto Meta.
+- **RPS**: coluna da dash SB, em USD por mil sessões.
+- **Média 7d**: média dos ROIs diários válidos; n/d não vira zero. (n/7) mostra a cobertura.
+
+**⏱️ Fontes e leitura**
+- **Fontes**: Meta Insights × Smart Bidding/Adgroup. Valores monetários em USD.
+- **Parcial**: 19/11 até 14:14 EST; * identifica o dia e a média parcial.
+- **Atraso GAM/SB**: informado pelo Smart Bidding nesta coleta; Receita e ROI podem estar defasados.
+- **Tetos visuais**: ROI/ROI E. 999,99% · ROAS 9,99x · Rev 9.999,99. Dados, cálculos, ranking e histórico usam valores reais.
+- **Layout**: Gasto, B.U.% e Saldo se adaptam aos números, sem cortar sinais ou casas decimais.
+- **Gasto financeiro**: INVESTIMENT da SB, no mesmo recorte das receitas e com ajuste de calendário já aplicado. Sem novo deslocamento de horas; Meta é referência operacional separada.
+
+**⚠️ Observações**
+- Rodada intraday 14:11 America/New_York: acumulado do dia atual até os horários reais de coleta de cada fonte; não é fechamento nem corte simultâneo entre fontes/contas. Atraso GAM/SB é a leitura atual do publisher.
+
+**Fim do relatório — 20 campanhas e histórico de 7 dias.**
