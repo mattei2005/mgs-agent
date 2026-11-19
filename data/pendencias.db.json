@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-09-14T00:59:03-04:00",
-    "total_abertas": 56,
+    "ultima_atualizacao": "2026-11-18T23:01:31-05:00",
+    "total_abertas": 57,
     "total_resolvidas": 43,
-    "proximo_id": 100,
+    "proximo_id": 101,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -1011,6 +1011,24 @@
         "users"
       ],
       "contexto": "MFA obrigatório ativo em dash.mgsdigitalcorp.com. Rodolfo active via 1Password. Geizian, Ícaro, Isliago, Joe, Kelly e Nicolas estão pending e recebem QR individual no próximo login; sem confirmar o autenticador não recebem sessão financeira."
+    },
+    {
+      "id": "PEND-100",
+      "titulo": "Arquivo 30 TB: atalho original na lixeira bloqueia monitor",
+      "categoria": "monitor",
+      "prioridade": "alta",
+      "status": "aberta",
+      "tempo_estimado": "15min apos decisao",
+      "bloqueio": "Autoridade da colocacao do atalho na lixeira nao reconciliada; preservar estado. Decisao exata: restaurar SOMENTE o mesmo atalho original, preservando target/nome/parent/media/reservas; depois validar ensure_shortcuts e monitor original sem novo writer. Nao recriar nem repetir tratamento.",
+      "criada_em": "2026-11-18T23:01:31-05:00",
+      "criada_por": "zeus",
+      "tags": [
+        "drive",
+        "30tb",
+        "archive",
+        "source-changed"
+      ],
+      "contexto": "Dono Zeus; origem cron83b148017b4d/thread1562078493498540042. Job3a1e80b40c9cf4cdda93e029cd1d425d; atalho original1524nmM9dE6peUQJmR7AieQTQOHh3PHim aponta para1z8YIm9iNHYrelqu5MB-xnFymzu-OJz1r, parent99_LEGACY1smyYJhxxRPpzRgFiBxnZUwvO1mhvFdF5. SA readonly em2026-11-19T04:00:50Z confirmou trashed=true somente no atalho; original e tratado intactos,4streams fonte/provider sizeMD5SHA256 conformes,request receipt ACK nativos validos. bridge.reconcile=False PASS; ensure_shortcuts falha SOURCE_CHANGED ao cair no guard legado de origem. Ultimo modificador SA nao prova autoria do trash. Nada movido/restaurado/recopiado; sem mudanca codigo/agenda/ACL. Evidencia scratch archive-incident-3a1e80b40c9cf4cdda93e029cd1d425d-20261119.json."
     }
   ],
   "resolvidas": [
@@ -1595,6 +1613,6 @@
       "como": "MFA obrigatório ativado para as sete identidades sob confirmação 1548916113142976544. Rodolfo active via 1Password; outros seis com enrollment individual obrigatório. TOTP/recovery/trust30d/anti-replay/encryption validados. Ação humana restante separada em PEND-099."
     }
   ],
-  "proximo_id": 100,
-  "ultima_atualizacao": "2026-09-14T00:59:03-04:00"
+  "proximo_id": 101,
+  "ultima_atualizacao": "2026-11-18T23:01:31-05:00"
 }
