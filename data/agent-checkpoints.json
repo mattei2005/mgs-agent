@@ -333,12 +333,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1572979659728097413",
-      "next_step": "Executar slots finitos na origem, incluir criadas apos09h19m35s428 desta conta hoje, manter IDs nominais/pausadas, retomar mesmo slot/outbox em falha e expirar antesAPI. Envios futuros ainda nao executados.",
-      "objective": "CPR e ROI cada30min oito campanhas nominais e futuras publicacoes hoje Yolokfx04 G004",
+      "next_step": "Resolver hierarquia por IDs, congelar alteradas ate emenda, deduplicar com nominais/novas; QA, dry-run e entrega; preservar agenda e recibos anteriores.",
+      "objective": "CPR e ROI cada30min nominais, futuras e campanhas alteradas hoje Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1572979659728097413/manifest.json",
-      "state": "scheduled_initial_get_verified; oito campanhas; primeira leitura09h22est sem gasto/resultados e roi n/d;29slots09h43a23h43est;expira20nov00hest;29testespass;agenda prepos sem conflito operacional;meta/sb read-only",
+      "state": "emenda1572985734569263105 autenticada;116activities coletadas ate09h43m43est. agenda original ativa e preservada; selecionando alteradas reais sem processamento/revisao.",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-19T14:23:27+00:00"
+      "updated_at": "2026-11-19T14:45:08+00:00"
     },
     {
       "agent": "ares",
@@ -11648,5 +11648,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T14:29:10+00:00"
+  "updated_at": "2026-11-19T14:45:08+00:00"
 }
