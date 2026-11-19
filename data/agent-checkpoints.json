@@ -4453,6 +4453,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1572778184741621803",
+      "next_step": "Preparar midia pela rota central,depois dry-run,Enginev3,QA integral e readback",
+      "objective": "Duplicar C018 dez vezes Yolokfx08G006 USD55 COCAP0.90 para19nov2026 00h05EST com24videos e copy literal",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572778184741621803/request.json",
+      "state": "request_authenticated:10grupos24videos;autoridade live;midia pendente",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-19T01:05:58+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
       "next_step": "Nenhuma pendencia deste pedido; nao repetir criacao ou ativacao. Responder confirmacao nativa na origem.",
       "objective": "Concluir C092 nos mesmos IDs com USD75/dia e COCAP1.05",
@@ -4470,6 +4480,16 @@
       "state": "complete_get_verified:15campanhas222-236,30ads active;usd35/dia ecostcap0.90;inicio18nov2026 00h15est;qa15/15;budgetloteusd525;contaativousd1717;30assetsused ids preservados;coordantiga isolada semqa ficticio",
       "thread_id": "1558134703565967394",
       "updated_at": "2026-11-18T00:45:35+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-CREATE-1572779977701724274",
+      "next_step": "Gates de midia,pre-stage e mesmo Enginev3 ate QA/readback completo",
+      "objective": "Duplicar185 em13 campanhas Mavroa06 com26videos ES;USD55/camp,CostGoal0.90,inicio19nov2026 00h15EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572779977701724274/request.json",
+      "state": "intake: duas mensagens humanas autenticadas; grupos e literais congelados; pedido separado da pausa anterior",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-19T01:07:50+00:00"
     },
     {
       "agent": "zeus",
@@ -4864,22 +4884,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572776409464709224",
-      "next_step": "Testar ativador, auditar agenda global e registrar one-shot; preservar IDs,budgets e filhos",
-      "objective": "Pausar20campanhas nominais Yolokfx08G006 e reativar19novembro2026 00hEST status-only",
+      "next_step": "Aguardar one-shot; GET integral apos ativacao dos mesmos20IDs; sem recorrencia",
+      "objective": "Pausar 20 campanhas nominais Yolokfx08 G006 e reativar19novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572776409464709224/activation.json",
-      "state": "paused_verified:20/20porgetintegral; snapshots estaveis aptos20/20; preparando one-shot",
+      "state": "scheduled:20/20paused confirmadas; ativacao19novembro2026 00hest agendada e validada",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-19T00:57:31+00:00"
+      "updated_at": "2026-11-19T01:01:09+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1572776675454877809",
-      "next_step": "Preparar hierarquias, QA e one-shot 19nov2026 00hEST",
-      "objective": "Pausar 15 campanhas Mavroa06 e reativar 19novembro2026 00h Nova York",
+      "next_step": "Aguardar execucao unica dos mesmos15IDs e GET final,sem recorrencia",
+      "objective": "Pausar 15 campanhas nominais Mavroa06 G006 e reativar19novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1572776675454877809/activation.json",
-      "state": "paused_activation_pending:15/15 pausadas com get integral",
+      "state": "scheduled:15/15 pausadas get integral; one-shot habilitado19nov2026 00hest,qa146,zero colisao operacional",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-19T00:56:15+00:00"
+      "updated_at": "2026-11-19T01:06:32+00:00"
     },
     {
       "agent": "zeus",
@@ -11568,5 +11588,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T00:57:31+00:00"
+  "updated_at": "2026-11-19T01:07:50+00:00"
 }
