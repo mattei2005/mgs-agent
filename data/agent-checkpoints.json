@@ -4473,6 +4473,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-AUDIT-1572796764099186809",
+      "next_step": "Nenhuma correcao Meta necessaria nesta leitura;usar literal correto no pre-cadastroAdOps",
+      "objective": "Auditar campanha239 e corrigir literalUTM malformado enviado por Ares",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572779977701724274/audit239-1572796764099186809/communication-edit-intent.json",
+      "state": "complete:erro exclusivo na mensagemdiscord;original corrigida porpatch+get;meta239,conjunto e2adsactive sem issues/feedback;utm b01fb06c239g01,utm_campaign b01fb06c239;usd55,cocap0.90,inicio19nov2026 00h15est preservados;0writesmeta;8testesbloco",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-19T02:14:58+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
       "next_step": "Nenhuma pendencia deste pedido; nao repetir criacao ou ativacao. Responder confirmacao nativa na origem.",
       "objective": "Concluir C092 nos mesmos IDs com USD75/dia e COCAP1.05",
@@ -11598,5 +11608,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T02:08:46+00:00"
+  "updated_at": "2026-11-19T02:14:58+00:00"
 }
