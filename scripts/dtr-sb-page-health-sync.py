@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from typing import Any
 from playwright.async_api import async_playwright
 
 BASE_DIR=Path('/root/mgs-agent')
@@ -418,8 +419,31 @@ async def get_sb_context():
     h.update({'origin':'https://app.smartbiddingdigital.com','referer':'https://app.smartbiddingdigital.com/'})
     return p,browser,ctx,h
 
+async def sb_read(ctx, url, headers):
+    # Retry only reads. Never persist Playwright call logs (headers/cookies).
+    for attempt in range(3):
+        try:
+            response=await ctx.request.get(url, headers=headers, timeout=120000)
+        except Exception:
+            if attempt==2:
+                raise RuntimeError('SB GET transport unavailable after 3 attempts') from None
+            await asyncio.sleep(2 ** attempt)
+            continue
+        if response.status in (429,500,502,503,504):
+            delay=response.headers.get('retry-after','')
+            try:
+                delay=float(delay) if delay else 2 ** attempt
+            except ValueError:
+                raise RuntimeError('SB GET cooldown requires later retry') from None
+            if delay>30 or attempt==2:
+                raise RuntimeError(f'SB GET HTTP {response.status}; cooldown {delay}s') from None
+            await asyncio.sleep(max(0.25,delay))
+            continue
+        return response
+    raise RuntimeError('SB GET attempts exhausted')
+
 async def fetch_sb_rows(ctx,h):
-    rc=await ctx.request.get('https://api.jbfdigital.com.br/company', headers=h, timeout=120000)
+    rc=await sb_read(ctx,'https://api.jbfdigital.com.br/company',h)
     companies=await rc.json()
     if rc.status != 200 or not isinstance(companies, list):
         raise RuntimeError(f'bad SB company response status={rc.status} type={type(companies).__name__}')
@@ -430,7 +454,7 @@ async def fetch_sb_rows(ctx,h):
         for pub in c.get('publishers') or []:
             if pub.get('active') and pub.get('publisherId'): pubs.append(pub['publisherId'])
     qs='&'.join('companies[]='+urllib.parse.quote(x) for x in pubs)+'&source=Messenger'
-    r=await ctx.request.get('https://api.jbfdigital.com.br/campaigns/Messenger?'+qs, headers=h, timeout=120000)
+    r=await sb_read(ctx,'https://api.jbfdigital.com.br/campaigns/Messenger?'+qs,h)
     rows=await r.json()
     if r.status!=200 or not isinstance(rows,list): raise RuntimeError(f'bad SB campaigns response status={r.status}')
     return pubs, rows
@@ -1474,6 +1498,92 @@ def write_google_sheet(rows, sheet_stats=None, dtr_enrichment=None, history_rows
             'readback_ok':True,
         }
 
+def validate_finalize_source(source, active, state, collected_users):
+    errors=source.get('errors') or []
+    if (source.get('today')!=today() or source.get('mode')!='apply'
+        or source.get('ok') is not False or source.get('writes')!=0
+        or source.get('new_restrictions_alerted')!=0
+        or source.get('missing_1p_users') or source.get('op_errors')
+        or source.get('discord_deliveries') or source.get('sheet_update')
+        or len(errors)!=1 or set(errors[0])!={'sheet_update_failed'}
+        or 'ECONNRESET' not in errors[0]['sheet_update_failed']
+        or 'GET https://api.jbfdigital.com.br/campaigns/Messenger?' not in errors[0]['sheet_update_failed']
+        or source.get('sheet_active_users')!=len(active)
+        or source.get('matched_1p_users')!=len(active)
+        or source.get('stats',{}).get('users_scanned')!=len(active)
+        or len(collected_users)!=len(active) or set(collected_users)!=set(active)
+        or not state.get('runs') or state['runs'][-1].get('log')!=source.get('log')):
+        raise RuntimeError('Finalization resume scope/coverage/last-run gate failed')
+
+async def resume_finalize(source_path):
+    """Resume only a proven zero-write complete scan whose final GET failed."""
+    import hashlib
+    from mgs_alert_transport import post_verified
+    source_path=Path(source_path).resolve()
+    if source_path.parent!=LOG_DIR or not source_path.name.startswith('dtr-sb-page-health-sync-'):
+        raise RuntimeError('Finalization source must be a canonical run receipt')
+    raw=source_path.read_bytes(); source=json.loads(raw)
+    digest=hashlib.sha256(raw).hexdigest()
+    checkpoint=source_path.with_suffix('.finalize.json')
+    receipt: dict[str, Any]=json.loads(checkpoint.read_text()) if checkpoint.exists() else {'source_sha256':digest,'source_log':str(source_path),'stage':'pending_sb_read'}
+    if receipt['source_sha256']!=digest:
+        raise RuntimeError('Finalization source hash changed')
+    def persist():
+        temporary=checkpoint.with_suffix('.tmp')
+        temporary.write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+        temporary.replace(checkpoint)
+    state=load_state(); active=active_users_from_sheet(sheet_rows())
+    wrapper=(LOG_DIR/'dtr-sb-page-health-sync.log').read_text()
+    started=datetime.fromisoformat(source['started_at'])
+    markers=[m for m in re.finditer(r'^\[([^\]]+)\] dtr-sb-page-health-sync.sh START args=--apply --quiet-noop$',wrapper,re.M) if 0 <= (started-datetime.fromisoformat(m[1])).total_seconds() <= 5]
+    if len(markers)!=1:
+        raise RuntimeError('Original collection marker is missing/ambiguous')
+    segment=wrapper[markers[0].end():].split('dtr-sb-page-health-sync.sh START',1)[0]
+    collected_users=re.findall(r'^PROGRESS user_done (\S+) accounts=\d+ reports=\d+ errors=0$',segment,re.M)
+    validate_finalize_source(source,active,state,collected_users)
+    persist()
+    p=browser=None
+    try:
+        if not receipt.get('outbox'):
+            p,browser,ctx,h=await get_sb_context()
+            _,rows=await fetch_sb_rows(ctx,h)
+            restricted,stats=restricted_sheet_rows(rows,active,today())
+            summary={k:v for k,v in source.items() if k!='errors'}
+            summary.update(stats)
+            summary.update(ok=True,errors=[],recovered_from=str(source_path),recovered_at=now_iso())
+            receipt['stage']='sheet_pending'; persist()
+            summary['sheet_update']=write_google_sheet(restricted,stats,[])
+            if not summary['sheet_update'].get('readback_ok'):
+                raise RuntimeError('Finalization Sheet readback missing')
+            exited=exited_restrictions_from_sheet(summary['sheet_update'].get('removed_page_rows') or [],rows,today())
+            summary['exited_restrictions']=exited
+            messages=[('no_new_restrictions_1',build_no_new_restrictions_alert(summary))]
+            messages.extend((f'operational_summary_{i}',text) for i,text in enumerate(build_operational_summary_alerts(restricted,summary),1))
+            messages.extend((f'exited_restrictions_{i}',text) for i,text in enumerate(build_exited_restrictions_alerts(exited,summary),1))
+            receipt['summary']=summary
+            receipt['outbox']=[{'kind':kind,'payload':{'content':(TEAM_MENTIONS+'\n' if i==0 else '')+text,'allowed_mentions':{'parse':[],'roles':TEAM_ROLE_IDS if i==0 else []},'nonce':hashlib.sha256(f'{digest}:{i}'.encode()).hexdigest()[:24],'enforce_nonce':True}} for i,(kind,text) in enumerate(messages)]
+            receipt['stage']='delivery_pending'; persist()
+        for part in receipt['outbox']:
+            if part.get('ambiguous') and not part.get('message_id'):
+                raise RuntimeError('Discord POST ambiguous; reconcile nonce before retry')
+            def accepted(message_id):
+                part['message_id']=message_id; part['ambiguous']=False; persist()
+            if not part.get('message_id'):
+                part['ambiguous']=True; persist()
+            message_id=post_verified(part['payload'],channel=TARGET_CHANNEL_ID,prior_id=part.get('message_id'),on_created=accepted)
+            part.update(message_id=message_id,verified=True); persist()
+        receipt['stage']='GET_VERIFIED';receipt['verified_at']=now_iso();persist()
+        summary=receipt['summary']
+        summary['discord_deliveries']=[{'kind':part['kind'],'result':{'status':200,'message_id':part['message_id'],'GET_verified':True}} for part in receipt['outbox']]
+        summary['finalization_receipt']=str(checkpoint)
+        recovered=source_path.with_name('dtr-sb-page-health-sync-'+datetime.now(NY).strftime('%Y%m%d-%H%M%S')+'.json')
+        summary['log']=str(recovered)
+        recovered.write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+        print(json.dumps({'ok':True,'mode':'finalization_resume','recovered_from':str(source_path),'log':str(recovered),'sheet_readback_ok':True,'deliveries_GET_verified':[p['message_id'] for p in receipt['outbox']],'campaign_writes':0}))
+    finally:
+        if browser: await browser.close()
+        if p: await p.stop()
+
 async def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--apply', action='store_true')
@@ -1484,7 +1594,13 @@ async def main():
     ap.add_argument('--limit-pages', type=int, default=0)
     ap.add_argument('--max-writes', type=int, default=0, help='Canary safety cap for total writes')
     ap.add_argument('--quiet-noop', action='store_true')
+    ap.add_argument('--resume-finalize-from', default='', help='Resume only the guarded final Sheet/delivery stage of a complete zero-write scan.')
     args=ap.parse_args()
+    if args.resume_finalize_from:
+        if not args.apply or args.user or args.limit_users or args.start_at or args.limit_accounts or args.limit_pages or args.max_writes:
+            raise RuntimeError('Finalization resume requires apply and unchanged full scope')
+        await resume_finalize(args.resume_finalize_from)
+        return
 
     LOG_DIR.mkdir(parents=True, exist_ok=True); REPORT_DIR.mkdir(parents=True, exist_ok=True)
     stamp=datetime.now(NY).strftime('%Y%m%d-%H%M%S'); tday=today()

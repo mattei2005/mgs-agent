@@ -72890,8 +72890,21 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 104964,
-      "modified_at": "2026-10-02T18:36:40-04:00"
+      "size_bytes": 112548,
+      "modified_at": "2026-11-19T15:47:58-05:00",
+      "recovery_49268380f789ee9caf6c65e4": {
+        "authority_message_id": "1569193434189668453",
+        "change": "Bounded sanitized GET retries and guarded same-occurrence zero-write finalization; canonical Sheet readback and frozen Discord outbox with accepted-ID GET resume",
+        "test_path": "/root/mgs-agent/tests/test_dtr_health_finalize_recovery.py",
+        "tests_passed": 20,
+        "evidence_path": "/root/mgs-agent/reports/automation-recovery-49268380f789ee9caf6c65e4.json",
+        "receipt_path": "/root/mgs-agent/logs/dtr-sb-page-health-sync-20261119-153002.finalize.json",
+        "sheet_rows_GET_verified": 378,
+        "delivery_ids_GET_verified": ["1573077002011942963", "1573077005547733188", "1573077008408383621", "1573077010115203218"],
+        "campaign_writes": 0,
+        "cron_changes": false,
+        "gateway_restart": false
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
