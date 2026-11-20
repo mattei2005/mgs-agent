@@ -1024,6 +1024,69 @@ def backup(mode: str, *, apply_retention_policy: bool = True, private_archive_ca
         lock.close()
 
 
+def finalize_direct_backup(remote_id: str, expected_name: str) -> dict[str, Any]:
+    """Resume verification/ACK only; never upload or create another snapshot."""
+    import mgs_private_backup_upload as private_archive
+    import mgs_backup_automation as automation
+    import ares_archive_bridge as bridge
+    config = load_config()
+    lock = acquire_lock(config, timeout_seconds=0)
+    started = time.monotonic()
+    try:
+        plan = bridge.read_json(automation.PLAN)
+        binding = private_archive.contract()
+        journal = bridge.read_json(private_archive.HOME / 'slots-journal.json', {})
+        rows = [v for v in journal.get('intents', {}).values() if v.get('id') == remote_id]
+        if len(rows) != 1 or not binding or not isinstance(plan, dict):
+            raise RuntimeError('exact existing direct backup slot required')
+        row = rows[0]['binding']
+        private_archive.validate_slot(row, plan, binding)
+        if row['name'] != expected_name or row['mode'] != 'quick' or row.get('canary') is not False:
+            raise RuntimeError('backup finalization scope mismatch')
+        drive = bridge.Drive(True)
+        meta = drive.meta(remote_id)
+        bridge.require_publisher(meta, bridge.CANONICAL_SA)
+        if (meta.get('trashed') is not False or meta.get('driveId')
+                or meta.get('parents') != [row['parent_id']] or meta.get('name') != expected_name
+                or str(meta.get('size')) != str(row['size'])
+                or meta.get('md5Checksum') != row['md5'] or meta.get('sha256Checksum') != row['sha256']):
+            raise RuntimeError('existing backup native bytes mismatch; no upload replay')
+        hashes = drive.hashes(remote_id)
+        if hashes != {'size': str(row['size']), 'md5': row['md5'], 'sha256': row['sha256']}:
+            raise RuntimeError('existing backup independent full-stream mismatch')
+        result = {
+            'status': 'PASS', 'mode': 'quick', 'tier': 'hourly',
+            'created_at_utc': meta['createdTime'], 'verified_at_utc': iso_now(),
+            'remote_file_id': remote_id, 'remote_name': expected_name,
+            'remote_size_bytes': row['size'], 'encrypted_md5': row['md5'],
+            'encrypted_sha256': row['sha256'], 'drive_id': None,
+            'storage_backend': 'private_owner_slot_sa_upload',
+            'archive_root_id': plan['archiveRootId'], 'tier_folder_id': row['parent_id'],
+            'retention_applied': False, 'retention_trashed_count': 0,
+            'archive_retention_preview_only': True, 'archive_sha256_stream_verified': True,
+            'recovery': 'same_snapshot_existing_upload_finalized',
+            'bundle_manifest': 'preserved_inside_original_ciphertext_not_reopened',
+            'duration_seconds': round(time.monotonic() - started, 3),
+        }
+        result['archive_native_ack'] = private_archive.publish_ack(result)
+        ack = json.loads(drive.raw(result['archive_native_ack']['file_id']))
+        if ack.get('file_id') != remote_id or ack.get('sha256') != row['sha256'] or ack.get('status') != 'verified':
+            raise RuntimeError('finalized backup ACK GET mismatch')
+        state = state_load(config)
+        state.setdefault('recovered_occurrences', {})[remote_id] = result
+        prior = state['last_success'].get('quick') or {}
+        if not prior.get('created_at_utc') or parse_iso(prior['created_at_utc']) < parse_iso(result['created_at_utc']):
+            state['last_success']['quick'] = result
+        state['updated_at_utc'] = iso_now()
+        atomic_json(Path(config['state_path']), state)
+        append_event(config, 'backup_finalization_recovered', remote_file_id=remote_id,
+                     ack_id=result['archive_native_ack']['file_id'], sha256=row['sha256'],
+                     same_snapshot=True, upload_replayed=False)
+        return result
+    finally:
+        lock.close()
+
+
 def safe_extract(archive: zipfile.ZipFile, destination: Path) -> None:
     destination = destination.resolve()
     for member in archive.infolist():
@@ -1307,6 +1370,9 @@ def main() -> int:
     backup_parser = sub.add_parser("backup")
     backup_parser.add_argument("--mode", choices=("quick", "full"), required=True)
     backup_parser.add_argument("--no-retention", action="store_true")
+    finalize_parser = sub.add_parser("finalize-direct")
+    finalize_parser.add_argument("--remote-id", required=True)
+    finalize_parser.add_argument("--expected-name", required=True)
     restore_parser = sub.add_parser("restore-test")
     restore_parser.add_argument("--remote-id")
     restore_parser.add_argument("--finance-database")
@@ -1318,6 +1384,8 @@ def main() -> int:
         if args.command == "backup":
             result = backup(args.mode, apply_retention_policy=not args.no_retention)
             print(json.dumps({k: result[k] for k in ("status", "mode", "tier", "remote_file_id", "remote_name", "remote_size_bytes", "duration_seconds", "retention_trashed_count", "retention_applied")}, ensure_ascii=False))
+        elif args.command == "finalize-direct":
+            print(json.dumps(finalize_direct_backup(args.remote_id, args.expected_name), ensure_ascii=False))
         elif args.command == "restore-test":
             if args.drop_finance_database and not args.finance_database:
                 raise ValueError("--drop-finance-database requires --finance-database")

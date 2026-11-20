@@ -48,7 +48,7 @@ def drive_reader():
 
     def get(file_id, media=False):
         query = {'alt': 'media'} if media else {
-            'fields': 'id,name,size,parents,trashed,md5Checksum,sha256Checksum,appProperties'}
+            'fields': 'id,name,size,parents,trashed,md5Checksum,sha256Checksum,appProperties,properties'}
         query['supportsAllDrives'] = 'true'
         url = 'https://www.googleapis.com/drive/v3/files/' + file_id + '?' + urllib.parse.urlencode(query)
         req = urllib.request.Request(url, method='GET', headers={'Authorization': 'Bearer ' + token})
@@ -59,7 +59,7 @@ def drive_reader():
 
 def observation(job, *, base=BASE, reader=None, getter=None):
     if not scope(job):
-        return None
+        return finalized_observation(job, base=base, reader=reader, getter=getter)
     try:
         root = base / ('reports/automation-recovery-' + KEY)
         execution = json.loads((root / 'canonical-execution.json').read_text())
@@ -111,5 +111,87 @@ def observation(job, *, base=BASE, reader=None, getter=None):
                 'evidence': {'remote_id': FILE, 'ack_id': ACK, 'size': SIZE, 'sha256': SHA,
                              'recovery': 'current_protection_restored',
                              'historical_snapshot_recreated': False}}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError):
+        return None
+
+
+FINAL_KEY = 'b072e2d339b0565639ed5d4a'
+FINAL_SLOT = '2026-11-20T14:23:00-05:00'
+FINAL_LAST_RUN = '2026-11-20T14:30:28.371171-05:00'
+FINAL_FILE = '1oPnCHSP-jmTPaVFNLn10zpzBNdQB3MRh'
+FINAL_ACK = '1c-Qiakb8qlQNnL5q42IrgwevMmUe6lTv'
+FINAL_NAME = 'mgs-dr-hourly-20261120T192348Z.zip.gpg'
+FINAL_SHA = 'f2ac92366e1163d7021bfa4ea80de7c3d4e3d2fc03cfd1a0247abd095d1245f5'
+FINAL_MD5 = '9317cedd295f8adb81cea517c0328e1b'
+FINAL_SIZE = '2070821835'
+
+
+def finalized_observation(job, *, base=BASE, reader=None, getter=None):
+    """Read-only exact-occurrence proof; never finalize or replay business here."""
+    if (job.get('id') != JOB or job.get('enabled') is not True
+            or job.get('state') != 'scheduled' or job.get('fire_claim')
+            or native_contract_hash(job) != CONTRACT
+            or job.get('last_run_at') != FINAL_LAST_RUN
+            or (job.get('last_dispatch') or {}).get('scheduled_at') != FINAL_SLOT):
+        return None
+    try:
+        root = base / ('reports/automation-recovery-' + FINAL_KEY)
+        execution = json.loads((root / 'canonical-execution.json').read_text())
+        result = json.loads((root / 'canonical-finalize.stdout').read_text())
+        delivery = json.loads((root / 'independent-readback.json').read_text())
+        command = ['/usr/bin/python3', '/root/mgs-agent/scripts/mgs-offsite-backup.py',
+                   'finalize-direct', '--remote-id', FINAL_FILE, '--expected-name', FINAL_NAME]
+        expected = {'status': 'PASS', 'mode': 'quick', 'tier': 'hourly',
+                    'remote_file_id': FINAL_FILE, 'remote_name': FINAL_NAME,
+                    'remote_size_bytes': int(FINAL_SIZE), 'encrypted_sha256': FINAL_SHA,
+                    'encrypted_md5': FINAL_MD5, 'archive_sha256_stream_verified': True,
+                    'retention_applied': False, 'retention_trashed_count': 0,
+                    'recovery': 'same_snapshot_existing_upload_finalized'}
+        if (execution.get('operation') != FINAL_KEY or execution.get('returncode') != 0
+                or execution.get('command') != command
+                or any(result.get(k) != v for k, v in expected.items())
+                or result.get('archive_native_ack', {}).get('file_id') != FINAL_ACK
+                or delivery.get('operation') != FINAL_KEY or delivery.get('GET_verified') is not True):
+            return None
+        report = delivery['report_infra_message_id']
+        if not str(report).isdigit():
+            return None
+        reader = reader or drive_reader()
+        remote = reader(FINAL_FILE)
+        if (remote.get('id') != FINAL_FILE or remote.get('name') != FINAL_NAME
+                or remote.get('parents') != [PARENT] or remote.get('trashed') is not False
+                or remote.get('size') != FINAL_SIZE or remote.get('md5Checksum') != FINAL_MD5
+                or remote.get('sha256Checksum') != FINAL_SHA):
+            return None
+        ack_meta = reader(FINAL_ACK)
+        if (ack_meta.get('id') != FINAL_ACK or ack_meta.get('parents') != [ACK_PARENT]
+                or ack_meta.get('trashed') is not False
+                or ack_meta.get('properties', {}).get('mgsArchiveType') != 'backup_direct_ack'
+                or ack_meta.get('sha256Checksum') != result['archive_native_ack']['sha256']):
+            return None
+        ack = reader(FINAL_ACK, True)
+        expected_ack = {'schema': 'mgs.backup.direct.archive.ack.v1', 'status': 'verified',
+                        'file_id': FINAL_FILE, 'parent_id': PARENT, 'size': FINAL_SIZE,
+                        'md5': FINAL_MD5, 'sha256': FINAL_SHA, 'tier': 'hourly',
+                        'canonical_sa_upload': True, 'independent_sa_stream_verified': True,
+                        'archive_trash_enabled': False}
+        if any(ack.get(k) != v for k, v in expected_ack.items()):
+            return None
+        if getter is None:
+            from mgs_alert_transport import request
+            getter = request
+        msg = getter('GET', f'https://discord.com/api/v10/channels/{CHANNEL}/messages/{report}')
+        if (msg.get('id') != report or msg.get('channel_id') != CHANNEL
+                or msg.get('author', {}).get('id') != '1496296175014252634'
+                or msg.get('content') != '' or msg.get('mentions') != []
+                or len(msg.get('embeds', [])) != 1 or FINAL_FILE not in json.dumps(msg['embeds'])):
+            return None
+        return {'status': 'OK', 'verified': True, 'target': 'native:zeus:' + JOB,
+                'at': time.time(), 'slot': FINAL_SLOT,
+                'source': {'kind': 'native', 'profile': 'zeus', 'job_id': JOB,
+                           'thread_id': THREAD, 'contract_hash': CONTRACT},
+                'receipt': f'dr-finalization:{FINAL_KEY};drive:{FINAL_FILE};ack:{FINAL_ACK};discord:{CHANNEL}/{report}',
+                'evidence': {'remote_id': FINAL_FILE, 'ack_id': FINAL_ACK,
+                             'same_original_snapshot': True, 'upload_replayed': False}}
     except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError):
         return None

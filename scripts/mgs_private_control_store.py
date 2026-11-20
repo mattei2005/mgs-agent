@@ -56,6 +56,20 @@ def publication_properties(kind,digest):
  if kind in {'request','vps_request','vps_backfill_request','vps_backup_move_request'}:props['mgsArchiveState']='queued'
  return props
 
+def publish_properties(d,fid,props,kind):
+ # Only the backup ACK's exact same-ID metadata PATCH is replay-safe here.
+ for attempt in range(3 if kind=='backup_direct_ack' else 1):
+  try:
+   d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id'},{'properties':props})
+   return
+  except b.ArchiveError as exc:
+   if kind!='backup_direct_ack' or str(exc) not in {'DRIVE_HTTP_500','DRIVE_HTTP_502','DRIVE_HTTP_503','DRIVE_HTTP_504'}:raise
+   meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
+   if all(meta.get('properties',{}).get(k)==v for k,v in props.items()):return
+   if attempt==2:raise
+   import time
+   time.sleep(2**attempt)
+
 def publish_sa(d,parent,name,data,mime,key,kind):
  c=b.read_json(CONFIG,{});j={'schema':'mgs.private.control.slot.request.v1','parent_id':parent,'key':key,'kind':kind,'mime':mime,'name':name,'size':len(data),'sha256':hashlib.sha256(data).hexdigest()};validate_request(j,c)
  old=d.one(parent,key)
@@ -64,6 +78,21 @@ def publish_sa(d,parent,name,data,mime,key,kind):
   if m.get('properties',{}).get('mgsArchiveType')==kind:
    b.require_publisher(m,b.CANONICAL_SA)
    if m.get('parents')!=[parent] or m.get('driveId') or d.raw(old['id'])!=data:raise b.ArchiveError('CONTROL_SA_IMMUTABLE_CONFLICT')
+   return old['id']
+  # A completed media PATCH followed by failed properties PATCH is not a new
+  # slot or a new upload. Reconcile its original bytes before metadata-only retry.
+  if kind=='backup_direct_ack' and m.get('properties',{}).get('mgsArchiveType')=='private_control_slot':
+   props=m.get('properties',{})
+   if (m.get('parents')!=[parent] or m.get('driveId') or m.get('name')!=name
+       or props.get('expectedKind')!=kind or props.get('expectedSha256')!=j['sha256']
+       or m.get('sha256Checksum')!=j['sha256'] or d.raw(old['id'])!=data):
+    raise b.ArchiveError('BACKUP_ACK_PARTIAL_BINDING')
+   b.require_publisher(m,b.CANONICAL_SA)
+   publish_properties(d,old['id'],publication_properties(kind,j['sha256']),kind)
+   after=d.meta(old['id']);b.require_publisher(after,b.CANONICAL_SA)
+   if (after.get('parents')!=[parent] or after.get('trashed') is not False
+       or any(after.get('properties',{}).get(k)!=v for k,v in publication_properties(kind,j['sha256']).items())
+       or d.raw(old['id'])!=data):raise b.ArchiveError('BACKUP_ACK_FINALIZE_READBACK')
    return old['id']
  # stdin is non-secret bound metadata only; the private child obtains its own grant.
  proc=subprocess.run([sys.executable,str(Path(__file__)),'slot','--apply'],input=json.dumps(j),text=True,capture_output=True,timeout=90)
@@ -78,7 +107,7 @@ def publish_sa(d,parent,name,data,mime,key,kind):
   with urllib.request.urlopen(request,timeout=90) as r:json.load(r)
  except Exception:
   if d.raw(fid)!=data:raise b.ArchiveError('CONTROL_SA_PUBLICATION_UNKNOWN') from None
- d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id'},{'properties':publication_properties(kind,j['sha256'])})
+ publish_properties(d,fid,publication_properties(kind,j['sha256']),kind)
  after=d.meta(fid);b.require_publisher(after,b.CANONICAL_SA)
  if any(after.get('properties',{}).get(k)!=v for k,v in publication_properties(kind,j['sha256']).items()):raise b.ArchiveError('CONTROL_SA_PUBLICATION_PROPERTIES_READBACK')
  if after.get('parents')!=[parent] or after.get('driveId') or after.get('properties',{}).get('sha256')!=j['sha256'] or after['properties'].get('mgsArchiveType')!=kind or d.raw(fid)!=data:raise b.ArchiveError('CONTROL_SA_PUBLICATION_READBACK')

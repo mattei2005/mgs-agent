@@ -1,0 +1,20 @@
+{
+  "operation": "b072e2d339b0565639ed5d4a",
+  "mode": "resume_safe",
+  "job_id": "3ff8bd8ca40d",
+  "slot": "2026-11-20T14:23:00-05:00",
+  "last_run_at": "2026-11-20T14:30:28.371171-05:00",
+  "contract_hash": "0326574c266953ac88ed1f23c23eaae7dfc2a6897b2f4ce050feeb8bb48e927e",
+  "authority_message_id": "1569193434189668453",
+  "authority_author_GET_verified": "344196393512075265",
+  "state": "existing_snapshot_finalization_pending",
+  "owner": "supervisor:495177",
+  "remote_file_id": "1oPnCHSP-jmTPaVFNLn10zpzBNdQB3MRh",
+  "ack_id": "1c-Qiakb8qlQNnL5q42IrgwevMmUe6lTv",
+  "completed": ["original snapshot uploaded with exact native size MD5 SHA256", "original ACK media uploaded with exact content SHA256"],
+  "pending": ["canonical full-stream recheck", "same-ID ACK properties finalization", "canonical state receipt", "independent supervisor verification"],
+  "diagnosis": "HTTP 500 during ACK metadata PATCH; archive and ACK content already exist; private_control_slot marker remains on ACK",
+  "no_new_snapshot": true,
+  "schedule_changed": false,
+  "gateway_restart": false
+}
