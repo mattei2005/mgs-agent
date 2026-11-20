@@ -1,0 +1,20 @@
+{
+  "operation_key": "fb3abfb178aacd92d9633715",
+  "alert_id": "1573426742474051796",
+  "authority_message_id": "1569193434189668453",
+  "status": "recovered_waiting_supervisor_validation",
+  "native_retry_commit": "c0cc89a55280398535d4fd2a53e9d924601721dd",
+  "recovery_not_before": 1795205166,
+  "validated_artifact_hashes": {
+    ".gitignore": "7536e494d89481698c9da3dce8c894dd280647e0d225bf658e42aa6e5a870758",
+    "scripts/mgs_automation_supervisor.py": "06d96e52702e1e5b92df37fa02598c4aff9aa5f1966a32426ded2c0aaf1495de",
+    "scripts/mgs_autopush_rollback_continuity.py": "93f32c16aebd4ee9231783ee0cf0373225faa271c4c0f053a483dcb853ee54bf",
+    "tests/test_auto_commit_empty_index.py": "dd7a4e6cf80e332b72dbd26e2f04cfa2dde4141710cdbec2cf491d6dc0b82892",
+    "tests/test_auto_commit_sensitive_paths.py": "b7ec4c9df200b9f4dfc3c7627bae4858bc70c736aca7fe3136a0240054cddc95",
+    "tests/test_autopush_rollback_continuity.py": "02930d43a20ed08cd608a95ddee74ba477ce0e07b080dc7aefed95a79a100c50"
+  },
+  "report_infra_message_id": "1573429173760819341",
+  "recovery_notice_id": null,
+  "recovery_notice_commit": null,
+  "pending": "natural monitor 2026-11-20T15:11:00-05:00 and GET of exact recovery notice"
+}

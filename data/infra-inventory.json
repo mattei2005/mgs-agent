@@ -895,12 +895,14 @@
     {
       "id": "autopush-rollback-guard-fb3abfb178aacd92d9633715",
       "agent": "zeus",
+      "report_infra_message_id": "1573429173760819341",
+      "report_GET_verified": true,
       "authority_message_id": "1569193434189668453",
       "source_alert_id": "1573426742474051796",
       "paths": [".gitignore", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py", "scripts/mgs_autopush_rollback_continuity.py", "tests/test_autopush_rollback_continuity.py", "scripts/mgs_automation_supervisor.py"],
       "receipt_directory": "reports/automation-recovery-fb3abfb178aacd92d9633715",
       "cause": "Exact untracked DR rollback source matched sensitive-name guard; provenance reconciled by audit, inventory, original REPORT and base-commit/hash.",
-      "result": "80 tests PASS; native watcher resumed commit/push cd26b3ce87e449af38d76bbe348b5cc1f536f37a; fresh natural monitor, delivery and independent closure pending in exact recovery receipt.",
+      "result": "80 tests PASS; native retry/push c0cc89a55280398535d4fd2a53e9d924601721dd and all six exact remote artifact hashes verified; canonical locked monitor dry-run zero failures. Natural monitor/notice GET and supervisor closure remain gated in the exact recovery receipt.",
       "preserved": "Rollback bytes and sensitive guard; no manual Git writer, restart, schedule, credential or business change.",
       "read_only_observer": "scripts/mgs_autopush_rollback_continuity.py"
     },
