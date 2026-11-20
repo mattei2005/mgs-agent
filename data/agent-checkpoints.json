@@ -1812,6 +1812,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1573151640645673134",
+      "next_step": "Concluir fontes novas Meta/SB e RPS UI; renderizar, revisar, publicar e reconciliar cada parte e resumo; preservar campanhas e agendas",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1573151640645673134/request.json",
+      "state": "preflight_validado;sete_pares;usd;america_new_york;data19nov2026;coleta_em_andamento",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-20T01:47:31+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -11748,5 +11758,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-19T19:24:17+00:00"
+  "updated_at": "2026-11-20T01:47:31+00:00"
 }
