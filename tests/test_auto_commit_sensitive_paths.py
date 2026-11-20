@@ -10,6 +10,21 @@ WATCHER = ROOT / "scripts/auto-commit-watcher.sh"
 
 
 class SensitivePathGuardTests(unittest.TestCase):
+    def test_exact_dr_rollback_exclusion(self):
+        target = "reports/automation-recovery-b072e2d339b0565639ed5d4a/rollback/mgs_private_control_store.py"
+        included = [target + ".other", "work/" + target,
+                    target.replace("b072e2d339b0565639ed5d4a", "other"),
+                    target.replace("mgs_private_control_store.py", "credentials.json"),
+                    "scripts/mgs_private_control_store.py",
+                    target.replace("rollback/", "rollback-other/")]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+            for path in [target] + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(["git", "-C", directory, "check-ignore", "-q", "--", path], check=False)
+                    self.assertEqual(result.returncode, 0 if path == target else 1)
+
     def test_exact_wrapper_exception_and_negative_paths(self):
         # Evaluate only variable declarations, never the persistent watcher.
         declarations = WATCHER.read_text().split(

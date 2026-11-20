@@ -195,3 +195,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # Preserve bytes locally; the installed source remains versioned and guarded.
 /data/ares/meta-ads/audit/maintenance/eggbev03-route-cutover-1571996433999990885/credential-routing-before-parent-name-fix.py
 
+# Reconciled DR recovery rollback source; exact base-commit/hash verified.
+# Preserve locally without publishing copied source or relaxing sensitive guards.
+/reports/automation-recovery-b072e2d339b0565639ed5d4a/rollback/mgs_private_control_store.py
+

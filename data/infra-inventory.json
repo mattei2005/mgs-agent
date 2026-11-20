@@ -893,6 +893,28 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "dr-same-snapshot-finalization-b072e2d339b0565639ed5d4a",
+      "agent": "zeus",
+      "report_infra_message_id": "1573422761651601592",
+      "report_GET_verified": true,
+      "deployed_collect_exact_slot_verified": true,
+      "authority_message_id": "1569193434189668453",
+      "source_thread": "1527004682382479380",
+      "job_id": "3ff8bd8ca40d",
+      "slot": "2026-11-20T14:23:00-05:00",
+      "paths": ["scripts/mgs-offsite-backup.py", "scripts/mgs_private_control_store.py", "scripts/mgs_dr_recovery_continuity.py", "tests/test_dr_existing_finalization.py", "tests/test_dr_finalized_observation.py"],
+      "receipt_directory": "reports/automation-recovery-b072e2d339b0565639ed5d4a",
+      "result": "PASS; original ciphertext full-stream size MD5 SHA256 verified; existing ACK metadata finalized; independent supervisor closure pending",
+      "remote_file_id": "1oPnCHSP-jmTPaVFNLn10zpzBNdQB3MRh",
+      "ack_id": "1c-Qiakb8qlQNnL5q42IrgwevMmUe6lTv",
+      "tests_passed": 27,
+      "new_snapshots": 0,
+      "credential_changes": false,
+      "schedule_changes": false,
+      "retention_changes": false,
+      "gateway_restarts": 0
+    },
+    {
       "id": "autopush-index-lock-recovery-3e1e5a580dd9f2151ef142e8",
       "agent": "zeus",
       "report_infra_message_id": "1572896477301186561",

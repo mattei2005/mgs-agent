@@ -1,0 +1,19 @@
+{
+  "operation_key": "fb3abfb178aacd92d9633715",
+  "alert_id": "1573426742474051796",
+  "authority_message_id": "1569193434189668453",
+  "authority_author_GET_verified": "344196393512075265",
+  "owner": "supervisor:511165",
+  "state": "correction_applied_native_retry_and_delivery_pending",
+  "cause": "Native auto-commit sensitive-name guard blocked an untracked rollback source from the authorized DR recovery b072e2d339b0565639ed5d4a; not a credential or new business operation.",
+  "rollback_source": "reports/automation-recovery-b072e2d339b0565639ed5d4a/rollback/mgs_private_control_store.py",
+  "rollback_sha256": "0022cbd3973d0cab0b86cfde7e5ed3c877f7a3f62dd4637706c2dcdf647d2567",
+  "rollback_base_commit": "3e652ff66633c32fa5c21a620694d68ec6f0d0e7",
+  "exact_base_bytes_and_manifest_verified": true,
+  "completed": ["GET original alert", "GET Rodolfo original authorization", "reconcile supervisor owner and empty Git index", "audit -> inventory -> original REPORT and Git provenance", "exact local-only .gitignore exclusion and regression test applied"],
+  "pending": ["regression suite", "native watcher retry and remote ancestry", "fresh natural monitor recovery and GET receipt", "inventory audit REPORT-INFRA and GET", "independent supervisor closure and final delivery"],
+  "next_step": "Keep existing watcher and supervisor owners; no manual commit/push or second dispatcher. Validate exact native retry and fresh natural recovery.",
+  "schedule_changed": false,
+  "credentials_changed": false,
+  "gateway_restart": false
+}

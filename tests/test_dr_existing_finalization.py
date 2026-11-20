@@ -56,7 +56,7 @@ class AckMetadataTests(unittest.TestCase):
         data = b'approved ACK bytes'
         import hashlib
         digest = hashlib.sha256(data).hexdigest()
-        meta = {'id': 'same-id', 'name': 'ack.json', 'parents': ['parent'], 'trashed': False,
+        meta = {'id': 'same-id', 'name': 'ack.json', 'parents': ['parent'], 'trashed': False, 'size': str(len(data)),
                 'sha256Checksum': digest, 'properties': {'mgsArchiveType': 'private_control_slot',
                 'expectedKind': 'backup_direct_ack', 'expectedSha256': digest}}
         after = copy.deepcopy(meta)

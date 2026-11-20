@@ -81,7 +81,7 @@ def publish_sa(d,parent,name,data,mime,key,kind):
    return old['id']
   # A completed media PATCH followed by failed properties PATCH is not a new
   # slot or a new upload. Reconcile its original bytes before metadata-only retry.
-  if kind=='backup_direct_ack' and m.get('properties',{}).get('mgsArchiveType')=='private_control_slot':
+  if kind=='backup_direct_ack' and m.get('properties',{}).get('mgsArchiveType')=='private_control_slot' and int(m.get('size') or 0)>0:
    props=m.get('properties',{})
    if (m.get('parents')!=[parent] or m.get('driveId') or m.get('name')!=name
        or props.get('expectedKind')!=kind or props.get('expectedSha256')!=j['sha256']

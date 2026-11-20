@@ -1,6 +1,6 @@
-"""Read-only closure receipt for the exact corrected hourly DR occurrence.
+"""Read-only closure receipts for explicitly reconciled hourly DR occurrences.
 
-This certifies current protection restored, NOT recreation of the lost snapshot.
+Each receipt distinguishes restored current protection from an original snapshot.
 Never uploads, changes scheduler history, deletes, or sends a business report.
 """
 import json
