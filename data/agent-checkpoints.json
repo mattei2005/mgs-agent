@@ -7798,6 +7798,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-roi-1573405431496318997",
+      "next_step": "Aguardar confirmacao alternativa inicio15h13EST depois cada30min ate23h43;revalidar auditoria global anteswrite;preservar inicial sem reenviar;nao alterar concorrentes",
+      "objective": "CPR Meta e ROI real SB cada30min campanhas criadas20nov ate pedido Mavroa04 G004",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1573405431496318997/manifest.json",
+      "state": "primeiro_get_verificado_13h36est;7campanhas070a076;29testespass;coortefixa;agenda_nao_criada_30pares_com_conflito_operacional",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-20T18:38:40+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -11028,6 +11038,26 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1573403712314024009",
+      "next_step": "Entregar resultado nativo e bloco Iris das cópias; nenhuma nova mutação Meta.",
+      "objective": "Duplicar C068 e C069 duas vezes cada, USD150/dia por campanha, início imediato.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573403712314024009/completion-receipt.json",
+      "state": "complete: c073/c074 de c068; c075/c076 de c069. quatro campanhas active, qa integral e ids preservados; usd600/dia adicionais.",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-20T18:36:42+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-1573403976697905277",
+      "next_step": "Entregar resultado nativo e bloco Iris das cópias; nenhuma nova mutação Meta.",
+      "objective": "Duplicar C066 duas vezes, USD150/dia por campanha, início imediato.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573403712314024009/completion-receipt.json",
+      "state": "complete: c077/c078 active, qa integral e ids preservados; usd300/dia adicionais.",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-20T18:36:42+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -11175,6 +11205,16 @@
       "state": "paused_waiting_activation_hour: 4/4 paused confirmadas por get individual e batch integral; quatro writes exclusivos status; budget,lance,nomes e programacao preservados. nenhuma agenda criada.",
       "thread_id": "1558131278589460584",
       "updated_at": "2026-11-17T18:11:12+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-status-1573404096080121997",
+      "next_step": "Entregar resultado nativo e bloco Iris das cópias; nenhuma nova mutação Meta.",
+      "objective": "Pausar somente C049 e C006 na Mavroa Conta04.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573403712314024009/completion-receipt.json",
+      "state": "complete: c049 e c006 paused por get individual e batch final; somente status alterado.",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-20T18:36:42+00:00"
     },
     {
       "agent": "zeus",
@@ -11848,5 +11888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T18:15:28+00:00"
+  "updated_at": "2026-11-20T18:38:40+00:00"
 }
