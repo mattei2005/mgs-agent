@@ -1,0 +1,24 @@
+{
+  "ok": false,
+  "action": "bring_to_front",
+  "message": "bring_to_front: exact target hwnd 0xf0348 was raised in z-order, but Windows kept foreground on hwnd 0x7e02e6; foreground activation failed.",
+  "effect": "refused",
+  "code": "foreground_unavailable",
+  "meta": {
+    "actual_foreground_window_id": 8258278,
+    "code": "foreground_unavailable",
+    "effect": "refused",
+    "landed_on_target": false,
+    "now_fg_hwnd": "0x7e02e6",
+    "pid": 18704,
+    "previous_fg_hwnd": "0x7e02e6",
+    "raised": true,
+    "restored": false,
+    "target_hwnd": "0xf0348",
+    "window_id": 983880
+  },
+  "verdict": {
+    "decision": "escalate",
+    "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+  }
+}

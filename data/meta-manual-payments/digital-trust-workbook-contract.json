@@ -182,20 +182,25 @@
   },
   "latest_refresh_qualification": {
     "status": "partial_validated_blocked_pc1_foreground",
-    "scheduled_at": "2026-11-19T21:02:00-05:00",
-    "updated_at": "2026-11-19T21:14:14.869655-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/partial-receipt.json",
+    "scheduled_at": "2026-11-20T08:02:00-05:00",
+    "updated_at": "2026-11-20T08:08:52.578426-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/partial-receipt.json",
     "business_refresh_complete": false,
     "accounts": 55,
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261119T210613237768",
-    "api_collected_at": "2026-11-19T21:05:57.790644-05:00",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261120T080544252916",
+    "api_collected_at": "2026-11-20T08:05:36.744585-05:00",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261119T210622523907",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261120T080546027950",
     "h_source": "accounts_list_outstanding_balance",
     "h_values_notes_original_times_preserved": true,
     "pending_ui": [
+      {
+        "account_id": "1046241194533786",
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
       {
         "account_id": "1150399088163771",
         "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
@@ -480,8 +485,8 @@
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
     "authentication_observed": false,
-    "blocker": "Windows foreground activation refused: exact Chrome hwnd983880 could not take foreground from AvastUI.exe hwnd8258278. Search remained empty after canonical worker and one foreground retry. No Meta authentication/passkey gate in inspected Accounts captures. No further inputs attempted.",
-    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/input-action-0.json",
+    "blocker": "Windows foreground activation refused: exact Chrome hwnd983880 could not take foreground from AvastUI.exe hwnd8258278. Search remained empty after canonical worker; a separate fresh-bounds foreground diagnostic was refused before text input. No Meta authentication/passkey gate in inspected Accounts captures. No further inputs attempted.",
+    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/input-action-0.json",
     "browser_tab_exact_parity_established": false,
     "browser_tab_parity_qualification": "Initial full AX preserved; failed routing means ctrl+t/ctrl+w effect not proven, so no additional tab closures or restoration attempted.",
     "lease_free": true,
@@ -491,19 +496,11 @@
     },
     "average_periods": [
       [
-        "2026-11-16",
-        "2026-11-18"
-      ],
-      [
         "2026-11-17",
         "2026-11-19"
       ]
     ],
     "month_periods": [
-      [
-        "2026-11-01",
-        "2026-11-19"
-      ],
       [
         "2026-11-01",
         "2026-11-20"
@@ -513,7 +510,7 @@
     "payments_executed": 0,
     "billing_changes": 0,
     "cron_changes": 0,
-    "next_run_at": "2026-11-20T08:02:00-05:00",
+    "next_run_at": "2026-11-20T14:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "delivery": "automatic_final_only_short_real_blocker",
     "next_step": "Owner must dismiss or resolve Avast foreground interception on PC1 and leave approved Rodolfo Chrome available. Zeus then revalidates target and resumes H40/current pending D in same job/contract; no payment or billing authority."
@@ -587,6 +584,7 @@
   "pending_card_history": {
     "status": "blocked_pc1_foreground",
     "account_ids": [
+      "1046241194533786",
       "1150399088163771",
       "1062446663435585",
       "1547524853816263",
@@ -596,6 +594,11 @@
       "2852476828464907"
     ],
     "pending_ui": [
+      {
+        "account_id": "1046241194533786",
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
       {
         "account_id": "1150399088163771",
         "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
@@ -632,7 +635,7 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/partial-receipt.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/partial-receipt.json"
   },
   "pending_new_account_fields": {
     "D_account_ids": [
