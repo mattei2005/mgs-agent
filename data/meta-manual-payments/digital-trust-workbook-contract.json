@@ -182,17 +182,17 @@
   },
   "latest_refresh_qualification": {
     "status": "partial_validated_blocked_pc1_foreground",
-    "scheduled_at": "2026-11-20T08:02:00-05:00",
-    "updated_at": "2026-11-20T08:08:52.578426-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/partial-receipt.json",
+    "scheduled_at": "2026-11-20T14:02:00-05:00",
+    "updated_at": "2026-11-20T14:10:52.769034-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json",
     "business_refresh_complete": false,
     "accounts": 55,
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261120T080544252916",
-    "api_collected_at": "2026-11-20T08:05:36.744585-05:00",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261120T140616719079",
+    "api_collected_at": "2026-11-20T14:06:09.881780-05:00",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261120T080546027950",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261120T140618658603",
     "h_source": "accounts_list_outstanding_balance",
     "h_values_notes_original_times_preserved": true,
     "pending_ui": [
@@ -485,10 +485,10 @@
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
     "authentication_observed": false,
-    "blocker": "Windows foreground activation refused: exact Chrome hwnd983880 could not take foreground from AvastUI.exe hwnd8258278. Search remained empty after canonical worker; a separate fresh-bounds foreground diagnostic was refused before text input. No Meta authentication/passkey gate in inspected Accounts captures. No further inputs attempted.",
-    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/input-action-0.json",
+    "blocker": "Windows refused foreground activation of exact Chrome hwnd983880; foreground remains AvastUI.exe hwnd8258278 pid23396. Canonical search remained empty. One fresh-bounds foreground diagnostic was refused before typing. No Meta/passkey/Windows authentication gate in inspected Accounts images. No further input attempted.",
+    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/input-action-0.json",
     "browser_tab_exact_parity_established": false,
-    "browser_tab_parity_qualification": "Initial full AX preserved; failed routing means ctrl+t/ctrl+w effect not proven, so no additional tab closures or restoration attempted.",
+    "browser_tab_parity_qualification": "Complete initial AX preserved. Failed input routing does not prove ctrl+t/ctrl+w landed; no uncertain preexisting tab was closed.",
     "lease_free": true,
     "groups": {
       "Cartão de crédito": 15,
@@ -510,10 +510,19 @@
     "payments_executed": 0,
     "billing_changes": 0,
     "cron_changes": 0,
-    "next_run_at": "2026-11-20T14:02:00-05:00",
+    "next_run_at": "2026-11-20T21:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "delivery": "automatic_final_only_short_real_blocker",
-    "next_step": "Owner must dismiss or resolve Avast foreground interception on PC1 and leave approved Rodolfo Chrome available. Zeus then revalidates target and resumes H40/current pending D in same job/contract; no payment or billing authority."
+    "next_step": "Owner minimizes/resolves Avast window without disabling protection and leaves approved Rodolfo Chrome available. Zeus revalidates same surface, resumes H40/current pending D only with same contract/job; no duplicate writer or completed-phase replay.",
+    "continuity_key": "df6fbad712b411f2773daf89",
+    "continuity_source_key": "native:zeus:2ee720363d7d:20261120T1402",
+    "retry_probe_at": "2026-11-20T15:10:52.776582-05:00",
+    "continuity_consumer_heartbeat": {
+      "at": 1795201645.7571225,
+      "open": 36,
+      "phase": "idle",
+      "pid": 476855
+    }
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -635,7 +644,7 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/partial-receipt.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json"
   },
   "pending_new_account_fields": {
     "D_account_ids": [

@@ -10059,12 +10059,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Aguardar Rodolfo minimizar/resolver a janela Avast sem desativar proteção e deixar Chrome disponível; depois revalidar a mesma superfície e retomar apenas H40/pending_ui atuais no mesmo job/contrato, reconciliando writes já concluídos. Sem novos jobs, pagamentos ou billing.",
-      "objective": "Atualização financeira recorrente de 55 contas e H40; ocorrência 20/11 08:02 Eastern do mesmo job.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T0802/partial-receipt.json",
-      "state": "parcial validada: c/g/i/j55 e invoices outubro atualizados e reconciliados por id; h40 e d preservados com fontes/horas originais. oito pending_ui atuais e 39 d históricos vazios qualificados. busca accounts permaneceu vazia; diagnóstico foreground exato recusado pelo windows, que manteve avastui.exe hwnd8258278 em vez de chrome983880. nenhum gate meta/passkey observado. outras abas intactas, sessão preservada, lease livre. report-infra pendente por entrega automática exclusiva. não declarar refresh integral.",
+      "next_step": "Intervenção local: minimizar/resolver a janela Avast sem desativar proteção e deixar Chrome disponível. Supervisor fará probe; só após comprovação positiva retomar H40 e D8 pendentes da mesma ocorrência, reconciliando owner/fire_claim/writes e sem repetir funding/invoices. API final e readback completo antes de concluir. Nenhum novo job, pagamento ou billing.",
+      "objective": "Atualização recorrente 20/11 14:02 Eastern: mesmas 55 contas e H40, mesmo job e contrato.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json",
+      "state": "parcial validada: c/g/i/j55 e invoices outubro atualizados e conferidos por id; outra aba intacta. h40 e d preservados com valores/fontes/horas anteriores; 8 pending_ui atuais e 39 d históricos vazios qualificados. busca accounts vazia; windows recusou foreground do chrome e manteve avastui.exe hwnd8258278. sem gate meta/passkey observado. lease livre; fila waiting_human da ocorrência persistida com consumidor ativo. report-infra pendente por entrega automática exclusiva.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-20T13:09:33+00:00"
+      "updated_at": "2026-11-20T19:11:13+00:00"
     },
     {
       "agent": "zeus",
@@ -11888,5 +11888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T18:38:40+00:00"
+  "updated_at": "2026-11-20T19:11:13+00:00"
 }
