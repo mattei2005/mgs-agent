@@ -5012,6 +5012,26 @@
       "updated_at": "2026-11-19T14:10:40+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1573154537475153943",
+      "next_step": "Aguardar one-shot; no horario, status-only ACTIVE e GET integral antes de notificar.",
+      "objective": "Pausar 12 campanhas nominais Yolokfx02 G006 e reativar20novembro2026 00hEST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573154537475153943/activation.json",
+      "state": "scheduled:12/12 paused por get integral;12 aptas para20novembro2026 00h00 america/new_york;119 testes e auditorias pre/pos aprovados",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-20T02:02:13+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1573154805562609746",
+      "next_step": "Preparar hierarquias,particionar prontidao e agendar one-shot com auditoria global",
+      "objective": "Pausar lista nominal Yolokfx08 G006 e reativar20novembro2026 00hEST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573154805562609746/activation.json",
+      "state": "42/42 paused confirmado por get integral;42writes status-only;ativacao ainda pendente preparacao",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-20T02:02:33+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
       "next_step": "Nenhum:2987 ativa;2955 retida para rollback; Livepatch saudável; PIDs dos agentes iguais; sem reboot; Snap sem candidatos. Observadores d476a2649595 e f17da87f7d57 concluídos/desabilitados sem próximo disparo; histórico automático supersedido pela execução manual.",
@@ -11758,5 +11778,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T01:52:57+00:00"
+  "updated_at": "2026-11-20T02:02:33+00:00"
 }
