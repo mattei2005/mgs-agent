@@ -7799,12 +7799,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-roi-1573405431496318997",
-      "next_step": "Aguardar confirmacao alternativa inicio15h13EST depois cada30min ate23h43;revalidar auditoria global anteswrite;preservar inicial sem reenviar;nao alterar concorrentes",
-      "objective": "CPR Meta e ROI real SB cada30min campanhas criadas20nov ate pedido Mavroa04 G004",
+      "next_step": "Congelar uniao novas e alteradas ateemenda;testar;dryrun;entregaemenda;auditaragenda atual;habilitar mesmo request sem duplicar inicial",
+      "objective": "CPR Meta e ROI real SB cada30min novas e alteradas20nov Mavroa04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1573405431496318997/manifest.json",
-      "state": "primeiro_get_verificado_13h36est;7campanhas070a076;29testespass;coortefixa;agenda_nao_criada_30pares_com_conflito_operacional",
+      "state": "emenda1573430872906924114_em_preflight;inicial_original_preservado;agenda_ainda_nao_criada",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-20T18:38:40+00:00"
+      "updated_at": "2026-11-20T20:15:22+00:00"
     },
     {
       "agent": "ares",
@@ -11888,5 +11888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T19:11:13+00:00"
+  "updated_at": "2026-11-20T20:15:22+00:00"
 }

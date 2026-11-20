@@ -9,7 +9,7 @@ R=Path('/root/mgs-agent/data/ares/meta-ads/state/cpr-roi-updates/157340543149631
 P=Path('/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1570877060862312680/schedule-audit.py')
 s=importlib.util.spec_from_file_location('inventory14',P);assert s and s.loader;mod=importlib.util.module_from_spec(s);sys.modules[s.name]=mod;s.loader.exec_module(mod)
 def audit(post=False):
- raw=mod.inventory();m=json.loads((R/'manifest.json').read_text());now=datetime.now(Z);end=datetime.fromisoformat(m['expires_at']);initial=json.loads((R/'runs/initial/complete.json').read_text());first=datetime.fromisoformat(initial['observed_at'])
+ raw=mod.inventory();m=json.loads((R/'manifest.json').read_text());now=datetime.now(Z);end=datetime.fromisoformat(m['expires_at']);initial=json.loads((R/'runs'/m.get('schedule_reference_run','initial')/'complete.json').read_text());first=datetime.fromisoformat(initial['observed_at'])
  infra=('monitor-tool-loops','monitor-service-restarts','monitor-hermes-memory-capacity','monitor-vps-health','sync-souls','monitor-cron-stale-logs','monitor_honcho','alerts-infra-failed-alert-resolver','monitor_hermes_pending_writes','finalize-hermes-structural-write','hermes-news-explainer-watchdog','hermes-usage-alert','hermes-context','honcho','watchdog','reconcile-hermes')
  for e in raw['entries']:
   if e['baseline'] and e['source']!='systemd':

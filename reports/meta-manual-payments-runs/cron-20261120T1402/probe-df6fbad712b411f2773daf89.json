@@ -1,0 +1,70 @@
+{
+  "operation_key": "df6fbad712b411f2773daf89",
+  "mode": "probe_only",
+  "source_key": "native:zeus:2ee720363d7d:20261120T1402",
+  "job_id": "2ee720363d7d",
+  "scheduled_at": "2026-11-20T14:02:00-05:00",
+  "status": "waiting_human",
+  "business_complete": false,
+  "auth_ready": false,
+  "original_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json",
+  "authority_verified_via_discord_get": {
+    "author_id": "344196393512075265",
+    "original_approval": "1563960055504838767",
+    "recurrence": "1563960345826037821",
+    "recovery_implementation": "1569193434189668453",
+    "current_registry": "/root/mgs-agent/data/authorized-users.json"
+  },
+  "reconciliation": {
+    "supervisor_owner": "supervisor:511165",
+    "native_job_enabled": true,
+    "native_job_fire_claim": null,
+    "native_job_next_run_at": "2026-11-20T21:02:00-05:00",
+    "writer_lock_free_at_preflight": true,
+    "financial_workers_observed": false,
+    "completed_layers_preserved": ["funding", "invoices", "metrics", "source_to_sheet_readback"],
+    "pending_layers_preserved": ["H40_Accounts_outstanding_balance", "D8_new_generic_events_instrument", "final_API_reconciliation_and_validation"],
+    "pending_ids_source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json",
+    "live_sheet_not_requeried_or_written_in_probe": true
+  },
+  "observations": {
+    "chrome_pid": 18704,
+    "chrome_window_id": 983880,
+    "same_approved_binding_alive": true,
+    "chrome_profile_rodolfo_in_ax": true,
+    "business_id_visually_verified": "155263197283282",
+    "accounts_and_outstanding_balance_visible": true,
+    "web_page_auth_challenge_visible": false,
+    "desktop_capture_avast_overlay_visible": false,
+    "avast_process_and_window_still_present": true,
+    "native_credential_prompt_pid": 26172,
+    "native_credential_prompt_window_id": 66778,
+    "native_credential_prompt_text": "Windows Security / Sign in with a passkey / Passkey for accounts.meta.com / Continue / Cancel",
+    "native_passkey_prompt_visually_verified": true,
+    "native_prompt_browser_owner_link_not_independently_proven": true,
+    "foreground_activation_not_tested": true,
+    "foreground_session0_probe": "GetForegroundWindow returned 0 in SSH service session; not valid evidence of interactive foreground readiness",
+    "conclusion": "Accounts pixels alone do not clear the native security/foreground gate. Preserve human block; no AUTH_READY. Do not press Continue/Cancel or dismiss Avast. Human should resolve the pending native prompt locally and leave approved Chrome available; next probe must revalidate the same surface."
+  },
+  "evidence": {
+    "chrome_ax": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/probe-df6fbad712b411f2773daf89-evidence/elements_350023ccf68c40d4bfc2bc683fe0024e.json",
+    "chrome_pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/probe-df6fbad712b411f2773daf89-evidence/computer_use_38934dfd49124080aa07d407686ac802.png",
+    "desktop_pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/probe-df6fbad712b411f2773daf89-evidence/computer_use_b34bacde33654dc883638f371119d4ab.png",
+    "native_passkey_pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/probe-df6fbad712b411f2773daf89-evidence/computer_use_678259f37fa6418eb7eee0c97d1f2fe9.png",
+    "vision_analyze_performed": true
+  },
+  "safety": {
+    "input_actions": 0,
+    "navigation_actions": 0,
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "gateway_restarts": 0,
+    "messages_posted": 0,
+    "pc1_probe_lease_released": true,
+    "business_continuation_not_started": true,
+    "supervisor_retains_queue_and_delivery_ownership": true
+  }
+}
