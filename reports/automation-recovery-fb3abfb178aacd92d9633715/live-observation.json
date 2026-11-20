@@ -1,0 +1,19 @@
+{
+  "status": "OK",
+  "verified": true,
+  "target": "alert:1573426742474051796",
+  "receipt": "/root/.hermes/shared/automation-continuity/runs/fb3abfb178aacd92d9633715/recovery-evidence.json",
+  "at": 1795205515.7558622,
+  "source": {
+    "kind": "alert",
+    "profile": "zeus",
+    "alert_id": "1573426742474051796",
+    "alert_channel": "1498132022634483894"
+  },
+  "evidence": {
+    "remote_main": "8bbf053e40f5c7ab7506cf990e04c2414d1a343f",
+    "native_retry_commit": "c0cc89a55280398535d4fd2a53e9d924601721dd",
+    "recovery_notice_get_verified": "1573430516072448265",
+    "report_infra_get_verified": "1573429173760819341"
+  }
+}

@@ -902,7 +902,7 @@
       "paths": [".gitignore", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py", "scripts/mgs_autopush_rollback_continuity.py", "tests/test_autopush_rollback_continuity.py", "scripts/mgs_automation_supervisor.py"],
       "receipt_directory": "reports/automation-recovery-fb3abfb178aacd92d9633715",
       "cause": "Exact untracked DR rollback source matched sensitive-name guard; provenance reconciled by audit, inventory, original REPORT and base-commit/hash.",
-      "result": "80 tests PASS; native retry/push c0cc89a55280398535d4fd2a53e9d924601721dd and all six exact remote artifact hashes verified; canonical locked monitor dry-run zero failures. Natural monitor/notice GET and supervisor closure remain gated in the exact recovery receipt.",
+      "result": "80 tests PASS; native retry/push c0cc89a55280398535d4fd2a53e9d924601721dd and six exact remote hashes verified. Natural monitor 2026-11-20T20:11:01Z zero failures; recovery notice 1573430516072448265 GET verified; exact read-only observer OK. Supervisor independent closure/final diagnostic delivery pending.",
       "preserved": "Rollback bytes and sensitive guard; no manual Git writer, restart, schedule, credential or business change.",
       "read_only_observer": "scripts/mgs_autopush_rollback_continuity.py"
     },
