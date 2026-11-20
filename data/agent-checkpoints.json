@@ -1843,12 +1843,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1573446204757512424",
-      "next_step": "Autenticar pedido e destinos, confirmar identidades Meta e dia civil; coletar fontes novas HTTP e DOM; validar e publicar sete pares com resumo",
+      "next_step": "Concluido; nao reenviar. Atraso SB1h14a1h16 nas seis contas com atividade. Boostingecon sem entrega/atividade SB: receitas, saldo, ROI e atraso n/d. Novo pedido exige fontes novas; agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1573446204757512424/intraday.py",
-      "state": "intake_preflight;codigo_revisado_isolado;zero_writes_meta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1573446204757512424/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;129campanhas_no_recorte_financeiro;39partes_integrais+7resumos;46mensagens_unicas_get;ordem_confirmada;corte20/11/2026_16:15est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass;429_final_recuperado_get_paced",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-20T21:14:42+00:00"
+      "updated_at": "2026-11-20T21:24:02+00:00"
     },
     {
       "agent": "ares",
@@ -11898,5 +11898,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T21:14:42+00:00"
+  "updated_at": "2026-11-20T21:24:02+00:00"
 }
