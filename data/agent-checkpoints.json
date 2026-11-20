@@ -343,12 +343,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1573371023603142820",
-      "next_step": "Congelar criacoes e alteracoes ate mensagem, testar coletor, primeira entrega e agenda finita auditada.",
+      "next_step": "Executar mesmojob8e4fb0ab27cd cada30min ate23h35EST20nov;expirar21nov00hantesAPI;preservarIDspausados e retomar mesmo slot/outbox emfalha;sem descoberta futura autorizada.",
       "objective": "CPR e ROI cada30min hoje novas e alteradas Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1573371023603142820/manifest.json",
-      "state": "preflight autenticado;usd ny confirmados;selecao congelada em preparacao;semwritemetasb",
+      "state": "scheduled_initial_get_verified;6campanhas306307308novas279288294alteradas;40testespass;25slots11h35a23h35est;prepossemconflito;reportinfraget;semwritesmetasb;coortecongeladaate11h14est",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-20T16:17:54+00:00"
+      "updated_at": "2026-11-20T16:21:31+00:00"
     },
     {
       "agent": "ares",
@@ -11818,5 +11818,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T16:17:54+00:00"
+  "updated_at": "2026-11-20T16:21:31+00:00"
 }
