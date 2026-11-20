@@ -5014,12 +5014,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573154537475153943",
-      "next_step": "Aguardar one-shot; no horario, status-only ACTIVE e GET integral antes de notificar.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 12 campanhas nominais Yolokfx02 G006 e reativar20novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573154537475153943/activation.json",
-      "state": "scheduled:12/12 paused por get integral;12 aptas para20novembro2026 00h00 america/new_york;119 testes e auditorias pre/pos aprovados",
+      "state": "12/12 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-20T02:02:13+00:00"
+      "updated_at": "2026-11-20T05:02:25+00:00"
     },
     {
       "agent": "ares",
@@ -5034,12 +5034,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573155009657307157",
-      "next_step": "Aguardar ativacao pontual e GET integral dos mesmos27IDs;semrecorrencia.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 27 campanhas nominais Mavroa06 G006 e reativar20novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573155009657307157/activation.json",
-      "state": "scheduled:27/27 paused por get;27aptas,one-shot20nov2026 00hest validado",
+      "state": "27/27 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-20T02:05:55+00:00"
+      "updated_at": "2026-11-20T05:05:06+00:00"
     },
     {
       "agent": "zeus",
@@ -11788,5 +11788,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T02:14:57+00:00"
+  "updated_at": "2026-11-20T05:05:06+00:00"
 }

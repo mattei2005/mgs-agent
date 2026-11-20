@@ -6880,20 +6880,26 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-11-19T00:05:03-05:00",
+    "last_check": "2026-11-20T00:05:07-05:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-11-18T00:00:00-05:00",
-      "deleted": 1,
-      "eligible": 1,
+      "cutoff": "2026-11-19T00:00:00-05:00",
+      "deleted": 7,
+      "eligible": 7,
       "message_ids": [
-        "1572404013691965612"
+        "1572766416388628554",
+        "1572706017878212749",
+        "1572706012371222685",
+        "1572706007912677417",
+        "1572585255070728225",
+        "1572585250498936843",
+        "1572585244865855672"
       ],
       "remaining": 0,
-      "scanned": 8,
+      "scanned": 10,
       "would_delete": 0
     },
-    "last_success_date": "2026-11-19"
+    "last_success_date": "2026-11-20"
   }
 }
