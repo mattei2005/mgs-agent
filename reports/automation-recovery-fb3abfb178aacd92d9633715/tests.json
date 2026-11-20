@@ -1,0 +1,17 @@
+[
+  {
+    "pattern": "test_auto_commit*.py",
+    "returncode": 0,
+    "output": "...................................................................\n----------------------------------------------------------------------\nRan 67 tests in 24.125s\n\nOK\n"
+  },
+  {
+    "pattern": "test_autopush_rollback_continuity.py",
+    "returncode": 0,
+    "output": "....<frozen importlib._bootstrap_external>:511: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7047a22a1c60>\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n<frozen importlib._bootstrap_external>:511: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7047a22a2a70>\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n<frozen importlib._bootstrap_external>:511: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7047a22a1300>\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n<frozen importlib._bootstrap_external>:511: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7047a20fcd60>\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n..\n----------------------------------------------------------------------\nRan 6 tests in 0.058s\n\nOK\n"
+  },
+  {
+    "pattern": "test_continuity_producer_ownership.py",
+    "returncode": 0,
+    "output": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.027s\n\nOK\n"
+  }
+]

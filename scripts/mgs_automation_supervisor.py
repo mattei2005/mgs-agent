@@ -123,6 +123,9 @@ def collect(base=BASE,profiles=PROFILES):
     from mgs_autopush_continuity import index_lock_observation
     recovered=index_lock_observation(base=base,now=now)
     if recovered is not None:observations[recovered['target']]=recovered
+    from mgs_autopush_rollback_continuity import observation as rollback_observation
+    recovered=rollback_observation(base=base,now=now)
+    if recovered is not None:observations[recovered['target']]=recovered
     inventory=[]
     cron=subprocess.run(['crontab','-l'],capture_output=True,text=True,timeout=15)
     if cron.returncode:raise RuntimeError('root cron inventory unavailable')

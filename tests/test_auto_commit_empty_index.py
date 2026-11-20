@@ -77,6 +77,19 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def test_dr_rollback_preserved_while_normal_file_commits(self):
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        target = "reports/automation-recovery-b072e2d339b0565639ed5d4a/rollback/mgs_private_control_store.py"
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        p = self.repo / target
+        p.parent.mkdir(parents=True)
+        p.write_text("rollback fixture")
+        (self.repo / "normal.txt").write_text("normal")
+        self.run_until("Commit OK:")
+        self.assertEqual(p.read_text(), "rollback fixture")
+        self.assertEqual(self.git("ls-files", "--", target), "")
+        self.assertIn("normal.txt", self.git("ls-files"))
+
     def test_existing_file_staging_failure_stays_error(self):
         (self.repo / "normal.txt").write_text("pending")
         (self.repo / ".git/index.lock").write_text("")
