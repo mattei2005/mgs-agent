@@ -30,11 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    677181,
-    677205,
-    677224,
-    677883,
-    677908,
     678374,
     678391,
     678412,
@@ -1029,7 +1024,12 @@
     760179,
     760192,
     760213,
-    760236
+    760236,
+    760738,
+    760765,
+    760791,
+    760815,
+    760837
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1060,6 +1060,37 @@
         732438
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust-2|wantabrand|71|340": {
+      "alert": {
+        "company": "digital-trust-2",
+        "created_at": "2026-11-20T00:03:45.000Z",
+        "domain": "wantabrand",
+        "notification_id": 760738,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 4,
+          "On-hold": 9
+        },
+        "pages": 13,
+        "segurador_id": "340",
+        "segurador_name": "Bình Hòa Trần",
+        "source": "page_token",
+        "user_email": "disparoswantabranduscces@gmail.com",
+        "user_id": "71",
+        "user_name": "Disparos Wantabrand US-CC-ES"
+      },
+      "last_sent_at": "2026-11-19T19:12:13-05:00",
+      "message_ids": [
+        "1573128790152847461"
+      ],
+      "notification_ids": [
+        760738
+      ],
+      "opened_at": "2026-11-19T19:12:10-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -1266,9 +1297,9 @@
     "digital-trust|boostingecon|30|1758": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T00:06:02.000Z",
+        "created_at": "2026-11-20T00:05:07.000Z",
         "domain": "boostingecon",
-        "notification_id": 743410,
+        "notification_id": 760815,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -1290,7 +1321,8 @@
       ],
       "notification_ids": [
         742203,
-        743410
+        743410,
+        760815
       ],
       "opened_at": "2026-11-10T19:12:14-05:00",
       "repeat_count": 0,
@@ -2259,9 +2291,9 @@
     "digital-trust|financeadx|24|265": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T00:06:03.000Z",
+        "created_at": "2026-11-20T00:05:08.000Z",
         "domain": "financeadx",
-        "notification_id": 743431,
+        "notification_id": 760837,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -2285,7 +2317,8 @@
       "notification_ids": [
         736384,
         742224,
-        743431
+        743431,
+        760837
       ],
       "opened_at": "2026-11-05T07:12:14-05:00",
       "repeat_count": 0,
@@ -4211,6 +4244,38 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|newsoun|14|1774": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-20T00:04:43.000Z",
+        "domain": "newsoun",
+        "notification_id": 760791,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 64,
+          "On-hold": 115,
+          "Ready": 1
+        },
+        "pages": 180,
+        "segurador_id": "1774",
+        "segurador_name": "Thanh Hiep",
+        "source": "page_token",
+        "user_email": "disparosnewsoun@gmail.com",
+        "user_id": "14",
+        "user_name": "Disparos Newsoun US-CC-EN"
+      },
+      "last_sent_at": "2026-11-19T19:12:13-05:00",
+      "message_ids": [
+        "1573128795303452735"
+      ],
+      "notification_ids": [
+        760791
+      ],
+      "opened_at": "2026-11-19T19:12:10-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|newsoun|14|1788": {
       "alert": {
         "company": "digital-trust",
@@ -4748,6 +4813,39 @@
         745167
       ],
       "opened_at": "2026-11-12T19:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|1821": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-20T00:04:34.000Z",
+        "domain": "openzed",
+        "notification_id": 760765,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 15,
+          "Broadcast": 288,
+          "On-hold": 85,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "1821",
+        "segurador_name": "Angela Baker",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-11-19T19:12:13-05:00",
+      "message_ids": [
+        "1573128799376117842"
+      ],
+      "notification_ids": [
+        760765
+      ],
+      "opened_at": "2026-11-19T19:12:10-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -6749,20 +6847,29 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-19T18:57:11-05:00",
+  "last_check": "2026-11-19T19:12:13-05:00",
   "last_delivery": {
-    "at": "2026-11-19T15:12:11-05:00",
+    "at": "2026-11-19T19:12:13-05:00",
     "cursor_ids": [
-      760179,
-      760192,
-      760213,
-      760236
+      760738,
+      760765,
+      760791,
+      760815,
+      760837
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1573128790152847461",
+      "1573128795303452735",
+      "1573128799376117842"
+    ],
+    "notification_ids": [
+      760738,
+      760765,
+      760791
+    ]
   },
   "last_error": null,
-  "last_seen_id": 760236,
+  "last_seen_id": 760837,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
