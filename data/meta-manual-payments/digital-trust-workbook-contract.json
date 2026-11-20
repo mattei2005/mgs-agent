@@ -181,18 +181,18 @@
     "verified_at": "2026-11-16T16:14:14.007196-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "partial_validated_waiting_human_meta_passkey",
-    "scheduled_at": "2026-11-19T14:02:00-05:00",
-    "updated_at": "2026-11-19T14:07:26.000622-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T1402/partial-receipt.json",
+    "status": "partial_validated_blocked_pc1_foreground",
+    "scheduled_at": "2026-11-19T21:02:00-05:00",
+    "updated_at": "2026-11-19T21:14:14.869655-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/partial-receipt.json",
     "business_refresh_complete": false,
     "accounts": 55,
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261119T140528208533",
-    "api_collected_at": "2026-11-19T14:05:22.023188-05:00",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261119T210613237768",
+    "api_collected_at": "2026-11-19T21:05:57.790644-05:00",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261119T140530590505",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261119T210622523907",
     "h_source": "accounts_list_outstanding_balance",
     "h_values_notes_original_times_preserved": true,
     "pending_ui": [
@@ -209,6 +209,11 @@
       {
         "account_id": "1547524853816263",
         "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1867022354284742",
+        "name": "Growpowerhub-US-SHEIN-EN-06-G006",
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
@@ -271,14 +276,214 @@
     ],
     "h_ledger_to_live_sheet_exact": true,
     "d_values_notes_preserved": true,
+    "historical_d_blanks_all_authorized_ids": [
+      {
+        "account_id": "336562339356179",
+        "name": "Openzed-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "3752157451670648",
+        "name": "Lyzmo-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "2039876850230678",
+        "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "311204101516831",
+        "name": "Topfeed-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "26632890069640784",
+        "name": "Zytiva-GB-CC-EN-02",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "3188620887977617",
+        "name": "Infinitynexx-MX-CC-ES-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1492168699397108",
+        "name": "Yolokfx-US-SHEIN-EN-07-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1034081997659047",
+        "name": "Eggbev-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1542257646409395",
+        "name": "Financeadx-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1526280818302320",
+        "name": "Vizioid-US-SHEIN-EN-01-G001",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1062887799996139",
+        "name": "Escalatepower-US-SHEIN-EN-02-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1498990138663094",
+        "name": "Escalatepower-US-SHEIN-EN-06-G006",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "814915838330687",
+        "name": "Helixenit-MX-CC-ES-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "2031917360813819",
+        "name": "Escalatepower-US-SHEIN-EN-04-G004",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1736068407518263",
+        "name": "Vizioid-US-SHEIN-EN-04-G004",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "897046653487466",
+        "name": "Escalatepower-US-SHEIN-EN-05-G005",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1754588462350629",
+        "name": "Growpowerhub-US-SHEIN-EN-02-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1018267074603840",
+        "name": "Escalatepower-US-SHEIN-EN-01-G001",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "536294549227786",
+        "name": "Vizioid-US-SHEIN-EN-02-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1085117577390237",
+        "name": "Vizioid-US-SHEIN-EN-03-G003",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "869857549542755",
+        "name": "Vizioid-US-SHEIN-EN-06-G006",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1753257812779707",
+        "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "908704754163659",
+        "name": "Zuout-US-CC-EN-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1001115192056600",
+        "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "4511685129081248",
+        "name": "Mavroa-US-SHEIN-ES-01-G001",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1744611463000838",
+        "name": "Openzed-US-CC-EN-03",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1851640026221079",
+        "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1829406761389732",
+        "name": "Mavroa-US-SHEIN-ES-05-G005",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1245683183659911",
+        "name": "OpenzedFinanzas-US-CC-ES-01",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "2633813727134360",
+        "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "937846586033361",
+        "name": "Mavroa-US-SHEIN-ES-06-G006",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "781612907182683",
+        "name": "Yolokfx-US-SHEIN-EN-04-G004",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1107653168698121",
+        "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "7840111366055613",
+        "name": "Yolokfx-US-SHEIN-EN-01-G002",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "787796726891306",
+        "name": "Yolokfx-US-SHEIN-EN-05-G001",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1583000095650153",
+        "name": "Yolokfx-US-SHEIN-EN-02-G006",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "2429758060563333",
+        "name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "state": "historical_blank_preserved_not_zero"
+      },
+      {
+        "account_id": "1600310064116258",
+        "name": "Yolokfx-US-SHEIN-EN-06-G003",
+        "state": "historical_blank_preserved_not_zero"
+      }
+    ],
     "source_parity_cgij": true,
     "invoice_source_to_live_sheet_exact": true,
     "invoice_period": "2026-10-01",
     "invoice_due_usd": "417864.11",
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
-    "authentication_observed": true,
-    "authentication_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261119T140530590505/blocked.png",
+    "authentication_observed": false,
+    "blocker": "Windows foreground activation refused: exact Chrome hwnd983880 could not take foreground from AvastUI.exe hwnd8258278. Search remained empty after canonical worker and one foreground retry. No Meta authentication/passkey gate in inspected Accounts captures. No further inputs attempted.",
+    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/input-action-0.json",
+    "browser_tab_exact_parity_established": false,
+    "browser_tab_parity_qualification": "Initial full AX preserved; failed routing means ctrl+t/ctrl+w effect not proven, so no additional tab closures or restoration attempted.",
     "lease_free": true,
     "groups": {
       "Cartão de crédito": 15,
@@ -288,22 +493,30 @@
       [
         "2026-11-16",
         "2026-11-18"
+      ],
+      [
+        "2026-11-17",
+        "2026-11-19"
       ]
     ],
     "month_periods": [
       [
         "2026-11-01",
         "2026-11-19"
+      ],
+      [
+        "2026-11-01",
+        "2026-11-20"
       ]
     ],
     "meta_writes": 0,
     "payments_executed": 0,
     "billing_changes": 0,
     "cron_changes": 0,
-    "next_run_at": "2026-11-19T21:02:00-05:00",
+    "next_run_at": "2026-11-20T08:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
-    "delivery": "automatic_final_only_exact_authentication_notice",
-    "next_step": "Human Meta passkey authentication required in approved Chrome PC1; reconcile claim/writer and resume missing H40 and current pending D under same contract/job."
+    "delivery": "automatic_final_only_short_real_blocker",
+    "next_step": "Owner must dismiss or resolve Avast foreground interception on PC1 and leave approved Rodolfo Chrome available. Zeus then revalidates target and resumes H40/current pending D in same job/contract; no payment or billing authority."
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -372,11 +585,12 @@
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "blocked_meta_passkey",
+    "status": "blocked_pc1_foreground",
     "account_ids": [
       "1150399088163771",
       "1062446663435585",
       "1547524853816263",
+      "1867022354284742",
       "1414197490675732",
       "1543098427832443",
       "2852476828464907"
@@ -398,6 +612,11 @@
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
+        "account_id": "1867022354284742",
+        "name": "Growpowerhub-US-SHEIN-EN-06-G006",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
         "account_id": "1414197490675732",
         "name": "Mavroa-US-SHEIN-ES-02-G002",
         "reason": "new_generic_payment_since_pc1_proof"
@@ -413,7 +632,7 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T1402/partial-receipt.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261119T2102/partial-receipt.json"
   },
   "pending_new_account_fields": {
     "D_account_ids": [
