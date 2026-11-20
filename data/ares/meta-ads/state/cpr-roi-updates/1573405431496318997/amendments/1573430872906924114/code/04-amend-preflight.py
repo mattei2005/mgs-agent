@@ -1,0 +1,8 @@
+import pathlib,importlib.util,sys,json
+R=pathlib.Path(__file__).parent;H=pathlib.Path('/root/.hermes/profiles/ares');s=importlib.util.spec_from_file_location('preflight_daily',H/'scripts/shein-daily-report.py');assert s and s.loader;d=importlib.util.module_from_spec(s);sys.modules[s.name]=d;s.loader.exec_module(d)
+m=d.load(R/'manifest.json');dc=d.Discord();b=d.load(R/'binding.json');dc.verify([b]);a=dc.call('GET','/channels/1558147152528674957/messages/1573430872906924114');assert a['author']['id']==m['requester_discord_id'] and a['channel_id']==m['thread_id'];A=R/'amendments/1573430872906924114';A.mkdir(parents=True,exist_ok=True,mode=0o700);d.save(A/'authorization.json',a)
+r=d.Runner({'policy_id':m['request_id']},A,[b],m['date']);account=r.graph('act_'+m['account_id'],{'fields':'id,name,currency,timezone_name'});assert account['id'] in [m['account_id'],'act_'+m['account_id']];assert all(account[k]==m[k] for k in ['currency','timezone_name']);d.save(A/'live-account.json',account)
+from datetime import datetime
+from zoneinfo import ZoneInfo
+at=datetime.fromisoformat(a['timestamp'].replace('Z','+00:00')).astimezone(ZoneInfo(account['timezone_name']));assert at.date().isoformat()==m['date'];print(json.dumps({'account':account,'request_local':at.isoformat(),'text':a['content']},ensure_ascii=False))
+recent=dc.call('GET','/channels/1558131644135637163/messages?limit=50');d.save(A/'origin-messages.json',[{k:x.get(k) for k in ['id','content','author','timestamp']} for x in recent]);print('ORIGIN_HUMANS',json.dumps([{'id':x['id'],'content':x['content'],'timestamp':x['timestamp']} for x in recent if not x['author'].get('bot')],ensure_ascii=False))

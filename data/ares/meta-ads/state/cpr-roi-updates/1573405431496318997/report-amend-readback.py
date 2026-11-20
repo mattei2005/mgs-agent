@@ -1,0 +1,4 @@
+import importlib.util,pathlib,sys,re,json,hashlib
+R=pathlib.Path(__file__).parent;A=R/'amendments/1573430872906924114';s=importlib.util.spec_from_file_location('finalread',pathlib.Path('/root/.hermes/profiles/ares/scripts/shein-daily-report.py'));assert s and s.loader;d=importlib.util.module_from_spec(s);sys.modules[s.name]=d;s.loader.exec_module(d);dc=d.Discord();mid=re.search(r'message_id=(\d+)',(A/'report-infra-result.txt').read_text()).group(1);remote=dc.call('GET','/channels/1498132022634483894/messages/'+mid);assert remote['id']==mid and not remote['content'] and remote['embeds'] and not remote['mentions'];d.save(A/'report-infra-readback.json',{'message_id':mid,'content_empty':True,'mentions':0,'embeds':len(remote['embeds'])})
+for rel,sha in d.load(A/'initial-hashes.json').items():assert hashlib.sha256((R/rel).read_bytes()).hexdigest()==sha
+print('REPORT_INFRA_GET_VERIFIED_AND_INITIAL_UNCHANGED')
