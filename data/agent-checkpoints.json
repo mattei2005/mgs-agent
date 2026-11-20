@@ -1813,12 +1813,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1573151640645673134",
-      "next_step": "Concluir fontes novas Meta/SB e RPS UI; renderizar, revisar, publicar e reconciliar cada parte e resumo; preservar campanhas e agendas",
+      "next_step": "Concluido; nao reenviar. Atraso SB46min nas seis contas com atividade. Boostingecon sem entrega/atividade SB, receitas e ROI n/d; atraso n/d. Novo pedido exige fontes novas; agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1573151640645673134/request.json",
-      "state": "preflight_validado;sete_pares;usd;america_new_york;data19nov2026;coleta_em_andamento",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1573151640645673134/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pares;129campanhas_no_recorte_financeiro;38partes_integrais+7resumos;45mensagens_unicas_get;ordem_confirmada;corte19/11/2026_20:45a20:46est;usd;zero_writes_meta;arquivo_sanitizado_hashes_validados;65regressoes+5fixtures_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-20T01:47:31+00:00"
+      "updated_at": "2026-11-20T01:52:57+00:00"
     },
     {
       "agent": "ares",
@@ -11758,5 +11758,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T01:47:31+00:00"
+  "updated_at": "2026-11-20T01:52:57+00:00"
 }
