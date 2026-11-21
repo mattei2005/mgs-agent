@@ -10099,12 +10099,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Coletar funding,invoices,C/G/I/J,H40,D pendências atuais; reconciliar API e validar todas fontes/abas. Sem pagamentos/billing.",
-      "objective": "Nova atualização integral autorizada por Rodolfo1573485203853283370: mesmas55 contas, H40 e contrato/job existentes.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370",
-      "state": "preflight sa/drive/sheets e baseline2abas capturados; chromemeta/bm/outstanding balance confirmado em pixels, sem gate. job sem claim e lease livre.",
+      "next_step": "Rodolfo concluir/fechar passkey nativa e resolver/minimizarAvast sem desativarproteção. Probe read-only exato; reconciliar writer e retomar só H40/D8, depois APIfinal e aceite. Sem replay de funding/invoices, novosjobs, pagamentos/billing.",
+      "objective": "Atualização integral manual1573485203853283370, mesmas55contas/H40, mesmojob/contrato.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/partial-receipt.json",
+      "state": "parcial validada: funding,invoices e c/g/i/j55 renovados; fonte porid, fórmulas e outraaba intacta. h40/d preservados com horários originais.8pending_ui. busca não recebeu input; diagnóstico visual exato encontrou diálogo windows passkey accounts.meta.com pendente e alertaavast; causalidade da perda de input não comprovada. sem maisinputs após gate. fila waiting_human com consumidorheartbeat ativo e lease livre.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-20T23:50:56+00:00"
+      "updated_at": "2026-11-20T23:59:05+00:00"
     },
     {
       "agent": "zeus",
@@ -10989,12 +10989,12 @@
     {
       "agent": "ares",
       "id": "shein-1572705957413392539",
-      "next_step": "Resolver rota administrativa compativel para minimo ADVERTISE+ANALYZE com pre-read e readbacks, sem bypass, novo token ou nova aprovacao do mesmo recorte; entao retomar request original dry-run/execute.",
-      "objective": "Duplicar uma vez a C004 Escalatepower04 G004 para agora herdando budget e lance",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572705957413392539/page-access-repair/authorization-and-diagnostic.json",
-      "state": "authorized_provisioning_runtime_gap; rodolfo1572711329905774673 aprovou reparo e futuros; grant canônico registrado. page offer hub http200 e assigned_users completo comprovam system user ausente. permission e campaign writes=0. guard page get-only sem executor administrativo compativel identificado; gap escalado report-infra.",
+      "next_step": "Aplicar somente delegacao ADVERTISE+ANALYZE ja autorizada1572711329905774673, por rota administrativa instalada compativel, pre-read/journal/readbacks; nao bypass ou trocar token. Revalidar Page corporativa, retomar input revisado mesmo request no runner central ate QA e readback. Sem nova aprovacao de mesmo reparo. Se horario expirar, resolver politica temporal antes de write.",
+      "objective": "Duplicar uma vez C004 Escalatepower04 G004; emenda Rodolfo: inicio 21/11/2026 00:00 America/New_York; herdar budget/lance",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572705957413392539/schedule-amendment-1573486549947908177.json",
+      "state": "schedule_amended_blocked_page_access. rodolfo1573486549947908177 autenticado e permissao live confirmada; mesmo request/autor/relogio originais. input revisado somente start_now para start_time2026-11-21t00:00:00-05:00; backup/digest validados. conta/fontehttp200 usd newyork daily5000 cost_cap; pageofferhub corporativohttp400code10; dry-run revisado bloqueado. guard get-only e sem executor administrativo separado compativel identificado. permission/campaign write attempts0; agendamento meta nao aplicado; sem cron/retomada automatica nova.",
       "thread_id": "1558131395451424890",
-      "updated_at": "2026-11-18T20:36:11+00:00"
+      "updated_at": "2026-11-20T23:58:12+00:00"
     },
     {
       "agent": "ares",
@@ -11928,5 +11928,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T23:50:56+00:00"
+  "updated_at": "2026-11-20T23:59:05+00:00"
 }

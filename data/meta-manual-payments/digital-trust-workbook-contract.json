@@ -181,18 +181,21 @@
     "verified_at": "2026-11-16T16:14:14.007196-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "partial_validated_blocked_pc1_foreground",
-    "scheduled_at": "2026-11-20T14:02:00-05:00",
-    "updated_at": "2026-11-20T14:10:52.769034-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json",
+    "status": "partial_validated_native_passkey_pending",
+    "run_kind": "manual_refresh",
+    "source_message_id": "1573485203853283370",
+    "requested_at": "2026-11-20T23:48:26.540000+00:00",
+    "updated_at": "2026-11-20T18:58:27.560726-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/partial-receipt.json",
     "business_refresh_complete": false,
     "accounts": 55,
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261120T140616719079",
-    "api_collected_at": "2026-11-20T14:06:09.881780-05:00",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261120T185142744821",
+    "api_collected_at": "2026-11-20T18:51:32.853540-05:00",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261120T185105728889",
     "fresh_h_count": 0,
     "preserved_h_count": 40,
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261120T140618658603",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261120T185144507464",
     "h_source": "accounts_list_outstanding_balance",
     "h_values_notes_original_times_preserved": true,
     "pending_ui": [
@@ -484,11 +487,15 @@
     "invoice_due_usd": "417864.11",
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
-    "authentication_observed": false,
-    "blocker": "Windows refused foreground activation of exact Chrome hwnd983880; foreground remains AvastUI.exe hwnd8258278 pid23396. Canonical search remained empty. One fresh-bounds foreground diagnostic was refused before typing. No Meta/passkey/Windows authentication gate in inspected Accounts images. No further input attempted.",
-    "blocker_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/input-action-0.json",
+    "authentication_observed": true,
+    "blocker": "CredentialUIBroker.exe pid26172 hwnd66778 has pending Windows passkey selection for accounts.meta.com, inspected in native.png. Search stayed empty after canonical background and one fresh foreground diagnostic; causal link to native dialog unproven. Avast scan-result decision also remains open; do not disable protection or act on either dialogue. No more UI input after native gate discovery.",
+    "blocker_evidence": [
+      "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/native.png",
+      "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/avast.png",
+      "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/input-after.png"
+    ],
     "browser_tab_exact_parity_established": false,
-    "browser_tab_parity_qualification": "Complete initial AX preserved. Failed input routing does not prove ctrl+t/ctrl+w landed; no uncertain preexisting tab was closed.",
+    "browser_tab_parity_qualification": "Failed/unverified input does not prove ctrl+t/ctrl+w landed. No uncertain preexisting tab closed. Initial AX preserved.",
     "lease_free": true,
     "groups": {
       "Cartão de crédito": 15,
@@ -498,12 +505,20 @@
       [
         "2026-11-17",
         "2026-11-19"
+      ],
+      [
+        "2026-11-18",
+        "2026-11-20"
       ]
     ],
     "month_periods": [
       [
         "2026-11-01",
         "2026-11-20"
+      ],
+      [
+        "2026-11-01",
+        "2026-11-21"
       ]
     ],
     "meta_writes": 0,
@@ -511,18 +526,18 @@
     "billing_changes": 0,
     "cron_changes": 0,
     "next_run_at": "2026-11-20T21:02:00-05:00",
-    "report_infra_status": "pending_cron_delivery_only_no_direct_send",
-    "delivery": "automatic_final_only_short_real_blocker",
-    "next_step": "Owner minimizes/resolves Avast window without disabling protection and leaves approved Rodolfo Chrome available. Zeus revalidates same surface, resumes H40/current pending D only with same contract/job; no duplicate writer or completed-phase replay.",
-    "continuity_key": "df6fbad712b411f2773daf89",
-    "continuity_source_key": "native:zeus:2ee720363d7d:20261120T1402",
-    "retry_probe_at": "2026-11-20T15:10:52.776582-05:00",
+    "report_infra_status": "GET_VERIFIED",
+    "next_step": "Rodolfo concludes or closes the pending native Meta passkey dialog and resolves/minimizes Avast without disabling protection. Read-only probe exact same Chrome and CredentialUIBroker before input. Resume only H40 and current D8 after reconciling active writer/receipts; final API reconciliation and full source parity. Same55 IDs/job/contract. No replay funding/invoices, no new job, no billing/payments.",
+    "continuity_key": "3c21fe6c17bf30fb2dadf8ee",
+    "continuity_source_key": "pc1:zeus:manual:1573485203853283370",
+    "retry_probe_at": "2026-11-20T19:58:27.565391-05:00",
     "continuity_consumer_heartbeat": {
-      "at": 1795201645.7571225,
-      "open": 36,
+      "at": 1795219042.941105,
+      "open": 37,
       "phase": "idle",
-      "pid": 476855
-    }
+      "pid": 733268
+    },
+    "report_infra_message_id": "1573487886844567733"
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -591,7 +606,7 @@
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "blocked_pc1_foreground",
+    "status": "blocked_native_passkey",
     "account_ids": [
       "1046241194533786",
       "1150399088163771",
@@ -644,7 +659,7 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T1402/partial-receipt.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/partial-receipt.json"
   },
   "pending_new_account_fields": {
     "D_account_ids": [
