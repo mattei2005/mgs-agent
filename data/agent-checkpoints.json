@@ -7889,12 +7889,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-roi-1573745849702416698",
-      "next_step": "Validar suites e dryrun; revisar previa; entregar inicial GET; auditar agenda global e criar acompanhamento unico finito ate22nov00hEST",
-      "objective": "Relatorio CPR Meta e ROI real SB cada30min novas e alteradas21nov Mavroa04 G004 incluindo futuras",
+      "next_step": "Executar mesmo job e slots; descobrir criacoes e alteracoes materiais futuras somente21nov conta exata;expirar22nov00hEST antesAPI;retomar apenas camada faltante sem reenviar inicial",
+      "objective": "CPR Meta e ROI real SB cada30min campanhas novas e alteradas21nov Mavroa04 G004 incluindo futuras",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1573745849702416698/manifest.json",
-      "state": "preparing;autor autenticado;conta usd america/new_york live;inclusao dinamica criacoes e alteracoes autorizada;zero writes meta/sb",
+      "state": "active_finite_schedule_verified;inicial12:08est get;4novas079a082;sem anteriores alteradas;29testespass;24slots12h13-23h43est;job9b24b657ff5d;readback enabled noagent local;auditoria_pos semcolisao;0writesmetasb",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-21T17:07:48+00:00"
+      "updated_at": "2026-11-21T17:11:03+00:00"
     },
     {
       "agent": "ares",
@@ -11988,5 +11988,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T17:07:48+00:00"
+  "updated_at": "2026-11-21T17:11:03+00:00"
 }

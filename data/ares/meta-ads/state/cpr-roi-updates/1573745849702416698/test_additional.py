@@ -24,6 +24,22 @@ class Additional(unittest.TestCase):
    obj=b.FakeRunner(r,[b.camp('1',dt=(AT-timedelta(days=1)).isoformat()),b.camp('2')],[e])
    members,_,_=m.discover(obj,copy.deepcopy(MAN),r,argparse.Namespace())
    self.assertEqual(set(members),{'2'})
+ def test_cli_expiry_before_api(self):
+  x=copy.deepcopy(MAN);x['expires_at']=AT.isoformat()
+  with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
+   root=Path(p);m.save(root/'manifest.json',x)
+   with patch.object(m,'ROOT',root),patch.object(m,'scope',side_effect=AssertionError('API')),patch.object(sys,'argv',['runner','--initial']):m.main()
+ def test_cli_replay_before_api(self):
+  with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
+   root=Path(p);m.save(root/'manifest.json',MAN);m.save(root/'runs/initial/complete.json',{'status':'COMPLETE_GET_VERIFIED'})
+   with patch.object(m,'ROOT',root),patch.object(m,'scope',side_effect=AssertionError('API')),patch.object(m,'helpers',side_effect=AssertionError('transport')),patch.object(sys,'argv',['runner','--initial']):m.main()
+ def test_paused_member_preserved_and_idempotent(self):
+  with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
+   root=Path(p);c={**b.camp('1'),'number':'001','reasons':['created_today'],'status':'PAUSED'};x=copy.deepcopy(MAN);x['campaigns']=[c]
+   members,_,_=m.discover(b.FakeRunner(root,[c],[]),x,root,argparse.Namespace())
+   self.assertEqual(set(members),{'1'});self.assertEqual(members['1']['status'],'PAUSED')
+ def test_empty_has_no_false_missing_group(self):
+  s={'rows':{},'observed_at':AT.isoformat(),'sb_at':None,'delay':{},'discovery_pending':[]};text='\n'.join(m.text(s,MAN));self.assertIn('Nenhuma campanha nova',text);self.assertNotIn('anteriores alteradas hoje',text)
  def test_overlap_one_row(self):
   with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
    r=Path(p);obj=b.FakeRunner(r,[b.camp('1')],[b.ev()])
