@@ -15,7 +15,7 @@ metadata:
 
 SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos e URL; renumere UTMs. Separe manual/lote/emenda. Conte ads por grupo. Usados≠referência entre contas: não invente `source_account`.
 
-Intake: `references/request-intake.md`. Pedido adicional ≠ emenda: preserve identidade/parâmetros e writer único por conta. Status: `references/status-only-readiness-and-signatures.md`. Bloqueios: `references/external-block-coordination.md`.
+Intake: `references/request-intake.md`; pedido novo usa metadata e binding, não conta da memória. Adicional ≠ emenda. Status: `references/status-only-readiness-and-signatures.md`. Bloqueios: `references/external-block-coordination.md`.
 
 QUEUED: job→predecessores. Grant ausente: paginação administrativa completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
