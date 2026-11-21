@@ -5094,32 +5094,32 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573449368336597134",
-      "next_step": "Executar one-shot registrado; validar somente status ACTIVE dos mesmos33IDs e preservar invariantes.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 33 campanhas nominais Yolokfx08 G006 e reativar21novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573449368336597134/activation.json",
-      "state": "scheduled:33/33 paused por get integral; reativacao unica21nov2026 00hest;308testes pass;zero conflito operacional",
+      "state": "33/33 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-20T21:37:29+00:00"
+      "updated_at": "2026-11-21T05:05:55+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573449549433806971",
-      "next_step": "Executar one-shot somente 400,238,358,393,331,307; preservar357,305,372 pausadas e solicitar escopo especifico de reparo.",
+      "next_step": "Reconciliar somente activation_blocked.",
       "objective": "Pausar 9 campanhas nominais Yolokfx02 G006 e reativar21novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573449549433806971/activation.json",
-      "state": "scheduled:9/9 paused;6 aptas agendadas21novembro2026 00hest;357,305,372 disapproved pendentes",
+      "state": "6/9 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-20T21:33:26+00:00"
+      "updated_at": "2026-11-21T05:01:17+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573450746135838832",
-      "next_step": "Aguardar execucao deterministica;manter mesmos31IDs,budgets e filhos;validar GET final apos janela.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar 31 campanhas nominais Mavroa06 G006 e reativar21novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573450746135838832/activation.json",
-      "state": "scheduled:31/31 paused por get final;31aptas,reativacao21nov2026 00hest,one-shot enabled verificado,290testespass",
+      "state": "31/31 active por get integral; excecoes pausadas; invariantes preservados",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-20T21:42:35+00:00"
+      "updated_at": "2026-11-21T05:05:39+00:00"
     },
     {
       "agent": "zeus",
@@ -11948,5 +11948,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T02:36:09+00:00"
+  "updated_at": "2026-11-21T05:05:55+00:00"
 }
