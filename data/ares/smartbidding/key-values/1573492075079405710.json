@@ -1,0 +1,66 @@
+{
+  "request_message_id": "1573492075079405710",
+  "thread_id": "1573491574094962758",
+  "source_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/single-clone/shein-1572685240575590452-final.json",
+  "source_request": "shein-1572685240575590452",
+  "campaign_id": "120255133639790640",
+  "domain": "growpowerhub.com",
+  "publisher": "digital-trust_growpowerhub",
+  "values": {
+    "utm_campaign": [
+      "b01fb04c009"
+    ],
+    "utm_adgroup": [
+      "b01fb04c009g01"
+    ]
+  },
+  "status": "API_CONFIRMED_GAM_OK_INDEPENDENT_READBACK_UNAVAILABLE",
+  "results": {
+    "utm_campaign": {
+      "http_status": 201,
+      "response": {
+        "publisherId": "digital-trust_growpowerhub",
+        "networkCode": "21922122164",
+        "field": "utm_campaign",
+        "values": [
+          "b01fb04c009"
+        ],
+        "gamInsert": "ok"
+      },
+      "written_at": "2026-11-21T00:19:37.113467+00:00"
+    },
+    "utm_adgroup": {
+      "http_status": 201,
+      "response": {
+        "publisherId": "digital-trust_growpowerhub",
+        "networkCode": "21922122164",
+        "field": "utm_adgroup",
+        "values": [
+          "b01fb04c009g01"
+        ],
+        "gamInsert": "ok"
+      },
+      "written_at": "2026-11-21T00:19:43.374344+00:00"
+    }
+  },
+  "updated_at": "2026-11-21T00:19:43.375086+00:00",
+  "verification": {
+    "response_literals_equal": true,
+    "keys_count": 2,
+    "values_count": 2,
+    "independent_readback": false,
+    "browser_authenticated": false,
+    "read_endpoints_tested": [
+      {
+        "path": "/keyvalues/preregister",
+        "method": "GET",
+        "status": 404
+      },
+      {
+        "path": "/keyvalues",
+        "method": "GET",
+        "status": 404
+      }
+    ]
+  }
+}

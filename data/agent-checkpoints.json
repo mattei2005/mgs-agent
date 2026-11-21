@@ -2372,6 +2372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-KEYVALUES-TRIAL-1573492075079405710",
+      "next_step": "Comunicar os dois retornos HTTP 201 e GAM ok sem alegar login visual; reconferencia independente depende de sessao segura ou endpoint de leitura documentado. Regra global Iris nao foi promovida neste teste.",
+      "objective": "Testar cadastro direto das UTMs da campanha 009 Growpowerhub Conta 04 na nova feature SB",
+      "source": "/root/mgs-agent/data/ares/smartbidding/key-values/1573492075079405710.json",
+      "state": "api_confirmed_gam_ok_independent_readback_unavailable",
+      "thread_id": "1573491574094962758",
+      "updated_at": "2026-11-21T00:21:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-ROI-BANDS-1561388893558014103",
       "next_step": "Apresentar os dois blocos com denominadores explicitos. Nao atribuir SMS/base historica a campanhas atuais nem ratear diferenca 968.12. Qualquer aprofundamento usa v2 como base.",
       "objective": "Decompor lucro Domain de sexta 16/10/2026 por BOT e trafego direto, com faixas e SMS separado.",
@@ -10989,12 +10999,12 @@
     {
       "agent": "ares",
       "id": "shein-1572705957413392539",
-      "next_step": "Aplicar somente delegacao ADVERTISE+ANALYZE ja autorizada1572711329905774673, por rota administrativa instalada compativel, pre-read/journal/readbacks; nao bypass ou trocar token. Revalidar Page corporativa, retomar input revisado mesmo request no runner central ate QA e readback. Sem nova aprovacao de mesmo reparo. Se horario expirar, resolver politica temporal antes de write.",
-      "objective": "Duplicar uma vez C004 Escalatepower04 G004; emenda Rodolfo: inicio 21/11/2026 00:00 America/New_York; herdar budget/lance",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572705957413392539/schedule-amendment-1573486549947908177.json",
-      "state": "schedule_amended_blocked_page_access. rodolfo1573486549947908177 autenticado e permissao live confirmada; mesmo request/autor/relogio originais. input revisado somente start_now para start_time2026-11-21t00:00:00-05:00; backup/digest validados. conta/fontehttp200 usd newyork daily5000 cost_cap; pageofferhub corporativohttp400code10; dry-run revisado bloqueado. guard get-only e sem executor administrativo separado compativel identificado. permission/campaign write attempts0; agendamento meta nao aplicado; sem cron/retomada automatica nova.",
+      "next_step": "Pedido concluido; nao repetir provisionamento, criacao ou ativacao. Meta processa/revisa anuncios. Entregar conclusao nativa e blocoIris ja validados; nenhuma recorrencia nova.",
+      "objective": "Concluir copia C004 Escalatepower04 G004, inicio21/11/2026 00:00 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572705957413392539/final-verification.json",
+      "state": "complete_verified: pageofferhub atribuicao minima advertise+analyze aplicada empost unico, demais atribuicoes preservadas e acesso corporativohttp200. c008 id120253366973320205,1adset120253366974120205,2ads120253366976640205/120253366976670205;usd50dia cocap0.80 inicio2026-11-21t00:00:00-05:00;campanha/conjunto/ads configuradosactive;1in_process1pending_review. qasemantico/render integral ids preservados engine_replayedfalse. contausd90dia deltausd50. postsnovos e omissao marcadores opcionais idade/genero registrados;revisaometa nao prova entrega. original request/relogio/autor mantidos. iris gerado e validado a partir trackingfinal.",
       "thread_id": "1558131395451424890",
-      "updated_at": "2026-11-20T23:58:12+00:00"
+      "updated_at": "2026-11-21T00:21:12+00:00"
     },
     {
       "agent": "ares",
@@ -11928,5 +11938,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T00:05:13+00:00"
+  "updated_at": "2026-11-21T00:21:33+00:00"
 }
