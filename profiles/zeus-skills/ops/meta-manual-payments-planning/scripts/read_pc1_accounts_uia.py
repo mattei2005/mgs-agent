@@ -34,7 +34,7 @@ def setquery(q):
  # Restore only that exact known query under the caller's blank-baseline gate.
  chips=[e for e in es if e.get('role')=='Button' and e.get('label','').startswith('Clear Name contains ')]
  if chips:
-  assert len(chips)==1 and chips[0]['label'][len('Clear Name contains '):] in {t['name'] for t in T.values()},'unknown_filter_do_not_clear'
+  assert len(chips)==1 and chips[0]['label'][len('Clear Name contains '):] in {T[aid]['name'] for aid in a.account_ids},'unknown_filter_do_not_clear'
   r=call({'action':'click','element':chips[0]['index']});assert r.get('ok') is True and not r.get('code') and not r.get('error'),'filter_clear_failed';time.sleep(1);cap()
  r=call({'action':'set_value','element':search()['index'],'value':q});assert r.get('ok') is True and not r.get('code') and not r.get('error'),'uia_set_failed';return r
 try:

@@ -69497,6 +69497,49 @@
           "sha256": "f9c2a7cad64b40b8d2895416e759e8414ae8d0bb7019cb94a3b2a48a0d228639"
         }
       ]
+    },
+    {
+      "id": "meta-manual-payments-cron-20261120T2102",
+      "type": "financial_refresh_receipt_and_scoped_UIA_recovery",
+      "agent": "zeus",
+      "status": "completed_validated",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261120T2102/financial-validation.json",
+      "updated_at": "2026-11-20T21:35:17.453763-05:00",
+      "scheduled_at": "2026-11-20T21:02:00-05:00",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+      "recovery_artifacts": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_uia.py",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_uia.py",
+          "sha256": "cf1d7eb1fc74e36ab6e468c9797774d3c4b4b2a97323f2f8204d11366d7ebf62"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/test_pc1_accounts_uia.py",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/test_pc1_accounts_uia.py",
+          "sha256": "c430e4625fa738e482367e6c1c017d335be702f076fe78162a0aff1051332d3b"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+          "sha256": "c54bed2690f5561af2113ffa6674e4fe683e90816df05f69e9739c89fa22748c"
+        }
+      ],
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 40,
+        "renewed_D": 2,
+        "pending_ui": 0,
+        "historical_blank_D": 39,
+        "source_parity": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "browser_tabs_preserved": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0,
+        "tests_passed": 22
+      }
     }
   ],
   "profile_skill_references": [
