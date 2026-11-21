@@ -1,0 +1,115 @@
+{
+  "phase": "partial_validated_blocked_provider",
+  "scheduled_at": "2026-11-21T14:02:00-05:00",
+  "funding": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261121T140536985561",
+  "api": {
+    "status": "updated_metrics_pending_card_history",
+    "accounts": 55,
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261121T140613749729",
+    "meta_writes": 0,
+    "payments_executed": 0,
+    "snapshot_at": "2026-11-21T14:06:09.994090-05:00",
+    "pending_ui": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2323706575049143",
+        "name": "Growpowerhub-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1547524853816263",
+        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ]
+  },
+  "invoices": {
+    "status": "september_invoices_updated_validated",
+    "accounts": 55,
+    "new_columns": "E Invoice; F Outubro — saldo em aberto",
+    "invoice_period": "2026-10-01",
+    "visible_invoice_numbers": 30,
+    "unpaid_in_tab": 30,
+    "tab_due_usd": "417864.11",
+    "unpaid_bm": 30,
+    "bm_due_usd": "417864.11",
+    "outside_accounts": [],
+    "full_grid_readback": true,
+    "prior_cells_preserved": true,
+    "payments_executed": 0,
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261121T140541936975"
+  },
+  "h": {
+    "status": "prepared",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261121T140616326065",
+    "credit_line_accounts": 40,
+    "sheet_writes": 0
+  },
+  "fresh_h_ids": [],
+  "preserved_h_ids": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784",
+    "1754588462350629",
+    "1542257646409395",
+    "1034081997659047",
+    "1492168699397108"
+  ],
+  "blocker": {
+    "reason": "Meta This page is not available right now; provider technical error visible",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T1402/surface.png",
+    "authentication_gate": false,
+    "inputs_stopped": true,
+    "inputs": 0,
+    "reloads": 0
+  },
+  "delivery": "cron_final_response_only",
+  "partial_validation": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T1402/partial-validation.json"
+}
