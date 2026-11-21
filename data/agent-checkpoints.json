@@ -5154,22 +5154,32 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573805110037975222",
-      "next_step": "30/30 aptas; falta registrar e validar one-shot das 00h00 22/11/2026 EST",
+      "next_step": "Executar o mesmo one-shot na janela autorizada; confirmar todos os IDs por GET antes de concluir ativacao",
       "objective": "Pausar 30 campanhas nominais Yolokfx08 G006 e reativar22novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573805110037975222/activation.json",
-      "state": "paused_activation_prepared",
+      "state": "scheduled:30/30 paused confirmadas; one-shot22novembro2026 00hest enabled e auditado; somente status da campanha alterado",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-21T21:08:09+00:00"
+      "updated_at": "2026-11-21T21:12:51+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1573805984776986719",
-      "next_step": "Validar testes e agenda one-shot; preservar pausa e IDs.",
+      "next_step": "Aguardar one-shot validado; no horario forcar autoridade/prontidao, alterar somente status e confirmar GET integral; sem recorrencia.",
       "objective": "Pausar 12 campanhas nominais Yolokfx02 G006 e reativar22novembro2026 00hEST status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573805984776986719/activation.json",
-      "state": "paused_activation_prepared: 12/12 aptas; agenda pendente",
+      "state": "scheduled:12/12 paused por get; 12 aptas agendadas22novembro2026 00hest; testes119; zero excecoes",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-11-21T21:07:33+00:00"
+      "updated_at": "2026-11-21T21:10:14+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1573806627537031301",
+      "next_step": "Aguardar one-shot autorizado; confirmar ACTIVE nos mesmos 33 IDs por GET integral e notificar na origem.",
+      "objective": "Pausar 33 campanhas nominais Mavroa06 G006 e reativar22novembro2026 00hEST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1573806627537031301/activation.json",
+      "state": "scheduled: 33/33 paused por get integral; reativacao pontual 22novembro2026 00h00 est validada",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-21T21:17:06+00:00"
     },
     {
       "agent": "zeus",
@@ -12018,5 +12028,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T21:08:09+00:00"
+  "updated_at": "2026-11-21T21:17:06+00:00"
 }
