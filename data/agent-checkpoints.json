@@ -1863,12 +1863,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1573785173882052642",
-      "next_step": "Autenticar mensagem, validar pares/escopo/identidades e coletar fontes novas",
+      "next_step": "Publicar integrais e resumos com nonce/GET; reconciliar mensagens e arquivar evidencias sanitizadas",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1573785173882052642/request.json",
-      "state": "initializing_new_request;7canonical_pairs;fresh_sources_required;no_campaign_writes",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-1573785173882052642/prepublication-qa.json",
+      "state": "prepared_render_validated;7pairs;136campaigns;41integral_parts+7summaries;65regressions+5summary_fixtures_pass;cutoffs21/11/2026_14:42-14:43est;sbdelay103min;boostingecon_empty_delay_nd;no_meta_writes",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-21T19:42:18+00:00"
+      "updated_at": "2026-11-21T19:51:48+00:00"
     },
     {
       "agent": "ares",
@@ -11998,5 +11998,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T19:42:18+00:00"
+  "updated_at": "2026-11-21T19:51:48+00:00"
 }
