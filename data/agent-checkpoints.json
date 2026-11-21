@@ -2372,6 +2372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-KEYVALUES-RULE-1573494030010941596",
+      "next_step": "Aplicar a regra permanente nos proximos fechamentos autorizados: cadastrar chaves literais na SB, preservar mesmo request e comunicar somente confirmacao da etapa apos evidencia; registrar qualquer pendencia real sem reexecutar Meta.",
+      "objective": "Oficializar cadastro direto SB em todo fechamento autorizado de criacao/duplicacao/clone de trafego direto e BOT, sem mensagem para Iris",
+      "source": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
+      "state": "active_validated",
+      "thread_id": "1573491574094962758",
+      "updated_at": "2026-11-21T00:27:27+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-KEYVALUES-TRIAL-1573492075079405710",
       "next_step": "Comunicar os dois retornos HTTP 201 e GAM ok sem alegar login visual; reconferencia independente depende de sessao segura ou endpoint de leitura documentado. Regra global Iris nao foi promovida neste teste.",
       "objective": "Testar cadastro direto das UTMs da campanha 009 Growpowerhub Conta 04 na nova feature SB",
@@ -11938,5 +11948,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T00:21:33+00:00"
+  "updated_at": "2026-11-21T00:27:27+00:00"
 }

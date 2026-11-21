@@ -156,6 +156,10 @@ Receita de rename, sequência e projeções: `references/thread-projection-and-s
 4. Se o gestor perguntar pelo JSON omitido no resumo, verificar os payloads de todos os anúncios e esclarecer o estado sem recriar ou alterar o pedido. Preservar resumo/digest; uma confirmação posterior ao esclarecimento aprova o mesmo plano quando não houve delta material, observados os gates vigentes.
 5. Priorizar o relatório da campanha efetivamente criada, conferida e pronta, conforme solicitado pelo gestor. Para cada notificação interna, comparar a fase de entrega, o bloqueio e a decisão humana com a última mensagem antes de responder; uma conclusão de manutenção que não mudou esses pontos fica no audit/checkpoint, não vira outra confirmação comercial. Comunicar parcial somente por mudança material de fase/bloqueio, decisão necessária ou divulgação obrigatória de persistência. Consolidar divulgações de skill/memória com subsistema, alvo, lição e readback na menor atualização útil permitida, sem confundi-las com progresso de publicação e sem repetir contagens de testes, parâmetros ou ausência de ação humana.
 
+## Fechamento BOT — cadastro direto na Smart Bidding
+
+Em toda criação, duplicação ou clone autorizado, Ares cadastra diretamente na SB o `utm_campaign` literal conferido no tracking BOT e só envia a confirmação dessa etapa ao terminar. Não gerar mensagem para Iris, encaminhar ao gestor, criar `utm_adgroup` artificial ou renumerar `pg_XXXXX`. Regra permanente de Rodolfo `1573494030010941596`; fonte canônica e receita: `paid-acquisition-operations/SKILL.md`, seção `Fechamento de campanhas — cadastro direto de key values na SB`, e `paid-acquisition-operations/references/smartbidding-key-values-direct-registration.md`. Preservar domínio monetizado, gates, mesmo request, recibo e ressalvas reais; falha SB não autoriza repetir a criação Meta nem configurar ChatPion.
+
 ## Rotas funcionais
 
 ### Regras

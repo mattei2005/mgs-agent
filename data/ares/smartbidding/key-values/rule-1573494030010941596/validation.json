@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "authority_message": "1573494030010941596",
+  "thread_id": "1573491574094962758",
+  "checked_at": "2026-11-21T00:27:07.777788+00:00",
+  "checks_count": 17,
+  "checks": [
+    "politica permanente autorizada nas duas estrategias",
+    "chaves corretas por estrategia",
+    "dominio monetizado e literalidade preservados",
+    "Iris removida como entrega ou fallback",
+    "recuperacao e confirmacao honesta preservadas",
+    "receita promovida sem restricao antiga de teste",
+    "consumidor reconciliado: paid-acquisition-operations/SKILL.md",
+    "consumidor reconciliado: paid-acquisition-operations/references/smartbidding-key-values-direct-registration.md",
+    "consumidor reconciliado: meta-campaign-engine-v3/SKILL.md",
+    "consumidor reconciliado: meta-campaign-engine-v3/references/eggbev-cross-account-clone.md",
+    "consumidor reconciliado: chatpion-bot-campaign-operations/SKILL.md",
+    "consumidor reconciliado: direct-traffic-shein-operations/references/request-intake.md",
+    "consumidor reconciliado: meta-ads-account-visualization/SKILL.md",
+    "consumidor reconciliado: meta-ads-account-visualization/references/scoped-generic-reporting.md",
+    "fonte historica preservada",
+    "uma unica regra ativa e supersessao atomica",
+    "evidencia live do teste direto preservada sem replay"
+  ],
+  "changed_files": [
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
+      "before_sha256": "4261f32fb8137c627d1c518987f442489658540ab9ee370c025a9aa0c42e9064",
+      "after_sha256": "c9933a89c06b24cfbe85d8ad968fd44a6c114683685a33974b66231b077a6dcb",
+      "diff_lines": 57
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/smartbidding-key-values-direct-registration.md",
+      "before_sha256": "1653b564c23ae5fa277b93ddaf220ae9006fe9892d6914cd7e60a8e0b0439bd0",
+      "after_sha256": "40c8d61e8fe18d6796d33a43b1509542e35ca244b13cf65bc0d17d98b645f308",
+      "diff_lines": 13
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/SKILL.md",
+      "before_sha256": "06d810421a2c4260a315f8340a7adf4c1dbdfcb9396e1dc4a570c47d01348425",
+      "after_sha256": "d3a0b703dbb7631eadad8a9e2d8566df407cfe1a4a3686254fdfa26edeea9dd3",
+      "diff_lines": 14
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/eggbev-cross-account-clone.md",
+      "before_sha256": "692e9b8c348cd105803c154bed77e9f06553c6528e16460d23786158bba97da9",
+      "after_sha256": "3fb8584dbfd49d846ea9345a07db81d7d6b8173cec46452e88e740f6791b1a63",
+      "diff_lines": 8
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/chatpion-bot-campaign-operations/SKILL.md",
+      "before_sha256": "6743f3b3a656c67b059ee830ccba44859faa022a47a4c45a7706fc30ace843bc",
+      "after_sha256": "34ca5158b9d151ff7c4f968aa6e6a1e1a30e0df11ee5c030723ebe4ada71443d",
+      "diff_lines": 13
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/request-intake.md",
+      "before_sha256": "5b265f5bd7a809586d4ee7793d4ed5541a1f46c3f98fead3cb5d496f4c5f499c",
+      "after_sha256": "b6bd76b0fdb7645ee210158381f5feec1795fb1a870f2ebe7de8cfde4da1cb08",
+      "diff_lines": 11
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-account-visualization/SKILL.md",
+      "before_sha256": "a4b062b9fbceb86554cc1e54c5488bfc47a7f6cf21f91f244624d69fe2ad69d8",
+      "after_sha256": "ba0c25701df256199c2a33b2e26d7c438c578d43671fba95829a125483d26f3c",
+      "diff_lines": 11
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-account-visualization/references/scoped-generic-reporting.md",
+      "before_sha256": "934ae14ca69deafc4c364243dc7bf185a3b2b8a82d65e14281578bdd7decdf67",
+      "after_sha256": "f3980ad804060aee80e766e9e71bdffee4660b0b2832770ce0a89dd77cf3c49d",
+      "diff_lines": 11
+    }
+  ],
+  "registry_active_id": "ARES-SB-DIRECT-KEYVALUES-1573494030010941596",
+  "runtime_code_changed": false,
+  "new_live_writes": 0,
+  "live_bot_test_performed": false,
+  "live_direct_trial": "prior receipt preserved, no replay",
+  "policy_scope": [
+    "direct_traffic",
+    "BOT"
+  ]
+}
