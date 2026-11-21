@@ -11129,12 +11129,12 @@
     {
       "agent": "ares",
       "id": "shein-1573624792764915802",
-      "next_step": "Validar QA renderizado e ativacao dos mesmos IDs; cadastro SB e recibo final",
+      "next_step": "Pedido concluido na Meta; nao repetir criacao, ativacao ou save SB; inicio configurado 21/11/2026 04:30 America/New_York, entrega nao comprovada",
       "objective": "Duplicar 10x campanha 018 Yolokfx08 G006 USD55 COCAP0.90 21/11 04:30 EST, 21 videos em grupos literais",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573624792764915802/pre-qa-ids.json",
-      "state": "10 campanhas e 21 anuncios criados paused; engine complete_paused; postprocess retomado readback-first, mesmos ids; qa/ativacao pendentes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1573624792764915802/final-verification.json",
+      "state": "complete_future_active: campanhas 069-078, 10 campanhas e 21 anuncios active; qa semantico/renderizado integral; usd550/dia; mesmos ids; sb 10 utm_campaign + 10 utm_adgroup http201 gaminsert ok; reconferencia sb independente indisponivel",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-21T09:17:35+00:00"
+      "updated_at": "2026-11-21T09:28:38+00:00"
     },
     {
       "agent": "ares",
@@ -11968,5 +11968,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T09:17:35+00:00"
+  "updated_at": "2026-11-21T09:28:38+00:00"
 }
