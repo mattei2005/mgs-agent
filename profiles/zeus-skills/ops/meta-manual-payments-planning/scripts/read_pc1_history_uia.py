@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Read approved Meta card history via native UIA in an already-owned tab.
-Requires a caller-created, verified owned Chrome tab. Never creates/closes tabs,
-pays or writes Sheets. URLs are entered by UIA; only direct URL suggestions invoke.
+"""Read approved Meta card history via native UIA and a scoped owned tab.
+Requires the caller's original Chrome tab baseline. Creates only a verified
+New Tab, fills the native address bar using UIA, and navigates with an explicit
+foreground Enter. Reads history and closes only attributable appended tabs,
+requiring original-tab prefix parity. Never pays or writes Sheets.
 """
 import argparse,os,sys,json,subprocess,time,re,shutil
 from pathlib import Path
@@ -37,7 +39,7 @@ try:
   if not dates or 150<=dates[0].get('bounds',[0,99999])[1]<=1000:break
   action({'action':'scroll','coordinate':[round(capture_size[0]*.7),round(capture_size[1]*.7)],'direction':'down','amount':5,'delivery_mode':'foreground','bring_to_front':True});time.sleep(1);full,es,text=cap()
  tp=B/(a.account_id+'.txt');tp.write_text(text);(B/(a.account_id+'-elements.json')).write_text(json.dumps(full,ensure_ascii=False));v=call({'action':'capture','mode':'vision','pid':bind['pid'],'window_id':bind['window_id']});pic=B/(a.account_id+'.png');shutil.copy2(v['screenshot_path'],pic);start=text.find('\nDate\nPayment method\nAmount\nStatus\n');end=text.find('\nView all activity',start);excerpt=text[start:end if end>=0 else start+3000] if start>=0 else ''
- rec={'status':'read','account_requested':a.account_id,'read_at':datetime.now().astimezone().isoformat(),'text_path':str(tp),'elements_path':str(B/(a.account_id+'-elements.json')),'screenshot':str(pic),'no_recent_spending_message':'You have no recent spending.' in text,'headings':[e.get('label') for e in es if e.get('role') in ['Heading','Document']],'billing_excerpt':excerpt,'input_route':'native_UIA_ValuePattern_and_direct_URL_suggestion','owned_tab_proof':a.owned_tab_proof};rp=B/(a.account_id+'-receipt.json');rp.write_text(json.dumps(rec,ensure_ascii=False,indent=2));rp.chmod(0o600);print(json.dumps({**rec,'receipt_path':str(rp)},ensure_ascii=False))
+ rec={'status':'read','account_requested':a.account_id,'read_at':datetime.now().astimezone().isoformat(),'text_path':str(tp),'elements_path':str(B/(a.account_id+'-elements.json')),'screenshot':str(pic),'no_recent_spending_message':'You have no recent spending.' in text,'headings':[e.get('label') for e in es if e.get('role') in ['Heading','Document']],'billing_excerpt':excerpt,'input_route':'native_UIA_NewTab_ValuePattern_foreground_enter','owned_tab_proof':a.owned_tab_proof};rp=B/(a.account_id+'-receipt.json');rp.write_text(json.dumps(rec,ensure_ascii=False,indent=2));rp.chmod(0o600);print(json.dumps({**rec,'receipt_path':str(rp)},ensure_ascii=False))
 finally:
  try:
   if created and not gate_seen:

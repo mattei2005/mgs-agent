@@ -69474,12 +69474,29 @@
       "id": "meta-manual-payments-manual-1573485203853283370",
       "type": "financial_refresh_receipt",
       "agent": "zeus",
-      "status": "partial_validated_native_passkey_pending",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/partial-receipt.json",
-      "updated_at": "2026-11-20T18:58:27.560726-05:00",
+      "status": "completed_validated",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1573485203853283370/retry-1573488813232361564/financial-validation.json",
+      "updated_at": "2026-11-20T19:51:29.936515-05:00",
       "report_infra_status": "GET_VERIFIED",
       "procedure_updated": "meta-manual-payments-planning/references/accounts-list-search.md: hidden native passkey probe after unconfirmed input",
-      "report_infra_message_id": "1573487886844567733"
+      "report_infra_message_id": "1573501167865172033",
+      "recovery_artifacts": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_uia.py",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_uia.py",
+          "sha256": "2ec973ed76c698fd5473d1ee1c0b641d3a476b92c6653e0b7359848e64cb455d"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_history_uia.py",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/read_pc1_history_uia.py",
+          "sha256": "7ea609335dfee3f340719fc188f95503f90fe0b2d206a79ca39c55291e842f3b"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+          "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+          "sha256": "f9c2a7cad64b40b8d2895416e759e8414ae8d0bb7019cb94a3b2a48a0d228639"
+        }
+      ]
     }
   ],
   "profile_skill_references": [
