@@ -69540,6 +69540,36 @@
         "payments": 0,
         "tests_passed": 22
       }
+    },
+    {
+      "id": "meta-manual-payments-cron-20261121T0802",
+      "agent": "zeus",
+      "type": "financial_refresh_partial_receipt",
+      "status": "partial_validated_blocked_provider",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/partial-validation.json",
+      "scheduled_at": "2026-11-21T08:02:00-05:00",
+      "updated_at": "2026-11-21T08:13:20.869058-05:00",
+      "verification": {
+        "accounts_api": 55,
+        "fresh_h": 1,
+        "historical_h": 39,
+        "pending_d": 5,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "browser_tabs_preserved": true,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "blocker": {
+        "reason": "Meta This page is not available right now; technical error visible",
+        "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/input-recovery/vision.png",
+        "authentication_gate": false,
+        "inputs_stopped": true,
+        "reloads": 0,
+        "billing_changes": 0
+      },
+      "next_step": "Preserve missing H39/D5; no reload/profile bypass. Revalidate correct surface on authorized continuation or next existing slot; reconcile receipts before collecting missing UI. Same job and single writer.",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send"
     }
   ],
   "profile_skill_references": [

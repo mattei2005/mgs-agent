@@ -1,0 +1,372 @@
+{
+  "status": "partial_validated_blocked_provider",
+  "business_refresh_complete": false,
+  "scheduled_at": "2026-11-21T08:02:00-05:00",
+  "verified_at": "2026-11-21T08:13:20.869058-05:00",
+  "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/partial-validation.json",
+  "accounts": 55,
+  "fresh_metrics_count": 55,
+  "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261121T080616864991",
+  "api_collected_at": "2026-11-21T08:06:04.877875-05:00",
+  "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261121T080537672241",
+  "invoice_period": "2026-10-01",
+  "invoice_pending": 30,
+  "invoice_due_usd": "417864.11",
+  "fresh_h_count": 1,
+  "fresh_h_ids": [
+    "336562339356179"
+  ],
+  "preserved_h_ids": [
+    "3752157451670648",
+    "2039876850230678",
+    "311204101516831",
+    "26632890069640784",
+    "3188620887977617",
+    "1419148446852410",
+    "1492168699397108",
+    "1034081997659047",
+    "1542257646409395",
+    "1526280818302320",
+    "1062887799996139",
+    "1498990138663094",
+    "814915838330687",
+    "2031917360813819",
+    "1736068407518263",
+    "897046653487466",
+    "1877104513669062",
+    "1754588462350629",
+    "1018267074603840",
+    "536294549227786",
+    "1085117577390237",
+    "869857549542755",
+    "1753257812779707",
+    "908704754163659",
+    "1001115192056600",
+    "4511685129081248",
+    "1744611463000838",
+    "1851640026221079",
+    "1829406761389732",
+    "1245683183659911",
+    "2633813727134360",
+    "937846586033361",
+    "781612907182683",
+    "1107653168698121",
+    "7840111366055613",
+    "787796726891306",
+    "1583000095650153",
+    "2429758060563333",
+    "1600310064116258"
+  ],
+  "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261121T080618753608",
+  "h_source": "accounts_list_outstanding_balance",
+  "pending_ui": [
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2323706575049143",
+      "name": "Growpowerhub-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1547524853816263",
+      "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ],
+  "historical_blank_d": [
+    {
+      "account_id": "336562339356179",
+      "name": "Openzed-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "3752157451670648",
+      "name": "Lyzmo-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "2039876850230678",
+      "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "311204101516831",
+      "name": "Topfeed-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "26632890069640784",
+      "name": "Zytiva-GB-CC-EN-02",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "3188620887977617",
+      "name": "Infinitynexx-MX-CC-ES-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located"
+    },
+    {
+      "account_id": "1492168699397108",
+      "name": "Yolokfx-US-SHEIN-EN-07-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1034081997659047",
+      "name": "Eggbev-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1542257646409395",
+      "name": "Financeadx-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1526280818302320",
+      "name": "Vizioid-US-SHEIN-EN-01-G001",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1062887799996139",
+      "name": "Escalatepower-US-SHEIN-EN-02-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1498990138663094",
+      "name": "Escalatepower-US-SHEIN-EN-06-G006",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "814915838330687",
+      "name": "Helixenit-MX-CC-ES-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "2031917360813819",
+      "name": "Escalatepower-US-SHEIN-EN-04-G004",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1736068407518263",
+      "name": "Vizioid-US-SHEIN-EN-04-G004",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "897046653487466",
+      "name": "Escalatepower-US-SHEIN-EN-05-G005",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1754588462350629",
+      "name": "Growpowerhub-US-SHEIN-EN-02-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1018267074603840",
+      "name": "Escalatepower-US-SHEIN-EN-01-G001",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "536294549227786",
+      "name": "Vizioid-US-SHEIN-EN-02-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1085117577390237",
+      "name": "Vizioid-US-SHEIN-EN-03-G003",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "869857549542755",
+      "name": "Vizioid-US-SHEIN-EN-06-G006",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1753257812779707",
+      "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "908704754163659",
+      "name": "Zuout-US-CC-EN-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1001115192056600",
+      "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "4511685129081248",
+      "name": "Mavroa-US-SHEIN-ES-01-G001",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1744611463000838",
+      "name": "Openzed-US-CC-EN-03",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1851640026221079",
+      "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1829406761389732",
+      "name": "Mavroa-US-SHEIN-ES-05-G005",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1245683183659911",
+      "name": "OpenzedFinanzas-US-CC-ES-01",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "2633813727134360",
+      "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "937846586033361",
+      "name": "Mavroa-US-SHEIN-ES-06-G006",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "781612907182683",
+      "name": "Yolokfx-US-SHEIN-EN-04-G004",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1107653168698121",
+      "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "7840111366055613",
+      "name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "787796726891306",
+      "name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1583000095650153",
+      "name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "2429758060563333",
+      "name": "Yolokfx-US-SHEIN-EN-03-G005",
+      "reason": "no_historical_instrument_proof"
+    },
+    {
+      "account_id": "1600310064116258",
+      "name": "Yolokfx-US-SHEIN-EN-06-G003",
+      "reason": "no_historical_instrument_proof"
+    }
+  ],
+  "other_sheet_data_unchanged": true,
+  "other_sheets_count": 1,
+  "validated_totals": [
+    {
+      "row": 18,
+      "col": 6,
+      "value": "8440.74"
+    },
+    {
+      "row": 18,
+      "col": 8,
+      "value": "3686.21"
+    },
+    {
+      "row": 18,
+      "col": 9,
+      "value": "139894.40"
+    },
+    {
+      "row": 61,
+      "col": 5,
+      "value": "417864.11"
+    },
+    {
+      "row": 61,
+      "col": 6,
+      "value": "13416.37"
+    },
+    {
+      "row": 61,
+      "col": 7,
+      "value": "706648.34"
+    },
+    {
+      "row": 61,
+      "col": 8,
+      "value": "710538.61"
+    },
+    {
+      "row": 61,
+      "col": 9,
+      "value": "292780.88"
+    },
+    {
+      "row": 63,
+      "col": 5,
+      "value": "417864.11"
+    },
+    {
+      "row": 63,
+      "col": 6,
+      "value": "21857.11"
+    },
+    {
+      "row": 63,
+      "col": 7,
+      "value": "706648.34"
+    },
+    {
+      "row": 63,
+      "col": 8,
+      "value": "714224.82"
+    },
+    {
+      "row": 63,
+      "col": 9,
+      "value": "432675.28"
+    }
+  ],
+  "lease_free": true,
+  "blocker": {
+    "reason": "Meta This page is not available right now; technical error visible",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/input-recovery/vision.png",
+    "authentication_gate": false,
+    "inputs_stopped": true,
+    "reloads": 0,
+    "billing_changes": 0
+  },
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "billing_changes": 0,
+  "next_run_at": "2026-11-21T14:02:00-05:00",
+  "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+  "browser_tabs_preserved": true,
+  "browser_tab_count": 6,
+  "search_restore_blocked_by_provider_error": true
+}

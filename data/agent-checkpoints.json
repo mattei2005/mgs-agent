@@ -10129,12 +10129,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Snapshot de todas abas;funding,invoices,métricasAPI,H40,provasD pendentes e validação final.",
-      "objective": "Refresh agendado21nov08:02ET:55contas,H40,mesmojob/contrato.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/surface-vision.png",
-      "state": "running: claim do slot confirmado,lease livre,chrome rodolfo/bm correta/accounts outstanding balance verificados ax+pixels;6abas,search vazio,sem gate. antes do primeiro write.",
+      "next_step": "Pendência aberta Zeus: revalidar superfície correta na continuação autorizada/próximo slot existente14:02ET,mesmojob/contrato;reconciliar H1 já publicado,retomar H39 e D5 sem replay. Nenhum novo job criado. REPORT-INFRA pendente por restrição de entrega do cron. Aviso curto somente resposta final automática.",
+      "objective": "Refresh agendado21nov08:02ET: mesmas55contas,H40,mesmojob/contrato.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T0802/partial-validation.json",
+      "state": "partial_validated_blocked_provider: api55 e invoices atualizadas;h1 lido/publicado e39históricos preservados;d5 pendentes,nenhuma prova inventada. após primeira busca uia meta exibiu this page is not available right now;erro técnico confirmado em pixels,sem gate de autenticação. inputs parados,sem reload/bypass,6abas preservadas,lease livre. validação parcial porid/totais/outraaba pass.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-21T13:05:24+00:00"
+      "updated_at": "2026-11-21T13:13:51+00:00"
     },
     {
       "agent": "zeus",
@@ -11968,5 +11968,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-21T13:05:24+00:00"
+  "updated_at": "2026-11-21T13:13:51+00:00"
 }
