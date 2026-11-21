@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "action": "click",
+  "message": "✅ Sent click via SendInput to pid 18704 at (629,389) (delivery_mode:foreground).",
+  "effect": "unverifiable",
+  "delivery_mode": "foreground",
+  "meta": {
+    "delivery": {
+      "mode": "foreground"
+    },
+    "effect": "unverifiable",
+    "route": "global_input",
+    "foreground_focus": {
+      "invoked": true,
+      "tool": "bring_to_front"
+    }
+  },
+  "verdict": {
+    "decision": "verify_fresh_state",
+    "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+  }
+}

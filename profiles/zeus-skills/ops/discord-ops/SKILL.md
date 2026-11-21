@@ -25,6 +25,10 @@ Completion criterion: only the procedure and evidence required for the current a
 
 Receita de REST e verificação: `references/discord-threads-lifecycle.md`, seção **Encerramento explícito com histórico preservado**.
 
+## Parar alertas e limpar mensagens
+
+Quando o pedido combinar parar um monitor e apagar mensagens, interrompa primeiro todos os agendamentos comprovadamente pertencentes ao mesmo monitor, inclusive a continuação noturna, e verifique o encerramento da execução em andamento antes da limpeza. Pausar a agenda não encerra um processo já iniciado. Preserve o job para retomada; não remova sua definição nem amplie a exclusão além dos IDs ou do intervalo autorizados. Confirme o resultado em duas partes: monitor parado e mensagens efetivamente apagadas. Procedimento: `references/discord-batch-message-deletion-rate-limits.md`.
+
 ## Exclusão de canais obsoletos
 
 Resolva o ID e confirme a finalidade pelo histórico e pelos consumidores atuais antes de recomendar exclusão. Obtenha a confirmação crítica do alvo e da perda de histórico; se Rodolfo dispensar explicitamente o backup nessa confirmação, respeite a dispensa somente para esse alvo, registre-a e execute sem exportação nem nova rodada de aprovação. Não transforme a dispensa pontual em política geral sem backup. Preserve o canal sucessor e não altere permissões, rotas ou reinicie gateways sem dependência comprovada. Receita de inventário, DELETE e readback: `references/route-pack-09.md`, seção **Exclusão de canal redundante**.

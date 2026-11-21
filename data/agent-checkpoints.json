@@ -2733,12 +2733,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1572685240575590452",
-      "next_step": "Administrador da Page deve disponibilizar o ativo1402479966284292 ao acesso administrativo corporativo usado no provisioning no portifolio Digital Trust; nao ha nova aprovacao comercial pendente. Depois refazer GET Page/business e assigned_users, aplicar uniao minima de tarefas somente se ausente com journal/readback e testar identidade corporativa original. Retomar mesmo request em dry-run/execute, 1 copia C006 USD50/dia lance herdado imediato, sem reiniciar relogio ou trocar token/campanha.",
-      "objective": "Duplicar uma vez campanha 006 Growpowerhub 04 G004 para agora herdando budget e lance reais",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572685240575590452/page-access-repair/authorization.json;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572685240575590452/page-access-repair/admin-page-diagnostic.json;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572685240575590452/page-access-repair/admin-scopes.json;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572685240575590452/request.json",
-      "state": "authorization_durable_verified_admin_page_access_blocked. rodolfo1572689505113215037 aprovou reparo advertise+analyze page1402479966284292/su122095869861482193/conta1419148446852410 atual e futuros equivalentes; contrato, registry e validacao ok. admin roosevelt10233237854144701/item4c2p3bon37smfbklfhuej5ywkm identidade e scopes business_management,pages_read_engagement,pages_manage_metadata,pages_manage_ads,pages_show_list granted, mas get page e assigned_users code10. portanto acesso ao ativo indisponivel mesmo com scopes; nao alegar grant ausente ou page fora da bm. zero permission/campaign writes. report-infra1572690014125428747.",
+      "next_step": "Pedido executado e programado; nenhuma nova criacao ou ativacao. Aguardar revisao normal Meta e horario solicitado. Preservar original006,recibos,IDs e autorizacao duravel da Page. BlocoIris preparado na conclusao nativa;nao enviado automaticamente.",
+      "objective": "Duplicar 006 Growpowerhub04 G004: uma copia USD50/dia lance herdado; complemento Rodolfo21nov00hEST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1572685240575590452/completion-receipt-1573487513954164787.json",
+      "state": "complete_future_active verificado:009 campanha120255133639790640,1conjunto2ads,usd50/dia,cost_cap usd0.80,21nov2026 00hest. pagetopchoices delegacaoadvertise+analyze aplicada e readbackadmin+corporativo; demais atribuicoes preservadas. qasemantico/render2/2,idscheckpoint iguais,engine nao repetido;2ads pending_review. totalativousd110/dia deltausd50;utms b01fb04c009g01/b01fb04c009. postsnovos,meta omitiu flags opcionais sugestaoidade/genero. relogio original preservado;inicio ainda futuro.",
       "thread_id": "1558131550028173345",
-      "updated_at": "2026-11-18T19:09:11+00:00"
+      "updated_at": "2026-11-21T00:05:13+00:00"
     },
     {
       "agent": "ares",
@@ -11928,5 +11928,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-20T23:59:05+00:00"
+  "updated_at": "2026-11-21T00:05:13+00:00"
 }
