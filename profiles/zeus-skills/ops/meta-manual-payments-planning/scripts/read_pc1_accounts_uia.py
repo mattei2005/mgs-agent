@@ -19,11 +19,24 @@ def call(x):
  d=handle_computer_use(x,session_id=s);return json.loads(d) if isinstance(d,str) else d
 def cap():
  global es,text,last,gate_open
- last=call({'action':'capture','mode':'ax','pid':bind['pid'],'window_id':bind['window_id']});assert not last.get('error');full=json.loads(Path(last['elements_file']).read_text()) if last.get('elements_file') else last;es=full.get('elements',[]);text='\n'.join(e.get('label','') for e in es);gate_open=bool(re.search(r'Windows Security|passkey for Facebook|security/twofactor/reauth|Confirm it.s you|temporarily blocked|going too fast|Log in to Facebook',text,re.I));assert not gate_open,'native_or_provider_gate';assert 'Accounts' in text and 'Rodolfo' in text,'wrong_surface';return full
+ # A filter can rerender the AX root briefly. Wait read-only; never input on
+ # an unidentified frame and never wait through a real provider/native gate.
+ for attempt in range(4):
+  last=call({'action':'capture','mode':'ax','pid':bind['pid'],'window_id':bind['window_id']});assert not last.get('error');full=json.loads(Path(last['elements_file']).read_text()) if last.get('elements_file') else last;es=full.get('elements',[]);text='\n'.join(e.get('label','') for e in es);gate_open=bool(re.search(r'Windows Security|passkey for Facebook|security/twofactor/reauth|Confirm it.s you|temporarily blocked|going too fast|Log in to Facebook',text,re.I));assert not gate_open,'native_or_provider_gate'
+  if 'Accounts' in text and 'Rodolfo' in text:return full
+  if attempt<3:time.sleep(1)
+ raise AssertionError('wrong_surface')
 def search():
  ss=[e for e in es if e.get('role') in ['Edit','TextField','SearchBox'] and e.get('label')=='Search'];assert len(ss)==1,'search_not_unique';return ss[0]
 def setquery(q):
- cap();r=call({'action':'set_value','element':search()['index'],'value':q});assert r.get('ok') is True and not r.get('code') and not r.get('error'),'uia_set_failed';return r
+ cap()
+ # Accounts may turn this operation's query into a Name-contains chip.
+ # Restore only that exact known query under the caller's blank-baseline gate.
+ chips=[e for e in es if e.get('role')=='Button' and e.get('label','').startswith('Clear Name contains ')]
+ if chips:
+  assert len(chips)==1 and chips[0]['label'][len('Clear Name contains '):] in {t['name'] for t in T.values()},'unknown_filter_do_not_clear'
+  r=call({'action':'click','element':chips[0]['index']});assert r.get('ok') is True and not r.get('code') and not r.get('error'),'filter_clear_failed';time.sleep(1);cap()
+ r=call({'action':'set_value','element':search()['index'],'value':q});assert r.get('ok') is True and not r.get('code') and not r.get('error'),'uia_set_failed';return r
 try:
  ws=json.loads(subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=50).stdout)['windows'];assert not any(w.get('app_name')=='CredentialUIBroker.exe' for w in ws),'native_auth_dialog_present';bind=json.loads((H/'pc1-browser-surface.json').read_text());assert any(w.get('pid')==bind['pid'] and w.get('window_id')==bind['window_id'] and w.get('app_name')=='chrome.exe' and not w.get('minimized') for w in ws),'approved_chrome_not_live';cap()
  for aid in a.account_ids:
