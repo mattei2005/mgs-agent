@@ -2043,12 +2043,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574111917159747615",
-      "next_step": "Após liberação da execução cron/maintenance, foreground retoma mesmo batch a54db7fd61b9686a6101514d4bcabf04, adapter local existente e complete/monitor serial. Não criar coordenador ou writer paralelo; reutilizar plano57 e QA pronta. Saldo53 fontes; auditoria final e mapa na origem.",
+      "next_step": "Acompanhar processo ativo em leitura. Se parar, reconciliar fase/claim/provas e retomar somente camada ausente pelo mesmo adapter/complete. Após request integral complete e manutenção nativa executar auditoria independente audit_task.py e publish_map.py dry-run/send na origem; sem anexos.",
       "objective": "Tratar e organizar 57 vídeos Kelly US SHEIN ES common preservando originais IDs e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1574111917159747615/plan.json",
-      "state": "foreground canônico ativo nesta sessão: 20261122_121859_886b999e. preparação e qa de todas as57 concluídas; plano imutável em executions/intake-1574111917159747615/plan.json. batch1 complete4 fontes. próximo batch a54db7fd61b9686a6101514d4bcabf04; tentativa foreground sem write abortou canonical_lock_busy por manutenção concorrente do monitor. não lançar outro tratamento nem complete: foreground continua dono entre chamadas. cron deve deferir e não duplicar preparação/qa/naming. 56 cleans únicos; duplicata índice32 converge ao27 em batch anterior. recovery estrito de checksum raw de reexport testado8+18+14, preservando guard de pares.",
+      "source": "data/ares/creative-ops/executions/intake-1574111917159747615/foreground-owner.json",
+      "state": "foreground canônico ativo: mesmo adapter intake_task.py consume e foreground-owner.json; pid2422380, handle proc_df255fcfce1e.12 fontes completas/45 saldo. batch atual234d50d1d83a4473d70924ed82c17fc0. não iniciar escritor cron/paralelo; main continua automaticamente pelo complete e monitor do mesmo request. plano57/56únicos/1duplicata; qa e preparação57 prontas. recovery slot timeout do batch2 resolvido por readback e mesmo complete, sem repetir mídia.",
       "thread_id": "1574111917159747615",
-      "updated_at": "2026-11-22T17:45:49+00:00"
+      "updated_at": "2026-11-22T18:10:26+00:00"
     },
     {
       "agent": "ares",
@@ -12088,5 +12088,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T17:45:49+00:00"
+  "updated_at": "2026-11-22T18:10:26+00:00"
 }
