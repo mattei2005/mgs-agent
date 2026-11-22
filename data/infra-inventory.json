@@ -69670,7 +69670,7 @@
       "scheduled_at": "2026-11-22T08:02:00-05:00",
       "updated_at": "2026-11-22T08:53:40.099653-05:00",
       "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/financial-validation.json",
-      "report_infra_status": "pending",
+      "report_infra_status": "GET_VERIFIED",
       "paths": [
         "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
         "data/meta-manual-payments/digital-trust-workbook-contract.json",
@@ -69698,7 +69698,9 @@
         "cron_changes": 0,
         "meta_writes": 0,
         "payments": 0
-      }
+      },
+      "report_infra_message_id": "1574060711619862621",
+      "report_infra_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/report-infra-receipt.json"
     }
   ],
   "profile_skill_references": [

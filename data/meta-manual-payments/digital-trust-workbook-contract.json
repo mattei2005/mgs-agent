@@ -508,13 +508,15 @@
     "meta_writes": 0,
     "billing_changes": 0,
     "next_run_at": "2026-11-22T14:02:00-05:00",
-    "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+    "report_infra_status": "GET_VERIFIED",
     "delivery": "cron_final_response_only",
     "totals_usd": {
       "average_daily": "21630.78",
       "balance": "728125.50",
       "month_spend": "455693.03"
-    }
+    },
+    "report_infra_message_id": "1574060711619862621",
+    "report_infra_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/report-infra-receipt.json"
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
