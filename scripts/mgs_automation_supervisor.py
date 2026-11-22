@@ -521,5 +521,5 @@ def main(resolver):
             try:notify_result(q,row,row.get('observation') or 'Resolvido: produtor e resultado verificados por nova leitura.',post_verified)
             except Exception:q.service('delivery_pending:'+row['key'],True)
         q.service('heartbeat',{'pid':os.getpid(),'at':time.time(),'phase':'idle','open':len(q.open())})
-        print(json.dumps({'status':'supervisor_tick_complete','observed':len(observations),'inventory_targets':len(inventory),'open':len(q.open())}))
+        print(json.dumps({'ok':True,'status':'supervisor_tick_complete','observed':len(observations),'inventory_targets':len(inventory),'open':len(q.open())}))
     q.close();return 0

@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import math
 import os
 import pathlib
 import re
@@ -97,17 +98,41 @@ def discord_api(token: str, method: str, endpoint: str, payload: dict[str, Any] 
     if payload is not None:
         headers['Content-Type'] = 'application/json'
     req = urllib.request.Request('https://discord.com/api/v10' + endpoint, data=data, headers=headers, method=method)
-    try:
-        with urllib.request.urlopen(req, timeout=25) as resp:
-            body = resp.read()
-            return resp.status, json.loads(body.decode('utf-8')) if body else None
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode('utf-8', errors='replace')
+    # Only reads are replayable here. Ambiguous writes retain their original
+    # exception/receipt path; never duplicate a POST to recover a network reset.
+    attempts = min(3, max(1, FETCH_RETRY_ATTEMPTS)) if method == 'GET' else 1
+    for attempt in range(1, attempts + 1):
+        retry_after = None
         try:
-            parsed = json.loads(body) if body else {}
-        except json.JSONDecodeError:
-            parsed = {'raw': body[:500]}
-        return exc.code, parsed
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                body = resp.read()
+                return resp.status, json.loads(body.decode('utf-8')) if body else None
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode('utf-8', errors='replace')
+            try:
+                parsed = json.loads(body) if body else {}
+            except json.JSONDecodeError:
+                parsed = {'raw': body[:500]}
+            if exc.code not in {429, 500, 502, 503, 504} or attempt == attempts:
+                return exc.code, parsed
+            delays = [exc.headers.get('Retry-After') if exc.headers else None,
+                      parsed.get('retry_after') if isinstance(parsed, dict) else None]
+            for value in delays:
+                try:
+                    value = float(value)
+                    if math.isfinite(value) and value >= 0:
+                        retry_after = max(retry_after or 0, value)
+                except (TypeError, ValueError):
+                    pass
+            reason = f'HTTP {exc.code}'
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as exc:
+            if attempt == attempts:
+                raise
+            reason = type(exc).__name__
+        delay = retry_after if retry_after is not None else FETCH_RETRY_BASE_SECONDS * 2 ** (attempt - 1)
+        log(f'WARN Discord GET {reason}; retry {attempt}/{attempts} in {delay:g}s')
+        time.sleep(delay)
+    raise AssertionError('unreachable Discord retry state')
 
 
 def load_state() -> dict[str, Any]:
@@ -229,24 +254,11 @@ def is_candidate(message: dict[str, Any]) -> bool:
 
 
 def _fetch_page(token: str, limit: int = 50, before: str | None = None) -> list[dict[str, Any]]:
-    retryable_statuses = {429, 500, 502, 503, 504}
-    attempts = max(1, FETCH_RETRY_ATTEMPTS)
-    status: int | None = None
-    data: Any = None
-    for attempt in range(1, attempts + 1):
-        status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}' + (f'&before={before}' if before else ''))
-        if status == 200:
-            return data or []
-        if status not in retryable_statuses or attempt == attempts:
-            break
-        retry_after = data.get('retry_after') if isinstance(data, dict) else None
-        try:
-            delay = max(float(retry_after), 0.0) if retry_after is not None else FETCH_RETRY_BASE_SECONDS * attempt
-        except (TypeError, ValueError):
-            delay = FETCH_RETRY_BASE_SECONDS * attempt
-        log(f'WARN GET channel messages HTTP {status}; retry {attempt}/{attempts} in {delay:g}s')
-        time.sleep(delay)
-    raise RuntimeError(f'GET channel messages HTTP {status} after {attempts} attempt(s): {data}')
+    # discord_api owns the single bounded retry budget for every GET consumer.
+    status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}' + (f'&before={before}' if before else ''))
+    if status == 200:
+        return data or []
+    raise RuntimeError(f'GET channel messages HTTP {status}; bounded read retries exhausted')
 
 
 def fetch_messages(token: str, limit: int = 50, after: str | None = None) -> list[dict[str, Any]]:
