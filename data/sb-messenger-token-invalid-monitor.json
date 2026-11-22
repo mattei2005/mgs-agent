@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 0,
+  "consecutive_failures": 1,
   "daily": {
     "date": "2026-11-21",
     "last_result": {
@@ -7043,7 +7043,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-21T19:27:10-05:00",
+  "last_check": "2026-11-21T19:42:09-05:00",
   "last_delivery": {
     "at": "2026-11-21T19:12:32-05:00",
     "cursor_ids": [
@@ -7077,7 +7077,11 @@
     "message_ids": [],
     "notification_ids": []
   },
-  "last_error": null,
+  "last_error": {
+    "at": "2026-11-21T19:42:09-05:00",
+    "message": "APIRequestContext.get: read ECONNRESET\nCall log:\n  - → GET https://api.jbfdigital.com.br/users/Messenger?companies[]=digital-trust&companies[]=digital-trust-2&source=Messenger\n    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\n    - accept: application/json, text/plain, */*\n    - accept-encoding: gzip,deflate,br\n    - authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjdJa01jUFhfLXpDUEJuOC02YnA5RSJ9.eyJpc3MiOiJo",
+    "type": "Error"
+  },
   "last_seen_id": 765856,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
