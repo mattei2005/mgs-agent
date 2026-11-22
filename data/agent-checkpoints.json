@@ -10229,12 +10229,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Zeus mantém pendência aberta. Revalidar a superfície no próximo tick existente21:02ET e seguir contrato: nova API55/H40 e somente pending_ui atuais para D. Não repetir writes desta ocorrência,não criar job/writer. REPORT-INFRA pendente pela restrição de entrega direta do cron; aviso único na resposta automática.",
-      "objective": "Refresh agendado21nov14:02ET: mesmas55contas,H40,mesmojob/contrato.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T1402/partial-validation.json",
-      "state": "partial_validated_blocked_provider: api55 e invoices outubro atualizadas com paridade porid; h40 e d preservados,5 eventos d pendentes; erro técnico meta confirmado na superfície correta,sem gate autenticação,sem inputs/reload. outraaba integralmente preservada; lease livre.",
+      "next_step": "Zeus mantém pendência aberta; próximo tick existente22nov08:02ET deve revalidar superfície e executar contrato atual. Sem novo job/writer; não confundir erro técnico com logout. REPORT-INFRA pendente por restrição de entrega direta deste cron.",
+      "objective": "Refresh autorizado21nov21:02ET; mesmas55contas/H40 e mesmo job.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T2102/partial-validation.json",
+      "state": "partial_validated_blocked_provider: api55 e invoices outubro publicadas com paridade porid;h40 e d preservados,7eventos d pendentes;erro técnico meta confirmado visualmente,sem gate autenticação,sem inputs/reload;outraaba preservada,lease livre.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-21T19:09:03+00:00"
+      "updated_at": "2026-11-22T02:06:28+00:00"
     },
     {
       "agent": "zeus",
@@ -12068,5 +12068,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T00:48:23+00:00"
+  "updated_at": "2026-11-22T02:06:28+00:00"
 }
