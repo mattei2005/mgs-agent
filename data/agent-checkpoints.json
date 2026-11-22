@@ -2042,6 +2042,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1574111917159747615",
+      "next_step": "QA visual por fonte; congelar plano real; consumir monitor e batches de até quatro pelo mesmo owner 528c5710269d; complete e manutenção; auditar conjunto inteiro e entregar mapa na origem.",
+      "objective": "Tratar e organizar 57 vídeos Kelly US SHEIN ES common preservando originais IDs e reservas",
+      "source": "data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
+      "state": "request 53b0f1cdd7dfd7778f58674402465e1c registrado e relido: 57 fontes estáveis baixadas/probeadas, 57 hashes raw únicos sem match no inventário. preparação local iniciada; nenhum tratamento remoto ou campanha.",
+      "thread_id": "1574111917159747615",
+      "updated_at": "2026-11-22T17:25:05+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -12078,5 +12088,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T13:55:07+00:00"
+  "updated_at": "2026-11-22T17:25:05+00:00"
 }
