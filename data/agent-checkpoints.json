@@ -2043,12 +2043,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574111917159747615",
-      "next_step": "QA visual por fonte; congelar plano real; consumir monitor e batches de até quatro pelo mesmo owner 528c5710269d; complete e manutenção; auditar conjunto inteiro e entregar mapa na origem.",
+      "next_step": "Após liberação da execução cron/maintenance, foreground retoma mesmo batch a54db7fd61b9686a6101514d4bcabf04, adapter local existente e complete/monitor serial. Não criar coordenador ou writer paralelo; reutilizar plano57 e QA pronta. Saldo53 fontes; auditoria final e mapa na origem.",
       "objective": "Tratar e organizar 57 vídeos Kelly US SHEIN ES common preservando originais IDs e reservas",
-      "source": "data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "request 53b0f1cdd7dfd7778f58674402465e1c registrado e relido: 57 fontes estáveis baixadas/probeadas, 57 hashes raw únicos sem match no inventário. preparação local iniciada; nenhum tratamento remoto ou campanha.",
+      "source": "data/ares/creative-ops/executions/intake-1574111917159747615/plan.json",
+      "state": "foreground canônico ativo nesta sessão: 20261122_121859_886b999e. preparação e qa de todas as57 concluídas; plano imutável em executions/intake-1574111917159747615/plan.json. batch1 complete4 fontes. próximo batch a54db7fd61b9686a6101514d4bcabf04; tentativa foreground sem write abortou canonical_lock_busy por manutenção concorrente do monitor. não lançar outro tratamento nem complete: foreground continua dono entre chamadas. cron deve deferir e não duplicar preparação/qa/naming. 56 cleans únicos; duplicata índice32 converge ao27 em batch anterior. recovery estrito de checksum raw de reexport testado8+18+14, preservando guard de pares.",
       "thread_id": "1574111917159747615",
-      "updated_at": "2026-11-22T17:25:05+00:00"
+      "updated_at": "2026-11-22T17:45:49+00:00"
     },
     {
       "agent": "ares",
@@ -12088,5 +12088,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T17:25:05+00:00"
+  "updated_at": "2026-11-22T17:45:49+00:00"
 }
