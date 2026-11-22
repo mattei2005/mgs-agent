@@ -1,7 +1,8 @@
 """Distinct RAW exports require source-bound proof and identical clean bytes."""
-import copy,hashlib,json,os,subprocess,tempfile,unittest
+import copy,hashlib,json,os,subprocess,tempfile,unittest,sys
 from pathlib import Path
 from unittest.mock import Mock
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import ares_autonomous_intake as a
 class DuplicateExportTests(unittest.TestCase):
  @classmethod
