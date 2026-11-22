@@ -5264,12 +5264,32 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1574186080318521365",
-      "next_step": "Obter decisao sobre suspender a reativacao anterior pendente; preservar os mesmos IDs e executar apenas status=PAUSED sob lane/lease apos liberacao valida.",
-      "objective": "Pausar oito campanhas nominais na Mavroa Conta06 G006",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1574186080318521365/request.json",
-      "state": "pausa nao executada: predecessor recovery_pending mantem lease da conta; oito ids resolvidos live",
+      "next_step": "41/42 aptas; falta registrar e validar one-shot das 00h02 23/11/2026 EST",
+      "objective": "Pausar 42 campanhas nominais Mavroa06 G006 e reativar23novembro2026 00h02EST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1574186080318521365/activation.json",
+      "state": "paused_activation_prepared",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-22T22:17:20+00:00"
+      "updated_at": "2026-11-22T22:29:09+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1574186500864610396",
+      "next_step": "Aguardar one-shot; confirmar ACTIVE por GET integral e entrega nativa,sem novos objetos ou alteracoes de budget",
+      "objective": "Pausar 34 campanhas nominais Yolokfx08 G006 e reativar23novembro2026 00hEST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1574186500864610396/activation.json",
+      "state": "scheduled:34/34 paused por get integral;34 aptas;reativacao23nov2026 00h00est;one-shot e auditoria pos-write validados",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-22T22:27:57+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1574188459281621015",
+      "next_step": "One-shot validado dos mesmos IDs;393 exige revisao Meta ou pedido especifico de reparo criativo.",
+      "objective": "Pausar 8 campanhas nominais Yolokfx02 G006 e reativar23novembro2026 00h10EST status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1574188459281621015/activation.json",
+      "state": "scheduled:8/8 pausadas;7aptas agendadas23novembro2026 00h10est;393pausada com2ads disapproved",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-22T22:31:29+00:00"
     },
     {
       "agent": "zeus",
@@ -12118,5 +12138,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T22:21:47+00:00"
+  "updated_at": "2026-11-22T22:31:29+00:00"
 }
