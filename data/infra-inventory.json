@@ -69701,6 +69701,30 @@
       },
       "report_infra_message_id": "1574060711619862621",
       "report_infra_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/report-infra-receipt.json"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261122T1402",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh_partial_receipt",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "scheduled_at": "2026-11-22T14:02:00-05:00",
+      "updated_at": "2026-11-22T14:11:35.369313-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T1402/partial-validation.json",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics_count": 55,
+        "fresh_h_count": 0,
+        "preserved_h_count": 40,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0
+      },
+      "pending_recent_d_count": 4,
+      "human_authentication_gate": true,
+      "own_suffix_tabs_retained": 2
     }
   ],
   "profile_skill_references": [

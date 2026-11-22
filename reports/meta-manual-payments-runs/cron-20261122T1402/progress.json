@@ -1,0 +1,13 @@
+{
+  "phase": "partial_validated_waiting_human_meta_passkey",
+  "business_refresh_complete": false,
+  "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T1402/partial-validation.json",
+  "h_pending": 40,
+  "d_pending": 4,
+  "owner": "zeus",
+  "next_step": "After human authentication, reconcile same occurrence H0/40 and D4; preserve published metrics and all historical times. Verify exact approved Chrome; no new job or writer.",
+  "human_gate": true,
+  "own_suffix_tabs_retained": 2,
+  "lease_free": true,
+  "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+}

@@ -2053,12 +2053,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574111917159747615",
-      "next_step": "Cron deve deferir ao foreground ativo. Acompanhar mesmo consume; complete/monitor serial mesmos IDs. Ao request complete auditar57 e publicar mapa exato na thread.",
+      "next_step": "Cron deve deferir. Manter processo único até request57 complete e manutenção same-ID. Rodar audit_task.py após saída; publicar mapa57 pelo publish_map.py dry-run e envio com readbacks Ares na origem. Saldo17 não concluído.",
       "objective": "Tratar e organizar57 vídeos Kelly US SHEIN ES common preservando originais IDs e reservas",
       "source": "data/ares/creative-ops/executions/intake-1574111917159747615/foreground-owner.json",
-      "state": "foreground ativo mantém ownership entre tools.20/57 complete;37 saldo. consume anterior terminou antes de write do batch f2f0032e290172ccea5db9f380c01199 por lock manutenção canônica; handle anterior reconciliado exited. mesmo adapter retomado como proc_77b11cb22d51, pid shell2445796; foreground-owner.json contém pid real e batch atual. espera somente read-only bounded por lock/fire_claim antes de mutar, sem roubar claim/criar writer paralelo. qa57 e plano imutável preservados.",
+      "state": "foreground ativo handle proc_77b11cb22d51 pid real2445808, fonte foreground-owner.json.40/57 complete;17 saldo. duplicata32→27 vinculada à mesma linhagem/nome/clean com raw distinto; verificador independente rebaixou/sanitizou e confirmou sha idêntico em complete real; batch70212960fbea13ab17c4d6d267544076 complete. nenhum novo candidato/variante para duplicata. mesmo consume serial segue complete/monitor e aguarda lane sem writer paralelo.",
       "thread_id": "1574111917159747615",
-      "updated_at": "2026-11-22T18:29:32+00:00"
+      "updated_at": "2026-11-22T19:18:41+00:00"
     },
     {
       "agent": "ares",
@@ -10259,12 +10259,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Próximo tick existente22nov14:02ET; novo refresh do mesmo contrato. Não repetir writes deste slot nem criar job. Entrega operacional somente resposta final automática.",
-      "objective": "Refresh recorrente22nov08:02ET das mesmas55contas e40H; mesmo job e workbook",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/financial-validation.json",
-      "state": "completed_validated:api55;h40outstandingbalance com hora individual;d8renovados,pending_ui vazio;39dhistóricos vazios qualificados;invoices outubro30;outraaba e abas chrome preservadas;lease livre;zero pagamentos/billing.",
+      "next_step": "Aguardar autenticação humana Meta no mesmo Chrome. Depois reconciliar esta ocorrência e coletar somente H40/D4faltantes, sem duplicar writer. Preservar recibos e reconciliar abas próprias antes de cleanup. Próximo tick existente21:02ET, sem novo job. REPORT-INFRA pendente por entrega somente automática.",
+      "objective": "Refresh recorrente22nov14:02ET das mesmas55contas e40H; mesmo job/workbook",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T1402/partial-validation.json",
+      "state": "parcial validado: api55 e invoices30/outubro; h0novos/40históricos preservados; d4eventos pendentes e39vazios históricos qualificados. gate real meta/passkey no chrome rodolfo confirmado em ax/pixels. aba alheia preservada; lease livre; 2abas próprias retidas no gate,6preexistentes preservadas; zero pagamentos/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-22T13:55:07+00:00"
+      "updated_at": "2026-11-22T19:12:08+00:00"
     },
     {
       "agent": "zeus",
@@ -12098,5 +12098,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T19:10:06+00:00"
+  "updated_at": "2026-11-22T19:18:41+00:00"
 }
