@@ -242,6 +242,35 @@ def monitor(polls=3,interval=20):
             if index+1<polls:time.sleep(interval)
         return {'status':'uploading','pending':0}
 
+def verify_duplicate_export(d,source,row,raw_hashes):
+    """Accept a distinct RAW export only after exact source/link/clean proof.
+
+    Never replaces the primary checksum or grants a second clean candidate.
+    """
+    sid=source['source_id']
+    if sid==row.get('source_drive_id') or sid not in (row.get('duplicate_source_drive_ids') or []):
+        raise IntakeError('DUPLICATE_EXPORT_SOURCE_BINDING')
+    links=[x for x in (row.get('duplicate_sources') or []) if x.get('source_drive_id')==sid]
+    if len(links)!=1:raise IntakeError('DUPLICATE_EXPORT_UNIQUE_LINK')
+    link=links[0]
+    expected={'original_filename':source['name'],'canonical_filename':row['canonical_filename'],'original_checksum':raw_hashes['sha256'],'clean_checksum':row['clean_checksum']}
+    if any(link.get(k)!=v for k,v in expected.items()) or raw_hashes['md5']!=source['md5'] or raw_hashes['size']!=source['size'] or (source.get('sha256') and source['sha256']!=raw_hashes['sha256']):
+        raise IntakeError('DUPLICATE_EXPORT_CONTENT_BINDING')
+    import tempfile,subprocess,os
+    scratch=Path(os.environ.get('TMPDIR','/root/.hermes/profiles/ares/cache/scratch'))
+    with tempfile.TemporaryDirectory(prefix='duplicate-export-',dir=scratch) as td:
+        ext=Path(source['name']).suffix
+        raw=Path(td)/('raw'+ext);clean=Path(td)/('clean'+ext)
+        data=d.raw(sid)
+        if hashlib.sha256(data).hexdigest()!=raw_hashes['sha256']:raise IntakeError('DUPLICATE_EXPORT_RAW_CHANGED')
+        raw.write_bytes(data)
+        sanitizer=bridge.BASE/'scripts/clean-creative-metadata.sh'
+        result=subprocess.run([str(sanitizer),'clean',str(raw),'--out',str(clean),'--agent','ares'],capture_output=True,timeout=400)
+        if result.returncode or not clean.exists() or hashlib.sha256(clean.read_bytes()).hexdigest()!=row['clean_checksum']:raise IntakeError('DUPLICATE_EXPORT_NOT_EQUIVALENT')
+        result=subprocess.run([str(sanitizer),'verify',str(clean),'--json'],capture_output=True,text=True,timeout=120)
+        if result.returncode or json.loads(result.stdout).get('clean') is not True:raise IntakeError('DUPLICATE_EXPORT_NOT_CLEAN')
+    return True
+
 def verify_completed(d,batch,baseline):
     rows=[json.loads(line) for line in (bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip()];proofs=[]
     for source in batch['sources']:
@@ -268,6 +297,9 @@ def verify_completed(d,batch,baseline):
         if raw.get('driveId')!=bridge.SOURCE_DRIVE or (not archived_duplicate and clean.get('driveId')!=bridge.SOURCE_DRIVE) or raw.get('trashed') or clean.get('trashed') or clean.get('name')!=row.get('canonical_filename'):raise IntakeError('FINAL_IDENTITY')
         hashes=d.hashes(source['source_id']);ch=d.hashes(clean['id'])
         allowed_raw={row['original_checksum'],row['clean_checksum']} if row['asset_id'] in baseline else {row['original_checksum']}
+        if row['asset_id'] in baseline and hashes['sha256'] not in allowed_raw:
+            verify_duplicate_export(d,source,row,hashes)
+            allowed_raw.add(hashes['sha256'])
         if hashes['md5']!=source['md5'] or hashes['size']!=source['size'] or hashes['sha256'] not in allowed_raw or ch['sha256']!=row['clean_checksum'] or ch['md5']!=clean['md5Checksum'] or ch['size']!=clean['size']:raise IntakeError('FINAL_BINARY_PROOF')
         proof={'source_id':source['source_id'],'clean_source_id':logical_clean,'raw_sha256':hashes['sha256'],'clean_sha256':ch['sha256'],'source_parent_verified':True,'clean_verified':True,'inventory_verified':True,'reservation_preserved':True}
         if archived_duplicate:proof.update(clean_provider_id=clean['id'],existing_archive_duplicate=True)
