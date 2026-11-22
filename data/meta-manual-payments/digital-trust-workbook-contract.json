@@ -180,108 +180,82 @@
     "verified_at": "2026-11-20T19:51:29.936515-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "partial_validated_blocked_provider",
-    "business_refresh_complete": false,
-    "scheduled_at": "2026-11-21T21:02:00-05:00",
-    "verified_at": "2026-11-21T21:05:29.714551-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T2102/partial-validation.json",
+    "status": "completed_validated",
+    "business_refresh_complete": true,
+    "scheduled_at": "2026-11-22T08:02:00-05:00",
+    "verified_at": "2026-11-22T08:53:40.099653-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/financial-validation.json",
     "accounts": 55,
     "groups": {
       "Cartão de crédito": 15,
       "Linha de crédito": 40
     },
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261121T210507597799",
-    "api_collected_at": "2026-11-21T21:05:04.033746-05:00",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261121T210440008433",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261122T085204541279",
+    "api_collected_at": "2026-11-22T08:52:00.263960-05:00",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261122T080505341117",
     "invoice_period": "2026-10-01",
     "invoice_pending": 30,
     "invoice_due_usd": "417864.11",
     "invoice_outside": [],
-    "fresh_h_count": 0,
-    "preserved_h_count": 40,
-    "preserved_h_ids": [
-      "1419148446852410",
-      "1753257812779707",
-      "1107653168698121",
-      "2633813727134360",
-      "2039876850230678",
-      "1851640026221079",
-      "1001115192056600",
-      "1018267074603840",
-      "1062887799996139",
-      "2031917360813819",
-      "897046653487466",
-      "1498990138663094",
-      "814915838330687",
-      "3188620887977617",
-      "3752157451670648",
-      "4511685129081248",
-      "1829406761389732",
-      "937846586033361",
-      "336562339356179",
-      "1744611463000838",
-      "1245683183659911",
-      "311204101516831",
-      "1526280818302320",
-      "536294549227786",
-      "1085117577390237",
-      "1736068407518263",
-      "1877104513669062",
-      "869857549542755",
-      "7840111366055613",
-      "1583000095650153",
-      "2429758060563333",
-      "781612907182683",
-      "787796726891306",
-      "1600310064116258",
-      "908704754163659",
-      "26632890069640784",
-      "1754588462350629",
-      "1542257646409395",
-      "1034081997659047",
-      "1492168699397108"
-    ],
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261121T210509450760",
+    "fresh_h_count": 40,
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261122T080540890088",
     "h_source": "accounts_list_outstanding_balance",
-    "h_values_notes_original_times_preserved": true,
-    "pending_ui": [
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2323706575049143",
-        "name": "Growpowerhub-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1547524853816263",
-        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
+    "h_usd": "723579.85",
+    "h_times": [
+      "2026-11-22T08:13:39.889104-05:00",
+      "2026-11-22T08:13:58.795309-05:00",
+      "2026-11-22T08:14:20.166141-05:00",
+      "2026-11-22T08:14:38.317969-05:00",
+      "2026-11-22T08:14:57.835406-05:00",
+      "2026-11-22T08:15:19.987183-05:00",
+      "2026-11-22T08:17:50.845259-05:00",
+      "2026-11-22T08:18:13.641630-05:00",
+      "2026-11-22T08:18:35.029019-05:00",
+      "2026-11-22T08:18:56.687746-05:00",
+      "2026-11-22T08:19:17.712804-05:00",
+      "2026-11-22T08:19:39.341551-05:00",
+      "2026-11-22T08:22:36.829733-05:00",
+      "2026-11-22T08:22:58.548466-05:00",
+      "2026-11-22T08:23:20.632904-05:00",
+      "2026-11-22T08:23:42.251970-05:00",
+      "2026-11-22T08:24:01.622651-05:00",
+      "2026-11-22T08:24:23.552357-05:00",
+      "2026-11-22T08:26:56.871332-05:00",
+      "2026-11-22T08:27:14.117672-05:00",
+      "2026-11-22T08:27:31.289545-05:00",
+      "2026-11-22T08:27:47.058415-05:00",
+      "2026-11-22T08:27:59.964817-05:00",
+      "2026-11-22T08:28:17.722478-05:00",
+      "2026-11-22T08:31:09.984777-05:00",
+      "2026-11-22T08:31:26.002039-05:00",
+      "2026-11-22T08:31:45.114360-05:00",
+      "2026-11-22T08:32:03.194245-05:00",
+      "2026-11-22T08:32:19.303047-05:00",
+      "2026-11-22T08:32:39.237980-05:00",
+      "2026-11-22T08:35:11.170398-05:00",
+      "2026-11-22T08:35:27.210237-05:00",
+      "2026-11-22T08:35:43.237632-05:00",
+      "2026-11-22T08:36:01.372171-05:00",
+      "2026-11-22T08:36:18.425631-05:00",
+      "2026-11-22T08:36:34.762420-05:00",
+      "2026-11-22T08:39:03.257992-05:00",
+      "2026-11-22T08:39:17.420777-05:00",
+      "2026-11-22T08:39:33.226822-05:00",
+      "2026-11-22T08:39:49.157421-05:00"
     ],
+    "pending_ui": [],
+    "renewed_d_ids": [
+      "1062446663435585",
+      "1150399088163771",
+      "1414197490675732",
+      "1543098427832443",
+      "1547524853816263",
+      "1867022354284742",
+      "2323706575049143",
+      "2852476828464907"
+    ],
+    "renewed_d_count": 8,
     "historical_blank_d": [
       {
         "account_id": "336562339356179",
@@ -483,7 +457,6 @@
     "source_parity_cgij": true,
     "invoice_source_to_live_sheet_exact": true,
     "h_ledger_to_live_sheet_exact": true,
-    "d_values_notes_preserved": true,
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
     "outside_write_masks_preserved": true,
@@ -520,10 +493,6 @@
     "lease_free": true,
     "average_periods": [
       [
-        "2026-11-18",
-        "2026-11-20"
-      ],
-      [
         "2026-11-19",
         "2026-11-21"
       ]
@@ -531,34 +500,20 @@
     "month_periods": [
       [
         "2026-11-01",
-        "2026-11-21"
-      ],
-      [
-        "2026-11-01",
         "2026-11-22"
       ]
     ],
-    "blocker": {
-      "reason": "Meta This page is not available right now; technical error visible",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T2102/surface.png",
-      "authentication_gate": false,
-      "inputs_stopped": true,
-      "inputs": 0,
-      "reloads": 0,
-      "billing_changes": 0
-    },
     "browser_tabs_preserved": true,
-    "browser_tab_exact_parity": "no input or tab mutation issued; exact initial AX and pixels retained",
     "payments_executed": 0,
     "meta_writes": 0,
     "billing_changes": 0,
-    "next_run_at": "2026-11-22T08:02:00-05:00",
+    "next_run_at": "2026-11-22T14:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "delivery": "cron_final_response_only",
     "totals_usd": {
-      "average_daily": "21876.31",
-      "balance": "721643.01",
-      "month_spend": "446608.62"
+      "average_daily": "21630.78",
+      "balance": "728125.50",
+      "month_spend": "455693.03"
     }
   },
   "layout_version": 3,
@@ -628,54 +583,22 @@
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "blocked_provider_technical_error",
-    "account_ids": [
-      "1150399088163771",
+    "status": "resolved_current_events",
+    "account_ids": [],
+    "pending_ui": [],
+    "renewed_account_ids": [
       "1062446663435585",
-      "2323706575049143",
-      "1547524853816263",
+      "1150399088163771",
       "1414197490675732",
       "1543098427832443",
+      "1547524853816263",
+      "1867022354284742",
+      "2323706575049143",
       "2852476828464907"
     ],
-    "pending_ui": [
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2323706575049143",
-        "name": "Growpowerhub-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1547524853816263",
-        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T2102/partial-validation.json"
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/financial-validation.json",
+    "verified_at": "2026-11-22T08:53:40.099653-05:00",
+    "historical_blank_d_qualified": 39
   },
   "pending_new_account_fields": {
     "D_account_ids": [

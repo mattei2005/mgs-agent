@@ -69661,6 +69661,44 @@
       "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261121T1402/partial-validation.json",
       "updated_at": "2026-11-21T14:08:32.466550-05:00",
       "report_infra_status": "pending_cron_delivery_only_no_direct_send"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261122T0802",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh_and_scoped_UIA_recovery",
+      "status": "completed_validated",
+      "scheduled_at": "2026-11-22T08:02:00-05:00",
+      "updated_at": "2026-11-22T08:53:40.099653-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T0802/financial-validation.json",
+      "report_infra_status": "pending",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "data/meta-manual-payments/pc1-card-ledger.json",
+        "data/meta-manual-payments/pc1-pay-now-ledger.json",
+        "data/meta-manual-payments/september-invoice-ledger.json",
+        "data/meta-manual-payments/last-refresh.json"
+      ],
+      "procedure_readback": {
+        "mirror_equal": true,
+        "sha256": "c713c3b8fa6237e78367005f587fa125c5223165a9c8dd5456126924aec7b600",
+        "summary": "Resolve UIA indexes after last capture; distinguish omnibox historical reauth suggestion from actual loaded gate."
+      },
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 40,
+        "renewed_d": 8,
+        "pending_ui": 0,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "browser_tabs_preserved": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0
+      }
     }
   ],
   "profile_skill_references": [
