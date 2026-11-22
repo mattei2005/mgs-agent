@@ -892,6 +892,32 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "autopush-index-lock-recovery-5372f4df6089c7f3c6810be5",
+      "agent": "zeus",
+      "report_infra_message_id": "1573983631070728288",
+      "report_infra_get_verified": true,
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1573981654010036305",
+      "cause": "Native Git staging failed with index.lock occupied at 2026-11-22 03:41 ET; lock already absent during investigation; competing process not attributed.",
+      "paths": [
+        "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_autopush_continuity.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+      ],
+      "correction": "Exact key/alert allowlist for repeated index-lock incidents; separate receipts and GET identities, no reuse of prior recovery. Native writer/batching and original supervisor closure preserved.",
+      "validation": "33 adapter tests, 17 canonical monitor tests and 7 ownership tests PASS; skill canonical/mirror SHA256 equal.",
+      "receipt": "/root/.hermes/shared/automation-continuity/runs/5372f4df6089c7f3c6810be5/recovery-evidence.json",
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/5372f4df6089c7f3c6810be5/rollback",
+      "status": "native_retry_validated_waiting_canonical_monitor_and_delivery",
+      "native_retry_commit": "890a61786303d4e07aec02c5b8ca88a6446e7db9",
+      "native_push_ok_at": "2026-11-22T03:48:23-05:00",
+      "manual_stage_commit_push": false,
+      "cron_changes": false,
+      "credentials_changed": false,
+      "gateway_restart": false
+    },
 {
   "id": "meta-manual-payments-refresh-20261121-2102",
   "agent": "zeus",

@@ -3624,12 +3624,12 @@
     {
       "agent": "zeus",
       "id": "AUTOPUSH-INDEX-5372f4df6089c7f3c6810be5",
-      "next_step": "Observar o flush nativo sem stage/commit/push manual; validar commit remoto e aviso Auto-push restabelecido por GET; persistir recibo e deixar fechamento ao supervisor original",
+      "next_step": "Aguardar tick natural do monitor 03:56 ET e GET do aviso de recuperacao; certificar recibo por ocorrencia, sem alterar fila pertencente ao supervisor:2059748",
       "objective": "Recuperar somente a falha de auto-commit/auto-push do alerta 1573981654010036305, preservando writer nativo e supervisor original",
       "source": "/root/.hermes/shared/automation-continuity/runs/5372f4df6089c7f3c6810be5/recovery-evidence.json",
-      "state": "running: index.lock transitorio ja ausente; watcher nativo pid 1206220 ativo; verificacao por ocorrencia corrigida e 33 testes pass; aguardando retry natural e monitor/entrega reais",
+      "state": "retry_nativo_validado: commit 890a61786303d4e07aec02c5b8ca88a6446e7db9 publicado as 03:48:23 et, remoto e quatro artefatos conferidos; report-infra 1573983631070728288 get validado",
       "thread_id": "1569185140502954077",
-      "updated_at": "2026-11-22T08:48:08+00:00"
+      "updated_at": "2026-11-22T08:50:08+00:00"
     },
     {
       "agent": "zeus",
@@ -12078,5 +12078,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T08:48:08+00:00"
+  "updated_at": "2026-11-22T08:50:08+00:00"
 }
