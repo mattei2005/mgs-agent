@@ -3624,12 +3624,12 @@
     {
       "agent": "zeus",
       "id": "AUTOPUSH-INDEX-5372f4df6089c7f3c6810be5",
-      "next_step": "Aguardar tick natural do monitor 03:56 ET e GET do aviso de recuperacao; certificar recibo por ocorrencia, sem alterar fila pertencente ao supervisor:2059748",
+      "next_step": "Supervisor original aplica fechamento independente no proximo tick natural; nao executar dispatcher paralelo nem replay de commit/push",
       "objective": "Recuperar somente a falha de auto-commit/auto-push do alerta 1573981654010036305, preservando writer nativo e supervisor original",
       "source": "/root/.hermes/shared/automation-continuity/runs/5372f4df6089c7f3c6810be5/recovery-evidence.json",
-      "state": "retry_nativo_validado: commit 890a61786303d4e07aec02c5b8ca88a6446e7db9 publicado as 03:48:23 et, remoto e quatro artefatos conferidos; report-infra 1573983631070728288 get validado",
+      "state": "resultado_e_entrega_validados: native retry 890a617863 e ead6333d4e publicados; tick natural 03:56 et zero falhas; aviso 1573985425964666995 get; observer exact-alert ok verified=true; report-infra 1573983631070728288 get",
       "thread_id": "1569185140502954077",
-      "updated_at": "2026-11-22T08:50:08+00:00"
+      "updated_at": "2026-11-22T08:57:30+00:00"
     },
     {
       "agent": "zeus",
@@ -12078,5 +12078,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T08:50:08+00:00"
+  "updated_at": "2026-11-22T08:57:30+00:00"
 }
