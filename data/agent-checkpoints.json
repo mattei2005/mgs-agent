@@ -3623,6 +3623,16 @@
     },
     {
       "agent": "zeus",
+      "id": "AUTOPUSH-INDEX-5372f4df6089c7f3c6810be5",
+      "next_step": "Observar o flush nativo sem stage/commit/push manual; validar commit remoto e aviso Auto-push restabelecido por GET; persistir recibo e deixar fechamento ao supervisor original",
+      "objective": "Recuperar somente a falha de auto-commit/auto-push do alerta 1573981654010036305, preservando writer nativo e supervisor original",
+      "source": "/root/.hermes/shared/automation-continuity/runs/5372f4df6089c7f3c6810be5/recovery-evidence.json",
+      "state": "running: index.lock transitorio ja ausente; watcher nativo pid 1206220 ativo; verificacao por ocorrencia corrigida e 33 testes pass; aguardando retry natural e monitor/entrega reais",
+      "thread_id": "1569185140502954077",
+      "updated_at": "2026-11-22T08:48:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "B001-INVEST-CALENDAR-1567032162757382155",
       "next_step": "No forced app alerts or credential changes. Existing published card unchanged; future native alerts use corrected loader. Separate Debora admin token 190/463 requires owner renewal, not automatic credential rotation.",
       "objective": "Diagnosticar e recuperar colunas de investimento n/d do B001 sem alterar credenciais ou reenviar alertas",
@@ -12068,5 +12078,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T05:06:39+00:00"
+  "updated_at": "2026-11-22T08:48:08+00:00"
 }

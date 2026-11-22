@@ -120,9 +120,10 @@ def collect(base=BASE,profiles=PROFILES):
     from mgs_autopush_continuity import observation as autopush_observation
     recovered=autopush_observation(base=base,now=now)
     if recovered is not None:observations[recovered['target']]=recovered
-    from mgs_autopush_continuity import index_lock_observation
-    recovered=index_lock_observation(base=base,now=now)
-    if recovered is not None:observations[recovered['target']]=recovered
+    from mgs_autopush_continuity import INDEX_RECOVERIES, index_lock_observation
+    for key,alert in INDEX_RECOVERIES.items():
+        recovered=index_lock_observation(base=base,now=now,key=key,alert=alert)
+        if recovered is not None:observations[recovered['target']]=recovered
     from mgs_autopush_rollback_continuity import observation as rollback_observation
     recovered=rollback_observation(base=base,now=now)
     if recovered is not None:observations[recovered['target']]=recovered

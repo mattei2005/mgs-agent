@@ -18,6 +18,10 @@ DB = Path('/root/.hermes/shared/automation-continuity/queue.sqlite3')
 BASE = Path('/root/mgs-agent')
 INDEX_KEY = '3e1e5a580dd9f2151ef142e8'
 INDEX_ALERT = '1572894488660017277'
+INDEX_RECOVERIES = {
+    INDEX_KEY: INDEX_ALERT,
+    '5372f4df6089c7f3c6810be5': '1573981654010036305',
+}
 
 
 def live_check(base, receipt):
@@ -107,7 +111,9 @@ def index_lock_live_check(base, receipt):
         raise ValueError('Native push missing')
     remote = subprocess.check_output(['git', '-C', str(base), 'ls-remote', 'origin', 'refs/heads/main'], timeout=25).decode().split()[0]
     subprocess.run(['git', '-C', str(base), 'merge-base', '--is-ancestor', commit, remote], check=True, capture_output=True, timeout=10)
-    source = request('GET', collection_url('1498132022634483894') + '/' + INDEX_ALERT)
+    source = request('GET', collection_url('1498132022634483894') + '/' + receipt['alert_id'])
+    if str(source.get('id')) != receipt['alert_id']:
+        raise ValueError('Source alert identity mismatch')
     if str(source.get('author', {}).get('id')) != '1496296175014252634' or source.get('content') != '' or len(source.get('embeds', [])) != 1:
         raise ValueError('Untrusted source alert')
     embed = source['embeds'][0]
@@ -136,9 +142,12 @@ def index_lock_live_check(base, receipt):
     return {'remote_main': remote, 'native_retry_commit': commit, 'recovery_notice_get_verified': notice['id']}
 
 
-def index_lock_observation(base=BASE, root=None, queue_path=DB, reader=None, now=None):
+def index_lock_observation(base=BASE, root=None, queue_path=DB, reader=None, now=None,
+                           key=INDEX_KEY, alert=INDEX_ALERT):
     """Scoped receipt for the one transient index-lock occurrence."""
-    root = Path(root) if root is not None else ROOT.parent / INDEX_KEY
+    if INDEX_RECOVERIES.get(key) != alert:
+        return None
+    root = Path(root) if root is not None else ROOT.parent / key
     path = root / 'recovery-evidence.json'
     if not path.exists():
         return None
@@ -146,19 +155,19 @@ def index_lock_observation(base=BASE, root=None, queue_path=DB, reader=None, now
         from contextlib import closing
         try:
             with closing(sqlite3.connect(f'file:{queue_path}?mode=ro', uri=True)) as db:
-                row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (INDEX_KEY,)).fetchone()
+                row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (key,)).fetchone()
         except sqlite3.Error:
             return None
-        if not row or row[0] != 'alert:' + INDEX_ALERT or row[1] in ('completed_validated', 'cancelled_owner'):
+        if not row or row[0] != 'alert:' + alert or row[1] in ('completed_validated', 'cancelled_owner'):
             return None
     now = time.time() if now is None else now
-    result = {'status': 'UNKNOWN', 'verified': False, 'target': 'alert:' + INDEX_ALERT,
+    result = {'status': 'UNKNOWN', 'verified': False, 'target': 'alert:' + alert,
               'receipt': str(path), 'at': now,
-              'source': {'kind': 'alert', 'profile': 'zeus', 'alert_id': INDEX_ALERT,
+              'source': {'kind': 'alert', 'profile': 'zeus', 'alert_id': alert,
                          'alert_channel': '1498132022634483894'}}
     try:
         receipt = json.loads(path.read_text())
-        if (receipt.get('operation_key'), receipt.get('alert_id'), receipt.get('authority_message_id'), receipt.get('status')) != (INDEX_KEY, INDEX_ALERT, '1569193434189668453', 'recovered_waiting_supervisor_validation'):
+        if (receipt.get('operation_key'), receipt.get('alert_id'), receipt.get('authority_message_id'), receipt.get('status')) != (key, alert, '1569193434189668453', 'recovered_waiting_supervisor_validation'):
             raise ValueError('Uncertified occurrence')
         state_path = base / 'data/auto-push-monitor.json'
         before = state_path.read_bytes()
