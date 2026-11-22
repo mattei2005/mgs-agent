@@ -30,13 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    686471,
-    686479,
-    686551,
-    686595,
-    686613,
-    686632,
-    687612,
     687620,
     687639,
     689510,
@@ -1029,7 +1022,14 @@
     765786,
     765811,
     765832,
-    765856
+    765856,
+    766139,
+    766152,
+    766166,
+    766188,
+    766211,
+    766233,
+    766253
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1067,9 +1067,9 @@
     "digital-trust-2|wantabrand|71|340": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-11-21T12:02:18.000Z",
+        "created_at": "2026-11-22T12:02:25.000Z",
         "domain": "wantabrand",
-        "notification_id": 763891,
+        "notification_id": 766139,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 4,
@@ -1089,7 +1089,8 @@
       ],
       "notification_ids": [
         760738,
-        763891
+        763891,
+        766139
       ],
       "opened_at": "2026-11-19T19:12:10-05:00",
       "repeat_count": 0,
@@ -1333,9 +1334,9 @@
     "digital-trust|boostingecon|30|1761": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-21T12:02:59.000Z",
+        "created_at": "2026-11-22T12:03:05.000Z",
         "domain": "boostingecon",
-        "notification_id": 763941,
+        "notification_id": 766211,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -1374,7 +1375,8 @@
         752407,
         754975,
         757986,
-        763941
+        763941,
+        766211
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2303,9 +2305,9 @@
     "digital-trust|financeadx|24|1687": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-21T12:02:58.000Z",
+        "created_at": "2026-11-22T12:03:04.000Z",
         "domain": "financeadx",
-        "notification_id": 763923,
+        "notification_id": 766188,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -2330,7 +2332,8 @@
         692100,
         745391,
         757973,
-        763923
+        763923,
+        766188
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -4265,9 +4268,9 @@
     "digital-trust|newsoun|14|1688": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-21T12:03:07.000Z",
+        "created_at": "2026-11-22T12:03:13.000Z",
         "domain": "newsoun",
-        "notification_id": 763966,
+        "notification_id": 766233,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 55,
@@ -4289,7 +4292,8 @@
       "notification_ids": [
         682991,
         692144,
-        763966
+        763966,
+        766233
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -4951,9 +4955,9 @@
     "digital-trust|openzed|16|1826": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-21T12:02:56.000Z",
+        "created_at": "2026-11-22T12:03:02.000Z",
         "domain": "openzed",
-        "notification_id": 763904,
+        "notification_id": 766166,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 15,
@@ -4975,7 +4979,8 @@
       ],
       "notification_ids": [
         757947,
-        763904
+        763904,
+        766166
       ],
       "opened_at": "2026-11-18T19:12:14-05:00",
       "repeat_count": 0,
@@ -6231,6 +6236,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|xyvlov|87|1793": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-22T12:02:59.000Z",
+        "domain": "xyvlov",
+        "notification_id": 766152,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1
+        },
+        "pages": 1,
+        "segurador_id": "1793",
+        "segurador_name": "Vitoria Souza Duarte",
+        "source": "page_token",
+        "user_email": "disparosxyvlovmxcces@gmail.com",
+        "user_id": "87",
+        "user_name": "Disparos Xyvlov MX-CC-ES"
+      },
+      "last_sent_at": "2026-11-22T07:12:11-05:00",
+      "message_ids": [
+        "1574034754699927576"
+      ],
+      "notification_ids": [
+        766152
+      ],
+      "opened_at": "2026-11-22T07:12:09-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|yolokfx|32|186": {
       "alert": {
         "company": "digital-trust",
@@ -6592,6 +6627,36 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|zytivafinanzas|83|1757": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-22T12:03:23.000Z",
+        "domain": "zytivafinanzas",
+        "notification_id": 766253,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1
+        },
+        "pages": 1,
+        "segurador_id": "1757",
+        "segurador_name": "Isidoro Cristina Barbosa Martins",
+        "source": "page_token",
+        "user_email": "disparoszytivaes@gmail.com",
+        "user_id": "83",
+        "user_name": "Disparos Zytiva US-CC-ES"
+      },
+      "last_sent_at": "2026-11-22T07:12:11-05:00",
+      "message_ids": [
+        "1574034759829684246"
+      ],
+      "notification_ids": [
+        766253
+      ],
+      "opened_at": "2026-11-22T07:12:09-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|zytivafinanzas|97|1739": {
       "alert": {
@@ -7042,42 +7107,29 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-22T06:57:09-05:00",
+  "last_check": "2026-11-22T07:12:11-05:00",
   "last_delivery": {
-    "at": "2026-11-21T19:12:32-05:00",
+    "at": "2026-11-22T07:12:11-05:00",
     "cursor_ids": [
-      765314,
-      765325,
-      765346,
-      765368,
-      765393,
-      765412,
-      765438,
-      765458,
-      765478,
-      765501,
-      765525,
-      765546,
-      765566,
-      765590,
-      765610,
-      765637,
-      765657,
-      765677,
-      765703,
-      765724,
-      765745,
-      765764,
-      765786,
-      765811,
-      765832,
-      765856
+      766139,
+      766152,
+      766166,
+      766188,
+      766211,
+      766233,
+      766253
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1574034754699927576",
+      "1574034759829684246"
+    ],
+    "notification_ids": [
+      766152,
+      766253
+    ]
   },
   "last_error": null,
-  "last_seen_id": 765856,
+  "last_seen_id": 766253,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
