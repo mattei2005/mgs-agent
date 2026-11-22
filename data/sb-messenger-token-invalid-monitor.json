@@ -30,8 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    687620,
-    687639,
     689510,
     689525,
     689766,
@@ -1029,7 +1027,9 @@
     766188,
     766211,
     766233,
-    766253
+    766253,
+    766391,
+    766403
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1906,6 +1906,40 @@
         764172
       ],
       "opened_at": "2026-11-20T07:12:11-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|eggbev|12|1827": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-22T16:02:37.000Z",
+        "domain": "eggbev",
+        "notification_id": 766391,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 13,
+          "Broadcast": 67,
+          "Campaign": 10,
+          "On-hold": 33,
+          "Ready": 2
+        },
+        "pages": 125,
+        "segurador_id": "1827",
+        "segurador_name": "ช่วงนี้ไม่ค่อยฝัน ทีม'ม",
+        "source": "page_token",
+        "user_email": "disparoseggbev@gmail.com",
+        "user_id": "12",
+        "user_name": "Disparos Eggbev US-CC-EN"
+      },
+      "last_sent_at": "2026-11-22T11:12:24-05:00",
+      "message_ids": [
+        "1574095197757771912"
+      ],
+      "notification_ids": [
+        766391
+      ],
+      "opened_at": "2026-11-22T11:12:17-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -6837,9 +6871,9 @@
     "digital-trust|zytiva|17|269": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-12T16:06:06.000Z",
+        "created_at": "2026-11-22T16:02:38.000Z",
         "domain": "zytiva",
-        "notification_id": 744015,
+        "notification_id": 766403,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -6862,7 +6896,8 @@
       "notification_ids": [
         741585,
         742702,
-        744015
+        744015,
+        766403
       ],
       "opened_at": "2026-11-10T07:12:11-05:00",
       "repeat_count": 0,
@@ -7107,29 +7142,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-22T10:57:10-05:00",
+  "last_check": "2026-11-22T11:12:24-05:00",
   "last_delivery": {
-    "at": "2026-11-22T07:12:11-05:00",
+    "at": "2026-11-22T11:12:24-05:00",
     "cursor_ids": [
-      766139,
-      766152,
-      766166,
-      766188,
-      766211,
-      766233,
-      766253
+      766391,
+      766403
     ],
     "message_ids": [
-      "1574034754699927576",
-      "1574034759829684246"
+      "1574095197757771912"
     ],
     "notification_ids": [
-      766152,
-      766253
+      766391
     ]
   },
   "last_error": null,
-  "last_seen_id": 766253,
+  "last_seen_id": 766403,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
