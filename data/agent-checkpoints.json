@@ -2053,12 +2053,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574111917159747615",
-      "next_step": "Consumir auditoria ativa; exigir permanent_verified em57. Depois publish_map.py --dry-run e envio com ID Ares/GET por parte. Limpar apenas mídia transitória já auditada e concluir na origem com link READY.",
+      "next_step": "Nenhum saldo operacional; entregar resumo final e link READY na origem. Não reprocessar, republicar mapa ou reabrir batches por notificação atrasada.",
       "objective": "Tratar e organizar57 vídeos Kelly US SHEIN ES common preservando originais IDs e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1574111917159747615/plan.json",
-      "state": "request53b0f1cdd7dfd7778f58674402465e1c complete57/57 em15 claims;56linhagens novas e1duplicata ligada à mesma peça, sem outra variante. consume canônico terminou exit0 após monitor/manutenção final. auditoria independente integral em execução handle proc_9ab949d6822c; não repetir intake/manutenção nem lançar auditor sobre mesmos paths. entrega humana ainda pendente até auditoria e mapa57 com readback.",
+      "source": "data/ares/creative-ops/executions/intake-1574111917159747615/final-audit.json",
+      "state": "completed: request53b0f1cdd7dfd7778f58674402465e1c complete57 fontes/15claims. auditoria independente integral exit0 validou57originais same-id,56providers clean e56stockraw, hashes/bytes/clean=true/reservas e preservação da reexportação duplicada32→27.56linhagens novas/1duplicata/0pendências. mapa57 publicado e relido em5partes ares:1574152380725862413,1574152388582055971,1574152392461516812,1574152396509024287,1574152400384819331. limpeza local transitória auditada concluída. nenhuma campanha/acl/credencial/delete remoto.",
       "thread_id": "1574111917159747615",
-      "updated_at": "2026-11-22T19:56:29+00:00"
+      "updated_at": "2026-11-22T20:00:14+00:00"
     },
     {
       "agent": "ares",
@@ -12098,5 +12098,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T19:56:29+00:00"
+  "updated_at": "2026-11-22T20:00:14+00:00"
 }
