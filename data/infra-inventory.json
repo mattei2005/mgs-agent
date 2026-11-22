@@ -893,6 +893,38 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "resolver-read-recovery-ed7b63acca9c68d684f426b3",
+      "agent": "zeus",
+      "type": "automation_recovery_get_transport",
+      "authority_message_id": "1569193434189668453",
+      "authority_live_GET_verified": true,
+      "operation_key": "ed7b63acca9c68d684f426b3",
+      "source_key": "producer:alerts-infra-failed-alert-resolver.py",
+      "paths": [
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+        "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+        "/root/mgs-agent/tests/test_resolver_read_transport.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+      ],
+      "evidence_directory": "/root/.hermes/shared/automation-continuity/runs/ed7b63acca9c68d684f426b3",
+      "cause": "Discord legacy-message GET TLS reset escaped without retry, aborting the supervisor before dispatch. Old traceback also persisted without a recognized successful tick boundary.",
+      "correction": "One GET-only retry budget of at most three attempts, backoff and numeric Retry-After support; no write replay. Explicit ok=true only on genuinely completed supervisor tick.",
+      "validation": "85 tests passed; 1 unrelated OAuth model-config test excluded after failure, with its test and source bytes verified identical to HEAD. Three fresh canonical legacy-message GETs HTTP 200; same-ID readbacks. Cron unchanged; skill mirror hash equal; diff check passed.",
+      "status": "correction_validated_waiting_natural_supervisor",
+      "independent_closure": "Pending subsequent natural tick; original owner supervisor:1808182 preserved. No second dispatcher or manual queue closure.",
+      "business_writes": 0,
+      "cron_changes": 0,
+      "gateway_restarts": 0,
+      "report_infra": {
+        "message_id": "1573866713223794733",
+        "channel_id": "1498132022634483894",
+        "GET_verified": true,
+        "content_empty": true,
+        "mentions": 0
+      }
+    },
+    {
       "id": "autopush-rollback-guard-fb3abfb178aacd92d9633715",
       "agent": "zeus",
       "report_infra_message_id": "1573429173760819341",

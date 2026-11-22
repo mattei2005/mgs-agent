@@ -74,6 +74,12 @@ Treat the canonical trusted `Cron recuperado` green embed as a recovery notifica
 
 For a notification already admitted under `alert:<id>`, preserve that key. On the natural supervisor tick, GET the original notification and require a newer healthy observation of its exact script before supplying the scoped read-only observation. Do not replay the producer, remap the queue identity or certify any historical business slot. Keep active-owner and explicit decision gates intact; let the original supervisor perform queue closure, legacy-ledger reconciliation and idempotent delivery. Exercise the main entrypoint in an isolated queue, not only the classifier helper. Regression: `tests/test_recovered_cron_notice.py`.
 
+## Resolver read transport and healthy completion boundary
+
+Put the bounded retry budget in the canonical Discord GET transport, including exact legacy-message reads, not only channel pagination. Retry transient connection resets/timeouts and 429/5xx with backoff and the greater valid numeric Retry-After/body delay; preserve auth/404 responses and never automatically replay POST/PATCH/DELETE. Keep one budget (maximum three attempts), not nested pagination × transport retries. An exhausted read stays an error with its cursor/receipts preserved. Prove the legacy reconciliation path in an isolated supervisor entrypoint fixture, plus fresh same-endpoint GETs; do not launch a second production dispatcher beneath an owned worker.
+
+Emit `ok: true` only at the actual completed supervisor tick, after its existing work and state saves, so the semantic log monitor recognizes a fresh success boundary after an older traceback. A successful GET or dry-run must not write that marker to the production log. The active parent retains its already-imported code; independent closure and final delivery belong to the next natural supervisor tick. Regression: `tests/test_resolver_read_transport.py`.
+
 ## Acceptance and operation
 
 1. Run the affected queue/supervisor/PC1 ingress, worker lifecycle, integration, monitor, resolver and DTR tests in isolated temporary state. Use the installed SB venv for tests importing Playwright, with `PYTHONPATH` including scripts and tests. Set a fixture `CRON_STALE_STATE` to avoid contaminating root-log fixtures with live native job failures; never weaken production probes to make tests pass.

@@ -15,6 +15,7 @@ import mgs_automation_supervisor as supervisor
 from mgs_automation_continuity import Queue
 
 spec = importlib.util.spec_from_file_location('resolver_read_transport', BASE / 'scripts/alerts-infra-failed-alert-resolver.py')
+assert spec and spec.loader
 resolver = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(resolver)
 
@@ -108,3 +109,27 @@ def test_supervisor_legacy_get_reset_continues_to_healthy_tick(tmp_path, monkeyp
     assert final['ok'] is True and final['status'] == 'supervisor_tick_complete'
     assert calls == ['GET', 'GET'] and waits == [2]
     assert legacy['processed']['123']['status'] == 'continuity_owned'
+
+
+def test_real_semantic_monitor_accepts_tick_boundary_after_old_traceback(tmp_path, monkeypatch):
+    import os
+    import subprocess
+    log = tmp_path / 'resolver.log'
+    log.write_text('Traceback (most recent call last):\nURLError: old fixture reset\n' +
+                   json.dumps({'ok': True, 'status': 'supervisor_tick_complete'}) + '\n')
+    bin_dir = tmp_path / 'bin'
+    bin_dir.mkdir()
+    crontab = bin_dir / 'crontab'
+    line = f'2-57/5 * * * * /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> {log} 2>&1\n'
+    crontab.write_text('#!/usr/bin/env python3\nprint(' + repr(line) + ', end="")\n')
+    crontab.chmod(0o700)
+    monkeypatch.setenv('PATH', str(bin_dir) + ':' + os.environ['PATH'])
+    monkeypatch.setenv('CRON_STALE_STATE', str(tmp_path / 'state.json'))
+    monkeypatch.delenv('MGS_MONITOR_NATIVE', raising=False)
+    result = subprocess.run(['bash', str(BASE / 'scripts/monitor-cron-stale-logs.sh'), '--dry-run'],
+                            capture_output=True, text=True, timeout=30)
+    assert result.returncode == 0
+    row = result.stdout.splitlines()[0].split('|')
+    assert row[0].strip() == 'alerts-infra-failed-alert-resolver.py'
+    assert row[1].strip() == 'OK'
+    assert not (tmp_path / 'state.json').exists()
