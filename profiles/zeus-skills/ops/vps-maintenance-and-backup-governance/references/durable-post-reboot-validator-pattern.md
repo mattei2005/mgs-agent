@@ -19,6 +19,8 @@ For systemd pre-state, never assume that multiple `systemctl show -p ... --value
 
 Freeze Hermes by stable runtime identity: canonical launcher target, runtime repository, local HEAD, and release/version prefix. Do not compare the entire `hermes --version` banner across a long preflight—the displayed upstream tip or behind count can change when remote `main` advances even though the active runtime is byte-for-byte unchanged. Treat a later upstream commit as a new update candidate, not pre-reboot drift.
 
+Before freezing the expected boot kernel, resolve the host's actual bootloader selection rather than assuming a root-level `/vmlinuz` alias exists. On GRUB hosts, inspect `/boot/vmlinuz`, the first effective `linux` entry in `/boot/grub/grub.cfg`, `GRUB_DEFAULT` in `/etc/default/grub`, and `grub-editenv list` for saved/next-entry overrides. Require the selected image and matching initrd/modules to exist; include the selecting configuration in the pre-dispatch hash set. Treat an absent optional root alias as a layout observation, not permission to create a symlink or modify boot configuration; a real selection mismatch remains blocking.
+
 Do not call `packages updated; reboot pending` complete maintenance.
 
 ## Package gate before reboot
@@ -38,7 +40,7 @@ Create a self-contained one-shot systemd unit before reboot:
 
 Use the canonical Discord transport `/root/mgs-agent/scripts/discord-bot-post.py` and REPORT helper `/root/mgs-agent/scripts/send-report-infra-embed.sh`; never parse, print or embed the bot token in the validator.
 
-Read back an asynchronous systemd dispatch with bounded convergence, not a single immediate assertion. After `systemd-run --no-block` returns a unit name, poll that exact unit with `systemctl show <unit> -p ActiveState -p SubState -p MainPID -p ExecStart`: require `active/running`, a positive PID and the frozen command for a waiting executor, or inspect its durable result if it already exited. An initial `activating` state is not proof of failed creation. Preserve the returned unit identity and reconcile it before any retry, because creating another executor can duplicate the reboot. Record the dispatch receipt only after this readback; it proves executor readiness, never reboot completion.
+Read back an asynchronous systemd dispatch with bounded, type-aware convergence, not a single immediate assertion. For a queued timer, require the exact `.timer` to be `active/waiting`, its `Triggers` to name the intended service, and that service's `ExecStart` to match the frozen executor. After the timer fires, inspect `Type`, `ActiveState`, `SubState`, `MainPID` and `ExecStart`: a long-running `Type=oneshot` can correctly remain `activating/running` until exit, whereas a waiting `Type=simple` executor should reach `active/running`. Require a positive PID and matching `/proc/<pid>/cmdline` for either running case; inspect the durable result if the executor already exited. Preserve timer/service identities and reconcile them before any retry, because creating another executor can duplicate the reboot. Record the dispatch receipt only after this readback; it proves queued/running ownership, never reboot completion.
 
 Check expected inactivity without a success-only subprocess wrapper. `systemctl is-active <unit>` normally returns status `3` with `inactive`; capture its return code and stdout explicitly when validating that a next-boot unit has not started. Treat `failed`, `unknown`, or a missing unit separately instead of accepting every nonzero code as expected inactivity.
 
@@ -54,7 +56,7 @@ The validator must prove all of the following from live state:
 6. zero failed units and zero priority 0..3 boot journal entries;
 7. `needrestart` current/expected kernel agree;
 8. gateways, Monarx/security agent, QEMU and cron are active with positive PIDs, while every intentionally inactive service matches its frozen authorized expected state;
-9. gateway readiness includes a fresh Discord-connected marker after each frozen pre-reboot log offset—service `active` alone is insufficient;
+9. gateway readiness includes a fresh Discord-connected marker after each frozen pre-reboot log offset—service `active` alone is insufficient. Freeze the log inode as well as its byte offset; after rotation/truncation, read the replacement from the start and require the marker's parsed timestamp to fall within the new boot, so an old connection line cannot certify recovery; obey the producer's actual log timezone;
 10. Hermes launcher and local HEAD remain exactly unchanged when application work is deferred.
 
 For a service intentionally held inactive, inspect both `ActiveState` and `UnitFileState` before reboot. An enabled unit that is merely stopped will start again during boot; preserve the authorized inactive state by disabling or otherwise persistently gating startup inside the exact confirmed scope, then require inactive/PID `0` after boot. Never encode a blanket “all services active” acceptance rule when the canonical expected-state registry says otherwise.
@@ -119,7 +121,7 @@ Before scheduling reboot, require:
 
 - validator `py_compile`;
 - `systemd-analyze verify` on the unit;
-- isolated module smoke for atomic JSON and inventory mutation using a temporary inventory;
+- isolated module smoke for atomic JSON and inventory mutation using a temporary inventory, plus full collector positive/negative fixtures. Isolate filesystem/boot predicates such as `/var/run/reboot-required`, boot ID and kernel alongside command responses: the pre-reboot host naturally has a reboot marker, and leaking that real predicate into a synthetic healthy-boot case creates a false test failure. Require the negative case to fail the deliberately changed predicate, without removing or changing production state to make either fixture pass;
 - Discord transport and REPORT-INFRA dry-runs;
 - backup SHA256 readback;
 - exact package/version readback and no actionable normal APT transaction in either upgrade simulation;
