@@ -352,6 +352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1574493360767504425",
+      "next_step": "Confirmar identidade live e preparar runner finito com descoberta de alteracoes futuras; teste coleta entrega e agenda",
+      "objective": "CPR e ROI cada 30 minutos ate fim de 23nov: novas e alteradas Yolokfx04 G004",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1574493360767504425/manifest.json",
+      "state": "intake_authenticated_scope_allowed_preflight_pending",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-23T18:36:04+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -8098,6 +8108,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-roi-1574493313346707468",
+      "next_step": "Testar runner e wrapper;coleta live inicial;revisar;entregar GET;auditar e habilitar agenda finita ate24nov00hEST",
+      "objective": "Relatorio CPR Meta e ROI real SB a cada30min novas e alteradas hoje Mavroa04 G004",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1574493313346707468/manifest.json",
+      "state": "preparing;autorizacao e identidade live confirmadas usd america/new_york;request e coortes dinamicas persistidos;sem write meta/sb",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-23T18:36:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -12188,5 +12208,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T18:21:31+00:00"
+  "updated_at": "2026-11-23T18:36:36+00:00"
 }
