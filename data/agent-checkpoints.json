@@ -10299,12 +10299,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Aguardar autenticação humana Meta no mesmo Chrome. Depois reconciliar esta ocorrência e coletar somente H40/D4faltantes, sem duplicar writer. Preservar recibos e reconciliar abas próprias antes de cleanup. Próximo tick existente21:02ET, sem novo job. REPORT-INFRA pendente por entrega somente automática.",
-      "objective": "Refresh recorrente22nov14:02ET das mesmas55contas e40H; mesmo job/workbook",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T1402/partial-validation.json",
-      "state": "parcial validado: api55 e invoices30/outubro; h0novos/40históricos preservados; d4eventos pendentes e39vazios históricos qualificados. gate real meta/passkey no chrome rodolfo confirmado em ax/pixels. aba alheia preservada; lease livre; 2abas próprias retidas no gate,6preexistentes preservadas; zero pagamentos/billing.",
+      "next_step": "Aguardar autenticacao humana Meta no mesmo Chrome. Depois reconciliar esta ocorrencia e coletar somente H40/D6faltantes, sem duplicar writer/job. Preservar horarios historicos e abas. Proximo tick existente23nov08:02ET. REPORT-INFRA pendente por entrega somente automatica.",
+      "objective": "Refresh recorrente22nov21:02ET das mesmas55contas e40H; mesmo job/workbook",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
+      "state": "parcial validado: api55, invoices30/outubro; h0novos/40historicos preservados; d6eventos atuais pendentes e39vazios historicos qualificados. gate meta/passkey carregado e confirmado em pixels/ax no chrome rodolfo aprovado. nenhum input/navegacao/aba alterado neste tick. outra aba e ranges fora dos writes preservados; lease livre; zero pagamentos/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-22T19:12:08+00:00"
+      "updated_at": "2026-11-23T02:07:38+00:00"
     },
     {
       "agent": "zeus",
@@ -12138,5 +12138,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-22T22:36:23+00:00"
+  "updated_at": "2026-11-23T02:07:38+00:00"
 }

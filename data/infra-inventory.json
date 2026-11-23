@@ -893,6 +893,27 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-manual-payments-refresh-20261122-2102",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_validated_waiting_human_meta_passkey",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
+      "updated_at": "2026-11-22T21:06:44.783566-05:00",
+      "report_infra_status": "pending_cron_delivery_only_no_direct_send",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics_count": 55,
+        "fresh_h_count": 0,
+        "preserved_h_count": 40,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0
+      },
+      "pending_recent_d_count": 6
+    },
+    {
       "id": "autopush-index-lock-recovery-5372f4df6089c7f3c6810be5",
       "agent": "zeus",
       "report_infra_message_id": "1573983631070728288",
