@@ -5386,12 +5386,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Executar somente lote Hostinger previamente apresentado, plano454ab163, confirmado por Rodolfo1574470534035542151;34 upgrades+6 novos+npm12.2.3;sem reboot/core22/Hermes/gateway restart. Revalidar antes da escrita e manter demais fases abertas.",
+      "next_step": "Primeiro lote executado e30/30 validado:34upgrades+6novos+npm12.2.3;gateways/boot/Hermes intactos. Nova confirmação:tzdata2026e→2026f +core22rev2987→3129, rotação nativa2955 com backup;plano22c6b7cd. Reboot não agendado exige gate/finalizador próprio. Demais4hosts/dashboard continuam abertos.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "reports/vps-maint-1574252891898908684-preparation.md",
-      "state": "first_host_critical_confirmation_received_revalidating",
+      "source": "reports/vps-maint-1574252891898908684-hostinger-first-lot.md",
+      "state": "first_host_lot_completed_next_hostinger_critical_gate_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T17:06:39+00:00"
+      "updated_at": "2026-11-23T17:14:40+00:00"
     },
     {
       "agent": "zeus",
@@ -12178,5 +12178,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T17:06:39+00:00"
+  "updated_at": "2026-11-23T17:14:40+00:00"
 }

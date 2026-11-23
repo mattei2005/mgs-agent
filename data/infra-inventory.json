@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-23T11:29:02-05:00",
+    "updated_at": "2026-11-23T12:16:03-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -80,19 +80,19 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "previous_version": "4.3.81-master",
+          "previous_version": "4.3.87-master",
           "status": "installed",
-          "version": "4.3.82-master"
+          "version": "4.3.91-master"
         },
         {
           "name": "monarx-protect",
           "status": "installed",
-          "version": "5.2.70-master"
+          "version": "5.2.73-master"
         },
         {
           "name": "monarx-protect-autodetect",
           "status": "installed",
-          "version": "5.2.70-master"
+          "version": "5.2.73-master"
         }
       ],
       "packages_count": 3,
@@ -104,7 +104,31 @@
       },
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "source_report": "Monarx restart hardening 2026-06-23",
-      "updated_at": "2026-10-12T18:11:57.740774+00:00"
+      "updated_at": "2026-11-23T17:14:40.639346+00:00",
+      "latest_maintenance_20261123": {
+        "authorization_message_id": "1574470534035542151",
+        "requested_by": "Rodolfo Mattei",
+        "validated_at": "2026-11-23T17:11:41.665648+00:00",
+        "status": "approved_lot_completed_validated_reboot_still_pending",
+        "scope": "34 upgrades+6 new packages+npm12.2.3;no reboot/core22/Hermes/gateway restart",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
+        "gateway_pids_unchanged": true,
+        "reboot_executed": false,
+        "checks_passed": 30,
+        "remaining_apt": {
+          "tzdata": [
+            "2026e-0ubuntu0.24.04.1",
+            "2026f-0ubuntu0.24.04.1"
+          ]
+        }
+      },
+      "protect_version_reconciliation": {
+        "version": "5.2.73-master",
+        "preexisting_before_this_lot": true,
+        "evidence": "/var/log/dpkg.log.1:2026-10-27 04:20:13;existing weekly vendor updater",
+        "changed_by_this_lot": false
+      }
     },
     {
       "agent": "zeus",
@@ -147,15 +171,22 @@
         "validated_at": "2026-08-11T12:45:08.033762+00:00"
       },
       "latest_maintenance": {
-        "authority_message_id": "1559198227801317547",
-        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
-        "hermes_started": false,
-        "packages": 8,
+        "authorization_message_id": "1574470534035542151",
+        "requested_by": "Rodolfo Mattei",
+        "validated_at": "2026-11-23T17:11:41.665648+00:00",
+        "status": "approved_lot_completed_validated_reboot_still_pending",
+        "scope": "34 upgrades+6 new packages+npm12.2.3;no reboot/core22/Hermes/gateway restart",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
+        "gateway_pids_unchanged": true,
         "reboot_executed": false,
-        "status": "packages_completed_validated_reboot_confirmation_pending",
-        "updated_at": "2026-10-12T14:11:15.287801+00:00",
-        "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
-        "validation_checks_passed": 26
+        "checks_passed": 30,
+        "remaining_apt": {
+          "tzdata": [
+            "2026e-0ubuntu0.24.04.1",
+            "2026f-0ubuntu0.24.04.1"
+          ]
+        }
       },
       "latest_maintenance_20260824": {
         "authorization_message_ids": [
@@ -226,13 +257,14 @@
         "status": "vps_completed_validated_ready_hermes"
       },
       "manager": "apt/npm",
-      "node_runtime": "v22.23.4",
+      "node_runtime": "v22.23.5",
       "packages": [
         {
           "name": "1password-cli",
-          "previous_version": "2.39.0-1",
+          "previous_version": "2.41.1-1",
           "status": "installed",
-          "version": "2.40.0-1"
+          "version": "2.42.0-1",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "apport",
@@ -247,7 +279,8 @@
         {
           "name": "corepack",
           "status": "installed",
-          "version": "0.36.0"
+          "version": "0.36.0",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "curl",
@@ -339,15 +372,17 @@
         },
         {
           "name": "linux-headers-generic",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-headers-virtual",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-image-6.8.0-138-generic",
@@ -356,15 +391,17 @@
         },
         {
           "name": "linux-image-virtual",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-libc-dev",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-modules-6.8.0-138-generic",
@@ -383,43 +420,50 @@
         },
         {
           "name": "linux-tools-common",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-virtual",
-          "previous_version": "6.8.0-142.142",
+          "previous_version": "6.8.0-149.149",
           "status": "installed",
-          "version": "6.8.0-146.146"
+          "version": "6.8.0-151.151",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "monarx-agent",
-          "previous_version": "4.3.81-master",
+          "previous_version": "4.3.87-master",
           "status": "installed",
-          "version": "4.3.82-master"
+          "version": "4.3.91-master",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "monarx-protect",
           "status": "installed",
-          "version": "5.2.70-master"
+          "version": "5.2.73-master",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "monarx-protect-autodetect",
           "status": "installed",
-          "version": "5.2.70-master"
+          "version": "5.2.73-master",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "nodejs",
-          "previous_version": "v22.23.3",
+          "previous_version": "22.23.4-1nodesource1",
           "status": "installed",
-          "version": "v22.23.4"
+          "version": "22.23.5-1nodesource1",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "npm",
-          "previous_version": "12.0.2",
+          "previous_version": "12.2.0",
           "status": "installed",
-          "version": "12.2.0"
+          "version": "12.2.3",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "plymouth",
@@ -444,7 +488,8 @@
         {
           "name": "tzdata",
           "status": "installed",
-          "version": "2026b-0ubuntu0.24.04.1"
+          "version": "2026e-0ubuntu0.24.04.1",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "netplan-generator",
@@ -472,39 +517,45 @@
         },
         {
           "name": "libgl1-mesa-dri",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "mesa-va-drivers",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "libglx-mesa0",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "libegl-mesa0",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "libgbm1",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "mesa-libgallium",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "linux-headers-6.8.0-146",
@@ -544,15 +595,17 @@
         },
         {
           "name": "mesa-vdpau-drivers",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "mesa-vulkan-drivers",
-          "previous_version": "25.2.8-0ubuntu0.24.04.2",
+          "previous_version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
-          "version": "25.2.8-0ubuntu0.24.04.4"
+          "version": "25.2.8-0ubuntu0.24.04.5",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "libopeniscsiusr",
@@ -592,9 +645,10 @@
         },
         {
           "name": "tailscale",
-          "previous_version": "1.102.4",
+          "previous_version": "1.104.6",
           "status": "installed",
-          "version": "1.104.1"
+          "version": "1.104.7",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         },
         {
           "name": "php8.3-cli",
@@ -619,35 +673,188 @@
           "previous_version": "8.3.6-0ubuntu0.24.04.12",
           "status": "installed",
           "version": "8.3.6-0ubuntu0.24.04.13"
+        },
+        {
+          "name": "libnss-systemd",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "systemd-dev",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "systemd-timesyncd",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "systemd-resolved",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libsystemd-shared",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libsystemd0",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "systemd-sysv",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libpam-systemd",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "systemd",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "udev",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libudev1",
+          "version": "255.4-1ubuntu8.19",
+          "previous_version": "255.4-1ubuntu8.18",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "distro-info",
+          "version": "1.7ubuntu0.1",
+          "previous_version": "1.7build1",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "sqlite3",
+          "version": "3.45.1-1ubuntu2.9",
+          "previous_version": "3.45.1-1ubuntu2.8",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libsqlite3-0",
+          "version": "3.45.1-1ubuntu2.9",
+          "previous_version": "3.45.1-1ubuntu2.8",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "python3-distro-info",
+          "version": "1.7ubuntu0.1",
+          "previous_version": "1.7build1",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-headers-6.8.0-151",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-headers-6.8.0-151-generic",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-modules-6.8.0-151-generic",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-image-6.8.0-151-generic",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-tools-6.8.0-151",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "linux-tools-6.8.0-151-generic",
+          "version": "6.8.0-151.151",
+          "previous_version": null,
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "snapd",
+          "version": "2.78+ubuntu24.04",
+          "previous_version": "2.77.1+ubuntu24.04",
+          "status": "installed",
+          "validated_at": "2026-11-23T17:11:41.665648+00:00"
         }
       ],
-      "packages_count": 69,
+      "packages_count": 91,
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
-      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "updated_at": "2026-10-21T22:38:39.569592+00:00",
-      "validation": {
-        "apt_residual": "byobu 6.11-0ubuntu1.1 phased 10%; intentionally not forced",
-        "apt_upgradable": 1,
-        "automatic_service_side_effect": "fwupd restarted by needrestart; active/running; no priority 0..3 errors",
-        "dpkg_audit": "clean",
-        "esm_apps_updates_pending": 0,
-        "failed_systemd_units": 0,
-        "gateway_services": "3/3 active; PIDs unchanged",
-        "held_packages": 0,
-        "journal_errors_since_boot": 0,
-        "journal_errors_since_package_boundary": 0,
-        "needrestart_deferred_service": null,
-        "needrestart_kernel": "current/expected 6.8.0-138-generic; KSTA=1",
-        "needrestart_sessions": "none reported post-reboot",
-        "npm_outdated_global": 0,
-        "reboot_required": false,
-        "rollback_integrity": "PASS; SHA256SUMS; 4 previous DEBs; strict 70-member FFmpeg ESM payload fallback",
-        "security_services": "monarx-agent active/running with new PID; mgs-autocommit unchanged",
-        "standard_security_updates_pending": 0,
-        "ubuntu_pro": "attached; esm-apps pending=0; standard security pending=0"
-      }
+      "updated_at": "2026-11-23T17:14:40.639346+00:00",
+      "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
+      "latest_maintenance_20261123": {
+        "authorization_message_id": "1574470534035542151",
+        "requested_by": "Rodolfo Mattei",
+        "validated_at": "2026-11-23T17:11:41.665648+00:00",
+        "status": "approved_lot_completed_validated_reboot_still_pending",
+        "scope": "34 upgrades+6 new packages+npm12.2.3;no reboot/core22/Hermes/gateway restart",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
+        "gateway_pids_unchanged": true,
+        "reboot_executed": false,
+        "checks_passed": 30,
+        "remaining_apt": {
+          "tzdata": [
+            "2026e-0ubuntu0.24.04.1",
+            "2026f-0ubuntu0.24.04.1"
+          ]
+        }
+      },
+      "latest_validation_scope": "Exact40 approved APT packages plus npm/Corepack/tzdata/Monarx prestate; other historical baseline package rows not recertified in this operation."
     },
     {
       "agent": "zeus",
@@ -69865,10 +70072,10 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "first_host_prepared_critical_confirmation_pending",
+      "status": "first_host_lot_completed_next_hostinger_critical_gate_pending",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
-      "report": "reports/vps-maint-1574252891898908684-preparation.md",
+      "report": "reports/vps-maint-1574252891898908684-hostinger-first-lot.md",
       "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
       "critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/critical-plan.json",
       "critical_manifest_sha256": "454ab163078a007d3b1f7d4cefbb039cf30ea9bda38b9ace622014c1346fa778",
@@ -69882,20 +70089,20 @@
         "original_rollback_debs": 24,
         "reconstructed_rollback_debs": 10
       },
-      "production_packages_changed": false,
+      "production_packages_changed": true,
       "reboot_executed": false,
       "ledger": [
         {
           "target": "Hostinger packages/npm",
-          "state": "prepared_awaiting_critical_confirmation"
+          "state": "completed_validated"
         },
         {
-          "target": "Hostinger core22",
-          "state": "pending_refresh_rotation_gate"
+          "target": "Hostinger new tzdata +core22",
+          "state": "prepared_pending_new_critical_confirmation"
         },
         {
           "target": "Hostinger reboot",
-          "state": "pending_after_packages_and_detached_validator"
+          "state": "pending_after_all_packages_and_separate_reboot_gate_not_scheduled"
         },
         {
           "target": "MatteiInc01 packages/reboot",
@@ -69918,7 +70125,25 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-23T02:48:32.076384+00:00"
+      "updated_at": "2026-11-23T17:14:40.639346+00:00",
+      "authorization_message_id": "1574470534035542151",
+      "disclosed_gate_message_id": "1574255493113708698",
+      "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
+      "gateway_pids_unchanged": true,
+      "checks_passed": 30,
+      "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/next-tzdata-core22/next-critical-plan.json",
+      "next_critical_manifest_sha256": "22c6b7cd87136467139235760b9843a6ceda32d721234aae71650fd7c1c75587",
+      "next_gate": "Confirm tzdata2026e→2026f +core22rev2987→3129 incl native old2955 rotation with preserved recovery; no reboot/gateway/Hermes",
+      "report_infra": {
+        "at": "2026-11-23T17:16:12.266053+00:00",
+        "message_id": "1574473349298520138",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "expected_fields_verified": true,
+        "status": "sent_verified"
+      }
     },
     {
       "id": "meta-manual-payments-cron-20261123T0802",
@@ -77682,15 +77907,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 1058142,
-      "md5": "db3cdc09eca587e120613a973121be51",
-      "modified_at": "2026-11-23T10:26:10-05:00"
+      "size_bytes": 1058264,
+      "md5": "a1bf8004b46fa26a83d92f62ad241474",
+      "modified_at": "2026-11-23T12:14:40-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 193961,
-      "md5": "09eca8f2bdf4e4efc70a18094f1b0d9e",
-      "modified_at": "2026-11-23T11:28:08-05:00"
+      "md5": "65566be7a64a2eea33b43dbe520c50e5",
+      "modified_at": "2026-11-23T12:13:07-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -77719,8 +77944,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "8631b959dbe52ebd7818811139bdfd5c",
-      "modified_at": "2026-11-23T11:26:10-05:00"
+      "md5": "850bd35222b0d267f29b77855e9fc7a7",
+      "modified_at": "2026-11-23T12:11:14-05:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -77773,8 +77998,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 3587,
-      "md5": "e76eb86399b7b3c19ea0032db7f5e1bc",
-      "modified_at": "2026-11-23T11:15:06-05:00"
+      "md5": "d8586fc918dec81a5e05b4d66dbf9067",
+      "modified_at": "2026-11-23T12:15:04-05:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -77815,8 +78040,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 453,
-      "md5": "bc7576b88fc39fddf870caef9617170a",
-      "modified_at": "2026-11-23T11:19:03-05:00"
+      "md5": "f20b397e6097d18cd9dfce19904b71f2",
+      "modified_at": "2026-11-23T11:49:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -77983,8 +78208,8 @@
     {
       "path": "/root/mgs-agent/data/finance-readonly-health-state.json",
       "size_bytes": 458,
-      "md5": "885d245c79682eac8a8491d98461cb50",
-      "modified_at": "2026-11-23T10:34:30-05:00"
+      "md5": "1fc6b9fc7cdb5a4df645cddfb1b8e43f",
+      "modified_at": "2026-11-23T11:34:30-05:00"
     },
     {
       "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
@@ -78067,8 +78292,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "1097bd738121bf3bb09ad10496d2e957",
-      "modified_at": "2026-11-23T11:24:02-05:00"
+      "md5": "a5db4c18bedff8c09c8392fd62d649fe",
+      "modified_at": "2026-11-23T12:14:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -78079,20 +78304,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 83826,
-      "md5": "575f5c4d0dcd3f2d36101ab02537d91e",
-      "modified_at": "2026-11-23T11:25:03-05:00"
+      "md5": "f3757bd2e90a8ff3f3ad7c83e9043f32",
+      "modified_at": "2026-11-23T12:15:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 128102,
-      "md5": "dfbd2d2407b82e35c4c2e678636de409",
-      "modified_at": "2026-11-23T11:29:02-05:00"
+      "md5": "8de82487901f1c86700ff56c95c06e47",
+      "modified_at": "2026-11-23T12:16:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 357,
-      "md5": "4f85c866e162ac2b4b9029f58a882803",
-      "modified_at": "2026-11-23T11:29:01-05:00"
+      "md5": "a5b0170783e5cb8cb9021fdc44943bce",
+      "modified_at": "2026-11-23T12:16:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -78145,8 +78370,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 830,
-      "md5": "860860622ea01eedb70c683361708e66",
-      "modified_at": "2026-11-23T11:29:18-05:00"
+      "md5": "9af52b46624b1f7c0ea16909eed785b8",
+      "modified_at": "2026-11-23T12:16:19-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -78186,9 +78411,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3777124,
-      "md5": "fc0fdd437c1815e8f62e5be6e8d72331",
-      "modified_at": "2026-11-23T10:28:35-05:00"
+      "size_bytes": 3786343,
+      "md5": "f23c83e7a65457c89359799f21e8b329",
+      "modified_at": "2026-11-23T12:16:12-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -78241,8 +78466,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 103972,
-      "md5": "1ea39f27a644a394447c535ec8808175",
-      "modified_at": "2026-11-23T11:28:47-05:00"
+      "md5": "2d31b6b3166cb6eb35bfb0be59b52629",
+      "modified_at": "2026-11-23T12:13:51-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -78325,8 +78550,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-dr-sla-alert-state.json",
       "size_bytes": 396,
-      "md5": "c03c1247bee436d593d2e70ead798d36",
-      "modified_at": "2026-11-23T11:00:48-05:00"
+      "md5": "ed9c668bfcf008895bdb55ab86b16c09",
+      "modified_at": "2026-11-23T12:00:48-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
@@ -78337,8 +78562,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 10280,
-      "md5": "3b2d472b2e08fcba9187f466825eaf1c",
-      "modified_at": "2026-11-23T10:30:37-05:00"
+      "md5": "53c29069d378a120247473a247928b09",
+      "modified_at": "2026-11-23T11:31:19-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -78685,8 +78910,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1081,
-      "md5": "49e8c62ebb62f9492a113851432b635c",
-      "modified_at": "2026-11-23T10:39:02-05:00"
+      "md5": "a25d5f67938012a9bb89cdf66dfb3eba",
+      "modified_at": "2026-11-23T11:39:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -78698,7 +78923,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-11-23T11:22:07-05:00"
+      "modified_at": "2026-11-23T12:07:07-05:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -78750,9 +78975,9 @@
     },
     {
       "path": "/root/mgs-agent/data/runcloud-alert-state.json",
-      "size_bytes": 24123,
-      "md5": "013abbcec9e19f6bd4d40bc9f7d7cf76",
-      "modified_at": "2026-11-23T10:04:42-05:00"
+      "size_bytes": 24141,
+      "md5": "dcce0e4f2a99b06c03a64a763deb3444",
+      "modified_at": "2026-11-23T12:04:42-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-keitaro-mct-state.json",
@@ -78781,8 +79006,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 184134,
-      "md5": "f85631cd4c994aa1396f95f1c833b79a",
-      "modified_at": "2026-11-23T11:27:11-05:00"
+      "md5": "9a2210a5cacf2c811f8a1c7e4622ddea",
+      "modified_at": "2026-11-23T12:12:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -78799,8 +79024,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 1382199,
-      "md5": "1d0a4ee85d3a7cc9ba269887bc227b04",
-      "modified_at": "2026-11-23T11:29:22-05:00"
+      "md5": "f1e3cb52bb5c9cdf31c03be9c631d785",
+      "modified_at": "2026-11-23T12:14:17-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -78872,7 +79097,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "452fce8fe41d61c315ed13e435c5bd54",
-      "modified_at": "2026-11-23T11:26:01-05:00"
+      "modified_at": "2026-11-23T12:16:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -78918,9 +79143,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3681,
-      "md5": "c8888ce99f0456ac916d363f202aeada",
-      "modified_at": "2026-11-23T11:25:06-05:00"
+      "size_bytes": 3666,
+      "md5": "186e83c5edc33b93558f7a6fc61d3288",
+      "modified_at": "2026-11-23T12:15:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
