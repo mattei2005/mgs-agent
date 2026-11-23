@@ -1,0 +1,79 @@
+{
+  "operation": "4d9d9e58fa760d6a46dd7f29",
+  "at": "2026-11-23T21:37:16.792519+00:00",
+  "remote": {
+    "id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+    "name": "mgs-dr-hourly-20261123T212347Z.zip.gpg",
+    "size": "2130844424",
+    "parents": [
+      "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V"
+    ],
+    "trashed": false,
+    "md5Checksum": "07f5fd5fd89614084c780ddd0b73d553",
+    "sha256Checksum": "047209457d51401bc5593e92a884f1771a37203b67f5ef4c6ea27962555781d4"
+  },
+  "ack_metadata": {
+    "id": "1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_",
+    "name": "direct-backup-ack-1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE.json",
+    "size": "461",
+    "parents": [
+      "1vrC6oOrTwNrxQRdGA12U_iKT9GqyXLgO"
+    ],
+    "trashed": false,
+    "sha256Checksum": "d30472aec85d1eb2fbd396bb9b29e4e8bafc545783093266ddeb030d3b2df625",
+    "properties": {
+      "expectedKind": "backup_direct_ack",
+      "mgsArchiveKey": "direct-backup-ack:1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+      "expectedSha256": "d30472aec85d1eb2fbd396bb9b29e4e8bafc545783093266ddeb030d3b2df625",
+      "mgsArchiveType": "backup_direct_ack",
+      "sha256": "d30472aec85d1eb2fbd396bb9b29e4e8bafc545783093266ddeb030d3b2df625"
+    }
+  },
+  "ack": {
+    "archive_root_id": "1RUhlFEH3213YShql5kLgmeQhBstRL8Nw",
+    "archive_trash_enabled": false,
+    "canonical_sa_upload": true,
+    "file_id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+    "independent_sa_stream_verified": true,
+    "md5": "07f5fd5fd89614084c780ddd0b73d553",
+    "parent_id": "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V",
+    "schema": "mgs.backup.direct.archive.ack.v1",
+    "sha256": "047209457d51401bc5593e92a884f1771a37203b67f5ef4c6ea27962555781d4",
+    "size": "2130844424",
+    "status": "verified",
+    "tier": "hourly"
+  },
+  "canonical_result": {
+    "status": "PASS",
+    "mode": "quick",
+    "tier": "hourly",
+    "created_at_utc": "2026-11-23T21:28:50.624Z",
+    "verified_at_utc": "2026-11-23T21:35:40.879385+00:00",
+    "remote_file_id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+    "remote_name": "mgs-dr-hourly-20261123T212347Z.zip.gpg",
+    "remote_size_bytes": 2130844424,
+    "encrypted_md5": "07f5fd5fd89614084c780ddd0b73d553",
+    "encrypted_sha256": "047209457d51401bc5593e92a884f1771a37203b67f5ef4c6ea27962555781d4",
+    "drive_id": null,
+    "storage_backend": "private_owner_slot_sa_upload",
+    "archive_root_id": "1RUhlFEH3213YShql5kLgmeQhBstRL8Nw",
+    "tier_folder_id": "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V",
+    "retention_applied": false,
+    "retention_trashed_count": 0,
+    "archive_retention_preview_only": true,
+    "archive_sha256_stream_verified": true,
+    "recovery": "same_snapshot_existing_upload_finalized",
+    "bundle_manifest": "preserved_inside_original_ciphertext_not_reopened",
+    "duration_seconds": 24.938,
+    "archive_native_ack": {
+      "file_id": "1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_",
+      "sha256": "d30472aec85d1eb2fbd396bb9b29e4e8bafc545783093266ddeb030d3b2df625"
+    }
+  },
+  "business_GET_verified": true,
+  "GET_verified": true,
+  "report_infra_message_id": "1574539573416173589",
+  "tests_passed": 26,
+  "diagnosis": "Original ciphertext complete; ACK reserved but zero bytes after CONTROL_SA_PUBLICATION_UNKNOWN. Canonical finalize-direct revalidated full stream and completed same ACK ID, no snapshot replay. Provider internal cause unproven.",
+  "next_step": "Existing supervisor independent validation and final source-thread delivery; no business replay"
+}

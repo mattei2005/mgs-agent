@@ -126,8 +126,32 @@ FINAL_MD5 = '9317cedd295f8adb81cea517c0328e1b'
 FINAL_SIZE = '2070821835'
 
 
+FINALIZED_OCCURRENCES = {
+    '2026-11-23T16:23:00-05:00': (
+        '4d9d9e58fa760d6a46dd7f29', '2026-11-23T16:30:49.097709-05:00',
+        '1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE', '1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_',
+        'mgs-dr-hourly-20261123T212347Z.zip.gpg',
+        '047209457d51401bc5593e92a884f1771a37203b67f5ef4c6ea27962555781d4',
+        '07f5fd5fd89614084c780ddd0b73d553', '2130844424'),
+}
+
+
 def finalized_observation(job, *, base=BASE, reader=None, getter=None):
+    slot = (job.get('last_dispatch') or {}).get('scheduled_at')
+    occurrence = FINALIZED_OCCURRENCES.get(slot) if isinstance(slot, str) else None
+    if occurrence is None:
+        occurrence = (FINAL_KEY, FINAL_LAST_RUN, FINAL_FILE, FINAL_ACK,
+                      FINAL_NAME, FINAL_SHA, FINAL_MD5, FINAL_SIZE)
+        slot = FINAL_SLOT
+    return _finalized_observation(job, slot, occurrence, base=base,
+                                  reader=reader, getter=getter)
+
+
+def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, getter=None):
     """Read-only exact-occurrence proof; never finalize or replay business here."""
+    (FINAL_KEY, FINAL_LAST_RUN, FINAL_FILE, FINAL_ACK,
+     FINAL_NAME, FINAL_SHA, FINAL_MD5, FINAL_SIZE) = occurrence
+    FINAL_SLOT = slot
     if (job.get('id') != JOB or job.get('enabled') is not True
             or job.get('state') != 'scheduled' or job.get('fire_claim')
             or native_contract_hash(job) != CONTRACT

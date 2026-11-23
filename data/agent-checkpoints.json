@@ -2,6 +2,15 @@
   "checkpoints": [
     {
       "agent": "zeus",
+      "id": "DR-RECOVERY-4d9d9e58fa760d6a46dd7f29",
+      "objective": "Recover only missing ACK/finalization of the original hourly encrypted backup",
+      "state": "original_snapshot_and_same_ACK_verified_supervisor_verification_pending",
+      "next_step": "Existing owning supervisor must verify occurrence receipt and deliver diagnosis; never replay backup or rewrite native scheduler failure history. REPORT-INFRA readback recorded in evidence.",
+      "source": "reports/automation-recovery-4d9d9e58fa760d6a46dd7f29/independent-readback.json",
+      "thread_id": "1527004682382479380"
+    },
+    {
+      "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
       "next_step": "Encerrado o último ciclo autorizado; nenhuma próxima data ou recorrência. Zero pendências operacionais.",
       "objective": "Rotina finita de aquecimento dos quatro perfis autorizados; zero comentários",

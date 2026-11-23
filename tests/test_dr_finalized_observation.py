@@ -100,5 +100,20 @@ class FinalizedObservationTests(unittest.TestCase):
         self.assertEqual(q.get(row['key'])['state'], 'completed_validated')
 
 
+class November23FinalizedObservationTests(FinalizedObservationTests):
+    def setUp(self):
+        slot, values = next(iter(m.FINALIZED_OCCURRENCES.items()))
+        names = ('FINAL_KEY', 'FINAL_LAST_RUN', 'FINAL_FILE', 'FINAL_ACK',
+                 'FINAL_NAME', 'FINAL_SHA', 'FINAL_MD5', 'FINAL_SIZE')
+        values_patch = patch.multiple(m, FINAL_SLOT=slot, **dict(zip(names, values)))
+        values_patch.start()
+        self.addCleanup(values_patch.stop)
+        super().setUp()
+
+    def test_does_not_accept_previous_or_next_slot(self):
+        for slot in ('2026-11-20T14:23:00-05:00', '2026-11-23T17:23:00-05:00'):
+            self.assertIsNone(self.observe(self.job | {'last_dispatch': {'scheduled_at': slot}}))
+
+
 if __name__ == '__main__':
     unittest.main()

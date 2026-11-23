@@ -1,0 +1,26 @@
+{
+  "at": "2026-11-23T21:38:07.505015+00:00",
+  "agent": "zeus",
+  "event": "dr_same_snapshot_finalization_recovered",
+  "operation_key": "4d9d9e58fa760d6a46dd7f29",
+  "authority_message_id": "1569193434189668453",
+  "original_authority_messages_GET_verified": [
+    "1527178807168204810",
+    "1527190909769486398"
+  ],
+  "remote_id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+  "ack_id": "1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_",
+  "receipt": "reports/automation-recovery-4d9d9e58fa760d6a46dd7f29/independent-readback.json",
+  "tests_passed": 26,
+  "owner": "supervisor:3864549",
+  "queue_closure": "independent_supervisor_pending",
+  "snapshot_replayed": false,
+  "cron_changes": 0,
+  "retention_deletions": 0,
+  "gateway_restarts": 0,
+  "hashes": {
+    "scripts/mgs_dr_recovery_continuity.py": "cff57dfa4facee2651da80a1c70747aa5353622064c15761aa974c7968df77f9",
+    "tests/test_dr_finalized_observation.py": "b12f6a6c20a466dc6073f367311e27d2e5593be2911f6975f7990f82973c09ff",
+    "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md": "6ba2a6d257807825d01f6be01ecc6137bc1ef918faebbdcd35929698ce05b23a"
+  }
+}

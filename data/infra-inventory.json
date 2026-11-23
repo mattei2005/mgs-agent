@@ -1183,6 +1183,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "dr-recovery-4d9d9e58fa760d6a46dd7f29",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "job_id": "3ff8bd8ca40d",
+      "slot": "2026-11-23T16:23:00-05:00",
+      "status": "same_original_snapshot_and_ACK_validated_independent_supervisor_pending",
+      "remote_file_id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+      "ack_id": "1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_",
+      "evidence": "reports/automation-recovery-4d9d9e58fa760d6a46dd7f29/independent-readback.json",
+      "paths": [
+        "scripts/mgs_dr_recovery_continuity.py",
+        "tests/test_dr_finalized_observation.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md"
+      ],
+      "validation": "26 tests PASS; canonical finalize-direct exit 0; same ciphertext full-stream SHA256 verified; exact native backup and ACK GET; no snapshot upload, retention, scheduler or gateway change"
+    },
+    {
       "id": "meta-manual-payments-refresh-20261122-2102",
       "agent": "zeus",
       "type": "authorized_recurring_financial_snapshot",

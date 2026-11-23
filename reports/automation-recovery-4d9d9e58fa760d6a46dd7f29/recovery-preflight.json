@@ -1,0 +1,79 @@
+{
+  "operation": "4d9d9e58fa760d6a46dd7f29",
+  "at": "2026-11-23T21:35:07.261900+00:00",
+  "authority_original": [
+    {
+      "id": "1527178807168204810",
+      "channel_id": "1527004682382479380",
+      "content": "sim"
+    },
+    {
+      "id": "1527190909769486398",
+      "channel_id": "1527004682382479380",
+      "content": "sim"
+    }
+  ],
+  "implementation_authority_GET_verified": "1569193434189668453",
+  "job": {
+    "id": "3ff8bd8ca40d",
+    "name": "MGS DR backup horário",
+    "prompt": "Run the deterministic encrypted MGS hourly disaster-recovery backup script. Do not schedule other jobs.",
+    "skills": [],
+    "skill": null,
+    "model": null,
+    "provider": null,
+    "provider_snapshot": null,
+    "model_snapshot": null,
+    "base_url": null,
+    "script": "mgs-offsite-backup-quick.sh",
+    "no_agent": true,
+    "context_from": null,
+    "schedule": {
+      "kind": "cron",
+      "expr": "23 * * * *",
+      "display": "23 * * * *"
+    },
+    "schedule_display": "23 * * * *",
+    "repeat": {
+      "times": null,
+      "completed": 3136
+    },
+    "enabled": true,
+    "state": "scheduled",
+    "paused_at": null,
+    "paused_reason": null,
+    "created_at": "2026-07-16T01:46:40.167439-04:00",
+    "next_run_at": "2026-11-23T17:23:00-05:00",
+    "last_run_at": "2026-11-23T16:30:49.097709-05:00",
+    "last_status": "error",
+    "last_error": "Script exited with code 1\nstderr:\n{\"status\": \"FAIL\", \"error_type\": \"ArchiveError\", \"error\": \"CONTROL_SA_PUBLICATION_UNKNOWN\"}",
+    "last_delivery_error": null,
+    "deliver": "local",
+    "origin": {
+      "platform": "discord",
+      "chat_id": "1527004682382479380",
+      "chat_name": "MGS Digital Corp / #zeus / Registros de preferências na memória - Rodolfo",
+      "thread_id": "1527004682382479380",
+      "user_id": "344196393512075265"
+    },
+    "enabled_toolsets": null,
+    "workdir": null,
+    "fire_claim": null,
+    "failure_streak": 1,
+    "last_dispatch": {
+      "scheduled_at": "2026-11-23T16:23:00-05:00",
+      "dispatched_at": "2026-11-23T16:23:46.449075-05:00",
+      "lateness_seconds": 46.4,
+      "kind": "on_time"
+    },
+    "last_failure": {
+      "at": "2026-11-23T16:30:49.097709-05:00",
+      "detail": "Script exited with code 1\nstderr:\n{\"status\": \"FAIL\", \"error_type\": \"ArchiveError\", \"error\": \"CONTROL_SA_PUBLICATION_UNKNOWN\"}"
+    }
+  },
+  "remote_id": "1dAPxBdUBnX8rLShPShTR2bO-LQcwjqtE",
+  "ack_id": "1JYIuJnNBYd5QSIClHy2bGMDJHLC1aad_",
+  "completed": "exact original ciphertext native size MD5 SHA256 GET matched",
+  "pending": "same-ID ACK empty; finalize canonical only; no backup replay",
+  "owner": "supervisor:3864549"
+}
