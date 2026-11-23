@@ -107,7 +107,7 @@ Immediately validate:
 - exact `dpkg-query` version;
 - role-aware runtime validation: resolve actual unit names from package contents, inventory, and live systemd before asserting service health. A package may be a shared library/PHP extension with no `.service` unit; in that case validate the installed payload, expected INI/module wiring where it is intentionally enabled, and the separate vendor agent service instead of inventing `<package>.service`;
 - empty `dpkg --audit`;
-- zero unexpected APT candidates;
+- the applied package/version map matches the approved transaction with no extra dependencies or removals; refresh indexes and simulate both upgrade paths separately to identify remaining candidates. Preserve a completed approved lot when a newly published, out-of-scope candidate appears: record its exact before/after versions and prepare a separate confirmation rather than installing it implicitly or relabeling the completed lot as failed;
 - Zeus/Atena/Ares active;
 - gateway PIDs unchanged unless their restart was explicitly authorized;
 - no priority 0..3 journal errors since the maintenance boundary.
@@ -116,9 +116,10 @@ When freezing or comparing service state, do not parse multiple `systemctl show 
 
 For a `nodejs` vendor-package update, inspect the embedded tooling immediately after APT: compare `node --version`, `npm --version`, npm `package.json`, and `corepack --version` with the frozen pre-state before declaring the package gate green. Vendor packages can replace a previously self-updated npm with an older bundled version even when the APT simulation lists only `nodejs`.
 
-- If the authorized Node target is correct but npm/Corepack regressed, treat that as a package side effect and recover the **exact compatible pre-state version** within the original rollback scope; do not silently accept the regression or jump to the newest npm release.
-- Fetch metadata for the exact pre-state npm version, require compatible `engines.node`, download it with `npm pack`, verify the published SHA-1 and SHA-512 integrity plus a locally recorded SHA-256, then use the standard global install and rerun `npm ping` plus a real `npm exec` smoke.
-- Detect live users of the system Node runtime through each process's resolved `/proc/<pid>/exe`. Do not substring-match `ps` command lines for `/usr/bin/node`, because the probe command itself can contain that text and create false consumers. Scope the post-update assertion to the exact confirmed binary/inode family, including its `(deleted)` predecessor; a concurrent Playwright/vendor SDK can launch its own older embedded Node during the check and is a separate finding, not proof that the confirmed system package failed. After reloading an MCP stdio child, reconcile the new PID/executable and let native transport recovery complete before a harmless read-only capability probe; a first stale-transport error does not justify restarting its parent gateway.
+- If the authorized Node target is correct but bundled npm regressed, record the intermediate tooling state and branch on the approved manifest: when a separate exact npm target is already confirmed, proceed directly to that target in the npm phase; otherwise recover the **exact compatible pre-state version** within the original rollback scope. Do not reinstall the old npm merely as an intermediate step before an already-approved npm upgrade, silently accept a regression, or select the registry's newest release by implication. Restore Corepack to its frozen version unless its own change was explicitly included.
+- For a pre-state npm recovery, fetch metadata for that exact version, require compatible `engines.node`, download it with `npm pack`, verify the published SHA-1 and SHA-512 integrity plus a locally recorded SHA-256, then use the standard global install and rerun `npm ping` plus a real `npm exec` smoke.
+- Detect live users of the system Node runtime through each process's resolved `/proc/<pid>/exe`. Do not substring-match `ps` command lines for `/usr/bin/node`, because the probe command itself can contain that text and create false consumers. Scope the post-update assertion to the exact confirmed binary/inode family, including its `(deleted)` predecessor; a concurrent Playwright/vendor SDK can launch its own older embedded Node during the check and is a separate finding, not proof that the confirmed system package failed.
+- Before reloading an old MCP stdio consumer within the authorized maintenance scope, freeze its exact PID, executable/inode, argv and parent gateway PID; prove a harmless native read succeeds and inspect the deployed transport's child-recovery implementation. If child reload is covered and native recovery is supported, revalidate that identity immediately before sending one targeted `SIGTERM` to the child only, then wait boundedly for termination/reconnection. Never use broad `pkill` or restart the parent gateway. Read back the replacement PID, `/proc/<newpid>/exe --version`, unchanged gateway PIDs and a successful native read before declaring the consumer updated. A first stale-transport error requires bounded native recovery, not a gateway restart, direct-API bypass or blind repeated signals; if the child cannot safely reload, retain it as an activation residual for the separately authorized restart/reboot.
 
 Record the APT gate before proceeding to npm.
 
@@ -218,7 +219,7 @@ Report authorized bytes and actual reclaimed bytes separately: filesystem accoun
 A successful narrow maintenance reports:
 
 - exact before/after versions;
-- APT pending `0`, clean dpkg, and no holds;
+- all approved package versions installed, clean dpkg and no holds; report the fresh global APT pending count separately, with any new out-of-scope transaction awaiting its own gate. Claim whole-host package currency only when host-eligible candidates are zero, and complete VPS maintenance only after every requested activation/reboot phase passes;
 - npm target current with `npm outdated {}` when npm was in scope, or exact pre-state npm/Corepack restored with any newer release classified separately when only Node was in scope;
 - gateway PIDs and security service state;
 - rollback integrity;
