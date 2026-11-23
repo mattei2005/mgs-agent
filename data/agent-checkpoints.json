@@ -1932,6 +1932,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1574521259289608325",
+      "next_step": "Coletar HTTP e RPS UI atuais, renderizar e revisar; publicar e reconciliar por GET; arquivar.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-1574521259289608325/request.json",
+      "state": "preflight_live_ok;7bindings;usd;america/new_york;date2026-11-23;zero_meta_writes",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-23T20:27:23+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -2859,6 +2869,16 @@
       "state": "complete_future_active verificado:009 campanha120255133639790640,1conjunto2ads,usd50/dia,cost_cap usd0.80,21nov2026 00hest. pagetopchoices delegacaoadvertise+analyze aplicada e readbackadmin+corporativo; demais atribuicoes preservadas. qasemantico/render2/2,idscheckpoint iguais,engine nao repetido;2ads pending_review. totalativousd110/dia deltausd50;utms b01fb04c009g01/b01fb04c009. postsnovos,meta omitiu flags opcionais sugestaoidade/genero. relogio original preservado;inicio ainda futuro.",
       "thread_id": "1558131550028173345",
       "updated_at": "2026-11-21T00:05:13+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1574520470034841752",
+      "next_step": "Administrador disponibilizar Page fonte a integracao corporativa vigente; revalidar Page/tarefas/videos. Reparo pelo agente exige aprovacao critica especifica. Retomar mesmo request via prepare-media, campaign dry-run/execute, QA integral e SB; preservar relogio e inicio original.",
+      "objective": "Duplicar 10x fonte01 Growpowerhub06 G006 com 24 videos/copies literais, USD25 por campanha, COCAP USD0.90, 24nov2026 00h05 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/access-diagnostic.json",
+      "state": "waiting_external_page_access. conta/autoridade/fonte confirmadas; cadastro local reconciliado e report-infra relido. page540397952481732 e video1159612673263871 recusam identidade corporativa code10; administrativo le conta mas nao page/tarefas. delegacao ausente nao comprovada. zero campanhas/uploads/reservas/writes de permissao.",
+      "thread_id": "1558134489748611163",
+      "updated_at": "2026-11-23T20:28:46+00:00"
     },
     {
       "agent": "ares",
@@ -5406,12 +5426,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Primeiro lote executado e30/30 validado:34upgrades+6novos+npm12.2.3;gateways/boot/Hermes intactos. Nova confirmação:tzdata2026e→2026f +core22rev2987→3129, rotação nativa2955 com backup;plano22c6b7cd. Reboot não agendado exige gate/finalizador próprio. Demais4hosts/dashboard continuam abertos.",
+      "next_step": "Complemento confirmado1574520554952728647 executado:tzdata2026f/core22rev3129;22/22 checks;rotação2955 com backup;sem reboot/gateway/Hermes. Nova confirmação crítica3pacotes libssh-4/libssh-gcrypt-4→0.10.6-2ubuntu0.6 e python3-oauthlib→3.2.2-1ubuntu0.1,plano7b300026 preparado. Reboot não agendado;demais4hosts/dashboard abertos.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "reports/vps-maint-1574252891898908684-hostinger-first-lot.md",
-      "state": "first_host_lot_completed_next_hostinger_critical_gate_pending",
+      "source": "reports/vps-maint-1574252891898908684-hostinger-complement.md",
+      "state": "hostinger_complement_completed_new_three_package_gate_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T17:14:40+00:00"
+      "updated_at": "2026-11-23T20:29:28+00:00"
     },
     {
       "agent": "zeus",
@@ -12208,5 +12228,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T19:12:40+00:00"
+  "updated_at": "2026-11-23T20:29:28+00:00"
 }
