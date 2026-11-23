@@ -426,7 +426,7 @@
   "days": 30,
   "start": "2026-11-23T20:42:31Z",
   "end": "2026-12-23T20:42:31Z",
-  "scheduler": "52 * * * *",
+  "scheduler": ["52 0-5,7-23 * * *", "2 6 * * *"],
   "timezone": "America/New_York",
   "period": "30 non-overlapping rolling 24h intervals",
   "settling_hours": 3,

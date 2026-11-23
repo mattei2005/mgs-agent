@@ -1,0 +1,69 @@
+{
+  "verified_at": "2026-11-23T20:54:43.678126+00:00",
+  "status": "active_validated",
+  "start": "2026-11-23T20:42:31Z",
+  "end": "2026-12-23T20:42:31Z",
+  "days": 30,
+  "sites": 38,
+  "hostnames": 114,
+  "initial_reference": {
+    "start": "2026-11-22T20:42:31Z",
+    "end": "2026-11-23T20:42:31Z",
+    "total_estimated_requests": 2850903,
+    "countries_or_categories": 158,
+    "excluded_from_accumulation": true
+  },
+  "tests": {
+    "portfolio": 21,
+    "vagaaqui_regression": 20
+  },
+  "total_distinct_tests": 41,
+  "initial_receipts": [
+    {
+      "key": "initial:1",
+      "message_id": "1574527845722619958",
+      "exact_get": true,
+      "fields": 8
+    },
+    {
+      "key": "initial:2",
+      "message_id": "1574527864706044006",
+      "exact_get": true,
+      "fields": 8
+    },
+    {
+      "key": "initial:3",
+      "message_id": "1574527868564938833",
+      "exact_get": true,
+      "fields": 8
+    },
+    {
+      "key": "initial:4",
+      "message_id": "1574527873405026505",
+      "exact_get": true,
+      "fields": 8
+    },
+    {
+      "key": "initial:5",
+      "message_id": "1574527877574164658",
+      "exact_get": true,
+      "fields": 6
+    }
+  ],
+  "cron_exact_readback": true,
+  "first_scheduled_tick_observed": true,
+  "first_tick_log": {
+    "status": "active",
+    "delivered_days": 0,
+    "verified_messages": 5
+  },
+  "last_check": "2026-11-23T20:52:26Z",
+  "provider_write": false,
+  "origin_or_waf_changes": false,
+  "hashes": {
+    "scripts/monitor-portfolio-country.py": "834d78f8f1be6675f3043db97726c5d2cb934ec0478ec4782ccb8948ecc5001c",
+    "tests/test_portfolio_country_monitor.py": "f9c96ca46d13ce18b6640448a420350e6168eb2f3d276b2821feec1c76e89ffb",
+    "data/portfolio-country-monitor-20261123/config.json": "f42769e1d44df51dc63cfb38c892c8ff73ef790be76d61049f19725f5bc65421",
+    "data/portfolio-country-monitor-20261123/selection.json": "0ae4a642575cd9760ae00cd7167125872062804c374d60aef5ddffeddf7af0b4"
+  }
+}

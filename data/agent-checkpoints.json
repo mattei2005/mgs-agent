@@ -2882,6 +2882,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1574526981704519835",
+      "next_step": "Aguardar decisao restrita de encerrar recuperacao anterior sem alterar campanhas existentes; preservar mesmo pedido e inputs; liberar somente coordenacao canonicamente apos autoridade e continuar c023 sem replay",
+      "objective": "Duplicar duas vezes cada uma das 16 fontes solicitadas na conta 08 G006; USD30 por campanha; 24 novembro 2026 00h10 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574526981704519835/batch-request.json",
+      "state": "waiting_predecessor_decision:32 copias solicitadas usd960/dia,zero criadas; nomes alvo ausentes no get completo; pendencia status-only anterior com 030 active e budget usd66.15 vs usd35 baseline; outras33 paused; nenhuma mudanca corretiva aplicada",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-23T20:53:15+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -3752,12 +3762,12 @@
     {
       "agent": "zeus",
       "id": "CF-PORTFOLIO-COUNTRY-20261123",
-      "next_step": "Congelar seleção com base no ranking consultado, validar hostnames e Analytics, implantar runner finito e agenda com readback.",
-      "objective": "Monitorar países diariamente por 30 dias nos sites da listagem com mais de 1000 requisições diárias; Cloudflare somente leitura, uma entrega consolidada na origem.",
-      "source": "Discord request1574524021737783399; scope1574524345575809116; ranking1574415812091969567+1574415814080208919",
-      "state": "preparation",
+      "next_step": "Consumidor instalado :52 exceto06h, às06:02 ET, retoma somente saldo. Primeiro tick real e cinco recibos iniciais GET verificados. Primeiro boletim24/11 ~20:52 Brasília; período até23/12, fechamento exige30/30×38/38 e GET, depois no-op. Bloqueio mantém pendência com Zeus.",
+      "objective": "Monitorar países diariamente por 30 dias nos 38 domínios do ranking com mais de1000 requisições estimadas nas24h de referência; mesma lista de subdomínios, grupo fixo, Cloudflare somente leitura.",
+      "source": "data/portfolio-country-monitor-20261123/validation.json",
+      "state": "active_validated",
       "thread_id": "1574415087257780367",
-      "updated_at": "2026-11-23T20:38:36+00:00"
+      "updated_at": "2026-11-23T20:55:29+00:00"
     },
     {
       "agent": "zeus",
@@ -5354,12 +5364,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1574186080318521365",
-      "next_step": "Reconciliar GET dos mesmos IDs e retomar somente camada pendente",
-      "objective": "Pausar 42 campanhas nominais Mavroa06 G006 e reativar23novembro2026 00h02EST status-only",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-only/shein-status-1574186080318521365/activation.json",
-      "state": "recovery_required: no_active_ad_path_248",
+      "next_step": "Nicolas ativara antigas manualmente00h;nao retomar runner antigo automaticamente;preservar request eprovas",
+      "objective": "Retomada antiga Mavroa06 assumida manualmente por Nicolas",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/status-manual-coordination.json",
+      "state": "suspended_by_operator;0writesmeta nesta coordenacao;42ids relidos;lease liberada somente coordenacao;agenda anterior inativa;nao representa ativacao ouqa completo",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-23T05:03:46+00:00"
+      "updated_at": "2026-11-23T20:56:35+00:00"
     },
     {
       "agent": "ares",
@@ -10419,12 +10429,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Completar H40 com inspecao real, publicar;resolverD5,refreshAPI final evalidacao integral;nao duplicar writer.",
-      "objective": "Atualização integral autorizada1574520802391363625 das mesmas55contas/40H no mesmo workbook e job",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1574520802391363625",
-      "state": "em foreground; autenticacao/superficie accounts revalidada. funding/invoices/api55 publicadas com readback;h24capturadas18visualmente verificadas;d5eventos pendentes. executor unicozeus, sem pagamentos/billing.",
+      "next_step": "Mesmo job21:02ET permanece ativo;coleta contratada e eventosDnovos. Nenhum bloqueio desta ocorrencia;nao duplicar entrega manual.",
+      "objective": "Refresh integral manual23nov autorizado1574520802391363625 das mesmas55contas e40H;mesmo workbook/job",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1574520802391363625/financial-validation.json",
+      "state": "concluido validado:api55 15:56et;h40 usd740896.40;d5provasnovas,pending_ui vazio;39dhistoricosvaziosqualificados;invoices30 usd417864.11;outraaba e6abaschrome preservadas;lease livre;sem pagamentos/billing;report-infra1574529260717080577 validado.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-23T20:39:47+00:00"
+      "updated_at": "2026-11-23T20:57:34+00:00"
     },
     {
       "agent": "zeus",
@@ -12258,5 +12268,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T20:41:20+00:00"
+  "updated_at": "2026-11-23T20:57:34+00:00"
 }

@@ -1,0 +1,9 @@
+# Monitoramento finito de países em portfólio
+
+- Congele a coorte a partir do ranking e da janela explicitamente escolhidos: `>1000` não significa `>=1000`, e queda posterior não remove um site sem nova instrução. Preserve o mesmo conjunto literal de subdomínios usado no ranking; não compare seleção por zona inteira com coleta só de apex/www.
+- Diferencie 30 períodos de24h de um mês calendário. Separe referência inicial do acumulado, confirme settings/retention por dataset e nunca converta falha ou ausência de acesso em zero.
+- Consolide a entrega em partes que respeitem os limites Discord, preservando a distribuição completa no agregado local. Persista por site antes de avançar; recomece apenas o saldo. Varra toda a janela de um POST ambíguo com paginação, nonce e marcador antes de considerar reenvio; faça GET exato de cada recibo.
+- No preflight de agenda, classifique a finalidade de cada job denso antes de chamá-lo de baseline: SB e intake de criativos continuam operacionais. Confira também virada de mês numa iniciativa de30 dias; um minuto livre nos próximos oito dias pode colidir com housekeeping mensal depois. Se necessário, preserve a cadência com entradas explícitas por faixa de horas e valide cada uma, sem ocultar colisão ou criar outro writer.
+- Não anuncie recuperação enquanto o resultado for collection_pending/catchup_pending. Não faça chamadas externas após completed; fechamento exige todos os intervalos e todas as partes entregues.
+
+Implementação de referência própria de Zeus: `/root/mgs-agent/scripts/monitor-portfolio-country.py`, testes `/root/mgs-agent/tests/test_portfolio_country_monitor.py`, contrato `/root/mgs-agent/docs/portfolio-country-monitor-20261123.md`. Reaproveite procedimentos/testes, nunca copie a coorte, IDs, credencial ou destinos para outro pedido.

@@ -173,6 +173,42 @@ class TestPortfolio(unittest.TestCase):
             n = q.call_count; m.main(); self.assertEqual(q.call_count, n)
             self.assertEqual(m.state_read(self.store)['status'], 'blocked')
 
+    def test_graphql_authz_is_not_zero(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.read.return_value = json.dumps({'data': None, 'errors': [{'extensions': {'code': 'authz'}}]}).encode()
+        response.__enter__.return_value = response
+        with patch.object(m.urllib.request, 'urlopen', return_value=response):
+            with self.assertRaises(m.Error) as error:
+                m.query('fixture', self.c['sites'][0], self.c['start'], m.intervals(self.c)[0][2])
+        self.assertTrue(error.exception.permanent)
+
+    def test_invalid_dataset_is_blocker_not_zero(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.read.return_value = json.dumps({'data': {'viewer': {'zones': [{'settings': {'httpRequestsAdaptiveGroups': {'enabled': False, 'maxDuration': 86400, 'notOlderThan': 9999999}}, 'httpRequestsAdaptiveGroups': []}]}}}).encode()
+        response.__enter__.return_value = response
+        with patch.object(m.urllib.request, 'urlopen', return_value=response):
+            with self.assertRaises(m.Error) as error:
+                m.query('fixture', self.c['sites'][0], self.c['start'], m.intervals(self.c)[0][2])
+        self.assertTrue(error.exception.permanent)
+
+    def test_retry_after_is_respected_without_sleeping_long(self):
+        from email.message import Message
+        headers = Message(); headers['Retry-After'] = '120'
+        e = urllib.error.HTTPError('https://api.cloudflare.com', 429, 'rate limited', headers, None)
+        with patch.object(m.urllib.request, 'urlopen', side_effect=e) as call, patch.object(m.time, 'sleep') as sleep:
+            with self.assertRaises(m.Error) as error:
+                m.query('fixture', self.c['sites'][0], self.c['start'], m.intervals(self.c)[0][2])
+        self.assertIn(';retry_at=', str(error.exception)); self.assertEqual(call.call_count, 1); sleep.assert_not_called()
+
+    def test_recovery_not_claimed_while_collection_pending(self):
+        self.s['failure_streak'] = 1; self.s['incident_id'] = 'fixture'
+        m.save(self.store/'state.json', self.s)
+        with patch.object(m, 'STORE', self.store), patch.object(m, 'read_config', return_value=self.c), patch.object(sys, 'argv', ['monitor']), patch.object(m, 'run', return_value={'status': 'collection_pending'}), patch.object(m, 'notice') as notice:
+            self.assertEqual(m.main(), 0); notice.assert_not_called()
+        self.assertEqual(m.state_read(self.store)['failure_streak'], 1)
+
 
 if __name__ == '__main__':
     unittest.main()

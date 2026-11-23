@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-23T15:36:03-05:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-11-23T15:54:34-05:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "2026-11-23T20:55:29.574180+00:00"
   },
   "system_packages": [
     {
@@ -70354,6 +70355,36 @@
         "payments": 0,
         "billing_changes": 0
       }
+    },
+    {
+      "id": "meta-manual-payments-manual-1574520802391363625",
+      "agent": "zeus",
+      "type": "authorized_manual_financial_refresh_existing_UIA",
+      "status": "completed_validated",
+      "source_message_id": "1574520802391363625",
+      "updated_at": "2026-11-23T15:57:08.207106-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1574520802391363625/financial-validation.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 40,
+        "renewed_d": 5,
+        "pending_ui": 0,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "browser_tabs_preserved": true,
+        "browser_original_tabs": 6,
+        "lease_free": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_message_id": "1574529260717080577",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -71891,6 +71922,19 @@
     },
     {
       "entry": "46 * * * * /usr/bin/flock -n /var/lock/monitor-vagaaqui-country.lock /bin/sh -c '/bin/sleep 7; /usr/bin/timeout 300s /usr/bin/python3 /root/mgs-agent/scripts/monitor-vagaaqui-country.py' >> /root/mgs-agent/logs/monitor-vagaaqui-country.log 2>&1"
+    },
+    {
+      "entry": "CRON_TZ=America/New_York"
+    },
+    {
+      "entry": "52 0-5,7-23 * * * /usr/bin/flock -n /var/lock/monitor-portfolio-country.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 600s /usr/bin/python3 /root/mgs-agent/scripts/monitor-portfolio-country.py' >> /root/mgs-agent/logs/monitor-portfolio-country.log 2>&1",
+      "description": "Finite38-domain Cloudflare daily country report; recovery tick, +25s, final period2026-12-23T20:42:31Z; own locks.",
+      "agent": "zeus"
+    },
+    {
+      "entry": "2 6 * * * /usr/bin/flock -n /var/lock/monitor-portfolio-country.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 600s /usr/bin/python3 /root/mgs-agent/scripts/monitor-portfolio-country.py' >> /root/mgs-agent/logs/monitor-portfolio-country.log 2>&1",
+      "description": "Finite38-domain Cloudflare daily country report; recovery tick, +25s, final period2026-12-23T20:42:31Z; own locks.",
+      "agent": "zeus"
     }
   ],
   "scripts": [
@@ -74648,6 +74692,14 @@
       "path": "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
       "size_bytes": 12324,
       "modified_at": "2026-07-10T21:26:47-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-portfolio-country.py",
+      "size_bytes": 18639,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Thirty-day, frozen38-domain Cloudflare country monitor; read-only, daily five-part digest, durable recovery and exact Discord GET.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-runcloud.py",
@@ -78089,15 +78141,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 1064341,
-      "md5": "1f036e183bf1c627ed3a2cd7bc27a161",
-      "modified_at": "2026-11-23T15:36:09-05:00"
+      "size_bytes": 1067167,
+      "md5": "40c0af1fe604cd2754840a68d5f2c322",
+      "modified_at": "2026-11-23T15:53:15-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 193961,
-      "md5": "04009ee189f745d530674550e0c63e66",
-      "modified_at": "2026-11-23T15:33:04-05:00"
+      "md5": "c69ba52f1a3f0ea1b6741de818a5fea0",
+      "modified_at": "2026-11-23T15:53:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -78126,8 +78178,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "dfa0a152f70c20156a1c9edff0e315fb",
-      "modified_at": "2026-11-23T15:26:08-05:00"
+      "md5": "321c0f7c7aa88b274f86fe95af1d6b74",
+      "modified_at": "2026-11-23T15:41:08-05:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -78180,8 +78232,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 3651,
-      "md5": "5db1d97c560d2370f085405a64c8c687",
-      "modified_at": "2026-11-23T15:30:09-05:00"
+      "md5": "4e80533f2f5ea5a2e6b66740cd1d7b81",
+      "modified_at": "2026-11-23T15:45:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -78222,8 +78274,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 453,
-      "md5": "d77819e3f34f79c87b6272b06951aa69",
-      "modified_at": "2026-11-23T15:19:04-05:00"
+      "md5": "0df5be7724207d886a2d25af2df145c1",
+      "modified_at": "2026-11-23T15:49:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -78257,9 +78309,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 869972,
-      "md5": "f0bb9d9187c943306dddee6a1e5d34db",
-      "modified_at": "2026-11-23T07:41:57-05:00"
+      "size_bytes": 870938,
+      "md5": "eaba6004de437bb0f37e913f027683ac",
+      "modified_at": "2026-11-23T15:41:22-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -78474,8 +78526,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "4d91bf21d3764d385d28401423ceca35",
-      "modified_at": "2026-11-23T15:34:02-05:00"
+      "md5": "f151cb2e0f9dc2866738cc249715dfdf",
+      "modified_at": "2026-11-23T15:54:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -78486,20 +78538,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 83976,
-      "md5": "c5abd0aab441a24c5ebef6d6e15080e8",
-      "modified_at": "2026-11-23T15:35:02-05:00"
+      "md5": "20f06c67780bd316cf13938915cd641d",
+      "modified_at": "2026-11-23T15:50:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 128464,
-      "md5": "67015dafe872ff03943a0f62522a1e51",
-      "modified_at": "2026-11-23T15:36:01-05:00"
+      "md5": "997583eed80af060d8125a629f84fe93",
+      "modified_at": "2026-11-23T15:54:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "a6fc2692013fc30b371677e5dcd6ba8d",
-      "modified_at": "2026-11-23T15:36:01-05:00"
+      "size_bytes": 358,
+      "md5": "7b90e2c5c8fa0336f4a7ff4b7735a8a8",
+      "modified_at": "2026-11-23T15:54:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -78552,8 +78604,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 830,
-      "md5": "b00d81e249cfe4df0168acd1c35769b6",
-      "modified_at": "2026-11-23T15:36:18-05:00"
+      "md5": "5ea4e91235d4afc63b8be5269570f927",
+      "modified_at": "2026-11-23T15:54:19-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -78593,9 +78645,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3791347,
-      "md5": "67c465b42b716f662a7dc3876dbbff2c",
-      "modified_at": "2026-11-23T15:35:11-05:00"
+      "size_bytes": 3795309,
+      "md5": "c9ed1766a54555cf9d815ad77707436e",
+      "modified_at": "2026-11-23T15:54:32-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -78648,8 +78700,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 103972,
-      "md5": "47c08459f9eb2a556dc703909cc9834d",
-      "modified_at": "2026-11-23T15:34:47-05:00"
+      "md5": "033974856fccddb536a0d80a3c3b8405",
+      "modified_at": "2026-11-23T15:52:49-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -79091,9 +79143,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1111,
-      "md5": "a2514ff63fe500fb34fa62aa26c72055",
-      "modified_at": "2026-11-23T14:39:02-05:00"
+      "size_bytes": 1112,
+      "md5": "8a35c3cfa52ae5de2d0dd67be052bbbe",
+      "modified_at": "2026-11-23T15:39:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -79105,7 +79157,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-11-23T15:22:05-05:00"
+      "modified_at": "2026-11-23T15:52:12-05:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -79188,8 +79240,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 184198,
-      "md5": "402592edd5b3e58a75b9e053f4721faf",
-      "modified_at": "2026-11-23T15:27:14-05:00"
+      "md5": "3b181e7323f7152ce352a561653c1101",
+      "modified_at": "2026-11-23T15:42:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -79206,8 +79258,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 1382199,
-      "md5": "046e1870b05d7d282f5c60ccae8cbdd7",
-      "modified_at": "2026-11-23T15:29:23-05:00"
+      "md5": "27812c91bf3624aa4ca757d5bd3ba740",
+      "modified_at": "2026-11-23T15:44:16-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -79279,7 +79331,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "452fce8fe41d61c315ed13e435c5bd54",
-      "modified_at": "2026-11-23T15:36:01-05:00"
+      "modified_at": "2026-11-23T15:51:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -79325,9 +79377,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3700,
-      "md5": "0c01222a2f74eda23c4684e5b557df0f",
-      "modified_at": "2026-11-23T15:35:06-05:00"
+      "size_bytes": 3695,
+      "md5": "f336834b6c49898277898e2b61247c20",
+      "modified_at": "2026-11-23T15:55:04-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -79361,9 +79413,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 56868,
-      "md5": "7f4de43660c1d5f93357ed21caa64be9",
-      "modified_at": "2026-11-23T15:35:12-05:00"
+      "size_bytes": 57068,
+      "md5": "eea6afdb6aae16a70f3aaf0db5323ef1",
+      "modified_at": "2026-11-23T15:52:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",
@@ -79388,6 +79440,228 @@
       "size_bytes": 15362,
       "md5": "157de5677d8ffc552bdcefbf747dc0a9",
       "modified_at": "2026-11-08T22:30:35-05:00"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_portfolio_country_monitor.py",
+      "size_bytes": 12916,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/docs/portfolio-country-monitor-20261123.md",
+      "size_bytes": 6104,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/state.json",
+      "size_bytes": 22859,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-preflight.json",
+      "size_bytes": 29832,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-receipt.json",
+      "size_bytes": 1035,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/validation.json",
+      "size_bytes": 1953,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/tests-vagaaqui-regression.log",
+      "size_bytes": 2135,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/initial-reference.json",
+      "size_bytes": 62753,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/tests-portfolio.log",
+      "size_bytes": 2900,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/selection.json",
+      "size_bytes": 14186,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/config.json",
+      "size_bytes": 13168,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-check.py",
+      "size_bytes": 7545,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-hour6/schedule-preflight.json",
+      "size_bytes": 29656,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-declared/schedule-post.json",
+      "size_bytes": 29826,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-hour6-declared/schedule-post.json",
+      "size_bytes": 29652,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-month-boundary/schedule-post.json",
+      "size_bytes": 29852,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-month-boundary/schedule-blockers.json",
+      "size_bytes": 69069,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-hour6-current/schedule-post.json",
+      "size_bytes": 29658,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-postwrite-hour6/schedule-post.json",
+      "size_bytes": 29658,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-prewrite/schedule-post.json",
+      "size_bytes": 29854,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-postwrite/schedule-post.json",
+      "size_bytes": 29854,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123/schedule-end-window/schedule-post.json",
+      "size_bytes": 29830,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/backups/portfolio-country-monitor-20261123/root-crontab.before",
+      "size_bytes": 17880,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/backups/portfolio-country-monitor-20261123/infra-inventory.before.json",
+      "size_bytes": 3795309,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/backups/portfolio-country-monitor-20261123/root-crontab.candidate",
+      "size_bytes": 18561,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
+      "size_bytes": 24503,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/references/finite-portfolio-country-monitor.md",
+      "size_bytes": 1853,
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "description": "Cloudflare portfolio country monitor: scoped contract/evidence/runtime/rollback/procedure.",
+      "agent": "zeus",
+      "source_thread_id": "1574415087257780367"
+    },
+    {
+      "path": "/root/mgs-agent/data/portfolio-country-monitor-20261123",
+      "description": "State/outbox/rolling24h daily packets for frozen38-domain thirty-day country monitor; no personal data or secrets.",
+      "modified_at": "2026-11-23T20:55:29.574180+00:00",
+      "agent": "zeus"
     }
   ],
   "mu_plugin_canonical": {

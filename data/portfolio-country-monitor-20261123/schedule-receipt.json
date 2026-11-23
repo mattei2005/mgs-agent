@@ -1,0 +1,14 @@
+{
+  "installed_at": "2026-11-23T20:51:30.957227+00:00",
+  "entries": [
+    "52 0-5,7-23 * * * /usr/bin/flock -n /var/lock/monitor-portfolio-country.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 600s /usr/bin/python3 /root/mgs-agent/scripts/monitor-portfolio-country.py' >> /root/mgs-agent/logs/monitor-portfolio-country.log 2>&1",
+    "2 6 * * * /usr/bin/flock -n /var/lock/monitor-portfolio-country.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 600s /usr/bin/python3 /root/mgs-agent/scripts/monitor-portfolio-country.py' >> /root/mgs-agent/logs/monitor-portfolio-country.log 2>&1"
+  ],
+  "exact_readback": true,
+  "unchanged_existing_bytes": true,
+  "backup": "/root/mgs-agent/backups/portfolio-country-monitor-20261123/root-crontab.before",
+  "stagger_seconds": 25,
+  "exception": "06:02 replaces 06:52 to avoid /etc/crontab monthly housekeeping on day1; one tick per civil hour; remaining hours :52",
+  "candidate_sha256": "f49b5fac30927c937a2bec6e7a8506095587699876556b88d737d48d229cb5b0",
+  "timezone": "America/New_York"
+}

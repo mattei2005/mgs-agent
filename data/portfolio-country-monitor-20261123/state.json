@@ -1,8 +1,330 @@
 {
   "schema": 1,
   "status": "active",
-  "outbox": {},
+  "outbox": {
+    "initial:1": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Cloudflare — referência inicial por país · 1/5",
+            "color": 3447003,
+            "description": "Referência: 2026-11-22T20:42:31Z → 2026-11-23T20:42:31Z UTC (fora do acumulado).\nMonitor: 2026-11-23T20:42:31Z → 2026-12-23T20:42:31Z UTC; 30 períodos de 24h; grupo fixo do ranking >1.000 req/dia.\nCobertura: 38/38 domínios. Total: 2.850.903 requisições estimadas.",
+            "fields": [
+              {
+                "name": "yolokfx.com · 836.806 req.",
+                "value": "Estados Unidos (US): 832.639 · 99.5%\nAlemanha (DE): 1.717 · 0.2%\nBélgica (BE): 1.212 · 0.1%\nMéxico (MX): 170 · 0.0%\nNZ: 149 · 0.0%\nFrança (FR): 127 · 0.0%\nSingapura (SG): 76 · 0.0%\nÍndia (IN): 72 · 0.0%\nPR: 59 · 0.0%\nPaíses Baixos (NL): 58 · 0.0%\nOutros (58 países/categorias): 527 · 0.1%",
+                "inline": false
+              },
+              {
+                "name": "mavroa.com · 708.871 req.",
+                "value": "Estados Unidos (US): 696.691 · 98.3%\nMéxico (MX): 4.530 · 0.6%\nAlemanha (DE): 1.648 · 0.2%\nPR: 1.213 · 0.2%\nHN: 657 · 0.1%\nDO: 650 · 0.1%\nVE: 581 · 0.1%\nCO: 465 · 0.1%\nGT: 348 · 0.0%\nSV: 322 · 0.0%\nOutros (57 países/categorias): 1.766 · 0.2%",
+                "inline": false
+              },
+              {
+                "name": "creditoparaveiculo.com · 784.484 req.",
+                "value": "Brasil (BR): 756.434 · 96.4%\nEstados Unidos (US): 20.287 · 2.6%\nPaíses Baixos (NL): 2.497 · 0.3%\nBélgica (BE): 1.616 · 0.2%\nAlemanha (DE): 1.542 · 0.2%\nCL: 507 · 0.1%\nRO: 313 · 0.0%\nLT: 311 · 0.0%\nAustrália (AU): 139 · 0.0%\nReino Unido (GB): 103 · 0.0%\nOutros (33 países/categorias): 735 · 0.1%",
+                "inline": false
+              },
+              {
+                "name": "gamezonead.com · 220.981 req.",
+                "value": "Brasil (BR): 211.239 · 95.6%\nPaíses Baixos (NL): 4.000 · 1.8%\nEstados Unidos (US): 3.310 · 1.5%\nAlemanha (DE): 1.447 · 0.7%\nÍndia (IN): 161 · 0.1%\nSingapura (SG): 121 · 0.1%\nReino Unido (GB): 114 · 0.1%\nChina (CN): 59 · 0.0%\nIndonésia (ID): 57 · 0.0%\nCL: 44 · 0.0%\nOutros (66 países/categorias): 429 · 0.2%",
+                "inline": false
+              },
+              {
+                "name": "dicasfinancas.info · 33.918 req.",
+                "value": "Países Baixos (NL): 29.464 · 86.9%\nSingapura (SG): 1.313 · 3.9%\nBélgica (BE): 1.260 · 3.7%\nAlemanha (DE): 710 · 2.1%\nEstados Unidos (US): 625 · 1.8%\nAustrália (AU): 150 · 0.4%\nChina (CN): 73 · 0.2%\nCanadá (CA): 69 · 0.2%\nReino Unido (GB): 63 · 0.2%\nNZ: 40 · 0.1%\nOutros (26 países/categorias): 151 · 0.4%",
+                "inline": false
+              },
+              {
+                "name": "growpowerhub.com · 30.048 req.",
+                "value": "Estados Unidos (US): 28.716 · 95.6%\nAlemanha (DE): 865 · 2.9%\nPL: 108 · 0.4%\nChina (CN): 42 · 0.1%\nIndonésia (ID): 40 · 0.1%\nMA: 33 · 0.1%\nIQ: 28 · 0.1%\nPaíses Baixos (NL): 23 · 0.1%\nBrasil (BR): 19 · 0.1%\nSingapura (SG): 17 · 0.1%\nOutros (35 países/categorias): 157 · 0.5%",
+                "inline": false
+              },
+              {
+                "name": "vizioid.com · 24.909 req.",
+                "value": "Estados Unidos (US): 23.193 · 93.1%\nAlemanha (DE): 949 · 3.8%\nSingapura (SG): 210 · 0.8%\nSE: 177 · 0.7%\nPL: 47 · 0.2%\nIndonésia (ID): 42 · 0.2%\nReino Unido (GB): 39 · 0.2%\nCanadá (CA): 30 · 0.1%\nKR: 26 · 0.1%\nBrasil (BR): 24 · 0.1%\nOutros (46 países/categorias): 172 · 0.7%",
+                "inline": false
+              },
+              {
+                "name": "escalatepower.com · 25.361 req.",
+                "value": "Estados Unidos (US): 23.011 · 90.7%\nAlemanha (DE): 747 · 2.9%\nBrasil (BR): 617 · 2.4%\nEE: 134 · 0.5%\nSingapura (SG): 110 · 0.4%\nChina (CN): 97 · 0.4%\nPL: 63 · 0.2%\nÍndia (IN): 50 · 0.2%\nFrança (FR): 47 · 0.2%\nBD: 40 · 0.2%\nOutros (57 países/categorias): 445 · 1.8%",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-PORTFOLIO-20261123:initial:1 | País pelo IP; inclui bots/arquivos. Não são visitantes. Analytics adaptativo; top10 + outros."
+            }
+          }
+        ],
+        "nonce": "908733954173647534",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-23T20:51:31Z",
+      "message_id": "1574527845722619958",
+      "verified": true,
+      "verified_at": "2026-11-23T20:51:32Z"
+    },
+    "initial:2": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Cloudflare — referência inicial por país · 2/5",
+            "color": 3447003,
+            "description": "Referência: 2026-11-22T20:42:31Z → 2026-11-23T20:42:31Z UTC (fora do acumulado).\nMonitor: 2026-11-23T20:42:31Z → 2026-12-23T20:42:31Z UTC; 30 períodos de 24h; grupo fixo do ranking >1.000 req/dia.\nCobertura: 38/38 domínios. Total: 2.850.903 requisições estimadas.",
+            "fields": [
+              {
+                "name": "cliquet.com · 13.780 req.",
+                "value": "Estados Unidos (US): 8.338 · 60.5%\nFrança (FR): 1.433 · 10.4%\nBélgica (BE): 1.320 · 9.6%\nChina (CN): 582 · 4.2%\nJapão (JP): 469 · 3.4%\nPaíses Baixos (NL): 395 · 2.9%\nSingapura (SG): 364 · 2.6%\nReino Unido (GB): 186 · 1.3%\nÍndia (IN): 175 · 1.3%\nAlemanha (DE): 116 · 0.8%\nOutros (50 países/categorias): 402 · 2.9%",
+                "inline": false
+              },
+              {
+                "name": "openzed.com · 16.756 req.",
+                "value": "Estados Unidos (US): 10.057 · 60.0%\nÍndia (IN): 2.624 · 15.7%\nFrança (FR): 552 · 3.3%\nPL: 435 · 2.6%\nSingapura (SG): 364 · 2.2%\nAlemanha (DE): 343 · 2.0%\nChina (CN): 339 · 2.0%\nNZ: 297 · 1.8%\nEspanha (ES): 279 · 1.7%\nRússia (RU): 240 · 1.4%\nOutros (80 países/categorias): 1.226 · 7.3%",
+                "inline": false
+              },
+              {
+                "name": "eggbev.com · 10.804 req.",
+                "value": "Estados Unidos (US): 6.073 · 56.2%\nPL: 973 · 9.0%\nAlemanha (DE): 898 · 8.3%\nPE: 755 · 7.0%\nReino Unido (GB): 371 · 3.4%\nChina (CN): 203 · 1.9%\nSingapura (SG): 197 · 1.8%\nHK: 192 · 1.8%\nNZ: 149 · 1.4%\nPaíses Baixos (NL): 147 · 1.4%\nOutros (58 países/categorias): 846 · 7.8%",
+                "inline": false
+              },
+              {
+                "name": "seuprimeiroempregoam.com · 10.626 req.",
+                "value": "Estados Unidos (US): 3.751 · 35.3%\nAlemanha (DE): 1.483 · 14.0%\nBélgica (BE): 1.283 · 12.1%\nFrança (FR): 1.067 · 10.0%\nÍndia (IN): 577 · 5.4%\nBrasil (BR): 394 · 3.7%\nSingapura (SG): 359 · 3.4%\nNZ: 300 · 2.8%\nChina (CN): 205 · 1.9%\nAustrália (AU): 151 · 1.4%\nOutros (63 países/categorias): 1.056 · 9.9%",
+                "inline": false
+              },
+              {
+                "name": "zytiva.com · 9.351 req.",
+                "value": "Estados Unidos (US): 4.118 · 44.0%\nReino Unido (GB): 989 · 10.6%\nAlemanha (DE): 841 · 9.0%\nPL: 532 · 5.7%\nSingapura (SG): 303 · 3.2%\nHK: 237 · 2.5%\nIndonésia (ID): 234 · 2.5%\nBrasil (BR): 218 · 2.3%\nLV: 164 · 1.8%\nVN: 159 · 1.7%\nOutros (77 países/categorias): 1.556 · 16.6%",
+                "inline": false
+              },
+              {
+                "name": "financeadx.com · 10.997 req.",
+                "value": "Estados Unidos (US): 3.712 · 33.8%\nÍndia (IN): 1.471 · 13.4%\nPaíses Baixos (NL): 959 · 8.7%\nAlemanha (DE): 897 · 8.2%\nSingapura (SG): 590 · 5.4%\nPH: 466 · 4.2%\nChina (CN): 421 · 3.8%\nMéxico (MX): 410 · 3.7%\nFrança (FR): 258 · 2.3%\nSE: 179 · 1.6%\nOutros (75 países/categorias): 1.634 · 14.9%",
+                "inline": false
+              },
+              {
+                "name": "newsoun.com · 8.354 req.",
+                "value": "Estados Unidos (US): 3.527 · 42.2%\nBélgica (BE): 1.253 · 15.0%\nAlemanha (DE): 664 · 7.9%\nPaíses Baixos (NL): 438 · 5.2%\nSingapura (SG): 390 · 4.7%\nReino Unido (GB): 375 · 4.5%\nAustrália (AU): 336 · 4.0%\nÍndia (IN): 238 · 2.8%\nBrasil (BR): 166 · 2.0%\nChina (CN): 142 · 1.7%\nOutros (69 países/categorias): 825 · 9.9%",
+                "inline": false
+              },
+              {
+                "name": "conectageral.com · 7.061 req.",
+                "value": "Estados Unidos (US): 2.614 · 37.0%\nFrança (FR): 1.604 · 22.7%\nAlemanha (DE): 493 · 7.0%\nAustrália (AU): 323 · 4.6%\nSingapura (SG): 288 · 4.1%\nPaíses Baixos (NL): 197 · 2.8%\nSE: 172 · 2.4%\nNZ: 151 · 2.1%\nIndonésia (ID): 139 · 2.0%\nMéxico (MX): 132 · 1.9%\nOutros (60 países/categorias): 948 · 13.4%",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-PORTFOLIO-20261123:initial:2 | País pelo IP; inclui bots/arquivos. Não são visitantes. Analytics adaptativo; top10 + outros."
+            }
+          }
+        ],
+        "nonce": "1148459721789459357",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-23T20:51:32Z",
+      "message_id": "1574527864706044006",
+      "verified": true,
+      "verified_at": "2026-11-23T20:51:36Z"
+    },
+    "initial:3": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Cloudflare — referência inicial por país · 3/5",
+            "color": 3447003,
+            "description": "Referência: 2026-11-22T20:42:31Z → 2026-11-23T20:42:31Z UTC (fora do acumulado).\nMonitor: 2026-11-23T20:42:31Z → 2026-12-23T20:42:31Z UTC; 30 períodos de 24h; grupo fixo do ranking >1.000 req/dia.\nCobertura: 38/38 domínios. Total: 2.850.903 requisições estimadas.",
+            "fields": [
+              {
+                "name": "gamingadx.com · 8.800 req.",
+                "value": "Estados Unidos (US): 2.430 · 27.6%\nSingapura (SG): 1.200 · 13.6%\nSA: 940 · 10.7%\nÍndia (IN): 640 · 7.3%\nAlemanha (DE): 600 · 6.8%\nReino Unido (GB): 570 · 6.5%\nAustrália (AU): 430 · 4.9%\nCanadá (CA): 380 · 4.3%\nÁfrica do Sul (ZA): 370 · 4.2%\nNG: 340 · 3.9%\nOutros (32 países/categorias): 900 · 10.2%",
+                "inline": false
+              },
+              {
+                "name": "lyzmo.com · 9.096 req.",
+                "value": "Estados Unidos (US): 3.466 · 38.1%\nReino Unido (GB): 1.361 · 15.0%\nPL: 1.085 · 11.9%\nAlemanha (DE): 644 · 7.1%\nSingapura (SG): 380 · 4.2%\nChina (CN): 294 · 3.2%\nLT: 227 · 2.5%\nÍndia (IN): 207 · 2.3%\nBrasil (BR): 176 · 1.9%\nLV: 174 · 1.9%\nOutros (71 países/categorias): 1.082 · 11.9%",
+                "inline": false
+              },
+              {
+                "name": "topfeed.fun · 8.259 req.",
+                "value": "Estados Unidos (US): 3.638 · 44.0%\nAlemanha (DE): 1.472 · 17.8%\nBélgica (BE): 1.284 · 15.5%\nNZ: 336 · 4.1%\nSingapura (SG): 302 · 3.7%\nIndonésia (ID): 132 · 1.6%\nReino Unido (GB): 129 · 1.6%\nBrasil (BR): 105 · 1.3%\nChina (CN): 97 · 1.2%\nAT: 78 · 0.9%\nOutros (66 países/categorias): 686 · 8.3%",
+                "inline": false
+              },
+              {
+                "name": "xyvlov.com · 7.331 req.",
+                "value": "Estados Unidos (US): 2.888 · 39.4%\nBélgica (BE): 1.807 · 24.6%\nFrança (FR): 1.052 · 14.4%\nAlemanha (DE): 632 · 8.6%\nSingapura (SG): 139 · 1.9%\nBrasil (BR): 122 · 1.7%\nReino Unido (GB): 70 · 1.0%\nMéxico (MX): 44 · 0.6%\nUA: 41 · 0.6%\nNZ: 40 · 0.5%\nOutros (63 países/categorias): 496 · 6.8%",
+                "inline": false
+              },
+              {
+                "name": "portalrelevante.com · 6.631 req.",
+                "value": "Estados Unidos (US): 2.729 · 41.2%\nBélgica (BE): 1.244 · 18.8%\nAlemanha (DE): 465 · 7.0%\nNZ: 340 · 5.1%\nSingapura (SG): 267 · 4.0%\nPL: 222 · 3.3%\nIrlanda (IE): 171 · 2.6%\nAustrália (AU): 149 · 2.2%\nLT: 136 · 2.1%\nBrasil (BR): 122 · 1.8%\nOutros (61 países/categorias): 786 · 11.9%",
+                "inline": false
+              },
+              {
+                "name": "wavesbee.com · 4.933 req.",
+                "value": "Estados Unidos (US): 2.270 · 46.0%\nAlemanha (DE): 437 · 8.9%\nChina (CN): 374 · 7.6%\nSE: 350 · 7.1%\nSingapura (SG): 225 · 4.6%\nAustrália (AU): 150 · 3.0%\nBrasil (BR): 120 · 2.4%\nIndonésia (ID): 96 · 1.9%\nReino Unido (GB): 83 · 1.7%\nFI: 69 · 1.4%\nOutros (76 países/categorias): 759 · 15.4%",
+                "inline": false
+              },
+              {
+                "name": "jobscana.com · 5.350 req.",
+                "value": "Bélgica (BE): 1.846 · 34.5%\nEstados Unidos (US): 1.319 · 24.7%\nPaíses Baixos (NL): 678 · 12.7%\nAlemanha (DE): 578 · 10.8%\nIrlanda (IE): 169 · 3.2%\nAT: 135 · 2.5%\nFrança (FR): 95 · 1.8%\nNZ: 82 · 1.5%\nFI: 57 · 1.1%\nLT: 47 · 0.9%\nOutros (49 países/categorias): 344 · 6.4%",
+                "inline": false
+              },
+              {
+                "name": "zuout.com · 4.885 req.",
+                "value": "Estados Unidos (US): 2.713 · 55.5%\nSingapura (SG): 507 · 10.4%\nReino Unido (GB): 373 · 7.6%\nAlemanha (DE): 357 · 7.3%\nNZ: 149 · 3.1%\nChina (CN): 89 · 1.8%\nFrança (FR): 89 · 1.8%\nDK: 79 · 1.6%\nAustrália (AU): 43 · 0.9%\nCO: 43 · 0.9%\nOutros (58 países/categorias): 443 · 9.1%",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-PORTFOLIO-20261123:initial:3 | País pelo IP; inclui bots/arquivos. Não são visitantes. Analytics adaptativo; top10 + outros."
+            }
+          }
+        ],
+        "nonce": "889362006404128981",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-23T20:51:36Z",
+      "message_id": "1574527868564938833",
+      "verified": true,
+      "verified_at": "2026-11-23T20:51:37Z"
+    },
+    "initial:4": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Cloudflare — referência inicial por país · 4/5",
+            "color": 3447003,
+            "description": "Referência: 2026-11-22T20:42:31Z → 2026-11-23T20:42:31Z UTC (fora do acumulado).\nMonitor: 2026-11-23T20:42:31Z → 2026-12-23T20:42:31Z UTC; 30 períodos de 24h; grupo fixo do ranking >1.000 req/dia.\nCobertura: 38/38 domínios. Total: 2.850.903 requisições estimadas.",
+            "fields": [
+              {
+                "name": "cephyric.com · 5.146 req.",
+                "value": "Bélgica (BE): 1.870 · 36.3%\nFrança (FR): 1.337 · 26.0%\nEstados Unidos (US): 1.026 · 19.9%\nAlemanha (DE): 203 · 3.9%\nSingapura (SG): 151 · 2.9%\nNZ: 149 · 2.9%\nChina (CN): 86 · 1.7%\nAustrália (AU): 40 · 0.8%\nPaíses Baixos (NL): 24 · 0.5%\nBrasil (BR): 19 · 0.4%\nOutros (50 países/categorias): 241 · 4.7%",
+                "inline": false
+              },
+              {
+                "name": "wantabrand.com · 4.821 req.",
+                "value": "Estados Unidos (US): 2.142 · 44.4%\nAlemanha (DE): 719 · 14.9%\nBélgica (BE): 489 · 10.1%\nSingapura (SG): 345 · 7.2%\nFrança (FR): 165 · 3.4%\nChina (CN): 94 · 1.9%\nPL: 86 · 1.8%\nBrasil (BR): 82 · 1.7%\nÍndia (IN): 70 · 1.5%\nPaíses Baixos (NL): 54 · 1.1%\nOutros (67 países/categorias): 575 · 11.9%",
+                "inline": false
+              },
+              {
+                "name": "zyclor.com · 3.868 req.",
+                "value": "Bélgica (BE): 1.529 · 39.5%\nEstados Unidos (US): 1.017 · 26.3%\nAlemanha (DE): 416 · 10.8%\nNZ: 147 · 3.8%\nIndonésia (ID): 116 · 3.0%\nÍndia (IN): 108 · 2.8%\nPL: 74 · 1.9%\nSingapura (SG): 61 · 1.6%\nAT: 41 · 1.1%\nReino Unido (GB): 36 · 0.9%\nOutros (47 países/categorias): 323 · 8.4%",
+                "inline": false
+              },
+              {
+                "name": "infinitynexx.com · 2.835 req.",
+                "value": "Estados Unidos (US): 1.660 · 58.6%\nAlemanha (DE): 272 · 9.6%\nMéxico (MX): 231 · 8.1%\nSingapura (SG): 148 · 5.2%\nFrança (FR): 57 · 2.0%\nIndonésia (ID): 48 · 1.7%\nBrasil (BR): 42 · 1.5%\nReino Unido (GB): 41 · 1.4%\nÍndia (IN): 32 · 1.1%\nBD: 25 · 0.9%\nOutros (50 países/categorias): 279 · 9.8%",
+                "inline": false
+              },
+              {
+                "name": "carcreditad.com · 2.797 req.",
+                "value": "Bélgica (BE): 1.558 · 55.7%\nEstados Unidos (US): 524 · 18.7%\nAlemanha (DE): 162 · 5.8%\nÍndia (IN): 125 · 4.5%\nReino Unido (GB): 79 · 2.8%\nMéxico (MX): 32 · 1.1%\nPY: 24 · 0.9%\nIndonésia (ID): 20 · 0.7%\nMY: 20 · 0.7%\nFrança (FR): 18 · 0.6%\nOutros (52 países/categorias): 235 · 8.4%",
+                "inline": false
+              },
+              {
+                "name": "financiarveiculo.com · 4.235 req.",
+                "value": "Bélgica (BE): 1.901 · 44.9%\nEstados Unidos (US): 1.322 · 31.2%\nTH: 175 · 4.1%\nAlemanha (DE): 140 · 3.3%\nPaíses Baixos (NL): 136 · 3.2%\nReino Unido (GB): 80 · 1.9%\nFrança (FR): 63 · 1.5%\nSingapura (SG): 60 · 1.4%\nPL: 47 · 1.1%\nUZ: 40 · 0.9%\nOutros (37 países/categorias): 271 · 6.4%",
+                "inline": false
+              },
+              {
+                "name": "marevelx.com · 3.159 req.",
+                "value": "Estados Unidos (US): 1.654 · 52.4%\nAlemanha (DE): 212 · 6.7%\nSingapura (SG): 184 · 5.8%\nIrlanda (IE): 175 · 5.5%\nAustrália (AU): 147 · 4.7%\nLT: 123 · 3.9%\nChina (CN): 80 · 2.5%\nBrasil (BR): 70 · 2.2%\nFrança (FR): 57 · 1.8%\nTR: 51 · 1.6%\nOutros (43 países/categorias): 406 · 12.9%",
+                "inline": false
+              },
+              {
+                "name": "ducapes.com · 3.197 req.",
+                "value": "Estados Unidos (US): 1.692 · 52.9%\nAlemanha (DE): 224 · 7.0%\nHK: 222 · 6.9%\nSE: 171 · 5.3%\nPaíses Baixos (NL): 165 · 5.2%\nSingapura (SG): 156 · 4.9%\nChina (CN): 104 · 3.3%\nNZ: 95 · 3.0%\nRússia (RU): 80 · 2.5%\nReino Unido (GB): 55 · 1.7%\nOutros (52 países/categorias): 233 · 7.3%",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-PORTFOLIO-20261123:initial:4 | País pelo IP; inclui bots/arquivos. Não são visitantes. Analytics adaptativo; top10 + outros."
+            }
+          }
+        ],
+        "nonce": "4778425418251336",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-23T20:51:37Z",
+      "message_id": "1574527873405026505",
+      "verified": true,
+      "verified_at": "2026-11-23T20:51:38Z"
+    },
+    "initial:5": {
+      "payload": {
+        "content": "",
+        "allowed_mentions": {
+          "parse": []
+        },
+        "embeds": [
+          {
+            "title": "Cloudflare — referência inicial por país · 5/5",
+            "color": 3447003,
+            "description": "Referência: 2026-11-22T20:42:31Z → 2026-11-23T20:42:31Z UTC (fora do acumulado).\nMonitor: 2026-11-23T20:42:31Z → 2026-12-23T20:42:31Z UTC; 30 períodos de 24h; grupo fixo do ranking >1.000 req/dia.\nCobertura: 38/38 domínios. Total: 2.850.903 requisições estimadas.",
+            "fields": [
+              {
+                "name": "helixenit.net · 3.037 req.",
+                "value": "Estados Unidos (US): 1.756 · 57.8%\nMéxico (MX): 445 · 14.7%\nAlemanha (DE): 341 · 11.2%\nPL: 116 · 3.8%\nÍndia (IN): 54 · 1.8%\nChina (CN): 51 · 1.7%\nFrança (FR): 34 · 1.1%\nSingapura (SG): 31 · 1.0%\nPaíses Baixos (NL): 29 · 1.0%\nReino Unido (GB): 24 · 0.8%\nOutros (47 países/categorias): 156 · 5.1%",
+                "inline": false
+              },
+              {
+                "name": "autocreditadx.com · 3.088 req.",
+                "value": "Estados Unidos (US): 1.633 · 52.9%\nAlemanha (DE): 922 · 29.9%\nReino Unido (GB): 75 · 2.4%\nBrasil (BR): 50 · 1.6%\nMéxico (MX): 39 · 1.3%\nÍndia (IN): 34 · 1.1%\nSingapura (SG): 32 · 1.0%\nIQ: 29 · 0.9%\nPL: 26 · 0.8%\nChina (CN): 23 · 0.7%\nOutros (48 países/categorias): 225 · 7.3%",
+                "inline": false
+              },
+              {
+                "name": "boostingecon.com · 2.044 req.",
+                "value": "Estados Unidos (US): 780 · 38.2%\nAlemanha (DE): 371 · 18.2%\nSE: 195 · 9.5%\nPL: 108 · 5.3%\nSingapura (SG): 98 · 4.8%\nIndonésia (ID): 47 · 2.3%\nChina (CN): 41 · 2.0%\nFrança (FR): 39 · 1.9%\nBrasil (BR): 35 · 1.7%\nMéxico (MX): 32 · 1.6%\nOutros (53 países/categorias): 298 · 14.6%",
+                "inline": false
+              },
+              {
+                "name": "autolendpro.com · 1.295 req.",
+                "value": "Estados Unidos (US): 395 · 30.5%\nSE: 335 · 25.9%\nAlemanha (DE): 213 · 16.4%\nCanadá (CA): 47 · 3.6%\nPaíses Baixos (NL): 47 · 3.6%\nReino Unido (GB): 45 · 3.5%\nFrança (FR): 34 · 2.6%\nSingapura (SG): 27 · 2.1%\nChina (CN): 14 · 1.1%\nMéxico (MX): 14 · 1.1%\nOutros (37 países/categorias): 124 · 9.6%",
+                "inline": false
+              },
+              {
+                "name": "financiamentoautoadx.com · 2.000 req.",
+                "value": "Estados Unidos (US): 1.100 · 55.0%\nTH: 300 · 15.0%\nÍndia (IN): 200 · 10.0%\nArgentina (AR): 100 · 5.0%\nChina (CN): 100 · 5.0%\nAlemanha (DE): 100 · 5.0%\nPaíses Baixos (NL): 100 · 5.0%",
+                "inline": false
+              },
+              {
+                "name": "gamehubad.com · 989 req.",
+                "value": "Estados Unidos (US): 548 · 55.4%\nAlemanha (DE): 155 · 15.7%\nReino Unido (GB): 70 · 7.1%\nSingapura (SG): 48 · 4.9%\nFrança (FR): 44 · 4.4%\nCanadá (CA): 31 · 3.1%\nIrlanda (IE): 14 · 1.4%\nHK: 11 · 1.1%\nChina (CN): 7 · 0.7%\nBrasil (BR): 6 · 0.6%\nOutros (23 países/categorias): 55 · 5.6%",
+                "inline": false
+              }
+            ],
+            "footer": {
+              "text": "CF-PORTFOLIO-20261123:initial:5 | País pelo IP; inclui bots/arquivos. Não são visitantes. Analytics adaptativo; top10 + outros."
+            }
+          }
+        ],
+        "nonce": "72560642083235385",
+        "enforce_nonce": true
+      },
+      "prepared_at": "2026-11-23T20:51:38Z",
+      "message_id": "1574527877574164658",
+      "verified": true,
+      "verified_at": "2026-11-23T20:51:42Z"
+    }
+  },
   "delivered_days": [],
   "failure_streak": 0,
-  "last_check": "2026-11-23T20:44:10Z"
+  "last_check": "2026-11-23T20:52:26Z",
+  "activation_verified": true
 }
