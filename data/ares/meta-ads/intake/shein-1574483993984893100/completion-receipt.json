@@ -1,0 +1,92 @@
+{
+  "request_id": "shein-1574483993984893100",
+  "verified_at": "2026-11-23T18:01:57.654029+00:00",
+  "meta_verified": true,
+  "campaigns": [
+    {
+      "id": "120252700411930744",
+      "number": "311",
+      "budget_minor": 10000,
+      "bid_strategy": "COST_CAP",
+      "bid_minor": [
+        90
+      ],
+      "start_time": "2026-11-23T12:58:57-0500",
+      "ad_ids": [
+        "120252700414730744",
+        "120252700414720744"
+      ],
+      "adset_ids": [
+        "120252700412810744"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "120252700411970744",
+      "number": "312",
+      "budget_minor": 10000,
+      "bid_strategy": "COST_CAP",
+      "bid_minor": [
+        90
+      ],
+      "start_time": "2026-11-23T12:58:57-0500",
+      "ad_ids": [
+        "120252700415440744",
+        "120252700414750744"
+      ],
+      "adset_ids": [
+        "120252700412860744"
+      ],
+      "warnings": []
+    }
+  ],
+  "new_budget_minor": 20000,
+  "warnings": [],
+  "key_values": {
+    "utm_campaign": [
+      "b01fb04c311",
+      "b01fb04c312"
+    ],
+    "utm_adgroup": [
+      "b01fb04c311g01",
+      "b01fb04c312g01"
+    ]
+  },
+  "posts_preserved": false,
+  "sb": {
+    "domain": "yolokfx.com",
+    "publisher_id": "digital-trust_yolokfx",
+    "contract_url": "https://app.smartbiddingdigital.com/assets/KeyValues-TMCdMNR_.js",
+    "independent_readback": "unavailable_no_documented_listing",
+    "results": {
+      "utm_campaign": {
+        "http": 201,
+        "response": {
+          "publisherId": "digital-trust_yolokfx",
+          "field": "utm_campaign",
+          "values": [
+            "b01fb04c311",
+            "b01fb04c312"
+          ],
+          "gamInsert": "ok",
+          "networkCode": "21922122164"
+        },
+        "recorded_at": "2026-11-23T18:02:28.484704+00:00"
+      },
+      "utm_adgroup": {
+        "http": 201,
+        "response": {
+          "publisherId": "digital-trust_yolokfx",
+          "field": "utm_adgroup",
+          "values": [
+            "b01fb04c311g01",
+            "b01fb04c312g01"
+          ],
+          "gamInsert": "ok",
+          "networkCode": "21922122164"
+        },
+        "recorded_at": "2026-11-23T18:02:34.825433+00:00"
+      }
+    }
+  }
+}
