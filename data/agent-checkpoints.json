@@ -1942,6 +1942,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1574573026987479121",
+      "next_step": "Concluido; nao reenviar. Atraso GAM/SB110-113min conforme publisher; atraso Boostingecon n/d. Boostingecon e Mavroa sem atividade no recorte, receita/saldo/ROI n/d. Novo pedido exige novas fontes; campanhas e agendas preservadas.",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1574573026987479121/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;63campaigns;29integralparts+7summaries;36unique_messages;cutoffs23/11/2026_18:52est;usd;zero_meta_writes;archive243bytes_hashes_verified;65regressions+5summaryfixtures+5gatechecks+6archivechecks_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-23T23:58:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -12288,5 +12298,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T23:48:45+00:00"
+  "updated_at": "2026-11-23T23:58:22+00:00"
 }
