@@ -828,14 +828,35 @@
           "previous_version": "2.77.1+ubuntu24.04",
           "status": "installed",
           "validated_at": "2026-11-23T17:11:41.665648+00:00"
+        },
+        {
+          "name": "libssh-4",
+          "version": "0.10.6-2ubuntu0.6",
+          "previous_version": "0.10.6-2ubuntu0.5",
+          "status": "installed",
+          "validated_at": "2026-11-23T20:36:31.009114+00:00"
+        },
+        {
+          "name": "libssh-gcrypt-4",
+          "version": "0.10.6-2ubuntu0.6",
+          "previous_version": "0.10.6-2ubuntu0.5",
+          "status": "installed",
+          "validated_at": "2026-11-23T20:36:31.009114+00:00"
+        },
+        {
+          "name": "python3-oauthlib",
+          "version": "3.2.2-1ubuntu0.1",
+          "previous_version": "3.2.2-1",
+          "status": "installed",
+          "validated_at": "2026-11-23T20:36:31.009114+00:00"
         }
       ],
-      "packages_count": 91,
+      "packages_count": 94,
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
       "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "updated_at": "2026-11-23T20:29:28.417093+00:00",
+      "updated_at": "2026-11-23T20:38:57.280615+00:00",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
       "latest_maintenance_20261123": {
         "authorization_message_id": "1574470534035542151",
@@ -885,7 +906,7 @@
           "Inst python3-oauthlib [3.2.2-1] (3.2.2-1ubuntu0.1 Ubuntu:24.04/noble-security [all])"
         ]
       },
-      "hostinger_reboot_state": "pending_not_scheduled",
+      "hostinger_reboot_state": "critical_confirmation_pending_not_scheduled",
       "core22": {
         "version": "20261022",
         "revision": 3129,
@@ -894,6 +915,28 @@
         "older2955_copied_to": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/next-tzdata-core22/core22_2955.snap",
         "retention_policy_changed": false,
         "validated_at": "2026-11-23T20:26:52.591802+00:00"
+      },
+      "latest_three_package_lot_20261123": {
+        "status": "approved_lot_completed_validated",
+        "authorization_message_id": "1574523547114537153",
+        "disclosed_gate_message_id": "1574523063930851432",
+        "manifest_sha256": "7b300026ab687ac689b6ab7406792d593e2eea73d38967ee23941fbe81c1eb44",
+        "checks_passed": 22,
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/new-security-lot/post-package-validation.json",
+        "packages": {
+          "libssh-4": "0.10.6-2ubuntu0.6",
+          "libssh-gcrypt-4": "0.10.6-2ubuntu0.6",
+          "python3-oauthlib": "3.2.2-1ubuntu0.1"
+        },
+        "host_current_observed": true,
+        "reboot_executed": false,
+        "reboot_scheduled": false,
+        "gateways_pids_unchanged": true
+      },
+      "host_package_currency_observed": {
+        "at": "2026-11-23T20:36:31.009114+00:00",
+        "apt_candidates": 0,
+        "snap_candidates": 0
       }
     },
     {
@@ -70112,10 +70155,10 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "hostinger_complement_completed_new_three_package_gate_pending",
+      "status": "hostinger_packages_completed_validated_reboot_critical_gate_pending",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
-      "report": "reports/vps-maint-1574252891898908684-hostinger-complement.md",
+      "report": "reports/vps-maint-1574252891898908684-hostinger-three-packages.md",
       "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
       "critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/critical-plan.json",
       "critical_manifest_sha256": "454ab163078a007d3b1f7d4cefbb039cf30ea9bda38b9ace622014c1346fa778",
@@ -70142,13 +70185,14 @@
         },
         {
           "target": "Hostinger newly observed three packages",
-          "state": "prepared_pending_new_critical_confirmation",
+          "state": "completed_validated",
           "manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/new-security-lot/critical-plan.json",
           "sha256": "7b300026ab687ac689b6ab7406792d593e2eea73d38967ee23941fbe81c1eb44"
         },
         {
           "target": "Hostinger reboot",
-          "state": "pending_new_three_package_gate_then_separate_reboot_confirmation_not_scheduled"
+          "state": "awaiting_critical_confirmation_external_preparation_then_dispatch_not_scheduled",
+          "prerequisites": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json"
         },
         {
           "target": "MatteiInc01 packages/reboot",
@@ -70171,15 +70215,15 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-23T20:29:28.417093+00:00",
+      "updated_at": "2026-11-23T20:38:57.280615+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
       "gateway_pids_unchanged": true,
       "checks_passed": 30,
-      "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/new-security-lot/critical-plan.json",
-      "next_critical_manifest_sha256": "7b300026ab687ac689b6ab7406792d593e2eea73d38967ee23941fbe81c1eb44",
-      "next_gate": "Confirm three newly observed packages: libssh-4/libssh-gcrypt-4 0.10.6-2ubuntu0.5→0.10.6-2ubuntu0.6; python3-oauthlib3.2.2-1→3.2.2-1ubuntu0.1. No reboot/Hermes/gateway/sshd/credentials.",
+      "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
+      "next_critical_manifest_sha256": "481b3a7260cfe866a99def451629c1247449f4a6da3a4c81714153841f56458c",
+      "next_gate": "Confirm single Hostinger reboot kernel147→151 and bounded external validator preparation/activation. No reboot dispatched or scheduled;no Hermes update/other-host mutation/credentials/firewall.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70217,14 +70261,46 @@
       },
       "reboot_scheduled": false,
       "latest_report_infra": {
-        "at": "2026-11-23T20:30:05.492795+00:00",
-        "message_id": "1574522448928440442",
+        "at": "2026-11-23T20:39:29.286728+00:00",
+        "message_id": "1574524813958058077",
         "channel_id": "1498132022634483894",
         "content_empty": true,
         "embed_count": 1,
         "mentions": 0,
         "expected_fields_verified": true,
         "status": "sent_verified"
+      },
+      "three_package_lot": {
+        "status": "approved_lot_completed_validated",
+        "authorization_message_id": "1574523547114537153",
+        "disclosed_gate_message_id": "1574523063930851432",
+        "manifest_sha256": "7b300026ab687ac689b6ab7406792d593e2eea73d38967ee23941fbe81c1eb44",
+        "checks_passed": 22,
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/new-security-lot/post-package-validation.json",
+        "packages": {
+          "libssh-4": "0.10.6-2ubuntu0.6",
+          "libssh-gcrypt-4": "0.10.6-2ubuntu0.6",
+          "python3-oauthlib": "3.2.2-1ubuntu0.1"
+        },
+        "host_current_observed": true,
+        "reboot_executed": false,
+        "reboot_scheduled": false,
+        "gateways_pids_unchanged": true,
+        "report_infra": {
+          "at": "2026-11-23T20:39:29.286728+00:00",
+          "message_id": "1574524813958058077",
+          "channel_id": "1498132022634483894",
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions": 0,
+          "expected_fields_verified": true,
+          "status": "sent_verified"
+        }
+      },
+      "host_package_currency_observed": {
+        "at": "2026-11-23T20:36:31.009114+00:00",
+        "apt_candidates": 0,
+        "snap_candidates": 0
       }
     },
     {

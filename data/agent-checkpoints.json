@@ -3751,6 +3751,16 @@
     },
     {
       "agent": "zeus",
+      "id": "CF-PORTFOLIO-COUNTRY-20261123",
+      "next_step": "Congelar seleção com base no ranking consultado, validar hostnames e Analytics, implantar runner finito e agenda com readback.",
+      "objective": "Monitorar países diariamente por 30 dias nos sites da listagem com mais de 1000 requisições diárias; Cloudflare somente leitura, uma entrega consolidada na origem.",
+      "source": "Discord request1574524021737783399; scope1574524345575809116; ranking1574415812091969567+1574415814080208919",
+      "state": "preparation",
+      "thread_id": "1574415087257780367",
+      "updated_at": "2026-11-23T20:38:36+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "CF-VAGAAQUI-COUNTRY-20261111",
       "next_step": "Consumidor horário no minuto46 retoma somente slices/outbox faltantes; boletim diário normal22:46ET; coleta encerra2026-12-11T01:38:29Z e fechamento exige cobertura integral+GET. Cinco ciclos falhos ou auth bloqueiam com pendência humana na origem.",
       "objective": "Monitorar por um mês o tráfego por país de vagaaqui.com, com resumos diários e fechamento nesta thread; Cloudflare somente leitura, newsfolha fora do escopo.",
@@ -4743,6 +4753,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1574524509044613276",
+      "next_step": "Obter Nicolas na origem: aprovacao somente de coordenacao para admitir este sucessor preservando objetos/provas/reservas/estados dos pedidos006/007,102-110,212-221 e retomada status-only pendente;semreplay/ativacaoantiga. Reconciliar pelas rotas canonicas,validar midia disjunta e admissao;prepare-media,dry-run,execute,QA/readback/SB mesmos request e horario.",
+      "objective": "Nove clones da campanha186 Mavroa06G006;18videosES em9grupos literais;USD55/camp;COCAP0.90;24nov2026 00h15EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/request.json",
+      "state": "waiting_scoped_coordination_approval;request integral e autoridade das mensagens1574524509044613276/1574524516972110046 preservados;0campaignwrites;fila canônica waiting com3dependencias historicas;consumidor ares-shein-request-queue ativo;get21campanhas historicas e filhos completo;recibos anteriores nao abrangem sucessor atual;lease status-only1574186080318521365 recovery_pending mantida",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-23T20:41:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-AUDIT-1572796764099186809",
       "next_step": "Nenhuma correcao Meta necessaria nesta leitura;usar literal correto no pre-cadastroAdOps",
       "objective": "Auditar campanha239 e corrigir literalUTM malformado enviado por Ares",
@@ -5436,12 +5456,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Rodolfo1574523547114537153 confirmou lote3pacotes apresentado na última resposta:libssh-4/libssh-gcrypt-4→0.10.6-2ubuntu0.6 e python3-oauthlib→3.2.2-1ubuntu0.1,plano7b300026. Revalidar e executar sem nova confirmação dos mesmos itens. Reboot/gateway/Hermes excluídos;demais4hosts/dashboard continuam abertos.",
+      "next_step": "Lote3 confirmado1574523547114537153 executado;22/22 checks e APT/Snap sem candidatos. Primeiro lote e complemento também concluídos. Próximo gate:reboot Hostinger147→151 e preparar/ativar validador externo;prereqs em secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json. Nenhum reboot agendado/executor armado. Após confirmação,gerar/testar/fixar hashes do verificador/finalizador/unit e handoff+turno inativo antes do dispatch. Demais4hosts/dashboard abertos.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "reports/vps-maint-1574252891898908684-hostinger-complement.md",
-      "state": "hostinger_three_package_confirmation_received_revalidating",
+      "source": "reports/vps-maint-1574252891898908684-hostinger-three-packages.md",
+      "state": "hostinger_packages_completed_validated_reboot_critical_gate_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T20:34:54+00:00"
+      "updated_at": "2026-11-23T20:38:57+00:00"
     },
     {
       "agent": "zeus",
@@ -10399,12 +10419,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Zeus mantém pendência H39/D3. Mesmo job existente21:02ET, sem novo job/writer: revalidar superfície e reconciliar ledgers antes da retomada; não repetir prova já publicada. REPORT-INFRA pendente pela restrição de envio direto do cron.",
-      "objective": "Refresh recorrente23nov14:02ET das mesmas55contas e40H; mesmo job/workbook",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T1402/financial-validation.json",
-      "state": "parcial validado: api55 e invoicesoutubro atualizadas; h1 novo e39 históricos preservados; d3eventos pendentes; meta accounts exibe erro técnico temporário confirmado em pixels, sem gate autenticação. inputs interrompidos sem reload/bypass. outras abas preservadas; lease livre;0pagamentos/billing.",
+      "next_step": "Completar H40 com inspecao real, publicar;resolverD5,refreshAPI final evalidacao integral;nao duplicar writer.",
+      "objective": "Atualização integral autorizada1574520802391363625 das mesmas55contas/40H no mesmo workbook e job",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1574520802391363625",
+      "state": "em foreground; autenticacao/superficie accounts revalidada. funding/invoices/api55 publicadas com readback;h24capturadas18visualmente verificadas;d5eventos pendentes. executor unicozeus, sem pagamentos/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-23T19:12:40+00:00"
+      "updated_at": "2026-11-23T20:39:47+00:00"
     },
     {
       "agent": "zeus",
@@ -12238,5 +12258,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T20:36:09+00:00"
+  "updated_at": "2026-11-23T20:41:20+00:00"
 }
