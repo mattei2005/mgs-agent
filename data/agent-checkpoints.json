@@ -353,12 +353,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1574493360767504425",
-      "next_step": "Confirmar identidade live e preparar runner finito com descoberta de alteracoes futuras; teste coleta entrega e agenda",
-      "objective": "CPR e ROI cada 30 minutos ate fim de 23nov: novas e alteradas Yolokfx04 G004",
+      "next_step": "Executar mesmo acompanhamento cada30min ate23h47EST23nov; descobrir novas e alteracoes materiais futuras na mesma conta; manter pausadas; expirar24nov00h antesAPI; retomar somente camada faltante do mesmo slot",
+      "objective": "CPR e ROI cada30min hoje novas e alteradas Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1574493360767504425/manifest.json",
-      "state": "intake_authenticated_scope_allowed_preflight_pending",
+      "state": "active_finite_schedule_verified; inicial13h37est get 3campanhas311312313; 31testespass; mesmojobd203990ecf20 21slots13h47a23h47est; prepossemconflito; reportinfraget; semwritesmetasb",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-23T18:36:04+00:00"
+      "updated_at": "2026-11-23T18:40:15+00:00"
     },
     {
       "agent": "ares",
@@ -2103,12 +2103,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574478797959340234",
-      "next_step": "Acompanhar executor único e claims do request7e65d278333ad9d7f9023f4949460bd9 até30; monitor manutenção finais; auditoria integral e mapa origem ainda pendentes",
+      "next_step": "Continuar mesmos6sourceIDs faltantes por consume e complete; auditoria integral depois da manutenção final; publicar mapa30 e link permanente na origem sem anexos",
       "objective": "Tratar organizar30 vídeos Kelly US SHEIN ES common preservando RAW same-ID e reservas",
       "source": "data/ares/creative-ops/executions/intake-1574478797959340234/foreground-owner.json",
-      "state": "mesmo foreground proc_e591d27490d1 ativo;12/30 canonicamente completos em3batches; batch36d8aea7b811fd56f52edd666eb80ca3 assumido como quarto. plano/preparação30/qa preservados, sem bloqueio atual; não iniciar writer concorrente",
+      "state": "foreground único proc_e591d27490d1 ativo;24/30 canonicamente completos em6batches. sem bloqueio atual; plano/preparação e nomes preservados. auditoria integral/mapa ainda não executados. scheduler nativo pode entrar em manutenção; runner aguarda lane sem concorrência",
       "thread_id": "1574478797959340234",
-      "updated_at": "2026-11-23T18:21:31+00:00"
+      "updated_at": "2026-11-23T18:47:27+00:00"
     },
     {
       "agent": "ares",
@@ -8109,12 +8109,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-roi-1574493313346707468",
-      "next_step": "Testar runner e wrapper;coleta live inicial;revisar;entregar GET;auditar e habilitar agenda finita ate24nov00hEST",
-      "objective": "Relatorio CPR Meta e ROI real SB a cada30min novas e alteradas hoje Mavroa04 G004",
+      "next_step": "Executar mesmo job slots28/58;descobrir criacoes e alteracoes materiais futuras somente conta e data;expirar24nov00hEST antesAPI;retomar apenas camada faltante;nao reenviar inicial",
+      "objective": "CPR Meta e ROI real SB cada30min novas e alteradas23nov Mavroa04 G004 incluindo futuras",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1574493313346707468/manifest.json",
-      "state": "preparing;autorizacao e identidade live confirmadas usd america/new_york;request e coortes dinamicas persistidos;sem write meta/sb",
+      "state": "active_finite_schedule_verified;inicial13h37est get2campanhas083084;29testespass;21slots13h58-23h58est;job84fd168680c7 enabled noagent local;race de agenda reconciliada alterando somente mesmojob;auditoria pos semcolisao;zero writesmetasb",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-23T18:36:36+00:00"
+      "updated_at": "2026-11-23T18:39:51+00:00"
     },
     {
       "agent": "ares",
@@ -12208,5 +12208,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T18:36:36+00:00"
+  "updated_at": "2026-11-23T18:47:27+00:00"
 }

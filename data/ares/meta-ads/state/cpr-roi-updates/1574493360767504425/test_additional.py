@@ -70,6 +70,22 @@ class Additional(unittest.TestCase):
   with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
    r=Path(p);m.save(r/'manifest.json',x)
    with patch.object(m,'ROOT',r),patch.object(m,'scope',side_effect=AssertionError('API')):self.assertEqual(m.execute(argparse.Namespace(initial=False,dry_run=False),AT)['status'],'NOT_DUE')
+ def test_second_slot_rechecks_activities(self):
+  with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
+   root=Path(p);seen=[]
+   class TrackingRunner(b.FakeRunner):
+    def source(self,run,name,fn):
+     seen.append((run.name,name));return super().source(run,name,fn)
+   for name in ('first','second'):
+    run=root/name;run.mkdir();m.discover(TrackingRunner(run,[b.camp('1')],[b.ev()]),copy.deepcopy(MAN),run,argparse.Namespace())
+   self.assertEqual(sum(name=='activities' for _,name in seen),2)
+ def test_discovery_retry_preserves_cutoff(self):
+  with tempfile.TemporaryDirectory(dir=str(m.HOME/'cache/scratch')) as p:
+   run=Path(p);fixed=(AT-timedelta(minutes=5)).isoformat();m.save(run/'discovery-cutoff.json',{'observed_at':fixed})
+   event=b.ev();event['event_time']=(AT-timedelta(minutes=1)).isoformat()
+   obj=b.FakeRunner(run,[b.camp('1',dt=(AT-timedelta(days=1)).isoformat())],[event])
+   members,_,_=m.discover(obj,copy.deepcopy(MAN),run,argparse.Namespace());self.assertEqual(members,{})
+   self.assertEqual(m.load(run/'membership-evidence.json')['observed_at'],fixed)
  def test_own_scheduler_identity(self):
   rows=[{'source':'ares','job_id':'own','script':'same'},{'source':'ares','job_id':'other','script':'same'},{'source':'zeus','job_id':'own','script':'same'}]
   kept=[x for x in rows if not(x['source']=='ares' and x['job_id']=='own')];self.assertEqual(len(kept),2)
