@@ -2883,12 +2883,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1574526981704519835",
-      "next_step": "Aguardar decisao restrita de encerrar recuperacao anterior sem alterar campanhas existentes; preservar mesmo pedido e inputs; liberar somente coordenacao canonicamente apos autoridade e continuar c023 sem replay",
-      "objective": "Duplicar duas vezes cada uma das 16 fontes solicitadas na conta 08 G006; USD30 por campanha; 24 novembro 2026 00h10 America/New_York",
+      "next_step": "Concluir fontes059,019,033,076,048,037,039 pelo runner central; readback integral fresco; cadastrar key valuesSB e fechar na origem",
+      "objective": "Duplicar duas vezes cada uma das 16 fontes na conta08 G006; USD30/dia cada; inicio24nov2026 00h10 NovaYork",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574526981704519835/batch-request.json",
-      "state": "waiting_predecessor_decision:32 copias solicitadas usd960/dia,zero criadas; nomes alvo ausentes no get completo; pendencia status-only anterior com 030 active e budget usd66.15 vs usd35 baseline; outras33 paused; nenhuma mudanca corretiva aplicada",
+      "state": "executing:recuperacao anterior encerrada por nicolas1574528507806093416 sem writesmeta;18 copias verificadas079-096 de32;qa integral por fonte e ids preservados;saldo segue sequencial no mesmo request",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-23T20:53:15+00:00"
+      "updated_at": "2026-11-23T21:26:48+00:00"
     },
     {
       "agent": "ares",
@@ -4764,12 +4764,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574524509044613276",
-      "next_step": "Obter Nicolas na origem: aprovacao somente de coordenacao para admitir este sucessor preservando objetos/provas/reservas/estados dos pedidos006/007,102-110,212-221 e retomada status-only pendente;semreplay/ativacaoantiga. Reconciliar pelas rotas canonicas,validar midia disjunta e admissao;prepare-media,dry-run,execute,QA/readback/SB mesmos request e horario.",
-      "objective": "Nove clones da campanha186 Mavroa06G006;18videosES em9grupos literais;USD55/camp;COCAP0.90;24nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/request.json",
-      "state": "waiting_scoped_coordination_approval;request integral e autoridade das mensagens1574524509044613276/1574524516972110046 preservados;0campaignwrites;fila canônica waiting com3dependencias historicas;consumidor ares-shein-request-queue ativo;get21campanhas historicas e filhos completo;recibos anteriores nao abrangem sucessor atual;lease status-only1574186080318521365 recovery_pending mantida",
+      "next_step": "Resolver bloqueio externoMeta nosmesmosIDs;GETintegral antesderetomarQA/postprocess/activate_verified central;semrecriar/trocarmidia/forcarativacao. Entregar parcialprecisonestaorigem;nenhumamonitorizacaoautomatica adicionalcriada.",
+      "objective": "Nove clones186 Mavroa06G006,18videosES,USD55/camp,COCAP0.90,24nov2026 00h15EST",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/partial-verified-receipt.json",
+      "state": "partial_external_meta_issues:250-258criadas,9conjuntos/18ads;9campanhaspaused;usd495/dia configurados;cap90;inicio00h15est preservado;ids iguais aposinterrupcao;3qa renderizadas;readback16h18est9ads com1487083forcerunstatus nas250/251/252/253/257;qa/posprocessamento/ativacao/sb pendentes. coordenacaoantiga isolada sobaprovacao1574527264819777677;0writesmeta nasantigas;nicolas assume ativacaomanual00h.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-23T20:41:20+00:00"
+      "updated_at": "2026-11-23T21:19:36+00:00"
     },
     {
       "agent": "ares",
@@ -12268,5 +12268,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T20:57:34+00:00"
+  "updated_at": "2026-11-23T21:26:48+00:00"
 }
