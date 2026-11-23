@@ -80,5 +80,5 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Skills criativas não autorizam sozinhas campaign write, budget, billing ou credencial; carregar a skill Campaign Ops e validar autoridade.
 - Não produzir final sem validar referência/provider essencial.
 - Não mover/deletar/sobrescrever fora do fluxo autorizado.
-- Não declarar upload, limpeza, geração ou campanha sem readback real.
+- Não declarar upload, limpeza, geração ou campanha sem readback real. Exigir flags de QA explicitamente booleanos e separados dos registros de mídia; um objeto não vazio em `clean` não comprova `clean=true`. Validar o schema serializado antes da publicação e da limpeza local.
 - Publicar mapas e conclusões programáticos somente com a identidade Ares confirmada por `GET /users/@me`; acesso de leitura por um helper compartilhado não comprova identidade de publicação. Usar o poster do próprio profile e validar autor, canal e conteúdo no readback, conforme `references/mixed-media-drive-intake-ready-legacy.md`.

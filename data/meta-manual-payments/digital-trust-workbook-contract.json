@@ -105,7 +105,7 @@
   "cron_job_id": "2ee720363d7d",
   "funding_regroup_authority": "1564115318887161857",
   "funding_regroup_policy": "Read live funding; automatically move line-to-card accounts to upper card block in same worksheet, preserving all authorized IDs from account_ids, data, notes, links and recalculated totals. Never change Meta billing. Reverse/unknown transitions remain fail-closed.",
-  "general_refresh_blocker": null,
+  "general_refresh_blocker": "provider_technical_error_on_pc1_accounts_no_authentication_gate",
   "h_source": "accounts_list_outstanding_balance",
   "h_source_history": [
     {
@@ -180,80 +180,90 @@
     "verified_at": "2026-11-20T19:51:29.936515-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "completed_validated",
-    "business_refresh_complete": true,
-    "scheduled_at": "2026-11-23T08:02:00-05:00",
-    "verified_at": "2026-11-23T08:46:20.802187-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
+    "status": "partial_provider_technical_error",
+    "business_refresh_complete": false,
+    "scheduled_at": "2026-11-23T14:02:00-05:00",
+    "verified_at": "2026-11-23T14:12:02.315390-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T1402/financial-validation.json",
     "accounts": 55,
     "groups": {
       "Cartão de crédito": 15,
       "Linha de crédito": 40
     },
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261123T084420367709",
-    "api_collected_at": "2026-11-23T08:44:15.639626-05:00",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261123T080534744061",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261123T140532761064",
+    "api_collected_at": "2026-11-23T14:05:28.355368-05:00",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261123T140453829528",
     "invoice_period": "2026-10-01",
     "invoice_pending": 30,
     "invoice_due_usd": "417864.11",
     "invoice_outside": [],
-    "fresh_h_count": 40,
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T080612224053",
+    "fresh_h_count": 1,
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T140534822352",
     "h_source": "accounts_list_outstanding_balance",
-    "h_usd": "736190.86",
-    "h_times": [
-      "2026-11-23T08:09:13.976310-05:00",
-      "2026-11-23T08:09:39.013295-05:00",
-      "2026-11-23T08:10:07.039080-05:00",
-      "2026-11-23T08:10:29.089464-05:00",
-      "2026-11-23T08:10:51.224368-05:00",
-      "2026-11-23T08:11:20.097679-05:00",
-      "2026-11-23T08:12:42.185736-05:00",
-      "2026-11-23T08:13:07.130101-05:00",
-      "2026-11-23T08:13:33.138539-05:00",
-      "2026-11-23T08:13:53.128410-05:00",
-      "2026-11-23T08:14:14.507898-05:00",
-      "2026-11-23T08:14:40.338897-05:00",
-      "2026-11-23T08:16:29.038738-05:00",
-      "2026-11-23T08:16:54.795037-05:00",
-      "2026-11-23T08:17:22.265289-05:00",
-      "2026-11-23T08:17:49.957396-05:00",
-      "2026-11-23T08:18:13.298543-05:00",
-      "2026-11-23T08:18:33.192196-05:00",
-      "2026-11-23T08:20:04.439163-05:00",
-      "2026-11-23T08:20:33.127075-05:00",
-      "2026-11-23T08:20:58.082137-05:00",
-      "2026-11-23T08:21:28.273823-05:00",
-      "2026-11-23T08:21:51.735411-05:00",
-      "2026-11-23T08:22:14.827035-05:00",
-      "2026-11-23T08:23:50.994592-05:00",
-      "2026-11-23T08:24:14.863759-05:00",
-      "2026-11-23T08:24:41.248429-05:00",
-      "2026-11-23T08:25:10.318216-05:00",
-      "2026-11-23T08:25:31.995064-05:00",
-      "2026-11-23T08:25:52.795753-05:00",
-      "2026-11-23T08:27:20.881722-05:00",
-      "2026-11-23T08:27:48.615480-05:00",
-      "2026-11-23T08:28:13.118351-05:00",
-      "2026-11-23T08:28:35.028743-05:00",
-      "2026-11-23T08:28:57.032927-05:00",
-      "2026-11-23T08:29:25.772996-05:00",
-      "2026-11-23T08:30:56.752074-05:00",
-      "2026-11-23T08:31:24.576348-05:00",
-      "2026-11-23T08:31:48.933980-05:00",
-      "2026-11-23T08:32:19.292690-05:00"
+    "h_verified_ids": [
+      "336562339356179"
     ],
-    "pending_ui": [],
-    "renewed_d_ids": [
-      "1062446663435585",
-      "1414197490675732",
-      "1543098427832443",
-      "1547524853816263",
-      "1867022354284742",
-      "2852476828464907"
+    "h_pending_ids": [
+      "1001115192056600",
+      "1018267074603840",
+      "1034081997659047",
+      "1062887799996139",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1419148446852410",
+      "1492168699397108",
+      "1498990138663094",
+      "1526280818302320",
+      "1542257646409395",
+      "1583000095650153",
+      "1600310064116258",
+      "1736068407518263",
+      "1744611463000838",
+      "1753257812779707",
+      "1754588462350629",
+      "1829406761389732",
+      "1851640026221079",
+      "1877104513669062",
+      "2031917360813819",
+      "2039876850230678",
+      "2429758060563333",
+      "2633813727134360",
+      "26632890069640784",
+      "311204101516831",
+      "3188620887977617",
+      "3752157451670648",
+      "4511685129081248",
+      "536294549227786",
+      "781612907182683",
+      "7840111366055613",
+      "787796726891306",
+      "814915838330687",
+      "869857549542755",
+      "897046653487466",
+      "908704754163659",
+      "937846586033361"
     ],
-    "renewed_d_count": 6,
+    "h_preserved_historical_count": 39,
+    "pending_ui": [
+      {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
+    "renewed_d_ids": [],
     "historical_blank_d": [
       {
         "account_id": "336562339356179",
@@ -454,7 +464,7 @@
     "historical_d_values_ledger_validated": 16,
     "source_parity_cgij": true,
     "invoice_source_to_live_sheet_exact": true,
-    "h_ledger_to_live_sheet_exact": true,
+    "published_h_source_parity": true,
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
     "outside_write_masks_preserved": true,
@@ -489,31 +499,16 @@
       "payments_executed": 0
     },
     "lease_free": true,
-    "average_periods": [
-      [
-        "2026-11-20",
-        "2026-11-22"
-      ]
-    ],
-    "month_periods": [
-      [
-        "2026-11-01",
-        "2026-11-23"
-      ]
-    ],
-    "browser_tabs_preserved": true,
-    "browser_tabs_original_count": 8,
+    "blocker": "Native Meta Accounts displayed This page is not available right now / technical error after first UIA collection; no authentication gate. Preserved surface-recovery1/surface.png. Stopped inputs without reload or alternate profile.",
+    "authentication_gate_confirmed": false,
     "payments_executed": 0,
     "meta_writes": 0,
     "billing_changes": 0,
-    "next_run_at": "2026-11-23T14:02:00-05:00",
+    "next_run_at": "2026-11-23T21:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "delivery": "cron_final_response_only",
-    "totals_usd": {
-      "average_daily": "22426.41",
-      "balance": "740829.63",
-      "month_spend": "477974.44"
-    }
+    "owner": "zeus",
+    "resume": "Same existing recurring job; revalidate provider surface and reconcile current ledgers before pending H/D steps. No duplicate job/writer created."
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -577,28 +572,42 @@
   "pay_now_collection_policy": "Rodolfo1570815017794674749 delegated resolving the proposed H source change: use literal Outstanding balance of exact Accounts-list row; source accounts_list_outstanding_balance, original per-account timestamps, matching name/ID/BM/header verified in pixels and AX. Applies to all40 current line-funded IDs under55-account scope. Rename H to actual metric, never Pay now modal or assumed Current balance equivalence. No Meta/billing/payment changes.",
   "pay_now_column": "Saldo pendente — Outstanding balance",
   "pay_now_column_authority_message": "1564382301155098717",
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T080612224053",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T140534822352",
   "pay_now_rule_authority_message": "1570815017794674749",
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "resolved_current_event_pending_ui_empty",
-    "account_ids": [],
-    "pending_ui": [],
-    "resolved_account_ids": [
-      "1062446663435585",
-      "1414197490675732",
+    "status": "pending_provider_technical_error",
+    "account_ids": [
+      "1150399088163771",
       "1543098427832443",
-      "1547524853816263",
-      "1867022354284742",
       "2852476828464907"
     ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
-    "verified_at": "2026-11-23T08:46:20.802187-05:00",
+    "pending_ui": [
+      {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
+    "resolved_account_ids": [],
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T1402/financial-validation.json",
+    "verified_at": "2026-11-23T14:12:02.315390-05:00",
     "historical_blank_count": 39,
     "history_gaps_are_not_zero": true,
-    "prior_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
-    "next_step": "Existing next scheduled tick; revalidate actual surface and collect new events only. Historical D blanks remain qualified, not recent pending events."
+    "prior_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
+    "owner": "zeus",
+    "next_step": "Same existing recurring job; revalidate provider surface and reconcile current ledgers before pending H/D steps. No duplicate job/writer created."
   },
   "pending_new_account_fields": {
     "D_account_ids": [

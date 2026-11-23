@@ -2103,12 +2103,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574478797959340234",
-      "next_step": "Consumir audit.log e exigir final-audit completo30 com provas permanentes; dry-run/publicação mapa30 e GET das partes; limpeza mídia transitória só depois; resumo final na origem",
+      "next_step": "Entregar resumo final e link READY na origem; nenhum saldo. Não repetir tratamento nomes arquivo mapa ou reabrir por notificação atrasada",
       "objective": "Tratar organizar30 vídeos Kelly US SHEIN ES common preservando RAW same-ID e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1574478797959340234/audit.log",
-      "state": "consume proc_e591d27490d1 terminou exit0;request7e65d278333ad9d7f9023f4949460bd9 complete30/30 em8claims; manutenção final executada pelo mesmo monitor. auditor independente foreground proc_4972390b8466 ativo; não repetir tratamento/arquivo/naming",
+      "source": "data/ares/creative-ops/executions/intake-1574478797959340234/delivery-closure.json",
+      "state": "completed: request7e65d278333ad9d7f9023f4949460bd9 complete30/30 em8claims/finalizações; auditoria integral exit0 confirmou30originais same-id,60providers/stockraw+clean, hashes clean=true e reservas.30linhagens novas/0duplicatas/0pendências. mapa30 publicado em3partes ares com get1574501805218471993,1574501810583109765,1574501815536320625. schema boolean clean suplementado sem sobrescrever auditoria original; mídia transitória removida após provas. nenhuma campanha/acl/credencial/delete remoto",
       "thread_id": "1574478797959340234",
-      "updated_at": "2026-11-23T19:06:11+00:00"
+      "updated_at": "2026-11-23T19:09:17+00:00"
     },
     {
       "agent": "ares",
@@ -10369,12 +10369,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Mesmo job proximo23nov14:02ET; nova coleta completa contratada e somente eventosDnovos. Entrega operacional automatica; REPORT-INFRA pendente por restricao de envio direto desta ocorrencia.",
-      "objective": "Refresh recorrente23nov08:02ET das mesmas55contas e40H; mesmo job/workbook",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
-      "state": "completed_validated: api55 final08:44et,h40 pixels+ledger comhorasproprias,d6provasnovas,pending_ui vazio,invoicesoutubro30usd417864.11;39dhistoricosvaziosqualificados;outraaba e8abaschrome preservadas;0pagamentos/billing.",
+      "next_step": "Zeus mantém pendência H39/D3. Mesmo job existente21:02ET, sem novo job/writer: revalidar superfície e reconciliar ledgers antes da retomada; não repetir prova já publicada. REPORT-INFRA pendente pela restrição de envio direto do cron.",
+      "objective": "Refresh recorrente23nov14:02ET das mesmas55contas e40H; mesmo job/workbook",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T1402/financial-validation.json",
+      "state": "parcial validado: api55 e invoicesoutubro atualizadas; h1 novo e39 históricos preservados; d3eventos pendentes; meta accounts exibe erro técnico temporário confirmado em pixels, sem gate autenticação. inputs interrompidos sem reload/bypass. outras abas preservadas; lease livre;0pagamentos/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-23T13:47:40+00:00"
+      "updated_at": "2026-11-23T19:12:40+00:00"
     },
     {
       "agent": "zeus",
@@ -12208,5 +12208,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T19:06:11+00:00"
+  "updated_at": "2026-11-23T19:12:40+00:00"
 }
