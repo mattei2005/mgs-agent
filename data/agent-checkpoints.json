@@ -2123,12 +2123,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574555584013934743",
-      "next_step": "Foreground unico consumir mesmo request blocos4; QA completa nao repetir; monitor/claim/complete canônicos; arquivo same-ID e auditoria final",
+      "next_step": "Nao iniciar writer paralelo; foreground consume continua mesmo request em6blocos4; consultar claims/recibos ate término; auditar24 originais same-ID e48providers/atalhos e mapa",
       "objective": "Tratar organizar24 videos Kelly US SHEIN EN common; preservar RAW same-ID e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1574555584013934743/plan.json",
-      "state": "registered request31313c81aa85d531bf1cc780281b2835;24raw baixados hashes tecnicos validos clean=true frames/audio preservados;revisao visual24 en pv;plano common preparado",
+      "source": "data/ares/creative-ops/executions/intake-1574555584013934743/foreground-owner.json",
+      "state": "foreground ativo handle proc_d7968b1aee49; request31313c81aa85d531bf1cc780281b2835 batch12661b7963c4821c073f62de705df2a2 tratado4/24; complete canônico em arquivo/ack; plano e qa integral24 congelados",
       "thread_id": "1574555584013934743",
-      "updated_at": "2026-11-23T22:48:33+00:00"
+      "updated_at": "2026-11-23T22:53:27+00:00"
     },
     {
       "agent": "ares",
@@ -5486,12 +5486,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "External mgs-vps-maint-1574252891898908684-dispatch.service scheduled, exact target read back. Waits for delivered handoff and canonical source/all-agent turn idle; no reboot in active tools. Validator mgs-vps-maint-1574252891898908684-validate.service then independent mgs-vps-maint-1574252891898908684-close.service own acceptance and delivery. On native resume WAIT for validator exit and existing closure; consume /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/final-result.json; no duplicate reboot. Other4hosts/dashboard remain open.",
+      "next_step": "Do not repeat reboot. Inspect /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-blocked.json and original handshake/attempt; recover only the exact failed gate. Existing owner confirmation remains scoped; other hosts unchanged.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
       "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/postboot-result.json",
-      "state": "hostinger_reboot_scheduled_waiting_final_handoff",
+      "state": "hostinger_reboot_dispatch_blocked",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T22:40:58+00:00"
+      "updated_at": "2026-11-23T23:01:13+00:00"
     },
     {
       "agent": "zeus",
@@ -12288,5 +12288,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T22:48:33+00:00"
+  "updated_at": "2026-11-23T23:01:13+00:00"
 }
