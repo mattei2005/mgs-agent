@@ -38,10 +38,12 @@ def main():
   checks['profile_and_unit_configuration_preserved']=all(c.sha(path)==h for path,h in pre['configuration_hashes'].items())
   versions={k:c.run(['dpkg-query','-W','-f=${Version}',k]).stdout.strip() for k in pre['expected_packages']};checks['all_expected_package_versions']=versions==pre['expected_packages'];result['versions']=versions
   checks['dpkg_clean']=not c.run(['dpkg','--audit']).stdout.strip();checks['holds_zero']=not c.run(['apt-mark','showhold']).stdout.strip()
+  refresh=None
   for attempt in range(3):
    refresh=c.run(['apt-get','update','-qq'],timeout=180,check=False)
    if refresh.returncode==0:break
    time.sleep(5*(attempt+1))
+  assert refresh is not None
   checks['apt_refresh_success']=refresh.returncode==0;result['apt_graph']={}
   for n,args in [('upgrade',['apt-get','-s','upgrade']),('full_upgrade',['apt-get','-s','dist-upgrade'])]:
    r=c.run(args);rows=[l for l in r.stdout.splitlines() if l.startswith(('Inst ','Remv ')) or 'upgraded,' in l];result['apt_graph'][n]=rows;checks[n+'_zero_candidates']=not any(l.startswith(('Inst ','Remv ')) for l in rows)

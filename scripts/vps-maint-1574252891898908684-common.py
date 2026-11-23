@@ -47,7 +47,7 @@ def all_active_turns():
  return active
 
 def discord_get(channel,suffix):
- spec=importlib.util.spec_from_file_location('mgs_discord_poster',ROOT/'scripts/discord-bot-post.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.load_env(m.DEFAULT_ENV)
+ spec=importlib.util.spec_from_file_location('mgs_discord_poster',ROOT/'scripts/discord-bot-post.py');assert spec and spec.loader;m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.load_env(m.DEFAULT_ENV)
  token=os.environ.get('MGS_DISCORD_BOT_TOKEN_OVERRIDE') or os.environ['DISCORD_BOT_TOKEN']
  req=urllib.request.Request('https://discord.com/api/v10/channels/'+str(channel)+'/messages'+suffix,headers={'Authorization':'Bot '+token,'User-Agent':'MGS-Zeus/1.0'})
  with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
@@ -60,7 +60,7 @@ def post_once(name,text):
   raise RuntimeError('ambiguous prior '+name+' send; do not duplicate')
  payload={'content':text,'allowed_mentions':{'parse':[],'users':[],'roles':[],'replied_user':False}}
  atomic(path,{'state':'posting','at':now(),'text':text})
- r=run([ROOT/'scripts/discord-bot-post.py','--channel-id',THREAD],check=False) if False else subprocess.run([str(ROOT/'scripts/discord-bot-post.py'),'--channel-id',THREAD],input=json.dumps(payload),capture_output=True,text=True,timeout=60,env=ENV)
+ r=subprocess.run([str(ROOT/'scripts/discord-bot-post.py'),'--channel-id',THREAD],input=json.dumps(payload),capture_output=True,text=True,timeout=60,env=ENV)
  atomic(B/(name+'-stdout.json'),{'rc':r.returncode,'stdout':r.stdout,'stderr':r.stderr})
  match=re.search(r'message_id=(\d+)',r.stdout)
  if not match:raise RuntimeError(name+' send result ambiguous; inspect preserved stdout')

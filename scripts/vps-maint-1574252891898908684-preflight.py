@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pure, non-lifecycle preflight for the owner-confirmed Hostinger operation."""
 import importlib.util,pathlib,os,json,sys,stat
-spec=importlib.util.spec_from_file_location('mgs_reboot_common',pathlib.Path(__file__).with_name('vps-maint-1574252891898908684-common.py'));c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c)
+spec=importlib.util.spec_from_file_location('mgs_reboot_common',pathlib.Path(__file__).with_name('vps-maint-1574252891898908684-common.py'));assert spec and spec.loader;c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c)
 def check_preflight(installed=True,require_git=False):
  p=c.load(c.B/'prestate.json');checks={}
  checks['owner_confirmation']=p['authorization_message_id']==c.AUTH
