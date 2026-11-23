@@ -2123,12 +2123,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574555584013934743",
-      "next_step": "Nao iniciar writer concorrente; mesmo consume completa saldo. Depois audit.py integral24 e publish-map.py dry-run/apply com readback;cleanup transitório e fechamento",
+      "next_step": "Entregar resumo final e linkREADY na origem; nenhum saldo. Não repetir tratamento, nomes, arquivo ou mapa por notificação atrasada.",
       "objective": "Tratar organizar24 videos Kelly US SHEIN EN common; preservar RAW same-ID e reservas",
-      "source": "data/ares/creative-ops/executions/intake-1574555584013934743/foreground-owner.json",
-      "state": "foreground proc_d7968b1aee49 ativo; 16/24 claims completos; request31313c81aa85d531bf1cc780281b2835;batch11a069b8628aee77d3baf36411feeea3;qa24 e plano originais preservados",
+      "source": "data/ares/creative-ops/executions/intake-1574555584013934743/delivery-closure.json",
+      "state": "completed:request31313c81aa85d531bf1cc780281b2835 complete24/24 em6claims;auditoria integral exit0 confirmou24originais same-id,48providers/estoques raw+clean,hashes clean=true e reservas.24novos/0duplicatas/0pendências.mapa24 publicado e relido em2partes1574572352975667301,1574572357308121517.mídia transitória removida após provas.2videosjaquetas015/016mantêm textos secundários gerados malformados,conteúdo preservado.sem campanha,acl,credencial,deleteremoto",
       "thread_id": "1574555584013934743",
-      "updated_at": "2026-11-23T23:29:49+00:00"
+      "updated_at": "2026-11-23T23:48:45+00:00"
     },
     {
       "agent": "ares",
@@ -12288,5 +12288,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T23:29:49+00:00"
+  "updated_at": "2026-11-23T23:48:45+00:00"
 }
