@@ -1,0 +1,126 @@
+{
+  "request_id": "shein-1574487609915211817",
+  "meta_verified": true,
+  "verified_at": "2026-11-23T18:14:33.728546+00:00",
+  "campaigns": [
+    {
+      "id": "120252700593260744",
+      "number": "313",
+      "budget_minor": 10000,
+      "bid_strategy": "COST_CAP",
+      "bid_minor": [
+        90
+      ],
+      "start_time": "2026-11-23T13:12:45-0500",
+      "ad_ids": [
+        "120252700594690744",
+        "120252700594650744"
+      ],
+      "warnings": []
+    }
+  ],
+  "tracking": [
+    {
+      "campaign_id": "120252700593260744",
+      "ad_id": "120252700594690744",
+      "values": {
+        "utm_campaign": [
+          "b01fb04c313"
+        ],
+        "utm_adgroup": [
+          "b01fb04c313g01"
+        ]
+      }
+    },
+    {
+      "campaign_id": "120252700593260744",
+      "ad_id": "120252700594650744",
+      "values": {
+        "utm_campaign": [
+          "b01fb04c313"
+        ],
+        "utm_adgroup": [
+          "b01fb04c313g01"
+        ]
+      }
+    }
+  ],
+  "key_values": {
+    "utm_campaign": [
+      "b01fb04c313"
+    ],
+    "utm_adgroup": [
+      "b01fb04c313g01"
+    ]
+  },
+  "new_budget_minor": 10000,
+  "warnings": [],
+  "posts_preserved": false,
+  "sb": {
+    "domain": "yolokfx.com",
+    "publisher_id": "digital-trust_yolokfx",
+    "contract_url": "https://app.smartbiddingdigital.com/assets/KeyValues-TMCdMNR_.js",
+    "independent_readback": "unavailable_no_documented_listing",
+    "results": {
+      "utm_campaign": {
+        "http": 201,
+        "response": {
+          "publisherId": "digital-trust_yolokfx",
+          "field": "utm_campaign",
+          "values": [
+            "b01fb04c313"
+          ],
+          "gamInsert": "ok",
+          "networkCode": "21922122164"
+        },
+        "recorded_at": "2026-11-23T18:15:04.679288+00:00"
+      },
+      "utm_adgroup": {
+        "http": 201,
+        "response": {
+          "publisherId": "digital-trust_yolokfx",
+          "field": "utm_adgroup",
+          "values": [
+            "b01fb04c313g01"
+          ],
+          "gamInsert": "ok",
+          "networkCode": "21922122164"
+        },
+        "recorded_at": "2026-11-23T18:15:11.965650+00:00"
+      }
+    }
+  },
+  "final_review": {
+    "read_at": "2026-11-23T18:15:17.022680+00:00",
+    "ads": [
+      {
+        "id": "120252700594690744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700593260744",
+        "adset_id": "120252700593720744"
+      },
+      {
+        "id": "120252700594650744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700593260744",
+        "adset_id": "120252700593720744"
+      }
+    ],
+    "configured": {
+      "ACTIVE": 2
+    },
+    "effective": {
+      "PENDING_REVIEW": 2
+    }
+  },
+  "active_account_budget": {
+    "read_at": "2026-11-23T18:15:17.022680+00:00",
+    "currency": "USD",
+    "minor": 272596,
+    "campaign_count": 20
+  }
+}
