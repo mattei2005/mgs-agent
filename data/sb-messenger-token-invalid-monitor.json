@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 1,
+  "consecutive_failures": 0,
   "daily": {
     "date": "2026-11-23",
     "last_result": {
@@ -7258,7 +7258,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-23T17:12:11-05:00",
+  "last_check": "2026-11-23T17:27:13-05:00",
   "last_delivery": {
     "at": "2026-11-23T15:12:11-05:00",
     "cursor_ids": [
@@ -7270,11 +7270,7 @@
     "message_ids": [],
     "notification_ids": []
   },
-  "last_error": {
-    "at": "2026-11-23T17:12:11-05:00",
-    "message": "APIRequestContext.get: read ECONNRESET\nCall log:\n  - → GET https://api.jbfdigital.com.br/notification\n    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\n    - accept: application/json, text/plain, */*\n    - accept-encoding: gzip,deflate,br\n    - authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjdJa01jUFhfLXpDUEJuOC02YnA5RSJ9.eyJpc3MiOiJodHRwczovL2piZmRpZ2l0YWwudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDZhM2YyOWJkMj",
-    "type": "Error"
-  },
+  "last_error": null,
   "last_seen_id": 768757,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",

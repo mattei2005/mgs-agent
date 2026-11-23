@@ -2,15 +2,6 @@
   "checkpoints": [
     {
       "agent": "zeus",
-      "id": "DR-RECOVERY-4d9d9e58fa760d6a46dd7f29",
-      "objective": "Recover only missing ACK/finalization of the original hourly encrypted backup",
-      "state": "original_snapshot_and_same_ACK_verified_supervisor_verification_pending",
-      "next_step": "Existing owning supervisor must verify occurrence receipt and deliver diagnosis; never replay backup or rewrite native scheduler failure history. REPORT-INFRA readback recorded in evidence.",
-      "source": "reports/automation-recovery-4d9d9e58fa760d6a46dd7f29/independent-readback.json",
-      "thread_id": "1527004682382479380"
-    },
-    {
-      "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
       "next_step": "Encerrado o último ciclo autorizado; nenhuma próxima data ou recorrência. Zero pendências operacionais.",
       "objective": "Rotina finita de aquecimento dos quatro perfis autorizados; zero comentários",
@@ -3820,6 +3811,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DR-RECOVERY-4d9d9e58fa760d6a46dd7f29",
+      "next_step": "Existing owning supervisor must verify occurrence receipt and deliver diagnosis; never replay backup or rewrite native scheduler failure history. REPORT-INFRA readback recorded in evidence.",
+      "objective": "Recover only missing ACK/finalization of the original hourly encrypted backup",
+      "source": "reports/automation-recovery-4d9d9e58fa760d6a46dd7f29/independent-readback.json",
+      "state": "original_snapshot_and_same_ACK_verified_supervisor_verification_pending",
+      "thread_id": "1527004682382479380",
+      "updated_at": "2026-11-23T22:26:36.687291+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1556244505953574952",
       "next_step": "Consumir executor; validar backup/restauração/cron/monitor; inventário, audit e REPORT-INFRA; final somente pelo resolvedor",
       "objective": "Recuperar restore semanal Hermes 940e9827b1ac e corrigir captura dos reports canônicos registrados",
@@ -5475,12 +5476,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Lote3 confirmado1574523547114537153 executado;22/22 checks e APT/Snap sem candidatos. Primeiro lote e complemento também concluídos. Próximo gate:reboot Hostinger147→151 e preparar/ativar validador externo;prereqs em secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json. Nenhum reboot agendado/executor armado. Após confirmação,gerar/testar/fixar hashes do verificador/finalizador/unit e handoff+turno inativo antes do dispatch. Demais4hosts/dashboard abertos.",
+      "next_step": "Rodolfo1574551205768732753 confirmou reboot Hostinger147→151 e validação externa propostos1574527436887035986. Pacotes atuais. Preparar/testar/fixar hashes de validator+unit+pure-preflight+finalizer+closure e preservar executor único. Nenhum reboot antes de handoff final lido e gateway_routing canônico sem turno ativo. Demais4hosts/dashboard abertos.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
       "source": "reports/vps-maint-1574252891898908684-hostinger-three-packages.md",
-      "state": "hostinger_packages_completed_validated_reboot_critical_gate_pending",
+      "state": "hostinger_reboot_confirmation_received_preparing_external_validator",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T20:38:57+00:00"
+      "updated_at": "2026-11-23T22:26:36+00:00"
     },
     {
       "agent": "zeus",
@@ -12277,5 +12278,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T21:26:48+00:00"
+  "updated_at": "2026-11-23T22:26:36+00:00"
 }
