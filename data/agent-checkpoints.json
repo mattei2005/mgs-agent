@@ -1903,12 +1903,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1574274189559599105",
-      "next_step": "Preflight live; collect fresh Meta/SB/UI; render; review; deliver and GET reconcile; archive",
+      "next_step": "Publish only reviewed artifacts to exact seven destinations then GET final reconciliation; archive",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1574274189559599105/request.json",
-      "state": "prepared; message authenticated; seven exact canonical pairs; code only reuse; no campaign writes",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1574274189559599105/approved-review.json",
+      "state": "rendered_and_reviewed;7accounts;101campaigns;35parts+7summaries;65regressions+5summary_fixtures+5gatefixtures_pass;fresh_financial23:05-23:06est;zero_meta_writes",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-23T04:05:35+00:00"
+      "updated_at": "2026-11-23T04:11:03+00:00"
     },
     {
       "agent": "ares",
@@ -12168,5 +12168,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T04:05:35+00:00"
+  "updated_at": "2026-11-23T04:11:04+00:00"
 }
