@@ -69860,6 +69860,65 @@
       "source_thread_id": "1574249078584377544",
       "next_gate": "Exact package/runtime/reboot confirmation with current backup/rollback before mutation",
       "learning": "vps-maintenance-and-backup-governance/references/maintenance-preflight-integrity-boundaries.md"
+    },
+    {
+      "id": "VPS-MAINT-1574252891898908684",
+      "agent": "zeus",
+      "type": "controlled_multi_host_maintenance",
+      "status": "first_host_prepared_critical_confirmation_pending",
+      "source_message_id": "1574252891898908684",
+      "source_thread_id": "1574249078584377544",
+      "report": "reports/vps-maint-1574252891898908684-preparation.md",
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
+      "critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/critical-plan.json",
+      "critical_manifest_sha256": "454ab163078a007d3b1f7d4cefbb039cf30ea9bda38b9ace622014c1346fa778",
+      "first_host": "srv1767265",
+      "first_lot": {
+        "apt_upgrades": 34,
+        "apt_new": 6,
+        "apt_removals": 0,
+        "npm": "12.2.0 ->12.2.3",
+        "rollback_packages_verified": 34,
+        "original_rollback_debs": 24,
+        "reconstructed_rollback_debs": 10
+      },
+      "production_packages_changed": false,
+      "reboot_executed": false,
+      "ledger": [
+        {
+          "target": "Hostinger packages/npm",
+          "state": "prepared_awaiting_critical_confirmation"
+        },
+        {
+          "target": "Hostinger core22",
+          "state": "pending_refresh_rotation_gate"
+        },
+        {
+          "target": "Hostinger reboot",
+          "state": "pending_after_packages_and_detached_validator"
+        },
+        {
+          "target": "MatteiInc01 packages/reboot",
+          "state": "pending_preparation_and_critical_confirmation"
+        },
+        {
+          "target": "MatteiInc02 packages/reboot",
+          "state": "pending_preparation_and_critical_confirmation"
+        },
+        {
+          "target": "MatteiInc03JBF packages/reboot",
+          "state": "pending_preparation_and_critical_confirmation"
+        },
+        {
+          "target": "Hestia packages/reboot",
+          "state": "pending_preparation_and_critical_confirmation"
+        },
+        {
+          "target": "dashboard Node22.23.5",
+          "state": "pending_Astra_route_and_separate_runtime_gate"
+        }
+      ],
+      "updated_at": "2026-11-23T02:48:32.076384+00:00"
     }
   ],
   "profile_skill_references": [
