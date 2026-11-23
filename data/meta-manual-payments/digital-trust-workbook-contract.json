@@ -180,103 +180,80 @@
     "verified_at": "2026-11-20T19:51:29.936515-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "partial_validated_waiting_human_meta_passkey",
-    "business_refresh_complete": false,
-    "scheduled_at": "2026-11-22T21:02:00-05:00",
-    "verified_at": "2026-11-22T21:06:44.783566-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
+    "status": "completed_validated",
+    "business_refresh_complete": true,
+    "scheduled_at": "2026-11-23T08:02:00-05:00",
+    "verified_at": "2026-11-23T08:46:20.802187-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
     "accounts": 55,
     "groups": {
       "Cartão de crédito": 15,
       "Linha de crédito": 40
     },
     "fresh_metrics_count": 55,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261122T210518721401",
-    "api_collected_at": "2026-11-22T21:05:16.198902-05:00",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261122T210449597781",
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261123T084420367709",
+    "api_collected_at": "2026-11-23T08:44:15.639626-05:00",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261123T080534744061",
     "invoice_period": "2026-10-01",
     "invoice_pending": 30,
     "invoice_due_usd": "417864.11",
     "invoice_outside": [],
-    "fresh_h_count": 0,
-    "preserved_h_count": 40,
-    "preserved_h_ids": [
-      "1419148446852410",
-      "1753257812779707",
-      "1107653168698121",
-      "2633813727134360",
-      "2039876850230678",
-      "1851640026221079",
-      "1001115192056600",
-      "1018267074603840",
-      "1062887799996139",
-      "2031917360813819",
-      "897046653487466",
-      "1498990138663094",
-      "814915838330687",
-      "3188620887977617",
-      "3752157451670648",
-      "4511685129081248",
-      "1829406761389732",
-      "937846586033361",
-      "336562339356179",
-      "1744611463000838",
-      "1245683183659911",
-      "311204101516831",
-      "1526280818302320",
-      "536294549227786",
-      "1085117577390237",
-      "1736068407518263",
-      "1877104513669062",
-      "869857549542755",
-      "7840111366055613",
-      "1583000095650153",
-      "2429758060563333",
-      "781612907182683",
-      "787796726891306",
-      "1600310064116258",
-      "908704754163659",
-      "26632890069640784",
-      "1754588462350629",
-      "1542257646409395",
-      "1034081997659047",
-      "1492168699397108"
-    ],
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261122T210520697700",
+    "fresh_h_count": 40,
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T080612224053",
     "h_source": "accounts_list_outstanding_balance",
-    "h_values_notes_original_times_preserved": true,
-    "pending_ui": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1547524853816263",
-        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1867022354284742",
-        "name": "Growpowerhub-US-SHEIN-EN-06-G006",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
+    "h_usd": "736190.86",
+    "h_times": [
+      "2026-11-23T08:09:13.976310-05:00",
+      "2026-11-23T08:09:39.013295-05:00",
+      "2026-11-23T08:10:07.039080-05:00",
+      "2026-11-23T08:10:29.089464-05:00",
+      "2026-11-23T08:10:51.224368-05:00",
+      "2026-11-23T08:11:20.097679-05:00",
+      "2026-11-23T08:12:42.185736-05:00",
+      "2026-11-23T08:13:07.130101-05:00",
+      "2026-11-23T08:13:33.138539-05:00",
+      "2026-11-23T08:13:53.128410-05:00",
+      "2026-11-23T08:14:14.507898-05:00",
+      "2026-11-23T08:14:40.338897-05:00",
+      "2026-11-23T08:16:29.038738-05:00",
+      "2026-11-23T08:16:54.795037-05:00",
+      "2026-11-23T08:17:22.265289-05:00",
+      "2026-11-23T08:17:49.957396-05:00",
+      "2026-11-23T08:18:13.298543-05:00",
+      "2026-11-23T08:18:33.192196-05:00",
+      "2026-11-23T08:20:04.439163-05:00",
+      "2026-11-23T08:20:33.127075-05:00",
+      "2026-11-23T08:20:58.082137-05:00",
+      "2026-11-23T08:21:28.273823-05:00",
+      "2026-11-23T08:21:51.735411-05:00",
+      "2026-11-23T08:22:14.827035-05:00",
+      "2026-11-23T08:23:50.994592-05:00",
+      "2026-11-23T08:24:14.863759-05:00",
+      "2026-11-23T08:24:41.248429-05:00",
+      "2026-11-23T08:25:10.318216-05:00",
+      "2026-11-23T08:25:31.995064-05:00",
+      "2026-11-23T08:25:52.795753-05:00",
+      "2026-11-23T08:27:20.881722-05:00",
+      "2026-11-23T08:27:48.615480-05:00",
+      "2026-11-23T08:28:13.118351-05:00",
+      "2026-11-23T08:28:35.028743-05:00",
+      "2026-11-23T08:28:57.032927-05:00",
+      "2026-11-23T08:29:25.772996-05:00",
+      "2026-11-23T08:30:56.752074-05:00",
+      "2026-11-23T08:31:24.576348-05:00",
+      "2026-11-23T08:31:48.933980-05:00",
+      "2026-11-23T08:32:19.292690-05:00"
     ],
+    "pending_ui": [],
+    "renewed_d_ids": [
+      "1062446663435585",
+      "1414197490675732",
+      "1543098427832443",
+      "1547524853816263",
+      "1867022354284742",
+      "2852476828464907"
+    ],
+    "renewed_d_count": 6,
     "historical_blank_d": [
       {
         "account_id": "336562339356179",
@@ -478,7 +455,6 @@
     "source_parity_cgij": true,
     "invoice_source_to_live_sheet_exact": true,
     "h_ledger_to_live_sheet_exact": true,
-    "d_values_notes_preserved": true,
     "other_sheet_data_unchanged": true,
     "other_sheets_count": 1,
     "outside_write_masks_preserved": true,
@@ -515,10 +491,6 @@
     "lease_free": true,
     "average_periods": [
       [
-        "2026-11-19",
-        "2026-11-21"
-      ],
-      [
         "2026-11-20",
         "2026-11-22"
       ]
@@ -526,33 +498,21 @@
     "month_periods": [
       [
         "2026-11-01",
-        "2026-11-22"
-      ],
-      [
-        "2026-11-01",
         "2026-11-23"
       ]
     ],
-    "blocker": {
-      "reason": "Loaded Meta /security/twofactor/reauth/ Confirm it is you with your passkey; Rodolfo Facebook, exact approved Chrome PID and handle, AX and actual screenshot inspected",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/surface.png",
-      "authentication_gate": true,
-      "inputs_stopped": true,
-      "inputs_this_run": 0,
-      "reloads": 0
-    },
     "browser_tabs_preserved": true,
-    "browser_tab_exact_parity": "No browser input, navigation or tab changes in this occurrence; existing human gate preserved",
+    "browser_tabs_original_count": 8,
     "payments_executed": 0,
     "meta_writes": 0,
     "billing_changes": 0,
-    "next_run_at": "2026-11-23T08:02:00-05:00",
+    "next_run_at": "2026-11-23T14:02:00-05:00",
     "report_infra_status": "pending_cron_delivery_only_no_direct_send",
     "delivery": "cron_final_response_only",
     "totals_usd": {
-      "average_daily": "21638.53",
-      "balance": "735658.60",
-      "month_spend": "470229.31"
+      "average_daily": "22426.41",
+      "balance": "740829.63",
+      "month_spend": "477974.44"
     }
   },
   "layout_version": 3,
@@ -617,55 +577,28 @@
   "pay_now_collection_policy": "Rodolfo1570815017794674749 delegated resolving the proposed H source change: use literal Outstanding balance of exact Accounts-list row; source accounts_list_outstanding_balance, original per-account timestamps, matching name/ID/BM/header verified in pixels and AX. Applies to all40 current line-funded IDs under55-account scope. Rename H to actual metric, never Pay now modal or assumed Current balance equivalence. No Meta/billing/payment changes.",
   "pay_now_column": "Saldo pendente — Outstanding balance",
   "pay_now_column_authority_message": "1564382301155098717",
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261110T140537683569",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261123T080612224053",
   "pay_now_rule_authority_message": "1570815017794674749",
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "pending_human_meta_passkey",
-    "account_ids": [
+    "status": "resolved_current_event_pending_ui_empty",
+    "account_ids": [],
+    "pending_ui": [],
+    "resolved_account_ids": [
       "1062446663435585",
-      "1547524853816263",
-      "1867022354284742",
       "1414197490675732",
       "1543098427832443",
+      "1547524853816263",
+      "1867022354284742",
       "2852476828464907"
     ],
-    "pending_ui": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1547524853816263",
-        "name": "Growpowerhub-US-SHEIN-EN-05-G005",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1867022354284742",
-        "name": "Growpowerhub-US-SHEIN-EN-06-G006",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
-    "verified_at": "2026-11-22T21:06:44.783566-05:00",
-    "next_step": "After human Meta passkey authentication, verify approved Rodolfo Chrome and reconcile this occurrence H40/D6 only; preserve published API metrics, original historical sources/times, job and single writer."
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/financial-validation.json",
+    "verified_at": "2026-11-23T08:46:20.802187-05:00",
+    "historical_blank_count": 39,
+    "history_gaps_are_not_zero": true,
+    "prior_evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261122T2102/partial-validation.json",
+    "next_step": "Existing next scheduled tick; revalidate actual surface and collect new events only. Historical D blanks remain qualified, not recent pending events."
   },
   "pending_new_account_fields": {
     "D_account_ids": [
