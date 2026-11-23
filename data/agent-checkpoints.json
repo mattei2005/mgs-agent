@@ -5476,12 +5476,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Rodolfo1574551205768732753 confirmou reboot Hostinger147→151 e validação externa propostos1574527436887035986. Pacotes atuais. Preparar/testar/fixar hashes de validator+unit+pure-preflight+finalizer+closure e preservar executor único. Nenhum reboot antes de handoff final lido e gateway_routing canônico sem turno ativo. Demais4hosts/dashboard abertos.",
+      "next_step": "Owner1574551205768732753 confirmed. Tested external controller prepared, validator mgs-vps-maint-1574252891898908684-validate.service and closure mgs-vps-maint-1574252891898908684-close.service enabled/inactive. Dispatch receipt /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-readback.json is authoritative for scheduling; finalizer must see exact handoff and primary routing idle. On native resume, WAIT for validator exit and existing closure, then read /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/final-result.json; no second writer or repeat reboot. Other4hosts/dashboard remain open.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "reports/vps-maint-1574252891898908684-hostinger-three-packages.md",
-      "state": "hostinger_reboot_confirmation_received_preparing_external_validator",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/postboot-result.json",
+      "state": "hostinger_reboot_prepared_verified_waiting_dispatch",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T22:26:36+00:00"
+      "updated_at": "2026-11-23T22:38:15+00:00"
     },
     {
       "agent": "zeus",
@@ -12278,5 +12278,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T22:26:36+00:00"
+  "updated_at": "2026-11-23T22:38:15+00:00"
 }

@@ -35,6 +35,7 @@ def main():
   checks['expected_kernel']=os.uname().release==pre['expected_kernel'];checks['reboot_marker_absent']=not pathlib.Path('/var/run/reboot-required').exists();result['boot_id']=new;result['kernel']=os.uname().release
   result['gateways']=readiness(pre);checks['all_gateway_runtime_and_fresh_discord']=True
   checks['launcher_unchanged']=str(pathlib.Path('/root/.local/bin/hermes').resolve())==pre['hermes_launcher'];checks['runtime_head_unchanged']=c.run(['git','-C',pre['hermes_runtime'],'rev-parse','HEAD']).stdout.strip()==pre['hermes_local_head']
+  checks['runtime_tracked_clean']=not c.run(['git','-C',pre['hermes_runtime'],'status','--porcelain','--untracked-files=no']).stdout.strip()
   checks['profile_and_unit_configuration_preserved']=all(c.sha(path)==h for path,h in pre['configuration_hashes'].items())
   versions={k:c.run(['dpkg-query','-W','-f=${Version}',k]).stdout.strip() for k in pre['expected_packages']};checks['all_expected_package_versions']=versions==pre['expected_packages'];result['versions']=versions
   checks['dpkg_clean']=not c.run(['dpkg','--audit']).stdout.strip();checks['holds_zero']=not c.run(['apt-mark','showhold']).stdout.strip()

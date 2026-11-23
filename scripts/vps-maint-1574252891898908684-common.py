@@ -102,6 +102,9 @@ def inventory_phase(phase,result_path,extra=None):
   if extra:r.update(extra)
   for item in r.get('ledger',[]):
    if item['target']=='Hostinger reboot':item.update({'state':phase,'source':str(result_path)})
+  controllers=[x for x in d.get('runtime_artifacts',[]) if isinstance(x,dict) and x.get('id')=='VPS-REBOOT-CONTROLLER-'+REQUEST]
+  if len(controllers)>1:raise RuntimeError('duplicate reboot controller inventory record')
+  if controllers:controllers[0].update({'status':phase,'updated_at':now(),'final_receipt':str(B/'final-result.json'),'retention':'definitions retained; validator/closure disabled after use; no file deletion'})
  mutate_inventory(ROOT/'data/infra-inventory.json',change)
 def checkpoint(state,next_step):
  run(['/usr/bin/python3',ROOT/'scripts/mgs-knowledge-control.py','checkpoint-upsert','--id',ID,'--agent','zeus','--thread-id',THREAD,'--objective','Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos','--state',state,'--next-step',next_step,'--source',str(B/'postboot-result.json')])
