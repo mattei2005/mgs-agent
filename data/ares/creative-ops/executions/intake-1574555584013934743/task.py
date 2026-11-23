@@ -10,7 +10,7 @@ N=24
 OUT=b.BASE/'data/ares/creative-ops/executions/intake-1574555584013934743'
 OUT.mkdir(parents=True,exist_ok=True)
 INV=b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
-RID='UNREGISTERED'; THREAD='1574555584013934743'; OP='SHEIN_US_EN'; OWNER='528c5710269d'
+RID='31313c81aa85d531bf1cc780281b2835'; THREAD='1574555584013934743'; OP='SHEIN_US_EN'; OWNER='528c5710269d'
 SAN=str(b.BASE/'scripts/clean-creative-metadata.sh')
 def save(path,x): b.atomic_json(path,x)
 def load(path,default=None): return b.read_json(path,default)
