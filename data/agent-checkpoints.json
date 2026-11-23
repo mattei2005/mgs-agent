@@ -1933,12 +1933,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1574521259289608325",
-      "next_step": "Coletar HTTP e RPS UI atuais, renderizar e revisar; publicar e reconciliar por GET; arquivar.",
+      "next_step": "Concluido; nao reenviar. Atraso GAM/SB87-88min conforme publisher; Boostingecon e Mavroa sem atividade no recorte, receita/saldo/ROI n/d; atraso Boostingecon n/d. Novo pedido exige novas fontes; campanhas e agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-1574521259289608325/request.json",
-      "state": "preflight_live_ok;7bindings;usd;america/new_york;date2026-11-23;zero_meta_writes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1574521259289608325/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;59campaigns;28integralparts+7summaries;35unique_messages;cutoffs23/11/2026_15:27-15:28est;usd;zero_meta_writes;archive241bytes_hashes_verified;65regressions+5summaryfixtures+5gatechecks+3archivechecks_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-23T20:27:23+00:00"
+      "updated_at": "2026-11-23T20:34:10+00:00"
     },
     {
       "agent": "ares",
@@ -4733,6 +4733,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1574521189035151514",
+      "next_step": "Obter autorizacao de Rodolfo para manutencao tecnica separada do consumidor central load_ready_assets usando metadata GET e edge thumbnails ja permitidos, sem ampliar guard. Apos manutencao validada, retomar MESMO request-ready com dry-run e campaign confirm-execute, QA integral, ativacao/readback e cadastro SB. Nao repetir uploads nem criar outro request.",
+      "objective": "Duplicar campanha 03 em 10 campanhas com 25 videos especificos, USD25/dia cada, COCAP USD0.90, inicio 24/11/2026 00:05 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/technical-blocker-receipt.json",
+      "state": "media_prestaged_campaign_preflight_blocked. 25/25 midias prontas; grupos 3,2,3,3,2,3,2,2,2,3; origem e complemento autenticados. conta allowed=true. guard local recusa thumbnails como field de dependencia video; metadata get e thumbnails edge separados retornam http200. nenhum writer de campanha iniciado. request-ready, uploads e reservas preservados.",
+      "thread_id": "1558134405313200150",
+      "updated_at": "2026-11-23T20:36:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-AUDIT-1572796764099186809",
       "next_step": "Nenhuma correcao Meta necessaria nesta leitura;usar literal correto no pre-cadastroAdOps",
       "objective": "Auditar campanha239 e corrigir literalUTM malformado enviado por Ares",
@@ -5426,12 +5436,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Complemento confirmado1574520554952728647 executado:tzdata2026f/core22rev3129;22/22 checks;rotação2955 com backup;sem reboot/gateway/Hermes. Nova confirmação crítica3pacotes libssh-4/libssh-gcrypt-4→0.10.6-2ubuntu0.6 e python3-oauthlib→3.2.2-1ubuntu0.1,plano7b300026 preparado. Reboot não agendado;demais4hosts/dashboard abertos.",
+      "next_step": "Rodolfo1574523547114537153 confirmou lote3pacotes apresentado na última resposta:libssh-4/libssh-gcrypt-4→0.10.6-2ubuntu0.6 e python3-oauthlib→3.2.2-1ubuntu0.1,plano7b300026. Revalidar e executar sem nova confirmação dos mesmos itens. Reboot/gateway/Hermes excluídos;demais4hosts/dashboard continuam abertos.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
       "source": "reports/vps-maint-1574252891898908684-hostinger-complement.md",
-      "state": "hostinger_complement_completed_new_three_package_gate_pending",
+      "state": "hostinger_three_package_confirmation_received_revalidating",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T20:29:28+00:00"
+      "updated_at": "2026-11-23T20:34:54+00:00"
     },
     {
       "agent": "zeus",
@@ -12228,5 +12238,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T20:29:28+00:00"
+  "updated_at": "2026-11-23T20:36:09+00:00"
 }
