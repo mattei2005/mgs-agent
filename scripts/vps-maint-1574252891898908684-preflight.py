@@ -9,6 +9,7 @@ def check_preflight(installed=True,require_git=False):
  checks['same_kernel']=os.uname().release==p['current_kernel']
  checks['launcher_unchanged']=str(pathlib.Path('/root/.local/bin/hermes').resolve())==p['hermes_launcher']
  checks['runtime_head_unchanged']=c.run(['git','-C',p['hermes_runtime'],'rev-parse','HEAD']).stdout.strip()==p['hermes_local_head']
+ checks['runtime_tracked_clean']=not c.run(['git','-C',p['hermes_runtime'],'status','--porcelain','--untracked-files=no']).stdout.strip()
  checks['exact_expected_packages']=all(c.run(['dpkg-query','-W','-f=${Version}',k]).stdout.strip()==v for k,v in p['expected_packages'].items())
  checks['configuration_and_boot_artifacts_frozen']=all(c.sha(path)==digest for path,digest in p['protected_file_hashes'].items())
  for name,old in p['units'].items():
