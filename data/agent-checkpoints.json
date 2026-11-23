@@ -2123,12 +2123,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1574555584013934743",
-      "next_step": "Nao iniciar writer paralelo; foreground consume continua mesmo request em6blocos4; consultar claims/recibos ate término; auditar24 originais same-ID e48providers/atalhos e mapa",
+      "next_step": "Foreground consume continua mesmo request; não iniciar writer concorrente. Depois auditar24 fontes e48providers/atalhos, publicar mapa com readback na origem e fechar.",
       "objective": "Tratar organizar24 videos Kelly US SHEIN EN common; preservar RAW same-ID e reservas",
       "source": "data/ares/creative-ops/executions/intake-1574555584013934743/foreground-owner.json",
-      "state": "foreground ativo handle proc_d7968b1aee49; request31313c81aa85d531bf1cc780281b2835 batch12661b7963c4821c073f62de705df2a2 tratado4/24; complete canônico em arquivo/ack; plano e qa integral24 congelados",
+      "state": "foreground proc_d7968b1aee49 ativo;request31313c81aa85d531bf1cc780281b2835;complete 8/24;batch atual a05a8ef134b8ad2f0e86a1742351aed5;fase consume_same_request;plano/qa24 preservados",
       "thread_id": "1574555584013934743",
-      "updated_at": "2026-11-23T22:53:27+00:00"
+      "updated_at": "2026-11-23T23:13:41+00:00"
     },
     {
       "agent": "ares",
@@ -12288,5 +12288,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-23T23:01:13+00:00"
+  "updated_at": "2026-11-23T23:13:41+00:00"
 }
