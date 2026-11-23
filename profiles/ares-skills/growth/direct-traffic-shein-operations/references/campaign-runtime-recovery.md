@@ -10,6 +10,8 @@ Pedido explícito “para hoje”/“para a data de hoje”, sem hora futura ind
 
 ### ForceRunStatus e ativação manual parcial
 
+Reassociação: [receita](forcerunstatus.md).
+
 Diante de `1487083 / Invalid usage of ForceRunStatus`, registre o erro como opaco: ele não comprova sozinho falha exclusivamente técnica nem uma política específica de conteúdo. Após uma ativação manual informada, releia campanhas, conjuntos e TODOS os anúncios do mesmo lote, com `status`, `effective_status`, `issues_info` e `ad_review_feedback`, além dos parâmetros materiais. O erro pode evoluir para `2490468` com rejeição na avaliação, enquanto a campanha e o conjunto ficam ACTIVE e um anúncio continua PAUSED/WITH_ISSUES. Informe separadamente as contagens em cada nível e a rejeição atual; não atribua um motivo de política quando o feedback não o expuser. Não tente superar rejeição por status write, recriação idêntica ou alteração não autorizada do conteúdo.
 
 Compare também orçamento, lance, horário, copy/tracking e os mesmos IDs após a ação manual. Registre divergências sem atribuir seu autor por inferência, sem restaurar valores automaticamente e sem retomar o writer antigo. Status ACTIVE futuro não prova entrega: consulte Insights no período quando necessário e mantenha a autoria da ativação como relato do operador, distinta da leitura do Ares.
