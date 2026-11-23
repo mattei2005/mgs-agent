@@ -36,7 +36,7 @@ For npm, capture current Node/npm/Corepack **and** the npm `package.json` versio
 npm view npm@TARGET version engines dist.shasum dist.integrity dist.tarball --json
 ```
 
-Parse this output defensively: when dotted selectors are requested, npm may return flat keys such as `"dist.shasum"`, `"dist.integrity"`, and `"dist.tarball"` instead of a nested `dist` object. Accept either shape, require all fields, and verify the live Node version satisfies `engines.node` before mutation. Do not assume npm JSON always has a top-level array: inspect and normalize list/object forms before selecting package metadata. Preserve an already downloaded tarball after a parser failure and resume its hash/integrity verification without replaying the completed APT transaction. For historical `.deb` identity checks, query `dpkg-deb -f <file> Package` and `Version` separately; a multi-field query adds labels, so positional values are not bare package/version strings.
+Parse this output defensively: when dotted selectors are requested, npm may return flat keys such as `"dist.shasum"`, `"dist.integrity"`, and `"dist.tarball"` instead of a nested `dist` object. Accept either shape, require all fields, and verify the live Node version satisfies `engines.node` before mutation. Persist the successful metadata response before selecting fields. Normalize a top-level object to one record, or select the unique record whose `version` exactly equals the requested target from a returned list; reject zero or multiple matches before calling `.get()` or indexing nested fields. Do not assume either JSON shape from the npm version or selector syntax. Preserve an already downloaded tarball after a parser failure and resume metadata/hash/integrity verification from retained inputs without replaying an APT transaction or downloading the same artifact again. For historical `.deb` identity checks, query `dpkg-deb -f <file> Package` and `Version` separately; a multi-field query adds labels, so positional values are not bare package/version strings.
 
 ## 2. Critical confirmation boundary
 
@@ -100,7 +100,7 @@ Do not print configuration or credential contents.
 
 ### APT gate
 
-Install only the simulated package/version with `--only-upgrade`, `--no-install-recommends`, noninteractive mode, and `--force-confold` when local conffiles must be preserved.
+Install only the exact package/version map exercised by the simulation, with `--no-install-recommends`, noninteractive mode, and `--force-confold` when local conffiles must be preserved. Keep `--only-upgrade` only for an upgrade-only manifest; omit it for explicitly confirmed new kernel components, preserving the same command shape used in their simulation. Never replace the pinned install with an unrestricted `dist-upgrade` merely because that command originally discovered the candidates.
 
 Immediately validate:
 
@@ -112,7 +112,7 @@ Immediately validate:
 - gateway PIDs unchanged unless their restart was explicitly authorized;
 - no priority 0..3 journal errors since the maintenance boundary.
 
-When freezing or comparing service state, do not parse multiple `systemctl show -p ... --value` properties by positional line order; systemd may emit them in a different order than requested. Query each property separately, or retain `Property=value` names and parse by key. Require `ActiveState=active` and a positive `MainPID` independently before comparing PIDs. Socket units intentionally have no MainPID field: validate their active/listening state and actual socket ownership instead of indexing a nonexistent PID. After a Type=simple restart, poll boundedly for the exact executable/version, not just active state: the new PID can briefly still resolve to systemd before it execs Node. Record that convergence before declaring drift or triggering rollback.
+When freezing or comparing service state, do not parse multiple `systemctl show -p ... --value` properties by positional line order; systemd may emit them in a different order than requested. Query each property separately, or retain `Property=value` names and parse by key. Resolve `Type` and `SubState` before asserting PID health. Require `ActiveState=active` and a positive `MainPID` for long-running daemons before comparing their PIDs; a successful `Type=oneshot` unit with `RemainAfterExit=yes` may correctly be `active/exited` with PID zero. Socket units intentionally have no daemon MainPID: validate active/listening state and actual socket ownership instead. Canonicalize service aliases so one process reached by both a D-Bus alias and its real unit is not counted as two independent consumers. After a Type=simple restart, poll boundedly for the exact executable/version, not just active state: the new PID can briefly still resolve to systemd before it execs Node. Record that convergence before declaring drift or triggering rollback.
 
 For a `nodejs` vendor-package update, inspect the embedded tooling immediately after APT: compare `node --version`, `npm --version`, npm `package.json`, and `corepack --version` with the frozen pre-state before declaring the package gate green. Vendor packages can replace a previously self-updated npm with an older bundled version even when the APT simulation lists only `nodejs`.
 
