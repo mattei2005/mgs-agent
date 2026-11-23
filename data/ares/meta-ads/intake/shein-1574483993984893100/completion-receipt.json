@@ -88,5 +88,54 @@
         "recorded_at": "2026-11-23T18:02:34.825433+00:00"
       }
     }
+  },
+  "final_review": {
+    "read_at": "2026-11-23T18:02:43.750460+00:00",
+    "ads": [
+      {
+        "id": "120252700414730744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700411930744",
+        "adset_id": "120252700412810744"
+      },
+      {
+        "id": "120252700414720744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700411930744",
+        "adset_id": "120252700412810744"
+      },
+      {
+        "id": "120252700415440744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700411970744",
+        "adset_id": "120252700412860744"
+      },
+      {
+        "id": "120252700414750744",
+        "status": "ACTIVE",
+        "configured_status": "ACTIVE",
+        "effective_status": "PENDING_REVIEW",
+        "campaign_id": "120252700411970744",
+        "adset_id": "120252700412860744"
+      }
+    ],
+    "configured": {
+      "ACTIVE": 4
+    },
+    "effective": {
+      "PENDING_REVIEW": 4
+    }
+  },
+  "active_account_budget": {
+    "read_at": "2026-11-23T18:02:43.750460+00:00",
+    "currency": "USD",
+    "minor": 262596,
+    "campaign_count": 19
   }
 }
