@@ -42,8 +42,11 @@ for b in q['bindings']:
  qa.append({'account_id':b['account_id'],'thread_id':b['thread_id'],'campaigns':len(rows),'ui_covered':len(must),'parts':len(parts),'financial_cutoff':m['source_timestamps']['financial']})
 assert len(all_ids)==len(set(all_ids))==fin['campaigns']
 (R/'qa.json').write_text(json.dumps({'status':'PASS','accounts':qa,'campaigns':len(all_ids),'source_window_and_financial_checks':True,'tests':load(R/'test-results.json')},ensure_ascii=False,indent=2))
-root_names={'acceptance.json','authorization.json','collection-progress.json','completion.json','delivery-progress.json','destinations-readback.json','final-reconciliation.json','intraday.py','launch.py','archive.py','qa.json','preflight.json','publishers.json','request.json','sb-visible-rps-capture.json','summary-deliveries.json','validated-summary.json','test-results.json','test_summary.py','run_tests.py','review.py','prepublication-qa.json','approved-review.json','gate-test-results.json','test_gate.py','materialize_from_refresh.py','diagnose_refresh.py'}
-root_names.update('refresh-diagnostic-'+str(n)+'.json' for n in range(0,len(all_ids),50))
+root_names={'acceptance.json','authorization.json','collection-progress.json','completion.json','delivery-progress.json','destinations-readback.json','final-reconciliation.json','intraday.py','launch.py','archive.py','qa.json','preflight.json','publishers.json','request.json','sb-visible-rps-capture.json','summary-deliveries.json','validated-summary.json','test-results.json','test_summary.py','run_tests.py','review.py','prepublication-qa.json','approved-review.json','gate-test-results.json','test_gate.py','materialize_from_refresh.py','diagnose_refresh.py','archive-test-results.json'}
+# Diagnostic refresh artifacts exist only when recovery was needed.
+# Keep mandatory request evidence required, but do not invent recovery files.
+root_names.update(name for n in range(0,len(all_ids),50)
+                  if (R/(name := 'refresh-diagnostic-'+str(n)+'.json')).exists())
 root_names.update('rps-page-'+str(p['number'])+'.json' for p in capture['pages'])
 files=[R/n for n in sorted(root_names)]
 account_names={'account.json','ads.json','ads-pagination.json','adsets.json','campaigns.json','daily.json','delay.json','insights.json','model.json','receipt.json','delivery.json','report.md','report.parts.json','sb.json','selected.json','summary-intent.json','summary.txt','refresh-observed-at.json'}
