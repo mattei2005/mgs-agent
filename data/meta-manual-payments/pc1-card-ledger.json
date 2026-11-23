@@ -269,33 +269,33 @@
       "account_id": "1543098427832443",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-22T08:49:17.893838-05:00",
-      "screenshot": "reports/meta-manual-payments-runs/cron-20261122T0802/d-history/verified-1543098427832443.png",
-      "receipt": "reports/meta-manual-payments-runs/cron-20261122T0802/d-history/1543098427832443-receipt.json",
+      "read_at": "2026-11-23T08:41:03.859809-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/card-history/verified-1543098427832443.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/card-history/1543098427832443-receipt.json",
       "rows": [
         {
-          "date": "Nov 22, 2026",
-          "method": "Discover ···· 8397",
-          "amount": "25.61",
+          "date": "Nov 23, 2026",
+          "method": "MasterCard ···· 3493",
+          "amount": "930.00",
           "status": "Paid"
         },
         {
           "date": "Nov 22, 2026",
-          "method": "Discover ···· 8397",
-          "amount": "813.76",
+          "method": "MasterCard ···· 3493",
+          "amount": "930.00",
           "status": "Paid"
         },
         {
           "date": "Nov 22, 2026",
-          "method": "American Express ···· 3322",
-          "amount": "116.25",
+          "method": "MasterCard ···· 3493",
+          "amount": "814.22",
           "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Nov 22, 2026",
-        "method": "Discover ···· 8397",
-        "amount": "25.61",
+        "date": "Nov 23, 2026",
+        "method": "MasterCard ···· 3493",
+        "amount": "930.00",
         "status": "Paid"
       },
       "status": "verified_card",
@@ -341,32 +341,32 @@
       "account_id": "2852476828464907",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-22T08:50:15.391104-05:00",
-      "screenshot": "reports/meta-manual-payments-runs/cron-20261122T0802/d-history/verified-2852476828464907.png",
-      "receipt": "reports/meta-manual-payments-runs/cron-20261122T0802/d-history/2852476828464907-receipt.json",
+      "read_at": "2026-11-23T08:42:36.436835-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/card-history/verified-2852476828464907.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T0802/card-history/2852476828464907-receipt.json",
       "rows": [
         {
+          "date": "Nov 23, 2026",
+          "method": "Visa ···· 6312",
+          "amount": "796.00",
+          "status": "Paid"
+        },
+        {
           "date": "Nov 22, 2026",
-          "method": "MasterCard ···· 0253",
+          "method": "American Express ···· 3322",
           "amount": "796.00",
           "status": "Paid"
         },
         {
-          "date": "Nov 21, 2026",
-          "method": "MasterCard ···· 0253",
+          "date": "Nov 22, 2026",
+          "method": "MasterCard ···· 2311",
           "amount": "796.00",
-          "status": "Paid"
-        },
-        {
-          "date": "Nov 21, 2026",
-          "method": "MasterCard ···· 0253",
-          "amount": "796.00",
-          "status": "Paid"
+          "status": "Failed"
         }
       ],
       "latest_card": {
-        "date": "Nov 22, 2026",
-        "method": "MasterCard ···· 0253",
+        "date": "Nov 23, 2026",
+        "method": "Visa ···· 6312",
         "amount": "796.00",
         "status": "Paid"
       },
