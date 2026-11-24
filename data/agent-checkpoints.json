@@ -5506,22 +5506,22 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Não repetir pacotes/backup:Inc01 lote20 confirmado1574642070478520412 concluído. Backup frio/restore5973tabelas27392842linhas verificados;20checks funcionais;2diagnósticos nativos postinst classificados mantendo estrito histórico. Próximo:confirmação reboot somenteInc01 kernel203->204;manifest9ddbb2988cbbd980.Não agendado. Hostinger encerrada;Inc02/03/Hestia/Node-dashboard pendentes.",
-      "objective": "Manutenção multi-host: Inc0120pacotes e recuperação concluídos; reboot e demais fases separados",
-      "source": "reports/vps-maint-1574252891898908684-inc01-completion.md",
-      "state": "inc01_packages_completed_validated_reboot_pending_critical_confirmation",
+      "next_step": "Não repetir reboot/pacotes. NovoBoot995a42ad...kernel204;30/31checks,apenasjournalestritofalha3USB/audio. Causa/preexistência não comprovadas; todosserviços/canários OK;validator disabled/inactive,consumidor saiu,foreground reconciliouSSH. Recomendar registrar ressalvas sem BIOS/drivers; aguardar disposição Rodolfo limitada a esta fase Inc01 ou investigação hardware separada. Outros hosts/Node-dashboard permanecem abertos.",
+      "objective": "Reboot Inc01 executado kernel204; aplicações recuperadas; decisão explícita sobre3registros kernel USB/áudio",
+      "source": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+      "state": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T04:50:11+00:00"
+      "updated_at": "2026-11-24T05:33:25+00:00"
     },
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "Consumidor único PID113994/session proc_84da91ce16a0 comprovado ativo e silencioso; fonte controller-progress.json e controller-final.json em reboot-1574650660572504115. Zeus foreground aguarda processo sair e consome recibo antes de fechar governança. Não repetir reboot/pacotes; não executar validador em paralelo. Locks nativos financeiros preservam filas; outros hosts inalterados.",
-      "objective": "Reboot somente Inc01 e validação externa, autorização1574650660572504115",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-consumer-ownership.json",
-      "state": "external_reboot_controller_running",
+      "next_step": "Não repetir reboot/pacotes. NovoBoot995a42ad...kernel204;30/31checks,apenasjournalestritofalha3USB/audio. Causa/preexistência não comprovadas; todosserviços/canários OK;validator disabled/inactive,consumidor saiu,foreground reconciliouSSH. Recomendar registrar ressalvas sem BIOS/drivers; aguardar disposição Rodolfo limitada a esta fase Inc01 ou investigação hardware separada. Outros hosts/Node-dashboard permanecem abertos.",
+      "objective": "Reboot Inc01 executado kernel204; aplicações recuperadas; decisão explícita sobre3registros kernel USB/áudio",
+      "source": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+      "state": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T05:19:20+00:00"
+      "updated_at": "2026-11-24T05:33:25+00:00"
     },
     {
       "agent": "zeus",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:19:20+00:00"
+  "updated_at": "2026-11-24T05:33:25+00:00"
 }

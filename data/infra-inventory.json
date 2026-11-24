@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "inc01_reboot_authorized_prepared_not_dispatched",
+      "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70261,11 +70261,13 @@
         },
         {
           "target": "MatteiInc01 packages/reboot",
-          "state": "packages_validated_reboot_authorized_prepared_not_dispatched",
-          "source": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
+          "state": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
+          "source": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
           "reboot": "awaiting_new_critical_confirmation_not_scheduled",
           "package_authorization": "1574642070478520412",
-          "reboot_authorization": "1574650660572504115"
+          "reboot_authorization": "1574650660572504115",
+          "reboot_executed": true,
+          "strict_journal_passed": false
         },
         {
           "target": "MatteiInc02 packages/reboot",
@@ -70284,15 +70286,15 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-24T05:16:54.408500+00:00",
+      "updated_at": "2026-11-24T05:33:25.302747+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
       "gateway_pids_unchanged": true,
       "checks_passed": 30,
-      "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json",
-      "next_critical_manifest_sha256": "9ddbb2988cbbd98083ef112ac2e45482ff8d1462cd87fc1cac84a37f5a1464d4",
-      "next_gate": "Zeus foreground launches and consumes the exact external Inc01 controller after canonical source sync; no new owner confirmation for this unchanged reboot. Other hosts/dashboard separate.",
+      "next_critical_manifest": null,
+      "next_critical_manifest_sha256": null,
+      "next_gate": "Rodolfo must choose scoped acceptance of three recorded kernel/USB/audio residuals or separately scoped hardware/driver investigation; no global policy relaxation.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70471,8 +70473,47 @@
         "local": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py",
         "remote_validator": "mgs-inc01-reboot-1574650660572504115-validate.service",
         "result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json",
-        "phase": "prepared_not_dispatched",
-        "preparation_report": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md"
+        "phase": "exited_foreground_reconciled_kernel_journal_blocked",
+        "preparation_report": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
+        "foreground_result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-decision-readback.json",
+        "validator_state": "disabled_inactive_definition_retained"
+      },
+      "inc01_reboot_result": {
+        "authorization_message_id": "1574650660572504115",
+        "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
+        "boot_id_before": "d4c9b6d5-4cac-40c2-9f1e-b145d0d2c6b8",
+        "boot_id_after": "995a42ad-5061-4c09-8355-a7e99c79f8ae",
+        "kernel": "5.15.0-204-generic",
+        "reboot_executed": true,
+        "reboot_scheduled": false,
+        "checks_passed": 30,
+        "checks_total": 31,
+        "strict_journal_passed": false,
+        "kernel_messages": [
+          "pci 0000:0e:00.0: Failed to read data",
+          "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+          "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        ],
+        "identified_devices": [
+          "AMD USB controller 1022:15b8/xhci_hcd, hub8/0ports",
+          "AMD audio controller 1022:15e3/snd_hda_intel"
+        ],
+        "preexistence_or_kernel_regression_proven": false,
+        "functional_services_recovered": true,
+        "validator_disabled_inactive": true,
+        "controller_exited_transport_failure_preserved": true,
+        "foreground_transport_recovery": "SSH/kernel204/newBootID and external200/200/401 confirmed; no reboot repeated",
+        "alternate_admission_candidate_activated": false,
+        "report": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+        "current_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-decision-readback.json",
+        "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/decision-report-infra.json",
+        "next_gate": "Rodolfo must choose scoped acceptance of three recorded kernel/USB/audio residuals or separately scoped hardware/driver investigation; no global policy relaxation."
+      },
+      "inc01_reboot_manifest": {
+        "path": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json",
+        "sha256": "9ddbb2988cbbd98083ef112ac2e45482ff8d1462cd87fc1cac84a37f5a1464d4",
+        "state": "authorized_and_executed_not_pending",
+        "authorization_message_id": "1574650660572504115"
       }
     },
     {
@@ -70622,11 +70663,11 @@
       "id": "VPS-MAINT-1574252891898908684-INC01",
       "agent": "zeus",
       "type": "host_scoped_package_rollback_and_database_consistency_preparation",
-      "status": "approved_packages_completed_validated_reboot_pending_critical_confirmation",
+      "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
       "source_thread_id": "1574249078584377544",
       "source_message_id": "1574636767036833863",
       "host": "MatteiInc01/162.55.28.178/RunCloud290075",
-      "report": "reports/vps-maint-1574252891898908684-inc01-completion.md",
+      "report": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
       "manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/critical-plan.json",
       "sha256": "5db8c98920645ea6a4c62c0c65053fff0e17c47e1c68da9467eeb9ed1ec47b9d",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/independent-final-readback.json",
@@ -70636,14 +70677,14 @@
       "services_restarted": [
         "mariadb"
       ],
-      "reboot_executed": false,
+      "reboot_executed": true,
       "rollback_packages": 20,
       "original_debs": 15,
       "reconstructed_payloads": 5,
       "database_backup_created": true,
       "report_transport": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/report-infra.json",
-      "skill_learning": "controlled-package-and-node-tooling-update.md: MEMORY scope/systemd oneshot fail-closed dispatch/native postinst attribution; historical evidence preserved",
-      "updated_at": "2026-11-24T04:50:11.051133+00:00",
+      "skill_learning": "durable-post-reboot-validator-pattern.md: observer vs remote reboot outcome; reread dispatch before retry; no historical kernel inference without coverage",
+      "updated_at": "2026-11-24T05:33:25.302747+00:00",
       "execution": {
         "status": "approved_packages_completed_validated_reboot_pending_critical_confirmation",
         "authorization_message_id": "1574642070478520412",
@@ -70683,13 +70724,47 @@
       "vendor_module_reload": "BitNinja IpFilter native package hook",
       "services_restarted_unrelated": false,
       "database_restore_exercised": true,
-      "next_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json"
+      "next_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json",
+      "reboot_result": {
+        "authorization_message_id": "1574650660572504115",
+        "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
+        "boot_id_before": "d4c9b6d5-4cac-40c2-9f1e-b145d0d2c6b8",
+        "boot_id_after": "995a42ad-5061-4c09-8355-a7e99c79f8ae",
+        "kernel": "5.15.0-204-generic",
+        "reboot_executed": true,
+        "reboot_scheduled": false,
+        "checks_passed": 30,
+        "checks_total": 31,
+        "strict_journal_passed": false,
+        "kernel_messages": [
+          "pci 0000:0e:00.0: Failed to read data",
+          "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+          "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        ],
+        "identified_devices": [
+          "AMD USB controller 1022:15b8/xhci_hcd, hub8/0ports",
+          "AMD audio controller 1022:15e3/snd_hda_intel"
+        ],
+        "preexistence_or_kernel_regression_proven": false,
+        "functional_services_recovered": true,
+        "validator_disabled_inactive": true,
+        "controller_exited_transport_failure_preserved": true,
+        "foreground_transport_recovery": "SSH/kernel204/newBootID and external200/200/401 confirmed; no reboot repeated",
+        "alternate_admission_candidate_activated": false,
+        "report": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+        "current_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-decision-readback.json",
+        "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/decision-report-infra.json",
+        "next_gate": "Rodolfo must choose scoped acceptance of three recorded kernel/USB/audio residuals or separately scoped hardware/driver investigation; no global policy relaxation."
+      },
+      "reboot_scheduled": false,
+      "consumer_running": false,
+      "validator_definition_retention": "disabled/inactive retained; no file deletion"
     },
     {
       "id": "VPS-INC01-REBOOT-1574650660572504115",
       "agent": "zeus",
       "type": "approved_remote_host_reboot_validator_and_external_consumer",
-      "status": "prepared_not_dispatched",
+      "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
       "authorization_message_id": "1574650660572504115",
       "disclosed_gate_message_id": "1574649750643281962",
       "source_thread_id": "1574249078584377544",
@@ -70704,7 +70779,7 @@
       "local_controller": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py",
       "result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json",
       "validator_unit": "mgs-inc01-reboot-1574650660572504115-validate.service",
-      "validator_definition_retention": "disable after one boot, retain definition; no deletion",
+      "validator_definition_retention": "disabled/inactive retained; no file deletion",
       "preflight_checks": 20,
       "synthetic_tests": 8,
       "frozen_configuration_code_hashes": 286,
@@ -70714,10 +70789,43 @@
         "native_catalog_readable": true,
         "materialized_restore_this_phase": false
       },
-      "reboot_executed": false,
+      "reboot_executed": true,
       "reboot_scheduled": false,
-      "report": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
-      "updated_at": "2026-11-24T05:16:54.408500+00:00"
+      "report": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+      "updated_at": "2026-11-24T05:33:25.302747+00:00",
+      "reboot_result": {
+        "authorization_message_id": "1574650660572504115",
+        "status": "inc01_reboot_executed_services_recovered_kernel_journal_disposition_pending",
+        "boot_id_before": "d4c9b6d5-4cac-40c2-9f1e-b145d0d2c6b8",
+        "boot_id_after": "995a42ad-5061-4c09-8355-a7e99c79f8ae",
+        "kernel": "5.15.0-204-generic",
+        "reboot_executed": true,
+        "reboot_scheduled": false,
+        "checks_passed": 30,
+        "checks_total": 31,
+        "strict_journal_passed": false,
+        "kernel_messages": [
+          "pci 0000:0e:00.0: Failed to read data",
+          "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+          "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        ],
+        "identified_devices": [
+          "AMD USB controller 1022:15b8/xhci_hcd, hub8/0ports",
+          "AMD audio controller 1022:15e3/snd_hda_intel"
+        ],
+        "preexistence_or_kernel_regression_proven": false,
+        "functional_services_recovered": true,
+        "validator_disabled_inactive": true,
+        "controller_exited_transport_failure_preserved": true,
+        "foreground_transport_recovery": "SSH/kernel204/newBootID and external200/200/401 confirmed; no reboot repeated",
+        "alternate_admission_candidate_activated": false,
+        "report": "reports/vps-maint-inc01-reboot-1574650660572504115-decision.md",
+        "current_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-decision-readback.json",
+        "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/decision-report-infra.json",
+        "next_gate": "Rodolfo must choose scoped acceptance of three recorded kernel/USB/audio residuals or separately scoped hardware/driver investigation; no global policy relaxation."
+      },
+      "consumer_running": false,
+      "skill_learning": "durable-post-reboot-validator-pattern.md: observer vs remote reboot outcome; reread dispatch before retry; no historical kernel inference without coverage"
     }
   ],
   "profile_skill_references": [
