@@ -1,5 +1,11 @@
 # Vagaaqui — monitor finito de país via Cloudflare
 
+## Estado vigente: cancelado pelo solicitante
+
+Pedido `1574921924495282388`, de `963808102891798649`, encerra antecipadamente este monitor e solicita arquivamento da thread. Cron individual comentado, estado `cancelled` e guard terminal no runner (inclusive initial/dry-run), sem coleta, replay ou fechamento mensal posterior. Histórico e recibos preservados; demais monitores, inclusive o de portfólio, inalterados. Backup: `backups/vagaaqui-country-stop-1574921924495282388/`. Não restaurar agenda/estado sem novo pedido autorizado; para rollback técnico, reconciliar o crontab atual e restaurar apenas esta entrada, nunca todo o snapshot.
+
+As datas e rotinas abaixo documentam o contrato histórico supersedido por esse cancelamento.
+
 - Autoridade: santosoliv_dev_br, Discord `963808102891798649`, infra-dev/thread `1569851196234014781`, confirmação `1569887564804915231`; registry `data/authorized-users.json`.
 - Executor único: Zeus; sem alteração em servidores, DNS, regras, WordPress ou credenciais. Newsfolha fora do escopo.
 - Contrato congelado: `data/vagaaqui-country-monitor/config.json`; início `2026-11-11T01:38:29Z`, término exclusivo `2026-12-11T01:38:29Z` (um mês calendário). Dias em UTC, primeiro e último intervalo parciais. Referência inicial de 24h é separada do acumulado.

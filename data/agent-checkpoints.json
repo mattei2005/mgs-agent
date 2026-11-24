@@ -3802,12 +3802,12 @@
     {
       "agent": "zeus",
       "id": "CF-VAGAAQUI-COUNTRY-20261111",
-      "next_step": "Consumidor horário no minuto46 retoma somente slices/outbox faltantes; boletim diário normal22:46ET; coleta encerra2026-12-11T01:38:29Z e fechamento exige cobertura integral+GET. Cinco ciclos falhos ou auth bloqueiam com pendência humana na origem.",
-      "objective": "Monitorar por um mês o tráfego por país de vagaaqui.com, com resumos diários e fechamento nesta thread; Cloudflare somente leitura, newsfolha fora do escopo.",
-      "source": "data/vagaaqui-country-monitor/validation.json",
-      "state": "active_validated",
+      "next_step": "Não coletar, reenviar, retomar ou emitir fechamento mensal deste monitor sem novo pedido autorizado. Arquivar somente a thread de origem.",
+      "objective": "Monitor individual por país de vagaaqui.com encerrado antecipadamente por pedido do solicitante autorizado.",
+      "source": "https://discord.com/channels/1185714635991679006/1569851196234014781/1574921924495282388",
+      "state": "cancelled_validated: cron comentado; estado cancelled; 22 testes pass; wrapper real cancelled_noop external_requests=0; histórico preservado",
       "thread_id": "1569851196234014781",
-      "updated_at": "2026-11-11T01:44:03+00:00"
+      "updated_at": "2026-11-24T22:59:26+00:00"
     },
     {
       "agent": "ares",
@@ -4039,12 +4039,12 @@
     {
       "agent": "zeus",
       "id": "INC03-PERIPHERALS-1574921787630821377",
-      "next_step": "Validar hardware físico, enumeração PCI/USB/ALSA, drivers e contexto do boot; procurar evidência histórica local. Somente leitura: sem PCI/USB rescan/reset,unbind,modprobe,BIOS,drivers/reboot. Preservar ressalvas ainda não aceitas e Hestia retido.",
-      "objective": "Diagnosticar periféricos USB/hub/áudio do dedicado Inc03 por pedido técnico autorizado",
-      "source": "discord:message:1574921787630821377",
-      "state": "read_only_scan_in_progress",
+      "next_step": "Leitura concluída. Propor confirmação técnica Hetzner para comportamentofirmware/portas/codec;sem ticketouintervenção enviados;ressalvas eordemserial preservadas.",
+      "objective": "Varredura física Inc03 USB/PCI/ALSA e provas históricas concluída",
+      "source": "reports/inc03-peripherals-1574921787630821377.md",
+      "state": "completed_readonly_preexistence_proven_no_repair",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T22:57:56+00:00"
+      "updated_at": "2026-11-24T23:03:30+00:00"
     },
     {
       "agent": "zeus",
@@ -5516,12 +5516,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "next_step": "Scan físico em leitura concluído por pedido FullTech1574921787630821377. Mesmas3mensagens comprovadas emkern.log.gz de30/10kernel202 e10/11kernel203;USBhub8zeroportas/áudiosemcodec. Falhaestrita26/27preservada;semreparoouaceite. Recomendação de confirmação técnica da plataforma pelaHetzner antes de intervenção;Hestia permanece retido.",
       "objective": "Concluir lotes seriais autorizados; ressalva Inc03 específica bloqueia Hestia",
-      "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "source": "reports/inc03-peripherals-1574921787630821377.md",
       "state": "inc03_reboot_residual_decision_pending_hestia_authorized_held",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:56:30+00:00"
+      "updated_at": "2026-11-24T23:03:30+00:00"
     },
     {
       "agent": "zeus",
@@ -5556,12 +5556,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC03",
-      "next_step": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "next_step": "Scan físico em leitura concluído por pedido FullTech1574921787630821377. Mesmas3mensagens comprovadas emkern.log.gz de30/10kernel202 e10/11kernel203;USBhub8zeroportas/áudiosemcodec. Falhaestrita26/27preservada;semreparoouaceite. Recomendação de confirmação técnica da plataforma pelaHetzner antes de intervenção;Hestia permanece retido.",
       "objective": "Concluir lotes seriais autorizados; ressalva Inc03 específica bloqueia Hestia",
-      "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "source": "reports/inc03-peripherals-1574921787630821377.md",
       "state": "reboot_executed_journal_residual_owner_decision_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:56:30+00:00"
+      "updated_at": "2026-11-24T23:03:30+00:00"
     },
     {
       "agent": "zeus",
@@ -12398,5 +12398,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T22:57:56+00:00"
+  "updated_at": "2026-11-24T23:03:30+00:00"
 }

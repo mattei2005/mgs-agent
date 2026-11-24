@@ -21,7 +21,7 @@ Completion criterion: only the procedure and evidence required for the current a
 1. Validar remetente, thread e canal pai contra a autoridade vigente; tratar o pedido de finalizar a conversa como arquivamento, não exclusão, bloqueio ou mudança nos servidores.
 2. Publicar uma única confirmação curta de encerramento, sem mentions, e conferir a mensagem pelo ID exato antes de arquivar.
 3. Arquivar somente a thread solicitada e consultar novamente seu `thread_metadata.archived`; sucesso no envio da mensagem não comprova arquivamento.
-4. Não publicar uma segunda resposta após o readback: uma nova mensagem pode reabrir a thread e invalidar o estado acabado de verificar. Planejar a entrega final antes do PATCH, sem adicionar `locked=true` para contornar esse problema.
+4. Não publicar uma segunda resposta após o readback, nem pelo envio automático da resposta final do turno: uma nova mensagem pode reabrir a thread e invalidar o estado acabado de verificar. A confirmação enviada por ferramenta já é a resposta pública; não duplicá-la em um resumo final. Resolver a entrega final antes do PATCH e fazer do arquivamento com GET a última operação pública, sem adicionar `locked=true` para contornar esse problema. Se outra mensagem já tiver sido publicada depois do GET, não usar esse readback anterior como prova do estado atual; reler o alvo antes de afirmar que continua arquivado.
 
 Receita de REST e verificação: `references/discord-threads-lifecycle.md`, seção **Encerramento explícito com histórico preservado**.
 

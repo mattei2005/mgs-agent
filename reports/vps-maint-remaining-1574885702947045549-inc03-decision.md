@@ -1,5 +1,7 @@
 # Inc03 atualizado/reiniciado — encerramento bloqueado por três ressalvas; Hestia preservado
 
+> Adendo de diagnóstico: a varredura1574921787630821377 encontrou nos `kern.log` comprimidos do próprio Inc03 as mesmas três mensagens nos boots de30/10(kernel202) e10/11(kernel203), com identidadeDMI correspondente. A preexistência passou a ser comprovada; a afirmação histórica de indeterminação abaixo foi supersedida por `reports/inc03-peripherals-1574921787630821377.md`. Nenhum reparo ou aceite do journal foi inferido;26/27 estrito preservado.
+
 ## Autoridade e escopo
 
 Rodolfo `1574885702947045549` confirmou o gate `1574880812271149222`, manifesto `f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651`. Ordem confirmada: Inc03 completo e validado antes da instalação Hestia; um reboot por host. Não inclui Node do dashboard, Hermes, outros hosts, BIOS/drivers ou limpeza.

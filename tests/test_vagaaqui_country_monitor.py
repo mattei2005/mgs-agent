@@ -71,6 +71,27 @@ class TestCountryMonitor(unittest.TestCase):
         with patch.object(m,'cf_token',return_value='fixture'),patch.object(m,'cf_query',side_effect=lambda token,a,b:self.sample(a,b)) as q,patch.object(m,'deliver',side_effect=self.delivered):
             result=m.run(self.c,self.s,self.store,m.parse(self.c['end'])+dt.timedelta(hours=4),'scheduled');self.assertEqual(result['status'],'completed');self.assertIn('final',self.s['outbox']);self.assertEqual(len(self.s['days']),len(list(m.intervals(self.c))))
             n=q.call_count;result=m.run(self.c,self.s,self.store,m.parse(self.c['end'])+dt.timedelta(days=2),'scheduled');self.assertEqual(result['external_requests'],0);self.assertEqual(q.call_count,n)
+    def test_cancelled_no_requests_or_replay(self):
+        self.s['status']='cancelled'
+        self.s['outbox']['pending']={'verified':False}
+        before=copy.deepcopy(self.s)
+        with patch.object(m,'cf_token') as token,patch.object(m,'cf_query') as query,patch.object(m,'deliver') as deliver:
+            for mode in ['initial','scheduled']:
+                result=m.run(self.c,self.s,self.store,m.parse(self.c['end']),mode)
+                self.assertEqual(result,{'status':'cancelled_noop','external_requests':0})
+            token.assert_not_called();query.assert_not_called();deliver.assert_not_called()
+        self.assertEqual(self.s,before)
+    def test_cancelled_main_all_modes_no_requests(self):
+        self.s.update(status='cancelled',failure_streak=2)
+        m.save(self.store/'state.json',self.s)
+        before=(self.store/'state.json').read_bytes()
+        with patch.object(m,'STORE',self.store),patch.object(m,'cf_token') as token,patch.object(m,'deliver') as deliver:
+            for flags in [[],['--initial'],['--dry-run']]:
+                with patch.object(m.sys,'argv',['monitor']+flags),contextlib.redirect_stdout(io.StringIO()) as out:
+                    self.assertEqual(m.main(),0)
+                self.assertEqual(json.loads(out.getvalue())['status'],'cancelled_noop')
+            token.assert_not_called();deliver.assert_not_called()
+        self.assertEqual((self.store/'state.json').read_bytes(),before)
     def test_blocked_no_requests(self):
         self.s['status']='blocked'
         with patch.object(m,'cf_query') as q,patch.object(m,'discord_get') as get:

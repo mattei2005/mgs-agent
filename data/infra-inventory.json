@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-24T12:32:02-05:00",
+    "updated_at": "2026-11-24T18:01:40-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -65169,12 +65169,14 @@
     {
       "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup.",
       "id": "vagaaqui-country-cd138bf5e970",
-      "modified_at": "2026-11-11T01:40:57.343546+00:00",
+      "modified_at": "2026-11-24T22:59:26.949906+00:00",
       "owner": "Zeus/Tech",
       "path": "/root/mgs-agent/tests/test_vagaaqui_country_monitor.py",
-      "sha256": "dd854af895874a78d46f890eea7b2c396d22b7052b25876ea7f641c07bba8eaf",
-      "size_bytes": 9627,
-      "type": "monitor_support"
+      "sha256": "e2d75e7a776211d1a6413a72c0a27cdb6f45a38279ce2574621a35bdf7260a6d",
+      "size_bytes": 11075,
+      "type": "monitor_support",
+      "status": "updated",
+      "last_change": "Cancelled Vagaaqui monitor per request 1574921924495282388; history retained"
     },
     {
       "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup.",
@@ -65189,12 +65191,14 @@
     {
       "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup.",
       "id": "vagaaqui-country-2856eeed7dfc",
-      "modified_at": "2026-11-11T01:41:59.196927+00:00",
+      "modified_at": "2026-11-24T22:59:26.949906+00:00",
       "owner": "Zeus/Tech",
       "path": "/root/mgs-agent/docs/vagaaqui-country-monitor.md",
-      "sha256": "f74848544b206c7466db45d27846e60f487761851a010e15e4ad12ca77fe0fbd",
-      "size_bytes": 4602,
-      "type": "monitor_support"
+      "sha256": "3fe83224ada9c5eaf7b0e1d7e0fd50e5ea26985c35ceb6d2632efc83d0b73b1c",
+      "size_bytes": 5344,
+      "type": "monitor_support",
+      "status": "updated",
+      "last_change": "Cancelled Vagaaqui monitor per request 1574921924495282388; history retained"
     },
     {
       "description": "Vagaaqui country monitor support: tests, schedule audit, operational contract, skill procedure or scheduler rollback backup.",
@@ -70315,7 +70319,7 @@
           "next_step": "Execute only under canonical Astra route or explicit owner exception; no finance/application writes under currentSol."
         }
       ],
-      "updated_at": "2026-11-24T20:56:30.137705+00:00",
+      "updated_at": "2026-11-24T23:03:30.147546+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70323,7 +70327,7 @@
       "checks_passed": 30,
       "next_critical_manifest": null,
       "next_critical_manifest_sha256": null,
-      "next_gate": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "next_gate": "Scan físico em leitura concluído por pedido FullTech1574921787630821377. Mesmas3mensagens comprovadas emkern.log.gz de30/10kernel202 e10/11kernel203;USBhub8zeroportas/áudiosemcodec. Falhaestrita26/27preservada;semreparoouaceite. Recomendação de confirmação técnica da plataforma pelaHetzner antes de intervenção;Hestia permanece retido.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70682,7 +70686,7 @@
         "report": "reports/vps-maint-1574252891898908684-inc02-completion.md",
         "updated_at": "2026-11-24T13:37:54.397219+00:00"
       },
-      "latest_phase_report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "latest_phase_report": "reports/inc03-peripherals-1574921787630821377.md",
       "inc02_reboot_authorization_message_id": "1574783533417894011",
       "inc02_reboot_controller": {
         "validator_unit": "mgs-inc02-reboot-1574783533417894011-validate.service",
@@ -70863,8 +70867,48 @@
             "PRIORITY": "3"
           }
         ],
-        "preexistence_proven": false,
-        "pending_owner_acceptance": true
+        "preexistence_proven": true,
+        "pending_owner_acceptance": true,
+        "preexistence_proof": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377/historical-comparison.json"
+      },
+      "latest_peripheral_diagnosis": {
+        "at": "2026-11-24T23:03:30.147546+00:00",
+        "requester_discord_id": "963808102891798649",
+        "source_message_id": "1574921787630821377",
+        "report": "reports/inc03-peripherals-1574921787630821377.md",
+        "evidence_root": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377",
+        "hardware_kind": "physical_dedicated",
+        "provider": "Hetzner",
+        "dmi": {
+          "sys_vendor": "Hetzner",
+          "product_name": "",
+          "product_version": "1.0",
+          "board_vendor": "ASRockRack",
+          "board_name": "B665D4U-1L",
+          "board_version": "3.03",
+          "bios_vendor": "American Megatrends International, LLC.",
+          "bios_version": "20.11",
+          "bios_date": "10/24/2024"
+        },
+        "preexistence_proven": true,
+        "historical_sources": [
+          "/var/log/kern.log.4.gz",
+          "/var/log/kern.log.2.gz"
+        ],
+        "historical_kernels": [
+          "5.15.0-202-generic",
+          "5.15.0-203-generic"
+        ],
+        "root_hub8_ports": 0,
+        "root_hub7_ports": 1,
+        "audio_pcm_or_codec_present": false,
+        "peripheral_fault_cause_fully_proven": false,
+        "kernel_amd_smn_quirk_reference": "https://github.com/torvalds/linux/commit/f195fc1e9715ba826c3b62d58038f760f66a4fe9",
+        "read_only_scan_completed": true,
+        "current_errors_fixed": false,
+        "strict_journal_passed": false,
+        "owner_residual_acceptance_received": false,
+        "provider_ticket_sent": false
       }
     },
     {
@@ -71505,7 +71549,7 @@
       "source_thread_id": "1574249078584377544",
       "host": "MatteiInc03",
       "ip": "46.4.95.117",
-      "report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "report": "reports/inc03-peripherals-1574921787630821377.md",
       "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
       "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
       "local_evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Inc03",
@@ -71558,8 +71602,8 @@
       "production_service_stop": true,
       "reboot_executed": true,
       "reboot_scheduled": false,
-      "next_gate": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
-      "updated_at": "2026-11-24T20:56:30.137705+00:00",
+      "next_gate": "Scan físico em leitura concluído por pedido FullTech1574921787630821377. Mesmas3mensagens comprovadas emkern.log.gz de30/10kernel202 e10/11kernel203;USBhub8zeroportas/áudiosemcodec. Falhaestrita26/27preservada;semreparoouaceite. Recomendação de confirmação técnica da plataforma pelaHetzner antes de intervenção;Hestia permanece retido.",
+      "updated_at": "2026-11-24T23:03:30.147546+00:00",
       "execution_authorization_message_id": "1574885702947045549",
       "latest_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
       "inc03_reboot_controller": {
@@ -71606,8 +71650,9 @@
             "PRIORITY": "3"
           }
         ],
-        "preexistence_proven": false,
-        "pending_owner_acceptance": true
+        "preexistence_proven": true,
+        "pending_owner_acceptance": true,
+        "preexistence_proof": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377/historical-comparison.json"
       },
       "upgrades_executed": 18,
       "cold_backup": {
@@ -71617,7 +71662,47 @@
       },
       "isolated_restore_tables": 1216,
       "functional_checks_passed": 22,
-      "native_installer_diagnostics_classified": true
+      "native_installer_diagnostics_classified": true,
+      "latest_peripheral_diagnosis": {
+        "at": "2026-11-24T23:03:30.147546+00:00",
+        "requester_discord_id": "963808102891798649",
+        "source_message_id": "1574921787630821377",
+        "report": "reports/inc03-peripherals-1574921787630821377.md",
+        "evidence_root": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377",
+        "hardware_kind": "physical_dedicated",
+        "provider": "Hetzner",
+        "dmi": {
+          "sys_vendor": "Hetzner",
+          "product_name": "",
+          "product_version": "1.0",
+          "board_vendor": "ASRockRack",
+          "board_name": "B665D4U-1L",
+          "board_version": "3.03",
+          "bios_vendor": "American Megatrends International, LLC.",
+          "bios_version": "20.11",
+          "bios_date": "10/24/2024"
+        },
+        "preexistence_proven": true,
+        "historical_sources": [
+          "/var/log/kern.log.4.gz",
+          "/var/log/kern.log.2.gz"
+        ],
+        "historical_kernels": [
+          "5.15.0-202-generic",
+          "5.15.0-203-generic"
+        ],
+        "root_hub8_ports": 0,
+        "root_hub7_ports": 1,
+        "audio_pcm_or_codec_present": false,
+        "peripheral_fault_cause_fully_proven": false,
+        "kernel_amd_smn_quirk_reference": "https://github.com/torvalds/linux/commit/f195fc1e9715ba826c3b62d58038f760f66a4fe9",
+        "read_only_scan_completed": true,
+        "current_errors_fixed": false,
+        "strict_journal_passed": false,
+        "owner_residual_acceptance_received": false,
+        "provider_ticket_sent": false
+      },
+      "latest_phase_report": "reports/inc03-peripherals-1574921787630821377.md"
     },
     {
       "id": "VPS-MAINT-1574252891898908684-HESTIA",
@@ -71722,6 +71807,60 @@
       "production_scope": "Inc03 only; Hestia held",
       "learning_saved": "Zeus controlled-package reference: mandatory complete executor pre-state schema and safe pre-write metadata recovery",
       "retained_unit": "/etc/systemd/system/mgs-remaining-inc03-1574885702947045549-validate.service disabled/inactive definition retained"
+    },
+    {
+      "id": "INC03-PERIPHERALS-1574921787630821377",
+      "agent": "zeus",
+      "type": "physical_peripheral_readonly_diagnostic",
+      "status": "scan_completed_historical_preexistence_confirmed_no_repair",
+      "source_message_id": "1574921787630821377",
+      "source_thread_id": "1574249078584377544",
+      "requester_discord_id": "963808102891798649",
+      "path": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377",
+      "script": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377/collector.py",
+      "report": "reports/inc03-peripherals-1574921787630821377.md",
+      "diagnosis": {
+        "at": "2026-11-24T23:03:30.147546+00:00",
+        "requester_discord_id": "963808102891798649",
+        "source_message_id": "1574921787630821377",
+        "report": "reports/inc03-peripherals-1574921787630821377.md",
+        "evidence_root": "/root/.hermes/profiles/zeus/reports/inc03-peripherals-1574921787630821377",
+        "hardware_kind": "physical_dedicated",
+        "provider": "Hetzner",
+        "dmi": {
+          "sys_vendor": "Hetzner",
+          "product_name": "",
+          "product_version": "1.0",
+          "board_vendor": "ASRockRack",
+          "board_name": "B665D4U-1L",
+          "board_version": "3.03",
+          "bios_vendor": "American Megatrends International, LLC.",
+          "bios_version": "20.11",
+          "bios_date": "10/24/2024"
+        },
+        "preexistence_proven": true,
+        "historical_sources": [
+          "/var/log/kern.log.4.gz",
+          "/var/log/kern.log.2.gz"
+        ],
+        "historical_kernels": [
+          "5.15.0-202-generic",
+          "5.15.0-203-generic"
+        ],
+        "root_hub8_ports": 0,
+        "root_hub7_ports": 1,
+        "audio_pcm_or_codec_present": false,
+        "peripheral_fault_cause_fully_proven": false,
+        "kernel_amd_smn_quirk_reference": "https://github.com/torvalds/linux/commit/f195fc1e9715ba826c3b62d58038f760f66a4fe9",
+        "read_only_scan_completed": true,
+        "current_errors_fixed": false,
+        "strict_journal_passed": false,
+        "owner_residual_acceptance_received": false,
+        "provider_ticket_sent": false
+      },
+      "skill_changed": "Zeus vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md",
+      "production_mutations": false,
+      "updated_at": "2026-11-24T23:03:30.147546+00:00"
     }
   ],
   "profile_skill_references": [
@@ -73256,9 +73395,6 @@
     },
     {
       "entry": "CRON_TZ=America/New_York"
-    },
-    {
-      "entry": "46 * * * * /usr/bin/flock -n /var/lock/monitor-vagaaqui-country.lock /bin/sh -c '/bin/sleep 7; /usr/bin/timeout 300s /usr/bin/python3 /root/mgs-agent/scripts/monitor-vagaaqui-country.py' >> /root/mgs-agent/logs/monitor-vagaaqui-country.log 2>&1"
     },
     {
       "entry": "CRON_TZ=America/New_York"
@@ -76068,8 +76204,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-vagaaqui-country.py",
-      "size_bytes": 17189,
-      "modified_at": "2026-11-10T20:39:26-05:00"
+      "size_bytes": 17413,
+      "modified_at": "2026-11-24T17:58:21-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-vps-health.py",
@@ -79516,15 +79652,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 1075863,
-      "md5": "4db2ab10ad09b9bc8b0ec5827069fba2",
-      "modified_at": "2026-11-24T12:30:33-05:00"
+      "size_bytes": 1077780,
+      "md5": "b607b4bdf6f2e558f769619de7ccadfb",
+      "modified_at": "2026-11-24T17:59:26-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 196976,
-      "md5": "f09b35cf88942e455ab6bf5e9a28cccb",
-      "modified_at": "2026-11-24T12:28:06-05:00"
+      "md5": "e51c3ed3d89fd1cf2d73d34cf9d38f67",
+      "modified_at": "2026-11-24T17:58:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -79553,8 +79689,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "d6d97d268ca6554e6857767991f70da1",
-      "modified_at": "2026-11-24T12:26:09-05:00"
+      "md5": "7d5335ef4e2b893acab6cdfd43298327",
+      "modified_at": "2026-11-24T17:56:08-05:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -79606,9 +79742,9 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 3623,
-      "md5": "f394701105dbd440b029f63708c0a10d",
-      "modified_at": "2026-11-24T12:30:05-05:00"
+      "size_bytes": 3588,
+      "md5": "70b5b1c44662897cb89358cb80db5811",
+      "modified_at": "2026-11-24T18:00:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -79649,8 +79785,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 453,
-      "md5": "ea0a40ca0477f074bc0f1ae50fa1c59a",
-      "modified_at": "2026-11-24T12:19:04-05:00"
+      "md5": "21bbb33e44ff5766ade1f56baf9c6de2",
+      "modified_at": "2026-11-24T17:49:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -79684,9 +79820,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 871892,
-      "md5": "0463e14bbdab24ea7ca1af13ab57d366",
-      "modified_at": "2026-11-24T07:40:28-05:00"
+      "size_bytes": 872833,
+      "md5": "59050cfa41c4111a76d75d61ac01d8ad",
+      "modified_at": "2026-11-24T15:41:12-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -79817,8 +79953,8 @@
     {
       "path": "/root/mgs-agent/data/finance-readonly-health-state.json",
       "size_bytes": 458,
-      "md5": "1594d8b38ff988def69c7947ffe20058",
-      "modified_at": "2026-11-24T11:34:29-05:00"
+      "md5": "f1e67f5fa66607067a9d69d7470c5b9f",
+      "modified_at": "2026-11-24T17:34:30-05:00"
     },
     {
       "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
@@ -79901,32 +80037,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "75258448ac1372074371cec6fda6f755",
-      "modified_at": "2026-11-24T12:24:02-05:00"
+      "md5": "a33c6ceccbbcb987121a6429c6a464c4",
+      "modified_at": "2026-11-24T17:54:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "7dff3e01395e75d65a2742274c471c6b",
-      "modified_at": "2026-11-24T07:50:37-05:00"
+      "md5": "05f700f2e73308df4839b1b41e071afe",
+      "modified_at": "2026-11-24T13:54:17-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 84276,
-      "md5": "1f13ad0bc4c269e550934f539bfd6af0",
-      "modified_at": "2026-11-24T12:30:03-05:00"
+      "size_bytes": 84426,
+      "md5": "71e7124de0e415e5966b5941380c2b7f",
+      "modified_at": "2026-11-24T18:00:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 129188,
-      "md5": "a333b04b56bf1ae274d7fae218bf3287",
-      "modified_at": "2026-11-24T12:32:02-05:00"
+      "size_bytes": 129550,
+      "md5": "f53cddb52ac52bd879db1f70d6387167",
+      "modified_at": "2026-11-24T18:02:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "8afecbc4baf9c906932d4cec1ddfc81d",
-      "modified_at": "2026-11-24T12:32:01-05:00"
+      "size_bytes": 357,
+      "md5": "bf330bbfc75478c59d42338a7882a7d6",
+      "modified_at": "2026-11-24T18:02:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -79972,15 +80108,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 1122,
-      "md5": "f089fe038d57b79dc110d5c002b788c2",
-      "modified_at": "2026-11-24T08:37:05-05:00"
+      "size_bytes": 1115,
+      "md5": "be3897f825309c69c4c2d3165bf83ef9",
+      "modified_at": "2026-11-24T14:37:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
-      "size_bytes": 817,
-      "md5": "dce6bd613beb91efbedd56a800b26723",
-      "modified_at": "2026-11-24T12:32:18-05:00"
+      "size_bytes": 816,
+      "md5": "fe423bc86613fc8ec6c0ee7fdf01630f",
+      "modified_at": "2026-11-24T18:01:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -80020,9 +80156,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3852619,
-      "md5": "ef98866c48ea0d871e64dc73b7977668",
-      "modified_at": "2026-11-24T12:15:38-05:00"
+      "size_bytes": 3870937,
+      "md5": "25537dda7d58bb6761a59ee900f7e249",
+      "modified_at": "2026-11-24T18:01:35-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -80075,8 +80211,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 103972,
-      "md5": "03233f7e771fb9c17bb52aad161d3f0c",
-      "modified_at": "2026-11-24T12:31:07-05:00"
+      "md5": "538567f9bf4f83f9f43f1ce57d84f756",
+      "modified_at": "2026-11-24T18:01:08-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -80159,8 +80295,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-dr-sla-alert-state.json",
       "size_bytes": 396,
-      "md5": "4184c34be86a5bc761106dfb97a4aba3",
-      "modified_at": "2026-11-24T12:30:08-05:00"
+      "md5": "dc91d761c99e779b09650cda11dfd3c8",
+      "modified_at": "2026-11-24T18:00:09-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
@@ -80171,8 +80307,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 11548,
-      "md5": "cfdadf851dbc09d1dbff53afcc6f56ad",
-      "modified_at": "2026-11-24T12:29:52-05:00"
+      "md5": "8a91eee89c054df86211572b61262193",
+      "modified_at": "2026-11-24T17:29:29-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -80518,9 +80654,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1080,
-      "md5": "39e54cf9900d1d6fbf0cc357b76ae8dd",
-      "modified_at": "2026-11-24T11:39:02-05:00"
+      "size_bytes": 1081,
+      "md5": "3c85159c91d0976c38b6fb523e061538",
+      "modified_at": "2026-11-24T17:39:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -80532,7 +80668,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-11-24T12:22:06-05:00"
+      "modified_at": "2026-11-24T17:52:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -80584,9 +80720,9 @@
     },
     {
       "path": "/root/mgs-agent/data/runcloud-alert-state.json",
-      "size_bytes": 24141,
-      "md5": "f7bd6d01238856f70c186117cdc2fa04",
-      "modified_at": "2026-11-24T12:04:41-05:00"
+      "size_bytes": 24123,
+      "md5": "235eeca60b6477540a494624e047cc52",
+      "modified_at": "2026-11-24T16:04:41-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-keitaro-mct-state.json",
@@ -80602,9 +80738,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 1384270,
-      "md5": "b0ceec75769899208dd92256ac2702f7",
-      "modified_at": "2026-11-24T10:45:27-05:00"
+      "size_bytes": 1384763,
+      "md5": "8559eb09b4f317fe2ccb73dd6325d6d9",
+      "modified_at": "2026-11-24T13:45:28-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -80614,9 +80750,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 184994,
-      "md5": "a9539d674d754f50a33a214d9677c99d",
-      "modified_at": "2026-11-24T12:27:13-05:00"
+      "size_bytes": 185058,
+      "md5": "8cef8db43646c9f88ec483d77daab3f7",
+      "modified_at": "2026-11-24T17:57:09-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -80633,8 +80769,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 1378603,
-      "md5": "baa7c99c845c4bef351caa8f33ec84a1",
-      "modified_at": "2026-11-24T12:29:19-05:00"
+      "md5": "95a82c09489024ecc033114458de05cb",
+      "modified_at": "2026-11-24T17:59:17-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -80705,8 +80841,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1785,
-      "md5": "85a64f11d0c6aa590e8226125ea96af5",
-      "modified_at": "2026-11-24T12:31:01-05:00"
+      "md5": "f82d3c4ea786f722bc8c755bebe26ed8",
+      "modified_at": "2026-11-24T18:01:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -80716,9 +80852,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 19352,
-      "md5": "fac0f507c01901615b0fb0c1ba232e0c",
-      "modified_at": "2026-11-24T12:24:05-05:00"
+      "size_bytes": 19488,
+      "md5": "fd65dec21acb67f20f7e70086b88daab",
+      "modified_at": "2026-11-24T17:24:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -80734,9 +80870,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 16493583,
-      "md5": "70d14ac84ce2a8dfb19bed12f1e23a48",
-      "modified_at": "2026-11-24T10:45:26-05:00"
+      "size_bytes": 16493842,
+      "md5": "af74c420135531c48959e5d0543b4be2",
+      "modified_at": "2026-11-24T13:45:27-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -80752,9 +80888,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3655,
-      "md5": "c91c250fa732f9d073d44f64ddc23465",
-      "modified_at": "2026-11-24T12:30:06-05:00"
+      "size_bytes": 3673,
+      "md5": "90f3f835323b90c84c1d26257488a059",
+      "modified_at": "2026-11-24T18:00:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -80765,8 +80901,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 682,
-      "md5": "1052ab9481282aea915b08f9ba68519b",
-      "modified_at": "2026-11-24T08:07:02-05:00"
+      "md5": "b4d0b125f992d8ea93ccc773f9009d7f",
+      "modified_at": "2026-11-24T14:07:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -80788,9 +80924,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 58595,
-      "md5": "3d14e32b6daa99f451dff02e1d1e4a3c",
-      "modified_at": "2026-11-24T08:43:03-05:00"
+      "size_bytes": 58918,
+      "md5": "6879b88800134d47e03046d886363f77",
+      "modified_at": "2026-11-24T18:01:39-05:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",

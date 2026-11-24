@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-11-24T22:59:26.949906+00:00",
+  "agent": "zeus",
+  "action": "cancel_monitor",
+  "target": "vagaaqui-country-monitor",
+  "request_message_id": "1574921924495282388",
+  "requester_discord_id": "963808102891798649",
+  "thread_id": "1569851196234014781",
+  "result": "cancelled_validated",
+  "evidence": {
+    "cron_active": false,
+    "writer_active": false,
+    "offline_tests": 22,
+    "exact_runner_status": "cancelled_noop",
+    "external_requests": 0,
+    "other_monitors": "unchanged"
+  },
+  "backup": "backups/vagaaqui-country-stop-1574921924495282388"
+}
