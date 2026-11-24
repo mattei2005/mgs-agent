@@ -5526,12 +5526,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC02",
-      "next_step": "Reboot somente Inc02 confirmado. Validador habilitado/inativo;23/23pré-check,11fixtures e440hashes. Congelar/sincronizar governança, armar observador externo e timer único, validar novo boot/kernel204 sem outras mudanças.",
-      "objective": "Inc02 reboot exclusivo confirmado; preservar fases dos demais hosts",
+      "next_step": "Timer mgs-inc02-reboot-1574783533417894011-dispatch.timer ativo/waiting e comando exato conferido. Consumir observer-final.json somente após validador remoto sair/PID0. Observador local mgs-inc02-reboot-1574783533417894011-observe.service. Não redisparar reboot nem instalar pacotes.",
+      "objective": "Reboot único Inc02 confirmado1574783533417894011; observador externo é dono da espera",
       "source": "reports/vps-maint-inc02-reboot-1574783533417894011-preparation.md",
-      "state": "inc02_reboot_confirmed_validator_prepared_not_dispatched",
+      "state": "inc02_reboot_timer_armed_external_observer_running",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T13:55:12+00:00"
+      "updated_at": "2026-11-24T13:58:48+00:00"
     },
     {
       "agent": "zeus",
@@ -12348,5 +12348,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T13:55:12+00:00"
+  "updated_at": "2026-11-24T13:58:48+00:00"
 }
