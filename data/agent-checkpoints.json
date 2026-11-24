@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Lote16 Inc02 concluído e validado; reboot NÃO agendado/executado. Confirmar preparação de validação pós-boot e reboot somente Inc02: kernel5.15.0-203→204. Inc03JBF/Hestia/Node continuam fases separadas. Não repetir APT/backup.",
-      "objective": "Lote16 Inc02 aplicado/validado; reboot exclusivo Inc02 ainda exige confirmação crítica",
-      "source": "reports/vps-maint-1574252891898908684-inc02-completion.md",
-      "state": "inc02_packages_completed_validated_reboot_awaiting_separate_critical_confirmation",
+      "next_step": "Reboot somente Inc02 confirmado. Validador habilitado/inativo;23/23pré-check,11fixtures e440hashes. Congelar/sincronizar governança, armar observador externo e timer único, validar novo boot/kernel204 sem outras mudanças.",
+      "objective": "Inc02 reboot exclusivo confirmado; preservar fases dos demais hosts",
+      "source": "reports/vps-maint-inc02-reboot-1574783533417894011-preparation.md",
+      "state": "inc02_reboot_confirmed_validator_prepared_not_dispatched",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T13:37:54+00:00"
+      "updated_at": "2026-11-24T13:55:12+00:00"
     },
     {
       "agent": "zeus",
@@ -5526,12 +5526,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC02",
-      "next_step": "Congelar estado atual, bootloader/kernel204,16versões/backups/configs/startup; testar e instalar one-shot validador; reboot único, aguardar novo boot, validar e fechar. Não reboot outros hosts.",
-      "objective": "Reboot exclusivo Inc02 confirmado por1574783533417894011; preparar e validar pós-boot sem outras alterações",
-      "source": "reports/vps-maint-1574252891898908684-inc02-completion.md",
-      "state": "inc02_reboot_confirmed_preparing_validator",
+      "next_step": "Reboot somente Inc02 confirmado. Validador habilitado/inativo;23/23pré-check,11fixtures e440hashes. Congelar/sincronizar governança, armar observador externo e timer único, validar novo boot/kernel204 sem outras mudanças.",
+      "objective": "Inc02 reboot exclusivo confirmado; preservar fases dos demais hosts",
+      "source": "reports/vps-maint-inc02-reboot-1574783533417894011-preparation.md",
+      "state": "inc02_reboot_confirmed_validator_prepared_not_dispatched",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T13:48:10+00:00"
+      "updated_at": "2026-11-24T13:55:12+00:00"
     },
     {
       "agent": "zeus",
@@ -12348,5 +12348,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T13:48:10+00:00"
+  "updated_at": "2026-11-24T13:55:12+00:00"
 }
