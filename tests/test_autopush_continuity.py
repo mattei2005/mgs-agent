@@ -177,9 +177,12 @@ class IndexLockContinuityTests(unittest.TestCase):
 
 
 class RepeatedIndexLockContinuityTests(IndexLockContinuityTests):
+    operation_key = '5372f4df6089c7f3c6810be5'
+    alert_id = '1573981654010036305'
+
     def observe(self, reader=None, db=None):
-        key = '5372f4df6089c7f3c6810be5'
-        alert = '1573981654010036305'
+        key = self.operation_key
+        alert = self.alert_id
         # Reuse all failure/owner fixtures without treating an older receipt as
         # proof of the new occurrence. Only the fixture's original identity moves.
         receipt = dict(self.receipt)
@@ -195,32 +198,32 @@ class RepeatedIndexLockContinuityTests(IndexLockContinuityTests):
     def test_exact_occurrence(self):
         result = self.observe()
         self.assertTrue(result['verified'])
-        self.assertEqual(result['target'], 'alert:1573981654010036305')
+        self.assertEqual(result['target'], 'alert:' + self.alert_id)
 
     def test_closed_does_not_probe(self):
         path = self.base / 'queue.db'
         with sqlite3.connect(path) as db:
             db.execute('CREATE TABLE requests(key TEXT,source_key TEXT,state TEXT)')
             db.execute('INSERT INTO requests VALUES(?,?,?)', (
-                '5372f4df6089c7f3c6810be5', 'alert:1573981654010036305', 'completed_validated'))
+                self.operation_key, 'alert:' + self.alert_id, 'completed_validated'))
         self.assertIsNone(self.observe(lambda *args: self.fail('closed probe'), path))
 
     def test_prior_receipt_cannot_certify_new_occurrence(self):
         result = target.index_lock_observation(
             self.base, self.base, None, lambda *args: self.fail('old receipt probe'),
-            now=150, key='5372f4df6089c7f3c6810be5', alert='1573981654010036305')
+            now=150, key=self.operation_key, alert=self.alert_id)
         self.assertFalse(result['verified'])
 
     def test_unregistered_pair_not_probed(self):
         self.assertIsNone(target.index_lock_observation(
             self.base, self.base, None, lambda *args: self.fail('unregistered probe'),
-            now=150, key='5372f4df6089c7f3c6810be5', alert=target.INDEX_ALERT))
+            now=150, key=self.operation_key, alert=target.INDEX_ALERT))
 
     def test_independent_closure_without_replay(self):
         from mgs_automation_continuity import Queue
         from mgs_automation_supervisor import drive
         q = Queue(self.base / 'queue.db'); self.addCleanup(q.close)
-        row = q.enqueue('alert:1573981654010036305', {'kind': 'alert'}, 'alert_unresolved', now=90)
+        row = q.enqueue('alert:' + self.alert_id, {'kind': 'alert'}, 'alert_unresolved', now=90)
         drive(q, {row['source_key']: self.observe()}, lambda *args: self.fail('replay'),
               lambda: False, lambda source: False, lambda *args: None, now=150, max_jobs=0)
         self.assertEqual(q.get(row['key'])['state'], 'completed_validated')
@@ -229,7 +232,7 @@ class RepeatedIndexLockContinuityTests(IndexLockContinuityTests):
         from mgs_automation_continuity import Queue
         from mgs_automation_supervisor import drive
         q = Queue(self.base / 'queue.db'); self.addCleanup(q.close)
-        row = q.enqueue('alert:1573981654010036305', {'kind': 'alert'}, 'alert_unresolved', now=90)
+        row = q.enqueue('alert:' + self.alert_id, {'kind': 'alert'}, 'alert_unresolved', now=90)
         def check(active):
             drive(q, {row['source_key']: self.observe()}, lambda *args: self.fail('replay'),
                   lambda: False, lambda source: active, lambda *args: None, now=150, max_jobs=0)
@@ -248,7 +251,7 @@ class RepeatedIndexLockContinuityTests(IndexLockContinuityTests):
             f'[main {commit[:10]}]\n')
         (self.base / 'logs/auto-push.log').write_text(
             f'[1970-01-01T00:02:00+00:00] auto-push OK commit={commit[:10]} branch=main\n')
-        source = {'id': '1573981654010036305', 'author': {'id': '1496296175014252634'},
+        source = {'id': self.alert_id, 'author': {'id': '1496296175014252634'},
                   'content': '', 'timestamp': '1970-01-01T00:01:30Z', 'embeds': [{
                       'title': 'Auto-push falhando', 'color': 15158332, 'fields': [{
                           'name': 'Último erro',
@@ -264,13 +267,18 @@ class RepeatedIndexLockContinuityTests(IndexLockContinuityTests):
              patch('mgs_alert_transport.request', side_effect=[source, notice]) as get:
             result = target.index_lock_live_check(self.base, receipt)
         self.assertEqual(result['native_retry_commit'], commit)
-        self.assertTrue(get.call_args_list[0].args[1].endswith('/1573981654010036305'))
+        self.assertTrue(get.call_args_list[0].args[1].endswith('/' + self.alert_id))
         source['id'] = target.INDEX_ALERT
         with patch.object(target.subprocess, 'check_output', side_effect=[b'active', commit.encode()]), \
              patch.object(target.subprocess, 'run'), \
              patch('mgs_alert_transport.request', return_value=source):
             with self.assertRaisesRegex(ValueError, 'identity mismatch'):
                 target.index_lock_live_check(self.base, receipt)
+
+
+class CurrentIndexLockContinuityTests(RepeatedIndexLockContinuityTests):
+    operation_key = '86efe843bbb6734a0efbc5b4'
+    alert_id = '1574619607724072962'
 
 
 if __name__ == '__main__':
