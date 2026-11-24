@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "inc02_reboot_executed_postboot_residual_awaiting_decision",
+      "status": "inc02_closed_remaining_phases_pending",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70272,8 +70272,8 @@
         },
         {
           "target": "MatteiInc02 packages/reboot",
-          "state": "inc02_reboot_executed_postboot_residual_awaiting_decision",
-          "source": "reports/vps-maint-inc02-reboot-1574783533417894011-result.md",
+          "state": "completed_with_owner_accepted_kernel_residuals",
+          "source": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
           "install_executed": true,
           "reboot_executed": true,
           "native_completed_count": 3,
@@ -70281,7 +70281,9 @@
           "reboot_scheduled": false,
           "authorization_message_id": "1574778744248340551",
           "installed_by_zeus_count": 16,
-          "reboot_authorization_message_id": "1574783533417894011"
+          "reboot_authorization_message_id": "1574783533417894011",
+          "strict_journal_passed": false,
+          "owner_acceptance_message_id": "1574853646628159610"
         },
         {
           "target": "MatteiInc03JBF packages/reboot",
@@ -70296,7 +70298,7 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-24T14:05:20.207298+00:00",
+      "updated_at": "2026-11-24T18:30:30.754752+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70304,7 +70306,7 @@
       "checks_passed": 30,
       "next_critical_manifest": null,
       "next_critical_manifest_sha256": null,
-      "next_gate": "Inc02 já reiniciou/kernel204,32/33 critérios. Falha estrita preservada:3errosUSB/hub/áudio comprovadamente preexistentes por mensagem+dispositivo+fonte. Aguardar aceite de Rodolfo para encerrar com essas3ressalvas semBIOS/drivers. Nenhum executor/reboot pendente; não repetir instalação/reboot.",
+      "next_gate": "Inc02 sistema encerrado com três ressalvas kernel aceitas; nenhuma decisão Inc02 pendente. Não repetir instalação/reboot nem alterar BIOS/drivers. Inc03JBF/Hestia/Node permanecem fases separadas com gates próprios.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70663,7 +70665,7 @@
         "report": "reports/vps-maint-1574252891898908684-inc02-completion.md",
         "updated_at": "2026-11-24T13:37:54.397219+00:00"
       },
-      "latest_phase_report": "reports/vps-maint-inc02-reboot-1574783533417894011-result.md",
+      "latest_phase_report": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
       "inc02_reboot_authorization_message_id": "1574783533417894011",
       "inc02_reboot_controller": {
         "validator_unit": "mgs-inc02-reboot-1574783533417894011-validate.service",
@@ -70736,7 +70738,7 @@
           "finished_at": "2026-11-24T14:01:28.370668+00:00"
         },
         "unit_retention": "disabled/inactive definition retained; no deletion",
-        "state": "inc02_reboot_executed_postboot_residual_awaiting_decision",
+        "state": "completed_with_owner_accepted_kernel_residuals",
         "hardware_residuals": {
           "preexisting_exact_same_device_source_message_multiset": true,
           "old_boot_id": "06af3b27-082c-48ed-9acc-23b6300ab7d3",
@@ -70775,11 +70777,17 @@
         },
         "strict_pass": false,
         "reboot_executed": true,
-        "next_critical_decision": "Accept only the three frozen pre-existing Inc02 kernel residuals without BIOS/driver changes",
+        "next_critical_decision": null,
         "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/result-report-infra.json",
-        "git_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/git-result-observation.json"
+        "git_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/git-result-observation.json",
+        "owner_acceptance_message_id": "1574853646628159610",
+        "owner_acceptance_gate_message_id": "1574788924155633786",
+        "owner_accepted_residuals_only": true,
+        "acceptance_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/owner-acceptance-runtime-readback.json",
+        "runcloud_compatibility_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/runcloud-compatibility-readback.json"
       },
-      "completed_inc02_package_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/critical-plan-v2.json"
+      "completed_inc02_package_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/critical-plan-v2.json",
+      "owner_acceptance_message_id": "1574853646628159610"
     },
     {
       "id": "meta-manual-payments-cron-20261123T0802",
@@ -71110,11 +71118,11 @@
       "id": "VPS-MAINT-1574252891898908684-INC02",
       "agent": "zeus",
       "type": "host_scoped_package_rollback_and_cold_backup_plan",
-      "status": "inc02_reboot_executed_postboot_residual_awaiting_decision",
+      "status": "completed_with_owner_accepted_kernel_residuals",
       "source_message_id": "1574778744248340551",
       "source_thread_id": "1574249078584377544",
       "host": "MatteiInc02/RunCloud288158/162.55.28.179",
-      "report": "reports/vps-maint-inc02-reboot-1574783533417894011-result.md",
+      "report": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
       "manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/critical-plan-v2.json",
       "manifest_sha256": "6a2fdfef8eaf78e61d74adea865e657ff458d98ee65d0f0879479caf888e41b5",
       "preparation_checks_passed": 16,
@@ -71134,7 +71142,7 @@
       "configuration_timezone": "Etc/UTC",
       "readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/independent-readback.json",
       "report_transport": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/completion-report-infra.json",
-      "updated_at": "2026-11-24T14:05:20.207298+00:00",
+      "updated_at": "2026-11-24T18:30:30.754752+00:00",
       "previous_authorization_message_id": "1574688273131900969",
       "previous_disclosed_gate_message_id": "1574668810458370079",
       "previous_manifest_sha256": "5554f1e992fa3dc7cbd9db990fc10146e5278b2bae00818a1a18d8c8f860a592",
@@ -71178,7 +71186,7 @@
       "authorization_message_id": "1574778744248340551",
       "disclosed_gate_message_id": "1574692546981003365",
       "reboot_scheduled": false,
-      "next_gate": "Inc02 já reiniciou/kernel204,32/33 critérios. Falha estrita preservada:3errosUSB/hub/áudio comprovadamente preexistentes por mensagem+dispositivo+fonte. Aguardar aceite de Rodolfo para encerrar com essas3ressalvas semBIOS/drivers. Nenhum executor/reboot pendente; não repetir instalação/reboot.",
+      "next_gate": "Inc02 sistema encerrado com três ressalvas kernel aceitas; nenhuma decisão Inc02 pendente. Não repetir instalação/reboot nem alterar BIOS/drivers. Inc03JBF/Hestia/Node permanecem fases separadas com gates próprios.",
       "execution": {
         "status": "inc02_packages_completed_validated_reboot_awaiting_separate_critical_confirmation",
         "authorization_message_id": "1574778744248340551",
@@ -71315,7 +71323,7 @@
           "finished_at": "2026-11-24T14:01:28.370668+00:00"
         },
         "unit_retention": "disabled/inactive definition retained; no deletion",
-        "state": "inc02_reboot_executed_postboot_residual_awaiting_decision",
+        "state": "completed_with_owner_accepted_kernel_residuals",
         "hardware_residuals": {
           "preexisting_exact_same_device_source_message_multiset": true,
           "old_boot_id": "06af3b27-082c-48ed-9acc-23b6300ab7d3",
@@ -71354,11 +71362,17 @@
         },
         "strict_pass": false,
         "reboot_executed": true,
-        "next_critical_decision": "Accept only the three frozen pre-existing Inc02 kernel residuals without BIOS/driver changes",
+        "next_critical_decision": null,
         "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/result-report-infra.json",
-        "git_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/git-result-observation.json"
+        "git_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/git-result-observation.json",
+        "owner_acceptance_message_id": "1574853646628159610",
+        "owner_acceptance_gate_message_id": "1574788924155633786",
+        "owner_accepted_residuals_only": true,
+        "acceptance_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/owner-acceptance-runtime-readback.json",
+        "runcloud_compatibility_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/runcloud-compatibility-readback.json"
       },
-      "latest_phase_report": "reports/vps-maint-inc02-reboot-1574783533417894011-result.md"
+      "latest_phase_report": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
+      "owner_acceptance_message_id": "1574853646628159610"
     },
     {
       "id": "meta-manual-payments-cron-20261124T0802",

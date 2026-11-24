@@ -1,5 +1,7 @@
 # Inc02 — reboot realizado; três ressalvas preexistentes aguardam aceite
 
+> Disposição posterior: Rodolfo aceitou exclusivamente estas três ressalvas em `1574853646628159610`, respondendo ao gate `1574788924155633786`. A pendência de decisão abaixo é histórica, supersedida por `reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md`; o resultado estrito 32/33 permanece inalterado.
+
 ## Autoridade e efeito real
 
 Rodolfo confirmou `1574783533417894011`, em resposta ao gate `1574781919080484905`. Reboot único exclusivo de MatteiInc02/RunCloud288158/162.55.28.179. Boot anterior `06af3b27-082c-48ed-9acc-23b6300ab7d3`; novo `28cfe94f-29fc-4907-86e9-69af9708fe20`; kernel carregado `5.15.0-204-generic`, antes203. Fronteira de tentativa e timer/serviço exatos conferidos; nenhum reboot repetido, nenhum pacote reinstalado.
