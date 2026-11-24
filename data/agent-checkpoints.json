@@ -11529,12 +11529,12 @@
     {
       "agent": "ares",
       "id": "shein-1574833548366586009",
-      "next_step": "Obter na origem aceite limitado das sete omissões e continuidade dos mesmos IDs; vincular receipt reviewed_copy_omissions com autoridade live, retomar QA e ativação central, conferir Meta e cadastrar UTMs diretamente na SB.",
+      "next_step": "Nenhuma ação de campanha pendente; responder conclusão nativa na origem, preservar recibos e não repetir writes.",
       "objective": "Duplicar C299 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005; USD150 por campanha; COCAP USD0.70; início imediato em 24/11/2026",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574833548366586009/pending-review-receipt.json",
-      "state": "aguardando aceite específico de omissões de api: c301-c305 existentes paused; 5 campanhas, 5 conjuntos e 10 anúncios conferidos por get; usd150/dia por campanha, usd750/dia no lote, cost_cap e cap70 centavos confirmados. fonte c299 active/maxvol usd50 preservada. dez creatives omitem image_animation,image_brightness_and_contrast,image_templates,image_text_translation,image_touchups,image_uncrop,video_uncrop; fonte fresca expõe todos; nenhum valor compartilhado alterado nem novo opt_in. qa renderizado parcial 2/5, qa semântico e ativação pendentes. sem grant vigente para este request; aceite mavroa não se aplica. sb pendente; não reenviar criação nem alterar fonte.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574833548366586009/completion-receipt.json",
+      "state": "complete: c301-c305 active, 5 conjuntos e 10 anúncios active, mesmos ids originais sem recriação. usd150/dia por campanha; lote usd750/dia; cost_cap usd0.70 em todos. qa semântico e renderizado integral; aceite pontual kelly 1574837792381341809 validado para sete omissões de api, sem waiver futuro. posts novos e omissão opcional de flags de sugestões de idade/gênero registrados. orçamento ativo total da conta usd7560/dia via get com horário no receipt. sb utm_campaign+utm_adgroup: 5 valores únicos por chave, http201 literal e gaminsert=ok; reconferência independente indisponível na rota documentada, sem reenvio. serving não auditado.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-24T17:13:17+00:00"
+      "updated_at": "2026-11-24T17:30:33+00:00"
     },
     {
       "agent": "ares",
@@ -12368,5 +12368,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T17:13:17+00:00"
+  "updated_at": "2026-11-24T17:30:33+00:00"
 }
