@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Preparação Inc03/Hestia concluída; aguardar confirmação crítica consolidada do manifesto f89361f1eaae:41upgrades+2novos/0remoções, pausaMariaDBInc03,rotinas nativas Hestia/Roundcube e reboot serial somente desses2hosts. Sem execução/agendamento. Node dashboard bloqueado pela rota Astra; preservar fases encerradas.",
-      "objective": "Concluir manutenção VPS sem avisos rotineiros; pendências críticas consolidadas",
-      "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
-      "state": "remaining_hosts_prepared_awaiting_exact_critical_confirmation",
+      "next_step": "Aceite1574885702947045549 vinculado ao gate1574880812271149222/manifestof89361f1eaae. Pré-checks27/27 após APTrefresh. Executar Inc03 backup frio/restauração/lote/reboot/validação antes de Hestia. Não repetir fases;Node fora.",
+      "objective": "Executar lotes e reboots seriais Inc03/Hestia confirmados sem avisos intermediários",
+      "source": "discord:message:1574885702947045549",
+      "state": "exact_lots_confirmed_preflight_passed",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:09:37+00:00"
+      "updated_at": "2026-11-24T20:34:45+00:00"
     },
     {
       "agent": "zeus",
@@ -12388,5 +12388,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T20:09:37+00:00"
+  "updated_at": "2026-11-24T20:34:45+00:00"
 }
