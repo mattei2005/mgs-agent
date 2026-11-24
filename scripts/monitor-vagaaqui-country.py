@@ -199,6 +199,7 @@ def deliver(s,key,p,store):
     entry['verified']=True;entry['verified_at']=iso(dt.datetime.now(UTC));save(store/'state.json',s)
 
 def run(c,s,store,now,mode):
+    if s.get('status')=='cancelled':return {'status':'cancelled_noop','external_requests':0}
     if s.get('status')=='completed':return {'status':'completed_noop','external_requests':0}
     if s.get('status')=='blocked':return {'status':'blocked_noop','external_requests':0,'reason':s.get('last_error')}
     if mode=='initial':
@@ -242,6 +243,8 @@ def main():
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:print('SKIP writer_busy');return 0
         c=config_read(STORE);s=state_read(STORE);now=dt.datetime.now(UTC)
+        if s.get('status')=='cancelled':
+            print(json.dumps({'status':'cancelled_noop','external_requests':0}));return 0
         if args.dry_run:
             sample=cf_query(cf_token(),iso(now-dt.timedelta(hours=24)),iso(now))
             print(json.dumps({'status':'dry_run_ok','hosts':HOSTS,'total':sample['total'],'countries':len(sample['countries']),'max_sample_interval':sample['max_sample_interval'],'start':c['start'],'end':c['end'],'state_write':False,'discord_write':False}));return 0

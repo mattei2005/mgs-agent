@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "active",
+  "status": "cancelled",
   "days": {
     "daily:2026-11-11T01:38:29Z": {
       "start": "2026-11-11T01:38:29Z",
@@ -1922,5 +1922,9 @@
     }
   },
   "failure_streak": 0,
-  "last_check": "2026-11-24T22:46:08Z"
+  "last_check": "2026-11-24T22:46:08Z",
+  "cancelled_at": "2026-11-24T22:58:37.669492+00:00",
+  "cancelled_by_discord_id": "963808102891798649",
+  "cancellation_message_id": "1574921924495282388",
+  "next_action": "No retries, collection or publication. Explicitly cancelled by authorized requester; retain historical receipts."
 }

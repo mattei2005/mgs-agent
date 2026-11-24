@@ -4038,6 +4038,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INC03-PERIPHERALS-1574921787630821377",
+      "next_step": "Validar hardware físico, enumeração PCI/USB/ALSA, drivers e contexto do boot; procurar evidência histórica local. Somente leitura: sem PCI/USB rescan/reset,unbind,modprobe,BIOS,drivers/reboot. Preservar ressalvas ainda não aceitas e Hestia retido.",
+      "objective": "Diagnosticar periféricos USB/hub/áudio do dedicado Inc03 por pedido técnico autorizado",
+      "source": "discord:message:1574921787630821377",
+      "state": "read_only_scan_in_progress",
+      "thread_id": "1574249078584377544",
+      "updated_at": "2026-11-24T22:57:56+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
       "next_step": "Enviar à Isa/Smart Bidding/JBF a evidência exata e solicitar correção/whitelist do detector IVT para tráfego residencial legítimo. Após ajuste, repetir teste desktop/mobile e exigir slots e gampad sob /21922122164/ antes de marcar impressão/fill como provados.",
       "objective": "Concluir a migração real de Cliquet e finanzas.cliquet do GAM ActiveView para o GAM Smart Bidding/JBF, preservando slots, targeting, receita e rollback independente por site.",
@@ -12388,5 +12398,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T20:56:30+00:00"
+  "updated_at": "2026-11-24T22:57:56+00:00"
 }
