@@ -5516,12 +5516,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "OK1574650660572504115 responde gate1574649750643281962 e manifesto9ddbb2988cbbd980. Não repetir pacotes/backup. Reconciliar trabalhos/locks ativos, congelar prestate e validator remoto, despachar reboot uma vez e consumir recibo pós-boot. Hostinger/outros hosts e Node/Hermes inalterados.",
-      "objective": "Reboot somente Inc01 confirmado; preservar dados/runtimes e validar novo boot kernel204",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json",
-      "state": "reboot_approved_preflight_before_dispatch",
+      "next_step": "20prechecks/8fixtures OK. Após sync canônico lançar consumidor /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py; Zeus foreground consome /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json após validator remoto disabled/inactive. Admissão/locks financeiros nativos só técnicos; sem SQL financeiro. Não repetir pacotes/backup/reboot, não mudar outros hosts.",
+      "objective": "Reboot Inc01 confirmado1574650660572504115, kernel203->204 e validação externa sem atualização de aplicação",
+      "source": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
+      "state": "reboot_authorized_prepared_not_dispatched",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T05:00:03+00:00"
+      "updated_at": "2026-11-24T05:16:54+00:00"
     },
     {
       "agent": "zeus",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:00:03+00:00"
+  "updated_at": "2026-11-24T05:16:54+00:00"
 }

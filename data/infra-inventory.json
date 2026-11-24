@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "inc01_packages_completed_validated_reboot_pending_critical_confirmation",
+      "status": "inc01_reboot_authorized_prepared_not_dispatched",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70261,10 +70261,11 @@
         },
         {
           "target": "MatteiInc01 packages/reboot",
-          "state": "packages_completed_validated_reboot_pending_critical_confirmation",
-          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/independent-final-readback.json",
+          "state": "packages_validated_reboot_authorized_prepared_not_dispatched",
+          "source": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
           "reboot": "awaiting_new_critical_confirmation_not_scheduled",
-          "package_authorization": "1574642070478520412"
+          "package_authorization": "1574642070478520412",
+          "reboot_authorization": "1574650660572504115"
         },
         {
           "target": "MatteiInc02 packages/reboot",
@@ -70283,7 +70284,7 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-24T04:50:11.051133+00:00",
+      "updated_at": "2026-11-24T05:16:54.408500+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70291,7 +70292,7 @@
       "checks_passed": 30,
       "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json",
       "next_critical_manifest_sha256": "9ddbb2988cbbd98083ef112ac2e45482ff8d1462cd87fc1cac84a37f5a1464d4",
-      "next_gate": "Owner confirmation for Inc01-only reboot kernel203->204 with external health readback; no reboot scheduled. Other hosts/dashboard still separate.",
+      "next_gate": "Zeus foreground launches and consumes the exact external Inc01 controller after canonical source sync; no new owner confirmation for this unchanged reboot. Other hosts/dashboard separate.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70464,6 +70465,14 @@
         "historical_failed_verdict_preserved": "/root/mgs-maintenance/1574252891898908684-inc01/apply-result.json",
         "report": "reports/vps-maint-1574252891898908684-inc01-completion.md",
         "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/completion-report-infra.json"
+      },
+      "inc01_reboot_authorization_message_id": "1574650660572504115",
+      "inc01_reboot_controller": {
+        "local": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py",
+        "remote_validator": "mgs-inc01-reboot-1574650660572504115-validate.service",
+        "result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json",
+        "phase": "prepared_not_dispatched",
+        "preparation_report": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md"
       }
     },
     {
@@ -70675,6 +70684,40 @@
       "services_restarted_unrelated": false,
       "database_restore_exercised": true,
       "next_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-critical-plan.json"
+    },
+    {
+      "id": "VPS-INC01-REBOOT-1574650660572504115",
+      "agent": "zeus",
+      "type": "approved_remote_host_reboot_validator_and_external_consumer",
+      "status": "prepared_not_dispatched",
+      "authorization_message_id": "1574650660572504115",
+      "disclosed_gate_message_id": "1574649750643281962",
+      "source_thread_id": "1574249078584377544",
+      "host": "MatteiInc01/RunCloud290075/162.55.28.178",
+      "sources": [
+        "scripts/vps-maint-inc01-1574650660572504115-boot_probe.py",
+        "scripts/vps-maint-inc01-1574650660572504115-postboot_validator.py",
+        "scripts/vps-maint-inc01-1574650660572504115-reboot_dispatcher.py",
+        "scripts/vps-maint-inc01-1574650660572504115-local_controller.py"
+      ],
+      "remote_root": "/root/mgs-maintenance/1574252891898908684-inc01/reboot-1574650660572504115",
+      "local_controller": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json",
+      "validator_unit": "mgs-inc01-reboot-1574650660572504115-validate.service",
+      "validator_definition_retention": "disable after one boot, retain definition; no deletion",
+      "preflight_checks": 20,
+      "synthetic_tests": 8,
+      "frozen_configuration_code_hashes": 286,
+      "postgresql_backup": {
+        "bytes": 228809357,
+        "sha256": "7671210621693ceab76cc98fef1cea80200378309a01fc4ca8e6a2322b8be924",
+        "native_catalog_readable": true,
+        "materialized_restore_this_phase": false
+      },
+      "reboot_executed": false,
+      "reboot_scheduled": false,
+      "report": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
+      "updated_at": "2026-11-24T05:16:54.408500+00:00"
     }
   ],
   "profile_skill_references": [
