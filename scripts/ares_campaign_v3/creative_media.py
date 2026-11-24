@@ -56,13 +56,13 @@ def creative_body(payload):
     return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads'] if k in payload}
 
 
-def matches(actual, expected):
+def matches(actual, expected, *, source_creative=None):
     if str(actual.get('url_tags') or '') != str(expected.get('url_tags') or ''):return False
     if 'contextual_multi_ads' in expected and actual.get('contextual_multi_ads') != expected['contextual_multi_ads']:return False
     image_hash = ((expected.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash')
     if image_hash:
         from .image_sourcing import valid_observed
-        if not valid_observed(actual, expected):
+        if not valid_observed(actual, expected, source_creative=source_creative):
             return False
     if image_hash and (((actual.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash') != image_hash):
         return False

@@ -5496,6 +5496,23 @@
       "updated_at": "2026-11-06T21:16:58+00:00"
     },
     {
+      "canonical_key": "ares.shein.pure-clone.inherited-mixed-sourcing-auto-recovery",
+      "canonical_source": "data/ares/meta-ads/policies/shein-inherited-mixed-sourcing-auto-recovery.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops",
+      "effective_at": "2026-11-24T04:08:50.050000+00:00",
+      "id": "ARES-SHEIN-INHERITED-SOURCING-1574637897200439319",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: correcao automatica do validador de variantes herdadas em pure clone",
+      "updated_at": "2026-11-24T04:15:47+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reporting.intraday-five-slots",
       "canonical_source": "data/ares/meta-ads/policies/shein-intraday-report.json",
       "consumers": [
@@ -17941,5 +17958,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:02:53+00:00"
+  "updated_at": "2026-11-24T04:15:47+00:00"
 }

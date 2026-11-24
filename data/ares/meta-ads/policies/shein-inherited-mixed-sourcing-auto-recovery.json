@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "policy_key": "ares.shein.pure-clone.inherited-mixed-sourcing-auto-recovery",
+  "status": "ACTIVE",
+  "owner": "Rodolfo Mattei",
+  "authority": {
+    "message_id": "1574637897200439319",
+    "author_id": "344196393512075265",
+    "thread_id": "1558127210966032385",
+    "parent_channel_id": "1548149483039236137",
+    "content": "Pode corrigir e se tiver pedidos futuros que exige isso pode fazer automaticamente.",
+    "verified_by_discord_readback": true,
+    "effective_at": "2026-11-24T04:08:50.050000+00:00"
+  },
+  "scope": {
+    "operation": "SHEIN-US-DIRECT",
+    "mode": "pure_clone",
+    "creative_materialization_route": "source_definition_two_phase",
+    "current_request_id": "shein-1574633485262393356",
+    "future_equivalent_authorized_requests": true,
+    "source_variants": ["padding", "uncrop", "recomposition", "multi_media"],
+    "action": "Automatically repair the same source-preservation validator incompatibility through separate scoped maintenance, test and resume the original authorized request without requiring another approval for this same correction."
+  },
+  "requirements": [
+    "Exact source-ad and creative identity, sealed approved payloads and confirmed existing Meta IDs",
+    "Complete unchanged inherited sourcing, image hashes, variants, enrollment, URLs, multiplicity and order",
+    "Exact approved primary story, text-only asset feed, Page/Instagram, copy, CTA and target tracking",
+    "No new media; strict clone_prestaged/from_zero sourcing remains unchanged",
+    "Regression tests, backup, shared-runtime maintenance lock, compare-and-swap install and REPORT-INFRA",
+    "Same request and IDs; full semantic QA, rendered media proof, central activation and terminal readback"
+  ],
+  "does_not_authorize": [
+    "New campaigns without an explicit campaign request",
+    "Additional budget, account or partition scope",
+    "Accepting actual material differences, omitted features or unknown variants",
+    "Bypassing QA, editing sealed manifests or replaying confirmed copies",
+    "Billing, credentials, permission changes, destructive operations or other Critical Subset actions",
+    "General unrestricted runtime maintenance"
+  ],
+  "supersedes": "Per-occurrence approval requirement for this exact inherited mixed-sourcing validator correction; original failed-request diagnosis remains historical."
+}

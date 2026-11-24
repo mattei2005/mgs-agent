@@ -132,6 +132,9 @@ def validate_live(live, expected, spec, request_id=None):
                     if (not matches(cr, slot.creative_payload)
                             or stable_story(cr.get('media_sourcing_spec')) != stable_story(ocr.get('media_sourcing_spec'))):
                         raise ValueError('activation image sourcing/media/copy drift')
+                if (spec.mode == 'pure_clone' and spec.creative_materialization_route == 'source_definition_two_phase'
+                        and cr.get('media_sourcing_spec') != ocr.get('media_sourcing_spec')):
+                    raise ValueError('activation inherited source variants drift')
                 if spec.reference:
                     slot = next(a for a in spec.ads if a.name == row['name'])
                     if slot.creative_payload.get('degrees_of_freedom_spec'):

@@ -408,7 +408,13 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         verify_creative(creative, resolved)
         cp = effective(resolved)
         if cp.get('asset_feed_spec') or cp.get('object_story_spec'):
-            if not media_creative_matches(creative, cp):
+            source_creative = None
+            if desired.get('creative_materialization_route') == 'source_definition_two_phase' and not expected.get('media'):
+                source_matches = [row for row in source['ads'] if str(row['id']) == sid]
+                if len(source_matches) != 1:
+                    raise RouteBlocked('pure clone source creative identity ambiguous')
+                source_creative = source_matches[0].get('creative')
+            if not media_creative_matches(creative, cp, source_creative=source_creative):
                 raise RouteBlocked('flexible media/copy/tracking readback mismatch')
         elif (creative.get('object_story_id') != cp['object_story_id']
                 or creative.get('effective_object_story_id') != cp['object_story_id']

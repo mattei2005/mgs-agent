@@ -2903,12 +2903,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1574520470034841752",
-      "next_step": "Continuacao exclusivamente pelo consumidor canonico da fila quando predecessor concluir. Nao transferir reservas, nao tocar outra conta/thread, nao duplicar writer/cron nem comunicar fila rotineira. Reusar request/parametros/relogio, prepare-media, campaign dry-run/execute, QA integral, ativacao e cadastro SB. Conferir data futura no momento de admissao sem reescrever selos.",
+      "next_step": "Decisao humana de revisao ou substituicao pertence ao predecessor na origem1558134405313200150. Preservar foreground atual, sem writer concorrente. Apos dependencia terminal, retomar prepare-media/dry-run/execute central aqui com mesmos24arquivos/grupos/parametros/IDs/relogio, QA/ativacao/SB. Nao converter execute agora em transferencia de reserva nem alterar campanhas de outra origem.",
       "objective": "Duplicar 10x fonte01 Growpowerhub06 G006 com 24 videos/copies literais, USD25 por campanha, COCAP USD0.90, 24nov2026 00h05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/page-delegation-1574631156467499100.json;data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1574520470034841752.json",
-      "state": "page_delegation_repaired_verified. aprovacao exata rodolfo1574631156467499100; post200 e tarefas advertise+analyze relidas, demais atribuicoes preservadas. get corporativo page offers hub e video fonte http200/ready. prepare-media persistiu mesmo request na fila canonica waiting, dependencia shein-1574521189035151514 recovery_pending; servico consumidor ativo. nenhum write de campanha/upload neste pedido ainda.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/foreground-external-dependency-1574632129164345425.json",
+      "state": "waiting_predecessor_external_review_decision. foreground solicitado rodolfo1574632129164345425, dispatch_owner foreground/delivery_owner ares validado sem writer atual. conta/page/video/fonte eua confirmados e 24 linhagens metadata_clean. zero campanhas/uploads atuais. onze arquivos reservados por shein-1574521189035151514, cujo lote chegou a qa completo mas ativacao parou por reprovacoes meta. owner origem pediu decisao revisao ou substituicao em1574639028161085613. nenhuma tomada de reserva/alteracao do predecessor.",
       "thread_id": "1558134489748611163",
-      "updated_at": "2026-11-24T03:44:32+00:00"
+      "updated_at": "2026-11-24T04:15:21+00:00"
     },
     {
       "agent": "ares",
@@ -5506,22 +5506,22 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Hostinger completed: new boot/kernel151, package and gateway/Discord checks passed; external validator disabled/inactive and definitions retained, no deletions. Closure transports and final receipt in /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json. Remaining MatteiInc01/02/03,Hestia and dashboard phases remain open with their exact gates; no repeat reboot.",
-      "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json",
-      "state": "hostinger_completed_validated_remaining_hosts_pending",
+      "next_step": "Hostinger já encerrada e validada. Confirmar lote Inc0120updates/0new/0remove, parada MariaDB para backup frio e restore isolado antes de instalar; hooks MariaDB restart e BitNinja IpFilter reload explícitos. Manifest5db8c98920645ea6; nenhum reboot/dashboard/Hermes/outros hosts por este gate. Demais fases permanecem abertas.",
+      "objective": "Manutenção cinco hosts + Node/dashboard com fases e gates independentes",
+      "source": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
+      "state": "inc01_prepared_awaiting_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T03:33:25+00:00"
+      "updated_at": "2026-11-24T04:15:07+00:00"
     },
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "Revalidar binding RunCloud/SSH, grafo APT, consumidores e backups; congelar lote Inc01 e apresentar confirmação crítica. Não instalar, reiniciar nem alterar dashboard.",
-      "objective": "Preparar lote exato e rollback MatteiInc01 após Hostinger concluída; instalação/reboot sujeitos a confirmação crítica própria",
-      "source": "discord:message:1574636767036833863",
-      "state": "preparing_readonly_package_and_recovery_preflight",
+      "next_step": "Hostinger já encerrada e validada. Confirmar lote Inc0120updates/0new/0remove, parada MariaDB para backup frio e restore isolado antes de instalar; hooks MariaDB restart e BitNinja IpFilter reload explícitos. Manifest5db8c98920645ea6; nenhum reboot/dashboard/Hermes/outros hosts por este gate. Demais fases permanecem abertas.",
+      "objective": "Preparar/aplicar manutenção Inc01 com backup consistente e confirmação crítica próprios",
+      "source": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
+      "state": "inc01_prepared_awaiting_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T04:05:50+00:00"
+      "updated_at": "2026-11-24T04:15:07+00:00"
     },
     {
       "agent": "zeus",
@@ -11499,12 +11499,12 @@
     {
       "agent": "ares",
       "id": "shein-1574633485262393356",
-      "next_step": "Obter autorizacao de manutencao pontual do runtime central; reproduzir e testar preservacao exata de sourcing herdado sem afrouxar midia nova; REPORT-INFRA; retomar o mesmo input/request preservando todos os IDs, QA integral, ativacao e cadastro SB. Nao recriar campanhas nem remover variantes.",
+      "next_step": "Pedido concluido; nenhuma campanha ou ativacao a repetir. Aplicar automaticamente a correcao para pedidos futuros equivalentes dentro da politica registrada. Entrega futura nao e comprovada por status ACTIVE.",
       "objective": "Duplicar duas vezes a C034 na Mavroa-US-SHEIN-ES-03-G003, USD100 por campanha, 24/11/2026 00:00 America/New_York.",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574633485262393356/recovery-diagnosis.json",
-      "state": "postprocess_pending: c036 e c037 criadas paused; dois conjuntos e quatro anuncios confirmados, usd200/dia total. get completo confirma story/afs/sourcing iguais aos payloads aprovados. validador de imagem rejeita variantes herdadas padding/uncrop/recomposition/multi_media; qa renderizado, ativacao e sb pendentes. nenhum codigo ou manifesto foi alterado.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574633485262393356/completion-receipt.json",
+      "state": "complete: correcao autorizada por rodolfo 1574637897200439319 instalada e testada; c036 e c037 active nos mesmos ids, dois conjuntos e quatro anuncios active, qa semantico e renderizado integral. usd100/dia cada; usd200/dia lote; cost_cap usd1.15; inicio 24/11/2026 00:00 america/new_york preservado. sb confirmou http201 e gaminsert=ok para utm_campaign e utm_adgroup literais das copias. reconferencia sb independente nao exposta pela feature. politica prospectiva equivalente ativa e registrada.",
       "thread_id": "1558127210966032385",
-      "updated_at": "2026-11-24T03:58:02+00:00"
+      "updated_at": "2026-11-24T04:20:29+00:00"
     },
     {
       "agent": "ares",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:12:40+00:00"
+  "updated_at": "2026-11-24T04:20:29+00:00"
 }

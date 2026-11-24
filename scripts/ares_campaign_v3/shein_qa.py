@@ -33,7 +33,12 @@ def verify_media(common, token, live, desired, source, policy):
         ad=actual[slot['name']];cp=slot['creative_payload'];cr=ad['creative']
         if str(ad.get('source_ad_id')) != str(slot['source_ad_id']):raise ValueError('media QA source lineage mismatch')
         if 'contextual_multi_ads' in cp and cr.get('contextual_multi_ads') != cp['contextual_multi_ads']:raise ValueError('Multi-advertiser ads differs from source; activation blocked')
-        if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
+        source_creative = None
+        if (desired.get('mode') == 'pure_clone'
+                and desired.get('creative_materialization_route') == 'source_definition_two_phase'
+                and not slot.get('media')):
+            source_creative = sources[str(slot['source_ad_id'])]['creative']
+        if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp,source_creative=source_creative):raise ValueError('full flexible media/copy/identity mismatch')
         image = (slot.get('media') or {}).get('media_type') == 'image'
         if image:
             wanted = slot['media']['image_hash']

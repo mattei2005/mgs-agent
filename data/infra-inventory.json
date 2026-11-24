@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "hostinger_completed_validated_remaining_hosts_pending",
+      "status": "inc01_prepared_awaiting_critical_confirmation",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70261,7 +70261,9 @@
         },
         {
           "target": "MatteiInc01 packages/reboot",
-          "state": "pending_preparation_and_critical_confirmation"
+          "state": "package_lot_and_database_consistency_window_awaiting_critical_confirmation",
+          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/critical-plan.json",
+          "reboot": "separate_gate_not_authorized"
         },
         {
           "target": "MatteiInc02 packages/reboot",
@@ -70280,7 +70282,7 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-24T03:33:25.420104+00:00",
+      "updated_at": "2026-11-24T04:15:06.833279+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70288,7 +70290,7 @@
       "checks_passed": 30,
       "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
       "next_critical_manifest_sha256": "481b3a7260cfe866a99def451629c1247449f4a6da3a4c81714153841f56458c",
-      "next_gate": "Prepare next remote-host phase with host-scoped backup and Critical confirmation; do not infer authorization across hosts.",
+      "next_gate": "Rodolfo must confirm exact20-package Inc01 lot plus short MariaDB cold-backup consistency pause; no install/reboot yet.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70414,7 +70416,18 @@
       },
       "hostinger_completed": true,
       "postboot_unit_state": "validator_disabled_inactive_definition_retained",
-      "reboot_transport_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json"
+      "reboot_transport_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json",
+      "inc01_preparation": {
+        "source_message_id": "1574636767036833863",
+        "report": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
+        "manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/critical-plan.json",
+        "sha256": "5db8c98920645ea6a4c62c0c65053fff0e17c47e1c68da9467eeb9ed1ec47b9d",
+        "remote_backup": "/root/mgs-maintenance/1574252891898908684-inc01",
+        "checks_passed": 14,
+        "installed": false,
+        "database_backup_created": false,
+        "report_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/report-infra.json"
+      }
     },
     {
       "id": "meta-manual-payments-cron-20261123T0802",
@@ -70558,6 +70571,31 @@
       },
       "report_infra_message_id": "1574614974142222409",
       "report_infra_readback": true
+    },
+    {
+      "id": "VPS-MAINT-1574252891898908684-INC01",
+      "agent": "zeus",
+      "type": "host_scoped_package_rollback_and_database_consistency_preparation",
+      "status": "prepared_awaiting_critical_confirmation",
+      "source_thread_id": "1574249078584377544",
+      "source_message_id": "1574636767036833863",
+      "host": "MatteiInc01/162.55.28.178/RunCloud290075",
+      "report": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
+      "manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/critical-plan.json",
+      "sha256": "5db8c98920645ea6a4c62c0c65053fff0e17c47e1c68da9467eeb9ed1ec47b9d",
+      "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/preparation-acceptance.json",
+      "independent_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/independent-readback.json",
+      "remote_root": "/root/mgs-maintenance/1574252891898908684-inc01",
+      "production_packages_changed": false,
+      "services_restarted": false,
+      "reboot_executed": false,
+      "rollback_packages": 20,
+      "original_debs": 15,
+      "reconstructed_payloads": 5,
+      "database_backup_created": false,
+      "report_transport": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/report-infra.json",
+      "skill_learning": "vps-maintenance-and-backup-governance/references/controlled-package-and-node-tooling-update.md",
+      "updated_at": "2026-11-24T04:15:06.833279+00:00"
     }
   ],
   "profile_skill_references": [

@@ -27,7 +27,60 @@ def sourcing(payload):
         result['descriptions'] = [{'text': ld['description']}]
     return result
 
-def valid_observed(actual, expected):
+def preserved_clone_sourcing(actual, expected, source):
+    """Exact inherited mixed variants, bound to a pure-clone source creative.
+
+    This is read-only recognition, never the new-media sourcing recipe. Callers
+    supply the source only for source-definition pure clones with no new media.
+    """
+    from .creative_media import stable, strip_output
+    if not isinstance(source, dict) or not re.fullmatch(r'[0-9]+', str(source.get('id') or '')):
+        return False
+    story = expected.get('object_story_spec') or {}
+    original = source.get('object_story_spec') or {}
+    primary = (story.get('link_data') or {}).get('image_hash')
+    if (not primary or (original.get('link_data') or {}).get('image_hash') != primary
+            or any(c.get('object_story_id') for c in (actual, expected, source))
+            or story.get('video_data') or original.get('video_data')
+            or story.get('page_id') != original.get('page_id')
+            or not story.get('page_id')):
+        return False
+    expected_ig = story.get('instagram_user_id')
+    if not expected_ig or expected_ig != (source.get('instagram_user_id') or original.get('instagram_user_id')):
+        return False
+    spec = expected.get('media_sourcing_spec')
+    if (not isinstance(spec, dict) or set(spec) - {'images', 'titles', 'bodies', 'descriptions'}
+            or strip_output(source.get('media_sourcing_spec')) != spec
+            or actual.get('media_sourcing_spec') != spec):
+        return False
+    images = spec.get('images')
+    if not isinstance(images, list) or len(images) < 2:
+        return False
+    for row in images:
+        if (not isinstance(row, dict) or not isinstance(row.get('hash'), str) or not row['hash']
+                or row.get('source') not in {'padding', 'uncrop', 'recomposition', 'multi_media'}
+                or row.get('opt_in_status') not in {'opt_in', 'opt_out'}
+                or set(row) - {'hash', 'source', 'opt_in_status', 'url', 'variant_types'}):
+            return False
+    primaries = [row for row in images if row['source'] == 'multi_media']
+    if len(primaries) != 1 or primaries[0] != {'hash': primary, 'source': 'multi_media', 'opt_in_status': 'opt_in'}:
+        return False
+    feed = expected.get('asset_feed_spec')
+    if feed and (not isinstance(feed, dict)
+            or set(feed) - {'titles', 'bodies', 'descriptions', 'optimization_type'}
+            or feed.get('optimization_type') != 'DEGREES_OF_FREEDOM'):
+        return False
+    observed_story = copy.deepcopy(actual.get('object_story_spec') or {})
+    if expected_ig and not observed_story.get('instagram_user_id'):
+        observed_story['instagram_user_id'] = actual.get('instagram_user_id')
+    return (stable(observed_story) == stable(story)
+            and stable(actual.get('asset_feed_spec')) == stable(feed)
+            and stable(source.get('asset_feed_spec')) == stable(feed)
+            and str(actual.get('url_tags') or '') == str(expected.get('url_tags') or '')
+            and actual.get('contextual_multi_ads') == expected.get('contextual_multi_ads'))
+
+
+def valid_observed(actual, expected, *, source_creative=None):
     """Reject inherited video/related/extra images and copy substitutions."""
     from .shein_reviewed_background_batch import preserved_sourcing
     preserved=preserved_sourcing(actual,expected)
@@ -38,6 +91,9 @@ def valid_observed(actual, expected):
     from .reviewed_copy_targeting import preserved_sourcing as reviewed_target_source
     reviewed_target = reviewed_target_source(actual, expected)
     if reviewed_target is not None:return reviewed_target
+    inherited_images = (expected.get('media_sourcing_spec') or {}).get('images')
+    if source_creative is not None and isinstance(inherited_images, list) and len(inherited_images) > 1:
+        return preserved_clone_sourcing(actual, expected, source_creative)
     spec = actual.get('media_sourcing_spec')
     if spec is None:
         return expected.get('media_sourcing_spec') is None
