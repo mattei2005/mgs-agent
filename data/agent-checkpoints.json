@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Inc02 sistema encerrado com três ressalvas kernel aceitas; nenhuma decisão Inc02 pendente. Não repetir instalação/reboot nem alterar BIOS/drivers. Inc03JBF/Hestia/Node permanecem fases separadas com gates próprios.",
-      "objective": "Inc02 sistema encerrado com ressalvas aceitas; preservar fases separadas da iniciativa",
-      "source": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
-      "state": "inc02_closed_remaining_phases_pending",
+      "next_step": "Pedido1574876451726041182 autoriza preparação integral Inc03JBF/Hestia. Reconciliar estado/rollback/lotes e consolidar apenas gates críticos exatos ainda necessários; sem instalação/reboot por autorização genérica. Dashboard Node mantém rota Astra própria; não ampliar para finanças/credenciais/limpeza.",
+      "objective": "Concluir saldo da manutenção VPS sem avisos rotineiros; preservar RunCloud/Hestia e fases encerradas",
+      "source": "discord:message:1574876451726041182",
+      "state": "remaining_hosts_preparation_in_progress",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T18:30:30+00:00"
+      "updated_at": "2026-11-24T19:57:40+00:00"
     },
     {
       "agent": "zeus",
@@ -12368,5 +12368,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T19:05:22+00:00"
+  "updated_at": "2026-11-24T19:57:40+00:00"
 }
