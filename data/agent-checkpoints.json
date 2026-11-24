@@ -1953,12 +1953,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1574603054404337798",
-      "next_step": "Publicar partes e resumos revisados; GET final de cada mensagem; arquivar e concluir.",
+      "next_step": "Concluido; nao reenviar. Atrasos GAM/SB validos [52, 108]min por publisher; atraso Boostingecon n/d. Boostingecon e Mavroa sem atividade no recorte, receita/saldo/ROI n/d. Novo pedido exige fontes novas; campanhas e agendas preservadas.",
       "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-1574603054404337798/approved-review.json",
-      "state": "prepared_review_hash_bound;7pairs;63campaigns;29integralparts+7summaries;65regressions+5summaryfixtures+5gatechecks+6archivechecks_pass;zero_meta_writes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1574603054404337798/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;63campaigns;29integralparts+7summaries;36unique_messages;cutoffs23/11/2026_20:51-20:52est;usd;zero_meta_writes;archive243bytes_hashes_verified;65regressions+5summaryfixtures+5gatechecks+6archivechecks_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-24T01:55:11+00:00"
+      "updated_at": "2026-11-24T01:56:54+00:00"
     },
     {
       "agent": "ares",
@@ -12308,5 +12308,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T01:55:11+00:00"
+  "updated_at": "2026-11-24T01:56:54+00:00"
 }
