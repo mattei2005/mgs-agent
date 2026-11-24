@@ -51,6 +51,8 @@ Before touching `/usr`, present:
 
 Do not treat a general “continue maintenance” as permission to add unrelated packages, restart a deferred system service, update Hermes, or reboot.
 
+When a native automatic updater reaches some approved target versions while a confirmation is pending, reconcile package identity and absolute timestamps through APT history, dpkg history, the updater log and its live native policy before attributing the change. Preserve the received approval and failed frozen-baseline preflight as historical evidence; do not downgrade or reinstall already-converged packages, disable the native updater, or weaken the old verifier. Freeze and validate the exact remaining transaction, refresh its rollback/configuration baseline, and request confirmation of that changed lot—even when its package count decreased. Record the native-completed items separately from Zeus-installed items and leave the original approval received-but-unexecuted rather than calling the whole authorized lot completed.
+
 ### Ubuntu Pro attachment is its own system-config gate
 
 Treat `pro attach` as a production system-configuration mutation, not as a harmless login helper: successful browser confirmation can alter APT entitlement/configuration and enable ESM/Livepatch. Obtain the Critical Subset confirmation **before** starting the attach flow. Then:
