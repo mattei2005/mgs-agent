@@ -5516,12 +5516,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "20prechecks/8fixtures OK. Após sync canônico lançar consumidor /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/local_controller.py; Zeus foreground consome /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/controller-final.json após validator remoto disabled/inactive. Admissão/locks financeiros nativos só técnicos; sem SQL financeiro. Não repetir pacotes/backup/reboot, não mudar outros hosts.",
-      "objective": "Reboot Inc01 confirmado1574650660572504115, kernel203->204 e validação externa sem atualização de aplicação",
-      "source": "reports/vps-maint-inc01-reboot-1574650660572504115-preparation.md",
-      "state": "reboot_authorized_prepared_not_dispatched",
+      "next_step": "Consumidor único PID113994/session proc_84da91ce16a0 comprovado ativo e silencioso; fonte controller-progress.json e controller-final.json em reboot-1574650660572504115. Zeus foreground aguarda processo sair e consome recibo antes de fechar governança. Não repetir reboot/pacotes; não executar validador em paralelo. Locks nativos financeiros preservam filas; outros hosts inalterados.",
+      "objective": "Reboot somente Inc01 e validação externa, autorização1574650660572504115",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/reboot-1574650660572504115/foreground-consumer-ownership.json",
+      "state": "external_reboot_controller_running",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T05:16:54+00:00"
+      "updated_at": "2026-11-24T05:19:20+00:00"
     },
     {
       "agent": "zeus",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:16:54+00:00"
+  "updated_at": "2026-11-24T05:19:20+00:00"
 }
