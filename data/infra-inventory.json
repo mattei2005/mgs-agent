@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "remaining_hosts_prepared_awaiting_exact_critical_confirmation",
+      "status": "inc03_packages_validated_reboot_prepared_authorized",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70287,13 +70287,14 @@
         },
         {
           "target": "MatteiInc03JBF packages/reboot",
-          "state": "prepared_awaiting_exact_critical_confirmation",
+          "state": "packages_validated_reboot_prepared_authorized",
           "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
           "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
           "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
-          "install_executed": false,
+          "install_executed": true,
           "reboot_executed": false,
-          "reboot_scheduled": false
+          "reboot_scheduled": false,
+          "authorization_message_id": "1574885702947045549"
         },
         {
           "target": "Hestia packages/reboot",
@@ -70312,7 +70313,7 @@
           "next_step": "Execute only under canonical Astra route or explicit owner exception; no finance/application writes under currentSol."
         }
       ],
-      "updated_at": "2026-11-24T20:09:37.176548+00:00",
+      "updated_at": "2026-11-24T20:43:27.122458+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70320,7 +70321,7 @@
       "checks_passed": 30,
       "next_critical_manifest": null,
       "next_critical_manifest_sha256": null,
-      "next_gate": "Preparação Inc03/Hestia concluída; aguardar confirmação crítica consolidada do manifesto f89361f1eaae:41upgrades+2novos/0remoções, pausaMariaDBInc03,rotinas nativas Hestia/Roundcube e reboot serial somente desses2hosts. Sem execução/agendamento. Node dashboard bloqueado pela rota Astra; preservar fases encerradas.",
+      "next_gate": "Dispatch one Inc03 reboot after private executable and canonical metadata checks; then prove new boot/kernel204 before Hestia.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70811,6 +70812,15 @@
         "state": "prepared_not_executed",
         "model_route_residual": "dashboard Node requires Astra; current Sol has no exception",
         "production_mutation": false
+      },
+      "execution_authorization_message_id": "1574885702947045549",
+      "latest_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
+      "inc03_reboot_controller": {
+        "validator_unit": "mgs-remaining-inc03-1574885702947045549-validate.service",
+        "remote_root": "/root/mgs-maintenance/1574252891898908684-inc03/reboot-1574885702947045549",
+        "local_result_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03",
+        "state": "enabled_inactive_not_dispatched",
+        "retention": "disable after validator exit; retain definition, no deletion"
       }
     },
     {
@@ -71446,7 +71456,7 @@
       "id": "VPS-MAINT-1574252891898908684-INC03",
       "agent": "zeus",
       "type": "vps_maintenance_preparation",
-      "status": "prepared_awaiting_exact_critical_confirmation",
+      "status": "inc03_packages_validated_reboot_prepared_authorized",
       "source_message_id": "1574876451726041182",
       "source_thread_id": "1574249078584377544",
       "host": "MatteiInc03",
@@ -71500,12 +71510,30 @@
         "total": 12,
         "path": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Inc03/independent-preconfirmation-readback.json"
       },
-      "production_packages_changed": false,
-      "production_service_stop": false,
+      "production_packages_changed": true,
+      "production_service_stop": true,
       "reboot_executed": false,
       "reboot_scheduled": false,
-      "next_gate": "Exact Critical Subset confirmation of frozen lot/native effects/database protection and serial reboot",
-      "updated_at": "2026-11-24T20:09:37.176548+00:00"
+      "next_gate": "Dispatch one Inc03 reboot after private executable and canonical metadata checks; then prove new boot/kernel204 before Hestia.",
+      "updated_at": "2026-11-24T20:43:27.122458+00:00",
+      "execution_authorization_message_id": "1574885702947045549",
+      "latest_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
+      "inc03_reboot_controller": {
+        "validator_unit": "mgs-remaining-inc03-1574885702947045549-validate.service",
+        "remote_root": "/root/mgs-maintenance/1574252891898908684-inc03/reboot-1574885702947045549",
+        "local_result_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03",
+        "state": "enabled_inactive_not_dispatched",
+        "retention": "disable after validator exit; retain definition, no deletion"
+      },
+      "upgrades_executed": 18,
+      "cold_backup": {
+        "bytes": 4590530560,
+        "pause_seconds": 7.731,
+        "sha256": "fc6f94465afddea74df5a67644ce7bb11ac858ac7d41ee5eb0bba6556da2a5ce"
+      },
+      "isolated_restore_tables": 1216,
+      "functional_checks_passed": 22,
+      "native_installer_diagnostics_classified": true
     },
     {
       "id": "VPS-MAINT-1574252891898908684-HESTIA",

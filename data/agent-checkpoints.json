@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Aceite1574885702947045549 vinculado ao gate1574880812271149222/manifestof89361f1eaae. Pré-checks27/27 após APTrefresh. Executar Inc03 backup frio/restauração/lote/reboot/validação antes de Hestia. Não repetir fases;Node fora.",
-      "objective": "Executar lotes e reboots seriais Inc03/Hestia confirmados sem avisos intermediários",
-      "source": "discord:message:1574885702947045549",
-      "state": "exact_lots_confirmed_preflight_passed",
+      "next_step": "Validador mgs-remaining-inc03-1574885702947045549-validate.service enabled/inactive;dispatch hashes válidos;19/19préboot e3fixtures. Sincronizar metadados e armar rebootInc03 único. Consumir resultado remotoantesHestia;nenhum reboot extra.",
+      "objective": "Inc03 lote18 validado; reboot204 confirmado preparado antes de Hestia",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/reboot-preparation.json",
+      "state": "inc03_packages_validated_reboot_prepared_authorized",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:34:45+00:00"
+      "updated_at": "2026-11-24T20:43:27+00:00"
     },
     {
       "agent": "zeus",
@@ -5546,12 +5546,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC03",
-      "next_step": "Aceite1574885702947045549/gate1574880812271149222. Backup4590530560bytes/parada7.731s e restauração1216tabelas validados;18pacotes instalados1vez.22/22funcionais;2diagnósticos nativos MariaDB atribuídos eVizioid502 recuperado200 semrepeat. Preparar/validar reboot204 antes de Hestia.",
-      "objective": "Inc03 lote18 instalado e validado; concluir reboot único confirmado",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/classified-validation-result.json",
-      "state": "packages_validated_reboot_authorized_pending_preparation",
+      "next_step": "Validador mgs-remaining-inc03-1574885702947045549-validate.service enabled/inactive;dispatch hashes válidos;19/19préboot e3fixtures. Sincronizar metadados e armar rebootInc03 único. Consumir resultado remotoantesHestia;nenhum reboot extra.",
+      "objective": "Inc03 lote18 validado; reboot204 confirmado preparado antes de Hestia",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/reboot-preparation.json",
+      "state": "inc03_packages_validated_reboot_prepared_authorized",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:40:45+00:00"
+      "updated_at": "2026-11-24T20:43:27+00:00"
     },
     {
       "agent": "zeus",
@@ -12388,5 +12388,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T20:40:45+00:00"
+  "updated_at": "2026-11-24T20:43:27+00:00"
 }
