@@ -5506,22 +5506,22 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Validador mgs-remaining-inc03-1574885702947045549-validate.service enabled/inactive;dispatch hashes válidos;19/19préboot e3fixtures. Sincronizar metadados e armar rebootInc03 único. Consumir resultado remotoantesHestia;nenhum reboot extra.",
-      "objective": "Inc03 lote18 validado; reboot204 confirmado preparado antes de Hestia",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/reboot-preparation.json",
-      "state": "inc03_packages_validated_reboot_prepared_authorized",
+      "next_step": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "objective": "Concluir lotes seriais autorizados; ressalva Inc03 específica bloqueia Hestia",
+      "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "state": "inc03_reboot_residual_decision_pending_hestia_authorized_held",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:43:27+00:00"
+      "updated_at": "2026-11-24T20:56:30+00:00"
     },
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-HESTIA",
-      "next_step": "Exact Critical Subset confirmation of frozen lot/native effects/database protection and serial reboot",
-      "objective": "server.boostingecon.com preparação e conclusão de sistema preservando stack nativa",
-      "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
-      "state": "prepared_awaiting_exact_critical_confirmation",
+      "next_step": "Aguardar disposição específica Inc03 para preservar ordemserial. GateHestia1574880812271149222 já confirmado1574885702947045549;revalidar sódriftantesescrita,não pedir aceitegenéricoigual.",
+      "objective": "Concluir lotes seriais autorizados; ressalva Inc03 específica bloqueia Hestia",
+      "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "state": "authorized_held_on_inc03_residual_decision",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:09:37+00:00"
+      "updated_at": "2026-11-24T20:56:30+00:00"
     },
     {
       "agent": "zeus",
@@ -5546,12 +5546,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC03",
-      "next_step": "Validador mgs-remaining-inc03-1574885702947045549-validate.service enabled/inactive;dispatch hashes válidos;19/19préboot e3fixtures. Sincronizar metadados e armar rebootInc03 único. Consumir resultado remotoantesHestia;nenhum reboot extra.",
-      "objective": "Inc03 lote18 validado; reboot204 confirmado preparado antes de Hestia",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/reboot-preparation.json",
-      "state": "inc03_packages_validated_reboot_prepared_authorized",
+      "next_step": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "objective": "Concluir lotes seriais autorizados; ressalva Inc03 específica bloqueia Hestia",
+      "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
+      "state": "reboot_executed_journal_residual_owner_decision_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T20:43:27+00:00"
+      "updated_at": "2026-11-24T20:56:30+00:00"
     },
     {
       "agent": "zeus",
@@ -12388,5 +12388,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T20:43:27+00:00"
+  "updated_at": "2026-11-24T20:56:30+00:00"
 }

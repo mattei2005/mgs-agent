@@ -1,5 +1,7 @@
 # Saldo VPS — preparação concluída; confirmação crítica consolidada pendente
 
+> Histórico de preparação: o lote foi confirmado por Rodolfo em `1574885702947045549`, gate `1574880812271149222`. O estado ativo está em `reports/vps-maint-remaining-1574885702947045549-inc03-decision.md`: Inc03 instalado/reiniciado com ressalvas de journal pendentes; Hestia já autorizado e retido pela ordem serial. A confirmação genérica abaixo não continua pendente.
+
 Pedido de Rodolfo `1574876451726041182`, thread `1574249078584377544`: concluir a manutenção sem avisos rotineiros passo a passo. Isso autoriza a preparação integral e o trabalho não crítico; não substitui a confirmação crítica dos lotes/efeitos agora observados.
 
 ## Lotes congelados

@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "inc03_packages_validated_reboot_prepared_authorized",
+      "status": "inc03_reboot_residual_decision_pending_hestia_authorized_held",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70287,24 +70287,26 @@
         },
         {
           "target": "MatteiInc03JBF packages/reboot",
-          "state": "packages_validated_reboot_prepared_authorized",
-          "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+          "state": "reboot_executed_journal_residual_owner_decision_pending",
+          "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
           "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
           "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
           "install_executed": true,
-          "reboot_executed": false,
+          "reboot_executed": true,
           "reboot_scheduled": false,
-          "authorization_message_id": "1574885702947045549"
+          "authorization_message_id": "1574885702947045549",
+          "strict_journal_passed": false
         },
         {
           "target": "Hestia packages/reboot",
-          "state": "prepared_awaiting_exact_critical_confirmation",
-          "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+          "state": "authorized_held_on_inc03_residual_decision",
+          "source": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
           "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
           "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
           "install_executed": false,
           "reboot_executed": false,
-          "reboot_scheduled": false
+          "reboot_scheduled": false,
+          "authorization_message_id": "1574885702947045549"
         },
         {
           "target": "dashboard Node22.23.5",
@@ -70313,7 +70315,7 @@
           "next_step": "Execute only under canonical Astra route or explicit owner exception; no finance/application writes under currentSol."
         }
       ],
-      "updated_at": "2026-11-24T20:43:27.122458+00:00",
+      "updated_at": "2026-11-24T20:56:30.137705+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70321,7 +70323,7 @@
       "checks_passed": 30,
       "next_critical_manifest": null,
       "next_critical_manifest_sha256": null,
-      "next_gate": "Dispatch one Inc03 reboot after private executable and canonical metadata checks; then prove new boot/kernel204 before Hestia.",
+      "next_gate": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70680,7 +70682,7 @@
         "report": "reports/vps-maint-1574252891898908684-inc02-completion.md",
         "updated_at": "2026-11-24T13:37:54.397219+00:00"
       },
-      "latest_phase_report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "latest_phase_report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
       "inc02_reboot_authorization_message_id": "1574783533417894011",
       "inc02_reboot_controller": {
         "validator_unit": "mgs-inc02-reboot-1574783533417894011-validate.service",
@@ -70809,18 +70811,60 @@
         "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
         "evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182",
         "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
-        "state": "prepared_not_executed",
+        "state": "confirmation_received_inc03_executed_hestia_authorized_held",
         "model_route_residual": "dashboard Node requires Astra; current Sol has no exception",
-        "production_mutation": false
+        "production_mutation": false,
+        "confirmation_message_id": "1574885702947045549",
+        "current_report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md"
       },
       "execution_authorization_message_id": "1574885702947045549",
       "latest_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
       "inc03_reboot_controller": {
-        "validator_unit": "mgs-remaining-inc03-1574885702947045549-validate.service",
+        "validator_unit": {
+          "MainPID": "0",
+          "LoadState": "loaded",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "UnitFileState": "disabled"
+        },
+        "unit_name": "mgs-remaining-inc03-1574885702947045549-validate.service",
         "remote_root": "/root/mgs-maintenance/1574252891898908684-inc03/reboot-1574885702947045549",
-        "local_result_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03",
-        "state": "enabled_inactive_not_dispatched",
-        "retention": "disable after validator exit; retain definition, no deletion"
+        "result": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/postboot-readback.json",
+        "independent_readback": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/independent-postboot-diagnosis.json",
+        "state": "disabled_inactive_retained_no_more_reboot",
+        "strict_passed": false,
+        "strict_checks_passed": 26,
+        "strict_checks_total": 27,
+        "boot_id": "10e1e31b-5e57-4350-abd0-b518d43a7920",
+        "kernel": "5.15.0-204-generic",
+        "kernel_residuals": [
+          {
+            "MESSAGE": "pci 0000:0e:00.0: Failed to read data",
+            "_KERNEL_DEVICE": "+pci:0000:0e:00.0",
+            "_KERNEL_SUBSYSTEM": "pci",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          },
+          {
+            "MESSAGE": "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+            "_KERNEL_DEVICE": "+usb:8-0:1.0",
+            "_KERNEL_SUBSYSTEM": "usb",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          },
+          {
+            "MESSAGE": "snd_hda_intel 0000:0d:00.6: no codecs found!",
+            "_KERNEL_DEVICE": "+pci:0000:0d:00.6",
+            "_KERNEL_SUBSYSTEM": "pci",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          }
+        ],
+        "preexistence_proven": false,
+        "pending_owner_acceptance": true
       }
     },
     {
@@ -71456,12 +71500,12 @@
       "id": "VPS-MAINT-1574252891898908684-INC03",
       "agent": "zeus",
       "type": "vps_maintenance_preparation",
-      "status": "inc03_packages_validated_reboot_prepared_authorized",
+      "status": "reboot_executed_journal_residual_owner_decision_pending",
       "source_message_id": "1574876451726041182",
       "source_thread_id": "1574249078584377544",
       "host": "MatteiInc03",
       "ip": "46.4.95.117",
-      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
       "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
       "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
       "local_evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Inc03",
@@ -71512,18 +71556,58 @@
       },
       "production_packages_changed": true,
       "production_service_stop": true,
-      "reboot_executed": false,
+      "reboot_executed": true,
       "reboot_scheduled": false,
-      "next_gate": "Dispatch one Inc03 reboot after private executable and canonical metadata checks; then prove new boot/kernel204 before Hestia.",
-      "updated_at": "2026-11-24T20:43:27.122458+00:00",
+      "next_gate": "Aceite específico das três ressalvas USB/hub/áudio do novo boot Inc03;preexistência não comprovada. Não repetir reboot/instalação. Depois liberar Hestia já autorizado pelo mesmo manifesto, sem novo gategenérico;Node rotaAstra separado.",
+      "updated_at": "2026-11-24T20:56:30.137705+00:00",
       "execution_authorization_message_id": "1574885702947045549",
       "latest_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
       "inc03_reboot_controller": {
-        "validator_unit": "mgs-remaining-inc03-1574885702947045549-validate.service",
+        "validator_unit": {
+          "MainPID": "0",
+          "LoadState": "loaded",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "UnitFileState": "disabled"
+        },
+        "unit_name": "mgs-remaining-inc03-1574885702947045549-validate.service",
         "remote_root": "/root/mgs-maintenance/1574252891898908684-inc03/reboot-1574885702947045549",
-        "local_result_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03",
-        "state": "enabled_inactive_not_dispatched",
-        "retention": "disable after validator exit; retain definition, no deletion"
+        "result": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/postboot-readback.json",
+        "independent_readback": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/independent-postboot-diagnosis.json",
+        "state": "disabled_inactive_retained_no_more_reboot",
+        "strict_passed": false,
+        "strict_checks_passed": 26,
+        "strict_checks_total": 27,
+        "boot_id": "10e1e31b-5e57-4350-abd0-b518d43a7920",
+        "kernel": "5.15.0-204-generic",
+        "kernel_residuals": [
+          {
+            "MESSAGE": "pci 0000:0e:00.0: Failed to read data",
+            "_KERNEL_DEVICE": "+pci:0000:0e:00.0",
+            "_KERNEL_SUBSYSTEM": "pci",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          },
+          {
+            "MESSAGE": "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+            "_KERNEL_DEVICE": "+usb:8-0:1.0",
+            "_KERNEL_SUBSYSTEM": "usb",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          },
+          {
+            "MESSAGE": "snd_hda_intel 0000:0d:00.6: no codecs found!",
+            "_KERNEL_DEVICE": "+pci:0000:0d:00.6",
+            "_KERNEL_SUBSYSTEM": "pci",
+            "SYSLOG_IDENTIFIER": "kernel",
+            "_TRANSPORT": "kernel",
+            "PRIORITY": "3"
+          }
+        ],
+        "preexistence_proven": false,
+        "pending_owner_acceptance": true
       },
       "upgrades_executed": 18,
       "cold_backup": {
@@ -71539,12 +71623,12 @@
       "id": "VPS-MAINT-1574252891898908684-HESTIA",
       "agent": "zeus",
       "type": "vps_maintenance_preparation",
-      "status": "prepared_awaiting_exact_critical_confirmation",
+      "status": "authorized_held_on_inc03_residual_decision",
       "source_message_id": "1574876451726041182",
       "source_thread_id": "1574249078584377544",
       "host": "server.boostingecon.com",
       "ip": "188.34.183.6",
-      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
       "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
       "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
       "local_evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Hestia",
@@ -71589,14 +71673,15 @@
       "production_service_stop": false,
       "reboot_executed": false,
       "reboot_scheduled": false,
-      "next_gate": "Exact Critical Subset confirmation of frozen lot/native effects/database protection and serial reboot",
-      "updated_at": "2026-11-24T20:09:37.176548+00:00"
+      "next_gate": "Aguardar disposição específica Inc03 para preservar ordemserial. GateHestia1574880812271149222 já confirmado1574885702947045549;revalidar sódriftantesescrita,não pedir aceitegenéricoigual.",
+      "updated_at": "2026-11-24T20:56:30.137705+00:00",
+      "execution_authorization_message_id": "1574885702947045549"
     },
     {
       "id": "VPS-REMAINING-PREPARATION-1574876451726041182",
       "agent": "zeus",
       "type": "protected_preparation_evidence_and_skill_learning",
-      "status": "validated_preparation_only",
+      "status": "execution_partial_validated_owner_residual_decision_pending",
       "source_message_id": "1574876451726041182",
       "source_thread_id": "1574249078584377544",
       "path": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182",
@@ -71611,10 +71696,32 @@
       ],
       "skill_changed": "Zeus hosting-control-panel-mail/SKILL.md: Hestia native-upgrade scope expansion and actual origin bind predicates",
       "model_route": "dashboard remains Astra-only",
-      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "report": "reports/vps-maint-remaining-1574885702947045549-inc03-decision.md",
       "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
-      "no_production_install_stop_reboot": true,
-      "updated_at": "2026-11-24T20:09:37.176548+00:00"
+      "no_production_install_stop_reboot": false,
+      "updated_at": "2026-11-24T20:56:30.137705+00:00",
+      "current_execution_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549",
+      "owned_execution_scripts": [
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/confirmed-preflight-payload.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/remote_reboot.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/stage_reboot.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/boot_validator.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/hestia_operations.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/stage_inc03.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/apply_approved.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/lot_collector.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/reboot-stage-payload.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/isolated_restore.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/stage-payload.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/cold_backup.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/test_cold_backup.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/classify_native_postinst.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/classify_native_postinst_recovery.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/execution-1574885702947045549/Inc03/phase_driver.py"
+      ],
+      "production_scope": "Inc03 only; Hestia held",
+      "learning_saved": "Zeus controlled-package reference: mandatory complete executor pre-state schema and safe pre-write metadata recovery",
+      "retained_unit": "/etc/systemd/system/mgs-remaining-inc03-1574885702947045549-validate.service disabled/inactive definition retained"
     }
   ],
   "profile_skill_references": [
