@@ -4794,12 +4794,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Dry-run e retomada central mesmos request e shells; QA/ativacao/readback e cadastro SB. Revisar posteriormente leitura indevida de helper CPV informada em 1574632033123041381.",
-      "objective": "Concluir 10 clones Nicolas com 25 videos e corrigir 001/002/003 para EUA por 1574631515386552413",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/country-amendment-1574631515386552413/source-country-amendment.json",
-      "state": "tres originais em us por post/get. fonte 003 snapshot atualizado somente geo, selos/ids/horario preservados. 001 perdeu apenas flags opcionais age/gender na normalizacao meta; age_range e brand safety preservados no repair.",
+      "next_step": "Operator decision: appeal Meta Spam review or approve corrected material. Do not activate partial batch, replace assets/copy, recreate or submit appeal without selected scope.",
+      "objective": "Corrigir 001/002/003 para EUA e concluir 10 duplicacoes Nicolas, preservando IDs/videos/budget/lance/inicio",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/final-reconciliation.json",
+      "state": "originais 001/002/003 em us e active por readback. lote 005-014 criado: 10 campanhas paused, 25 ads paused, usd250/dia configurados, cap usd0.90, pais us, inicio configurado 24/11/2026 00:05 new york. qa renderizada 10/10 e 25 assets conciliados, mesmas linhagens. meta reprovou 16/25 ads em 7 campanhas; 9 com feedback spam e 7 sem detalhe. ativacao nao concluida, sem replay. utms: 10 utm_campaign + 10 utm_adgroup http201/gaminsert ok; readback independente sb nao disponivel. skill e causa da leitura indevida cpv registradas.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-24T03:47:31+00:00"
+      "updated_at": "2026-11-24T04:12:40+00:00"
     },
     {
       "agent": "ares",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:05:50+00:00"
+  "updated_at": "2026-11-24T04:12:40+00:00"
 }
