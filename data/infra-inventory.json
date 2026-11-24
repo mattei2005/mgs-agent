@@ -70460,6 +70460,36 @@
       "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/final-result.json",
       "retention": "definitions retained; validator/closure disabled after use; no file deletion",
       "updated_at": "2026-11-23T23:01:12.907674+00:00"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261123T2102",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh_existing_UIA",
+      "status": "completed_validated",
+      "scheduled_at": "2026-11-23T21:02:00-05:00",
+      "updated_at": "2026-11-23T21:37:21.092791-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261123T2102/financial-validation.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 55,
+        "fresh_metrics": 55,
+        "fresh_h": 40,
+        "renewed_d": 3,
+        "pending_ui": 0,
+        "historical_blank_d": 39,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "browser_tabs_preserved": true,
+        "browser_original_tabs": 6,
+        "lease_free": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_message_id": "1574614974142222409",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
