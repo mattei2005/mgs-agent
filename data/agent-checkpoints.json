@@ -4794,12 +4794,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Operator decision: appeal Meta Spam review or approve corrected material. Do not activate partial batch, replace assets/copy, recreate or submit appeal without selected scope.",
-      "objective": "Corrigir 001/002/003 para EUA e concluir 10 duplicacoes Nicolas, preservando IDs/videos/budget/lance/inicio",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/final-reconciliation.json",
-      "state": "originais 001/002/003 em us e active por readback. lote 005-014 criado: 10 campanhas paused, 25 ads paused, usd250/dia configurados, cap usd0.90, pais us, inicio configurado 24/11/2026 00:05 new york. qa renderizada 10/10 e 25 assets conciliados, mesmas linhagens. meta reprovou 16/25 ads em 7 campanhas; 9 com feedback spam e 7 sem detalhe. ativacao nao concluida, sem replay. utms: 10 utm_campaign + 10 utm_adgroup http201/gaminsert ok; readback independente sb nao disponivel. skill e causa da leitura indevida cpv registradas.",
+      "next_step": "Aguardar decisao da Meta sem novo submit. Se recusa mantida, Nicolas solicitara troca. Nao criar cron, repetir copies ou alegar entrega antes de Insights. Preservar IDs, selos, budget/cap e inicio; a gestao parcial posterior nao e COMPLETE integral do runner original.",
+      "objective": "Gestao parcial apos QA: solicitar revisao e habilitar anuncios permitidos do lote Nicolas sem alterar escopo comercial",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/review-and-selective-activation-1574639436166074502.json",
+      "state": "gestao complementar rodolfo 1574639436166074502 executada: campanhas 005-014 e 10 conjuntos active, eua, budget usd25 cada/250 lote e cap usd0.90, inicio24/11/2026 00:05 new york preservado. ads: configurados {'paused': 16, 'active': 9}; efetivos {'disapproved': 16, 'active': 9}. revisao dos 16 reprovados submetida na interface da conta exata; meta confirmou recebimento. readback apos refresh reduziu available23->7; contador in review ainda0, sem alegar aprovacao. nenhuma troca de midia/copy. original act_pending fica historico; nao reexecutar criacao ou o ativador integral como retry.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-24T04:12:40+00:00"
+      "updated_at": "2026-11-24T04:46:47+00:00"
     },
     {
       "agent": "ares",
@@ -5506,22 +5506,22 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Hostinger já encerrada e validada. Confirmar lote Inc0120updates/0new/0remove, parada MariaDB para backup frio e restore isolado antes de instalar; hooks MariaDB restart e BitNinja IpFilter reload explícitos. Manifest5db8c98920645ea6; nenhum reboot/dashboard/Hermes/outros hosts por este gate. Demais fases permanecem abertas.",
-      "objective": "Manutenção cinco hosts + Node/dashboard com fases e gates independentes",
-      "source": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
-      "state": "inc01_prepared_awaiting_critical_confirmation",
+      "next_step": "Não repetir pacotes/backup:Inc01 lote20 confirmado1574642070478520412 concluído. Backup frio/restore5973tabelas27392842linhas verificados;20checks funcionais;2diagnósticos nativos postinst classificados mantendo estrito histórico. Próximo:confirmação reboot somenteInc01 kernel203->204;manifest9ddbb2988cbbd980.Não agendado. Hostinger encerrada;Inc02/03/Hestia/Node-dashboard pendentes.",
+      "objective": "Manutenção multi-host: Inc0120pacotes e recuperação concluídos; reboot e demais fases separados",
+      "source": "reports/vps-maint-1574252891898908684-inc01-completion.md",
+      "state": "inc01_packages_completed_validated_reboot_pending_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T04:15:07+00:00"
+      "updated_at": "2026-11-24T04:50:11+00:00"
     },
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "Backup frio e restore isolado completos:5973tabelas de aplicação e27392842linhas lidas;sem rede,eventos/replicaçãoOFF,processo isolado encerrado;MariaDBprodução10.11.19 ativo. Coletor pré-write19/19PASS. Executar somente20pacotes autorizados1574642070478520412, sem reboot ou outros hosts.",
-      "objective": "Aplicar lote20 Inc01 após backup frio e recuperação real validados",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/isolated-restore-observation.json",
-      "state": "recovery_validated_exact_package_install_next",
+      "next_step": "Não repetir pacotes/backup:Inc01 lote20 confirmado1574642070478520412 concluído. Backup frio/restore5973tabelas27392842linhas verificados;20checks funcionais;2diagnósticos nativos postinst classificados mantendo estrito histórico. Próximo:confirmação reboot somenteInc01 kernel203->204;manifest9ddbb2988cbbd980.Não agendado. Hostinger encerrada;Inc02/03/Hestia/Node-dashboard pendentes.",
+      "objective": "Manutenção multi-host: Inc0120pacotes e recuperação concluídos; reboot e demais fases separados",
+      "source": "reports/vps-maint-1574252891898908684-inc01-completion.md",
+      "state": "inc01_packages_completed_validated_reboot_pending_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T04:40:48+00:00"
+      "updated_at": "2026-11-24T04:50:11+00:00"
     },
     {
       "agent": "zeus",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:40:48+00:00"
+  "updated_at": "2026-11-24T04:50:11+00:00"
 }

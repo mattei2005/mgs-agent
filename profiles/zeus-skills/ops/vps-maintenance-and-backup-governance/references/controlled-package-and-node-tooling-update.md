@@ -102,6 +102,12 @@ dpkg-deb -f previous.deb Version
 
 Do not print configuration or credential contents.
 
+### Mixed-engine backup and executable-gate safety
+
+- For a cold MariaDB backup, recheck application MEMORY tables with real `COUNT(*)` before the approved stop; exclude `mysql`, `information_schema`, `performance_schema` and `sys` from that application-data predicate. Virtual `information_schema` tables can advertise ENGINE=MEMORY and return metadata rows, so an unfiltered query creates a false nonempty-data blocker. Keep nonempty real application MEMORY state blocking and preserve the failed observation.
+- Dispatch a long systemd `Type=oneshot` executor with `systemd-run --no-block` when ownership, not completion, is the intended return point. Without it, the launcher can wait for the oneshot to finish and time out while the real job continues. Reconcile the exact existing unit/PID/result and never repeat the operation from the launcher's timeout alone. For an approved database pause, put bounded production-service recovery in the executor's `finally` and an independent exact-service `ExecStopPost`; validate both success and deliberately failed-copy cases before dispatch.
+- Make test/compile gates fail closed across shell or subprocess boundaries: use `set -e`, `&&` or explicit checked return codes before a later upload/dispatch. A failed first command followed by a successful second command is not a passed gate; fix the fixture and reconcile any already-dispatched side effects before continuing.
+
 ## 4. Apply APT and npm as separate gates
 
 ### APT gate
@@ -117,6 +123,8 @@ Immediately validate:
 - Zeus/Atena/Ares active;
 - gateway PIDs unchanged unless their restart was explicitly authorized;
 - no priority 0..3 journal errors since the maintenance boundary.
+
+For MariaDB upgrades over an existing database, retain a strict journal failure rather than replaying the installation merely to clear it. The exact pair `mysql.user table already exists!` / `Run mysql_upgrade, not mysql_install_db` can come from the package postinst's deliberately tolerated `mariadb-install-db` branch, whose `ERR_LOGGER` sends even those diagnostics to `daemon.err`. Classify that pair only when the messages, `mariadb-server.postinst` identity, exact executor unit and priority all match, the installed postinst hash equals the inspected candidate, the tolerant existing-database branch is verified, APT returned zero, every approved version and functional check passed, and the native read-only `mariadb-upgrade --check-if-upgrade-is-needed` explicitly reports that no upgrade is needed within the same 10.11 branch (its observed return code is 1). Do not infer failure from an older `mysql_upgrade_info` patch version alone, force a schema upgrade, suppress runtime-daemon errors or waive any additional message. Preserve the original raw journal/verdict, write a separate attribution and fresh health readback, and supersede only the verdict. If the strict checker exited nonzero solely for that verified pair, reset only its already-exited failed unit and prove zero remaining failed units without another production restart. Exercise positive, wrong-source, unknown-message, unhealthy-version and real-upgrade-needed cases before using the classifier.
 
 When freezing or comparing service state, do not parse multiple `systemctl show -p ... --value` properties by positional line order; systemd may emit them in a different order than requested. Query each property separately, or retain `Property=value` names and parse by key. Resolve `Type` and `SubState` before asserting PID health. Require `ActiveState=active` and a positive `MainPID` for long-running daemons before comparing their PIDs; a successful `Type=oneshot` unit with `RemainAfterExit=yes` may correctly be `active/exited` with PID zero. Socket units intentionally have no daemon MainPID: validate active/listening state and actual socket ownership instead. Canonicalize service aliases so one process reached by both a D-Bus alias and its real unit is not counted as two independent consumers. After a Type=simple restart, poll boundedly for the exact executable/version, not just active state: the new PID can briefly still resolve to systemd before it execs Node. Record that convergence before declaring drift or triggering rollback.
 

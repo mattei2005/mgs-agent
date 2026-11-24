@@ -1,5 +1,7 @@
 # SHEIN — handoff de vídeo e compliance regional
 
+Apelo de reprovações e gestão parcial posterior: `review-disapproved-and-selective-activation.md`.
+
 ## Metadata e miniaturas separadas
 
 Para dependências técnicas reconhecidas, faça GET do vídeo com `fields=id,title,status` e GET de `<video_id>/thumbnails` com `fields=id,uri,width,height`; não peça `thumbnails` como expansão no nó quando o guard só autoriza o edge. Exija HTTP200, ready/linhagem válidos e `data[0].uri` não vazia. Separe manutenção do executor da campanha, preserve guard/credencial/reservas e retome o mesmo request-ready após regressões e dry-run real. `test_shein_media_qa.py` cobre consultas exatas e rejeita HTTP403, lista vazia e URI ausente; mantenha os negativos de idioma/checksum/uso/Drive. Falha recuperável desse consumidor não exige nova autorização de campanha.
