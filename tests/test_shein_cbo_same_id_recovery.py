@@ -50,10 +50,60 @@ class CBORecovery(unittest.TestCase):
         engine=Engine(); spec=self.spec();engine.campaign.update(name=spec.name,daily_budget='7500',bid_strategy='COST_CAP');engine.adset.update(name=spec.adset_name,bid_amount='60')
         shell_recovery.reconcile(engine,SimpleNamespace(account_id='999',campaigns=(spec,)),None,{'campaign_ids':['111'],'adset_ids':['222']})
         self.assertFalse([op for _,ops in engine.calls for op in ops if op.method=='POST'])
+    def test_same_strategy_cap_uses_adset_not_atomic_mapping(self):
+        engine=Engine();engine.campaign['bid_strategy']='COST_CAP'
+        shell_recovery.reconcile(engine,SimpleNamespace(account_id='999',campaigns=(self.spec(),)),None,{'campaign_ids':['111'],'adset_ids':['222']})
+        writes=[op for _,ops in engine.calls for op in ops if op.method=='POST']
+        self.assertTrue(writes);self.assertTrue(all('adset_bid_amounts' not in op.body for op in writes))
+        self.assertEqual([op.body['bid_amount'] for op in writes if op.relative_url=='222'],['60'])
+        self.assertEqual(engine.adset['bid_amount'],'60')
     def test_cap_recovery_wrong_parent_fails_before_writes(self):
         engine=Engine();engine.adset['campaign_id']='333'
         with self.assertRaises(ValueError):
             shell_recovery.reconcile(engine,SimpleNamespace(account_id='999',campaigns=(self.spec(),)),None,{'campaign_ids':['111'],'adset_ids':['222']})
         self.assertFalse([op for _,ops in engine.calls for op in ops if op.method=='POST'])
+
+class PrestagedShellRecovery(CBORecovery):
+    def run_core(self, *, exists=True, campaigns=None, account_operation='SHEIN-US-DIRECT'):
+        from unittest.mock import Mock
+        from ares_campaign_v3.engine import CampaignEngine
+        class RecoveryEngine(Engine):
+            def _batch(self, bundle, transport, operations, stage):
+                if stage == 'recovery_shell_inventory' and not self.exists:
+                    self.calls.append((stage, copy.deepcopy(operations)))
+                    return [BatchResult(op.name,200,{'data':[]},[]) for op in operations]
+                if stage == 'recovery_shell_adset_copy':
+                    self.calls.append((stage,copy.deepcopy(operations)))
+                    self.exists=True
+                    return [BatchResult(op.name,200,{'copied_adset_id':'222'},[]) for op in operations]
+                return super()._batch(bundle,transport,operations,stage)
+        engine=RecoveryEngine();engine.exists=exists
+        engine.config={'accounts':{'999':{'operation':account_operation}}}
+        engine._readback_only_record=lambda bundle,record: True
+        engine._timed_start=lambda: ({},0)
+        engine._timed_finish=lambda *args: None
+        engine._readback_ops=lambda campaign_ids: []
+        spec=self.spec();spec.creative_materialization_route='ad_copy';spec.source_adset_id='source-set'
+        bundle=SimpleNamespace(account_id='999',campaigns=(spec,))
+        record={'campaign_ids':['111'] if campaigns is None else campaigns,'stage':'campaign_copies_created','timings':{}}
+        result=CampaignEngine._recover_prestaged_bundle(engine,bundle,None,record)
+        return engine,record,result
+    def test_missing_adset_recovered_without_campaign_copy(self):
+        engine,record,result=self.run_core(exists=False)
+        copies=[op for _,ops in engine.calls for op in ops if op.kind=='adset_copy']
+        self.assertEqual(len(copies),1);self.assertEqual(copies[0].relative_url,'source-set/copies')
+        self.assertEqual(copies[0].body['campaign_id'],'111')
+        self.assertEqual(record['adset_ids'],['222']);self.assertEqual(result,['111'])
+        self.assertFalse([op for _,ops in engine.calls for op in ops if op.kind=='campaign_copy'])
+    def test_existing_adset_adopted_without_copy(self):
+        engine,record,result=self.run_core(exists=True)
+        self.assertEqual(record['adset_ids'],['222'])
+        self.assertFalse([op for _,ops in engine.calls for op in ops if op.kind in {'campaign_copy','adset_copy'}])
+    def test_incomplete_campaign_identity_rejected(self):
+        from ares_campaign_v3.engine import ExecutionFailed
+        with self.assertRaises(ExecutionFailed):self.run_core(campaigns=[])
+    def test_other_operation_does_not_gain_shell_recovery(self):
+        from ares_campaign_v3.engine import ExecutionFailed
+        with self.assertRaises(ExecutionFailed):self.run_core(account_operation='OTHER')
 
 if __name__=='__main__':unittest.main()

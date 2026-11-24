@@ -38,7 +38,7 @@ def reconcile(engine,bundle,transport,record):
         if getattr(spec,'bid_override',False):
             if str(campaign_observed.get('id'))!=str(cid) or str(campaign_observed.get('account_id'))!=str(bundle.account_id) or str(adset_observed.get('id'))!=str(setid) or str(adset_observed.get('campaign_id'))!=str(cid):
                 raise ValueError('CBO recovery shell account/parent identity mismatch')
-        desired,set_desired=shell_payloads(spec,setid)
+        desired,set_desired=shell_payloads(spec,setid,source_strategy=campaign_observed.get('bid_strategy'))
         if any(str(campaign_observed.get(k))!=str(v) for k,v in desired.items() if k!='adset_bid_amounts') or not cap_matches(spec,adset_observed):
             updates.append(BatchOperation('shell_campaign_update_'+str(i),'POST',cid,body=desired,kind='campaign_update'))
         if any((str(adset_observed.get(k) or '0')!=str(v) if k=='bid_amount' else (adset_observed.get(k) or {})!=v if k=='bid_constraints' else adset_observed.get(k)!=v) for k,v in set_desired.items()):

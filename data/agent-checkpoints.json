@@ -11488,6 +11488,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1574633485262393356",
+      "next_step": "Obter autorizacao de manutencao pontual do runtime central; reproduzir e testar preservacao exata de sourcing herdado sem afrouxar midia nova; REPORT-INFRA; retomar o mesmo input/request preservando todos os IDs, QA integral, ativacao e cadastro SB. Nao recriar campanhas nem remover variantes.",
+      "objective": "Duplicar duas vezes a C034 na Mavroa-US-SHEIN-ES-03-G003, USD100 por campanha, 24/11/2026 00:00 America/New_York.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574633485262393356/recovery-diagnosis.json",
+      "state": "postprocess_pending: c036 e c037 criadas paused; dois conjuntos e quatro anuncios confirmados, usd200/dia total. get completo confirma story/afs/sourcing iguais aos payloads aprovados. validador de imagem rejeita variantes herdadas padding/uncrop/recomposition/multi_media; qa renderizado, ativacao e sb pendentes. nenhum codigo ou manifesto foi alterado.",
+      "thread_id": "1558127210966032385",
+      "updated_at": "2026-11-24T03:58:02+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12318,5 +12328,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T03:47:31+00:00"
+  "updated_at": "2026-11-24T03:58:02+00:00"
 }

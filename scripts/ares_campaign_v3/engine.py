@@ -1092,6 +1092,16 @@ class CampaignEngine:
             raise ExecutionFailed("a bundle cannot mix creative materialization routes")
         campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
         adset_ids = [str(value) for value in record.get("adset_ids") or []]
+        if (len(campaign_ids) == len(bundle.campaigns)
+                and (len(adset_ids) != len(bundle.campaigns)
+                     or record.get('stage') in {None, 'campaign_copies_created', 'adsets_created'})
+                and (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT'):
+            # Reuse the readback-first shell recovery already used by two-phase
+            # clones. It adopts existing adsets and copies only proven missing
+            # children; campaign copies and their IDs are never replayed.
+            from .shell_recovery import reconcile
+            reconcile(self, bundle, transport, record)
+            adset_ids = [str(value) for value in record.get('adset_ids') or []]
         if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):
             raise ExecutionFailed("partial prestaged bundle is missing campaign/adset identities")
 
