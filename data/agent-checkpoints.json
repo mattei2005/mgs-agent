@@ -11518,6 +11518,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1574829840127762624",
+      "next_step": "Nenhum write pendente; Meta mantém quatro anúncios em análise. Entregar confirmação na origem.",
+      "objective": "Duplicar C311 três vezes na Yolokfx conta 04 G004 com USD150 diários por cópia e início imediato",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574829840127762624/completion-receipt.json",
+      "state": "complete: c314 c315 c316 active; usd150 por campanha, delta usd450/dia; 6 anúncios com qa integral, 2 active e 4 pending_review; sb utm_campaign e utm_adgroup http201 gaminsert ok; sem reconferência sb independente disponível",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-24T16:58:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12348,5 +12358,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T14:05:20+00:00"
+  "updated_at": "2026-11-24T16:58:33+00:00"
 }
