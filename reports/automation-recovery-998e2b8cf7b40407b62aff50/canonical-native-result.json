@@ -1,0 +1,67 @@
+{
+  "archive_native_ack": {
+    "file_id": "1rvauyzSGMecwqLBB_hestYbI5Tb-G5Ni",
+    "sha256": "0b52758d0fd717af6e98985effda11da77f922d371b8ce4ea383a03b9f343871"
+  },
+  "archive_retention_preview_only": true,
+  "archive_root_id": "1RUhlFEH3213YShql5kLgmeQhBstRL8Nw",
+  "archive_sha256_stream_verified": true,
+  "bundle": {
+    "bundle_sha256": "9f87a2e129c0f0799b763969a0409e6c60f98186a2017d13e35f7da5dbaf2da1",
+    "bundle_size_bytes": 2138360969,
+    "components": [
+      {
+        "component": "hermes-zeus",
+        "filename": "hermes-zeus-quick.zip",
+        "member_count": 1488,
+        "sha256": "905e0d818bcd948cdef41393d3888e5a2a97f0de7a499f093da0b6b4a49293cb",
+        "size_bytes": 1082553158
+      },
+      {
+        "component": "hermes-atena",
+        "filename": "hermes-atena-quick.zip",
+        "member_count": 238,
+        "sha256": "29a06191a01dfec08dde228845f4769988c755540c67d2d666dd4a04d3369db0",
+        "size_bytes": 326235578
+      },
+      {
+        "component": "hermes-ares",
+        "filename": "hermes-ares-quick.zip",
+        "member_count": 1912,
+        "sha256": "f91f986a320643c9ff76da92e89c35e4ddcc37e35e626f9d130aae3ac057cfe5",
+        "size_bytes": 725638371
+      },
+      {
+        "component": "mgs-agent",
+        "filename": "mgs-agent-quick.zip",
+        "member_count": 14,
+        "sha256": "65b3615cf35109f28e5661fd0091603f048178e6dae81240818871279f3fcc7d",
+        "size_bytes": 3932166
+      }
+    ],
+    "created_at_utc": "2026-11-24T03:28:12.973331+00:00",
+    "mode": "quick",
+    "profiles": [
+      "zeus",
+      "atena",
+      "ares"
+    ],
+    "schema_version": 1
+  },
+  "created_at_utc": "2026-11-24T03:30:30.427678+00:00",
+  "drive_id": null,
+  "duration_seconds": 402.169,
+  "encrypted_md5": "8cb7cd965f143ff868b19a9cd34acd7f",
+  "encrypted_sha256": "ffb2fcada124066f034a5975f10665432df4e0f602a1a757791e8e5677f1314f",
+  "mode": "quick",
+  "public_key_fingerprint": "2E094ACEBCC647EA16410C21B50574AB9470819D",
+  "remote_file_id": "1iZiCFlJ9qsHOi5f3D5FhifjQACUR_6vI",
+  "remote_name": "mgs-dr-hourly-20261124T032348Z.zip.gpg",
+  "remote_size_bytes": 2138597966,
+  "retention_applied": false,
+  "retention_trashed_count": 0,
+  "status": "PASS",
+  "storage_backend": "private_owner_slot_sa_upload",
+  "tier": "hourly",
+  "tier_folder_id": "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V"
+}
