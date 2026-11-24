@@ -856,7 +856,7 @@
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
       "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "updated_at": "2026-11-23T20:38:57.280615+00:00",
+      "updated_at": "2026-11-24T03:33:25.576951+00:00",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
       "latest_maintenance_20261123": {
         "authorization_message_id": "1574470534035542151",
@@ -906,7 +906,7 @@
           "Inst python3-oauthlib [3.2.2-1] (3.2.2-1ubuntu0.1 Ubuntu:24.04/noble-security [all])"
         ]
       },
-      "hostinger_reboot_state": "critical_confirmation_pending_not_scheduled",
+      "hostinger_reboot_state": "completed_validated",
       "core22": {
         "version": "20261022",
         "revision": 3129,
@@ -937,6 +937,13 @@
         "at": "2026-11-23T20:36:31.009114+00:00",
         "apt_candidates": 0,
         "snap_candidates": 0
+      },
+      "latest_reboot_20261123": {
+        "authorization_message_id": "1574551205768732753",
+        "kernel": "6.8.0-151-generic",
+        "boot_id": "6326e10a-324e-48fc-9f14-f8fa3c83d00e",
+        "status": "completed_validated",
+        "result": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json"
       }
     },
     {
@@ -70195,7 +70202,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "hostinger_reboot_scheduled",
+      "status": "hostinger_completed_validated_remaining_hosts_pending",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70213,7 +70220,7 @@
         "reconstructed_rollback_debs": 10
       },
       "production_packages_changed": true,
-      "reboot_executed": false,
+      "reboot_executed": true,
       "ledger": [
         {
           "target": "Hostinger packages/npm",
@@ -70231,9 +70238,9 @@
         },
         {
           "target": "Hostinger reboot",
-          "state": "hostinger_reboot_scheduled",
+          "state": "hostinger_completed_validated_remaining_hosts_pending",
           "prerequisites": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
-          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json"
+          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json"
         },
         {
           "target": "MatteiInc01 packages/reboot",
@@ -70256,7 +70263,7 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-24T03:24:28.272297+00:00",
+      "updated_at": "2026-11-24T03:33:25.420104+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70264,7 +70271,7 @@
       "checks_passed": 30,
       "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
       "next_critical_manifest_sha256": "481b3a7260cfe866a99def451629c1247449f4a6da3a4c81714153841f56458c",
-      "next_gate": "External durable executor waits for exact retry handoff/current canonical source session to become idle and all agents idle; other-agent activity retains waiting consumer; no repeated reboot.",
+      "next_gate": "Prepare next remote-host phase with host-scoped backup and Critical confirmation; do not infer authorization across hosts.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70300,7 +70307,7 @@
           "status": "sent_verified"
         }
       },
-      "reboot_scheduled": true,
+      "reboot_scheduled": false,
       "latest_report_infra": {
         "at": "2026-11-23T22:41:48.607955+00:00",
         "message_id": "1574555595384553545",
@@ -70360,7 +70367,7 @@
         "change": "required updated_at only; ownership/state preserved",
         "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/checkpoint-metadata-before-repair.json"
       },
-      "reboot_validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json",
+      "reboot_validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json",
       "reboot_artifacts": {
         "validator_unit": "mgs-vps-maint-1574252891898908684-validate.service",
         "closure_unit": "mgs-vps-maint-1574252891898908684-close.service",
@@ -70387,7 +70394,10 @@
         "embed_count": 1,
         "mentions": 0,
         "state": "sent_verified"
-      }
+      },
+      "hostinger_completed": true,
+      "postboot_unit_state": "validator_disabled_inactive_definition_retained",
+      "reboot_transport_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json"
     },
     {
       "id": "meta-manual-payments-cron-20261123T0802",
@@ -70475,7 +70485,7 @@
       "id": "VPS-REBOOT-CONTROLLER-1574252891898908684",
       "agent": "zeus",
       "type": "approved_one_time_reboot_controller",
-      "status": "hostinger_reboot_scheduled",
+      "status": "hostinger_completed_validated_remaining_hosts_pending",
       "source_thread_id": "1574249078584377544",
       "authorization_message_id": "1574551205768732753",
       "paths": [
@@ -70495,7 +70505,7 @@
       "dispatch_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json",
       "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json",
       "retention": "definitions retained; validator/closure disabled after use; no file deletion",
-      "updated_at": "2026-11-24T03:24:28.408909+00:00",
+      "updated_at": "2026-11-24T03:33:25.420383+00:00",
       "retry_message_id": "1574625446883229757",
       "waiting_consumer": "mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service",
       "runtime_max": "infinity",

@@ -4794,12 +4794,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Validar dry-run real, REPORT-INFRA e retomar executor central; exigir QA/ACTIVE/readback integral e cadastro SB.",
-      "objective": "Concluir as 10 duplicacoes com 25 videos, USD25/dia cada, COCAP USD0.90 e inicio 24/11/2026 00:05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/maintenance/inventory-before.json",
-      "state": "manutencao isolada de leitura de thumbnails concluida; guard intacto. testes vid 10 e runtime 11 ok; img 43 ok e 2 erros iguais no baseline. retomada ordenada por rodolfo 1574624795138588673, mesmo request-ready e reservas.",
+      "next_step": "Aguardar decisao material do pais das copias; se BR, regularizacao exata do anunciante verificado por rota suportada/autorizada. Nao alterar fonte/pais por inferencia. Depois retomar mesmos IDs pelo core, QA/ativacao/readback e cadastro SB.",
+      "objective": "Concluir 10 duplicacoes da fonte 003 com 25 videos, USD25/dia cada, COCAP USD0.90, inicio 24/11/2026 00:05 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/maintenance/regional-compliance-blocker.json",
+      "state": "miniaturas corrigidas e dry-run real ok. execucao criou somente 2 shells paused, zero conjuntos/anuncios por readback. meta bloqueia adset_copy 100/3858634: anunciante verificado ausente. fonte 003 segmenta br, nao us; fonte e 4 conjuntos da conta sem identidade regional exposta. pedido nao concluido; preservar request/ids/reservas/manifest, sem retry identico.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-24T03:19:22+00:00"
+      "updated_at": "2026-11-24T03:29:35+00:00"
     },
     {
       "agent": "ares",
@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Retry1574625446883229757 queued: external mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service owns one reboot after exact handoff/current source session idle/all agents idle. Busy agents keep durable waiting consumer, never forced. Validator mgs-vps-maint-1574252891898908684-validate.service and closure mgs-vps-maint-1574252891898908684-close.service own postboot verification/reporting; consume /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json after exit before any foreground closure. Existing authorization1574551205768732753 unchanged; other hosts/dashboard pending.",
+      "next_step": "Hostinger completed: new boot/kernel151, package and gateway/Discord checks passed; external validator disabled/inactive and definitions retained, no deletions. Closure transports and final receipt in /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json. Remaining MatteiInc01/02/03,Hestia and dashboard phases remain open with their exact gates; no repeat reboot.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
       "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json",
-      "state": "hostinger_reboot_scheduled",
+      "state": "hostinger_completed_validated_remaining_hosts_pending",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T03:24:28+00:00"
+      "updated_at": "2026-11-24T03:33:25+00:00"
     },
     {
       "agent": "zeus",
@@ -12308,5 +12308,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T03:24:28+00:00"
+  "updated_at": "2026-11-24T03:33:25+00:00"
 }

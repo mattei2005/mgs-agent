@@ -1,6 +1,6 @@
 # SHEIN — recuperação de preflight e ativação
 
-Use quando uma conta permitida falhar no guard técnico, um objeto criado não tiver proveniência reconhecida ou o QA terminar mas a ativação não fechar. Para recuperação de mídia/cópias e snapshot compacto, siga as seções correspondentes de `general-campaign-fast-route.md`.
+Use para guard, proveniência ou ativação pendente. Mídia/cópias: `general-campaign-fast-route.md`. Handoff de miniaturas e erro regional 3858634: `video-handoff-and-regional-compliance.md`.
 
 ## 1. Classificar a camada antes de corrigir
 
