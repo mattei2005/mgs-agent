@@ -21,7 +21,7 @@ QUEUED: job→predecessores. Grant ausente: paginação administrativa completa.
 
 Separe autorizações, coortes e recibos de pausa e criação intercaladas. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
-Destinos e diagnóstico: `references/inherited-destination-data.md`.
+Falhas/destinos: `references/read-only-batch-child-recovery.md`.
 
 ## Duplicação e recuperação — precedência obrigatória
 
