@@ -5516,12 +5516,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC01",
-      "next_step": "Hostinger já encerrada e validada. Confirmar lote Inc0120updates/0new/0remove, parada MariaDB para backup frio e restore isolado antes de instalar; hooks MariaDB restart e BitNinja IpFilter reload explícitos. Manifest5db8c98920645ea6; nenhum reboot/dashboard/Hermes/outros hosts por este gate. Demais fases permanecem abertas.",
-      "objective": "Preparar/aplicar manutenção Inc01 com backup consistente e confirmação crítica próprios",
-      "source": "reports/vps-maint-1574252891898908684-inc01-preparation.md",
-      "state": "inc01_prepared_awaiting_critical_confirmation",
+      "next_step": "Confirmação1574642070478520412 vinculada ao gate1574640455130546228 e manifesto5db8c98920645ea6; revalidar drift/checksums, backup frio com recuperação garantida do serviço, restore isolado e lote20 exato; não ampliar escopo.",
+      "objective": "Aplicar lote Inc01 confirmado, com backup frio MariaDB e restore isolado antes da instalação; sem reboot",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc01/critical-plan.json",
+      "state": "approved_preflight_before_database_pause",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T04:15:07+00:00"
+      "updated_at": "2026-11-24T04:26:40+00:00"
     },
     {
       "agent": "zeus",
@@ -12338,5 +12338,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:20:29+00:00"
+  "updated_at": "2026-11-24T04:26:40+00:00"
 }

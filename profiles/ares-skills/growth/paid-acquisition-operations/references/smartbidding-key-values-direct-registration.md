@@ -22,6 +22,10 @@ Tráfego direto cadastra `utm_campaign` e `utm_adgroup`; BOT cadastra `utm_campa
 
 ## Confirmação e limite de readback
 
+### Frase de fechamento na própria resposta
+
+Quando o operador disser que não recebeu a notificação de cadastro após uma criação/duplicação, resolva primeiro como referência à confirmação padrão no fechamento do pedido, não como pedido de alerta separado, notificação automática da SB ou envio a terceiros. Após sucesso comprovado das chaves, encerre o resumo operacional com uma linha própria e clara: **“UTMs cadastradas diretamente na dash da SB.”** Não esconda essa confirmação em parênteses, detalhes de infraestrutura ou na explicação do reparo. Se houver limitação de reconferência independente, informe-a brevemente antes da linha final, sem confundir sucesso retornado pelo serviço com verificação independente. Falha, resposta incerta ou sincronização pendente continuam explícitas e não recebem confirmação integral. Consulta sobre a frase de confirmação não autoriza repetir o cadastro nem enviar aviso separado. Se o operador esclarecer esse sentido, reconheça a interpretação equivocada e confirme o cadastro já comprovado sem reabrir a pergunta. Esclarecimento de Rodolfo `1574641939276370011`, na origem `1558127210966032385`; regra de cadastro direto permanece a política canônica vigente.
+
 - O retorno de sucesso observado inclui `publisherId`, `networkCode`, `field`, `values` e `gamInsert`. Exija igualdade literal do publisher/chave/lista solicitados; confira HTTP e tipos.
 - `gamInsert='ok'` é a confirmação retornada pelo serviço de criação no GAM. Qualquer outro valor corresponde ao badge da UI `Pending hourly sync`; cadastro SB aceito não deve ser descrito como criação GAM confirmada nesse caso.
 - Não confunda resposta POST com leitura independente posterior. O componente observado exibe apenas `lastResult` retornado pelo POST e não fornece listagem persistida. GETs de `/keyvalues` e `/keyvalues/preregister` não estavam implementados no teste; não inventar endpoint de consulta nem tratar relatório de impressões como catálogo de valores recém-criados.

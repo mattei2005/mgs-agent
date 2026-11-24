@@ -446,11 +446,23 @@ def _batch(common, token, requests):
         raise RouteBlocked('read-only Graph batch failed')
     if {row.get('name') for row in rows} != {item['name'] for item in requests}:
         raise RouteBlocked('read-only Graph batch identity mismatch')
+    queries = {item['name']: item for item in requests}
+    result = {}
     for row in rows:
-        if row.get('code') != 200 or not isinstance(row.get('body'), dict):
-            err = (row.get('body') or {}).get('error') or {}
+        body = row.get('body')
+        err = (body.get('error') or {}) if isinstance(body, dict) else {}
+        if row.get('code') != 200 and err.get('code') == 4 and err.get('is_transient') is True:
+            # Retry only this failed GET via the same guarded identity/transport.
+            # Successful children are retained; the common helper owns backoff.
+            query = queries[row['name']]
+            retry_http, retry_body, _ = common.graph_get(query['path'], token, query.get('params'))
+            row = {'name': row['name'], 'code': retry_http, 'body': retry_body}
+            body = retry_body
+            err = (body.get('error') or {}) if isinstance(body, dict) else {}
+        if row.get('code') != 200 or not isinstance(body, dict) or err:
             raise RouteBlocked('read-only endpoint rejected: ' + str(row.get('name')) + '; code=' + str(err.get('code')))
-    return {row.get('name'): row['body'] for row in rows}
+        result[row['name']] = body
+    return result
 
 
 def _complete_edge(value: dict[str, Any]) -> list[dict[str, Any]]:
