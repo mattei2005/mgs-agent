@@ -71016,6 +71016,28 @@
       },
       "production_packages_changed_by_zeus": false,
       "independent_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/remaining-lot-v2-independent-readback.json"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261124T0802",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "waiting_human",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261124T0802/receipt.json",
+      "scheduled_at": "2026-11-24T08:02:00-05:00",
+      "updated_at": "2026-11-24T08:10:33.657762-05:00",
+      "verification": {
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "historical_h_preserved": 40,
+        "pending_d": 5,
+        "source_parity_partial_cgij_ef": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_transport_restricted_no_manual_messages"
     }
   ],
   "profile_skill_references": [
