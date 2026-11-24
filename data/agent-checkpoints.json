@@ -5526,12 +5526,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC02",
-      "next_step": "Inc01:aceite1574663015410704418 já aplicado,sem BIOS/drivers,sem pendência de aceite. Inc02:manifest5554f1e992fa3dc7;19upgrades/0new/0remove,rollback19,candidatos19,16checks PASS. Confirmar pausa MariaDB p/cópia fria completa/restoreisolado antes de instalar;sem reboot,sem PHP/NGINX,Node/Hermes,SSH/firewall/credenciais ou outros hosts. Não transferir aprovações de host anterior.",
-      "objective": "Inc01 encerrado com3ressalvas aceitas; Inc02 lote19 preparado aguardando confirmação crítica própria",
-      "source": "reports/vps-maint-1574252891898908684-inc02-preparation.md",
-      "state": "inc02_prepared_awaiting_exact_critical_confirmation",
+      "next_step": "Reconciliar fronteiras/executor; validar drift e backup; aplicar somente19pacotes; validar; reboot separado",
+      "objective": "Executar lote19 Inc02 confirmado1574688273131900969 com backup frio e restore antes da instalação; sem reboot",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/authorization-1574688273131900969.json",
+      "state": "approved_reconciling_live_preflight",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T06:05:36+00:00"
+      "updated_at": "2026-11-24T07:32:40+00:00"
     },
     {
       "agent": "zeus",
@@ -12348,5 +12348,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T06:05:36+00:00"
+  "updated_at": "2026-11-24T07:32:40+00:00"
 }
