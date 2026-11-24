@@ -205,7 +205,11 @@ class DriveCacheTests(unittest.TestCase):
             def meta_read(path,token,params):
                 self.assertEqual(token,'OFFLINE_META')
                 if path=='act_100/advideos':return 200,{'data':[{'id':'v0'},{'id':'v1'}]},{}
-                i=int(path[-1]);return 200,{'id':path,'title':refs[i]['asset_id']+' '+refs[i]['checksum'][:10],'status':{'video_status':'ready'},'thumbnails':{'data':[{'uri':'https://example.test/thumb'}]}},{}
+                if path.endswith('/thumbnails'):
+                    self.assertEqual(params, {'fields':'id,uri,width,height'})
+                    return 200,{'data':[{'uri':'https://example.test/thumb'}]},{}
+                self.assertEqual(params, {'fields':'id,title,status'})
+                i=int(path[-1]);return 200,{'id':path,'title':refs[i]['asset_id']+' '+refs[i]['checksum'][:10],'status':{'video_status':'ready'}},{}
             common.graph_get.side_effect=meta_read
             request={'request_id':'request','asset_refs':refs};profile={'account_id':'100','language':'EN'}
             with patch.object(locations,'binding',return_value=binding), \
@@ -218,8 +222,18 @@ class DriveCacheTests(unittest.TestCase):
                 self.assertEqual(len(out),2);self.assertEqual(siblings.call_count,1)
                 self.assertEqual(sum(c.args[1]=='ready' for c in ops.drive_file_readback.call_args_list),1)
                 self.assertEqual(sum(c.args[1].startswith('file-') for c in ops.drive_file_readback.call_args_list),2)
-                self.assertEqual([c.args[0] for c in common.graph_get.call_args_list],['v0','v1','act_100/advideos'])
+                self.assertEqual([c.args[0] for c in common.graph_get.call_args_list],['v0','v0/thumbnails','v1','v1/thumbnails','act_100/advideos'])
                 self.assertEqual([r['testing_parent_id'] for r in out],['testing','testing'])
+                for http, body in [(403, {'data':[{'uri':'https://example.test/thumb'}]}),
+                                   (200, {'data':[]}), (200, {'data':[{}]})]:
+                    with self.subTest(thumbnail_http=http, thumbnail_body=body):
+                        def bad_thumb(path, token, params):
+                            if path.endswith('/thumbnails'): return http, body, {}
+                            return meta_read(path, token, params)
+                        common.graph_get.side_effect=bad_thumb
+                        with self.assertRaisesRegex(ValueError,'thumbnail unavailable'):
+                            handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                common.graph_get.side_effect=meta_read
                 # A warmed folder must never skip per-asset checks on asset two.
                 for change, error in [
                     ({'metadata_clean':False},'sanitized metadata'),

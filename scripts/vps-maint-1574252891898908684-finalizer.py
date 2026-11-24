@@ -9,7 +9,7 @@ def main():
  pre=c.load(c.B/'prestate.json');deadline=time.monotonic()+1200;handoff=None
  try:
   while True:
-   msgs=c.discord_get(c.THREAD,'?after='+c.AUTH+'&limit=100')
+   msgs=c.discord_get(c.THREAD,'?after='+pre.get('retry_message_id',c.AUTH)+'&limit=100')
    matches=[m for m in msgs if m.get('author',{}).get('id')=='1496296175014252634' and m.get('content','').strip()==c.HANDOFF]
    row=c.source_turn(c.routing('zeus'));same_session=row['entry'].get('session_id')==pre['source_session_id'];source_inactive=not row['entry'].get('active_turn_token');active=c.all_active_turns()
    if matches:
@@ -18,7 +18,12 @@ def main():
     if newer_human:raise RuntimeError('new human input after handoff; hold reboot for source-thread reconciliation')
    observation={'at':c.now(),'handoff_id':handoff['id'] if handoff else None,'source_session_same':same_session,'source_turn_inactive':source_inactive,'active_turns':active};c.atomic(c.B/'dispatch-handshake-progress.json',observation)
    if handoff and same_session and source_inactive and not active:break
-   if time.monotonic()>=deadline:raise RuntimeError('handoff/idle wait expired; host was not rebooted; see canonical routing observation')
+   if time.monotonic()>=deadline:
+    if handoff and same_session and source_inactive and active:
+     c.atomic(c.B/'idle-queue.json',{'at':c.now(),'status':'waiting_for_other_agent_turns','owner_unit':os.environ.get('SYSTEMD_UNIT','mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service'),'active_turns':active,'next_check_seconds':5,'reboot_attempted':False})
+     c.audit('hostinger_reboot_retry_waiting_for_busy_agents',active_turns=active,receipt=str(c.B/'idle-queue.json'))
+     deadline=time.monotonic()+1200
+    else:raise RuntimeError('handoff/source-idle wait expired; host was not rebooted; see canonical routing observation')
    time.sleep(5)
   c.run(['apt-get','update','-qq'],timeout=180);v.check_preflight(installed=True,require_git=False)
   # Check canonical routing and the delivered exact handoff again immediately before dispatch.

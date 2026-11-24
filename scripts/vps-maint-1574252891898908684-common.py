@@ -3,12 +3,12 @@
 import datetime,fcntl,hashlib,importlib.util,json,os,pathlib,re,sqlite3,subprocess,time,urllib.request
 P=pathlib.Path
 ROOT=P('/root/mgs-agent')
-B=P('/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation')
+B=P('/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757')
 AUTH='1574551205768732753';THREAD='1574249078584377544';REQUEST='1574252891898908684';ID='VPS-MAINT-'+REQUEST
 VALIDATOR='mgs-vps-maint-1574252891898908684-validate.service'
 CLOSURE='mgs-vps-maint-1574252891898908684-close.service'
 SCOPE='/root/.hermes/profiles/zeus/sessions';KEY='agent:main:discord:thread:'+THREAD+':'+THREAD
-HANDOFF='Reinicialização da Hostinger agendada. O procedimento externo só inicia após o encerramento desta resposta e valida o novo kernel e a reconexão de Zeus, Atena e Ares.\n\nA conclusão será publicada nesta thread. Os outros servidores e o dashboard não serão alterados nesta etapa.'
+HANDOFF='Nova tentativa da reinicialização da Hostinger agendada. O executor externo aguardará esta resposta terminar e os agentes ficarem sem tarefas ativas antes de reiniciar.\n\nVou validar o novo kernel e a reconexão de Zeus, Atena e Ares, e publicar a conclusão nesta thread. Os outros servidores e o dashboard não serão alterados nesta etapa.'
 ENV={**os.environ,'LC_ALL':'C','NEEDRESTART_MODE':'l','DEBIAN_FRONTEND':'noninteractive'}
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def run(args,timeout=120,check=True):

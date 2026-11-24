@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-23T18:50:35-05:00",
+    "updated_at": "2026-11-23T22:25:37-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1225,7 +1225,10 @@
       "agent": "zeus",
       "authority_message_id": "1569193434189668453",
       "source_alert_id": "1574619607724072962",
-      "paths": ["/root/mgs-agent/scripts/mgs_autopush_continuity.py", "/root/mgs-agent/tests/test_autopush_continuity.py"],
+      "paths": [
+        "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
+        "/root/mgs-agent/tests/test_autopush_continuity.py"
+      ],
       "correction": "Register exact existing index-lock incident for read-only independent verification; preserve native writer, batching, supervisor owner and per-occurrence receipts. No Git write replay, lock removal or watcher restart.",
       "validation": "53 adapter/ownership plus 17 canonical monitor tests PASS; git diff --check PASS. Native retry eb8549d155358ebb23a2922ec09b52f794afcf77 and remote ancestry verified. Natural monitor 2026-11-24T03:11:01Z zero failures; exact-alert live observer OK verified=true.",
       "native_retry_commit": "eb8549d155358ebb23a2922ec09b52f794afcf77",
@@ -70192,7 +70195,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "hostinger_reboot_dispatch_blocked",
+      "status": "hostinger_reboot_scheduled",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70228,9 +70231,9 @@
         },
         {
           "target": "Hostinger reboot",
-          "state": "hostinger_reboot_dispatch_blocked",
+          "state": "hostinger_reboot_scheduled",
           "prerequisites": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
-          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-blocked.json"
+          "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json"
         },
         {
           "target": "MatteiInc01 packages/reboot",
@@ -70253,7 +70256,7 @@
           "state": "pending_Astra_route_and_separate_runtime_gate"
         }
       ],
-      "updated_at": "2026-11-23T23:01:12.907309+00:00",
+      "updated_at": "2026-11-24T03:24:28.272297+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70261,7 +70264,7 @@
       "checks_passed": 30,
       "next_critical_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/reboot-prerequisites.json",
       "next_critical_manifest_sha256": "481b3a7260cfe866a99def451629c1247449f4a6da3a4c81714153841f56458c",
-      "next_gate": "Final response delivery plus canonical source/all-agent turn-idle; external finalizer owns one reboot and postboot validation. Do not duplicate writer.",
+      "next_gate": "External durable executor waits for exact retry handoff/current canonical source session to become idle and all agents idle; other-agent activity retains waiting consumer; no repeated reboot.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70297,7 +70300,7 @@
           "status": "sent_verified"
         }
       },
-      "reboot_scheduled": false,
+      "reboot_scheduled": true,
       "latest_report_infra": {
         "at": "2026-11-23T22:41:48.607955+00:00",
         "message_id": "1574555595384553545",
@@ -70343,12 +70346,12 @@
       "reboot_controller": {
         "validator_unit": "mgs-vps-maint-1574252891898908684-validate.service",
         "closure_unit": "mgs-vps-maint-1574252891898908684-close.service",
-        "input_snapshot": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch.sha256",
-        "prestate": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/prestate.json",
-        "dispatch_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-readback.json",
-        "runtime_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/postboot-result.json",
-        "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/final-result.json",
-        "tests_passed": 12,
+        "input_snapshot": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch.sha256",
+        "prestate": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/prestate.json",
+        "dispatch_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json",
+        "runtime_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json",
+        "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json",
+        "tests_passed": 17,
         "pure_preflight_checks": 29,
         "unit_retention": "definitions retained; disable after one use; no deletion"
       },
@@ -70357,15 +70360,15 @@
         "change": "required updated_at only; ownership/state preserved",
         "backup": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/checkpoint-metadata-before-repair.json"
       },
-      "reboot_validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-blocked.json",
+      "reboot_validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json",
       "reboot_artifacts": {
         "validator_unit": "mgs-vps-maint-1574252891898908684-validate.service",
         "closure_unit": "mgs-vps-maint-1574252891898908684-close.service",
-        "root": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation",
+        "root": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757",
         "retention": "disabled_definitions_retained_no_file_deletion"
       },
-      "dispatch_timer": "mgs-vps-maint-1574252891898908684-dispatch.timer",
-      "dispatch_service": "mgs-vps-maint-1574252891898908684-dispatch.service",
+      "dispatch_timer": "mgs-vps-maint-1574252891898908684-retry-1574625446883229757.timer",
+      "dispatch_service": "mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service",
       "reboot_preparation_report": {
         "at": "2026-11-23T22:41:48.607955+00:00",
         "message_id": "1574555595384553545",
@@ -70374,6 +70377,16 @@
         "content_empty": true,
         "embed_count": 1,
         "mentions": 0
+      },
+      "retry_message_id": "1574625446883229757",
+      "reboot_retry_report": {
+        "at": "2026-11-24T03:24:30.716284+00:00",
+        "message_id": "1574626737353134102",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "state": "sent_verified"
       }
     },
     {
@@ -70462,7 +70475,7 @@
       "id": "VPS-REBOOT-CONTROLLER-1574252891898908684",
       "agent": "zeus",
       "type": "approved_one_time_reboot_controller",
-      "status": "hostinger_reboot_dispatch_blocked",
+      "status": "hostinger_reboot_scheduled",
       "source_thread_id": "1574249078584377544",
       "authorization_message_id": "1574551205768732753",
       "paths": [
@@ -70474,12 +70487,20 @@
         "/etc/systemd/system/mgs-vps-maint-1574252891898908684-validate.service",
         "/etc/systemd/system/mgs-vps-maint-1574252891898908684-close.service"
       ],
-      "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/isolated-test-result.json",
-      "readiness": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/pure-preflight-result.json",
-      "dispatch_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-readback.json",
-      "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/final-result.json",
+      "validation": [
+        "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/isolated-test-result.json",
+        "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/retry-idle-gate-tests.json"
+      ],
+      "readiness": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/pure-preflight-result.json",
+      "dispatch_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/dispatch-readback.json",
+      "final_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json",
       "retention": "definitions retained; validator/closure disabled after use; no file deletion",
-      "updated_at": "2026-11-23T23:01:12.907674+00:00"
+      "updated_at": "2026-11-24T03:24:28.408909+00:00",
+      "retry_message_id": "1574625446883229757",
+      "waiting_consumer": "mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service",
+      "runtime_max": "infinity",
+      "original_failed_receipt": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-blocked.json",
+      "skill_learning": "vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md: owner retry/current source session/durable busy queue"
     },
     {
       "id": "meta-manual-payments-cron-20261123T2102",
@@ -73691,8 +73712,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py",
-      "size_bytes": 17306,
-      "modified_at": "2026-11-09T21:14:44-05:00"
+      "size_bytes": 17606,
+      "modified_at": "2026-11-23T22:17:58-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_naming.py",
@@ -74576,8 +74597,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
-      "size_bytes": 10520,
-      "modified_at": "2026-11-22T03:46:30-05:00"
+      "size_bytes": 10575,
+      "modified_at": "2026-11-23T22:01:10-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_rollback_continuity.py",
@@ -75201,13 +75222,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/vps-maint-1574252891898908684-common.py",
-      "size_bytes": 9532,
-      "modified_at": "2026-11-23T17:38:33-05:00"
+      "size_bytes": 9605,
+      "modified_at": "2026-11-23T22:21:44-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/vps-maint-1574252891898908684-finalizer.py",
-      "size_bytes": 4904,
-      "modified_at": "2026-11-23T17:32:22-05:00"
+      "size_bytes": 5444,
+      "modified_at": "2026-11-23T22:22:04-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/vps-maint-1574252891898908684-preflight.py",
@@ -78284,15 +78305,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 1068742,
-      "md5": "24a9f97840ba4959f0398eb8e257c1cc",
-      "modified_at": "2026-11-23T18:48:45-05:00"
+      "size_bytes": 1070443,
+      "md5": "9e6a566174877866165e43cec44be3a6",
+      "modified_at": "2026-11-23T22:24:28-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 194974,
-      "md5": "3a9734de6aeae70ee584b6092fa43742",
-      "modified_at": "2026-11-23T18:48:03-05:00"
+      "size_bytes": 195919,
+      "md5": "ffc7d29888d41eb538c2d539df7de065",
+      "modified_at": "2026-11-23T22:23:08-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -78321,8 +78342,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "1d68b6b76b8e817974a15599eee29237",
-      "modified_at": "2026-11-23T18:41:07-05:00"
+      "md5": "871e2e9d8412e487c1349d8b7c56f4b3",
+      "modified_at": "2026-11-23T22:11:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -78375,8 +78396,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 3687,
-      "md5": "26feabcd87516200a6a5ccb0ae5f4668",
-      "modified_at": "2026-11-23T18:45:04-05:00"
+      "md5": "642a6cb398762b0d7cae7de7c7d920f4",
+      "modified_at": "2026-11-23T22:15:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -78417,8 +78438,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 453,
-      "md5": "b2dc7e0965288e71bf2bc676193558a9",
-      "modified_at": "2026-11-23T18:49:03-05:00"
+      "md5": "02820146b3db95ed40a35dbe9f3f8bae",
+      "modified_at": "2026-11-23T22:19:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -78585,8 +78606,8 @@
     {
       "path": "/root/mgs-agent/data/finance-readonly-health-state.json",
       "size_bytes": 458,
-      "md5": "3886e1213eb766a89f756fd28d48431b",
-      "modified_at": "2026-11-23T18:34:30-05:00"
+      "md5": "94dc097eb87d2e1086fe57c649ac2242",
+      "modified_at": "2026-11-23T21:34:30-05:00"
     },
     {
       "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
@@ -78669,32 +78690,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "cb450c7f3ef134ea84eccd3144a76e58",
-      "modified_at": "2026-11-23T18:44:01-05:00"
+      "md5": "36ae9af157d3a00c9f93bb5abb26dfbf",
+      "modified_at": "2026-11-23T22:24:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "6bd9619ae68695451c59b1c26a0fab49",
-      "modified_at": "2026-11-23T13:39:26-05:00"
+      "md5": "c607b12448090538288c97b687cf79ba",
+      "modified_at": "2026-11-23T19:43:04-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 83976,
-      "md5": "eb36b1dad67405a870612476abf4c94f",
-      "modified_at": "2026-11-23T18:50:01-05:00"
+      "size_bytes": 84126,
+      "md5": "30a0e91f66b3ca6781b1fa6b060459f8",
+      "modified_at": "2026-11-23T22:25:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 128464,
-      "md5": "a9861a02a7a1987bde86a1d51b13a961",
-      "modified_at": "2026-11-23T18:50:01-05:00"
+      "size_bytes": 128826,
+      "md5": "a28412e602fe517984db43e6e862b3ce",
+      "modified_at": "2026-11-23T22:26:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "5f146b308feb928532abfaee79b3db03",
-      "modified_at": "2026-11-23T18:50:02-05:00"
+      "size_bytes": 357,
+      "md5": "16161a84b48fc56ea9cc339a00110f4d",
+      "modified_at": "2026-11-23T22:26:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -78741,14 +78762,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 1116,
-      "md5": "badd9144700c67a5bca618d3354cd02a",
-      "modified_at": "2026-11-23T14:37:06-05:00"
+      "md5": "93fc46d62954c37668e8eeedbb6ce05a",
+      "modified_at": "2026-11-23T20:37:04-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
-      "size_bytes": 829,
-      "md5": "7ab5e7c223d683ee9a464207e5a328f2",
-      "modified_at": "2026-11-23T18:50:18-05:00"
+      "size_bytes": 830,
+      "md5": "d5f1f856506be719b5b2b63a604c90ef",
+      "modified_at": "2026-11-23T22:25:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -78788,9 +78809,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3802216,
-      "md5": "913a353dd846c63bc759379203a71dfb",
-      "modified_at": "2026-11-23T18:50:33-05:00"
+      "size_bytes": 3806081,
+      "md5": "8fd3aa0740cf181f4abb72e39c4f86cc",
+      "modified_at": "2026-11-23T22:25:35-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -78843,8 +78864,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 103972,
-      "md5": "7daf4b7b537c7a5373ba2bf7b034f6ec",
-      "modified_at": "2026-11-23T18:49:47-05:00"
+      "md5": "ea61967c1f59e2cd9d7f744fe76c2ea4",
+      "modified_at": "2026-11-23T22:25:46-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -78927,8 +78948,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-dr-sla-alert-state.json",
       "size_bytes": 396,
-      "md5": "013c453bc2edc0ae5dd65cbcf43df3ce",
-      "modified_at": "2026-11-23T18:30:48-05:00"
+      "md5": "ea6da2e9c85f287c4f1338e6e1e7347c",
+      "modified_at": "2026-11-23T22:00:48-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
@@ -78939,8 +78960,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 11548,
-      "md5": "baef28d657850edd0c7d0cc0446913ca",
-      "modified_at": "2026-11-23T18:30:26-05:00"
+      "md5": "f33ff396c324d21f20025bfebbdd9654",
+      "modified_at": "2026-11-23T21:31:12-05:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -79287,8 +79308,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1081,
-      "md5": "025a97a5e62df0aab56576fe3ab7728a",
-      "modified_at": "2026-11-23T18:39:02-05:00"
+      "md5": "4579514dae0cabf45ce82503f52b2094",
+      "modified_at": "2026-11-23T21:39:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -79300,7 +79321,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-11-23T18:37:05-05:00"
+      "modified_at": "2026-11-23T22:22:07-05:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -79353,8 +79374,8 @@
     {
       "path": "/root/mgs-agent/data/runcloud-alert-state.json",
       "size_bytes": 24142,
-      "md5": "57fbe6db3c7c07810a01412f3d9a0dae",
-      "modified_at": "2026-11-23T18:04:41-05:00"
+      "md5": "d07a5ed42ee8f8dae2a8e42facfdc1f8",
+      "modified_at": "2026-11-23T22:04:42-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-keitaro-mct-state.json",
@@ -79370,9 +79391,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 1372484,
-      "md5": "411e9a959265c7473c80fe716a67ff83",
-      "modified_at": "2026-11-23T14:00:30-05:00"
+      "size_bytes": 1372705,
+      "md5": "c232e6e58e71f05567bdccfa8b883764",
+      "modified_at": "2026-11-23T21:21:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -79382,9 +79403,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 184198,
-      "md5": "572142c9fda45f1057f553255388455e",
-      "modified_at": "2026-11-23T18:42:10-05:00"
+      "size_bytes": 184472,
+      "md5": "58894a808d45cdc8186f5c4558e73b9f",
+      "modified_at": "2026-11-23T22:12:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -79401,8 +79422,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 1382199,
-      "md5": "c0139b0bd02b3ce13aa57dd7a3ca21cd",
-      "modified_at": "2026-11-23T18:44:17-05:00"
+      "md5": "2537ca413086dc27e2e74a6ff3e7eb66",
+      "modified_at": "2026-11-23T22:14:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -79474,7 +79495,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "3c3e81fe2737cbd76be4180a5f339b93",
-      "modified_at": "2026-11-23T18:51:01-05:00"
+      "modified_at": "2026-11-23T22:26:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -79484,9 +79505,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 19523,
-      "md5": "c9c828e8a4d319010dd815fbc8f8efa1",
-      "modified_at": "2026-11-23T18:24:06-05:00"
+      "size_bytes": 19511,
+      "md5": "0a88822fc2ae9bfa60bd62a223333b55",
+      "modified_at": "2026-11-23T22:24:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -79520,9 +79541,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3684,
-      "md5": "1ee748c66046f781d7a5ce2097b09953",
-      "modified_at": "2026-11-23T18:50:04-05:00"
+      "size_bytes": 3712,
+      "md5": "207ddb245e2a268b8d729e67029d05fd",
+      "modified_at": "2026-11-23T22:25:04-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -79533,8 +79554,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 682,
-      "md5": "d592120764d3a95915776c6e9c22da70",
-      "modified_at": "2026-11-23T14:07:03-05:00"
+      "md5": "af12acb98ecbdfaeba8c2e34bf955a7b",
+      "modified_at": "2026-11-23T20:07:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

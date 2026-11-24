@@ -2903,12 +2903,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1574520470034841752",
-      "next_step": "Administrador disponibilizar Page fonte a integracao corporativa vigente; revalidar Page/tarefas/videos. Reparo pelo agente exige aprovacao critica especifica. Retomar mesmo request via prepare-media, campaign dry-run/execute, QA integral e SB; preservar relogio e inicio original.",
+      "next_step": "Aguardar aviso de Rodolfo, sem alterar Page, BM, permissoes ou credenciais. Apos aviso, revalidar acesso da integracao existente a Page e videos e retomar somente camadas pendentes do mesmo request; preservar IDs, relogio E2E e inicio original, aplicando late_recovery_review caso necessario.",
       "objective": "Duplicar 10x fonte01 Growpowerhub06 G006 com 24 videos/copies literais, USD25 por campanha, COCAP USD0.90, 24nov2026 00h05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/access-diagnostic.json",
-      "state": "waiting_external_page_access. conta/autoridade/fonte confirmadas; cadastro local reconciliado e report-infra relido. page540397952481732 e video1159612673263871 recusam identidade corporativa code10; administrativo le conta mas nao page/tarefas. delegacao ausente nao comprovada. zero campanhas/uploads/reservas/writes de permissao.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/access-diagnostic.json;discord:message:1574626179346858086",
+      "state": "waiting_owner_notice. rodolfo informou na mensagem 1574626179346858086 que a page 540397952481732 nao esta na bm e que resolvera e avisara. declaracao do owner, ainda sem novo readback meta. preservados request, diagnostico e parametros originais; nenhuma nova acao meta neste turno.",
       "thread_id": "1558134489748611163",
-      "updated_at": "2026-11-23T20:28:46+00:00"
+      "updated_at": "2026-11-24T03:22:42+00:00"
     },
     {
       "agent": "ares",
@@ -4794,22 +4794,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Obter autorizacao de Rodolfo para manutencao tecnica separada do consumidor central load_ready_assets usando metadata GET e edge thumbnails ja permitidos, sem ampliar guard. Apos manutencao validada, retomar MESMO request-ready com dry-run e campaign confirm-execute, QA integral, ativacao/readback e cadastro SB. Nao repetir uploads nem criar outro request.",
-      "objective": "Duplicar campanha 03 em 10 campanhas com 25 videos especificos, USD25/dia cada, COCAP USD0.90, inicio 24/11/2026 00:05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/technical-blocker-receipt.json",
-      "state": "media_prestaged_campaign_preflight_blocked. 25/25 midias prontas; grupos 3,2,3,3,2,3,2,2,2,3; origem e complemento autenticados. conta allowed=true. guard local recusa thumbnails como field de dependencia video; metadata get e thumbnails edge separados retornam http200. nenhum writer de campanha iniciado. request-ready, uploads e reservas preservados.",
+      "next_step": "Validar dry-run real, REPORT-INFRA e retomar executor central; exigir QA/ACTIVE/readback integral e cadastro SB.",
+      "objective": "Concluir as 10 duplicacoes com 25 videos, USD25/dia cada, COCAP USD0.90 e inicio 24/11/2026 00:05 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/maintenance/inventory-before.json",
+      "state": "manutencao isolada de leitura de thumbnails concluida; guard intacto. testes vid 10 e runtime 11 ok; img 43 ok e 2 erros iguais no baseline. retomada ordenada por rodolfo 1574624795138588673, mesmo request-ready e reservas.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-23T20:36:09+00:00"
+      "updated_at": "2026-11-24T03:19:22+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-1574524509044613276",
-      "next_step": "Resolver bloqueio externoMeta nosmesmosIDs;GETintegral antesderetomarQA/postprocess/activate_verified central;semrecriar/trocarmidia/forcarativacao. Entregar parcialprecisonestaorigem;nenhumamonitorizacaoautomatica adicionalcriada.",
-      "objective": "Nove clones186 Mavroa06G006,18videosES,USD55/camp,COCAP0.90,24nov2026 00h15EST",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/partial-verified-receipt.json",
-      "state": "partial_external_meta_issues:250-258criadas,9conjuntos/18ads;9campanhaspaused;usd495/dia configurados;cap90;inicio00h15est preservado;ids iguais aposinterrupcao;3qa renderizadas;readback16h18est9ads com1487083forcerunstatus nas250/251/252/253/257;qa/posprocessamento/ativacao/sb pendentes. coordenacaoantiga isolada sobaprovacao1574527264819777677;0writesmeta nasantigas;nicolas assume ativacaomanual00h.",
+      "next_step": "Nenhum. Não retomar/recriar/ativar/corrigir este pedido por wakes antigos; novas ações somente por pedido explícito.",
+      "objective": "Encerrar o pedido das campanhas 250–258 por decisão de Rodolfo após ação manual de Nicolas",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574524509044613276/operator-closure-1574624930635583530.json",
+      "state": "closed_by_operator_manual_resolution: rodolfo confirmou ação manual de nicolas na mensagem1574624930635583530, relida na origem. caso encerrado; não equivale a qa automatizado ou comprovação de status meta. histórico preservado; zero writes meta/drive neste encerramento. job observado foreground_owned,dispatch_owner foreground,attempts0,notificationnull.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-23T21:19:36+00:00"
+      "updated_at": "2026-11-24T03:18:16+00:00"
     },
     {
       "agent": "ares",
@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Do not repeat reboot. Inspect /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/dispatch-blocked.json and original handshake/attempt; recover only the exact failed gate. Existing owner confirmation remains scoped; other hosts unchanged.",
+      "next_step": "Retry1574625446883229757 queued: external mgs-vps-maint-1574252891898908684-retry-1574625446883229757.service owns one reboot after exact handoff/current source session idle/all agents idle. Busy agents keep durable waiting consumer, never forced. Validator mgs-vps-maint-1574252891898908684-validate.service and closure mgs-vps-maint-1574252891898908684-close.service own postboot verification/reporting; consume /root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/final-result.json after exit before any foreground closure. Existing authorization1574551205768732753 unchanged; other hosts/dashboard pending.",
       "objective": "Manutenção cinco hosts + Node/dashboard e reboots coordenados; preservar fases independentes e gates críticos",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-preparation/postboot-result.json",
-      "state": "hostinger_reboot_dispatch_blocked",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/reboot-retry-1574625446883229757/postboot-result.json",
+      "state": "hostinger_reboot_scheduled",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-23T23:01:13+00:00"
+      "updated_at": "2026-11-24T03:24:28+00:00"
     },
     {
       "agent": "zeus",
@@ -12308,5 +12308,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T02:37:21+00:00"
+  "updated_at": "2026-11-24T03:24:28+00:00"
 }

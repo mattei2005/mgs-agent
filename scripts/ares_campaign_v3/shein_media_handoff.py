@@ -126,11 +126,14 @@ def load_ready_assets(request, profile, base, common, token):
             rows.append({**media,'language':row['language'],'canonical_filename':row['canonical_filename'],'asset_drive_id':row['asset_drive_id'],
                          'drive_md5':file.get('md5Checksum'),'ready_parent_id':file['parents'][0],'testing_parent_id':testing[0]['id'],'manager_folder_preserved':bool(manager)})
             continue
-        h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status,thumbnails'})
+        h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status'})
         if h != 200 or not ready_status(video) or ref['asset_id'] not in str(video.get('title')) or ref['checksum'][:10] not in str(video.get('title')):
             raise ValueError('pre-staged video readiness/lineage title mismatch')
-        thumbs = video.get('thumbnails', {}).get('data') or []
-        if not thumbs:
+        # Technical dependencies expose thumbnails through the scoped edge,
+        # not as an expanded metadata field. Preserve the existing scope guard.
+        th, thumbnails, _ = common.graph_get(media['vertical_video_id'] + '/thumbnails', token, {'fields': 'id,uri,width,height'})
+        thumbs = thumbnails.get('data') or []
+        if th != 200 or not thumbs or not thumbs[0].get('uri'):
             raise ValueError('pre-staged video thumbnail unavailable')
         rows.append({**media, 'language': row['language'], 'canonical_filename': row['canonical_filename'], 'asset_drive_id': row['asset_drive_id'],
                      'thumbnail_url': thumbs[0]['uri'], 'drive_md5': file.get('md5Checksum'), 'ready_parent_id': file['parents'][0], 'testing_parent_id': testing[0]['id'], 'manager_folder_preserved': bool(manager)})
