@@ -70219,7 +70219,7 @@
       "id": "VPS-MAINT-1574252891898908684",
       "agent": "zeus",
       "type": "controlled_multi_host_maintenance",
-      "status": "inc02_closed_remaining_phases_pending",
+      "status": "remaining_hosts_prepared_awaiting_exact_critical_confirmation",
       "source_message_id": "1574252891898908684",
       "source_thread_id": "1574249078584377544",
       "report": "reports/vps-maint-1574252891898908684-hostinger-reboot.md",
@@ -70287,18 +70287,32 @@
         },
         {
           "target": "MatteiInc03JBF packages/reboot",
-          "state": "pending_preparation_and_critical_confirmation"
+          "state": "prepared_awaiting_exact_critical_confirmation",
+          "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+          "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
+          "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+          "install_executed": false,
+          "reboot_executed": false,
+          "reboot_scheduled": false
         },
         {
           "target": "Hestia packages/reboot",
-          "state": "pending_preparation_and_critical_confirmation"
+          "state": "prepared_awaiting_exact_critical_confirmation",
+          "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+          "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
+          "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+          "install_executed": false,
+          "reboot_executed": false,
+          "reboot_scheduled": false
         },
         {
           "target": "dashboard Node22.23.5",
-          "state": "pending_Astra_route_and_separate_runtime_gate"
+          "state": "blocked_mandatory_Astra_model_route",
+          "source": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+          "next_step": "Execute only under canonical Astra route or explicit owner exception; no finance/application writes under currentSol."
         }
       ],
-      "updated_at": "2026-11-24T18:30:30.754752+00:00",
+      "updated_at": "2026-11-24T20:09:37.176548+00:00",
       "authorization_message_id": "1574470534035542151",
       "disclosed_gate_message_id": "1574255493113708698",
       "validation": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-hostinger/post-package-validation.json",
@@ -70306,7 +70320,7 @@
       "checks_passed": 30,
       "next_critical_manifest": null,
       "next_critical_manifest_sha256": null,
-      "next_gate": "Inc02 sistema encerrado com três ressalvas kernel aceitas; nenhuma decisão Inc02 pendente. Não repetir instalação/reboot nem alterar BIOS/drivers. Inc03JBF/Hestia/Node permanecem fases separadas com gates próprios.",
+      "next_gate": "Preparação Inc03/Hestia concluída; aguardar confirmação crítica consolidada do manifesto f89361f1eaae:41upgrades+2novos/0remoções, pausaMariaDBInc03,rotinas nativas Hestia/Roundcube e reboot serial somente desses2hosts. Sem execução/agendamento. Node dashboard bloqueado pela rota Astra; preservar fases encerradas.",
       "report_infra": {
         "at": "2026-11-23T17:16:12.266053+00:00",
         "message_id": "1574473349298520138",
@@ -70665,7 +70679,7 @@
         "report": "reports/vps-maint-1574252891898908684-inc02-completion.md",
         "updated_at": "2026-11-24T13:37:54.397219+00:00"
       },
-      "latest_phase_report": "reports/vps-maint-inc02-reboot-1574783533417894011-owner-closure.md",
+      "latest_phase_report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
       "inc02_reboot_authorization_message_id": "1574783533417894011",
       "inc02_reboot_controller": {
         "validator_unit": "mgs-inc02-reboot-1574783533417894011-validate.service",
@@ -70787,7 +70801,17 @@
         "runcloud_compatibility_readback": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/reboot-1574783533417894011/runcloud-compatibility-readback.json"
       },
       "completed_inc02_package_manifest": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/critical-plan-v2.json",
-      "owner_acceptance_message_id": "1574853646628159610"
+      "owner_acceptance_message_id": "1574853646628159610",
+      "preparation_request_message_id": "1574876451726041182",
+      "remaining_preparation": {
+        "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
+        "sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+        "evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182",
+        "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+        "state": "prepared_not_executed",
+        "model_route_residual": "dashboard Node requires Astra; current Sol has no exception",
+        "production_mutation": false
+      }
     },
     {
       "id": "meta-manual-payments-cron-20261123T0802",
@@ -71417,6 +71441,152 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_transport_restricted_no_manual_messages"
+    },
+    {
+      "id": "VPS-MAINT-1574252891898908684-INC03",
+      "agent": "zeus",
+      "type": "vps_maintenance_preparation",
+      "status": "prepared_awaiting_exact_critical_confirmation",
+      "source_message_id": "1574876451726041182",
+      "source_thread_id": "1574249078584377544",
+      "host": "MatteiInc03",
+      "ip": "46.4.95.117",
+      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
+      "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+      "local_evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Inc03",
+      "remote_recovery_root": "/root/mgs-maintenance/1574252891898908684-inc03",
+      "upgrades": 18,
+      "new_packages": 0,
+      "removals": 0,
+      "backup_preparation": {
+        "at": "2026-11-24T20:00:47.905581+00:00",
+        "overall": true,
+        "host": "MatteiInc03",
+        "upgrades": 18,
+        "new_packages": 0,
+        "removals": 0,
+        "rollback_packages": 18,
+        "original_repository_debs": 14,
+        "reconstructed_payloads": 4,
+        "candidate_debs": 18,
+        "configuration_backup_bytes": 7038414,
+        "http": {
+          "yolokfx.com/public": {
+            "rc": 0,
+            "status": "200"
+          },
+          "yolokfx.com/origin": {
+            "rc": 0,
+            "status": "200"
+          },
+          "vizioid.com/public": {
+            "rc": 0,
+            "status": "200"
+          },
+          "vizioid.com/origin": {
+            "rc": 0,
+            "status": "200"
+          }
+        },
+        "remote_root": "/root/mgs-maintenance/1574252891898908684-inc03",
+        "db_stop_performed": false,
+        "package_install_performed": false,
+        "reboot_performed": false,
+        "configuration_mutation_performed": false
+      },
+      "independent_readback": {
+        "passed": 12,
+        "total": 12,
+        "path": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Inc03/independent-preconfirmation-readback.json"
+      },
+      "production_packages_changed": false,
+      "production_service_stop": false,
+      "reboot_executed": false,
+      "reboot_scheduled": false,
+      "next_gate": "Exact Critical Subset confirmation of frozen lot/native effects/database protection and serial reboot",
+      "updated_at": "2026-11-24T20:09:37.176548+00:00"
+    },
+    {
+      "id": "VPS-MAINT-1574252891898908684-HESTIA",
+      "agent": "zeus",
+      "type": "vps_maintenance_preparation",
+      "status": "prepared_awaiting_exact_critical_confirmation",
+      "source_message_id": "1574876451726041182",
+      "source_thread_id": "1574249078584377544",
+      "host": "server.boostingecon.com",
+      "ip": "188.34.183.6",
+      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "manifest": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/critical-plan.json",
+      "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+      "local_evidence_root": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Hestia",
+      "remote_recovery_root": "/root/mgs-maintenance/1574252891898908684-hestia",
+      "upgrades": 23,
+      "new_packages": 2,
+      "removals": 0,
+      "backup_preparation": {
+        "at": "2026-11-24T20:01:26.913481+00:00",
+        "overall": true,
+        "host": "server.boostingecon.com",
+        "upgrades": 23,
+        "new_packages": 2,
+        "removals": 0,
+        "rollback_packages": 23,
+        "original_repository_debs": 19,
+        "reconstructed_payloads": 4,
+        "candidate_debs": 25,
+        "configuration_backup_bytes": 5654054,
+        "http": {
+          "mail.digitaltrustadx.com/public": {
+            "rc": 0,
+            "status": "200"
+          },
+          "mail.digitaltrustadx.com/origin": {
+            "rc": 0,
+            "status": "200"
+          }
+        },
+        "remote_root": "/root/mgs-maintenance/1574252891898908684-hestia",
+        "db_stop_performed": false,
+        "package_install_performed": false,
+        "reboot_performed": false,
+        "configuration_mutation_performed": false
+      },
+      "independent_readback": {
+        "passed": 15,
+        "total": 15,
+        "path": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/Hestia/independent-preconfirmation-readback.json"
+      },
+      "production_packages_changed": false,
+      "production_service_stop": false,
+      "reboot_executed": false,
+      "reboot_scheduled": false,
+      "next_gate": "Exact Critical Subset confirmation of frozen lot/native effects/database protection and serial reboot",
+      "updated_at": "2026-11-24T20:09:37.176548+00:00"
+    },
+    {
+      "id": "VPS-REMAINING-PREPARATION-1574876451726041182",
+      "agent": "zeus",
+      "type": "protected_preparation_evidence_and_skill_learning",
+      "status": "validated_preparation_only",
+      "source_message_id": "1574876451726041182",
+      "source_thread_id": "1574249078584377544",
+      "path": "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182",
+      "owned_scripts": [
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/prepare_remaining.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/freeze_plan.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/independent_preconfirmation.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/govern_preparation.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/independent-preconfirmation-payload.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/fleet_discovery.py",
+        "/root/.hermes/secure-backups/vps-maintenance/remaining-1574876451726041182/discovery-payload.py"
+      ],
+      "skill_changed": "Zeus hosting-control-panel-mail/SKILL.md: Hestia native-upgrade scope expansion and actual origin bind predicates",
+      "model_route": "dashboard remains Astra-only",
+      "report": "reports/vps-maint-remaining-1574876451726041182-preparation.md",
+      "manifest_sha256": "f89361f1eaaebefd0230cd2c0dd9c3713f73616aeec55aa7f34311e8e2f4f651",
+      "no_production_install_stop_reboot": true,
+      "updated_at": "2026-11-24T20:09:37.176548+00:00"
     }
   ],
   "profile_skill_references": [

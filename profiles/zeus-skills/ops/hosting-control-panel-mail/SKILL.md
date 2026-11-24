@@ -27,6 +27,7 @@ Use this skill when Rodolfo asks to fix, enable, audit, or explain access to e-m
   - user-requested service/config/package changes can proceed after explicit approval;
   - critical subset needs double-confirm, especially `/etc`, `/usr`, package installs, DB user/password creation, firewall/SSH, or deletion.
 - Before touching configs, create timestamped backups under `/root/zeus-<topic>-<timestamp>/` or equivalent.
+- Before confirming a Hestia package upgrade, inspect the downloaded candidate's maintainer scripts, `func/upgrade.sh`, version-specific migration and `upgrade.conf`; the APT package map alone does not describe its production effects. Freeze live feature applicability without exposing secret values: native routines can also update Roundcube/schema/Composer dependencies, rewrite Exim or unattended-upgrades configuration, narrow database grants, rotate phpMyAdmin SSO keys or reinstall components. Protect any unowned webmail/vendor files and restore-test the Roundcube database in isolation before its applicable upgrade. Distinguish absent SSO/no matching grants from permission to rotate credentials; changed applicability requires a new gate. Derive origin probes from the actual Nginx listening address instead of assuming Hestia binds HTTPS on 127.0.0.1; a failed loopback probe is not a public webmail outage.
 - Do not use `curl -k` as proof of public TLS health. For final validation, use certificate-verifying `curl` against the public URL.
 
 ## Browser-only panel inspection
