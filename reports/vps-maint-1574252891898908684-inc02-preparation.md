@@ -1,5 +1,7 @@
 # Inc02 — lote preparado, confirmação crítica própria pendente
 
+**Gate histórico supersedido:** Rodolfo confirmou o lote19 em `1574688273131900969`, mas o pré-check anterior a qualquer instalação/parada detectou3pacotes já atualizados pelo produtor nativo às06:33UTC. A aprovação está recebida e não executada. O gate ativo é o novo lote16 em [escopo atualizado](vps-maint-1574252891898908684-inc02-scope-refresh.md), manifesto `6a2fdfef8eaf78e61d74adea865e657ff458d98ee65d0f0879479caf888e41b5`, aguardando confirmação por alteração de escopo. O restante deste documento é a preparação histórica original, preservada.
+
 ## Continuidade e autoridade
 
 Rodolfo1574663015410704418 aceitou encerrar a fase de sistema Inc01 com as três ressalvas kernel apresentadas em1574659555877716081 e mandou continuar. O encerramento limitado está em `vps-maint-inc01-reboot-1574650660572504115-owner-closure.md`; o journal estrito não virou PASS nem se alterou BIOS/drivers. A mensagem autoriza preparar o próximo host, não transfere a aprovação crítica de instalação/reboot do Inc01.

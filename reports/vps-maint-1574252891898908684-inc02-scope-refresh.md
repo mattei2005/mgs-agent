@@ -32,7 +32,7 @@ Estado: `prepared_remaining_16_awaiting_changed_scope_critical_confirmation`.
 - Simulação literal dos16 com zero novos/remoções. Sem dpkg audit, holds ou failed units.
 -16retornos verificáveis:13DEBs originais e3reconstruídos;16candidatos. Identidade e fluxo completo dos32payloads relidos; hashes verificados.
 - Novo arquivo de configurações/dpkg capturado do estado atual e validado (`configuration-and-dpkg-v2.tar.gz`,5980578bytes), sem sobrescrever o anterior.
-- Novo `rollback-and-candidates-v2.sha256` cobre a configuração atual e os32DEBs; readback independente a concluir antes do gate final.
+- Novo `rollback-and-candidates-v2.sha256` cobre a configuração atual e os32DEBs; readback SSH independente passou e reconfirmou os16baselines,3alvos nativos,9PIDs de serviços preservados e ausência das fronteiras de execução.
 - MariaDB,Nginx,Apache,PHP83,RunCloud,cron,SSH,Fail2ban,firewalld ativos. Tabela MEMORY de aplicação continua com contagem real zero.
 - GameZoneAd e CarCreditAd: novo GET público HTTP200. FusoEtc/UTC preservado.
 - Nenhuma fronteira `apply-start`, `cold-backup-start` ou `isolated-restore-start` existe. Não há executor produtivo desta fase aguardando para disparar automaticamente.

@@ -2903,12 +2903,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1574520470034841752",
-      "next_step": "Pedir somente decisao sobre14ads rejeitados:solicitar revisao Meta ou materiais corrigidos.Nao forcar ativacao/recriar como contorno;preservar10adsACTIVE/IDs/seals/clock/SBsucesso sem repetir saves. Iniciar eventual review pelo mesmoescopo com confirmação da plataforma. Avaliacao de possivel rotacao de credenciais expostas exige gate proprio do owner.",
+      "next_step": "Nicolas assume acompanhamento dos14anuncios pendentes. Ares interrompe tentativas de revisao/atendimento e nao retoma automaticamente. Somente novo pedido explicito autoriza proxima acao,apos reconciliar estado e eventuais alteracoes humanas.",
       "objective": "Concluir pedido Nicolas:10clonesGrowpowerhub06,24videos/gruposcopyexpressos,USD25cada,COCAP0.90,inicio24nov00h05ET",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/final-receipt.json",
-      "state": "created_activated_partial_meta_rejections_review_pending. criadas10campanhas003-012/24ads,10conjuntos; ids iguais checkpoint e qa10/10. fresh readback 2026-11-24t05:35:54.270180+00:00:14ads paused/with_issues2490468 nascampanhas003,004,005,007,008,009;10adsactive nascampanhas006,010,011,012. usd25/campanha total250;cocap0.90;eua;inicio configurado24nov00h05et,ativacao posterior,sem prova de inicio pontual. sb10utm_campaign+10utm_adgrouphttp201/gaminsertok,sem leituraindependente.24linhagensreusadas,zeroreadyconsumido,0readyunicoliberado no inventario. recibo saneado;incidente de saida sensivel em diagnostico registrado semvalores.",
+      "state": "human_takeover_nicolas_no_automatic_ares_resume. rodolfo1574691359204311071 recusou abertura de suporte e informou que nicolas1055570806945620030 assume daqui. handoff limitado ao saldo de14ads/revisao;ares nao enviou revisao. preservadas10campanhas24ads/qa/parametros/ids e cadastrossbanteriores;nenhuma nova alteracao meta ou credencial. dispatcher anterior jaforeground_complete;sem nova rotina.",
       "thread_id": "1558134489748611163",
-      "updated_at": "2026-11-24T05:36:39+00:00"
+      "updated_at": "2026-11-24T07:42:00+00:00"
     },
     {
       "agent": "ares",
@@ -5506,12 +5506,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684",
-      "next_step": "Inc01:aceite1574663015410704418 já aplicado,sem BIOS/drivers,sem pendência de aceite. Inc02:manifest5554f1e992fa3dc7;19upgrades/0new/0remove,rollback19,candidatos19,16checks PASS. Confirmar pausa MariaDB p/cópia fria completa/restoreisolado antes de instalar;sem reboot,sem PHP/NGINX,Node/Hermes,SSH/firewall/credenciais ou outros hosts. Não transferir aprovações de host anterior.",
-      "objective": "Inc01 encerrado com3ressalvas aceitas; Inc02 lote19 preparado aguardando confirmação crítica própria",
-      "source": "reports/vps-maint-1574252891898908684-inc02-preparation.md",
-      "state": "inc02_prepared_awaiting_exact_critical_confirmation",
+      "next_step": "Inc01 encerrado com ressalvas aceitas. Inc02:confirmar novo lote16(MariaDB7,Galera1,GLib5,distro-info2,xfsprogs1),backup frio/restoreisolado antes de instalar,sem reboot. Native unattended atualizou tzdata/libssh/OAuthlib às06:33UTC antes do aceite07:29. Nada instalado/parado por Zeus. Gate19 supersedido,aprovação1574688273131900969preservada,manifestv2 6a2fdfef8eaf78e6. Sem executor de produção pendente.",
+      "objective": "Inc02 restante16 após3pacotes nativos já atualizados; preservar aceite19 recebido não executado; sem reboot",
+      "source": "reports/vps-maint-1574252891898908684-inc02-scope-refresh.md",
+      "state": "inc02_remaining16_awaiting_changed_scope_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T06:05:36+00:00"
+      "updated_at": "2026-11-24T07:40:45+00:00"
     },
     {
       "agent": "zeus",
@@ -5526,12 +5526,12 @@
     {
       "agent": "zeus",
       "id": "VPS-MAINT-1574252891898908684-INC02",
-      "next_step": "Reconciliar fronteiras/executor; validar drift e backup; aplicar somente19pacotes; validar; reboot separado",
-      "objective": "Executar lote19 Inc02 confirmado1574688273131900969 com backup frio e restore antes da instalação; sem reboot",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/1574252891898908684-inc02/authorization-1574688273131900969.json",
-      "state": "approved_reconciling_live_preflight",
+      "next_step": "Inc01 encerrado com ressalvas aceitas. Inc02:confirmar novo lote16(MariaDB7,Galera1,GLib5,distro-info2,xfsprogs1),backup frio/restoreisolado antes de instalar,sem reboot. Native unattended atualizou tzdata/libssh/OAuthlib às06:33UTC antes do aceite07:29. Nada instalado/parado por Zeus. Gate19 supersedido,aprovação1574688273131900969preservada,manifestv2 6a2fdfef8eaf78e6. Sem executor de produção pendente.",
+      "objective": "Inc02 restante16 após3pacotes nativos já atualizados; preservar aceite19 recebido não executado; sem reboot",
+      "source": "reports/vps-maint-1574252891898908684-inc02-scope-refresh.md",
+      "state": "inc02_remaining16_awaiting_changed_scope_critical_confirmation",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T07:32:40+00:00"
+      "updated_at": "2026-11-24T07:40:45+00:00"
     },
     {
       "agent": "zeus",
@@ -12348,5 +12348,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T07:32:40+00:00"
+  "updated_at": "2026-11-24T07:42:00+00:00"
 }

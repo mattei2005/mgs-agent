@@ -16,7 +16,9 @@ Sob a lease PC1, reconcilie a disponibilidade do AdsPower e a sessão permitida.
 
 Congele os ad IDs reprovados do pedido e seus campaign IDs. Em Available for review, filtre SOMENTE as campanhas afetadas: esse seletor é multiseleção. Confira a quantidade filtrada contra os IDs da API antes de Select All; o total global da conta pode conter reprovações antigas alheias. Preserve screenshots/árvores e intent antes de Request review → Submit. O modal avisa que os ads podem começar conforme o agendamento anterior: confira a cobertura da autoridade antes de confirmar. Não envie novamente após resposta incerta ou processamento em curso.
 
-Exija confirmação real `We've received your request` e faça leitura posterior da conta/IDs. O contador In review pode continuar zero enquanto os anúncios saem de Available for review; isso não autoriza novo envio nem prova aprovação/rejeição. Registre a confirmação recebida e a limitação atual sem inventar protocolo ou status. A decisão posterior da Meta permanece externa. Troca de materiais depende do pedido específico do gestor, não da autorização de apelo.
+Exija confirmação real `We've received your request` e faça leitura posterior da conta/IDs. Se a API apontar anúncios com `2490468`, mas a conta exata na interface continuar com `Available for review = 0` após conferir os filtros, registre `review_submitted=false`: a divergência não comprova revisão prévia, aprovação ou inelegibilidade permanente. Não clique em envio desabilitado, invente apelo por API ou recrie anúncios; uma abertura de atendimento é outra ação e depende da autorização específica correspondente.
+
+O contador In review pode continuar zero enquanto os anúncios saem de Available for review; isso não autoriza novo envio nem prova aprovação/rejeição. Registre a confirmação recebida e a limitação atual sem inventar protocolo ou status. A decisão posterior da Meta permanece externa. Troca de materiais depende do pedido específico do gestor, não da autorização de apelo.
 
 ## Leitura e input remotos
 
