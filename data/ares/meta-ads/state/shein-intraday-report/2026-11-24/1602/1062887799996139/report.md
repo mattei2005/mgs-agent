@@ -3,9 +3,9 @@
 **⏱️ ATRASO GAM/SB: 3h 00min**
 Financeiro: investimento e receitas da mesma fonte SB, com ajuste de calendário já aplicado; sem novo deslocamento de horas.
 Financeiro: 24/11 16:03 EST. Bid: Meta 24/11 16:03 EST.
-B.U.% operacional: gasto bruto Meta do dia ÷ orçamento diário vigente; não usa o Gasto financeiro SB. Orçamento: 24/11 16:19 EST.
+B.U.% operacional: gasto bruto Meta do dia ÷ orçamento diário vigente; não usa o Gasto financeiro SB. Orçamento: 24/11 16:32 EST.
 RPS: coluna da dash SB, consultada em 24/11 16:06 EST.
-Status dos blocos: Meta 24/11 16:19 EST.
+Status dos blocos: Meta 24/11 16:32 EST.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **0,00** · Rev **n/d** · Saldo **n/d** · ROI **n/d** · ROI E. **n/d**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
