@@ -1,7 +1,7 @@
 {
   "operation": "998e2b8cf7b40407b62aff50",
   "at": "2026-11-24T03:39:57.187336+00:00",
-  "stage": "business_already_committed_observer_repair_pending",
+  "stage": "business_and_recovery_report_GET_verified_independent_supervisor_pending",
   "job_id": "3ff8bd8ca40d",
   "slot": "2026-11-23T22:23:00-05:00",
   "last_run_at": "2026-11-23T22:30:36.778275-05:00",
@@ -131,7 +131,9 @@
     "tier_folder_id": "1SSClDHGxRQY3y2_FJ5I9OiiHD-HXpo2V"
   },
   "business_GET_verified": true,
-  "GET_verified": false,
+  "GET_verified": true,
   "diagnosis": "Canonical backup_success committed at 03:30:35.865Z; adopted worker -15 at 03:30:36.778Z. Backup and ACK complete. No upload, finalize, new snapshot or scheduler rewrite needed.",
-  "next_step": "Read-only exact-occurrence observer, tests, governance report; original supervisor final verification and delivery"
+  "next_step": "Original supervisor natural tick: read-only observation and closure; no business retry",
+  "report_infra_message_id": "1574631378925125633",
+  "tests_passed": 35
 }

@@ -1190,6 +1190,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "dr-recovery-998e2b8cf7b40407b62aff50",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "job_id": "3ff8bd8ca40d",
+      "slot": "2026-11-23T22:23:00-05:00",
+      "status": "native_backup_already_committed_observer_validated_supervisor_pending",
+      "remote_file_id": "1iZiCFlJ9qsHOi5f3D5FhifjQACUR_6vI",
+      "ack_id": "1rvauyzSGMecwqLBB_hestYbI5Tb-G5Ni",
+      "evidence": "reports/automation-recovery-998e2b8cf7b40407b62aff50/independent-readback.json",
+      "paths": [
+        "scripts/mgs_dr_recovery_continuity.py",
+        "tests/test_dr_committed_observation.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md"
+      ],
+      "validation": "35 tests PASS; live observer verified=true and isolated queue completed_validated; exact canonical PASS, success event, backup/ACK GET and REPORT-INFRA 1574631378925125633 GET; no business replay, deletion, cron or gateway change"
+    },
+    {
       "id": "dr-recovery-4d9d9e58fa760d6a46dd7f29",
       "agent": "zeus",
       "authority_message_id": "1569193434189668453",
@@ -74642,8 +74659,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_dr_recovery_continuity.py",
-      "size_bytes": 12155,
-      "modified_at": "2026-11-23T16:36:43-05:00"
+      "size_bytes": 14555,
+      "modified_at": "2026-11-23T22:44:26-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_dtr_continuity.py",

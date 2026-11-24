@@ -2903,12 +2903,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1574520470034841752",
-      "next_step": "Aguardar aviso de Rodolfo, sem alterar Page, BM, permissoes ou credenciais. Apos aviso, revalidar acesso da integracao existente a Page e videos e retomar somente camadas pendentes do mesmo request; preservar IDs, relogio E2E e inicio original, aplicando late_recovery_review caso necessario.",
+      "next_step": "Continuacao exclusivamente pelo consumidor canonico da fila quando predecessor concluir. Nao transferir reservas, nao tocar outra conta/thread, nao duplicar writer/cron nem comunicar fila rotineira. Reusar request/parametros/relogio, prepare-media, campaign dry-run/execute, QA integral, ativacao e cadastro SB. Conferir data futura no momento de admissao sem reescrever selos.",
       "objective": "Duplicar 10x fonte01 Growpowerhub06 G006 com 24 videos/copies literais, USD25 por campanha, COCAP USD0.90, 24nov2026 00h05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/access-diagnostic.json;discord:message:1574626179346858086",
-      "state": "waiting_owner_notice. rodolfo informou na mensagem 1574626179346858086 que a page 540397952481732 nao esta na bm e que resolvera e avisara. declaracao do owner, ainda sem novo readback meta. preservados request, diagnostico e parametros originais; nenhuma nova acao meta neste turno.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574520470034841752/page-delegation-1574631156467499100.json;data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1574520470034841752.json",
+      "state": "page_delegation_repaired_verified. aprovacao exata rodolfo1574631156467499100; post200 e tarefas advertise+analyze relidas, demais atribuicoes preservadas. get corporativo page offers hub e video fonte http200/ready. prepare-media persistiu mesmo request na fila canonica waiting, dependencia shein-1574521189035151514 recovery_pending; servico consumidor ativo. nenhum write de campanha/upload neste pedido ainda.",
       "thread_id": "1558134489748611163",
-      "updated_at": "2026-11-24T03:22:42+00:00"
+      "updated_at": "2026-11-24T03:44:32+00:00"
     },
     {
       "agent": "ares",
@@ -4794,12 +4794,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Aguardar decisao material do pais das copias; se BR, regularizacao exata do anunciante verificado por rota suportada/autorizada. Nao alterar fonte/pais por inferencia. Depois retomar mesmos IDs pelo core, QA/ativacao/readback e cadastro SB.",
-      "objective": "Concluir 10 duplicacoes da fonte 003 com 25 videos, USD25/dia cada, COCAP USD0.90, inicio 24/11/2026 00:05 America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/maintenance/regional-compliance-blocker.json",
-      "state": "miniaturas corrigidas e dry-run real ok. execucao criou somente 2 shells paused, zero conjuntos/anuncios por readback. meta bloqueia adset_copy 100/3858634: anunciante verificado ausente. fonte 003 segmenta br, nao us; fonte e 4 conjuntos da conta sem identidade regional exposta. pedido nao concluido; preservar request/ids/reservas/manifest, sem retry identico.",
+      "next_step": "Dry-run e retomada central mesmos request e shells; QA/ativacao/readback e cadastro SB. Revisar posteriormente leitura indevida de helper CPV informada em 1574632033123041381.",
+      "objective": "Concluir 10 clones Nicolas com 25 videos e corrigir 001/002/003 para EUA por 1574631515386552413",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/country-amendment-1574631515386552413/source-country-amendment.json",
+      "state": "tres originais em us por post/get. fonte 003 snapshot atualizado somente geo, selos/ids/horario preservados. 001 perdeu apenas flags opcionais age/gender na normalizacao meta; age_range e brand safety preservados no repair.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-24T03:29:35+00:00"
+      "updated_at": "2026-11-24T03:47:31+00:00"
     },
     {
       "agent": "ares",
@@ -5722,6 +5722,16 @@
       "state": "auditoria_concluida_com_residuais:71jobshermes18ativos24pausados29concluidos;60rootcrons18timers;baselinenov4 nenhum recorrente ativo removido/pausado inesperadamente;monitor corrigido19testes e recibosshein24get;guard733pass;digitaltrust400parcialpc1/2faaberto;dtralvo42paginasrecuperado,relatoriointegralnaoreexecutado;report1569188573238927391getok",
       "thread_id": "1569185140502954077",
       "updated_at": "2026-11-09T03:15:53+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-AUTOMATION-RECOVERY-998e2b8cf7b40407b62aff50",
+      "next_step": "35 testes PASS; backup/ACK e REPORT-INFRA 1574631378925125633 GET validados; observador live OK e fila isolada completed_validated. Apenas supervisor:4688/consumer natural deve verificar e fechar fila produtiva e entregar na origem. Nenhum upload/finalize pendente.",
+      "objective": "Reconciliar o mesmo backup horario 22:23 de 23/11 sem replay",
+      "source": "reports/automation-recovery-998e2b8cf7b40407b62aff50/live-observation.json",
+      "state": "verifying",
+      "thread_id": "1527004682382479380",
+      "updated_at": "2026-11-24T03:45:15+00:00"
     },
     {
       "agent": "zeus",
@@ -12308,5 +12318,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T03:33:25+00:00"
+  "updated_at": "2026-11-24T03:47:31+00:00"
 }

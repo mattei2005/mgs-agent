@@ -1,0 +1,42 @@
+{
+  "operation": "998e2b8cf7b40407b62aff50",
+  "at": "2026-11-24T03:45:44.848540+00:00",
+  "changed_files_sha256": {
+    "scripts/mgs_dr_recovery_continuity.py": "075b492850d5f4c41af2b6a3a04ecf94d002812ab111f393d2d1932648acd885",
+    "tests/test_dr_committed_observation.py": "b768a4df53566af849a56ece1e584672df4eb91bbe36c8c70104ff588d274eeb",
+    "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md": "4c6b5f415c7a5e5dca9c032bf0942ad2cc17484a85617ce56354a80925bdc69a",
+    "profiles/zeus-skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md": "4c6b5f415c7a5e5dca9c032bf0942ad2cc17484a85617ce56354a80925bdc69a"
+  },
+  "tests_passed": 35,
+  "inventory_readback": {
+    "id": "dr-recovery-998e2b8cf7b40407b62aff50",
+    "agent": "zeus",
+    "authority_message_id": "1569193434189668453",
+    "job_id": "3ff8bd8ca40d",
+    "slot": "2026-11-23T22:23:00-05:00",
+    "status": "native_backup_already_committed_observer_validated_supervisor_pending",
+    "remote_file_id": "1iZiCFlJ9qsHOi5f3D5FhifjQACUR_6vI",
+    "ack_id": "1rvauyzSGMecwqLBB_hestYbI5Tb-G5Ni",
+    "evidence": "reports/automation-recovery-998e2b8cf7b40407b62aff50/independent-readback.json",
+    "paths": [
+      "scripts/mgs_dr_recovery_continuity.py",
+      "tests/test_dr_committed_observation.py",
+      "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/dr-resumable-upload-recovery.md"
+    ],
+    "validation": "35 tests PASS; live observer verified=true and isolated queue completed_validated; exact canonical PASS, success event, backup/ACK GET and REPORT-INFRA 1574631378925125633 GET; no business replay, deletion, cron or gateway change"
+  },
+  "checkpoint_readback": {
+    "id": "ZEUS-AUTOMATION-RECOVERY-998e2b8cf7b40407b62aff50",
+    "state": "verifying",
+    "next_step": "35 testes PASS; backup/ACK e REPORT-INFRA 1574631378925125633 GET validados; observador live OK e fila isolada completed_validated. Apenas supervisor:4688/consumer natural deve verificar e fechar fila produtiva e entregar na origem. Nenhum upload/finalize pendente."
+  },
+  "queue_readback": {
+    "key": "998e2b8cf7b40407b62aff50",
+    "state": "running",
+    "owner": "supervisor:4688"
+  },
+  "business_stage": "already_completed_original_snapshot_backup_and_ACK_GET_verified",
+  "remaining_stage": "original_supervisor_independent_verification_and_source_delivery",
+  "report_infra_message_id": "1574631378925125633",
+  "report_GET_verified": true
+}

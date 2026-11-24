@@ -58,6 +58,11 @@ def drive_reader():
 
 
 def observation(job, *, base=BASE, reader=None, getter=None):
+    slot = (job.get('last_dispatch') or {}).get('scheduled_at')
+    if isinstance(slot, str) and slot in COMMITTED_OCCURRENCES:
+        return _finalized_observation(job, slot, COMMITTED_OCCURRENCES[slot],
+                                      base=base, reader=reader, getter=getter,
+                                      native_committed=True)
     if not scope(job):
         return finalized_observation(job, base=base, reader=reader, getter=getter)
     try:
@@ -136,6 +141,16 @@ FINALIZED_OCCURRENCES = {
 }
 
 
+COMMITTED_OCCURRENCES = {
+    '2026-11-23T22:23:00-05:00': (
+        '998e2b8cf7b40407b62aff50', '2026-11-23T22:30:36.778275-05:00',
+        '1iZiCFlJ9qsHOi5f3D5FhifjQACUR_6vI', '1rvauyzSGMecwqLBB_hestYbI5Tb-G5Ni',
+        'mgs-dr-hourly-20261124T032348Z.zip.gpg',
+        'ffb2fcada124066f034a5975f10665432df4e0f602a1a757791e8e5677f1314f',
+        '8cb7cd965f143ff868b19a9cd34acd7f', '2138597966'),
+}
+
+
 def finalized_observation(job, *, base=BASE, reader=None, getter=None):
     slot = (job.get('last_dispatch') or {}).get('scheduled_at')
     occurrence = FINALIZED_OCCURRENCES.get(slot) if isinstance(slot, str) else None
@@ -147,7 +162,8 @@ def finalized_observation(job, *, base=BASE, reader=None, getter=None):
                                   reader=reader, getter=getter)
 
 
-def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, getter=None):
+def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, getter=None,
+                           native_committed=False):
     """Read-only exact-occurrence proof; never finalize or replay business here."""
     (FINAL_KEY, FINAL_LAST_RUN, FINAL_FILE, FINAL_ACK,
      FINAL_NAME, FINAL_SHA, FINAL_MD5, FINAL_SIZE) = occurrence
@@ -160,8 +176,34 @@ def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, get
         return None
     try:
         root = base / ('reports/automation-recovery-' + FINAL_KEY)
-        execution = json.loads((root / 'canonical-execution.json').read_text())
-        result = json.loads((root / 'canonical-finalize.stdout').read_text())
+        execution = {}
+        if native_committed:
+            if (job.get('last_status') != 'error'
+                    or 'worker exited with status -15' not in str(job.get('last_error', ''))):
+                return None
+            result = json.loads((root / 'canonical-native-result.json').read_text())
+            state = json.loads((base / 'data/mgs-offsite-backup-state.json').read_text())
+            if state.get('last_success', {}).get('quick') != result:
+                return None
+            matches = []
+            with (base / 'logs/mgs-offsite-backup.jsonl').open() as events:
+                for line in events:
+                    # Historical log damage outside this immutable ID is not
+                    # evidence about this occurrence. Matching damage fails closed.
+                    if FINAL_FILE not in line:
+                        continue
+                    event = json.loads(line)
+                    if event.get('remote_file_id') == FINAL_FILE and event.get('event') == 'backup_success':
+                        matches.append(event)
+            if (len(matches) != 1 or matches[0].get('mode') != 'quick'
+                    or matches[0].get('tier') != 'hourly'
+                    or str(matches[0].get('size_bytes')) != FINAL_SIZE
+                    or matches[0].get('sha256') != FINAL_SHA
+                    or matches[0].get('retention_trashed_count') != 0):
+                return None
+        else:
+            execution = json.loads((root / 'canonical-execution.json').read_text())
+            result = json.loads((root / 'canonical-finalize.stdout').read_text())
         delivery = json.loads((root / 'independent-readback.json').read_text())
         command = ['/usr/bin/python3', '/root/mgs-agent/scripts/mgs-offsite-backup.py',
                    'finalize-direct', '--remote-id', FINAL_FILE, '--expected-name', FINAL_NAME]
@@ -169,11 +211,13 @@ def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, get
                     'remote_file_id': FINAL_FILE, 'remote_name': FINAL_NAME,
                     'remote_size_bytes': int(FINAL_SIZE), 'encrypted_sha256': FINAL_SHA,
                     'encrypted_md5': FINAL_MD5, 'archive_sha256_stream_verified': True,
-                    'retention_applied': False, 'retention_trashed_count': 0,
-                    'recovery': 'same_snapshot_existing_upload_finalized'}
-        if (execution.get('operation') != FINAL_KEY or execution.get('returncode') != 0
-                or execution.get('command') != command
-                or any(result.get(k) != v for k, v in expected.items())
+                    'retention_applied': False, 'retention_trashed_count': 0}
+        if not native_committed:
+            expected['recovery'] = 'same_snapshot_existing_upload_finalized'
+            if (execution.get('operation') != FINAL_KEY or execution.get('returncode') != 0
+                    or execution.get('command') != command):
+                return None
+        if (any(result.get(k) != v for k, v in expected.items())
                 or result.get('archive_native_ack', {}).get('file_id') != FINAL_ACK
                 or delivery.get('operation') != FINAL_KEY or delivery.get('GET_verified') is not True):
             return None
@@ -216,6 +260,7 @@ def _finalized_observation(job, slot, occurrence, *, base=BASE, reader=None, get
                            'thread_id': THREAD, 'contract_hash': CONTRACT},
                 'receipt': f'dr-finalization:{FINAL_KEY};drive:{FINAL_FILE};ack:{FINAL_ACK};discord:{CHANNEL}/{report}',
                 'evidence': {'remote_id': FINAL_FILE, 'ack_id': FINAL_ACK,
-                             'same_original_snapshot': True, 'upload_replayed': False}}
+                             'same_original_snapshot': True, 'upload_replayed': False,
+                             'native_already_committed': native_committed}}
     except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError):
         return None
