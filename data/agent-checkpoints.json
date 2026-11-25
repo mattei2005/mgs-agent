@@ -4873,13 +4873,23 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1575197527920083015",
+      "next_step": "Concluir QA integral e ativacao pelo runner central do mesmo request, readback de todos IDs e cadastro direto SB; sem recriar objetos",
+      "objective": "Duplicar C036 dez vezes na Yolokfx08 G006 com 20 videos expressos, USD35 e COCAP USD0.90",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575197527920083015/postprocess-recovery-boundary.json",
+      "state": "10 campanhas e 20 anuncios criados paused; ids preservados apos timeout; engine complete_paused; retomada do qa e pos-processamento apos snapshot expirado; anterior suspenso e 3 reservas transferidas sob aceite 1575198893560307837",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-25T17:41:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-1575198254822326443",
-      "next_step": "Resolver estacionamento explicito apenas da recuperacao antiga, sem alterar seus objetos nem reexecutar ativador; preservar o request atual e relogio. Consumidor canonico da fila ativo. Depois prepare-media, dry-run, execute central, QA20ads, ativacao/readback e SB. Se horario vencer aplicar politica vigente sem reescrever manifests.",
-      "objective": "Duplicar C003 Escalatepower06 em 10 campanhas com 20 videos expressos, USD25/dia, COCAP USD0.90, 25/11/2026 12:35 New York",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/intake-authority-receipt.json",
-      "state": "input integral persistido; duas mensagens humanas lidas por id, grupos1-10 e20files unicos conferidos. checker allowed. prepare-media enfileirou sem campanha write. servico canonico ativo. dependencia shein-1574521189035151514 mantem activation_pending apos gestao seletiva autorizada por rodolfo1574639436166074502, com instrucao canonica de nao repetir ativador integral; aguarda revisao meta e eventual pedido de troca. nao inferida suspensao ou conclusao do predecessor.",
+      "next_step": "Perguntar somente qual campanha ativa/pausada usar como fonte no lugar003. Incorporar resposta ao mesmo request com recibo de emenda, preservar relogio e parametros; reconciliar queue/input antes de retirar hold. Depois preparar20videos, dry-run/execute central, QA e SB. ContratoSB vivo e publisher positivo ja conferidos.",
+      "objective": "Cancelar antigas005-014 e executar10novas daC003 com20videos, USD25/dia e COCAPUSD0.90",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/source-003-direct-readback.json",
+      "state": "cancelamento antigo concluido por pausa reversivel: quatro pausadas e seis ja arquivadas; get final10 confirmou inatividade. recuperacao antiga estacionada por autoridade1575200600487100427. novo intake integral preservado com20files/copy/headline/description. transferencia4reservas antiga->nova verificada. prepare-media alcancou preflight e bloqueou porque fonte003 nao aparece no edge vivo; get direto120252896792330042 confirmou archived. nenhuma nova campanha criada; nenhum request-ready/media-preparation. job needs_source_selection, foreground com maintenance_hold; nao restaurar fonte nem trocar campanha por inferencia. inicio12:35 passou sem novas campanhas.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-25T17:19:15+00:00"
+      "updated_at": "2026-11-25T17:39:54+00:00"
     },
     {
       "agent": "ares",
@@ -6496,12 +6506,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-JOE-EXCEPTION-1575202919324844063",
-      "next_step": "Implementar exceção explicitamente limitada por flag/autoridade/mês/gestor;preservar fontes/banco;validar engine,payments,UI e nãoherança;gates/release;aplicarJoeOutubro e readback",
-      "objective": "Joe outubro10% excepcional como pessoal, aviso contextual e redução única do lucro dos sócios",
-      "source": "reports/finance-joe-personal-complement-1575198554111217826.md;discord:1575202919324844063;discord:1575203206345134121",
-      "state": "authorized_discovery: rodolfo1575202919324844063 confirmou proposta1575200026043351101;complemento company-funded,semfaturamentofictício;1575203206345134121 esclarece impacto nasmetades;nenhumaescritafinanceira",
+      "next_step": "Candidatoúnico comexceçãoopt-in Joeoutubro e timestampsauditadosporrate;preservarrotinas/receitas/ledger;gates completos/publicar;aplicarJoe;validarAPIUIeimpactos",
+      "objective": "Joe outubro10% excepcional/pessoal/aviso e datas por cotação na Conferência",
+      "source": "docs/finance-joe-october-exception.md;discord:1575203649590919289",
+      "state": "authorized_discovery:1575202919324844063 joecompanyfunded;1575203649590919289 adiciona datahora real por8cartõesdecotação/invalidos;cadastrodejoe e fontesdetimestampemdescoberta;zeroescrita financeira",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-25T17:35:55+00:00"
+      "updated_at": "2026-11-25T17:39:44+00:00"
     },
     {
       "agent": "zeus",
@@ -12558,5 +12568,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:35:55+00:00"
+  "updated_at": "2026-11-25T17:41:36+00:00"
 }
