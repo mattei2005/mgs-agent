@@ -71861,6 +71861,28 @@
       "skill_changed": "Zeus vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md",
       "production_mutations": false,
       "updated_at": "2026-11-24T23:03:30.147546+00:00"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261124T2102",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "waiting_human",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261124T2102/receipt.json",
+      "scheduled_at": "2026-11-24T21:02:00-05:00",
+      "updated_at": "2026-11-24T21:05:13.999556-05:00",
+      "verification": {
+        "fresh_metrics": 55,
+        "fresh_h": 0,
+        "historical_h_preserved": 40,
+        "pending_d": 8,
+        "source_parity_partial_cgij_ef": true,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_transport_restricted_no_manual_messages"
     }
   ],
   "profile_skill_references": [
