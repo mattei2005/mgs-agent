@@ -2932,6 +2932,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1575158261047500871",
+      "next_step": "Nenhum write pendente. Entrega nativa de conclusao com ressalvas; nao repetir criacao nem cadastro SB.",
+      "objective": "Duplicar fonte 01 Growpowerhub06 em dez campanhas com vinte videos explicitos, USD25/dia e COCAP USD0.90",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575158261047500871/completion-verification.json",
+      "state": "complete: c013-c022, 10 campanhas/10 conjuntos/20 anuncios active conferidos; qa integral; ids preservados; budget novo usd250/dia, ativo da conta usd420/dia no corte; sb duas chaves http201 gaminsert=ok; horario solicitado 10h et ultrapassado, ativacao apos qa pelo mesmo request; flags opcionais age/gender omitidas pela meta.",
+      "thread_id": "1558134489748611163",
+      "updated_at": "2026-11-25T15:16:38+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -12498,5 +12508,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T14:13:45+00:00"
+  "updated_at": "2026-11-25T15:16:38+00:00"
 }
