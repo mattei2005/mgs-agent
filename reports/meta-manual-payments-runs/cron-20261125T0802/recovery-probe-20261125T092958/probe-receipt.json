@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-11-25T14:29:58.893631+00:00",
+  "input_actions": 0,
+  "created_tabs": 0,
+  "lease_acquired": true,
+  "authority": {
+    "http_status": 200,
+    "message_id": "1575022093777637377",
+    "channel_id": "1563926766286803004",
+    "author_id": "344196393512075265",
+    "content": "isso ai mantem entao a atualizacao do cron apenas na aba com contas com saldo."
+  },
+  "captures": {
+    "approved": {
+      "pid": 18704,
+      "window_id": 983880,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T092958/approved.png",
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T092958/approved-elements.json",
+      "width": 2558,
+      "height": 1390,
+      "profile_rodolfo_ax": true,
+      "save_as_ax": true
+    },
+    "save-dialog": {
+      "pid": 240656,
+      "window_id": 919286,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T092958/save-dialog.png",
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T092958/save-dialog-elements.json",
+      "width": 1184,
+      "height": 711,
+      "profile_rodolfo_ax": false,
+      "save_as_ax": true
+    }
+  },
+  "windows": [
+    {
+      "pid": 240656,
+      "window_id": 919286,
+      "minimized": false,
+      "chrome": false,
+      "save_dialog": true
+    },
+    {
+      "pid": 18704,
+      "window_id": 983880,
+      "minimized": false,
+      "chrome": false,
+      "save_dialog": false
+    },
+    {
+      "pid": 22408,
+      "window_id": 131954,
+      "minimized": false,
+      "chrome": false,
+      "save_dialog": false
+    },
+    {
+      "pid": 17988,
+      "window_id": 197246,
+      "minimized": false,
+      "chrome": false,
+      "save_dialog": false
+    },
+    {
+      "pid": 11204,
+      "window_id": 65902,
+      "minimized": false,
+      "chrome": false,
+      "save_dialog": false
+    }
+  ],
+  "lease_released": true
+}
