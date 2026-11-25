@@ -415,7 +415,13 @@
   "cron_job_id": "2ee720363d7d",
   "funding_regroup_authority": "1564115318887161857",
   "funding_regroup_policy": "Read live funding; automatically move line-to-card accounts to upper card block in same worksheet, preserving all authorized IDs from account_ids, data, notes, links and recalculated totals. Never change Meta billing. Reverse/unknown transitions remain fail-closed.",
-  "general_refresh_blocker": null,
+  "general_refresh_blocker": {
+    "status": "waiting_resource_ui",
+    "reason": "pc1_foreground_save_dialog",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+    "at": "2026-11-25T14:08:44.413592-05:00",
+    "continuity_key": "ce11800d217d22dba6a58dcc"
+  },
   "h_source": "accounts_list_outstanding_balance",
   "h_source_history": [
     {
@@ -490,21 +496,22 @@
     "verified_at": "2026-11-20T19:51:29.936515-05:00"
   },
   "latest_refresh_qualification": {
-    "status": "partial_waiting_resource_historical_d",
+    "status": "partial_waiting_resource_ui",
     "business_refresh_complete": false,
-    "scheduled_at": "2026-11-25T08:02:00-05:00",
-    "fire_claim_by": "srv1767265:1504:c2d214255c9144d7a1d0fe4a26d0e683",
-    "verified_at": "2026-11-25T09:02:56.629456-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/closure-receipt.json",
+    "scheduled_at": "2026-11-25T14:02:00-05:00",
+    "fire_claim_by": "srv1767265:1504:7a0b55272f5142ca9835b3526a68af4c",
+    "verified_at": "2026-11-25T14:08:44.413592-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
     "accounts": 51,
     "groups": {
       "Cartão de crédito": 16,
       "Linha de crédito": 35
     },
     "fresh_metrics_count": 51,
-    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
-    "validated_metrics_at": "2026-11-25T08:52:15.428878-05:00",
-    "fresh_h_count": 35,
+    "api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T140522903391",
+    "validated_metrics_at": "2026-11-25T14:05:19.227297-05:00",
+    "fresh_h_count": 0,
+    "historical_h_preserved_count": 35,
     "h_read_times": {
       "1542257646409395": "2026-11-25T08:09:58.318297-05:00",
       "1062887799996139": "2026-11-25T08:10:19.657099-05:00",
@@ -542,22 +549,21 @@
       "1600310064116258": "2026-11-25T08:26:10.457018-05:00",
       "2429758060563333": "2026-11-25T08:26:33.661158-05:00"
     },
-    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T080504327581",
+    "h_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T140610092715",
     "h_source": "accounts_list_outstanding_balance",
-    "pending_ui": [],
-    "D_verified_published_ids": [
-      "1062446663435585",
-      "1150399088163771",
-      "1307492658016080",
-      "1414197490675732",
-      "1543098427832443",
-      "1547524853816263",
-      "1635726541410028",
-      "1772267146710748",
-      "1867022354284742",
-      "2323706575049143",
-      "2852476828464907"
+    "pending_ui": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
     ],
+    "D_verified_published_ids": [],
     "historical_blank_d": [
       {
         "account_id": "1307492658016080",
@@ -751,7 +757,7 @@
       "period": "2026-10-01",
       "pending": 30,
       "due_usd": "417864.11",
-      "source_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261125T080412736403"
+      "source_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261125T140439513709"
     },
     "average_periods": [
       [
@@ -767,9 +773,9 @@
     ],
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
-    "h_source_to_live_sheet_and_note_exact": true,
+    "h_historical_ledger_to_live_sheet_exact": true,
     "d_existing_ledger_to_live_sheet_exact": true,
-    "h_original_collection_times_preserved": true,
+    "d_h_values_notes_format_exactly_preserved": true,
     "other_sheet_data_unchanged": true,
     "frozen_sheet_full_equality": {
       "554305337": true,
@@ -811,37 +817,37 @@
       "payments_executed": 0
     },
     "lease_free": true,
-    "original_tabs_preserved": true,
+    "input_actions": 0,
+    "tabs_created": 0,
+    "tabs_closed": 0,
     "payments_executed": 0,
     "meta_writes": 0,
     "billing_changes": 0,
     "cron_changes": 0,
-    "next_run_at": "2026-11-25T14:02:00-05:00",
-    "report_infra_status": "pending_transport_restricted_no_manual_messages",
-    "historical_line_history_attempt": {
-      "account_id": "1542257646409395",
-      "result": "unverified_navigation",
-      "diagnosis": "Background link returned unchanged page; foreground action refused exact HWND because separate Chrome Save As dialog was foreground. No auth gate. Unrelated dialog left untouched; no historical instrument fabricated.",
-      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/d-full-pixel/1542257646409395-action-failure.json",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/foreground-conflict.png",
-      "scope": "historical gaps, no current generic-payment pending_ui events"
+    "next_run_at": "2026-11-25T21:02:00-05:00",
+    "blocker": {
+      "reason": "pc1_foreground_save_dialog",
+      "save_dialog_pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/save-dialog.png",
+      "approved_chrome_pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/surface.png",
+      "meta_authentication_gate_demonstrated": false,
+      "unrelated_dialog_preserved": true
     },
+    "report_infra_status": "pending_transport_restricted_no_manual_messages",
     "delivery": "cron_final_response_only",
-    "financial_metrics_complete": true,
-    "financial_layer_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/receipt.json",
-    "continuity_key": "79cd082a20c22a736307765f",
-    "continuity_source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+    "financial_layer_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/receipt.json",
+    "continuity_key": "ce11800d217d22dba6a58dcc",
+    "continuity_source_key": "native:zeus:2ee720363d7d:20261125T1402:ui-missing",
     "continuity_state": "waiting_resource",
-    "retry_at": "2026-11-25T14:07:56.644872+00:00",
+    "retry_at": "2026-11-25T19:13:44.423440+00:00",
     "consumer_heartbeat": {
-      "at": 1795615325.2463887,
-      "authority": "1569193434189668453",
-      "phase": "collecting",
-      "pid": 1562875
+      "at": 1795633687.5849812,
+      "open": 38,
+      "phase": "idle",
+      "pid": 1887185
     },
     "consumer_schedule": "2-57/5 * * * *",
-    "remaining_stage": "Five active newly included line-account historical D proofs; not current-event pending_ui. Historical blanks remain unknown, not zero.",
-    "next_step": "Existing continuity supervisor resumes ONLY the five missing historical D proofs after resource/surface reconciliation. Same job, authority and active51 scope; preserve all already-validated writes."
+    "remaining_stage": "H35 fresh UI, D2 recent events; D5 historical governed by existing separate request.",
+    "next_step": "Existing supervisor resumes only this occurrence missing H/D after PC1 dialog/surface revalidation and native-claim reconciliation; preserve all published layers, later receipts, archive and same job."
   },
   "layout_version": 3,
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -905,17 +911,31 @@
   "pay_now_updated_each_tick": true,
   "payments_authorized": false,
   "pending_card_history": {
-    "status": "recent_events_reconciled_historical_new_fields_pending",
+    "status": "recent_events_and_historical_fields_pending",
     "account_ids": [
       "1034081997659047",
+      "1062446663435585",
       "1492168699397108",
       "1542257646409395",
+      "1543098427832443",
       "1663268201836138",
       "1754588462350629"
     ],
-    "pending_ui": [],
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/closure-receipt.json",
-    "next_step": "Existing continuity supervisor resumes ONLY the five missing historical D proofs after resource/surface reconciliation. Same job, authority and active51 scope; preserve all already-validated writes."
+    "pending_ui": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+    "next_step": "Existing supervisor resumes only this occurrence missing H/D after PC1 dialog/surface revalidation and native-claim reconciliation; preserve all published layers, later receipts, archive and same job.",
+    "historical_request_key": "79cd082a20c22a736307765f"
   },
   "pending_new_account_fields": {
     "authority_message_id": "1575016959395893258",

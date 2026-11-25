@@ -72884,6 +72884,39 @@
       },
       "continuity_key": "79cd082a20c22a736307765f",
       "report_infra_status": "pending_transport_restricted_no_manual_messages"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261125T1402",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "partial_waiting_resource_ui",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+      "scheduled_at": "2026-11-25T14:02:00-05:00",
+      "updated_at": "2026-11-25T14:08:44.413592-05:00",
+      "verification": {
+        "fresh_metrics": 51,
+        "fresh_h": 0,
+        "historical_h_preserved": 35,
+        "pending_recent_d": [
+          "1062446663435585",
+          "1543098427832443"
+        ],
+        "pending_new_historical_d": [
+          "1034081997659047",
+          "1492168699397108",
+          "1542257646409395",
+          "1663268201836138",
+          "1754588462350629"
+        ],
+        "other_sheet_data_unchanged": true,
+        "archived_accounts_not_collected": 146,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0,
+        "cron_changes": 0
+      },
+      "continuity_key": "ce11800d217d22dba6a58dcc",
+      "report_infra_status": "pending_transport_restricted_no_manual_messages"
     }
   ],
   "profile_skill_references": [
