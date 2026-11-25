@@ -42,10 +42,16 @@ Rodolfo1575120915530911765 confirmou a proposta1575058997373968486. Isso superse
 - Produção2189→2190,audit7736;recoveryimutável,backup/restore real,ensaio,readback idempotente,14vistasdesktop/mobile e496célulasgestor confirmados. Readbackposterior2191 confirmaadiçõesidênticas. Nenhumdeploy/restart/credencialalterada.
 - Evidência:`reports/finance-october-rede2-complete-1575120915530911765.md` e `apps/finance-system/private/rede2-october-1575120915530911765/acceptance.json`.
 
-## Fase4 — Rede1: auditada, aguardando confirmação
+## Fase4 — Rede1: aplicada e validada
 
-`reports/finance-october-rede1-review-1575120915530911765.md`:3476linhas,36sites,1805gruposfonte/1858gruposDash,1860união. FonteCAD1708827.76 versusDash1709447.03, reduçãoCAD619.27. ConferênciaUSD/Rede2 nãofoireaberta.
+Rodolfo1575132030201761953 confirmou as receitas diáriasCAD e as quatro atribuições exclusivamente paraoutubro. Supersede o estado pendente do relatório histórico `reports/finance-october-rede1-review-1575120915530911765.md`.
 
-Além dosvaloresdiários, a fonteatribuiCliquetUSintegralmenteaMGS,NewsounDEaKelly eZuoutprincipal/FinanzasaNicolas;essasquatroatribuições divergemdosfatosCADsalvos e precisamconfirmaçãodeoutubro. Decisõesdesetembro nãoseestendemautomaticamente.
+- FonteCAD1708827.76 eDashCAD1708827.76;antes1709447.03,redução619.27.3476linhas/36sites/1860controlesdaunião,300overlaysCAD e2destinosMGS deCliquet nasdatasreais06/07outubro.
+- CliquetUS→MGS;NewsounDE→Kelly;Zuoutprincipal/Finanzas→Nicolas. Estratégias/verticais/originais preservados; a decisão não é regra deimportação permanente e não altera setembro.
+- Produção2192→2193,audit7793;backup/restore real321cenários;14vistas,4774célulasdiárias e154footers confirmados;readonly idempotente semrepetircommit. USD/gastos/câmbios/taxas/pagamentos/outrosmeses preservados.
+- Relatório:`reports/finance-october-rede1-complete-1575132030201761953.md`. Evidência:`apps/finance-system/private/rede1-october-1575132030201761953/acceptance.json`.
+- Listagem solicitada:42sitescomreceitanomês,83participações site/gestor/moeda, incluindo inalteradas eparticipaçõeszeradas;antesdestaúltimacorreçãoRede1 versusdepois. USDjáestavaajustado pelasfasesRede2/M2. Arquivos`domain-manager-comparison.json`/`domain-manager-table.txt`,sem anexoaousuário.
 
-Simulaçãov2emmemóriaconciliauniãocompleta/cartão e5gestores,semwriteRede1. A simulaçãoanteriorfoiinvalidadaporfaltadedestinosCliquet;usarsomenterecibov2. Próximopasso:confirmarcorreçõesCADdiáriasequatroatribuições,entãoexecutarcombackup/restore/readback. AVsegueencerrada pela confirmaçãodotitular.
+## Conclusão da sequência
+
+Conferência solicitada FB/Google→M2→Rede2→Rede1 concluída;cincoabasoriginais relidas idênticas. AV encerrada pelaconfirmaçãodotitular. Google conservaaprecisãoAPI eodiferençadeexibiçãojáexplicada,nãoépendênciadecorreção. Câmbios/recebimentos/pagamentos permanecem processos separados; nenhuma novaexecução financeira pendente desteescopo.

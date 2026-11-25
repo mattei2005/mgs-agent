@@ -1190,6 +1190,78 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-finance-october-rede1-1575132030201761953",
+      "report_infra_message_id": "1575137504628047914",
+      "report_infra_readback": true,
+      "agent": "zeus",
+      "type": "monthly_revenue_correction_and_complete_manager_listing",
+      "status": "completed_validated",
+      "authorization_message_id": "1575132030201761953",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T13:13:51.217795+00:00",
+      "canonical_source": "docs/finance-october-closing.md",
+      "report_path": "reports/finance-october-rede1-complete-1575132030201761953.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953",
+      "backup": {
+        "pass": true,
+        "authority": "1575132030201761953",
+        "remote_backup": "/home/zeus/mgs-finance-backups/rede1-october-1575132030201761953/finance-before.dump",
+        "local_backup": "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/finance-before.dump",
+        "sha256": "a034666545e4214e45e6668cbd1d2bdad41e0d11657a4e5118f5e67308e7cda0",
+        "bytes": 234098538,
+        "restored_database": "mgs_finance_r1oct_1575132030201761953",
+        "stage": "/home/mgsfinance/stage-r1oct-1575132030201761953",
+        "stage_files": 516,
+        "scenario_count": 321,
+        "scenario_fingerprints_equal": true,
+        "production_financial_writes": 0,
+        "retained_restore_database": true
+      },
+      "acceptance": {
+        "pass": true,
+        "authority": "1575132030201761953",
+        "period": "2026-10",
+        "revision": 2193,
+        "audit": {
+          "id": "7793",
+          "actor": "zeus / Rodolfo 1575132030201761953",
+          "action": "OCTOBER_REDE1_CLOSING_APPLIED",
+          "scenario_id": "workspace-2026-10"
+        },
+        "source_controls": 1860,
+        "source_rows": 3476,
+        "source_total_cad": "1708827.76219823235975096057",
+        "updated_total_cad": "1708827.76219823237220951677",
+        "all_controls_cent_equal": true,
+        "browser_views": 14,
+        "rendered_daily_cells": 4774,
+        "monthly_footers": 154,
+        "source_tabs_unchanged": [
+          "Gastos FB",
+          "Gastos Google",
+          "Rede MonetizeMore (M2)",
+          "rede 1 SB",
+          "rede 2 SB"
+        ],
+        "comparison_sites": 42,
+        "comparison_rows": 83,
+        "payments_unchanged": true,
+        "all_closing_phases_complete": true,
+        "fx_settlement_not_changed": true
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/runner.mjs": "e9defef57b0fe3f7f86c40a49786fe4eca5e3fdcb684f5994c02597086957e24",
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/browser.mjs": "c83f3f69279b31dc6a60effec318648c538d7cdc5f4cf7a12871a8e6f4f10267",
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/verify-readonly.py": "aa8231ebd5fdcf63ac30e81c2804df4b34c13cb75fcedfaf2f7af5deece55e69",
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/prepare.py": "a05ffb1d3a69d5f227a54b756a03c3a216f094faa95e54f91a210d4ea5b7a032",
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/backup.py": "cc9e3617e091c6d80a5ca96010560df7742c553801bfcf094dfea4215eadb238",
+        "/root/mgs-agent/apps/finance-system/private/rede1-october-1575132030201761953/make-comparison.py": "701bf74bd15743a7c84457e6fce869fbe295f7e9e44b13b0c4507b39f6d70445",
+        "/root/mgs-agent/reports/finance-october-rede1-complete-1575132030201761953.md": "2a3af829be8c5502e847beecc218a682b21b674e39165b3d13a3938998ba97d7",
+        "/root/mgs-agent/docs/finance-october-closing.md": "6f7e330edc3fac34870cd6c7a5266e8c0e90138defd7ddd226edeab3f83ce374",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md": "33f94c7ddff4757e4db14f1a61dd2b1c2e937454d265dc693f2b1c5d4d200ce4"
+      }
+    },
+    {
       "id": "zeus-finance-october-rede2-1575120915530911765",
       "report_infra_message_id": "1575128267227402283",
       "report_infra_readback": true,

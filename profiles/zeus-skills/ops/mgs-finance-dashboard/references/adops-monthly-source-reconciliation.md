@@ -96,6 +96,10 @@ For bounded native-currency reallocations through gross-pair overlays, retain or
 
 ### Additional execution guards
 
+- For a requested complete site-by-manager before/after list, freeze the comparison endpoint explicitly: before this correction is different from before the entire closing sequence. Include every original/new site-manager participation, unchanged values and removed allocations; separate native currencies rather than adding CAD and USD. Recompute counts and totals from saved artifacts. Calculate the displayed difference from the displayed endpoints, preserve full precision in evidence, and disclose the measured rounding bridge instead of changing financial values to make displayed rows add to an independently rounded total.
+
+- For a verification-only transaction after a successful financial commit, use shared admission plus a PostgreSQL repeatable-read/read-only transaction when the exclusive gate is occupied by an authorized scheduled reader. Require the already-applied branch and zero writes, retain exact target/content assertions, and preserve the writer's exclusive gate. Never replay the mutation, stop the reader or bypass release admission merely to complete readback.
+
 - A local exclusive admission wait can expire while the authorized lookup worker legitimately holds a shared lease during its bounded queue long-poll. Inspect the actual holder and producer timeout first; preserve the no-changes outcome and extend only the caller's bounded wait beyond that poll (120seconds covers the current65-second idle wait). Retry under the same lock, revalidate the baseline, and never kill the worker, bypass admission or report a financial outage merely because the first30-second wait expired.
 
 - Reconcile each manager/site detailed block to its own monthly summary, not only the sum of summary cards. Historical labels such as `Wantabrand ES` versus the combined principal operation and `FinanzasTopFeed` versus `TopFeed Finanzas` require exact canonical aliases; otherwise adding native facts can create a second summary row while the grand-total control still passes.
