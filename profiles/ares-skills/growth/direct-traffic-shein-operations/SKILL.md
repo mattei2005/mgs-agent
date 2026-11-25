@@ -19,7 +19,7 @@ Intake: `references/request-intake.md`; metadata/binding, não memória. Troca V
 
 QUEUED: job→predecessores. Grant ausente: paginação administrativa completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
-Separe autorizações, coortes e recibos de pausa e criação intercaladas. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
+Separe autorizações/recibos de pausa, criação, omissões, ensaio e revisão: aceite de um delta não libera outro. Veja `references/forcerunstatus.md`. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
 Falhas/destinos: `references/read-only-batch-child-recovery.md`.
 

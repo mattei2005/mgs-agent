@@ -16778,15 +16778,33 @@
         "zeus"
       ],
       "domain": "finance",
-      "effective_at": "2026-11-13T14:12:37+00:00",
-      "id": "finance-meta-account-scope-55-1570799435502588027",
+      "effective_at": "2026-11-25T05:25:37+00:00",
+      "id": "finance-meta-account-scope-197-1575016959395893258",
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Digital Trust:197 contas com pagamento do Excel;incluir142 sem excluir55",
+      "updated_at": "2026-11-25T05:25:37+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.account-scope",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "cron:2ee720363d7d",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-13T14:12:37+00:00",
+      "id": "finance-meta-account-scope-55-1570799435502588027",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-account-scope-197-1575016959395893258",
       "title": "Digital Trust: incluir oito contas com gasto, total55 no mesmo workbook e refresh",
-      "updated_at": "2026-11-13T14:12:37+00:00"
+      "updated_at": "2026-11-25T05:25:37+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.pay-now-column",
@@ -17958,5 +17976,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:15:47+00:00"
+  "updated_at": "2026-11-25T05:25:37+00:00"
 }

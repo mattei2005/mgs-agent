@@ -1,0 +1,70 @@
+{
+  "id": "2ee720363d7d",
+  "name": "Digital Trust · planilha de pagamentos 3x/dia",
+  "prompt": "Atualização financeira recorrente autorizada de Rodolfo344196393512075265 na thread1563926766286803004. MESMO job2ee720363d7d, cadência2 8,14,21 * * * America/New_York; sem writer/job paralelos. Resolver SEMPRE account_ids e pay_now_account_ids do contrato data/meta-manual-payments/digital-trust-workbook-contract.json; escopo atual197IDs pela mensagem1575016959395893258, que autorizou adicionar as142 contas faltantes COM forma de pagamento no Book1.xlsx. Isso supersede somente a fixação55IDs/40H dos prompts anteriores. Comparação351contas,197elegíveis,154No payment method ignoradas. Não adicionar outros IDs automaticamente, não excluir zeros, não reduzir escopo. BM155263197283282,spreadsheet1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU,sheet271321738. A inclusão foi validada em reports/meta-manual-payments-runs/add142-1575016959395893258/receipt.json;53cartão e144linha,55linhas anteriores preservadas integralmente. Novos142 têm funding/saldo/média/gasto API verificados;D sem instrumento histórico fica vazio;104novosH permanecem vazios com PENDENTE_H_NOVA_CONTA e autoridade exata até prova UI própria. Resolver pending_new_account_fields do contrato, não substituir H por saldoAPI/Excel nem tratar vazio como zero. Rodolfo informou autenticação concluída na mesma mensagem, mas esta inclusão não validou sessãoPC1: conferir superfície live antes de pedir novo login.\nCarregar meta-manual-payments-planning e referências recurring-refresh.md,accounts-list-search.md,collection-and-workbook.md,funding-regroup-priority.md,september-invoices.md. Seguir sequência canônica: preflight SA e concorrência/claim/superfície; backup de todas as abas ANTES do primeiro write; regroup_funding.py --apply;refresh_september_invoices.py --apply;refresh_workbook.py --apply --allow-history-pending;H;Dpendentes;reconciliação APIfinal e validação. Resolver interpreter/dependências pelo launcher atual, sem instalar ou trocar identidade. Drive/Sheets exclusivamente SA mgsagent@mgs-core-prod.iam.gserviceaccount.com via helper canônico; projeto mgs-core-prod. Meta somente leitura com identidade do contrato.\nH vigente1570815017794674749: Saldo pendente — Outstanding balance da linha Accounts exata,source accounts_list_outstanding_balance, nome/ID/BM/header/valor em pixels e AX, hora individual original. Não confundir com Current balance,modalPay now ou billing. publish_pay_now.py --prepare resolve targets dinamicamente; read_pc1_accounts_list.py emlotesaté6foreground,umworker/leasePC1,aba própria no mesmoChromeRodolfo; não abrir detalhes/modais para saldo. Ler cada imagem comvision_analyze;crop do mesmoarquivo resolveOCR antes de nova navegação. Manifest verified_account_ids e accounts_list_checks[ID]={valid_billing_list:true,business_id:'155263197283282',row_account_id:ID,name:NOME_EXATO,balance_usd:VALOR_LITERAL,balance_label:'Outstanding balance',authority_message_id:'1570815017794674749'}. Publicar pelo worker canônico, preservar fontes/horas, resolver somente pendências comprovadas. Parciais exigem readback e--verified-only,sem alegar integral.\nE somente invoices pendentes reais;Paid/due0 vazio;F latest_closed_generated outubro2026. J novembro2026 de2026-11-01a2026-11-30 limitado ao dia local atual parcial. Média3diascompletos;Insights diário/agregado reconciliados. D somente prova explícita histórica de cartão: nunca inferir instrumento por funding/eventogenérico/crédito publicitário. Resolver pending_ui no workerPC1 e inspeção real;detalhes exigem business_id,asset_id,payment_account_id exatos quando necessários. Depois D repetir refreshAPI final somente eventos novos, no máximo2reconciliações por evento. Validar todosIDs,grupos,links,notas,moedas,subtotais e totalF/G/H/I/J;comparar C/G/I/J com plano final,E/F com invoices,H comledger e D com provas;outrasabas preservadas. setBasicFilter pode ordenar grupo: comparar linhas completas porID dentro da faixa, limites/totais/demaisabas estritos. API omite células vazias finais: normalizar apenas trailingblanks,sem coercer IDs/valores. Em write parcial,ler alvo exato e recuperar camada faltante,sem replaydeinsert/linhas.\nManter sessão e executor únicos;fechar somente abaspróprias,liberar lease. PC1 ocupado/timeout exige fila/retomada canônica e responsabilidade aberta,não abandono. Bloqueio real sem bypass/reload/perfilalternativo;auth só após superfície correta comprovada. Nenhum pagamento,billing/default,budget,credencial/permissão,novo jobougatewayrestart. Atualizar contrato/checkpoint/audit/inventário/REPORT quando aplicável. Não reutilizar slot/receipt anterior nem declarar autenticação recuperada sem prova.\nFORMATO vigente1571982992975597571: gateMeta/passkey comprovado -> FINAL EXATAMENTE Não consegui concluir. Você precisa autenticar a Meta no Chrome do PC1. Semdiagnóstico/logs/métricas nessa mensagem,detalhes no checkpoint. Outro bloqueio decisório:uma frase com motivo real. Sucesso integral:uma única mensagemPTBR nesta thread comlink eaté6bullets,coberturatotal,H,média/gasto/invoices,ressalvasD;semIDsinternos,paths,traces,anexosoumentions. Nunca chamarparcialdetudofeito,nem duplicarentregaautomática. Nenhum pagamento ou alteração de billing.",
+  "skills": [
+    "meta-manual-payments-planning",
+    "google-drive-agent-automation",
+    "secure-remote-windows-automation"
+  ],
+  "skill": "meta-manual-payments-planning",
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": null,
+  "no_agent": false,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "2 8,14,21 * * *",
+    "display": "2 8,14,21 * * *"
+  },
+  "schedule_display": "2 8,14,21 * * *",
+  "repeat": {
+    "times": null,
+    "completed": 91
+  },
+  "enabled": true,
+  "state": "scheduled",
+  "paused_at": null,
+  "paused_reason": null,
+  "created_at": "2026-10-25T13:42:18.304561-04:00",
+  "next_run_at": "2026-11-25T08:02:00-05:00",
+  "last_run_at": "2026-11-24T21:05:21.314502-05:00",
+  "last_status": "ok",
+  "last_error": null,
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": {
+    "at": "2026-11-13T14:05:43.743450-05:00",
+    "detail": "RuntimeError: HTTP 400: {\"detail\":\"Bad Request\"}"
+  },
+  "failure_streak": 0,
+  "deliver": "discord:1496267442899521627:1563926766286803004",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1563926766286803004",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Nessa Planilha Que Crie Uma - Rodolfo",
+    "thread_id": "1563926766286803004",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "discord:1496267442899521627:1563926766286803004",
+  "last_dispatch": {
+    "scheduled_at": "2026-11-24T21:02:00-05:00",
+    "dispatched_at": "2026-11-24T21:02:06.013594-05:00",
+    "lateness_seconds": 6.0,
+    "kind": "on_time"
+  },
+  "fire_claim": null,
+  "canonical_completions": [
+    "7ecc860f39294131bdde201ce9d2bc76"
+  ],
+  "timezone": "America/New_York"
+}
