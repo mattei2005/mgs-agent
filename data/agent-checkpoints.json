@@ -11568,6 +11568,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1574992132266008730",
+      "next_step": "Pedido concluído; entregar resumo nativo sem repetir writes. Início futuro não comprova serving.",
+      "objective": "Duplicar duas vezes C019 Mavroa G003 para 25/11 00:00 com USD100/dia cada.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574992132266008730/completion-receipt.json",
+      "state": "complete: campanhas 038/039 da fonte 019 active, 4 anúncios, usd100/dia cada e usd200/dia no lote; início 25/11/2026 00:00 america/new_york, cost_cap usd1.30; qa integral dos mesmos ids e ressalvas de features aceitas por isliago; utms sb duas chaves http201 gaminsert ok; reconferência sb independente indisponível.",
+      "thread_id": "1558127210966032385",
+      "updated_at": "2026-11-25T03:46:38+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12398,5 +12408,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T02:05:15+00:00"
+  "updated_at": "2026-11-25T03:46:38+00:00"
 }
