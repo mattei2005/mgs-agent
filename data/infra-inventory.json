@@ -1190,6 +1190,200 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-finance-joe-exception-1575202919324844063",
+      "report_infra_message_id": "1575221646598602894",
+      "report_infra_readback": true,
+      "agent": "zeus",
+      "type": "scoped_payroll_exception_and_rate_timestamps",
+      "status": "completed_validated",
+      "authority": "1575202919324844063",
+      "additional_authority": "1575203649590919289",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T18:48:23.867880+00:00",
+      "canonical_source": "docs/finance-joe-october-exception.md",
+      "report_path": "reports/finance-joe-exception-1575202919324844063.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/joe-exception-1575202919324844063",
+      "release_id": "joe-exception-1575202919324844063",
+      "files": [
+        {
+          "host": "local",
+          "path": "apps/finance-system/expenses.py",
+          "source": "expenses.py",
+          "before": "3e4d661b30ecc93d515dda90677243d07db36c5d579ddb2cf55f1d464bdf31c8",
+          "after": "0665ada2557c08edaa9066ce911f3e234ad1d068e19a09fa49db790c2f5a4cde"
+        },
+        {
+          "host": "remote",
+          "path": "expenses.py",
+          "source": "expenses.py",
+          "before": "3e4d661b30ecc93d515dda90677243d07db36c5d579ddb2cf55f1d464bdf31c8",
+          "after": "0665ada2557c08edaa9066ce911f3e234ad1d068e19a09fa49db790c2f5a4cde"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/worker.py",
+          "source": "worker.py",
+          "before": "8e322a963d6c463f9b015953e94c37c3c7178f5359438807d752d6806bf43578",
+          "after": "0ab650582eb845c907214373931e6fb06044f2d1ac17590bc8b370e22cce6172"
+        },
+        {
+          "host": "remote",
+          "path": "worker.py",
+          "source": "worker.py",
+          "before": "8e322a963d6c463f9b015953e94c37c3c7178f5359438807d752d6806bf43578",
+          "after": "0ab650582eb845c907214373931e6fb06044f2d1ac17590bc8b370e22cce6172"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/workspace.mjs",
+          "source": "workspace.mjs",
+          "before": "54ec88a7ff0732075d10a5b268a2b148ad78bcea8f4484e32b550c6338617646",
+          "after": "75c7819bc5d095d9bb29998ac6aeb888987de5d44a61025bb2f31e8ecae3eae1"
+        },
+        {
+          "host": "remote",
+          "path": "workspace.mjs",
+          "source": "workspace.mjs",
+          "before": "54ec88a7ff0732075d10a5b268a2b148ad78bcea8f4484e32b550c6338617646",
+          "after": "75c7819bc5d095d9bb29998ac6aeb888987de5d44a61025bb2f31e8ecae3eae1"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/manager-view.mjs",
+          "source": "manager-view.mjs",
+          "before": "87142fa062f27ecd8d23d5d96f450e6a4c510eb7e64d039b2d554106bbe98ab0",
+          "after": "a7eccb599a1ee6c4bd2b020ee078cd74e9012287e54e0190d44f67f4ad0c2bf4"
+        },
+        {
+          "host": "remote",
+          "path": "manager-view.mjs",
+          "source": "manager-view.mjs",
+          "before": "87142fa062f27ecd8d23d5d96f450e6a4c510eb7e64d039b2d554106bbe98ab0",
+          "after": "a7eccb599a1ee6c4bd2b020ee078cd74e9012287e54e0190d44f67f4ad0c2bf4"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/monthly-review-routes.mjs",
+          "source": "monthly-review-routes.mjs",
+          "before": "4e0f5321675b1ce4b28a679f995f651151ea8d247e9264119b380e42b7f6ef7b",
+          "after": "654b8f6e878241bbd272c8f91befdac455d74e625daa23cfd63c813f0b198d19"
+        },
+        {
+          "host": "remote",
+          "path": "monthly-review-routes.mjs",
+          "source": "monthly-review-routes.mjs",
+          "before": "4e0f5321675b1ce4b28a679f995f651151ea8d247e9264119b380e42b7f6ef7b",
+          "after": "654b8f6e878241bbd272c8f91befdac455d74e625daa23cfd63c813f0b198d19"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/operations.js",
+          "source": "public/operations.js",
+          "before": "c85536fbb4427672e9be64b9ee151a31cf06c2d832b71a0ca23a9d4492808683",
+          "after": "bcdb415e1498143bcca7e1b9c998490671523d485c2b3332e17f5b1b0fd399ea"
+        },
+        {
+          "host": "remote",
+          "path": "public/operations.js",
+          "source": "public/operations.js",
+          "before": "c85536fbb4427672e9be64b9ee151a31cf06c2d832b71a0ca23a9d4492808683",
+          "after": "bcdb415e1498143bcca7e1b9c998490671523d485c2b3332e17f5b1b0fd399ea"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/review.js",
+          "source": "public/review.js",
+          "before": "334b6b11af567acb185fc61d3c41e3205f5edfcf989db7ec581c7aaa5f58a9c4",
+          "after": "7c0f53d5c9928f7658f6aeae516354c996e27bd5e72517bbf0498106865983cc"
+        },
+        {
+          "host": "remote",
+          "path": "public/review.js",
+          "source": "public/review.js",
+          "before": "334b6b11af567acb185fc61d3c41e3205f5edfcf989db7ec581c7aaa5f58a9c4",
+          "after": "7c0f53d5c9928f7658f6aeae516354c996e27bd5e72517bbf0498106865983cc"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/app.js",
+          "source": "public/app.js",
+          "before": "a9d1bff4c1d48b191274e4ab7e0802fc8617e7977d5eb25a982c1c6f50603291",
+          "after": "b4dd7761e9f67c7d128bb34775fa313559b545567ab2aeba0f63d28c445bd78a"
+        },
+        {
+          "host": "remote",
+          "path": "public/app.js",
+          "source": "public/app.js",
+          "before": "a9d1bff4c1d48b191274e4ab7e0802fc8617e7977d5eb25a982c1c6f50603291",
+          "after": "b4dd7761e9f67c7d128bb34775fa313559b545567ab2aeba0f63d28c445bd78a"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/test_payroll_policy.py",
+          "source": "tests/test_payroll_policy.py",
+          "before": "303fc5dfb83049a1bb7df8825bf30831c04d4ab7ba2929189a3e635325a87d7a",
+          "after": "ee48c75e18bfda9c940e19394424733bcba9386f9c1f99309d7929c386363a2f"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/manager-current-period.test.mjs",
+          "source": "tests/manager-current-period.test.mjs",
+          "before": "c97dece4b8d2035940c2115ef4630211b2b7633be36ca72314c442c43a7d5bcb",
+          "after": "107949c8a65d19a28e3f8d64a7e3b23a8ef878ca59aa261c91f0fe7e8a847312"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/simple-review.test.mjs",
+          "source": "tests/simple-review.test.mjs",
+          "before": "82554c77b567d3e49e2faafa0aa7d86cb78d02f5a7b11dad689a1e780bc2928f",
+          "after": "3b182d2b3a691827041cf444248cb831e731fa423a3d3d1b7cbd2aa0b19c3130"
+        }
+      ],
+      "acceptance": {
+        "pass": true,
+        "at": "2026-11-25T18:43:49.211Z",
+        "revision": 2215,
+        "audit_id": "7912",
+        "joe_result_brl": "98502.76",
+        "normal_brl": "6895.19",
+        "due_10_brl": "9850.28",
+        "company_complement_brl": "2955.09",
+        "partner_half_exact_brl": "1477.545",
+        "partner_half_rounded_brl": "1477.55",
+        "fx": "5.7519",
+        "usdbrl_mode": "fixed",
+        "timestamp_controls": 192,
+        "views": 40,
+        "only_joe_october": true,
+        "joe_payments_due_matches": true,
+        "geizian_due_matches_half": true,
+        "no_payment_registered": true
+      },
+      "backup": {
+        "pass": true,
+        "authority": "1575202919324844063",
+        "remote_backup": "/home/zeus/mgs-finance-backups/joe-exception-1575202919324844063/finance-before.dump",
+        "local_backup": "/root/mgs-agent/apps/finance-system/private/joe-exception-1575202919324844063/finance-before.dump",
+        "sha256": "fdf85174b7fc52beead423ae3dc9d788ee34b8c6d93e9b32504a0436a89927c4",
+        "bytes": 239463385,
+        "restored_database": "mgs_finance_joeoct_1575202919324844063",
+        "stage": "/home/mgsfinance/stage-joeoct-1575202919324844063",
+        "stage_files": 516,
+        "scenario_count": 325,
+        "scenario_fingerprints_equal": true,
+        "production_financial_writes": 0,
+        "retained_restore_database": true
+      },
+      "tests": {
+        "node": 310,
+        "python": 259,
+        "total": 569
+      },
+      "code_cutover_financial_writes": 0,
+      "financial_apply_writes": 1,
+      "payment_writes": 0
+    },
+    {
       "id": "zeus-finance-october-invalid-1575192637433188468",
       "report_infra_message_id": "1575197735315833056",
       "report_infra_readback": true,

@@ -20,4 +20,4 @@ Acrescentar abaixo de cada um dos oito cartões Cotações e inválidos a últim
 
 ## Estado
 
-Autorizado;preparação em `apps/finance-system/private/joe-exception-1575202919324844063/`. Checkpoint `ZEUS-FINANCE-JOE-EXCEPTION-1575202919324844063` governa publicação/aplicação/readback. Ainda semalteraçãofinanceira nesta preparação.
+Publicado/aplicado e validado: release`joe-exception-1575202919324844063`committed;financeiro2214→2215,audit7912,flagapenasJoe/outubro.569testes,40vistasstage+40produção,192timestamps,325cenáriospreservadosnocodecutover;ledger eoutrosmesespreservadosnaaplicação. Joe normalBRL6895.19,total10%BRL9850.28,complementoempresaBRL2955.09;metadeeconômicaBRL1477.545/cada. Cotaçãofinalfixa5.7519;valoresdoprintinicialeramreferência. Avisocontextual ecarimbosET ativos. Nenhum pagamentoexecutado. Evidência:`reports/finance-joe-exception-1575202919324844063.md`,pacote`apps/finance-system/private/joe-exception-1575202919324844063/acceptance.json`. Nenhumapendênciafuncional.
