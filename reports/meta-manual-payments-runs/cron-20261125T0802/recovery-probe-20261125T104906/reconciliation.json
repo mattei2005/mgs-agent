@@ -1,0 +1,53 @@
+{
+  "job_id": "2ee720363d7d",
+  "native_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+  "native_contract_hash_matches_source": true,
+  "job_enabled": true,
+  "job_state": "scheduled",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T08:02:00-05:00",
+  "last_run_at": "2026-11-25T09:03:40.204057-05:00",
+  "next_run_at": "2026-11-25T14:02:00-05:00",
+  "later_native_tick_observed": false,
+  "writer_lock_free": true,
+  "financial_worker_processes_found": [],
+  "latest_api_run": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
+  "last_refresh_status": "updated_validated",
+  "pending_ledger_entries": {
+    "1034081997659047": null,
+    "1492168699397108": null,
+    "1542257646409395": null,
+    "1663268201836138": null,
+    "1754588462350629": null
+  },
+  "pending_D": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H": [],
+  "scope_mode": "active_tab_only",
+  "active_count": 51,
+  "pending_subset_active": true,
+  "balance_views_enabled": false,
+  "queue": {
+    "key": "79cd082a20c22a736307765f",
+    "state": "running",
+    "owner": "supervisor:1660693",
+    "attempts": 11,
+    "failures": 0,
+    "due": 1795621537.4063954,
+    "lease_until": 1795622886.8304617
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795621686.8247662,
+    "phase": "dispatching",
+    "pid": 1660693
+  },
+  "consumer_cron": [
+    "2-57/5 * * * *"
+  ]
+}
