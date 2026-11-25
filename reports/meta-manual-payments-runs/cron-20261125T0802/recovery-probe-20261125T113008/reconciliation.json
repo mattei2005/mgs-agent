@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-11-25T16:30:20.325984+00:00",
+  "job": {
+    "id": "2ee720363d7d",
+    "enabled": true,
+    "state": "scheduled",
+    "fire_claim": null,
+    "last_dispatch": {
+      "scheduled_at": "2026-11-25T08:02:00-05:00",
+      "dispatched_at": "2026-11-25T08:02:06.020521-05:00",
+      "lateness_seconds": 6.0,
+      "kind": "on_time"
+    },
+    "last_run_at": "2026-11-25T09:03:40.204057-05:00",
+    "next_run_at": "2026-11-25T14:02:00-05:00"
+  },
+  "contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+  "writer_lock_free": true,
+  "financial_workers": [],
+  "queue": {
+    "key": "79cd082a20c22a736307765f",
+    "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+    "state": "running",
+    "owner": "supervisor:1711395",
+    "attempts": 15,
+    "failures": 0,
+    "due": 1795623948.6432462,
+    "lease_until": 1795625288.4874856
+  },
+  "owner_alive": true,
+  "heartbeat": {
+    "at": 1795624088.484599,
+    "phase": "dispatching",
+    "pid": 1711395
+  },
+  "active_account_count": 51,
+  "sheet_id": 794137639,
+  "scope_mode": "active_tab_only",
+  "pending_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_ledger_entries": {
+    "1034081997659047": null,
+    "1492168699397108": null,
+    "1542257646409395": null,
+    "1663268201836138": null,
+    "1754588462350629": null
+  },
+  "last_refresh": {
+    "status": "updated_validated",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
+    "collected_at": "2026-11-25T08:52:15.428878-05:00",
+    "accounts": 51,
+    "pending_ui": []
+  },
+  "contract_pending_fields": {
+    "authority_message_id": "1575016959395893258",
+    "D_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "H_account_ids": [],
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/closure-receipt.json",
+    "reason": "All35 H independently verified; two new card-account empty histories verified without zero. Five new line-account historical D remain unverified, queued with no completed-layer replay."
+  }
+}
