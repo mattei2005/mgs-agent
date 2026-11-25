@@ -1190,6 +1190,75 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-finance-conference-usd-1575169245086486671",
+      "report_infra_message_id": "1575181804888129647",
+      "report_infra_readback": true,
+      "agent": "zeus",
+      "type": "read_only_finance_presentation_release",
+      "status": "completed_validated",
+      "authorization_message_id": "1575169245086486671",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T16:09:56.000479+00:00",
+      "canonical_source": "docs/finance-conference-cad-usd.md",
+      "report_path": "reports/finance-conference-usd-1575169245086486671.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/conference-usd-1575169245086486671",
+      "release_id": "conference-usd-1575169245086486671",
+      "published_files": [
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/review.js",
+          "source": "public/review.js",
+          "before": "22fcf4348a612a759bf94f160765f51039b86cdecc818684c5abac4caeb807b5",
+          "after": "334b6b11af567acb185fc61d3c41e3205f5edfcf989db7ec581c7aaa5f58a9c4"
+        },
+        {
+          "host": "remote",
+          "path": "public/review.js",
+          "source": "public/review.js",
+          "before": "22fcf4348a612a759bf94f160765f51039b86cdecc818684c5abac4caeb807b5",
+          "after": "334b6b11af567acb185fc61d3c41e3205f5edfcf989db7ec581c7aaa5f58a9c4"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/review.css",
+          "source": "public/review.css",
+          "before": "2314d6cf4ede5cda95304fde22f73cd803db2273a3afb438dd037f877353d56c",
+          "after": "9d28590a4940ea28c82600aa4d43f9a641c211acaf874f9052ec0324c70e2469"
+        },
+        {
+          "host": "remote",
+          "path": "public/review.css",
+          "source": "public/review.css",
+          "before": "2314d6cf4ede5cda95304fde22f73cd803db2273a3afb438dd037f877353d56c",
+          "after": "9d28590a4940ea28c82600aa4d43f9a641c211acaf874f9052ec0324c70e2469"
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/simple-review.test.mjs",
+          "source": "tests/simple-review.test.mjs",
+          "before": "ece7cf67d9d999cc67aa57c2b757b439daff086b3a6efc4bea8ac7bb52ae2d48",
+          "after": "82554c77b567d3e49e2faafa0aa7d86cb78d02f5a7b11dad689a1e780bc2928f"
+        }
+      ],
+      "acceptance": {
+        "pass": true,
+        "independent_decimal_controls": 2384,
+        "conference_views": 16,
+        "manager_views": 10,
+        "financial_writes": 0
+      },
+      "financial_scenarios_preserved": 324,
+      "financial_ledger_and_audit_unchanged": true,
+      "tests": {
+        "node": 306,
+        "python": 255,
+        "total": 561,
+        "npm_audit": 0
+      },
+      "skill_path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/preventive-release-gate-and-review.md",
+      "skill_sha256": "d154b5bcf62b7601a26632a74a1ae388d900943fc1d13e426d10784228170b85"
+    },
+    {
       "id": "zeus-finance-october-rede1-1575132030201761953",
       "report_infra_message_id": "1575137504628047914",
       "report_infra_readback": true,
