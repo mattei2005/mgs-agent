@@ -1,0 +1,21 @@
+{
+  "approved_surface": {
+    "image": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round17/approved.png",
+    "inspected_with": "vision_analyze",
+    "page": "Billing & payments — Accounts",
+    "business_id_pixels": "155263197283282",
+    "balance_header": "Outstanding balance",
+    "authentication_gate_visible": false,
+    "page_error_visible": false
+  },
+  "native_dialog": {
+    "image": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round17/native-dialog-0.png",
+    "inspected_with": "vision_analyze",
+    "open_pixels": true,
+    "type": "Save As/Salvar como",
+    "authentication_gate_visible": false,
+    "origin_unproved": true,
+    "preserved_without_input": true
+  },
+  "decision": "waiting_resource: preserve native dialog, no navigation or collection retry"
+}
