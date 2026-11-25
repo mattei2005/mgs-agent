@@ -1962,6 +1962,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1575149894799462412",
+      "next_step": "Autenticar pedido, revalidar sete pares canônicos e identidades Meta, coletar Meta/SB/UI atuais, renderizar, revisar e publicar com GET por parte e resumo",
+      "objective": "Sete Intradays G006 nas threads individuais com resumo financeiro ao final; somente leitura",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1575149894799462412/intraday.py",
+      "state": "preparando_fontes_novas",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-25T14:05:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -10609,12 +10619,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Mesmojob2ee720363d7d08:02/14:02/21:02ET:coletarapenas51IDsativos eH35;preservararquivos. Nãoexecutarpublisherduasviews,nãorestaurar197,nãoreativar146. Só1Hnovo aindaaguardaUI noescopoatual;resolverDrecenteapenasativos.",
-      "objective": "Cron financeiro apenas51ativos na abaContas com saldo,mesmojob3xdia",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-active-only-1575022093777637377/receipt.json",
-      "state": "configurado1575022093777637377:sheet794137639/51ids,16cartão35linha;146arquivo e antiga base197 congelados,semcoleta/write/reativação. balance_viewsdesabilitado. passvalidator51+fundingdryrun51+hprepare35semarquivados;valoresfinanceiros/arquivosintactos. mudançadeconfignãoénovorefreshnemvalidaçãoauthpc1.",
+      "next_step": "Existing continuity supervisor resumes ONLY the five missing historical D proofs after resource/surface reconciliation. Same job, authority and active51 scope; preserve all already-validated writes.",
+      "objective": "Refresh25nov08:02ET somente51ativos Contas com saldo; histórica D parcial em cinco contas de linha",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/closure-receipt.json",
+      "state": "c/g/i/j51 atualizados08:52et; h35 novos outstanding balance verificados pixels/ax; invoices outubro30 usd417864.11; d11 verificações renovadas, pending_ui recente vazio. cinco históricos d novos de linha sem prova por conflito foreground save as em outro chrome; fila canônica persistida. arquivo146/base/sheet1 integralmente intactos; sem cobrança/billing; lease livre.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-25T05:39:59+00:00"
+      "updated_at": "2026-11-25T14:02:56+00:00"
     },
     {
       "agent": "zeus",
@@ -12488,5 +12498,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T13:13:52+00:00"
+  "updated_at": "2026-11-25T14:05:20+00:00"
 }
