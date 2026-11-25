@@ -6265,6 +6265,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-CONFERENCE-USD-1575169245086486671",
+      "next_step": "Preparar candidato; validar conversão/cotação/status/ausência,desktopmobile;gates completos;release controlado;readback e fingerprints",
+      "objective": "Adicionar USD equivalente na Conferência Rede1 preservando CAD, total e detalhes por site",
+      "source": "discord:1575169245086486671;docs/finance-conference-cad-usd.md",
+      "state": "authorized_preparing: rodolfo1575169245086486671; somente apresentação cad÷usd/cad da competência; nenhuma alteração financeira",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T15:22:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-CORRECT-1551324490271695064",
       "next_step": "Obter decisao para os demais codigos nao mapeados sem estender fallback sozinho;completar dimensoes/linhagem/agrupamento/importadores e API autenticada;canario/rollback e implantacao;preencher1-31agosto e validar moedas/gastos/gestores;preservar setembro e futuros.",
       "objective": "Corrigir gastos,receitas e visao de gestores de agosto pela fonte read-only",
@@ -12508,5 +12518,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T15:16:38+00:00"
+  "updated_at": "2026-11-25T15:22:27+00:00"
 }
