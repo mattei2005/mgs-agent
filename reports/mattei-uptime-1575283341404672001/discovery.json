@@ -1,0 +1,747 @@
+{
+  "checked_at": "2026-11-25T22:56:37.672741+00:00",
+  "servers": [
+    {
+      "hostname": "MatteiInc01",
+      "config_files_read": 535,
+      "sites": [
+        {
+          "domain": "app.conectageral.com",
+          "roots": [
+            "/home/runcloud/webapps/app-conectageral",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/app-conectageral.domains.d/app.conectageral.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/app-conectageral.d/main.conf"
+          ]
+        },
+        {
+          "domain": "app.portalrelevante.com",
+          "roots": [
+            "/home/runcloud/webapps/app-portalrelevante-com",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/app-portalrelevante-com.domains.d/app.portalrelevante.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/app-portalrelevante-com.d/main.conf"
+          ]
+        },
+        {
+          "domain": "conectageral.com",
+          "roots": [
+            "/home/runcloud/webapps/conectageral",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/conectageral.domains.d/conectageral.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/conectageral.d/main.conf"
+          ]
+        },
+        {
+          "domain": "de.newsoun.com",
+          "roots": [
+            "/home/runcloud/webapps/newsoun-de",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/newsoun-de.domains.d/de.newsoun.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/newsoun-de.d/main.conf"
+          ]
+        },
+        {
+          "domain": "dicasfinancas.info",
+          "roots": [
+            "/home/runcloud/webapps/dicasfinancas",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/dicasfinancas.domains.d/dicasfinancas.info.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/dicasfinancas.d/main.conf"
+          ]
+        },
+        {
+          "domain": "eggbev.com",
+          "roots": [
+            "/home/runcloud/webapps/eggbev",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/eggbev.domains.d/eggbev.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/eggbev.d/main.conf"
+          ]
+        },
+        {
+          "domain": "empleo.seuprimeiroempregoam.com",
+          "roots": [
+            "/home/runcloud/webapps/seuprimeiroempleo",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/seuprimeiroempleo.domains.d/empleo.seuprimeiroempregoam.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/seuprimeiroempleo.d/main.conf"
+          ]
+        },
+        {
+          "domain": "es.seuprimeiroempregoam.com",
+          "roots": [
+            "/home/runcloud/webapps/es-seuprimeiroempregoam",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/es-seuprimeiroempregoam.domains.d/es.seuprimeiroempregoam.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/es-seuprimeiroempregoam.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finance.topfeed.fun",
+          "roots": [
+            "/home/runcloud/webapps/finance-topfeed",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finance-topfeed.domains.d/finance.topfeed.fun.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finance-topfeed.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finance.wantabrand.com",
+          "roots": [
+            "/home/runcloud/webapps/finance-wantabrand",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finance-wantabrand.domains.d/finance.wantabrand.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finance-wantabrand.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.conectageral.com",
+          "roots": [
+            "/home/runcloud/webapps/finanzas-conectageral",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finanzas-conectageral.domains.d/finanzas.conectageral.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finanzas-conectageral.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.eggbev.com",
+          "roots": [
+            "/home/runcloud/webapps/finanzas-eggbev",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finanzas-eggbev.domains.d/finanzas.eggbev.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finanzas-eggbev.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.lyzmo.com",
+          "roots": [
+            "/home/runcloud/webapps/finanzas-lyzmo",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finanzas-lyzmo.domains.d/finanzas.lyzmo.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finanzas-lyzmo.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.newsoun.com",
+          "roots": [
+            "/home/runcloud/webapps/newsoun-finanzas",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/newsoun-finanzas.domains.d/finanzas.newsoun.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/newsoun-finanzas.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.portalrelevante.com",
+          "roots": [
+            "/home/runcloud/webapps/portalrelevante-finanzas",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/portalrelevante-finanzas.domains.d/finanzas.portalrelevante.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/portalrelevante-finanzas.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.topfeed.fun",
+          "roots": [
+            "/home/runcloud/webapps/finanzas-topfeed",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finanzas-topfeed.domains.d/finanzas.topfeed.fun.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finanzas-topfeed.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.wavesbee.com",
+          "roots": [
+            "/home/runcloud/webapps/finanzas-wavesbee",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finanzas-wavesbee.domains.d/finanzas.wavesbee.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finanzas-wavesbee.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.zuout.com",
+          "roots": [
+            "/home/runcloud/webapps/zuout-finanzas",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/zuout-finanzas.domains.d/finanzas.zuout.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/zuout-finanzas.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finanzas.zytiva.com",
+          "roots": [
+            "/home/runcloud/webapps/zytiva-finanzas",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/zytiva-finanzas.domains.d/finanzas.zytiva.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/zytiva-finanzas.d/main.conf"
+          ]
+        },
+        {
+          "domain": "fincgriffin.com",
+          "roots": [
+            "/home/runcloud/webapps/fincgriffin",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/fincgriffin.domains.d/fincgriffin.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/fincgriffin.d/main.conf"
+          ]
+        },
+        {
+          "domain": "lyzmo.com",
+          "roots": [
+            "/home/runcloud/webapps/lyzmo",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/lyzmo.domains.d/lyzmo.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/lyzmo.d/main.conf"
+          ]
+        },
+        {
+          "domain": "newsoun.com",
+          "roots": [
+            "/home/runcloud/webapps/newsoun",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/newsoun.domains.d/newsoun.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/newsoun.d/main.conf"
+          ]
+        },
+        {
+          "domain": "portalrelevante.com",
+          "roots": [
+            "/home/runcloud/webapps/portalrelevante",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/portalrelevante.domains.d/portalrelevante.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/portalrelevante.d/main.conf"
+          ]
+        },
+        {
+          "domain": "seuprimeiroempregoam.com",
+          "roots": [
+            "/home/runcloud/webapps/seuprimeiroempregoam",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/seuprimeiroempregoam.domains.d/seuprimeiroempregoam.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/seuprimeiroempregoam.d/main.conf"
+          ]
+        },
+        {
+          "domain": "topfeed.fun",
+          "roots": [
+            "/home/runcloud/webapps/topfeed",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/topfeed.domains.d/topfeed.fun.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/topfeed.d/main.conf"
+          ]
+        },
+        {
+          "domain": "wantabrand.com",
+          "roots": [
+            "/home/runcloud2/webapps/wantabrand",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/wantabrand.domains.d/wantabrand.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/wantabrand.d/main.conf"
+          ]
+        },
+        {
+          "domain": "wavesbee.com",
+          "roots": [
+            "/home/runcloud/webapps/wavesbee",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/wavesbee.domains.d/wavesbee.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/wavesbee.d/main.conf"
+          ]
+        },
+        {
+          "domain": "zuout.com",
+          "roots": [
+            "/home/runcloud/webapps/zuout",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/zuout.domains.d/zuout.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/zuout.d/main.conf"
+          ]
+        },
+        {
+          "domain": "zytiva.com",
+          "roots": [
+            "/home/runcloud/webapps/zytiva",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/zytiva.domains.d/zytiva.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/zytiva.d/main.conf"
+          ]
+        }
+      ],
+      "server": "MatteiInc01",
+      "server_id": "290075",
+      "ip": "162.55.28.178"
+    },
+    {
+      "hostname": "MatteiInc02",
+      "config_files_read": 114,
+      "sites": [
+        {
+          "domain": "autocreditadx.com",
+          "roots": [
+            "/home/runcloud2/webapps/autocreditadxx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/autocreditadxx.domains.d/autocreditadx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/autocreditadxx.d/main.conf"
+          ]
+        },
+        {
+          "domain": "autolendpro.com",
+          "roots": [
+            "/home/runcloud2/webapps/autolendpro",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/autolendpro.domains.d/autolendpro.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/autolendpro.d/main.conf"
+          ]
+        },
+        {
+          "domain": "carcreditad.com",
+          "roots": [
+            "/home/runcloud2/webapps/carcreditad",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/carcreditad.domains.d/carcreditad.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/carcreditad.d/main.conf"
+          ]
+        },
+        {
+          "domain": "creditoparaveiculo.com",
+          "roots": [
+            "/home/runcloud2/webapps/creditoparaveiculo",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/creditoparaveiculo.domains.d/creditoparaveiculo.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/creditoparaveiculo.d/main.conf"
+          ]
+        },
+        {
+          "domain": "financiamentoautoadx.com",
+          "roots": [
+            "/home/runcloud2/webapps/financiamentoautoadx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/financiamentoautoadx.domains.d/financiamentoautoadx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/financiamentoautoadx.d/main.conf"
+          ]
+        },
+        {
+          "domain": "financiarveiculo.com",
+          "roots": [
+            "/home/runcloud2/webapps/financiarveiculo",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/financiarveiculo.domains.d/financiarveiculo.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/financiarveiculo.d/main.conf"
+          ]
+        },
+        {
+          "domain": "gamehubad.com",
+          "roots": [
+            "/home/runcloud2/webapps/gamehubad",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/gamehubad.domains.d/gamehubad.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/gamehubad.d/main.conf"
+          ]
+        },
+        {
+          "domain": "gamezonead.com",
+          "roots": [
+            "/home/runcloud2/webapps/gamezonead",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/gamezonead.domains.d/gamezonead.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/gamezonead.d/main.conf"
+          ]
+        },
+        {
+          "domain": "gamingadx.com",
+          "roots": [
+            "/home/runcloud2/webapps/gamingadx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/gamingadx.domains.d/gamingadx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/gamingadx.d/main.conf"
+          ]
+        }
+      ],
+      "server": "MatteiInc02",
+      "server_id": "288158",
+      "ip": "162.55.28.179"
+    },
+    {
+      "hostname": "MatteiInc03",
+      "config_files_read": 159,
+      "sites": [
+        {
+          "domain": "boostingecon.com",
+          "roots": [
+            "/home/runcloud/webapps/boostingecon",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/boostingecon.domains.d/boostingecon.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/boostingecon.d/main.conf"
+          ]
+        },
+        {
+          "domain": "cephyric.com",
+          "roots": [
+            "/home/runcloud/webapps/cephyric",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/cephyric.domains.d/cephyric.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/cephyric.d/main.conf"
+          ]
+        },
+        {
+          "domain": "ducapes.com",
+          "roots": [
+            "/home/runcloud/webapps/ducapes",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/ducapes.domains.d/ducapes.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/ducapes.d/main.conf"
+          ]
+        },
+        {
+          "domain": "escalatepower.com",
+          "roots": [
+            "/home/runcloud/webapps/escalatepower",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/escalatepower.domains.d/escalatepower.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/escalatepower.d/main.conf"
+          ]
+        },
+        {
+          "domain": "finance.ducapes.com",
+          "roots": [
+            "/home/runcloud/webapps/finance-ducapes",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/finance-ducapes.domains.d/finance.ducapes.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/finance-ducapes.d/main.conf"
+          ]
+        },
+        {
+          "domain": "financeadx.com",
+          "roots": [
+            "/home/runcloud/webapps/FinanceADX",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/FinanceADX.domains.d/financeadx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/FinanceADX.d/main.conf"
+          ]
+        },
+        {
+          "domain": "fincgriffin.com",
+          "roots": [
+            "/home/runcloud/webapps/Fincgriffin-com",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/Fincgriffin-com.domains.d/fincgriffin.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/Fincgriffin-com.d/main.conf"
+          ]
+        },
+        {
+          "domain": "growpowerhub.com",
+          "roots": [
+            "/home/runcloud/webapps/growpowerhub",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/growpowerhub.domains.d/growpowerhub.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/growpowerhub.d/main.conf"
+          ]
+        },
+        {
+          "domain": "helixenit.net",
+          "roots": [
+            "/home/runcloud/webapps/helixenit",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/helixenit.domains.d/helixenit.net.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/helixenit.d/main.conf"
+          ]
+        },
+        {
+          "domain": "infinitynexx.com",
+          "roots": [
+            "/home/runcloud/webapps/infinitynexx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/infinitynexx.domains.d/infinitynexx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/infinitynexx.d/main.conf"
+          ]
+        },
+        {
+          "domain": "jobscana.com",
+          "roots": [
+            "/home/runcloud/webapps/jobscana",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/jobscana.domains.d/jobscana.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/jobscana.d/main.conf"
+          ]
+        },
+        {
+          "domain": "marevelx.com",
+          "roots": [
+            "/home/runcloud/webapps/marevelx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/marevelx.domains.d/marevelx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/marevelx.d/main.conf"
+          ]
+        },
+        {
+          "domain": "mavroa.com",
+          "roots": [
+            "/home/runcloud/webapps/mavroa",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/mavroa.domains.d/mavroa.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/mavroa.d/main.conf"
+          ]
+        },
+        {
+          "domain": "vizioid.com",
+          "roots": [
+            "/home/runcloud/webapps/vizioid",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/vizioid.domains.d/vizioid.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/vizioid.d/main.conf"
+          ]
+        },
+        {
+          "domain": "xyvlov.com",
+          "roots": [
+            "/home/runcloud/webapps/xyvlov",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/xyvlov.domains.d/xyvlov.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/xyvlov.d/main.conf"
+          ]
+        },
+        {
+          "domain": "yolokfx.com",
+          "roots": [
+            "/home/runcloud/webapps/yolokfx",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/yolokfx.domains.d/yolokfx.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/yolokfx.d/main.conf"
+          ]
+        },
+        {
+          "domain": "zyclor.com",
+          "roots": [
+            "/home/runcloud/webapps/zyclor",
+            "/opt/RunCloud/letsencrypt"
+          ],
+          "sources": [
+            "/etc/nginx-rc/conf.d/zyclor.domains.d/zyclor.com.conf"
+          ],
+          "includes": [
+            "/etc/nginx-rc/conf.d/zyclor.d/main.conf"
+          ]
+        }
+      ],
+      "server": "MatteiInc03JBF",
+      "server_id": "310255",
+      "ip": "46.4.95.117"
+    }
+  ]
+}

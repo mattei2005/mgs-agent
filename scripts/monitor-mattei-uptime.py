@@ -8,6 +8,7 @@ BASE=Path('/root/mgs-agent')
 CONFIG=BASE/'data/mattei-uptime-config.json'
 STATE=BASE/'data/mattei-uptime-state.json'
 spec=importlib.util.spec_from_file_location('runcloud_transport',BASE/'scripts/monitor-runcloud.py')
+assert spec is not None and spec.loader is not None
 transport=importlib.util.module_from_spec(spec);spec.loader.exec_module(transport)
 save=transport.save
 
