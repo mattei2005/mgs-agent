@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-11-25T19:22:08.218685+00:00",
+  "job_id": "2ee720363d7d",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T14:02:00-05:00",
+  "next_run_at": "2026-11-25T21:02:00-05:00",
+  "later_native_tick_observed": true,
+  "later_native_tick_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+  "writer_lock_free": true,
+  "financial_workers": [],
+  "pending_D": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H_new_account_fields": [],
+  "ledger_entries_present": [],
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1896750",
+    "attempts": 31,
+    "failures": 0,
+    "due": 1795633987.5692244,
+    "lease_until": 1795635483.643816
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795634283.624315,
+    "phase": "dispatching",
+    "pid": 1896750
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "related_later_tick_queue": [
+    {
+      "key": "ce11800d217d22dba6a58dcc",
+      "state": "waiting_resource",
+      "owner": null,
+      "due": 1795634024.4234405,
+      "attempts": 0,
+      "failures": 0
+    }
+  ]
+}
