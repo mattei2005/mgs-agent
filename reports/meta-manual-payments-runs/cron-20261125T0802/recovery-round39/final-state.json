@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-11-25T20:50:32.975757+00:00",
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1988597",
+    "attempts": 39,
+    "failures": 0,
+    "due": 1795639564.172189,
+    "lease_until": 1795640886.0163577
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795639686.0122616,
+    "phase": "dispatching",
+    "pid": 1988597
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "next_native_run_at": "2026-11-25T21:02:00-05:00",
+  "fire_claim": null,
+  "writer_lock_free": true,
+  "financial_worker_processes": [],
+  "lease": {
+    "ok": true,
+    "locked": false
+  },
+  "pending_account_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "original_tabs_count": 6,
+  "original_tabs_preserved": true,
+  "contract_sha256_unchanged": true
+}

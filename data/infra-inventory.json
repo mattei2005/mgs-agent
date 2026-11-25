@@ -72917,6 +72917,45 @@
       },
       "continuity_key": "ce11800d217d22dba6a58dcc",
       "report_infra_status": "pending_transport_restricted_no_manual_messages"
+    },
+    {
+      "id": "meta-manual-payments-add1-1575252034100138135",
+      "agent": "zeus",
+      "type": "financial-account-active-scope-addition",
+      "source_message_id": "1575252034100138135",
+      "source_thread_id": "1563926766286803004",
+      "status": "addition_validated",
+      "updated_at": "2026-11-25T15:55:41.151208-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add1-1575252034100138135/receipt.json",
+      "paths": [
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "data/knowledge-registry.json",
+        "data/agent-checkpoints.json",
+        "cron:zeus:2ee720363d7d",
+        "automation-continuity:79cd082a20c22a736307765f",
+        "automation-continuity:ce11800d217d22dba6a58dcc"
+      ],
+      "verification": {
+        "account_id": "1770569568407466",
+        "active_accounts": 52,
+        "groups": {
+          "Cartão de crédito": 17,
+          "Linha de crédito": 35
+        },
+        "old51_preserved": true,
+        "other3_sheets_preserved": true,
+        "formula_and_link_validation": "PASS",
+        "balance_usd": "0",
+        "default": "American Express •••• 1003",
+        "same_job_schedule_and_destination": true,
+        "original_recovery_targets_preserved": true,
+        "new_D_blank_qualified": true,
+        "H35_unchanged": true,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_status": "sent_get_verified",
+      "report_infra_message_id": "1575253678309376147"
     }
   ],
   "profile_skill_references": [
