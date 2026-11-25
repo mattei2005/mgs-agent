@@ -4623,6 +4623,16 @@
     },
     {
       "agent": "zeus",
+      "id": "RUNCLOUD-AGENT-1575098784659144846",
+      "next_step": "Conferir versão instalada/candidata, saúde, updater nativo e agenda global; preservar gates críticos e não intervir em periféricos.",
+      "objective": "Verificar agente RunCloud nos hosts MGS e implantar verificação a cada15dias sob autoridade FullTech",
+      "source": "reports/runcloud-agent-1575098784659144846.md",
+      "state": "in_progress_readonly_discovery",
+      "thread_id": "1574249078584377544",
+      "updated_at": "2026-11-25T10:41:48+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "RUNCLOUD-QUOTA-1561029089458917528",
       "next_step": "Nenhuma decisao pendente. Cron ativo respeita bloqueio persistente ate reset informado pela RunCloud; nao declarar recuperacao da API sem coleta integra.",
       "objective": "Aplicar cadencia RunCloud aprovada: saude2h e status de backups24h, preservando execucao dos backups, bloqueio de quota e billing",
@@ -12478,5 +12488,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T08:01:07+00:00"
+  "updated_at": "2026-11-25T10:41:48+00:00"
 }
