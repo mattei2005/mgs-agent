@@ -15,6 +15,17 @@ Supersede o limite de seis itens de `1551798171628212275` somente para acrescent
 - Agosto/setembro têm o custo mensal SMS na dimensão histórica de mídia. O cartão identifica essa parcela já incluída em Gastos com mídia, sem reclassificar ou duplicar valor. Desde outubro, identificar a dimensão Despesas diretas SMS.
 - Somente apresentação: nenhum lançamento, pagamento, comissão, fonte, resultado ou taxa é alterado para acrescentar o cartão. Ausência de dados permanece indisponível; consulta não confirma fechamento externo.
 
+## Recargas no SMS expandido — Rodolfo1575031561391439952
+
+Ao expandir **Ver por site e recargas**, exibir **Observação — recargas do mês** com data, valor original de cada recarga e total por moeda. É controle informativo: não somar ao consumo, não recalcular lucro/comissão/ledger, não calcular suposto saldo de crédito nem criar registros para preencher a tela.
+
+- Outubro em diante: somente `prepaid_credit` confirmado do fornecedor exato `SMS Funnel`, na competência/data selecionadas. Ignorar a antiga referência `company|121`, inclusive seu valor nominal residual30mil, porque não comprova uma recarga desse mês.
+- Antes de outubro: a despesa histórica `company|121` só fornece recargas quando estiver explicitamente arquivada e reclassificada como `direct_monthly_cost`. Mostrar seus componentes de cobrança, preservando repetições, e exigir soma igual ao agregado; não listar agregado e componentes duas vezes.
+- Sem detalhamento de datas, apresentar o total mensal na moeda original com **Data não informada**; data da conferência não é data de recarga. Não converter o antigo USD de agosto em um pagamento BRL inventado.
+- Sem registros: **Nenhuma recarga registrada nesta competência**, não afirmação de inexistência de pagamentos no fornecedor. Permitir expandir um cartão que tenha recarga mesmo sem consumo/site.
+- Manter o acesso exato Rodolfo/Geizian já autorizado. A observação acompanha os registros salvos, sem campo extra de edição.
+- Estado/publicação: checkpoint `ZEUS-FINANCE-SMS-RECHARGES-1575031561391439952`; evidência privada `apps/finance-system/private/sms-recharges-1575031561391439952/`.
+
 ## Consulta exata de Geizian
 
 Supersede `1551924862854107256` apenas para os recursos necessários à Conferência simples: `/review.html`, `/review.js`, `/review.css`, `/api/monthly-conference`.

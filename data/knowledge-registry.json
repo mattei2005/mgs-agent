@@ -12060,6 +12060,24 @@
       "updated_at": "2026-10-07T15:02:09+00:00"
     },
     {
+      "canonical_key": "finance.conference.sms-recharge-observation",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T06:20:30+00:00",
+      "id": "FINANCE-SMS-RECHARGE-OBSERVATION-1575031561391439952",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Recargas mensais como observação no SMS expandido da Conferência",
+      "updated_at": "2026-11-25T06:20:30+00:00"
+    },
+    {
       "canonical_key": "finance.sms.residual.2026-10-06",
       "canonical_source": "reports/finance-sms-residual-1557401256098664584.md",
       "consumers": [
@@ -18084,5 +18102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T05:44:18+00:00"
+  "updated_at": "2026-11-25T06:20:30+00:00"
 }
