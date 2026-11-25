@@ -52,6 +52,14 @@ Rodolfo1575132030201761953 confirmou as receitas diáriasCAD e as quatro atribui
 - Relatório:`reports/finance-october-rede1-complete-1575132030201761953.md`. Evidência:`apps/finance-system/private/rede1-october-1575132030201761953/acceptance.json`.
 - Listagem solicitada:42sitescomreceitanomês,83participações site/gestor/moeda, incluindo inalteradas eparticipaçõeszeradas;antesdestaúltimacorreçãoRede1 versusdepois. USDjáestavaajustado pelasfasesRede2/M2. Arquivos`domain-manager-comparison.json`/`domain-manager-table.txt`,sem anexoaousuário.
 
+## Conciliação bancária posterior — outubro apenas
+
+Rodolfo1575192637433188468 confirmou absorver a diferença para o recebimento informadoUSD1250860.59 na taxa efetivaInválidosRede1. Esta decisão posterior supersede somente a preservação deL1 que valia nas correções de receita anteriores; não muda seus valoresbrutos nem a fonte de fechamento.
+
+Aplicado evalidado: L1fraction0.0012745966=0.12745966%,fixed/confirmed;produção2206→2207,audit7878. LíquidosRede1USD1062061.17 +Rede2USD188799.42 =USD1250860.59;diferençaUSD0.00. A influência indireta deFincgriffinnoRede2 foi explicitamente aceita; o próprio controleRede2 permaneceinalterado. Taxa efetiva deconciliação, não evidência deinvalidpuramenteinformadopeloprovedor. Gross,câmbios,revsharepercentual,gastos,pagamentos eoutrosmesespreservados. Não propagarpara futurosmeses.
+
+Relatório `reports/finance-october-invalid-close-1575192637433188468.md`;checkpointZEUS-FINANCE-OCT-INVALID-1575192637433188468. Não há pendência desta conciliação. O valor bancário é informado pelo titular, semextratoconsultado.
+
 ## Conclusão da sequência
 
 Conferência solicitada FB/Google→M2→Rede2→Rede1 concluída;cincoabasoriginais relidas idênticas. AV encerrada pelaconfirmaçãodotitular. Google conservaaprecisãoAPI eodiferençadeexibiçãojáexplicada,nãoépendênciadecorreção. Câmbios/recebimentos/pagamentos permanecem processos separados; nenhuma novaexecução financeira pendente desteescopo.

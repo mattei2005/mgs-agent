@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-11-25T17:09:04.420060+00:00",
+  "native_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+  "job_enabled": true,
+  "job_state": "scheduled",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T08:02:00-05:00",
+  "next_run_at": "2026-11-25T14:02:00-05:00",
+  "later_native_tick_observed": false,
+  "writer_lock_free": true,
+  "financial_worker_processes_found": [],
+  "pending_ledger_entries": {
+    "1034081997659047": null,
+    "1492168699397108": null,
+    "1542257646409395": null,
+    "1663268201836138": null,
+    "1754588462350629": null
+  },
+  "pending_account_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H_account_ids": [],
+  "active_account_count": 51,
+  "last_refresh": {
+    "status": "updated_validated",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
+    "collected_at": "2026-11-25T08:52:15.428878-05:00",
+    "accounts": 51,
+    "pending_ui": []
+  },
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1736046",
+    "attempts": 19,
+    "failures": 0,
+    "due": 1795626386.396584,
+    "lease_until": 1795627690.2131455
+  },
+  "consumer_heartbeat": {
+    "at": 1795626490.2083056,
+    "phase": "dispatching",
+    "pid": 1736046
+  },
+  "queue_owner_alive": true
+}
