@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T06:37:54.761733+00:00",
+    "updated_at": "2026-11-25T06:45:15.452860+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72192,6 +72192,29 @@
         "/root/mgs-agent/docs/finance-conference-sms-geizian-cad.md": "ff4a661d13a324c47f0e6d1e9c1848d271c5faef338875c9c641b1b99eb36d14",
         "/root/mgs-agent/reports/finance-sms-recharges-1575031561391439952.md": "5f17896d7d7ab69e260469097e6b71f958f483a5f68ac46e620a241c97d466ee",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/preventive-release-gate-and-review.md": "1940ad99c7a86ca5b3a2610aa578776f22a454f5b9ac472e946fb8b6d58853ca"
+      }
+    },
+    {
+      "id": "zeus-finance-prepaid-1575038856569299086",
+      "agent": "zeus",
+      "type": "authorized_prepaid_bookkeeping",
+      "status": "completed_validated",
+      "authorization_message_id": "1575038856569299086",
+      "source_message_id": "1567199190331686913",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T06:45:15.452860+00:00",
+      "canonical_source": "docs/finance-sms-payment-1567199190331686913.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1575038856569299086",
+      "row_id": "sms-prepaid-2026-11-02-1575038856569299086",
+      "revision_after": 972,
+      "audit_id": "7689",
+      "prepaid_records_added": 1,
+      "consumption_result_or_ledger_changes": 0,
+      "browser_views": 6,
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1575038856569299086/apply.py": "f005a234c43410d1f4f6783b4329a21e39444f7df4513281404d09b18f10ba54",
+        "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1575038856569299086/browser.mjs": "5bdbb5cf865bc27386528a3e03b177d1ab355ceb8189e3e4e2c6399c386b45e3",
+        "/root/mgs-agent/docs/finance-sms-payment-1567199190331686913.md": "7cbbfdb7985c1e7cbd8b1031ac2c9233bffc18841a0477523a2b347850341405"
       }
     }
   ],
