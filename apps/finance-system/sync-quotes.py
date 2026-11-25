@@ -2,6 +2,7 @@
 """Read Google formula quotes via canonical SA; send only quotes to isolated finance app."""
 import sys,json,pathlib,datetime,math,os,fcntl
 from urllib.parse import urlencode
+from decimal import Decimal
 BASE=pathlib.Path('/root/mgs-agent');ROOT=BASE/'apps/finance-system'
 if __name__=='__main__':
  from finance_release_guard import admit_entrypoint
@@ -57,6 +58,10 @@ def collect(extra_config=None):
   value=cell.get('effectiveValue',{}).get('numberValue')
   if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<value<10000:raise RuntimeError('invalid_quote_technical_'+item['range'])
   values[key]=value;formulas[key]=item['formula'];sources[key]={'spreadsheet_id':sid,'range':item['range'],'sheet_title':cfg['sheet_title'],'purpose':'provisional_market_quote'}
+  # Rodolfo1575021696442966117: add 2% once to raw USD/CAD, never to a settled rate.
+  if key=='principal|Agosto 2026|H1':
+   values[key]=float(Decimal(str(value))*Decimal('1.02'))
+   sources[key].update({'raw_value':value,'multiplier':'1.02','adjustment_percent':2,'authority':'1575021696442966117'})
   if 'periods' in item:sources[key]['periods']=item['periods']
  return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':sid,'values':values,'formulas':formulas,'extra_sources':sources,'google_writes':0}
 

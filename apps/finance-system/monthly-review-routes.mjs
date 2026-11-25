@@ -10,7 +10,9 @@ import {buildMonthlyReview,traceRows} from './monthly-review.mjs';
 export async function installMonthlyReview(app,db){
  const [model,source]=await Promise.all(['ui-model.json','source.json'].map(f=>fs.readFile(root+'/private/'+f,'utf8').then(JSON.parse)));
  const owner=(req,res,next)=>req.auth?.role==='owner'&&req.auth?.username==='rodolfo'?next():res.status(403).json({error:'Conferência mensal disponível somente para Rodolfo'});
- app.get(['/review.html','/review.js','/review.css','/period-preview.js'],owner,(req,res,next)=>next());
+ const conference=(req,res,next)=>(req.auth?.role==='owner'&&req.auth?.username==='rodolfo'||req.auth?.role==='partner'&&req.auth?.username==='geizian')?next():res.status(403).json({error:'Conferência mensal indisponível para este usuário'});
+ app.get(['/review.html','/review.js','/review.css'],conference,(req,res,next)=>next());
+ app.get('/period-preview.js',owner,(req,res,next)=>next());
  app.get('/api/period-preview',owner,async(req,res)=>{
   const period=String(req.query.period||'');periodInfo(period);
   const result=await db.transaction(async tx=>{
@@ -24,7 +26,7 @@ export async function installMonthlyReview(app,db){
    return buildPeriodPreview(s,target,{revision:accounts.revision,before:projection(period),after:next?projection(next.id):[]});
   });res.json(result);
  });
- app.get('/api/monthly-conference',owner,async(req,res)=>{
+ app.get('/api/monthly-conference',conference,async(req,res)=>{
   const period=String(req.query.period||'');periodInfo(period);
   const result=await db.transaction(async tx=>{
    await tx.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY');

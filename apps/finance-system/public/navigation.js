@@ -5,7 +5,7 @@ window.MGSNavigation={period(){const explicit=new URLSearchParams(location.searc
  window.MGSNotices?.mount(user);
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const main=[['overview','Dashboard'],['movement','Relatório Diário'],['annual','Caixa Sintético']],admin=[['sites','Cadastro de Domínios'],['accounts','Contas de Anúncio'],['company','Despesas Gerais'],['personnel','Despesas Funcionários'],['rates','Câmbio e Inválidos'],['payments','Pagamentos',true],['activity','Histórico de Atividades',true],['approvals','Aprovações',true],['users','Usuários',true]],partnerViews=['company','personnel','rates','payments'];
- if(role==='owner'&&user.username==='rodolfo')main.push(['review','Conferência mensal']);
+ if(role==='owner'&&user.username==='rodolfo'||role==='partner'&&user.username==='geizian')main.push(['review','Conferência mensal']);
  const item=([key,label,op])=>`<a class="nav-item ${key===selected?'selected':''}" href="${key==='review'?'/review.html':op?'/operations':'/'}?view=${key}" ${key!=='review'&&!op&&!operations?'data-main-view="'+key+'"':''}>${esc(label)}${key==='approvals'?'<span id="approvalCount"></span>':''}</a>`;
  const sidebar=document.querySelector('.sidebar');if(!sidebar)return;
  document.body.classList.add('finance-shell');document.body.classList.toggle('manager-fullscreen',selected==='manager');

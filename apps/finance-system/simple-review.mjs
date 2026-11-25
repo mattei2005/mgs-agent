@@ -6,7 +6,7 @@ import {decimalCompare} from './monthly-review.mjs';
 import {ratesFor} from './workspace.mjs';
 // Read the selected scenario only; never fetch today's FX or seed a future month from August.
 export function conferenceRates(s){return ratesFor(s.id.slice(10)).filter(r=>r.type==='fx'||r.type==='invalid').map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key),value=s.result.results?.[r.key]?.actual??s.overrides[r.key]??cfg?.value??null;return {key:r.key,label:r.label,source:r.source,type:r.type,value,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.mode==='fixed'&&cfg?.status==='confirmed'&&value!==null?'confirmed':'provisional'};});}
-const DEFINITIONS=[['rede1','Gross CAD · Rede1','CAD'],['rede2','Gross USD · Rede2','USD'],['av','Gross USD · AV','USD'],['m2','Gross USD · M2','USD'],['facebook','Gastos Facebook',null],['google','Gastos Google',null]];
+const DEFINITIONS=[['rede1','Gross CAD · Rede1','CAD'],['rede2','Gross USD · Rede2','USD'],['av','Gross USD · AV','USD'],['m2','Gross USD · M2','USD'],['facebook','Gastos Facebook',null],['google','Gastos Google',null],['sms','Gastos SMS Funnel',null]];
 const sum=values=>{const r=decimalCompare(values,'0');if(r.actual===undefined)throw Error('Valor inválido para conferência');return r.actual;};
 const present=x=>x!==null&&x!==undefined&&x!=='';
 // Display-only projection of the stored calculated discounts into original currency.
@@ -44,9 +44,20 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  const buckets=new Map(DEFINITIONS.map(([id,label,currency])=>[id,{id,label,currency,values:new Map(),sites:new Map(),deductions:[],entries:0}])),unclassified=[],seenGross=new Set(),seenSpend=new Set();
  const contribute=(id,currency,value,site,f=null)=>{if(!present(value))return;if(!/^(CAD|USD|BRL|GBP)$/.test(currency))throw Error('Moeda sem suporte');sum([value]);const b=buckets.get(id);if(!b.values.has(currency))b.values.set(currency,[]);b.values.get(currency).push(String(value));if(!b.sites.has(site))b.sites.set(site,new Map());const v=b.sites.get(site);if(!v.has(currency))v.set(currency,[]);v.get(currency).push(String(value));if(f)b.deductions.push({site,currency,values:revenueDeductions(value,f)});b.entries++;};
  const unresolved=(f,currency,value,reason)=>{if(Number(value)!==0)unclassified.push({site:f.site,currency,value:String(value),reason});};
+ const sms={seen:new Set(),usd:[],sources:new Set(),dates:new Set(),monthly:false};
  for(const f of domain.facts){
   const a=additions.get(f.id),monthly=['monthly_gross_adjustment','direct_monthly_cost'].includes(a?.kind)&&a.period===period.id&&f.date===period.id;
   if(!validDate(period.id,f.date)&&!monthly)throw Object.assign(Error('Movimento fora da competência selecionada'),{status:409});
+  // Consumption only, once per saved fact. Prepaid credits/receipts are not additional costs.
+  if(['direct_monthly_cost','direct_daily_cost','sms_dashboard_reconciliation'].includes(a?.kind)&&/^SMS Funnel(?: ·|$)/.test(a.label||'')){
+   if(sms.seen.has(f.id)||a.period!==period.id||a.date!==f.date||a.site!==f.site||a.currency!=='BRL'||f.cost_currency!=='BRL'||!present(f.cost_amount))throw Object.assign(Error('Origem do consumo SMS incompatível'),{status:409});
+   const original=a.kind==='sms_dashboard_reconciliation'?text(BigInt(a.cost_delta_cents)*SCALE/100n):a.amount;
+   if(decimalCompare([f.cost_amount],original).status!=='pass')throw Object.assign(Error('Consumo SMS diverge do lançamento registrado'),{status:409});
+   const debit=a.kind==='direct_monthly_cost'?f.spend:f.direct_expense;
+   if(!present(debit))throw Object.assign(Error('Conversão registrada do SMS indisponível'),{status:409});
+   sms.seen.add(f.id);sms.usd.push(text(-fixed(debit)));sms.sources.add(a.source||'Fonte não informada');sms.dates.add(f.date);sms.monthly ||= monthly;
+   contribute('sms','BRL',f.cost_amount,f.site);continue;
+  }
   if(!f.revenue_superseded){
    const origins={};const addOrigin=(currency,value)=>{if(present(value))origins[currency]=sum([...(origins[currency]?[origins[currency]]:[]),value]);};
    if(f.gross_origins)for(const [c,v] of Object.entries(f.gross_origins))addOrigin(c,v);
@@ -69,6 +80,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  }
  const totals=values=>[...values].sort(([a],[b])=>a.localeCompare(b)).map(([currency,vs])=>({currency,value:sum(vs)}));
  const items=[...buckets.values()].map(b=>({id:b.id,label:b.label,currency:b.currency,totals:totals(b.values),...(b.currency?{breakdown:summarizeDeductions(totals(b.values),b.deductions)}:{}),sites:[...b.sites].sort(([a],[b])=>a.localeCompare(b,'pt-BR')).map(([site,v])=>({site,totals:totals(v),...(b.currency?{breakdown:summarizeDeductions(totals(v),b.deductions.filter(x=>x.site===site))}:{})})),status:b.entries?'to_check':'no_data',entries:b.entries}));
+ const smsItem=items.find(x=>x.id==='sms');Object.assign(smsItem,{converted_totals:sms.seen.size?[{currency:'USD',value:sum(sms.usd)}]:[],sources:[...sms.sources].sort(),dates:[...sms.dates].sort(),note:'Consumo de SMS, não recargas de crédito. '+(sms.monthly?'Neste mês, o SMS já está incluído em “Gastos com mídia” da Dashboard. O cartão apenas identifica essa parcela; não é uma nova despesa.':'Este consumo entra em “Despesas diretas SMS” da Dashboard, separado de Facebook e Google.')});
  const pendingGroups=new Map();for(const x of unclassified){const key=JSON.stringify([x.site,x.currency,x.reason]);if(!pendingGroups.has(key))pendingGroups.set(key,{...x,values:[]});pendingGroups.get(key).values.push(x.value);}const pending=[...pendingGroups.values()].map(({values,...x})=>({...x,value:sum(values),entries:values.length}));
  return {period,revision:s.revision,cutoff:domain.realized?.cutoff_date||null,rates:conferenceRates(s),items,unclassified:pending,financial_writes:0,external_reconciled:false,notice:'Valores registrados na dash para comparar com os relatórios do mês. Esta consulta não marca a conferência como concluída.',other_months_changed:false};
 }

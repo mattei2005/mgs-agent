@@ -17,7 +17,16 @@ class SourceIndependenceTests(unittest.TestCase):
   selectors={k:'service_account' for k in ['ARES_DRIVE_AUTH_MODE','MGS_DRIVE_AUTH_PRIMARY','MGS_GOOGLE_SHEETS_AUTH_MODE','MGS_META_APP_ROLES_GOOGLE_AUTH_MODE']}
   with patch.dict(os.environ,selectors),patch.object(sync,'load_env'),patch.object(sync,'load_service_account',return_value={'client_email':'mgsagent@mgs-core-prod.iam.gserviceaccount.com','project_id':'mgs-core-prod'}),patch.object(sync,'service_account_access_token',return_value='test-only-not-a-credential'),patch.object(sync,'api_json',side_effect=self.api):return sync.collect(self.config)
  def test_monthly_fixed_rate_does_not_block_fresh_quotes(self):
-  result=self.collect();self.assertEqual(result['values'],{BRL:5.2,CAD:1.4,GBP:1.3});self.assertEqual(result['google_writes'],0);self.assertEqual(result['spreadsheet_id'],'technical-sheet');self.assertEqual(result['extra_sources'][BRL]['range'],'B1')
+  result=self.collect();self.assertEqual(result['values'],{BRL:5.2,CAD:1.428,GBP:1.3});self.assertEqual(result['google_writes'],0);self.assertEqual(result['spreadsheet_id'],'technical-sheet');self.assertEqual(result['extra_sources'][BRL]['range'],'B1')
+ def test_cad_spread_once_from_raw_source_brl_and_gbp_preserved(self):
+  a=self.collect();b=self.collect()
+  self.assertEqual(a['values'],b['values']);self.assertEqual(a['values'][CAD],1.428)
+  self.assertEqual(a['extra_sources'][CAD]['raw_value'],1.4);self.assertEqual(a['extra_sources'][CAD]['multiplier'],'1.02')
+  self.assertEqual(a['values'][BRL],5.2);self.assertEqual(a['values'][GBP],1.3)
+  self.assertEqual(a['formulas'][CAD],'=GOOGLEFINANCE("USDCAD")')
+ def test_cad_source_already_adjusted_is_rejected_to_prevent_double_spread(self):
+  self.cells[2]['userEnteredValue']['formulaValue']='=GOOGLEFINANCE("USDCAD")*102%'
+  with self.assertRaisesRegex(RuntimeError,'quote_formula_changed'):self.collect()
  def test_manual_number_in_technical_source_is_rejected(self):
   self.cells[1]['userEnteredValue']={'numberValue':5.08}
   with self.assertRaisesRegex(RuntimeError,'quote_formula_changed'):self.collect()

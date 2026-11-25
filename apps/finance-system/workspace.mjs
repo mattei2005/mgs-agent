@@ -82,7 +82,7 @@ export const rates=[
  // Existing M2 calculation key: current Sheet EP82 is lineage, not a new deduction.
  {key:'principal|Agosto 2026|EW82',label:'RevShare M2',source:'EP82 · planilha principal (M2)',type:'percent',automatic:false,defaultValue:'0.05'},
  {key:'principal|CAIXA SINTETICO|J2',label:'USD → BRL',source:'F1 → Caixa J2',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDBRL") × 99%'},
- {key:'principal|Agosto 2026|H1',label:'USD → CAD · Rede1',source:'H1',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDCAD")'},
+ {key:'principal|Agosto 2026|H1',label:'USD → CAD · Rede1',source:'H1',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDCAD") × 102%'},
  {key:'principal|Agosto 2026|I1',label:'GBP → USD · YMonetize',source:'I1',type:'fx',automatic:false},
  {key:'principal|Agosto 2026|G1',label:'Preço por Artigo',source:'G1',type:'divisor',automatic:false},
  {key:'principal|Agosto 2026|J1',label:'Inválidos · ActiveView',source:'J1',type:'invalid',automatic:false},
