@@ -2,7 +2,13 @@
 
 Active capability authority: Rodolfo `1551755722700624003`. Publication/evidence: `/root/mgs-agent/reports/finance-prevention-release-1551755722700624003.md`. This supersedes the **not implemented** status of the first package in `finance-prevention-audit-1551747394356518933.md`, not its later recommendations.
 
-## Confirmed operational scope — Rodolfo 1551798171628212275
+## Current supersession — SMS and Geizian
+
+Rodolfo1575019978305044612 supersedes the six-item and absolute Rodolfo-only restrictions below only for a seventh **Gastos SMS Funnel** card and exact Geizian/partner access to the simple Conference HTML/assets/API. `docs/finance-conference-sms-geizian-cad.md` owns the decision; checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612` owns publication state. Keep the older technical review/trace/preview APIs Rodolfo-only and all unrelated access unchanged.
+
+Project saved SMS consumption once by fact identity, including signed official reconciliation, never prepaid purchases or receipt rows. Preserve source currency and stored conversion, show site/source/coverage, and explain when historical SMS already belongs to the Dashboard media total. Compare all original six cards byte-for-byte, reconcile SMS to real monthly additions or daily official receipts, and verify exact roles and desktop/mobile UI without financial writes. Consultation is not external closing confirmation.
+
+## Historical operational scope — Rodolfo 1551798171628212275
 
 The main monthly conference is limited to the spreadsheet's six distinct items: gross CAD Rede1; gross USD Rede2; gross USD AV; gross USD M2; Facebook spend; Google spend. Keep original currency and network distinctions. Rodolfo alone checks prior-month general-expense bills and updates those expenses; exclude that manual routine from this conference without removing expenses from calculations. Manager views update downstream from revenue/spend using existing rules: do not invent separate manager input or a second manual conference. This supersedes the prior combined expense/payroll/balance/vigency presentation as the desired main workflow, not its historical publication evidence or internal regression protections. Canonical source: `docs/finance-system-product-direction.md`, **Escopo simples da conferência mensal**. Record implementation status separately; user clarification is not proof that the UI has already been changed.
 

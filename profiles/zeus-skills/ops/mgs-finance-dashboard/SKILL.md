@@ -177,6 +177,8 @@ For authenticated PostgreSQL hosting, load `references/finance-system-postgresql
 
 ## Retrospective prevention audits
 
+**Conference SMS and exact Geizian consultation — Rodolfo1575019978305044612; automatic CAD spread1575021696442966117:** `/root/mgs-agent/docs/finance-conference-sms-geizian-cad.md` supersedes the six-item/absolutely Rodolfo-only conference boundary: add SMS consumption separately without reclassifying historical money, and allow the exact Geizian/partner identity to the simple consultation only. Technical review/trace/preview APIs remain Rodolfo-only. USD/CAD automatic uses raw Google Finance ×1.02 once in the collector; USD/BRL remains ×0.99 and all fixed rates win. Publication state belongs to checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612`, not this decision. Load the conference and quote references below for execution.
+
 For the published first preventive package (owner-only monthly review/provenance, mandatory release gate, first-failure GAM recovery), load `references/preventive-release-gate-and-review.md`. Authority: Rodolfo `1551755722700624003`. This is a read-only first closing delivery, not approval/freeze/settlement or the full vigency migration.
 
 For an audit of everything learned during a monthly closing and prevention for later months, load `references/monthly-prevention-audit.md`. It separates historical fixes from current controls and proposed features, requires the optional August fixture replay and month-boundary checks, and records acceptance of explained fractional-cent differences without inventing a blanket tolerance.

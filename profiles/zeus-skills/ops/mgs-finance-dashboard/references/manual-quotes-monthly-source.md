@@ -4,7 +4,13 @@
 
 Authority: Rodolfo1546975305216827412 and direct mid-turn corrections in thread1545426987756298340 on2026-09-08.
 
-## Independent provisional source — current runtime
+## Current USD/CAD spread supersession
+
+Rodolfo1575021696442966117 requires automatic USD/CAD = raw Google Finance ×1.02, applied once in `sync-quotes.py` after validating the unchanged raw C1 formula. Preserve raw value, multiplier and authority as quote provenance. USD/BRL already includes ×0.99 in B1 and must not be reduced twice; GBP and all fixed settlement rates remain untouched. `docs/finance-conference-sms-geizian-cad.md` owns the decision and checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612` owns activation evidence. The prior no-spread CAD values below are historical; source independence remains current.
+
+For historical rate questions, read the exact scenario/key/actor's rate-change audit. Distinguish percentage movement of USD/CAD from its reciprocal CAD→USD receipt effect; compute both with Decimal. A cumulative payable change requires an audited before/after bridge across exchange, rates, expenses and ledger; an approximate screenshot amount is not a snapshot, and the rate percentage alone cannot explain the total balance change.
+
+## Independent provisional source — preserved foundation
 
 Rodolfo1552011536011108493 authorized correcting the collector after legitimately fixing August USD/BRL at5.08. Do not restore GOOGLEFINANCE in the principal closing cell or propagate its fixed number to other months. The application already contained USD5.08 and GBP1.3357 as fixed/confirmed; preserve them rather than reapplying them. CAD was still auto and remains subject to its existing provisional lifecycle, not an inferred fully-fixed August month.
 
