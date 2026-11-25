@@ -1,0 +1,93 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+  "mode": "resume_safe",
+  "status": "waiting_resource",
+  "cause": "pc1_save_as_dialog_still_open_preserved",
+  "observed_at": "2026-11-25T19:40:49.250235+00:00",
+  "authority": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round33/authority-readback.json",
+    "original_command_message_id": "1563960055504838767",
+    "current_scope_message_id": "1575022093777637377",
+    "recovery_authority_message_id": "1569193434189668453",
+    "all_authority_gets_http_200": true,
+    "current_registry_authorized": true
+  },
+  "reconciliation": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round33/reconciliation.json",
+    "final_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round33/final-state.json",
+    "native_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+    "later_native_tick_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+    "later_tick_missing_layers_not_adopted": "H35 fresh UI, D2 recent events; D5 historical governed by existing separate request.",
+    "writer_lock_free": true,
+    "financial_workers": [],
+    "completed_financial_layers_replayed": false,
+    "live_sheet_revalidation_performed": false
+  },
+  "scope": {
+    "sheet_id": 794137639,
+    "mode": "active_tab_only",
+    "active_account_count": 51,
+    "pending_stage": "Historical D explicit Paid card instrument proof only",
+    "pending_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "archived_accounts_excluded": true,
+    "balance_views_enabled": false
+  },
+  "surface": {
+    "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round33/probe-receipt.json",
+    "approved_chrome": {
+      "pid": 18704,
+      "window_id": 983880
+    },
+    "approved_active_page_pixels": "Whats new in AdBlock; Meta Business Suite tab inactive",
+    "save_as_dialog_confirmed_in_pixels": true,
+    "unrelated_dialog_preserved": true,
+    "meta_authentication_challenge_demonstrated": false,
+    "meta_access_revalidated": false,
+    "auth_ready_claimed": false,
+    "vision_inspected_images": [
+      "approved.png",
+      "save-dialog-0.png"
+    ],
+    "input_actions": 0,
+    "tabs_created": 0,
+    "tabs_closed": 0,
+    "lease_free_readback": true,
+    "lease_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round33/lease-release.json"
+  },
+  "continuity": {
+    "queue_owner": "supervisor:1926596",
+    "queue_owner_alive_at_final_verification": true,
+    "queue_state": "running",
+    "attempts": 33,
+    "failures": 0,
+    "consumer_heartbeat": {
+      "at": 1795635484.2243876,
+      "phase": "dispatching",
+      "pid": 1926596
+    },
+    "consumer_schedule": "2-57/5 * * * *",
+    "retry_at": null,
+    "retry_scheduling_owner": "Existing supervisor consumes this result and applies resource backoff; worker did not mutate queue or dispatch.",
+    "next_step": "Reconcile native claim and both occurrence receipts; reacquire lease and inspect original Chrome/dialogs before input. Preserve unrelated Save As and original tabs. Resume only historical D for these five IDs using actual pixels, canonical narrow record_pc1_proof and exact contract pending-fields/readback. H35/D2 remain under ce11800d217d22dba6a58dcc. Do not repeat completed metrics, funding, invoices, H or business delivery; no old hardcoded adapter."
+  },
+  "side_effects": {
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "delivery_messages": 0,
+    "infrastructure_modified": false,
+    "local_diagnostic_artifacts_only": true
+  },
+  "business_complete": false,
+  "delivery_complete": false,
+  "independent_closure_not_claimed": true
+}
