@@ -9452,6 +9452,24 @@
       "updated_at": "2026-10-28T13:34:53+00:00"
     },
     {
+      "canonical_key": "finance.fx.automatic-cad-spread",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T05:44:18+00:00",
+      "id": "FINANCE-CAD-SPREAD-1575021696442966117",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "USD/CAD automático +2%; USD/BRL -1% e taxas fixas preservadas",
+      "updated_at": "2026-11-25T05:44:18+00:00"
+    },
+    {
       "canonical_key": "finance.native-sites-allocation",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -9609,6 +9627,24 @@
       "updated_at": "2026-10-04T18:28:20+00:00"
     },
     {
+      "canonical_key": "finance.conference.access.exact-rodolfo",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T05:44:18+00:00",
+      "id": "FINANCE-CONFERENCE-GEIZIAN-1575019978305044612",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Consulta simples Geizian e Rodolfo; APIs técnicas só Rodolfo",
+      "updated_at": "2026-11-25T05:44:18+00:00"
+    },
+    {
       "canonical_key": "finance.conference.quotes-receipt-reconciliation",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -9624,6 +9660,24 @@
       "superseded_by": null,
       "title": "Cotações na Conferência, aceite M2 e reconciliação de recebimentos",
       "updated_at": "2026-09-28T16:07:34+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-review.operational-scope",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T05:44:18+00:00",
+      "id": "FINANCE-CONFERENCE-SMS-1575019978305044612",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência mensal inclui consumo SMS como sétimo item sem nova despesa",
+      "updated_at": "2026-11-25T05:44:18+00:00"
     },
     {
       "canonical_key": "finance.august2026.correction.1551324490271695064",
@@ -11546,10 +11600,10 @@
       "kind": "decision",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-CONFERENCE-SMS-1575019978305044612",
       "title": "Conferência mensal: quatro receitas por rede/moeda e gastos FB/Google",
-      "updated_at": "2026-09-22T03:33:27+00:00"
+      "updated_at": "2026-11-25T05:44:18+00:00"
     },
     {
       "canonical_key": "finance.company-expenses.sb-tech-bot.currency",
@@ -16628,10 +16682,10 @@
       "kind": "policy",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-CONFERENCE-GEIZIAN-1575019978305044612",
       "title": "Conferência mensal exclusiva do login rodolfo",
-      "updated_at": "2026-09-22T12:12:40+00:00"
+      "updated_at": "2026-11-25T05:44:18+00:00"
     },
     {
       "canonical_key": "finance.gam.mapping.dicasfinancas",
@@ -16783,10 +16837,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-account-scope-active51-1575022093777637377",
       "title": "Digital Trust:197 contas com pagamento do Excel;incluir142 sem excluir55",
-      "updated_at": "2026-11-25T05:25:37+00:00"
+      "updated_at": "2026-11-25T05:39:59+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.account-scope",
@@ -16805,6 +16859,24 @@
       "superseded_by": "finance-meta-account-scope-197-1575016959395893258",
       "title": "Digital Trust: incluir oito contas com gasto, total55 no mesmo workbook e refresh",
       "updated_at": "2026-11-25T05:25:37+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.account-scope",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "cron:2ee720363d7d",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T05:39:59+00:00",
+      "id": "finance-meta-account-scope-active51-1575022093777637377",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cron Meta somente51Contas com saldo;146arquivadassemrefresh",
+      "updated_at": "2026-11-25T05:39:59+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.pay-now-column",
@@ -16836,10 +16908,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-balance-views-active-only-1575022093777637377",
+      "title": "Contas Meta:saldo zero em aba separada;escopo197 preservado na base técnica",
+      "updated_at": "2026-11-25T05:39:59+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.balance-views",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "cron:2ee720363d7d",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T05:39:59+00:00",
+      "id": "finance-meta-balance-views-active-only-1575022093777637377",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Contas Meta:saldo zero em aba separada;escopo197 preservado na base técnica",
-      "updated_at": "2026-11-25T05:32:57+00:00"
+      "title": "Contas com saldo vira aba canônica;zeros e base antiga congeladossemretornoautomático",
+      "updated_at": "2026-11-25T05:39:59+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.live-funding-regroup",
@@ -17994,5 +18084,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T05:32:57+00:00"
+  "updated_at": "2026-11-25T05:44:18+00:00"
 }

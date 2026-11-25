@@ -1,5 +1,7 @@
 # Sistema financeiro MGS — direcionamento de produto
 
+**Supersessão confirmada1575019978305044612/1575021696442966117:** `docs/finance-conference-sms-geizian-cad.md` acrescenta SMS como sétimo cartão da Conferência, libera consulta simples ao usuário exato Geizian/partner além de Rodolfo/owner e determina USD/CAD automático ×1,02, preservando taxas fixas. Isso supersede abaixo somente o limite de seis itens, a exclusividade absoluta de Rodolfo e o CAD live sem spread; execução deve ser verificada no checkpoint e recibo de publicação.
+
 **Vínculos/gestores confirmados1547052028663169105:** fonte canônica `docs/finance-account-ownership.md`. Nove contas ajustadas em setembro: Vizioid ativo/MGS; Yolokfx com cinco operadores; Mattei1→GameZoneAd; Infinitynexx titular Joe e conta G001 Ícaro. Pendências anteriores dessas duas últimas contas explicitamente supersedidas. Readback de cadastro, gastos e interface concluído.
 
 **Auditoria integral1548008533608636527:** a navegação sem mês explícito agora abre a competência Eastern corrente dentro do intervalo registrado, em vez de voltar para agosto. As páginas de gestor preservam todos os blocos-base e incluem blocos dinâmicos de gastos de contas nativas; testes com contagem fixa no layout histórico foram corrigidos para validar API/render atual.

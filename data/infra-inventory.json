@@ -72022,6 +72022,76 @@
       "job_unchanged": "2ee720363d7d;08:02/14:02/21:02ET",
       "report_infra_status": "sent_get_verified",
       "report_infra_message_id": "1575021680387031222"
+    },
+    {
+      "id": "meta-cron-active-only-1575022093777637377",
+      "agent": "zeus",
+      "type": "cron-scope-and-canonical-sheet-cutover",
+      "source_message_id": "1575022093777637377",
+      "source_thread_id": "1563926766286803004",
+      "status": "configured_verified_not_full_refresh",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-active-only-1575022093777637377/receipt.json",
+      "updated_at": "2026-11-25T00:41:04.079390-05:00",
+      "paths": [
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "cron:zeus:2ee720363d7d",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/SKILL.md",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/references/recurring-refresh.md",
+        "data/knowledge-registry.json",
+        "data/agent-checkpoints.json"
+      ],
+      "verification": {
+        "status": "cron_active_tab_only_configured_verified",
+        "source_message_id": "1575022093777637377",
+        "active_accounts": 51,
+        "active_sheet_id": 794137639,
+        "active_sheet_title": "Contas com saldo",
+        "h_targets": 35,
+        "archived_accounts": 146,
+        "archive_sheet_id": 1293802358,
+        "historical_base_sheet_id": 271321738,
+        "archive_and_historical_base_unchanged": true,
+        "all_financial_values_preserved": true,
+        "only_two_active_header_notes_changed": true,
+        "recurring_job_id": "2ee720363d7d",
+        "schedule": {
+          "kind": "cron",
+          "expr": "2 8,14,21 * * *",
+          "display": "2 8,14,21 * * *"
+        },
+        "timezone": "America/New_York",
+        "next_run_at": "2026-11-25T08:02:00-05:00",
+        "job_enabled": true,
+        "job_field_diff": [
+          "prompt"
+        ],
+        "automatic_reactivation": false,
+        "double_view_publisher_disabled": true,
+        "native_validator": "snapshot_readback_pass",
+        "funding_consumer_dry_run_accounts": 51,
+        "h_prepare_targets": 35,
+        "archived_h_targets": 0,
+        "procedure_readback": [
+          {
+            "file": "SKILL.md",
+            "mirror_equal": true,
+            "sha256": "a29500de075136f8bd895efa77dd2a21f3f4653d5dd320593ad2350228ece355"
+          },
+          {
+            "file": "references/recurring-refresh.md",
+            "mirror_equal": true,
+            "sha256": "6a30beb7fe575a6b70ec9729f666da356d158897c3da50eb0a3afefc941f13c6"
+          }
+        ],
+        "new_full_financial_refresh_performed": false,
+        "pc1_authentication_revalidated": false,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "billing_changes": 0,
+        "verified_at": "2026-11-25T00:41:04.079390-05:00"
+      },
+      "report_infra_status": "sent_get_verified",
+      "report_infra_message_id": "1575023509355241553"
     }
   ],
   "profile_skill_references": [
