@@ -36,6 +36,27 @@ function reviewNetwork(f,a,period,currency){
  }
  return f.partner;
 }
+// Recharge observations are cash/prepaid records, never a second consumption expense.
+export function monthlySmsRecharges(s){
+ const period=periodInfo(s.id.slice(10)).id,entries=[],seen=new Set();
+ const add=(id,date,amount,currency,label,source)=>{
+  if(seen.has(id)||!['BRL','USD','CAD','GBP'].includes(currency)||!present(amount)||fixed(amount)<0n||date!==null&&!validDate(period,date))throw Object.assign(Error('Recarga registrada incompatível com a competência'),{status:409});
+  seen.add(id);if(fixed(amount)===0n)return;entries.push({id,date,amount:sum([amount]),currency,label,source});
+ };
+ for(const a of s.additions){
+  if(period>='2026-10'&&a.kind==='prepaid_credit'&&a.provider==='SMS Funnel'&&a.status==='confirmed'&&a.period===period){
+   add(a.id,a.date,a.amount,a.currency,a.label||'Recarga SMS Funnel','Crédito pré-pago registrado');
+  }else if(period<'2026-10'&&a.kind==='expense'&&a.id==='company|121'&&a.archived===true&&a.reclassification==='direct_monthly_cost'){
+   if(Array.isArray(a.charges)&&a.charges.length){
+    if(decimalCompare(a.charges.map(c=>c.amount),a.amount).status!=='pass')throw Object.assign(Error('Recargas históricas divergem do total registrado'),{status:409});
+    for(const c of a.charges)add(a.id+':'+c.id,c.date||null,c.amount,a.currency,'Recarga SMS Funnel','Histórico de recargas');
+   }else add(a.id,null,a.amount,a.currency,'Total mensal registrado · datas não informadas','Histórico de recargas');
+  }
+ }
+ entries.sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')||a.id.localeCompare(b.id));
+ const currencies=[...new Set(entries.map(e=>e.currency))].sort();
+ return {entries,totals:currencies.map(currency=>({currency,value:sum(entries.filter(e=>e.currency===currency).map(e=>e.amount))})),note:'Observação para controle: recargas de crédito registradas neste mês. Não são somadas ao consumo de SMS nem descontadas novamente do resultado.'};
+}
 export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots:[]}}){
  const period=periodInfo(s.id.slice(10)),domain=s.result.domain,lookup=new Map(source.map(c=>[c.id,c])),pm=periodModel(model,period.id);
  const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period.id==='2026-08'?lookup.get(key)?.input:'')??''}])),s.additions,period.id);
@@ -80,7 +101,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  }
  const totals=values=>[...values].sort(([a],[b])=>a.localeCompare(b)).map(([currency,vs])=>({currency,value:sum(vs)}));
  const items=[...buckets.values()].map(b=>({id:b.id,label:b.label,currency:b.currency,totals:totals(b.values),...(b.currency?{breakdown:summarizeDeductions(totals(b.values),b.deductions)}:{}),sites:[...b.sites].sort(([a],[b])=>a.localeCompare(b,'pt-BR')).map(([site,v])=>({site,totals:totals(v),...(b.currency?{breakdown:summarizeDeductions(totals(v),b.deductions.filter(x=>x.site===site))}:{})})),status:b.entries?'to_check':'no_data',entries:b.entries}));
- const smsItem=items.find(x=>x.id==='sms');Object.assign(smsItem,{converted_totals:sms.seen.size?[{currency:'USD',value:sum(sms.usd)}]:[],sources:[...sms.sources].sort(),dates:[...sms.dates].sort(),note:'Consumo de SMS, não recargas de crédito. '+(sms.monthly?'Neste mês, o SMS já está incluído em “Gastos com mídia” da Dashboard. O cartão apenas identifica essa parcela; não é uma nova despesa.':'Este consumo entra em “Despesas diretas SMS” da Dashboard, separado de Facebook e Google.')});
+ const smsItem=items.find(x=>x.id==='sms');Object.assign(smsItem,{recharges:monthlySmsRecharges(s),converted_totals:sms.seen.size?[{currency:'USD',value:sum(sms.usd)}]:[],sources:[...sms.sources].sort(),dates:[...sms.dates].sort(),note:'Consumo de SMS, não recargas de crédito. '+(sms.monthly?'Neste mês, o SMS já está incluído em “Gastos com mídia” da Dashboard. O cartão apenas identifica essa parcela; não é uma nova despesa.':'Este consumo entra em “Despesas diretas SMS” da Dashboard, separado de Facebook e Google.')});
  const pendingGroups=new Map();for(const x of unclassified){const key=JSON.stringify([x.site,x.currency,x.reason]);if(!pendingGroups.has(key))pendingGroups.set(key,{...x,values:[]});pendingGroups.get(key).values.push(x.value);}const pending=[...pendingGroups.values()].map(({values,...x})=>({...x,value:sum(values),entries:values.length}));
  return {period,revision:s.revision,cutoff:domain.realized?.cutoff_date||null,rates:conferenceRates(s),items,unclassified:pending,financial_writes:0,external_reconciled:false,notice:'Valores registrados na dash para comparar com os relatórios do mês. Esta consulta não marca a conferência como concluída.',other_months_changed:false};
 }

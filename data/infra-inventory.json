@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T06:12:45.870036+00:00",
+    "updated_at": "2026-11-25T06:37:54.761733+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72164,6 +72164,35 @@
         "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344/read-history.py": "94b7c17239a86166bbe94f540965f30f57bc2b2cf40d43b8180cafac2277870e",
         "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344/summary.json": "f06daecef7f0339f386845bd2192f60efe716690483988b0b2002bab33cfb8ec"
       }
+    },
+    {
+      "id": "zeus-finance-sms-recharges-1575031561391439952",
+      "agent": "zeus",
+      "type": "readonly_finance_presentation",
+      "status": "published_and_validated",
+      "authorization_message_id": "1575031561391439952",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T06:37:54.761733+00:00",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-recharges-1575031561391439952",
+      "report_path": "reports/finance-sms-recharges-1575031561391439952.md",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "backup": "/root/mgs-agent/apps/finance-system/private/releases/sms-recharges-1575031561391439952",
+      "financial_writes": 0,
+      "financial_scenarios_preserved": 319,
+      "tests": {
+        "node": 302,
+        "python": 255,
+        "conference_views": 16,
+        "manager_views": 10
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/simple-review.mjs": "0df7f84e1deabc6c267058939b23d2bf36b91385b5e3c1906b7500ab7b567c97",
+        "/root/mgs-agent/apps/finance-system/public/review.js": "22fcf4348a612a759bf94f160765f51039b86cdecc818684c5abac4caeb807b5",
+        "/root/mgs-agent/apps/finance-system/tests/simple-review.test.mjs": "ece7cf67d9d999cc67aa57c2b757b439daff086b3a6efc4bea8ac7bb52ae2d48",
+        "/root/mgs-agent/docs/finance-conference-sms-geizian-cad.md": "ff4a661d13a324c47f0e6d1e9c1848d271c5faef338875c9c641b1b99eb36d14",
+        "/root/mgs-agent/reports/finance-sms-recharges-1575031561391439952.md": "5f17896d7d7ab69e260469097e6b71f958f483a5f68ac46e620a241c97d466ee",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/preventive-release-gate-and-review.md": "1940ad99c7a86ca5b3a2610aa578776f22a454f5b9ac472e946fb8b6d58853ca"
+      }
     }
   ],
   "profile_skill_references": [
@@ -76929,6 +76958,27 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/simple-review.mjs",
+      "size_bytes": 12199,
+      "modified_at": "2026-11-25T06:33:56.767221+00:00",
+      "sha256": "0df7f84e1deabc6c267058939b23d2bf36b91385b5e3c1906b7500ab7b567c97",
+      "description": "Readonly monthly SMS recharge observations1575031561391439952"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/review.js",
+      "size_bytes": 7639,
+      "modified_at": "2026-11-25T06:33:58.801223+00:00",
+      "sha256": "22fcf4348a612a759bf94f160765f51039b86cdecc818684c5abac4caeb807b5",
+      "description": "Readonly monthly SMS recharge observations1575031561391439952"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/simple-review.test.mjs",
+      "size_bytes": 16044,
+      "modified_at": "2026-11-25T06:34:00.684225+00:00",
+      "sha256": "ece7cf67d9d999cc67aa57c2b757b439daff086b3a6efc4bea8ac7bb52ae2d48",
+      "description": "Readonly monthly SMS recharge observations1575031561391439952"
     }
   ],
   "skills_mgs": [

@@ -24,7 +24,7 @@ Ao expandir **Ver por site e recargas**, exibir **Observação — recargas do m
 - Sem detalhamento de datas, apresentar o total mensal na moeda original com **Data não informada**; data da conferência não é data de recarga. Não converter o antigo USD de agosto em um pagamento BRL inventado.
 - Sem registros: **Nenhuma recarga registrada nesta competência**, não afirmação de inexistência de pagamentos no fornecedor. Permitir expandir um cartão que tenha recarga mesmo sem consumo/site.
 - Manter o acesso exato Rodolfo/Geizian já autorizado. A observação acompanha os registros salvos, sem campo extra de edição.
-- Estado/publicação: checkpoint `ZEUS-FINANCE-SMS-RECHARGES-1575031561391439952`; evidência privada `apps/finance-system/private/sms-recharges-1575031561391439952/`.
+- Publicado/validado: `reports/finance-sms-recharges-1575031561391439952.md`. Continuidade: checkpoint `ZEUS-FINANCE-SMS-RECHARGES-1575031561391439952`; evidência privada `apps/finance-system/private/sms-recharges-1575031561391439952/`.
 
 ## Consulta exata de Geizian
 
