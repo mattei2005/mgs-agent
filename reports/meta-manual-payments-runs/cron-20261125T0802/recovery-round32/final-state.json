@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-11-25T19:30:57.769602+00:00",
+  "job_id": "2ee720363d7d",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T14:02:00-05:00",
+  "next_run_at": "2026-11-25T21:02:00-05:00",
+  "writer_lock_free": true,
+  "financial_workers": [],
+  "pending_D": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H_new_account_fields": [],
+  "pending_ledger_entries_present": [],
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1907064",
+    "attempts": 32,
+    "failures": 0,
+    "due": 1795634836.8648934,
+    "lease_until": 1795636087.5584054
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795634887.5516682,
+    "phase": "dispatching",
+    "pid": 1907064
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "related_later_tick_queue": [
+    {
+      "key": "ce11800d217d22dba6a58dcc",
+      "state": "waiting_resource",
+      "owner": null,
+      "due": 1795635102.7932277,
+      "attempts": 1,
+      "failures": 0
+    }
+  ]
+}
