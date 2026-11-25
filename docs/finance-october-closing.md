@@ -25,15 +25,23 @@ Evidência `apps/finance-system/private/october-close-1575041627167391744/`; rel
 - Custos registrados:1149lançamentos positivos conta/dia rastreados até input/site/data;38contas com sufixoG conciliadas ao gestor;2108controles gestor/site/dia e68mensais sem diferença em centavos. Google não recebeu gestor inventado: respeitada a disposição explícita Mattei1→GameZoneAd sem gestor externo do contrato de contas.
 - Readback de fonte integral FB/Google idêntico no fim; APIs reais dos cinco gestores, owner-preview e quatro vistas Conferência Rodolfo/Geizian desktop/mobile confirmados. Não houve nova coleta nos provedores de mídia; a comparação usa o fechamento fornecido e os recibos/fatos já registrados na Dash.
 
-## Fase2 — M2: divergência confirmada, aguardando aplicação
+## Fase2 — M2: aplicada e validada
 
-Continuação autorizada1575047241696288920. Relatório `reports/finance-october-m2-review-1575047241696288920.md`.
+Supersessão: Rodolfo1575050438892585082 confirmou a proposta deoutubro; o estado anterior deaguardando aplicação está encerrado. Relatório `reports/finance-october-m2-complete-1575050438892585082.md`.
 
-- Wantabrand principal: USD21.29brutos (01/10=12.68;02/10=8.61); FinanceWantabrand: USD0.49em27/10. TotalUSD21.78na fonte; nenhum lançamento positivoM2naDash.
-- Fonte inteira62controles domínio/dia, releitura idêntica; NETWORKPubGuru confirmou os valores diários aoscentavos.22janelas de atribuição semlacunas confirmamBOT, não a geografia operacional.
-- Proposta **ainda não autorizada para aplicação**: repetir em outubro os destinos de setembro, principalUS-CC-ES/BOT/G001 eFinanceUS-CC-EN/BOT/G001, preservando os valores da fonte e as trêsdatas reais. A aprovação1562663899969617922era limitada a setembro; não propagar por inferência.
-- Falta confirmar a atribuição específica de outubro e o lançamento dosUSD21.78. Nenhuma escrita financeira/Google neste ponto.
+- Wantabrand principal:USD21.29,US-CC-ES/BOT/G001;FinanceWantabrand:USD0.49,US-CC-EN/BOT/G001. TotalUSD21.78, trêsdatas reais01/10,02/10,27/10 e62controlesexatos.
+- Aplicação2179→2180,audit7703;backupdual/restoreisolado,recoveryimutável,idempotência/API/DOMconfirmados. Source/gastos/CAD/outrascompetências/ledger preservados;FinancepermaneceINATIVO. RemuneraçãoÍcaro recalculada pela regra7%; nenhum pagamento executado.
+- Esta atribuição vale somenteoutubro. Setembro continua com sua confirmação própria e novembro/futuro não recebe cópia dessas receitas/regras pontuais.
+
+## Fase3 — Rede2: auditada, correção ainda não autorizada
+
+Relatório `reports/finance-october-rede2-review-1575050438892585082.md`;681linhasfonte→304grupos/fatos;63diferenças visíveis gestor/diaem18datas.
+
+- A fonteRede2somaUSD209970.26600474482565033512. Os fatosUSD já salvos dos mesmos sites somamUSD210063.28208955383762231863;deltaexato−93.01608480901197198351.
+- O cartãoRede2mostraUSD209524.645149672887613645 porqueUSD538.636939880950008666 deFincgriffinjá salvos estão fora docartão,como origemnãoidentificada. Issoéclassificação visual,não538.64de receita nova.
+- Proposta:ajustar grossUSD deCPV,Fincgriffin eGameZoneAd aosdias/gestores dafonte e identificara origemUSD Fincgriffin comoRede2naConferência;preservarCAD,catálogo/percentuais,atribuições existentes,gastos,M2 eledger. CarCreditAdjá coincideaocentavo epermanecepreservado.
+- Simulação semwrite passouos5gestores/cartões;correção recalculará resultados/remuneração pelas regrasexistentes. A diferença devalores exibidos totaliza−USD93.01,enquantoarredondar odeltaexato resulta−USD93.02;aplicarvaloresoriginais,nãoajusteartificial.
 
 ## Próximo ponto
 
-Concluir a decisão/aplicaçãoM2 antes de avançar para **Rede2** e **Rede1**, ainda não conferidas. AV está resolvida pela confirmação do titular e ausência de receita na Dash; não exigir outro relatórioAV sem nova divergência.
+Obter confirmação e concluirRede2 antes de **Rede1**, ainda não conferida. AV está resolvida pela confirmação do titular e ausência de receita na Dash; não exigir outro relatórioAV sem nova divergência.

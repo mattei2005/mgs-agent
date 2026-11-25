@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T02:28:32-05:00",
+    "updated_at": "2026-11-25T08:01:08.075829+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72280,6 +72280,64 @@
         "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/m2-read.py": "868a0308c295a3a4e44e66733cfc60c07c2cfc853ea83bb8f6d16359d33cf760",
         "/root/mgs-agent/docs/finance-october-closing.md": "9de371a1b7c3077bbf722ad212ecf51252bd118d1da12dbc1bba6b18a930046a",
         "/root/mgs-agent/reports/finance-october-m2-review-1575047241696288920.md": "64cdd4708915ea375ad941fb58660a42a48b1488366507ced9f184f5d709ef3f"
+      }
+    },
+    {
+      "id": "zeus-finance-october-m2-1575050438892585082",
+      "agent": "zeus",
+      "type": "monthly_revenue_correction_and_next_phase_audit",
+      "status": "m2_completed_rede2_proposal_pending",
+      "authorization_message_id": "1575050438892585082",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T08:01:08.075829+00:00",
+      "canonical_source": "docs/finance-october-closing.md",
+      "report_path": "reports/finance-october-m2-complete-1575050438892585082.md",
+      "next_report": "reports/finance-october-rede2-review-1575050438892585082.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082",
+      "backup": {
+        "pass": true,
+        "authority": "1575050438892585082",
+        "remote_backup": "/home/zeus/mgs-finance-backups/m2-october-1575050438892585082/finance-before.dump",
+        "local_backup": "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/finance-before.dump",
+        "sha256": "3be751621bac160476dbc49c783dce214fdec8bd076fc8eaaf3b4702068d324c",
+        "bytes": 231217828,
+        "restored_database": "mgs_finance_m2oct_1575050438892585082",
+        "stage": "/home/mgsfinance/stage-m2oct-1575050438892585082",
+        "stage_files": 516,
+        "scenario_count": 319,
+        "scenario_fingerprints_equal": true,
+        "production_financial_writes": 0,
+        "retained_restore_database": true,
+        "recovery": "Python3.10 no hashlib.file_digest; streamed SHA256, verified existing copy, resumed stage only without repeating dump/restore"
+      },
+      "financial_result": {
+        "period": "2026-10",
+        "added_m2_usd": "21.78",
+        "entries": 3,
+        "controls": 62,
+        "revision_before": 2179,
+        "revision_after": 2180,
+        "audit_id": "7703",
+        "ledger_unchanged": true,
+        "other_scenarios_unchanged": true
+      },
+      "browser_checks": 16,
+      "rede2_applied": false,
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/runner.mjs": "dbe36e32689e6ca4484616ef57ae4753af0781704620cb0ad72552f43d2701c7",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/browser.mjs": "2eff1d6298f6103bc0d5be7ae9133c1ef3216b4a4001b6c3396f17060d34678a",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/backup.py": "202ab430edd9efc0175c2e6c8782a69cc78d5875c69a80c2560c8d03b55fc745",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/run-browser.py": "6ef6da6c329fe54ac2b3deb2212975b63fc8b84f71bd196505dc0106f227adb2",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/prepare.py": "1e776cd143cfaf05588ea880ce3b5d972200042c6bc9178dc88dadbeffb2ad85",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/resume-stage.py": "fdcd998683103e23a11d2f1d21e6b9469aaf209b4994cb2896905d710270ae08",
+        "/root/mgs-agent/apps/finance-system/private/m2-october-1575050438892585082/run.py": "5f2207b2da97807ef7b2e1afa56eef20677a2d0bf71e5dbe45eb3fdc68e2c325",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/rede2-read.py": "b5d5891271af39775b9ecca577c2a0b3e77973d9e3fafde0be1a85db4f4115b4",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/rede2-compare.py": "54624459f42f80e46721da4a0504b722e90e43530afceb0d40b9f1edbdc0b33c",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/rede2-simulate.mjs": "fb16e852d1fd2b733328311c6b7595cf33b31b7fc26427433201e9b9704c998f",
+        "/root/mgs-agent/docs/finance-october-closing.md": "2d59a78715ade7abdaf7dca427f71ce86fda389fc02f4ad287f823b90f1f1d26",
+        "/root/mgs-agent/reports/finance-october-m2-complete-1575050438892585082.md": "20dc81595854834d136b218bc2b65a099bb6e8e042518f02b5aa0ff77a7df0e0",
+        "/root/mgs-agent/reports/finance-october-rede2-review-1575050438892585082.md": "22ab6a6815910485e8c81696c64a090f86bb0ae8ba032a38728849e005668ef6",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/pubguru-m2-revenue-reconciliation.md": "78ff290ca288416ced17271da64bae004d623df646d253db5b71720bde94e455"
       }
     }
   ],
