@@ -9,11 +9,27 @@ import json
 
 PATH = '/root/.hermes/profiles/ares/scripts/shein-campaign-creation-weekly.py'
 s = importlib.util.spec_from_file_location('weekly', PATH)
+assert s is not None and s.loader is not None
 w = importlib.util.module_from_spec(s); s.loader.exec_module(w)
 p = w.d.load(w.POLICY)
 
 
 class WeeklyTests(unittest.TestCase):
+    def test_wrapper_exact_target_and_arguments(self):
+        import os
+        wrapper = Path(PATH).with_name('shein-campaign-creation-weekly-cron.py')
+        sp = importlib.util.spec_from_file_location('weekly_wrapper', wrapper)
+        assert sp is not None and sp.loader is not None
+        m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+        class Resolver:
+            @staticmethod
+            def resolve(_): return {'python': '/usr/bin/python3'}
+        class Loader:
+            def exec_module(self, module): module.resolve = Resolver.resolve
+        with patch.object(m.importlib.util,'module_from_spec',return_value=Resolver()),patch.object(m.importlib.util,'spec_from_file_location',return_value=type('S',(),{'loader':Loader()})()),patch.object(m.sys,'argv',['wrapper','--validate-live']),patch.object(m.os,'execv') as ex,patch.dict(os.environ,{},clear=False):
+            m.main()
+            ex.assert_called_once_with('/usr/bin/python3',['/usr/bin/python3',PATH,'--validate-live'])
+            self.assertEqual(os.environ['HERMES_PROFILE'],'ares')
     def test_closed_previous_week(self):
         a,b=w.period(datetime.fromisoformat('2026-11-30T07:02:25-05:00'))
         self.assertEqual(a.isoformat(),'2026-11-23T00:00:00-05:00')

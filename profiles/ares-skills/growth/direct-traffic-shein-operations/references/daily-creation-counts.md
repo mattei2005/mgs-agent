@@ -2,7 +2,7 @@
 
 Use para contar campanhas novas por gestor/site, não para performance ou receita. Fonte ativa: `/root/mgs-agent/data/ares/meta-ads/policies/shein-campaign-creation-daily.json`; executor `/root/.hermes/profiles/ares/scripts/shein-campaign-creation-daily.py`; wrapper `shein-campaign-creation-cron.py`.
 
-- Resolva os 36 vínculos pelo catálogo SHEIN canônico e valide seis sites × seis gestores, unicidade e scopes de domínio/conta antes da Meta. Leia a identidade e BM live de cada conta; não amplie por capacidade do token.
+- Resolva os vínculos pelo catálogo SHEIN canônico e pela seleção aprovada apontada na política vigente; derive a cardinalidade dessa fonte, sem fixar 36 ou assumir uma única conta por célula gestor/site. Valide seis sites × seis gestores, unicidade e scopes de domínio/conta antes da Meta. Leia a identidade e BM live de cada conta; não amplie por capacidade do token.
 - Conte IDs únicos por `created_time` convertido para Eastern, não por data no nome ou início da veiculação. Inclua clones/duplicações e estados aceitos. O edge rejeita `DELETED` como filtro; use os estados aprovados do contrato, sem prometer os objetos não expostos pela API.
 - Separe gestor responsável pela conta da pessoa que executou a criação. Autor desconhecido não deve ser inventado a partir de ownership.
 - Preserve snapshot/corte e cursores por conta para retomar somente o restante. Dados ausentes são `n/d`, nunca zero. Reconcilie totais de gestores, sites e IDs únicos.
@@ -10,6 +10,14 @@ Use para contar campanhas novas por gestor/site, não para performance ou receit
 - Publique na thread registrada via bot Ares com outbox/nonce e GET exato. Não usar renderer financeiro, anexos, nova thread ou footer de scheduler; não alterar Meta nem D-1/Intraday.
 - Resolva o Python pelo helper canônico `/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py`, como no Diário financeiro; nunca interprete a primeira linha do launcher Hermes como Python. O launcher nativo pode ter shebang de shell e exige a seleção PM vigente. Após mudar o wrapper, teste sua entrada real com ambiente mínimo de cron e `--help`, rejeição de `/bin/sh`, falha sem fallback, passagem literal de argumentos e identidade do profile; então execute o slot pendente pelo mesmo runner e confirme GET/outbox, sem recriar a agenda. A regressão é `test_ares_shein_creation_daily.py`.
 - Antes de mexer na agenda, inventariar oito datas globais, excluir só o próprio job no pós-write e manter lock/deadline/quotas. O root cron é determinístico, sem LLM; não criar cópia no cron Hermes.
+
+## Fechamento semanal por gestor
+
+- Resolva a recorrência semanal pela política `data/ares/meta-ads/policies/shein-campaign-creation-weekly.json`; ela é independente do Diário18h08 e da planilha. O runner `shein-campaign-creation-weekly.py` reutiliza somente Collector/resolve/aggregate/deliver do produto de contagem, sem chamar o hook Google ou o main diário.
+- Conte a semana anterior completa em America/New_York: segunda00h00 inclusiva até segunda seguinte00h00 exclusiva. Não some relatórios diários parciais. Use created_time e IDs únicos, mantendo as ressalvas de autoria/objetos expostos da API e n/d para consultas incompletas.
+- Preserve snapshot, cursores e outbox próprios por início da semana. No replay de uma publicação, reconcilie o intent antes de resolver credenciais/coletar; não repita POST ambíguo. A validação live não publica; a agenda publica somente na origem registrada.
+- Valide o wrapper público real e exija no help o nome do runner semanal. Em reuso, substitua o caminho absoluto completo, não apenas o basename entre aspas: uma substituição que não encontra o literal pode manter o main diário e passar um teste superficial de argumentos. Cubra o alvo exato no teste do execv, além de argumentos/profile. Regressões: `tests/test_ares_shein_creation_weekly.py` e `tests/test_ares_shein_creation_daily.py`.
+- Para alterar horário, audite oito datas globais pelo inventário atual e recalcule o recorte semanal; não herde a escolha do Diário. Preserve baseline excepcional, stagger, lock independente, timeout e pre/postaudit. A política define o horário vigente; não criar um segundo produtor Hermes para o mesmo fechamento.
 
 ## Planilha mensal dos seis sites SHEIN e fechamento D-1
 

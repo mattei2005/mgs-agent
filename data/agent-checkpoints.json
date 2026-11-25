@@ -3433,12 +3433,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-WEEKLY-CREATION-1575049871080030280",
-      "next_step": "Validar janela semanal, runner, leitura live e cron com auditoria global",
-      "objective": "Relatorio semanal SHEIN por gestor, segunda cedo, semana fechada Eastern",
+      "next_step": "Primeira execucao30/11/2026 07h02Eastern;semana23a29/11;envio futuro ainda nao executado",
+      "objective": "Relatorio semanal SHEIN por gestor, segunda07h02Eastern, semana fechada",
       "source": "data/ares/meta-ads/policies/shein-campaign-creation-weekly.json",
-      "state": "preflight; reutilizar coletor diario sem alterar agenda existente",
+      "state": "installed_verified; 38/38 contas na validacao live;11testes semanais+13diarios;agenda root unica;pre/postaudit pass;diario e sheet preservados",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-11-25T07:26:46+00:00"
+      "updated_at": "2026-11-25T07:34:05+00:00"
     },
     {
       "agent": "ares",
@@ -12478,5 +12478,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T07:30:07+00:00"
+  "updated_at": "2026-11-25T07:34:05+00:00"
 }
