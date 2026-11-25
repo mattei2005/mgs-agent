@@ -6,6 +6,12 @@
 - Rodolfo `1575021696442966117`, mesma thread: manter USD/BRL live menos 1% e acrescentar 2% no USD/CAD live.
 - Publicado e validado: `reports/finance-conference-sms-geizian-cad-1575019978305044612.md`, release `conference-sms-1575019978305044612` committed. Continuidade: checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612`; evidências em `apps/finance-system/private/conference-sms-1575019978305044612/`.
 
+## Apresentação desde novembro/2026 — supersessão delimitada
+
+Rodolfo `1575226305702797474` aprovou retirar a apresentação em BRL fora de Despesas Gerais desde `2026-11`, preservando CAD. A decisão canônica é `docs/finance-november-display-currencies.md`; a publicação é verificada pelo checkpoint `ZEUS-FINANCE-USD-NOV-1575226305702797474`.
+
+Isso supersede, somente nessa faixa de competências, as instruções abaixo de mostrar consumo e observações de recarga em BRL na Conferência. O consumo usa o USD calculado e salvo, tanto no agregado quanto por site; não recebe nova conversão. Recargas podem ser apresentadas como equivalentes USD de controle, explicitando a cotação da competência e conservando as moedas/valores originais em Despesas Gerais e no armazenamento. Outubro e anteriores, CAD, registros, regras de consumo e ausência de dupla dedução permanecem intactos.
+
 ## Conferência mensal
 
 Supersede o limite de seis itens de `1551798171628212275` somente para acrescentar **Gastos SMS Funnel** como sétimo item. Preservar os quatro cartões de receita, Facebook e Google, moedas e descontos existentes.
