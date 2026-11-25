@@ -1,0 +1,34 @@
+{
+  "status": "balance_views_published_validated",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/balance-views-20261125T003141415048",
+  "authority_message_id": "1575020113722212353",
+  "source_accounts": 197,
+  "main_accounts": 51,
+  "zero_accounts": 146,
+  "main_sheet_id": 794137639,
+  "zero_sheet_id": 1293802358,
+  "criterion": "I — Saldo a pagar: only numeric zero, unknown retained in main",
+  "source_values_notes_formulas_unchanged": true,
+  "unrelated_sheets_unchanged": true,
+  "all_view_account_rows_exact": true,
+  "all_ids_disjoint_and_complete": true,
+  "totals": {
+    "main": {
+      "F": "417864.11",
+      "G": "24677.78",
+      "H": "744887.35",
+      "I": "778623.77",
+      "J": "526852.18"
+    },
+    "zero": {
+      "F": "0.00",
+      "G": "0.00",
+      "H": "0.00",
+      "I": "0.00",
+      "J": "0.00"
+    }
+  },
+  "meta_writes": 0,
+  "payments_executed": 0,
+  "published_at": "2026-11-25T00:31:43.879197-05:00"
+}

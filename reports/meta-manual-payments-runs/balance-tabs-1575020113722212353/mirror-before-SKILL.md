@@ -1,0 +1,135 @@
+---
+name: meta-manual-payments-planning
+description: "Use when planning manual Meta card payments."
+version: 0.4.0
+author: Rodolfo Mattei, Hermes Agent
+license: Proprietary
+platforms: [linux]
+metadata:
+  hermes:
+    tags: [mgs, meta, billing, manual-payments, credit-cards, credit-line, sheets, finance]
+    related_skills: [meta-ads-api-operations, google-drive-agent-automation, secure-remote-windows-automation]
+---
+
+# Planejamento de pagamentos manuais Meta
+
+## Objetivo e autoridade
+
+Esta é a skill dona do fluxo de apoio financeiro a Rodolfo: inventariar contas Meta, separar cartão e linha de crédito, conferir cobranças e invoices, calcular o gasto diário e organizar uma planilha que o ajude a fazer pagamentos manuais com seus diversos cartões, reduzindo os saldos das contas e a dependência da linha de crédito.
+
+Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1563926766286803004`. Essa finalidade é estratégia de planejamento, não uma autorização permanente para efetuar pagamentos, escolher cartões, alterar billing, budgets, permissões ou credenciais. Rodolfo decide e executa os pagamentos; qualquer execução futura por Zeus continua sujeita à autorização específica e à confirmação adicional de billing do `AGENT.md`.
+
+## When to Use
+
+- Inventário somente leitura dos cartões cadastrados por conta/BM, separando cartão padrão, adicionais e linha de crédito, inclusive quando a entrega é apenas no chat.
+- Planilha de contas, saldos, últimas cobranças no cartão, gasto mensal ou média diária para decidir pagamentos manuais.
+- Distribuir pagamentos entre cartões disponíveis e diminuir utilização da linha de crédito, sem alterar a forma padrão por inferência.
+- Distinguir saldo corrente, valor do Pay now, invoice fechada, crédito publicitário e pagamento efetivamente realizado.
+- Reconciliar um pagamento manual relatado por Rodolfo e atualizar o mesmo workbook sob pedido autorizado.
+- Não usar para criar/otimizar campanhas, autorizar novos pagadores, pagar automaticamente ou mudar a forma padrão.
+
+## Pré-requisitos e fontes
+
+1. Resolver o pedido, BM, período, moedas, canal de entrega e autoridade exatos; resolver workbook/aba somente se houver trabalho de planilha. Se Rodolfo pedir PC1, usar a sessão real aprovada do PC1. Não substituir silenciosamente por outro navegador, identidade ou BM, nem exigir Sheets para uma consulta no chat.
+2. Quando a coleta usar API, carregar `meta-ads-api-operations` para transporte Meta, leitura segura de 1Password e cobertura BM-admin. Usar a credencial administrativa existente aprovada; um token operacional restrito não prova inventário completo. Não trocar referências de produção.
+3. Carregar `google-drive-agent-automation` antes de Sheets: somente SA `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`. Conferir os quatro seletores `service_account`, Drive `canEdit` e Sheets HTTP 200. Não usar OAuth pessoal/browser Google como fallback.
+4. APIs/dashboards/recibos live são fonte de estado; screenshots são evidência limitada ao conteúdo visível. Ler imagens com `vision_analyze`. Nunca confundir nome de conta, posição de linha, pagamento atual e transação histórica.
+5. Para prioridades G/H/I/J e reorganização automática linha→cartão, carregar `references/funding-regroup-priority.md`; esta autorização nova supersede o gate antigo e as contagens/posições fixas, sem mudar billing. Para endpoints e evidência do workbook existente, carregar `references/collection-and-workbook.md`. Para retomada e limites comprovados do caso inicial, carregar `references/digital-trust-baseline.md`; valores históricos dessa referência nunca substituem coleta atual.
+6. Quando Rodolfo pedir nova atualização integral, com ou sem aviso de autenticação concluída, retomar o mesmo contrato e job: verificar a superfície PC1 atual, reconciliar writes anteriores e executar uma nova coleta de todo o conjunto autorizado, não apenas dos itens antes bloqueados. Antes do primeiro write, conferir o dispatch/fire claim do job, workers e recibos recentes; ausência momentânea de processo financeiro não prova que o agente agendado terminou entre duas fases. Se o tick ainda estiver ativo, acompanhar sua conclusão em foreground e reconciliar o resultado antes de iniciar a coleta manual, sem duplicar writer, job ou lease. Não tratar o aviso humano como prova de recuperação. Seguir a sequência executável em `references/recurring-refresh.md`; uma coleta integral pode reutilizar provas históricas de cartão sem eventos posteriores, mas nunca reapresentar seus horários como leituras novas.
+
+## Procedimento
+
+### 1. Congelar e coletar o escopo
+
+- Paginar completamente `owned_ad_accounts` e `client_ad_accounts` da BM e unir por ID; preservar duplicatas de nome como contas distintas. Registrar contagem por origem e lacunas de acesso.
+- Ler identidade, moeda, timezone, funding atual e balance por conta. Manter só tipo e bandeira/final mascarados; nunca persistir tokens, payment-source IDs ou transações protegidas em saída pública.
+- Classificar cartão por funding tipo 1; linha de crédito por tipo 4 com monthly-invoicing; omissão é não identificado, não ausência de meio de pagamento.
+- Coletar Insights do mês solicitado e reconciliar diário x agregado por conta com Decimal, respeitando moeda e dia atual parcial. Não usar lifetime `amount_spent` como mês.
+- Persistir cada lote sanitizado e exigir igualdade do conjunto de IDs antes de publicar.
+
+### 1a. Inventário de cartões no PC1 — mapear antes de abrir
+
+1. Descobrir a janela/perfil real, validar a BM e adquirir a lease compartilhada. Ler **Accounts** primeiro e persistir o mapa completo por ID, nome literal e método exibido; preservar contas homônimas como IDs distintos. Para enumeração e marcadores da UI, usar `references/collection-and-workbook.md`.
+2. Não abrir detalhes das linhas explicitamente **No payment method**. Na consulta de cartões de Rodolfo, ignorar também nomes exatos **001** e **001 BR**, aceitando somente equivalência de caixa/espaços a `001br`; não excluir `001 US`, `001 DE` ou outros nomes por prefixo. Campo ausente na API continua desconhecido, não equivale ao rótulo explícito da UI.
+3. Congelar os IDs elegíveis antes da navegação. Abrir somente contas com método exibido e ainda não conferidas. Na retomada, reconciliar o mapa e os recibos existentes; atualizar a classificação das pendências sem reabrir contas concluídas ou repetir a varredura inteira sem necessidade de frescor.
+4. Ler a **seção de métodos da conta**, separando `Default` dos cartões adicionais; não coletar cartões da tabela de transações como se fossem cadastrados atualmente. Linha de crédito como padrão pode coexistir com cartões adicionais. `Ad credit` na lista não determina o funding padrão: conferir o detalhe da conta elegível.
+5. Persistir cada resultado e seu horário antes da próxima conta. Tratar como estados distintos: excluída por nome, sem método na lista, consultada sem cartões, consultada com cartões e bloqueada/não consultada. Reconciliar os conjuntos por ID para não somar exclusões sobrepostas nem apresentar contas ignoradas como consultas concluídas.
+6. Reduzir navegações e usar lotes sequenciais com pausas; nenhuma cadência de billing está certificada como imune a limites da Meta. Ao primeiro bloqueio real, interromper a navegação e liberar a lease. Se Rodolfo pedir espera e nova tentativa, agendar uma execução única real pelo fluxo de `log-monitor-discord-alert`, preservando os IDs pendentes; não prometer retry sem job persistido nem apresentar a espera como garantia de desbloqueio.
+7. Entregar nomes completos e bandeira/final mascarados, com legenda inequívoca para padrão e adicionais. Separar contas cujo padrão é linha de crédito. Em pergunta pontual por final de cartão, filtrar o ledger e informar **todas as correspondências verificadas**, o papel de cada cartão e a data/origem do levantamento, sem reapresentar o histórico como leitura live. Contar combinações de bandeira/final observadas; não afirmar que finais mascarados provam cartões físicos únicos.
+
+### 1b. Auditar contas com gasto fora da aba
+
+Comparar IDs da aba live com o inventário completo owned/client da BM, incluindo contas fechadas; consultar Insights apenas do conjunto ausente, na competência do header/contrato, sem confundir falha com zero. Reconciliar diário e agregado temporalmente próximos nas contas positivas. Entregar todas as faltantes, gasto e total por moeda, cobertura, horário e dia parcial; a auditoria não autoriza inclusão na planilha nem ampliação da recorrência. Receita de lotes, retomada, aliases de timezone e conciliação em `references/collection-and-workbook.md`, seção **Cobertura de gasto fora da aba**.
+
+### 2. Última cobrança somente no cartão
+
+- Ler atividades `category=BUDGET`; identificar a transação histórica efetivamente paga por cartão e selecionar a mais recente confirmada.
+- Excluir **Advertising credit**, créditos de anúncio/promocionais, cupons, bônus, estornos, reversões, falhas e recusas.
+- `ad_account_billing_charge`, `payment_amount` e `action=67` não comprovam cartão: créditos publicitários podem ter exatamente o mesmo formato. O valor ser pequeno/grande e o default atual também não comprovam o meio histórico.
+- Exigir evidência do instrumento da transação: registro transacional/UI com cartão identificado ou screenshot do usuário reconciliado de forma única por conta e sequência/data/valor. Guardar data, timezone, bandeira/final permitido e fonte na nota da célula.
+- Pedir à leitura visual todas as linhas de Date/Payment method/Amount/Status em ordem de cima para baixo e identificar explicitamente a cobrança mais recente Paid em cartão; “última linha” pode ser interpretada como a linha inferior, mais antiga. Solicitar campos separados `authentication_gate`, `page_error` e `latest_paid_card`, sem a pergunta ambígua “Gate?”: um aceite da prova financeira não significa desafio de autenticação. Quando a URL lida divergir do alvo, recortar a barra de endereço da mesma captura e conferir `business_id` e `asset_id` separadamente; não completar dígitos com o nome do arquivo, `payment_account_id` ou o ID esperado.
+- API é a primeira rota. Inspecionar campos/rotas suportados antes de declarar que a API não atende; ausência de instrumento no endpoint consultado não é impossibilidade global da API. Não derivar um tipo de cartão de transaction IDs ou códigos opacos.
+- Se precisar de UI, usar sessão autenticada aprovada e conferir conta/BM/perfil/URL reais. Um gate numa janela não prova que o Facebook esteja deslogado em todo o PC1. Só pedir login após verificar a superfície correta; preservar janelas, perfis e credenciais.
+- Se faltar prova, deixar o campo em branco, sinalizar a lacuna e preservar o valor anterior no backup/audit, sem apresentá-lo como cartão. Sem evento no histórico não significa cobrança zero. Não somar últimas cobranças de datas diferentes como um total mensal.
+
+### 3. Média diária e planejamento entre cartões
+
+- Usar os três últimos dias **completos**, no timezone de cada conta; excluir hoje. Somar gasto dessas datas e dividir por 3, inclusive datas sem gasto. Reconciliar com agregado independente.
+- Publicar número com dois decimais e nota das datas/fuso. Subtotais são a soma das médias por conta exibidas; não misturar moedas.
+- Para recomendar valor/cartão, obter de fonte atual a disponibilidade de cada cartão e obrigações relevantes; não supor capacidade a partir de saldo Meta ou funding default. Usar apenas bandeira/final e um alias seguro, nunca número completo/CVC.
+- Apresentar por conta: saldo corrente, gasto diário, pagamento proposto, cartão proposto e saldo/projeção após pagamento, sempre distinguindo observado de simulado. Não adicionar novas colunas ou abas sem pedido.
+- Nunca prometer que um pagamento liberará a mesma quantia da linha: conciliar efeito real na conta e na linha/available credit após liquidação. Pagamento avulso não implica mudança da forma padrão.
+
+### 4. Balance, Pay now, invoices e pagamentos
+
+- Consultar saldos na lista Accounts sem abrir detalhes: carregar `references/accounts-list-search.md`. Busca por nome foi validada em cinco contas; vincular sempre ID e nome exatos da linha, pois busca por prefixo pode retornar várias contas. Current balance da lista não equivale automaticamente ao valor do modal nem autoriza novo rollout de H.
+- Tratar separadamente: current balance, gasto do mês, valor permitido no modal Pay now, invoice original, saldo pendente da invoice e pagamentos efetivados.
+- **Fonte H vigente — Rodolfo `1570815017794674749`:** o dono delegou resolver a proposta de usar o saldo exibido na UI nova. H agora é **Saldo pendente — Outstanding balance**, coletado na linha Accounts exata, com fonte `accounts_list_outstanding_balance`, cabeçalho/ID/nome/BM conferidos em pixels e AX, e hora individual original. Isso supersede a fonte Current balance anterior, sem afirmar equivalência semântica nem chamar o saldo de valor permitido no modal Pay now. Mantém somente as contas de linha do contrato, sem cobrança ou mudança Meta. Manifest exige `balance_label='Outstanding balance'` e a autoridade nova; fontes históricas preservadas continuam identificadas como históricas.
+- **Fonte H anterior — Rodolfo `1564382301155098717`:** após teste5/5, autorizou concluir as mesmas contas usando Current balance da linha na lista Accounts. Usar busca por nome com ID exato, fonte `accounts_list_current_balance` e hora individual; não fingir valor de modal nem prova de botão desabilitado. O procedimento Accounts é a rota preferida de leitura de saldo; a regra anterior de modal/desabilitado fica preservada para pedidos especificamente do valor pagável no modal.
+- **Regra anterior de H — Rodolfo `1564373157727576245`:** se o botão inicial **Pay now estiver realmente indisponível/desabilitado na conta autenticada e identificada**, usar em **H** o **Current balance exibido no topo** como saldo a pagar do mês ainda aberto (outubro/2026). Essa orientação do dono supersede a exigência anterior de H exclusivamente do modal; não publicar zero nem manter H histórico só porque o modal não pode ser aberto. Registrar fonte `current_balance_pay_now_unavailable`, valor, hora e evidência visual/AX do botão e do balance. O dono interpreta esse estado como baixa computada das invoices; a coluna F continua reconciliada pelo `amount_due` live, sem fabricar status Paid. Botão ausente por carregamento, gate de login/2FA, erro ou bloqueio temporário do Facebook **não** é prova de indisponibilidade financeira e não autoriza fallback. Se habilitado, ler o valor literal do modal normalmente. H tem duas fontes explícitas, não é limite do emissor. Nunca clicar botão desabilitado nem executar pagamento.
+- No modal ler rótulo/período literalmente. `Amount you can pay now` não é automaticamente o saldo total, uma invoice ou o limite do cartão. Não inferir que balance menos Pay now seja dívida do mês passado.
+- **Invoice E vigente — Rodolfo `1564382678168502295`:** mostrar só invoices pendentes reais; limpar o número quando pago/due0 ou ausente da lista de pendências após paginação completa. Preservar histórico em ledger/backup/notas, não no valor visível de E. Outubro só entra após a Meta gerar a invoice na virada mensal, normalmente perto do dia2, nunca por inferência ou reaproveitamento do número de setembro. Gasto J mantém a competência autorizada.
+- Paginar invoices com campos explícitos e unir por `ad_account_ids`. Reportar número, competência, moeda, valor original, status, pendência e vencimento. `Paid` com pendência zero não é invoice ainda devida; não inventar invoice de mês ainda aberto.
+- Reconciliar pagamento de uma conta na linha por evento/data/valor e evidência do instrumento quando disponível; pagamento no cartão pode coexistir com monthly invoicing padrão. Não atribuir transação a uma invoice sem ligação comprovada.
+- Atualizar balance e Insights em um lote GET-only temporalmente coerente antes de explicar diferenças. Só reportar conciliação exata quando observada em centavos; não forçar igualdade contábil universal nem inventar causa para divergência.
+
+### 5. Publicar no mesmo workbook
+
+- Preservar ID do workbook/aba, contas, notas, links, fórmulas e outras abas; backup imutável antes de cada mudança e diário de recuperação separado. Antes do primeiro worker com `--apply`, capturar também valores/fórmulas e propriedades das abas não alvo para comparação final; o snapshot criado apenas na fase H não cobre os writes anteriores de funding, invoices e métricas. Se essa baseline faltar, qualificar que as escritas foram restritas à aba autorizada e que propriedades passaram, sem declarar paridade integral dos dados das outras abas.
+- Se outra aba divergir da baseline, preservar o primeiro readback divergente e comparar células, fórmulas, notas e propriedades antes de atribuir a causa. Reconciliar a origem pelas fontes canônicas e conferir os alvos efetivos dos writes desta execução. Não restaurar a aba alheia nem enfraquecer o teste para comparar somente propriedades: isso esconderia alterações reais de dados. Se a diferença estiver fora dos ranges escritos e não houver conflito no alvo, concluir apenas a validação da aba autorizada, registrar separadamente a edição concorrente e sua atribuição comprovada ou ainda desconhecida, e deixar `other_sheet_data_unchanged=false`. Se houver sobreposição ou efeito próprio não explicado, bloquear o fechamento e recuperar somente a camada afetada.
+- Layout do workbook: **A Nome; B Forma; C Cartão default; D Última cobrança no cartão; E Invoice; F Saldo de invoices da competência selecionada; G Média diária; H Pay now; I Saldo a pagar; J Gasto mensal autorizado**. Resolver pelo header e contrato, não por posição histórica. E mostra somente invoices pendentes reais; F acompanha a última competência fechada efetivamente gerada, preservando o gate para dívida antiga ainda aberta. Não trocar a competência de J por inferência. No contrato atual, H usa **Outstanding balance da linha exata** sob a autoridade vigente `1570815017794674749`, com fonte `accounts_list_outstanding_balance` e hora individual; não abrir modais só porque Pay now está habilitado. O modal e o fallback de botão comprovadamente indisponível são ramos para pedidos específicos do valor pagável, não a rota padrão do refresh. Nenhuma dessas medidas é limite do emissor. Procedimentos em `references/september-invoices.md` e `references/accounts-list-search.md`; para consulta específica de modal, usar `references/pay-now-column.md`.
+- Separar blocos de cartão e linha, ordenar por nome exato/ID e colocar subtotais abaixo dos blocos e total geral abaixo. D não recebe soma que pareça total mensal de pagamentos. Valores em moeda original explícita, sem total misto.
+- Exclusão de linhas zero somente sob pedido específico e com a coluna de gasto mensal corretamente resolvida. Não excluir automaticamente contas novas/inativas; preservar as removidas no backup e validar todos os IDs restantes.
+- Nomes das contas são clicáveis para Billing & payments, não Summary. Usar URL de billing validada com BM e `asset_id` exatos; preservar nomes e IDs em notas, sem normalizá-los ou inferir parâmetros ocultos de prints.
+- Totais financeiros usam `ROUND(SUM(...),2)`; validar resultado calculado independentemente com Decimal. Ler effective formatting quando cores sinalizam pendências e tolerar apenas quantização RGB comprovada.
+- Validar vazio e zero por campo e grupo, não por um acesso obrigatório a `userEnteredValue`: F pode permanecer vazia em conta de cartão sem invoice, enquanto uma linha com saldo de invoice confirmado pode exigir zero explícito. Preservar essa apresentação; célula omitida pela API não autoriza preencher zero nem declarar saldo desconhecido como quitado. Usar o contrato e a evidência de invoices para decidir qual estado é válido.
+- Depois de inserir/reordenar colunas, ler de volta todos os valores/fórmulas, IDs, links, notas relevantes, moedas, blocos e subtotais; confirmar preservação de outras abas. Se um write já ocorreu, recuperar apenas a camada faltante, nunca reaplicar non-idempotent inserts ou reescrever o dataset às cegas.
+
+### 6. Apoio ao pagamento manual e acompanhamento
+
+- Antes de qualquer proposta, fornecer fonte/data, contas exatas, cartões propostos, valores, disponibilidade conhecida e lacunas. Proposta não é pagamento autorizado.
+- Não clicar em Pay now final, cadastrar cartão, mudar default, pagar invoice ou automatizar transferências por causa desta skill. Uma eventual execução futura deve obter o gate de billing específico e sua confirmação adicional.
+- Quando Rodolfo informar que pagou, confirmar transação e saldo de forma read-only. Registrar confirmado, pendente ou não localizado; não descontar apenas porque o usuário planejou pagar, nem repetir uma cobrança ambígua.
+- Recorrência foi autorizada por Rodolfo na mensagem `1563960345826037821`: atualizar esta planilha três vezes ao dia, por volta de 08h, 14h e 21h. Contrato e escopo em `data/meta-manual-payments/digital-trust-workbook-contract.json`; horários físicos e runbook em `references/recurring-refresh.md`. Somente este recorte tem autorização recorrente; outros workbooks/cadências continuam snapshots até pedido específico. Atualização é leitura Meta/PC1 e escrita Sheets, nunca pagamento ou mudança de billing.
+
+## Validação executável somente leitura
+
+Usar `terminal(command="python3 /root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py --spreadsheet-id <ID> --sheet-id <GID> --business-id <BM_ID>", timeout=180)` depois da publicação. O helper usa a SA canônica, confere schema, IDs, links de billing, fórmulas calculadas e totais; reporta campos de cartão vazios sem fingir que validou o instrumento. Não coleta novos gastos, não atualiza a aba e não executa pagamentos. A saída é evidência de estrutura/readback do snapshot, não refresh financeiro.
+
+## Verificação e entrega
+
+- Tratar novas pendências históricas surgidas na reconciliação final como continuação do mesmo refresh, não como falha genérica: resolver somente os IDs/eventos novos e repetir a fase final, preservando H e demais writes já validados.
+- Gerar o recibo de fechamento a partir das evidências desta execução; não herdar de um relatório copiado horários, IDs renovados, contagem de abas, estado de autenticação ou restrição de entrega. Uma execução manual deve se identificar pela mensagem que a autorizou, sem assumir a identidade de um tick anterior. Parametrizar preflight, verificador e fechamento pelo modo manual/agendado antes de executar: claim do próprio tick e ausência de claim concorrente são gates diferentes; derivar provas D dos receipts reais, nunca de uma quantidade fixa de logs. Seguir a receita em `references/recurring-refresh.md`.
+
+Concluir somente após contagem/IDs e dados alterados baterem com a fonte, fórmulas calculadas estarem corretas, efeitos externos terem readback e lacunas estarem explícitas. Validar separadamente frescor de métricas API, leituras H e provas históricas D: PASS estrutural não prova coleta nova. Derivar as pendências D do `pending_ui` da coleta atual, não da lista do bloqueio anterior: novos eventos podem surgir durante a autenticação sem alterar o conjunto de contas autorizado. Após resolver D na UI, repetir o refresh API e exigir `pending_ui` vazio antes de declarar essas pendências resolvidas. Comparar C/G/I/J por ID com o plano da coleta final, H com valor/fonte/horário do ledger e D com a prova histórica correspondente. Auditar lacunas D em todos os IDs autorizados, inclusive contas atualmente na linha: um resultado sem `card_charge_blank_rows` no bloco de cartão não prova ausência de vazios históricos no workbook inteiro. Um D vazio com `no_charge_located` pode permanecer qualificado, sem significar zero ou histórico inexistente.
+
+### Comunicação de status e resultado
+
+- Ao perguntar se está executando ou por que não há movimento no PC1, conferir o job e o artefato mais recente da fase atual antes de responder. `fire_claim`/heartbeat prova ownership ativo, não navegação nem avanço: distinguir execução ativa, coleta API, leitura no PC1, espera e bloqueio. Afirmar atividade no PC1 somente com evidência recente do worker/captura; timestamps de uma fase anterior não comprovam atividade atual.
+- Se a superfície correta confirmar autenticação/passkey, preservar o estado e enviar somente: **Não consegui concluir. Você precisa autenticar a Meta no Chrome do PC1.** Guardar métricas parciais, logs e diagnóstico no receipt/checkpoint, sem acrescentá-los ao aviso. Não pedir autenticação por handle antigo, timeout, busca ainda não pronta ou ocupação humana sem gate comprovado.
+- Se houver outro bloqueio decisório, explicar o motivo real em uma frase curta. Quando Rodolfo liberar o PC1 após uso próprio, reconciliar o executor e retomar a etapa faltante; não iniciar outro writer nem repetir fases já publicadas. Receita de diagnóstico e retomada em `references/recurring-refresh.md`.
+- Após aceite integral, entregar uma única mensagem com link e até seis bullets: cobertura total e H, período da média/gasto, invoices, pendências D resolvidas e ressalvas históricas legítimas; confirmar ausência de pagamentos/billing em uma frase. Omitir IDs internos, caminhos, detalhes de lease e explicações repetidas. Nunca chamar atualização parcial de concluída.
+- Distinguir pendências novas de histórico sem prova. Se D legitimamente vazio, identificar a conta e o motivo; se houver edição concorrente em outra aba, qualificar o resultado sem alegar preservação integral. Informar invoices externas separadamente, sem ampliar contas ou totais autorizados.
+- Ao receber conclusão assíncrona, verificar a mensagem já publicada pelo ID/destino antes de responder. Se o resultado automático já foi entregue, encerrar apenas recibo/checkpoint e eventual REPORT-INFRA pendente, sem segunda confirmação ou resumo na origem; a notificação interna não é novo pedido humano. Não confundir recuperação manual validada com prova de um futuro tick.
+
+Para alterações nesta skill, atualizar o inventário, registrar audit, sincronizar o espelho versionado e publicar REPORT-INFRA pelo helper canônico, com readback do embed. Decisões estratégicas e retomadas ficam no registry/checkpoint MGS, não em MEMORY/USER.

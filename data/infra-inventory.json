@@ -71943,6 +71943,85 @@
       ],
       "report_infra_status": "sent_get_verified",
       "report_infra_message_id": "1575019902878744597"
+    },
+    {
+      "id": "meta-balance-tabs-1575020113722212353",
+      "agent": "zeus",
+      "type": "financial-balance-presentation-views",
+      "status": "published_validated",
+      "source_message_id": "1575020113722212353",
+      "source_thread_id": "1563926766286803004",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/balance-tabs-1575020113722212353/receipt.json",
+      "updated_at": "2026-11-25T00:33:50.469183-05:00",
+      "paths": [
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "data/meta-manual-payments/balance-views-last-publication.json",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/publish_balance_views.py",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/test_balance_views.py",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/SKILL.md",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/references/recurring-refresh.md"
+      ],
+      "verification": {
+        "status": "balance_views_published_validated",
+        "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/balance-views-20261125T003141415048",
+        "authority_message_id": "1575020113722212353",
+        "source_accounts": 197,
+        "main_accounts": 51,
+        "zero_accounts": 146,
+        "main_sheet_id": 794137639,
+        "zero_sheet_id": 1293802358,
+        "criterion": "I — Saldo a pagar: only numeric zero, unknown retained in main",
+        "source_values_notes_formulas_unchanged": true,
+        "unrelated_sheets_unchanged": true,
+        "all_view_account_rows_exact": true,
+        "all_ids_disjoint_and_complete": true,
+        "totals": {
+          "main": {
+            "F": "417864.11",
+            "G": "24677.78",
+            "H": "744887.35",
+            "I": "778623.77",
+            "J": "526852.18"
+          },
+          "zero": {
+            "F": "0.00",
+            "G": "0.00",
+            "H": "0.00",
+            "I": "0.00",
+            "J": "0.00"
+          }
+        },
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "published_at": "2026-11-25T00:31:43.879197-05:00"
+      },
+      "procedure_readback": [
+        {
+          "file": "SKILL.md",
+          "sha256": "3ff7090e88dd8386ca10eca6ba7f22b927681b08c039c679eedcaf4b603be626",
+          "mirror_equal": true
+        },
+        {
+          "file": "references/recurring-refresh.md",
+          "sha256": "346ead752d4287d1b31eed18e1c211b4510300e1b03abd5cc2334c25d3b31c39",
+          "mirror_equal": true
+        },
+        {
+          "file": "scripts/publish_balance_views.py",
+          "sha256": "5718a4453bc34fbc5a490163ed77d8f44d52d4c7ec8886151ad0e837269a9b5a",
+          "mirror_equal": true
+        },
+        {
+          "file": "scripts/test_balance_views.py",
+          "sha256": "b8f8d1da88b9aadd199b1ea6800dfb92b7754a998f93bbca7818f741c9252c8f",
+          "mirror_equal": true
+        }
+      ],
+      "unit_tests_passed": 8,
+      "scope_account_ids_preserved": 197,
+      "job_unchanged": "2ee720363d7d;08:02/14:02/21:02ET",
+      "report_infra_status": "sent_get_verified",
+      "report_infra_message_id": "1575021680387031222"
     }
   ],
   "profile_skill_references": [

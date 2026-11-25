@@ -6216,12 +6216,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612",
-      "next_step": "Capturar snapshots atuais, preparar candidato, validar SMS e acesso mínimo, gates integrais, publicar e ler de volta",
-      "objective": "Adicionar SMS Funnel à Conferência mensal e depois liberar consulta exata para Geizian, sem alteração financeira ou outras permissões",
-      "source": "discord:1575019978305044612;discord:1574940302899421296",
-      "state": "in_progress: identidade e confirmação de rodolfo validadas no discord; preparação isolada, nenhuma publicação ainda",
+      "next_step": "Aplicar spread apenas no coletor automático, provar fixas preservadas, repetir stage e gates, publicar ambos os pedidos e readback",
+      "objective": "SMS separado na Conferência, acesso Geizian e novo USD/CAD automático +2% autorizado no mid-turn; preservar cotações fixas",
+      "source": "discord:1575019978305044612;discord:1575021696442966117;apps/finance-system/private/conference-sms-1575019978305044612/stage-proof.json",
+      "state": "candidate sms stage validado:16 vistas e quatro competências; consulta cotação anterior respondida. novo pedido1575021696442966117 amplia escopo para ajuste automático usdcad",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-25T05:28:30+00:00"
+      "updated_at": "2026-11-25T05:35:17+00:00"
     },
     {
       "agent": "zeus",
@@ -10538,6 +10538,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-manual-payments-balance-tabs-1575020113722212353",
+      "next_step": "Mesmo job08:02/14:02/21:02ET publica views após cada refresh/partial antes da entrega;saldo diferente de zero retorna principal;sem novo writer nem reduzir197IDs.",
+      "objective": "Separar saldo a pagar zero em outra aba sem retirar contas do acompanhamento",
+      "source": "/root/mgs-agent/data/meta-manual-payments/balance-views-last-publication.json",
+      "state": "concluído e readback:51contas com saldo,146contas sem saldo a pagar;união197ids disjunta,source/sheet1 intactos,todoslinks/notas/totais preservados. base197oculta;helpertestado8casos+publicação real. mesma recorrência via skillfinalizer;sem billing/pagamento;autenticaçãopc1não revalidada por esta reorganização.",
+      "thread_id": "1563926766286803004",
+      "updated_at": "2026-11-25T05:32:58+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-manual-payments-book1-1575016959395893258",
       "next_step": "Pedido de inclusão concluído;recorrência existente consumirá197IDs e resolverá camposUI conforme contrato,sem repetir inclusão. Não alegar refresh integral ou autenticação comprovada.",
       "objective": "Comparar Book1.xlsx apenas contas com forma de pagamento e incluir faltantes na mesma aba",
@@ -12428,5 +12438,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T05:28:30+00:00"
+  "updated_at": "2026-11-25T05:35:17+00:00"
 }
