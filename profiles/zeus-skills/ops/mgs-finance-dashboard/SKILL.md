@@ -60,7 +60,7 @@ Do not substitute the general finance workbook for the live Dash as the comparis
 
 When Rodolfo compares an earlier screenshot with the Dash, explain the same beneficiary, competence and metric—not merely the latest exchange-rate edit. Read the screenshot's exact totals and rates, audit human edits separately from automatic refreshes, and reconstruct both endpoints before claiming the difference is explained. A constant-rate simulation is provisional evidence, not the screenshot's historical balance; explicitly replace it when the actual image supplies a different baseline. Do not keep requesting a capture time if the visible values and audited inputs already reproduce the screenshot to the cent.
 
-Answer date questions first in the stated timezone, then show one compact signed bridge: starting balance, each verified increase/decrease, ending balance and total difference. Separate payments/adjustments from operating result, disclose any unresolved residual, and distinguish the comparison endpoint from a later live balance. Keep this investigation read-only. Follow `references/manual-quotes-monthly-source.md#reconstructing-a-screenshot-to-current-balance` for the audit and isolated replay procedure.
+Answer date questions first in the stated timezone, then show one compact signed bridge: starting balance, each verified increase/decrease, ending balance and total difference. For exchange-related rows, include an adjacent **Cotação antes → depois** column using those same frozen endpoints; preserve the existing monetary rows when Rodolfo requests this extra context instead of replacing the bridge with a separate FX explanation. Separate payments/adjustments from operating result, disclose any unresolved residual, and distinguish the comparison endpoint from a later live balance. Keep this investigation read-only. Follow `references/manual-quotes-monthly-source.md#reconstructing-a-screenshot-to-current-balance` for the audit and isolated replay procedure. For month-by-month fixation history, use the reference's **Monthly automatic-to-fixed FX history** recipe rather than substituting a screenshot rate or a daily market average.
 
 ## Spend-audit coverage and period boundaries
 
@@ -85,6 +85,12 @@ Use `references/current-manager-tabs-reconciliation.md#account-spend-audit-acros
 Use `references/adops-monthly-source-reconciliation.md` for source-quality gates, gross-overlay transactions and nonmonetary payment observations.
 
 ## Financial-system implementation
+
+### Recharge control and prior notices
+
+Keep recharge control separate from consumption: show the selected month's saved purchases, payment dates and original-currency totals as an explicitly informational observation inside the expanded SMS detail, without adding them to the expense/result again. Preserve unknown dates and repeated legitimate purchases; never fill the display from a carried legacy template or infer available vendor credit from purchases minus this month's consumption.
+
+When Rodolfo asks whether he already reported a payment, retrieve the original conversation and its canonical record before answering. Distinguish **reported**, **documented**, and **posted in the Dash**. An empty Dash list does not mean he never told Zeus. If it was only documented, say so plainly, identify the missing application step, and obtain the necessary posting authority rather than silently backfilling during a recall question. After approval, use the existing prepaid-record API and verify both the committed row and the expanded observation; do not deploy code for a routine purchase entry. Follow `references/prepaid-direct-cost-reclassification.md`.
 
 ### Presentation-only changes
 
@@ -199,7 +205,7 @@ For a supplied all-network/all-account closing workbook, load `references/adops-
 
 ## Canonical sources
 
-- Historical closing/conference Sheets for August and September 2026: `/root/mgs-agent/docs/finance-monthly-closing-reference-sheets.md` (exact owner-confirmed links, periods, initial tabs and reconciliation evidence; documentation request `1572623601235009748`). These are read-only closing references, distinct from the principal workbook; consult this index when retrieving them for future checks.
+- Owner-supplied monthly closing/conference Sheets: `/root/mgs-agent/docs/finance-monthly-closing-reference-sheets.md` records their exact links, periods, initial tabs and reconciliation evidence. These are read-only closing references, distinct from the principal workbook. Resolve the requested month's entry rather than restricting discovery to the months that existed when this skill was written.
 - Principal workbook: `16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak`.
 - Production identity: `mgsagent@mgs-core-prod.iam.gserviceaccount.com` through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`.
 - Current initiative checkpoint: `ZEUS-FINANCE-DASH-AUGUST-20260904` in `/root/mgs-agent/data/agent-checkpoints.json`.
