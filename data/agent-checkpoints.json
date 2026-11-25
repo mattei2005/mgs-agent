@@ -4873,6 +4873,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1575198254822326443",
+      "next_step": "Resolver estacionamento explicito apenas da recuperacao antiga, sem alterar seus objetos nem reexecutar ativador; preservar o request atual e relogio. Consumidor canonico da fila ativo. Depois prepare-media, dry-run, execute central, QA20ads, ativacao/readback e SB. Se horario vencer aplicar politica vigente sem reescrever manifests.",
+      "objective": "Duplicar C003 Escalatepower06 em 10 campanhas com 20 videos expressos, USD25/dia, COCAP USD0.90, 25/11/2026 12:35 New York",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/intake-authority-receipt.json",
+      "state": "input integral persistido; duas mensagens humanas lidas por id, grupos1-10 e20files unicos conferidos. checker allowed. prepare-media enfileirou sem campanha write. servico canonico ativo. dependencia shein-1574521189035151514 mantem activation_pending apos gestao seletiva autorizada por rodolfo1574639436166074502, com instrucao canonica de nao repetir ativador integral; aguarda revisao meta e eventual pedido de troca. nao inferida suspensao ou conclusao do predecessor.",
+      "thread_id": "1558134405313200150",
+      "updated_at": "2026-11-25T17:19:15+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-AUDIT-1572796764099186809",
       "next_step": "Nenhuma correcao Meta necessaria nesta leitura;usar literal correto no pre-cadastroAdOps",
       "objective": "Auditar campanha239 e corrigir literalUTM malformado enviado por Ares",
@@ -12538,5 +12548,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:13:15+00:00"
+  "updated_at": "2026-11-25T17:19:15+00:00"
 }

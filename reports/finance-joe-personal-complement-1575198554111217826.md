@@ -1,4 +1,13 @@
-# Joe — complemento pessoal de outubro até equivalente a10%
+# Joe — complemento de outubro até equivalente a10%
+
+## Supersessão de direção — Rodolfo1575199575658987611
+
+Rodolfo corrigiu o entendimento: o complemento deve integrar a somatória e o fluxo da empresa, não ser um pagamento pessoal fora daDash. O texto deaviso e o rateiopessoal propostos abaixo ficam supersedidos e NÃO devem ser publicados.
+
+Ele sugeriu aumentar a receita de qualquer site para cruzar afaixa10%. Isso permanece hipótese não executada. RecomendaçãoZeus: preservar receitas reais/conciliação e lançar uma exceção de remuneração deJoe emoutubro, equivalente a10% do resultado real, como despesa de pessoal daempresa. Complemento contabilizado umaúnicavez antes do lucrodivididoentreossócios, semrateá-lodenovo nosdomínios nemreduzira própriabasecomissionável deJoe. Regra geral dosoutrosgestores/meses preservada. Aviso deve explicar bonificação/exceção, nunca atingimento fictício dameta. Esse tratamento ainda depende da confirmação do titular; nenhum lançamento, alteração dereceita ouaviso publicado.
+
+Referência jávalidada noprint:7%BRL6915.10;10%BRL9878.71;complementoBRL2963.61. Custocorporativo substitui divisãoexternapessoal;impactoeconômico exato nasmetadesBRL1481.805cada,comcentavos definidos somente no cálculo/fechamento apropriado. Câmbioautomático pode alterarosvaloresatéaplicação; revalidarbaseline.
+
 
 ## Decisão informada pelo titular
 

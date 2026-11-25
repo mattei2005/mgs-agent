@@ -102,6 +102,10 @@ When adding a currency equivalent, retain the original currency and existing inf
 
 Finish focused semantic and desktop/mobile layout checks before freezing the candidate for the full release gates; a later CSS or JavaScript edit invalidates the earlier candidate proof. Report the published user-visible result and preserved financial data concisely, keeping detailed test logs in evidence.
 
+### Exceptional remuneration and who bears the cost
+
+Separate the intended remuneration from its funding and accounting treatment before calculating partner contributions or drafting a notice. When Rodolfo changes a personal top-up into a company expense, explicitly supersede the earlier split and notice; do not keep both proposals active. Preserve actual site revenue and bank reconciliation rather than increasing revenue to trigger a commission bracket. Propose a transparent beneficiary-and-month-specific remuneration exception or bonus, subject to approval and implementation verification, without changing the general rule for other managers or periods. Show normal remuneration, exceptional total and only the incremental cost; distinguish a reduction in partners' distributable profit from an additional personal payment. Follow `references/trial-payroll-review.md#exceptional-remuneration-and-funding-analysis` before application or communication.
+
 ### Individual correction notices and acknowledgement
 
 1. **Choose the smallest truthful message before building.** For correction pop-ups, prefer Rodolfo's concise, nonnumeric explanation: affected sites and period, what was missing from the individual result, that it has been corrected, and where to consult current data. Omit monetary values, reduction percentages and personalized bracket commentary unless explicitly requested in the final wording. A notification is not a second financial report; removing numbers avoids stale comparisons without concealing the correction. Resolve exact approved copy, recipients and publication state from the canonical notice document and checkpoint, not from an earlier chat draft.
