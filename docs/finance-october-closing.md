@@ -25,6 +25,15 @@ Evidência `apps/finance-system/private/october-close-1575041627167391744/`; rel
 - Custos registrados:1149lançamentos positivos conta/dia rastreados até input/site/data;38contas com sufixoG conciliadas ao gestor;2108controles gestor/site/dia e68mensais sem diferença em centavos. Google não recebeu gestor inventado: respeitada a disposição explícita Mattei1→GameZoneAd sem gestor externo do contrato de contas.
 - Readback de fonte integral FB/Google idêntico no fim; APIs reais dos cinco gestores, owner-preview e quatro vistas Conferência Rodolfo/Geizian desktop/mobile confirmados. Não houve nova coleta nos provedores de mídia; a comparação usa o fechamento fornecido e os recibos/fatos já registrados na Dash.
 
+## Fase2 — M2: divergência confirmada, aguardando aplicação
+
+Continuação autorizada1575047241696288920. Relatório `reports/finance-october-m2-review-1575047241696288920.md`.
+
+- Wantabrand principal: USD21.29brutos (01/10=12.68;02/10=8.61); FinanceWantabrand: USD0.49em27/10. TotalUSD21.78na fonte; nenhum lançamento positivoM2naDash.
+- Fonte inteira62controles domínio/dia, releitura idêntica; NETWORKPubGuru confirmou os valores diários aoscentavos.22janelas de atribuição semlacunas confirmamBOT, não a geografia operacional.
+- Proposta **ainda não autorizada para aplicação**: repetir em outubro os destinos de setembro, principalUS-CC-ES/BOT/G001 eFinanceUS-CC-EN/BOT/G001, preservando os valores da fonte e as trêsdatas reais. A aprovação1562663899969617922era limitada a setembro; não propagar por inferência.
+- Falta confirmar a atribuição específica de outubro e o lançamento dosUSD21.78. Nenhuma escrita financeira/Google neste ponto.
+
 ## Próximo ponto
 
-Receita **M2**, depois **Rede2** e **Rede1**, ainda não conferidas nesta fase. AV está resolvida pela confirmação do titular e ausência de receita na Dash; não exigir outro relatórioAV sem nova divergência.
+Concluir a decisão/aplicaçãoM2 antes de avançar para **Rede2** e **Rede1**, ainda não conferidas. AV está resolvida pela confirmação do titular e ausência de receita na Dash; não exigir outro relatórioAV sem nova divergência.

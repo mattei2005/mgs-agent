@@ -3432,6 +3432,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-WEEKLY-CREATION-1575049871080030280",
+      "next_step": "Validar janela semanal, runner, leitura live e cron com auditoria global",
+      "objective": "Relatorio semanal SHEIN por gestor, segunda cedo, semana fechada Eastern",
+      "source": "data/ares/meta-ads/policies/shein-campaign-creation-weekly.json",
+      "state": "preflight; reutilizar coletor diario sem alterar agenda existente",
+      "thread_id": "1565084013763371009",
+      "updated_at": "2026-11-25T07:26:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SMS-COPY-OBSERVE-1558154555617841294",
       "next_step": "A partir de 13/10, quando solicitado e com feed SB disponivel, ler dias completos 10-12/10 e comparar com 02-08/10 no mesmo escopo e fontes. Apresentar Data - CTR - Envios - Gasto - Receita - ROI; taxas ponderadas pelos totais, receita liquida, custo unitario vivo e timezone Sao Paulo. Conferir efeito de calendario e receita por sessao; nao afirmar causalidade da copy a partir de CTR ou ROI isolado. Sem envio automatico agendado por esta decisao.",
       "objective": "Avaliar se a nova mensagem melhora CTR e ROI do SMS depois de mais dois dias completos, conforme Rodolfo.",
@@ -6576,12 +6586,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-OCTOBER-CLOSING-1575041627167391744",
-      "next_step": "Próximo ponto receitaM2, depoisRede2 eRede1. AV outubro encerrada pela confirmação explícita e ausência naDash. Preservar microsGoogle salvo nova decisão específica; fontes somenteleitura.",
-      "objective": "Conferência outubro: FB/Google →M2 →Rede2 →Rede1;AV sem movimento",
-      "source": "reports/finance-october-spend-review-1575041627167391744.md",
-      "state": "phase1_completed_readonly:52contasfbusd869020.28exatas;google31diasbrl91064.00vs91063.991578,31/31centavosdiáriosiguais,deltaexibição0.01porprecisão;nenhumajuste aplicado.1149linhagens+2108controlesgestor/dia+68mensaispass;api/browser/source recheckpass;ediçãoelevenlabs22usdderodolfoecronfxreconciliados,preservados",
+      "next_step": "Congelar fonte ebaseline atuais;backup dual/restoreisolado;ensaiar3entradas+62controles;aplicartransação comrecovery;lerAPI/gestores e retomarRede2",
+      "objective": "Aplicar M2outubroUSD21.78 nas3datas reais comUS/G001/BOT confirmado; depoisRede2→Rede1",
+      "source": "discord:1575050438892585082;reports/finance-october-m2-review-1575047241696288920.md",
+      "state": "phase2_m2_authorized_1575050438892585082:identidade/escopo confirmados; preparar backup/restore/rehearsal, sem escrita financeira ainda",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-25T07:05:07+00:00"
+      "updated_at": "2026-11-25T07:30:07+00:00"
     },
     {
       "agent": "zeus",
@@ -12468,5 +12478,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T07:05:07+00:00"
+  "updated_at": "2026-11-25T07:30:07+00:00"
 }
