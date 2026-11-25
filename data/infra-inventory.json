@@ -1190,6 +1190,72 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-finance-october-invalid-1575192637433188468",
+      "report_infra_message_id": "1575197735315833056",
+      "report_infra_readback": true,
+      "agent": "zeus",
+      "type": "month_specific_effective_invalid_settlement",
+      "status": "completed_validated",
+      "authority": "1575192637433188468",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T17:13:14.515434+00:00",
+      "canonical_source": "docs/finance-october-closing.md",
+      "report_path": "reports/finance-october-invalid-close-1575192637433188468.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468",
+      "acceptance": {
+        "pass": true,
+        "authority": "1575192637433188468",
+        "rate_fraction": "0.0012745966",
+        "rate_percent": "0.12745966",
+        "proofs": [
+          {
+            "width": 1440,
+            "rede1_usd": "1062061.17",
+            "rede2_usd": "188799.42",
+            "total_usd": "1250860.59",
+            "difference_usd": "0.00"
+          },
+          {
+            "width": 390,
+            "rede1_usd": "1062061.17",
+            "rede2_usd": "188799.42",
+            "total_usd": "1250860.59",
+            "difference_usd": "0.00"
+          }
+        ],
+        "audit_id": "7878",
+        "only_october": true,
+        "ledger_preserved": true,
+        "other_scenarios_preserved": true,
+        "temporary_sessions_revoked": true
+      },
+      "backup": {
+        "pass": true,
+        "authority": "1575192637433188468",
+        "remote_backup": "/home/zeus/mgs-finance-backups/invalid-october-1575192637433188468/finance-before.dump",
+        "local_backup": "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468/finance-before.dump",
+        "sha256": "6576e3b747966d351fd0fe759bfe441a40fe0419898b173213b97dc9eda9f0a2",
+        "bytes": 238071377,
+        "restored_database": "mgs_finance_invoct_1575192637433188468",
+        "stage": "/home/mgsfinance/stage-invoct-1575192637433188468",
+        "stage_files": 516,
+        "scenario_count": 324,
+        "scenario_fingerprints_equal": true,
+        "production_financial_writes": 0,
+        "retained_restore_database": true
+      },
+      "production_rate_api_writes": 1,
+      "payments_written": 0,
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468/apply.py": "6a84085bb31e90b8ddb9d0b0f910acb2fca69ca493c96210050a5b9410b70eb8",
+        "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468/validate.mjs": "c9bef3235728e8fbd21d24919c2fa2fc63c0d6337bf75b29ce5e75acf7d9abc1",
+        "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468/stage-remote.py": "aab9a11efc04572368bd9692434665e1b0cb98dad6a950ab7fc2dbae192b4f0c",
+        "/root/mgs-agent/apps/finance-system/private/invalid-october-1575192637433188468/browser.mjs": "4cde998c64bd23aef88f186a238e2a240f56b6451189804d6a5c86603c5d5d07",
+        "/root/mgs-agent/reports/finance-october-invalid-close-1575192637433188468.md": "d2efa5b2840cdedb07c8715f5e400cb9625997bcac5784845084fef451d2b065",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md": "79dcfe78cd43645641053889f817dc72a2f26ebe574d945f2ae6d927c13fb072"
+      }
+    },
+    {
       "id": "zeus-finance-conference-usd-1575169245086486671",
       "report_infra_message_id": "1575181804888129647",
       "report_infra_readback": true,
