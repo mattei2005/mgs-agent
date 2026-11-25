@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T00:25:34-05:00",
+    "updated_at": "2026-11-25T06:02:53.253604+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72092,6 +72092,57 @@
       },
       "report_infra_status": "sent_get_verified",
       "report_infra_message_id": "1575023509355241553"
+    },
+    {
+      "id": "zeus-finance-conference-sms-cad-1575019978305044612",
+      "agent": "zeus",
+      "type": "finance_readonly_presentation_access_and_auto_quote_spread",
+      "owner": "Rodolfo Mattei / Zeus",
+      "authorization_message_ids": [
+        "1575019978305044612",
+        "1575021696442966117"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_and_validated",
+      "updated_at": "2026-11-25T06:02:53.253604+00:00",
+      "canonical_source": "docs/finance-conference-sms-geizian-cad.md",
+      "report_path": "reports/finance-conference-sms-geizian-cad-1575019978305044612.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/conference-sms-1575019978305044612",
+      "runtime": {
+        "url": "https://dash.mgsdigitalcorp.com",
+        "host": "MatteiInc01",
+        "release_id": "conference-sms-1575019978305044612"
+      },
+      "tests": {
+        "node": 295,
+        "python": 255,
+        "conference_views": 16,
+        "manager_views": 10,
+        "js_errors": 0,
+        "public_financial_posts": 0
+      },
+      "financial_effects": "Code cutover preserved all financial fingerprints; natural quotes changed only auto FX in Oct/Nov; all fixed rates, nominal inputs, ledger and other scenarios preserved",
+      "authorization_change": "Exact geizian/partner reads simple Conference only; other role/credentials/MFA/Discord permissions unchanged",
+      "backup": "/root/mgs-agent/apps/finance-system/private/releases/conference-sms-1575019978305044612",
+      "files": {
+        "/root/mgs-agent/apps/finance-system/simple-review.mjs": "060fc16c3d6f7e57400ec6d2cb8956472b057a08dac38c936d28e3c044d180bf",
+        "/root/mgs-agent/apps/finance-system/monthly-review-routes.mjs": "4e0f5321675b1ce4b28a679f995f651151ea8d247e9264119b380e42b7f6ef7b",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "0db85b9d86fa4b0729f516cf16b3f75710f6b4598b10a28716f6e19cc45bc083",
+        "/root/mgs-agent/apps/finance-system/public/review.js": "4d0b722c6202e445a286ba947db29db61ac1391b211fffb62435337351c5b3c5",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "54ec88a7ff0732075d10a5b268a2b148ad78bcea8f4484e32b550c6338617646",
+        "/root/mgs-agent/apps/finance-system/sync-quotes.py": "fcb25a0bb3a19e2c227313ee9e61245245a37a622921c684d323eabd25fad10c",
+        "/root/mgs-agent/apps/finance-system/tests/simple-review.test.mjs": "e74aa90fcf142069d46af4364122467f68c2d82b03d9d4eb828aa44b79dbbc40",
+        "/root/mgs-agent/apps/finance-system/tests/conference-access.test.mjs": "f3836b7234ab3d39e56643bb04e414aeaf4d2db9ea4f19829855c070ba824951",
+        "/root/mgs-agent/apps/finance-system/tests/test_quote_source.py": "a0e44319a49a4bb8687eae7ca950b6215b9904be742e9c5d54aeb7494139dda0",
+        "/root/mgs-agent/apps/finance-system/tests/manual-quotes.test.mjs": "3c23d33673de02dd3c3a7c829759d359a9684cfa46b4cda4fa13215304bc1227",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "7ea0e9eae300cb8fc42937f1ac55c0c8c55bc784a0d6917ac9bccf5e178a9f16",
+        "/root/mgs-agent/docs/finance-conference-sms-geizian-cad.md": "dc5173ea9182139e50d7e21232fef28286ca3a9c5eb8474c05303c788837435a",
+        "/root/mgs-agent/reports/finance-conference-sms-geizian-cad-1575019978305044612.md": "77cae39a8ec376d0711e9d002e5a8fb44f5a6dc0b33c3686f98bca189af791ef",
+        "/root/mgs-agent/reports/finance-geizian-balance-1575023523120947242.md": "89c47c7d95b101c1a63413ccf927108ecbd9ce6c6b55852bfc42d8c23a8b6007",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "94c62396f8b4b747d9e5a4b1610257f079a1838b829580d2fbb11c8a290cbaf2",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/preventive-release-gate-and-review.md": "0aa428d573db1e1e6107c6ee51f5007b2a949a8f40191fa1821c8ec2923753e3",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md": "b663568b0f8cc69c238f5dfa599700dba45695c6d3cdc537caf26c8d4fd757ae"
+      }
     }
   ],
   "profile_skill_references": [
@@ -76857,6 +76908,76 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/simple-review.mjs",
+      "size_bytes": 10243,
+      "modified_at": "2026-11-25T05:54:00.753159+00:00",
+      "sha256": "060fc16c3d6f7e57400ec6d2cb8956472b057a08dac38c936d28e3c044d180bf",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/monthly-review-routes.mjs",
+      "size_bytes": 5552,
+      "modified_at": "2026-11-25T05:54:02.838161+00:00",
+      "sha256": "4e0f5321675b1ce4b28a679f995f651151ea8d247e9264119b380e42b7f6ef7b",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/navigation.js",
+      "size_bytes": 19091,
+      "modified_at": "2026-11-25T05:54:04.759164+00:00",
+      "sha256": "0db85b9d86fa4b0729f516cf16b3f75710f6b4598b10a28716f6e19cc45bc083",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/review.js",
+      "size_bytes": 6640,
+      "modified_at": "2026-11-25T05:54:06.786166+00:00",
+      "sha256": "4d0b722c6202e445a286ba947db29db61ac1391b211fffb62435337351c5b3c5",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
+      "size_bytes": 44463,
+      "modified_at": "2026-11-25T05:54:09.030169+00:00",
+      "sha256": "54ec88a7ff0732075d10a5b268a2b148ad78bcea8f4484e32b550c6338617646",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/sync-quotes.py",
+      "size_bytes": 7945,
+      "modified_at": "2026-11-25T05:54:11.105171+00:00",
+      "sha256": "fcb25a0bb3a19e2c227313ee9e61245245a37a622921c684d323eabd25fad10c",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/simple-review.test.mjs",
+      "size_bytes": 12024,
+      "modified_at": "2026-11-25T05:54:11.108171+00:00",
+      "sha256": "e74aa90fcf142069d46af4364122467f68c2d82b03d9d4eb828aa44b79dbbc40",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/conference-access.test.mjs",
+      "size_bytes": 1550,
+      "modified_at": "2026-11-25T05:54:11.110171+00:00",
+      "sha256": "f3836b7234ab3d39e56643bb04e414aeaf4d2db9ea4f19829855c070ba824951",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_quote_source.py",
+      "size_bytes": 7212,
+      "modified_at": "2026-11-25T05:54:11.112171+00:00",
+      "sha256": "a0e44319a49a4bb8687eae7ca950b6215b9904be742e9c5d54aeb7494139dda0",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/manual-quotes.test.mjs",
+      "size_bytes": 2887,
+      "modified_at": "2026-11-25T05:54:11.114171+00:00",
+      "sha256": "3c23d33673de02dd3c3a7c829759d359a9684cfa46b4cda4fa13215304bc1227",
+      "description": "SMS conference / exact Geizian consultation / automatic CAD spread 1575019978305044612"
     }
   ],
   "skills_mgs": [

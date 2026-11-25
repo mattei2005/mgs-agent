@@ -4,7 +4,7 @@
 
 - Rodolfo `1575019978305044612`, thread `1545426987756298340`: incluir o gasto SMS Funnel na Conferência mensal e depois liberar a consulta para Geizian, preservando o acesso de Rodolfo e as demais permissões.
 - Rodolfo `1575021696442966117`, mesma thread: manter USD/BRL live menos 1% e acrescentar 2% no USD/CAD live.
-- Estado de execução: checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612`; evidências em `apps/finance-system/private/conference-sms-1575019978305044612/`. Decisão confirmada não equivale a publicação; exigir recibo de produção.
+- Publicado e validado: `reports/finance-conference-sms-geizian-cad-1575019978305044612.md`, release `conference-sms-1575019978305044612` committed. Continuidade: checkpoint `ZEUS-FINANCE-CONFERENCE-SMS-1575019978305044612`; evidências em `apps/finance-system/private/conference-sms-1575019978305044612/`.
 
 ## Conferência mensal
 

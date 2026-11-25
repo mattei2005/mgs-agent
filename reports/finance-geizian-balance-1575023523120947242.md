@@ -1,5 +1,29 @@
 # Diagnóstico do saldo Geizian — outubro/2026
 
+## Supersessão após screenshot — Rodolfo1575026320847667321
+
+O screenshot recebido (`/root/.hermes/profiles/zeus/cache/images/img_a29b71a329f7.png`) resolve o valor e os dois câmbios de referência, embora não contenha horário. Competência outubro; saldo anterior49.598,65; metade787.617,00; ajustes0,00; saldo837.215,65; USD/BRL5,888817; USD/CAD1,432825; GBP1,339500. Rodolfo identifica a captura como23/11.
+
+Reconstrução pelo motor com os dados e regras anteriores às edições reproduziu **exatamente787.617,00 no centavo**. A ausência de horário não impede mais fechar a ponte monetária desse print ao snapshot805.044,73. Evidência: `geizian-screenshot-bridge.json` no mesmo diretório privado.
+
+Ponte sequencial, somando os valores apresentados em centavos:
+
+- Print: R$837.215,65.
+- Oscilação USD/BRL5,888817→5,843475: −R$6.730,90.
+- CAD do print1,432825→fixo1,44623: −R$23.753,01.
+- Atualização dos inválidos: +R$8.943,86.
+- Despesas gerais: −R$944,06.
+- Ajuste de juros Amex: −R$9.686,81.
+- Saldo do snapshot consultado: R$805.044,73; diferença total −R$32.170,92.
+
+A análise inicial abaixo era uma simulação a USD/BRL constante usando CAD1,426805 imediatamente antes da edição, e não a cotação1,432825 que aparece no print. Está supersedida como explicação da diferença entre as duas telas, preservada como investigação histórica.
+
+Auditoria do calendário Eastern: **23/11 às23:11:13**, Rodolfo registrou o ajuste Amex de9.686,81, o único evento financeiro de edição de Rodolfo encontrado nesse dia. Taxas e despesas foram editadas no dia24/11. O ajuste mostra criação24/11 04:11 UTC, mas23/11 23:11 Eastern; não confundir as datas. No print, Ajustes – pagamentos está0,00, portanto esse desconto não estava refletido nele. A base screenshot foi validada por números, não por horário presumido.
+
+Os valores finais continuam sensíveis ao USD/BRL automático. A publicação subsequente do spread USD/CAD+2% preservou o CAD fixo de outubro; ciclo normal05:56UTC atualizou somente o USD/BRL automático desse mês. Para futura pergunta sobre valor corrente, ler novamente e separar a oscilação posterior, sem refazer a ponte histórica ou modificar o ledger.
+
+## Investigação inicial — histórico supersedido pelo print
+
 Pedido Rodolfo1575023523120947242, thread1545426987756298340. Consulta somente leitura; sem ajuste, pagamento ou recálculo persistido. Relaciona a pergunta anterior1575021020966813727 sobre CAD com as edições reais do fechamento.
 
 ## Fonte
