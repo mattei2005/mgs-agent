@@ -9926,6 +9926,24 @@
       "updated_at": "2026-09-09T00:09:56+00:00"
     },
     {
+      "canonical_key": "finance.ui.display-currencies.from-2026-11",
+      "canonical_source": "docs/finance-november-display-currencies.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T21:53:02+00:00",
+      "id": "FINANCE-DISPLAY-USD-NOV-1575226305702797474",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Dash: USD desde novembro/2026, CAD preservado, BRL somente Despesas Gerais",
+      "updated_at": "2026-11-25T21:53:02+00:00"
+    },
+    {
       "canonical_key": "finance.august2026.same_day_dual_revenue",
       "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
       "consumers": [
@@ -18325,5 +18343,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T20:53:49+00:00"
+  "updated_at": "2026-11-25T21:53:02+00:00"
 }
