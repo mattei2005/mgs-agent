@@ -93,6 +93,19 @@ export const rates=[
 ];
 // Rodolfo1546729477319696405: GBP live capability bounded to August; other periods unchanged.
 export function ratesFor(period){return rates.map(r=>r.key==='principal|Agosto 2026|I1'&&period==='2026-08'?{...r,automatic:true,formula:'GOOGLEFINANCE("GBPUSD")'}:r);}
+// Per-parameter provenance. Never use an unrelated global quote timestamp for a fixed rate.
+export function rateUpdateTimes(s,events=[]){
+ const sorted=events.filter(e=>e.scenario_id===s.id).slice().sort((a,b)=>BigInt(a.id)>BigInt(b.id)?-1:BigInt(a.id)<BigInt(b.id)?1:0),out={};
+ const stamp=value=>{if(!value)return null;const d=new Date(value);return Number.isFinite(d.getTime())?d.toISOString():null;};
+ for(const r of ratesFor(s.id.slice(10))){const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key),mode=cfg?.mode||(r.automatic?'auto':'fixed'),value=s.result?.results?.[r.key]?.actual??s.overrides[r.key]??cfg?.value??null;let found=null;
+  for(const e of sorted){const a=e.after_data||{};
+   if(e.action==='FINANCIAL_RATE_CHANGED'&&a.key===r.key&&a.mode===mode&&value!==null&&Number.isFinite(Number(a.value))&&Number(a.value)===Number(value)){const at=stamp(e.created_at);if(at){found={last_updated_at:at,last_update_source:'manual'};break;}}
+   if(mode==='auto'&&e.action==='AUTO_QUOTES_UPDATED'&&a.period===s.id.slice(10)&&Array.isArray(a.keys)&&a.keys.includes(r.key)){const at=stamp(a.updated_at)||stamp(e.created_at);if(at){found={last_updated_at:at,last_update_source:'automatic'};break;}}
+  }
+  out[r.key]=found||{last_updated_at:null,last_update_source:null};
+ }return out;
+}
+export async function loadRateUpdateTimes(db,s){const rows=(await db.query(`SELECT id,scenario_id,action,created_at,after_data FROM audit_events WHERE id IN (SELECT DISTINCT ON (after_data->>'key') id FROM audit_events WHERE scenario_id=$1 AND action='FINANCIAL_RATE_CHANGED' ORDER BY after_data->>'key',id DESC) OR id IN (SELECT id FROM audit_events WHERE scenario_id=$1 AND action='AUTO_QUOTES_UPDATED' ORDER BY id DESC LIMIT 1) ORDER BY id DESC`,[s.id])).rows;return rateUpdateTimes(s,rows);}
 export async function liveQuotes(){try{return JSON.parse(await fs.readFile(path.join(root,'private/live-quotes.json'),'utf8'));}catch(e){if(e.code==='ENOENT')return {values:{},updated_at:null};throw e;}}
 export function effectiveOverrides(overrides,additions,quotes,period="2026-08"){const next={...overrides};for(const r of ratesFor(period).filter(r=>r.automatic)){const cfg=additions.find(a=>a.kind==='rate'&&a.key===r.key);if(cfg?.mode==='fixed')next[r.key]=cfg.value;else if(quotes.values?.[r.key]!==undefined)next[r.key]=String(quotes.values[r.key]);}return next;}
 export async function ensureWorkspace(db,actor='rodolfo',period='2026-08'){
@@ -260,7 +273,8 @@ export async function installWorkspace(app,db,mutate){
   const pm=periodModel(model,period);
   const expenses=s.result.domain.expenses.map(x=>({...x,status:period==='2026-08'?(model.expenses[x.id]?.status||'Não informado'):'A conferir',...x,...s.additions.filter(a=>a.kind==='expense'&&(a.target||a.id)===x.id).map(a=>({status:a.status,checked_on:a.checked_on??null,archived:a.archived,...(a.charges?{charges:a.charges}:{}),...(a.reclassification?{reclassification:a.reclassification,recognized_brl:a.recognized_brl,direct_cost_ids:a.direct_cost_ids||[],reclassification_authority:a.authority||null}:{})})).reduce((a,b)=>({...a,...b}),{})}));
   const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}])),s.additions,period);
-  const am=withGrossPairs(accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period),s),payload={id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:ratesFor(period).map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')},serialized=JSON.stringify(payload);cacheSet(cacheKey,serialized);res.set('X-MGS-Workspace-Cache','miss');res.set('Server-Timing',`workspace;dur=${Date.now()-started}`);res.type('application/json').send(serialized);
+  const rateUpdates=await loadRateUpdateTimes(db,s);
+  const am=withGrossPairs(accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period),s),payload={id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:ratesFor(period).map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at,...rateUpdates[r.key]};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')},serialized=JSON.stringify(payload);cacheSet(cacheKey,serialized);res.set('X-MGS-Workspace-Cache','miss');res.set('Server-Timing',`workspace;dur=${Date.now()-started}`);res.type('application/json').send(serialized);
  });
  app.post('/api/workspace/open',async(req,res)=>{const s=await ensureWorkspace(db,req.actor,String(req.body.period||'2026-08'));res.json({id:s.id,revision:s.revision});});
  const guard=(req,res,next)=>{if(!req.params.id.startsWith('workspace-'))return res.status(400).json({error:'Edição disponível somente nos meses de trabalho'});periodInfo(periodFromId(req.params.id));if(req.body.period&&req.body.period!==periodFromId(req.params.id))return res.status(400).json({error:'O formulário pertence a outro mês'});next();};
@@ -312,6 +326,7 @@ export async function installWorkspace(app,db,mutate){
    if(!['ATIVO','INATIVO'].includes(activity))throw Object.assign(Error('Atividade inválida: use ATIVO ou INATIVO'),{status:400});
    if(activity==='ATIVO'&&prior?.manager_role&&!existing?.manager)throw Object.assign(Error('Gestor sem vínculo de resultado: cadastre o vínculo antes de ativar'),{status:400});
    Object.assign(row,{activity,payroll_rule:prior?.payroll_rule||'monthly-v1',manager_role:prior?.manager_role??!!existing?.manager});
+   if(prior?.commission_exception)row.commission_exception=structuredClone(prior.commission_exception);
   }
   if(prior&&row.amount===undefined&&prior.amount!==undefined){row.amount=prior.amount;row.currency=prior.currency;}
   if(chargeSet)row.charges=chargeSet.charges;else if(prior?.charges)row.charges=structuredClone(prior.charges);

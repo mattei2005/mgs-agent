@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {managerView,managerCardSummary} from '../manager-view.mjs';
 
+
+test('exceptional remuneration changes due and status without fabricating the normal commission band',()=>{const ex={id:'joe-october-10pct-1575202919324844063',authority:'1575202919324844063',period:'2026-10',manager:'joe',rate:'0.10',normal_brl:'6915.10',normal_usd:'1383.02',complement_brl:'2963.61',complement_usd:'592.722'},payroll={brl:'-9878.71',usd:'-1975.742',floor_brl:'3000',activity:'ATIVO',payroll_rule:'monthly-v1',commission_exception:ex},r=managerCardSummary({profit:'19757.422'},'5',{id:'2026-10',days:31},{cutoff_date:'2026-10-31',elapsed_days:31},payroll);assert.equal(r.remuneration.status,'exception10');assert.equal(r.remuneration.due.brl,'9878.71');assert.equal(r.current.commission.rate,'0.07');assert.equal(Number(r.current.result.brl).toFixed(2),'98787.11');assert.deepEqual(r.remuneration.exception,ex);const normal=managerCardSummary({profit:'19757.422'},'5',{id:'2026-10',days:31},{cutoff_date:'2026-10-31',elapsed_days:31},{...payroll,commission_exception:undefined,brl:'-6915.10'});assert.equal(normal.remuneration.status,'commission7');assert.ok(!('exception'in normal.remuneration));});
+
 const cell=(book,ref,value)=>[`${book}|Agosto 2026|${ref}`,{actual:String(value)}];
 function fixture(){
  const results=Object.fromEntries([

@@ -116,7 +116,7 @@ def run(payload):
  if changes:
   fx=w.get('principal','Agosto 2026','F1')
   domain['expenses']=apply_expense_changes(domain['expenses'],changes,fx,{'CAD':w.get('principal','Agosto 2026','H1'),'UNITS':w.get('principal','Agosto 2026','G1')})
-  domain['expenses']=apply_payroll_policy(domain['expenses'],changes,domain['managers'],fx)
+  domain['expenses']=apply_payroll_policy(domain['expenses'],changes,domain['managers'],fx,period=period)
   totals={k:sum((num(x['usd']) for x in domain['expenses'] if x['category']==k),num(0)) for k in ['company','personnel']}
   domain['cash']=portfolio(domain['facts'],totals['company'],totals['personnel'],fx)
  if explicit_cutoff:
@@ -137,4 +137,4 @@ def run(payload):
  domain.pop('checks');domain.pop('bindings');domain.pop('cash_checks')
  return {'currency_revision':'monthly-currency-1','network_revision':'monthly-networks-2','engine_revision':'finance-homologation-3','summary':summary,'domain':domain,'results':results,'issues':r['issues'],'boundaries':data['boundaries']}
 if __name__=='__main__':
- result=run(json.load(sys.stdin));sys.stdout.write(json.dumps(result,ensure_ascii=False,default=json_default))
+ result=run(json.load(sys.stdin));sys.stdout.write(json.dumps(result,ensure_ascii=True,default=json_default))

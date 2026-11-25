@@ -12,7 +12,7 @@ def compensation(projected_profit_usd,usdbrl,floor_brl='3000',low_rate='.07',hig
  if brl<num(high_threshold_brl):return -(p*low)
  return -(p*high)
 
-def apply_payroll_policy(rows,changes,managers,fx):
+def apply_payroll_policy(rows,changes,managers,fx,period=None):
  """Explicit operational policy, leaving immutable migration parity untouched.
  Commission uses actual monthly attributed net, not projected future revenue.
  BRL payroll is rounded half-up to cents before USD conversion.
@@ -21,6 +21,12 @@ def apply_payroll_policy(rows,changes,managers,fx):
  from decimal import ROUND_HALF_UP
  output=deepcopy(rows);fx=num(fx)
  if fx<=0:raise ValueError('Invalid payroll exchange')
+ exceptions=[a for a in changes if 'commission_exception' in a]
+ expected={'id':'joe-october-10pct-1575202919324844063','authority':'1575202919324844063','period':'2026-10','manager':'joe','rate':'0.10'}
+ if len(exceptions)>1:raise ValueError('Duplicate exceptional remuneration')
+ for a in exceptions:
+  if period!='2026-10' or (a.get('target') or a.get('id'))!='personnel|148' or a.get('payroll_rule')!='monthly-v1' or a.get('commission_exception')!=expected:
+   raise ValueError('Exceptional remuneration outside approved scope')
  configs={a.get('target') or a['id']:a for a in changes if a.get('payroll_rule')=='monthly-v1'}
  for row in output:
   cfg=configs.get(row['id'])
@@ -28,6 +34,7 @@ def apply_payroll_policy(rows,changes,managers,fx):
   if row['category']!='personnel':raise ValueError('Payroll policy on non-personnel row')
   activity=cfg.get('activity','ATIVO')
   if activity not in ('ATIVO','INATIVO'):raise ValueError('Invalid employee activity')
+  if cfg.get('commission_exception') and row.get('manager')!='joe':raise ValueError('Exceptional remuneration manager mismatch')
   row.update(activity=activity,payroll_rule='monthly-v1')
   if activity=='INATIVO' or row.get('archived'):
    row.update(usd=D(0),brl=D(0));continue
@@ -36,7 +43,13 @@ def apply_payroll_policy(rows,changes,managers,fx):
    if len(totals)!=1:raise ValueError('Monthly manager result not uniquely mapped')
    profit=num(totals[0]['profit']);base=profit*fx
    brl=(compensation(profit,fx)*fx).quantize(D('.01'),rounding=ROUND_HALF_UP)
-   row.update(usd=brl/fx,brl=brl,commission_base_brl=base,commission_rate=D('.10') if base>=D(100000) else D('.07'),floor_brl=D(3000))
+   normal_brl=brl
+   exception=cfg.get('commission_exception')
+   if exception:
+    target=max(D(0),base*D('.10')).quantize(D('.01'),rounding=ROUND_HALF_UP)
+    brl=-max(abs(normal_brl),target)
+    row['commission_exception']={**exception,'normal_brl':abs(normal_brl),'normal_usd':abs(normal_brl)/fx,'complement_brl':abs(brl)-abs(normal_brl),'complement_usd':(abs(brl)-abs(normal_brl))/fx}
+   row.update(usd=brl/fx,brl=brl,commission_base_brl=base,commission_rate=D('.10') if exception or base>=D(100000) else D('.07'),floor_brl=D(3000))
   elif cfg.get('manager_role'):
    raise ValueError('Active manager requires an explicit result mapping')
  return output

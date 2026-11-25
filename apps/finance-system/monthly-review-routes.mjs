@@ -6,6 +6,7 @@ import {accountDocument,accountSites,accountManager} from './accounts.mjs';
 import {managerView} from './manager-view.mjs';
 import {ledger} from './finance-ops.mjs';
 import {buildSimpleReview} from './simple-review.mjs';
+import {loadRateUpdateTimes} from './workspace.mjs';
 import {buildMonthlyReview,traceRows} from './monthly-review.mjs';
 export async function installMonthlyReview(app,db){
  const [model,source]=await Promise.all(['ui-model.json','source.json'].map(f=>fs.readFile(root+'/private/'+f,'utf8').then(JSON.parse)));
@@ -32,7 +33,7 @@ export async function installMonthlyReview(app,db){
    await tx.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY');
    const s=(await tx.query('SELECT * FROM scenarios WHERE id=$1',[workspaceId(period)])).rows[0];if(!s)throw Object.assign(Error('Competência indisponível'),{status:404});
    const accounts=await accountDocument(tx);
-   return buildSimpleReview(s,{model,source:source.cells,accounts});
+   const review=buildSimpleReview(s,{model,source:source.cells,accounts}),updates=await loadRateUpdateTimes(tx,s);review.rates=review.rates.map(r=>({...r,...updates[r.key]}));return review;
   });res.json(result);
  });
  app.get('/api/monthly-review',owner,async(req,res)=>{
