@@ -1,0 +1,96 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+  "mode": "resume_safe",
+  "status": "waiting_resource",
+  "cause": "pc1_save_as_dialog_returned_during_read_attempts_preserved",
+  "observed_at": "2026-11-25T20:20:27.292530+00:00",
+  "authority_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round36-final/authority-readback.json",
+  "reconciliation_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round36-final/reconciliation.json",
+  "final_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round36-final/final-state.json",
+  "native_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+  "scope": {
+    "sheet_id": 794137639,
+    "active_account_count": 51,
+    "pending_stage": "D historical explicit Paid card instrument proofs only",
+    "pending_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "archived_accounts_excluded": true
+  },
+  "progress": {
+    "initial_save_dialog_count": 0,
+    "initial_accounts_access_verified_in_pixels": true,
+    "exact_first_account_detail_access_verified": true,
+    "first_account_id": "1034081997659047",
+    "first_account_name": "Eggbev-US-CC-EN-01",
+    "first_account_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round36/history-uia1/1034081997659047-receipt.json",
+    "historical_paid_card_proof_obtained": false,
+    "canonical_proof_publisher_invoked": false,
+    "failures": [
+      {
+        "worker": "read_pc1_billing_history.py",
+        "reason": "billing_page_not_verified",
+        "actual_surface": "original Accounts list; target navigation not verified"
+      },
+      {
+        "worker": "local read-only transaction link extension",
+        "reason": "transaction_history_not_ready"
+      },
+      {
+        "worker": "local read-only diagnostic",
+        "reason": "direct_url_suggestion_not_unique"
+      },
+      {
+        "worker": "local read-only foreground diagnostic",
+        "reason": "action assertion; underlying response not persisted; exact action failure cause unproven"
+      }
+    ],
+    "blind_retry_stopped": true
+  },
+  "surface": {
+    "final_probe": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round36-final/probe-receipt.json",
+    "save_as_dialog_confirmed_in_pixels": true,
+    "dialog_preserved": true,
+    "meta_authentication_challenge_demonstrated": false,
+    "final_accounts_access_verified": true,
+    "history_access_not_verified": true,
+    "original_tabs_preserved": true,
+    "original_tab_count": 6,
+    "all_attempt_tab_parity_verified": true,
+    "lease_free_readback": true
+  },
+  "continuity": {
+    "queue_owner": "supervisor:1948724",
+    "owner_alive": true,
+    "state": "running",
+    "attempts": 36,
+    "failures": 0,
+    "consumer_heartbeat": {
+      "at": 1795637287.0905197,
+      "phase": "dispatching",
+      "pid": 1948724
+    },
+    "consumer_schedule": "2-57/5 * * * *",
+    "retry_at": null,
+    "retry_scheduling_owner": "existing supervisor consumes this diagnostic and applies resource backoff; no queue mutation by this worker",
+    "next_step": "Reacquire lease and inspect live dialogs before input. Preserve Save As. Once PC1 is free, diagnose exact UI action response before another navigation retry; use proven native UIA detail route. Read visible View transaction history in own tab with immediate capture and persisted response, not blind table polling. Resume only these five D proofs; record only through canonical record_pc1_proof after actual Paid card pixels, then reconcile pending fields/readback. Keep later H35/D2 under ce11800d217d22dba6a58dcc; no completed-layer or business-delivery replay."
+  },
+  "side_effects": {
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "business_delivery_messages": 0,
+    "canonical_infrastructure_modified": false,
+    "local_diagnostic_artifacts_only": true
+  },
+  "business_complete": false,
+  "delivery_complete": false,
+  "independent_closure_not_claimed": true
+}
