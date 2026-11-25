@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T06:45:15.452860+00:00",
+    "updated_at": "2026-11-25T07:05:07.219270+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72215,6 +72215,41 @@
         "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1575038856569299086/apply.py": "f005a234c43410d1f4f6783b4329a21e39444f7df4513281404d09b18f10ba54",
         "/root/mgs-agent/apps/finance-system/private/sms-prepaid-1575038856569299086/browser.mjs": "5bdbb5cf865bc27386528a3e03b177d1ab355ceb8189e3e4e2c6399c386b45e3",
         "/root/mgs-agent/docs/finance-sms-payment-1567199190331686913.md": "7cbbfdb7985c1e7cbd8b1031ac2c9233bffc18841a0477523a2b347850341405"
+      }
+    },
+    {
+      "id": "zeus-finance-october-spend-review-1575041627167391744",
+      "agent": "zeus",
+      "type": "readonly_closing_reconciliation",
+      "status": "phase1_complete",
+      "authorization_message_id": "1575041627167391744",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T07:05:07.219270+00:00",
+      "canonical_source": "docs/finance-october-closing.md",
+      "report_path": "reports/finance-october-spend-review-1575041627167391744.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744",
+      "financial_writes": 0,
+      "google_writes": 0,
+      "coverage": {
+        "facebook_accounts": 52,
+        "google_daily_rows": 31,
+        "lineage": 1149,
+        "manager_site_days": 2108,
+        "manager_sites": 68,
+        "browser_views": 4
+      },
+      "remaining": "M2, Rede2, Rede1 in requested order; AV no activity confirmed",
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/browser-spend.mjs": "4c9d9d9a02b37a7a25ebd16205b66e6d325462729b1b0d3d84d6b021cbc14301",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/compare.py": "d198dad2671bc100cc7073d4bd8997a293aaf8b759b25f4f390fcf4c68c57600",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/dash-spend.py": "3d1d9303af88f90ae7dfb8d646a19b0ea56716355221c3fddfde7d2cad80470a",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/manager-spend.py": "ccda3ed4d4d0fd8d35bdff0195828e0c94fc626c0868f7c1bb60bf81545f86b9",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/source-meta.py": "d81381c374bcf19e35df4c5931708675673776b05c75466e88cf2fe4ffe4bec8",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/source-spend.py": "fe9950e70e348f05f4ee92c604c42c99c9dead4d14bed1d20c024c3704b6ca50",
+        "/root/mgs-agent/apps/finance-system/private/october-close-1575041627167391744/verify-spend.py": "e66669b5bfd456e99253eb225001a2d1df2a67b31aebf9bbf1127d8362947323",
+        "/root/mgs-agent/docs/finance-october-closing.md": "85bb714c399f0b54cefdb04d2d1e13ce50fc188cd7b56cc98eb4841e011093cc",
+        "/root/mgs-agent/docs/finance-monthly-closing-reference-sheets.md": "8f8fa06f3c88cbd940d522c29513c4ceeea63d83ece7b12f7e761552beabc12e",
+        "/root/mgs-agent/reports/finance-october-spend-review-1575041627167391744.md": "e7bf4ca6c31108bcc05a8cb4aa0ca5598d3f2e854878d983c3231b4d9b9854b1"
       }
     }
   ],
