@@ -33,15 +33,19 @@ Supersessão: Rodolfo1575050438892585082 confirmou a proposta deoutubro; o estad
 - Aplicação2179→2180,audit7703;backupdual/restoreisolado,recoveryimutável,idempotência/API/DOMconfirmados. Source/gastos/CAD/outrascompetências/ledger preservados;FinancepermaneceINATIVO. RemuneraçãoÍcaro recalculada pela regra7%; nenhum pagamento executado.
 - Esta atribuição vale somenteoutubro. Setembro continua com sua confirmação própria e novembro/futuro não recebe cópia dessas receitas/regras pontuais.
 
-## Fase3 — Rede2: auditada, correção ainda não autorizada
+## Fase3 — Rede2: aplicada e validada
 
-Relatório `reports/finance-october-rede2-review-1575050438892585082.md`;681linhasfonte→304grupos/fatos;63diferenças visíveis gestor/diaem18datas.
+Rodolfo1575120915530911765 confirmou a proposta1575058997373968486. Isso supersede somente a pendência Rede2, preservando o relatório histórico `reports/finance-october-rede2-review-1575050438892585082.md`.
 
-- A fonteRede2somaUSD209970.26600474482565033512. Os fatosUSD já salvos dos mesmos sites somamUSD210063.28208955383762231863;deltaexato−93.01608480901197198351.
-- O cartãoRede2mostraUSD209524.645149672887613645 porqueUSD538.636939880950008666 deFincgriffinjá salvos estão fora docartão,como origemnãoidentificada. Issoéclassificação visual,não538.64de receita nova.
-- Proposta:ajustar grossUSD deCPV,Fincgriffin eGameZoneAd aosdias/gestores dafonte e identificara origemUSD Fincgriffin comoRede2naConferência;preservarCAD,catálogo/percentuais,atribuições existentes,gastos,M2 eledger. CarCreditAdjá coincideaocentavo epermanecepreservado.
-- Simulação semwrite passouos5gestores/cartões;correção recalculará resultados/remuneração pelas regrasexistentes. A diferença devalores exibidos totaliza−USD93.01,enquantoarredondar odeltaexato resulta−USD93.02;aplicarvaloresoriginais,nãoajusteartificial.
+- Resultado:USD209970.27 na fonte e naConferência;304controles/681linhas. CPV182043.93,Fincgriffin479.51,GameZoneAd27446.81,CarCreditAd0.02.
+- 302overlaysUSD conservam originais;Fincgriffin identificaRede2naConferência semduplicação. CAD,catálogo/regras,câmbios,gastos,M2,AV,SMS/recargas,pagamentos e demaiscompetências preservados.
+- Produção2189→2190,audit7736;recoveryimutável,backup/restore real,ensaio,readback idempotente,14vistasdesktop/mobile e496célulasgestor confirmados. Readbackposterior2191 confirmaadiçõesidênticas. Nenhumdeploy/restart/credencialalterada.
+- Evidência:`reports/finance-october-rede2-complete-1575120915530911765.md` e `apps/finance-system/private/rede2-october-1575120915530911765/acceptance.json`.
 
-## Próximo ponto
+## Fase4 — Rede1: auditada, aguardando confirmação
 
-Obter confirmação e concluirRede2 antes de **Rede1**, ainda não conferida. AV está resolvida pela confirmação do titular e ausência de receita na Dash; não exigir outro relatórioAV sem nova divergência.
+`reports/finance-october-rede1-review-1575120915530911765.md`:3476linhas,36sites,1805gruposfonte/1858gruposDash,1860união. FonteCAD1708827.76 versusDash1709447.03, reduçãoCAD619.27. ConferênciaUSD/Rede2 nãofoireaberta.
+
+Além dosvaloresdiários, a fonteatribuiCliquetUSintegralmenteaMGS,NewsounDEaKelly eZuoutprincipal/FinanzasaNicolas;essasquatroatribuições divergemdosfatosCADsalvos e precisamconfirmaçãodeoutubro. Decisõesdesetembro nãoseestendemautomaticamente.
+
+Simulaçãov2emmemóriaconciliauniãocompleta/cartão e5gestores,semwriteRede1. A simulaçãoanteriorfoiinvalidadaporfaltadedestinosCliquet;usarsomenterecibov2. Próximopasso:confirmarcorreçõesCADdiáriasequatroatribuições,entãoexecutarcombackup/restore/readback. AVsegueencerrada pela confirmaçãodotitular.
