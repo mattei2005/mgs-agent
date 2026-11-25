@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "zeus",
+      "id": "MATTEI-UPTIME-1575283341404672001",
+      "objective": "Listar sites MGS nos Mattei 1/2/3 e monitorar disponibilidade pública e alcance dos servidores neste tópico, sem alterar sites/serviços.",
+      "state": "in_progress: autoridade FullTech validada; descoberta Nginx live com filtro positivo MGS concluída; coleta pública, testes e agendamento em preparação.",
+      "next_step": "Validar vínculos duplicados e sondas; testar monitor, auditar scheduler, ativar e publicar listagem com readback.",
+      "source": "discord:1575283341404672001; scratch/mattei-monitor-1575283341404672001/discovery.json",
+      "thread_id": "1575283341404672001",
+      "authority_message_id": "1575283341404672001"
+    },
+    {
+      "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
       "next_step": "Encerrado o último ciclo autorizado; nenhuma próxima data ou recorrência. Zero pendências operacionais.",
       "objective": "Rotina finita de aquecimento dos quatro perfis autorizados; zero comentários",
