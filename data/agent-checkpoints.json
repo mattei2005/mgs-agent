@@ -4874,12 +4874,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1575197527920083015",
-      "next_step": "Concluir QA integral e ativacao pelo runner central do mesmo request, readback de todos IDs e cadastro direto SB; sem recriar objetos",
+      "next_step": "Concluido; entregar resumo nativo na origem sem outro POST; nao repetir criacao, ativacao ou cadastro SB. Job FOREGROUND_COMPLETE e lease liberada.",
       "objective": "Duplicar C036 dez vezes na Yolokfx08 G006 com 20 videos expressos, USD35 e COCAP USD0.90",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575197527920083015/postprocess-recovery-boundary.json",
-      "state": "10 campanhas e 20 anuncios criados paused; ids preservados apos timeout; engine complete_paused; retomada do qa e pos-processamento apos snapshot expirado; anterior suspenso e 3 reservas transferidas sob aceite 1575198893560307837",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575197527920083015/final-verification.json",
+      "state": "complete_verified: campanhas111-120 e20anuncios active no readback25nov2026 12h52est; usd35dia cada,deltausd350dia,totalativousd5069.31dia;costcapusd0.90;qa semantico/renderizado integral,20linhagens uso registrado,mesmos ids;postsnovos;12h30 solicitado nao cumprido,iniciosconfigurados12h34-12h37,ativacaoaposqa;utms10+10 sb http201 gaminsertok,leituraindependenteindisponivel;retomadaantiga suspensa e3reservas transferidas sob1575198893560307837",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-25T17:41:36+00:00"
+      "updated_at": "2026-11-25T17:54:35+00:00"
     },
     {
       "agent": "ares",
@@ -12568,5 +12568,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:41:36+00:00"
+  "updated_at": "2026-11-25T17:54:35+00:00"
 }
