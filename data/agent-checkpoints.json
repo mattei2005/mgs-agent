@@ -2411,6 +2411,16 @@
       "updated_at": "2026-11-12T06:15:07+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-MAVROA07-G004-REPORT-1575250717093011567",
+      "next_step": "Obter confirmacao especifica de Rodolfo para ANALYZE ao minibot System User; provisionar com pre-read/readback e retomar mesmo enrollment, sem novo cron ou D-1",
+      "objective": "Vincular thread exclusiva e incluir Mavroa 07 G004 no Intraday existente",
+      "source": "data/ares/discord/thread-report-1575250717093011567.json",
+      "state": "pending_critical_permission_confirmation",
+      "thread_id": "1575250717093011567",
+      "updated_at": "2026-11-25T20:46:28+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-META-APP-PROFILE-TOKEN-CUTOVER-20260902",
       "next_step": "Aguardar tick real Eggbev LEADS c3d2499d8c33 às 20:16 ET e validação one-shot d1b94343f4af às 20:21 ET nesta thread; depois confirmar streak0 ou reportar/corrigir bloqueio. Badges históricos Diário/Intraday CPV13 serão substituídos nos ticks 16:01/16:06 ET.",
@@ -12598,5 +12608,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T20:26:01+00:00"
+  "updated_at": "2026-11-25T20:46:28+00:00"
 }

@@ -607,6 +607,13 @@ Produzir relatórios                       Expor credenciais/tokens
 - Restrição provisória de mensagens é contexto informado pelo operador, não evidência live nem liberação. `page_eligibility_policy` e denylist permanecem inalteradas; histórico de restrição exige decisão explícita própria para revisão, mesmo após aquecimento.
 - Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json#/discord/route_contracts/campaign_warmup`, registry e prompts das duas threads e de Regras. Conta aceita pelo checker Digital Trust; estado/acesso Meta dependem de preflight futuro.
 
+## Escopo exclusivo — Mavroa Conta 07 G004 Criação
+
+- Decisão de Rodolfo Mattei `1575250902724644867`: thread `1575250902724644867`, pai `1548149654926135486`, exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-07-G004`, ID literal `1770569568407466`, Joe/G004. Fonte canônica: `data/ares/discord/thread-scopes/1575250902724644867.json`; catálogo SHEIN atualizado sem herdar configuração de outra conta.
+- Título manual vigente `🎯Mavroa Conta 07 Criar Camp`, corrigido por Rodolfo em `1575251186510991433`; a referência inicial à Conta 04 está supersedida somente quanto ao título. Pai, título e presença de Zeus, Rodolfo, Geizian e Joe conferidos por GET Discord.
+- Escopo corporativo confirmado `allowed=true`, BM Digital Trust. Nome da conta é declarado pelo solicitante, não nome live validado pela Meta. Conta documentada, sem onboarding técnico presumido; validar acesso, identidade, moeda, fuso e saúde no preflight da execução futura.
+- A definição não solicita campanha imediata, ativação, budget, cron, alteração de credencial/permissão ou outras contas. Preservar título manual e histórico; aguardar pedido de campanha com seus parâmetros.
+
 ## 13. Validação antes de responder
 
 - Arquivo criado/alterado: path + inspeção real.

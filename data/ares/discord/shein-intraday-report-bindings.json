@@ -503,7 +503,20 @@
       "resume_message_id": "1570864612889600177"
     }
   ],
-  "pending_bindings": [],
+  "pending_bindings": [
+    {
+      "thread_id": "1575250717093011567",
+      "channel_id": "1558147066826334309",
+      "thread_name": "📈Mavroa Conta 07 Intraday",
+      "manager_code": "g004",
+      "account_id": "1770569568407466",
+      "account_name_declared": "Mavroa-US-SHEIN-ES-07-G004",
+      "source_message_id": "1575250717093011567",
+      "status": "PENDING_CRITICAL_PERMISSION_CONFIRMATION",
+      "request": "data/ares/discord/thread-report-1575250717093011567.json",
+      "schedule_active": false
+    }
+  ],
   "publication_policy": "new reports only after a new explicit authorized human request; audit/cleanup never posts a report",
   "binding_count": 37
 }
