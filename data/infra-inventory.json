@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T02:09:11-05:00",
+    "updated_at": "2026-11-25T02:09:44-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -76309,8 +76309,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
-      "size_bytes": 36982,
-      "modified_at": "2026-11-22T03:46:30-05:00"
+      "size_bytes": 37089,
+      "modified_at": "2026-11-25T02:10:45-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
@@ -76484,8 +76484,26 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_sb_token_monitor_continuity.py",
-      "size_bytes": 4704,
-      "modified_at": "2026-11-17T16:44:04-05:00"
+      "size_bytes": 4905,
+      "modified_at": "2026-11-25T02:10:45-05:00",
+      "last_recovery": {
+        "operation_key": "e853905050082dbd77669386",
+        "alert_id": "1575042753283227769",
+        "authority_message_id": "1569193434189668453",
+        "scope": "Existing token-monitor login recovery; distinct occurrence verifier and checkpoint, no business replay",
+        "changed_paths": [
+          "/root/mgs-agent/scripts/mgs_sb_token_monitor_continuity.py",
+          "/root/mgs-agent/scripts/mgs_automation_supervisor.py",
+          "/root/mgs-agent/tests/test_sb_token_monitor_continuity.py",
+          "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/common-automation-continuity.md"
+        ],
+        "evidence": "/root/mgs-agent/reports/automation-recovery/e853905050082dbd77669386/checkpoint.json",
+        "tests_passed": 24,
+        "natural_tick_verified": "2026-11-25T02:12:10-05:00",
+        "credentials_changed": false,
+        "cron_changed": false,
+        "status": "business_recovered_waiting_supervisor_closure"
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_scheduler_health.py",
@@ -80439,20 +80457,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 84576,
-      "md5": "33cc6550448ad4d6993063aad851901d",
-      "modified_at": "2026-11-25T02:05:02-05:00"
+      "md5": "22093c6cff1fcb097ff5e9e771a6d985",
+      "modified_at": "2026-11-25T02:10:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 129912,
-      "md5": "38d48f8c482112718a61509ea7b5b8d9",
-      "modified_at": "2026-11-25T02:09:02-05:00"
+      "md5": "a8944a56cb34e152b7787b2f7e1b77ba",
+      "modified_at": "2026-11-25T02:10:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "356326cbd5e15cd62930f920399b517b",
-      "modified_at": "2026-11-25T02:09:02-05:00"
+      "md5": "989d8b5783666876bf769f0a88c24ab0",
+      "modified_at": "2026-11-25T02:10:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -80547,8 +80565,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 3897038,
-      "md5": "6bfeea4f8b3b69b21d2dccd4ff835226",
-      "modified_at": "2026-11-25T02:09:08-05:00"
+      "md5": "8a0724f89d8b052b21f2f6bd089472e9",
+      "modified_at": "2026-11-25T02:09:42-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -81140,9 +81158,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 185487,
-      "md5": "3fbe5507e25f051c69ed6e5d231c30cc",
-      "modified_at": "2026-11-25T01:57:36-05:00"
+      "size_bytes": 185319,
+      "md5": "33c28426e0f34c92627134af5ec6c555",
+      "modified_at": "2026-11-25T02:10:10-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -81278,9 +81296,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3663,
-      "md5": "9983a487e4885b484a9f2a75c3ce33ca",
-      "modified_at": "2026-11-25T02:05:05-05:00"
+      "size_bytes": 3729,
+      "md5": "633c652a155db3b112cc0474eed998c0",
+      "modified_at": "2026-11-25T02:10:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -81314,9 +81332,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 59543,
-      "md5": "178cb0f35bbe7a5ade3cb4e374fbc8ae",
-      "modified_at": "2026-11-25T02:09:10-05:00"
+      "size_bytes": 59695,
+      "md5": "a2131672da55a1b23ca2d69d642e0030",
+      "modified_at": "2026-11-25T02:09:43-05:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",

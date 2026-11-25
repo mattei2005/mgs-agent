@@ -15,6 +15,10 @@ BASE = Path('/root/mgs-agent')
 KEY = '24c94f890699dee6148cf511'
 ALERT = '1572362593874608159'
 SOURCE_KEY = 'alert:' + ALERT
+RECOVERIES = {
+    KEY: ALERT,
+    'e853905050082dbd77669386': '1575042753283227769',
+}
 QUEUE_DB = Path('/root/.hermes/shared/automation-continuity/queue.sqlite3')
 
 
@@ -31,27 +35,30 @@ def probe(base):
     return json.loads(lines[-1])
 
 
-def observation(base=BASE, reader=None, now=None, queue_path=QUEUE_DB):
-    root = base / 'reports/automation-recovery' / KEY
+def observation(base=BASE, reader=None, now=None, queue_path=QUEUE_DB, key=KEY, alert=ALERT):
+    if RECOVERIES.get(key) != alert:
+        return None
+    source_key = 'alert:' + alert
+    root = base / 'reports/automation-recovery' / key
     path = root / 'checkpoint.json'
     if not path.exists():
         return None
     if queue_path is not None:
         try:
             with sqlite3.connect(f'file:{queue_path}?mode=ro', uri=True, timeout=5) as db:
-                row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (KEY,)).fetchone()
-            if row is None or row[0] != SOURCE_KEY or row[1] in ('completed_validated', 'cancelled_owner'):
+                row = db.execute('SELECT source_key,state FROM requests WHERE key=?', (key,)).fetchone()
+            if row is None or row[0] != source_key or row[1] in ('completed_validated', 'cancelled_owner'):
                 return None
         except (OSError, sqlite3.Error):
             return None
     now = time.time() if now is None else now
-    result = {'status': 'UNKNOWN', 'verified': False, 'target': SOURCE_KEY,
+    result = {'status': 'UNKNOWN', 'verified': False, 'target': source_key,
               'receipt': str(path), 'at': now,
-              'source': {'kind': 'alert', 'profile': 'zeus', 'alert_id': ALERT,
+              'source': {'kind': 'alert', 'profile': 'zeus', 'alert_id': alert,
                          'alert_channel': '1498132022634483894'}}
     try:
         receipt = json.loads(path.read_text())
-        if receipt.get('operation_key') != KEY or receipt.get('alert_id') != ALERT:
+        if receipt.get('operation_key') != key or receipt.get('alert_id') != alert:
             raise ValueError('Occurrence identity mismatch')
         if receipt.get('authority_message_ids') != ['1569193434189668453', '1545180305961386055']:
             raise ValueError('Authority mismatch')

@@ -52,6 +52,22 @@ class TokenMonitorContinuityTests(unittest.TestCase):
         self.receipt['alert_id'] = 'other'; self.save()
         self.assertFalse(self.observe()['verified'])
 
+    def test_repeated_occurrence_uses_own_receipt(self):
+        key = 'e853905050082dbd77669386'
+        alert = '1575042753283227769'
+        root = self.base / 'reports/automation-recovery' / key
+        root.mkdir()
+        receipt = dict(self.receipt, operation_key=key, alert_id=alert)
+        (root / 'checkpoint.json').write_text(json.dumps(receipt))
+        result = target.observation(self.base, lambda base: self.live,
+                                    now=1794951900, queue_path=None, key=key, alert=alert)
+        self.assertTrue(result['verified'])
+        self.assertEqual(result['target'], 'alert:' + alert)
+        self.assertIsNone(target.observation(self.base, queue_path=None, key=key, alert=target.ALERT))
+        (root / 'checkpoint.json').write_text(json.dumps(self.receipt))
+        self.assertFalse(target.observation(self.base, lambda base: self.live,
+                                           now=1794951900, queue_path=None, key=key, alert=alert)['verified'])
+
     def test_prior_manual_success_not_natural_tick(self):
         self.state['last_check'] = '2026-11-17T16:38:01-05:00'; self.save()
         self.assertFalse(self.observe()['verified'])

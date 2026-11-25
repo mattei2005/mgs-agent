@@ -1,0 +1,18 @@
+{
+  "operation_key": "e853905050082dbd77669386",
+  "status": "OK",
+  "verified": true,
+  "target": "alert:1575042753283227769",
+  "receipt": "/root/mgs-agent/reports/automation-recovery/e853905050082dbd77669386/checkpoint.json",
+  "at": 1795590767.3225477,
+  "evidence": {
+    "exact_consumer_live_read": true,
+    "natural_tick_last_check": "2026-11-25T02:12:10-05:00",
+    "cursor": 771770,
+    "alerts_seen": 842,
+    "new_alerts": 0,
+    "new_business_delivery_required": false,
+    "credentials_changed": false
+  },
+  "queue_closure": "Not performed: original active supervisor owns the row and final diagnostic delivery. The next natural supervisor tick loads the scoped observer."
+}
