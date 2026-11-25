@@ -1,0 +1,22 @@
+{
+  "operation_key": "ce11800d217d22dba6a58dcc",
+  "verification_method": "vision_analyze of fresh exact-window screenshots",
+  "approved_surface": {
+    "screenshot": "approved.png",
+    "page": "Billing & payments / Accounts / Ad accounts",
+    "business_id_pixels": "155263197283282",
+    "balance_header": "Outstanding balance",
+    "authentication_gate_visible": false,
+    "page_error_visible": false,
+    "desktop_availability_not_inferred": true
+  },
+  "native_dialog": {
+    "screenshot": "native-dialog-0.png",
+    "type": "Save As",
+    "open_pixels": true,
+    "authentication_gate_visible": false,
+    "origin_unproved": true,
+    "preserved_no_input": true
+  },
+  "resume_decision": "waiting_resource; no navigation or business writes while unrelated native dialog remains open"
+}
