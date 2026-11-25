@@ -14424,6 +14424,23 @@
       "updated_at": "2026-11-18T14:53:26+00:00"
     },
     {
+      "canonical_key": "infra.runcloud.agent.review15days",
+      "canonical_source": "reports/runcloud-agent-1575098784659144846.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-11-25T10:49:08+00:00",
+      "id": "RUNCLOUD-REVIEW-15D-1575098784659144846",
+      "kind": "decision",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Revisão15dias do agente RunCloud; foco em web sem intervenção em periféricos",
+      "updated_at": "2026-11-25T10:49:08+00:00"
+    },
+    {
       "canonical_key": "revenue.smart-routing.drip.url-position-order",
       "canonical_source": "profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
       "consumers": [
@@ -18155,5 +18172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T08:01:07+00:00"
+  "updated_at": "2026-11-25T10:49:08+00:00"
 }

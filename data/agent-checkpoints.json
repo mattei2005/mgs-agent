@@ -4049,12 +4049,12 @@
     {
       "agent": "zeus",
       "id": "INC03-PERIPHERALS-1574921787630821377",
-      "next_step": "Leitura concluída. Propor confirmação técnica Hetzner para comportamentofirmware/portas/codec;sem ticketouintervenção enviados;ressalvas eordemserial preservadas.",
-      "objective": "Varredura física Inc03 USB/PCI/ALSA e provas históricas concluída",
-      "source": "reports/inc03-peripherals-1574921787630821377.md",
-      "state": "completed_readonly_preexistence_proven_no_repair",
+      "next_step": "Decisão1575098784659144846: semticketHetzner ouintervenção periférica;foco web. Preservar preexistência comprovada e journalestritofalso,semalegarreparo;Hestia nãoexecutadonestepedido.",
+      "objective": "Varredura em leitura concluída; FullTech dispensa investigação adicional de periféricos",
+      "source": "reports/runcloud-agent-1575098784659144846.md",
+      "state": "completed_no_further_peripheral_action_requested",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-24T23:03:30+00:00"
+      "updated_at": "2026-11-25T10:49:09+00:00"
     },
     {
       "agent": "zeus",
@@ -4624,12 +4624,12 @@
     {
       "agent": "zeus",
       "id": "RUNCLOUD-AGENT-1575098784659144846",
-      "next_step": "Conferir versão instalada/candidata, saúde, updater nativo e agenda global; preservar gates críticos e não intervir em periféricos.",
-      "objective": "Verificar agente RunCloud nos hosts MGS e implantar verificação a cada15dias sob autoridade FullTech",
+      "next_step": "Job6558be364f6f confirmado; próxima revisão10/12/2026 03:02Eastern. Sem atualização pendente. Instalações críticas futuras exigem lote exato e confirmação de Rodolfo.",
+      "objective": "Verificar agente RunCloud e manter revisão a cada15dias",
       "source": "reports/runcloud-agent-1575098784659144846.md",
-      "state": "in_progress_readonly_discovery",
+      "state": "initial_current_validated_recurring_scheduled",
       "thread_id": "1574249078584377544",
-      "updated_at": "2026-11-25T10:41:48+00:00"
+      "updated_at": "2026-11-25T10:49:09+00:00"
     },
     {
       "agent": "zeus",
@@ -12488,5 +12488,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T10:41:48+00:00"
+  "updated_at": "2026-11-25T10:49:09+00:00"
 }

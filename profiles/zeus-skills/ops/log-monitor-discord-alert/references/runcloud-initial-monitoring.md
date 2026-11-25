@@ -70,6 +70,15 @@ This section is a read-only readiness procedure and rollout acceptance contract,
 - Deliver with the existing Zeus bot, without a recurring webhook-secret lookup. Require exact Discord GET for actual messages; do not publish fake incidents as smoke tests.
 - Verify the live log-rotation configuration and retained history. Exercise a scratch fixture for rotation; shortening retention or deleting logs is a separate operation.
 
+## Periodic agent-version review
+
+- Compare `dpkg-query` installed version with `apt-cache policy runcloud-agent` after a successful fresh `apt-get -o APT::Update::Error-Mode=any update`; confirm the exact server API `agentVersion`, `online` and `connected` separately. Store full package-policy evidence but print only installed/candidate/repository and health.
+- Inspect `runcloud-upgrade.timer` and its service before claiming automatic updates are active. A static inactive timer with `OnActiveSec` is an on-demand updater, not a recurring verified automatic schedule.
+- Use a profile-local relative wrapper filename for `cronjob_manage.script`; the live scheduler may reject an absolute repository path even when the exposed schema describes absolute support. Keep the actual tested implementation in the canonical repository and make the wrapper execute that exact path.
+- For an interval of 15 calendar days at a collision-audited local minute, a daily no-agent dispatcher may use a durable due-date gate before any vault/SSH/API work; advance the due date by 15 days only after complete validated collection. Retain failed predicates and independent host successes; bounded recovery must stop blind attempts and expose a precise blocker.
+- FullTech permission to request updates does not waive the Critical Subset: this package owns `/etc/systemd/system` and `/usr/share/doc` paths. Schedule/perform read-only review under delegated authority, but freeze any discovered exact update and obtain Rodolfo's critical confirmation before installation; never substitute a broad vendor `apt upgrade` for the requested agent-only scope.
+- Authoritative vendor recipe: `https://runcloud.io/docs/how-to-update-runcloud-agent-manually`. A missing generic documentation URL should be replaced through search with the exact supported page, not treated as unavailable vendor guidance.
+
 ## 7. Test and close
 
 1. Exercise the deployed interpreter with `tests/test_monitor_runcloud.py`, `tests/test_runcloud_quota.py` and `tests/test_runcloud_cadence.py` before promotion. Run new regressions against the old implementation first, then rerun all relevant suites on the candidate and deployed files.
