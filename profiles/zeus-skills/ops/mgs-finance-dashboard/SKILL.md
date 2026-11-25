@@ -56,6 +56,12 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 
 Do not substitute the general finance workbook for the live Dash as the comparison target. A supplied closing Sheet is a read-only reference unless Rodolfo separately authorizes editing it.
 
+## Explaining a changed balance
+
+When Rodolfo compares an earlier screenshot with the Dash, explain the same beneficiary, competence and metric—not merely the latest exchange-rate edit. Read the screenshot's exact totals and rates, audit human edits separately from automatic refreshes, and reconstruct both endpoints before claiming the difference is explained. A constant-rate simulation is provisional evidence, not the screenshot's historical balance; explicitly replace it when the actual image supplies a different baseline. Do not keep requesting a capture time if the visible values and audited inputs already reproduce the screenshot to the cent.
+
+Answer date questions first in the stated timezone, then show one compact signed bridge: starting balance, each verified increase/decrease, ending balance and total difference. Separate payments/adjustments from operating result, disclose any unresolved residual, and distinguish the comparison endpoint from a later live balance. Keep this investigation read-only. Follow `references/manual-quotes-monthly-source.md#reconstructing-a-screenshot-to-current-balance` for the audit and isolated replay procedure.
+
 ## Spend-audit coverage and period boundaries
 
 - Treat a reported site or screenshot as the starting example, not the audit boundary when Rodolfo asks to check everything. Verify every spending account, site and manager in the requested period, including individual daily results—not only the company total or import status.
