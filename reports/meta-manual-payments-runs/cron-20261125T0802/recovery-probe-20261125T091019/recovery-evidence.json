@@ -1,0 +1,79 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+  "mode": "resume_safe",
+  "status": "waiting_resource",
+  "cause": "pc1_foreground_save_dialog_preserved",
+  "observed_at": "2026-11-25T14:10:20.050396+00:00",
+  "authority_readback": {
+    "http_status": 200,
+    "message_id": "1575022093777637377",
+    "channel_id": "1563926766286803004",
+    "author_id": "344196393512075265",
+    "content": "isso ai mantem entao a atualizacao do cron apenas na aba com contas com saldo.",
+    "current_registry_rodolfo_authorized": true
+  },
+  "scope": {
+    "job_id": "2ee720363d7d",
+    "scheduled_at": "2026-11-25T08:02:00-05:00",
+    "sheet_id": 794137639,
+    "active_accounts": 51,
+    "archived_accounts_excluded": 146,
+    "pending_stage": "historical D instrument proof only",
+    "pending_account_ids": ["1034081997659047", "1492168699397108", "1542257646409395", "1663268201836138", "1754588462350629"],
+    "ledger_entries_for_pending_ids": 0,
+    "pending_current_generic_events": []
+  },
+  "reconciliation": {
+    "original_tick_fire_claim": null,
+    "job_enabled": true,
+    "job_last_run_at": "2026-11-25T09:03:40.204057-05:00",
+    "job_next_run_at": "2026-11-25T14:02:00-05:00",
+    "later_native_tick_observed": false,
+    "writer_lock_free": true,
+    "financial_worker_processes_observed": false,
+    "latest_api_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
+    "completed_phases_not_replayed": ["funding", "invoices", "C_G_I_J", "H", "D_recent_events"],
+    "pending_contract_fields_unchanged": true
+  },
+  "surface_inspection": {
+    "read_only_probe_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T091019/probe-receipt.json",
+    "approved_chrome": {"pid": 18704, "window_id": 983880},
+    "approved_chrome_ax_profile_rodolfo": true,
+    "approved_chrome_pixels": "AdBlock update page active; Meta Business Suite tab inactive; profile name not visible in pixels.",
+    "save_dialog": {"pid": 240656, "window_id": 919286},
+    "save_dialog_confirmed_in_pixels": true,
+    "unrelated_dialog_left_untouched": true,
+    "meta_authentication_gate_confirmed": false,
+    "meta_access_revalidated": false,
+    "auth_ready_claimed": false,
+    "input_actions": 0,
+    "owned_tabs_created": 0,
+    "tabs_closed": 0,
+    "lease_reacquired_and_released": true
+  },
+  "continuity": {
+    "queue_owner": "supervisor:1566416",
+    "queue_owner_alive": true,
+    "queue_state_at_readback": "running",
+    "attempts_at_readback": 1,
+    "failures_at_readback": 0,
+    "consumer_heartbeat": {"at": 1795615689.7273216, "phase": "dispatching", "pid": 1566416},
+    "consumer_cron": "2-57/5 * * * *",
+    "final_response_consumer": "Existing supervisor receives this worker response and applies waiting_resource/backoff. Worker does not steal its queue claim or create a scheduler.",
+    "next_step": "Reconcile same job, owner, five pending D ledger entries and live Windows surface at next supervisor retry. Resume only historical D after unrelated Save As foreground conflict is absent; preserve every other Chrome tab. Do not retry input against a known occupied foreground or request Meta authentication without a real challenge."
+  },
+  "side_effects": {
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "business_delivery_messages": 0,
+    "infrastructure_modified": false,
+    "local_diagnostic_artifacts_only": true
+  },
+  "business_complete": false,
+  "delivery_complete": false,
+  "independent_closure_not_claimed": true
+}

@@ -13,6 +13,12 @@ metadata:
 
 Use esta skill para estruturar, revisar ou manter leitura intraday, relatório diário, guardrails e crons Meta Ads do Ares. Ela é uma camada **genérica de governança**: métricas, thresholds, horários, budgets, threads e ações pertencem ao contrato específico de cada operação.
 
+## Intake — intenção antes do pipeline
+
+- Distinga anúncio de trabalho do operador de pedido ao Ares antes de abrir contratos, antecedentes executáveis ou coleta financeira. Uma declaração inequívoca em primeira pessoa de que o humano fará os relatórios não solicita uma segunda execução: reconheça brevemente, sem prometer geração nem publicar. Havendo ambiguidade real sobre quem executará, pergunte somente isso.
+- Recebida uma correção que peça explicitamente ao Ares para gerar os relatórios, autentique essa mensagem e prossiga sem outro pedido de confirmação; uma desculpa ou correção de redação não torna a ordem ambígua. Reutilize o contexto válido de contas, destinos e complementos, mas vincule a autorização de execução à mensagem corretiva, pois a declaração anterior não autorizava publicação.
+- Confira se houve coleta ou entrega antes da correção: sem execução anterior, abra uma única rodada com fontes novas; com execução parcial, reconcilie o request existente antes de continuar, pois corrigir a formulação não autoriza duplicar relatórios.
+
 ## Disclosure progressivo
 
 1. Identifique a operação, a conta e o pedido exato. Em pedidos multicontas, resolva separadamente o universo autorizado e os destinos: consolidado na origem não equivale a envio nas threads individuais. Quando o pedido disser todas as threads de um gestor, selecione somente os bindings de Intraday desse recorte, incluindo contas sem entrega; não inclua criação, regras ou outros gestores. Compare `manager_code` sem distinguir maiúsculas/minúsculas (`str(code).casefold()`), pois índice de threads e catálogo podem representar o mesmo gestor com caixas diferentes; preserve os valores originais e todos os IDs. Antes da coleta, confronte os pares `(account_id, thread_id)` selecionados com o catálogo e confira unicidade de contas e destinos; uma seleção vazia inesperada exige revisar o predicado, não concluir ausência de contas. Para SHEIN, siga a seção **Intraday multicontas em uma origem explicitamente autorizada** da referência específica.

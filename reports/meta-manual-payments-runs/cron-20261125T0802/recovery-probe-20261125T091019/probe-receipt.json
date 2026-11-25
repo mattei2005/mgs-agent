@@ -1,0 +1,58 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "observed_at": "2026-11-25T14:10:20.050396+00:00",
+  "mode": "resume_safe",
+  "input_actions": 0,
+  "sheet_writes": 0,
+  "meta_writes": 0,
+  "pending_account_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "windows": [
+    {
+      "pid": 18704,
+      "window_id": 983880,
+      "kind": "approved"
+    },
+    {
+      "pid": 240656,
+      "window_id": 919286,
+      "kind": "save-dialog"
+    }
+  ],
+  "captures": [
+    {
+      "kind": "approved",
+      "pid": 18704,
+      "window_id": 983880,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T091019/approved.png",
+      "capture_error": null,
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T091019/approved-elements.json",
+      "profile_rodolfo": true,
+      "billing_surface": false,
+      "save_dialog_ax": true,
+      "auth_gate_ax": false
+    },
+    {
+      "kind": "save-dialog",
+      "pid": 240656,
+      "window_id": 919286,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T091019/save-dialog.png",
+      "capture_error": null,
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-probe-20261125T091019/save-dialog-elements.json",
+      "profile_rodolfo": false,
+      "billing_surface": false,
+      "save_dialog_ax": true,
+      "auth_gate_ax": false
+    }
+  ],
+  "lease_release": {
+    "ok": true,
+    "action": "released",
+    "locked": false
+  }
+}
