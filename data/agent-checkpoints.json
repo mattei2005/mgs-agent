@@ -4854,12 +4854,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1574521189035151514",
-      "next_step": "Aguardar decisao da Meta sem novo submit. Se recusa mantida, Nicolas solicitara troca. Nao criar cron, repetir copies ou alegar entrega antes de Insights. Preservar IDs, selos, budget/cap e inicio; a gestao parcial posterior nao e COMPLETE integral do runner original.",
-      "objective": "Gestao parcial apos QA: solicitar revisao e habilitar anuncios permitidos do lote Nicolas sem alterar escopo comercial",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1574521189035151514/review-and-selective-activation-1574639436166074502.json",
-      "state": "gestao complementar rodolfo 1574639436166074502 executada: campanhas 005-014 e 10 conjuntos active, eua, budget usd25 cada/250 lote e cap usd0.90, inicio24/11/2026 00:05 new york preservado. ads: configurados {'paused': 16, 'active': 9}; efetivos {'disapproved': 16, 'active': 9}. revisao dos 16 reprovados submetida na interface da conta exata; meta confirmou recebimento. readback apos refresh reduziu available23->7; contador in review ainda0, sem alegar aprovacao. nenhuma troca de midia/copy. original act_pending fica historico; nao reexecutar criacao ou o ativador integral como retry.",
+      "next_step": "Nao retomar ativador/criacao/revisao antiga sem novo pedido explicito. Continuar somente novo request shein-1575198254822326443 pela rota central; antigas nao excluir nem restaurar.",
+      "objective": "Cancelar lote antigo005-014 e estacionar recuperacao integral conforme Nicolas1575200600487100427",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/cancel-previous/receipt.json",
+      "state": "supersede espera de revisao/replacement como pendencia automatica. get meta confirmou seis campanhas ja archived e quatro active; quatro pausadas por payload somente status, com get individual e batch final10. seis arquivadas preservadas. campanhas005-014 todas inativas. runner suspended_by_operator; automatic_recovery_required false; resume_requires_explicit_instruction true. lease complete significa liberacao, nao campanha integralmente ativada. historico e ids mantidos. quatro reservas expressamente selecionadas no novo request transferidas com historico sob locks.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-24T04:46:47+00:00"
+      "updated_at": "2026-11-25T17:33:09+00:00"
     },
     {
       "agent": "ares",
@@ -6492,6 +6492,16 @@
       "state": "completed_validated:6/6regras locais/remotas; en yolokfx vizioid escalatepower growpowerhub, es mavroa boostingecon.468testes sem skips;33regressões finais;3373linhas62grupos05/10completo;rev221/audit3215;growpowerhub cad0.014351240487899069 incorporado;2metadados escalatepower corrigidos sem delta caixa;histórico/de/gestores/rateio preservados;replays idempotentes;api desktop/mobile/health/logout ok;registry/skill/inventory/audit;report1557034165453459528 vazio1embed0mentions validado;nenhuma pendência",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-10-06T14:19:02+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-JOE-EXCEPTION-1575202919324844063",
+      "next_step": "Implementar exceção explicitamente limitada por flag/autoridade/mês/gestor;preservar fontes/banco;validar engine,payments,UI e nãoherança;gates/release;aplicarJoeOutubro e readback",
+      "objective": "Joe outubro10% excepcional como pessoal, aviso contextual e redução única do lucro dos sócios",
+      "source": "reports/finance-joe-personal-complement-1575198554111217826.md;discord:1575202919324844063;discord:1575203206345134121",
+      "state": "authorized_discovery: rodolfo1575202919324844063 confirmou proposta1575200026043351101;complemento company-funded,semfaturamentofictício;1575203206345134121 esclarece impacto nasmetades;nenhumaescritafinanceira",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T17:35:55+00:00"
     },
     {
       "agent": "zeus",
@@ -12548,5 +12558,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:19:15+00:00"
+  "updated_at": "2026-11-25T17:35:55+00:00"
 }
