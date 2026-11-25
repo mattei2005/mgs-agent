@@ -22,7 +22,9 @@ def cap():
  global capture_size,gate_seen
  d=call({'action':'capture','mode':'ax','pid':bind['pid'],'window_id':bind['window_id']});capture_size=(d.get('width'),d.get('height'));assert not d.get('error');full=json.loads(Path(d['elements_file']).read_text()) if d.get('elements_file') else d;es=full.get('elements',[]);text='\n'.join(e.get('label','') for e in es if e.get('role')!='TabItem');gate_seen=bool(re.search(r'Windows Security|passkey for Facebook|security/twofactor/reauth|Confirm it.s you|temporarily blocked|going too fast|Log in to Facebook',text,re.I));assert not gate_seen,'native_or_provider_gate';return full,es,text
 def action(x):
- r=call(x);assert r.get('ok') is True and not r.get('code') and not r.get('error');return r
+ r=call(x)
+ if not (r.get('ok') is True and not r.get('code') and not r.get('error')):(B/(a.account_id+'-action-failure.json')).write_text(json.dumps({'action':x,'result':r},ensure_ascii=False))
+ assert r.get('ok') is True and not r.get('code') and not r.get('error');return r
 created=False;initial_tabs=[];gate_seen=False
 def browser_tabs(es):return [e for e in es if e.get('role')=='TabItem' and e.get('bounds',[0,99999])[1]<50]
 try:
@@ -36,7 +38,8 @@ try:
  time.sleep(2);full,es,text=cap()
  if '\nDate\nPayment method\nAmount\nStatus\n' not in text:
   links=[e for e in es if e.get('role')=='Hyperlink' and e.get('label')=='View transaction history'];assert len(links)==1,'transaction_history_link_missing'
-  action({'action':'click','element':links[0]['index'],'delivery_mode':'foreground','bring_to_front':True});time.sleep(8);full,es,text=cap()
+  x,y,w,h=links[0]['bounds'];assert 0<=x<x+w<=capture_size[0] and 0<=y<y+h<=capture_size[1],'history_link_offscreen'
+  action({'action':'click','coordinate':[round(x+w/2),round(y+h/2)],'delivery_mode':'foreground','bring_to_front':True});time.sleep(8);full,es,text=cap()
  for attempt in range(3):
   dates=[e for e in es if e.get('role')=='Text' and e.get('label')=='Date'];
   if not dates or 150<=dates[0].get('bounds',[0,99999])[1]<=1000:break
