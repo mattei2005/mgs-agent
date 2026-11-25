@@ -97,6 +97,19 @@ During monthly rollover acceptance, exercise the actual editor API on an origina
 
 Test a quote-triggered recalculation across Eastern midnight while the explicit complete-data cutoff stays on an earlier day. A restored snapshot can pass manager controls while the live snapshot fails after calendar-driven general-expense accrual adds a day that the display excludes. Reconcile snapshot revisions, identical nominal additions and the `AUTO_QUOTES_UPDATED` audit before attributing the failure to a deployment. Preserve the manager sum guard and report the actual cutoff/day-expense difference; do not advance the cutoff or change payroll merely to silence the check. A presentation/blank-entry authorization does not authorize a new financial cutoff correction. Historical reproduction: `reports/finance-simple-review-cutoff-blocked-1551811440418095186.md`; resolved publication1551913189355028501 is the active implementation baseline, not this old blocked state.
 
+## Acceptance harness preflight and currency editors
+
+Run the smallest complete canary before the expensive coverage matrix:
+
+1. Read the active route, validator, response shape and UI event binding. Resolve the beneficiary through ledger `parties`; verify the selected ID in `#party` and the returned `counterparty`. A manager alias or a URL query alone does not prove selection.
+2. Authenticate only isolated test identities for mutation canaries. Exercise native create, unchanged-value edit, changed equivalent, stale FX rejection and mismatched-conversion rejection. Preserve `confirmed`, integer `direction`, entry version and period/beneficiary checks; an invalid harness request is not evidence that a guard should be weakened.
+3. Check the returned ledger `entries` and the exact target ID after every canary. Exercise the actual browser form as well as direct API calls, since HTML minimum/step constraints can reject a valid native amount before the server receives it.
+4. Cover an ordinary amount, a non-round-tripping native-cent amount, a tiny native amount whose two-decimal equivalent is zero, and an equivalent requiring fractional display-currency cents. Keep unchanged native values byte-exact; for intentional edits, use decimal arithmetic and round only to the native ledger's storage unit. Reject a new amount that rounds to zero native cents.
+5. Verify labels and explanatory copy visually before freezing code. Mark converted floors, thresholds, balances and recharge controls as equivalents where appropriate; do not imply new fixed-currency contracts or extra revenue.
+6. Only then expand to all approved roles, views, periods and viewports. Persist each batch with expected counts and separate receipts for read-only preservation, independent monetary comparisons and isolated mutation tests. Do not label isolated test writes as production mutations, or describe the entire test run as write-free when only its read-only phase was.
+
+For manifest construction, distinguish preparer-owned provenance from deployable code. Validate the preparation receipt's authority and hash and retain it in gate integrity checks, but do not publish it merely because a raw tree diff lists it as an additional file. Exclude only the specifically identified provenance artifact from the closed deployment target list; unknown extra files still block publication.
+
 ## Required release gate
 
 - Treat `private/<past-release>/` scripts, fixed IDs, authority allowlists, month ranges and fixture paths as evidence of that release, not a generic ready-to-run deployment. Resolve current scope and inventory first; never replay a historical mutation merely because its script once passed.
@@ -122,5 +135,5 @@ Test a quote-triggered recalculation across Eastern midnight while the explicit 
 
 - Load `current-security-performance-and-dr.md`: a restored database on the same cluster still shares memory/service failure risk. Hash large documents one row at a time and aggregate only short hashes; never `jsonb_agg` full scenario/result documents.
 - Confirm all native periods, current/historical boundaries, desktop/mobile, owner access, denied global access for other roles, five manager namespaces and zero financial POST/SQL mutations.
-- In Playwright APIRequestContext storageState, cookie entries need `expires` explicitly; omitted expiry accepted by BrowserContext.addCookies is not accepted by the API context. Preserve cookies in memory and revoke the test session afterward.
+- In Playwright APIRequestContext storageState, cookie entries need `expires` explicitly; omitted expiry accepted by BrowserContext.addCookies is not accepted by the API context. Preserve cookies in memory. For a temporary QA login, do not request device trust; retain its original cookie jar in memory, log out with that session's CSRF token, then replay the original cookie on a read-only authenticated endpoint and require401. A request made only after clearing client cookies does not prove server-side revocation. Never revoke unrelated sessions to finish QA.
 - Preserve rollback files and isolated databases until separately authorized to remove them. Record any production incident, its cause, recovery and actual validation in the release report; never hide it behind a successful final suite.
