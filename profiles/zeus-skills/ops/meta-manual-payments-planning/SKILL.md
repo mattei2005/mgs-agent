@@ -41,7 +41,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 
 ### 1. Congelar e coletar o escopo
 
-- Paginar completamente `owned_ad_accounts` e `client_ad_accounts` da BM e unir por ID; preservar duplicatas de nome como contas distintas. Registrar contagem por origem e lacunas de acesso.
+- Para inventário completo ou auditoria de cobertura, paginar `owned_ad_accounts` e `client_ad_accounts` da BM e unir por ID; preservar duplicatas de nome como contas distintas. Para inclusão de IDs fornecidos explicitamente, validar somente esse delta por GET exato e pela aba live, sem transformar o pedido em nova varredura ou refresh das contas anteriores.
 - Ler identidade, moeda, timezone, funding atual e balance por conta. Manter só tipo e bandeira/final mascarados; nunca persistir tokens, payment-source IDs ou transações protegidas em saída pública.
 - Classificar cartão por funding tipo 1; linha de crédito por tipo 4 com monthly-invoicing; omissão é não identificado, não ausência de meio de pagamento.
 - Coletar Insights do mês solicitado e reconciliar diário x agregado por conta com Decimal, respeitando moeda e dia atual parcial. Não usar lifetime `amount_spent` como mês.
@@ -60,6 +60,10 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 ### 1b. Auditar contas com gasto fora da aba
 
 Comparar IDs da aba live com o inventário completo owned/client da BM, incluindo contas fechadas; consultar Insights apenas do conjunto ausente, na competência do header/contrato, sem confundir falha com zero. Reconciliar diário e agregado temporalmente próximos nas contas positivas. Entregar todas as faltantes, gasto e total por moeda, cobertura, horário e dia parcial; a auditoria não autoriza inclusão na planilha nem ampliação da recorrência. Receita de lotes, retomada, aliases de timezone e conciliação em `references/collection-and-workbook.md`, seção **Cobertura de gasto fora da aba**.
+
+### 1c. Incluir conta nova na aba ativa
+
+Quando Rodolfo pedir inclusão em **Contas com saldo**, adicionar os IDs exatos à aba e ao escopo do mesmo cron, sem criar outra rotina. Se ele determinar permanência apesar de saldo zero por uso iminente, registrar a exceção no contrato e na nota da conta; não exigir gasto prévio nem aplicar automaticamente a separação por zero. Confirmar BM, nome, moeda, funding e métricas da conta nova; manter D sem prova histórica vazio qualificado e H somente no recorte de linha. Preservar as demais contas e abas, sem chamar inclusão de refresh integral. Seguir **Inclusão autorizada de contas** em `references/collection-and-workbook.md`; se houver recuperações abertas, aplicar também **Mudança autorizada de escopo com recuperações pendentes** em `references/recurring-refresh.md`.
 
 ### 2. Última cobrança somente no cartão
 
@@ -131,6 +135,7 @@ Concluir somente após contagem/IDs e dados alterados baterem com a fonte, fórm
 
 ### Comunicação de status e resultado
 
+- Antes de declarar removido um bloqueio nativo do PC1, repetir `list_windows` e verificar os diálogos candidatos além da janela Meta. Uma captura limpa de Accounts prova apenas essa superfície; não prova ausência de “Salvar como” em outro Chrome nem navegação recuperada. Preservar diálogos humanos e distinguir autenticação confirmada, desktop disponível e avanço real da etapa pendente.
 - Ao perguntar se está executando ou por que não há movimento no PC1, conferir o job e o artefato mais recente da fase atual antes de responder. `fire_claim`/heartbeat prova ownership ativo, não navegação nem avanço: distinguir execução ativa, coleta API, leitura no PC1, espera e bloqueio. Afirmar atividade no PC1 somente com evidência recente do worker/captura; timestamps de uma fase anterior não comprovam atividade atual.
 - Se a superfície correta confirmar autenticação/passkey, preservar o estado e enviar somente: **Não consegui concluir. Você precisa autenticar a Meta no Chrome do PC1.** Guardar métricas parciais, logs e diagnóstico no receipt/checkpoint, sem acrescentá-los ao aviso. Não pedir autenticação por handle antigo, timeout, busca ainda não pronta ou ocupação humana sem gate comprovado.
 - Se houver outro bloqueio decisório, explicar o motivo real em uma frase curta. Quando Rodolfo liberar o PC1 após uso próprio, reconciliar o executor e retomar a etapa faltante; não iniciar outro writer nem repetir fases já publicadas. Receita de diagnóstico e retomada em `references/recurring-refresh.md`.
