@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-25T01:06:33-05:00",
+    "updated_at": "2026-11-25T06:12:45.870036+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -72142,6 +72142,27 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "94c62396f8b4b747d9e5a4b1610257f079a1838b829580d2fbb11c8a290cbaf2",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/preventive-release-gate-and-review.md": "0aa428d573db1e1e6107c6ee51f5007b2a949a8f40191fa1821c8ec2923753e3",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md": "b663568b0f8cc69c238f5dfa599700dba45695c6d3cdc537caf26c8d4fd757ae"
+      }
+    },
+    {
+      "id": "zeus-finance-cad-history-1575031043784712344",
+      "agent": "zeus",
+      "type": "readonly_finance_audit_artifact",
+      "status": "completed_validated",
+      "authorization_message_id": "1575031043784712344",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-25T06:12:45.870036+00:00",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344",
+      "financial_writes": 0,
+      "coverage": {
+        "native_months": 4,
+        "imported_historical_months": 7,
+        "cad_audit_events": 5
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344/raw-history.json": "f8ad81cd4247f5e2a96b8deeefb9e41104f03478b2bb2339f18e480ada9411ef",
+        "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344/read-history.py": "94b7c17239a86166bbe94f540965f30f57bc2b2cf40d43b8180cafac2277870e",
+        "/root/mgs-agent/apps/finance-system/private/cad-history-1575031043784712344/summary.json": "f06daecef7f0339f386845bd2192f60efe716690483988b0b2002bab33cfb8ec"
       }
     }
   ],
