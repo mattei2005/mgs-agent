@@ -1,0 +1,23 @@
+{
+  "inspection_tool": "vision_analyze",
+  "approved_surface": {
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round26/approved.png",
+    "page": "Accounts",
+    "business_id_pixels": "155263197283282",
+    "balance_header": "Outstanding balance",
+    "authentication_gate_visible": false
+  },
+  "native_dialog": {
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round26/native-dialog-0.png",
+    "title_pixels": "Save As",
+    "open_pixels": true,
+    "file_picker_not_authentication": true,
+    "origin_unproved": true,
+    "preserved_without_input": true
+  },
+  "h_collection_verified_account_ids": [],
+  "input_actions": 0,
+  "tabs_created": 0,
+  "tabs_closed": 0,
+  "decision": "waiting_resource; do not navigate or dismiss unrelated native dialog"
+}
