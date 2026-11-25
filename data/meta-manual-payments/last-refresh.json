@@ -1,7 +1,18 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
-  "collected_at": "2026-11-25T08:52:15.428878-05:00",
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T140522903391",
+  "collected_at": "2026-11-25T14:05:19.227297-05:00",
   "accounts": 51,
-  "pending_ui": []
+  "pending_ui": [
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }
