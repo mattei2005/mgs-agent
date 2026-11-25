@@ -4904,12 +4904,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1575198254822326443",
-      "next_step": "Perguntar somente qual campanha ativa/pausada usar como fonte no lugar003. Incorporar resposta ao mesmo request com recibo de emenda, preservar relogio e parametros; reconciliar queue/input antes de retirar hold. Depois preparar20videos, dry-run/execute central, QA e SB. ContratoSB vivo e publisher positivo ja conferidos.",
-      "objective": "Cancelar antigas005-014 e executar10novas daC003 com20videos, USD25/dia e COCAPUSD0.90",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/source-003-direct-readback.json",
-      "state": "cancelamento antigo concluido por pausa reversivel: quatro pausadas e seis ja arquivadas; get final10 confirmou inatividade. recuperacao antiga estacionada por autoridade1575200600487100427. novo intake integral preservado com20files/copy/headline/description. transferencia4reservas antiga->nova verificada. prepare-media alcancou preflight e bloqueou porque fonte003 nao aparece no edge vivo; get direto120252896792330042 confirmou archived. nenhuma nova campanha criada; nenhum request-ready/media-preparation. job needs_source_selection, foreground com maintenance_hold; nao restaurar fonte nem trocar campanha por inferencia. inicio12:35 passou sem novas campanhas.",
+      "next_step": "Pedir somente decisao sobre revisaoMeta ou revisao de conteudo reprovado. Nao ativar,toggle,recriar nem substituir conteudo para contornar rejeicao;preservar20ads/10campaigns e provas. Nao repetir cadastroSB;se autorizado revisar,seguir escopo exato com mesmosrequest/IDs e readback. Programacao00:04 nao garante veiculacao enquanto bloqueado.",
+      "objective": "Duplicar fonte010 em10novas com20videos expressos, USD25/dia, COCAPUSD0.90 e inicio26/11/2026 00:04NewYork",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575198254822326443/final-reconciliation.json",
+      "state": "fonte e horario emendados por nicolas1575250760680079392 no mesmo request/relogio; antigos005-014 permanecem historico de cancelamento anterior. novos ids10campanhas014-023,10conjuntos20ads criados e qa renderizada10/10 com cobertura integral. user_age_unknown restaurado somente nos10alvos, fonte preservada, get verificado. budgetusd25cada/250lote,cost_cap90minor e inicio26/11/2026 00:04newyork confirmados em todos pais/conjuntos. ativacao bloqueada pela meta:19adsdisapproved,1with_issues2490468avaliacao_rejeitada;20adspaused,10campanhaspaused.5ads feedbackspam. runneractivation_pending com media_postprocess_complete true. nenhuma nova copia/retry de ativacao apos constatacao.10utm_campaign+10utm_adgroup cadastradassbhttp201/gaminsertok, igualdade literal confirmada,getindependente indisponivel. jobreview_decision_required,foreground/maintenance_hold;mesmosids e selos.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-11-25T17:39:54+00:00"
+      "updated_at": "2026-11-25T21:13:38+00:00"
     },
     {
       "agent": "ares",
@@ -12618,5 +12618,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T20:55:53+00:00"
+  "updated_at": "2026-11-25T21:13:38+00:00"
 }
