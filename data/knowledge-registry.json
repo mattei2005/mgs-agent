@@ -10669,6 +10669,23 @@
       "updated_at": "2026-09-08T04:55:03+00:00"
     },
     {
+      "canonical_key": "finance.2026-10.joe-payroll-exception",
+      "canonical_source": "docs/finance-joe-october-exception.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T18:22:57+00:00",
+      "id": "FINANCE-JOE-OCTOBER-EXCEPTION-1575202919324844063",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Joe outubro: remuneração excepcional10% como pessoal, sem receita fictícia",
+      "updated_at": "2026-11-25T18:22:57+00:00"
+    },
+    {
       "canonical_key": "finance.ad-spend-closing",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -11621,6 +11638,23 @@
       "superseded_by": null,
       "title": "Pushalert99USD desde setembro2026",
       "updated_at": "2026-09-25T15:19:45+00:00"
+    },
+    {
+      "canonical_key": "finance.rate-cards.update-timestamps",
+      "canonical_source": "docs/finance-joe-october-exception.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-25T18:22:57+00:00",
+      "id": "FINANCE-RATE-TIMESTAMPS-1575203649590919289",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Data e hora de atualização por parâmetro nas cotações e inválidos",
+      "updated_at": "2026-11-25T18:22:57+00:00"
     },
     {
       "canonical_key": "finance.sources.transient-read-retry",
@@ -18240,5 +18274,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:13:15+00:00"
+  "updated_at": "2026-11-25T18:22:57+00:00"
 }

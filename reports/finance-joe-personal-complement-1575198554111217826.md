@@ -1,5 +1,9 @@
 # Joe — complemento de outubro até equivalente a10%
 
+## Confirmação vigente — Rodolfo1575202919324844063
+
+Confirmado o tratamento corporativo proposto: 10% excepcional somente paraJoe/outubro como despesa de pessoal, sem alterar receitas. A divisão pessoal e o aviso anterior permanecem supersedidos. Contrato ativo e estado de execução: `docs/finance-joe-october-exception.md`, checkpoint `ZEUS-FINANCE-JOE-EXCEPTION-1575202919324844063`. As pendências de confirmação descritas abaixo são histórico das propostas, não bloqueios vigentes.
+
 ## Supersessão de direção — Rodolfo1575199575658987611
 
 Rodolfo corrigiu o entendimento: o complemento deve integrar a somatória e o fluxo da empresa, não ser um pagamento pessoal fora daDash. O texto deaviso e o rateiopessoal propostos abaixo ficam supersedidos e NÃO devem ser publicados.

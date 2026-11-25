@@ -14,6 +14,10 @@ Rodolfo1575202919324844063 confirmou proposta1575200026043351101 na thread154542
 - Avisocontextualpersistente noremune­raçãodeJoe/outubro,sem afirmaratingimentodafaixa nem pagamento jáfeito:10% excepcionalautorizado,pelaempresa,receitas/resultadosdositespreservados. Mostrar remuneraçãonormal,complemento etotaldevido;outrosgestores/meses não recebemaviso. Não reciclar nemeditar avisoanteriordecorreçãodegastos.
 - Valores do print são referência, nãoquantiafixa. CálculoacompanharesultadoeFX dacompetência,sempropagarexceção.
 
+## Datas por cotação — autoridade adicional1575203649590919289
+
+Acrescentar abaixo de cada um dos oito cartões Cotações e inválidos a última atualização registrada daquele parâmetro, em data/horaAmerica/New_York(ET), naConferência eDashboard. Fonte: audit da mesma competência e chave. Taxa fixa usa sua alteração/confirmação, não a última coleta global; automática usa sincronizaçãoauditada correspondente. Confirmação manual em modoauto também pode ser fonte quando corresponde ao valor atual. Sem evidência histórica,mostrarAtualizaçãonãoregistrada,sem inventardata ouusarhoráriodeaberturadatela. Valores,modes,status efinanças permanecem intactos. Consulta cacheada mantém as guardas derevision eobservação; os timestamps são metadados adicionais.
+
 ## Estado
 
 Autorizado;preparação em `apps/finance-system/private/joe-exception-1575202919324844063/`. Checkpoint `ZEUS-FINANCE-JOE-EXCEPTION-1575202919324844063` governa publicação/aplicação/readback. Ainda semalteraçãofinanceira nesta preparação.
