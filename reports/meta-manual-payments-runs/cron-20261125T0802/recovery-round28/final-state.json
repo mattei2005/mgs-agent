@@ -1,0 +1,28 @@
+{
+  "verified_at": "2026-11-25T18:40:10.558161+00:00",
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1866592",
+    "attempts": 28,
+    "failures": 0,
+    "due": 1795631759.0697594,
+    "lease_until": 1795633084.3126361
+  },
+  "queue_owner_alive": true,
+  "consumer_entrypoint_verified": true,
+  "consumer_cron": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+  "job_enabled": true,
+  "fire_claim": null,
+  "last_dispatch": "2026-11-25T08:02:00-05:00",
+  "next_run_at": "2026-11-25T14:02:00-05:00",
+  "pending_D": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H": [],
+  "ledger_proofs_present": [],
+  "writer_lock_free": true
+}
