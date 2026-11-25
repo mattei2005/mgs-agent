@@ -28,7 +28,7 @@ def browser_tabs(es):return [e for e in es if e.get('role')=='TabItem' and e.get
 try:
  ws=json.loads(subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=45).stdout)['windows'];assert not any(w.get('app_name')=='CredentialUIBroker.exe' for w in ws),'native_auth_dialog_present'
  full,es,text=cap();initial_tabs=browser_tabs(es);(B/(a.account_id+'-tabs-before.json')).write_text(json.dumps(full,ensure_ascii=False));newbuttons=[e for e in es if e.get('role')=='Button' and e.get('label')=='New Tab'];assert len(newbuttons)==1;action({'action':'click','element':newbuttons[0]['index']});time.sleep(1);full,es,text=cap();assert len(browser_tabs(es))==len(initial_tabs)+1 and any(e.get('label','').startswith('New Tab') for e in browser_tabs(es)),'new_tab_not_verified';created=True;fields=[e for e in es if e.get('role')=='Edit' and e.get('label')=='Address and search bar'];assert len(fields)==1
- url='https://business.facebook.com/latest/billing_hub/accounts/details/?business_id=155263197283282&asset_id='+a.account_id+'&payment_account_id='+a.account_id;action({'action':'set_value','element':fields[0]['index'],'value':url});time.sleep(1);full,es,text=cap();ss=[e for e in es if e.get('role')=='ListItem' and e.get('label','').startswith(url+',')];assert len(ss)==1,'direct_url_suggestion_not_unique';r=action({'action':'key','keys':'return','delivery_mode':'foreground','bring_to_front':True});(B/(a.account_id+'-navigate.json')).write_text(json.dumps(r,ensure_ascii=False));deadline=time.monotonic()+65
+ url='https://business.facebook.com/latest/billing_hub/accounts/details/?business_id=155263197283282&asset_id='+a.account_id+'&payment_account_id='+a.account_id;action({'action':'set_value','element':fields[0]['index'],'value':url});time.sleep(1);full,es,text=cap();ss=[e for e in es if e.get('role')=='ListItem' and e.get('label','').startswith(url+',')];(B/(a.account_id+'-preenter.json')).write_text(json.dumps(full,ensure_ascii=False));assert len([e for e in es if e.get('role')=='Edit' and e.get('label')=='Address and search bar'])==1,'address_control_not_unique';r=action({'action':'key','keys':'return','delivery_mode':'foreground','bring_to_front':True});(B/(a.account_id+'-navigate.json')).write_text(json.dumps(r,ensure_ascii=False));deadline=time.monotonic()+65
  while True:
   full,es,text=cap()
   if '\nDate\nPayment method\nAmount\nStatus\n' in text or 'No payment activity' in text or 'You have no recent spending.' in text or 'View transaction history' in text:break
@@ -36,7 +36,7 @@ try:
  time.sleep(2);full,es,text=cap()
  if '\nDate\nPayment method\nAmount\nStatus\n' not in text:
   links=[e for e in es if e.get('role')=='Hyperlink' and e.get('label')=='View transaction history'];assert len(links)==1,'transaction_history_link_missing'
-  action({'action':'click','element':links[0]['index']});time.sleep(4);full,es,text=cap()
+  action({'action':'click','element':links[0]['index'],'delivery_mode':'foreground','bring_to_front':True});time.sleep(8);full,es,text=cap()
  for attempt in range(3):
   dates=[e for e in es if e.get('role')=='Text' and e.get('label')=='Date'];
   if not dates or 150<=dates[0].get('bounds',[0,99999])[1]<=1000:break
