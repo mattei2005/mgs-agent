@@ -73,7 +73,7 @@ def events_for(state,observations):
     for key,obs in observations.items():
         old=state.setdefault('announced',{}).get(key,'ok');new=obs['status']
         if old==new:continue
-        if new=='probe_error':continue # local sampler failure must not resolve a known incident
+        if new=='probe_error' and old not in ('ok','probe_error'):continue # unknown sample never resolves or overwrites a known target incident
         events.append({'key':key,'previous':old,'status':new,'observation':obs})
     return events
 
@@ -92,6 +92,16 @@ def verify(message,payload,channel):
     for got,want in zip(message['embeds'],payload['embeds']):
         for key in ('title','description','color','footer'):
             if key in want:assert got.get(key)==want[key], 'Discord readback mismatch: '+key
+
+def reconcile_queued(state,observations):
+    for entry in list(state.get('outbox',[])):
+        if entry['phase']!='queued' or entry.get('message_id') or not entry.get('events'):continue
+        valid=[e for e in entry['events'] if e['key'] not in observations or observations[e['key']]['status']==e['status']]
+        if not valid:state['outbox'].remove(entry)
+        elif valid!=entry['events']:
+            entry['events']=valid;entry['payload']=event_payload(valid)
+            entry['payload'].update(content='',allowed_mentions={'parse':[]},nonce=entry['id'],enforce_nonce=True)
+            entry['payload']['embeds'][-1]['footer']={'text':marker(entry['id'])}
 
 def deliver(state,path,discord):
     for entry in list(state.get('outbox',[])):
@@ -148,6 +158,7 @@ def main():
     if args.dry_run:print(json.dumps({'mode':'dry-run',**summary,'observations':obs},ensure_ascii=False));return 0
     transport.load_env('/root/.hermes/profiles/zeus/.env');discord=transport.Discord(os.environ['DISCORD_BOT_TOKEN'],cfg['channel_id'])
     # Reconcile accepted POSTs before enqueuing new events; never replay ambiguous writes.
+    reconcile_queued(state,obs);save(args.state,state)
     deliver(state,args.state,discord)
     events=events_for(state,obs)
     state.update(last_check=datetime.datetime.now(datetime.timezone.utc).isoformat(),observations=obs,summary=summary);save(args.state,state)

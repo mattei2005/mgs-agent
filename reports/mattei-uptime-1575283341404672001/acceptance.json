@@ -1,0 +1,30 @@
+{
+  "validated_at": "2026-11-25T23:06:41.991676+00:00",
+  "authority_message_id": "1575283341404672001",
+  "thread_id": "1575283341404672001",
+  "unique_sites": 54,
+  "server_bindings": 55,
+  "server_count": 3,
+  "summary": {
+    "checked_at": "25/11/2026 18:06 EST",
+    "sites": 54,
+    "servers": 3,
+    "states": {
+      "ok": 57
+    },
+    "events": 0
+  },
+  "panel_message_id": "1575285231806578752",
+  "panel_exact_get_verified": true,
+  "panel_domains_all_present": true,
+  "scheduled_entry": "46 * * * * /usr/bin/flock -n /root/mgs-agent/data/mattei-uptime-run.lock /bin/sh -c '/bin/sleep 47; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-mattei-uptime.py >> /root/mgs-agent/logs/monitor-mattei-uptime.log 2>&1'",
+  "scheduler_service_active": true,
+  "scheduled_tick_observed": false,
+  "manual_deployed_wrapper_exercised": true,
+  "regression_tests_passed": 9,
+  "production_pending_deliveries": 0,
+  "new_per_cycle_vault_calls": 0,
+  "remote_mutations": 0,
+  "report_status": "delivered_verified",
+  "report_infra_message_id": "1575286686609444986"
+}

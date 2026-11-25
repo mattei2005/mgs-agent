@@ -3,10 +3,11 @@
     {
       "agent": "zeus",
       "id": "MATTEI-UPTIME-1575283341404672001",
+      "report_infra_message_id": "1575286686609444986",
       "objective": "Listar sites MGS nos Mattei 1/2/3 e monitorar disponibilidade pública e alcance dos servidores neste tópico, sem alterar sites/serviços.",
-      "state": "in_progress: autoridade FullTech validada; descoberta Nginx live com filtro positivo MGS concluída; coleta pública, testes e agendamento em preparação.",
-      "next_step": "Validar vínculos duplicados e sondas; testar monitor, auditar scheduler, ativar e publicar listagem com readback.",
-      "source": "discord:1575283341404672001; scratch/mattei-monitor-1575283341404672001/discovery.json",
+      "state": "active: 54 hosts MGS, 55 vínculos Nginx e 3 servidores; todos saudáveis nas coletas reais; painel 1575285231806578752 publicado/editado e validado por GET; 9 testes; cron horário com readback e zero colisões operacionais; watchdog OK. Primeiro tick futuro ainda não observado.",
+      "next_step": "Cron horário no minuto 46 +47s atualiza painel e entrega transições verificadas na mesma thread; nenhum reparo, restart ou escopo privado autorizado.",
+      "source": "reports/mattei-uptime-1575283341404672001/; data/mattei-uptime-config.json; data/mattei-uptime-state.json",
       "thread_id": "1575283341404672001",
       "authority_message_id": "1575283341404672001"
     },

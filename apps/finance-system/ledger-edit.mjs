@@ -4,6 +4,12 @@ const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});}
 const iso=v=>v instanceof Date?v.toISOString():v;
 // Fingerprint is a concurrency version, not authorization. Scope and role are checked separately.
 export function ledgerVersion(row){return createHash('sha256').update(JSON.stringify(['id','counterparty','period','effective_date','kind','amount_cents','direction','description','actor','created_at','voided_at','voided_by'].map(k=>k==='effective_date'?String(iso(row[k])).slice(0,10):['amount_cents','direction'].includes(k)?Number(row[k]):iso(row[k])??null))).digest('hex');}
+// Optional display adapter; ledger storage and versions remain native BRL cents.
+export function usdDisplayCents(amount,fx){
+ if(typeof amount!=='string'||!/^\d{1,10}(?:\.\d{1,18})?$/.test(amount)||typeof fx!=='string'||!/^\d{1,5}(?:\.\d{1,18})?$/.test(fx)||!(Number(fx)>0))fail('Conversão de exibição inválida');
+ const [a,b='']=amount.split('.'),[c,d='']=fx.split('.'),usd=BigInt(a+b),rate=BigInt(c+d),scale=10n**BigInt(b.length+d.length),product=usd*rate*100n,brl=product/scale+(product%scale*2n>=scale?1n:0n);if(usd<=0n||brl<=0n||brl>100000000000n)fail('Valor convertido fora do limite');return Number(brl);
+}
+export function nativeLedgerBody(b){const out={...b};for(const k of ['display_currency','display_amount','display_fx'])delete out[k];return out;}
 export function validateLedgerChange(row,b,action,currentDate){
  if(!row||row.voided_at)fail('Lançamento excluído ou indisponível; atualize a lista',409);
  periodInfo(row.period);if(row.period<'2026-08')fail('Histórico fechado: alteração indisponível',409);

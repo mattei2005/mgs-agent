@@ -1,3 +1,20 @@
+/* Display-currency policy, Rodolfo1575226305702797474. Stored finance stays unchanged. */
+window.MGSDisplayCurrency=(()=>{
+ const modern=p=>/^\d{4}-(?:0[1-9]|1[0-2])$/.test(String(p||''))&&p>='2026-11';
+ const parts=v=>{if(v===null||v===undefined||String(v).trim()==='')return null;const s=String(v).trim(),m=s.match(/^([+-]?)(\d*)(?:\.(\d*))?(?:e([+-]?\d+))?$/i);if(!m||!(m[2]||m[3])||s.length>120)return null;let scale=(m[3]||'').length-Number(m[4]||0);if(Math.abs(scale)>100)return null;let n=BigInt((m[2]||'0')+(m[3]||''))*(m[1]==='-'?-1n:1n);if(scale<0){n*=10n**BigInt(-scale);scale=0;}return {n,scale};};
+ const text=(n,places)=>{const sign=n<0n?'-':'',a=n<0n?-n:n,factor=10n**BigInt(places);return sign+(a/factor).toString()+(places?'.'+(a%factor).toString().padStart(places,'0'):'');};
+ const rounded=(n,d,places)=>{if(d<=0n)return null;const sign=n<0n?-1n:1n,a=(n<0n?-n:n)*10n**BigInt(places),q=a/d,r=a%d;return text(sign*(q+(r*2n>=d?1n:0n)),places);};
+ const round=(v,places=2)=>{const a=parts(v);return a?rounded(a.n,10n**BigInt(a.scale),places):null;};
+ const divide=(v,rate,places=18)=>{const a=parts(v),b=parts(rate);return a&&b&&b.n>0n?rounded(a.n*10n**BigInt(b.scale),b.n*10n**BigInt(a.scale),places):null;};
+ const multiply=(v,rate,places=18)=>{const a=parts(v),b=parts(rate);return a&&b&&b.n>0n?rounded(a.n*b.n,10n**BigInt(a.scale+b.scale),places):null;};
+ const sum=(values,places=18)=>{const xs=values.map(parts);if(xs.some(x=>!x))return null;const scale=Math.max(0,...xs.map(x=>x.scale));return rounded(xs.reduce((n,x)=>n+x.n*10n**BigInt(scale-x.scale),0n),10n**BigInt(scale),places);};
+ const same=(a,b)=>{const x=parts(a),y=parts(b);return x&&y?x.n*10n**BigInt(y.scale)===y.n*10n**BigInt(x.scale):a===b;};
+ const input=(v,from,fx)=>v===''?'':from==='BRL'?divide(v,fx,2):String(v??'');
+ const restore=(entered,original,from,fx)=>{if(from!=='BRL')return String(entered);const displayed=input(original,from,fx);if(same(entered,displayed))return String(original);const converted=multiply(entered,fx,18);if(converted===null)throw Error('Conversão indisponível. Atualize a competência antes de editar.');return converted;};
+ const money=(value,currency='USD')=>{const v=round(value,2);if(v===null)return '—';const number=Number(v);if(!Number.isFinite(number)||Math.abs(number)>1e12)return '—';return new Intl.NumberFormat('pt-BR',{style:'currency',currency,minimumFractionDigits:2,maximumFractionDigits:2}).format(number===0?0:number);};
+ return {modern,parts,round,divide,multiply,sum,same,input,restore,money};
+})();
+
 /* Shared shell. Approved manager access uses isolated server-side namespaces. */
 window.MGSExistingPeriod=(periods,requested,current)=>{const ids=periods.map(p=>p.id).sort();if(!ids.length)throw Error('Nenhuma competência disponível');if(ids.includes(requested))return requested;if(!current){const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));current=p.year+'-'+p.month;}return ids.includes(current)?current:ids.filter(x=>x<=current).at(-1)||ids[0];};
 window.MGSNavigation={period(){const explicit=new URLSearchParams(location.search).get('period')||sessionStorage.getItem('financePeriod');if(explicit)return explicit;const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value])),current=parts.year+'-'+parts.month;return current<'2026-08'?'2026-08':current>'2027-12'?'2027-12':current;},setPeriod(period){sessionStorage.setItem('financePeriod',period);const u=new URL(location.href);u.searchParams.set('period',period);history.replaceState(null,'',u);document.querySelectorAll('.sidebar a[href]').forEach(a=>{const x=new URL(a.href,location.origin);if(x.origin===location.origin){x.searchParams.set('period',period);a.href=x;}});},mount(role,selected,operations=false,user={}){

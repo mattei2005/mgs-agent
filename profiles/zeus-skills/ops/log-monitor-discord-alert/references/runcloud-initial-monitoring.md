@@ -79,6 +79,16 @@ This section is a read-only readiness procedure and rollout acceptance contract,
 - FullTech permission to request updates does not waive the Critical Subset: this package owns `/etc/systemd/system` and `/usr/share/doc` paths. Schedule/perform read-only review under delegated authority, but freeze any discovered exact update and obtain Rodolfo's critical confirmation before installation; never substitute a broad vendor `apt upgrade` for the requested agent-only scope.
 - Authoritative vendor recipe: `https://runcloud.io/docs/how-to-update-runcloud-agent-manually`. A missing generic documentation URL should be replaced through search with the exact supported page, not treated as unavailable vendor guidance.
 
+## Public website and server-reachability coverage
+
+- Keep guest/provider health separate from public HTTPS. Reuse `scripts/monitor-mattei-uptime.py` and its explicit `data/mattei-uptime-config.json` contract for the infra-dev panel; never describe RunCloud agent connection or an open TCP port as proof that an entire site renders correctly.
+- Discover bindings from the loaded `nginx-rc -T` configuration and recursively resolve its included main/root snippets. A domain file can contain only the ACME challenge root while its real `/home/.../webapps/...` root is included elsewhere. Collect only projected fields after a positive corporate scope filter; do not export raw global Nginx output.
+- Count unique public hostnames separately from server bindings. The same hostname may be configured on more than one server; configuration presence does not establish which origin public DNS currently selects. Preserve that distinction in the panel and totals.
+- Recheck the current corporate catalog and origin binding at every scope change; the authorized technical channel does not grant permission to list private or non-MGS projects hosted alongside MGS. Never widen the catalog from possession of a hosting credential.
+- Classify DNS, TLS, timeout, application/HTTP failure, slow response and WAF challenge separately; retry an initial failure safely and compare explicit configured origins without disabling TLS verification. Challenge/403 is not proof of an offline host; failure of TCP 22/80/443 from one probe is not proof that the machine is powered off.
+- Choose a collision-audited schedule from live global inventory rather than silently forcing a dense default. State the actual detection interval and single-probe limitations, preserve independent locks/timeouts, and enroll the new log in the stale watchdog with a cadence-specific tolerance.
+- Verify panel POST/PATCH by exact GET, preserve accepted message IDs before readback, reconcile ambiguous delivery by nonce/footer and never repost blindly. Test classification, transient recovery, origin fallback, persistent incident dedupe, ambiguous POST and accepted-POST/failed-GET recovery with isolated mocks, not fake public incidents.
+
 ## 7. Test and close
 
 1. Exercise the deployed interpreter with `tests/test_monitor_runcloud.py`, `tests/test_runcloud_quota.py` and `tests/test_runcloud_cadence.py` before promotion. Run new regressions against the old implementation first, then rerun all relevant suites on the candidate and deployed files.

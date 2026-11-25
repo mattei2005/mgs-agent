@@ -1190,6 +1190,34 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "MATTEI-UPTIME-1575283341404672001",
+      "report_infra_message_id": "1575286686609444986",
+      "report_infra_readback": true,
+      "type": "public-https-and-tcp-monitor",
+      "owner": "zeus",
+      "authority_message_id": "1575283341404672001",
+      "author_id": "963808102891798649",
+      "thread_id": "1575283341404672001",
+      "script": "/root/mgs-agent/scripts/monitor-mattei-uptime.py",
+      "tests": "/root/mgs-agent/tests/test_mattei_uptime.py",
+      "config": "/root/mgs-agent/data/mattei-uptime-config.json",
+      "state": "/root/mgs-agent/data/mattei-uptime-state.json",
+      "schedule": "46 * * * *",
+      "timezone": "America/New_York",
+      "stagger_seconds": 47,
+      "timeout_seconds": 300,
+      "lock": "/root/mgs-agent/data/mattei-uptime-run.lock",
+      "log": "/root/mgs-agent/logs/monitor-mattei-uptime.log",
+      "watchdog_threshold_seconds": 5400,
+      "panel_message_id": "1575285231806578752",
+      "coverage": {"unique_mgs_hostnames": 54, "nginx_server_bindings": 55, "servers": 3},
+      "validation": "9 tests passed; two real apply collections and exact panel GET/PATCH/GET validated; all 54 HTTPS and three TCP targets healthy; zero pending deliveries; native crontab readback and eight-civil-date conflict audit passed; watchdog OK at 90min tolerance. Future scheduled tick not yet observed.",
+      "evidence": "/root/mgs-agent/reports/mattei-uptime-1575283341404672001/",
+      "rollback": "Disable only the exact new crontab entry, preserving concurrent scheduler changes; retain script/state/evidence. Prior crontab and watchdog script preserved in evidence directory.",
+      "limitations": "Single external probe; no full-layout visual assurance; configured binding does not prove public DNS origin; no private/non-MGS projects; no server/site mutations or restarts.",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md"
+    },
+    {
       "id": "zeus-finance-joe-exception-1575202919324844063",
       "report_infra_message_id": "1575221646598602894",
       "report_infra_readback": true,
@@ -74275,6 +74303,7 @@
     }
   ],
   "crons": [
+    {"entry": "46 * * * * /usr/bin/flock -n /root/mgs-agent/data/mattei-uptime-run.lock /bin/sh -c '/bin/sleep 47; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-mattei-uptime.py >> /root/mgs-agent/logs/monitor-mattei-uptime.log 2>&1'", "description": "MGS availability in infra-dev thread 1575283341404672001; 54 public hosts, 55 bindings, 3 servers; zero operational schedule conflicts."},
     {
       "entry": "*/5 * * * * flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
     },
@@ -74508,6 +74537,7 @@
     }
   ],
   "scripts": [
+    {"path": "/root/mgs-agent/scripts/monitor-mattei-uptime.py", "description": "FullTech MGS public HTTPS and Mattei TCP reachability panel; hourly independent lock and verified Discord outbox; 9 regression tests."},
     {
       "path": "/root/mgs-agent/scripts/.ares_campaign_v3.image-identity-final-t_8364ae25/__init__.py",
       "size_bytes": 132,
@@ -80756,6 +80786,8 @@
     }
   ],
   "data_files": [
+    {"path": "/root/mgs-agent/data/mattei-uptime-config.json", "description": "Positive MGS scope, origin bindings, hourly schedule and FullTech authority."},
+    {"path": "/root/mgs-agent/data/mattei-uptime-state.json", "description": "Public/TCP observations, announced incidents, verified panel ID, durable outbox and delivery receipts; no credentials."},
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 1097613,

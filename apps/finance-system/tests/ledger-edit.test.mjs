@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {ledgerVersion,validateLedgerChange} from '../ledger-edit.mjs';
+import {ledgerVersion,validateLedgerChange,usdDisplayCents,nativeLedgerBody} from '../ledger-edit.mjs';
+
+test('USD display ledger conversion uses exact cents and strips only validated display metadata',()=>{for(const[a,b,c]of [["100.00", "5.76", 57600], ["1.00", "1.005", 101], ["0.01", "5.7519", 6]])assert.equal(usdDisplayCents(a,b),c);for(const[a,b]of [['0','5'],['-1','5'],['1','0'],['1.0000000000000000001','5'],['1','NaN']])assert.throws(()=>usdDisplayCents(a,b));const body={amount:'576.00',period:'2026-11',display_currency:'USD',display_amount:'100.00',display_fx:'5.76',unexpected:'preserved-for-validator'};assert.deepEqual(nativeLedgerBody(body),{amount:'576.00',period:'2026-11',unexpected:'preserved-for-validator'});assert.equal(body.display_currency,'USD');});
+
+test('USD equivalents may use fractional cents to preserve exact native-cent entries',()=>{for(const [amount,fx,expected]of [["17.375335744788789164", "5.75586", 10001], ["0.001", "5.75586", 1], ["1.001", "5", 501]])assert.equal(usdDisplayCents(amount,fx),expected);});
 const row={id:'test-entry',period:'2026-08',counterparty:'geizian',kind:'adjustment',direction:1,amount_cents:10470,description:'Canva',effective_date:'2026-09-21',created_at:'2026-09-21T10:00:00.000Z',voided_at:null,voided_by:null,actor:'rodolfo'};
 const payload=(r=row)=>({period:r.period,counterparty:r.counterparty,version:ledgerVersion(r),confirmed:true,kind:r.kind,direction:r.direction,amount:'405.00',date:r.effective_date,description:'Aluguel corrigido'});
 test('edit applies to August, every later month and later years without month-specific business values',()=>{for(const period of ['2026-08','2026-09','2026-10','2026-12','2027-01','2027-08','2027-12']){const r={...row,period};assert.deepEqual(validateLedgerChange(r,payload(r),'edit','2026-09-21'),{kind:'adjustment',direction:1,amount_cents:40500,effective_date:'2026-09-21',description:'Aluguel corrigido'});}});

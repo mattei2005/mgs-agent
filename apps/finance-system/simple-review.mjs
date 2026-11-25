@@ -65,7 +65,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  const buckets=new Map(DEFINITIONS.map(([id,label,currency])=>[id,{id,label,currency,values:new Map(),sites:new Map(),deductions:[],entries:0}])),unclassified=[],seenGross=new Set(),seenSpend=new Set();
  const contribute=(id,currency,value,site,f=null)=>{if(!present(value))return;if(!/^(CAD|USD|BRL|GBP)$/.test(currency))throw Error('Moeda sem suporte');sum([value]);const b=buckets.get(id);if(!b.values.has(currency))b.values.set(currency,[]);b.values.get(currency).push(String(value));if(!b.sites.has(site))b.sites.set(site,new Map());const v=b.sites.get(site);if(!v.has(currency))v.set(currency,[]);v.get(currency).push(String(value));if(f)b.deductions.push({site,currency,values:revenueDeductions(value,f)});b.entries++;};
  const unresolved=(f,currency,value,reason)=>{if(Number(value)!==0)unclassified.push({site:f.site,currency,value:String(value),reason});};
- const sms={seen:new Set(),usd:[],sources:new Set(),dates:new Set(),monthly:false};
+ const sms={seen:new Set(),usd:[],bySite:new Map(),sources:new Set(),dates:new Set(),monthly:false};
  for(const f of domain.facts){
   const a=additions.get(f.id),monthly=['monthly_gross_adjustment','direct_monthly_cost'].includes(a?.kind)&&a.period===period.id&&f.date===period.id;
   if(!validDate(period.id,f.date)&&!monthly)throw Object.assign(Error('Movimento fora da competência selecionada'),{status:409});
@@ -76,7 +76,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
    if(decimalCompare([f.cost_amount],original).status!=='pass')throw Object.assign(Error('Consumo SMS diverge do lançamento registrado'),{status:409});
    const debit=a.kind==='direct_monthly_cost'?f.spend:f.direct_expense;
    if(!present(debit))throw Object.assign(Error('Conversão registrada do SMS indisponível'),{status:409});
-   sms.seen.add(f.id);sms.usd.push(text(-fixed(debit)));sms.sources.add(a.source||'Fonte não informada');sms.dates.add(f.date);sms.monthly ||= monthly;
+   sms.seen.add(f.id);const converted=text(-fixed(debit));sms.usd.push(converted);if(!sms.bySite.has(f.site))sms.bySite.set(f.site,[]);sms.bySite.get(f.site).push(converted);sms.sources.add(a.source||'Fonte não informada');sms.dates.add(f.date);sms.monthly ||= monthly;
    contribute('sms','BRL',f.cost_amount,f.site);continue;
   }
   if(!f.revenue_superseded){
@@ -102,6 +102,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  const totals=values=>[...values].sort(([a],[b])=>a.localeCompare(b)).map(([currency,vs])=>({currency,value:sum(vs)}));
  const items=[...buckets.values()].map(b=>({id:b.id,label:b.label,currency:b.currency,totals:totals(b.values),...(b.currency?{breakdown:summarizeDeductions(totals(b.values),b.deductions)}:{}),sites:[...b.sites].sort(([a],[b])=>a.localeCompare(b,'pt-BR')).map(([site,v])=>({site,totals:totals(v),...(b.currency?{breakdown:summarizeDeductions(totals(v),b.deductions.filter(x=>x.site===site))}:{})})),status:b.entries?'to_check':'no_data',entries:b.entries}));
  const smsItem=items.find(x=>x.id==='sms');Object.assign(smsItem,{recharges:monthlySmsRecharges(s),converted_totals:sms.seen.size?[{currency:'USD',value:sum(sms.usd)}]:[],sources:[...sms.sources].sort(),dates:[...sms.dates].sort(),note:'Consumo de SMS, não recargas de crédito. '+(sms.monthly?'Neste mês, o SMS já está incluído em “Gastos com mídia” da Dashboard. O cartão apenas identifica essa parcela; não é uma nova despesa.':'Este consumo entra em “Despesas diretas SMS” da Dashboard, separado de Facebook e Google.')});
+ if(period.id>='2026-11')for(const site of smsItem.sites)site.converted_totals=[{currency:'USD',value:sum(sms.bySite.get(site.site)||[])}];
  const pendingGroups=new Map();for(const x of unclassified){const key=JSON.stringify([x.site,x.currency,x.reason]);if(!pendingGroups.has(key))pendingGroups.set(key,{...x,values:[]});pendingGroups.get(key).values.push(x.value);}const pending=[...pendingGroups.values()].map(({values,...x})=>({...x,value:sum(values),entries:values.length}));
  return {period,revision:s.revision,cutoff:domain.realized?.cutoff_date||null,rates:conferenceRates(s),items,unclassified:pending,financial_writes:0,external_reconciled:false,notice:'Valores registrados na dash para comparar com os relatórios do mês. Esta consulta não marca a conferência como concluída.',other_months_changed:false};
 }

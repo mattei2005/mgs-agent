@@ -37,6 +37,10 @@ class Tests(unittest.TestCase):
         self.assertEqual(m.events_for(s,{'site:eggbev.com':{'status':'timeout'}}),[])
         self.assertEqual(m.events_for(s,{'site:eggbev.com':{'status':'probe_error'}}),[])
         self.assertEqual(len(m.events_for(s,{'site:eggbev.com':{'status':'ok'}})),1)
+        queued={'outbox':[{'phase':'queued','events':[{'key':'site:eggbev.com','status':'timeout'}]}]}
+        m.reconcile_queued(queued,{'site:eggbev.com':{'status':'ok'}});self.assertEqual(queued['outbox'],[])
+        accepted={'outbox':[{'phase':'sending','events':[{'key':'site:eggbev.com','status':'timeout'}]}]}
+        m.reconcile_queued(accepted,{'site:eggbev.com':{'status':'ok'}});self.assertEqual(len(accepted['outbox']),1)
     def test_outbox_readback_retry_no_repost(self):
         with tempfile.TemporaryDirectory(dir='/root/.hermes/profiles/zeus/cache/scratch') as temp:
             path=pathlib.Path(temp)/'state.json';s={};d=MockDiscord();m.enqueue(s,{'embeds':[{'title':'fixture','description':'isolated mock only','color':1}]},'panel')
