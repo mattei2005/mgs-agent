@@ -41,6 +41,12 @@ After the owner resolves operational country/vertical and manager/strategy, bind
 
 Reuse the existing M2 catalog, monthly invalid/revshare/tax/FX settings and manager identity mapping. Do not create duplicate sites, reactivate an inactive residual-revenue site for expense allocation, seed fake spending, or turn this posting into a payment. Freeze/rehearse/restore-test/apply/read back through the bounded native import workflow in `references/gam-revenue-dashboard-import.md`. Verify all source domain/day controls, no unintended non-target-country revenue, the company's profit bridge and the real manager renderer's daily/monthly gross columns; a correct company total alone does not prove manager attribution. Keep unrelated facts, prior closing phases, other months and the payment ledger unchanged.
 
+### Rehearsal and committed-readback safeguards
+
+- Discover the live worker's fixture/dependency closure and the remote interpreter before preparing a restore stage. `private/domain.json` can be a generated local test artifact, not a required production file. Use streamed SHA-256 when remote Python lacks `hashlib.file_digest`; do not install dependencies or invent a missing fixture to repair the harness. After a partial stage copy, verify every existing file against the planned source and resume only missing files; preserve and reuse an already verified dump/restore instead of recreating it.
+- Compare unaffected manager financial payloads strictly while treating the enclosing workspace `revision` as expected to increment after a commit. Prove that revision is the only differing metadata before normalizing it in a before/after check; never normalize values, rates, dates or balances to make verification pass. A failed post-commit validator resumes with reads, not another import.
+- In owner-preview browser validation, a pending manager notice may intercept detail clicks. Verify the readonly preview identity, close that preview-only dialog with its supported Escape behavior, and continue the full UI acceptance. Never click the recipient's acknowledgement, remove the real notice, or treat the overlay as a financial failure.
+
 ## August 2026 validated read-only observation
 
 - Dashboard production, cutoff 31/08:
