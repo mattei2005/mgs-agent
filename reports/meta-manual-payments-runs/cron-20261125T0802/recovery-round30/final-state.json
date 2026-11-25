@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-11-25T19:01:05.031437+00:00",
+  "job_id": "2ee720363d7d",
+  "job_enabled": true,
+  "job_state": "scheduled",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T08:02:00-05:00",
+  "next_run_at": "2026-11-25T14:02:00-05:00",
+  "later_native_tick_observed": false,
+  "writer_lock_free": true,
+  "financial_workers": [],
+  "pending_D": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_H": [],
+  "ledger_entries_present": [],
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1881954",
+    "attempts": 30,
+    "failures": 0,
+    "due": 1795632957.7606912,
+    "lease_until": 1795634283.6187444
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795633083.605462,
+    "phase": "dispatching",
+    "pid": 1881954
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "contract_sha256": "38875a1c63ee0eabf76c62c5e1f5a0dfc8eefe712b43c8bad8ca673e3adc6a42",
+  "ledger_sha256": "53c64bbcf5b99dd1f3ea647a71f782a3b6ae144a15236c80468cc368aa513f3c"
+}
