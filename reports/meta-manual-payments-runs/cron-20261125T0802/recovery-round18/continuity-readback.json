@@ -1,0 +1,19 @@
+{
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:1730938",
+    "attempts": 18,
+    "failures": 0,
+    "due": 1795625828.0161636,
+    "lease_until": 1795627083.921222
+  },
+  "owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795625883.9141037,
+    "phase": "dispatching",
+    "pid": 1730938
+  },
+  "consumer_cron_lines": [
+    "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+  ]
+}
