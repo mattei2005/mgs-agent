@@ -1200,8 +1200,14 @@
       "checkpoint": "ZEUS-FINANCE-GENERAL-1575319781027090473",
       "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
       "scope": "October01-31 and November01-24; all queryable financial accounts/sites/five managers; Geizian October805044.73→790559.98 bridge",
-      "result": "audit_completed; October source exact; saved attribution verified both months; November source delta USD+67.11/BRL-7.785261 in53fields proposed only; financial writes0;20UIviews;13372DOMcells;326scenarios/ledger preserved apart from authorized automaticFX",
-      "rollback": "No production code/config/financial write; private evidence retained, no destructive cleanup; skill patch is documentation only"
+      "result": "audit_and_approved_application_completed; October source exact and untouched; November53fields applied1019→1020,source exact USD530613.51/BRL54891.574952;20UIviews13372DOMcells;replay0;payments/rules/FX/othermonths/daily_state preserved",
+      "application": {
+        "authorization": "1575351468540559501",
+        "path": "/root/mgs-agent/apps/finance-system/private/general-spend-apply-1575351468540559501/",
+        "report": "/root/mgs-agent/reports/finance-general-spend-apply-1575351468540559501.md",
+        "backup": "Private exact pre-import gzip verified remotely and locally; receipt contains path and hash"
+      },
+      "rollback": "No production code/config change. Financial rollback uses verified exact November pre-import gzip under admission/locks/CAS, preserving later unrelated writes; private audit evidence retained; no destructive cleanup."
     },
     {
       "id": "zeus-finance-usd-display-1575226305702797474",
