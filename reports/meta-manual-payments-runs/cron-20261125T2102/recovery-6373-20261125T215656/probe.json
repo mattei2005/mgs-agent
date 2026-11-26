@@ -1,0 +1,70 @@
+{
+  "operation": "6373afb33275674610c06b6a",
+  "at": "2026-11-25T21:57:26.150303-05:00",
+  "windows": [
+    {
+      "pid": 251988,
+      "window_id": 1179890,
+      "minimized": false,
+      "save_dialog": true,
+      "native_credential": false,
+      "approved_handle": false
+    },
+    {
+      "pid": 18704,
+      "window_id": 983880,
+      "minimized": false,
+      "save_dialog": false,
+      "native_credential": false,
+      "approved_handle": true
+    },
+    {
+      "pid": 22408,
+      "window_id": 131954,
+      "minimized": false,
+      "save_dialog": false,
+      "native_credential": false,
+      "approved_handle": false
+    },
+    {
+      "pid": 17988,
+      "window_id": 197246,
+      "minimized": false,
+      "save_dialog": false,
+      "native_credential": false,
+      "approved_handle": false
+    },
+    {
+      "pid": 11204,
+      "window_id": 65902,
+      "minimized": false,
+      "save_dialog": false,
+      "native_credential": false,
+      "approved_handle": false
+    }
+  ],
+  "captures": {
+    "approved": {
+      "pid": 18704,
+      "window_id": 983880,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/recovery-6373-20261125T215656/approved.png",
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/recovery-6373-20261125T215656/approved-elements.json",
+      "profile_rodolfo": true,
+      "accounts": true,
+      "passkey_or_login_gate": false
+    },
+    "save-dialog": {
+      "pid": 251988,
+      "window_id": 1179890,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/recovery-6373-20261125T215656/save-dialog.png",
+      "elements": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/recovery-6373-20261125T215656/save-dialog-elements.json",
+      "profile_rodolfo": false,
+      "accounts": false,
+      "passkey_or_login_gate": false
+    }
+  },
+  "input_actions": 0,
+  "business_writes": 0,
+  "tabs_created": 0,
+  "tabs_closed": 0
+}

@@ -9781,12 +9781,12 @@
     {
       "agent": "ares",
       "id": "creative-intake-1575332638351429665",
-      "next_step": "Executor canônico continua restantes pelo mesmo request 2e321ad23ece76973f93e190906d2c02. Na entrega final reconciliar outbox parcial e publicar apenas saldo17, não reenviar oito pares já verificados. Foreground sem writer de mídia/monitor concorrente.",
+      "next_step": "Continuar mesmo request 2e321ad23ece76973f93e190906d2c02 sem writer paralelo. Fechar preservação same-ID e auditoria25; reconciliar outbox parcial1575341131833544874 e publicar apenas saldo17, com ressalvas sem editar textos. Paths de provas em executions/intake-1575332638351429665/independent-closure.",
       "objective": "Tratar e organizar 25 vídeos Kelly US SHEIN EN common com originais preservados",
       "source": "discord:1516887105543077949:1575332638351429665",
-      "state": "executor canônico mantém ownership; foreground somente auditoria independente e comunicação. oito fontes permanentemente auditadas e mapa parcial publicado via ares com readback; total25, saldo17. provas e outbox em data/ares/creative-ops/executions/intake-1575332638351429665/independent-closure.",
+      "state": "executor canônico mantém ownership.16 fontes canonicamente completas; entrega humana publicada/auditada até8, saldo17 até fechamento permanente. auditor independente separa originais ainda em staging de permanent_verified; não refaz tratamento. ressalvas de conteúdo confirmadas em content-caveats.json da independent-closure, inclusive hooddie/diro em source 1m_rtlkh6coa6bfgdi1glvlfmrm9s5jiu que supersede transcrição inicial.",
       "thread_id": "1575332638351429665",
-      "updated_at": "2026-11-26T02:43:14+00:00"
+      "updated_at": "2026-11-26T03:00:38+00:00"
     },
     {
       "agent": "ares",
@@ -12660,5 +12660,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T02:43:14+00:00"
+  "updated_at": "2026-11-26T03:00:38+00:00"
 }
