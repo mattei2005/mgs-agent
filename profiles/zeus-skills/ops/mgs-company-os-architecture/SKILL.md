@@ -23,6 +23,13 @@ Completion criterion: only the procedure and evidence required for the current a
 - For a whole-agent audit, load `references/shared-domain-scope-guardrails.md` and freeze a machine-readable coverage manifest before reporting. Keep documented scope, actual credential reach and operating-system isolation as separate findings.
 - Report to Rodolfo with the verdict first, followed by numbered **Problema / Causa / Solução** items. Label unproved causes, give verified coverage and exclusions, and distinguish completed audit from unapplied remediation. Ask only for the exact critical transition that remains blocked, not a blanket approval for loosely specified cleanup and credential changes.
 
+## Institutional closure gate
+
+- Validate the canonical knowledge store early when the task will need a checkpoint transition. A malformed record elsewhere can block the shared writer even when the task's own record is valid.
+- Make each required closure operation a checked dependency of the next. A later successful shell command must not mask a failed checkpoint update; read back the exact target record before writing an overall success receipt.
+- Keep external-operation success separate from institutional closure. If metadata repair is needed, preserve the deployed operation and its receipts, repair only the authorized metadata defect, then retry the canonical writer and complete reporting. Do not rerun a committed operation to repair its bookkeeping.
+- Follow the schema-recovery and synchronization checks in `references/institutional-knowledge-continuity.md` before declaring the work fully closed.
+
 ## Operational route packs
 
 - **When to use → 2. Create a blueprint before operational changes** → `references/route-pack-01.md`

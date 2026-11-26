@@ -132,6 +132,15 @@ For JSON registers and checkpoints:
 
 Use the class-level `software-development-methods` reference `transactional-json-registers.md` for the full concurrency pattern.
 
+## Recovering a schema-blocked checkpoint transition
+
+1. Run `python3 /root/mgs-agent/scripts/mgs-knowledge-control.py validate` and inspect the exact failing record by ID. Re-read the intended task checkpoint too: an error may leave its prior state intact, and a successful later command does not prove the transition landed.
+2. Distinguish structural metadata from operational meaning. If the repair is within authority and only a required metadata field is absent, preserve the affected record before editing and leave its objective, state, next step, sources, ownership and permissions unchanged. Unknown business state or authority is a decision blocker, not a field to infer.
+3. Use the existing controller's `locked(root)` and `atomic_write_json(...)` primitives for the exceptional repair. Re-read under the common lock, verify the defect still exists, change only the identified field, and compare semantic readback before releasing the lock. Keep normal updates on `checkpoint-upsert`; direct repair is not a replacement writer.
+4. Use an evidenced original timestamp when restoring one. Otherwise, if adding `updated_at` for the repair itself, generate the actual repair time and record that meaning explicitly; never present it as a reconstructed operational event time.
+5. Audit the metadata-only change, retry the original `checkpoint-upsert`, run the validator again and require the exact target state on readback. Produce the overall closure receipt only after these checks pass. Do not weaken validation, erase the malformed record or modify unrelated operational state to obtain a green result.
+6. If the existing completion report needs a correction, update that exact message through the same transport and re-read its final fields instead of posting a duplicate. Preserve the distinction between the original operation and the metadata repair.
+
 ## Validation and closure
 
 Minimum proof:
@@ -143,7 +152,7 @@ Minimum proof:
 - no secret-pattern findings in changed files;
 - `git diff --check` passes;
 - infra inventory is regenerated and confirms executable/non-empty data artifacts;
-- Git auto-commit/push reaches `HEAD == origin/main` without manual push;
+- Git auto-commit/push includes the task's latest files: require a clean scoped `git status --short -- <task paths>` as well as `git rev-list --left-right --count HEAD...origin/main` returning no divergence. Equal refs alone do not include uncommitted files. Allow the existing auto-commit cycle to run and recheck; do not force a manual commit/push unless separately requested;
 - REPORT-INFRA helper succeeds and the exact message ID is read back with empty content, one expected embed, semantic fields, and no mentions;
 - audit records implementation and REPORT readback separately.
 
