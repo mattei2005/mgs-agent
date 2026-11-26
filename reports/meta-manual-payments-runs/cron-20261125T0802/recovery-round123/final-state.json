@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-11-26T13:26:32.320673+00:00",
+  "queue": {
+    "key": "79cd082a20c22a736307765f",
+    "state": "running",
+    "cause": "original_writer_active",
+    "owner": "supervisor:3130561",
+    "attempts": 123,
+    "failures": 0,
+    "due": 1795699091.8508582,
+    "lease_until": 1795700564.084316
+  },
+  "owner_alive": true,
+  "heartbeat": {
+    "at": 1795699092.122563,
+    "phase": "dispatching",
+    "pid": 3130561
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "next_scheduled_consumer_check_utc": "2026-11-26T13:27:00+00:00",
+  "retry_time_not_guaranteed": true,
+  "writer_lock_free": true,
+  "lease_free_readback": true,
+  "contract_unchanged_from_preflight": true,
+  "pending_ledger_entries_still_absent": true,
+  "later_tick_queues": [
+    {
+      "key": "82cda493797d9f67923fbcc7",
+      "state": "waiting_human",
+      "cause": "meta_passkey_authentication_required",
+      "owner": null,
+      "attempts": 0,
+      "failures": 0
+    },
+    {
+      "key": "6373afb33275674610c06b6a",
+      "state": "waiting_human",
+      "cause": "original_writer_active",
+      "owner": null,
+      "attempts": 7,
+      "failures": 0
+    },
+    {
+      "key": "ce11800d217d22dba6a58dcc",
+      "state": "waiting_human",
+      "cause": "waiting_human",
+      "owner": null,
+      "attempts": 100,
+      "failures": 0
+    }
+  ],
+  "latest_native_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261126T0802/closure-receipt.json",
+  "latest_native_status": "partial_waiting_human_auth",
+  "latest_native_claim_reconciled_no_replay": true
+}

@@ -1,0 +1,137 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+  "mode": "probe_only",
+  "status": "waiting_human",
+  "cause": "meta_passkey_authentication_required",
+  "secondary_resource_gate": "pc1_save_as_dialog_present_preserved",
+  "observed_at": "2026-11-26T13:26:32.320673+00:00",
+  "authority_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/authority-readback.json",
+  "reconciliation_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/reconciliation.json",
+  "sheet_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/sheet-readback.json",
+  "final_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/final-state.json",
+  "native_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+  "scope": {
+    "sheet_id": 794137639,
+    "active_account_count": 52,
+    "exact_live_ids_verified": true,
+    "pending_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "pending_stage": "D historical explicit Paid card instrument proofs ONLY",
+    "new_account_D_separate_not_adopted": "1770569568407466",
+    "archived_accounts_excluded": true
+  },
+  "visual_readback": {
+    "inspected_with": "vision_analyze",
+    "authentication_gate_on_approved_surface": true,
+    "authentication_gate_text": "Confirm it’s you with your passkey",
+    "profile_visible": "Rodolfo Mattei · Facebook",
+    "expected_business_id_in_encoded_destination": "155263197283282",
+    "billing_accounts_access_confirmed": false,
+    "historical_D_access_confirmed": false,
+    "page_error_visible": false,
+    "native_save_as_dialog_confirmed": true,
+    "dialog_preserved": true,
+    "browser_tabs_visible": 6,
+    "no_tab_mutation_by_this_probe": true,
+    "captures": {
+      "approved-vision": {
+        "pid": 18704,
+        "window_id": 983880,
+        "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/approved-retry-vision.png",
+        "width": 2558,
+        "height": 1390
+      },
+      "save-dialog-0-vision": {
+        "pid": 251988,
+        "window_id": 1179890,
+        "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/save-dialog-0-retry-vision.png",
+        "width": 1184,
+        "height": 711
+      }
+    },
+    "basis": "Both current screenshots inspected by vision_analyze. Approved Chrome visibly displays passkey reauthentication, not Accounts. AX confirms Rodolfo and the passkey fallback description. Save As remains independently open."
+  },
+  "continuity": {
+    "observed_at": "2026-11-26T13:26:32.320673+00:00",
+    "queue": {
+      "key": "79cd082a20c22a736307765f",
+      "state": "running",
+      "cause": "original_writer_active",
+      "owner": "supervisor:3130561",
+      "attempts": 123,
+      "failures": 0,
+      "due": 1795699091.8508582,
+      "lease_until": 1795700564.084316
+    },
+    "owner_alive": true,
+    "heartbeat": {
+      "at": 1795699092.122563,
+      "phase": "dispatching",
+      "pid": 3130561
+    },
+    "consumer_schedule": "2-57/5 * * * *",
+    "next_scheduled_consumer_check_utc": "2026-11-26T13:27:00+00:00",
+    "retry_time_not_guaranteed": true,
+    "writer_lock_free": true,
+    "lease_free_readback": true,
+    "contract_unchanged_from_preflight": true,
+    "pending_ledger_entries_still_absent": true,
+    "later_tick_queues": [
+      {
+        "key": "82cda493797d9f67923fbcc7",
+        "state": "waiting_human",
+        "cause": "meta_passkey_authentication_required",
+        "owner": null,
+        "attempts": 0,
+        "failures": 0
+      },
+      {
+        "key": "6373afb33275674610c06b6a",
+        "state": "waiting_human",
+        "cause": "original_writer_active",
+        "owner": null,
+        "attempts": 7,
+        "failures": 0
+      },
+      {
+        "key": "ce11800d217d22dba6a58dcc",
+        "state": "waiting_human",
+        "cause": "waiting_human",
+        "owner": null,
+        "attempts": 100,
+        "failures": 0
+      }
+    ],
+    "latest_native_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261126T0802/closure-receipt.json",
+    "latest_native_status": "partial_waiting_human_auth",
+    "latest_native_claim_reconciled_no_replay": true
+  },
+  "side_effects": {
+    "input_actions": 0,
+    "tabs_created": 0,
+    "tabs_closed": 0,
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "business_delivery_messages": 0,
+    "queue_mutations": 0,
+    "canonical_infrastructure_modified": false,
+    "local_diagnostic_artifacts_only": true
+  },
+  "auth_ready": false,
+  "auth_ready_reason_not_emitted": "Explicit passkey reauthentication challenge is visible in the approved Rodolfo Chrome; Save As also persists. No positive target-access proof.",
+  "next_step": "Human authenticates Meta in approved Chrome PC1 and resolves the unrelated Save As dialog locally without automation dismissing it. Existing supervisor retains ownership/backoff and must read-only revalidate same surface/dialogs. Only after both gates clear, reconcile later native receipts and collect the same five historical D proofs. No replay of completed financial layers or duplicate delivery; other occurrences remain independent.",
+  "public_auth_notice": "Não consegui concluir. Você precisa autenticar a Meta no Chrome do PC1.",
+  "public_auth_notice_send_by_this_probe": false,
+  "business_complete": false,
+  "delivery_complete": false,
+  "independent_closure_not_claimed": true
+}

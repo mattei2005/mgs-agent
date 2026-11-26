@@ -1,0 +1,31 @@
+{
+  "inspected_with": "vision_analyze",
+  "authentication_gate_on_approved_surface": true,
+  "authentication_gate_text": "Confirm it’s you with your passkey",
+  "profile_visible": "Rodolfo Mattei · Facebook",
+  "expected_business_id_in_encoded_destination": "155263197283282",
+  "billing_accounts_access_confirmed": false,
+  "historical_D_access_confirmed": false,
+  "page_error_visible": false,
+  "native_save_as_dialog_confirmed": true,
+  "dialog_preserved": true,
+  "browser_tabs_visible": 6,
+  "no_tab_mutation_by_this_probe": true,
+  "captures": {
+    "approved-vision": {
+      "pid": 18704,
+      "window_id": 983880,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/approved-retry-vision.png",
+      "width": 2558,
+      "height": 1390
+    },
+    "save-dialog-0-vision": {
+      "pid": 251988,
+      "window_id": 1179890,
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round123/save-dialog-0-retry-vision.png",
+      "width": 1184,
+      "height": 711
+    }
+  },
+  "basis": "Both current screenshots inspected by vision_analyze. Approved Chrome visibly displays passkey reauthentication, not Accounts. AX confirms Rodolfo and the passkey fallback description. Save As remains independently open."
+}
