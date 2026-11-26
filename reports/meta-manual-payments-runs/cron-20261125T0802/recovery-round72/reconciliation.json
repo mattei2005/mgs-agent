@@ -1,0 +1,123 @@
+{
+  "observed_at": "2026-11-26T03:04:11.407017+00:00",
+  "source": {
+    "authority_message_id": "1575022093777637377",
+    "checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/closure-receipt.json",
+    "closure_guard": "Current cron response is delivered automatically; no second summary of completed metrics. Resume only missing historical D proofs and narrow canonical record_pc1_proof with actual pixels, update contract pending fields/readback. Do not reuse old hardcoded finance delivery adapter.",
+    "communication": "User notified of partial history; future recovery only when missing layer is independently verified.",
+    "completed_financial_layers": {
+      "C_G_I_J": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T085222635947",
+      "D_recent_events": [
+        "1062446663435585",
+        "1150399088163771",
+        "1307492658016080",
+        "1414197490675732",
+        "1543098427832443",
+        "1547524853816263",
+        "1635726541410028",
+        "1772267146710748",
+        "1867022354284742",
+        "2323706575049143",
+        "2852476828464907"
+      ],
+      "E_F": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261125T080412736403",
+      "H": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T080504327581"
+    },
+    "contract_amendment_history": [
+      {
+        "authority_message_id": "1575252034100138135",
+        "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add1-1575252034100138135/receipt.json",
+        "new_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+        "original_missing_targets_preserved": true,
+        "prior_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+        "reason": "Owner adds one card account to active recurring scope; original H35/D targets remain unchanged. New account D is tracked separately in canonical pending_new_account_fields, not duplicated here."
+      }
+    ],
+    "contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+    "job_id": "2ee720363d7d",
+    "kind": "native",
+    "pending_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "pending_stage": "D historical card instrument proof ONLY for five current active accounts; reconcile exact new-row fields",
+    "profile": "zeus",
+    "resource": "pc1",
+    "scheduled_at": "2026-11-25T08:02:00-05:00",
+    "scope_guard": "51 active IDs on sheet794137639 only. Do not collect archived146, run views, repeat funding/invoices/H/full dataset, create another job or execute billing. Reconcile any later native tick before action. Preserve original Chrome tabs. Do not dismiss unrelated Save As dialog. Foreground focus conflict was not Meta authentication. Reacquire lease and inspect live windows before any input. AMENDMENT1575252034100138135: live active scope is now52, prior51plus1770569568407466. Only original missing IDs belong to this occurrence; do not collect added account here or rewrite completed metrics. Validate exact live52 IDs and preserve all original layers, never insist on obsolete51 count. Original authority/slot/targets preserved; use latest source hash from this row, not hardcoded prior probes.",
+    "thread_id": "1563926766286803004"
+  },
+  "native_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+  "contract_sha256": "d8ead673a8b33dcb69d8b8f1c4ac3ce5234dd5ce7e2f4afe8b94d83188e69415",
+  "job_enabled": true,
+  "job_state": "scheduled",
+  "fire_claim": null,
+  "last_dispatch_scheduled_at": "2026-11-25T21:02:00-05:00",
+  "next_run_at": "2026-11-26T08:02:00-05:00",
+  "later_native_tick_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/closure-receipt.json",
+  "later_native_tick_receipt_sha256": "3e33e9c848e68a94ea97f03cf2ec68bf8263e801a11a0be89b142722362cf6bf",
+  "later_tick_status": "partial_waiting_resource_ui",
+  "later_tick_queue": [
+    {
+      "key": "6373afb33275674610c06b6a",
+      "state": "waiting_human",
+      "owner": null,
+      "due": 1795662267.9945178,
+      "attempts": 2,
+      "failures": 0
+    }
+  ],
+  "writer_lock_free": true,
+  "financial_worker_processes_found": [],
+  "pending_account_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "pending_ledger_entries": {
+    "1034081997659047": null,
+    "1492168699397108": null,
+    "1542257646409395": null,
+    "1663268201836138": null,
+    "1754588462350629": null
+  },
+  "canonical_pending_new_account_fields": {
+    "authority_message_id": "1575016959395893258",
+    "D_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629",
+      "1770569568407466"
+    ],
+    "H_account_ids": [],
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add1-1575252034100138135/receipt.json",
+    "reason": "Preserve prior unresolved fields; new card account D needs its own historical proof, blank is not zero. H scope unchanged.",
+    "authority_by_account_id": {
+      "1770569568407466": "1575252034100138135"
+    }
+  },
+  "new_account_excluded_from_this_occurrence": true,
+  "active_account_count": 52,
+  "exact_live_ids_verified": true,
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:2486606",
+    "attempts": 72,
+    "failures": 0,
+    "due": 1795661718.3516886,
+    "lease_until": 1795663386.590902
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795662186.5855944,
+    "phase": "dispatching",
+    "pid": 2486606
+  }
+}
