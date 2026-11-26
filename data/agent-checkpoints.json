@@ -1992,6 +1992,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1575332926084751393",
+      "next_step": "Concluido; nao reenviar. GAM/SB13min Escalatepower e Vizioid,73min Growpowerhub/Mavroa/Yolokfx02/Yolokfx08; Boostingecon sem atividade e atraso n/d. Novo pedido exige fontes novas; campanhas, budgets e agendas preservados.",
+      "objective": "Gerar sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1575332926084751393/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;125campaigns;39integralparts+7summaries;46unique_messages;cutoffs25/11/2026_21:12-21:13est;usd;zero_meta_writes;archive256bytes_hashes_verified;65regressions_tasklocal_catalog_subset+5summaryfixtures+5gatechecks+6archivechecks_pass",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-26T02:21:26+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -9770,6 +9780,16 @@
     },
     {
       "agent": "ares",
+      "id": "creative-intake-1575332638351429665",
+      "next_step": "Executor canônico continua imediatamente o request inteiro em batches de até 4 usando mesmo complete, sem esperar scheduler; foreground acompanha proofs/claims e fará confirmação final na origem após mapa auditado. Evidências iniciais sources/discovery em scratch intake-1575332638351429665.",
+      "objective": "Tratar e organizar 25 vídeos Kelly US SHEIN EN common com originais preservados",
+      "source": "discord:1516887105543077949:1575332638351429665",
+      "state": "ownership reconciliado: execução canônica cron local-a282f75800c66bac54af96025bfb0e200d2dbbe4ac1063c285bca0a460c48c14 assumiu batch e04a9444dfac42349484aff06486ccb8 do request 2e321ad23ece76973f93e190906d2c02. foreground desta thread em read-only, sem preparo, claim, complete, monitor ou writer paralelo.",
+      "thread_id": "1575332638351429665",
+      "updated_at": "2026-11-26T02:15:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "creative-intake-kelly-1561765244450111621",
       "next_step": "Nenhuma pendencia neste intake; usar links READY LEGACY e mapa exato do manifesto. Uso em campanha requer pedido proprio e conciliacao.",
       "objective": "Tratar e mover lote Kelly US SHEIN EN preservando originais e reserva",
@@ -12640,5 +12660,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T01:41:05+00:00"
+  "updated_at": "2026-11-26T02:21:26+00:00"
 }
