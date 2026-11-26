@@ -1190,6 +1190,31 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-index-lock-recovery-ae6dff3c0d514b3f8976d1a2",
+      "agent": "zeus",
+      "authority_message_id": "1569193434189668453",
+      "source_alert_id": "1575450070235619379",
+      "report_infra_message_id": "1575453467357478994",
+      "report_infra_get_verified": true,
+      "native_retry_commit": "b2cbfd67268bbd6d6432b9d2d25840979f6e6ad2",
+      "first_native_retry_commit": "7fd280ce22f1db919db4b3c152dfc1e8e3b2e80f",
+      "recovery_notice_id": "1575453845687894137",
+      "recovery_notice_get_verified": true,
+      "paths": [
+        "/root/mgs-agent/scripts/mgs_autopush_continuity.py",
+        "/root/mgs-agent/tests/test_autopush_continuity.py"
+      ],
+      "cause": "Native staging blocked by index.lock at 2026-11-26 04:53:10 ET; lock already absent during reconciliation. Competing process not attributed.",
+      "correction": "Register exact existing alert in read-only occurrence observer; preserve native retry, writer, batching and owning supervisor. No manual stage/commit/push, lock deletion or restart.",
+      "validation": "83 adapter, producer ownership and canonical monitor tests PASS; git diff --check PASS. Native retry 7fd280ce22 and later push b2cbfd6726 confirmed; remote ancestry verified. Natural monitor 2026-11-26T10:11:01Z zero failures; exact-alert observer live OK verified=true; recovery notice and REPORT-INFRA GET verified. Existing supervisor alone retains queue closure.",
+      "receipt": "/root/.hermes/shared/automation-continuity/runs/ae6dff3c0d514b3f8976d1a2/recovery-evidence.json",
+      "rollback": "/root/.hermes/shared/automation-continuity/runs/ae6dff3c0d514b3f8976d1a2/rollback",
+      "status": "target_and_delivery_validated_original_supervisor_closure_pending",
+      "manual_stage_commit_push": false,
+      "cron_changes": false,
+      "gateway_restart": false
+    },
+    {
       "id": "finance-payment-party-filter-1575374541897601075",
       "agent": "zeus",
       "type": "bounded-finance-presentation-release",
