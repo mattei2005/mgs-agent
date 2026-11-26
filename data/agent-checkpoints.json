@@ -8999,12 +8999,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1575391863991701665",
-      "next_step": "Perguntar somente se autoriza suspender recuperacao automatica antiga sem alterar campanhas/anuncios. Com aceite autenticado: seguir locks e AccountWriterLeaseStore.release; reconciliar audit atual de falha pre-admissao sem efeitos; dry-run e execute central no mesmo request, preservar relogio e QA. Sem aceite nao liberar lease nem repetir execute.",
-      "objective": "Duplicar C143 tres vezes na Yolokfx06 G003; USD100 por campanha; COCAP USD0.90; 26/11/2026 04:00 America/New_York.",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575391863991701665/request.json",
-      "state": "aguardando decisao sobre suspensao da recuperacao anterior shein-1575012965613178921. novo pedido autenticado e dry_run_ok, fonte c143 active, fonte cap70; manifest novos alvos cap90 e budget10000. execute interrompido antes do writer por writerleaseconflict; audit failed lanes vazio e sem checkpoint atual. get anterior: pais c161/c162/c163 active, os nove ad ids originais archived. nao restaurar, reativar nem concluir pedido anterior por inferencia. parametros originais preservados no mesmo intake.",
+      "next_step": "Solicitar decisao delimitada: manter anuncio com erro pausado e habilitar oito restantes, ou resolver erro externo para habilitacao integral; nao ativar parcialmente sem aceite, nao repetir criacao nem POST como sondagem. Preservar request/IDs/manifests/budget/bid/inicio/relogio. Apos elegibilidade, somente ativacao central e readback, depois cadastro SB.",
+      "objective": "Duplicar C143 tres vezes na Yolokfx06 G003; USD100/dia cada; COCAP USD0.90; 26/11/2026 04:00 America/New_York.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575391863991701665/partial-verification-receipt.json",
+      "state": "recuperacao antiga suspensa com aceite 1575393128406327388; lease liberada sem write meta antigo. novas c164/c165/c166 criadas pelo mesmo engine; ids 120258593451080151,120258593451090151,120258593468980151. budget10000/cap90/04h conferidos em todas; 9 ads e renderer qa 3/3 com ids preservados. activation_pending: todas campanhas e adsets paused; um ad da c164 120258593454360151 with_issues 1487083 forcerunstatus; outros oito ads pending_review. ativacao integral nao executada; sb pendente. nao repetir reassociacao experimental da recuperacao anterior que terminou 2490468.",
       "thread_id": "1558127055282110526",
-      "updated_at": "2026-11-26T06:08:07+00:00"
+      "updated_at": "2026-11-26T06:16:53+00:00"
     },
     {
       "agent": "ares",
@@ -12688,5 +12688,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T06:08:08+00:00"
+  "updated_at": "2026-11-26T06:16:53+00:00"
 }
