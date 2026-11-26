@@ -5063,6 +5063,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-G004-YOLO04-shein-1575588100892270595",
+      "next_step": "Criacao concluida; aguardar analise da Meta, sem nova mutacao automatica",
+      "objective": "Duplicar 3 vezes a campanha 307 para agora com USD70 por campanha",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575588100892270595/completion-receipt.json",
+      "state": "complete: campanhas 320, 321, 322; 3 campanhas active; usd70/dia cada, usd210/dia lote; 6 anuncios habilitados pending_review; qa integral e sb confirmados",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-26T19:10:12+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-G006-YOLO02-ACTIVATE-1563031426381774959",
       "next_step": "Concluído; nenhuma recorrência criada",
       "objective": "Ativação status-only das 100 campanhas nominais, sem alterar budget, lance, filhos ou programação",
@@ -10859,12 +10869,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Human must authenticate Meta passkey in approved Rodolfo Chrome PC1. Existing supervisor must first read-only verify same browser/BM and native dialogs; no automated credential/passkey input. Reconcile all newer receipts and native claim before resuming only H34 missing and D9 current events, plus separately governed historical D. Preserve H1 original time, all API/invoice writes, archived146/base/Sheet1, same cron and sole writer. Do not repeat successful financial phases. After UI proof, final API reconciliation max twice per event and full source-to-live/frozen-sheet validation. No payments, billing, credential, permission, restart or job changes. No duplicate blocker notice; this occurrence notice is cron-final-only.",
-      "objective": "Refresh 26nov08:02ET somente ativos Contas com saldo; concluir H/D após passkey Meta",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261126T0802/closure-receipt.json",
-      "state": "c/g/i/j52 atualizados08:11et e e/f outubro30 invoices usd417864.11 validados. h1 financeadx-us-cc-en-01 outstanding balance269.81 lido08:07et publicado; outros34h preservados históricos. d9 pendentes atuais; histórico d separado. gate passkey meta real em rodolfo chrome business_id correto, ax+pixels após reload único de erro técnico. inputs interrompidos; save as alheio preservado. seis abas originais e arquivo146/base/sheet1 intactos; lease livre; nenhum pagamento/billing. report-infra pendente por restrição de envio cron.",
+      "next_step": "Human must unlock Windows PC1 and make the existing Rodolfo Chrome Meta session available. Existing supervisor first performs read-only list_windows, exact profile/BM AX+pixel check and native-dialog check. No Windows/PIN/passkey/password input or alternative browser/profile. Missing Chrome handle is NOT proof of Meta authentication. Reconcile all newer native claims, receipts and closed financial layers before resuming only current H35 and D9 plus separately governed historical D. Preserve all current C/G/I/J and E/F writes, archived146/base/Sheet1, H/D original times, same job and sole writer. Final API reconciliation after real D proof, at most twice per event, full source-to-live and frozen-sheet validation. No billing/payment/credential/permission/restart/schedule change. No duplicate user blocker notice; current occurrence delivery is cron final only.",
+      "objective": "Refresh 26nov14:02ET somente ativos Contas com saldo; concluir H/D após desbloqueio Windows PC1",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261126T1402/closure-receipt.json",
+      "state": "c/g/i/j52 atualizados14:04et e e/f outubro30 invoices usd417864.11 validados. h35 históricos e d integralmente preservados; d9 pendentes atuais. windows lockapp confirmado em pixels; handle chrome antigo ausente, nenhum chrome descoberto; não foi comprovado gate meta neste tick. nenhum input ui/credencial/aba executado. arquivo146/base/sheet1 idênticos por readback completo; lease livre; nenhum pagamento/billing. report-infra pendente por restrição explícita de envio cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-26T13:13:18+00:00"
+      "updated_at": "2026-11-26T19:08:10+00:00"
     },
     {
       "agent": "zeus",
@@ -12748,5 +12758,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T18:27:56+00:00"
+  "updated_at": "2026-11-26T19:10:12+00:00"
 }
