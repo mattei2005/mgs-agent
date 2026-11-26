@@ -2982,6 +2982,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1575528671647633570",
+      "next_step": "Owner deve liberar conta exata a integracao corporativa existente. Apos confirmacao, repetir GET, reconciliar cadastro tecnico somente da conta por evidencia viva e retomar mesmo request no runner central. Nao trocar credenciais nem permissao por inferencia.",
+      "objective": "Duplicar C001 tres vezes na Mavroa07 G004 para agora herdando budget e lance vivos",
+      "source": "data/ares/meta-ads/audit/shein-1575528671647633570-preflight.json",
+      "state": "external_access_blocked: get corporativo da conta1770569568407466 http403 meta200 por acesso ads_management/ads_read nao concedido; registro engine/profile ausente; zero writes de campanha",
+      "thread_id": "1575250902724644867",
+      "updated_at": "2026-11-26T15:11:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -12688,5 +12698,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T13:13:18+00:00"
+  "updated_at": "2026-11-26T15:11:23+00:00"
 }
