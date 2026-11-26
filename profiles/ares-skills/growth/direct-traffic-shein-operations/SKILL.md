@@ -35,7 +35,7 @@ Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `co
 
 Corrija o executor compartilhado, preservando padrões/decisões. Exija regressão e readback de recursos/novas UTMs na rota normal; informe pendências.
 
-Prova renderizada não substitui prontidão atual. Recibo multifonte: `references/campaign-batch-final-readback.md`.
+QA antigo não basta: confira issues e recursos de toda a coorte antes do aceite/ativação seletiva. Receita: `references/review-disapproved-and-selective-activation.md`.
 
 Relatório com complemento só termina após reconciliar remotamente ambos, inclusive em conta única: conferir partes, intents, resumo e ordem pelos IDs exatos, não apenas o `COMPLETE` do adaptador. Receita em `references/canonical-report-renderer.md`, seção `Resumo complementar persistido por conta`.
 
