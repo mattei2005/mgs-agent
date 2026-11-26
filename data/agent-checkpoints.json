@@ -3012,6 +3012,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1575573283221405788",
+      "next_step": "Pedido concluido: nao repetir criacao/ativacao/cadastro SB. Quatro ads seguem analise externa da Meta; entrega/performance nao aferidas. Nao reabrir C005 ou solicitar appeal por este pedido.",
+      "objective": "Duplicar C002 duas vezes para agora na Mavroa07 G004, herdar budget/lance vivos",
+      "source": "data/ares/meta-ads/audit/shein-1575573283221405788-final.json",
+      "state": "complete: c006/c007, 2campanhas/4ads configuradosactive; efetivos{\"pending_review\": 4}; budgetcada7000minorusd,total140usd/dia,contaativa490usd/dia;costcap90minorusd;qa/ids preservados;sourcec002,postsnovos;sb201duaschaves/gamok;getindependentesb indisponivel.",
+      "thread_id": "1575250902724644867",
+      "updated_at": "2026-11-26T18:11:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -12728,5 +12738,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T17:52:22+00:00"
+  "updated_at": "2026-11-26T18:11:32+00:00"
 }
