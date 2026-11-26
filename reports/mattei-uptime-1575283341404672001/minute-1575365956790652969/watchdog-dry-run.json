@@ -1,0 +1,82 @@
+sync-souls.sh                    | OK     | age=2min threshold=20min
+monitor-auto-push.sh             | OK     | age=1min threshold=2160min
+monitor-yoast-health-eggbev.sh   | OK     | age=784min threshold=2160min
+check-pending-reports.sh         | OK     | age=5min threshold=2160min
+monitor-service-restarts.sh      | OK     | age=1min threshold=20min
+monitor-gpt55-oauth-cost.sh      | OK     | age=693min threshold=2880min
+monitor-tool-loops.sh            | OK     | age=4min threshold=20min
+infra-discovery.sh               | OK     | age=1106min threshold=2160min
+monitor-hermes-updates.sh        | OK     | age=170min threshold=2160min
+track-article-cost.sh            | OK     | age=12min threshold=60min
+cleanup-zombie-sessions.sh       | OK     | age=27min threshold=150min
+housekeeping-bak-cleanup.sh      | OK     | age=1602min threshold=11520min
+pendencia-render-md.sh           | OK     | age=927min threshold=2160min
+chat-log.sh                      | OK     | age=27min threshold=150min
+cron-control-plane.py            | OK     | age=895min threshold=2160min
+monitor-cron-stale-logs.sh       | SKIP   | watchdog self-skip
+hermes-news-explainer.py         | OK     | age=2min threshold=20min
+monitor-webshare-status.sh       | OK     | age=200min threshold=2160min
+mgs-safety-backup.sh             | OK     | age=1186min threshold=2160min
+monitor_honcho_billing_watch.py  | OK     | age=0min threshold=5min
+monitor-honcho-health.sh         | OK     | age=153min threshold=540min
+monitor-discord-thread-archive-warnings.py | OK     | age=851min threshold=2160min
+discord-archive-stale-agent-threads.py | OK     | age=12min threshold=60min
+monitor-vps-health.py            | OK     | age=2min threshold=20min
+dtr-sb-page-health-sync.sh       | OK     | age=466min threshold=2160min
+alerts-infra-failed-alert-resolver.py | OK     | age=9min threshold=20min
+dtr-sb-daily-match-audit.sh      | OK     | age=993min threshold=2160min
+monitor-op-rate-limit.py         | OK     | age=48min threshold=2160min
+monitor-drive-auth-unified.py    | OK     | age=8min threshold=2160min
+sync-sb-sms-revenue-daily.sh     | OK     | age=927min threshold=2160min
+sync-smsfunnel-cost-daily.sh     | OK     | age=858min threshold=2160min
+monitor_hermes_pending_writes.py | OK     | age=0min threshold=5min
+finalize-hermes-structural-write.py | OK     | age=0min threshold=5min
+dtr-sb-restricted-summary.py     | OK     | age=922min threshold=2160min
+sb-restricted-transition-monitor.py | OK     | age=13min threshold=2160min
+refresh-sb-restricted-history-sheet.py | OK     | age=207min threshold=2160min
+monitor-sms-funnel-balance.py    | OK     | age=3min threshold=2160min
+monitor-sms-funnel-balance.py    | OK     | age=3min threshold=11520min
+monitor-hermes-memory-capacity.py | OK     | age=3min threshold=40min
+hermes-news-explainer-watchdog.py | OK     | age=0min threshold=5min
+hermes-context-cost-audit.py     | OK     | age=1120min threshold=2160min
+sb-broadcast-template-repair.sh  | OK     | age=6min threshold=2160min
+sb-broadcast-template-repair.sh  | OK     | age=6min threshold=60min
+sb-broadcast-template-repair.sh  | OK     | age=6min threshold=2160min
+sync-sb-messenger-revenue-sheet.py | OK     | age=910min threshold=2160min
+monitor-sb-messenger-token-invalid.py | OK     | age=0min threshold=75min
+monitor-sb-messenger-token-invalid.py | OK     | age=1402min threshold=2160min
+apps/finance-system/finance_media_spend_sync.py | OK     | canonical producer state=ok newer than log; age=924min
+apps/finance-system/finance_gam_revenue_sync.py | OK     | age=908min threshold=2160min
+apps/finance-system/finance_gam_revenue_sync.py | OK     | age=908min threshold=2160min
+finance-month-rollover.py        | OK     | age=23min threshold=2160min
+finance-readonly-health.py       | OK     | age=53min threshold=2160min
+monitor-runcloud.py              | OK     | age=82min threshold=180min
+ares/shein-daily-cron.py         | OK     | verified report receipt accounts=25; age=914min; cadence unchanged
+ares/shein-intraday-cron.py      | OK     | verified report receipt accounts=26; age=186min; cadence unchanged
+ares/shein-intraday-cron.py      | OK     | verified report receipt accounts=26; age=186min; cadence unchanged
+ares/shein-intraday-cron.py      | OK     | verified report receipt accounts=26; age=186min; cadence unchanged
+ares/shein-intraday-cron.py      | OK     | verified report receipt accounts=26; age=186min; cadence unchanged
+ares/shein-intraday-cron.py      | OK     | verified report receipt accounts=26; age=186min; cadence unchanged
+ares/shein-campaign-creation-cron.py | ERROR  | report receipt does not prove complete account coverage and verified delivery
+ares/campaign-creation-sheet-cron.py | OK     | age=1392min threshold=2160min
+monitor-portfolio-country.py     | OK     | age=35min threshold=2160min
+monitor-portfolio-country.py     | OK     | age=35min threshold=2160min
+ares/shein-campaign-creation-weekly-cron.py | WARMUP | log ausente; primeira execução age=1242min threshold=11520min path=/root/mgs-agent/logs/ares-shein-campaign-creation-weekly.log
+monitor-mattei-uptime.py         | OK     | age=0min threshold=6min
+hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked
+hermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked
+hermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked
+hermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked
+hermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked
+hermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked
+hermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked
+hermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked
+hermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked
+hermes:zeus:83b148017b4d         | OK     | Ares arquivo 30TB · reconciliação cloud; scheduler completion and delivery checked
+hermes:zeus:2ee720363d7d         | OK     | Digital Trust · planilha de pagamentos 3x/dia; scheduler completion and delivery checked
+hermes:zeus:6558be364f6f         | OK     | RunCloud agente · revisão a cada 15 dias; scheduler completion and delivery checked
+hermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked
+hermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked
+hermes:ares:528c5710269d         | OK     | Ares criativos · intake contextual autônomo; scheduler completion and delivery checked
+service:automation-continuity    | OK     | consumer phase=dispatching; open=40; durable queue readable
+problems=1 resolved=0 dry_run=1

@@ -4319,15 +4319,13 @@
     },
     {
       "agent": "zeus",
-      "authority_message_id": "1575283341404672001",
       "id": "MATTEI-UPTIME-1575283341404672001",
-      "next_step": "Cron horário no minuto 46 +47s atualiza painel e entrega transições verificadas na mesma thread; nenhum reparo, restart ou escopo privado autorizado.",
-      "objective": "Listar sites MGS nos Mattei 1/2/3 e monitorar disponibilidade pública e alcance dos servidores neste tópico, sem alterar sites/serviços.",
-      "report_infra_message_id": "1575286686609444986",
-      "source": "reports/mattei-uptime-1575283341404672001/; data/mattei-uptime-config.json; data/mattei-uptime-state.json",
-      "state": "active: 54 hosts MGS, 55 vínculos Nginx e 3 servidores; todos saudáveis nas coletas reais; painel 1575285231806578752 publicado/editado e validado por GET; 9 testes; cron horário com readback e zero colisões operacionais; watchdog OK. Primeiro tick futuro ainda não observado.",
+      "next_step": "Continuar baseline de1min na mesma thread; avisar somente transições. Lock evita sobreposição, mas ciclos prolongados podem ampliar intervalo efetivo; não garantir SLA rígido de60s.",
+      "objective": "Monitorar os mesmos54 sites MGS e3 servidores Mattei a cada minuto; decisão1575365956790652969 supersede somente a cadência horária.",
+      "source": "reports/mattei-uptime-1575283341404672001/minute-1575365956790652969/; data/mattei-uptime-config.json; Discord1575365956790652969",
+      "state": "active: cron* * * * * +47s, executor/locks únicos, painel1575285231806578752 com1min validado por get;10 testes ok;54 sites e3 servidores saudáveis;2 ticks nativos23:25/23:26est, zero outbox; watchdog360s ok; report1575367459978870866 get validado. backup/rollback preservado.",
       "thread_id": "1575283341404672001",
-      "updated_at": "2026-11-26T00:58:08+00:00"
+      "updated_at": "2026-11-26T04:28:23+00:00"
     },
     {
       "agent": "zeus",
@@ -12680,5 +12678,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T04:19:51+00:00"
+  "updated_at": "2026-11-26T04:28:23+00:00"
 }

@@ -131,7 +131,9 @@ def panel(cfg,obs,stamp):
         for domain in s['domains']:
             r=obs['site:'+domain];lines.append(f"{domain:32} {LABELS[r['status']]:12} {r.get('http',0):3}  {r.get('seconds',0):4.1f}s")
         desc='```\n'+'\n'.join(lines)+'\n```\nTCP 22/80/443: '+', '.join(k+(' aberto' if v else ' sem resposta') for k,v in host['ports'].items())
-        desc+='\nChecagem: '+stamp+' • atualização a cada 1 hora.'
+        interval=cfg.get('interval_seconds',3600)
+        cadence='1 minuto' if interval==60 else ('1 hora' if interval==3600 else str(interval)+' segundos')
+        desc+='\nChecagem: '+stamp+' • atualização a cada '+cadence+'.'
         embeds.append({'title':s['name']+' — '+str(len(s['domains']))+' vínculos MGS','description':desc,'color':3066993 if all(obs['site:'+d]['status']=='ok' for d in s['domains']) and host['status']=='ok' else 15844367})
     return {'content':'','allowed_mentions':{'parse':[]},'embeds':embeds}
 

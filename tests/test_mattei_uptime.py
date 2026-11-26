@@ -62,6 +62,16 @@ class Tests(unittest.TestCase):
         self.assertTrue(all(len(e['description'])<4096 for e in p['embeds']));self.assertLess(sum(len(e['description'])+len(e['title']) for e in p['embeds']),5800)
         for s,e in zip(cfg['servers'],p['embeds']):
             for domain in s['domains']:self.assertIn(domain,e['description'])
+    def test_minute_cadence_and_watchdog(self):
+        cfg=json.loads(m.CONFIG.read_text());self.assertEqual(cfg['schedule'],'* * * * *');self.assertEqual(cfg['interval_seconds'],60)
+        obs=json.loads(pathlib.Path('/root/mgs-agent/reports/mattei-uptime-1575283341404672001/dry-run.json').read_text())['observations']
+        self.assertTrue(all('atualização a cada 1 minuto.' in e['description'] for e in m.panel(cfg,obs,'fixture')['embeds']))
+        import ast
+        shell=pathlib.Path('/root/mgs-agent/scripts/monitor-cron-stale-logs.sh').read_text();code=shell.split("<<'PY'\n",1)[1].rsplit('\nPY',1)[0]
+        tree=ast.parse(code);fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='threshold_seconds');ns={}
+        exec(compile(ast.Module(body=[fn],type_ignores=[]),'<watchdog-function>','exec'),ns)
+        self.assertEqual(ns['threshold_seconds']('* * * * *','monitor-mattei-uptime.py'),360)
+        self.assertEqual(ns['threshold_seconds']('46 * * * *','monitor-mattei-uptime.py'),5400)
     def test_no_remote_mutations_and_no_credential_lookups(self):
         text=pathlib.Path('/root/mgs-agent/scripts/monitor-mattei-uptime.py').read_text();self.assertNotIn('sshpass',text);self.assertNotIn('systemctl restart',text);self.assertNotIn('item get',text)
 if __name__=='__main__':unittest.main()

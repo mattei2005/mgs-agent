@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "channel_id": "1575283341404672001",
+  "authority_message_id": "1575283341404672001",
+  "author_id": "963808102891798649",
+  "scope": "MGS corporate positive catalog only; external public website and direct TCP observations",
+  "schedule": "46 * * * *",
+  "timezone": "America/New_York",
+  "stagger_seconds": 47,
+  "slow_seconds": 8,
+  "servers": [
+    {
+      "name": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "domains": [
+        "app.conectageral.com",
+        "app.portalrelevante.com",
+        "conectageral.com",
+        "de.newsoun.com",
+        "dicasfinancas.info",
+        "eggbev.com",
+        "empleo.seuprimeiroempregoam.com",
+        "es.seuprimeiroempregoam.com",
+        "finance.topfeed.fun",
+        "finance.wantabrand.com",
+        "finanzas.conectageral.com",
+        "finanzas.eggbev.com",
+        "finanzas.lyzmo.com",
+        "finanzas.newsoun.com",
+        "finanzas.portalrelevante.com",
+        "finanzas.topfeed.fun",
+        "finanzas.wavesbee.com",
+        "finanzas.zuout.com",
+        "finanzas.zytiva.com",
+        "fincgriffin.com",
+        "lyzmo.com",
+        "newsoun.com",
+        "portalrelevante.com",
+        "seuprimeiroempregoam.com",
+        "topfeed.fun",
+        "wantabrand.com",
+        "wavesbee.com",
+        "zuout.com",
+        "zytiva.com"
+      ]
+    },
+    {
+      "name": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "domains": [
+        "autocreditadx.com",
+        "autolendpro.com",
+        "carcreditad.com",
+        "creditoparaveiculo.com",
+        "financiamentoautoadx.com",
+        "financiarveiculo.com",
+        "gamehubad.com",
+        "gamezonead.com",
+        "gamingadx.com"
+      ]
+    },
+    {
+      "name": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "domains": [
+        "boostingecon.com",
+        "cephyric.com",
+        "ducapes.com",
+        "escalatepower.com",
+        "finance.ducapes.com",
+        "financeadx.com",
+        "fincgriffin.com",
+        "growpowerhub.com",
+        "helixenit.net",
+        "infinitynexx.com",
+        "jobscana.com",
+        "marevelx.com",
+        "mavroa.com",
+        "vizioid.com",
+        "xyvlov.com",
+        "yolokfx.com",
+        "zyclor.com"
+      ]
+    }
+  ],
+  "limitations": [
+    "One probe location; no visual full-layout assurance",
+    "Bindings reflect active Nginx configuration, not necessarily the public DNS origin",
+    "No guest restart, no Cloudflare/DNS/config mutation",
+    "No alerts for non-MGS or private projects"
+  ],
+  "created_at": "2026-11-25T22:59:31.238681+00:00"
+}

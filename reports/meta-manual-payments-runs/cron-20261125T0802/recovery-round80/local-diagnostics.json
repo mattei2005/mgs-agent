@@ -1,0 +1,10 @@
+{
+  "read_only_discovery_errors": [
+    {"error": "sqlite3.OperationalError: no such table: operations", "recovered": true, "correction": "Inspected actual sqlite_master and requests schema; SELECT by requests.key."},
+    {"error": "sqlite3.OperationalError: no such column: operation_key", "recovered": true, "correction": "Used real requests.key from PRAGMA table_info; exact operation reconciled by canonical probe."}
+  ],
+  "database_mutations": 0,
+  "business_effects_from_errors": 0,
+  "runtime_notice": "The local handler emitted an unrestricted-mode notice; the deployed SSH wrapper preserves the existing standard-mode interactive daemon and does not forward unrestricted/bypass. Only captures and window discovery were requested; no inputs, configuration writes, updates or restarts were executed.",
+  "canonical_infrastructure_modified": false
+}

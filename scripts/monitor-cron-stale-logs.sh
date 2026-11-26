@@ -70,8 +70,11 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     # Este relatório diário teve a agenda movida entre horários distantes no
     # mesmo ciclo. Preserve dois ciclos completos antes de classificar STALE;
     # o monitor alvo continua validado separadamente por dry-run.
+    if script == 'monitor-mattei-uptime.py' and minute == '*' and hour == '*':
+        # Approved minute baseline; allow the existing bounded 300s failure cycle.
+        return 6 * 60
     if script == 'monitor-mattei-uptime.py' and minute == '46' and hour == '*':
-        # Hourly public probe + 47s stagger/300s timeout: 30-minute grace.
+        # Retained hourly rollback compatibility.
         return 90 * 60
     if script == 'monitor-gpt55-oauth-cost.sh':
         return 48 * 3600

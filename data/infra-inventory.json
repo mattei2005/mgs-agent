@@ -1431,22 +1431,27 @@
       "tests": "/root/mgs-agent/tests/test_mattei_uptime.py",
       "config": "/root/mgs-agent/data/mattei-uptime-config.json",
       "state": "/root/mgs-agent/data/mattei-uptime-state.json",
-      "schedule": "46 * * * *",
+      "schedule": "* * * * *",
+      "interval_seconds": 60,
+      "cadence_authority_message_id": "1575365956790652969",
+      "cadence_report_infra_message_id": "1575367459978870866",
+      "cadence_evidence": "/root/mgs-agent/reports/mattei-uptime-1575283341404672001/minute-1575365956790652969/",
+      "dense_baseline": "Explicit FullTech request; eight-date global inventory, unavoidable minute coincidences recorded, independent writer/locks, 47s stagger; other schedules unchanged.",
       "timezone": "America/New_York",
       "stagger_seconds": 47,
       "timeout_seconds": 300,
       "lock": "/root/mgs-agent/data/mattei-uptime-run.lock",
       "log": "/root/mgs-agent/logs/monitor-mattei-uptime.log",
-      "watchdog_threshold_seconds": 5400,
+      "watchdog_threshold_seconds": 360,
       "panel_message_id": "1575285231806578752",
       "coverage": {
         "unique_mgs_hostnames": 54,
         "nginx_server_bindings": 55,
         "servers": 3
       },
-      "validation": "9 tests passed; two real apply collections and exact panel GET/PATCH/GET validated; all 54 HTTPS and three TCP targets healthy; zero pending deliveries; native crontab readback and eight-civil-date conflict audit passed; watchdog OK at 90min tolerance. Future scheduled tick not yet observed.",
+      "validation": "10 tests passed; real dry-run 6.131s, all 54 HTTPS and three TCP targets healthy; state unchanged. Exact cron replacement/readback; two native scheduled minute ticks 25/11/2026 23:25 and 23:26 EST healthy with no pending deliveries. Eight-date inventory has zero unknown sources; dense-baseline minute coincidences recorded, not falsely classified as zero. Watchdog threshold 360s.",
       "evidence": "/root/mgs-agent/reports/mattei-uptime-1575283341404672001/",
-      "rollback": "Disable only the exact new crontab entry, preserving concurrent scheduler changes; retain script/state/evidence. Prior crontab and watchdog script preserved in evidence directory.",
+      "rollback": "Restore only the exact prior hourly cron line and backed-up monitor/config/watchdog from minute cadence evidence; preserve other scheduler changes, panel identity, observations and deliveries.",
       "limitations": "Single external probe; no full-layout visual assurance; configured binding does not prove public DNS origin; no private/non-MGS projects; no server/site mutations or restarts.",
       "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md"
     },
@@ -74808,7 +74813,7 @@
       "entry": "2 7 * * 1 /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-campaign-creation-weekly-cron.py --scheduled' >> /root/mgs-agent/logs/ares-shein-campaign-creation-weekly.log 2>&1"
     },
     {
-      "entry": "46 * * * * /usr/bin/flock -n /root/mgs-agent/data/mattei-uptime-run.lock /bin/sh -c '/bin/sleep 47; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-mattei-uptime.py >> /root/mgs-agent/logs/monitor-mattei-uptime.log 2>&1'"
+      "entry": "* * * * * /usr/bin/flock -n /root/mgs-agent/data/mattei-uptime-run.lock /bin/sh -c '/bin/sleep 47; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-mattei-uptime.py >> /root/mgs-agent/logs/monitor-mattei-uptime.log 2>&1'"
     }
   ],
   "scripts": [
