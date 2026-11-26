@@ -1,0 +1,40 @@
+{
+  "operation_key": "bda902d1fc4bc4977e52e604",
+  "mode": "resume_safe",
+  "source_key": "native:ares:69dfca2b9719",
+  "contract_hash": "4610425f0bf44091606f4b9a6cda4ed2a562d82ae4ec923f3b2e773da46e8f5a",
+  "owner": "existing_supervisor_worker",
+  "state": "reconciled_ready_to_resume",
+  "account_id": "1046241194533786",
+  "destination_thread_id": "1539832402744975450",
+  "slot": "intraday:2026-11-26:09",
+  "authority": {
+    "human_id": "344196393512075265",
+    "current_ares_access": "full",
+    "original_scope_message_id": "1539434208408375426",
+    "intraday_continuity_message_id": "1539994892674011247",
+    "intraday_preservation_message_id": "1540084519418462218",
+    "human_messages_live_get_confirmed": true,
+    "domain_gate": "ALLOWED",
+    "account_gate": "allowed=true"
+  },
+  "reconciliation": {
+    "failed_execution_id": "70b578c657d54f128cbc259e4c31bb2e",
+    "failed_execution_status": "failed",
+    "original_fire_claim": null,
+    "failure": "ChunkedEncodingError: ConnectionResetError(104)",
+    "failure_notice_message_id": "1575483008918749238",
+    "target_slot_delivery_record": "absent",
+    "target_slot_report_artifact": "absent",
+    "latest_report_slot_verified": "intraday:2026-11-26:07",
+    "foreign_target_process_found": false,
+    "pc1_required": false,
+    "partial_business_writes_found": false,
+    "latest_action_checkpoint_preserved": "2026-11-26T08:07:02.246819-03:00"
+  },
+  "completed_steps": ["authority_live_readback", "current_job_and_contract_reconciliation", "process_and_execution_reconciliation", "delivery_and_destination_reconciliation"],
+  "pending_steps": ["canonical_report_only_retry_for_same_09_slot", "exact_message_GET_and_content_hash_reconciliation", "final_receipt"],
+  "retry_policy": "one_safe_retry_with_canonical_slot_idempotency; retain_pending_on_failure",
+  "prohibited_changes": ["cron", "cadence", "campaigns", "budget", "strategy", "start_time", "credentials", "permissions", "billing", "payments", "gateway_restart"],
+  "next_action": "execute_existing_creditoparaveiculo-intraday.sh_only_while_09_SP_report_branch_applies"
+}

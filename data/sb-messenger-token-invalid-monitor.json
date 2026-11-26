@@ -30,7 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    707111,
     707327,
     707343,
     707730,
@@ -1029,7 +1028,8 @@
     773932,
     773956,
     773974,
-    774000
+    774000,
+    774178
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3251,9 +3251,9 @@
     "digital-trust|helixenit|47|203": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-20T20:05:28.000Z",
+        "created_at": "2026-11-26T12:03:53.000Z",
         "domain": "helixenit",
-        "notification_id": 762911,
+        "notification_id": 774178,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -3282,7 +3282,8 @@
         753200,
         756069,
         759527,
-        762911
+        762911,
+        774178
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -7364,25 +7365,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-26T06:57:10-05:00",
+  "last_check": "2026-11-26T07:12:16-05:00",
   "last_delivery": {
-    "at": "2026-11-25T19:12:15-05:00",
+    "at": "2026-11-26T07:12:16-05:00",
     "cursor_ids": [
-      773822,
-      773844,
-      773868,
-      773888,
-      773912,
-      773932,
-      773956,
-      773974,
-      774000
+      774178
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 774000,
+  "last_seen_id": 774178,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
