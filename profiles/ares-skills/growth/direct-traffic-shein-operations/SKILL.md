@@ -13,11 +13,13 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos e URL; renumere UTMs. Separe manual/lote/emenda. Conte ads por grupo. Usados≠referência entre contas: não invente `source_account`.
+SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos/URL; renumere UTMs. Separe manual/lote/emenda; conte ads/grupo. Usados≠`source_account`.
 
-Intake: `references/request-intake.md`; metadata/binding, não memória. Troca V1/V2/V3: `references/quiz-version-clone-delta.md` → `target_quiz_version`, nunca profile global.
+Intake metadata/binding≠memória: `references/request-intake.md`. V1/V2/V3: `references/quiz-version-clone-delta.md`; `target_quiz_version`≠profile global.
 
-QUEUED: job→predecessores. Grant ausente: paginação administrativa completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
+QUEUED→job/predecessores. Grant→paginação admin completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
+
+Feche por configured/effective de todos os ads; Engine/QA/SB não anulam reprovação.
 
 Separe autorizações/recibos de pausa, criação, omissões, ensaio e revisão: aceite de um delta não libera outro. Veja `references/forcerunstatus.md`. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
