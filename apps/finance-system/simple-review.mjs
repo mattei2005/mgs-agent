@@ -29,6 +29,12 @@ const networkId=(network,currency)=>({'SB Rede1|CAD':'rede1','Rede1|CAD':'rede1'
 // Explicit per-receipt metadata still wins; other sites/months are untouched.
 function reviewNetwork(f,a,period,currency){
  if(a?.source_network)return a.source_network;
+ // Rodolfo1575648329847799909: November-forward Fincgriffin GAM USD is Rede2.
+ // Display grouping only; preserve saved results, catalog and explicit origin metadata.
+ if(period>='2026-11'&&f.site==='Fincgriffin'&&currency==='USD'&&f.native_addition&&
+    a?.source_import_type==='gam_email_daily'&&a.currency==='USD'&&a.date===f.date&&validDate(period,a.date)&&
+    a.source_import_id?.startsWith('gam-email-'+a.date+'-')&&a.id===f.id&&a.id.startsWith(a.source_import_id+'|fincgriffin|')&&
+    /^[a-f0-9]{64}$/.test(a.source_hashes?.usd||''))return 'SB Rede2';
  if(period==='2026-09'&&f.site==='Fincgriffin'&&currency==='USD'){
   const legacy=!f.native_addition&&!a&&/^fincgriffin-principal\|US\|[1-9]$/.test(f.id)&&f.date===`2026-09-0${f.id.split('|').at(-1)}`;
   const daily=a?.source_import_type==='gam_email_daily'&&a.currency==='USD'&&a.date===f.date&&a.date>='2026-09-10'&&a.date<='2026-09-30'&&a.source_import_id?.startsWith('gam-email-'+a.date+'-')&&a.id.startsWith(a.source_import_id+'|fincgriffin|')&&/^[a-f0-9]{64}$/.test(a.source_hashes?.usd||'');

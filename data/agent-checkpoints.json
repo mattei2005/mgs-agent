@@ -6536,12 +6536,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-FINC-REDE2-1575648329847799909",
-      "next_step": "Preparar candidato isolado, testes completos, replay mensal e publicação coordenada com readback.",
+      "next_step": "Sem pendência. Aplicação automática da regra aos próximos registros comprovados da mesma origem. Não reimportar nem alterar parceiro de cálculo por inferência.",
       "objective": "Classificar receita GAM USD do Fincgriffin em Rede2 na Conferência de novembro em diante, preservando fatos e cálculos.",
-      "source": "discord:1545426987756298340/1575648329847799909",
-      "state": "rodolfo confirmou rede2 em1575648329847799909. preparação de correção somente da conferência, com origem gam validada; sem fallback universal usd para rede2.",
+      "source": "reports/finance-finc-rede2-1575648329847799909.md",
+      "state": "publicado e validado: release committed; fincgriffinusd25,91 emrede2, aviso removido; node323/python259; api e4vistas owner/geizian; cenários/ledger/histórico preservados.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-26T23:04:29+00:00"
+      "updated_at": "2026-11-26T23:35:36+00:00"
     },
     {
       "agent": "zeus",
@@ -12798,5 +12798,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T23:04:29+00:00"
+  "updated_at": "2026-11-26T23:35:36+00:00"
 }
