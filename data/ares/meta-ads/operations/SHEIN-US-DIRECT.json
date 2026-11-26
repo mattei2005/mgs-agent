@@ -1,4 +1,32 @@
 {
+  "account_delegation_repair_authorizations": {
+    "1770569568407466": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1575541274121998439",
+      "source_thread_id": "1575250902724644867",
+      "source_channel_id": "1548149654926135486",
+      "approval_prompt_message_id": "1575529467957354748",
+      "initial_request_id": "shein-1575528671647633570",
+      "execution_owner": "ares",
+      "account_id": "1770569568407466",
+      "account_name_declared": "Mavroa-US-SHEIN-ES-07-G004",
+      "business_id": "155263197283282",
+      "system_user_id": "122095869861482193",
+      "required_tasks": ["ADVERTISE", "ANALYZE"],
+      "repeat_approval_required": false,
+      "scope": "Repair delegation of this exact ad account to the existing corporate integration for the current and future separately authorized Campaign Ops requests. Preserve existing tasks and add only ADVERTISE and ANALYZE when absent. This is permission-repair authority, not automatic campaign execution.",
+      "requirements": [
+        "authenticate CEO approval and effective access in the exact origin",
+        "positive account scope and exact administrative account/business identity readback",
+        "separate provisioning identity and fully paginated assignment pre-read",
+        "persist intent and other-assignment digest before a minimal non-retried assignment POST",
+        "administrative assignment readback and access readback with original corporate credential",
+        "preserve original request, E2E clock, IDs, QA, budget, bid and campaign authority"
+      ],
+      "exclusions": ["other accounts or Pages", "MANAGE task", "ownership transfer", "credential issuance or rotation", "app permission changes", "billing", "account_spend_limit", "pixel or CAPI configuration", "automatic campaigns or recurrence"]
+    }
+  },
   "page_delegation_repair_authorizations": {
     "571515486037700": {
       "enabled": true,
