@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-11-26T11:43:39.619538+00:00",
+  "queue": {
+    "key": "79cd082a20c22a736307765f",
+    "state": "running",
+    "cause": "waiting_human",
+    "owner": "supervisor:3037231",
+    "attempts": 120,
+    "failures": 0,
+    "due": 1795692566.1958723,
+    "lease_until": 1795694443.103497
+  },
+  "owner_alive": true,
+  "heartbeat": {
+    "at": 1795693090.697007,
+    "phase": "dispatching",
+    "pid": 3037231
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "next_scheduled_consumer_check_utc": "2026-11-26T11:47:00+00:00",
+  "retry_time_not_guaranteed": true,
+  "writer_lock_free": true,
+  "lease_free_readback": true,
+  "contract_unchanged_from_preflight": true,
+  "pending_ledger_entries_still_absent": true,
+  "later_tick_gate": [
+    {
+      "key": "6373afb33275674610c06b6a",
+      "state": "waiting_human",
+      "owner": null,
+      "attempts": 5,
+      "failures": 0
+    }
+  ]
+}
