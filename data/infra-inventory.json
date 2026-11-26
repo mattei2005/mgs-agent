@@ -1190,6 +1190,19 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-payment-party-filter-1575374541897601075",
+      "agent": "zeus",
+      "type": "bounded-finance-presentation-release",
+      "authorization": "1575374541897601075",
+      "thread_id": "1575312872190382223",
+      "path": "/root/mgs-agent/apps/finance-system/private/payment-party-filter-1575374541897601075/",
+      "canonical_source": "/root/mgs-agent/docs/finance-retired-payees-oct-nov.md",
+      "code_paths": ["apps/finance-system/public/operations.js", "apps/finance-system/tests/finance-ops.test.mjs"],
+      "scope": "Hide exact personnel|150 and personnel|152 choices only in October/November2026 payment selector; preserve historical API and truthful already-selected archived context; no financial/auth changes",
+      "state": "candidate frozen;TDD17pass;stage38views;Node320pass;Python gate running under proc_de1b3914d5ab;not published",
+      "rollback": "Canonical controller exact-file backups/journal; no database migration or destructive cleanup"
+    },
+    {
       "id": "finance-pending-points-1575364424246763643",
       "agent": "zeus",
       "type": "read-only-financial-personnel-audit",

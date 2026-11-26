@@ -1,0 +1,53 @@
+{
+  "observed_at": "2026-11-26T05:15:19.455589+00:00",
+  "queue": {
+    "state": "running",
+    "owner": "supervisor:2619819",
+    "attempts": 85,
+    "failures": 0,
+    "due": 1795669829.0873792,
+    "lease_until": 1795671188.2260745
+  },
+  "queue_owner_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795669988.221795,
+    "phase": "dispatching",
+    "pid": 2619819
+  },
+  "consumer_schedule": "2-57/5 * * * *",
+  "next_native_run_at": "2026-11-26T08:02:00-05:00",
+  "fire_claim": null,
+  "writer_lock_free": true,
+  "financial_worker_processes": [],
+  "lease": {
+    "ok": true,
+    "locked": false
+  },
+  "pending_account_ids": [
+    "1034081997659047",
+    "1492168699397108",
+    "1542257646409395",
+    "1663268201836138",
+    "1754588462350629"
+  ],
+  "canonical_pending_new_account_fields": {
+    "authority_message_id": "1575016959395893258",
+    "D_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629",
+      "1770569568407466"
+    ],
+    "H_account_ids": [],
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add1-1575252034100138135/receipt.json",
+    "reason": "Preserve prior unresolved fields; new card account D needs its own historical proof, blank is not zero. H scope unchanged.",
+    "authority_by_account_id": {
+      "1770569568407466": "1575252034100138135"
+    }
+  },
+  "original_tabs_count": 6,
+  "original_tabs_preserved": true,
+  "contract_sha256_unchanged": true
+}
