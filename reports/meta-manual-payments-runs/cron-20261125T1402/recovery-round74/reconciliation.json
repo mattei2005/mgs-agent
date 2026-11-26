@@ -1,0 +1,490 @@
+{
+  "observed_at": "2026-11-26T08:27:15.946362+00:00",
+  "operation_key": "ce11800d217d22dba6a58dcc",
+  "source_key": "native:zeus:2ee720363d7d:20261125T1402:ui-missing",
+  "source": {
+    "authority_message_id": "1575022093777637377",
+    "checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
+    "closure_guard": "Complete H via existing prepared targets after pixel verification; collect only current pending D events and record through canonical helper, then final API reconcile max2 per event, independent full validation vs baseline, original tabs/lease. No old hardcoded delivery-only adapter. Current cron final delivered automatically; do not send duplicate blocked message. Future delivery only after actual missing-stage recovery; exact source occurrence key required.",
+    "completed_financial_layers": {
+      "C_G_I_J": "/root/mgs-agent/reports/meta-manual-payments-runs/20261125T140522903391",
+      "E_F": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261125T140439513709"
+    },
+    "contract_amendment_history": [
+      {
+        "authority_message_id": "1575252034100138135",
+        "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/add1-1575252034100138135/receipt.json",
+        "new_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+        "original_missing_targets_preserved": true,
+        "prior_contract_hash": "2524af68edce24fe67783c7856030c1c2bd4b4e850df1cb6dc1d31c6cf8c6386",
+        "reason": "Owner adds one card account to active recurring scope; original H35/D targets remain unchanged. New account D is tracked separately in canonical pending_new_account_fields, not duplicated here."
+      }
+    ],
+    "contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+    "h_prepare": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T140610092715",
+    "historical_D_request_key": "79cd082a20c22a736307765f",
+    "job_id": "2ee720363d7d",
+    "kind": "native",
+    "pending_H_account_ids": [
+      "1542257646409395",
+      "1062887799996139",
+      "814915838330687",
+      "1034081997659047",
+      "1498990138663094",
+      "1526280818302320",
+      "1877104513669062",
+      "2031917360813819",
+      "1419148446852410",
+      "1018267074603840",
+      "897046653487466",
+      "1754588462350629",
+      "1492168699397108",
+      "1736068407518263",
+      "536294549227786",
+      "1085117577390237",
+      "908704754163659",
+      "1753257812779707",
+      "869857549542755",
+      "4511685129081248",
+      "1744611463000838",
+      "1001115192056600",
+      "1245683183659911",
+      "1851640026221079",
+      "1663268201836138",
+      "2633813727134360",
+      "937846586033361",
+      "1829406761389732",
+      "1107653168698121",
+      "7840111366055613",
+      "781612907182683",
+      "787796726891306",
+      "1583000095650153",
+      "1600310064116258",
+      "2429758060563333"
+    ],
+    "pending_account_ids": [
+      "1001115192056600",
+      "1018267074603840",
+      "1034081997659047",
+      "1062446663435585",
+      "1062887799996139",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1419148446852410",
+      "1492168699397108",
+      "1498990138663094",
+      "1526280818302320",
+      "1542257646409395",
+      "1543098427832443",
+      "1583000095650153",
+      "1600310064116258",
+      "1663268201836138",
+      "1736068407518263",
+      "1744611463000838",
+      "1753257812779707",
+      "1754588462350629",
+      "1829406761389732",
+      "1851640026221079",
+      "1877104513669062",
+      "2031917360813819",
+      "2429758060563333",
+      "2633813727134360",
+      "4511685129081248",
+      "536294549227786",
+      "781612907182683",
+      "7840111366055613",
+      "787796726891306",
+      "814915838330687",
+      "869857549542755",
+      "897046653487466",
+      "908704754163659",
+      "937846586033361"
+    ],
+    "pending_recent_D_account_ids": [
+      "1062446663435585",
+      "1543098427832443"
+    ],
+    "pending_stage": "Only UI H35 fresh Outstanding balance and D2 new generic events, then API final reconciliation/readback. Historical D5 belong to existing request79cd082a20c22a736307765f; no duplicate executor.",
+    "profile": "zeus",
+    "resource": "pc1",
+    "scheduled_at": "2026-11-25T14:02:00-05:00",
+    "scope_guard": "Use LIVE active_tab_only account/pay_now sets on sheet794137639 only. No archive146 reads/writes, views, payments, billing, budgets, credentials, permissions, gateway restart or cron changes. Preserve same approved Chrome/Rodolfo; release lease on busy. Do not dismiss unrelated human Save As dialog. No auth gate was proved. Reconcile current native fire claim, any active queue owner, H ledger and D proofs before resuming; never duplicate a writer. Never replay funding/invoices or completed metrics. If a later native tick has collected a field, reconcile that exact proof and do not overwrite newer notes/values with this older occurrence. AMENDMENT1575252034100138135: live active scope is now52, prior51plus1770569568407466. Only original missing IDs belong to this occurrence; do not collect added account here or rewrite completed metrics. Validate exact live52 IDs and preserve all original layers, never insist on obsolete51 count. Original authority/slot/targets preserved; use latest source hash from this row, not hardcoded prior probes.",
+    "thread_id": "1563926766286803004"
+  },
+  "native_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+  "active_ids": [
+    "1307492658016080",
+    "1046241194533786",
+    "1150399088163771",
+    "1481815942722118",
+    "1062446663435585",
+    "1762774024309795",
+    "648687381127947",
+    "1635726541410028",
+    "2323706575049143",
+    "1547524853816263",
+    "1867022354284742",
+    "1414197490675732",
+    "1543098427832443",
+    "2852476828464907",
+    "1770569568407466",
+    "1290644206529750",
+    "1772267146710748",
+    "1542257646409395",
+    "1062887799996139",
+    "814915838330687",
+    "1034081997659047",
+    "1498990138663094",
+    "1526280818302320",
+    "1877104513669062",
+    "2031917360813819",
+    "1419148446852410",
+    "1018267074603840",
+    "897046653487466",
+    "1754588462350629",
+    "1492168699397108",
+    "1736068407518263",
+    "536294549227786",
+    "1085117577390237",
+    "908704754163659",
+    "1753257812779707",
+    "869857549542755",
+    "4511685129081248",
+    "1744611463000838",
+    "1001115192056600",
+    "1245683183659911",
+    "1851640026221079",
+    "1663268201836138",
+    "2633813727134360",
+    "937846586033361",
+    "1829406761389732",
+    "1107653168698121",
+    "7840111366055613",
+    "781612907182683",
+    "787796726891306",
+    "1583000095650153",
+    "1600310064116258",
+    "2429758060563333"
+  ],
+  "h_targets": [
+    "1542257646409395",
+    "1062887799996139",
+    "814915838330687",
+    "1034081997659047",
+    "1498990138663094",
+    "1526280818302320",
+    "1877104513669062",
+    "2031917360813819",
+    "1419148446852410",
+    "1018267074603840",
+    "897046653487466",
+    "1754588462350629",
+    "1492168699397108",
+    "1736068407518263",
+    "536294549227786",
+    "1085117577390237",
+    "908704754163659",
+    "1753257812779707",
+    "869857549542755",
+    "4511685129081248",
+    "1744611463000838",
+    "1001115192056600",
+    "1245683183659911",
+    "1851640026221079",
+    "1663268201836138",
+    "2633813727134360",
+    "937846586033361",
+    "1829406761389732",
+    "1107653168698121",
+    "7840111366055613",
+    "781612907182683",
+    "787796726891306",
+    "1583000095650153",
+    "1600310064116258",
+    "2429758060563333"
+  ],
+  "pending_H_account_ids": [
+    "1542257646409395",
+    "1062887799996139",
+    "814915838330687",
+    "1034081997659047",
+    "1498990138663094",
+    "1526280818302320",
+    "1877104513669062",
+    "2031917360813819",
+    "1419148446852410",
+    "1018267074603840",
+    "897046653487466",
+    "1754588462350629",
+    "1492168699397108",
+    "1736068407518263",
+    "536294549227786",
+    "1085117577390237",
+    "908704754163659",
+    "1753257812779707",
+    "869857549542755",
+    "4511685129081248",
+    "1744611463000838",
+    "1001115192056600",
+    "1245683183659911",
+    "1851640026221079",
+    "1663268201836138",
+    "2633813727134360",
+    "937846586033361",
+    "1829406761389732",
+    "1107653168698121",
+    "7840111366055613",
+    "781612907182683",
+    "787796726891306",
+    "1583000095650153",
+    "1600310064116258",
+    "2429758060563333"
+  ],
+  "pending_recent_D_account_ids": [
+    "1062446663435585",
+    "1543098427832443"
+  ],
+  "H_current_ledger_proofs": {
+    "1542257646409395": {
+      "amount": "269.81",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:08:04.359485-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1542257646409395-receipt.json"
+    },
+    "1062887799996139": {
+      "amount": "372.26",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:08:26.346453-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1062887799996139-receipt.json"
+    },
+    "814915838330687": {
+      "amount": "452.68",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:08:48.985385-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/814915838330687-receipt.json"
+    },
+    "1034081997659047": {
+      "amount": "525.27",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:09:12.827177-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1034081997659047-receipt.json"
+    },
+    "1498990138663094": {
+      "amount": "585.79",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:09:34.035210-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1498990138663094-receipt.json"
+    },
+    "1526280818302320": {
+      "amount": "645.01",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:09:55.320348-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1526280818302320-receipt.json"
+    },
+    "1877104513669062": {
+      "amount": "628.68",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:11:07.099880-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1877104513669062-receipt.json"
+    },
+    "2031917360813819": {
+      "amount": "656.77",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:11:29.392660-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/2031917360813819-receipt.json"
+    },
+    "1419148446852410": {
+      "amount": "785.55",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:11:51.169392-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1419148446852410-receipt.json"
+    },
+    "1018267074603840": {
+      "amount": "1158.27",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:12:14.880865-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1018267074603840-receipt.json"
+    },
+    "897046653487466": {
+      "amount": "1272.00",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:12:33.987328-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/897046653487466-receipt.json"
+    },
+    "1754588462350629": {
+      "amount": "1296.94",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:12:53.394321-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1754588462350629-receipt.json"
+    },
+    "1492168699397108": {
+      "amount": "1544.55",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:14:17.357738-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1492168699397108-receipt.json"
+    },
+    "1736068407518263": {
+      "amount": "1368.34",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:14:38.533458-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1736068407518263-receipt.json"
+    },
+    "536294549227786": {
+      "amount": "1726.86",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:14:59.669533-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/536294549227786-receipt.json"
+    },
+    "1085117577390237": {
+      "amount": "2069.72",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:15:24.160874-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1085117577390237-receipt.json"
+    },
+    "908704754163659": {
+      "amount": "2429.55",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:15:47.627213-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/908704754163659-receipt.json"
+    },
+    "1753257812779707": {
+      "amount": "2539.34",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:16:11.322603-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1753257812779707-receipt.json"
+    },
+    "869857549542755": {
+      "amount": "3984.92",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:17:21.142806-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/869857549542755-receipt.json"
+    },
+    "4511685129081248": {
+      "amount": "5366.49",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:17:43.553420-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/4511685129081248-receipt.json"
+    },
+    "1744611463000838": {
+      "amount": "5156.37",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:18:05.267596-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1744611463000838-receipt.json"
+    },
+    "1001115192056600": {
+      "amount": "6583.86",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:18:27.861225-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1001115192056600-receipt.json"
+    },
+    "1245683183659911": {
+      "amount": "9112.61",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:18:55.708960-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1245683183659911-receipt.json"
+    },
+    "1851640026221079": {
+      "amount": "9643.48",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:19:21.294042-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1851640026221079-receipt.json"
+    },
+    "1663268201836138": {
+      "amount": "18448.81",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:20:38.284543-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1663268201836138-receipt.json"
+    },
+    "2633813727134360": {
+      "amount": "18210.57",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:20:59.821683-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/2633813727134360-receipt.json"
+    },
+    "937846586033361": {
+      "amount": "24949.53",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:21:21.122923-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/937846586033361-receipt.json"
+    },
+    "1829406761389732": {
+      "amount": "26444.95",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:21:43.082165-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1829406761389732-receipt.json"
+    },
+    "1107653168698121": {
+      "amount": "35035.37",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:22:06.774560-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1107653168698121-receipt.json"
+    },
+    "7840111366055613": {
+      "amount": "43688.51",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:22:27.628339-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/7840111366055613-receipt.json"
+    },
+    "781612907182683": {
+      "amount": "49224.88",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:23:44.042813-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/781612907182683-receipt.json"
+    },
+    "787796726891306": {
+      "amount": "49121.35",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:24:10.023643-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/787796726891306-receipt.json"
+    },
+    "1583000095650153": {
+      "amount": "113275.39",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:24:32.998792-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1583000095650153-receipt.json"
+    },
+    "1600310064116258": {
+      "amount": "169641.78",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:24:54.215182-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/1600310064116258-receipt.json"
+    },
+    "2429758060563333": {
+      "amount": "180178.75",
+      "source": "accounts_list_outstanding_balance",
+      "read_at": "2026-11-25T21:25:16.898154-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261125T210446176383/2429758060563333-receipt.json"
+    }
+  },
+  "D_current_ledger_proofs": {
+    "1062446663435585": {
+      "read_at": "2026-11-25T08:31:36.459431-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/d/1062446663435585-receipt.json"
+    },
+    "1543098427832443": {
+      "read_at": "2026-11-25T08:39:03.364479-05:00",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/d/1543098427832443-receipt.json"
+    }
+  },
+  "h_receipts_present": [],
+  "h_verified_account_ids": [],
+  "financial_workers": [],
+  "writer_lock_free": true,
+  "queue_owner": "supervisor:2863795",
+  "queue_state": "running",
+  "consumer_heartbeat": {
+    "at": 1795681391.8280787,
+    "phase": "dispatching",
+    "pid": 2863795
+  },
+  "next_run_at": "2026-11-26T08:02:00-05:00",
+  "historical_D_queue": [
+    {
+      "key": "79cd082a20c22a736307765f",
+      "state": "waiting_resource",
+      "owner": null,
+      "due": 1795681864.5004292
+    }
+  ]
+}
