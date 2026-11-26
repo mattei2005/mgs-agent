@@ -1190,6 +1190,20 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-general-spend-1575319781027090473",
+      "agent": "zeus",
+      "type": "read-only-financial-audit",
+      "authorization": "1575319781027090473",
+      "thread_id": "1575312872190382223",
+      "path": "/root/mgs-agent/apps/finance-system/private/general-spend-audit-1575319781027090473/",
+      "report": "/root/mgs-agent/reports/finance-general-spend-1575319781027090473.md",
+      "checkpoint": "ZEUS-FINANCE-GENERAL-1575319781027090473",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
+      "scope": "October01-31 and November01-24; all queryable financial accounts/sites/five managers; Geizian October805044.73→790559.98 bridge",
+      "result": "audit_completed; October source exact; saved attribution verified both months; November source delta USD+67.11/BRL-7.785261 in53fields proposed only; financial writes0;20UIviews;13372DOMcells;326scenarios/ledger preserved apart from authorized automaticFX",
+      "rollback": "No production code/config/financial write; private evidence retained, no destructive cleanup; skill patch is documentation only"
+    },
+    {
       "id": "zeus-finance-usd-display-1575226305702797474",
       "checkpoint_metadata_repair": {
         "path": "data/agent-checkpoints.json",
