@@ -6507,6 +6507,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-GENERAL-1575319781027090473",
+      "next_step": "Concluir coleta, snapshot DB e atribuição independente; reconstruir histórico de FX/comissãoJoe/ledger e validar APIs/telas; sem alterações financeiras",
+      "objective": "Auditar todas contas/sites/gestores outubro inteiro e novembro ate ultimo dia fechado; reconciliar saldo Geizian aproximado805mil→790mil",
+      "source": "discord:1575319781027090473;apps/finance-system/private/general-spend-audit-1575319781027090473/",
+      "state": "in_progress_read_only;collectorproc_82cc3d6a24ce;nenhuma autorização financeira de correção",
+      "thread_id": "1575312872190382223",
+      "updated_at": "2026-11-26T01:19:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-GROWPOWER-G004-1563528749830377524",
       "next_step": "Nenhum passo pendente; preservar decisao no rollover canonico, sem copiar realizado nem reclassificar receita do dominio",
       "objective": "Vincular Growpowerhub US SHEIN EN G004 e recuperar fechamento23/10",
@@ -12630,5 +12640,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T00:58:08+00:00"
+  "updated_at": "2026-11-26T01:19:39+00:00"
 }
