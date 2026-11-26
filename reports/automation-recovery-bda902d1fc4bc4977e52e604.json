@@ -4,7 +4,8 @@
   "source_key": "native:ares:69dfca2b9719",
   "contract_hash": "4610425f0bf44091606f4b9a6cda4ed2a562d82ae4ec923f3b2e773da46e8f5a",
   "owner": "existing_supervisor_worker",
-  "state": "reconciled_ready_to_resume",
+  "state": "completed_validated",
+  "final_receipt": "/root/mgs-agent/reports/automation-recovery-bda902d1fc4bc4977e52e604-final.json",
   "account_id": "1046241194533786",
   "destination_thread_id": "1539832402744975450",
   "slot": "intraday:2026-11-26:09",
@@ -33,8 +34,8 @@
     "latest_action_checkpoint_preserved": "2026-11-26T08:07:02.246819-03:00"
   },
   "completed_steps": ["authority_live_readback", "current_job_and_contract_reconciliation", "process_and_execution_reconciliation", "delivery_and_destination_reconciliation"],
-  "pending_steps": ["canonical_report_only_retry_for_same_09_slot", "exact_message_GET_and_content_hash_reconciliation", "final_receipt"],
+  "pending_steps": [],
   "retry_policy": "one_safe_retry_with_canonical_slot_idempotency; retain_pending_on_failure",
   "prohibited_changes": ["cron", "cadence", "campaigns", "budget", "strategy", "start_time", "credentials", "permissions", "billing", "payments", "gateway_restart"],
-  "next_action": "execute_existing_creditoparaveiculo-intraday.sh_only_while_09_SP_report_branch_applies"
+  "next_action": "independent_supervisor_verification_of_final_receipt; do_not_replay_report_or_clear_scheduler_error_manually"
 }

@@ -1,0 +1,48 @@
+{
+  "operation_key": "bda902d1fc4bc4977e52e604",
+  "status": "completed_validated",
+  "slot": "intraday:2026-11-26:09",
+  "verified_at": "2026-11-26T07:14:21.068798-05:00",
+  "canonical_wrapper_return_code": 0,
+  "artifact": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20261126T121323Z.json",
+  "artifact_sha256": "4a9bd4dcdb9cf5a5a39cf50b57c8e4c8fc1f623227f5f38d2b8a2d4b1d6ef5d2",
+  "campaigns": 10,
+  "parts": 3,
+  "messages": [
+    {
+      "message_id": "1575484681128771659",
+      "channel_id": "1539832402744975450",
+      "author_id": "1508864261504630925",
+      "http_status": 200,
+      "sha256": "fb54154296811d3c11c74ae68d4070ef2307ab96ad075351b6d1b62632383a63",
+      "verified": true
+    },
+    {
+      "message_id": "1575484689777561701",
+      "channel_id": "1539832402744975450",
+      "author_id": "1508864261504630925",
+      "http_status": 200,
+      "sha256": "9c62f02b16bd592c5bf5a76812439cd8fbda95f81aa40d6fc887f07e2cafcd79",
+      "verified": true
+    },
+    {
+      "message_id": "1575484692097146921",
+      "channel_id": "1539832402744975450",
+      "author_id": "1508864261504630925",
+      "http_status": 200,
+      "sha256": "b5e33152ffa46a198214b12d0c09a9aba65e3f91bc8f2d4da0164ff0745a9375",
+      "verified": true
+    }
+  ],
+  "replay_test": {
+    "suppressed_duplicate": true,
+    "GET_verified": true,
+    "POST_forbidden_sentinel_passed": true,
+    "delivery_state_unchanged": true
+  },
+  "campaign_writes": 0,
+  "action_checkpoint_unchanged": true,
+  "schedule_contract_hash_unchanged": true,
+  "source_job_historical_error_preserved": "error",
+  "pending_steps": []
+}
