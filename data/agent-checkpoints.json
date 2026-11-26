@@ -2983,12 +2983,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1575528671647633570",
-      "next_step": "Owner deve liberar conta exata a integracao corporativa existente. Apos confirmacao, repetir GET, reconciliar cadastro tecnico somente da conta por evidencia viva e retomar mesmo request no runner central. Nao trocar credenciais nem permissao por inferencia.",
+      "next_step": "Retomar mesmo input central apos janela de quota, readback-only primeiro bundle sem replay, concluir terceiro/QA/ativacao e cadastro SB. Preservar request/IDs/relogio e autoridade original Joe.",
       "objective": "Duplicar C001 tres vezes na Mavroa07 G004 para agora herdando budget e lance vivos",
-      "source": "data/ares/meta-ads/audit/shein-1575528671647633570-preflight.json",
-      "state": "external_access_blocked: get corporativo da conta1770569568407466 http403 meta200 por acesso ads_management/ads_read nao concedido; registro engine/profile ausente; zero writes de campanha",
+      "source": "data/ares/meta-ads/audit/shein-1575528671647633570-maintenance/maintenance-verification.json",
+      "state": "acesso restaurado por grant ceo duravel; get corporativo200. cadastro pure_clone reconciliado e dry-run aprovado; primeiro bundle2 criado paused com4ads, readback diferido por development_access, mesmo request. fonte70usd/dia,costcap0.90. terceira campanha pendente.",
       "thread_id": "1575250902724644867",
-      "updated_at": "2026-11-26T15:11:22+00:00"
+      "updated_at": "2026-11-26T16:07:04+00:00"
     },
     {
       "agent": "ares",
@@ -12698,5 +12698,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T15:11:23+00:00"
+  "updated_at": "2026-11-26T16:07:04+00:00"
 }
