@@ -8998,6 +8998,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1575391863991701665",
+      "next_step": "Perguntar somente se autoriza suspender recuperacao automatica antiga sem alterar campanhas/anuncios. Com aceite autenticado: seguir locks e AccountWriterLeaseStore.release; reconciliar audit atual de falha pre-admissao sem efeitos; dry-run e execute central no mesmo request, preservar relogio e QA. Sem aceite nao liberar lease nem repetir execute.",
+      "objective": "Duplicar C143 tres vezes na Yolokfx06 G003; USD100 por campanha; COCAP USD0.90; 26/11/2026 04:00 America/New_York.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575391863991701665/request.json",
+      "state": "aguardando decisao sobre suspensao da recuperacao anterior shein-1575012965613178921. novo pedido autenticado e dry_run_ok, fonte c143 active, fonte cap70; manifest novos alvos cap90 e budget10000. execute interrompido antes do writer por writerleaseconflict; audit failed lanes vazio e sem checkpoint atual. get anterior: pais c161/c162/c163 active, os nove ad ids originais archived. nao restaurar, reativar nem concluir pedido anterior por inferencia. parametros originais preservados no mesmo intake.",
+      "thread_id": "1558127055282110526",
+      "updated_at": "2026-11-26T06:08:07+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-all36-approved-compact-20261019T233015",
       "next_step": "Sem pendencias. Proximos relatorios SHEIN usam compact_identity_standard automaticamente;BUsobrebudgetvigenteneverinicial,reconciliar antesfinalrender. Consultar completion/latest-deliveries;nao reenviar nem excluir outros historicos sempedido.",
       "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;corrigir BU com budget vigente e explicar na legenda",
@@ -12678,5 +12688,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T05:26:51+00:00"
+  "updated_at": "2026-11-26T06:08:08+00:00"
 }
