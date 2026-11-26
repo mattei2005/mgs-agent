@@ -10799,12 +10799,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Reconcile newer PC1 ledger and all existing owners before read. D pending derives from this final API collection; never require archive proof. Retain original historical D timestamps unless a new event is proved. Max two reconciliations per event. Do not rewrite older H evidence over this newer H35. Complete only missing UI D with visual instrument evidence and same-ID/BM URL proof; final API must have pending_ui empty. Compare financial source-to-live and full frozen sheets against baseline. Source-thread blocker is delivered by cron final only; do not repeat it. Existing supervisor owns recovery and any later verified delivery.",
-      "objective": "Refresh 25nov21:02ET somente52 ativos Contas com saldo; D pendente por roteamento de janela nativa no PC1",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/closure-receipt.json",
-      "state": "c/g/i/j52 atualizados e validados21:28et; e/f outubro30 invoices usd417864.11. h35 outstanding balance coletados21:08–21:25 via uia, pixels+ax, publicados com readback e horas próprias. d9 pendentes da api final; d5 históricos em pedido anterior. save as humano preservado; navegação ax caiu na janela alheia antes de enter. sem gate meta demonstrado. seis abas originais e search vazio restaurados; arquivo146/base/sheet1 integralmente intactos; lease livre; nenhum pagamento/billing.",
+      "next_step": "Human must authenticate Meta passkey in approved Rodolfo Chrome PC1. Existing supervisor must first read-only verify same browser/BM and native dialogs; no automated credential/passkey input. Reconcile all newer receipts and native claim before resuming only H34 missing and D9 current events, plus separately governed historical D. Preserve H1 original time, all API/invoice writes, archived146/base/Sheet1, same cron and sole writer. Do not repeat successful financial phases. After UI proof, final API reconciliation max twice per event and full source-to-live/frozen-sheet validation. No payments, billing, credential, permission, restart or job changes. No duplicate blocker notice; this occurrence notice is cron-final-only.",
+      "objective": "Refresh 26nov08:02ET somente ativos Contas com saldo; concluir H/D após passkey Meta",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261126T0802/closure-receipt.json",
+      "state": "c/g/i/j52 atualizados08:11et e e/f outubro30 invoices usd417864.11 validados. h1 financeadx-us-cc-en-01 outstanding balance269.81 lido08:07et publicado; outros34h preservados históricos. d9 pendentes atuais; histórico d separado. gate passkey meta real em rodolfo chrome business_id correto, ax+pixels após reload único de erro técnico. inputs interrompidos; save as alheio preservado. seis abas originais e arquivo146/base/sheet1 intactos; lease livre; nenhum pagamento/billing. report-infra pendente por restrição de envio cron.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-26T02:30:50+00:00"
+      "updated_at": "2026-11-26T13:13:18+00:00"
     },
     {
       "agent": "zeus",
@@ -12688,5 +12688,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T06:36:20+00:00"
+  "updated_at": "2026-11-26T13:13:18+00:00"
 }
