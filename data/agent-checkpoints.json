@@ -372,6 +372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1575591632391110697",
+      "next_step": "Executar mesmos IDs cada30min nesta origem; preservar coorte fixa, snapshots e recibos idempotentes; sem descoberta futura/edicoes; expirar27nov00hEST antes API; sem writes Meta/SB",
+      "objective": "CPR e ROI cada30min ate fim26nov campanhas criadas hoje Yolokfx04 G004",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1575591632391110697/manifest.json",
+      "state": "active_finite_schedule_verified: 319320321322; inicial14h21est get confirmado 4campanhas sem gasto/resultados; 20testes+3baseline; 19slots14h46a23h46est; expira27nov00h; jobc482b46f4ac3 enabled noagent local; prepos semconflito; reportinfra get",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-26T19:24:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -4980,6 +4990,16 @@
       "state": "fonte e horario emendados por nicolas1575250760680079392 no mesmo request/relogio; antigos005-014 permanecem historico de cancelamento anterior. novos ids10campanhas014-023,10conjuntos20ads criados e qa renderizada10/10 com cobertura integral. user_age_unknown restaurado somente nos10alvos, fonte preservada, get verificado. budgetusd25cada/250lote,cost_cap90minor e inicio26/11/2026 00:04newyork confirmados em todos pais/conjuntos. ativacao bloqueada pela meta:19adsdisapproved,1with_issues2490468avaliacao_rejeitada;20adspaused,10campanhaspaused.5ads feedbackspam. runneractivation_pending com media_postprocess_complete true. nenhuma nova copia/retry de ativacao apos constatacao.10utm_campaign+10utm_adgroup cadastradassbhttp201/gaminsertok, igualdade literal confirmada,getindependente indisponivel. jobreview_decision_required,foreground/maintenance_hold;mesmosids e selos.",
       "thread_id": "1558134405313200150",
       "updated_at": "2026-11-25T21:13:38+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-1575591947580608625",
+      "next_step": "Nenhum novo write autorizado; aguardar processamento e analise externos Meta. Cadastro SB concluido, nao repetir POST.",
+      "objective": "Duplicar uma vez C010 na Growpowerhub 04 para agora, herdando orçamento e lance.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575591947580608625/completion-receipt.json",
+      "state": "c011 criada e habilitada active, usd60/dia, cost_cap usd0.90, 2 anuncios com qa renderizado; 1 pending_review e 1 in_process na leitura final. recuperacao sem recriar ids; sb utm_campaign e utm_adgroup http201 gaminsert ok; reconferencia independente sb indisponivel.",
+      "thread_id": "1558131550028173345",
+      "updated_at": "2026-11-26T19:24:48+00:00"
     },
     {
       "agent": "ares",
@@ -12758,5 +12778,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T19:10:12+00:00"
+  "updated_at": "2026-11-26T19:24:48+00:00"
 }
