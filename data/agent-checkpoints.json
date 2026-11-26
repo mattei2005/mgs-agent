@@ -2983,12 +2983,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1575528671647633570",
-      "next_step": "Retomar mesmo input central apos janela de quota, readback-only primeiro bundle sem replay, concluir terceiro/QA/ativacao e cadastro SB. Preservar request/IDs/relogio e autoridade original Joe.",
+      "next_step": "Pedido concluido; nao repetir criacao, ativacao ou cadastro SB. Proximos pedidos equivalentes consultam autorizacao canonica da conta sem nova pergunta, com preread/readback. Entrega e performance nao foram aferidas por Insights.",
       "objective": "Duplicar C001 tres vezes na Mavroa07 G004 para agora herdando budget e lance vivos",
-      "source": "data/ares/meta-ads/audit/shein-1575528671647633570-maintenance/maintenance-verification.json",
-      "state": "acesso restaurado por grant ceo duravel; get corporativo200. cadastro pure_clone reconciliado e dry-run aprovado; primeiro bundle2 criado paused com4ads, readback diferido por development_access, mesmo request. fonte70usd/dia,costcap0.90. terceira campanha pendente.",
+      "source": "data/ares/meta-ads/audit/shein-1575528671647633570-final.json",
+      "state": "complete: c002/c003/c004,3campanhas,6ads active por get;70usd/dia cada,total210usd/dia,cap0.90usd,contaativa280usd/dia;qa3/3,ids preservados;sb201 ambaschaves gamok. grant rodolfo1575541274121998439 aplicado e duravel somente conta1770569568407466;fonte preservada;ressalva flags opcionais age/gender omitidas;posts novos;atraso e2e preservado. sem reconferencia independente sb disponivel.",
       "thread_id": "1575250902724644867",
-      "updated_at": "2026-11-26T16:07:04+00:00"
+      "updated_at": "2026-11-26T16:18:32+00:00"
     },
     {
       "agent": "ares",
@@ -12698,5 +12698,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T16:07:04+00:00"
+  "updated_at": "2026-11-26T16:18:32+00:00"
 }
