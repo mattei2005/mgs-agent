@@ -18,4 +18,4 @@ Mudançavisualnovembro+nãoalteroucontrato:regraativapisoBRL3000,7% abaixoBRL100
 
 Direçãoparadebate:semanter7%/10%,definir nominalmenteemUSDopisoemetaqueaciona10%,comcompetênciainicialexplícitae semretroagiroutubroporinferência. Validar receita/resultadobaseemUSD,arredondamentodelançamentos/moedaoriginal,comportamentodopiso eefeitosnosgestoresantesdeaplicação. ValoresUSD,vigência,manutençãodospercentuais eeventualtratamentodosaldoshistóricos ainda não foramconfirmados;nenhumamudançadepolíticaaplicada.
 
-Estado:ponto1auditadocomachadovisual/aguardandoautorização decorreção;ponto2emdiscussão/aguardandoparâmetros. Sem es­critasfinanceiras,deploy,restart,cron,credencialoupermissão neste turno.
+Estado supersedido para execução: Rodolfo1575374541897601075 autorizou a correção visual,publicada/validada eencerrada semescritafinanceira. Fonteatual:`docs/finance-retired-payees-oct-nov.md`;evidência:`reports/finance-retired-payees-1575374541897601075.md`. Este relatório preserva a auditoria anterioràcorreção. Ponto1concluído;ponto2permaneceemdiscussão,semparâmetrosaprovados.

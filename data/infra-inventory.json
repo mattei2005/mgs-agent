@@ -1199,7 +1199,9 @@
       "canonical_source": "/root/mgs-agent/docs/finance-retired-payees-oct-nov.md",
       "code_paths": ["apps/finance-system/public/operations.js", "apps/finance-system/tests/finance-ops.test.mjs"],
       "scope": "Hide exact personnel|150 and personnel|152 choices only in October/November2026 payment selector; preserve historical API and truthful already-selected archived context; no financial/auth changes",
-      "state": "candidate frozen;TDD17pass;stage38views;Node320pass;Python gate running under proc_de1b3914d5ab;not published",
+      "state": "completed_validated;releasecommitted;Node320/Python259;stage38+production38views;threeactivehashesverified;326scenarios40historyrowsledgeridenticalunderlocks;sessionclosed;no financial/auth changes",
+      "report": "/root/mgs-agent/reports/finance-retired-payees-1575374541897601075.md",
+      "learning": "mgs-finance-dashboard/SKILL.md: bounded retired choice rendering with truthful historical selection",
       "rollback": "Canonical controller exact-file backups/journal; no database migration or destructive cleanup"
     },
     {
@@ -1210,8 +1212,8 @@
       "thread_id": "1575312872190382223",
       "path": "/root/mgs-agent/apps/finance-system/private/pending-points-1575364424246763643/",
       "report": "/root/mgs-agent/reports/finance-pending-points-1575364424246763643.md",
-      "result": "Gustavo/Rafael archived inactive zero due in October/November, no matching payments; absent active staff list but still present in Payments beneficiary selector. UI1440/390 confirmed; owner session closed; no financial writes. Point2 USD targets undefined, not applied.",
-      "next_step": "Owner approval for bounded presentation repair; discuss USD floor/10percent target/effective month without automatic policy change"
+      "result": "Initial audit confirmed Gustavo/Rafael archived/inactive/zero due with names still offered in Payments. Superseded execution status: bounded visual fix1575374541897601075 published and validated, no financial/auth writes. Point2 USD targets remain undefined and not applied.",
+      "next_step": "Point1 closed; discuss USD floor/10percent target/effective month only after parameters and financial policy are explicitly confirmed"
     },
     {
       "id": "finance-general-spend-1575319781027090473",

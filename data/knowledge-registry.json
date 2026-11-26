@@ -11744,6 +11744,24 @@
       "updated_at": "2026-09-28T17:28:17+00:00"
     },
     {
+      "canonical_key": "finance.ui.retired-payee-options.oct-nov-2026",
+      "canonical_source": "docs/finance-retired-payees-oct-nov.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-26T05:26:51+00:00",
+      "id": "FINANCE-RETIRED-PAYEE-UI-1575374541897601075",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pagamentos: ocultar dois beneficiários excluídos em outubro/novembro2026 sem apagar histórico",
+      "updated_at": "2026-11-26T05:26:51+00:00"
+    },
+    {
       "canonical_key": "finance-system.review-conference-ux",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -18343,5 +18361,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T21:53:02+00:00"
+  "updated_at": "2026-11-26T05:26:51+00:00"
 }

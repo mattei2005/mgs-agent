@@ -6766,12 +6766,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-PENDING-1575364424246763643",
-      "next_step": "Consumir gates Node/Python do mesmo candidato;publicação canônica combackup e fingerprint soblocks;validarHTTPS seminterceptação,encerrar sessão eREPORT-INFRA",
-      "objective": "Publicar somente remoção visual dos dois beneficiários em outubro/novembro",
-      "source": "docs/finance-retired-payees-oct-nov.md;apps/finance-system/private/payment-party-filter-1575374541897601075/manifest.json;discord:1575374541897601075",
-      "state": "candidate_frozen;tddred2→green17;stage38viewsall7identitiespluscontrols;dependency0;fullgatesrunningproc_de1b3914d5ab;no production changes yet",
+      "next_step": "Ponto1 encerrado,não reaplicar/não excluir dados. Ponto2: discutir e confirmar piso/meta nominalUSD,percentuais e vigência antes de qualquer mudança financeira.",
+      "objective": "Ponto1 correção visual dos beneficiários encerrada;ponto2 metasUSD separado",
+      "source": "docs/finance-retired-payees-oct-nov.md;reports/finance-retired-payees-1575374541897601075.md;apps/finance-system/private/payment-party-filter-1575374541897601075/acceptance.json",
+      "state": "point1_completed_validated:approval1575374541897601075,releasecommitted;node320/python259;stage38prod38;326scenarios40historyledgeridentical;hashes3verified;sessionclosed;point2notapplied",
       "thread_id": "1575312872190382223",
-      "updated_at": "2026-11-26T05:04:44+00:00"
+      "updated_at": "2026-11-26T05:26:51+00:00"
     },
     {
       "agent": "zeus",
@@ -7096,12 +7096,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-USD-NOV-1575226305702797474",
-      "next_step": "Publicação encerrada. Pontos1e2agora no checkpointZEUS-FINANCE-PENDING-1575364424246763643:ponto1auditado comvestígio visual emPagamentos,correção nãoaplicada;ponto2discussãoUSDsemparâmetrosaprovados.",
-      "objective": "ApresentaçãoUSD/CAD novembro+concluída;fila1e2retomada separadamente",
-      "source": "docs/finance-november-display-currencies.md;reports/finance-usd-display-1575226305702797474.md;apps/finance-system/private/usd-display-1575226305702797474/acceptance.json;reports/finance-pending-points-1575364424246763643.md",
-      "state": "completed_validated;no currency-policy financial change",
+      "next_step": "Somente ponto2 permanece:discutir piso/meta nominalUSD,percentuais evigência. Ponto1 concluído no checkpointZEUS-FINANCE-PENDING-1575364424246763643;nenhuma exclusão adicional pendente.",
+      "objective": "ApresentaçãoUSD/CAD concluída;vestígioGustavo/Rafael encerrado;metasUSD ainda separadas",
+      "source": "docs/finance-november-display-currencies.md;docs/finance-retired-payees-oct-nov.md;reports/finance-usd-display-1575226305702797474.md;reports/finance-retired-payees-1575374541897601075.md",
+      "state": "completed_validated;currency display published and bounded payee visual fix1575374541897601075 also completed;no monetary policy change",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-26T04:19:51+00:00"
+      "updated_at": "2026-11-26T05:26:51+00:00"
     },
     {
       "agent": "zeus",
@@ -12678,5 +12678,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T05:04:44+00:00"
+  "updated_at": "2026-11-26T05:26:51+00:00"
 }
