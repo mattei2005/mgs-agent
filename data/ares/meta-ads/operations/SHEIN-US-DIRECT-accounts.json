@@ -884,21 +884,24 @@
     {
       "account_id": "1770569568407466",
       "name": "Mavroa-US-SHEIN-ES-07-G004",
-      "name_source": "user_declared_not_live_verified",
+      "name_source": "live_meta_verified",
       "manager_code": "G004",
       "manager_name": "Joe",
       "manager_discord_id": "1214246869484576890",
       "channel_id": "1548149654926135486",
       "channel_name": "shein-g004",
       "creation_thread_id": "1575250902724644867",
-      "engine_registered": false,
-      "registered_modes": [],
-      "single_clone_runtime_enabled": false,
-      "account_prerequisite_status": "DOCUMENTED_PENDING_LIVE_PREFLIGHT",
+      "engine_registered": true,
+      "registered_modes": ["pure_clone"],
+      "single_clone_runtime_enabled": true,
+      "account_prerequisite_status": "LIVE_SOURCE_READY",
       "source_message_id": "1575250902724644867",
       "scope_source": "data/ares/discord/thread-scopes/1575250902724644867.json",
       "asset_scope_allowed": true,
-      "meta_identity_readback_performed": false
+      "meta_identity_readback_performed": true,
+      "currency": "USD",
+      "timezone_name": "America/New_York",
+      "account_delegation_authority_message_id": "1575541274121998439"
     }
   ],
   "last_scoped_reconciliation": {

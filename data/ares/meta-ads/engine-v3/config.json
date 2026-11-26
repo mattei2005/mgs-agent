@@ -132,6 +132,91 @@
   "audit_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit",
   "media_registry": "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json",
   "accounts": {
+    "1770569568407466": {
+      "account_id": "1770569568407466",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-07-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1770569568407466",
+        "account_name": "Mavroa-US-SHEIN-ES-07-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb07",
+        "utm_medium": "g004-s",
+        "destination_base": "https://mavroa.com/quiz/us/sh2-g004/",
+        "page_id": "717431928129946",
+        "instagram_user_id": "17841415113559417",
+        "pixel_id": "1001283201270967",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "52616757565849",
+        "reference_campaign_number": 1,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein-1575528671647633570-maintenance/source-live.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "source_definition_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
     "1481815942722118": {
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Eggbev-US-CC-EN-03",
