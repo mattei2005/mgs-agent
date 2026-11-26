@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-11-26T13:31:45.578257+00:00",
+  "queue": {
+    "key": "6373afb33275674610c06b6a",
+    "state": "running",
+    "cause": "original_writer_active",
+    "owner": "supervisor:3140463",
+    "lease_until": 1795700888.6855795,
+    "due": 1795699091.8508582,
+    "attempts": 8,
+    "failures": 0
+  },
+  "owner_alive": true,
+  "writer_free": true,
+  "lease_free": true,
+  "ledger_hashes": {
+    "D": "53c64bbcf5b99dd1f3ea647a71f782a3b6ae144a15236c80468cc368aa513f3c",
+    "H": "0d19e190938997593675dc07654d227631a62094039ca3a540e51ee491247b8d"
+  },
+  "ledger_unchanged_during_probe": true
+}
