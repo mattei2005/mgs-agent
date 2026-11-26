@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-11-26T05:48:48.883657+00:00",
+  "operation_key": "ce11800d217d22dba6a58dcc",
+  "queue_record": {
+    "key": "ce11800d217d22dba6a58dcc",
+    "source_key": "native:zeus:2ee720363d7d:20261125T1402:ui-missing",
+    "state": "running",
+    "owner": "supervisor:2670096",
+    "due": 1795671797.8816571,
+    "failures": 0
+  },
+  "supervisor_alive": true,
+  "heartbeat": {
+    "at": 1795671783.8587935,
+    "phase": "dispatching",
+    "pid": 2670096
+  },
+  "lease_free": true,
+  "business_writes": 0,
+  "queue_mutations": 0,
+  "checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round58/recovery-evidence.json",
+  "manifest_sealed_after_validation_process_exit": true,
+  "note": "Earlier evidence-sha256.json was generated while validation-execution.log was still open; this post-exit seal is authoritative for final file hashes."
+}
