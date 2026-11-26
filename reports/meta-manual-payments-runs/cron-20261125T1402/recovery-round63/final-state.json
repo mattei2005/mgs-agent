@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-11-26T06:38:49.107732+00:00",
+  "queue": {
+    "key": "ce11800d217d22dba6a58dcc",
+    "source_key": "native:zeus:2ee720363d7d:20261125T1402:ui-missing",
+    "state": "running",
+    "owner": "supervisor:2777240",
+    "due": 1795674847.4203584,
+    "failures": 0
+  },
+  "supervisor_alive": true,
+  "consumer_heartbeat": {
+    "at": 1795674786.1502764,
+    "phase": "dispatching",
+    "pid": 2777240
+  },
+  "writer_free": true,
+  "lease_free": true,
+  "business_complete": false,
+  "delivery_complete": false,
+  "business_writes": 0,
+  "pending_recent_D_account_ids": [
+    "1062446663435585",
+    "1543098427832443"
+  ],
+  "pending_H_account_ids": [],
+  "next_step": "Existing supervisor owns resource backoff. Preserve human Save As dialog; no input until desktop available. Reconcile owners and exact D2 receipts before canonical missing-stage recovery; do not reopen later waiting_human occurrence or replay completed financial layers."
+}
