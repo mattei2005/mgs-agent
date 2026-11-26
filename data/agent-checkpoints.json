@@ -8999,12 +8999,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1575391863991701665",
-      "next_step": "Pedir somente aceite da nova omissao de comentarios no anuncio inline_comment. Com aceite, gerar binding/receipt request-specific pelo mecanismo reviewed_copy_omissions e validar autoridade. Revalidar elegibilidade atual; ativar status-only somente ads autorizados sem issues, manter todos afetados PAUSED e pais sem elegiveis PAUSED; nao usar runner para ativacao integral, nao reattach/toggle/recriar. Depois readback exato, SB e fechamento parcial honesto. Preservar IDs, manifest, clock e provas.",
-      "objective": "Duplicar C143 tres vezes na Yolokfx06 G003; USD100/dia cada; COCAP USD0.90; 26/11/2026 04:00 America/New_York; gestao seletiva autorizada 1575395136484016250.",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575391863991701665/selective-qa-block-receipt.json",
-      "state": "aceite seletivo 1575395136484016250 autenticado por get e permissao live. preflight status-only sem writes: frescor mudou desde pergunta. get 06:23:08 utc: c164/c165/c166 e nove ads paused; 5 ads with_issues 1487083 (todos 3 c164, ad1 e ad3 c166), 4 ads sem issues retornadas. qa semantico fresco bloqueou por omissao inline_comment nos 9 creatives; sem valor explicitamente alterado/default novo. nao ha grant de omissao deste request. nenhum intent ou post status enviado. budget10000 e cap90/04h preservados. sb ainda nao cadastrado. aceite seletivo nao foi revogado; nao pedir outra autorizacao para os mesmos status.",
+      "next_step": "Nenhuma acao adicional autorizada. Nao consultar/enviar revisao, repetir ativacao, reassociar ou recriar anuncios. Preservar estado existente e aguardar novo pedido explicito; nao reabrir esta pendencia automaticamente.",
+      "objective": "Duplicacao C143 em C164/C165/C166; USD100/dia cada, COCAP USD0.90, 26/11/2026 04h New York; preservar resultado parcial sem nova intervencao.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575391863991701665/completion-receipt.json",
+      "state": "decisao final do operador 1575399683013083138: nao precisa, em resposta somente a oferta de verificar disponibilidade de revisao dos cinco anuncios rejeitados. mensagem autenticada por get, autor432898782188011543, origem1558127055282110526. revisao nao solicitada nem enviada; nenhum write meta/sb nesta decisao. ultimo readback preservado:3 campanhas active; c164 com0 ads ativos/3 paused, c165 com3 active, c166 ad2 active/ad1 ead3 paused; total4 active e5 desabilitados meta2490468. nao confundir recusa de revisao com ordem de pausar/excluir campanhas ou sucesso integral. budget100/cap0.90/26nov04h preservados; sb cadastrado2x201 gaminsert ok; lease livre; recuperacoes automaticas suspensas e historico mantido.",
       "thread_id": "1558127055282110526",
-      "updated_at": "2026-11-26T06:23:35+00:00"
+      "updated_at": "2026-11-26T06:36:20+00:00"
     },
     {
       "agent": "ares",
@@ -12688,5 +12688,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T06:23:35+00:00"
+  "updated_at": "2026-11-26T06:36:20+00:00"
 }
