@@ -1,0 +1,120 @@
+{
+  "operation_key": "79cd082a20c22a736307765f",
+  "source_key": "native:zeus:2ee720363d7d:20261125T0802:historical-d",
+  "mode": "probe_only",
+  "status": "waiting_resource",
+  "cause": "pc1_save_as_dialog_present_preserved",
+  "observed_at": "2026-11-26T11:03:56.469199+00:00",
+  "authority_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/authority-readback.json",
+  "reconciliation_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/reconciliation.json",
+  "sheet_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/sheet-readback.json",
+  "final_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/final-state.json",
+  "native_contract_hash": "d5a6d274c446ed023710223f25d8c149737300e3de60ee43be1d0244b5229f60",
+  "scope": {
+    "sheet_id": 794137639,
+    "active_account_count": 52,
+    "exact_live_ids_verified": true,
+    "pending_account_ids": [
+      "1034081997659047",
+      "1492168699397108",
+      "1542257646409395",
+      "1663268201836138",
+      "1754588462350629"
+    ],
+    "pending_stage": "D historical explicit Paid card instrument proofs ONLY",
+    "new_account_D_separate_not_adopted": "1770569568407466",
+    "archived_accounts_excluded": true
+  },
+  "visual_readback": {
+    "inspected_with": "vision_analyze",
+    "approved_accounts_access_confirmed": true,
+    "business_id_visible_in_url": "155263197283282",
+    "business_name_not_proven_in_pixels": true,
+    "profile_Rodolfo_confirmed_in_AX": true,
+    "profile_name_not_visible_in_pixels": true,
+    "authentication_gate_on_approved_surface": false,
+    "page_error_on_approved_surface": false,
+    "native_save_as_dialog_confirmed": true,
+    "native_authentication_dialog_demonstrated": false,
+    "dialog_preserved": true,
+    "desktop_available_not_proven": true,
+    "human_currently_present_not_proven": true,
+    "original_tabs_count": 6,
+    "original_tabs_preserved": true,
+    "captures": {
+      "approved-vision": {
+        "pid": 18704,
+        "window_id": 983880,
+        "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/approved-retry-vision.png",
+        "width": 2558,
+        "height": 1390
+      },
+      "save-dialog-0-vision": {
+        "pid": 251988,
+        "window_id": 1179890,
+        "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T0802/recovery-round118/save-dialog-0-retry-vision.png",
+        "width": 1184,
+        "height": 711
+      }
+    }
+  },
+  "continuity": {
+    "observed_at": "2026-11-26T11:03:56.469199+00:00",
+    "queue": {
+      "key": "79cd082a20c22a736307765f",
+      "state": "running",
+      "cause": "waiting_human",
+      "owner": "supervisor:3004217",
+      "attempts": 118,
+      "failures": 0,
+      "due": 1795690120.3544893,
+      "lease_until": 1795692041.521673
+    },
+    "owner_alive": true,
+    "heartbeat": {
+      "at": 1795690689.8173056,
+      "phase": "dispatching",
+      "pid": 3004217
+    },
+    "consumer_schedule": "2-57/5 * * * *",
+    "next_scheduled_consumer_check_utc": "2026-11-26T11:07:00+00:00",
+    "writer_lock_free": true,
+    "lease_free_readback": true,
+    "contract_unchanged_from_preflight": true,
+    "pending_ledger_entries_still_absent": true,
+    "later_tick_gate_preserved": [
+      {
+        "key": "6373afb33275674610c06b6a",
+        "state": "waiting_human",
+        "owner": null,
+        "attempts": 3,
+        "failures": 0
+      }
+    ]
+  },
+  "side_effects": {
+    "input_actions": 0,
+    "tabs_created": 0,
+    "tabs_closed": 0,
+    "sheet_writes": 0,
+    "meta_writes": 0,
+    "payments": 0,
+    "billing_changes": 0,
+    "cron_changes": 0,
+    "business_delivery_messages": 0,
+    "queue_mutations": 0,
+    "canonical_infrastructure_modified": false,
+    "local_diagnostic_artifacts_only": true
+  },
+  "local_diagnostic_error": {
+    "kind": "sqlite_column_lookup",
+    "error": "no such column: operation_key",
+    "resolved": "PRAGMA confirmed primary key column key; same read succeeded; no writes"
+  },
+  "auth_ready": false,
+  "auth_ready_reason_not_emitted": "Accounts access does not remove preserved native Save As desktop gate. No resumption authorized in probe_only.",
+  "next_step": "Existing supervisor retains ownership/backoff. Revalidate same windows without input; preserve Save As. Only after resource gate cleared may existing authorized executor collect the same five D proofs. No financial phase replay or duplicate delivery.",
+  "business_complete": false,
+  "delivery_complete": false,
+  "independent_closure_not_claimed": true
+}
