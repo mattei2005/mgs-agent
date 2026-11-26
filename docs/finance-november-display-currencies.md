@@ -49,3 +49,7 @@ Rodolfo `1575238236975014088` pediu concluir este trabalho antes de:
 
 1. Verificar vestígios de **Gustavo - Gestor** e **Rafael - Gestor** em outubro e novembro, após as exclusões que ele informou ter feito. Auditoria inicialmente somente leitura; não apagar histórico ou inferir autorização para nova exclusão, credencial ou permissão.
 2. Discutir metas de remuneração fixadas em USD em lugar da base atual. Não alterar piso, patamares, percentuais ou vigência durante a mudança de apresentação; os parâmetros da futura política ainda precisam ser definidos e confirmados.
+
+### Retomada dos pontos — Rodolfo1575364424246763643
+
+Ponto1 auditado em produção, outubro/novembro: Gustavo e Rafael estão arquivados/inativos, com devido zero e sem lançamentos dessas contrapartes nos dois meses. Não aparecem na lista ativa de funcionários, mas ainda aparecem no seletor de beneficiários de Pagamentos. Correção visual proposta, não aplicada; preservar histórico e movimentos legítimos, sem nova exclusão de dados. Ponto2 permanece em discussão: ainda não há valores nominais USD, vigência ou mudança de percentuais aprovados. Evidência e continuidade: `reports/finance-pending-points-1575364424246763643.md`, checkpoint `ZEUS-FINANCE-PENDING-1575364424246763643`. Esta atualização supersede somente o status anterior de que nenhum dos pontos havia sido iniciado.

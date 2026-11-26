@@ -1190,6 +1190,17 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-pending-points-1575364424246763643",
+      "agent": "zeus",
+      "type": "read-only-financial-personnel-audit",
+      "authorization": "1575364424246763643",
+      "thread_id": "1575312872190382223",
+      "path": "/root/mgs-agent/apps/finance-system/private/pending-points-1575364424246763643/",
+      "report": "/root/mgs-agent/reports/finance-pending-points-1575364424246763643.md",
+      "result": "Gustavo/Rafael archived inactive zero due in October/November, no matching payments; absent active staff list but still present in Payments beneficiary selector. UI1440/390 confirmed; owner session closed; no financial writes. Point2 USD targets undefined, not applied.",
+      "next_step": "Owner approval for bounded presentation repair; discuss USD floor/10percent target/effective month without automatic policy change"
+    },
+    {
       "id": "finance-general-spend-1575319781027090473",
       "agent": "zeus",
       "type": "read-only-financial-audit",

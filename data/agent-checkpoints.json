@@ -6767,6 +6767,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-PENDING-1575364424246763643",
+      "next_step": "Rodolfo decide correção visual delimitada sem apagar histórico;depois definir piso/meta nominalUSD,vigência e percentuais antes de qualquer alteração financeira",
+      "objective": "Retomar pontos1Gustavo/Rafael e2metasUSD após término daDash",
+      "source": "reports/finance-pending-points-1575364424246763643.md;apps/finance-system/private/pending-points-1575364424246763643/ui-proof.json;docs/finance-november-display-currencies.md",
+      "state": "point1_audited_readonly:oct2222/nov1022,archived/inactive/zero due,no matching ledger;not active staff but remainspaymentsoptions;api/dom1440/390pass,sessionclosed;point2usdparametersnotapproved",
+      "thread_id": "1575312872190382223",
+      "updated_at": "2026-11-26T04:19:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-PERSISTENT-SESSION-1555568204607135796",
       "next_step": "Usuários com abas anteriores devem atualizar uma vez; nenhuma publicação pendente.",
       "objective": "Login persistente para todos e atualização automática segura preservando contexto.",
@@ -7088,12 +7098,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-USD-NOV-1575226305702797474",
-      "next_step": "Alteração da Dash concluída. Pontos 1 e 2 permanecem para a sequência: verificar Gustavo/Rafael outubro-novembro em leitura e discutir metas USD; nenhum deles foi executado ou aplicado nesta entrega. Prioridade reafirmada por Rodolfo1575312764178796636.",
-      "objective": "Concluir alteração de apresentação USD/CAD da Dash desde novembro/2026",
-      "source": "docs/finance-november-display-currencies.md;reports/finance-usd-display-1575226305702797474.md;apps/finance-system/private/usd-display-1575226305702797474/acceptance.json;discord-report:1575313446390472786",
-      "state": "completed_validated",
+      "next_step": "Publicação encerrada. Pontos1e2agora no checkpointZEUS-FINANCE-PENDING-1575364424246763643:ponto1auditado comvestígio visual emPagamentos,correção nãoaplicada;ponto2discussãoUSDsemparâmetrosaprovados.",
+      "objective": "ApresentaçãoUSD/CAD novembro+concluída;fila1e2retomada separadamente",
+      "source": "docs/finance-november-display-currencies.md;reports/finance-usd-display-1575226305702797474.md;apps/finance-system/private/usd-display-1575226305702797474/acceptance.json;reports/finance-pending-points-1575364424246763643.md",
+      "state": "completed_validated;no currency-policy financial change",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-26T00:58:08+00:00"
+      "updated_at": "2026-11-26T04:19:51+00:00"
     },
     {
       "agent": "zeus",
@@ -12670,5 +12680,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T03:32:40+00:00"
+  "updated_at": "2026-11-26T04:19:51+00:00"
 }
