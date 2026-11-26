@@ -15,6 +15,14 @@ metadata:
 
 Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct.
 
+## Explain a verified defect before seeking repair approval
+
+When Rodolfo says he already deleted an item, distinguish **his completed deletion**, **any remaining financial effect**, and **a stale name still offered by the interface**. Acknowledge the confirmed deletion first; do not imply that he needs to delete it again. Name the exact screen/control that still shows it and state whether any amount is affected.
+
+Keep completed investigation separate from proposed repair. If the checks already finished, say so; explain the remaining change in plain terms rather than asking to investigate again. If he asks what needs doing or says he did not understand, change the explanation to one concrete before/after example, not another repetition of the same approval question. Bind any necessary approval to that exact interface change and its preserved values/history. After approval, execute that scope without reopening the decision.
+
+For retired-beneficiary diagnosis, selector rendering and historical-selection regression tests, use **Vestígios visuais de beneficiários removidos** in `references/payments-approvals-nicolas-pilot.md`.
+
 **Mandatory model route — Rodolfo `1550907143975075893`, extended-context decision `1550942971023593605`:** every task about the MGS financial dashboard, the finance-system application, or a directly related finance-dashboard workflow must run on `openai-codex/gpt-6-astra-900k`. The suffix is a Hermes opt-in alias and is stripped before the request; resolve its effective window from the authenticated Codex catalog and cap it at the live `max_context_window` (currently 872,000 for the MGS subscription), never at a stale hardcoded 900,000 or the direct-API 1,050,000 window. Thread `1545426987756298340` is permanently finance-scoped and must resolve to extended-context Astra even after a session reset or stale `/model` override. New finance threads must be recognized from their topic/title or current request before the agent is built. Validate the resolved model and live context window on the real turn; never change Zeus's global model merely to satisfy this route.
 
 **Dependency-only security maintenance — Rodolfo1556897466652037131:** load `references/dependency-patch-release.md` before targeted npm dependency updates. Isolate the dependency tree, prove exact lock delta and security regression, run both full gates, and use a separately reviewed exact-file bootstrap retaining the canonical release locks/journal/rollback; never widen the permanent `node_modules` gate or install over active code.
