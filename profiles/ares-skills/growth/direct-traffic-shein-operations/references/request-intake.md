@@ -19,6 +19,12 @@ Use ao converter pedidos naturais em input do runner comum. Para mídia, autorid
 
 Casos de conferência antes do writer: ordem singular → uma cópia; repetição adicional após conclusão → novo request e mesma fonte indicada; consulta de sucesso → somente leitura; retomada explícita → mesmo request/IDs; budget/lance omitidos → herança viva, sem transportar overrides do lote anterior. Não converter esses casos em autorização de repetição automática.
 
+#### Resolver binding sem arquivo individual da thread
+
+Se `data/ares/discord/thread-scopes/<thread_id>.json` não existir, busque o ID literal da thread em `context/ares-operational-map.md` e leia somente a seção correspondente. Confronte a conta ali vinculada com o registro exato de `SHEIN-US-DIRECT-accounts.json`, selecionado por `account_id`, e exija concordância do canal pai e da partição. A ausência do arquivo individual não invalida um vínculo institucional já registrado; tampouco o título da thread ou o histórico do gestor substituem esse vínculo. Não procure a thread recursivamente em todos os objetos do catálogo de contas: o catálogo pode guardar o canal pai sem guardar os IDs das threads. Depois da resolução, execute o checker da conta, leia somente sua writer lease e os artefatos do request atual, autentique a origem e deixe o runner validar identidade/saúde e permissões live antes do write. Se as fontes canônicas divergirem ou não resolverem uma conta única, interrompa a admissão e esclareça somente o alvo, sem escolher pela memória nem criar um novo binding por inferência.
+
+Conferência dessa resolução: arquivo individual ausente + seção exata e catálogo concordantes permite seguir aos gates; título ou memória divergentes não mudam a conta; pai/partição divergentes impedem o write; nenhuma fonte positiva única exige esclarecer o alvo. Esses casos verificam a admissão, não comprovam acesso Meta ou campanha criada.
+
 ### Pedido em anexo e complemento curto da fonte
 
 1. Quando o pedido vier em um documento anexado, autentique por GET a mensagem original, seu autor/origem e a metadata do anexo; leia o arquivo real recebido. `message.content` vazio é válido nesse formato e não significa pedido ausente. Preserve separadamente o corpo Discord literal e o texto do documento, pois substituir um pelo outro quebra a conferência posterior de autoridade.

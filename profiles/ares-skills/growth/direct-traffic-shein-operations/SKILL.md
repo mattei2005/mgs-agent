@@ -15,7 +15,7 @@ metadata:
 
 SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos/URL; renumere UTMs. Separe manual/lote/emenda; conte ads/grupo. Usados≠`source_account`.
 
-Intake metadata/binding≠memória: `references/request-intake.md`. V1/V2/V3: `references/quiz-version-clone-delta.md`; `target_quiz_version`≠profile global.
+Duplicação curta e binding: `references/request-intake.md` primeiro. Quiz: `references/quiz-version-clone-delta.md`; `target_quiz_version`≠profile global.
 
 QUEUED→job/predecessores. Grant→paginação admin completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
