@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-11-26T06:18:21.220947+00:00",
+  "operation_key": "ce11800d217d22dba6a58dcc",
+  "queue": {
+    "key": "ce11800d217d22dba6a58dcc",
+    "source_key": "native:zeus:2ee720363d7d:20261125T1402:ui-missing",
+    "state": "running",
+    "owner": "supervisor:2721296",
+    "due": 1795673602.2865171,
+    "failures": 0
+  },
+  "queue_transition_owner": "existing supervisor",
+  "consumer_heartbeat": {
+    "at": 1795673586.7691453,
+    "phase": "dispatching",
+    "pid": 2721296
+  },
+  "lease_free": true,
+  "writer_free": true,
+  "business_complete": false,
+  "delivery_complete": false,
+  "checkpoint": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/recovery-round61/recovery-evidence.json"
+}
