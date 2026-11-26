@@ -40,7 +40,7 @@ Textos livres e provas originais não são reescritos para inventar moedas. Camp
 - Checkpoint: `ZEUS-FINANCE-USD-NOV-1575226305702797474`.
 - Pacote isolado: `apps/finance-system/private/usd-display-1575226305702797474/`.
 - Release `usd-display-1575226305702797474` publicado pelo controlador canônico, estado `committed`. Gates atuais: Node 318/318 e Python 259/259, sem skips; stage com 148 vistas, 220 controles Decimal e canários de precisão/edição. Readback imediato preservou os 326 cenários, ledger e auditoria financeira.
-- A validação HTTPS final está em andamento; conclusão somente após seu recibo, logout da sessão de teste, inventário e REPORT-INFRA.
+- Concluído e validado em produção: 148 vistas HTTPS, 218 controles Decimal, 28 recusas esperadas por escopo e 19 destinos por hash. Sessão temporária encerrada com replay do token original recusado. Inventário e REPORT-INFRA `1575313446390472786` lidos de volta. Evidência final: `reports/finance-usd-display-1575226305702797474.md`.
 - Nenhuma migração monetária, transferência bancária ou lançamento financeiro produtivo integra este pacote.
 
 ## Fila posterior, separada desta publicação

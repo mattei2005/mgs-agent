@@ -2,17 +2,6 @@
   "checkpoints": [
     {
       "agent": "zeus",
-      "id": "MATTEI-UPTIME-1575283341404672001",
-      "report_infra_message_id": "1575286686609444986",
-      "objective": "Listar sites MGS nos Mattei 1/2/3 e monitorar disponibilidade pública e alcance dos servidores neste tópico, sem alterar sites/serviços.",
-      "state": "active: 54 hosts MGS, 55 vínculos Nginx e 3 servidores; todos saudáveis nas coletas reais; painel 1575285231806578752 publicado/editado e validado por GET; 9 testes; cron horário com readback e zero colisões operacionais; watchdog OK. Primeiro tick futuro ainda não observado.",
-      "next_step": "Cron horário no minuto 46 +47s atualiza painel e entrega transições verificadas na mesma thread; nenhum reparo, restart ou escopo privado autorizado.",
-      "source": "reports/mattei-uptime-1575283341404672001/; data/mattei-uptime-config.json; data/mattei-uptime-state.json",
-      "thread_id": "1575283341404672001",
-      "authority_message_id": "1575283341404672001"
-    },
-    {
-      "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
       "next_step": "Encerrado o último ciclo autorizado; nenhuma próxima data ou recorrência. Zero pendências operacionais.",
       "objective": "Rotina finita de aquecimento dos quatro perfis autorizados; zero comentários",
@@ -4320,6 +4309,18 @@
     },
     {
       "agent": "zeus",
+      "authority_message_id": "1575283341404672001",
+      "id": "MATTEI-UPTIME-1575283341404672001",
+      "next_step": "Cron horário no minuto 46 +47s atualiza painel e entrega transições verificadas na mesma thread; nenhum reparo, restart ou escopo privado autorizado.",
+      "objective": "Listar sites MGS nos Mattei 1/2/3 e monitorar disponibilidade pública e alcance dos servidores neste tópico, sem alterar sites/serviços.",
+      "report_infra_message_id": "1575286686609444986",
+      "source": "reports/mattei-uptime-1575283341404672001/; data/mattei-uptime-config.json; data/mattei-uptime-state.json",
+      "state": "active: 54 hosts MGS, 55 vínculos Nginx e 3 servidores; todos saudáveis nas coletas reais; painel 1575285231806578752 publicado/editado e validado por GET; 9 testes; cron horário com readback e zero colisões operacionais; watchdog OK. Primeiro tick futuro ainda não observado.",
+      "thread_id": "1575283341404672001",
+      "updated_at": "2026-11-26T00:58:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B001-4 por B001-5 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
@@ -7067,12 +7068,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-USD-NOV-1575226305702797474",
-      "next_step": "Python gate proc_9ac337467f95 em candidate/private/usd-v3-gates. Node318 PASS; stage-v3 148 vistas+220 controles Decimal+canários precisão PASS. Gerar manifesto/backup e publicar; QA HTTPS e readback financeiro; inventário/REPORT. Depois: auditoria readonly Gustavo/Rafael outubro-novembro e proposta metas USD.",
-      "objective": "Concluir USD/CAD novembro+; depois auditar ex-gestores e discutir metas USD",
-      "source": "docs/finance-november-display-currencies.md;apps/finance-system/private/usd-display-1575226305702797474/stage-v3/proof.json;apps/finance-system/private/usd-display-1575226305702797474/stage-v3/decimal-proof.json;discord:1575238236975014088",
-      "state": "node_and_stage_pass_python_gate_running_no_production_deployment",
+      "next_step": "Alteração da Dash concluída. Pontos 1 e 2 permanecem para a sequência: verificar Gustavo/Rafael outubro-novembro em leitura e discutir metas USD; nenhum deles foi executado ou aplicado nesta entrega. Prioridade reafirmada por Rodolfo1575312764178796636.",
+      "objective": "Concluir alteração de apresentação USD/CAD da Dash desde novembro/2026",
+      "source": "docs/finance-november-display-currencies.md;reports/finance-usd-display-1575226305702797474.md;apps/finance-system/private/usd-display-1575226305702797474/acceptance.json;discord-report:1575313446390472786",
+      "state": "completed_validated",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-25T22:48:51+00:00"
+      "updated_at": "2026-11-26T00:58:08+00:00"
     },
     {
       "agent": "zeus",
@@ -12629,5 +12630,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-25T22:48:51+00:00"
+  "updated_at": "2026-11-26T00:58:08+00:00"
 }
