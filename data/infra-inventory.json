@@ -1189,6 +1189,7 @@
     }
   ],
   "runtime_artifacts": [
+    {"id": "finance-geizian-settlement-1575565232510738474", "agent": "zeus", "type": "financial_settlement_and_payment_note", "status": "completed_verified", "authority": "1575565232510738474", "evidence": "/root/mgs-agent/reports/finance-geizian-settlement-1575565232510738474.md", "artifact_dir": "/root/mgs-agent/apps/finance-system/private/geizian-settlement-1575565232510738474", "ledger_id": "84ca409f-e4da-4c64-a1fb-7dfab3993930", "audit_ids": ["8261", "8262"], "verification": {"balance_cents": 0, "status": "Conferido", "browser_views": 4, "scenarios_unchanged": true, "other_ledger_rows_unchanged": true, "idempotent": true, "bank_transfers_executed_by_agent": 0}, "updated_at": "2026-11-26T17:42:14.793116+00:00"},
     {
       "id": "autopush-index-lock-recovery-ae6dff3c0d514b3f8976d1a2",
       "agent": "zeus",
