@@ -41,7 +41,7 @@ QA antigo não basta: confira issues e recursos de toda a coorte antes do aceite
 
 Relatório com complemento só termina após reconciliar remotamente ambos, inclusive em conta única: conferir partes, intents, resumo e ordem pelos IDs exatos, não apenas o `COMPLETE` do adaptador. Receita em `references/canonical-report-renderer.md`, seção `Resumo complementar persistido por conta`.
 
-Usar ROI real no dia fechado; quantidade isolada recebe só número e unidade. Complementos preservam coorte, snapshot e colunas não alteradas. Dias atípicos exigem comparação histórica, não inferência pelo último dia. Receita em `references/smartbidding-product-analysis.md`.
+ROI real no dia fechado; quantidade isolada: só número/unidade. Complementos preservam snapshot/colunas. Ranking multidata exige intervalo inclusivo e QA campanha × dia; seguir `references/smartbidding-product-analysis.md`, seção de ranking.
 
 ## Pedidos concorrentes e comunicação — regra permanente
 

@@ -362,6 +362,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-ROI-1575576678325813283",
+      "next_step": "Executar mesmo wrapper e job na coorte fixa, manter pausadas; expirar27nov00hEST antesAPI; recuperar somente camada faltante sem reenviar inicial; nao alterar enrollment Intraday anterior",
+      "objective": "CPR e ROI cada30min ate fim26nov Mavroa07 G004 campanhas criadas hoje ate pedido",
+      "source": "data/ares/meta-ads/state/cpr-roi-updates/1575576678325813283/manifest.json",
+      "state": "active_finite_schedule_verified; 7 campanhas001–007; inicial13h23est get; 20testes+3baseline; replay wrapper preservado; 21slots13h43–23h43est; job5523072dfc4b enabled noagent local; auditoria prepos sem conflito; reportinfra get; zero writes meta/sb",
+      "thread_id": "1575250717093011567",
+      "updated_at": "2026-11-26T18:27:56+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-UPDATES-1567630190232739864",
       "next_step": "Enviar todos os CPR acumulados a cada30min nesta origem, mesmo sem threshold; expirar05/11/2026 00:00 EST antes de API; retomar somente camadas/slots incompletos",
       "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
@@ -12738,5 +12748,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T18:11:32+00:00"
+  "updated_at": "2026-11-26T18:27:56+00:00"
 }
