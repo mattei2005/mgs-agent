@@ -10771,12 +10771,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Existing supervisor resumes only this occurrence missing H/D after PC1 dialog/surface revalidation and native-claim reconciliation; preserve all published layers, later receipts, archive and same job.",
-      "objective": "Refresh25nov14:02ET somente51ativos Contas com saldo; coleta UI pendente por diálogo humano no PC1",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T1402/closure-receipt.json",
-      "state": "c/g/i/j51 atualizados14:05et e e/f outubro30 usd417864.11 validados. h35 históricos preservados integralmente, sem coleta nova. d2 novos eventos pendentes; d5 históricos já na fila anterior. pc1 com save as humano preservado e adblock ativo na janela aprovada; sem gate de autenticação demonstrado. arquivo146/base/sheet1 integralmente intactos; nenhuma cobrança/billing; lease livre.",
+      "next_step": "Reconcile newer PC1 ledger and all existing owners before read. D pending derives from this final API collection; never require archive proof. Retain original historical D timestamps unless a new event is proved. Max two reconciliations per event. Do not rewrite older H evidence over this newer H35. Complete only missing UI D with visual instrument evidence and same-ID/BM URL proof; final API must have pending_ui empty. Compare financial source-to-live and full frozen sheets against baseline. Source-thread blocker is delivered by cron final only; do not repeat it. Existing supervisor owns recovery and any later verified delivery.",
+      "objective": "Refresh 25nov21:02ET somente52 ativos Contas com saldo; D pendente por roteamento de janela nativa no PC1",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261125T2102/closure-receipt.json",
+      "state": "c/g/i/j52 atualizados e validados21:28et; e/f outubro30 invoices usd417864.11. h35 outstanding balance coletados21:08–21:25 via uia, pixels+ax, publicados com readback e horas próprias. d9 pendentes da api final; d5 históricos em pedido anterior. save as humano preservado; navegação ax caiu na janela alheia antes de enter. sem gate meta demonstrado. seis abas originais e search vazio restaurados; arquivo146/base/sheet1 integralmente intactos; lease livre; nenhum pagamento/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-25T19:08:44+00:00"
+      "updated_at": "2026-11-26T02:30:50+00:00"
     },
     {
       "agent": "zeus",
@@ -12660,5 +12660,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-26T02:21:26+00:00"
+  "updated_at": "2026-11-26T02:30:50+00:00"
 }
