@@ -281,5 +281,10 @@ class CurrentIndexLockContinuityTests(RepeatedIndexLockContinuityTests):
     alert_id = '1574619607724072962'
 
 
+class November26IndexLockContinuityTests(RepeatedIndexLockContinuityTests):
+    operation_key = 'ae6dff3c0d514b3f8976d1a2'
+    alert_id = '1575450070235619379'
+
+
 if __name__ == '__main__':
     unittest.main()
