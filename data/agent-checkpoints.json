@@ -3062,6 +3062,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1575742680510500915",
+      "next_step": "Validar e executar cada fonte sequencialmente no Engine central; QA readback final e cadastro SB",
+      "objective": "Duplicar 3 vezes cada uma das 12 fontes solicitadas na Yolokfx08 G006, USD45 por copia, 27 novembro 2026 00h41 ET",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575742680510500915/aggregate.json",
+      "state": "intake autenticado; 36 copias solicitadas; usd1620 diarios; fontes 071 101 023 022 099 020 105 120 040 085 088 095; sem efeitos deste request antes do dry-run",
+      "thread_id": "1570857869790945455",
+      "updated_at": "2026-11-27T05:20:08+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -12038,6 +12048,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1575741959694454818",
+      "next_step": "Pedir aceite somente das cinco ausencias comprovadas neste lote. Depois de aprovado, validar receipt reviewed_copy_omissions por dialogo/autoridade live e mesmos IDs/selos/relogio; retomar runner central, QA/activate_verified/readback, cadastro direto das UTMs SB. Nao transportar aprovacoes dos lotes anteriores nem recriar campanhas.",
+      "objective": "Duplicar 3 vezes C021 na Mavroa G003 a USD70/dia para 27/11 01:00 Nova York",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575741959694454818/feature-drift-readback.json",
+      "state": "awaiting_material_feature_review: fonte c021, copias c046 c047 c048 criadas paused; 6 anuncios, usd70/dia cada campanha, usd210/dia lote; inicio 27/11/2026 01:00 america/new_york e cost_cap usd1.30 preservados. qa renderizado 3/3, qa semantico retido: enhance_cta, inline_comment, text_optimizations, text_translation e video_uncrop ausentes em 6/6 copies, fonte fresca opt_in. tres defaults adicionais opt_out aceitos pelo comparador vigente, nao sao novos recursos habilitados. mecanismo review instalado ja representa as cinco formas; nao precisa nova manutencao tecnica. nenhuma ativacao e sb pendente.",
+      "thread_id": "1558127210966032385",
+      "updated_at": "2026-11-27T05:20:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12868,5 +12888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T05:10:41+00:00"
+  "updated_at": "2026-11-27T05:20:46+00:00"
 }
