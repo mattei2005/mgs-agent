@@ -3092,6 +3092,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1575964438237024277",
+      "next_step": "Nao repetir criacao,ativacao ou cadastro SB. Preservar pausas manuais;eventual reativacao ou pedido de revisao dos4ads rejeitados depende de nova orientacao do operador. Nao reenviar conteudo rejeitado como novo. Performance nao aferida.",
+      "objective": "Duplicar C007 quatro vezes na Mavroa07 G004 para agora herdando budget e lance vivos",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575964438237024277/completion-receipt.json",
+      "state": "c008-c011 criadas,4campaigns/4adsets/8ads,qa4/4;70usd/dia cada,total configurado280usd/dia,cocap0.90. ativacao inicial confirmada;4pausas externas subsequentes actor mesy mamanya daffa em15:06et;preservadas sem reativar. readback final4campaignspaused;ads3disapproved+1with_issues/rejeicao+4campaign_paused. budget ativo lote0usd/dia. targeting user_age_unknown reparado false e fonte inalterada. sb201 ambaschaves gamok,sem readback independente. postsnovos;ids preservados.",
+      "thread_id": "1575250902724644867",
+      "updated_at": "2026-11-27T20:11:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -12948,5 +12958,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T19:56:59+00:00"
+  "updated_at": "2026-11-27T20:11:29+00:00"
 }

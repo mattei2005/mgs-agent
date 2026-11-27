@@ -19,7 +19,7 @@ Duplicação curta e binding: `references/request-intake.md` primeiro. Quiz: `re
 
 QUEUED→job/predecessores. Grant→paginação admin completa. GenAI: `references/reviewed-genai-sourcing-order.md`.
 
-Feche por configured/effective de todos os ads; Engine/QA/SB não anulam reprovação.
+Feche por configured/effective; não reative pausas manuais posteriores ao QA.
 
 Separe autorizações/recibos de pausa, criação, omissões, ensaio e revisão: aceite de um delta não libera outro. Veja `references/forcerunstatus.md`. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
