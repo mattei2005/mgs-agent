@@ -12009,12 +12009,12 @@
     {
       "agent": "ares",
       "id": "shein-1575731225690243114",
-      "next_step": "Delimitar e autorizar manutencao tecnica separada do validador para representar enrollments OPT_IN com customizations preservadas; testar positivos/negativos, validar receipt real, retomar mesmo request/IDs via runner central e concluir readback/SB. Nao repetir aceite comercial das quatro omissoes.",
+      "next_step": "Concluido tecnicamente e SB; entregar resumo nativo na origem. Nenhuma manutencao, QA, ativacao ou cadastro pendente. Nao recriar, reativar nem repetir POST SB; processamento/entrega futura Meta nao garantidos por status ACTIVE.",
       "objective": "Duplicar 3 vezes C013 Mavroa G003 a USD100/dia para 27/11 00:00 Nova York",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575731225690243114/approved-review-blocked-readback.json",
-      "state": "human_review_approved_technical_gate: aceite isliago 1575732827817771079 validado por get e autoridade live para quatro omissoes; nao perguntar novamente. c040 c041 c042 e 6 ads confirmados paused; usd100/dia cada, inicio futuro original preservado. reviewed_copy_omissions rejeita enhance_cta e text_optimizations com customizations.text_extraction opt_in; capacidade local pendente, sem autorizacao para bypass ou alteracao de selos. qa renderizado 3/3 preservado, ativacao e sb pendentes.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575731225690243114/completion-receipt.json",
+      "state": "complete: c040 c041 c042, 3 campanhas e 6 anuncios configurados active e efetivo active no readback. usd100/dia cada, usd300/dia delta, orcamento ativo da conta usd3240 conforme get meta 2026-11-27t04:51:02.296864+00:00. inicio 27/11/2026 00:00 america/new_york preservado; cost_cap usd1.10. qa semantico e renderizado 3/3, mesmos ids e sem replay. quatro omissoes aceitas em 1575732827817771079; manutencao localizada autorizada em 1575734115884470397, cas e 24 testes ok, gate resolvido. posts novos. sb utm_campaign/utm_adgroup http201 gaminsert ok e listas literais conferidas; readback independente nao disponivel.",
       "thread_id": "1558127210966032385",
-      "updated_at": "2026-11-27T04:42:21+00:00"
+      "updated_at": "2026-11-27T04:53:01+00:00"
     },
     {
       "agent": "ares",
@@ -12848,5 +12848,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T04:42:21+00:00"
+  "updated_at": "2026-11-27T04:53:01+00:00"
 }
