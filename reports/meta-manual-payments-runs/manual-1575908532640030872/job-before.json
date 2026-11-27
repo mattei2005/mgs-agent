@@ -1,0 +1,70 @@
+{
+  "id": "2ee720363d7d",
+  "name": "Digital Trust · planilha de pagamentos 3x/dia",
+  "prompt": "ADENDO VIGENTE1575252034100138135: incluir1770569568407466 — Mavroa-US-SHEIN-ES-07-G004 — na aba ativa Contas com saldo e na mesma recorrência, mesmo com saldo zero, pois Joe começa a usar hoje. Escopo atual52IDs:17cartão/35linha, apenas referência; resolver conjuntos LIVE do contrato. Preservar51anteriores e146arquivadas;nenhuma nova descoberta. Esta inclusão supersede somente a fixação do conjunto51 e a exclusividade da autoridade antiga. Cartão default confirmadoAmerican Express••••1003;Dnovo vazio qualificado até prova própria. H permanece nas contas de linha do contrato.\nAtualização financeira recorrente autorizada por Rodolfo344196393512075265 na thread1563926766286803004. REGRA VIGENTE1575022093777637377: atualizar SOMENTE a aba Contas com saldo, spreadsheet1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU,sheet794137639. Esta decisão supersede o escopo recorrente197 e a publicação de duas visualizações. Contrato canônico data/meta-manual-payments/digital-trust-workbook-contract.json: recurring_scope.mode=active_tab_only,account_ids e pay_now_account_ids LIVE; contagens nunca são autoridade. Resolver os conjuntos LIVE, não usar contagens como autoridade. As146 contas em Contas sem saldo a pagar (sheet1293802358) e a antiga base técnica197 (sheet271321738) são ARQUIVO CONGELADO: não consultar contas arquivadas, não atualizar essas abas, não reativar/redescobrir IDs e não executar publish_balance_views.py, pois balance_views.enabled=false. Essas contas NÃO voltam automaticamente à principal. Preservar seus dados/formatos/notas/fórmulas e Sheet1 por readback completo. Nenhum DELETE de conta/linha/arquivo, pagamento,billing,budget,credencial/permissão ou gatewayrestart. MESMO job2ee720363d7d,cron2 8,14,21 * * * America/New_York,mesmo destino;sem novo job nem writer paralelo. Escopo active_tab_only de1575022093777637377 ampliado explicitamente por1575252034100138135,evidência reports/meta-manual-payments-runs/cron-active-only-1575022093777637377/receipt.json.\nCarregar meta-manual-payments-planning,google-drive-agent-automation,secure-remote-windows-automation;refs recurring-refresh.md,accounts-list-search.md,collection-and-workbook.md,funding-regroup-priority.md,september-invoices.md. A regra active_tab_only tem precedência sobre qualquer histórico197/55 ou regra antiga de base oculta/duasviews. Google exclusivamente SA mgsagent@mgs-core-prod.iam.gserviceaccount.com,projeto mgs-core-prod,helpercanônico;sem OAuthpessoal. Meta somente leitura com identidade do contrato.\nPreflight claim/worker/writer.lock e superfícieChromeRodolfoPC1 atuais. Descobrir interpreter/dependências no launcher real;sem instalar/trocaridentidade. Backup de todas as abas antes do primeiro write. Executar sequentialmente regroup_funding.py --apply,refresh_september_invoices.py --apply,refresh_workbook.py --apply --allow-history-pending na aba ATIVA do contrato. Não apontar workers à base antiga. Funding desconhecido/reverso não autorizado bloqueia com diagnóstico;transição linha→cartão segue autoridade existente. E/F apenas invoices pendentes reais da última competência fechada gerada,outubro2026 atual;Paid/due0 vazio. LeituraBM business_invoices somente índice necessário ao join dos IDs ativos,não monitoramentoindividual dos146arquivados. J novembro2026,de2026-11-01a2026-11-30,limitado ao dia local atual parcial. Média3diascompletos com diário/agregado reconciliados;USD semmisturarmoedas.\nH vigente1570815017794674749=Saldo pendente — Outstanding balance da Accounts list exata,source accounts_list_outstanding_balance,ID/nome/BM/header/valor emAXepixels e horaindividualoriginal. Não substituir por Current balance/API/Excel/modalPay now,nemzero por falta de prova. publish_pay_now.py --prepare resolve targets ATIVOS do contrato. Não reutilizar targets de runs197/55 ou baseantiga;reconciliar evidências anteriores sem replay. read_pc1_accounts_list.py emlotesaté6foreground,umworkerPC1/leaseglobal,aba própria no mesmoChrome. Ler screenshots comvision_analyze,cropdomesmoarquivo paraOCRambíguo. Manifest verified_account_ids e accounts_list_checks[ID]={valid_billing_list:true,business_id:'155263197283282',row_account_id:ID,name:NOME_EXATO,balance_usd:VALOR_LITERAL,balance_label:'Outstanding balance',authority_message_id:'1570815017794674749'}. Publishercanônico comreadback;--verified-onlysomenteprovasvistasequalificarparcial. Pending_new_account_fields é filtrado aos IDs ativos;no último readback somente1Hnovo aguardavaUI. Não restaurar104H/146D arquivados como pendências ativas.\nD requerprova explícita de cobrança históricaPaid emcartão;excluir créditos/falhas,não inferir de funding/eventogenérico. Resolver pending_ui apenas IDs ativos comworkerPC1 e inspeçãoreal. Rota nova dedetalhes exige business_id,asset_id,payment_account_id exatos quandoaplicável. Após D repetir refreshAPIfinal,somentependênciasnovas,máximo2reconciliaçõesporevento. Não exigir provaUI de conta fora do escopo.\nValidação:IDs exatos do contrato na aba794137639,grupos,links,notas,moedas,subtotais/totalF/G/H/I/J;paridade C/G/I/J com último plano publicado,E/F cominvoices,H comledger,D comprovas. Todos os valores/fórmulas/notas/formatos das146arquivadas,basehistórica e Sheet1 devem permanecer intactos. Não republicarviews/nãomovercontas/nãoampliarescopo implicitamente. Ordenação porfiltro é comparável porID nafaixa;limites/totais/demaisabas estritos. APIpodeomitirvaziosfinais:normalizarsomenteisso. Em falha póswrite reconciliar alvoexato e corrigirsócamadafaltante,sem replayblind. Atualizar contrato/checkpoint/audit/inventário/REPORTseaplicável;cadência inalterada.\nPC1ocupado/timeout:filapersistente e retrysegurocanônicos;semabandono,novoexecutorouprofilalternativo. Gate real deauth exige conferência da superfíciecorreta;Rodolfo informouautenticação em1575016959395893258,mas esse aviso não é prova técnica atual. Preservarsessão,fecharsóabaspróprias,liberarlease. FORMATO1571982992975597571: gateMeta/passkey comprovado -> FINAL EXATAMENTE Não consegui concluir. Você precisa autenticar a Meta no Chrome do PC1. Semmétricas/logs/diagnósticopúblico. Outro bloqueiodecisório:uma frasecomcausareal. Sucessointegral:umaúnicamensagemPTBRcomlinkdaabaContas com saldo(gid794137639),até6bullets,coberturadosativos,H,média/gasto/invoices e ressalvasD. SemIDs/paths/traces/anexos/mentions. Nunca chamarparcialdeintegral. Dizerque146arquivadasnãoatualizam,sepertinente;nãoprometerretornoautomático. Nenhum pagamento ou alteração de billing.",
+  "skills": [
+    "meta-manual-payments-planning",
+    "google-drive-agent-automation",
+    "secure-remote-windows-automation"
+  ],
+  "skill": "meta-manual-payments-planning",
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": null,
+  "no_agent": false,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "2 8,14,21 * * *",
+    "display": "2 8,14,21 * * *"
+  },
+  "schedule_display": "2 8,14,21 * * *",
+  "repeat": {
+    "times": null,
+    "completed": 98
+  },
+  "enabled": true,
+  "state": "scheduled",
+  "paused_at": null,
+  "paused_reason": null,
+  "created_at": "2026-10-25T13:42:18.304561-04:00",
+  "next_run_at": "2026-11-27T14:02:00-05:00",
+  "last_run_at": "2026-11-27T08:05:25.348324-05:00",
+  "last_status": "ok",
+  "last_error": null,
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": {
+    "at": "2026-11-13T14:05:43.743450-05:00",
+    "detail": "RuntimeError: HTTP 400: {\"detail\":\"Bad Request\"}"
+  },
+  "failure_streak": 0,
+  "deliver": "discord:1496267442899521627:1563926766286803004",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1563926766286803004",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Nessa Planilha Que Crie Uma - Rodolfo",
+    "thread_id": "1563926766286803004",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "discord:1496267442899521627:1563926766286803004",
+  "last_dispatch": {
+    "scheduled_at": "2026-11-27T08:02:00-05:00",
+    "dispatched_at": "2026-11-27T08:02:06.016415-05:00",
+    "lateness_seconds": 6.0,
+    "kind": "on_time"
+  },
+  "fire_claim": null,
+  "canonical_completions": [
+    "6b1079191bf94c4c9313d0e065ae77ac"
+  ],
+  "timezone": "America/New_York"
+}
