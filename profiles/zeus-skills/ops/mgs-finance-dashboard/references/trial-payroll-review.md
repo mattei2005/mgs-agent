@@ -35,6 +35,12 @@ The opt-in `commission_exception` on existing `personnel|148` is bound to exact 
 
 Freeze the calculation inputs for before/after comparisons. A later owner FX edit changes BRL reference amounts without changing the approved10% rule; re-read the exact month before application and report the actual amount, not the earlier screenshot. Half-cent partner effects belong to the native half-profit precision, not an invented personal debit or arbitrary ledger balancing.
 
+## Native-currency editing for fixed salaries
+
+Rodolfo1575923939899875581 authorizes the five existing fixed-salary editors to use native BRL from November2026 onward, retaining USD lists/totals. Resolve exact scope/publication in `docs/finance-fixed-salary-brl-editor.md` and checkpoint `ZEUS-FINANCE-SALARY-BRL-1575923939899875581`; this is the narrow exception to November USD-only presentation, not a new remuneration policy.
+
+Bind these editors by exact expense ID and saved BRL denomination, not by mutable display name or the presence of the word Gestor. Preserve the original `edit_amount` string, including inactive salaries and native cents; never back-calculate it from rounded USD or reset it to historical migration defaults. Kelly creative and Kelly manager stay separate. Display currency changes do not alter the salary's contractual denomination. Verify actual form submission and saved native value in an isolated database at desktop/mobile widths, plus untouched prior months and unchanged production financial fingerprints. Test partner permissions against the actual existing role contract: Geizian can read the global workspace; the five managers cannot. Do not change permissions to satisfy an incorrect test expectation.
+
 ## Payroll implementation and verification pitfalls
 - `expenses.apply_payroll_policy` applies only explicit expense `payroll_rule=monthly-v1` records; never change the immutable baseline to claim parity after a newly approved business rule.
 - Monthly commission basis is the attributed actual month total (manager row12), not row14's extrapolation. Include native additions/account spend and monthly expense allocation before payroll. Round commission half-up to cents BRL before USD conversion. Test zero/negative result, floor boundary and 99999.99/100000/100000.01.
