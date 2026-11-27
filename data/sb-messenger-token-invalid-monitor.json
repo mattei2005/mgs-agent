@@ -30,16 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    714932,
-    715217,
-    715231,
-    715255,
-    715901,
-    715922,
-    716377,
-    716394,
-    716414,
-    716602,
     716610,
     716631,
     717279,
@@ -1029,7 +1019,17 @@
     775636,
     775666,
     775678,
-    775703
+    775703,
+    776261,
+    776280,
+    776303,
+    776325,
+    776349,
+    776368,
+    776391,
+    776414,
+    776450,
+    776462
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1683,6 +1683,39 @@
         773974
       ],
       "opened_at": "2026-11-09T07:12:15-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|cliquet|13|295": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-27T12:04:42.000Z",
+        "domain": "cliquet",
+        "notification_id": 776450,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 9,
+          "Broadcast": 34,
+          "On-hold": 131,
+          "Ready": 3
+        },
+        "pages": 177,
+        "segurador_id": "295",
+        "segurador_name": "John Cesar",
+        "source": "page_token",
+        "user_email": "disparoscliquet@gmail.com",
+        "user_id": "13",
+        "user_name": "Disparos Cliquet US-CC-EN"
+      },
+      "last_sent_at": "2026-11-27T07:12:14-05:00",
+      "message_ids": [
+        "1575846711442677833"
+      ],
+      "notification_ids": [
+        776450
+      ],
+      "opened_at": "2026-11-27T07:12:13-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2956,9 +2989,9 @@
     "digital-trust|fincgriffin|105|1773": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:33.000Z",
+        "created_at": "2026-11-27T12:04:16.000Z",
         "domain": "fincgriffin",
-        "notification_id": 773888,
+        "notification_id": 776325,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -2988,7 +3021,8 @@
         767268,
         769336,
         771637,
-        773888
+        773888,
+        776325
       ],
       "opened_at": "2026-11-12T15:12:25-05:00",
       "repeat_count": 0,
@@ -3264,9 +3298,9 @@
     "digital-trust|helixenit|47|203": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T12:03:53.000Z",
+        "created_at": "2026-11-27T12:04:29.000Z",
         "domain": "helixenit",
-        "notification_id": 774178,
+        "notification_id": 776414,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -3296,7 +3330,8 @@
         756069,
         759527,
         762911,
-        774178
+        774178,
+        776414
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -4093,9 +4128,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:23.000Z",
+        "created_at": "2026-11-27T12:04:11.000Z",
         "domain": "lyzmo",
-        "notification_id": 773822,
+        "notification_id": 776261,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -4138,7 +4173,8 @@
         767219,
         769272,
         771573,
-        773822
+        773822,
+        776261
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -5587,9 +5623,9 @@
     "digital-trust|spe|7|210": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:06:03.000Z",
+        "created_at": "2026-11-27T12:04:43.000Z",
         "domain": "spe",
-        "notification_id": 774000,
+        "notification_id": 776462,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -5614,7 +5650,8 @@
         767413,
         769466,
         771770,
-        774000
+        774000,
+        776462
       ],
       "opened_at": "2026-11-20T11:12:21-05:00",
       "repeat_count": 0,
@@ -5930,9 +5967,9 @@
     "digital-trust|topfeed|6|179": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:48.000Z",
+        "created_at": "2026-11-27T12:04:18.000Z",
         "domain": "topfeed",
-        "notification_id": 773956,
+        "notification_id": 776368,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 16,
@@ -5957,7 +5994,8 @@
         767336,
         769407,
         771700,
-        773956
+        773956,
+        776368
       ],
       "opened_at": "2026-11-21T15:12:15-05:00",
       "repeat_count": 0,
@@ -6414,9 +6452,9 @@
     "digital-trust|xyvlov|43|1790": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:42.000Z",
+        "created_at": "2026-11-27T12:04:24.000Z",
         "domain": "xyvlov",
-        "notification_id": 773932,
+        "notification_id": 776391,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 4,
@@ -6447,7 +6485,8 @@
         767314,
         769380,
         771678,
-        773932
+        773932,
+        776391
       ],
       "opened_at": "2026-11-12T15:12:25-05:00",
       "repeat_count": 0,
@@ -6563,9 +6602,9 @@
     "digital-trust|zuoutfinanzas|82|1730": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:29.000Z",
+        "created_at": "2026-11-27T12:04:13.000Z",
         "domain": "zuoutfinanzas",
-        "notification_id": 773868,
+        "notification_id": 776303,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -6596,7 +6635,8 @@
         767249,
         769306,
         771613,
-        773868
+        773868,
+        776303
       ],
       "opened_at": "2026-09-24T16:12:13-04:00",
       "repeat_count": 0,
@@ -6606,9 +6646,9 @@
     "digital-trust|zuout|11|1799": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:34.000Z",
+        "created_at": "2026-11-27T12:04:17.000Z",
         "domain": "zuout",
-        "notification_id": 773912,
+        "notification_id": 776349,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 27,
@@ -6640,7 +6680,8 @@
         767291,
         769353,
         771659,
-        773912
+        773912,
+        776349
       ],
       "opened_at": "2026-11-04T07:12:19-05:00",
       "repeat_count": 0,
@@ -6755,9 +6796,9 @@
     "digital-trust|zuout|82|1730": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-26T00:05:26.000Z",
+        "created_at": "2026-11-27T12:04:12.000Z",
         "domain": "zuout",
-        "notification_id": 773844,
+        "notification_id": 776280,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -6787,7 +6828,8 @@
         767226,
         769292,
         771589,
-        773844
+        773844,
+        776280
       ],
       "opened_at": "2026-09-25T16:12:12-04:00",
       "repeat_count": 0,
@@ -7402,21 +7444,30 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-27T06:57:08-05:00",
+  "last_check": "2026-11-27T07:12:14-05:00",
   "last_delivery": {
-    "at": "2026-11-26T19:12:09-05:00",
+    "at": "2026-11-27T07:12:14-05:00",
     "cursor_ids": [
-      775611,
-      775636,
-      775666,
-      775678,
-      775703
+      776261,
+      776280,
+      776303,
+      776325,
+      776349,
+      776368,
+      776391,
+      776414,
+      776450,
+      776462
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1575846711442677833"
+    ],
+    "notification_ids": [
+      776450
+    ]
   },
   "last_error": null,
-  "last_seen_id": 775703,
+  "last_seen_id": 776462,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
