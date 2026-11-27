@@ -12018,6 +12018,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1575736997073518604",
+      "next_step": "Entregar resumo nativo: criacao e agendamento conferidos; 5 anuncios em analise e 1 efetivo ACTIVE no corte, aprovacao/entrega futura dependem da Meta. Sem write tecnico ou cadastro SB pendente; nao recriar, reativar ou repetir POST SB.",
+      "objective": "Duplicar 3 vezes C039 em Mavroa-US-SHEIN-ES-03-G003 para 27/11 01:00 a USD100/dia cada",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575736997073518604/completion-receipt.json",
+      "state": "creation_complete_scheduled_external_review: fonte c039, copias c043 c044 c045, 3 campanhas e 6 anuncios habilitados active; estado efetivo no get: {\"active\": 1, \"pending_review\": 5}. usd100/dia por campanha, usd300/dia delta; total diario configurado ativo da conta usd3540 (get meta 2026-11-27t05:01:29.027444+00:00). inicio 27/11/2026 01:00 america/new_york, cost_cap usd1.30 herdado. qa semantico/renderizado 3/3; mesmos ids apos recuperacao de pos-processamento, engine_replayed=false. posts novos, zero warnings. sb utm_campaign/utm_adgroup http201 gaminsert ok, valores literais conferidos; reconferencia independente indisponivel.",
+      "thread_id": "1558127210966032385",
+      "updated_at": "2026-11-27T05:02:39+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12848,5 +12858,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T04:53:01+00:00"
+  "updated_at": "2026-11-27T05:02:39+00:00"
 }
