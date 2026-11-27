@@ -30,11 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    714178,
-    714179,
-    714517,
-    714537,
-    714921,
     714932,
     715217,
     715231,
@@ -1029,7 +1024,12 @@
     775235,
     775259,
     775281,
-    775338
+    775338,
+    775611,
+    775636,
+    775666,
+    775678,
+    775703
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1067,9 +1067,9 @@
     "digital-trust-2|wantabrand|71|340": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-11-25T20:04:01.000Z",
+        "created_at": "2026-11-27T00:02:50.000Z",
         "domain": "wantabrand",
-        "notification_id": 773206,
+        "notification_id": 775611,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 4,
@@ -1093,7 +1093,8 @@
         766139,
         768559,
         770760,
-        773206
+        773206,
+        775611
       ],
       "opened_at": "2026-11-19T19:12:10-05:00",
       "repeat_count": 0,
@@ -2601,9 +2602,9 @@
     "digital-trust|financeadx|57|325": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-25T20:05:28.000Z",
+        "created_at": "2026-11-27T00:03:47.000Z",
         "domain": "financeadx",
-        "notification_id": 773251,
+        "notification_id": 775666,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 3,
@@ -2643,7 +2644,8 @@
         766530,
         768713,
         770980,
-        773251
+        773251,
+        775666
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2726,9 +2728,9 @@
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-25T20:05:24.000Z",
+        "created_at": "2026-11-27T00:03:33.000Z",
         "domain": "financeadx",
-        "notification_id": 773239,
+        "notification_id": 775636,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 6,
@@ -2762,7 +2764,8 @@
         766509,
         768696,
         770958,
-        773239
+        773239,
+        775636
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -3219,9 +3222,9 @@
     "digital-trust|helixenit|33|308": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-25T20:05:40.000Z",
+        "created_at": "2026-11-27T00:03:55.000Z",
         "domain": "helixenit",
-        "notification_id": 773278,
+        "notification_id": 775678,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -3250,7 +3253,8 @@
         766553,
         768740,
         770993,
-        773278
+        773278,
+        775678
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -6184,9 +6188,9 @@
     "digital-trust|vizioid|50|217": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-25T20:06:06.000Z",
+        "created_at": "2026-11-27T00:04:12.000Z",
         "domain": "vizioid",
-        "notification_id": 773301,
+        "notification_id": 775703,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -6242,7 +6246,8 @@
         766572,
         768757,
         771019,
-        773301
+        773301,
+        775703
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -7397,17 +7402,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-26T18:57:09-05:00",
+  "last_check": "2026-11-26T19:12:09-05:00",
   "last_delivery": {
-    "at": "2026-11-26T15:12:10-05:00",
+    "at": "2026-11-26T19:12:09-05:00",
     "cursor_ids": [
-      775338
+      775611,
+      775636,
+      775666,
+      775678,
+      775703
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 775338,
+  "last_seen_id": 775703,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
