@@ -5044,12 +5044,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1575746615715569757",
-      "next_step": "Dry-run do request-ready,execute central,QA/ativacao/readback e cadastro direto SB",
+      "next_step": "Aguardar consentimento explicito para diagnostico confidencial no suporte Meta;preservar request/manifests/IDs/provas ehorario;nao toggle/reattach/recriar como sondagem;retomar somente posprocessamento central apos evidencia nova valida;nenhuma retomada automatica prometida",
       "objective": "Duplicate campaign 186 ten times with 20 selected Spanish videos; USD35 per campaign; COCAP USD0.95; 2026-11-27 01:15 America/New_York",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575746615715569757/intake-authority-checkpoint.json",
-      "state": "media preparada:20 assets,10grupos; recovery de coordenacao concluido,objetos antigos preservados;nenhuma campanha nova criada ainda",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575746615715569757/partial-receipt.json",
+      "state": "partial:259-268 criadas;10campanhas,10conjuntos,20ads paused;usd35/dia,costcapusd0.95,inicio27nov2026 01h15est conferidos;copy/headline/descricao literais20/20;8ads com1487083 forcerunstatus nas259,260,261,262,265;qa renderizado eativacao pendentes;sb nao iniciado;delta budget ativo0;nao entregar como concluido",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-27T05:44:33+00:00"
+      "updated_at": "2026-11-27T06:04:27+00:00"
     },
     {
       "agent": "ares",
@@ -12898,5 +12898,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T06:00:48+00:00"
+  "updated_at": "2026-11-27T06:04:27+00:00"
 }
