@@ -73514,6 +73514,37 @@
       },
       "continuity_key": "f2cd802292b193d37c79ade2",
       "report_infra_status": "pending_transport_restricted_no_manual_messages"
+    },
+    {
+      "id": "meta-manual-payments-manual-1575908532640030872",
+      "agent": "zeus",
+      "type": "authorized_manual_financial_refresh_existing_UIA",
+      "status": "completed_validated",
+      "source_message_id": "1575908532640030872",
+      "updated_at": "2026-11-27T12:05:17.060244-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1575908532640030872/financial-validation.json",
+      "report_infra_status": "verified",
+      "verification": {
+        "accounts": 52,
+        "fresh_metrics": 52,
+        "fresh_h": 35,
+        "renewed_d": 15,
+        "pending_ui": 0,
+        "historical_blank_d": 37,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "browser_tabs_preserved": true,
+        "browser_original_tabs": 6,
+        "lease_free": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_message_id": "1575920511052030073",
+      "skill_reference_readback": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1575908532640030872/skill-readback.json",
+      "recovery_reconciliation": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1575908532640030872/recovery-reconciliation.json"
     }
   ],
   "profile_skill_references": [
