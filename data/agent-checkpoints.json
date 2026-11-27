@@ -12049,12 +12049,12 @@
     {
       "agent": "ares",
       "id": "shein-1575741959694454818",
-      "next_step": "Pedir aceite somente das cinco ausencias comprovadas neste lote. Depois de aprovado, validar receipt reviewed_copy_omissions por dialogo/autoridade live e mesmos IDs/selos/relogio; retomar runner central, QA/activate_verified/readback, cadastro direto das UTMs SB. Nao transportar aprovacoes dos lotes anteriores nem recriar campanhas.",
+      "next_step": "Concluido tecnicamente e SB; entregar resumo nativo na origem com cinco limitacoes aceitas. Nenhuma manutencao, QA, ativacao ou cadastro pendente. Nao recriar/reexecutar nem repetir POST SB; inicio futuro e ACTIVE nao comprovam entrega.",
       "objective": "Duplicar 3 vezes C021 na Mavroa G003 a USD70/dia para 27/11 01:00 Nova York",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575741959694454818/feature-drift-readback.json",
-      "state": "awaiting_material_feature_review: fonte c021, copias c046 c047 c048 criadas paused; 6 anuncios, usd70/dia cada campanha, usd210/dia lote; inicio 27/11/2026 01:00 america/new_york e cost_cap usd1.30 preservados. qa renderizado 3/3, qa semantico retido: enhance_cta, inline_comment, text_optimizations, text_translation e video_uncrop ausentes em 6/6 copies, fonte fresca opt_in. tres defaults adicionais opt_out aceitos pelo comparador vigente, nao sao novos recursos habilitados. mecanismo review instalado ja representa as cinco formas; nao precisa nova manutencao tecnica. nenhuma ativacao e sb pendente.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1575741959694454818/completion-receipt.json",
+      "state": "complete: fonte c021, copias c046 c047 c048; 3 campanhas e 6 anuncios active configurado e efetivo no get 2026-11-27t05:25:36.728372+00:00. usd70/dia cada, usd210/dia lote; total diario configurado ativo da conta usd3720 por get meta. inicio 27/11/2026 01:00 america/new_york e cost_cap usd1.30 preservados. cinco omissoes aceitas por isliago em 1575743548408594443, dialogo/autoridade live e binding de 6 ads validados, negativos request/clock/source/manifests rejeitados. qa semantico/renderizado 3/3, mesmos ids, sem replay; posts novos; limitacao de features preservada no recibo. sb utm_campaign/utm_adgroup http201 gaminsert ok e valores literais conferidos; reconferencia independente indisponivel. gate material resolvido, sem manutencao tecnica nova.",
       "thread_id": "1558127210966032385",
-      "updated_at": "2026-11-27T05:20:46+00:00"
+      "updated_at": "2026-11-27T05:26:48+00:00"
     },
     {
       "agent": "ares",
@@ -12888,5 +12888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T05:20:46+00:00"
+  "updated_at": "2026-11-27T05:26:48+00:00"
 }
