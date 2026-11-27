@@ -2053,12 +2053,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1575888959182213201",
-      "next_step": "Coletar HTTP e RPS UI atuais; renderizar, revisar integral e resumos; entregar e reconciliar por GET; arquivar evidencias sanitizadas",
+      "next_step": "Publicar partes canônicas e resumo por conta com nonce; reconciliar todos os GETs; arquivar evidencias sanitizadas",
       "objective": "Gerar sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1575888959182213201/request.json",
-      "state": "preflight_ok; sete pares e mensagem autenticados; identidades meta usd america/new_york; dia 27/11/2026; zero campaign writes",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1575888959182213201/approved-review.json",
+      "state": "prepared_review_approved; sete pares;151 campanhas;42 partes+7 resumos;65 regressions e 5 summaryfixtures+5 gatechecks+6 archivechecks pass; fontes27/11/2026 10:02-10:03 est; zero writes meta",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-27T15:02:39+00:00"
+      "updated_at": "2026-11-27T15:10:45+00:00"
     },
     {
       "agent": "ares",
@@ -12918,5 +12918,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T15:02:39+00:00"
+  "updated_at": "2026-11-27T15:10:45+00:00"
 }
