@@ -383,12 +383,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-ROI-1575977166632390947",
-      "next_step": "Reconciliar autoria de edicoes; testar coletor e render; entregar inicial GET; auditar agenda global e criar unico job finito",
+      "next_step": "Executar mesmo job cada30min ate23h43EST27nov; preservar IDs, snapshots, pausadas e recibos; sem descoberta futura; expirar28nov00hEST antesAPI. Em erro retomar somente camada faltante do mesmo slot.",
       "objective": "CPR e ROI cada30min ate fim27nov: novas e alteradas Yolokfx04 G004",
       "source": "data/ares/meta-ads/state/cpr-roi-updates/1575977166632390947/manifest.json",
-      "state": "authenticated_preflight_fixed_cohort_reconciliation; usd america/new_york; 4novas5edicoes candidatas; sem publicacao nem agenda ainda",
+      "state": "active_finite_schedule_verified;inicialget9campanhas4novas323324325326e5alteradas255313320321322;metasb17h27est;120testespass;job3b9725f6183c13slots17h43a23h43est;prepos0conflitos;reportinfraget;coortecongelada15h50est;semwritesmetasb",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-27T22:26:32+00:00"
+      "updated_at": "2026-11-27T22:31:37+00:00"
     },
     {
       "agent": "ares",
@@ -12978,5 +12978,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T22:26:32+00:00"
+  "updated_at": "2026-11-27T22:31:37+00:00"
 }
