@@ -1190,6 +1190,19 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-geizian-table-1575779090743431260",
+      "agent": "zeus",
+      "type": "payment_note_presentation",
+      "status": "stage_verified_gates_running",
+      "authority": "1575779090743431260",
+      "report": "reports/finance-geizian-table-1575779090743431260.md",
+      "evidence": "/root/mgs-agent/apps/finance-system/private/geizian-table-1575779090743431260",
+      "release_id": "geizian-table-1575779090743431260",
+      "scope": "Geizian outubro2026: substituir explicacao pela tabela Excel; nenhuma alteracao de ledger/cambio/saldo",
+      "retention": "Candidato, fixtures enumeradas, outputs dos gates, backups e provas retidos; nenhuma exclusao autorizada",
+      "skill_reference": "mgs-finance-dashboard/references/payments-approvals-nicolas-pilot.md"
+    },
+    {
       "id": "finance-finc-rede2-1575648329847799909",
       "agent": "zeus",
       "type": "finance_conference_network_classification",
