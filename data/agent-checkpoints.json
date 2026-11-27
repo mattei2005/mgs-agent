@@ -2063,12 +2063,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1575942174917271703",
-      "next_step": "Coletar HTTP e RPS UI; renderizar, revisar e validar; publicar e reconciliar por GET; arquivar evidencias sanitizadas",
+      "next_step": "Concluido; nao reenviar. GAM/SB33-34min nas seis contas com atividade; Boostingecon sem atividade e atraso n/d. Novo pedido exige fontes novas; campanhas, budgets e agendas preservados.",
       "objective": "Gerar sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1575942174917271703/request.json",
-      "state": "preflight_ok;7 pares e mensagem autenticados; identidades meta usd america/new_york; novas fontes obrigatórias; zero writes meta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1575942174917271703/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;151campaigns;42integralparts+7summaries;49unique_messages;cutoff27/11/2026_13:33est;usd;zero_meta_writes;archive_bytes_hashes_verified;65regressions+5summaryfixtures+5gatechecks+6archivechecks_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-27T18:32:47+00:00"
+      "updated_at": "2026-11-27T18:41:59+00:00"
     },
     {
       "agent": "ares",
@@ -12938,5 +12938,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T18:32:47+00:00"
+  "updated_at": "2026-11-27T18:41:59+00:00"
 }
