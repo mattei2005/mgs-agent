@@ -11978,6 +11978,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1575676212322373715",
+      "next_step": "Operação concluída; informar um anúncio em análise externa da Meta. Não recriar, reativar ou repetir cadastro SB.",
+      "objective": "Concluir as cinco cópias autorizadas da C308 com USD150/dia e Cost per result goal USD0.85 e cadastrar UTMs na SB.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575676212322373715/completion-receipt.json",
+      "state": "complete_meta_sb_external_review_pending: c314, c315, c316, c317, c318; 5 campanhas/5 conjuntos/10 anúncios configurados active; efetivos {\"active\": 9, \"pending_review\": 1}; qa integral e ids preservados; usd150/dia cada, usd750/dia lote; cost_cap usd0.85; início 2026-11-27 00:00 america/new_york. sete omissões aceitas neste request. duas chaves sb http201/gam ok; reconferência independente indisponível.",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-11-27T01:06:07+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12808,5 +12818,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T00:52:08+00:00"
+  "updated_at": "2026-11-27T01:06:08+00:00"
 }
