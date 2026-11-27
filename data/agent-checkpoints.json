@@ -7095,6 +7095,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-SALARY-BRL-1575923939899875581",
+      "next_step": "Preparar candidato isolado, validar formulários/gates, publicar e ler produção",
+      "objective": "Editar em BRL os cinco salários fixos, preservando listagens USD e valores",
+      "source": "docs/finance-fixed-salary-brl-editor.md",
+      "state": "preparing",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-27T17:19:57+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-SAVE-PERF-1552071425156845749",
       "next_step": "Nenhuma pendência desta otimização. Mudanças numéricas continuam aguardando recálculo/commit/readback real; não prometer latência fixa.",
       "objective": "Acelerar salvamento preservando regras e confirmação real",
@@ -12918,5 +12928,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T17:06:10+00:00"
+  "updated_at": "2026-11-27T17:19:57+00:00"
 }
