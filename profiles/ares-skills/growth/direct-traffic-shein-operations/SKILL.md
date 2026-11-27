@@ -13,7 +13,7 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos/URL; renumere UTMs. Separe manual/lote/emenda; conte ads/grupo. Usados≠`source_account`.
+SHEIN≠CAR/CPV; headline≠CTA. Preserve IDs/relógio/selos/URL; renumere UTMs. Usados≠`source_account`.
 
 Duplicação curta e binding: `references/request-intake.md` primeiro. Quiz: `references/quiz-version-clone-delta.md`; `target_quiz_version`≠profile global.
 
@@ -23,7 +23,7 @@ Feche por configured/effective de todos os ads; Engine/QA/SB não anulam reprova
 
 Separe autorizações/recibos de pausa, criação, omissões, ensaio e revisão: aceite de um delta não libera outro. Veja `references/forcerunstatus.md`. Antes de uma conclusão tardia, releia também os IDs pausados: sucesso histórico não comprova estado atual. Audite reativações posteriores em Activities antes de repetir writes; informe perfil/aplicativo sem inferir o humano e peça decisão apenas sobre os IDs com intervenção posterior conflitante. Pausa pontual não autoriza enforcement contínuo.
 
-Falhas/destinos: `references/read-only-batch-child-recovery.md`.
+Falhas/destinos: `references/read-only-batch-child-recovery.md`. Horário: `references/native-copy-time-precision.md`.
 
 ## Duplicação e recuperação — precedência obrigatória
 
