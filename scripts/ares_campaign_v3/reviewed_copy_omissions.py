@@ -43,6 +43,20 @@ def binding(state,checkpoint):
         'execution_started_at':state['execution_started_at'],'slots':sorted(slots,key=lambda x:x['ad_id'])}
 
 
+def _reviewable_opt_in(key, value):
+    """Allow only known OPT_IN shapes; keep nested settings in sealed payloads.
+
+    An accepted omission concerns the whole bound feature, not an enrollment
+    toggle. Unknown customizations and any explicit opt-out stay fail-closed.
+    """
+    if value == {'enroll_status': 'OPT_IN'}:
+        return True
+    return (key in {'enhance_cta', 'text_optimizations'} and value == {
+        'enroll_status': 'OPT_IN',
+        'customizations': {'text_extraction': {'enroll_status': 'OPT_IN'}},
+    })
+
+
 def validate(receipt,state,checkpoint,*,get_message):
     index=json.loads(POLICY_INDEX.read_text()).get('requests',{})
     grant=index.get(state['request']['request_id']) or {}
@@ -58,7 +72,7 @@ def validate(receipt,state,checkpoint,*,get_message):
     for c in state['manifest']['campaigns']:
         for ad in c['ads']:
             f=ad['creative_payload'].get('degrees_of_freedom_spec',{}).get('creative_features_spec',{})
-            if any(f.get(k)!={'enroll_status':'OPT_IN'} for k in keys):raise ValueError('review source enrollment scope changed')
+            if any(not _reviewable_opt_in(k, f.get(k)) for k in keys):raise ValueError('review source enrollment scope changed')
     origin=state['request']['source_thread_id']
     if receipt['origin_id']!=origin:raise ValueError('review exact origin required')
     if receipt['approved_by']!='344196393512075265':
@@ -118,7 +132,7 @@ def expected_degrees(actual,expected):
     missing=set(wanted)-set(observed)
     if missing and missing!=accepted:raise ValueError('review omission set changed')
     for key in missing:
-        if wanted[key]!={'enroll_status':'OPT_IN'}:raise ValueError('review cannot accept explicit enrollment change')
+        if not _reviewable_opt_in(key, wanted[key]):raise ValueError('review cannot accept explicit enrollment change')
         del wanted[key]
     return desired
 
