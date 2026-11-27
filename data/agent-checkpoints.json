@@ -6666,12 +6666,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-GEIZIAN-TABLE-1575779090743431260",
-      "next_step": "Aguardar proc_ae745d1ff506 silencioso; se Python PASS publicar via publish.py --publish, apply.py e verify.py; registrar report/inventario",
+      "next_step": "Sem execução pendente. Preservar nota e quitação; não repetir baixa. REPORT-INFRA em finalização no mesmo turno.",
       "objective": "Substituir observação Geizian/outubro pela tabela do Excel, sem modificar pagamentos ou saldos",
       "source": "reports/finance-geizian-table-1575779090743431260.md",
-      "state": "stage_verified:14vistas;node324pass;python_em_execucao;backup_e_ensaio_nota_pass;producao_intocada",
+      "state": "completed:release committed;nota8358;324node259python;14vistasproducao;saldo0conferido;ledger/cenarios/historico preservados;replaynoop",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-27T08:00:45+00:00"
+      "updated_at": "2026-11-27T08:16:24+00:00"
     },
     {
       "agent": "zeus",
@@ -12908,5 +12908,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T08:00:45+00:00"
+  "updated_at": "2026-11-27T08:16:24+00:00"
 }

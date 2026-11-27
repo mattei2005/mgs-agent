@@ -39,7 +39,20 @@ function editPaymentEntry(e,d){const nature=paymentNature(e);modal('Editar lanç
  '<label>Natureza<select name="nature">'+[['credit','Acréscimo/reembolso · aumenta o valor a pagar'],['discount','Desconto · diminui o valor a pagar'],['payment','Pagamento registrado · diminui o valor a pagar']].map(([v,label])=>'<option value="'+v+'" '+(v===nature?'selected':'')+'>'+label+'</option>').join('')+'</select></label><p>Ao confirmar, você salva a correção. Os valores anteriores permanecem no histórico.</p>',
  async f=>{const n=f.get('nature');await saveLedgerChange(e,'edit',{description:f.get('description'),...paymentAmountPayload(f.get('amount'),d,(Number(e.amount_cents)/100).toFixed(2)),date:f.get('date'),kind:n==='payment'?'payment':'adjustment',direction:n==='credit'?1:-1});});}
 function deletePaymentEntry(e,d){modal('Excluir lançamento · '+d.party.label,'<p><strong>'+esc(e.description)+'</strong></p><p>'+esc(displayMoney(Number(e.amount_cents)/100,'BRL',e.period))+' · Referência '+esc(e.period)+'</p><p>Confirma excluir este lançamento da lista e do cálculo do saldo? A ação fica registrada no histórico. Não haverá transferência bancária.</p>',async()=>saveLedgerChange(e,'delete'));}
-function paymentNotesView(notes){return !Array.isArray(notes)||!notes.length?'':'<section data-payment-notes aria-label="Observações da competência">'+notes.map(n=>'<article class="card"><h3>'+esc(n.title)+'</h3>'+String(n.text||'').split('\n').filter(Boolean).map(p=>'<p>'+esc(p)+'</p>').join('')+'</article>').join('')+'</section>';}
+// Presentation only: strict four-column plain-text tables; no HTML or calculation.
+function paymentNoteBody(text){
+ const lines=String(text||'').split('\n'),out=[];
+ const cells=line=>{const s=String(line||'').trim();if(!s.startsWith('|')||!s.endsWith('|'))return null;const c=s.slice(1,-1).split('|').map(x=>x.trim());return c.length===4?c:null;};
+ for(let i=0;i<lines.length;i++){
+  const header=cells(lines[i]),divider=cells(lines[i+1]);
+  if(header&&divider&&divider.every(x=>/^:?-{3,}:?$/.test(x))&&cells(lines[i+2])){
+   const rows=[];let j=i+2;while(j<lines.length&&cells(lines[j]))rows.push(cells(lines[j++]));
+   out.push('<div data-payment-note-scroll role="region" aria-label="Tabela explicativa do pagamento" tabindex="0"><table data-payment-note-table><colgroup><col><col><col><col></colgroup><thead><tr>'+header.map(v=>'<th scope="col">'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>{const total=/^(TOTAL|SALDO RESTANTE)/.test(row[0]),discount=/^\(-\)/.test(row[0]);return '<tr class="'+(total?'payment-note-total':discount?'payment-note-discount':'')+'">'+row.map((v,k)=>'<'+(k?'td':'th scope="row"')+'>'+esc(v)+'</'+(k?'td':'th')+'>').join('')+'</tr>';}).join('')+'</tbody></table></div>');i=j-1;
+  }else if(lines[i].trim())out.push('<p>'+esc(lines[i])+'</p>');
+ }
+ return out.join('');
+}
+function paymentNotesView(notes){return !Array.isArray(notes)||!notes.length?'':'<section data-payment-notes aria-label="Observações da competência">'+notes.map(n=>'<article class="card"><h3>'+esc(n.title)+'</h3>'+paymentNoteBody(n.text)+'</article>').join('')+'</section>';}
 function paymentPartyOptions(d){
  // Rodolfo1575374541897601075: presentation only, exact retired cadastros/months.
  const scoped=d.period==='2026-10'||d.period==='2026-11',retired=new Set(['personnel|150','personnel|152']);
