@@ -3063,12 +3063,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1575742680510500915",
-      "next_step": "Retomar QA da fonte040 e concluir 085 088 095, readback integral e cadastro SB",
+      "next_step": "Criacao e cadastro concluidos; 4 anuncios em analise externa da Meta. Nao recriar, reativar ou recadastrar; nenhuma entrega/horario pontual garantidos.",
       "objective": "Duplicar 3 vezes cada uma das 12 fontes Yolokfx08 G006 USD45 por copia",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575742680510500915/aggregate.json",
-      "state": "24 copias c121-c144 active com qa confirmado; fonte040 c145-c147 em pos-processamento paused; 3 fontes ainda pendentes; inicio venceu durante execucao, politica vigente aplicada somente aos pedidos posteriores",
+      "state": "36 copias c121-c156 habilitadas, 81 anuncios configured active; effective active 77, pending_review 4; qa e readback integral sem falhas; usd45 cada usd1620 diarios novos e usd6373.36 ativos totais; cap usd0.90 herdado; inicio00h41 nao cumprido integralmente por atraso; sb36+36 gam ok com limite de reconferencia independente",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-27T06:00:48+00:00"
+      "updated_at": "2026-11-27T06:17:36+00:00"
     },
     {
       "agent": "ares",
@@ -12898,5 +12898,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T06:04:27+00:00"
+  "updated_at": "2026-11-27T06:17:36+00:00"
 }
