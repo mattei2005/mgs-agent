@@ -30,10 +30,6 @@
     "pending": null
   },
   "delivered_ids": [
-    716610,
-    716631,
-    717279,
-    717302,
     717497,
     717514,
     717602,
@@ -1029,7 +1025,11 @@
     776391,
     776414,
     776450,
-    776462
+    776462,
+    776911,
+    776925,
+    776945,
+    776979
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1303,9 +1303,9 @@
     "digital-trust|boostingecon|30|1758": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-20T00:05:07.000Z",
+        "created_at": "2026-11-27T16:03:44.000Z",
         "domain": "boostingecon",
-        "notification_id": 760815,
+        "notification_id": 776945,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -1328,7 +1328,8 @@
       "notification_ids": [
         742203,
         743410,
-        760815
+        760815,
+        776945
       ],
       "opened_at": "2026-11-10T19:12:14-05:00",
       "repeat_count": 0,
@@ -2554,11 +2555,18 @@
     "digital-trust|financeadx|24|339": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-27T20:11:58.000Z",
+        "created_at": "2026-11-27T16:03:34.000Z",
         "domain": "financeadx",
-        "notification_id": 675003,
+        "notification_id": 776911,
         "page_count_scope": "mapped-sb-user-id",
-        "pages": 227,
+        "page_statuses": {
+          "Blocked": 3,
+          "Broadcast": 24,
+          "Campaign": 1,
+          "On-hold": 170,
+          "Ready": 2
+        },
+        "pages": 200,
         "segurador_id": "339",
         "segurador_name": "Edi Sangkut",
         "source": "page_token",
@@ -2566,28 +2574,17 @@
         "user_id": "24",
         "user_name": "Disparos Financeadx US-CC-EN"
       },
-      "last_sent_at": "2026-08-28T23:27:14-04:00",
+      "last_sent_at": "2026-11-27T11:12:12-05:00",
       "message_ids": [
-        "1542627898702307472",
-        "1542676914601205802",
-        "1542722212300193854",
-        "1542767511806672969",
-        "1542812810415972386",
-        "1542858115169525822",
-        "1542907185632387114",
-        "1542956258880000113",
-        "1543005331456790655",
-        "1543050626064326687",
-        "1543099708816363582"
+        "1575907096841551964"
       ],
       "notification_ids": [
-        675003
+        776911
       ],
-      "opened_at": "2026-08-27T16:12:26-04:00",
-      "repeat_count": 10,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-11-27T11:12:10-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|financeadx|53|289": {
       "alert": {
@@ -4691,9 +4688,9 @@
     "digital-trust|newsoun|14|302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-02T12:06:29.000Z",
+        "created_at": "2026-11-27T16:03:45.000Z",
         "domain": "newsoun",
-        "notification_id": 732607,
+        "notification_id": 776979,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 49,
@@ -4713,7 +4710,8 @@
         "1566787068443492505"
       ],
       "notification_ids": [
-        732607
+        732607,
+        776979
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
       "repeat_count": 0,
@@ -5303,6 +5301,39 @@
         734334
       ],
       "opened_at": "2026-11-03T15:12:19-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|718": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-27T16:03:36.000Z",
+        "domain": "openzed",
+        "notification_id": 776925,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 15,
+          "Broadcast": 148,
+          "On-hold": 225,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "718",
+        "segurador_name": "Tu Tu",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-11-27T11:12:12-05:00",
+      "message_ids": [
+        "1575907102747267162"
+      ],
+      "notification_ids": [
+        776925
+      ],
+      "opened_at": "2026-11-27T11:12:10-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -7444,30 +7475,26 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-27T10:57:09-05:00",
+  "last_check": "2026-11-27T11:12:12-05:00",
   "last_delivery": {
-    "at": "2026-11-27T07:12:14-05:00",
+    "at": "2026-11-27T11:12:12-05:00",
     "cursor_ids": [
-      776261,
-      776280,
-      776303,
-      776325,
-      776349,
-      776368,
-      776391,
-      776414,
-      776450,
-      776462
+      776911,
+      776925,
+      776945,
+      776979
     ],
     "message_ids": [
-      "1575846711442677833"
+      "1575907096841551964",
+      "1575907102747267162"
     ],
     "notification_ids": [
-      776450
+      776911,
+      776925
     ]
   },
   "last_error": null,
-  "last_seen_id": 776462,
+  "last_seen_id": 776979,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
