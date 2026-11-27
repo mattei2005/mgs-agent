@@ -73597,6 +73597,34 @@
       "retention": "Candidate, explicit fixtures, private evidence and rollback retained; no cleanup authorized",
       "report_infra_status": "readback_verified",
       "report_infra_message_id": "1575932512365060248"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261127T1402",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "completed_validated",
+      "scheduled_at": "2026-11-27T14:02:00-05:00",
+      "updated_at": "2026-11-27T14:24:11.801868-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T1402/financial-validation.json",
+      "report_infra_status": "pending_due_to_cron_no_manual_delivery",
+      "verification": {
+        "active_accounts": 52,
+        "fresh_metrics": 52,
+        "fresh_h": 35,
+        "new_d_events": 0,
+        "renewed_d": 0,
+        "historical_blank_d": 37,
+        "source_parity_cgij_ef_h_d": true,
+        "other_sheet_data_unchanged": true,
+        "outside_write_masks_preserved": true,
+        "browser_tabs_preserved": true,
+        "lease_free": true,
+        "cron_changes": 0,
+        "meta_writes": 0,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "recovery": "Initial Accounts synthetic search no-op recovered by existing scoped UIA ValuePattern collector; all35 H actual screenshots read, exact source and individual timestamps retained."
     }
   ],
   "profile_skill_references": [

@@ -1,0 +1,17 @@
+{
+  "status": "pending_due_to_cron_no_manual_delivery",
+  "helper": "/root/mgs-agent/scripts/send-report-infra-embed.sh",
+  "destination": "1498132022634483894",
+  "action": "modificada",
+  "type": "data operacional",
+  "paths": [
+    "data/meta-manual-payments/digital-trust-workbook-contract.json",
+    "data/meta-manual-payments/pc1-pay-now-ledger.json",
+    "data/meta-manual-payments/last-refresh.json",
+    "data/infra-inventory.json",
+    "data/agent-checkpoints.json"
+  ],
+  "reason": "Refresh agendado27nov14:02ET concluído: 52 métricas API finais, 35H Outstanding balance pixels+AX+ledger; nenhum evento D novo pendente; 37D históricos vazios qualificados e provas anteriores datadas preservadas; invoices outubro30USD417864.11;3abas alheias completas e6abasChrome preservadas;0pagamento/billing.",
+  "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T1402/financial-validation.json",
+  "no_manual_message_sent": true
+}

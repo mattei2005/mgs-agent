@@ -10989,12 +10989,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Mesmo job próximo27nov14:02ET; nova coleta contratada/eventosnovos. Preservar horários H/D e notas de ausência limitada ao período, não zero. Ocorrências antigas de outro escopo não foram fechadas por inferência. Entrega única na origem pelo turno manual.",
-      "objective": "Atualização manual27nov autorizada1575908532640030872 mesmas52contas35H;mesmo workbook/job",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1575908532640030872/financial-validation.json",
-      "state": "completed_validated: api52 final12:03et,h35pixels+ledger;10datuais conferidos9cartões/1semgastosrecentes;5 históricos semtransaçõesjan1-nov27 qualificados;pending_ui vazio;30invoicesusd417864.11;37dvaziosqualificados;3abas alheias e6chrome preservadas;7recuperações cobertas fechadas semreplay;skill/mirror/readback;report1575920511052030073 getvalidado;0pagamentos/billing.",
+      "next_step": "Mesmo job próximo27nov21:02ET; nova coleta contratada, somente eventos D novos. Sem reativar146arquivadas. REPORT-INFRA pendente por proibição de envio manual nesta ocorrência; evidência financial-validation.json. Resultado operacional somente pelo final automático do cron.",
+      "objective": "Refresh agendado somente contas ativas Contas com saldo, mesmo job/cadência",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T1402/financial-validation.json",
+      "state": "refresh agendado27nov14:02et concluído: 52 métricas api finais, 35h outstanding balance pixels+ax+ledger; nenhum evento d novo pendente; 37d históricos vazios qualificados e provas anteriores datadas preservadas; invoices outubro30usd417864.11;3abas alheias completas e6abaschrome preservadas;0pagamento/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-27T17:06:10+00:00"
+      "updated_at": "2026-11-27T19:24:12+00:00"
     },
     {
       "agent": "zeus",
@@ -12938,5 +12938,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T18:41:59+00:00"
+  "updated_at": "2026-11-27T19:24:12+00:00"
 }
