@@ -3063,12 +3063,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1575742680510500915",
-      "next_step": "Validar e executar cada fonte sequencialmente no Engine central; QA readback final e cadastro SB",
-      "objective": "Duplicar 3 vezes cada uma das 12 fontes solicitadas na Yolokfx08 G006, USD45 por copia, 27 novembro 2026 00h41 ET",
+      "next_step": "Retomar QA da fonte099 no mesmo request e seguir fontes restantes; readback integral e cadastro SB",
+      "objective": "Duplicar 3 vezes cada uma das 12 fontes na Yolokfx08 G006 USD45 por copia 27 novembro 2026 00h41 ET",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575742680510500915/aggregate.json",
-      "state": "intake autenticado; 36 copias solicitadas; usd1620 diarios; fontes 071 101 023 022 099 020 105 120 040 085 088 095; sem efeitos deste request antes do dry-run",
+      "state": "12 copias c121-c132 verificadas active qa; fonte099 com 3 copias em pos-processamento sem replay; fontes restantes pendentes",
       "thread_id": "1570857869790945455",
-      "updated_at": "2026-11-27T05:20:08+00:00"
+      "updated_at": "2026-11-27T05:39:01+00:00"
     },
     {
       "agent": "ares",
@@ -12888,5 +12888,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T05:26:48+00:00"
+  "updated_at": "2026-11-27T05:39:01+00:00"
 }
