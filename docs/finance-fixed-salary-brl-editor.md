@@ -10,4 +10,4 @@ Esta decisão supersede exclusivamente o campo convertido em USD desses cinco re
 
 ## Execução
 
-Checkpoint ZEUS-FINANCE-SALARY-BRL-1575923939899875581. Implementação em candidato isolado; gates completos, teste real de formulário desktop/mobile, persistência isolada e leitura produtiva sem escritas financeiras obrigatórios. Aprovação não equivale a publicação.
+Checkpoint ZEUS-FINANCE-SALARY-BRL-1575923939899875581. Publicado e validado: release `salary-brl-1575923939899875581` committed; gates Node326/Python259; dez saves isolados e quarenta formulários produtivos desktop/mobile;330cenários,40registros históricos e ledger preservados no cutover; zero escrita financeira produtiva. Relatório: `reports/finance-fixed-salary-brl-1575923939899875581.md`. Regra operacional/procedimento salvos na skill mgs-finance-dashboard, referência trial-payroll-review.md.

@@ -18,11 +18,13 @@ A apresentação USD desde novembro também convertia os campos de edição dos 
 - Stage autenticado: quarenta formulários (cinco pessoas × quatro meses × duas larguras), valores comparados à API; listopagem novembro em USD; Kelly Gestor sem campo monetário editável. Capturas desktop/mobile inspecionadas visualmente. Nenhuma escrita financeira produtiva.
 - O primeiro ensaio de permissões falhou por expectativa errada do harness: Geizian já pode ler workspace global. Conferido contrato existente e corrigido apenas o teste; rerun passou, com Geizian200 e os cinco gestores403, sem mudança de autorização.
 - Sessões temporárias de QA encerradas e cookies originais reexecutados com401.
-- Gate Node:326/326, sem skips. Gate Python ainda em andamento no momento desta gravação. Auditoria de dependências produtivas: zero vulnerabilidades.
+- Gates completos: Node326/326 e Python259/259, sem falhas/skips, candidato congelado e manifests compatíveis. Auditoria de dependências produtivas: zero vulnerabilidades.
 
 ## Publicação e encerramento
 
-Ainda pendentes nesta versão documental; seguir checkpoint ZEUS-FINANCE-SALARY-BRL-1575923939899875581. Não interpretar os testes de stage como publicação.
+Release `salary-brl-1575923939899875581` publicada pelo controlador canônico, journal committed, cutover43.12s. Destinos: public/app.js local/remoto e tests/ui-review.test.mjs local; hashes ativos conferidos. Reiniciado somente o serviço financeiro; saúde produtiva confirmada pelo controlador. O primeiro `check` foi recusado antes de efeitos por execução no diretório candidato; repetido na raiz canônica com sucesso, sem contornar o guard.
+
+Callback de leitura sob locks validou330cenários, revisões/valores, ledger e40registros históricos byte-equivalentes antes/depois. Produção HTTPS sem interceptação: quarenta formulários, seis verificações de perfil, zero erroJS/POSTfinanceiro; sessão temporária encerrada e cookie original recusado401. Inventário lido de volta. Checkpoint ZEUS-FINANCE-SALARY-BRL-1575923939899875581 concluído; REPORT-INFRA1575932512365060248 enviado em embed silencioso e mensagem lida de volta em1498132022634483894. Registry/checkpoints validados sem erros. Procedimento persistido na skill financeira, referência trial-payroll-review.md.
 
 ## Artefatos
 
