@@ -12,7 +12,7 @@ Thread `1545426987756298340`, Rodolfo Mattei (`344196393512075265`):
 
 - USD nos resultados, previsões, remunerações, comissões, saldos, pagamentos, gráficos e totais desde `2026-11`.
 - CAD permanece nas receitas, relatórios e Conferência onde já é relevante, inclusive o equivalente USD e a cotação USD/CAD.
-- BRL visível somente em Despesas Gerais, com a moeda original e o equivalente USD da despesa.
+- BRL visível somente em Despesas Gerais, com a moeda original e o equivalente USD da despesa. **Exceção posterior aprovada por Rodolfo1575923939899875581:** os editores dos cinco salários fixos (Samuel, Ially, Jislaine, Raquel e Kelly Criação de Criativos) mantêm BRL nativo. Listagens/totais continuam USD; nenhum salário ou câmbio muda nesta exceção. Contrato e estado: `docs/finance-fixed-salary-brl-editor.md`, checkpoint `ZEUS-FINANCE-SALARY-BRL-1575923939899875581`.
 - Cartão USD/BRL com data/hora e controle existente somente em Despesas Gerais, não nos demais painéis.
 - Outubro/2026 e competências anteriores conservam sua apresentação histórica.
 - Não mudar faturamento, lançamentos originais, pisos, faixas de comissão, rateios, pagamentos, spreads ou inválidos. Exibição em USD não congela estimativas.
