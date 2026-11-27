@@ -2053,12 +2053,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1575888959182213201",
-      "next_step": "Publicar partes canônicas e resumo por conta com nonce; reconciliar todos os GETs; arquivar evidencias sanitizadas",
+      "next_step": "Concluído; não reenviar. GAM/SB63min nas seis contas com atividade; Boostingecon sem atividade e atraso n/d. Novo pedido exige fontes novas; campanhas, budgets e agendas preservados.",
       "objective": "Gerar sete Intradays G006 nas threads individuais com resumo financeiro; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/g006-intraday-1575888959182213201/approved-review.json",
-      "state": "prepared_review_approved; sete pares;151 campanhas;42 partes+7 resumos;65 regressions e 5 summaryfixtures+5 gatechecks+6 archivechecks pass; fontes27/11/2026 10:02-10:03 est; zero writes meta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1575888959182213201/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;151campaigns;42integralparts+7summaries;49unique_messages;cutoff27/11/2026_10:02-10:03est;usd;zero_meta_writes;archive_bytes_hashes_verified;65regressions+5summaryfixtures+5gatechecks+6archivechecks_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-27T15:10:45+00:00"
+      "updated_at": "2026-11-27T15:12:50+00:00"
     },
     {
       "agent": "ares",
@@ -12918,5 +12918,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T15:10:45+00:00"
+  "updated_at": "2026-11-27T15:12:50+00:00"
 }
