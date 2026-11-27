@@ -5043,6 +5043,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1575746615715569757",
+      "next_step": "Dry-run do request-ready,execute central,QA/ativacao/readback e cadastro direto SB",
+      "objective": "Duplicate campaign 186 ten times with 20 selected Spanish videos; USD35 per campaign; COCAP USD0.95; 2026-11-27 01:15 America/New_York",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1575746615715569757/intake-authority-checkpoint.json",
+      "state": "media preparada:20 assets,10grupos; recovery de coordenacao concluido,objetos antigos preservados;nenhuma campanha nova criada ainda",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-27T05:44:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-AUDIT-1572796764099186809",
       "next_step": "Nenhuma correcao Meta necessaria nesta leitura;usar literal correto no pre-cadastroAdOps",
       "objective": "Auditar campanha239 e corrigir literalUTM malformado enviado por Ares",
@@ -12888,5 +12898,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T05:39:01+00:00"
+  "updated_at": "2026-11-27T05:44:33+00:00"
 }

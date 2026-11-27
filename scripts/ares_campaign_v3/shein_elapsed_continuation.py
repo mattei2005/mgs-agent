@@ -141,7 +141,9 @@ def binding(state, checkpoint, original, policy, profile, *, now):
             w0, w1 = instant(window['started_at']), instant(window['finished_at'])
             if not prepared <= w0 <= w1 <= first_at:
                 raise ValueError('copy window chronology mismatch')
-            if observed != start and not (start < observed and w0 <= observed <= w1
+            # Graph start_time has whole-second precision; retain the exact
+            # recorded second, as in shein_copy_schedule.normalized_schedule_proof.
+            if observed != start and not (start < observed and w0.replace(microsecond=0) <= observed <= w1
                     and observed.astimezone(zone).date() == start.astimezone(zone).date()):
                 raise ValueError('native second outside exact same-day copy window')
             slots.append({'idempotency_key': key, 'campaign_id': cid, 'adset_id': sid,

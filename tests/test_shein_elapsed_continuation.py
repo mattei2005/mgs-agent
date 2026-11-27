@@ -166,6 +166,25 @@ def test_even_consistent_changed_second_outside_copy_window_is_not_authorized(ob
     with pytest.raises(ValueError,match='window'):m.binding(s,c,o,p,pr,now=NOW)
 
 
+def test_native_second_precision_at_fractional_copy_start():
+    s,c,o,p,pr=fixture()
+    # Graph returns whole seconds; local transport clocks include fractions.
+    c['bundles'][0]['timings']['adset_copy']['started_at']='2026-11-12T06:20:27.006394+00:00'
+    before=copy.deepcopy((s,c,o,p,pr))
+    bound=m.binding(s,c,o,p,pr,now=NOW)
+    assert bound['slots'][1]['observed_start_time']==OBSERVED
+    assert (s,c,o,p,pr)==before
+    # The preceding whole second is still outside the native window.
+    bad='2026-11-12T01:20:26-0500'
+    o['campaigns'][1]['start_time']=bad
+    o['campaigns'][1]['adsets'][0]['start_time']=bad
+    for r in c['bundles'][0]['readback_results']:
+        if r['name']=='readback_campaign_2':r['body']['start_time']=bad
+        if r['name']=='readback_adsets_2':r['body']['data'][0]['start_time']=bad
+    with pytest.raises(ValueError,match='window'):
+        m.binding(s,c,o,p,pr,now=NOW)
+
+
 def test_exact_observed_second_no_generic_tolerance(tmp_path,monkeypatch):
     registered(tmp_path,monkeypatch)
     assert m.proof(START,'2026-11-12T01:20:28-0500',request_id=RID,account_id=AID,campaign_id='457',idempotency_key=RID+'-c1',base=tmp_path,now=NOW) is None
