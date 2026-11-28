@@ -11019,12 +11019,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Aguardar autenticação Meta no mesmo Chrome PC1; preservar mesmo job/cadência e escopo52. Reconciliar esta ocorrência antes de retomada; somente3H faltantes e2D novos, depois API final/validação. REPORT-INFRA pendente por proibição de envio manual no tick.",
-      "objective": "Atualização recorrente autorizada das contas ativas;aguardando autenticação humana",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T2102/partial-financial-validation.json",
-      "state": "refresh27nov21:02et parcial:52 métricas api e invoices outubro publicadas;32/35 h pixels+ax+ledger publicados;3h anteriores preservados e2d novos pendentes. accounts falhou tecnicamente; um reload abriu gate meta/passkey real confirmado em pixels.3abas alheias intactas;lease livre;nenhum pagamento/billing.",
+      "next_step": "Aguardar autenticação humana da Meta no Chrome PC1; manter job/cadência/escopo; reconciliar recibos antes de retomar H/D e API final. REPORT-INFRA pendente por restrição de entrega manual neste tick.",
+      "objective": "Atualização financeira recorrente ativa; bloqueio humano Meta/passkey",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261128T0802/partial-financial-validation.json",
+      "state": "refresh28nov08:02et parcial: 52 métricas api e invoices outubro atualizadas; h/d preservados. gate real meta/passkey confirmado no mesmo chrome rodolfo em pixels+ax. 8 d atuais pendentes, 35 h sem leitura nova; três abas congeladas intactas;lease livre;nenhum pagamento/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-28T02:22:57+00:00"
+      "updated_at": "2026-11-28T13:05:52+00:00"
     },
     {
       "agent": "zeus",
@@ -12998,5 +12998,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-28T04:46:28+00:00"
+  "updated_at": "2026-11-28T13:05:52+00:00"
 }

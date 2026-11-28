@@ -73652,6 +73652,26 @@
         "billing_changes": 0
       },
       "report_infra_status": "pending_due_to_cron_no_manual_delivery"
+    },
+    {
+      "id": "meta-manual-payments-cron-20261128T0802",
+      "agent": "zeus",
+      "type": "scheduled_financial_refresh",
+      "status": "blocked_meta_passkey",
+      "scheduled_at": "2026-11-28T08:02:00-05:00",
+      "updated_at": "2026-11-28T08:05:51.973879-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261128T0802/partial-financial-validation.json",
+      "verification": {
+        "fresh_metrics": 52,
+        "fresh_h": 0,
+        "pending_h": 35,
+        "pending_d": 8,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "payments": 0,
+        "billing_changes": 0
+      },
+      "report_infra_status": "pending_due_to_cron_no_manual_delivery"
     }
   ],
   "profile_skill_references": [
