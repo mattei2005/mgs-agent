@@ -2083,12 +2083,12 @@
     {
       "agent": "ares",
       "id": "ARES-G006-INTRADAY-1576094332308422759",
-      "next_step": "Coletar fontes novas Meta SB e RPS; renderizar revisar publicar reconciliar e arquivar",
+      "next_step": "Concluido; nao reenviar. Atraso GAM/SB 38min nas contas com atividade exceto Escalatepower 98min; Boostingecon sem atividade e atraso n/d. Novo pedido exige fontes novas; campanhas budgets e agendas preservados.",
       "objective": "Gerar sete Intradays G006 com resumo financeiro individual; somente leitura",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/shein-g006-1576094332308422759/request.json",
-      "state": "preflight_ok; seven canonical pairs; meta identities usd america/new_york; date 2026-11-27",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-on-demand-requests/1576094332308422759/final-reconciliation.json",
+      "state": "complete_get_verified_and_reconciled;7pairs;151campaigns;42integralparts+7summaries;49unique_messages;cutoff27/11/2026_23:37-23:38_est;usd;zero_meta_writes;archive_bytes_hashes_verified;65regressions+5summary+5gate+6archivechecks_pass",
       "thread_id": "1567162580273729629",
-      "updated_at": "2026-11-28T04:37:48+00:00"
+      "updated_at": "2026-11-28T04:46:28+00:00"
     },
     {
       "agent": "ares",
@@ -12998,5 +12998,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-28T04:37:48+00:00"
+  "updated_at": "2026-11-28T04:46:28+00:00"
 }
