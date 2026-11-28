@@ -12138,6 +12138,16 @@
     },
     {
       "agent": "ares",
+      "id": "shein-1576036058586419293",
+      "next_step": "Nenhum write pendente neste pedido; aguardar processamento/análise da Meta. Não recriar nem reativar objetos terminais.",
+      "objective": "Duplicar C082 cinco vezes na Mavroa05 G005, USD100 por cópia e Cost per result goal USD0.85",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1576036058586419293/completion-receipt.json",
+      "state": "meta configurada active: campanhas 091,092,093,094,095, 10 anúncios; usd100/dia por cópia, usd500.00/dia no lote; cost_cap usd0.85; início 28/11/2026 00:00 america/new_york. qa/ids/readback conferidos. revisão meta na leitura: {'active': 3, 'pending_review': 7}. sb: duas chaves com http201, listas literais e gaminsert=ok; reconferência independente indisponível. posts novos; ressalva de sugestões opcionais de idade/gênero preservada no recibo.",
+      "thread_id": "1558133898209394780",
+      "updated_at": "2026-11-28T00:54:07+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "shein-bid-1569299061759021218",
       "next_step": "Concluido; nenhuma alteracao pendente.",
       "objective": "Ajustar somente C251,C252,C253,C254,C255 de Yolokfx-US-SHEIN-EN-03-G005 para Cost per result goal USD0.75",
@@ -12978,5 +12988,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-27T22:31:37+00:00"
+  "updated_at": "2026-11-28T00:54:07+00:00"
 }
