@@ -11009,12 +11009,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Mesmo job próximo27nov21:02ET; nova coleta contratada, somente eventos D novos. Sem reativar146arquivadas. REPORT-INFRA pendente por proibição de envio manual nesta ocorrência; evidência financial-validation.json. Resultado operacional somente pelo final automático do cron.",
-      "objective": "Refresh agendado somente contas ativas Contas com saldo, mesmo job/cadência",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T1402/financial-validation.json",
-      "state": "refresh agendado27nov14:02et concluído: 52 métricas api finais, 35h outstanding balance pixels+ax+ledger; nenhum evento d novo pendente; 37d históricos vazios qualificados e provas anteriores datadas preservadas; invoices outubro30usd417864.11;3abas alheias completas e6abaschrome preservadas;0pagamento/billing.",
+      "next_step": "Aguardar autenticação Meta no mesmo Chrome PC1; preservar mesmo job/cadência e escopo52. Reconciliar esta ocorrência antes de retomada; somente3H faltantes e2D novos, depois API final/validação. REPORT-INFRA pendente por proibição de envio manual no tick.",
+      "objective": "Atualização recorrente autorizada das contas ativas;aguardando autenticação humana",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261127T2102/partial-financial-validation.json",
+      "state": "refresh27nov21:02et parcial:52 métricas api e invoices outubro publicadas;32/35 h pixels+ax+ledger publicados;3h anteriores preservados e2d novos pendentes. accounts falhou tecnicamente; um reload abriu gate meta/passkey real confirmado em pixels.3abas alheias intactas;lease livre;nenhum pagamento/billing.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-27T19:24:12+00:00"
+      "updated_at": "2026-11-28T02:22:57+00:00"
     },
     {
       "agent": "zeus",
@@ -12988,5 +12988,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-28T00:54:07+00:00"
+  "updated_at": "2026-11-28T02:22:57+00:00"
 }
